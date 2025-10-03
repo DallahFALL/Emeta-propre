@@ -1,1 +1,100 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>e-META — Assistant IA</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="01_Logo_Sources/eMETA-official-logo.png" alt="e-META Logo" height="40" />
+        <span class="brand-title">e-META</span>
+      </div>
 
+      <nav class="nav">
+        <a href="#">Accueil</a>
+        <a href="#packs" id="nav-packs">Découvrir les packs</a>
+        <a href="#about" id="nav-about">À propos</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="controls">
+        <select id="lang-select" aria-label="Choix de la langue">
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+          <option value="ar">AR</option>
+        </select>
+        <button id="cta-whatsapp" class="btn outline">Contact WhatsApp</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1 id="hero-title">e-META — L'assistant IA pluridisciplinaire pour vos décisions</h1>
+        <p id="hero-sub">Packs de formulaires spécialisés, synthèses structurées et recommandations actionnables — multilingue.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#packs" id="discover-btn">Découvrir les packs</a>
+          <button class="btn outline" id="hero-wa">Contact WhatsApp</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="packs" class="container packs-grid" aria-label="Packs">
+      <!-- Cards: marketing / finance / hr / product -->
+      <article class="card">
+        <h3>Marketing</h3>
+        <p>Brief campagne, estimation budget et canaux.</p>
+        <a class="card-btn" href="forms/marketing.html" id="open-marketing">Ouvrir</a>
+      </article>
+
+      <article class="card">
+        <h3>Financement</h3>
+        <p>Demande structurée, modèles financiers.</p>
+        <a class="card-btn" href="forms/finance.html" id="open-finance">Ouvrir</a>
+      </article>
+
+      <article class="card">
+        <h3>Recrutement</h3>
+        <p>Brief rôle, budget et timeline.</p>
+        <a class="card-btn" href="forms/hr.html" id="open-hr">Ouvrir</a>
+      </article>
+
+      <article class="card">
+        <h3>Produit</h3>
+        <p>Positionnement, pricing, GTM.</p>
+        <a class="card-btn" href="forms/product.html" id="open-product">Ouvrir</a>
+      </article>
+    </section>
+
+    <section id="about" class="container section-light">
+      <h2>À propos</h2>
+      <p>e-META aide les acteurs de tous les secteurs à structurer leurs décisions via des packs de formulaires spécialisés et des synthèses actionnables.</p>
+    </section>
+
+    <section id="faq" class="container">
+      <h2>FAQ</h2>
+      <details><summary>Comment fonctionne e-META ?</summary><p>Remplissez un pack -> synthèse AI -> recommandations actionnables.</p></details>
+      <details><summary>Est-ce gratuit ?</summary><p>Version de démonstration gratuite. Offre pro à venir.</p></details>
+    </section>
+
+    <section id="contact" class="container section-light">
+      <h2>Contact</h2>
+      <p>Email : <a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
+      <p>WhatsApp : <a href="https://wa.me/221782607212" target="_blank">+221 78 260 72 12</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© 2025 e-META</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
