@@ -1,1 +1,71 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Marketing — e-META</title>
+  <style>
+    body{font-family:Inter,system-ui,Arial;max-width:980px;margin:24px auto;padding:0 18px;color:#222}
+    h1{font-size:1.6rem}
+    label{display:block;margin:10px 0 6px}
+    input,textarea,select{width:100%;padding:10px;border:1px solid #ddd;border-radius:6px}
+    button{margin-top:12px;padding:10px 14px;border-radius:8px;background:#075fa8;color:#fff;border:none;cursor:pointer}
+    .small{font-size:0.9rem;color:#666}
+  </style>
+</head>
+<body>
+  <h1>Pack Marketing</h1>
+  <p class="small">Brief campagne, estimation budget et canaux.</p>
 
+  <form id="form">
+    <label for="company">Nom / entreprise</label>
+    <input id="company" name="company" placeholder="Nom de l'entité" required />
+
+    <label for="objectives">Objectifs (résumé)</label>
+    <textarea id="objectives" name="objectives" rows="4" placeholder="Ex: acquisition, notoriété..." required></textarea>
+
+    <label for="budget">Budget approximatif (€)</label>
+    <input id="budget" name="budget" placeholder="Ex: 2000" />
+
+    <label for="channels">Canaux préférés</label>
+    <input id="channels" name="channels" placeholder="Ex: Réseaux sociaux, email, SEA" />
+
+    <button type="submit">Envoyer</button>
+  </form>
+
+  <div id="result" style="margin-top:18px;white-space:pre-wrap"></div>
+
+  <script>
+    const form = document.getElementById('form');
+    const result = document.getElementById('result');
+    function currentLang(){ return localStorage.getItem('e_meta_lang') || 'fr' }
+
+    form.addEventListener('submit', async (ev)=>{
+      ev.preventDefault();
+      const data = {
+        pack: 'marketing',
+        lang: currentLang(),
+        payload: {
+          company: form.company.value,
+          objectives: form.objectives.value,
+          budget: form.budget.value,
+          channels: form.channels.value
+        }
+      };
+      result.textContent = "Envoi en cours...";
+      try{
+        const r = await fetch('/api/generate', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(data)
+        });
+        const json = await r.json();
+        if(!r.ok) throw new Error(json.error || JSON.stringify(json));
+        result.textContent = json.output || JSON.stringify(json, null, 2);
+      }catch(e){
+        result.textContent = "Erreur : " + e.message;
+      }
+    });
+  </script>
+</body>
+</html>
