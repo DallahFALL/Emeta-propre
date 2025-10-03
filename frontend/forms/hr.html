@@ -1,1 +1,35 @@
-
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Recrutement — e-META</title>
+<style>body{font-family:Inter,Arial;max-width:980px;margin:24px auto;padding:0 18px;color:#222}label{display:block;margin:10px 0 6px}input,textarea,select{width:100%;padding:10px;border:1px solid #ddd;border-radius:6px}button{margin-top:12px;padding:10px 14px;border-radius:8px;background:#075fa8;color:#fff;border:none}</style>
+</head>
+<body>
+  <h1>Pack Recrutement</h1>
+  <form id="form">
+    <label>Poste recherché</label><input name="role" required />
+    <label>Taille équipe / département</label><input name="teamSize" />
+    <label>Budget salarial (annuel)</label><input name="salary" />
+    <label>Durée et priorités</label><textarea name="timeline" rows="4"></textarea>
+    <button type="submit">Envoyer</button>
+  </form>
+  <div id="result" style="margin-top:14px;white-space:pre-wrap"></div>
+  <script>
+    const f=document.getElementById('form'), r=document.getElementById('result');
+    function getLang(){return localStorage.getItem('e_meta_lang')||'fr'}
+    f.addEventListener('submit', async e=>{
+      e.preventDefault();
+      r.textContent='Envoi...';
+      try{
+        const res = await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+          pack:'hr', lang:getLang(), payload:Object.fromEntries(new FormData(f))
+        })});
+        const j = await res.json();
+        if(!res.ok) throw new Error(j.error || JSON.stringify(j));
+        r.textContent = j.output;
+      }catch(err){r.textContent = 'Erreur: '+err.message}
+    });
+  </script>
+</body>
+</html>
