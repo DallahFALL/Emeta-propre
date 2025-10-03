@@ -1,1 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "marketing",
+  "type": "object",
+  "required": ["company","objectives"],
+  "properties": {
+    "company": {"type":"string","minLength":1},
+    "objectives": {"type":"string"},
+    "budget": {"type":["string","number"]},
+    "channels": {"type":"string"}
+  },
+  "additionalProperties": false
+}
 
