@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>e-META — Assistant IA pluridisciplinaire</title>
+  <meta name="description" content="e-META aide organisations et professionnels à structurer leurs décisions : packs de formulaires, synthèses et recommandations actionnables.">
+  <link rel="icon" href="01_Logo_Sources/eMETA-official-logo.png" />
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+  <meta name="theme-color" content="#0b5480" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <!-- Official logo path -->
+        <a href="/" class="logo-link" aria-label="e-META">
+          <img src="01_Logo_Sources/eMETA-official-logo.png" alt="e-META Logo" class="logo" />
+          <span class="brand-text">e-META</span>
+        </a>
+      </div>
+
+      <nav class="main-nav" id="mainNav">
+        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="navList">☰</button>
+        <ul id="navList" class="nav-list">
+          <li><a href="#">Accueil</a></li>
+          <li><a href="#packs" id="link-packs">Découvrir les packs</a></li>
+          <li><a href="#about" id="link-about">À propos</a></li>
+          <li><a href="#faq" id="link-faq">FAQ</a></li>
+          <li><a href="#contact" id="link-contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <select id="langSelect" aria-label="Choisir la langue">
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+          <option value="ar">AR</option>
+        </select>
+        <a class="btn ghost" id="whatsBtn" href="https://wa.me/221782607212" target="_blank" rel="noopener">Contact WhatsApp</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <h1 id="heroTitle">e-META — L'assistant IA pluridisciplinaire pour vos décisions</h1>
+        <p id="heroSubtitle">Packs de formulaires spécialisés, synthèses structurées et recommandations actionnables — multilingue.</p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#packs" id="cta-packs">Découvrir les packs</a>
+          <a class="btn outline" href="https://wa.me/221782607212" id="cta-whats">Contact WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="packs" class="wrap packs-section">
+      <h2>Nos packs</h2>
+      <p class="muted">Packs conçus pour diagnostiquer, prioriser et recommander des actions concrètes.</p>
+
+      <div class="cards-row" role="list">
+        <article class="card" role="listitem">
+          <h3 class="card-title" data-key="pack_marketing">Marketing</h3>
+          <p class="card-desc" data-key="pack_marketing_desc">Brief campagne, estimation budget et canaux.</p>
+          <div class="card-actions">
+            <a class="btn small" href="forms/marketing.html" data-pack="marketing" aria-label="Ouvrir Marketing">Ouvrir</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <h3 class="card-title" data-key="pack_finance">Financement</h3>
+          <p class="card-desc" data-key="pack_finance_desc">Demande structurée, modèles financiers.</p>
+          <div class="card-actions">
+            <a class="btn small" href="forms/finance.html" data-pack="finance" aria-label="Ouvrir Financement">Ouvrir</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <h3 class="card-title" data-key="pack_hr">Recrutement</h3>
+          <p class="card-desc" data-key="pack_hr_desc">Brief rôle, budget et timeline.</p>
+          <div class="card-actions">
+            <a class="btn small" href="forms/hr.html" data-pack="hr" aria-label="Ouvrir Recrutement">Ouvrir</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <h3 class="card-title" data-key="pack_product">Produit</h3>
+          <p class="card-desc" data-key="pack_product_desc">Positionnement, pricing, GTM.</p>
+          <div class="card-actions">
+            <a class="btn small" href="forms/product.html" data-pack="product" aria-label="Ouvrir Produit">Ouvrir</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="wrap about-section">
+      <h2>À propos</h2>
+      <p>e-META aide les acteurs de tous les secteurs à structurer leurs décisions via des packs de formulaires spécialisés et des synthèses actionnables.</p>
+    </section>
+
+    <section id="faq" class="wrap faq-section">
+      <h2>FAQ</h2>
+      <details>
+        <summary>Comment fonctionne e-META ?</summary>
+        <p>Vous remplissez un formulaire structuré ; le moteur IA produit diagnostic, options et recommandations priorisées.</p>
+      </details>
+      <details>
+        <summary>Est-ce gratuit ?</summary>
+        <p>Un niveau d'accès gratuit permet d'essayer les packs ; plans payants pour intégrations et volumes plus élevés.</p>
+      </details>
+    </section>
+
+    <section id="contact" class="wrap contact-section">
+      <h2>Contact</h2>
+      <p>Email : <a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
+      <p>WhatsApp : <a href="https://wa.me/221782607212" target="_blank">+221 78 260 72 12</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <small>© 2025 e-META</small>
+      <nav class="footer-nav">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/politique.html">Legal</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
