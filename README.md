@@ -1,17 +1,16 @@
 # e-META — Emeta-propre
 
-Site officiel (propre) pour e-meta.app — frontend minimal responsive et serveur express (exemples).
-But: publier facilement sur GitHub Pages / Netlify et déployer une version propre.
+Site statique + serveur minimal pour AI assistant.
 
-Structure:
-- frontend/       -> fichiers publics (index.html, style.css, script.js, forms/, assets/)
-- server/         -> exemple d'API Node/Express (server.js)
-- docs/           -> (option pour GitHub Pages)
+## Structure
+- `frontend/` : site public (index.html, css, js, forms, lang, prompts)
+- `schemas/` : JSON Schema pour validation formulaires
+- `server/` : Express API (validation, proxy vers OpenAI, envoi email/WhatsApp)
 
-Voir instructions de déploiement ci-dessous.
-
-## Déploiement (rapide)
-1. Copier `frontend/` dans `docs/` (ou configurer GitHub Pages pour "main branch / root").  
-2. Paramétrer GitHub Pages (Settings > Pages) : Branch = `main`, Folder = `/docs`.  
-3. Attendre ~1 min puis visiter `https://<username>.github.io/<repo>/`.
-
+## Installation serveur (local)
+```bash
+cd server
+cp .env.example .env
+# edit .env
+npm install
+npm start
