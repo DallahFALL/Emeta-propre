@@ -5,46 +5,46 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>e-META — L'assistant IA</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- favicon possible -->
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <div class="left">
-        <a class="brand" href="/">
-          <!-- logo unique, chemin absolu à la racine -->
-          <img src="01_Logo_Sources/eMETA-official-logo.png" alt="e-META Logo" height="100" /> 
-        </a>
-      </div>
+      <a class="brand" href="#home" aria-label="Aller à l'accueil">
+        <!-- chemin relatif au fichier index.html dans frontend/ -->
+        <img src="01_Logo_Sources/eMETA-official-logo.png" alt="e-META Logo" class="brand-logo" />
+      </a>
 
-      <nav class="main-nav" aria-label="Navigation principale">
-        <a href="#home" data-i18n="nav_home">Accueil</a>
-        <a href="#packs" data-i18n="nav_packs">Découvrir les packs</a>
-        <a href="#about" data-i18n="nav_about">À propos</a>
-        <a href="#faq" data-i18n="nav_faq">FAQ</a>
-        <a href="#contact" data-i18n="nav_contact">Contact</a>
+      <button id="navToggle" class="nav-toggle" aria-label="Ouvrir le menu">☰</button>
+
+      <nav id="mainNav" class="main-nav" aria-label="Navigation principale">
+        <a href="#home">Accueil</a>
+        <a href="#packs">Découvrir les packs</a>
+        <a href="#about">À propos</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
       </nav>
 
       <div class="header-controls">
-        <select id="langSelect" aria-label="Langue">
+        <select id="langSelect" aria-label="Choisir la langue">
           <option value="fr">FR</option>
           <option value="en">EN</option>
           <option value="es">ES</option>
           <option value="ar">AR</option>
         </select>
-        <a class="btn btn-primary" href="https://wa.me/221782607212" target="_blank" rel="noreferrer">Contact WhatsApp</a>
       </div>
     </div>
   </header>
 
   <main>
-    <section class="hero" id="home">
+    <section id="home" class="hero">
       <div class="container hero-inner">
         <h1 class="hero-title"><span class="brand-accent">e-META</span> — L'assistant IA pluridisciplinaire pour vos décisions</h1>
         <p class="hero-sub">Packs de formulaires spécialisés, synthèses structurées et recommandations actionnables — multilingue.</p>
+
         <div class="hero-ctas">
-          <a class="btn btn-cta" href="#packs" data-i18n="cta_packs">Découvrir les packs</a>
-          <a class="btn btn-ghost" href="https://wa.me/221782607212" target="_blank" rel="noreferrer" data-i18n="cta_whatsapp">Contact WhatsApp</a>
+          <a class="btn btn-cta" href="#packs">Découvrir les packs</a>
+          <!-- WhatsApp placé dans le hero (pas à côté du sélecteur langue dans l'en-tête) -->
+          <a class="btn btn-ghost" href="https://wa.me/221782607212" target="_blank" rel="noopener">Contact WhatsApp</a>
         </div>
       </div>
     </section>
@@ -57,25 +57,33 @@
         <article class="card">
           <h3>Marketing</h3>
           <p>Brief campagne, estimation budget et canaux.</p>
-          <a class="card-link" href="forms/marketing.html">Ouvrir</a>
+          <div class="card-footer">
+            <a class="card-link" href="forms/marketing.html">Ouvrir</a>
+          </div>
         </article>
 
         <article class="card">
           <h3>Financement</h3>
           <p>Demande structurée, modèles financiers.</p>
-          <a class="card-link" href="forms/finance.html">Ouvrir</a>
+          <div class="card-footer">
+            <a class="card-link" href="forms/finance.html">Ouvrir</a>
+          </div>
         </article>
 
         <article class="card">
           <h3>Recrutement</h3>
           <p>Brief rôle, budget et timeline.</p>
-          <a class="card-link" href="forms/hr.html">Ouvrir</a>
+          <div class="card-footer">
+            <a class="card-link" href="forms/hr.html">Ouvrir</a>
+          </div>
         </article>
 
         <article class="card">
           <h3>Produit</h3>
           <p>Positionnement, pricing, GTM.</p>
-          <a class="card-link" href="forms/product.html">Ouvrir</a>
+          <div class="card-footer">
+            <a class="card-link" href="forms/product.html">Ouvrir</a>
+          </div>
         </article>
       </div>
     </section>
@@ -87,14 +95,14 @@
 
     <section id="faq" class="container section">
       <h2>FAQ</h2>
-      <details><summary>Comment fonctionne e-META ?</summary><p>Remplacez ce texte par la FAQ réelle.</p></details>
-      <details><summary>Est-ce gratuit ?</summary><p>Remplacez ce texte par votre politique de tarification.</p></details>
+      <details><summary>Comment fonctionne e-META ?</summary><p>Expliquer le principe — collecte via formulaires, synthèse IA, recommandations.</p></details>
+      <details><summary>Est-ce gratuit ?</summary><p>Préciser les offres (gratuit, freemium, pro...).</p></details>
     </section>
 
     <section id="contact" class="container section">
       <h2>Contact</h2>
       <p>Email : <a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
-      <p>WhatsApp : <a href="https://wa.me/221782607212" target="_blank" rel="noreferrer">+221 78 260 72 12</a></p>
+      <p>WhatsApp : <a href="https://wa.me/221782607212" target="_blank" rel="noopener">+221 78 260 72 12</a></p>
     </section>
   </main>
 
@@ -105,20 +113,25 @@
   </footer>
 
   <script>
-    // small UI helpers
+    // année automatique
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // language selection persistence (front-end only)
-    const langSelect = document.getElementById('langSelect');
-    const saved = localStorage.getItem('emeta_lang') || 'fr';
-    langSelect.value = saved;
-    langSelect.addEventListener('change', (e) => {
-      localStorage.setItem('emeta_lang', e.target.value);
-      // you can hook here to load translations later
-      // location.reload();
+    // mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', ()=> {
+      mainNav.classList.toggle('open');
     });
 
-    // if you need to implement data-i18n replacement, you can fetch JSON files from /lang/*.json
+    // langue persistée localStorage
+    const LANG_KEY = 'emeta_lang';
+    const langSelect = document.getElementById('langSelect');
+    const saved = localStorage.getItem(LANG_KEY);
+    if(saved) langSelect.value = saved;
+    langSelect.addEventListener('change', e => {
+      localStorage.setItem(LANG_KEY, e.target.value);
+      // ici tu peux ajouter code pour charger les labels JSON
+    });
   </script>
 </body>
 </html>
