@@ -5,116 +5,120 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>e-META — L'assistant IA</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- favicon possible -->
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <!-- left: logo -->
-      <!-- Brand/logo (unique) -->
-<a class="brand" href="/">
-  <img alt="e-META Logo" src="/eMETA-official-logo.svg.png" style="height:56px; width:auto; max-height:64px;" />
-</a>
+      <div class="left">
+        <a class="brand" href="/">
+          <!-- logo unique, chemin absolu à la racine -->
+          <img alt="e-META" src="/emeta-logo.png" class="brand-logo" />
+        </a>
+      </div>
 
-      <!-- center: nav -->
-      <nav class="main-nav" id="mainNav" aria-label="Navigation principale">
-        <a href="#" data-i18n="nav_home">Accueil</a>
+      <nav class="main-nav" aria-label="Navigation principale">
+        <a href="#home" data-i18n="nav_home">Accueil</a>
         <a href="#packs" data-i18n="nav_packs">Découvrir les packs</a>
         <a href="#about" data-i18n="nav_about">À propos</a>
         <a href="#faq" data-i18n="nav_faq">FAQ</a>
         <a href="#contact" data-i18n="nav_contact">Contact</a>
       </nav>
 
-      <!-- right: language + mobile toggle (no WhatsApp here) -->
       <div class="header-controls">
-        <label class="visually-hidden" for="langSelect">Langue</label>
-        <select id="langSelect" aria-label="Choisir la langue">
+        <select id="langSelect" aria-label="Langue">
           <option value="fr">FR</option>
           <option value="en">EN</option>
           <option value="es">ES</option>
           <option value="ar">AR</option>
         </select>
-
-        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav">
-          ☰
-        </button>
+        <a class="btn btn-primary" href="https://wa.me/221782607212" target="_blank" rel="noreferrer">Contact WhatsApp</a>
       </div>
     </div>
   </header>
 
   <main>
-    <section class="hero">
+    <section class="hero" id="home">
       <div class="container hero-inner">
-        <h1 data-i18n="hero_title">e-META — L'assistant IA pluridisciplinaire pour vos décisions</h1>
-        <p class="subtitle" data-i18n="hero_subtitle">Packs de formulaires spécialisés, synthèses structurées et recommandations actionnables — multilingue.</p>
-        <div class="hero-cta">
-          <a class="btn primary" href="#packs" data-i18n="discover_packs">Découvrir les packs</a>
-          <!-- WhatsApp dans le hero (éloigné du sélecteur langue) -->
-          <a class="btn outline" id="whatsappHero" href="https://wa.me/221782607212" target="_blank" rel="noopener">Contact WhatsApp</a>
+        <h1 class="hero-title"><span class="brand-accent">e-META</span> — L'assistant IA pluridisciplinaire pour vos décisions</h1>
+        <p class="hero-sub">Packs de formulaires spécialisés, synthèses structurées et recommandations actionnables — multilingue.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-cta" href="#packs" data-i18n="cta_packs">Découvrir les packs</a>
+          <a class="btn btn-ghost" href="https://wa.me/221782607212" target="_blank" rel="noreferrer" data-i18n="cta_whatsapp">Contact WhatsApp</a>
         </div>
       </div>
     </section>
 
     <section id="packs" class="container section">
-      <h2 data-i18n="packs_title">Nos packs</h2>
-      <p class="lead" data-i18n="packs_lead">Packs conçus pour diagnostiquer, prioriser et recommander des actions concrètes.</p>
+      <h2 class="section-title">Nos packs</h2>
+      <p class="section-lead">Packs conçus pour diagnostiquer, prioriser et recommander des actions concrètes.</p>
 
-      <div class="cards" id="packsGrid">
+      <div class="cards-grid">
         <article class="card">
-          <h3 data-i18n="pack_marketing_title">Marketing</h3>
-          <p data-i18n="pack_marketing_desc">Brief campagne, estimation budget et canaux.</p>
-          <a class="btn block" href="forms/marketing.html" data-i18n="open_btn">Ouvrir</a>
+          <h3>Marketing</h3>
+          <p>Brief campagne, estimation budget et canaux.</p>
+          <a class="card-link" href="forms/marketing.html">Ouvrir</a>
         </article>
 
         <article class="card">
-          <h3 data-i18n="pack_finance_title">Financement</h3>
-          <p data-i18n="pack_finance_desc">Demande structurée, modèles financiers.</p>
-          <a class="btn block" href="forms/finance.html" data-i18n="open_btn">Ouvrir</a>
+          <h3>Financement</h3>
+          <p>Demande structurée, modèles financiers.</p>
+          <a class="card-link" href="forms/finance.html">Ouvrir</a>
         </article>
 
         <article class="card">
-          <h3 data-i18n="pack_hr_title">Recrutement</h3>
-          <p data-i18n="pack_hr_desc">Brief rôle, budget et timeline.</p>
-          <a class="btn block" href="forms/hr.html" data-i18n="open_btn">Ouvrir</a>
+          <h3>Recrutement</h3>
+          <p>Brief rôle, budget et timeline.</p>
+          <a class="card-link" href="forms/hr.html">Ouvrir</a>
         </article>
 
         <article class="card">
-          <h3 data-i18n="pack_product_title">Produit</h3>
-          <p data-i18n="pack_product_desc">Positionnement, pricing, GTM.</p>
-          <a class="btn block" href="forms/product.html" data-i18n="open_btn">Ouvrir</a>
+          <h3>Produit</h3>
+          <p>Positionnement, pricing, GTM.</p>
+          <a class="card-link" href="forms/product.html">Ouvrir</a>
         </article>
       </div>
     </section>
 
     <section id="about" class="container section">
-      <h2 data-i18n="about_title">À propos</h2>
-      <p data-i18n="about_text">e-META aide les acteurs de tous les secteurs à structurer leurs décisions via des packs de formulaires spécialisés et des synthèses actionnables.</p>
+      <h2>À propos</h2>
+      <p>e-META aide les acteurs de tous les secteurs à structurer leurs décisions via des packs de formulaires spécialisés et des synthèses actionnables.</p>
     </section>
 
     <section id="faq" class="container section">
-      <h2 data-i18n="faq_title">FAQ</h2>
-      <details>
-        <summary data-i18n="faq_q1">Comment fonctionne e-META ?</summary>
-        <p>Completez le formulaire, l’IA génère la synthèse et recommandations.</p>
-      </details>
-      <details>
-        <summary data-i18n="faq_q2">Est-ce gratuit ?</summary>
-        <p>Il existe une version de base et des packs pro.</p>
-      </details>
+      <h2>FAQ</h2>
+      <details><summary>Comment fonctionne e-META ?</summary><p>Remplacez ce texte par la FAQ réelle.</p></details>
+      <details><summary>Est-ce gratuit ?</summary><p>Remplacez ce texte par votre politique de tarification.</p></details>
     </section>
 
-    <footer id="contact" class="container footer">
-      <h3 data-i18n="contact_title">Contact</h3>
+    <section id="contact" class="container section">
+      <h2>Contact</h2>
       <p>Email : <a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
-      <p>WhatsApp : <a href="tel:+221782607212">+221 78 260 72 12</a></p>
-      <p class="copyright">© 2025 e-META</p>
-    </footer>
+      <p>WhatsApp : <a href="https://wa.me/221782607212" target="_blank" rel="noreferrer">+221 78 260 72 12</a></p>
+    </section>
   </main>
 
-  <!-- floating whatsapp button (accessible, not next to lang) -->
-  <a class="whatsapp-fab" href="https://wa.me/221782607212" target="_blank" rel="noopener" aria-label="WhatsApp">
-    💬
-  </a>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> e-META</p>
+    </div>
+  </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // small UI helpers
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // language selection persistence (front-end only)
+    const langSelect = document.getElementById('langSelect');
+    const saved = localStorage.getItem('emeta_lang') || 'fr';
+    langSelect.value = saved;
+    langSelect.addEventListener('change', (e) => {
+      localStorage.setItem('emeta_lang', e.target.value);
+      // you can hook here to load translations later
+      // location.reload();
+    });
+
+    // if you need to implement data-i18n replacement, you can fetch JSON files from /lang/*.json
+  </script>
 </body>
 </html>
