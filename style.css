@@ -55,5 +55,30 @@ header select{padding:6px;border-radius:6px;border:1px solid #ddd;background:#ff
   .nav-toggle{display:inline-block}
   .header-inner{position:relative}
   .hero h1{font-size:26px}
+
+  /* logo brand responsive */
+.brand img {
+  height: 56px;
+  width: auto;
+  max-width: 220px;
+}
+
+/* header layout : place langue et contact correctement */
+.header-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* petits écrans : logo plus petit */
+@media (max-width: 768px) {
+  .brand img {
+    height: 44px;
+  }
+  .header-controls {
+    gap: 8px;
+  }
+}
+
 }
 .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
