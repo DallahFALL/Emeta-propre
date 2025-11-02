@@ -27,5 +27,9 @@
   "delivery_inline":"Affichage",
   "form_send":"Envoyer",
   "form_cancel":"Annuler",
-  "result_title":"Résultat"
+  "result_title":"Résultat",
+  "open":"Ouvrir",
+  "email_subject_prefix":"Demande pack",
+  "inline_sample":"Synthèse initiale : clarifier l'objectif, définir le budget et prioriser.",
+  "packs_empty":"Aucun pack disponible."
 }
