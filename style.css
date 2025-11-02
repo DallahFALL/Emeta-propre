@@ -1,202 +1,74 @@
-/* ==========================
-   style.css - base + responsive + RTL support
-   Replace your current style.css with this content.
-   ========================== */
-
-/* Import fonts: Inter for LTR, Noto Naskh Arabic for Arabic */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600&display=swap');
-
+/* ROOT STYLES for e-META (responsive + RTL) */
 :root{
-  --bg:#f6f8fa;
+  --blue:#1565a9;
+  --muted:#6b7580;
+  --bg:#f5f8fa;
   --card:#ffffff;
-  --muted:#6b7280;
-  --brand:#1666a8;
-  --radius:12px;
-  --gap:1.25rem;
-  --container-max:1100px;
-  --nav-height:72px;
+  --container:1100px;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:#0f1720;
 }
 
-/* global resets */
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background:var(--bg);
-  color:#111827;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height:1.5;
-  font-size:16px;
-}
-
-/* Arabic font override */
-html[lang="ar"] body,
-.rtl-mode body {
-  font-family: 'Noto Naskh Arabic', 'Inter', system-ui, sans-serif;
-}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);line-height:1.55}
 
 /* container */
-.container{
-  max-width:var(--container-max);
-  margin:0 auto;
-  padding:0 1rem;
-}
+.container{max-width:var(--container);margin:0 auto;padding:0 20px}
 
 /* header */
-.site-header{
-  background: #fff;
-  border-bottom: 1px solid #e6e9ee;
-  height:var(--nav-height);
-  display:flex;
-  align-items:center;
-}
-.header-inner{
-  width:100%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.brand{
-  display:flex;
-  align-items:center;
-  gap:.6rem;
-  text-decoration:none;
-  color:inherit;
-}
-.brand img{ display:block; height:40px; }
-.brand .brand-text{ font-weight:700; letter-spacing:.2px; }
+.site-header{background:#fff;border-bottom:1px solid #e6eef6;position:sticky;top:0;z-index:60}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.brand img{height:42px;display:block}
+.brand-title{font-weight:700}
+#mainNav{display:flex;gap:18px;align-items:center;justify-content:center;flex:1}
+#mainNav a{ text-decoration:none;color:var(--muted);font-weight:600 }
+#mainNav a:hover{ color:var(--blue) }
 
-/* nav */
-nav.main-nav ul{ list-style:none; margin:0; padding:0; display:flex; gap:1.25rem; align-items:center; }
-nav.main-nav a{ text-decoration:none; color:#0f172a; font-weight:500; }
-
-/* header controls (language select, contact) */
-.header-controls{ display:flex; gap:0.75rem; align-items:center; }
-.lang-select{ padding:.45rem .6rem; border-radius:8px; border:1px solid #d1d5db; background:#fff; }
+.header-controls{display:flex;gap:8px;align-items:center}
+.lang-select{padding:8px 10px;border-radius:8px;border:1px solid #d6e2ea;background:#fff}
+.btn{display:inline-block;padding:8px 14px;border-radius:10px;border:1px solid rgba(0,0,0,.06);background:#fff;color:#0d3340;font-weight:600;cursor:pointer}
+.btn-primary{background:var(--blue);color:#fff;border:none}
 
 /* hero */
-.hero{
-  background:#fff;
-  padding:2.5rem 0;
-  text-align:center;
-}
-.hero h1{
-  margin:0 0 .8rem;
-  font-size:2.2rem;
-  color:var(--brand);
-  line-height:1.05;
-}
-.hero p{ margin:0 0 1.2rem; color:var(--muted); }
+.site-hero{padding:64px 0 40px;text-align:center;background:#fff}
+.hero h1{font-size:38px;color:var(--blue);margin:0 0 12px;font-weight:800}
+.hero p{color:var(--muted);margin:0 0 20px}
+.actions{display:flex;gap:12px;justify-content:center}
 
-/* CTA row */
-.cta-row{ display:flex; gap:1rem; justify-content:center; margin-top:1rem; flex-wrap:wrap; }
-.btn{
-  padding:.75rem 1.25rem;
-  border-radius:10px;
-  border:1px solid transparent;
-  font-weight:600;
-  cursor:pointer;
-  text-decoration:none;
-  display:inline-block;
-}
-.btn-primary{ background:var(--brand); color:#fff; box-shadow:0 6px 14px rgba(22,102,168,0.12); }
-.btn-ghost{ background:#fff; color:#111827; border:1px solid #e6e9ee; }
+/* packs */
+.packs{padding:36px 0}
+.packs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.card{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 8px 20px rgba(16,24,40,.06)}
+.card h3{margin:0 0 10px}
 
-/* packs grid */
-#packsGrid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:1.25rem; margin-top:1.5rem; padding:1.25rem 0 3rem; }
-.card{
-  background:var(--card);
-  border-radius:var(--radius);
-  padding:1.25rem;
-  box-shadow:0 8px 24px rgba(15,23,42,0.06);
-  min-height:160px;
-}
-.card h3{ margin:0 0 .6rem; font-size:1.05rem; }
-.card p{ margin:0 0 .9rem; color:var(--muted) }
+/* form */
+.form-card{background:var(--card);padding:20px;border-radius:10px;box-shadow:0 6px 14px rgba(16,24,40,.06);max-width:900px}
+.form-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.form-row label{display:block;font-weight:600;margin-bottom:6px}
+input[type="text"],input[type="email"],textarea,select{width:100%;padding:10px 12px;border-radius:8px;border:1px solid #d9e6ef;background:#fff;font-size:14px}
+textarea{min-height:110px}
+.form-actions{display:flex;gap:12px;margin-top:12px}
+.small-btn{padding:8px 12px;border-radius:8px}
+
+/* result */
+#formResult{background:#fff;padding:12px;border-radius:8px;border:1px dashed #dfeaf2;white-space:pre-wrap;margin-top:14px}
 
 /* footer */
-.site-footer{
-  background:#fff;
-  border-top:1px solid #e6e9ee;
-  padding:2rem 0;
-  margin-top:2rem;
+.site-footer{background:var(--card);padding:28px;border-radius:8px;margin-top:30px}
+
+/* utilities */
+.mt-24{margin-top:24px}
+.mb-24{margin-bottom:24px}
+
+/* responsive */
+@media (max-width:900px){
+  #mainNav{display:none}
+  #mainNav.open{display:flex;flex-direction:column;position:absolute;left:0;right:0;top:68px;background:#fff;padding:12px;border-top:1px solid #e6eef6}
+  .hero h1{font-size:28px}
 }
 
-/* floating WhatsApp button (example class .whatsapp-fab) */
-.whatsapp-fab{
-  position:fixed;
-  right:20px;
-  bottom:22px;
-  width:56px;
-  height:56px;
-  border-radius:50%;
-  background:#21b573;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 8px 20px rgba(33,181,115,0.18);
-  z-index:1000;
-}
-.whatsapp-fab img{ width:28px; height:28px }
-
-/* small responsiveness */
-@media (max-width: 1024px){
-  #packsGrid{ grid-template-columns:repeat(2, 1fr); }
-}
-@media (max-width: 640px){
-  .hero h1{ font-size:1.6rem; }
-  #packsGrid{ grid-template-columns:1fr; }
-  nav.main-nav{ display:none; } /* simple mobile collapse - you may add burger later */
-  .site-header{ padding:0 .6rem; }
-}
-
-/* ===========================
-   RTL specific rules (Arabic)
-   =========================== */
-
-/* base: use attribute or class */
-html[lang="ar"], .rtl-mode, :dir(rtl) {
-  direction: rtl;
-  unicode-bidi: embed;
-}
-
-/* header layout reversed */
-.rtl-mode .header-inner {
-  flex-direction: row-reverse;
-}
-.rtl-mode nav.main-nav ul {
-  flex-direction: row-reverse;
-}
-
-/* brand spacing flip */
-.rtl-mode .brand { margin-left:0; margin-right:1rem; }
-
-/* header controls reversed (language select / contact) */
-.rtl-mode .header-controls { flex-direction: row-reverse; }
-
-/* hero text right */
-.rtl-mode .hero { text-align: right; }
-
-/* CTA order reversed */
-.rtl-mode .cta-row { flex-direction: row-reverse; }
-
-/* pack cards text align right */
-.rtl-mode .card { text-align: right; }
-
-/* floating WhatsApp: move to left */
-.rtl-mode .whatsapp-fab { right: auto; left:20px; }
-
-/* flip chevrons if you use them */
-.rtl-mode .chev-right { transform: scaleX(-1); }
-
-/* keep inline-ltr content readable (emails, amounts) */
-.rtl-mode .ltr-inline { direction:ltr; unicode-bidi:embed; }
-
-/* small-screen adjustments keep hero centered */
-@media (max-width:640px){
-  .rtl-mode .hero { text-align:center; }
-  .rtl-mode nav.main-nav ul { flex-direction:column; }
-}
+/* RTL support */
+html[lang="ar"]{direction:rtl;text-align:right;font-family:"Noto Naskh Arabic", "Inter", sans-serif}
+html[lang="ar"] .header-inner{flex-direction:row-reverse}
+html[lang="ar"] #mainNav{justify-content:center}
