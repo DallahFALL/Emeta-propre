@@ -1,1 +1,136 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>e-META — L'assistant IA</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#home" aria-label="Aller à l'accueil">
+   <img src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" height="100" />
+      </a>
 
+      <button id="navToggle" class="nav-toggle" aria-label="Ouvrir le menu">☰</button>
+
+      <nav id="mainNav" class="main-nav" aria-label="Navigation principale">
+        <a href="#home">Accueil</a>
+        <a href="#packs">Découvrir les packs</a>
+        <a href="#about">À propos</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-controls">
+        <select id="langSelect" aria-label="Choisir la langue">
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+          <option value="ar">AR</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container hero-inner">
+        <h1 class="hero-title"><span class="brand-accent">e-META</span> — L'assistant IA pluridisciplinaire pour vos décisions</h1>
+        <p class="hero-sub">Packs de formulaires spécialisés, synthèses structurées et recommandations actionnables — multilingue.</p>
+
+        <div class="hero-ctas">
+          <a class="btn btn-cta" href="#packs">Découvrir les packs</a>
+          <!-- WhatsApp placé dans le hero (pas à côté du sélecteur langue dans l'en-tête) -->
+          <a class="btn btn-ghost" href="https://wa.me/221782607212" target="_blank" rel="noopener">Contact WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="packs" class="container section">
+      <h2 class="section-title">Nos packs</h2>
+      <p class="section-lead">Packs conçus pour diagnostiquer, prioriser et recommander des actions concrètes.</p>
+
+      <div class="cards-grid">
+        <article class="card">
+          <h3>Marketing</h3>
+          <p>Brief campagne, estimation budget et canaux.</p>
+          <div class="card-footer">
+            <a class="card-link" href="forms/marketing.html">Ouvrir</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Financement</h3>
+          <p>Demande structurée, modèles financiers.</p>
+          <div class="card-footer">
+            <a class="card-link" href="forms/finance.html">Ouvrir</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Recrutement</h3>
+          <p>Brief rôle, budget et timeline.</p>
+          <div class="card-footer">
+            <a class="card-link" href="forms/hr.html">Ouvrir</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Produit</h3>
+          <p>Positionnement, pricing, GTM.</p>
+          <div class="card-footer">
+            <a class="card-link" href="forms/product.html">Ouvrir</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="container section">
+      <h2>À propos</h2>
+      <p>e-META aide les acteurs de tous les secteurs à structurer leurs décisions via des packs de formulaires spécialisés et des synthèses actionnables.</p>
+    </section>
+
+    <section id="faq" class="container section">
+      <h2>FAQ</h2>
+      <details><summary>Comment fonctionne e-META ?</summary><p>Expliquer le principe — collecte via formulaires, synthèse IA, recommandations.</p></details>
+      <details><summary>Est-ce gratuit ?</summary><p>Préciser les offres (gratuit, freemium, pro...).</p></details>
+    </section>
+
+    <section id="contact" class="container section">
+      <h2>Contact</h2>
+      <p>Email : <a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
+      <p>WhatsApp : <a href="https://wa.me/221782607212" target="_blank" rel="noopener">+221 78 260 72 12</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> e-META</p>
+    </div>
+  </footer>
+
+  <script>
+    // année automatique
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const mainNav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', ()=> {
+      mainNav.classList.toggle('open');
+    });
+
+    // langue persistée localStorage
+    const LANG_KEY = 'emeta_lang';
+    const langSelect = document.getElementById('langSelect');
+    const saved = localStorage.getItem(LANG_KEY);
+    if(saved) langSelect.value = saved;
+    langSelect.addEventListener('change', e => {
+      localStorage.setItem(LANG_KEY, e.target.value);
+      // ici tu peux ajouter code pour charger les labels JSON
+    });
+  </script>
+</body>
+</html>
