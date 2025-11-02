@@ -27,5 +27,9 @@
   "delivery_inline":"Inline",
   "form_send":"Send",
   "form_cancel":"Cancel",
-  "result_title":"Result"
+  "result_title":"Result",
+  "open":"Open",
+  "email_subject_prefix":"Pack request",
+  "inline_sample":"Initial summary: clarify objective, set budget and priorities.",
+  "packs_empty":"No packs available."
 }
