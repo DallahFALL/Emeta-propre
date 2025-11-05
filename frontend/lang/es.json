@@ -1,41 +1,59 @@
 {
-  "nav_home":"Inicio",
-  "nav_packs":"Packs",
-  "nav_about":"Acerca",
-  "nav_faq":"FAQ",
-  "nav_contact":"Contacto",
-  "hero_title":"e-META — Asistente IA multidisciplinario para decisiones",
-  "hero_sub":"Packs de formularios especializados, resúmenes estructurados y recomendaciones accionables — multilingüe.",
-  "btn_discover":"Descubrir packs",
-  "btn_whatsapp":"Contactar por WhatsApp",
-  "btn_whatsapp_text":"Hola, quiero información sobre e-META.",
-  "packs_title":"Nuestros packs",
-  "packs_sub":"Packs diseñados para diagnosticar, priorizar y recomendar acciones concretas.",
-  "about_title":"Acerca",
-  "about_text":"e-META ayuda a los actores de todos los sectores a estructurar sus decisiones mediante packs de formularios especializados y resúmenes accionables.",
-  "faq_title":"FAQ",
-  "faq_q1":"¿Cómo funciona e-META?",
-  "faq_a1":"Rellena un pack, elige el modo de entrega — recibe el resumen por email, WhatsApp o mostrado en la página.",
-  "faq_q2":"¿Es gratis?",
-  "faq_a2":"La versión básica es gratuita; algunas opciones pro pueden ser de pago.",
-  "form_title":"Pack —",
-  "form_name":"Nombre",
-  "form_email":"Email",
-  "form_phone":"Teléfono (WhatsApp)",
-  "form_details":"Detalles",
-  "form_mode":"Modo de entrega",
-  "mode_email":"Email",
-  "mode_whatsapp":"WhatsApp",
-  "mode_display":"Mostrar",
-  "form_send":"Enviar",
-  "form_cancel":"Cancelar",
-  "contact_title":"Contacto",
-  "contact_email_label":"Email :",
-  "contact_whatsapp_label":"WhatsApp :",
-  "packs":[
-    {"name":"Marketing","desc":"Brief campaña, estimación de presupuesto y canales.","button":"Abrir"},
-    {"name":"Funding","desc":"Solicitud de financiación estructurada, modelos financieros.","button":"Abrir"},
-    {"name":"Recruitment","desc":"Brief de rol, presupuesto y cronograma.","button":"Abrir"},
-    {"name":"Product","desc":"Posicionamiento, precios, GTM.","button":"Abrir"}
+  "nav_home": "Inicio",
+  "nav_packs": "Descubrir packs",
+  "nav_about": "Acerca de",
+  "nav_faq": "FAQ",
+  "nav_contact": "Contacto",
+  "open_btn": "Abrir",
+  "btn_whatsapp_text": "Hola, quiero un pack e-META",
+  "form_title_prefix": "Pack —",
+  "form_submit": "Enviar",
+  "form_cancel": "Cancelar",
+  "form_mode_label": "Modo de entrega",
+  "form_mode_email": "Email",
+  "form_mode_whatsapp": "WhatsApp",
+  "form_mode_display": "Mostrar",
+  "packs": [
+    {
+      "name": "Marketing",
+      "desc": "Brief de campaña, estimación de presupuesto y canales.",
+      "button": "Abrir",
+      "fields": [
+        {"key":"objective","type":"text","label":"Objetivo principal","placeholder":"ej.: adquisición / reconocimiento","required":true},
+        {"key":"audience","type":"text","label":"Audiencia objetivo","placeholder":"ej.: 18-35, urbano"},
+        {"key":"budget","type":"text","label":"Presupuesto estimado","placeholder":"ej.: 1.200.000 XOF"},
+        {"key":"channels","type":"textarea","label":"Canales previstos","placeholder":"TV, radio, digital..."}
+      ]
+    },
+    {
+      "name": "Funding",
+      "desc": "Solicitud estructurada de financiación, modelos financieros.",
+      "button": "Abrir",
+      "fields": [
+        {"key":"amount","type":"text","label":"Importe solicitado","placeholder":"ej.: 20.000.000 XOF","required":true},
+        {"key":"use_of_funds","type":"textarea","label":"Uso de los fondos","placeholder":"¿Para qué se utilizará el dinero?"},
+        {"key":"term","type":"select","label":"Plazo deseado","options":[{"label":"6 meses","value":"6m"},{"label":"12 meses","value":"12m"},{"label":"24 meses","value":"24m"}]}
+      ]
+    },
+    {
+      "name": "Recruitment",
+      "desc": "Brief de puesto, presupuesto y calendario.",
+      "button": "Abrir",
+      "fields": [
+        {"key":"role","type":"text","label":"Puesto","placeholder":"ej.: Jefe de proyecto","required":true},
+        {"key":"team_size","type":"text","label":"Tamaño del equipo","placeholder":"ej.: 3 personas"},
+        {"key":"salary","type":"text","label":"Presupuesto salarial","placeholder":"ej.: XOF / mes"}
+      ]
+    },
+    {
+      "name": "Product",
+      "desc": "Posicionamiento, precios, GTM.",
+      "button": "Abrir",
+      "fields": [
+        {"key":"value","type":"textarea","label":"Propuesta de valor","placeholder":"¿Por qué este producto?","required":true},
+        {"key":"price_model","type":"text","label":"Modelo de precios","placeholder":"ej.: suscripción / compra única"},
+        {"key":"launch_date","type":"text","label":"Lanzamiento previsto","placeholder":"YYYY-MM"}
+      ]
+    }
   ]
 }
