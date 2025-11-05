@@ -1,41 +1,59 @@
 {
-  "nav_home":"Home",
-  "nav_packs":"Packs",
-  "nav_about":"About",
-  "nav_faq":"FAQ",
-  "nav_contact":"Contact",
-  "hero_title":"e-META — Multidisciplinary AI assistant for decisions",
-  "hero_sub":"Specialized form packs, structured summaries and actionable recommendations — multilingual.",
-  "btn_discover":"Discover packs",
-  "btn_whatsapp":"Contact WhatsApp",
-  "btn_whatsapp_text":"Hello, I want information about e-META.",
-  "packs_title":"Our packs",
-  "packs_sub":"Packs designed to diagnose, prioritise and recommend concrete actions.",
-  "about_title":"About",
-  "about_text":"e-META helps actors across sectors structure decisions with specialized form packs and actionable summaries.",
-  "faq_title":"FAQ",
-  "faq_q1":"How does e-META work?",
-  "faq_a1":"Fill a pack, choose output mode — receive the summary by email, WhatsApp or displayed on page.",
-  "faq_q2":"Is it free?",
-  "faq_a2":"Basic version is free; some pro options may be paid.",
-  "form_title":"Pack —",
-  "form_name":"Name",
-  "form_email":"Email",
-  "form_phone":"Phone (WhatsApp)",
-  "form_details":"Details",
-  "form_mode":"Output mode",
-  "mode_email":"Email",
-  "mode_whatsapp":"WhatsApp",
-  "mode_display":"Display",
-  "form_send":"Send",
-  "form_cancel":"Cancel",
-  "contact_title":"Contact",
-  "contact_email_label":"Email :",
-  "contact_whatsapp_label":"WhatsApp :",
-  "packs":[
-    {"name":"Marketing","desc":"Campaign brief, budget estimate and channels.","button":"Open"},
-    {"name":"Funding","desc":"Structured funding request, financial templates.","button":"Open"},
-    {"name":"Recruitment","desc":"Role brief, budget and timeline.","button":"Open"},
-    {"name":"Product","desc":"Positioning, pricing, GTM.","button":"Open"}
+  "nav_home": "Home",
+  "nav_packs": "Discover packs",
+  "nav_about": "About",
+  "nav_faq": "FAQ",
+  "nav_contact": "Contact",
+  "open_btn": "Open",
+  "btn_whatsapp_text": "Hello, I'd like an e-META pack",
+  "form_title_prefix": "Pack —",
+  "form_submit": "Send",
+  "form_cancel": "Cancel",
+  "form_mode_label": "Delivery mode",
+  "form_mode_email": "Email",
+  "form_mode_whatsapp": "WhatsApp",
+  "form_mode_display": "Display",
+  "packs": [
+    {
+      "name": "Marketing",
+      "desc": "Campaign brief, budget estimate and channels.",
+      "button": "Open",
+      "fields": [
+        {"key":"objective","type":"text","label":"Main objective","placeholder":"e.g. acquisition / awareness","required":true},
+        {"key":"audience","type":"text","label":"Target audience","placeholder":"e.g. 18-35, urban"},
+        {"key":"budget","type":"text","label":"Estimated budget","placeholder":"e.g. 1,200,000 XOF"},
+        {"key":"channels","type":"textarea","label":"Planned channels","placeholder":"TV, radio, digital..."}
+      ]
+    },
+    {
+      "name": "Funding",
+      "desc": "Structured funding request, financial models.",
+      "button": "Open",
+      "fields": [
+        {"key":"amount","type":"text","label":"Requested amount","placeholder":"e.g. 20,000,000 XOF","required":true},
+        {"key":"use_of_funds","type":"textarea","label":"Use of funds","placeholder":"What will the money be used for?"},
+        {"key":"term","type":"select","label":"Desired term","options":[{"label":"6 months","value":"6m"},{"label":"12 months","value":"12m"},{"label":"24 months","value":"24m"}]}
+      ]
+    },
+    {
+      "name": "Recruitment",
+      "desc": "Role brief, budget and timeline.",
+      "button": "Open",
+      "fields": [
+        {"key":"role","type":"text","label":"Role","placeholder":"e.g. Project Manager","required":true},
+        {"key":"team_size","type":"text","label":"Team size","placeholder":"e.g. 3 people"},
+        {"key":"salary","type":"text","label":"Salary budget","placeholder":"e.g. XOF / month"}
+      ]
+    },
+    {
+      "name": "Product",
+      "desc": "Positioning, pricing, GTM.",
+      "button": "Open",
+      "fields": [
+        {"key":"value","type":"textarea","label":"Value proposition","placeholder":"Why this product?","required":true},
+        {"key":"price_model","type":"text","label":"Pricing model","placeholder":"e.g. subscription / one-time"},
+        {"key":"launch_date","type":"text","label":"Planned launch","placeholder":"YYYY-MM"}
+      ]
+    }
   ]
 }
