@@ -1,41 +1,59 @@
 {
-  "nav_home":"الصفحة الرئيسية",
-  "nav_packs":"اكتشف الحزم",
-  "nav_about":"معلومات عنا",
-  "nav_faq":"الأسئلة الشائعة",
-  "nav_contact":"اتصل",
-  "hero_title":"e-META — مساعد ذكاء اصطناعي متعدد التخصصات للقرارات",
-  "hero_sub":"حزم استمارات متخصصة، ملخصات منظمة وتوصيات قابلة للتنفيذ — متعدد اللغات.",
-  "btn_discover":"اكتشف الحزم",
-  "btn_whatsapp":"التواصل عبر واتساب",
-  "btn_whatsapp_text":"مرحبًا، أريد معلومات عن e-META.",
-  "packs_title":"حزمنا",
-  "packs_sub":"حزم مصممة للتشخيص وتحديد الأولويات والتوصية بإجراءات ملموسة.",
-  "about_title":"معلومات عنا",
-  "about_text":"يساعد e-META الجهات في جميع القطاعات على تنظيم قراراتها عبر حزم استمارات متخصصة وملخصات قابلة للتنفيذ.",
-  "faq_title":"الأسئلة الشائعة",
-  "faq_q1":"كيف يعمل e-META؟",
-  "faq_a1":"املأ حزمة، اختر طريقة الإخراج — ستصلك الملخص عبر البريد أو واتساب أو ستعرض على الصفحة.",
-  "faq_q2":"هل هو مجاني؟",
-  "faq_a2":"النسخة الأساسية مجانية؛ قد تكون الخيارات الاحترافية مدفوعة.",
-  "form_title":"حزمة —",
-  "form_name":"الاسم",
-  "form_email":"البريد الإلكتروني",
-  "form_phone":"الهاتف (واتساب)",
-  "form_details":"التفاصيل",
-  "form_mode":"طريقة الإرسال",
-  "mode_email":"البريد الإلكتروني",
-  "mode_whatsapp":"واتساب",
-  "mode_display":"عرض",
-  "form_send":"إرسال",
-  "form_cancel":"إلغاء",
-  "contact_title":"اتصل",
-  "contact_email_label":"البريد الإلكتروني :",
-  "contact_whatsapp_label":"واتساب :",
-  "packs":[
-    {"name":"Product","desc":"التموضع والتسعير وخطة طرح السوق.","button":"فتح"},
-    {"name":"Recruitment","desc":"وصف الدور والميزانية والجدول الزمني.","button":"فتح"},
-    {"name":"Funding","desc":"طلب تمويل منظم ونماذج مالية.","button":"فتح"},
-    {"name":"Marketing","desc":"موجز الحملة وتقدير الميزانية والقنوات.","button":"فتح"}
+  "nav_home": "الصفحة الرئيسية",
+  "nav_packs": "اكتشف الحزم",
+  "nav_about": "معلومات عنا",
+  "nav_faq": "الأسئلة الشائعة",
+  "nav_contact": "اتصل",
+  "open_btn": "فتح",
+  "btn_whatsapp_text": "مرحباً، أريد حزمة e-META",
+  "form_title_prefix": "الحزمة —",
+  "form_submit": "إرسال",
+  "form_cancel": "إلغاء",
+  "form_mode_label": "طريقة الاستلام",
+  "form_mode_email": "البريد الإلكتروني",
+  "form_mode_whatsapp": "واتساب",
+  "form_mode_display": "عرض",
+  "packs": [
+    {
+      "name": "التسويق",
+      "desc": "موجز الحملة وتقدير الميزانية والقنوات.",
+      "button": "فتح",
+      "fields": [
+        {"key":"objective","type":"text","label":"الهدف الرئيسي","placeholder":"مثال: اكتساب / وعي","required":true},
+        {"key":"audience","type":"text","label":"الفئة المستهدفة","placeholder":"مثال: 18-35، حضري"},
+        {"key":"budget","type":"text","label":"الميزانية المقدرة","placeholder":"مثال: 1 200 000 XOF"},
+        {"key":"channels","type":"textarea","label":"القنوات المتوقعة","placeholder":"التلفزيون، الراديو، الرقمي..."}
+      ]
+    },
+    {
+      "name": "التمويل",
+      "desc": "طلب تمويل منظم، نماذج مالية.",
+      "button": "فتح",
+      "fields": [
+        {"key":"amount","type":"text","label":"المبلغ المطلوب","placeholder":"مثال: 20,000,000 XOF","required":true},
+        {"key":"use_of_funds","type":"textarea","label":"استخدام الأموال","placeholder":"ما الذي سيُستخدم المال من أجله؟"},
+        {"key":"term","type":"select","label":"المدة المطلوبة","options":[{"label":"6 أشهر","value":"6m"},{"label":"12 أشهر","value":"12m"},{"label":"24 أشهر","value":"24m"}]}
+      ]
+    },
+    {
+      "name": "التوظيف",
+      "desc": "تفصيل الدور والميزانية والجدول الزمني.",
+      "button": "فتح",
+      "fields": [
+        {"key":"role","type":"text","label":"المنصب المطلوب","placeholder":"مثال: مدير مشروع","required":true},
+        {"key":"team_size","type":"text","label":"حجم الفريق","placeholder":"مثال: 3 أشخاص"},
+        {"key":"salary","type":"text","label":"ميزانية الرواتب","placeholder":"مثال: XOF / شهر"}
+      ]
+    },
+    {
+      "name": "المنتج",
+      "desc": "التموضع، التسعير، خطة الإطلاق.",
+      "button": "فتح",
+      "fields": [
+        {"key":"value","type":"textarea","label":"عرض القيمة","placeholder":"لماذا هذا المنتج؟","required":true},
+        {"key":"price_model","type":"text","label":"نموذج التسعير","placeholder":"مثال: اشتراك / شراء لمرة واحدة"},
+        {"key":"launch_date","type":"text","label":"تاريخ الإطلاق المتوقع","placeholder":"YYYY-MM"}
+      ]
+    }
   ]
 }
