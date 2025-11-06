@@ -1,59 +1,50 @@
 {
-  "nav_home": "Accueil",
-  "nav_packs": "Découvrir les packs",
-  "nav_about": "À propos",
-  "nav_faq": "FAQ",
-  "nav_contact": "Contact",
-  "open_btn": "Ouvrir",
-  "btn_whatsapp_text": "Bonjour, je souhaite un pack e-META",
-  "form_title_prefix": "Pack —",
-  "form_submit": "Envoyer",
-  "form_cancel": "Annuler",
-  "form_mode_label": "Mode de restitution",
-  "form_mode_email": "Email",
-  "form_mode_whatsapp": "WhatsApp",
-  "form_mode_display": "Affichage",
-  "packs": [
-    {
-      "name": "Marketing",
-      "desc": "Brief campagne, estimation budget et canaux.",
-      "button": "Ouvrir",
-      "fields": [
-        {"key":"objective","type":"text","label":"Objectif principal","placeholder":"Ex : acquisition / notoriété","required":true},
-        {"key":"audience","type":"text","label":"Audience cible","placeholder":"Ex : 18-35, urbain"},
-        {"key":"budget","type":"text","label":"Budget estimé","placeholder":"Ex : 1 200 000 XOF"},
-        {"key":"channels","type":"textarea","label":"Canaux envisagés","placeholder":"TV, radio, digital..."}
-      ]
-    },
-    {
-      "name": "Funding",
-      "desc": "Demande structurée, modèles financiers.",
-      "button": "Ouvrir",
-      "fields": [
-        {"key":"amount","type":"text","label":"Montant requis","placeholder":"Ex : 20 000 000 XOF","required":true},
-        {"key":"usage","type":"textarea","label":"Usage du financement","placeholder":"A quoi servira cet argent?"},
-        {"key":"term","type":"select","label":"Durée souhaitée","options":[{"label":"6 mois","value":"6m"},{"label":"12 mois","value":"12m"},{"label":"24 mois","value":"24m"}]}
-      ]
-    },
-    {
-      "name": "Recruitment",
-      "desc": "Brief rôle, budget et timeline.",
-      "button": "Ouvrir",
-      "fields": [
-        {"key":"role","type":"text","label":"Poste recherché","placeholder":"Ex : Chef de projet","required":true},
-        {"key":"team_size","type":"text","label":"Taille de l'équipe","placeholder":"Ex : 3 personnes"},
-        {"key":"salary","type":"text","label":"Budget salarial","placeholder":"Ex : XOF / mois"}
-      ]
-    },
-    {
-      "name": "Product",
-      "desc": "Positionnement, pricing, GTM.",
-      "button": "Ouvrir",
-      "fields": [
-        {"key":"value","type":"textarea","label":"Proposition de valeur","placeholder":"Pourquoi ce produit?","required":true},
-        {"key":"price_model","type":"text","label":"Modèle tarifaire","placeholder":"Ex : abonnement / one-time"},
-        {"key":"launch_date","type":"text","label":"Date de lancement prévue","placeholder":"YYYY-MM"}
-      ]
-    }
+  "nav_home":"Accueil",
+  "nav_packs":"Découvrir les packs",
+  "nav_about":"À propos",
+  "nav_faq":"FAQ",
+  "nav_contact":"Contact",
+  "btn_whatsapp":"Contact WhatsApp",
+  "btn_discover":"Découvrir les packs",
+  "btn_open":"Ouvrir",
+  "hero_title":"e-META — L'assistant IA pluridisciplinaire",
+  "hero_sub":"Packs de formulaires spécialisés, synthèses et recommandations actionnables.",
+  "packs_title":"Nos packs",
+  "packs_sub":"Packs conçus pour diagnostiquer, prioriser et recommander des actions concrètes.",
+  "about_title":"À propos",
+  "about_text":"e-META aide les acteurs de tous les secteurs à structurer leurs décisions via des packs de formulaires spécialisés et des synthèses actionnables.",
+  "faq_title":"FAQ",
+  "faq_q1":"Comment fonctionne e-META ?",
+  "faq_a1":"Réponse courte expliquant le fonctionnement.",
+  "faq_q2":"Est-ce gratuit ?",
+  "faq_a2":"Réponse sur les options gratuites/payant.",
+  "contact_title":"Contact",
+  "footer_about_title":"À propos",
+  "footer_about_text":"e-META propose des formulaires et des synthèses pour aider à la prise de décision.",
+  "footer_faq_title":"FAQ",
+  "footer_faq_q1":"Comment fonctionne e-META ?",
+  "footer_faq_q2":"Est-ce gratuit ?",
+  "footer_contact_title":"Contact",
+  "btn_open_pack":"Ouvrir",
+  "btn_open":"Ouvrir",
+  "form_label_need":"Question principale",
+  "form_label_field1":"Champ 1",
+  "form_label_field2":"Champ 2",
+  "form_label_name":"Nom",
+  "form_label_email":"Email",
+  "form_label_phone":"Téléphone (WhatsApp)",
+  "form_label_details":"Détails",
+  "form_label_mode":"Mode de restitution",
+  "form_mode_email":"Email",
+  "form_mode_whatsapp":"WhatsApp",
+  "form_mode_display":"Affichage",
+  "form_send":"Envoyer",
+  "form_cancel":"Annuler",
+  "form_result_title":"Résultat",
+  "packs":[
+    {"key":"marketing","title":"Marketing","desc":"Brief campagne, estimation budget et canaux."},
+    {"key":"funding","title":"Financement","desc":"Demande structurée, modèles financiers."},
+    {"key":"recruitment","title":"Recrutement","desc":"Brief rôle, budget et timeline."},
+    {"key":"product","title":"Produit","desc":"Positionnement, pricing, GTM."}
   ]
 }
