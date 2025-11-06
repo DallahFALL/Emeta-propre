@@ -1,59 +1,48 @@
 {
-  "nav_home": "Home",
-  "nav_packs": "Discover packs",
-  "nav_about": "About",
-  "nav_faq": "FAQ",
-  "nav_contact": "Contact",
-  "open_btn": "Open",
-  "btn_whatsapp_text": "Hello, I'd like an e-META pack",
-  "form_title_prefix": "Pack —",
-  "form_submit": "Send",
-  "form_cancel": "Cancel",
-  "form_mode_label": "Delivery mode",
-  "form_mode_email": "Email",
-  "form_mode_whatsapp": "WhatsApp",
-  "form_mode_display": "Display",
-  "packs": [
-    {
-      "name": "Marketing",
-      "desc": "Campaign brief, budget estimate and channels.",
-      "button": "Open",
-      "fields": [
-        {"key":"objective","type":"text","label":"Main objective","placeholder":"e.g. acquisition / awareness","required":true},
-        {"key":"audience","type":"text","label":"Target audience","placeholder":"e.g. 18-35, urban"},
-        {"key":"budget","type":"text","label":"Estimated budget","placeholder":"e.g. 1,200,000 XOF"},
-        {"key":"channels","type":"textarea","label":"Planned channels","placeholder":"TV, radio, digital..."}
-      ]
-    },
-    {
-      "name": "Funding",
-      "desc": "Structured funding request, financial models.",
-      "button": "Open",
-      "fields": [
-        {"key":"amount","type":"text","label":"Requested amount","placeholder":"e.g. 20,000,000 XOF","required":true},
-        {"key":"use_of_funds","type":"textarea","label":"Use of funds","placeholder":"What will the money be used for?"},
-        {"key":"term","type":"select","label":"Desired term","options":[{"label":"6 months","value":"6m"},{"label":"12 months","value":"12m"},{"label":"24 months","value":"24m"}]}
-      ]
-    },
-    {
-      "name": "Recruitment",
-      "desc": "Role brief, budget and timeline.",
-      "button": "Open",
-      "fields": [
-        {"key":"role","type":"text","label":"Role","placeholder":"e.g. Project Manager","required":true},
-        {"key":"team_size","type":"text","label":"Team size","placeholder":"e.g. 3 people"},
-        {"key":"salary","type":"text","label":"Salary budget","placeholder":"e.g. XOF / month"}
-      ]
-    },
-    {
-      "name": "Product",
-      "desc": "Positioning, pricing, GTM.",
-      "button": "Open",
-      "fields": [
-        {"key":"value","type":"textarea","label":"Value proposition","placeholder":"Why this product?","required":true},
-        {"key":"price_model","type":"text","label":"Pricing model","placeholder":"e.g. subscription / one-time"},
-        {"key":"launch_date","type":"text","label":"Planned launch","placeholder":"YYYY-MM"}
-      ]
-    }
+  "nav_home":"Home",
+  "nav_packs":"Packs",
+  "nav_about":"About",
+  "nav_faq":"FAQ",
+  "nav_contact":"Contact",
+  "btn_whatsapp":"Contact WhatsApp",
+  "btn_discover":"Discover packs",
+  "btn_open":"Open",
+  "hero_title":"e-META — Multidisciplinary AI assistant",
+  "hero_sub":"Specialized form packs, structured syntheses and actionable recommendations.",
+  "packs_title":"Our packs",
+  "packs_sub":"Packs designed to diagnose, prioritize and recommend concrete actions.",
+  "about_title":"About",
+  "about_text":"e-META helps actors across sectors structure decisions using specialized form packs and actionable syntheses.",
+  "faq_title":"FAQ",
+  "faq_q1":"How does e-META work?",
+  "faq_a1":"Short answer explaining how it works.",
+  "faq_q2":"Is it free?",
+  "faq_a2":"Information on free/paid options.",
+  "contact_title":"Contact",
+  "footer_about_title":"About",
+  "footer_about_text":"e-META offers forms and syntheses to support decision making.",
+  "footer_faq_title":"FAQ",
+  "footer_faq_q1":"How does e-META work?",
+  "footer_faq_q2":"Is it free?",
+  "footer_contact_title":"Contact",
+  "form_label_need":"Main question",
+  "form_label_field1":"Field 1",
+  "form_label_field2":"Field 2",
+  "form_label_name":"Name",
+  "form_label_email":"Email",
+  "form_label_phone":"Phone (WhatsApp)",
+  "form_label_details":"Details",
+  "form_label_mode":"Result mode",
+  "form_mode_email":"Email",
+  "form_mode_whatsapp":"WhatsApp",
+  "form_mode_display":"Display",
+  "form_send":"Send",
+  "form_cancel":"Cancel",
+  "form_result_title":"Result",
+  "packs":[
+    {"key":"marketing","title":"Marketing","desc":"Campaign brief, budget estimate and channels."},
+    {"key":"funding","title":"Funding","desc":"Structured funding request, financial models."},
+    {"key":"recruitment","title":"Recruitment","desc":"Role brief, budget and timeline."},
+    {"key":"product","title":"Product","desc":"Positioning, pricing, GTM."}
   ]
 }
