@@ -1,5 +1,10 @@
-/* script.js - Version corrective pour localisation des packs + formulaire dynamique */
-const LANG_DIR = './frontend/lang/'; // chemin vers vos JSON (vérifier que ce dossier existe)
+/* script.js
+ - Charge les fichiers de langue depuis /frontend/lang/{code}.json
+ - Rend dynamiquement les packs, ouvre le formulaire, gère envoi (mailto / wa.me / affichage)
+ - Fallback logo: essaye src principal puis data-alt-src
+*/
+
+const LANG_DIR = './frontend/lang/'; // place tes JSON ici: frontend/lang/fr.json, en.json, es.json, ar.json
 const DEFAULT_LANG = 'fr';
 const WHATSAPP_NUMBER = '221782607212';
 
@@ -8,12 +13,21 @@ let currentLangJson = null;
 
 document.addEventListener('DOMContentLoaded', () => {
   const langSelect = document.getElementById('langSelector');
-  // set saved or default
   const saved = localStorage.getItem('emeta_lang') || DEFAULT_LANG;
-  if(langSelect) langSelect.value = saved;
+  if (langSelect) langSelect.value = saved;
+
+  // setup logo fallback
+  const siteLogo = document.getElementById('site-logo');
+  if (siteLogo) {
+    siteLogo.addEventListener('error', () => {
+      const alt = siteLogo.getAttribute('data-alt-src');
+      if (alt && siteLogo.src.indexOf(alt) === -1) siteLogo.src = alt;
+    });
+  }
+
   loadLang(saved);
 
-  if(langSelect){
+  if (langSelect) {
     langSelect.addEventListener('change', (e) => {
       const code = e.target.value;
       localStorage.setItem('emeta_lang', code);
@@ -21,190 +35,232 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // cancel button form
-  const cancelBtn = document.getElementById('formCancel');
-  if(cancelBtn) cancelBtn.addEventListener('click', hideForm);
+  // discover button scroll
+  const discover = document.getElementById('btn-discover');
+  if (discover) discover.addEventListener('click', () => {
+    document.getElementById('packs').scrollIntoView({behavior:'smooth'});
+  });
 
-  // form submit
-  const form = document.getElementById('packForm');
-  if(form) form.addEventListener('submit', handleFormSubmit);
+  // whatsapp quick
+  const waBtn = document.getElementById('whatsappContact');
+  if (waBtn) waBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}`, '_blank');
+  });
+
+  // modal cancel(s)
+  const modalCancel = document.getElementById('formCancelBtn');
+  if (modalCancel) modalCancel.addEventListener('click', hideForm);
+  const modalCloseIcon = document.getElementById('formCancel');
+  if (modalCloseIcon) modalCloseIcon.addEventListener('click', hideForm);
 });
 
-/* Charge le JSON de langue (cache-bust) et stocke globalement */
-async function loadLang(code){
-  try{
+async function loadLang(code) {
+  try {
     const url = `${LANG_DIR}${code}.json?t=${Date.now()}`;
-    console.log('[i] fetch lang:', url);
     const res = await fetch(url);
-    if(!res.ok) throw new Error(`fetch ${url} status ${res.status}`);
+    if (!res.ok) throw new Error('Lang file not found: ' + url);
     const json = await res.json();
     currentLangCode = code;
     currentLangJson = json;
     document.documentElement.lang = code;
+    document.documentElement.dir = (code === 'ar') ? 'rtl' : 'ltr';
 
-    // texte statique (data-i18n)
-    document.querySelectorAll('[data-i18n]').forEach(el=>{
+    // fill static nodes data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      if(key && json[key]) el.innerText = json[key];
+      if (key && json[key] !== undefined) {
+        if (el.tagName.toLowerCase() === 'input' || el.tagName.toLowerCase() === 'textarea') {
+          el.placeholder = json[key];
+        } else {
+          el.textContent = json[key];
+        }
+      }
     });
 
-    // rendre packs depuis json.packs
-    if(Array.isArray(json.packs)){
+    // update whatsapp button text/href
+    const wa = document.getElementById('whatsappContact');
+    if (wa && json.btn_whatsapp_text) {
+      wa.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(json.btn_whatsapp_text)}`;
+      // text is replaced above via data-i18n on inner span
+    }
+
+    // render packs
+    if (Array.isArray(json.packs)) {
       renderPacks(json.packs);
     } else {
-      document.getElementById('packsGrid').innerHTML = '<p>Pas de packs définis.</p>';
+      const grid = document.getElementById('packsGrid');
+      if (grid) grid.innerHTML = `<p>${json.no_packs_text || 'Aucun pack.'}</p>`;
     }
-
-    // mettre à jour lien whatsapp si présent
-    const w = document.getElementById('whatsappContact');
-    if(w && json.btn_whatsapp_text) {
-      w.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(json.btn_whatsapp_text)}`;
-    }
-
-    console.log('[i] langue chargée:', code);
-  }catch(err){
-    console.error('[!] loadLang error', err);
+  } catch (err) {
+    console.error('[eMETA] loadLang error', err);
   }
 }
 
-/* Render des packs à partir d'un tableau pack[] localisé */
-function renderPacks(packs){
+function renderPacks(packs) {
   const grid = document.getElementById('packsGrid');
-  if(!grid) return;
+  if (!grid) return;
   grid.innerHTML = '';
   packs.forEach((p, i) => {
-    const card = document.createElement('div');
+    const card = document.createElement('article');
     card.className = 'pack-card';
-    const name = escapeHtml(p.name || `Pack ${i+1}`);
-    const desc = escapeHtml(p.desc || '');
-    const btnText = escapeHtml(p.button || (currentLangJson && currentLangJson.open_btn) || 'Ouvrir');
-
-    card.innerHTML = `
-      <h3 class="pack-title">${name}</h3>
-      <p class="pack-desc">${desc}</p>
-      <button class="btn open-pack" data-index="${i}">${btnText}</button>
-    `;
+    card.setAttribute('data-pack-id', p.id || `pack-${i}`);
+    const title = document.createElement('h3');
+    title.className = 'pack-title';
+    title.textContent = p.name || (`Pack ${i+1}`);
+    const desc = document.createElement('p');
+    desc.className = 'pack-desc';
+    desc.textContent = p.desc || '';
+    const btnWrap = document.createElement('div');
+    btnWrap.style.marginTop = '12px';
+    const btn = document.createElement('button');
+    btn.className = 'open-pack';
+    btn.dataset.index = i;
+    btn.textContent = p.button || (currentLangJson && currentLangJson.open_btn) || 'Ouvrir';
+    btn.addEventListener('click', () => openFormForPack(i));
+    btnWrap.appendChild(btn);
+    card.appendChild(title);
+    card.appendChild(desc);
+    card.appendChild(btnWrap);
     grid.appendChild(card);
   });
-
-  // events
-  document.querySelectorAll('.open-pack').forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      const idx = parseInt(e.currentTarget.dataset.index, 10);
-      openFormForPack(idx);
-    });
-  });
 }
 
-/* Ouvre le formulaire basé sur la définition du pack (fields) */
-function openFormForPack(index){
-  if(!currentLangJson || !Array.isArray(currentLangJson.packs)) return;
+/* Ouvre le formulaire et génère les champs dynamiquement */
+function openFormForPack(index) {
+  if (!currentLangJson || !Array.isArray(currentLangJson.packs)) return;
   const pack = currentLangJson.packs[index];
-  if(!pack) return;
-  // show form section
-  document.getElementById('packFormSection').classList.remove('hidden');
-  document.getElementById('formTitle').innerText = `${currentLangJson.form_title_prefix || 'Pack —'} ${pack.name}`;
-  document.getElementById('packName').value = pack.name || '';
+  if (!pack) return;
 
-  // dynamic fields
-  const containerId = 'dynamicFields';
-  let container = document.getElementById(containerId);
-  if(!container){
-    container = document.createElement('div');
-    container.id = containerId;
-    document.getElementById('packForm').insertBefore(container, document.getElementById('formActions'));
+  const section = document.getElementById('packFormSection');
+  const packNameInput = document.getElementById('packName');
+  const formTitle = document.getElementById('formTitle');
+  if (section && packNameInput && formTitle) {
+    section.classList.remove('hidden');
+    section.classList.add('modal'); // show modal style
+    section.setAttribute('aria-hidden', 'false');
+    packNameInput.value = pack.name || '';
+    formTitle.textContent = (currentLangJson.form_title_prefix || 'Pack —') + ' ' + (pack.name || '');
+
+    // build dynamic fields
+    let container = document.getElementById('dynamicFields');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'dynamicFields';
+      const form = document.getElementById('packForm');
+      const actions = document.getElementById('formActions');
+      form.insertBefore(container, actions);
+    }
+    container.innerHTML = '';
+    const fields = Array.isArray(pack.fields) && pack.fields.length ? pack.fields : defaultFields();
+    fields.forEach(f => {
+      const node = createFieldDom(f);
+      container.appendChild(node);
+    });
+
+    // scroll to modal/top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-  container.innerHTML = ''; // clear
 
-  const fields = (Array.isArray(pack.fields) && pack.fields.length) ? pack.fields : defaultFields();
-  fields.forEach(f => container.appendChild(createFieldDom(f)));
-  window.scrollTo({top: document.getElementById('packFormSection').offsetTop - 80, behavior:'smooth'});
+  // attach form submit
+  const form = document.getElementById('packForm');
+  if (form && !form._bound) {
+    form.addEventListener('submit', handleFormSubmit);
+    form._bound = true;
+  }
 }
 
-/* crée DOM d'un champ */
-function createFieldDom(f){
-  const wr = document.createElement('div');
-  wr.className = 'form-field';
+/* Create form field node */
+function createFieldDom(f) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'form-field';
   const label = document.createElement('label');
   label.setAttribute('for', `f_${f.key}`);
-  label.innerText = f.label || f.key || '';
-  wr.appendChild(label);
+  label.textContent = f.label || f.key;
+  wrapper.appendChild(label);
 
-  let input;
-  const t = (f.type || 'text').toLowerCase();
-  if(t === 'textarea'){
-    input = document.createElement('textarea');
-    input.rows = f.rows || 4;
-  } else if(t === 'select'){
-    input = document.createElement('select');
-    (f.options||[]).forEach(o=>{
+  let inp;
+  const type = (f.type || 'text').toLowerCase();
+  if (type === 'textarea') {
+    inp = document.createElement('textarea');
+    inp.rows = f.rows || 4;
+  } else if (type === 'select') {
+    inp = document.createElement('select');
+    (f.options || []).forEach(o => {
       const opt = document.createElement('option');
       opt.value = o.value || o;
-      opt.innerText = o.label || o;
-      input.appendChild(opt);
+      opt.textContent = o.label || o;
+      inp.appendChild(opt);
     });
   } else {
-    input = document.createElement('input');
-    input.type = f.type || 'text';
+    inp = document.createElement('input');
+    inp.type = f.type || 'text';
   }
-  input.id = `f_${f.key}`;
-  input.name = f.key;
-  if(f.placeholder) input.placeholder = f.placeholder;
-  if(f.required) input.required = true;
-  input.className = 'form-input';
-  wr.appendChild(input);
-  return wr;
+  inp.id = `f_${f.key}`;
+  inp.name = f.key;
+  if (f.placeholder) inp.placeholder = f.placeholder;
+  if (f.required) inp.required = true;
+  inp.className = 'form-input';
+  wrapper.appendChild(inp);
+  return wrapper;
 }
 
-/* valeurs par défaut */
-function defaultFields(){
+function defaultFields() {
   return [
-    {key:'name', type:'text', label:'Nom', placeholder:'Votre nom', required:true},
-    {key:'email', type:'email', label:'Email', placeholder:'a@b.com'},
-    {key:'phone', type:'tel', label:'Téléphone (WhatsApp)', placeholder:'+221...'},
-    {key:'details', type:'textarea', label:'Détails', placeholder:'Expliquez votre besoin...'}
+    { key: 'name', type: 'text', label: currentLangJson && currentLangJson.form_name || 'Nom', placeholder: '', required: true },
+    { key: 'email', type: 'email', label: currentLangJson && currentLangJson.form_email || 'Email', placeholder: '' },
+    { key: 'details', type: 'textarea', label: currentLangJson && currentLangJson.form_details || 'Détails', placeholder: '' }
   ];
 }
 
-/* hide form */
-function hideForm(){
-  document.getElementById('packFormSection').classList.add('hidden');
-  document.getElementById('packForm').reset();
+function hideForm() {
+  const section = document.getElementById('packFormSection');
+  if (!section) return;
+  section.classList.add('hidden');
+  section.setAttribute('aria-hidden', 'true');
   const dyn = document.getElementById('dynamicFields');
-  if(dyn) dyn.innerHTML = '';
-  document.getElementById('formMsg').innerHTML = '';
+  if (dyn) dyn.innerHTML = '';
+  const form = document.getElementById('packForm');
+  if (form) form.reset();
+  const msg = document.getElementById('formMsg');
+  if (msg) msg.innerHTML = '';
 }
 
-/* submit handling */
-function handleFormSubmit(e){
+/* Handle submission: mailto / whatsapp / display */
+function handleFormSubmit(e) {
   e.preventDefault();
   const f = e.target;
-  const formData = {};
-  f.querySelectorAll('input,textarea,select').forEach(i=>{
-    if(!i.name) return;
-    if(i.type === 'checkbox') formData[i.name] = i.checked;
-    else formData[i.name] = i.value;
+  const fd = {};
+  f.querySelectorAll('input,textarea,select').forEach(i => {
+    if (!i.name) return;
+    fd[i.name] = i.type === 'checkbox' ? i.checked : i.value;
   });
-  const mode = f.querySelector('input[name="mode"]:checked') ? f.querySelector('input[name="mode"]:checked').value : 'email';
-  const subject = `Demande pack: ${formData.packName || formData.pack || ''}`;
-  let body = `${subject}\n\n`;
-  Object.keys(formData).forEach(k => { body += `${k}: ${formData[k]}\n`; });
 
-  if(mode === 'email'){
+  const mode = (f.querySelector('input[name="mode"]:checked') || {}).value || 'email';
+  const subject = `Demande pack: ${fd.packName || fd.pack || ''}`;
+  let body = `${subject}\n\n`;
+  Object.keys(fd).forEach(k => {
+    body += `${k}: ${fd[k]}\n`;
+  });
+
+  if (mode === 'email') {
     const mailto = `mailto:contact@e-meta.app?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailto;
-  } else if(mode === 'whatsapp'){
+  } else if (mode === 'whatsapp') {
     const wa = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(body)}`;
     window.open(wa, '_blank');
   } else {
-    // affichage direct
-    const disp = document.createElement('pre');
-    disp.textContent = body;
-    document.getElementById('formMsg').appendChild(disp);
+    const msg = document.getElementById('formMsg');
+    if (msg) {
+      msg.innerHTML = `<pre>${escapeHtml(body)}</pre>`;
+    } else {
+      alert('Affichage :\n' + body);
+    }
   }
-  setTimeout(hideForm, 800);
+
+  setTimeout(hideForm, 700);
 }
 
-function escapeHtml(s){
-  return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function escapeHtml(s) {
+  return String(s || '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 }
