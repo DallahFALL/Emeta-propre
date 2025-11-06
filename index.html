@@ -3,182 +3,179 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>e-META — Assistant IA pluridisciplinaire</title>
+  <title>e-META — L'assistant IA pluridisciplinaire</title>
 
-  <!-- Google fonts (inclut Noto Naskh Arabic pour l'arabe) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="site-header" role="banner">
+  <header class="site-header">
     <div class="header-inner">
       <div class="brand">
-        <a href="/" id="logoLink" class="brand-link">
-          <img src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" height="100" />
-          <span class="brand-text"></span>
+        <a href="#home" class="brand-link">
+          <img src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" class="brand-logo" />
+          <span class="brand-text">e-META</span>
         </a>
       </div>
 
-      <nav id="mainNav" class="main-nav" aria-label="Navigation principale">
-        <a href="#home" data-i18n="nav_home">Accueil</a>
-        <a href="#packs" data-i18n="nav_packs">Découvrir les packs</a>
-        <a href="#about" data-i18n="nav_about">À propos</a>
-        <a href="#faq" data-i18n="nav_faq">FAQ</a>
-        <a href="#contact" data-i18n="nav_contact">Contact</a>
+      <nav class="main-nav" id="mainNav" aria-label="Navigation principale">
+        <a href="#home" data-i18n="nav.home">Accueil</a>
+        <a href="#packs" data-i18n="nav.packs">Découvrir les packs</a>
+        <a href="#about" data-i18n="nav.about">À propos</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
 
-      <div class="tools">
-        <select id="langSelect" aria-label="Lang" title="Langue">
-          <option value="fr">FR</option>
-          <option value="en">EN</option>
-          <option value="es">ES</option>
-          <option value="ar">AR</option>
-        </select>
-
-        <a id="whatsappBtn" class="btn whatsapp" href="https://wa.me/221782607212" target="_blank" rel="noopener">
-          <span data-i18n="btn_whatsapp">Contact WhatsApp</span>
-        </a>
-
-        <button id="mobileMenuBtn" class="hamburger" aria-label="menu">☰</button>
+      <div class="header-actions">
+        <select id="langSelect" aria-label="Choisir la langue"></select>
+        <button id="whatsappBtn" class="btn btn-whatsapp">Contact WhatsApp</button>
+        <button id="menuToggle" class="hamburger" aria-label="Ouvrir le menu">☰</button>
       </div>
     </div>
   </header>
 
-  <main id="main">
-    <section id="home" class="hero">
-      <div class="hero-inner">
-        <h1 data-i18n="hero_title"><strong>e-META</strong> — L'assistant IA pluridisciplinaire</h1>
-        <p class="lead" data-i18n="hero_sub">Packs de formulaires spécialisés, synthèses et recommandations actionnables.</p>
-        <div class="hero-actions">
-          <button id="discoverPacks" class="btn primary" data-i18n="btn_discover">Découvrir les packs</button>
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <h1 data-i18n="hero.title">e-META — L'assistant IA pluridisciplinaire</h1>
+        <p class="sub" data-i18n="hero.subtitle">Packs de formulaires spécialisés, synthèses et recommandations actionnables.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#packs" data-i18n="hero.cta">Découvrir les packs</a>
         </div>
       </div>
     </section>
 
-    <section id="packs" class="section">
+    <section class="packs" id="packs">
       <div class="container">
-        <h2 data-i18n="packs_title">Nos packs</h2>
-        <p class="muted" data-i18n="packs_sub">Packs conçus pour diagnostiquer, prioriser et recommander des actions concrètes.</p>
+        <h2 data-i18n="packs.title">Nos packs</h2>
+        <p class="lead" data-i18n="packs.lead">Packs conçus pour diagnostiquer, prioriser et recommander des actions concrètes.</p>
 
-        <div id="packsContainer" class="packs-grid">
-          <!-- Les cartes seront injectées dynamiquement par script.js -->
+        <div class="cards-grid" id="packsGrid">
+          <!-- Cards: remplir dynamiquement ou coller celles-ci et utiliser data-key -->
+          <article class="card" data-key="pack.marketing">
+            <h3 class="card-title" data-key-title="pack.marketing.title">Marketing</h3>
+            <p data-key-desc="pack.marketing.desc">Brief campagne, estimation budget et canaux.</p>
+            <button class="btn btn-outline open-pack" data-pack="Marketing">Ouvrir</button>
+          </article>
+
+          <article class="card" data-key="pack.funding">
+            <h3 class="card-title" data-key-title="pack.funding.title">Funding</h3>
+            <p data-key-desc="pack.funding.desc">Demande structurée, modèles financiers.</p>
+            <button class="btn btn-outline open-pack" data-pack="Funding">Ouvrir</button>
+          </article>
+
+          <article class="card" data-key="pack.recruitment">
+            <h3 class="card-title" data-key-title="pack.recruitment.title">Recruitment</h3>
+            <p data-key-desc="pack.recruitment.desc">Brief rôle, budget et timeline.</p>
+            <button class="btn btn-outline open-pack" data-pack="Recruitment">Ouvrir</button>
+          </article>
+
+          <article class="card" data-key="pack.product">
+            <h3 class="card-title" data-key-title="pack.product.title">Product</h3>
+            <p data-key-desc="pack.product.desc">Positionnement, pricing, GTM.</p>
+            <button class="btn btn-outline open-pack" data-pack="Product">Ouvrir</button>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="about" class="section about">
-      <div class="container">
-        <h2 data-i18n="about_title">À propos</h2>
-        <p data-i18n="about_text">e-META aide les acteurs de tous les secteurs à structurer leurs décisions via des packs de formulaires spécialisés et des synthèses actionnables.</p>
+    <!-- About / FAQ / Contact (one footer-block area) -->
+    <section class="info-blocks container" id="about">
+      <div class="about">
+        <h3 data-i18n="about.title">À propos</h3>
+        <p data-i18n="about.text">e-META aide les acteurs de tous les secteurs à structurer leurs décisions via des packs.</p>
       </div>
-    </section>
 
-    <section id="faq" class="section faq">
-      <div class="container">
-        <h2 data-i18n="faq_title">FAQ</h2>
+      <div class="faq" id="faq">
+        <h3 data-i18n="faq.title">FAQ</h3>
         <ul>
-          <li><button class="faq-q" aria-expanded="false" data-i18n="faq_q1">Comment fonctionne e-META ?</button>
-            <div class="faq-a" data-i18n="faq_a1">Réponse courte expliquant le fonctionnement.</div>
-          </li>
-          <li><button class="faq-q" aria-expanded="false" data-i18n="faq_q2">Est-ce gratuit ?</button>
-            <div class="faq-a" data-i18n="faq_a2">Réponse sur les options gratuites/payant.</div>
-          </li>
+          <li><button class="faq-toggle">►</button> <span data-i18n="faq.q1">Comment fonctionne e-META ?</span></li>
+          <li><button class="faq-toggle">►</button> <span data-i18n="faq.q2">Est-ce gratuit ?</span></li>
         </ul>
       </div>
-    </section>
 
-    <section id="contact" class="section contact">
-      <div class="container">
-        <h2 data-i18n="contact_title">Contact</h2>
-        <p><strong>Email :</strong> <a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
-        <p><strong>WhatsApp :</strong> <a href="https://wa.me/221782607212" target="_blank" rel="noopener">+221 78 260 72 12</a></p>
+      <div class="contact" id="contact">
+        <h3 data-i18n="contact.title">Contact</h3>
+        <p>Email : <a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
+        <p>WhatsApp : <a href="https://wa.me/221782607212" target="_blank">+221 78 260 72 12</a></p>
       </div>
     </section>
+
   </main>
-
-  <footer id="siteFooter">
-    <div class="container footer-grid">
-      <div class="footer-about">
-        <h3 data-i18n="footer_about_title">À propos</h3>
-        <p data-i18n="footer_about_text">e-META propose des formulaires et des synthèses pour aider à la prise de décision.</p>
-      </div>
-      <div class="footer-faq">
-        <h3 data-i18n="footer_faq_title">FAQ</h3>
-        <ul>
-          <li data-i18n="footer_faq_q1">Comment fonctionne e-META ?</li>
-          <li data-i18n="footer_faq_q2">Est-ce gratuit ?</li>
-        </ul>
-      </div>
-      <div class="footer-contact">
-        <h3 data-i18n="footer_contact_title">Contact</h3>
-        <p><a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
-        <p><a href="https://wa.me/221782607212" target="_blank" rel="noopener">+221 78 260 72 12</a></p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <small>© <span id="year">2025</span> e-META</small>
-    </div>
-  </footer>
 
   <!-- Modal: formulaire unique pluridisciplinaire -->
   <div id="packModal" class="modal" aria-hidden="true">
-    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-dialog">
       <header class="modal-header">
-        <h3 id="modalTitle">Pack</h3>
-        <button class="modal-close" id="modalClose" aria-label="Fermer">✕</button>
+        <h2 id="modalTitle">Pack —</h2>
+        <button id="closeModal" class="close">×</button>
       </header>
 
-      <div class="modal-body">
-        <form id="packForm">
-          <input type="hidden" id="packKey" name="packKey" value="" />
+      <form id="packForm" class="modal-form">
+        <input type="hidden" id="selectedPack" name="pack" value="" />
 
-          <label for="pack_need" data-i18n="form_label_need">Question principale</label>
-          <input id="pack_need" name="need" type="text" placeholder="Ex : Augmenter mes ventes..." required />
+        <label for="need">Requête / Besoin (titre)</label>
+        <input id="need" name="need" placeholder="Ex : Obtenir un plan marketing..." />
 
-          <div class="two-cols">
-            <div>
-              <label for="pack_field1" data-i18n="form_label_field1">Champ 1</label>
-              <input id="pack_field1" name="field1" placeholder="Ex : Marché cible" />
-            </div>
-            <div>
-              <label for="pack_field2" data-i18n="form_label_field2">Champ 2</label>
-              <input id="pack_field2" name="field2" placeholder="Ex : Budget disponible" />
-            </div>
-          </div>
+        <label for="teamSize">Taille de l'équipe</label>
+        <input id="teamSize" name="teamSize" placeholder="Ex : 3 personnes" />
 
-          <label for="pack_name" data-i18n="form_label_name">Nom</label>
-          <input id="pack_name" name="name" required />
+        <label for="budget">Budget indicatif</label>
+        <input id="budget" name="budget" placeholder="Ex : 200 000 XOF / mois" />
 
-          <label for="pack_email" data-i18n="form_label_email">Email</label>
-          <input id="pack_email" name="email" type="email" placeholder="a@b.com" />
+        <label for="name">Nom</label>
+        <input id="name" name="name" />
 
-          <label for="pack_phone" data-i18n="form_label_phone">Téléphone (WhatsApp)</label>
-          <input id="pack_phone" name="phone" placeholder="+221..." />
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" />
 
-          <label for="pack_details" data-i18n="form_label_details">Détails</label>
-          <textarea id="pack_details" name="details" rows="5" placeholder="Brève description..."></textarea>
+        <label for="phone">Téléphone (WhatsApp)</label>
+        <input id="phone" name="phone" placeholder="+221..." />
 
-          <fieldset class="rest-mode">
-            <legend data-i18n="form_label_mode">Mode de restitution</legend>
-            <label><input type="radio" name="mode" value="email" checked /> <span data-i18n="form_mode_email">Email</span></label>
-            <label><input type="radio" name="mode" value="whatsapp" /> <span data-i18n="form_mode_whatsapp">WhatsApp</span></label>
-            <label><input type="radio" name="mode" value="display" /> <span data-i18n="form_mode_display">Affichage</span></label>
-          </fieldset>
+        <label for="details">Détails</label>
+        <textarea id="details" name="details" rows="5" placeholder="Décrivez le contexte, objectifs..."></textarea>
 
-          <div class="form-actions">
-            <button type="submit" class="btn primary" id="formSubmit" data-i18n="form_send">Envoyer</button>
-            <button type="button" class="btn" id="formCancel" data-i18n="form_cancel">Annuler</button>
-          </div>
-        </form>
+        <div class="restauration">
+          <label>Mode de restitution</label>
+          <label><input type="radio" name="mode" value="email" checked /> Email</label>
+          <label><input type="radio" name="mode" value="whatsapp" /> WhatsApp</label>
+          <label><input type="radio" name="mode" value="display" /> Affichage</label>
+        </div>
 
-        <div id="formResult" class="form-result" aria-live="polite"></div>
-      </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn btn-primary">Envoyer</button>
+          <button type="button" id="cancelForm" class="btn btn-outline">Annuler</button>
+        </div>
+
+        <div id="formFeedback" class="form-feedback" role="status" aria-live="polite"></div>
+      </form>
     </div>
   </div>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4 data-i18n="footer.about">À propos</h4>
+        <p data-i18n="footer.desc">e-META propose des formulaires et des synthèses pour aider à la prise de décision.</p>
+      </div>
+      <div>
+        <h4 data-i18n="footer.faq">FAQ</h4>
+        <ul>
+          <li data-i18n="faq.q1">Comment fonctionne e-META ?</li>
+          <li data-i18n="faq.q2">Est-ce gratuit ?</li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.contact">Contact</h4>
+        <p><a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
+        <p><a href="https://wa.me/221782607212" target="_blank">+221 78 260 72 12</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">e-META 2025 ©</div>
+  </footer>
 
   <script src="script.js"></script>
 </body>
 </html>
-
-
