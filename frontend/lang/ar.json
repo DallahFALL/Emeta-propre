@@ -1,59 +1,34 @@
 {
-  "nav_home": "الصفحة الرئيسية",
-  "nav_packs": "اكتشف الحزم",
-  "nav_about": "معلومات عنا",
-  "nav_faq": "الأسئلة الشائعة",
-  "nav_contact": "اتصل",
-  "open_btn": "فتح",
-  "btn_whatsapp_text": "مرحباً، أريد حزمة e-META",
-  "form_title_prefix": "الحزمة —",
-  "form_submit": "إرسال",
-  "form_cancel": "إلغاء",
-  "form_mode_label": "طريقة الاستلام",
-  "form_mode_email": "البريد الإلكتروني",
-  "form_mode_whatsapp": "واتساب",
-  "form_mode_display": "عرض",
-  "packs": [
-    {
-      "name": "التسويق",
-      "desc": "موجز الحملة وتقدير الميزانية والقنوات.",
-      "button": "فتح",
-      "fields": [
-        {"key":"objective","type":"text","label":"الهدف الرئيسي","placeholder":"مثال: اكتساب / وعي","required":true},
-        {"key":"audience","type":"text","label":"الفئة المستهدفة","placeholder":"مثال: 18-35، حضري"},
-        {"key":"budget","type":"text","label":"الميزانية المقدرة","placeholder":"مثال: 1 200 000 XOF"},
-        {"key":"channels","type":"textarea","label":"القنوات المتوقعة","placeholder":"التلفزيون، الراديو، الرقمي..."}
-      ]
-    },
-    {
-      "name": "التمويل",
-      "desc": "طلب تمويل منظم، نماذج مالية.",
-      "button": "فتح",
-      "fields": [
-        {"key":"amount","type":"text","label":"المبلغ المطلوب","placeholder":"مثال: 20,000,000 XOF","required":true},
-        {"key":"use_of_funds","type":"textarea","label":"استخدام الأموال","placeholder":"ما الذي سيُستخدم المال من أجله؟"},
-        {"key":"term","type":"select","label":"المدة المطلوبة","options":[{"label":"6 أشهر","value":"6m"},{"label":"12 أشهر","value":"12m"},{"label":"24 أشهر","value":"24m"}]}
-      ]
-    },
-    {
-      "name": "التوظيف",
-      "desc": "تفصيل الدور والميزانية والجدول الزمني.",
-      "button": "فتح",
-      "fields": [
-        {"key":"role","type":"text","label":"المنصب المطلوب","placeholder":"مثال: مدير مشروع","required":true},
-        {"key":"team_size","type":"text","label":"حجم الفريق","placeholder":"مثال: 3 أشخاص"},
-        {"key":"salary","type":"text","label":"ميزانية الرواتب","placeholder":"مثال: XOF / شهر"}
-      ]
-    },
-    {
-      "name": "المنتج",
-      "desc": "التموضع، التسعير، خطة الإطلاق.",
-      "button": "فتح",
-      "fields": [
-        {"key":"value","type":"textarea","label":"عرض القيمة","placeholder":"لماذا هذا المنتج؟","required":true},
-        {"key":"price_model","type":"text","label":"نموذج التسعير","placeholder":"مثال: اشتراك / شراء لمرة واحدة"},
-        {"key":"launch_date","type":"text","label":"تاريخ الإطلاق المتوقع","placeholder":"YYYY-MM"}
-      ]
-    }
+  "nav_home":"الصفحة الرئيسية",
+  "nav_packs":"اكتشف الحزم",
+  "nav_about":"معلومات عنا",
+  "nav_faq":"الأسئلة الشائعة",
+  "nav_contact":"اتصل",
+  "btn_whatsapp":"التواصل عبر واتساب",
+  "btn_discover":"اكتشف الحزم",
+  "btn_open":"فتح",
+  "hero_title":"e-META — مساعد ذكي متعدد التخصصات",
+  "hero_sub":"حزم من النماذج المتخصصة، ملخصات منظمة وتوصيات قابلة للتنفيذ.",
+  "packs_title":"حزمنا",
+  "packs_sub":"حزم مصممة لتشخيص وترتيب الأولويات وتقديم توصيات عملية.",
+  "form_label_need":"السؤال الرئيسي",
+  "form_label_field1":"حقل 1",
+  "form_label_field2":"حقل 2",
+  "form_label_name":"الاسم",
+  "form_label_email":"البريد الإلكتروني",
+  "form_label_phone":"الهاتف (واتساب)",
+  "form_label_details":"تفاصيل",
+  "form_label_mode":"طريقة الإرجاع",
+  "form_mode_email":"البريد الإلكتروني",
+  "form_mode_whatsapp":"واتساب",
+  "form_mode_display":"عرض",
+  "form_send":"إرسال",
+  "form_cancel":"إلغاء",
+  "form_result_title":"النتيجة",
+  "packs":[
+    {"key":"marketing","title":"التسويق","desc":"موجز الحملة وتقدير الميزانية والقنوات."},
+    {"key":"funding","title":"التمويل","desc":"طلب تمويل منظم ونماذج مالية."},
+    {"key":"recruitment","title":"التوظيف","desc":"وصف الدور والميزانية والجدول الزمني."},
+    {"key":"product","title":"المنتج","desc":"التوضيع والتسعير وخطة الإطلاق."}
   ]
 }
