@@ -1,59 +1,34 @@
 {
-  "nav_home": "Inicio",
-  "nav_packs": "Descubrir packs",
-  "nav_about": "Acerca de",
-  "nav_faq": "FAQ",
-  "nav_contact": "Contacto",
-  "open_btn": "Abrir",
-  "btn_whatsapp_text": "Hola, quiero un pack e-META",
-  "form_title_prefix": "Pack —",
-  "form_submit": "Enviar",
-  "form_cancel": "Cancelar",
-  "form_mode_label": "Modo de entrega",
-  "form_mode_email": "Email",
-  "form_mode_whatsapp": "WhatsApp",
-  "form_mode_display": "Mostrar",
-  "packs": [
-    {
-      "name": "Marketing",
-      "desc": "Brief de campaña, estimación de presupuesto y canales.",
-      "button": "Abrir",
-      "fields": [
-        {"key":"objective","type":"text","label":"Objetivo principal","placeholder":"ej.: adquisición / reconocimiento","required":true},
-        {"key":"audience","type":"text","label":"Audiencia objetivo","placeholder":"ej.: 18-35, urbano"},
-        {"key":"budget","type":"text","label":"Presupuesto estimado","placeholder":"ej.: 1.200.000 XOF"},
-        {"key":"channels","type":"textarea","label":"Canales previstos","placeholder":"TV, radio, digital..."}
-      ]
-    },
-    {
-      "name": "Funding",
-      "desc": "Solicitud estructurada de financiación, modelos financieros.",
-      "button": "Abrir",
-      "fields": [
-        {"key":"amount","type":"text","label":"Importe solicitado","placeholder":"ej.: 20.000.000 XOF","required":true},
-        {"key":"use_of_funds","type":"textarea","label":"Uso de los fondos","placeholder":"¿Para qué se utilizará el dinero?"},
-        {"key":"term","type":"select","label":"Plazo deseado","options":[{"label":"6 meses","value":"6m"},{"label":"12 meses","value":"12m"},{"label":"24 meses","value":"24m"}]}
-      ]
-    },
-    {
-      "name": "Recruitment",
-      "desc": "Brief de puesto, presupuesto y calendario.",
-      "button": "Abrir",
-      "fields": [
-        {"key":"role","type":"text","label":"Puesto","placeholder":"ej.: Jefe de proyecto","required":true},
-        {"key":"team_size","type":"text","label":"Tamaño del equipo","placeholder":"ej.: 3 personas"},
-        {"key":"salary","type":"text","label":"Presupuesto salarial","placeholder":"ej.: XOF / mes"}
-      ]
-    },
-    {
-      "name": "Product",
-      "desc": "Posicionamiento, precios, GTM.",
-      "button": "Abrir",
-      "fields": [
-        {"key":"value","type":"textarea","label":"Propuesta de valor","placeholder":"¿Por qué este producto?","required":true},
-        {"key":"price_model","type":"text","label":"Modelo de precios","placeholder":"ej.: suscripción / compra única"},
-        {"key":"launch_date","type":"text","label":"Lanzamiento previsto","placeholder":"YYYY-MM"}
-      ]
-    }
+  "nav_home":"Inicio",
+  "nav_packs":"Packs",
+  "nav_about":"Acerca",
+  "nav_faq":"FAQ",
+  "nav_contact":"Contacto",
+  "btn_whatsapp":"Contactar WhatsApp",
+  "btn_discover":"Descubrir packs",
+  "btn_open":"Abrir",
+  "hero_title":"e-META — Asistente IA multidisciplinar",
+  "hero_sub":"Packs de formularios especializados, síntesis y recomendaciones accionables.",
+  "packs_title":"Nuestros packs",
+  "packs_sub":"Packs diseñados para diagnosticar, priorizar y recomendar acciones concretas.",
+  "form_label_need":"Pregunta principal",
+  "form_label_field1":"Campo 1",
+  "form_label_field2":"Campo 2",
+  "form_label_name":"Nombre",
+  "form_label_email":"Email",
+  "form_label_phone":"Teléfono (WhatsApp)",
+  "form_label_details":"Detalles",
+  "form_label_mode":"Modo de restitución",
+  "form_mode_email":"Email",
+  "form_mode_whatsapp":"WhatsApp",
+  "form_mode_display":"Mostrar",
+  "form_send":"Enviar",
+  "form_cancel":"Cancelar",
+  "form_result_title":"Resultado",
+  "packs":[
+    {"key":"marketing","title":"Marketing","desc":"Brief de campaña, estimación de presupuesto y canales."},
+    {"key":"funding","title":"Financiación","desc":"Solicitud de financiación estructurada, modelos financieros."},
+    {"key":"recruitment","title":"Reclutamiento","desc":"Brief de rol, presupuesto y cronograma."},
+    {"key":"product","title":"Producto","desc":"Posicionamiento, precio, GTM."}
   ]
 }
