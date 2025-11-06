@@ -1,197 +1,147 @@
-// script.js - Assure le chargement dynamique des langues, packs, modal et envoi simple
-(() => {
-  const LANG_PATH = 'frontend/lang/';
-  const defaultLang = document.documentElement.lang || 'fr';
-  const langSelect = document.getElementById('langSelect');
-  const packsContainer = document.getElementById('packsContainer');
-  const packModal = document.getElementById('packModal');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalClose = document.getElementById('modalClose');
-  const packForm = document.getElementById('packForm');
-  const formResult = document.getElementById('formResult');
-  const discoverBtn = document.getElementById('discoverPacks');
-  const whatsappBtn = document.getElementById('whatsappBtn');
+// simple language loader + UI behavior
+const LANG_PATH = 'frontend/lang'; // adjust if needed
+const available = ['fr','en','es','ar'];
+const langSelect = document.getElementById('langSelect');
+const packsGrid = document.getElementById('packsGrid');
+const whatsappBtn = document.getElementById('whatsappBtn');
 
-  let translations = {};
-  let currentLang = defaultLang;
-  let packsData = [];
+// fill language selector
+available.forEach(code=>{
+  const opt = document.createElement('option');
+  opt.value = code; opt.text = code.toUpperCase();
+  langSelect.appendChild(opt);
+});
 
-  async function loadLang(lang){
-    try{
-      const resp = await fetch(`${LANG_PATH}${lang}.json`);
-      if(!resp.ok) throw new Error('Lang file missing');
-      const json = await resp.json();
-      translations[lang] = json;
-      return json;
-    }catch(e){
-      console.error('Erreur chargement langue', e);
-      return {};
-    }
+// load default language from localStorage or browser
+const defaultLang = localStorage.getItem('lang') || (navigator.language||'fr').slice(0,2);
+langSelect.value = available.includes(defaultLang) ? defaultLang : 'fr';
+
+async function loadLang(code){
+  try{
+    const url = `${LANG_PATH}/${code}.json`;
+    const res = await fetch(url);
+    if(!res.ok) throw new Error('Lang load failed');
+    const dict = await res.json();
+    applyTranslations(dict, code);
+    localStorage.setItem('lang', code);
+    document.documentElement.lang = code;
+  }catch(e){
+    console.warn('loadLang error',e);
   }
+}
 
-  function t(key){
-    return (translations[currentLang] && translations[currentLang][key]) || key;
-  }
-
-  function applyTranslations(){
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      el.textContent = t(key);
-    });
-    // set html lang attribute
-    document.documentElement.lang = currentLang;
-    // handle direction automatically for Arabic
-    if(currentLang === 'ar'){
-      document.documentElement.setAttribute('dir','rtl');
-    }else{
-      document.documentElement.setAttribute('dir','ltr');
-    }
-    // populate packs text
-    renderPacks();
-  }
-
-  async function init(){
-    // load current lang + others in background
-    await loadLang(currentLang);
-    ['fr','en','es','ar'].forEach(async l => {
-      if(l !== currentLang) await loadLang(l);
-    });
-
-    // use translations to get packs list or fallback
-    packsData = translations[currentLang].packs || [
-      {key:'marketing', title:'Marketing', desc:'Brief campagne, estimation budget et canaux.'},
-      {key:'funding', title:'Funding', desc:'Demande structurée, modèles financiers.'},
-      {key:'recruitment', title:'Recruitment', desc:'Brief rôle, budget et timeline.'},
-      {key:'product', title:'Product', desc:'Positionnement, pricing, GTM.'}
-    ];
-
-    applyTranslations();
-  }
-
-  function renderPacks(){
-    // get pack list from translations (handle dynamic change)
-    const langPacks = (translations[currentLang] && translations[currentLang].packs) || packsData;
-    packsContainer.innerHTML = '';
-    langPacks.forEach(p => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `
-        <div>
-          <h4>${p.title}</h4>
-          <p>${p.desc}</p>
-        </div>
-        <div style="margin-top:12px;">
-          <button class="btn open-pack" data-key="${p.key}">${t('btn_open') || 'Ouvrir'}</button>
-        </div>
-      `;
-      packsContainer.appendChild(card);
-    });
-
-    // wire open-pack
-    document.querySelectorAll('.open-pack').forEach(b => {
-      b.addEventListener('click', (e) => {
-        const key = e.currentTarget.getAttribute('data-key');
-        openPackModal(key);
-      });
-    });
-  }
-
-  function openPackModal(key){
-    // set title and packKey
-    const pack = (translations[currentLang].packs || packsData).find(p=>p.key===key) || {title:key};
-    modalTitle.textContent = pack.title;
-    document.getElementById('packKey').value = key;
-    packForm.reset();
-    formResult.innerHTML = '';
-    packModal.setAttribute('aria-hidden','false');
-    packModal.style.display = 'flex';
-    // scroll top of modal
-    document.querySelector('.modal-body').scrollTop = 0;
-  }
-
-  function closeModal(){
-    packModal.setAttribute('aria-hidden','true');
-    packModal.style.display = 'none';
-  }
-
-  // form submit handler: three simple modes
-  packForm.addEventListener('submit', (ev) => {
-    ev.preventDefault();
-    const fd = new FormData(packForm);
-    const data = Object.fromEntries(fd.entries());
-    const mode = data.mode || 'email';
-    const subject = `[e-META] Demande: ${data.need || 'Pack'}`;
-    // Create body from fields
-    const bodyLines = [
-      `Pack: ${data.packKey || ''}`,
-      `Question principale: ${data.need || ''}`,
-      `Champ1: ${data.field1 || ''}`,
-      `Champ2: ${data.field2 || ''}`,
-      `Nom: ${data.name || ''}`,
-      `Email: ${data.email || ''}`,
-      `Téléphone: ${data.phone || ''}`,
-      `Détails: ${data.details || ''}`,
-    ];
-    const body = bodyLines.join('\n');
-
-    if(mode === 'email'){
-      const mailto = `mailto:contact@e-meta.app?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailto;
-    }else if(mode === 'whatsapp'){
-      // open wa.me with message
-      const phone = data.phone ? data.phone.replace(/\s+/g,'') : '221782607212';
-      const wa = `https://wa.me/${phone.replace('+','') || '221782607212'}?text=${encodeURIComponent(subject + '\n' + body)}`;
-      window.open(wa, '_blank');
-    }else{ // display
-      formResult.innerHTML = `<strong>${t('form_result_title') || 'Réponse'}</strong><pre>${escapeHtml(body)}</pre>`;
-    }
+function applyTranslations(dict,code){
+  // translate data-i18n attributes
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(dict[key]) el.textContent = dict[key];
   });
+  // translate cards (keys attr)
+  document.querySelectorAll('[data-key-title]').forEach(el=>{
+    const key = el.getAttribute('data-key-title');
+    if(dict[key]) el.textContent = dict[key];
+  });
+  document.querySelectorAll('[data-key-desc]').forEach(el=>{
+    const key = el.getAttribute('data-key-desc');
+    if(dict[key]) el.textContent = dict[key];
+  });
+  // update pack buttons text if present
+  document.querySelectorAll('.open-pack').forEach(btn=>{
+    if(dict['pack.open']) btn.textContent = dict['pack.open'];
+  });
+  // for dir RTL
+  if(code === 'ar') document.documentElement.setAttribute('lang','ar');
+  else document.documentElement.setAttribute('lang',code);
+}
 
-  function escapeHtml(unsafe){
-    return unsafe.replace(/[&<"'>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+// language change
+langSelect.addEventListener('change',()=> loadLang(langSelect.value));
+loadLang(langSelect.value); // initial load
+
+// menu toggle for mobile
+const menuToggle = document.getElementById('menuToggle');
+menuToggle.addEventListener('click',()=>{
+  document.getElementById('mainNav').classList.toggle('open');
+});
+
+// PACK modal logic
+const modal = document.getElementById('packModal');
+const modalTitle = document.getElementById('modalTitle');
+const selectedPackInput = document.getElementById('selectedPack');
+const closeModal = document.getElementById('closeModal');
+const cancelForm = document.getElementById('cancelForm');
+const packForm = document.getElementById('packForm');
+
+document.querySelectorAll('.open-pack').forEach(btn=>{
+  btn.addEventListener('click', e=>{
+    const packName = btn.dataset.pack || btn.closest('.card')?.querySelector('.card-title')?.textContent || 'Pack';
+    openModal(packName);
+  });
+});
+
+function openModal(pack){
+  selectedPackInput.value = pack;
+  modalTitle.textContent = `Pack — ${pack}`;
+  modal.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  // reset form
+  packForm.reset();
+}
+
+function closeModalFn(){
+  modal.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+closeModal.addEventListener('click', closeModalFn);
+cancelForm.addEventListener('click', closeModalFn);
+
+// submit handling: simple behavior: build mailto or wa message or display
+packForm.addEventListener('submit', e=>{
+  e.preventDefault();
+  const fd = new FormData(packForm);
+  const obj = Object.fromEntries(fd.entries());
+  const mode = fd.get('mode') || 'email';
+  const summary = `Pack: ${obj.pack}\nTitre: ${obj.need}\nBudget: ${obj.budget}\nTaille équipe: ${obj.teamSize}\nNom: ${obj.name}\nEmail: ${obj.email}\nTéléphone: ${obj.phone}\nDetails:\n${obj.details}`;
+
+  if(mode === 'whatsapp'){
+    const phone = obj.phone.replace(/\s+/g,'').replace(/^\+/, '');
+    const text = encodeURIComponent(summary);
+    const waUrl = `https://wa.me/${phone || '221782607212'}?text=${text}`;
+    window.open(waUrl,'_blank');
+    showFeedback('Message WhatsApp ouvert.');
+    closeModalFn();
+    return;
   }
 
-  modalClose.addEventListener('click', closeModal);
-  document.getElementById('formCancel').addEventListener('click', closeModal);
+  if(mode === 'email'){
+    const to = obj.email || 'contact@e-meta.app';
+    const subject = encodeURIComponent(`Demande e-META: ${obj.pack}`);
+    const body = encodeURIComponent(summary);
+    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+    showFeedback('Client mail ouvert.');
+    closeModalFn();
+    return;
+  }
 
-  // close on background click
-  packModal.addEventListener('click', (e) => {
-    if(e.target === packModal) closeModal();
-  });
+  // display - show short result
+  showFeedback('Restitution affichée ci-dessous : (exemple)');
+  // simple display example
+  const displayEl = document.createElement('div');
+  displayEl.style.padding = '12px';
+  displayEl.style.background = '#fff';
+  displayEl.style.borderRadius = '8px';
+  displayEl.style.marginTop = '12px';
+  displayEl.textContent = summary;
+  packForm.appendChild(displayEl);
+});
 
-  // FAQ toggles
-  document.querySelectorAll('.faq-q').forEach(b => {
-    b.addEventListener('click', () => {
-      const expanded = b.getAttribute('aria-expanded') === 'true';
-      b.setAttribute('aria-expanded', !expanded);
-    });
-  });
+function showFeedback(msg){
+  const fb = document.getElementById('formFeedback');
+  fb.textContent = msg;
+  setTimeout(()=> fb.textContent = '', 4000);
+}
 
-  // language switcher
-  langSelect.value = currentLang;
-  langSelect.addEventListener('change', async (e) => {
-    currentLang = e.target.value;
-    if(!translations[currentLang]) await loadLang(currentLang);
-    // if packs not in new language, try to find fallback
-    applyTranslations();
-  });
-
-  // discover button scrolls to packs
-  discoverBtn.addEventListener('click', () => {
-    document.getElementById('packs').scrollIntoView({behavior:'smooth'});
-  });
-
-  // mobile menu button toggles nav (simple)
-  document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-    const nav = document.getElementById('mainNav');
-    if(nav.style.display === 'flex'){nav.style.display='none';}
-    else nav.style.display='flex';
-  });
-
-  // set year
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // initial load
-  init();
-
-})();
+// whatsapp top button
+whatsappBtn.addEventListener('click', ()=>{
+  window.open('https://wa.me/221782607212','_blank');
+});
