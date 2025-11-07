@@ -1,147 +1,186 @@
-// simple language loader + UI behavior
-const LANG_PATH = 'frontend/lang'; // adjust if needed
-const available = ['fr','en','es','ar'];
-const langSelect = document.getElementById('langSelect');
-const packsGrid = document.getElementById('packsGrid');
-const whatsappBtn = document.getElementById('whatsappBtn');
+// script.js - simple i18n loader + packs renderer + modal form behavior
+(() => {
+  const LANG_SELECT = document.getElementById('langSelect');
+  const PACKS_GRID = document.getElementById('packsGrid');
+  const DISCOVER = document.getElementById('discoverPacks');
+  const WHATS_BTN = document.getElementById('whatsBtn');
+  const MODAL = document.getElementById('packFormModal');
+  const MODAL_CLOSE = document.getElementById('modalClose');
+  const MODAL_TITLE_NAME = document.getElementById('modalPackName');
+  const PACK_FORM = document.getElementById('packForm');
+  const PACK_ID = document.getElementById('packId');
 
-// fill language selector
-available.forEach(code=>{
-  const opt = document.createElement('option');
-  opt.value = code; opt.text = code.toUpperCase();
-  langSelect.appendChild(opt);
-});
+  // list of candidate base paths to find lang files (works in many repo layouts)
+  const LANG_BASES = [
+    'frontend/lang',
+    '/frontend/lang',
+    'lang',
+    '/lang',
+    './frontend/lang',
+    './lang'
+  ];
 
-// load default language from localStorage or browser
-const defaultLang = localStorage.getItem('lang') || (navigator.language||'fr').slice(0,2);
-langSelect.value = available.includes(defaultLang) ? defaultLang : 'fr';
+  let currentLang = localStorage.getItem('emeta_lang') || 'fr';
+  LANG_SELECT.value = currentLang;
 
-async function loadLang(code){
-  try{
-    const url = `${LANG_PATH}/${code}.json`;
-    const res = await fetch(url);
-    if(!res.ok) throw new Error('Lang load failed');
-    const dict = await res.json();
-    applyTranslations(dict, code);
-    localStorage.setItem('lang', code);
-    document.documentElement.lang = code;
-  }catch(e){
-    console.warn('loadLang error',e);
-  }
-}
-
-function applyTranslations(dict,code){
-  // translate data-i18n attributes
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key = el.getAttribute('data-i18n');
-    if(dict[key]) el.textContent = dict[key];
-  });
-  // translate cards (keys attr)
-  document.querySelectorAll('[data-key-title]').forEach(el=>{
-    const key = el.getAttribute('data-key-title');
-    if(dict[key]) el.textContent = dict[key];
-  });
-  document.querySelectorAll('[data-key-desc]').forEach(el=>{
-    const key = el.getAttribute('data-key-desc');
-    if(dict[key]) el.textContent = dict[key];
-  });
-  // update pack buttons text if present
-  document.querySelectorAll('.open-pack').forEach(btn=>{
-    if(dict['pack.open']) btn.textContent = dict['pack.open'];
-  });
-  // for dir RTL
-  if(code === 'ar') document.documentElement.setAttribute('lang','ar');
-  else document.documentElement.setAttribute('lang',code);
-}
-
-// language change
-langSelect.addEventListener('change',()=> loadLang(langSelect.value));
-loadLang(langSelect.value); // initial load
-
-// menu toggle for mobile
-const menuToggle = document.getElementById('menuToggle');
-menuToggle.addEventListener('click',()=>{
-  document.getElementById('mainNav').classList.toggle('open');
-});
-
-// PACK modal logic
-const modal = document.getElementById('packModal');
-const modalTitle = document.getElementById('modalTitle');
-const selectedPackInput = document.getElementById('selectedPack');
-const closeModal = document.getElementById('closeModal');
-const cancelForm = document.getElementById('cancelForm');
-const packForm = document.getElementById('packForm');
-
-document.querySelectorAll('.open-pack').forEach(btn=>{
-  btn.addEventListener('click', e=>{
-    const packName = btn.dataset.pack || btn.closest('.card')?.querySelector('.card-title')?.textContent || 'Pack';
-    openModal(packName);
-  });
-});
-
-function openModal(pack){
-  selectedPackInput.value = pack;
-  modalTitle.textContent = `Pack — ${pack}`;
-  modal.setAttribute('aria-hidden','false');
-  document.body.style.overflow = 'hidden';
-  // reset form
-  packForm.reset();
-}
-
-function closeModalFn(){
-  modal.setAttribute('aria-hidden','true');
-  document.body.style.overflow = '';
-}
-closeModal.addEventListener('click', closeModalFn);
-cancelForm.addEventListener('click', closeModalFn);
-
-// submit handling: simple behavior: build mailto or wa message or display
-packForm.addEventListener('submit', e=>{
-  e.preventDefault();
-  const fd = new FormData(packForm);
-  const obj = Object.fromEntries(fd.entries());
-  const mode = fd.get('mode') || 'email';
-  const summary = `Pack: ${obj.pack}\nTitre: ${obj.need}\nBudget: ${obj.budget}\nTaille équipe: ${obj.teamSize}\nNom: ${obj.name}\nEmail: ${obj.email}\nTéléphone: ${obj.phone}\nDetails:\n${obj.details}`;
-
-  if(mode === 'whatsapp'){
-    const phone = obj.phone.replace(/\s+/g,'').replace(/^\+/, '');
-    const text = encodeURIComponent(summary);
-    const waUrl = `https://wa.me/${phone || '221782607212'}?text=${text}`;
-    window.open(waUrl,'_blank');
-    showFeedback('Message WhatsApp ouvert.');
-    closeModalFn();
-    return;
+  // try to fetch file from candidate paths
+  async function fetchLangJson(lang) {
+    for (const base of LANG_BASES) {
+      const url = `${base}/${lang}.json`;
+      try {
+        const res = await fetch(url, {cache: 'no-store'});
+        if (res.ok) return res.json();
+      } catch (e) { /* try next */ }
+    }
+    throw new Error('Lang file not found for ' + lang);
   }
 
-  if(mode === 'email'){
-    const to = obj.email || 'contact@e-meta.app';
-    const subject = encodeURIComponent(`Demande e-META: ${obj.pack}`);
-    const body = encodeURIComponent(summary);
-    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
-    showFeedback('Client mail ouvert.');
-    closeModalFn();
-    return;
+  // apply i18n: set elements having data-i18n to key
+  function applyI18n(dict) {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const text = get(dict, key) || el.textContent;
+      if (el.tagName.toLowerCase() === 'input' || el.tagName.toLowerCase() === 'textarea') {
+        el.placeholder = text;
+      } else {
+        el.textContent = text;
+      }
+    });
+    // render packs array
+    if (dict.packs && Array.isArray(dict.packs)) {
+      PACKS_GRID.innerHTML = '';
+      dict.packs.forEach(p => {
+        const art = document.createElement('article');
+        art.className = 'pack-card';
+        art.setAttribute('data-pack', p.id);
+        art.innerHTML = `
+          <h3 class="pack-title">${p.title}</h3>
+          <p class="pack-desc">${p.desc}</p>
+          <button class="open-pack btn-outline" data-pack="${p.id}">${dict.btn.open || 'Ouvrir'}</button>
+        `;
+        PACKS_GRID.appendChild(art);
+      });
+      attachPackButtons();
+    }
   }
 
-  // display - show short result
-  showFeedback('Restitution affichée ci-dessous : (exemple)');
-  // simple display example
-  const displayEl = document.createElement('div');
-  displayEl.style.padding = '12px';
-  displayEl.style.background = '#fff';
-  displayEl.style.borderRadius = '8px';
-  displayEl.style.marginTop = '12px';
-  displayEl.textContent = summary;
-  packForm.appendChild(displayEl);
-});
+  // helper to read nested keys a.b.c
+  function get(obj, path) {
+    return path.split('.').reduce((o,k)=> (o && o[k]!==undefined)?o[k]:null, obj);
+  }
 
-function showFeedback(msg){
-  const fb = document.getElementById('formFeedback');
-  fb.textContent = msg;
-  setTimeout(()=> fb.textContent = '', 4000);
-}
+  // open modal with pack details
+  function openForm(packId, packTitle) {
+    MODAL.setAttribute('aria-hidden','false');
+    MODAL.style.display='flex';
+    MODAL_TITLE_NAME.textContent = packTitle;
+    PACK_ID.value = packId;
+    document.body.style.overflow='hidden';
+  }
+  function closeForm() {
+    MODAL.setAttribute('aria-hidden','true');
+    MODAL.style.display='none';
+    document.body.style.overflow='';
+    PACK_FORM.reset();
+  }
 
-// whatsapp top button
-whatsappBtn.addEventListener('click', ()=>{
-  window.open('https://wa.me/221782607212','_blank');
-});
+  function attachPackButtons() {
+    document.querySelectorAll('.open-pack').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = btn.dataset.pack;
+        // title from card
+        const card = btn.closest('.pack-card');
+        const title = card.querySelector('.pack-title').textContent;
+        openForm(id, title);
+      });
+    });
+  }
+
+  // form submit
+  PACK_FORM.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = new FormData(PACK_FORM);
+    const mode = form.get('mode') || 'email';
+    const summary = `
+Pack: ${form.get('packId')}
+Objectif: ${form.get('objective') || '-'}
+Taille équipe: ${form.get('teamSize') || '-'}
+Budget: ${form.get('budget') || '-'}
+Nom: ${form.get('clientName') || '-'}
+Email: ${form.get('clientEmail') || '-'}
+Phone: ${form.get('clientPhone') || '-'}
+Détails: ${form.get('details') || '-'}
+`.trim();
+
+    if (mode === 'email') {
+      // open mailto with summary
+      const to = 'contact@e-meta.app';
+      const subj = encodeURIComponent(`Demande pack ${form.get('packId')}`);
+      const body = encodeURIComponent(summary);
+      window.location.href = `mailto:${to}?subject=${subj}&body=${body}`;
+    } else if (mode === 'whatsapp') {
+      const phone = form.get('clientPhone') || '221782607212';
+      const text = encodeURIComponent(summary);
+      window.open(`https://wa.me/${phone.replace(/\D/g,'') || '221782607212'}?text=${text}`, '_blank');
+    } else {
+      // display summary - simple: alert or inline -- we show alert and close
+      alert(summary);
+    }
+    closeForm();
+  });
+
+  // modal close
+  MODAL_CLOSE.addEventListener('click', closeForm);
+  document.getElementById('formCancel').addEventListener('click', closeForm);
+
+  // open packs section
+  DISCOVER.addEventListener('click', () => {
+    document.getElementById('packs').scrollIntoView({behavior:'smooth'});
+  });
+
+  // WhatsApp top button
+  WHATS_BTN.addEventListener('click', ()=> {
+    window.open('https://wa.me/221782607212','_blank');
+  });
+
+  // menu hamburger for small screens
+  document.getElementById('menuBtn').addEventListener('click', () => {
+    const nav = document.querySelector('.main-nav ul');
+    if (nav.style.display === 'flex') nav.style.display = 'none';
+    else nav.style.display = 'flex';
+  });
+
+  // FAQ toggles simple
+  document.querySelectorAll('.faq-toggle').forEach(btn => {
+    btn.addEventListener('click', ()=> {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      // simple: show a small bullet style or collapse behaviour can be added
+    });
+  });
+
+  // language change
+  LANG_SELECT.addEventListener('change', async (e) => {
+    const lang = e.target.value;
+    await changeLang(lang);
+  });
+
+  async function changeLang(lang) {
+    try {
+      const dict = await fetchLangJson(lang);
+      applyI18n(dict);
+      currentLang = lang;
+      localStorage.setItem('emeta_lang', lang);
+      // set html lang & dir
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      // small tweak: if rtl, keep select on right via CSS not here
+    } catch (err) {
+      console.error(err);
+      alert('Lang load error: ' + err.message);
+    }
+  }
+
+  // initial load
+  changeLang(currentLang);
+})();
