@@ -1,16 +1,14 @@
 {
-  "nav": {"home":"Home","packs":"Packs","about":"About","faq":"FAQ","contact":"Contact"},
-  "hero": {"title":"e-META — The multidisciplinary AI assistant","subtitle":"Specialized form packs, structured syntheses and actionable recommendations."},
-  "btn": {"discover":"Discover packs","whatsapp":"Contact WhatsApp","open":"Open"},
-  "packs": {"title":"Our packs","subtitle":"Packs designed to diagnose, prioritise and recommend concrete actions."},
-  "packs": [
-    {"id":"marketing","title":"Marketing","desc":"Campaign brief, budget estimate and channels."},
-    {"id":"funding","title":"Funding","desc":"Structured funding request, financial models."},
-    {"id":"recruitment","title":"Recruitment","desc":"Role brief, budget and timeline."},
-    {"id":"product","title":"Product","desc":"Positioning, pricing, GTM."}
-  ],
-  "about":{"title":"About","text":"e-META helps actors from all sectors to structure decisions via specialised form packs and actionable syntheses."},
-  "faq":{"title":"FAQ","q1":"How does e-META work?","q2":"Is it free?"},
-  "form":{"label":{"objective":"Objective","team":"Team size","budget":"Indicative budget","name":"Name","email":"Email","phone":"Phone (WhatsApp)","details":"Details","restitution":"Result delivery"},"mode":{"email":"Email","whatsapp":"WhatsApp","display":"Display"},"send":"Send","cancel":"Cancel"},
-  "footer":{"aboutTitle":"About","aboutText":"e-META provides forms and syntheses to help decision making.","faqTitle":"FAQ","contactTitle":"Contact"}
+  "nav":{"home":"Home","packs":"Packs","about":"About","faq":"FAQ","contact":"Contact"},
+  "hero":{"title":"e-META — Multidisciplinary AI assistant","subtitle":"Specialized form packs, structured summaries and actionable recommendations.","discover":"Discover packs"},
+  "packs":{"title":"Our packs","subtitle":"Packs designed to diagnose, prioritize and recommend concrete actions.","open":"Open","list":[
+    {"key":"marketing","title":"Marketing","desc":"Campaign brief, budget estimate and channels."},
+    {"key":"funding","title":"Funding","desc":"Structured funding request, financial models."},
+    {"key":"recruitment","title":"Recruitment","desc":"Role brief, budget and timeline."},
+    {"key":"product","title":"Product","desc":"Positioning, pricing, GTM."}
+  ]},
+  "about":{"title":"About","text":"e-META helps actors across sectors structure decisions via specialized form packs and actionable syntheses."},
+  "faq":{"title":"FAQ"},
+  "contact":{"title":"Contact"},
+  "form":{"teamLabel":"Team size","budgetLabel":"Indicative budget","name":"Name","email":"Email","phone":"Phone (WhatsApp)","details":"Details","delivery":"Delivery mode"}
 }
