@@ -1,16 +1,14 @@
 {
-  "nav":{"home":"Inicio","packs":"Packs","about":"Acerca de","faq":"FAQ","contact":"Contacto"},
-  "hero":{"title":"e-META — El asistente IA multidisciplinar","subtitle":"Packs de formularios especializados, síntesis y recomendaciones accionables."},
-  "btn":{"discover":"Descubrir packs","whatsapp":"Contactar WhatsApp","open":"Abrir"},
-  "packs":{"title":"Nuestros packs","subtitle":"Packs diseñados para diagnosticar, priorizar y recomendar acciones concretas."},
-  "packs":[
-    {"id":"marketing","title":"Marketing","desc":"Brief de campaña, estimación de presupuesto y canales."},
-    {"id":"funding","title":"Financiación","desc":"Solicitud estructurada de financiación, modelos financieros."},
-    {"id":"recruitment","title":"Reclutamiento","desc":"Brief de rol, presupuesto y cronograma."},
-    {"id":"product","title":"Producto","desc":"Posicionamiento, precios, GTM."}
-  ],
-  "about":{"title":"Acerca de","text":"e-META ayuda a actores de todos los sectores a estructurar decisiones mediante packs de formularios especializados y síntesis accionables."},
-  "faq":{"title":"FAQ","q1":"¿Cómo funciona e-META?","q2":"¿Es gratuito?"},
-  "form":{"label":{"objective":"Objetivo","team":"Tamaño del equipo","budget":"Presupuesto indicativo","name":"Nombre","email":"Email","phone":"Teléfono (WhatsApp)","details":"Detalles","restitution":"Modo de entrega"},"mode":{"email":"Email","whatsapp":"WhatsApp","display":"Mostrar"},"send":"Enviar","cancel":"Cancelar"},
-  "footer":{"aboutTitle":"Acerca de","aboutText":"e-META proporciona formularios y síntesis para ayudar en la toma de decisiones.","faqTitle":"FAQ","contactTitle":"Contacto"}
+  "nav":{"home":"Inicio","packs":"Packs","about":"Acerca","faq":"FAQ","contact":"Contacto"},
+  "hero":{"title":"e-META — Asistente IA multidisciplinario","subtitle":"Packs de formularios especializados, resúmenes estructurados y recomendaciones accionables.","discover":"Descubrir packs"},
+  "packs":{"title":"Nuestros packs","subtitle":"Packs diseñados para diagnosticar, priorizar y recomendar acciones concretas.","open":"Abrir","list":[
+    {"key":"marketing","title":"Marketing","desc":"Brief campaña, estimación presupuesto y canales."},
+    {"key":"funding","title":"Financiación","desc":"Solicitud estructurada, modelos financieros."},
+    {"key":"recruitment","title":"Reclutamiento","desc":"Brief rol, presupuesto y cronograma."},
+    {"key":"product","title":"Producto","desc":"Posicionamiento, pricing, GTM."}
+  ]},
+  "about":{"title":"Acerca","text":"e-META ayuda a los actores de todos los sectores a estructurar sus decisiones mediante packs de formularios especializados y síntesis accionables."},
+  "faq":{"title":"FAQ"},
+  "contact":{"title":"Contacto"},
+  "form":{"teamLabel":"Tamaño del equipo","budgetLabel":"Presupuesto indicativo","name":"Nombre","email":"Email","phone":"Teléfono (WhatsApp)","details":"Detalles","delivery":"Modo de entrega"}
 }
