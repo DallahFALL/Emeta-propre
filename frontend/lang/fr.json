@@ -1,31 +1,66 @@
 {
-  "nav.home":"Accueil",
-  "nav.packs":"Découvrir les packs",
-  "nav.about":"À propos",
-  "nav.faq":"FAQ",
-  "nav.contact":"Contact",
-  "hero.title":"e-META — L'assistant IA pluridisciplinaire",
-  "hero.subtitle":"Packs de formulaires spécialisés, synthèses et recommandations actionnables.",
-  "hero.cta":"Découvrir les packs",
-  "packs.title":"Nos packs",
-  "packs.lead":"Packs conçus pour diagnostiquer, prioriser et recommander des actions concrètes.",
-  "pack.marketing.title":"Marketing",
-  "pack.marketing.desc":"Brief campagne, estimation budget et canaux.",
-  "pack.funding.title":"Financement",
-  "pack.funding.desc":"Demande structurée, modèles financiers.",
-  "pack.recruitment.title":"Recrutement",
-  "pack.recruitment.desc":"Brief rôle, budget et timeline.",
-  "pack.product.title":"Produit",
-  "pack.product.desc":"Positionnement, pricing, GTM.",
-  "pack.open":"Ouvrir",
-  "about.title":"À propos",
-  "about.text":"e-META aide les acteurs de tous les secteurs à structurer leurs décisions via des packs.",
-  "faq.title":"FAQ",
-  "faq.q1":"Comment fonctionne e-META ?",
-  "faq.q2":"Est-ce gratuit ?",
-  "contact.title":"Contact",
-  "footer.about":"À propos",
-  "footer.desc":"e-META propose des formulaires et des synthèses pour aider à la prise de décision.",
-  "footer.faq":"FAQ",
-  "footer.contact":"Contact"
+  "nav": {
+    "home": "Accueil",
+    "packs": "Découvrir les packs",
+    "about": "À propos",
+    "faq": "FAQ",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "e-META — L'assistant IA pluridisciplinaire",
+    "subtitle": "Packs de formulaires spécialisés, synthèses et recommandations actionnables."
+  },
+  "btn": {
+    "discover": "Découvrir les packs",
+    "whatsapp": "Contact WhatsApp",
+    "open": "Ouvrir"
+  },
+  "packs": {
+    "title": "Nos packs",
+    "subtitle": "Packs conçus pour diagnostiquer, prioriser et recommander des actions concrètes."
+  },
+  "packsList": {},
+  "packs": [
+    {"id":"marketing","title":"Marketing","desc":"Brief campagne, estimation budget et canaux."},
+    {"id":"funding","title":"Financement","desc":"Demande structurée, modèles financiers."},
+    {"id":"recruitment","title":"Recrutement","desc":"Brief rôle, budget et timeline."},
+    {"id":"product","title":"Produit","desc":"Positionnement, pricing, GTM."}
+  ],
+  "about": {
+    "title":"À propos",
+    "text":"e-META aide les acteurs de tous les secteurs à structurer leurs décisions via des packs de formulaires spécialisés et des synthèses actionnables."
+  },
+  "faq": {
+    "title":"FAQ",
+    "q1":"Comment fonctionne e-META ?",
+    "q2":"Est-ce gratuit ?"
+  },
+  "contact": {
+    "title":"Contact"
+  },
+  "form": {
+    "label": {
+      "objective":"Objectif recherché",
+      "team":"Taille de l'équipe",
+      "budget":"Budget indicatif",
+      "name":"Nom",
+      "email":"Email",
+      "phone":"Téléphone (WhatsApp)",
+      "details":"Détails",
+      "restitution":"Mode de restitution"
+    },
+    "mode": {
+      "email":"Email",
+      "whatsapp":"WhatsApp",
+      "display":"Affichage"
+    },
+    "send":"Envoyer",
+    "cancel":"Annuler"
+  },
+  "footer":{
+    "aboutTitle":"À propos",
+    "aboutText":"e-META propose des formulaires et des synthèses pour aider à la prise de décision.",
+    "faqTitle":"FAQ",
+    "contactTitle":"Contact"
+  }
 }
