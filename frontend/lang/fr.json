@@ -1,66 +1,14 @@
 {
-  "nav": {
-    "home": "Accueil",
-    "packs": "Découvrir les packs",
-    "about": "À propos",
-    "faq": "FAQ",
-    "contact": "Contact"
-  },
-  "hero": {
-    "title": "e-META — L'assistant IA pluridisciplinaire",
-    "subtitle": "Packs de formulaires spécialisés, synthèses et recommandations actionnables."
-  },
-  "btn": {
-    "discover": "Découvrir les packs",
-    "whatsapp": "Contact WhatsApp",
-    "open": "Ouvrir"
-  },
-  "packs": {
-    "title": "Nos packs",
-    "subtitle": "Packs conçus pour diagnostiquer, prioriser et recommander des actions concrètes."
-  },
-  "packsList": {},
-  "packs": [
-    {"id":"marketing","title":"Marketing","desc":"Brief campagne, estimation budget et canaux."},
-    {"id":"funding","title":"Financement","desc":"Demande structurée, modèles financiers."},
-    {"id":"recruitment","title":"Recrutement","desc":"Brief rôle, budget et timeline."},
-    {"id":"product","title":"Produit","desc":"Positionnement, pricing, GTM."}
-  ],
-  "about": {
-    "title":"À propos",
-    "text":"e-META aide les acteurs de tous les secteurs à structurer leurs décisions via des packs de formulaires spécialisés et des synthèses actionnables."
-  },
-  "faq": {
-    "title":"FAQ",
-    "q1":"Comment fonctionne e-META ?",
-    "q2":"Est-ce gratuit ?"
-  },
-  "contact": {
-    "title":"Contact"
-  },
-  "form": {
-    "label": {
-      "objective":"Objectif recherché",
-      "team":"Taille de l'équipe",
-      "budget":"Budget indicatif",
-      "name":"Nom",
-      "email":"Email",
-      "phone":"Téléphone (WhatsApp)",
-      "details":"Détails",
-      "restitution":"Mode de restitution"
-    },
-    "mode": {
-      "email":"Email",
-      "whatsapp":"WhatsApp",
-      "display":"Affichage"
-    },
-    "send":"Envoyer",
-    "cancel":"Annuler"
-  },
-  "footer":{
-    "aboutTitle":"À propos",
-    "aboutText":"e-META propose des formulaires et des synthèses pour aider à la prise de décision.",
-    "faqTitle":"FAQ",
-    "contactTitle":"Contact"
-  }
+  "nav":{"home":"Accueil","packs":"Découvrir les packs","about":"À propos","faq":"FAQ","contact":"Contact"},
+  "hero":{"title":"e-META — L'assistant IA pluridisciplinaire","subtitle":"Packs de formulaires spécialisés, synthèses structurées et recommandations actionnables.","discover":"Découvrir les packs"},
+  "packs":{"title":"Nos packs","subtitle":"Packs conçus pour diagnostiquer, prioriser et recommander des actions concrètes.","open":"Ouvrir","list":[
+    {"key":"marketing","title":"Marketing","desc":"Brief campagne, estimation budget et canaux."},
+    {"key":"funding","title":"Financement","desc":"Demande structurée, modèles financiers."},
+    {"key":"recruitment","title":"Recrutement","desc":"Brief rôle, budget et timeline."},
+    {"key":"product","title":"Produit","desc":"Positionnement, pricing, GTM."}
+  ]},
+  "about":{"title":"À propos","text":"e-META aide les acteurs de tous les secteurs à structurer leurs décisions via des packs de formulaires spécialisés et des synthèses actionnables."},
+  "faq":{"title":"FAQ"},
+  "contact":{"title":"Contact"},
+  "form":{"teamLabel":"Taille de l'équipe","budgetLabel":"Budget indicatif","name":"Nom","email":"Email","phone":"Téléphone (WhatsApp)","details":"Détails","delivery":"Mode de restitution"}
 }
