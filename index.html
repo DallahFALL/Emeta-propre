@@ -1,161 +1,626 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title data-i18n="siteTitle">e-META — Assistant IA</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>e-META — Assistant IA pluridisciplinaire</title>
 
-  <!-- Google fonts: Noto Sans + Noto Naskh Arabic -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Noto+Naskh+Arabic&display=swap" rel="stylesheet">
+<!-- Google fonts: Inter + Noto Naskh Arabic for Arabic rendering -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+<style>
+  :root{
+    --accent:#0b6db2;
+    --muted:#6b7785;
+    --bg:#f3fbfb;
+    --card:#ffffff;
+    --whatsapp:#17b978;
+    --max-width:1100px;
+    --container-padding:24px;
+  }
+  html{font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial; background:var(--bg); color:#0b2530; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+  /* RTL support for Arabic */
+  html[lang="ar"]{direction:rtl;text-align:right; font-family: "Noto Naskh Arabic", Inter, sans-serif;}
+
+  /* Header */
+  header{background:#fff; border-bottom:1px solid rgba(10,20,30,0.05); position:sticky; top:0; z-index:40;}
+  .nav-inner{max-width:var(--max-width); margin:0 auto; display:flex; align-items:center; gap:16px; padding:12px var(--container-padding); justify-content:space-between;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand img{height:40px;}
+  nav{display:flex; gap:18px; align-items:center;}
+  nav a{color:var(--accent); text-decoration:none; font-weight:600;}
+  .controls{display:flex; gap:12px; align-items:center;}
+  .lang-select{border-radius:8px; padding:8px 12px; border:1px solid rgba(0,0,0,0.08); background:white;}
+  .btn-whatsapp{background:var(--whatsapp); color:#fff; padding:10px 16px; border-radius:10px; font-weight:700; border:none; box-shadow:0 4px 12px rgba(23,185,120,0.12); cursor:pointer;}
+
+  /* Hero */
+  .hero{max-width:var(--max-width); margin:28px auto; padding:40px var(--container-padding); text-align:center;}
+  .hero h1{font-size:36px; line-height:1.05; margin:6px 0; color:var(--accent);}
+  .hero p{color:var(--muted); margin-bottom:18px;}
+  .hero .cta{background:var(--accent); color:#fff; padding:12px 22px; border-radius:10px; border:none; font-weight:700; cursor:pointer;}
+
+  /* Packs */
+  .section{max-width:var(--max-width); margin:24px auto; padding:20px var(--container-padding);}
+  .section h2{font-size:26px; margin-bottom:6px; text-align:center;}
+  .section p.lead{color:var(--muted); text-align:center; margin-bottom:22px;}
+  .packs-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; align-items:stretch; justify-items:stretch;}
+  .pack{background:var(--card); border-radius:14px; padding:22px; box-shadow:0 10px 30px rgba(9,30,40,0.04); display:flex; flex-direction:column; justify-content:space-between;}
+  .pack h3{margin:0 0 8px 0; font-size:18px;}
+  .pack p{color:var(--muted); margin-bottom:12px; flex:1;}
+  .pack .open-btn{align-self:flex-start; padding:8px 12px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); background:white; cursor:pointer;}
+
+  /* About / FAQ / Contact compact */
+  .info-row{display:flex; gap:24px; margin-top:30px; flex-wrap:wrap; align-items:flex-start; justify-content:space-between;}
+  .info-col{flex:1 1 220px; min-width:220px;}
+  .info-col h3{font-size:20px; margin-bottom:8px;}
+  .info-col p, .info-col ul{color:var(--muted); margin:0;}
+
+  /* Modal form (single responsive) */
+  .modal-backdrop{position:fixed; inset:0; background:rgba(8,12,16,0.45); display:none; align-items:center; justify-content:center; z-index:60; padding:24px;}
+  .modal{background:var(--card); border-radius:12px; width:100%; max-width:680px; box-shadow:0 20px 50px rgba(0,0,0,0.25); max-height:92vh; overflow:auto; padding:20px;}
+  .modal .modal-header{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;}
+  .modal label{display:block; font-weight:600; margin:10px 0 6px;}
+  .field-row{display:flex; gap:12px; flex-wrap:wrap;}
+  .field-row .field{flex:1 1 200px;}
+  input[type="text"], input[type="email"], textarea, select{width:100%; padding:12px 14px; border-radius:8px; border:1px solid rgba(10,20,30,0.08); background: #fff; font-size:14px;}
+  textarea{min-height:100px; resize:vertical;}
+  .modal .actions{display:flex; gap:12px; margin-top:16px;}
+  .btn-primary{background:var(--accent); color:#fff; border:none; padding:10px 14px; border-radius:8px; cursor:pointer;}
+  .btn-secondary{background:#fff; border:1px solid rgba(0,0,0,0.08); padding:10px 14px; border-radius:8px; cursor:pointer;}
+
+  /* Footer */
+  footer{background:transparent; margin-top:40px; padding:28px 0 40px;border-top:1px solid rgba(10,20,30,0.03);}
+  .footer-inner{max-width:var(--max-width); margin:0 auto; padding:0 var(--container-padding); display:flex; gap:20px; flex-wrap:wrap; align-items:flex-start; justify-content:space-between;}
+  .footer-inner .col{flex:1 1 220px; min-width:220px;}
+  .footer-bottom{max-width:var(--max-width); margin:10px auto 0; text-align:center; color:var(--muted); padding:8px var(--container-padding);}
+
+  /* small screens */
+  @media (max-width:1000px){
+    .packs-grid{grid-template-columns:repeat(2,1fr);}
+    .hero h1{font-size:30px;}
+  }
+  @media (max-width:640px){
+    .nav-inner{padding:10px 12px;}
+    nav{display:none} /* simplified mobile nav (use burger if needed) */
+    .section h2{text-align:left;}
+    .packs-grid{grid-template-columns:1fr; gap:14px;}
+    .hero{padding:28px 12px}
+    .modal{max-width:92%; padding:18px;}
+    .info-row{padding:0 8px;}
+  }
+  /* smaller spacing for about/faq/contact */
+  .compact{margin-top:12px; padding-top:12px;}
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap header-inner">
-      <div class="brand">
-        <img src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" id="siteLogo" />
-        <span class="brand-title">e-META</span>
-      </div>
 
-      <nav class="main-nav" role="navigation" aria-label="Main navigation">
-        <ul>
-          <li><a href="#home" data-i18n="nav.home">Accueil</a></li>
-          <li><a href="#packs" data-i18n="nav.packs">Découvrir les packs</a></li>
-          <li><a href="#about" data-i18n="nav.about">À propos</a></li>
-          <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
-          <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
-        </ul>
-      </nav>
-
-      <div class="header-actions">
-        <button id="whatsBtn" class="btn btn-cta" aria-label="Contact WhatsApp" data-i18n="buttons.whatsapp">Contact WhatsApp</button>
-
-        <select id="langSelect" aria-label="Language selector">
-          <option value="fr">FR</option>
-          <option value="en">EN</option>
-          <option value="es">ES</option>
-          <option value="ar">AR</option>
-        </select>
-
-        <button id="hamburger" class="hamburger" aria-label="Menu" aria-expanded="false">≡</button>
-      </div>
+<header>
+  <div class="nav-inner" role="navigation" aria-label="Main navigation">
+    <div class="brand">
+      <!-- replace src with correct logo path in repo -->
+      <img src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" id="site-logo">
+      <strong style="color:var(--accent); font-size:18px;">e-META</strong>
     </div>
-  </header>
 
-  <main id="home" class="wrap main">
-    <section class="hero" id="hero">
-      <h1 class="hero-title" data-i18n="hero.title">e-META — L'assistant IA pluridisciplinaire</h1>
-      <p class="hero-sub" data-i18n="hero.subtitle">Packs de formulaires spécialisés, synthèses et recommandations actionnables.</p>
-      <div class="hero-actions">
-        <button class="btn btn-primary" id="discoverPacks" data-i18n="buttons.discover">Découvrir les packs</button>
-      </div>
-    </section>
+    <nav aria-label="Main links">
+      <a href="#home" data-i18n="nav.home">Accueil</a>
+      <a href="#packs" data-i18n="nav.packs">Découvrir les packs</a>
+      <a href="#about" data-i18n="nav.about">À propos</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
 
-    <section id="packs" class="packs">
-      <h2 data-i18n="packs.title">Nos packs</h2>
-      <p class="muted" data-i18n="packs.subtitle">Packs conçus pour diagnostiquer, prioriser et recommander des actions concrètes.</p>
+    <div class="controls">
+      <button class="btn-whatsapp" id="whatsappBtn">Contact WhatsApp</button>
 
-      <div class="packs-grid" id="packsGrid">
-        <!-- cards will be filled from lang JSON -->
-      </div>
-    </section>
-
-    <section id="about" class="about wrap">
-      <h2 data-i18n="about.title">À propos</h2>
-      <p data-i18n="about.text">e-META aide les acteurs de tous les secteurs à structurer leurs décisions via des packs de formulaires spécialisés et des synthèses actionnables.</p>
-    </section>
-
-    <section id="faq" class="faq wrap">
-      <h2 data-i18n="faq.title">FAQ</h2>
-      <ul id="faqList">
-        <!-- filled from JSON -->
-      </ul>
-    </section>
-
-    <section id="contact" class="contact wrap">
-      <h2 data-i18n="contact.title">Contact</h2>
-      <p><strong>Email :</strong> <a href="mailto:contact@e-meta.app" id="contactEmail">contact@e-meta.app</a></p>
-      <p><strong>WhatsApp :</strong> <a href="https://wa.me/221782607212" id="contactWhats">+221 78 260 72 12</a></p>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="wrap footer-grid">
-      </div>
-      <div>
-        </ul>
-      </div>
-    </div>
-    <div class="wrap copyright">e-META 2025 ©</div>
-  </footer>
-
-  <!-- Modal / Form (hidden by default) -->
-  <div id="formModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="formTitle">
-    <div class="modal-panel">
-      <button id="closeModal" class="modal-close" aria-label="Close">✕</button>
-      <h3 id="formTitle" data-i18n="form.title">Pack — Demande</h3>
-
-      <form id="packForm" autocomplete="on" novalidate>
-        <input type="hidden" name="packId" id="packId" />
-
-        <div class="form-group">
-          <label for="userRequest" data-i18n="form.requestLabel">Résultat attendu</label>
-          <input id="userRequest" name="request" placeholder="" data-i18n-placeholder="form.requestPlaceholder" />
-        </div>
-
-        <div class="grid-2">
-          <div class="form-group">
-            <label for="teamSize" data-i18n="form.teamSize">Taille de l'équipe</label>
-            <input id="teamSize" name="teamSize" placeholder="Ex : 3 personnes" />
-          </div>
-          <div class="form-group">
-            <label for="budget" data-i18n="form.budget">Budget indicatif</label>
-            <input id="budget" name="budget" placeholder="Ex : 200 000 XOF / mois" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="name" data-i18n="form.name">Nom</label>
-          <input id="name" name="name" placeholder="" />
-        </div>
-
-        <div class="form-group">
-          <label for="email" data-i18n="form.email">Email</label>
-          <input id="email" name="email" type="email" placeholder="a@b.com" />
-        </div>
-
-        <div class="form-group">
-          <label for="phone" data-i18n="form.phone">Téléphone (WhatsApp)</label>
-          <input id="phone" name="phone" placeholder="+221..." />
-        </div>
-
-        <div class="form-group">
-          <label for="details" data-i18n="form.details">Détails</label>
-          <textarea id="details" name="details" rows="5" placeholder="" data-i18n-placeholder="form.detailsPlaceholder"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label data-i18n="form.modeLabel">Mode de restitution</label>
-          <div class="radio-row" role="radiogroup" aria-label="Mode de restitution">
-            <label><input type="radio" name="mode" value="email" checked /> <span data-i18n="form.mode.email">Email</span></label>
-            <label><input type="radio" name="mode" value="whatsapp" /> <span data-i18n="form.mode.whatsapp">WhatsApp</span></label>
-            <label><input type="radio" name="mode" value="display" /> <span data-i18n="form.mode.display">Affichage</span></label>
-          </div>
-        </div>
-
-        <div class="form-actions">
-          <button type="submit" class="btn btn-primary" data-i18n="buttons.send">Envoyer</button>
-          <button type="button" id="cancelForm" class="btn btn-ghost" data-i18n="buttons.cancel">Annuler</button>
-        </div>
-
-        <div id="formFeedback" class="muted small"></div>
-      </form>
+      <select id="langSelect" class="lang-select" aria-label="Select language">
+        <option value="fr">FR</option>
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+        <option value="ar">AR</option>
+      </select>
     </div>
   </div>
+</header>
 
-  <script src="script.js"></script>
+<main>
+  <section class="hero" id="home">
+    <h1 data-i18n="hero.title">e-META — L'assistant IA pluridisciplinaire</h1>
+    <p data-i18n="hero.subtitle">Packs de formulaires spécialisés, synthèses structurées et recommandations actionnables.</p>
+    <button class="cta" id="discoverPacks" data-i18n="hero.cta">Découvrir les packs</button>
+  </section>
+
+  <section class="section" id="packs">
+    <h2 data-i18n="packs.title">Nos packs</h2>
+    <p class="lead" data-i18n="packs.lead">Packs conçus pour diagnostiquer, prioriser et recommander des actions concrètes.</p>
+
+    <div class="packs-grid" id="packsGrid" role="list">
+      <!-- packs will be generated by JS for translation & consistency -->
+    </div>
+
+    <!-- a single modal form - opened with pack buttons -->
+    <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-header">
+          <h3 id="modalTitle">Pack — <span id="modalPackName">...</span></h3>
+          <button id="modalClose" aria-label="Fermer">✕</button>
+        </div>
+
+        <form id="packForm">
+          <label for="expectedResult" data-i18n="form.resultLabel">Résultat attendu</label>
+          <input id="expectedResult" name="result" type="text" placeholder="Ex : Obtenir un plan marketing..." data-i18n-placeholder="form.resultPlaceholder">
+
+          <div class="field-row">
+            <div class="field">
+              <label for="teamSize" data-i18n="form.teamLabel">Taille de l'équipe</label>
+              <input id="teamSize" name="teamSize" type="text" placeholder="Ex : 3 personnes" data-i18n-placeholder="form.teamPlaceholder">
+            </div>
+            <div class="field">
+              <label for="budget" data-i18n="form.budgetLabel">Budget indicatif</label>
+              <input id="budget" name="budget" type="text" placeholder="Ex : 200 000 XOF / mois" data-i18n-placeholder="form.budgetPlaceholder">
+            </div>
+          </div>
+
+          <!-- Conditional helper section (filled by JS per pack) -->
+          <div id="conditionalFields" aria-live="polite"></div>
+
+          <label for="name" data-i18n="form.name">Nom</label>
+          <input id="name" name="name" type="text" placeholder="" required>
+
+          <label for="email" data-i18n="form.email">Email</label>
+          <input id="email" name="email" type="email" placeholder="a@b.com" required>
+
+          <label for="phone" data-i18n="form.phone">Téléphone (WhatsApp)</label>
+          <input id="phone" name="phone" type="text" placeholder="+221..." required>
+
+          <label for="details" data-i18n="form.details">Détails</label>
+          <textarea id="details" name="details" placeholder="Décrivez le contexte, objectifs..."></textarea>
+
+          <label data-i18n="form.mode">Mode de restitution</label>
+          <div style="display:flex; gap:12px; align-items:center;">
+            <label><input type="radio" name="mode" value="email" checked> <span data-i18n="form.modeEmail">Email</span></label>
+            <label><input type="radio" name="mode" value="whatsapp"> <span data-i18n="form.modeWhats">WhatsApp</span></label>
+            <label><input type="radio" name="mode" value="display"> <span data-i18n="form.modeDisplay">Affichage</span></label>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn-primary" id="submitBtn" data-i18n="form.submit">Envoyer</button>
+            <button type="button" class="btn-secondary" id="cancelBtn" data-i18n="form.cancel">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- compact info row -->
+    <div class="info-row compact" id="infoRow">
+      <div class="info-col" id="aboutCol">
+        <h3 id="aboutTitle" data-i18n="about.title">À propos</h3>
+        <p data-i18n="about.text">e-META aide les acteurs de tous les secteurs à structurer leurs décisions via des packs de formulaires spécialisés et des synthèses actionnables.</p>
+      </div>
+
+      <div class="info-col" id="faqCol">
+        <h3 data-i18n="faq.title">FAQ</h3>
+        <ul>
+          <li data-i18n="faq.q1">Comment fonctionne e-META ?</li>
+          <li data-i18n="faq.q2">Est-ce gratuit ?</li>
+        </ul>
+      </div>
+
+      <div class="info-col" id="contactCol">
+        <h3 data-i18n="contact.title">Contact</h3>
+        <p><strong data-i18n="contact.emailLabel">Email</strong> : <a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
+        <p><strong data-i18n="contact.whatsLabel">WhatsApp</strong> : <a href="https://wa.me/221782607212" target="_blank">+221 78 260 72 12</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="col">
+      <h4 data-i18n="footer.about">À propos</h4>
+      <p data-i18n="footer.aboutText">e-META propose des formulaires et des synthèses pour aider à la prise de décision.</p>
+    </div>
+    <div class="col">
+      <h4 data-i18n="footer.faq">FAQ</h4>
+      <ul>
+        <li data-i18n="footer.faq1">Comment fonctionne e-META ?</li>
+        <li data-i18n="footer.faq2">Est-ce gratuit ?</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4 data-i18n="footer.contact">Contact</h4>
+      <p><a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
+      <p><a href="https://wa.me/221782607212" target="_blank">+221 78 260 72 12</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">e-META 2025 ©</div>
+</footer>
+
+<script>
+/* ---------- TRANSLATIONS (inline JSON) ---------- */
+const translations = {
+  fr: {
+    "nav.home":"Accueil",
+    "nav.packs":"Découvrir les packs",
+    "nav.about":"À propos",
+    "nav.faq":"FAQ",
+    "nav.contact":"Contact",
+    "hero.title":"e-META — L'assistant IA pluridisciplinaire",
+    "hero.subtitle":"Packs de formulaires spécialisés, synthèses structurées et recommandations actionnables.",
+    "hero.cta":"Découvrir les packs",
+    "packs.title":"Nos packs",
+    "packs.lead":"Packs conçus pour diagnostiquer, prioriser et recommander des actions concrètes.",
+    "form.resultLabel":"Résultat attendu",
+    "form.resultPlaceholder":"Ex : Demande de financement pour projet...",
+    "form.teamLabel":"Taille de l'équipe",
+    "form.teamPlaceholder":"Ex : 3 personnes",
+    "form.budgetLabel":"Budget indicatif",
+    "form.budgetPlaceholder":"Ex : 200 000 XOF / mois",
+    "form.name":"Nom",
+    "form.email":"Email",
+    "form.phone":"Téléphone (WhatsApp)",
+    "form.details":"Détails",
+    "form.mode":"Mode de restitution",
+    "form.modeEmail":"Email",
+    "form.modeWhats":"WhatsApp",
+    "form.modeDisplay":"Affichage",
+    "form.submit":"Envoyer",
+    "form.cancel":"Annuler",
+    "about.title":"À propos",
+    "about.text":"e-META aide les acteurs de tous les secteurs à structurer leurs décisions via des packs de formulaires spécialisés et des synthèses actionnables.",
+    "faq.title":"FAQ",
+    "faq.q1":"Comment fonctionne e-META ?",
+    "faq.q2":"Est-ce gratuit ?",
+    "contact.title":"Contact",
+    "contact.emailLabel":"Email",
+    "contact.whatsLabel":"WhatsApp",
+    "footer.about":"À propos",
+    "footer.aboutText":"e-META propose des formulaires et des synthèses pour aider à la prise de décision.",
+    "footer.faq":"FAQ",
+    "footer.faq1":"Comment fonctionne e-META ?",
+    "footer.faq2":"Est-ce gratuit ?",
+    "footer.contact":"Contact",
+    // pack definitions
+    "pack.marketing.title":"Marketing",
+    "pack.marketing.desc":"Brief campagne, estimation budget et canaux.",
+    "pack.funding.title":"Financement",
+    "pack.funding.desc":"Demande structurée, modèles financiers.",
+    "pack.recruitment.title":"Recrutement",
+    "pack.recruitment.desc":"Brief rôle, budget et timeline.",
+    "pack.product.title":"Produit",
+    "pack.product.desc":"Positionnement, pricing, GTM."
+  },
+
+  en: {
+    "nav.home":"Home",
+    "nav.packs":"Packs",
+    "nav.about":"About",
+    "nav.faq":"FAQ",
+    "nav.contact":"Contact",
+    "hero.title":"e-META — Multidisciplinary AI Assistant",
+    "hero.subtitle":"Specialized form packs, structured syntheses and actionable recommendations.",
+    "hero.cta":"Discover packs",
+    "packs.title":"Our packs",
+    "packs.lead":"Packs designed to diagnose, prioritise and recommend concrete actions.",
+    "form.resultLabel":"Expected result",
+    "form.resultPlaceholder":"Ex: Funding request for project...",
+    "form.teamLabel":"Team size",
+    "form.teamPlaceholder":"Ex: 3 people",
+    "form.budgetLabel":"Indicative budget",
+    "form.budgetPlaceholder":"Ex: 200 000 XOF / month",
+    "form.name":"Name",
+    "form.email":"Email",
+    "form.phone":"Phone (WhatsApp)",
+    "form.details":"Details",
+    "form.mode":"Delivery mode",
+    "form.modeEmail":"Email",
+    "form.modeWhats":"WhatsApp",
+    "form.modeDisplay":"Display",
+    "form.submit":"Send",
+    "form.cancel":"Cancel",
+    "about.title":"About",
+    "about.text":"e-META helps actors across sectors structure decisions via specialized form packs and actionable syntheses.",
+    "faq.title":"FAQ",
+    "faq.q1":"How does e-META work?",
+    "faq.q2":"Is it free?",
+    "contact.title":"Contact",
+    "contact.emailLabel":"Email",
+    "contact.whatsLabel":"WhatsApp",
+    "footer.about":"About",
+    "footer.aboutText":"e-META offers forms and syntheses to support decision-making.",
+    "footer.faq":"FAQ",
+    "footer.faq1":"How does e-META work?",
+    "footer.faq2":"Is it free?",
+    "footer.contact":"Contact",
+    "pack.marketing.title":"Marketing",
+    "pack.marketing.desc":"Campaign brief, budget estimate and channels.",
+    "pack.funding.title":"Funding",
+    "pack.funding.desc":"Structured funding request, financial models.",
+    "pack.recruitment.title":"Recruitment",
+    "pack.recruitment.desc":"Role brief, budget and timeline.",
+    "pack.product.title":"Product",
+    "pack.product.desc":"Positioning, pricing, GTM."
+  },
+
+  es: {
+    "nav.home":"Inicio",
+    "nav.packs":"Packs",
+    "nav.about":"Acerca",
+    "nav.faq":"FAQ",
+    "nav.contact":"Contacto",
+    "hero.title":"e-META — Asistente IA multidisciplinar",
+    "hero.subtitle":"Packs de formularios especializados, síntesis estructuradas y recomendaciones accionables.",
+    "hero.cta":"Descubrir packs",
+    "packs.title":"Nuestros packs",
+    "packs.lead":"Packs diseñados para diagnosticar, priorizar y recomendar acciones concretas.",
+    "form.resultLabel":"Resultado esperado",
+    "form.resultPlaceholder":"Ej: Solicitud de financiación para proyecto...",
+    "form.teamLabel":"Tamaño del equipo",
+    "form.teamPlaceholder":"Ej: 3 personas",
+    "form.budgetLabel":"Presupuesto indicativo",
+    "form.budgetPlaceholder":"Ej: 200 000 XOF / mes",
+    "form.name":"Nombre",
+    "form.email":"Email",
+    "form.phone":"Teléfono (WhatsApp)",
+    "form.details":"Detalles",
+    "form.mode":"Modo de entrega",
+    "form.modeEmail":"Email",
+    "form.modeWhats":"WhatsApp",
+    "form.modeDisplay":"Mostrar",
+    "form.submit":"Enviar",
+    "form.cancel":"Cancelar",
+    "about.title":"Acerca",
+    "about.text":"e-META ayuda a los actores de todos los sectores a estructurar sus decisiones mediante packs de formularios especializados y síntesis accionables.",
+    "faq.title":"FAQ",
+    "faq.q1":"¿Cómo funciona e-META?",
+    "faq.q2":"¿Es gratuito?",
+    "contact.title":"Contacto",
+    "contact.emailLabel":"Email",
+    "contact.whatsLabel":"WhatsApp",
+    "footer.about":"Acerca",
+    "footer.aboutText":"e-META ofrece formularios y síntesis para apoyar la toma de decisiones.",
+    "footer.faq":"FAQ",
+    "footer.faq1":"¿Cómo funciona e-META?",
+    "footer.faq2":"¿Es gratuito?",
+    "footer.contact":"Contacto",
+    "pack.marketing.title":"Marketing",
+    "pack.marketing.desc":"Brief de campaña, estimación de presupuesto y canales.",
+    "pack.funding.title":"Financiación",
+    "pack.funding.desc":"Solicitud estructurada, modelos financieros.",
+    "pack.recruitment.title":"Reclutamiento",
+    "pack.recruitment.desc":"Brief de puesto, presupuesto y calendario.",
+    "pack.product.title":"Producto",
+    "pack.product.desc":"Posicionamiento, precios, GTM."
+  },
+
+  ar: {
+    "nav.home":"الصفحة الرئيسية",
+    "nav.packs":"اكتشف الحزم",
+    "nav.about":"معلومات عنا",
+    "nav.faq":"الأسئلة الشائعة",
+    "nav.contact":"اتصل",
+    "hero.title":"e-META — المساعد الذكي متعدد التخصصات",
+    "hero.subtitle":"حزم نماذج متخصصة، ملخصات منظمة وتوصيات قابلة للتنفيذ.",
+    "hero.cta":"اكتشف الحزم",
+    "packs.title":"حزمنا",
+    "packs.lead":"حزم مصممة لتشخيص وتحديد الأولويات والتوصية بإجراءات ملموسة.",
+    "form.resultLabel":"النتيجة المتوقعة",
+    "form.resultPlaceholder":"مثال: طلب تمويل لمشروع...",
+    "form.teamLabel":"حجم الفريق",
+    "form.teamPlaceholder":"مثال: 3 أشخاص",
+    "form.budgetLabel":"الميزانية التقريبية",
+    "form.budgetPlaceholder":"مثال: 200 000 XOF / شهر",
+    "form.name":"الاسم",
+    "form.email":"البريد الإلكتروني",
+    "form.phone":"الهاتف (واتساب)",
+    "form.details":"التفاصيل",
+    "form.mode":"طريقة التسليم",
+    "form.modeEmail":"البريد الإلكتروني",
+    "form.modeWhats":"واتساب",
+    "form.modeDisplay":"عرض",
+    "form.submit":"إرسال",
+    "form.cancel":"إلغاء",
+    "about.title":"معلومات عنا",
+    "about.text":"يساعد e-META الجهات في جميع القطاعات على تنظيم قراراتها عبر حزم استمارات متخصصة وملخصات قابلة للتنفيذ.",
+    "faq.title":"الأسئلة الشائعة",
+    "faq.q1":"كيف يعمل e-META؟",
+    "faq.q2":"هل هو مجاني؟",
+    "contact.title":"اتصل",
+    "contact.emailLabel":"البريد الإلكتروني",
+    "contact.whatsLabel":"واتساب",
+    "footer.about":"معلومات عنا",
+    "footer.aboutText":"يقدم e-META نماذج وملخصات لمساعدة اتخاذ القرار.",
+    "footer.faq":"الأسئلة الشائعة",
+    "footer.faq1":"كيف يعمل e-META؟",
+    "footer.faq2":"هل هو مجاني؟",
+    "footer.contact":"اتصل",
+    "pack.marketing.title":"التسويق",
+    "pack.marketing.desc":"موجز الحملة وتقدير الميزانية والقنوات.",
+    "pack.funding.title":"التمويل",
+    "pack.funding.desc":"طلب تمويل منظم، نماذج مالية.",
+    "pack.recruitment.title":"التوظيف",
+    "pack.recruitment.desc":"وصف الدور والميزانية والجدول الزمني.",
+    "pack.product.title":"المنتج",
+    "pack.product.desc":"التسعير والموقع وخطة الإطلاق."
+  }
+};
+
+/* ---------- Packs data model (keys) ---------- */
+const packKeys = [
+  { id:'marketing', key:'pack.marketing' },
+  { id:'funding', key:'pack.funding' },
+  { id:'recruitment', key:'pack.recruitment' },
+  { id:'product', key:'pack.product' }
+];
+
+/* Apply translations to elements with data-i18n and placeholders */
+function applyTranslations(lang){
+  document.documentElement.lang = lang;
+  // direction handled for Arabic
+  if(lang === 'ar') document.documentElement.setAttribute('lang','ar');
+  // map text nodes
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    const text = translations[lang][key] || translations['fr'][key] || key;
+    el.textContent = text;
+  });
+  // map placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-placeholder');
+    el.placeholder = translations[lang][key] || translations['fr'][key] || '';
+  });
+
+  // regenerate packs display (titles + desc)
+  renderPacks(lang);
+}
+
+/* Render the packs into the grid using translations */
+function renderPacks(lang){
+  const grid = document.getElementById('packsGrid');
+  grid.innerHTML = '';
+  packKeys.forEach(pk=>{
+    const titleKey = `${pk.key}.title`;
+    const descKey = `${pk.key}.desc`;
+    const title = translations[lang][titleKey] || translations['fr'][titleKey] || pk.id;
+    const desc = translations[lang][descKey] || translations['fr'][descKey] || '';
+    const card = document.createElement('article');
+    card.className = 'pack';
+    card.setAttribute('role','listitem');
+    card.innerHTML = `
+      <div>
+        <h3 data-pack-id="${pk.id}">${title}</h3>
+        <p>${desc}</p>
+      </div>
+      <div style="margin-top:12px;">
+        <button class="open-btn" data-pack="${pk.id}">${ translations[lang]['hero.cta'] ? (lang==='fr' ? 'Ouvrir':'Open') : 'Open' }</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+  // Attach click listeners to new buttons
+  grid.querySelectorAll('.open-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=> openPackModal(btn.dataset.pack));
+  });
+}
+
+/* ---------- Modal logic ---------- */
+const backdrop = document.getElementById('modalBackdrop');
+const modalPackName = document.getElementById('modalPackName');
+const modalClose = document.getElementById('modalClose');
+const cancelBtn = document.getElementById('cancelBtn');
+const packForm = document.getElementById('packForm');
+const conditionalFields = document.getElementById('conditionalFields');
+
+function openPackModal(packId){
+  const lang = document.getElementById('langSelect').value;
+  // set modal name from translations
+  const titleKey = `pack.${packId}.title`;
+  const packTitle = translations[lang][titleKey] || translations['fr'][titleKey] || packId;
+  modalPackName.textContent = packTitle;
+  // fill conditional fields per pack
+  fillConditional(packId, lang);
+  backdrop.style.display = 'flex';
+  backdrop.setAttribute('aria-hidden','false');
+  // focus first field
+  setTimeout(()=>document.getElementById('expectedResult').focus(),120);
+}
+
+function closeModal(){
+  backdrop.style.display = 'none';
+  backdrop.setAttribute('aria-hidden','true');
+  packForm.reset();
+  conditionalFields.innerHTML = '';
+}
+
+/* Conditional fields generator (simple examples) */
+function fillConditional(packId, lang){
+  conditionalFields.innerHTML = '';
+  if(packId === 'recruitment'){
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `
+      <label for="position">${ translations[lang]['form.positionLabel'] || 'Poste recherché' }</label>
+      <input id="position" name="position" type="text" placeholder="${ translations[lang]['form.positionPlaceholder'] || 'Ex : Chef de projet' }">
+      <label for="contractType">${ translations[lang]['form.contractLabel'] || 'Type de contrat' }</label>
+      <select id="contractType" name="contractType">
+        <option value="cd">CDI</option>
+        <option value="ct">CDD</option>
+        <option value="ft">Freelance</option>
+      </select>
+    `;
+    conditionalFields.appendChild(wrapper);
+  } else if(packId === 'marketing'){
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `
+      <label for="audience">${ lang==='ar' ? 'الجمهور المستهدف' : 'Audience cible' }</label>
+      <input id="audience" name="audience" type="text" placeholder="${ lang==='ar' ? 'مثال: شباب 18-35' : 'Ex : jeunes 18-35' }">
+      <label for="channel">${ lang==='ar' ? 'القنوات الرئيسية' : 'Main channels' }</label>
+      <input id="channel" name="channel" type="text" placeholder="${ lang==='ar' ? 'مثال: Facebook, Radio' : 'Ex: Facebook, Radio' }">
+    `;
+    conditionalFields.appendChild(wrapper);
+  } else if(packId === 'funding'){
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `
+      <label for="useOfFunds">${ lang==='ar' ? 'استخدام الأموال' : 'Use of funds' }</label>
+      <textarea id="useOfFunds" name="useOfFunds" placeholder="${ lang==='ar' ? 'وصف موجز' : 'Short description' }"></textarea>
+    `;
+    conditionalFields.appendChild(wrapper);
+  } else {
+    // generic for product/others
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `
+      <label for="keyQuestion">${ lang==='ar' ? 'السؤال الرئيسي' : 'Key question' }</label>
+      <input id="keyQuestion" name="keyQuestion" type="text" placeholder="${ lang==='ar' ? 'ما الذي تود تحقيقه؟' : 'What do you want to achieve?' }">
+    `;
+    conditionalFields.appendChild(wrapper);
+  }
+}
+
+/* ---------- Event listeners ---------- */
+modalClose.addEventListener('click', closeModal);
+cancelBtn.addEventListener('click', closeModal);
+backdrop.addEventListener('click', (e)=>{
+  if(e.target === backdrop) closeModal();
+});
+
+// submit handler (example: just logs values; adapt to backend / Make scenario)
+packForm.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const data = new FormData(packForm);
+  const payload = Object.fromEntries(data.entries());
+  // add chosen pack name
+  payload.pack = modalPackName.textContent;
+  console.log('Form payload:', payload);
+  // UI: show thanks then close
+  alert((document.getElementById('langSelect').value==='fr') ? 'Demande envoyée — Merci !' : 'Request sent — Thank you!');
+  closeModal();
+});
+
+/* Language selector */
+document.getElementById('langSelect').addEventListener('change',(e)=>{
+  const lang = e.target.value;
+  applyTranslations(lang);
+  // special: set html dir attribute for arabic
+  if(lang === 'ar') document.documentElement.dir = 'rtl'; else document.documentElement.dir = 'ltr';
+});
+
+/* discover packs scroll to packs and center title */
+document.getElementById('discoverPacks').addEventListener('click',(e)=>{
+  document.getElementById('packs').scrollIntoView({behavior:'smooth', block:'start'});
+});
+
+/* WhatsApp contact button — opens wa.me */
+document.getElementById('whatsappBtn').addEventListener('click', ()=>{
+  window.open('https://wa.me/221782607212','_blank');
+});
+
+/* initialize default language and packs */
+window.addEventListener('DOMContentLoaded',()=>{
+  const defaultLang = 'fr';
+  document.getElementById('langSelect').value = defaultLang;
+  applyTranslations(defaultLang);
+});
+</script>
+
 </body>
 </html>
-
-
