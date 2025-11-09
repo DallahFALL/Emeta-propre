@@ -1,15 +1,37 @@
 /* ============================================================
-   e-META — Script multilingue dynamique (FR / EN / ES / AR)
-   Version : 2.4
+   e-META — Script multilingue dynamique complet (FR / EN / ES / AR)
+   Version : 2.5
    Auteur  : Abdoulaye FALL & e-META Dev
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
-
-  // --- Dictionnaire multilingue complet -------------------------------
+  // --- Dictionnaire compact simplifié pour fiabilité RTL + AR
   const translations = {
     fr: {
       choose: "— Choisir —",
+      form_title: "Requête personnalisée",
+      label_domain: "Domaine / Thème",
+      label_expected: "Résultat attendu",
+      label_budget: "Budget indicatif",
+      label_currency: "Devise",
+      label_name: "Nom complet",
+      label_email: "Email",
+      label_phone: "Téléphone (WhatsApp)",
+      label_details: "Détails / Contexte",
+      btn_send: "Envoyer la requête",
+      btn_reset: "Réinitialiser",
+      currency: {
+        USD: "USD — Dollar américain",
+        EUR: "EUR — Euro",
+        GBP: "GBP — Livre sterling",
+        XOF: "XOF — Franc CFA (UEMOA)",
+        XAF: "XAF — Franc CFA (CEMAC)",
+        CFA: "CFA — Franc CFA",
+        JPY: "JPY — Yen japonais",
+        CNY: "CNY — Yuan chinois",
+        CAD: "CAD — Dollar canadien",
+        AUD: "AUD — Dollar australien"
+      },
       domain: {
         agriculture: "Agriculture & Agroécologie",
         environment: "Environnement & Climat",
@@ -34,10 +56,41 @@ document.addEventListener("DOMContentLoaded", () => {
         artisanal: "Artisanat & Transformation locale",
         social: "Développement social & communautaire",
         autre: "Autre"
+      },
+      placeholders: {
+        expectedResult: "Ex : Dossier de financement, plan stratégique, prototype...",
+        details: "Décrivez le contexte, les contraintes ou vos attentes principales...",
+        budget: "Montant estimé",
+        name: "Votre nom complet",
+        email: "exemple@mail.com",
+        phone: "+221..."
       }
     },
     en: {
       choose: "— Choose —",
+      form_title: "Custom Request",
+      label_domain: "Domain / Topic",
+      label_expected: "Expected result",
+      label_budget: "Indicative budget",
+      label_currency: "Currency",
+      label_name: "Full name",
+      label_email: "Email",
+      label_phone: "Phone (WhatsApp)",
+      label_details: "Details / Context",
+      btn_send: "Send request",
+      btn_reset: "Reset",
+      currency: {
+        USD: "USD — US Dollar",
+        EUR: "EUR — Euro",
+        GBP: "GBP — Pound Sterling",
+        XOF: "XOF — West African CFA Franc",
+        XAF: "XAF — Central African CFA Franc",
+        CFA: "CFA — CFA Franc",
+        JPY: "JPY — Japanese Yen",
+        CNY: "CNY — Chinese Yuan",
+        CAD: "CAD — Canadian Dollar",
+        AUD: "AUD — Australian Dollar"
+      },
       domain: {
         agriculture: "Agriculture & Agroecology",
         environment: "Environment & Climate",
@@ -62,10 +115,41 @@ document.addEventListener("DOMContentLoaded", () => {
         artisanal: "Craft & Local Processing",
         social: "Social & Community Development",
         autre: "Other"
+      },
+      placeholders: {
+        expectedResult: "Ex: Funding file, strategic plan, prototype...",
+        details: "Describe the context, constraints, or expectations...",
+        budget: "Estimated amount",
+        name: "Your full name",
+        email: "example@mail.com",
+        phone: "+221..."
       }
     },
     es: {
       choose: "— Elegir —",
+      form_title: "Solicitud personalizada",
+      label_domain: "Dominio / Tema",
+      label_expected: "Resultado esperado",
+      label_budget: "Presupuesto indicativo",
+      label_currency: "Moneda",
+      label_name: "Nombre completo",
+      label_email: "Correo electrónico",
+      label_phone: "Teléfono (WhatsApp)",
+      label_details: "Detalles / Contexto",
+      btn_send: "Enviar solicitud",
+      btn_reset: "Restablecer",
+      currency: {
+        USD: "USD — Dólar estadounidense",
+        EUR: "EUR — Euro",
+        GBP: "GBP — Libra esterlina",
+        XOF: "XOF — Franco CFA (UEMOA)",
+        XAF: "XAF — Franco CFA (CEMAC)",
+        CFA: "CFA — Franco CFA",
+        JPY: "JPY — Yen japonés",
+        CNY: "CNY — Yuan chino",
+        CAD: "CAD — Dólar canadiense",
+        AUD: "AUD — Dólar australiano"
+      },
       domain: {
         agriculture: "Agricultura y Agroecología",
         environment: "Medio Ambiente y Clima",
@@ -90,10 +174,41 @@ document.addEventListener("DOMContentLoaded", () => {
         artisanal: "Artesanía y Producción Local",
         social: "Desarrollo Social y Comunitario",
         autre: "Otro"
+      },
+      placeholders: {
+        expectedResult: "Ej: Plan estratégico, expediente de financiación...",
+        details: "Describe el contexto, limitaciones o expectativas...",
+        budget: "Monto estimado",
+        name: "Tu nombre completo",
+        email: "ejemplo@mail.com",
+        phone: "+221..."
       }
     },
     ar: {
       choose: "— اختر —",
+      form_title: "طلب مخصص",
+      label_domain: "المجال / الموضوع",
+      label_expected: "النتيجة المتوقعة",
+      label_budget: "الميزانية التقديرية",
+      label_currency: "العملة",
+      label_name: "الاسم الكامل",
+      label_email: "البريد الإلكتروني",
+      label_phone: "الهاتف (واتساب)",
+      label_details: "التفاصيل / السياق",
+      btn_send: "إرسال الطلب",
+      btn_reset: "إعادة الضبط",
+      currency: {
+        USD: "USD — دولار أمريكي",
+        EUR: "EUR — يورو",
+        GBP: "GBP — جنيه إسترليني",
+        XOF: "XOF — فرنك غرب أفريقي (UEMOA)",
+        XAF: "XAF — فرنك وسط أفريقي (CEMAC)",
+        CFA: "CFA — فرنك س ف ا",
+        JPY: "JPY — ين ياباني",
+        CNY: "CNY — يوان صيني",
+        CAD: "CAD — دولار كندي",
+        AUD: "AUD — دولار أسترالي"
+      },
       domain: {
         agriculture: "الزراعة والإيكولوجيا الزراعية",
         environment: "البيئة والمناخ",
@@ -118,124 +233,73 @@ document.addEventListener("DOMContentLoaded", () => {
         artisanal: "الحرف والتحويل المحلي",
         social: "التنمية الاجتماعية والمجتمعية",
         autre: "أخرى"
+      },
+      placeholders: {
+        expectedResult: "مثلاً: خطة استراتيجية، مشروع تمويل...",
+        details: "اشرح السياق أو القيود أو التوقعات...",
+        budget: "المبلغ المقدر",
+        name: "اسمك الكامل",
+        email: "example@mail.com",
+        phone: "+221..."
       }
     }
   };
 
-  // --- Détection automatique de la langue du navigateur ----------
+  // --- Détection automatique langue navigateur ---
   const browserLang = navigator.language.substring(0, 2).toLowerCase();
-  const supportedLangs = ["fr", "en", "es", "ar"];
-  const initialLang =
+  const supported = ["fr", "en", "es", "ar"];
+  const lang =
     localStorage.getItem("eMETA_lang") ||
-    (supportedLangs.includes(browserLang) ? browserLang : "fr");
+    (supported.includes(browserLang) ? browserLang : "fr");
 
-  const langSelect = document.getElementById("langSelect");
-  if (langSelect) langSelect.value = initialLang;
-  setLanguage(initialLang);
+  document.getElementById("langSelect").value = lang;
+  applyLang(lang);
 
-  if (langSelect) {
-    langSelect.addEventListener("change", () => {
-      const lang = langSelect.value;
-      localStorage.setItem("eMETA_lang", lang);
-      setLanguage(lang);
-    });
-  }
+  document.getElementById("langSelect").addEventListener("change", e => {
+    const newLang = e.target.value;
+    localStorage.setItem("eMETA_lang", newLang);
+    applyLang(newLang);
+  });
 
-  // --- Fonction principale de traduction --------------------------
-  function setLanguage(lang) {
-    const dict = translations[lang] || translations.fr;
+  // --- Fonction principale de traduction ---
+  function applyLang(lang) {
+    const dict = translations[lang];
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
 
-    // Titre du document
-    document.title =
-      lang === "fr"
-        ? "e-META — Requête personnalisée"
-        : lang === "en"
-        ? "e-META — Custom Request"
-        : lang === "es"
-        ? "e-META — Solicitud personalizada"
-        : "e-META — طلب مخصص";
+    // Titre
+    document.title = dict.form_title;
 
-    // --- Traduction du select Domaine ---
+    // Labels simples (basés sur data-i18n)
+    for (const key of Object.keys(dict)) {
+      if (typeof dict[key] === "string") {
+        const els = document.querySelectorAll(`[data-i18n="${key}"]`);
+        els.forEach(el => (el.textContent = dict[key]));
+      }
+    }
+
+    // Domaines
     const domainSelect = document.getElementById("domain");
     if (domainSelect) {
       Array.from(domainSelect.options).forEach((opt, i) => {
-        if (i === 0) {
-          opt.textContent = dict.choose;
-        } else {
-          const val = opt.value;
-          if (dict.domain[val]) opt.textContent = dict.domain[val];
-        }
+        if (i === 0) opt.textContent = dict.choose;
+        else if (dict.domain[opt.value]) opt.textContent = dict.domain[opt.value];
       });
     }
 
-    // --- Placeholders dynamiques (simplifiés ici) ---
-    const placeholders = {
-      expectedResult: {
-        fr: "Ex : Dossier de financement, plan stratégique...",
-        en: "Ex: Funding file, strategic plan...",
-        es: "Ej: Plan estratégico, expediente de financiación...",
-        ar: "مثلاً: خطة استراتيجية، مشروع تمويل..."
-      },
-      details: {
-        fr: "Décrivez le contexte, les contraintes ou vos attentes...",
-        en: "Describe the context, constraints, or expectations...",
-        es: "Describe el contexto, limitaciones o expectativas...",
-        ar: "اشرح السياق أو القيود أو التوقعات..."
-      },
-      budget: {
-        fr: "Montant estimé",
-        en: "Estimated amount",
-        es: "Monto estimado",
-        ar: "المبلغ المقدر"
-      },
-      name: {
-        fr: "Votre nom complet",
-        en: "Your full name",
-        es: "Tu nombre completo",
-        ar: "اسمك الكامل"
-      },
-      email: {
-        fr: "exemple@mail.com",
-        en: "example@mail.com",
-        es: "ejemplo@mail.com",
-        ar: "example@mail.com"
-      },
-      phone: {
-        fr: "+221...",
-        en: "+221...",
-        es: "+221...",
-        ar: "+221..."
-      }
-    };
-    Object.keys(placeholders).forEach(id => {
+    // Devises
+    const currencySelect = document.getElementById("currency");
+    if (currencySelect) {
+      Array.from(currencySelect.options).forEach(opt => {
+        if (dict.currency[opt.value])
+          opt.textContent = dict.currency[opt.value];
+      });
+    }
+
+    // Placeholders
+    for (const id in dict.placeholders) {
       const el = document.getElementById(id);
-      if (el) el.placeholder = placeholders[id][lang];
-    });
-  }
-
-  // --- Bouton WhatsApp --------------------------------------------
-  const whatsappBtn = document.getElementById("whatsappBtn");
-  if (whatsappBtn) {
-    whatsappBtn.addEventListener("click", () => {
-      const phone = (document.getElementById("phone")?.value || "").replace(/\D/g, "");
-      const msg = encodeURIComponent(
-        "Bonjour, je souhaite soumettre une requête via e-META."
-      );
-      const url = phone
-        ? `https://wa.me/${phone}?text=${msg}`
-        : `https://wa.me/?text=${msg}`;
-      window.open(url, "_blank");
-    });
-  }
-
-  // --- Menu mobile -----------------------------------------------
-  const menuToggle = document.getElementById("menuToggle");
-  const mainNav = document.getElementById("mainNav");
-  if (menuToggle && mainNav) {
-    menuToggle.addEventListener("click", () => {
-      mainNav.classList.toggle("open");
-    });
+      if (el) el.placeholder = dict.placeholders[id];
+    }
   }
 });
