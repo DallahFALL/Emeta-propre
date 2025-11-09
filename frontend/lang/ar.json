@@ -44,3 +44,8 @@
   "form.sending":"جاري الإرسال...",
   "form.sent":"شكراً — سنعاود الاتصال بك قريباً."
 }
+// 🇸🇦 Arabic
+label_mode: "طريقة الإرسال",
+mode_whatsapp: "واتساب",
+mode_email: "البريد الإلكتروني",
+mode_display: "العرض المباشر",
