@@ -128,16 +128,24 @@
         <textarea id="details" name="details" rows="4" placeholder="Décrivez le contexte, contraintes, priorités..."></textarea>
       </div>
 
-      <!-- 🔹 Nouveau bloc : Mode de restitution -->
-      <div class="row">
-        <label data-i18n="label_mode">Mode de restitution</label>
-        <div class="choices">
-          <label><input type="radio" name="mode" value="whatsapp"> <span data-i18n="mode_whatsapp">WhatsApp</span></label>
-          <label><input type="radio" name="mode" value="email"> <span data-i18n="mode_email">Email</span></label>
-          <label><input type="radio" name="mode" value="display" checked> <span data-i18n="mode_display">Affichage direct</span></label>
-        </div>
-      </div>
-      <!-- Fin du bloc ajouté -->
+      <!-- 🔹 Bloc compact : Mode de restitution -->
+<div class="row restitution-row">
+  <label data-i18n="label_mode">Mode de restitution</label>
+  <div class="restitution-options">
+    <label class="rest-option">
+      <input type="radio" name="mode" value="whatsapp">
+      <span data-i18n="mode_whatsapp">WhatsApp</span>
+    </label>
+    <label class="rest-option">
+      <input type="radio" name="mode" value="email">
+      <span data-i18n="mode_email">Email</span>
+    </label>
+    <label class="rest-option">
+      <input type="radio" name="mode" value="display" checked>
+      <span data-i18n="mode_display">Affichage direct</span>
+    </label>
+  </div>
+</div>
 
       <div class="form-actions">
         <button type="submit" class="btn-primary" data-i18n="btn_send">Envoyer la requête</button>
@@ -172,4 +180,5 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
