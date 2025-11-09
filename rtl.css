@@ -1,6 +1,9 @@
-html[dir="rtl"] body { direction: rtl; text-align: right; font-family: "Tajawal", sans-serif; }
-html[dir="rtl"] .header-inner { flex-direction: row-reverse; }
-html[dir="rtl"] .controls { flex-direction: row-reverse; }
-html[dir="rtl"] label { text-align: right; }
-html[dir="rtl"] input, html[dir="rtl"] select, html[dir="rtl"] textarea { direction: rtl; text-align: right; }
-html[dir="rtl"] .row.two-col { flex-direction: column; }
+/* RTL global */
+html[dir="rtl"] body{direction:rtl;text-align:right;font-family:"Tajawal",Inter,system-ui,Segoe UI,Arial,sans-serif}
+html[dir="rtl"] .header-inner{flex-direction:row-reverse}
+html[dir="rtl"] .main-nav{flex-direction:row-reverse}
+html[dir="rtl"] .main-nav.open{right:0;left:0}
+html[dir="rtl"] .controls{flex-direction:row-reverse}
+html[dir="rtl"] .row.two-col{flex-direction:column}
+html[dir="rtl"] label{text-align:right}
+html[dir="rtl"] input,html[dir="rtl"] select,html[dir="rtl"] textarea{direction:rtl;text-align:right}
