@@ -44,3 +44,8 @@
   "form.sending":"Enviando...",
   "form.sent":"Gracias — le responderemos pronto."
 }
+// 🇪🇸 Español
+label_mode: "Modo de entrega",
+mode_whatsapp: "WhatsApp",
+mode_email: "Correo",
+mode_display: "Visualización directa",
