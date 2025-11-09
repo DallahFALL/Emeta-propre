@@ -1,23 +1,14 @@
-/* e-META — corrections RTL (arabe) */
-html[dir="rtl"] body{
-  direction:rtl; text-align:right;
-  font-family:"Tajawal",Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+html[dir="rtl"] body {
+  direction: rtl;
+  text-align: right;
+  font-family: "Tajawal", sans-serif;
 }
 
-/* header */
-html[dir="rtl"] .header-inner{flex-direction:row-reverse}
-html[dir="rtl"] .controls{flex-direction:row-reverse}
-html[dir="rtl"] .main-nav{flex-direction:row-reverse}
-html[dir="rtl"] .main-nav a{margin-left:0;margin-right:0}
-html[dir="rtl"] .burger{order:-1}
-
-/* formulaire */
-html[dir="rtl"] label{text-align:right}
-html[dir="rtl"] input,
-html[dir="rtl"] select,
-html[dir="rtl"] textarea{direction:rtl; text-align:right}
-
-html[dir="rtl"] .two-col{direction:rtl}
-
-/* footer */
-html[dir="rtl"] .site-footer{text-align:center}
+html[dir="rtl"] .header-inner { flex-direction: row-reverse; }
+html[dir="rtl"] .main-nav a { margin: 0 0 0 1rem; }
+html[dir="rtl"] label { text-align: right; }
+html[dir="rtl"] input, html[dir="rtl"] textarea, html[dir="rtl"] select {
+  text-align: right;
+  direction: rtl;
+}
+html[dir="rtl"] .two-col { flex-direction: row-reverse; }
