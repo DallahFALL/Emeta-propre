@@ -1,159 +1,135 @@
-<!doctype html>
-<html lang="fr">
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>e-META — Requête personnalisée</title>
-
-  <!-- Google Font (optionnel) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css">
+  <title data-i18n="app.title">e-META – Assistant IA Multilingue</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <header class="site-header">
+    <h1 class="title" data-i18n="header.title">e-META – Assistant IA de Prise de Décision</h1>
+    <p class="subtitle" data-i18n="header.subtitle">Formulaire central — Répondez et envoyez par WhatsApp ou Email</p>
+  </header>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <div class="brand">
-     <img src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" id="siteLogo"> 
-    </div>
-
-    <nav id="mainNav" class="main-nav" aria-label="Main">
-      <a href="#home" data-i18n="home">Accueil</a>
-      <a href="#about" data-i18n="about">À propos</a>
-      <a href="#faq" data-i18n="faq">FAQ</a>
-      <a href="#contact" data-i18n="contact">Contact</a>
-    </nav>
-
-    <div class="controls">
-      <button id="whatsappBtn" class="btn-whatsapp" data-i18n="whatsapp">Contact WhatsApp</button>
-
-      <label for="langSelect" class="sr-only">Langue</label>
-      <select id="langSelect" class="lang-select" aria-label="Langue">
-        <option value="fr">FR</option>
-        <option value="en">EN</option>
-        <option value="es">ES</option>
-        <option value="ar">AR</option>
-      </select>
-
-      <button id="menuToggle" class="burger" aria-label="Menu">☰</button>
-    </div>
-  </div>
-</header>
-
-<main id="home" class="container">
-  <section class="hero">
-    <h1 class="hero-title" data-i18n="hero_title">e-META — L'assistant IA pluridisciplinaire</h1>
-    <p class="lead" data-i18n="hero_lead">Formulaire unique, guidé et adaptatif pour diagnostiquer, prioriser et recommander des actions concrètes.</p>
-  </section>
-
-  <!-- SINGLE FORM (pluridisciplinaire) -->
-  <section class="form-section" id="request">
-    <h2 class="center" data-i18n="form_title">Nouvelle requête personnalisée</h2>
-
-    <form id="unifiedForm" class="unified-form" autocomplete="off" novalidate>
-
-      <div class="row">
-        <label for="domain" data-i18n="label_domain">Domaine / Thème</label>
-        <select id="domain" name="domain" required>
-          <option value="">— Choisir —</option>
-          <option value="agriculture">Agriculture / Gestion des terres</option>
-          <option value="funding">Financement</option>
-          <option value="marketing">Marketing</option>
-          <option value="recruitment">Recrutement</option>
-          <option value="product">Produit / Lancement</option>
-          <option value="environment">Environnement</option>
-          <option value="other">Autre</option>
-        </select>
-      </div>
-
-      <div class="row">
-        <label for="expectedResult" data-i18n="label_expected">Résultat attendu</label>
-        <input id="expectedResult" name="expectedResult" type="text" placeholder="Ex : Plan de gestion foncière, dossier de financement..." required>
-      </div>
-
-      <div class="row two-col">
-        <div>
-          <label for="teamSize" data-i18n="label_team">Taille de l'équipe</label>
-          <input id="teamSize" name="teamSize" type="text" placeholder="Ex : 3 personnes">
+  <main class="container">
+    <form id="emetaForm" class="card" novalidate>
+      <!-- Barre d’actions -->
+      <div class="grid grid-2">
+        <div class="field">
+          <label for="lang" data-i18n="form.language">Langue</label>
+          <select id="lang" name="lang" aria-label="Language selector">
+            <option value="fr">Français (FR)</option>
+            <option value="en">English (EN)</option>
+            <option value="es">Español (ES)</option>
+            <option value="ar">العربية (AR)</option>
+          </select>
         </div>
-        <div>
-          <label for="budget" data-i18n="label_budget">Budget indicatif</label>
-          <input id="budget" name="budget" type="text" placeholder="Ex : 200 000 XOF / mois">
+
+        <div class="field">
+          <label for="currency" data-i18n="form.currency">Devise</label>
+          <select id="currency" name="currency">
+            <option value="USD">USD — US Dollar</option>
+            <option value="EUR">EUR — Euro</option>
+            <option value="GBP">GBP — Pound Sterling</option>
+            <option value="XOF">XOF — Franc CFA (UEMOA)</option>
+            <option value="XAF">XAF — Franc CFA (CEMAC)</option>
+            <option value="CFA">CFA — Franc CFA (Générique)</option>
+          </select>
         </div>
       </div>
 
-      <!-- Conditional fields injected here -->
-      <div id="conditionalContainer" aria-live="polite"></div>
-
-      <hr class="divider">
-
-      <div class="row">
-        <label for="name" data-i18n="label_name">Nom</label>
-        <input id="name" name="name" type="text" placeholder="Votre nom complet" required>
-      </div>
-
-      <div class="row two-col">
-        <div>
-          <label for="email" data-i18n="label_email">Email</label>
-          <input id="email" name="email" type="email" placeholder="a@b.com" required>
+      <!-- Identité -->
+      <div class="grid grid-2">
+        <div class="field">
+          <label for="fullname" data-i18n="form.fullname">Nom complet</label>
+          <input id="fullname" name="fullname" type="text" placeholder="Votre nom" required />
         </div>
-        <div>
-          <label for="phone" data-i18n="label_phone">Téléphone (WhatsApp)</label>
-          <input id="phone" name="phone" type="tel" placeholder="+221..." required>
+        <div class="field">
+          <label for="email" data-i18n="form.email">Email</label>
+          <input id="email" name="email" type="email" placeholder="nom@domaine.com" />
         </div>
       </div>
 
-      <div class="row">
-        <label for="details" data-i18n="label_details">Détails / Contexte</label>
-        <textarea id="details" name="details" rows="4" placeholder="Décrivez le contexte, contraintes, priorités..."></textarea>
-      </div>
-
-      <div class="row">
-        <label data-i18n="label_mode">Mode de restitution</label>
-        <div class="choices">
-          <label><input type="radio" name="mode" value="email" checked> <span data-i18n="mode_email">Email</span></label>
-          <label><input type="radio" name="mode" value="whatsapp"> <span data-i18n="mode_whatsapp">WhatsApp</span></label>
-          <label><input type="radio" name="mode" value="display"> <span data-i18n="mode_display">Affichage</span></label>
+      <div class="grid grid-2">
+        <div class="field">
+          <label for="phone" data-i18n="form.phone">Téléphone (WhatsApp)</label>
+          <input id="phone" name="phone" type="tel" placeholder="+221770000000" />
+        </div>
+        <div class="field">
+          <label for="domain" data-i18n="form.domain">Domaine</label>
+          <select id="domain" name="domain" required>
+            <option value="" selected disabled data-i18n="form.chooseDomain">— Choisir un domaine —</option>
+            <option value="agriculture" data-i18n="domain.agriculture">Agriculture</option>
+            <option value="commerce" data-i18n="domain.commerce">Commerce & Distribution</option>
+            <option value="ecommerce" data-i18n="domain.ecommerce">E-commerce</option>
+            <option value="fintech" data-i18n="domain.fintech">FinTech / Mobile Money</option>
+            <option value="sante" data-i18n="domain.sante">Santé</option>
+            <option value="education" data-i18n="domain.education">Éducation</option>
+            <option value="immobilier" data-i18n="domain.immobilier">Immobilier</option>
+            <option value="transport" data-i18n="domain.transport">Transport & Logistique</option>
+            <option value="energie" data-i18n="domain.energie">Énergie & Solaire</option>
+            <option value="tourisme" data-i18n="domain.tourisme">Tourisme</option>
+            <option value="technologie" data-i18n="domain.technologie">Technologie & IA</option>
+            <option value="juridique" data-i18n="domain.juridique">Juridique</option>
+            <option value="finance" data-i18n="domain.finance">Finance & Comptabilité</option>
+            <option value="rh" data-i18n="domain.rh">Ressources Humaines</option>
+            <option value="marketing" data-i18n="domain.marketing">Marketing & Communication</option>
+            <option value="industrie" data-i18n="domain.industrie">Industrie & Fabrication</option>
+            <option value="environnement" data-i18n="domain.environnement">Environnement</option>
+            <option value="public" data-i18n="domain.public">Projets Publics & Collectivités</option>
+            <option value="autre" data-i18n="domain.autre">Autre</option>
+          </select>
         </div>
       </div>
 
-      <div class="form-actions">
-        <button type="submit" class="btn-primary" data-i18n="btn_send">Envoyer la requête</button>
-        <button type="reset" class="btn-secondary" data-i18n="btn_reset">Réinitialiser</button>
+      <!-- Champs conditionnels par domaine -->
+      <div id="conditionalFields" class="stack"></div>
+
+      <!-- Objet & Description -->
+      <div class="field">
+        <label for="subject" data-i18n="form.subject">Objet</label>
+        <input id="subject" name="subject" type="text" placeholder="Titre de votre requête" required />
       </div>
 
-      <div id="formStatus" class="form-status" aria-live="polite"></div>
+      <div class="field">
+        <label for="details" data-i18n="form.details">Détails</label>
+        <textarea id="details" name="details" rows="5" placeholder="Expliquez votre besoin…"></textarea>
+      </div>
+
+      <!-- Requête personnalisée -->
+      <div class="field checkbox">
+        <input id="customReq" name="customReq" type="checkbox" />
+        <label for="customReq" data-i18n="form.customReq">Requête personnalisée</label>
+      </div>
+
+      <div id="customReqBlock" class="field" hidden>
+        <label for="customDetails" data-i18n="form.customDetails">Détails de la requête personnalisée</label>
+        <textarea id="customDetails" name="customDetails" rows="4" placeholder="Décrivez votre cas spécifique…"></textarea>
+      </div>
+
+      <!-- Actions -->
+      <div class="actions">
+        <button type="button" id="whatsappButton" class="btn whatsapp" aria-label="Envoyer sur WhatsApp">
+          <span aria-hidden="true">🟢</span> <span data-i18n="btn.whatsapp">WhatsApp</span>
+        </button>
+        <button type="submit" class="btn primary" data-i18n="btn.submit">Envoyer par Email</button>
+        <button type="reset" class="btn ghost" data-i18n="btn.reset">Réinitialiser</button>
+      </div>
+
+      <p class="small muted" data-i18n="form.note">
+        Astuce : si vous renseignez votre numéro WhatsApp, le message est pré-rempli et prêt à envoyer.
+      </p>
     </form>
-  </section>
+  </main>
 
-  <section id="about" class="info container">
-    <h3 data-i18n="about">À propos</h3>
-    <p data-i18n="about_text">e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.</p>
-  </section>
+  <footer class="site-footer">
+    <p class="small">
+      <span data-i18n="footer.rights">©</span> <span id="year"></span> e-META •
+      <span data-i18n="footer.tag">Simplement. Intelligemment.</span>
+    </p>
+  </footer>
 
-  <section id="faq" class="info container">
-    <h3 data-i18n="faq">FAQ</h3>
-    <details>
-      <summary data-i18n="faq_q1">Comment fonctionne e-META ?</summary>
-      <p data-i18n="faq_a1">Remplissez la requête ; e-META génère un diagnostic, 3 options stratégiques et une recommandation priorisée.</p>
-    </details>
-  </section>
-
-  <section id="contact" class="info container">
-    <h3 data-i18n="contact">Contact</h3>
-    <p>Email : <a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
-  </section>
-</main>
-
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <div>e-META © 2025</div>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
-
-
