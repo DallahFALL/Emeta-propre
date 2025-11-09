@@ -44,3 +44,8 @@
   "form.sending":"Sending...",
   "form.sent":"Thanks — we will get back to you shortly."
 }
+// 🇬🇧 English
+label_mode: "Delivery mode",
+mode_whatsapp: "WhatsApp",
+mode_email: "Email",
+mode_display: "On-screen display",
