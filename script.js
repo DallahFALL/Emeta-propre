@@ -41,6 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
       ph_expected:"Ex : Dossier de financement, plan stratégique, prototype...",
       ph_details:"Décrivez le contexte, les contraintes ou vos attentes principales...",
       ph_budget:"Montant estimé", ph_name:"Votre nom complet", ph_email:"exemple@mail.com", ph_phone:"+221..."
+      // 🇫🇷 Français
+      label_mode: "Mode de restitution",
+      mode_whatsapp: "WhatsApp",
+      mode_email: "Email",
+      mode_display: "Affichage direct", 
     },
 
     en: {
@@ -69,6 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
       "dom.agriculture":"Agriculture & Agroecology","dom.environment":"Environment & Climate","dom.energy":"Energy & Solar","dom.commerce":"Trade & Distribution","dom.ecommerce":"E-commerce & Digital","dom.finance":"Finance & Accounting","dom.fintech":"FinTech / Mobile Money","dom.funding":"Funding & Partnerships","dom.marketing":"Marketing & Communication","dom.technology":"Technology & Innovation","dom.education":"Education & Training","dom.sante":"Health & Well-being","dom.transport":"Transport & Logistics","dom.immobilier":"Real Estate & Construction","dom.juridique":"Legal & Compliance","dom.industrie":"Industry & Production","dom.culture":"Culture & Media","dom.tourisme":"Tourism & Hospitality","dom.rh":"Human Resources","dom.public":"Public Projects & Communities","dom.artisanal":"Craft & Local Processing","dom.social":"Social & Community Development","dom.autre":"Other",
       "cur.USD":"USD — US Dollar","cur.EUR":"EUR — Euro","cur.GBP":"GBP — Pound Sterling","cur.XOF":"XOF — West African CFA Franc","cur.XAF":"XAF — Central African CFA Franc","cur.CFA":"CFA — CFA Franc","cur.JPY":"JPY — Japanese Yen","cur.CNY":"CNY — Chinese Yuan","cur.CAD":"CAD — Canadian Dollar","cur.AUD":"AUD — Australian Dollar",
       ph_expected:"Ex: Funding file, strategic plan, prototype...", ph_details:"Describe the context, constraints or expectations...", ph_budget:"Estimated amount", ph_name:"Your full name", ph_email:"example@mail.com", ph_phone:"+221..."
+      // 🇬🇧 English
+      label_mode: "Delivery mode",
+      mode_whatsapp: "WhatsApp",
+      mode_email: "Email",
+      mode_display: "On-screen display",
     },
 
     es: {
@@ -97,7 +107,12 @@ document.addEventListener("DOMContentLoaded", () => {
       "dom.agriculture":"Agricultura y Agroecología","dom.environment":"Medio Ambiente y Clima","dom.energy":"Energía y Solar","dom.commerce":"Comercio y Distribución","dom.ecommerce":"E-commerce y Digital","dom.finance":"Finanzas y Contabilidad","dom.fintech":"FinTech / Dinero Móvil","dom.funding":"Financiación y Alianzas","dom.marketing":"Marketing y Comunicación","dom.technology":"Tecnología e Innovación","dom.education":"Educación y Formación","dom.sante":"Salud y Bienestar","dom.transport":"Transporte y Logística","dom.immobilier":"Bienes Raíces y Construcción","dom.juridique":"Legal y Cumplimiento","dom.industrie":"Industria y Producción","dom.culture":"Cultura y Medios","dom.tourisme":"Turismo y Hotelería","dom.rh":"Recursos Humanos","dom.public":"Proyectos Públicos y Comunidades","dom.artisanal":"Artesanía y Producción Local","dom.social":"Desarrollo Social y Comunitario","dom.autre":"Otro",
       "cur.USD":"USD — Dólar estadounidense","cur.EUR":"EUR — Euro","cur.GBP":"GBP — Libra esterlina","cur.XOF":"XOF — Franco CFA (UEMOA)","cur.XAF":"XAF — Franco CFA (CEMAC)","cur.CFA":"CFA — Franco CFA","cur.JPY":"JPY — Yen japonés","cur.CNY":"CNY — Yuan chino","cur.CAD":"CAD — Dólar canadiense","cur.AUD":"AUD — Dólar australiano",
       ph_expected:"Ej: Plan estratégico, expediente de financiación...", ph_details:"Describe el contexto, limitaciones o expectativas...", ph_budget:"Monto estimado", ph_name:"Tu nombre completo", ph_email:"ejemplo@mail.com", ph_phone:"+221..."
-    },
+      // 🇪🇸 Español
+      label_mode: "Modo de entrega",
+      mode_whatsapp: "WhatsApp",
+      mode_email: "Correo",
+      mode_display: "Visualización directa",
+      },
 
     ar: {
       page_title: "e-META — طلب مخصص",
@@ -125,6 +140,11 @@ document.addEventListener("DOMContentLoaded", () => {
       "dom.agriculture":"الزراعة والإيكولوجيا الزراعية","dom.environment":"البيئة والمناخ","dom.energy":"الطاقة والطاقة الشمسية","dom.commerce":"التجارة والتوزيع","dom.ecommerce":"التجارة الإلكترونية والرقمية","dom.finance":"التمويل والمحاسبة","dom.fintech":"التقنيات المالية / المال المحمول","dom.funding":"التمويل والشراكات","dom.marketing":"التسويق والاتصال","dom.technology":"التكنولوجيا والابتكار","dom.education":"التعليم والتدريب","dom.sante":"الصحة والرفاهية","dom.transport":"النقل واللوجستيات","dom.immobilier":"العقارات والبناء","dom.juridique":"القانون والامتثال","dom.industrie":"الصناعة والإنتاج","dom.culture":"الثقافة والإعلام","dom.tourisme":"السياحة والفنادق","dom.rh":"الموارد البشرية","dom.public":"المشاريع العامة والمجتمعات","dom.artisanal":"الحرف والتحويل المحلي","dom.social":"التنمية الاجتماعية والمجتمعية","dom.autre":"أخرى",
       "cur.USD":"USD — دولار أمريكي","cur.EUR":"EUR — يورو","cur.GBP":"GBP — جنيه إسترليني","cur.XOF":"XOF — فرنك غرب أفريقي (UEMOA)","cur.XAF":"XAF — فرنك وسط أفريقي (CEMAC)","cur.CFA":"CFA — فرنك س ف ا","cur.JPY":"JPY — ين ياباني","cur.CNY":"CNY — يوان صيني","cur.CAD":"CAD — دولار كندي","cur.AUD":"AUD — دولار أسترالي",
       ph_expected:"مثلاً: خطة استراتيجية، مشروع تمويل...", ph_details:"اشرح السياق أو القيود أو التوقعات...", ph_budget:"المبلغ المقدر", ph_name:"اسمك الكامل", ph_email:"example@mail.com", ph_phone:"+221..."
+      // 🇸🇦 Arabic
+      label_mode: "طريقة الإرسال",
+      mode_whatsapp: "واتساب",
+      mode_email: "البريد الإلكتروني",
+      mode_display: "العرض المباشر",
     }
   };
 
