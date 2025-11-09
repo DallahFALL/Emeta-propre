@@ -13,7 +13,8 @@
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="#home" aria-label="e-META">
-     <img id="logo" src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" height="100">
+      <img class="brand-logo" src="01_Logo_Sources/eMETA-official-logo.png" alt="e-META Logo" />
+      <span class="brand-title" data-i18n="brand">e-META</span>
     </a>
 
     <nav id="mainNav" class="main-nav" aria-label="Main">
@@ -81,7 +82,7 @@
 
       <div class="row">
         <label for="expectedResult" data-i18n="label_expected">Résultat attendu</label>
-        <input id="expectedResult" name="expectedResult" type="text" placeholder="Ex : Dossier de financement, plan stratégique..." required>
+        <input id="expectedResult" name="expectedResult" type="text" placeholder="Ex : Dossier de financement..." required>
       </div>
 
       <div class="row two-col">
@@ -127,6 +128,17 @@
         <textarea id="details" name="details" rows="4" placeholder="Décrivez le contexte, contraintes, priorités..."></textarea>
       </div>
 
+      <!-- 🔹 Nouveau bloc : Mode de restitution -->
+      <div class="row">
+        <label data-i18n="label_mode">Mode de restitution</label>
+        <div class="choices">
+          <label><input type="radio" name="mode" value="whatsapp"> <span data-i18n="mode_whatsapp">WhatsApp</span></label>
+          <label><input type="radio" name="mode" value="email"> <span data-i18n="mode_email">Email</span></label>
+          <label><input type="radio" name="mode" value="display" checked> <span data-i18n="mode_display">Affichage direct</span></label>
+        </div>
+      </div>
+      <!-- Fin du bloc ajouté -->
+
       <div class="form-actions">
         <button type="submit" class="btn-primary" data-i18n="btn_send">Envoyer la requête</button>
         <button type="reset" class="btn-secondary" data-i18n="btn_reset">Réinitialiser</button>
@@ -160,21 +172,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
