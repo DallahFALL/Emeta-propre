@@ -1,0 +1,44 @@
+/* =======================================================
+   e-META — RTL Styles (pour l'arabe)
+   ======================================================= */
+
+html[dir="rtl"] body {
+  direction: rtl;
+  text-align: right;
+  font-family: "Tajawal", "Inter", sans-serif;
+}
+
+/* Header */
+html[dir="rtl"] .header-inner {
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .main-nav a {
+  margin: 0 0 0 1rem;
+}
+
+/* Formulaire */
+html[dir="rtl"] label {
+  text-align: right;
+  display: block;
+}
+
+html[dir="rtl"] input,
+html[dir="rtl"] textarea,
+html[dir="rtl"] select {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Champs côte à côte */
+html[dir="rtl"] .two-col {
+  flex-direction: row-reverse;
+  gap: 1rem;
+}
+
+/* Footer */
+html[dir="rtl"] .site-footer {
+  text-align: center;
+  direction: rtl;
+  font-family: "Tajawal", sans-serif;
+}
