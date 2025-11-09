@@ -14,27 +14,17 @@
   <div class="container header-inner">
     <a class="brand" href="#home">
             <img id="logo" src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" height="100">
+      <span class="brand-title" data-i18n="brand">e-META</span>
     </a>
-
-    <nav id="mainNav" class="main-nav" aria-label="Main">
-      <a href="#home" data-i18n="home">Accueil</a>
-      <a href="#about" data-i18n="about">À propos</a>
-      <a href="#faq" data-i18n="faq">FAQ</a>
-      <a href="#contact" data-i18n="contact">Contact</a>
-    </nav>
 
     <div class="controls">
       <button id="whatsappBtn" class="btn-whatsapp" data-i18n="whatsapp">WhatsApp</button>
-
-      <label for="langSelect" class="sr-only">Langue</label>
-      <select id="langSelect" class="lang-select" aria-label="Langue">
+      <select id="langSelect" class="lang-select">
         <option value="fr">FR</option>
         <option value="en">EN</option>
         <option value="es">ES</option>
         <option value="ar">AR</option>
       </select>
-
-      <button id="menuToggle" class="burger" aria-label="Menu">☰</button>
     </div>
   </div>
 </header>
@@ -45,143 +35,75 @@
     <p class="lead" data-i18n="hero_lead">Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.</p>
   </section>
 
-  <section class="form-section" id="request">
+  <form id="unifiedForm" class="unified-form" autocomplete="off" novalidate>
     <h2 class="center" data-i18n="form_title">Requête personnalisée</h2>
 
-    <form id="unifiedForm" class="unified-form" autocomplete="off" novalidate>
-      <div class="row">
-        <label for="domain" data-i18n="label_domain">Domaine / Thème</label>
-        <select id="domain" name="domain" required>
-          <option value="">— Choisir —</option>
-          <option value="agriculture">Agriculture</option>
-          <option value="environment">Environnement</option>
-          <option value="energy">Énergie</option>
-          <option value="commerce">Commerce</option>
-          <option value="ecommerce">E-commerce</option>
-          <option value="finance">Finance</option>
-          <option value="fintech">FinTech</option>
-          <option value="funding">Financement</option>
-          <option value="marketing">Marketing</option>
-          <option value="technology">Technologie</option>
-          <option value="education">Éducation</option>
-          <option value="sante">Santé</option>
-          <option value="transport">Transport</option>
-          <option value="immobilier">Immobilier</option>
-          <option value="juridique">Juridique</option>
-          <option value="industrie">Industrie</option>
-          <option value="culture">Culture</option>
-          <option value="tourisme">Tourisme</option>
-          <option value="rh">Ressources Humaines</option>
-          <option value="public">Projets publics</option>
-          <option value="artisanal">Artisanat</option>
-          <option value="social">Social</option>
-          <option value="autre">Autre</option>
+    <div class="row">
+      <label for="domain" data-i18n="label_domain">Domaine / Thème</label>
+      <select id="domain" name="domain" data-domain-options required></select>
+    </div>
+
+    <div class="row">
+      <label for="expectedResult" data-i18n="label_expected">Résultat attendu</label>
+      <input id="expectedResult" name="expectedResult" type="text" placeholder="Ex : Dossier de financement...">
+    </div>
+
+    <div class="row two-col">
+      <div>
+        <label for="budget" data-i18n="label_budget">Budget indicatif</label>
+        <input id="budget" name="budget" type="text" placeholder="Montant estimé">
+      </div>
+      <div>
+        <label for="currency" data-i18n="label_currency">Devise</label>
+        <select id="currency" name="currency">
+          <option value="USD">USD — Dollar américain</option>
+          <option value="EUR">EUR — Euro</option>
+          <option value="XOF">XOF — Franc CFA</option>
+          <option value="GBP">GBP — Livre sterling</option>
+          <option value="CNY">CNY — Yuan chinois</option>
         </select>
       </div>
+    </div>
 
-      <div class="row">
-        <label for="expectedResult" data-i18n="label_expected">Résultat attendu</label>
-        <input id="expectedResult" name="expectedResult" type="text" placeholder="Ex : Dossier de financement..." required>
+    <div class="row two-col">
+      <div>
+        <label for="name" data-i18n="label_name">Nom complet</label>
+        <input id="name" name="name" type="text" placeholder="Votre nom complet">
       </div>
-
-      <div class="row two-col">
-        <div>
-          <label for="budget" data-i18n="label_budget">Budget indicatif</label>
-          <input id="budget" name="budget" type="text" placeholder="Montant estimé">
-        </div>
-        <div>
-          <label for="currency" data-i18n="label_currency">Devise</label>
-          <select id="currency" name="currency">
-            <option value="USD">USD — Dollar américain</option>
-            <option value="EUR">EUR — Euro</option>
-            <option value="GBP">GBP — Livre sterling</option>
-            <option value="XOF">XOF — Franc CFA (UEMOA)</option>
-            <option value="XAF">XAF — Franc CFA (CEMAC)</option>
-            <option value="CFA">CFA — Franc CFA</option>
-            <option value="JPY">JPY — Yen japonais</option>
-            <option value="CNY">CNY — Yuan chinois</option>
-            <option value="CAD">CAD — Dollar canadien</option>
-            <option value="AUD">AUD — Dollar australien</option>
-          </select>
-        </div>
+      <div>
+        <label for="phone" data-i18n="label_phone">Téléphone (WhatsApp)</label>
+        <input id="phone" name="phone" type="tel" placeholder="+221...">
       </div>
+    </div>
 
-      <div class="row two-col">
-        <div>
-          <label for="name" data-i18n="label_name">Nom complet</label>
-          <input id="name" name="name" type="text" placeholder="Votre nom complet" required>
-        </div>
-        <div>
-          <label for="phone" data-i18n="label_phone">Téléphone (WhatsApp)</label>
-          <input id="phone" name="phone" type="tel" placeholder="+221..." required>
-        </div>
+    <div class="row">
+      <label for="email" data-i18n="label_email">Email</label>
+      <input id="email" name="email" type="email" placeholder="exemple@mail.com">
+    </div>
+
+    <div class="row">
+      <label for="details" data-i18n="label_details">Détails / Contexte</label>
+      <textarea id="details" name="details" rows="4" placeholder="Décrivez le contexte..."></textarea>
+    </div>
+
+    <div class="row restitution-row">
+      <label data-i18n="label_mode">Mode de restitution</label>
+      <div class="restitution-options">
+        <label class="rest-option"><input type="radio" name="mode" value="whatsapp"><span data-i18n="mode_whatsapp">WhatsApp</span></label>
+        <label class="rest-option"><input type="radio" name="mode" value="email"><span data-i18n="mode_email">Email</span></label>
+        <label class="rest-option"><input type="radio" name="mode" value="display" checked><span data-i18n="mode_display">Affichage direct</span></label>
       </div>
+    </div>
 
-      <div class="row">
-        <label for="email" data-i18n="label_email">Email</label>
-        <input id="email" name="email" type="email" placeholder="exemple@mail.com" required>
-      </div>
-
-      <div class="row">
-        <label for="details" data-i18n="label_details">Détails / Contexte</label>
-        <textarea id="details" name="details" rows="4" placeholder="Décrivez le contexte, contraintes, priorités..."></textarea>
-      </div>
-
-      <!-- 🔹 Bloc compact : Mode de restitution -->
-      <div class="row restitution-row">
-        <label data-i18n="label_mode">Mode de restitution</label>
-        <div class="restitution-options">
-          <label class="rest-option">
-            <input type="radio" name="mode" value="whatsapp">
-            <span data-i18n="mode_whatsapp">WhatsApp</span>
-          </label>
-          <label class="rest-option">
-            <input type="radio" name="mode" value="email">
-            <span data-i18n="mode_email">Email</span>
-          </label>
-          <label class="rest-option">
-            <input type="radio" name="mode" value="display" checked>
-            <span data-i18n="mode_display">Affichage direct</span>
-          </label>
-        </div>
-      </div>
-      <!-- Fin bloc restitution -->
-
-      <div class="form-actions">
-        <button type="submit" class="btn-primary" data-i18n="btn_send">Envoyer la requête</button>
-        <button type="reset" class="btn-secondary" data-i18n="btn_reset">Réinitialiser</button>
-      </div>
-    </form>
-  </section>
-
-  <section id="about" class="info container">
-    <h3 data-i18n="about">À propos</h3>
-    <p data-i18n="about_text">e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.</p>
-  </section>
-
-  <section id="faq" class="info container">
-    <h3 data-i18n="faq">FAQ</h3>
-    <details>
-      <summary data-i18n="faq_q1">Comment fonctionne e-META ?</summary>
-      <p data-i18n="faq_a1">Remplissez la requête ; e-META génère un diagnostic, 3 options stratégiques et une recommandation priorisée.</p>
-    </details>
-  </section>
-
-  <section id="contact" class="info container">
-    <h3 data-i18n="contact">Contact</h3>
-    <p>Email : <a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
-  </section>
+    <div class="form-actions">
+      <button type="submit" class="btn-primary" data-i18n="btn_send">Envoyer la requête</button>
+      <button type="reset" class="btn-secondary" data-i18n="btn_reset">Réinitialiser</button>
+    </div>
+  </form>
 </main>
 
-<footer class="site-footer" data-i18n="footer_tagline">
-  © 2025 e-META • Simplement. Intelligemment.
-</footer>
+<footer class="site-footer" data-i18n="footer_tagline">© 2025 e-META • Simplement. Intelligemment.</footer>
 
 <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
