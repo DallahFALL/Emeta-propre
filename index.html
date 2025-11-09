@@ -4,17 +4,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title data-i18n="app.title">e-META – Assistant IA Multilingue</title>
-  <link rel="stylesheet" href="styles.css" />
+  <!-- ✅ Chargement du CSS avec anti-cache -->
+  <link rel="stylesheet" href="styles.css?v=2.0" />
 </head>
+
 <body>
+  <!-- ================= HEADER ================= -->
   <header class="site-header">
     <h1 class="title" data-i18n="header.title">e-META – Assistant IA de Prise de Décision</h1>
-    <p class="subtitle" data-i18n="header.subtitle">Formulaire central — Répondez et envoyez par WhatsApp ou Email</p>
+    <p class="subtitle" data-i18n="header.subtitle">
+      Formulaire central — Répondez et envoyez par WhatsApp ou Email
+    </p>
   </header>
 
+  <!-- ================= FORMULAIRE ================= -->
   <main class="container">
     <form id="emetaForm" class="card" novalidate>
-      <!-- Barre d’actions -->
+      
+      <!-- Langue et Devise -->
       <div class="grid grid-2">
         <div class="field">
           <label for="lang" data-i18n="form.language">Langue</label>
@@ -51,6 +58,7 @@
         </div>
       </div>
 
+      <!-- Téléphone & Domaine -->
       <div class="grid grid-2">
         <div class="field">
           <label for="phone" data-i18n="form.phone">Téléphone (WhatsApp)</label>
@@ -83,10 +91,10 @@
         </div>
       </div>
 
-      <!-- Champs conditionnels par domaine -->
+      <!-- Champs conditionnels -->
       <div id="conditionalFields" class="stack"></div>
 
-      <!-- Objet & Description -->
+      <!-- Objet et Détails -->
       <div class="field">
         <label for="subject" data-i18n="form.subject">Objet</label>
         <input id="subject" name="subject" type="text" placeholder="Titre de votre requête" required />
@@ -111,7 +119,7 @@
       <!-- Actions -->
       <div class="actions">
         <button type="button" id="whatsappButton" class="btn whatsapp" aria-label="Envoyer sur WhatsApp">
-          <span aria-hidden="true">🟢</span> <span data-i18n="btn.whatsapp">WhatsApp</span>
+          🟢 <span data-i18n="btn.whatsapp">WhatsApp</span>
         </button>
         <button type="submit" class="btn primary" data-i18n="btn.submit">Envoyer par Email</button>
         <button type="reset" class="btn ghost" data-i18n="btn.reset">Réinitialiser</button>
@@ -123,13 +131,16 @@
     </form>
   </main>
 
+  <!-- ================= FOOTER ================= -->
   <footer class="site-footer">
     <p class="small">
-      <span data-i18n="footer.rights">©</span> <span id="year"></span> e-META •
+      <span data-i18n="footer.rights">©</span>
+      <span id="year"></span> e-META •
       <span data-i18n="footer.tag">Simplement. Intelligemment.</span>
     </p>
   </footer>
 
-  <script src="script.js" defer></script>
+  <!-- Scripts -->
+  <script src="script.js?v=2.0" defer></script>
 </body>
 </html>
