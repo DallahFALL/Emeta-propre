@@ -1,44 +1,23 @@
-/* =======================================================
-   e-META — RTL Styles (pour l'arabe)
-   ======================================================= */
-
-html[dir="rtl"] body {
-  direction: rtl;
-  text-align: right;
-  font-family: "Tajawal", "Inter", sans-serif;
+/* e-META — corrections RTL (arabe) */
+html[dir="rtl"] body{
+  direction:rtl; text-align:right;
+  font-family:"Tajawal",Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
 }
 
-/* Header */
-html[dir="rtl"] .header-inner {
-  flex-direction: row-reverse;
-}
+/* header */
+html[dir="rtl"] .header-inner{flex-direction:row-reverse}
+html[dir="rtl"] .controls{flex-direction:row-reverse}
+html[dir="rtl"] .main-nav{flex-direction:row-reverse}
+html[dir="rtl"] .main-nav a{margin-left:0;margin-right:0}
+html[dir="rtl"] .burger{order:-1}
 
-html[dir="rtl"] .main-nav a {
-  margin: 0 0 0 1rem;
-}
-
-/* Formulaire */
-html[dir="rtl"] label {
-  text-align: right;
-  display: block;
-}
-
+/* formulaire */
+html[dir="rtl"] label{text-align:right}
 html[dir="rtl"] input,
-html[dir="rtl"] textarea,
-html[dir="rtl"] select {
-  text-align: right;
-  direction: rtl;
-}
+html[dir="rtl"] select,
+html[dir="rtl"] textarea{direction:rtl; text-align:right}
 
-/* Champs côte à côte */
-html[dir="rtl"] .two-col {
-  flex-direction: row-reverse;
-  gap: 1rem;
-}
+html[dir="rtl"] .two-col{direction:rtl}
 
-/* Footer */
-html[dir="rtl"] .site-footer {
-  text-align: center;
-  direction: rtl;
-  font-family: "Tajawal", sans-serif;
-}
+/* footer */
+html[dir="rtl"] .site-footer{text-align:center}
