@@ -1,6 +1,6 @@
 /* ============================================================
    e-META — Script multilingue dynamique (FR / EN / ES / AR)
-   Version : 2.2
+   Version : 2.3
    Auteur  : Abdoulaye FALL & e-META Dev
    ============================================================ */
 
@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Dictionnaire multilingue principal -------------------------------
   const translations = {
     fr: {
+      "choose": "— Choisir —",
       "page_title": "e-META — Requête personnalisée",
       "brand": "e-META",
       "home": "Accueil",
@@ -33,37 +34,31 @@ document.addEventListener("DOMContentLoaded", () => {
       "mode_display": "Affichage",
       "btn_send": "Envoyer la requête",
       "btn_reset": "Réinitialiser",
+      "placeholder_expected": "Ex : Dossier de financement, plan stratégique, prototype...",
+      "placeholder_details": "Décrivez le contexte, les contraintes ou vos attentes principales...",
+      "placeholder_budget": "Montant estimé",
+      "placeholder_name": "Votre nom complet",
+      "placeholder_email": "exemple@mail.com",
+      "placeholder_phone": "+221...",
       "about_text": "e-META structure vos demandes et produit des synthèses claires et exploitables selon votre domaine.",
       "faq_q1": "Comment fonctionne e-META ?",
       "faq_a1": "Remplissez la requête personnalisée. e-META analyse vos données et génère une synthèse stratégique multilingue.",
       "tagline": "Simplement. Intelligemment.",
-      // Domaines
-      "dom.agriculture": "Agriculture & Agroécologie",
-      "dom.environment": "Environnement & Climat",
-      "dom.energy": "Énergie & Solaire",
-      "dom.commerce": "Commerce & Distribution",
-      "dom.ecommerce": "E-commerce & Digital",
-      "dom.finance": "Finance & Comptabilité",
-      "dom.fintech": "FinTech / Mobile Money",
-      "dom.funding": "Financement & Partenariat",
-      "dom.marketing": "Marketing & Communication",
-      "dom.technology": "Technologie & Innovation",
-      "dom.education": "Éducation & Formation",
-      "dom.sante": "Santé & Bien-être",
-      "dom.transport": "Transport & Logistique",
-      "dom.immobilier": "Immobilier & Construction",
-      "dom.juridique": "Juridique & Conformité",
-      "dom.industrie": "Industrie & Production",
-      "dom.culture": "Culture & Médias",
-      "dom.tourisme": "Tourisme & Hôtellerie",
-      "dom.rh": "Ressources Humaines",
-      "dom.public": "Projets publics & collectivités",
-      "dom.artisanal": "Artisanat & Transformation locale",
-      "dom.social": "Développement social & communautaire",
-      "dom.autre": "Autre"
+      // Devises
+      "cur.USD": "USD — Dollar américain",
+      "cur.EUR": "EUR — Euro",
+      "cur.GBP": "GBP — Livre sterling",
+      "cur.XOF": "XOF — Franc CFA (UEMOA)",
+      "cur.XAF": "XAF — Franc CFA (CEMAC)",
+      "cur.CFA": "CFA — Franc CFA",
+      "cur.JPY": "JPY — Yen japonais",
+      "cur.CNY": "CNY — Yuan chinois",
+      "cur.CAD": "CAD — Dollar canadien",
+      "cur.AUD": "AUD — Dollar australien"
     },
 
     en: {
+      "choose": "— Choose —",
       "page_title": "e-META — Custom Request",
       "brand": "e-META",
       "home": "Home",
@@ -88,37 +83,31 @@ document.addEventListener("DOMContentLoaded", () => {
       "mode_display": "On screen",
       "btn_send": "Send request",
       "btn_reset": "Reset",
+      "placeholder_expected": "Ex: Funding file, strategic plan, prototype...",
+      "placeholder_details": "Describe the context, constraints, or expectations...",
+      "placeholder_budget": "Estimated amount",
+      "placeholder_name": "Your full name",
+      "placeholder_email": "example@mail.com",
+      "placeholder_phone": "+221...",
       "about_text": "e-META structures your requests and produces clear, actionable summaries adapted to your field.",
       "faq_q1": "How does e-META work?",
       "faq_a1": "Fill in the custom request. e-META analyzes your data and generates a multilingual strategic summary.",
       "tagline": "Simply. Intelligently.",
-      // Domains
-      "dom.agriculture": "Agriculture & Agroecology",
-      "dom.environment": "Environment & Climate",
-      "dom.energy": "Energy & Solar",
-      "dom.commerce": "Trade & Distribution",
-      "dom.ecommerce": "E-commerce & Digital",
-      "dom.finance": "Finance & Accounting",
-      "dom.fintech": "FinTech / Mobile Money",
-      "dom.funding": "Funding & Partnerships",
-      "dom.marketing": "Marketing & Communication",
-      "dom.technology": "Technology & Innovation",
-      "dom.education": "Education & Training",
-      "dom.sante": "Health & Well-being",
-      "dom.transport": "Transport & Logistics",
-      "dom.immobilier": "Real Estate & Construction",
-      "dom.juridique": "Legal & Compliance",
-      "dom.industrie": "Industry & Production",
-      "dom.culture": "Culture & Media",
-      "dom.tourisme": "Tourism & Hospitality",
-      "dom.rh": "Human Resources",
-      "dom.public": "Public Projects & Communities",
-      "dom.artisanal": "Craft & Local Processing",
-      "dom.social": "Social & Community Development",
-      "dom.autre": "Other"
+      // Currencies
+      "cur.USD": "USD — US Dollar",
+      "cur.EUR": "EUR — Euro",
+      "cur.GBP": "GBP — Pound Sterling",
+      "cur.XOF": "XOF — West African CFA Franc",
+      "cur.XAF": "XAF — Central African CFA Franc",
+      "cur.CFA": "CFA — CFA Franc",
+      "cur.JPY": "JPY — Japanese Yen",
+      "cur.CNY": "CNY — Chinese Yuan",
+      "cur.CAD": "CAD — Canadian Dollar",
+      "cur.AUD": "AUD — Australian Dollar"
     },
 
     es: {
+      "choose": "— Elegir —",
       "page_title": "e-META — Solicitud personalizada",
       "brand": "e-META",
       "home": "Inicio",
@@ -140,40 +129,34 @@ document.addEventListener("DOMContentLoaded", () => {
       "label_mode": "Modo de entrega",
       "mode_email": "Correo electrónico",
       "mode_whatsapp": "WhatsApp",
-      "mode_display": "Pantalla",
+      "mode_display": "Visualización",
       "btn_send": "Enviar solicitud",
       "btn_reset": "Restablecer",
+      "placeholder_expected": "Ej: Plan estratégico, expediente de financiación...",
+      "placeholder_details": "Describe el contexto, limitaciones o expectativas...",
+      "placeholder_budget": "Monto estimado",
+      "placeholder_name": "Tu nombre completo",
+      "placeholder_email": "ejemplo@mail.com",
+      "placeholder_phone": "+221...",
       "about_text": "e-META estructura tus solicitudes y genera resúmenes claros y prácticos según tu campo.",
       "faq_q1": "¿Cómo funciona e-META?",
       "faq_a1": "Completa la solicitud personalizada. e-META analiza tus datos y genera un resumen estratégico multilingüe.",
       "tagline": "Simplemente. Inteligentemente.",
-      // Dominios
-      "dom.agriculture": "Agricultura y Agroecología",
-      "dom.environment": "Medio Ambiente y Clima",
-      "dom.energy": "Energía y Solar",
-      "dom.commerce": "Comercio y Distribución",
-      "dom.ecommerce": "E-commerce y Digital",
-      "dom.finance": "Finanzas y Contabilidad",
-      "dom.fintech": "FinTech / Dinero Móvil",
-      "dom.funding": "Financiación y Alianzas",
-      "dom.marketing": "Marketing y Comunicación",
-      "dom.technology": "Tecnología e Innovación",
-      "dom.education": "Educación y Formación",
-      "dom.sante": "Salud y Bienestar",
-      "dom.transport": "Transporte y Logística",
-      "dom.immobilier": "Bienes Raíces y Construcción",
-      "dom.juridique": "Legal y Cumplimiento",
-      "dom.industrie": "Industria y Producción",
-      "dom.culture": "Cultura y Medios",
-      "dom.tourisme": "Turismo y Hotelería",
-      "dom.rh": "Recursos Humanos",
-      "dom.public": "Proyectos Públicos y Comunidades",
-      "dom.artisanal": "Artesanía y Producción local",
-      "dom.social": "Desarrollo social y comunitario",
-      "dom.autre": "Otro"
+      // Monedas
+      "cur.USD": "USD — Dólar estadounidense",
+      "cur.EUR": "EUR — Euro",
+      "cur.GBP": "GBP — Libra esterlina",
+      "cur.XOF": "XOF — Franco CFA (UEMOA)",
+      "cur.XAF": "XAF — Franco CFA (CEMAC)",
+      "cur.CFA": "CFA — Franco CFA",
+      "cur.JPY": "JPY — Yen japonés",
+      "cur.CNY": "CNY — Yuan chino",
+      "cur.CAD": "CAD — Dólar canadiense",
+      "cur.AUD": "AUD — Dólar australiano"
     },
 
     ar: {
+      "choose": "— اختر —",
       "page_title": "e-META — طلب مخصص",
       "brand": "إي-ميتا",
       "home": "الرئيسية",
@@ -198,34 +181,27 @@ document.addEventListener("DOMContentLoaded", () => {
       "mode_display": "العرض على الشاشة",
       "btn_send": "إرسال الطلب",
       "btn_reset": "إعادة الضبط",
+      "placeholder_expected": "مثلاً: خطة استراتيجية، مشروع تمويل...",
+      "placeholder_details": "اشرح السياق أو القيود أو التوقعات...",
+      "placeholder_budget": "المبلغ المقدر",
+      "placeholder_name": "اسمك الكامل",
+      "placeholder_email": "example@mail.com",
+      "placeholder_phone": "+221...",
       "about_text": "يقوم e-META بتنظيم الطلبات وإنشاء ملخصات واضحة وقابلة للتنفيذ وفقاً للمجال.",
       "faq_q1": "كيف يعمل e-META؟",
       "faq_a1": "املأ الطلب المخصص. يقوم e-META بتحليل بياناتك وإنشاء ملخص استراتيجي متعدد اللغات.",
       "tagline": "ببساطة. بذكاء.",
-      // المجالات
-      "dom.agriculture": "الزراعة والإيكولوجيا الزراعية",
-      "dom.environment": "البيئة والمناخ",
-      "dom.energy": "الطاقة والطاقة الشمسية",
-      "dom.commerce": "التجارة والتوزيع",
-      "dom.ecommerce": "التجارة الإلكترونية والرقمية",
-      "dom.finance": "التمويل والمحاسبة",
-      "dom.fintech": "التقنيات المالية / المال المحمول",
-      "dom.funding": "التمويل والشراكات",
-      "dom.marketing": "التسويق والاتصال",
-      "dom.technology": "التكنولوجيا والابتكار",
-      "dom.education": "التعليم والتدريب",
-      "dom.sante": "الصحة والرفاهية",
-      "dom.transport": "النقل واللوجستيات",
-      "dom.immobilier": "العقارات والبناء",
-      "dom.juridique": "القانون والامتثال",
-      "dom.industrie": "الصناعة والإنتاج",
-      "dom.culture": "الثقافة والإعلام",
-      "dom.tourisme": "السياحة والفنادق",
-      "dom.rh": "الموارد البشرية",
-      "dom.public": "المشاريع العامة والمجتمعات",
-      "dom.artisanal": "الحرف والتحويل المحلي",
-      "dom.social": "التنمية الاجتماعية والمجتمعية",
-      "dom.autre": "أخرى"
+      // العملات
+      "cur.USD": "USD — دولار أمريكي",
+      "cur.EUR": "EUR — يورو",
+      "cur.GBP": "GBP — جنيه إسترليني",
+      "cur.XOF": "XOF — فرنك غرب أفريقي (UEMOA)",
+      "cur.XAF": "XAF — فرنك وسط أفريقي (CEMAC)",
+      "cur.CFA": "CFA — فرنك س ف ا",
+      "cur.JPY": "JPY — ين ياباني",
+      "cur.CNY": "CNY — يوان صيني",
+      "cur.CAD": "CAD — دولار كندي",
+      "cur.AUD": "AUD — دولار أسترالي"
     }
   };
 
@@ -234,12 +210,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const supportedLangs = ["fr", "en", "es", "ar"];
   const initialLang = localStorage.getItem("eMETA_lang") || (supportedLangs.includes(browserLang) ? browserLang : "fr");
 
-  // --- Application de la langue ----------------------------------
   const langSelect = document.getElementById("langSelect");
   if (langSelect) langSelect.value = initialLang;
   setLanguage(initialLang);
 
-  // --- Changement manuel -----------------------------------------
   if (langSelect) {
     langSelect.addEventListener("change", () => {
       const lang = langSelect.value;
@@ -251,10 +225,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Fonction principale de traduction --------------------------
   function setLanguage(lang) {
     const dict = translations[lang] || translations.fr;
-
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-
     document.title = dict["page_title"] || "e-META";
 
     document.querySelectorAll("[data-i18n]").forEach(el => {
@@ -262,13 +234,34 @@ document.addEventListener("DOMContentLoaded", () => {
       if (dict[key]) el.textContent = dict[key];
     });
 
-    // Traduction des <option> dans la liste des domaines
+    // Traduction du placeholder "Choisir"
     const domainSelect = document.getElementById("domain");
     if (domainSelect) {
-      Array.from(domainSelect.options).forEach(opt => {
-        const key = `dom.${opt.value}`;
+      const firstOption = domainSelect.options[0];
+      firstOption.textContent = dict["choose"];
+    }
+
+    // Traduction des devises
+    const currencySelect = document.getElementById("currency");
+    if (currencySelect) {
+      Array.from(currencySelect.options).forEach(opt => {
+        const key = `cur.${opt.value}`;
         if (dict[key]) opt.textContent = dict[key];
       });
+    }
+
+    // Mise à jour des placeholders
+    const placeholders = {
+      expectedResult: "placeholder_expected",
+      details: "placeholder_details",
+      budget: "placeholder_budget",
+      name: "placeholder_name",
+      email: "placeholder_email",
+      phone: "placeholder_phone"
+    };
+    for (const id in placeholders) {
+      const el = document.getElementById(id);
+      if (el && dict[placeholders[id]]) el.placeholder = dict[placeholders[id]];
     }
   }
 
@@ -278,9 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
     whatsappBtn.addEventListener("click", () => {
       const phone = (document.getElementById("phone")?.value || "").replace(/\D/g, "");
       const msg = encodeURIComponent("Bonjour, je souhaite soumettre une requête via e-META.");
-      const url = phone
-        ? `https://wa.me/${phone}?text=${msg}`
-        : `https://wa.me/?text=${msg}`;
+      const url = phone ? `https://wa.me/${phone}?text=${msg}` : `https://wa.me/?text=${msg}`;
       window.open(url, "_blank");
     });
   }
