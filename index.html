@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>e-META — Requête personnalisée</title>
 
-  <!-- Police -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="rtl.css">
@@ -13,10 +12,10 @@
 <body>
 <header class="site-header">
   <div class="container header-inner">
-    <div class="brand">
-      <img id="siteLogo" src="01_Logo_Sources/eMETA-official-logo.png" alt="e-META Logo">
+    <a class="brand" href="#home" aria-label="e-META">
+      <img class="brand-logo" src="01_Logo_Sources/eMETA-official-logo.png" alt="" />
       <span class="brand-title" data-i18n="brand">e-META</span>
-    </div>
+    </a>
 
     <nav id="mainNav" class="main-nav" aria-label="Main">
       <a href="#home" data-i18n="home">Accueil</a>
@@ -43,16 +42,14 @@
 
 <main id="home" class="container">
   <section class="hero">
-    <h1 class="hero-title" data-i18n="hero_title">e-META — L'assistant IA pluridisciplinaire</h1>
+    <h1 class="hero-title" data-i18n="hero_title">e-META — L’assistant IA pluridisciplinaire</h1>
     <p class="lead" data-i18n="hero_lead">Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.</p>
   </section>
 
-  <!-- Formulaire principal -->
   <section class="form-section" id="request">
     <h2 class="center" data-i18n="form_title">Requête personnalisée</h2>
 
     <form id="unifiedForm" class="unified-form" autocomplete="off" novalidate>
-
       <div class="row">
         <label for="domain" data-i18n="label_domain">Domaine / Thème</label>
         <select id="domain" name="domain" required>
@@ -85,7 +82,7 @@
 
       <div class="row">
         <label for="expectedResult" data-i18n="label_expected">Résultat attendu</label>
-        <input id="expectedResult" name="expectedResult" type="text" placeholder="Ex : Dossier de financement..." required>
+        <input id="expectedResult" name="expectedResult" type="text" placeholder="Ex : Dossier de financement, plan stratégique..." required>
       </div>
 
       <div class="row two-col">
