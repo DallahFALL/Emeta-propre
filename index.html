@@ -4,22 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>e-META — Requête personnalisée</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="rtl.css">
 </head>
 <body>
-
-<!-- ============ HEADER ============ -->
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="#home">
-            <img id="logo" src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" height="100">
+    <div class="brand">
+      <img class="brand-logo" src="01_Logo_Sources/eMETA-official-logo.png" alt="e-META Logo">
       <span class="brand-title" data-i18n="brand">e-META</span>
-    </a>
+    </div>
 
-    <nav id="mainNav" class="main-nav" aria-label="Main navigation">
+    <nav class="main-nav">
       <a href="#home" data-i18n="home">Accueil</a>
       <a href="#about" data-i18n="about">À propos</a>
       <a href="#faq" data-i18n="faq">FAQ</a>
@@ -27,98 +24,80 @@
     </nav>
 
     <div class="controls">
-      <button id="whatsappBtn" class="btn-whatsapp" type="button" data-i18n="whatsapp">WhatsApp</button>
-
-      <label for="langSelect" class="sr-only">Langue</label>
+      <button id="whatsappBtn" class="btn-whatsapp" data-i18n="whatsapp">WhatsApp</button>
       <select id="langSelect" class="lang-select" aria-label="Langue">
         <option value="fr">FR</option>
         <option value="en">EN</option>
         <option value="es">ES</option>
         <option value="ar">AR</option>
       </select>
-
-      <button id="menuToggle" class="burger" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
     </div>
   </div>
 </header>
 
-<!-- ============ MAIN ============ -->
 <main id="home" class="container">
   <section class="hero">
     <h1 class="hero-title" data-i18n="hero_title">e-META — L’assistant IA pluridisciplinaire</h1>
     <p class="lead" data-i18n="hero_lead">Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.</p>
   </section>
 
-  <!-- FORMULAIRE -->
-  <form id="unifiedForm" class="unified-form" autocomplete="off" novalidate>
+  <form id="unifiedForm" class="unified-form" autocomplete="off">
     <h2 class="center" data-i18n="form_title">Requête personnalisée</h2>
 
     <div class="row">
       <label for="domain" data-i18n="label_domain">Domaine / Thème</label>
-      <!-- options injectées par script.js selon la langue -->
       <select id="domain" name="domain" data-domain-options required></select>
     </div>
 
     <div class="row">
       <label for="expectedResult" data-i18n="label_expected">Résultat attendu</label>
-      <input id="expectedResult" name="expectedResult" type="text"
-             data-i18n-placeholder="ph_expected" placeholder="Ex : Dossier de financement, plan stratégique, prototype…">
+      <input id="expectedResult" name="expectedResult" type="text" placeholder="Ex : Dossier de financement...">
     </div>
 
     <div class="row two-col">
       <div>
         <label for="budget" data-i18n="label_budget">Budget indicatif</label>
-        <input id="budget" name="budget" type="text"
-               data-i18n-placeholder="ph_budget" placeholder="Montant estimé">
+        <input id="budget" name="budget" type="text" placeholder="Montant estimé">
       </div>
       <div>
         <label for="currency" data-i18n="label_currency">Devise</label>
-        <!-- options injectées par script.js pour être traduites -->
-        <select id="currency" name="currency" data-currency-options></select>
+        <select id="currency" name="currency">
+          <option value="USD">USD — Dollar américain</option>
+          <option value="EUR">EUR — Euro</option>
+          <option value="XOF">XOF — Franc CFA</option>
+          <option value="GBP">GBP — Livre sterling</option>
+          <option value="CNY">CNY — Yuan chinois</option>
+        </select>
       </div>
     </div>
 
     <div class="row two-col">
       <div>
         <label for="name" data-i18n="label_name">Nom complet</label>
-        <input id="name" name="name" type="text"
-               data-i18n-placeholder="ph_name" placeholder="Votre nom complet">
+        <input id="name" name="name" type="text" placeholder="Votre nom complet">
       </div>
       <div>
         <label for="phone" data-i18n="label_phone">Téléphone (WhatsApp)</label>
-        <input id="phone" name="phone" type="tel"
-               data-i18n-placeholder="ph_phone" placeholder="+221…">
+        <input id="phone" name="phone" type="tel" placeholder="+221...">
       </div>
     </div>
 
     <div class="row">
       <label for="email" data-i18n="label_email">Email</label>
-      <input id="email" name="email" type="email"
-             data-i18n-placeholder="ph_email" placeholder="exemple@mail.com">
+      <input id="email" name="email" type="email" placeholder="exemple@mail.com">
     </div>
 
     <div class="row">
       <label for="details" data-i18n="label_details">Détails / Contexte</label>
-      <textarea id="details" name="details" rows="4"
-                data-i18n-placeholder="ph_details" placeholder="Décrivez le contexte, contraintes ou attentes…"></textarea>
+      <textarea id="details" name="details" rows="4" placeholder="Décrivez le contexte..."></textarea>
     </div>
 
-    <!-- Mode de restitution compact -->
     <div class="row restitution-row">
       <label data-i18n="label_mode">Mode de restitution</label>
       <div class="restitution-options">
-        <label class="rest-option">
-          <input type="radio" name="mode" value="whatsapp">
-          <span data-i18n="mode_whatsapp">WhatsApp</span>
-        </label>
-        <label class="rest-option">
-          <input type="radio" name="mode" value="email">
-          <span data-i18n="mode_email">Email</span>
-        </label>
-        <label class="rest-option">
-          <input type="radio" name="mode" value="display" checked>
-          <span data-i18n="mode_display">Affichage direct</span>
-        </label>
+        <label class="rest-option"><input type="radio" name="mode" value="whatsapp"><span data-i18n="mode_whatsapp">WhatsApp</span></label>
+        <label class="rest-option"><input type="radio" name="mode" value="email"><span data-i18n="mode_email">Email</span></label>
+        <label class="rest-option"><input type="radio" name="mode" value="display" checked><span data-i18n="mode_display">Affichage direct</span></label>
       </div>
     </div>
 
@@ -128,33 +107,27 @@
     </div>
   </form>
 
-  <!-- SECTIONS INFO -->
-  <section id="about" class="info">
+  <section id="about" class="info-block">
     <h3 data-i18n="about">À propos</h3>
     <p data-i18n="about_text">e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.</p>
   </section>
 
-  <section id="faq" class="info">
+  <section id="faq" class="info-block">
     <h3 data-i18n="faq">FAQ</h3>
     <details>
       <summary data-i18n="faq_q1">Comment fonctionne e-META ?</summary>
-      <p data-i18n="faq_a1">Remplissez la requête ; e-META génère un diagnostic, 3 options stratégiques et une recommandation priorisée.</p>
+      <p data-i18n="faq_a1">Remplissez le formulaire ; e-META analyse et recommande les actions les plus pertinentes.</p>
     </details>
   </section>
 
-  <section id="contact" class="info">
+  <section id="contact" class="info-block">
     <h3 data-i18n="contact">Contact</h3>
     <p>Email : <a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
   </section>
 </main>
 
-<!-- ============ FOOTER ============ -->
 <footer class="site-footer">
-  <div class="container footer-inner">
-    <div class="foot-left">© 2025 <span data-i18n="brand">e-META</span></div>
-    <div class="foot-mid" data-i18n="footer_tagline">Simplement. Intelligemment.</div>
-    <div class="foot-right"><a href="#home">↑</a></div>
-  </div>
+  <p>© 2025 e-META • <span data-i18n="footer_tagline">Simplement. Intelligemment.</span></p>
 </footer>
 
 <script src="script.js"></script>
