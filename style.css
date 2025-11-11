@@ -1,114 +1,87 @@
-body {
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  background: #f9fbfc;
-  color: #222;
-}
-
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: #fff;
-  flex-wrap: wrap;
-  border-bottom: 1px solid #e4e4e4;
-}
-
-.logo {
-  height: 35px;
-  margin-right: 8px;
-}
-
-.main-nav a {
-  margin: 0 10px;
-  text-decoration: none;
-  font-weight: 600;
-  color: #0366d6;
-}
-
-.controls {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.btn-whatsapp {
-  background: #25D366;
-  color: #fff;
-  border: none;
-  padding: 6px 16px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.lang-select {
-  border-radius: 6px;
-  padding: 6px;
-  border: 1px solid #ccc;
-}
-
-.hero {
-  text-align: center;
-  padding: 1.5rem;
-}
-
-.form-section {
-  background: #fff;
-  max-width: 800px;
+/* === Structure responsive générale === */
+.container {
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 1rem;
 }
 
-.row {
-  margin-bottom: 1rem;
+/* === Formulaire === */
+.unified-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
 }
 
-.two-col {
+.row.two-col {
   display: flex;
   gap: 1rem;
 }
 
-.two-col > div {
+.row.two-col > div {
   flex: 1;
 }
 
-.restitution .choices {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+/* === Adaptation mobile === */
+@media (max-width: 768px) {
+  .row.two-col {
+    flex-direction: column;
+  }
+
+  input, select, textarea, button {
+    width: 100% !important;
+  }
+
+  .btn-primary, .btn-secondary {
+    display: block;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  header .controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #whatsappBtn {
+    margin-top: 0.5rem;
+  }
+
+  footer.site-footer .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
-.form-actions {
+/* === Centrage propre du titre === */
+.center {
   text-align: center;
-  margin-top: 1.2rem;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #111;
+  margin: 1.2rem 0;
 }
 
-.btn-primary {
-  background: #0366d6;
-  color: #fff;
-  border: none;
-  padding: 8px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.btn-secondary {
-  background: #eee;
-  border: none;
-  padding: 8px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
+/* === Footer moderne === */
 .site-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #0d1b2a;
+  background: #0f172a;
   color: #fff;
-  margin-top: 2rem;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+}
+
+/* === Bouton WhatsApp responsive === */
+#whatsappBtn {
+  background: #25d366;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+#whatsappBtn:hover {
+  background: #1ebc57;
 }
