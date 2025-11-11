@@ -3,26 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>e-META — L’assistant IA pluridisciplinaire</title>
+  <title>e-META — Assistant IA Multilingue</title>
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
+  <link rel="icon" href="01_Logo_Sources/eMETA-official-logo.svg.png" />
 </head>
 
 <body>
+  <!-- HEADER -->
   <header class="header">
     <div class="logo-container">
-      <img src="01_Logo_Sources/eMETA-official-logo.png" alt="e-META Logo" class="logo" />
+      <img src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" class="logo" />
       <span class="brand-name">e-META</span>
     </div>
-    <nav class="nav">
+
+    <nav class="nav-links">
       <a href="#home" data-i18n="home">Accueil</a>
       <a href="#about" data-i18n="about">À propos</a>
       <a href="#faq" data-i18n="faq">FAQ</a>
       <a href="#contact" data-i18n="contact">Contact</a>
     </nav>
-    <div class="header-actions">
-      <button id="whatsappBtn" class="whatsapp-btn">WhatsApp</button>
-      <select id="languageSelect" class="lang-select">
+
+    <div class="lang-controls">
+      <button class="whatsapp-btn">WhatsApp</button>
+      <select id="languageSwitcher">
         <option value="fr">FR</option>
         <option value="en">EN</option>
         <option value="es">ES</option>
@@ -31,92 +35,117 @@
     </div>
   </header>
 
-  <main class="container" id="home">
+  <!-- MAIN SECTION -->
+  <main id="home" class="main-content">
     <section class="intro">
-      <h1><span class="highlight">e-META</span> — <span data-i18n="subtitle">L’assistant IA pluridisciplinaire</span></h1>
-      <p data-i18n="description">Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.</p>
+      <h1><span class="brand-highlight">e-META</span> — <span data-i18n="assistant_title">L’assistant IA pluridisciplinaire</span></h1>
+      <p data-i18n="assistant_subtitle">Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.</p>
     </section>
 
-    <form id="metaForm" class="meta-form">
-      <h2 class="form-title" data-i18n="form_title">Requête personnalisée</h2>
+    <section class="form-section">
+      <form id="smartForm" class="responsive-form">
+        <h2 class="form-title" data-i18n="form_title">Requête personnalisée</h2>
 
-      <!-- Domaine / Thème -->
-      <label for="domain" data-i18n="domain_label">Domaine / Thème</label>
-      <select id="domain" name="domain" required></select>
-
-      <!-- Résultat attendu -->
-      <label for="result" data-i18n="result_label">Résultat attendu</label>
-      <input type="text" id="result" name="result" placeholder="Ex : Dossier de financement..." />
-
-      <!-- Budget + Devise -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="budget" data-i18n="budget_label">Budget indicatif</label>
-          <input type="text" id="budget" name="budget" placeholder="Montant estimé" />
-        </div>
-        <div class="form-group">
-          <label for="currency" data-i18n="currency_label">Devise</label>
-          <select id="currency" name="currency">
-            <option value="USD">USD — Dollar américain</option>
-            <option value="EUR">EUR — Euro</option>
-            <option value="GBP">GBP — Livre sterling</option>
-            <option value="XOF">XOF — Franc CFA BCEAO</option>
-            <option value="XAF">XAF — Franc CFA BEAC</option>
+        <div class="form-grid">
+          <!-- Domaine -->
+          <label for="domain" data-i18n="label_domain">Domaine / Thème</label>
+          <select id="domain">
+            <option value="" data-i18n="option_choose">— Domaine —</option>
+            <option data-i18n="opt_agriculture">Agriculture</option>
+            <option data-i18n="opt_education">Éducation</option>
+            <option data-i18n="opt_energie">Énergie</option>
+            <option data-i18n="opt_environnement">Environnement</option>
+            <option data-i18n="opt_finance">Finance</option>
+            <option data-i18n="opt_technologie">Technologie</option>
+            <option data-i18n="opt_transport">Transport</option>
+            <option data-i18n="opt_sante">Santé</option>
+            <option data-i18n="opt_marketing">Marketing</option>
+            <option data-i18n="opt_ecommerce">E-commerce</option>
           </select>
+
+          <!-- Résultat attendu -->
+          <label for="result" data-i18n="label_result">Résultat attendu</label>
+          <input type="text" id="result" placeholder="Ex : Dossier de financement, plan stratégique, prototype..." data-i18n-placeholder="ph_result" />
+
+          <!-- Budget + Devise -->
+          <div class="dual-field">
+            <div>
+              <label for="budget" data-i18n="label_budget">Budget indicatif</label>
+              <input type="text" id="budget" placeholder="Montant estimé" data-i18n-placeholder="ph_budget" />
+            </div>
+            <div>
+              <label for="currency" data-i18n="label_currency">Devise</label>
+              <select id="currency">
+                <option>USD — Dollar américain</option>
+                <option>EUR — Euro</option>
+                <option>XOF — Franc CFA</option>
+                <option>GBP — Livre sterling</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Nom et Téléphone -->
+          <div class="dual-field">
+            <div>
+              <label for="fullname" data-i18n="label_name">Nom complet</label>
+              <input type="text" id="fullname" placeholder="Votre nom complet" data-i18n-placeholder="ph_name" />
+            </div>
+            <div>
+              <label for="phone" data-i18n="label_phone">Téléphone (WhatsApp)</label>
+              <input type="tel" id="phone" placeholder="+221..." />
+            </div>
+          </div>
+
+          <!-- Email -->
+          <label for="email" data-i18n="label_email">Email</label>
+          <input type="email" id="email" placeholder="exemple@mail.com" data-i18n-placeholder="ph_email" />
+
+          <!-- Détails -->
+          <label for="details" data-i18n="label_details">Détails / Contexte</label>
+          <textarea id="details" rows="3" placeholder="Décrivez le contexte, contraintes ou priorités..." data-i18n-placeholder="ph_details"></textarea>
+
+          <!-- Mode de restitution -->
+          <fieldset class="delivery-mode">
+            <legend data-i18n="label_mode">Mode de restitution</legend>
+            <div class="mode-options">
+              <label><input type="radio" name="delivery" value="whatsapp" checked /> <span data-i18n="mode_whatsapp">WhatsApp</span></label>
+              <label><input type="radio" name="delivery" value="email" /> <span data-i18n="mode_email">Email</span></label>
+              <label><input type="radio" name="delivery" value="display" /> <span data-i18n="mode_display">Affichage direct</span></label>
+            </div>
+          </fieldset>
+
+          <!-- Buttons -->
+          <div class="form-actions">
+            <button type="submit" class="btn-primary" data-i18n="btn_send">Envoyer la requête</button>
+            <button type="reset" class="btn-secondary" data-i18n="btn_reset">Réinitialiser</button>
+          </div>
         </div>
-      </div>
-
-      <!-- Nom + Téléphone -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="name" data-i18n="name_label">Nom complet</label>
-          <input type="text" id="name" name="name" placeholder="Votre nom complet" />
-        </div>
-        <div class="form-group">
-          <label for="phone" data-i18n="phone_label">Téléphone (WhatsApp)</label>
-          <input type="tel" id="phone" name="phone" placeholder="+221..." />
-        </div>
-      </div>
-
-      <!-- Email -->
-      <label for="email" data-i18n="email_label">Email</label>
-      <input type="email" id="email" name="email" placeholder="exemple@mail.com" />
-
-      <!-- Détails / Contexte -->
-      <label for="details" data-i18n="details_label">Détails / Contexte</label>
-      <textarea id="details" name="details" placeholder="Décrivez le contexte..."></textarea>
-
-      <!-- Mode de restitution -->
-      <fieldset class="delivery-mode">
-        <legend data-i18n="label_mode">Mode de restitution</legend>
-        <label><input type="radio" name="mode" value="whatsapp" checked /> <span data-i18n="mode_whatsapp">WhatsApp</span></label>
-        <label><input type="radio" name="mode" value="email" /> <span data-i18n="mode_email">Email</span></label>
-        <label><input type="radio" name="mode" value="display" /> <span data-i18n="mode_display">Affichage direct</span></label>
-      </fieldset>
-
-      <!-- Boutons -->
-      <div class="buttons">
-        <button type="submit" data-i18n="submit_btn">Envoyer la requête</button>
-        <button type="reset" data-i18n="reset_btn">Réinitialiser</button>
-      </div>
-    </form>
+      </form>
+    </section>
   </main>
 
-  <footer class="footer">
+  <!-- FOOTER -->
+  <footer>
     <section id="about">
       <h3 data-i18n="about">À propos</h3>
       <p data-i18n="about_text">e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.</p>
     </section>
+
     <section id="faq">
       <h3 data-i18n="faq">FAQ</h3>
-      <details><summary data-i18n="faq_q1">Comment fonctionne e-META ?</summary></details>
+      <details>
+        <summary data-i18n="faq_q1">Comment fonctionne e-META ?</summary>
+        <p data-i18n="faq_a1">L’utilisateur saisit une demande, l’IA analyse et propose une synthèse contextualisée.</p>
+      </details>
     </section>
+
     <section id="contact">
       <h3 data-i18n="contact">Contact</h3>
       <p>Email : <a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
     </section>
-    <div class="footer-bottom">
-      <p data-i18n="footer_text">© 2025 e-META • Simplement. Intelligemment.</p>
+
+    <div class="footer-note">
+      <p>© 2025 <span class="brand-highlight">e-META</span> • <span data-i18n="footer_slogan">Simplement. Intelligemment.</span></p>
     </div>
   </footer>
 </body>
