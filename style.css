@@ -1,123 +1,114 @@
 body {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
   background: #f9fbfc;
   color: #222;
-  margin: 0;
+}
+
+.header-container {
   display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.container { max-width: 960px; margin: auto; padding: 1rem; }
-
-/* HEADER */
-.site-header {
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
   background: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-  position: sticky;
-  top: 0;
-  z-index: 20;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #e4e4e4;
 }
-.header-inner {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 0.8rem 1.2rem; flex-wrap: wrap;
+
+.logo {
+  height: 35px;
+  margin-right: 8px;
 }
-.brand { display: flex; align-items: center; gap: 0.5rem; }
-.brand-logo { height: 32px; }
-.main-nav a { margin: 0 0.5rem; text-decoration: none; color: #0078d7; font-weight: 500; }
+
+.main-nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #0366d6;
+}
 
 .controls {
-  display: flex; align-items: center; gap: 0.75rem;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
+
 .btn-whatsapp {
-  background: #25d366; border: none; color: white;
-  font-weight: 600; padding: 0.45rem 1rem; border-radius: 8px;
-  cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  transition: all 0.2s ease-in-out;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
 }
-.btn-whatsapp:hover { background: #1eb954; }
 
 .lang-select {
-  padding: 0.45rem; border-radius: 6px; border: 1px solid #ccc; font-weight: 600;
+  border-radius: 6px;
+  padding: 6px;
+  border: 1px solid #ccc;
 }
 
-/* MAIN */
-.hero { text-align: center; margin: 2rem 0; }
-.hero-title { color: #0078d7; font-size: 1.8rem; font-weight: 700; }
-.lead { color: #555; font-size: 1rem; }
+.hero {
+  text-align: center;
+  padding: 1.5rem;
+}
 
-.unified-form {
-  background: white; border-radius: 12px; padding: 1.5rem;
+.form-section {
+  background: #fff;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.row { margin-bottom: 1rem; }
-.row.two-col { display: flex; gap: 1rem; flex-wrap: wrap; }
-.row.two-col > div { flex: 1; }
-
-input, select, textarea {
-  width: 100%; padding: 0.6rem;
-  border: 1px solid #ccc; border-radius: 6px;
-  font-size: 1rem;
+.row {
+  margin-bottom: 1rem;
 }
 
-.restitution-options {
-  display: flex; gap: 20px; flex-wrap: wrap;
+.two-col {
+  display: flex;
+  gap: 1rem;
+}
+
+.two-col > div {
+  flex: 1;
+}
+
+.restitution .choices {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 1.2rem;
 }
 
 .btn-primary {
-  background: #0078d7; color: white;
-  border: none; border-radius: 6px;
-  padding: 0.7rem 1.4rem; cursor: pointer;
+  background: #0366d6;
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
   font-weight: 600;
 }
-.btn-primary:hover { background: #005fa3; }
 
 .btn-secondary {
-  background: #eee; border: none;
-  border-radius: 6px; padding: 0.7rem 1.4rem;
-  font-weight: 600; cursor: pointer;
+  background: #eee;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-.info-block {
-  background: white;
-  margin-top: 2rem; padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-}
-
-/* FOOTER */
 .site-footer {
-  background: #0b0c10;
-  color: white;
   text-align: center;
   padding: 1rem;
-  margin-top: auto;
-  font-size: 0.95rem;
-}
-
-@media (max-width: 768px) {
-  .header-inner { flex-direction: column; text-align: center; }
-  .main-nav { margin: 0.5rem 0; }
-  .controls { justify-content: center; }
-  .btn-whatsapp { width: 100%; }
-  .lang-select { width: 100%; }
-}
-
-/* Centrage du titre principal */
-.center {
-  text-align: center;
-  font-weight: 700;
-  font-size: 1.6rem;
-  color: #111;
-  margin: 1.2rem 0;
-  line-height: 1.4;
-}
-
-/* Responsive pour petits écrans */
-@media (max-width: 768px) {
-  .center {
-    font-size: 1.3rem;
-    margin: 1rem 0;
-  }
+  background: #0d1b2a;
+  color: #fff;
+  margin-top: 2rem;
 }
