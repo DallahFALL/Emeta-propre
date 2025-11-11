@@ -1,23 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>e-META — Assistant IA Multilingue</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="rtl.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 <header class="site-header">
-  <div class="header-container">
-    <div class="logo-area">
-      <img src="01_Logo_Sources/eMETA-official-logo.png" alt="e-META Logo" class="logo">
-      <span class="brand">e-META</span>
+  <div class="container header-inner">
+    <div class="brand">
+      <img id="logo" src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" height="100">
+      <span class="brand-title">e-META</span>
     </div>
 
-    <nav class="main-nav">
+    <nav class="main-nav" aria-label="Main">
       <a href="#home" data-i18n="home">Accueil</a>
       <a href="#about" data-i18n="about">À propos</a>
       <a href="#faq" data-i18n="faq">FAQ</a>
@@ -25,8 +23,8 @@
     </nav>
 
     <div class="controls">
-      <button id="whatsappBtn" class="btn-whatsapp">WhatsApp</button>
-      <select id="langSelect" class="lang-select">
+      <button id="whatsappBtn">WhatsApp</button>
+      <select id="langSelect" aria-label="Langue">
         <option value="fr">FR</option>
         <option value="en">EN</option>
         <option value="es">ES</option>
@@ -36,60 +34,42 @@
   </div>
 </header>
 
-<main id="home" class="main-container">
+<main id="home" class="container">
   <section class="hero">
     <h1 class="hero-title" data-i18n="hero_title">e-META — L’assistant IA pluridisciplinaire</h1>
-    <p class="hero-subtitle" data-i18n="hero_lead">Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.</p>
+    <p class="lead" data-i18n="hero_lead">Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.</p>
   </section>
 
   <section class="form-section" id="request">
     <h2 class="center" data-i18n="form_title">Requête personnalisée</h2>
 
     <form id="unifiedForm" class="unified-form" autocomplete="off" novalidate>
-      <!-- Domaine -->
+
       <div class="row">
         <label for="domain" data-i18n="label_domain">Domaine / Thème</label>
         <select id="domain" name="domain" required>
-          <option value="" data-i18n-option="choose">— Choisir —</option>
-          <option value="agriculture" data-i18n-option="domain_agriculture">Agriculture</option>
-          <option value="environment" data-i18n-option="domain_environment">Environnement & Climat</option>
-          <option value="energy" data-i18n-option="domain_energy">Énergie & Solaire</option>
-          <option value="commerce" data-i18n-option="domain_commerce">Commerce & Distribution</option>
-          <option value="digital" data-i18n-option="domain_digital">E-commerce & Digital</option>
-          <option value="finance" data-i18n-option="domain_finance">Finance & Comptabilité</option>
-          <option value="fintech" data-i18n-option="domain_fintech">FinTech / Mobile Money</option>
-          <option value="funding" data-i18n-option="domain_funding">Financement & Partenariat</option>
-          <option value="marketing" data-i18n-option="domain_marketing">Marketing & Communication</option>
-          <option value="technology" data-i18n-option="domain_technology">Technologie & Innovation</option>
-          <option value="education" data-i18n-option="domain_education">Éducation & Formation</option>
-          <option value="health" data-i18n-option="domain_health">Santé & Bien-être</option>
-          <option value="transport" data-i18n-option="domain_transport">Transport & Logistique</option>
-          <option value="realestate" data-i18n-option="domain_realestate">Immobilier & Construction</option>
-          <option value="law" data-i18n-option="domain_law">Juridique & Conformité</option>
-          <option value="industry" data-i18n-option="domain_industry">Industrie & Production</option>
+          <option value="">— Choisir —</option>
         </select>
       </div>
 
       <div class="row">
         <label for="expectedResult" data-i18n="label_expected">Résultat attendu</label>
-        <input id="expectedResult" name="expectedResult" type="text"
-               data-i18n-placeholder="ph_expected"
-               placeholder="Ex : Dossier de financement, plan stratégique, prototype…" required>
+        <input id="expectedResult" name="expectedResult" type="text" placeholder="Ex : Dossier de financement..." required>
       </div>
 
       <div class="row two-col">
         <div>
           <label for="budget" data-i18n="label_budget">Budget indicatif</label>
-          <input id="budget" name="budget" type="text" data-i18n-placeholder="ph_budget" placeholder="Montant estimé">
+          <input id="budget" name="budget" type="text" placeholder="Montant estimé">
         </div>
         <div>
           <label for="currency" data-i18n="label_currency">Devise</label>
           <select id="currency" name="currency">
-            <option value="USD" data-i18n-option="usd">USD — Dollar américain</option>
-            <option value="EUR" data-i18n-option="eur">EUR — Euro</option>
-            <option value="GBP" data-i18n-option="gbp">GBP — Livre sterling</option>
-            <option value="XOF" data-i18n-option="xof">XOF — Franc CFA</option>
-            <option value="XAF" data-i18n-option="xaf">XAF — Franc CFA BEAC</option>
+            <option value="USD">USD — Dollar américain</option>
+            <option value="EUR">EUR — Euro</option>
+            <option value="XOF">XOF — Franc CFA</option>
+            <option value="GBP">GBP — Livre sterling</option>
+            <option value="JPY">JPY — Yen japonais</option>
           </select>
         </div>
       </div>
@@ -97,26 +77,25 @@
       <div class="row two-col">
         <div>
           <label for="name" data-i18n="label_name">Nom complet</label>
-          <input id="name" name="name" type="text" data-i18n-placeholder="ph_name" placeholder="Votre nom complet" required>
+          <input id="name" name="name" type="text" placeholder="Votre nom complet" required>
         </div>
         <div>
           <label for="phone" data-i18n="label_phone">Téléphone (WhatsApp)</label>
-          <input id="phone" name="phone" type="tel" data-i18n-placeholder="ph_phone" placeholder="+221..." required>
+          <input id="phone" name="phone" type="tel" placeholder="+221..." required>
         </div>
       </div>
 
       <div class="row">
         <label for="email" data-i18n="label_email">Email</label>
-        <input id="email" name="email" type="email" data-i18n-placeholder="ph_email" placeholder="exemple@mail.com">
+        <input id="email" name="email" type="email" placeholder="exemple@mail.com">
       </div>
 
       <div class="row">
         <label for="details" data-i18n="label_details">Détails / Contexte</label>
-        <textarea id="details" name="details" rows="4" data-i18n-placeholder="ph_details"
-                  placeholder="Décrivez le contexte, contraintes ou priorités…"></textarea>
+        <textarea id="details" name="details" rows="4" placeholder="Décrivez le contexte, contraintes ou priorités..."></textarea>
       </div>
 
-      <div class="row restitution">
+      <div class="row">
         <label data-i18n="label_mode">Mode de restitution</label>
         <div class="choices">
           <label><input type="radio" name="mode" value="whatsapp" checked> <span data-i18n="mode_whatsapp">WhatsApp</span></label>
@@ -152,7 +131,9 @@
 </main>
 
 <footer class="site-footer">
-  <p>© 2025 e-META • <span data-i18n="footer_tagline">Simplement. Intelligemment.</span></p>
+  <div class="container footer-inner">
+    <p>© 2025 e-META • Simplement. Intelligemment.</p>
+  </div>
 </footer>
 
 <script src="script.js"></script>
