@@ -1,162 +1,154 @@
+/* ====== GLOBAL ====== */
 body {
   font-family: 'Inter', sans-serif;
   margin: 0;
-  background: #f8fafc;
-  color: #111;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  padding: 0;
+  background: #f7f9fb;
+  color: #222;
 }
 
-header {
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  color: #111;
+}
+
+a { text-decoration: none; color: #007bff; }
+.center { text-align: center; }
+
+/* ====== NAVBAR ====== */
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 5%;
   background: #fff;
+  padding: 1rem 2rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
   flex-wrap: wrap;
 }
 
-.logo-container {
+.logo-area { display: flex; align-items: center; gap: 10px; }
+.logo { height: 28px; }
+.brand { font-weight: 700; color: #007bff; }
+
+.nav-links {
+  display: flex;
+  gap: 1.2rem;
+  font-weight: 600;
+}
+
+.nav-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
-}
-
-.logo {
-  width: 40px;
-  height: 40px;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #111;
-  margin: 0 10px;
-  font-weight: 500;
-}
-
-.lang-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  gap: 0.5rem;
 }
 
 .whatsapp-btn {
-  background: #25D366;
+  background: #25d366;
   color: #fff;
   border: none;
+  padding: 8px 14px;
   border-radius: 8px;
-  padding: 8px 16px;
   cursor: pointer;
+  font-weight: 600;
 }
 
-main {
-  flex: 1;
-  padding: 40px 10%;
+/* ====== HERO ====== */
+.hero {
+  padding: 2rem 1rem;
   text-align: center;
 }
 
 .form-section {
-  background: #fff;
-  border-radius: 16px;
-  padding: 25px;
-  margin: 30px auto;
-  max-width: 850px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-}
-
-.form-title {
-  font-size: 1.5em;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.form-grid {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-  text-align: left;
+  justify-content: center;
+  padding: 1.5rem;
 }
+
+.form-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 800px;
+  width: 100%;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* ====== FORM ====== */
+label { display: block; font-weight: 600; margin-top: 10px; }
 
 input, select, textarea {
   width: 100%;
   padding: 10px;
-  border-radius: 6px;
+  margin-top: 5px;
   border: 1px solid #ccc;
-  font-size: 1em;
+  border-radius: 6px;
+  font-size: 14px;
 }
 
-.dual-field {
+.row {
   display: flex;
-  gap: 20px;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 
-.dual-field > div {
-  flex: 1;
+.col { flex: 1; min-width: 230px; }
+
+fieldset {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 1rem;
+  padding: 1rem;
 }
 
-.delivery-mode {
-  margin-top: 15px;
-}
+legend { font-weight: 600; }
 
-.mode-options {
+.btn-row {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 
-.btn-primary {
+.submit-btn {
   background: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-secondary {
-  background: #e0e0e0;
-  color: #333;
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-}
-
-footer {
-  background: #0b0c10;
   color: #fff;
-  text-align: center;
-  padding: 30px 10px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
 }
 
-footer section {
-  margin-bottom: 20px;
+.reset-btn {
+  background: #eee;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
 }
+
+/* ====== FOOTER ====== */
+footer {
+  background: #0a0a0a;
+  color: #f1f1f1;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+footer h3 { color: #fff; }
+footer a { color: #61b3ff; }
 
 .footer-note {
-  font-size: 0.9em;
-  opacity: 0.8;
+  margin-top: 1.5rem;
+  font-size: 14px;
 }
 
-/* Responsive */
+/* ====== RESPONSIVE ====== */
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .dual-field {
-    flex-direction: column;
-  }
-
-  .nav-links {
-    margin-top: 10px;
-  }
-
-  .form-section {
-    width: 90%;
-  }
+  .navbar { flex-direction: column; gap: 10px; }
+  .form-container { padding: 1.2rem; }
+  .btn-row { flex-direction: column; }
+  .row { flex-direction: column; }
 }
