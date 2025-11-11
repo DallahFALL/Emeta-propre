@@ -104,20 +104,3 @@ input, select, textarea {
   .lang-select { width: 100%; }
 }
 
-/* Centrage du titre principal */
-.center {
-  text-align: center;
-  font-weight: 700;
-  font-size: 1.6rem;
-  color: #111;
-  margin: 1.2rem 0;
-  line-height: 1.4;
-}
-
-/* Responsive pour petits écrans */
-@media (max-width: 768px) {
-  .center {
-    font-size: 1.3rem;
-    margin: 1rem 0;
-  }
-}
