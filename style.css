@@ -1,87 +1,116 @@
-/* === Structure responsive générale === */
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 1rem;
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  background: #f9fafb;
+  color: #111;
 }
 
-/* === Formulaire === */
-.unified-form {
+/* Header */
+.site-header {
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  padding: 0.8rem 1.5rem;
+}
+.header-inner {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
-
-.row.two-col {
+.brand {
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  gap: .5rem;
+}
+.brand img { height: 38px; }
+
+.main-nav a {
+  margin: 0 0.8rem;
+  text-decoration: none;
+  color: #222;
+  font-weight: 600;
+}
+.main-nav a:hover { color: #007aff; }
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
 }
 
-.row.two-col > div {
-  flex: 1;
+/* WhatsApp button */
+#whatsappBtn {
+  background: #25d366;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: .4rem .8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+#whatsappBtn:hover { background: #1ebc57; }
+
+/* Lang selector */
+#langSelect {
+  border-radius: 6px;
+  padding: .3rem .6rem;
 }
 
-/* === Adaptation mobile === */
-@media (max-width: 768px) {
-  .row.two-col {
-    flex-direction: column;
-  }
-
-  input, select, textarea, button {
-    width: 100% !important;
-  }
-
-  .btn-primary, .btn-secondary {
-    display: block;
-    width: 100%;
-    margin-top: 0.5rem;
-  }
-
-  header .controls {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  #whatsappBtn {
-    margin-top: 0.5rem;
-  }
-
-  footer.site-footer .footer-inner {
-    flex-direction: column;
-    text-align: center;
-  }
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
 }
+.hero-title { color: #007aff; font-weight: 800; }
+.lead { max-width: 700px; margin: 0 auto; }
 
-/* === Centrage propre du titre === */
+/* Formulaire */
+.form-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
 .center {
   text-align: center;
-  font-weight: 700;
-  font-size: 1.6rem;
-  color: #111;
-  margin: 1.2rem 0;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.row { margin-bottom: 1rem; }
+.row.two-col { display: flex; gap: 1rem; }
+.row.two-col > div { flex: 1; }
+
+input, select, textarea {
+  width: 100%;
+  padding: .5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: .95rem;
 }
 
-/* === Footer moderne === */
+.btn-primary, .btn-secondary {
+  padding: .6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+.btn-primary { background: #007aff; color: #fff; }
+.btn-secondary { background: #f3f4f6; }
+
+/* Footer */
 .site-footer {
   background: #0f172a;
   color: #fff;
   text-align: center;
   padding: 1rem 0;
-  font-size: 0.9rem;
+  font-size: .9rem;
 }
 
-/* === Bouton WhatsApp responsive === */
-#whatsappBtn {
-  background: #25d366;
-  color: #fff;
-  font-weight: 600;
-  border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-#whatsappBtn:hover {
-  background: #1ebc57;
+/* Responsive */
+@media (max-width: 768px) {
+  .row.two-col { flex-direction: column; }
+  input, select, textarea, button { width: 100% !important; }
+  .controls { justify-content: center; flex-wrap: wrap; }
+  #whatsappBtn { margin-top: .5rem; }
 }
