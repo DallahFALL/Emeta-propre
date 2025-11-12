@@ -180,57 +180,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* === Menu burger responsive === */
-const burger = document.querySelector("#burger");
-const nav = document.querySelector("#mainNav");
-burger.addEventListener("click", () => {
-  nav.classList.toggle("open");
-});
-
-/* === Sélecteur de langue pro === */
-const langMenu = document.querySelector("#langMenu");
-const langBtn = document.querySelector("#langBtn");
-const dropdown = document.querySelector("#langDropdown");
-const flag = document.querySelector("#flag");
-const langCode = document.querySelector("#langCode");
-
-langBtn.addEventListener("click", () => {
-  langMenu.classList.toggle("open");
-});
-
-dropdown.querySelectorAll("li").forEach(item => {
-  item.addEventListener("click", () => {
-    const lang = item.dataset.lang;
-    applyLanguage(lang);
-    flag.textContent = FLAGS[lang];
-    langCode.textContent = lang;
-    langMenu.classList.remove("open");
-  });
-});
-
-/* Fermer le menu en dehors du clic */
-document.addEventListener("click", e => {
-  if (!langMenu.contains(e.target)) langMenu.classList.remove("open");
-});
-
-/* === BURGER MENU === */
+// Menu burger
 const burger = document.querySelector("#burger");
 const mainNav = document.querySelector("#mainNav");
-burger.addEventListener("click", () => {
-  mainNav.classList.toggle("open");
-});
+burger.addEventListener("click", () => mainNav.classList.toggle("open"));
 
-/* === LANG MENU === */
+// Sélecteur de langue pro
 const langMenu = document.querySelector("#langMenu");
 const langBtn = document.querySelector("#langBtn");
 const dropdown = document.querySelector("#langDropdown");
 const flag = document.querySelector("#flag");
 const langCode = document.querySelector("#langCode");
 
-langBtn.addEventListener("click", () => {
-  langMenu.classList.toggle("open");
-});
-
+langBtn.addEventListener("click", () => langMenu.classList.toggle("open"));
 dropdown.querySelectorAll("li").forEach(item => {
   item.addEventListener("click", () => {
     const lang = item.dataset.lang;
@@ -240,7 +202,6 @@ dropdown.querySelectorAll("li").forEach(item => {
     langMenu.classList.remove("open");
   });
 });
-
 document.addEventListener("click", e => {
   if (!langMenu.contains(e.target)) langMenu.classList.remove("open");
 });
