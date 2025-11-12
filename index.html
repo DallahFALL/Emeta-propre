@@ -1,134 +1,176 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
   <title>e-META — Assistant IA Multilingue</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style_v3.8.css" />
 </head>
 <body>
-  <!-- ===== HEADER ===== -->
+  <!-- HEADER -->
   <header class="site-header">
-    <div class="container nav-bar">
-      <a class="brand" href="#home">
+    <div class="container header-inner">
+      <a href="#home" class="brand">
               <img id="logo" src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" height="100">
         <span class="brand-text">e-META</span>
       </a>
 
-      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      <!-- Burger -->
+      <button id="burgerBtn" class="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
 
-      <nav class="nav-links" id="primaryNav">
-        <a href="#home" data-i18n="home">Accueil</a>
-        <a href="#about" data-i18n="about">À propos</a>
-        <a href="#faq" data-i18n="faq">FAQ</a>
-        <a href="#contact" data-i18n="contact">Contact</a>
-        <button id="whatsappBtn" class="btn-wa">WhatsApp</button>
-
-        <div class="lang-wrapper">
-          <button id="languageSelect" class="lang-btn">🇫🇷 FR</button>
-          <div id="languageMenu" class="lang-dropdown">
-            <button class="lang-option" data-lang="fr">🇫🇷 Français</button>
-            <button class="lang-option" data-lang="en">🇬🇧 English</button>
-            <button class="lang-option" data-lang="es">🇪🇸 Español</button>
-            <button class="lang-option" data-lang="ar">🇸🇦 العربية</button>
-          </div>
-        </div>
+      <!-- NAV -->
+      <nav id="mainNav" class="nav">
+        <a href="#home" data-i18n="nav_home">Accueil</a>
+        <a href="#about" data-i18n="nav_about">À propos</a>
+        <a href="#faq" data-i18n="nav_faq">FAQ</a>
+        <a href="#contact" data-i18n="nav_contact">Contact</a>
       </nav>
+
+      <!-- Actions -->
+      <div class="actions">
+        <button id="whatsappBtn" class="btn btn-wa">WhatsApp</button>
+
+        <!-- Lang select (flag + code) -->
+        <div class="langbox">
+          <button id="langToggle" class="lang-current" aria-haspopup="true" aria-expanded="false">
+            <span id="langFlag">🇫🇷</span>
+            <span id="langCode">FR</span>
+            <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 7l5 6 5-6H5z"/></svg>
+          </button>
+          <ul id="langMenu" class="lang-menu" role="menu" aria-label="Language">
+            <li data-lang="fr" role="menuitem">🇫🇷 FR — Français</li>
+            <li data-lang="en" role="menuitem">🇬🇧 EN — English</li>
+            <li data-lang="es" role="menuitem">🇪🇸 ES — Español</li>
+            <li data-lang="ar" role="menuitem">🇸🇦 AR — العربية</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </header>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero container" id="home">
-    <h1 data-i18n="title">e-META — L’assistant IA pluridisciplinaire</h1>
-    <p class="tagline" data-i18n="tagline">
-      Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="container">
+      <h1 class="hero-title" data-i18n="hero_title">e-META — L’assistant IA pluridisciplinaire</h1>
+      <p class="hero-sub" data-i18n="hero_sub">
+        Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.
+      </p>
+    </div>
+  </section>
+
+  <!-- FORM CARD -->
+  <main class="container">
+    <section class="card">
+      <h2 class="card-title" data-i18n="form_title">Requête personnalisée</h2>
+
+      <form id="requestForm" class="form-grid" novalidate>
+        <!-- Domaine / Résultat -->
+        <div class="form-field">
+          <label for="themeSelect" data-i18n="label_domain">Domaine / Thème</label>
+          <select id="themeSelect" required aria-required="true"></select>
+        </div>
+
+        <div class="form-field">
+          <label for="expected" data-i18n="label_expected">Résultat attendu</label>
+          <input id="expected" type="text" placeholder="Ex : Dossier de financement…" />
+        </div>
+
+        <!-- Budget / Devise -->
+        <div class="form-field">
+          <label for="budget" data-i18n="label_budget">Budget indicatif</label>
+          <input id="budget" type="text" inputmode="numeric" placeholder="Montant estimé" />
+        </div>
+
+        <div class="form-field">
+          <label for="currencySelect" data-i18n="label_currency">Devise</label>
+          <select id="currencySelect" required aria-required="true"></select>
+        </div>
+
+        <!-- Identité -->
+        <div class="form-field">
+          <label for="fullname" data-i18n="label_fullname">Nom complet</label>
+          <input id="fullname" type="text" placeholder="Votre nom complet" />
+        </div>
+
+        <div class="form-field">
+          <label for="phone" data-i18n="label_phone">Téléphone (WhatsApp)</label>
+          <input id="phone" type="tel" placeholder="+221…" />
+        </div>
+
+        <div class="form-field full">
+          <label for="email" data-i18n="label_email">Email</label>
+          <input id="email" type="email" placeholder="exemple@mail.com" />
+        </div>
+
+        <div class="form-field full">
+          <label for="details" data-i18n="label_details">Détails / Contexte</label>
+          <textarea id="details" rows="5" placeholder="Décrivez le contexte…"></textarea>
+        </div>
+
+        <!-- Delivery mode -->
+        <fieldset class="form-field full">
+          <legend data-i18n="label_delivery">Mode de restitution</legend>
+          <div class="radios" id="deliveryGroup">
+            <label class="radio">
+              <input type="radio" name="delivery" value="whatsapp" checked>
+              <span data-i18n="delivery_whatsapp">WhatsApp</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="delivery" value="email">
+              <span data-i18n="delivery_email">Email</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="delivery" value="display">
+              <span data-i18n="delivery_display">Affichage direct</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Actions -->
+        <div class="form-actions full">
+          <button type="button" id="sendBtn" class="btn btn-primary" data-i18n="btn_send">Envoyer la requête</button>
+          <button type="reset" class="btn" data-i18n="btn_reset">Réinitialiser</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- ABOUT / FAQ / CONTACT -->
+  <section id="about" class="container sections">
+    <h3 data-i18n="about_title">À propos</h3>
+    <p data-i18n="about_body">
+      e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.
     </p>
   </section>
 
-  <!-- ===== FORMULAIRE ===== -->
-  <section class="container">
-    <form id="customForm" class="card form-card">
-      <h2 class="center" data-i18n="customRequest">Requête personnalisée</h2>
-
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="domainSelect" data-i18n="domain">Domaine / Thème</label>
-          <select id="domainSelect"></select>
-        </div>
-        <div class="form-group">
-          <label for="expectedResult" data-i18n="expected">Résultat attendu</label>
-          <input id="expectedResult" type="text" />
-        </div>
-
-        <div class="form-group">
-          <label for="budgetInput" data-i18n="budget">Budget indicatif</label>
-          <input id="budgetInput" type="text" inputmode="decimal" />
-        </div>
-        <div class="form-group">
-          <label for="currencySelect" data-i18n="currency">Devise</label>
-          <select id="currencySelect"></select>
-        </div>
-
-        <div class="form-group">
-          <label for="fullName" data-i18n="name">Nom complet</label>
-          <input id="fullName" type="text" />
-        </div>
-        <div class="form-group">
-          <label for="phoneInput" data-i18n="phone">Téléphone (WhatsApp)</label>
-          <input id="phoneInput" type="tel" placeholder="+221 …" />
-        </div>
-
-        <div class="form-group span-2">
-          <label for="emailInput" data-i18n="email">Email</label>
-          <input id="emailInput" type="email" />
-        </div>
-
-        <div class="form-group span-2">
-          <label for="detailsInput" data-i18n="details">Détails / Contexte</label>
-          <textarea id="detailsInput" rows="4"></textarea>
-        </div>
-      </div>
-
-      <fieldset class="card radio-card">
-        <legend data-i18n="mode">Mode de restitution</legend>
-        <div class="radio-row">
-          <label class="radio"><input type="radio" name="delivery" value="whatsapp" checked /><span>WhatsApp</span></label>
-          <label class="radio"><input type="radio" name="delivery" value="email" /><span>Email</span></label>
-          <label class="radio"><input type="radio" name="delivery" value="display" /><span data-i18n="mode_display">Affichage direct</span></label>
-        </div>
-      </fieldset>
-
-      <div class="actions">
-        <button type="button" id="sendBtn" class="btn-primary" data-i18n="send">Envoyer la requête</button>
-        <button type="reset" class="btn-light" data-i18n="reset">Réinitialiser</button>
-      </div>
-    </form>
+  <section id="faq" class="container sections">
+    <h3>FAQ</h3>
+    <details>
+      <summary data-i18n="faq_q1">Comment fonctionne e-META ?</summary>
+      <p data-i18n="faq_a1">
+        Remplissez le formulaire, e-META analyse vos données, propose une synthèse et restitue selon le mode choisi.
+      </p>
+    </details>
   </section>
 
-  <!-- ===== ABOUT / FAQ / CONTACT ===== -->
-  <footer class="footer" id="about">
-    <section class="container about">
-      <h3 data-i18n="about">À propos</h3>
-      <p data-i18n="aboutText">
-        e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.
-      </p>
+  <section id="contact" class="container sections">
+    <h3 data-i18n="contact_title">Contact</h3>
+    <p>
+      <span data-i18n="contact_label">Email :</span>
+      <a href="mailto:contact@e-meta.app">contact@e-meta.app</a>
+    </p>
+  </section>
 
-      <h3 id="faq" data-i18n="faq">FAQ</h3>
-      <details><summary data-i18n="faqQ">Comment fonctionne e-META ?</summary>
-        <p>Le système analyse vos données, puis génère une synthèse intelligente personnalisée.</p>
-      </details>
-
-      <h3 id="contact" data-i18n="contact">Contact</h3>
-      <p>Email : <a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
-    </section>
-
-    <div class="footer-bottom" data-i18n="footer">
-      © 2025 e-META • Simplement. Intelligemment.
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p id="footerText">© 2025 e-META • Simplement. Intelligemment.</p>
     </div>
   </footer>
 
-  <script src="script_v3.8.js"></script>
+  <script src="./script_v3.8.js"></script>
 </body>
 </html>
-
-
