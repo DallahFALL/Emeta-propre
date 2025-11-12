@@ -103,3 +103,24 @@ html, body { margin:0; padding:0; font-family: "Poppins", system-ui, -apple-syst
 .site-footer h3{margin:.2rem 0 .6rem}
 .site-footer a{color:#4da6ff; text-decoration:none}
 .site-footer a:hover{text-decoration:underline}
+
+.lang-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.5);
+  padding: 6px 10px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+.lang-select:hover {
+  background: rgba(255,255,255,0.85);
+  transform: scale(1.03);
+}
+#flag { font-size: 20px; transition: transform .2s ease; }
+#languageSelect {
+  border: none; background: transparent; font-weight: 600;
+  font-size: .9rem; cursor: pointer; outline: none;
+}
+#languageSelect option { background: #fff; color: #111; }
