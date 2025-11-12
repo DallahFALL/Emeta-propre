@@ -212,3 +212,35 @@ dropdown.querySelectorAll("li").forEach(item => {
 document.addEventListener("click", e => {
   if (!langMenu.contains(e.target)) langMenu.classList.remove("open");
 });
+
+/* === BURGER MENU === */
+const burger = document.querySelector("#burger");
+const mainNav = document.querySelector("#mainNav");
+burger.addEventListener("click", () => {
+  mainNav.classList.toggle("open");
+});
+
+/* === LANG MENU === */
+const langMenu = document.querySelector("#langMenu");
+const langBtn = document.querySelector("#langBtn");
+const dropdown = document.querySelector("#langDropdown");
+const flag = document.querySelector("#flag");
+const langCode = document.querySelector("#langCode");
+
+langBtn.addEventListener("click", () => {
+  langMenu.classList.toggle("open");
+});
+
+dropdown.querySelectorAll("li").forEach(item => {
+  item.addEventListener("click", () => {
+    const lang = item.dataset.lang;
+    applyLanguage(lang);
+    flag.textContent = FLAGS[lang];
+    langCode.textContent = lang;
+    langMenu.classList.remove("open");
+  });
+});
+
+document.addEventListener("click", e => {
+  if (!langMenu.contains(e.target)) langMenu.classList.remove("open");
+});
