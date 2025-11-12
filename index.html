@@ -8,13 +8,18 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
+ <header class="site-header">
   <div class="header-inner">
+    <!-- LOGO -->
     <div class="brand">
-          <img id="logo" src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" height="100">
+      <img src="logo.png" alt="e-META Logo" class="logo">
+      <span class="brand-text">e-META</span>
     </div>
 
-    <!-- Menu principal -->
+    <!-- BOUTON MENU MOBILE -->
+    <button class="burger" id="burger" aria-label="Menu">&#9776;</button>
+
+    <!-- NAVIGATION PRINCIPALE -->
     <nav class="main-nav" id="mainNav">
       <a href="#home" data-i18n="home">Accueil</a>
       <a href="#about" data-i18n="about">À propos</a>
@@ -22,13 +27,16 @@
       <a href="#contact" data-i18n="contact">Contact</a>
     </nav>
 
+    <!-- ACTIONS (WhatsApp + Langue) -->
     <div class="header-actions">
       <button id="whatsappBtn" class="whatsapp-btn">WhatsApp</button>
 
-      <!-- Sélecteur de langue dynamique -->
+      <!-- Sélecteur de langue -->
       <div class="lang-select" id="langMenu">
         <button id="langBtn" class="lang-btn">
-          <span id="flag">🇫🇷</span> <span id="langCode">FR</span> ▼
+          <span id="flag">🇫🇷</span>
+          <span id="langCode">FR</span>
+          <span class="arrow">▼</span>
         </button>
         <ul id="langDropdown" class="lang-dropdown">
           <li data-lang="FR">🇫🇷 Français</li>
@@ -37,9 +45,6 @@
           <li data-lang="AR">🇸🇦 العربية</li>
         </ul>
       </div>
-
-      <!-- Burger menu -->
-      <button class="burger" id="burger" aria-label="Menu">&#9776;</button>
     </div>
   </div>
 </header>
@@ -129,6 +134,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
