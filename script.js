@@ -252,3 +252,125 @@ function init(){
   bindNav();
 }
 document.addEventListener('DOMContentLoaded', init);
+
+// --- WhatsApp deep-link ------------------------------------------------------
+const SUPPORT_WHATSAPP = "221782607212"; // numéro e-META validé
+
+function getCurrentLang() {
+  const el = document.getElementById("languageSelect");
+  return (el && el.value) ? el.value : "fr";
+}
+
+// Petites étiquettes multi-langues pour le message
+const i18nWA = {
+  fr: {
+    hello: "Bonjour",
+    title: "Nouvelle requête e-META",
+    domain: "Domaine/Thème",
+    expected: "Résultat attendu",
+    budget: "Budget indicatif",
+    currency: "Devise",
+    fullName: "Nom complet",
+    phone: "Téléphone (WhatsApp)",
+    email: "Email",
+    details: "Détails / Contexte",
+    footer: "Envoyé depuis e-META.app"
+  },
+  en: {
+    hello: "Hello",
+    title: "New e-META request",
+    domain: "Domain/Topic",
+    expected: "Expected result",
+    budget: "Indicative budget",
+    currency: "Currency",
+    fullName: "Full name",
+    phone: "Phone (WhatsApp)",
+    email: "Email",
+    details: "Details / Context",
+    footer: "Sent from e-META.app"
+  },
+  es: {
+    hello: "Hola",
+    title: "Nueva solicitud e-META",
+    domain: "Dominio/Tema",
+    expected: "Resultado esperado",
+    budget: "Presupuesto indicativo",
+    currency: "Moneda",
+    fullName: "Nombre completo",
+    phone: "Teléfono (WhatsApp)",
+    email: "Email",
+    details: "Detalles / Contexto",
+    footer: "Enviado desde e-META.app"
+  },
+  ar: {
+    hello: "مرحبًا",
+    title: "طلب جديد من e-META",
+    domain: "المجال / الموضوع",
+    expected: "النتيجة المتوقعة",
+    budget: "الميزانية التقديرية",
+    currency: "العملة",
+    fullName: "الاسم الكامل",
+    phone: "الهاتف (واتساب)",
+    email: "البريد الإلكتروني",
+    details: "التفاصيل / السياق",
+    footer: "أُرسل من e-META.app"
+  }
+};
+
+function getValue(id) {
+  const el = document.getElementById(id);
+  if (!el) return "";
+  if (el.tagName === "SELECT") {
+    return el.options[el.selectedIndex]?.text?.trim() || "";
+  }
+  return el.value?.trim() || "";
+}
+
+function buildWhatsAppText(lang) {
+  const t = i18nWA[lang] || i18nWA.fr;
+
+  // Adapte ces IDs à tes champs si besoin
+  const domain  = getValue("domainSelect");         // <select id="domainSelect">
+  const result  = getValue("expectedResult");       // <input  id="expectedResult">
+  const budget  = getValue("budgetInput");          // <input  id="budgetInput">
+  const currency= getValue("currencySelect");       // <select id="currencySelect">
+  const name    = getValue("fullName");             // <input  id="fullName">
+  const phone   = getValue("phoneInput");           // <input  id="phoneInput">
+  const email   = getValue("emailInput");           // <input  id="emailInput">
+  const details = getValue("detailsInput");         // <textarea id="detailsInput">
+
+  const lines = [
+    `${t.hello} 👋`,
+    `*${t.title}*`,
+    `${t.domain}: ${domain || "—"}`,
+    `${t.expected}: ${result || "—"}`,
+    `${t.budget}: ${budget || "—"}`,
+    `${t.currency}: ${currency || "—"}`,
+    `${t.fullName}: ${name || "—"}`,
+    `${t.phone}: ${phone || "—"}`,
+    `${t.email}: ${email || "—"}`,
+    `${t.details}:`,
+    `${details || "—"}`,
+    "",
+    t.footer
+  ];
+
+  return lines.join("\n");
+}
+
+function openWhatsAppWithForm() {
+  const lang = getCurrentLang();
+  const text = encodeURIComponent(buildWhatsAppText(lang));
+  // Utilise le schéma court, compatible mobile & web (WhatsApp Web)
+  const url  = `https://wa.me/${SUPPORT_WHATSAPP}?text=${text}`;
+  window.open(url, "_blank", "noopener");
+}
+
+(function bindWhatsAppButton(){
+  const btn = document.getElementById("whatsappBtn");
+  if (!btn) return;
+  btn.addEventListener("click", function(e){
+    e.preventDefault();
+    openWhatsAppWithForm();
+  });
+})();
