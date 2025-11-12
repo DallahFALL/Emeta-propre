@@ -1,6 +1,7 @@
-/* ===== CONFIG TRANSLATIONS / OPTIONS ===== */
+/* ====== Drapeaux et langues ====== */
 const FLAGS = { FR: "🇫🇷", EN: "🇬🇧", ES: "🇪🇸", AR: "🇸🇦" };
 
+/* ====== Textes et traductions ====== */
 const i18n = {
   FR: {
     home: "Accueil", about: "À propos", faq: "FAQ", contact: "Contact",
@@ -12,22 +13,23 @@ const i18n = {
     label_email: "Email", label_details: "Détails / Contexte", label_mode: "Mode de restitution",
     mode_whatsapp: "WhatsApp", mode_email: "Email", mode_display: "Affichage direct",
     ph_expected: "Ex : Dossier de financement, plan stratégique, prototype...",
-    ph_budget: "Montant estimé", ph_fullname: "Votre nom complet", ph_phone: "+221…", ph_email: "exemple@mail.com",
-    ph_details: "Décrivez le contexte, contraintes ou priorités...",
+    ph_budget: "Montant estimé", ph_fullname: "Votre nom complet", ph_phone: "+221…",
+    ph_email: "exemple@mail.com", ph_details: "Décrivez le contexte, contraintes ou priorités...",
     btn_submit: "Envoyer la requête", btn_reset: "Réinitialiser",
     about_text: "e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.",
     faq_question: "Comment fonctionne e-META ?",
     faq_answer: "e-META collecte vos informations, les analyse avec l’IA, et restitue une synthèse personnalisée via WhatsApp, email ou affichage direct.",
     copyright: "© 2025 e-META • Simplement. Intelligemment.",
     domains: [
-      "— Domaine —","Agriculture","Environnement","Énergie","Commerce","E-commerce","Finance","FinTech","Financement",
-      "Marketing","Technologie","Éducation","Santé","Transport","Immobilier","Construction","Logistique","Tourisme",
-      "Industrie","Médias","Services publics","Gouvernance","Sécurité","RH / Recrutement"
+      "— Domaine —", "Agriculture", "Environnement", "Énergie", "Commerce", "E-commerce",
+      "Finance", "FinTech", "Financement", "Technologie", "Éducation", "Santé", "Transport",
+      "Immobilier", "Construction", "Logistique", "Tourisme", "Industrie", "Médias", "Services publics",
+      "Gouvernance", "Sécurité", "RH / Recrutement"
     ],
     currencies: [
-      "USD — Dollar américain","EUR — Euro","XOF — Franc CFA","GBP — Livre sterling","JPY — Yen japonais",
-      "CAD — Dollar canadien","CNY — Yuan chinois","AED — Dirham des Émirats","MAD — Dirham marocain",
-      "NGN — Naira nigérian","GHS — Cedi ghanéen","ZAR — Rand sud-africain"
+      "USD — Dollar américain", "EUR — Euro", "XOF — Franc CFA", "GBP — Livre sterling",
+      "JPY — Yen japonais", "CAD — Dollar canadien", "CNY — Yuan chinois", "AED — Dirham des Émirats",
+      "MAD — Dirham marocain", "GHS — Cedi ghanéen", "ZAR — Rand sud-africain"
     ]
   },
   EN: {
@@ -39,23 +41,24 @@ const i18n = {
     label_currency: "Currency", label_fullname: "Full name", label_phone: "Phone (WhatsApp)",
     label_email: "Email", label_details: "Details / Context", label_mode: "Delivery mode",
     mode_whatsapp: "WhatsApp", mode_email: "Email", mode_display: "Direct display",
-    ph_expected: "Ex: Funding file, strategic plan, prototype...", ph_budget: "Estimated amount",
-    ph_fullname: "Your full name", ph_phone: "+221…", ph_email: "example@mail.com",
-    ph_details: "Describe context, constraints or priorities...",
+    ph_expected: "Ex: Funding file, strategic plan, prototype...",
+    ph_budget: "Estimated amount", ph_fullname: "Your full name", ph_phone: "+221…",
+    ph_email: "example@mail.com", ph_details: "Describe context, constraints or priorities...",
     btn_submit: "Send request", btn_reset: "Reset",
     about_text: "e-META structures requests and produces a strategic summary adapted to the context.",
     faq_question: "How does e-META work?",
     faq_answer: "e-META gathers your inputs, analyzes them with AI, and returns a tailored strategic summary via WhatsApp, email, or direct display.",
     copyright: "© 2025 e-META • Simply. Intelligently.",
     domains: [
-      "— Domain —","Agriculture","Environment","Energy","Commerce","E-commerce","Finance","FinTech","Funding",
-      "Marketing","Technology","Education","Health","Transport","Real estate","Construction","Logistics","Tourism",
-      "Industry","Media","Public services","Governance","Security","HR / Recruitment"
+      "— Domain —", "Agriculture", "Environment", "Energy", "Commerce", "E-commerce",
+      "Finance", "FinTech", "Funding", "Technology", "Education", "Health", "Transport",
+      "Real estate", "Construction", "Logistics", "Tourism", "Industry", "Media", "Public services",
+      "Governance", "Security", "HR / Recruitment"
     ],
     currencies: [
-      "USD — US Dollar","EUR — Euro","XOF — West African CFA franc","GBP — Pound sterling","JPY — Japanese Yen",
-      "CAD — Canadian Dollar","CNY — Chinese Yuan","AED — UAE Dirham","MAD — Moroccan Dirham",
-      "NGN — Nigerian Naira","GHS — Ghanaian Cedi","ZAR — South African Rand"
+      "USD — US Dollar", "EUR — Euro", "XOF — West African CFA franc", "GBP — Pound sterling",
+      "JPY — Japanese Yen", "CAD — Canadian Dollar", "CNY — Chinese Yuan", "AED — UAE Dirham",
+      "MAD — Moroccan Dirham", "GHS — Ghanaian Cedi", "ZAR — South African Rand"
     ]
   },
   ES: {
@@ -67,23 +70,24 @@ const i18n = {
     label_currency: "Moneda", label_fullname: "Nombre completo", label_phone: "Teléfono (WhatsApp)",
     label_email: "Correo", label_details: "Detalles / Contexto", label_mode: "Modo de entrega",
     mode_whatsapp: "WhatsApp", mode_email: "Email", mode_display: "Visualización directa",
-    ph_expected: "Ej.: Dossier de financiamiento, plan estratégico, prototipo...", ph_budget: "Monto estimado",
-    ph_fullname: "Su nombre completo", ph_phone: "+221…", ph_email: "ejemplo@mail.com",
-    ph_details: "Describa el contexto, limitaciones o prioridades...",
+    ph_expected: "Ej.: Dossier de financiamiento, plan estratégico, prototipo...",
+    ph_budget: "Monto estimado", ph_fullname: "Su nombre completo", ph_phone: "+221…",
+    ph_email: "ejemplo@mail.com", ph_details: "Describa el contexto, limitaciones o prioridades...",
     btn_submit: "Enviar solicitud", btn_reset: "Restablecer",
     about_text: "e-META estructura las solicitudes y produce un resumen estratégico adaptado al contexto.",
     faq_question: "¿Cómo funciona e-META?",
     faq_answer: "e-META recopila sus datos, los analiza con IA y entrega un resumen estratégico por WhatsApp, email o visualización directa.",
     copyright: "© 2025 e-META • Simplemente. Inteligentemente.",
     domains: [
-      "— Dominio —","Agricultura","Medio ambiente","Energía","Comercio","Comercio electrónico","Finanzas","FinTech","Financiación",
-      "Marketing","Tecnología","Educación","Salud","Transporte","Bienes raíces","Construcción","Logística","Turismo",
-      "Industria","Medios","Servicios públicos","Gobernanza","Seguridad","RR. HH. / Reclutamiento"
+      "— Dominio —", "Agricultura", "Medio ambiente", "Energía", "Comercio", "Comercio electrónico",
+      "Finanzas", "FinTech", "Financiación", "Tecnología", "Educación", "Salud", "Transporte",
+      "Bienes raíces", "Construcción", "Logística", "Turismo", "Industria", "Medios", "Servicios públicos",
+      "Gobernanza", "Seguridad", "RR. HH. / Reclutamiento"
     ],
     currencies: [
-      "USD — Dólar estadounidense","EUR — Euro","XOF — Franco CFA de África Occidental","GBP — Libra esterlina","JPY — Yen japonés",
-      "CAD — Dólar canadiense","CNY — Yuan chino","AED — Dírham de EAU","MAD — Dírham marroquí",
-      "NGN — Naira nigeriano","GHS — Cedi ghanés","ZAR — Rand sudafricano"
+      "USD — Dólar estadounidense", "EUR — Euro", "XOF — Franco CFA", "GBP — Libra esterlina",
+      "JPY — Yen japonés", "CAD — Dólar canadiense", "CNY — Yuan chino", "AED — Dírham de EAU",
+      "MAD — Dírham marroquí", "GHS — Cedi ghanés", "ZAR — Rand sudafricano"
     ]
   },
   AR: {
@@ -95,91 +99,58 @@ const i18n = {
     label_currency: "العملة", label_fullname: "الاسم الكامل", label_phone: "الهاتف (واتساب)",
     label_email: "البريد الإلكتروني", label_details: "التفاصيل / السياق", label_mode: "طريقة الاسترجاع",
     mode_whatsapp: "واتساب", mode_email: "البريد", mode_display: "عرض مباشر",
-    ph_expected: "مثال: ملف تمويل، خطة استراتيجية، نموذج أولي...", ph_budget: "المبلغ المقدّر",
-    ph_fullname: "اسمك الكامل", ph_phone: "+221…", ph_email: "example@mail.com",
-    ph_details: "اشرح السياق أو القيود أو الأولويات...",
+    ph_expected: "مثال: ملف تمويل، خطة استراتيجية، نموذج أولي...",
+    ph_budget: "المبلغ المقدّر", ph_fullname: "اسمك الكامل", ph_phone: "+221…",
+    ph_email: "example@mail.com", ph_details: "اشرح السياق أو القيود أو الأولويات...",
     btn_submit: "إرسال الطلب", btn_reset: "إعادة التعيين",
     about_text: "يقوم e-META بهيكلة الطلبات وإنتاج خلاصة استراتيجية مناسبة للسياق.",
     faq_question: "كيف يعمل e-META ؟",
     faq_answer: "يجمع e-META معلوماتك ويحللها بالذكاء الاصطناعي ثم يعرض خلاصة مخصّصة عبر واتساب أو البريد أو العرض المباشر.",
     copyright: "© 2025 e-META • ببساطة. بذكاء.",
     domains: [
-      "— المجال —","الزراعة","البيئة","الطاقة","التجارة","التجارة الإلكترونية","المالية","التقنية المالية","التمويل",
-      "التسويق","التكنولوجيا","التعليم","الصحة","النقل","العقارات","البناء","اللوجستيات","السياحة",
-      "الصناعة","الإعلام","الخدمات العامة","الحوكمة","الأمن","الموارد البشرية / التوظيف"
+      "— المجال —", "الزراعة", "البيئة", "الطاقة", "التجارة", "التجارة الإلكترونية",
+      "المالية", "التقنية المالية", "التمويل", "التكنولوجيا", "التعليم", "الصحة", "النقل",
+      "العقارات", "البناء", "اللوجستيات", "السياحة", "الصناعة", "الإعلام", "الخدمات العامة",
+      "الحوكمة", "الأمن", "الموارد البشرية / التوظيف"
     ],
     currencies: [
-      "USD — الدولار الأمريكي","EUR — اليورو","XOF — فرنك غرب إفريقيا","GBP — الجنيه الإسترليني","JPY — الين الياباني",
-      "CAD — الدولار الكندي","CNY — اليوان الصيني","AED — الدرهم الإماراتي","MAD — الدرهم المغربي",
-      "NGN — النيرة النيجيرية","GHS — السيدي الغاني","ZAR — الراند الجنوب أفريقي"
+      "USD — الدولار الأمريكي", "EUR — اليورو", "XOF — فرنك غرب إفريقيا", "GBP — الجنيه الإسترليني",
+      "JPY — الين الياباني", "CAD — الدولار الكندي", "CNY — اليوان الصيني", "AED — الدرهم الإماراتي",
+      "MAD — الدرهم المغربي", "GHS — السيدي الغاني", "ZAR — الراند الجنوب أفريقي"
     ]
   }
 };
 
-/* ===== HELPERS ===== */
+/* ====== Fonctions utilitaires ====== */
 const $ = s => document.querySelector(s);
-
-function fillSelect(select, items) {
-  select.innerHTML = items.map(text => `<option>${text}</option>`).join("");
+function fillSelect(select, list) {
+  select.innerHTML = list.map(v => `<option>${v}</option>`).join("");
 }
-
-function setPlaceholders(lang) {
-  const t = i18n[lang];
-  $("#expected").placeholder = t.ph_expected;
-  $("#budget").placeholder   = t.ph_budget;
-  $("#fullname").placeholder = t.ph_fullname;
-  $("#phone").placeholder    = t.ph_phone;
-  $("#email").placeholder    = t.ph_email;
-  $("#details").placeholder  = t.ph_details;
-}
-
-function translateStatic(lang) {
+function translate(lang) {
   const t = i18n[lang];
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
     if (t[key]) el.textContent = t[key];
   });
-  // copyright / footer mail stays
-  $("#flag").textContent = FLAGS[lang] || "🌐";
-  document.dir = (lang === "AR") ? "rtl" : "ltr";
-}
-
-function applyLanguage(lang) {
-  const t = i18n[lang];
-  // Header + footer + labels
-  translateStatic(lang);
-  // Placeholders
-  setPlaceholders(lang);
-  // Domain & currency dynamic lists
+  // placeholders
+  $("#expected").placeholder = t.ph_expected;
+  $("#budget").placeholder = t.ph_budget;
+  $("#fullname").placeholder = t.ph_fullname;
+  $("#phone").placeholder = t.ph_phone;
+  $("#email").placeholder = t.ph_email;
+  $("#details").placeholder = t.ph_details;
   fillSelect($("#domain"), t.domains);
   fillSelect($("#currency"), t.currencies);
-  // Save choice
-  localStorage.setItem("emeta_lang", lang);
-  // Ensure select shows current
-  $("#languageSelect").value = lang;
+  $("#flag").textContent = FLAGS[lang];
+  document.dir = (lang === "AR") ? "rtl" : "ltr";
+  localStorage.setItem("lang", lang);
 }
 
-/* ===== INIT ===== */
+/* ====== Initialisation ====== */
 document.addEventListener("DOMContentLoaded", () => {
-  const saved = localStorage.getItem("emeta_lang") || "FR";
-  applyLanguage(saved);
+  const lang = localStorage.getItem("lang") || "FR";
+  translate(lang);
+  $("#languageSelect").value = lang;
 
-  // Language switch
-  $("#languageSelect").addEventListener("change", e => {
-    applyLanguage(e.target.value);
-  });
-
-  // WhatsApp CTA
-  $("#whatsappBtn").addEventListener("click", () => {
-    // ouvre une nouvelle conversation vide avec le numéro si renseigné
-    const phone = $("#phone").value.replace(/\D/g, "");
-    const url = phone ? `https://wa.me/${phone}` : `https://wa.me/`;
-    window.open(url, "_blank");
-  });
-
-  // Form (demo)
-  $("#requestForm").addEventListener("submit", e => {
-    e.preventDefault();
-    alert("✅ Requête envoyée (démo).");
-  });
+  $("#languageSelect").addEventListener("change", e => translate(e.target.value));
 });
