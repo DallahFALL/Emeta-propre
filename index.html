@@ -51,42 +51,39 @@
 
       <div class="grid-2">
         <div class="field">
-          <label for="domain" data-i18n="label_domain">Domaine / Thème</label>
+          <label data-i18n="label_domain">Domaine / Thème</label>
           <select id="domain"></select>
         </div>
-
         <div class="field">
-          <label for="expected" data-i18n="label_expected">Résultat attendu</label>
+          <label data-i18n="label_expected">Résultat attendu</label>
           <input id="expected" type="text" placeholder="">
         </div>
 
         <div class="field">
-          <label for="budget" data-i18n="label_budget">Budget indicatif</label>
+          <label data-i18n="label_budget">Budget indicatif</label>
           <input id="budget" type="text" placeholder="">
         </div>
-
         <div class="field">
-          <label for="currency" data-i18n="label_currency">Devise</label>
+          <label data-i18n="label_currency">Devise</label>
           <select id="currency"></select>
         </div>
 
         <div class="field">
-          <label for="fullname" data-i18n="label_fullname">Nom complet</label>
+          <label data-i18n="label_fullname">Nom complet</label>
           <input id="fullname" type="text" placeholder="">
         </div>
-
         <div class="field">
-          <label for="phone" data-i18n="label_phone">Téléphone (WhatsApp)</label>
+          <label data-i18n="label_phone">Téléphone (WhatsApp)</label>
           <input id="phone" type="tel" placeholder="">
         </div>
 
         <div class="field span-2">
-          <label for="email" data-i18n="label_email">Email</label>
+          <label data-i18n="label_email">Email</label>
           <input id="email" type="email" placeholder="">
         </div>
 
         <div class="field span-2">
-          <label for="details" data-i18n="label_details">Détails / Contexte</label>
+          <label data-i18n="label_details">Détails / Contexte</label>
           <textarea id="details" rows="4" placeholder=""></textarea>
         </div>
       </div>
@@ -94,18 +91,9 @@
       <fieldset class="mode card-soft">
         <legend data-i18n="label_mode">Mode de restitution</legend>
         <div class="mode-row">
-          <label class="mode-item">
-            <input type="radio" name="mode" value="whatsapp" checked>
-            <span data-i18n="mode_whatsapp">WhatsApp</span>
-          </label>
-          <label class="mode-item">
-            <input type="radio" name="mode" value="email">
-            <span data-i18n="mode_email">Email</span>
-          </label>
-          <label class="mode-item">
-            <input type="radio" name="mode" value="display">
-            <span data-i18n="mode_display">Affichage direct</span>
-          </label>
+          <label><input type="radio" name="mode" value="whatsapp" checked><span data-i18n="mode_whatsapp">WhatsApp</span></label>
+          <label><input type="radio" name="mode" value="email"><span data-i18n="mode_email">Email</span></label>
+          <label><input type="radio" name="mode" value="display"><span data-i18n="mode_display">Affichage direct</span></label>
         </div>
       </fieldset>
 
@@ -119,20 +107,16 @@
   <!-- FOOTER -->
   <footer class="site-footer" id="about">
     <h3 data-i18n="about">À propos</h3>
-    <p data-i18n="about_text">
-      e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.
-    </p>
+    <p data-i18n="about_text">e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.</p>
 
     <h3 id="faq" data-i18n="faq">FAQ</h3>
     <details>
       <summary data-i18n="faq_question">Comment fonctionne e-META ?</summary>
-      <p data-i18n="faq_answer">
-        e-META collecte vos informations, les analyse avec l’IA, et restitue une synthèse personnalisée via WhatsApp, email ou affichage direct.
-      </p>
+      <p data-i18n="faq_answer">e-META collecte vos informations, les analyse avec l’IA, et restitue une synthèse personnalisée via WhatsApp, email ou affichage direct.</p>
     </details>
 
     <h3 id="contact" data-i18n="contact">Contact</h3>
-    <p><span>Email : </span><a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
+    <p>Email : <a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
     <p id="copyright" data-i18n="copyright">© 2025 e-META • Simplement. Intelligemment.</p>
   </footer>
 
