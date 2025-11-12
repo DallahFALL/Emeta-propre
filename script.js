@@ -235,3 +235,35 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   applyTranslations("fr");
 });
+
+// === UI HOOKS : menu mobile & langue (à coller en bas de script.js v3.7) ===
+document.addEventListener("DOMContentLoaded", () => {
+  const navToggle = document.querySelector(".nav-toggle");
+  const primaryNav = document.getElementById("primaryNav");
+  if (navToggle && primaryNav) {
+    navToggle.addEventListener("click", () => primaryNav.classList.toggle("open"));
+  }
+
+  const langBtn = document.getElementById("languageSelect");
+  const langMenu = document.getElementById("languageMenu");
+  if (langBtn && langMenu) {
+    langBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      langMenu.classList.toggle("show");
+    });
+    document.addEventListener("click", (e) => {
+      if (!langMenu.contains(e.target) && e.target !== langBtn) langMenu.classList.remove("show");
+    });
+  }
+
+  // Envoi bouton principal = même logique que WhatsApp si "whatsapp" coché
+  const send = document.getElementById("sendBtn");
+  if (send) {
+    send.addEventListener("click", () => {
+      const mode = (document.querySelector('input[name="delivery"]:checked')||{}).value;
+      if (mode === "whatsapp") openWhatsAppDynamic();
+      else if (mode === "email") alert("Mode Email: à câbler avec ton scénario (Make / SMTP).");
+      else alert("Affichage direct: à afficher dans la page/résumé.");
+    });
+  }
+});
