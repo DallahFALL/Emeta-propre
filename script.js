@@ -374,3 +374,78 @@ function openWhatsAppWithForm() {
     openWhatsAppWithForm();
   });
 })();
+
+// === TABLE DES NUMÉROS WHATSAPP PAR RÉGION / LANGUE ===
+const WA_CONTACTS = {
+  fr: { number: "221782607212", name: "e-META Sénégal" },
+  en: { number: "233550120874",  name: "e-META Ghana" },
+  es: { number: "34631102478",   name: "e-META España" },
+  ar: { number: "971521905611",  name: "e-META Dubai" }
+};
+
+// === Message type multi-langue ===
+const i18nWA = {
+  fr: {
+    hello: "Bonjour 👋",
+    title: "Nouvelle requête e-META",
+    footer: "Envoyé depuis e-META.app"
+  },
+  en: {
+    hello: "Hello 👋",
+    title: "New e-META Request",
+    footer: "Sent from e-META.app"
+  },
+  es: {
+    hello: "Hola 👋",
+    title: "Nueva solicitud e-META",
+    footer: "Enviado desde e-META.app"
+  },
+  ar: {
+    hello: "مرحبًا 👋",
+    title: "طلب جديد من e-META",
+    footer: "أُرسل من e-META.app"
+  }
+};
+
+// === Construit le message et ouvre WhatsApp ===
+function openWhatsAppDynamic() {
+  const lang = state.lang || "fr";
+  const { number, name } = WA_CONTACTS[lang] || WA_CONTACTS.fr;
+  const dict = i18nWA[lang] || i18nWA.fr;
+
+  // Exemple basique : tu peux enrichir avec les valeurs du formulaire
+  const domain  = document.getElementById("domain")?.value || "";
+  const result  = document.getElementById("expected")?.value || "";
+  const nameU   = document.getElementById("fullname")?.value || "";
+  const budget  = document.getElementById("budget")?.value || "";
+  const currency= document.getElementById("currency")?.value || "";
+  const details = document.getElementById("details")?.value || "";
+
+  const text = encodeURIComponent(
+`${dict.hello}
+${dict.title} 📩
+
+🧩 Domaine / Thème : ${domain}
+🎯 Résultat attendu : ${result}
+💰 Budget : ${budget} ${currency}
+👤 Nom complet : ${nameU}
+📝 Détails : ${details}
+
+${dict.footer}`
+  );
+
+  const url = `https://wa.me/${number}?text=${text}`;
+  window.open(url, "_blank", "noopener");
+
+  console.log(`✅ Envoi via ${name} (${number})`);
+}
+
+// === Bind le bouton WhatsApp principal ===
+(function(){
+  const btn = document.getElementById("whatsappBtn") || document.getElementById("waBtn");
+  if (!btn) return;
+  btn.addEventListener("click", (e)=>{
+    e.preventDefault();
+    openWhatsAppDynamic();
+  });
+})();
