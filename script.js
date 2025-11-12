@@ -267,3 +267,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// === ÉTAT GLOBAL ===
+const state={lang:"fr"};
+
+// === TRADUCTIONS (mêmes textes que v3.7) ===
+const i18n={fr:{title:"e-META — L’assistant IA pluridisciplinaire",tagline:"Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.",customRequest:"Requête personnalisée",domain:"Domaine / Thème",expected:"Résultat attendu",budget:"Budget indicatif",currency:"Devise",name:"Nom complet",phone:"Téléphone (WhatsApp)",email:"Email",details:"Détails / Contexte",mode:"Mode de restitution",send:"Envoyer la requête",reset:"Réinitialiser",about:"À propos",aboutText:"e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.",faq:"FAQ",faqQ:"Comment fonctionne e-META ?",contact:"Contact",footer:"© 2025 e-META • Simplement. Intelligemment."},
+en:{title:"e-META — The Multidisciplinary AI Assistant",tagline:"Smart form to analyze, diagnose and recommend suitable solutions.",customRequest:"Custom Request",domain:"Domain / Topic",expected:"Expected result",budget:"Indicative budget",currency:"Currency",name:"Full name",phone:"Phone (WhatsApp)",email:"Email",details:"Details / Context",mode:"Delivery mode",send:"Send request",reset:"Reset",about:"About",aboutText:"e-META structures requests and produces a strategic synthesis adapted to context.",faq:"FAQ",faqQ:"How does e-META work ?",contact:"Contact",footer:"© 2025 e-META • Simply. Intelligently."},
+es:{title:"e-META — El asistente IA multidisciplinario",tagline:"Formulario inteligente para analizar, diagnosticar y recomendar soluciones adaptadas.",customRequest:"Solicitud personalizada",domain:"Dominio / Tema",expected:"Resultado esperado",budget:"Presupuesto indicativo",currency:"Moneda",name:"Nombre completo",phone:"Teléfono (WhatsApp)",email:"Email",details:"Detalles / Contexto",mode:"Modo de entrega",send:"Enviar solicitud",reset:"Reiniciar",about:"Acerca de",aboutText:"e-META estructura las solicitudes y produce una síntesis estratégica adaptada al contexto.",faq:"FAQ",faqQ:"¿Cómo funciona e-META ?",contact:"Contacto",footer:"© 2025 e-META • Simplemente. Inteligentemente."},
+ar:{title:"إي-ميتا — المساعد الذكي متعدد التخصصات",tagline:"نموذج ذكي لتحليل وتشخيص واقـتراح حلول مناسبة.",customRequest:"طلب مخصص",domain:"المجال / الموضوع",expected:"النتيجة المتوقعة",budget:"الميزانية التقديرية",currency:"العملة",name:"الاسم الكامل",phone:"الهاتف (واتساب)",email:"البريد الإلكتروني",details:"التفاصيل / السياق",mode:"وضع التسليم",send:"إرسال الطلب",reset:"إعادة تعيين",about:"حول",aboutText:"تنظم e-META الطلبات وتنتج تحليلاً استراتيجياً يتكيف مع السياق.",faq:"الأسئلة الشائعة",faqQ:"كيف تعمل e-META؟",contact:"اتصال",footer:"© 2025 إي-ميتا • ببساطة. بذكاء."}};
+
+// === DOMAINES & DEVISES ===
+const domains={fr:["Agriculture","Énergie","Éducation","Santé","Finance","Commerce","Environnement","Technologie","BTP / Construction","Autre"],
+en:["Agriculture","Energy","Education","Health","Finance","Trade","Environment","Technology","Construction","Other"],
+es:["Agricultura","Energía","Educación","Salud","Finanzas","Comercio","Medio ambiente","Tecnología","Construcción","Otro"],
+ar:["الزراعة","الطاقة","التعليم","الصحة","التمويل","التجارة","البيئة","التكنولوجيا","البناء","أخرى"]};
+const currencies={fr:["XOF — Franc CFA","USD — Dollar américain","EUR — Euro"],en:["USD — US Dollar","EUR — Euro","GBP — Pound Sterling"],es:["USD — Dólar EE.UU.","EUR — Euro","MXN — Peso mexicano"],ar:["SAR — ريال سعودي","AED — درهم إماراتي","USD — دولار أمريكي"]};
+
+// === WHATSAPP PAR LANGUE ===
+const WA_CONTACTS={fr:"221782607212",en:"233550120874",es:"34631102478",ar:"971521905611"};
+
+// === CHARGEMENT LISTES ===
+function populateSelects(lang){
+ const d=document.getElementById("domainSelect"),c=document.getElementById("currencySelect");
+ d.innerHTML=domains[lang].map(x=>`<option>${x}</option>`).join("");
+ c.innerHTML=currencies[lang].map(x=>`<option>${x}</option>`).join("");
+}
+
+// === TRADUCTION ===
+function applyTranslations(lang){
+ state.lang=lang;const t=i18n[lang];
+ document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(t[k])el.textContent=t[k];});
+ const p=(
