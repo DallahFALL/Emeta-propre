@@ -449,3 +449,10 @@ ${dict.footer}`
     openWhatsAppDynamic();
   });
 })();
+
+function updateWhatsAppLabel() {
+  const { name } = WA_CONTACTS[state.lang] || WA_CONTACTS.fr;
+  const btn = document.getElementById("whatsappBtn");
+  if (btn) btn.title = `Contacter ${name}`;
+}
+document.addEventListener("DOMContentLoaded", updateWhatsAppLabel);
