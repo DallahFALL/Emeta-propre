@@ -1,301 +1,371 @@
-/* ===========================================================
-   e-META | script.js v3.7 — Multilangue + Responsive + WhatsApp Routing
-   =========================================================== */
+/* =========================
+   e-META – script v3.8
+   ========================= */
 
-// === ÉTAT GLOBAL ===========================================================
-const state = { lang: "fr" };
-
-// === DICTIONNAIRE DE TRADUCTIONS ==========================================
-const i18n = {
+// --- Config langues (i18n) ---
+const I18N = {
   fr: {
-    title: "e-META — L’assistant IA pluridisciplinaire",
-    tagline: "Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.",
-    customRequest: "Requête personnalisée",
-    domain: "Domaine / Thème",
-    expected: "Résultat attendu",
-    budget: "Budget indicatif",
-    currency: "Devise",
-    name: "Nom complet",
-    phone: "Téléphone (WhatsApp)",
-    email: "Email",
-    details: "Détails / Contexte",
-    mode: "Mode de restitution",
-    send: "Envoyer la requête",
-    reset: "Réinitialiser",
-    about: "À propos",
-    aboutText: "e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.",
-    faq: "FAQ",
-    faqQ: "Comment fonctionne e-META ?",
-    contact: "Contact",
-    footer: "© 2025 e-META • Simplement. Intelligemment."
+    _flag: "🇫🇷", _code: "FR", _dir: "ltr", _defaultCurrency: "XOF",
+    nav_home: "Accueil", nav_about: "À propos", nav_faq: "FAQ", nav_contact: "Contact",
+    hero_title: "e-META — L’assistant IA pluridisciplinaire",
+    hero_sub: "Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.",
+    form_title: "Requête personnalisée",
+    label_domain: "Domaine / Thème",
+    label_expected: "Résultat attendu",
+    label_budget: "Budget indicatif",
+    label_currency: "Devise",
+    label_fullname: "Nom complet",
+    label_phone: "Téléphone (WhatsApp)",
+    label_email: "Email",
+    label_details: "Détails / Contexte",
+    label_delivery: "Mode de restitution",
+    delivery_whatsapp: "WhatsApp",
+    delivery_email: "Email",
+    delivery_display: "Affichage direct",
+    btn_send: "Envoyer la requête",
+    btn_reset: "Réinitialiser",
+    about_title: "À propos",
+    about_body: "e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.",
+    faq_q1: "Comment fonctionne e-META ?",
+    faq_a1: "Remplissez le formulaire, e-META analyse vos données, propose une synthèse et restitue selon le mode choisi.",
+    contact_title: "Contact",
+    contact_label: "Email :",
+    footer: "© 2025 e-META • Simplement. Intelligemment.",
+    placeholders: {
+      expected: "Ex : Dossier de financement, plan stratégique, prototype…",
+      budget: "Montant estimé",
+      fullname: "Votre nom complet",
+      phone: "+221…",
+      email: "exemple@mail.com",
+      details: "Décrivez le contexte, contraintes ou priorités…"
+    },
+    themes: [
+      "— Domaine —","Agriculture","Environnement","Énergie","Commerce",
+      "E-commerce","Finance","FinTech","Financement","Marketing",
+      "Technologie","Éducation","Santé","Transport","Immobilier"
+    ],
+    currencies: {
+      XOF: "XOF — Franc CFA", EUR: "EUR — Euro", USD: "USD — US Dollar",
+      GBP: "GBP — British Pound", MAD: "MAD — Dirham", NGN: "NGN — Naira",
+      GHS: "GHS — Cedi", XAF: "XAF — CEMAC Franc", DZD: "DZD — Dinar"
+    }
   },
   en: {
-    title: "e-META — The Multidisciplinary AI Assistant",
-    tagline: "Smart form to analyze, diagnose and recommend suitable solutions.",
-    customRequest: "Custom Request",
-    domain: "Domain / Topic",
-    expected: "Expected result",
-    budget: "Indicative budget",
-    currency: "Currency",
-    name: "Full name",
-    phone: "Phone (WhatsApp)",
-    email: "Email",
-    details: "Details / Context",
-    mode: "Delivery mode",
-    send: "Send request",
-    reset: "Reset",
-    about: "About",
-    aboutText: "e-META structures requests and produces a strategic synthesis adapted to context.",
-    faq: "FAQ",
-    faqQ: "How does e-META work?",
-    contact: "Contact",
-    footer: "© 2025 e-META • Simply. Intelligently."
+    _flag: "🇬🇧", _code: "EN", _dir: "ltr", _defaultCurrency: "USD",
+    nav_home: "Home", nav_about: "About", nav_faq: "FAQ", nav_contact: "Contact",
+    hero_title: "e-META — The Multidisciplinary AI Assistant",
+    hero_sub: "Smart form to analyze, diagnose and recommend suitable solutions.",
+    form_title: "Custom Request",
+    label_domain: "Domain / Topic",
+    label_expected: "Expected result",
+    label_budget: "Indicative budget",
+    label_currency: "Currency",
+    label_fullname: "Full name",
+    label_phone: "Phone (WhatsApp)",
+    label_email: "Email",
+    label_details: "Details / Context",
+    label_delivery: "Delivery mode",
+    delivery_whatsapp: "WhatsApp",
+    delivery_email: "Email",
+    delivery_display: "Direct display",
+    btn_send: "Send request",
+    btn_reset: "Reset",
+    about_title: "About",
+    about_body: "e-META structures requests and produces a strategic synthesis adapted to the context.",
+    faq_q1: "How does e-META work?",
+    faq_a1: "Fill the form; e-META analyzes your data, proposes a synthesis and returns it via the chosen mode.",
+    contact_title: "Contact",
+    contact_label: "Email:",
+    footer: "© 2025 e-META • Simply. Intelligently.",
+    placeholders: {
+      expected: "Ex: Funding file, strategic plan, prototype…",
+      budget: "Estimated amount",
+      fullname: "Your full name",
+      phone: "+44…",
+      email: "example@mail.com",
+      details: "Describe context, constraints or priorities…"
+    },
+    themes: [
+      "— Domain —","Agriculture","Environment","Energy","Trade",
+      "E-commerce","Finance","FinTech","Funding","Marketing",
+      "Technology","Education","Health","Transport","Real estate"
+    ],
+    currencies: {
+      USD: "USD — US Dollar", EUR: "EUR — Euro", GBP: "GBP — British Pound",
+      XOF: "XOF — West African CFA", NGN: "NGN — Naira", GHS: "GHS — Cedi",
+      MAD: "MAD — Dirham", XAF: "XAF — Central African CFA", JPY: "JPY — Yen"
+    }
   },
   es: {
-    title: "e-META — El asistente IA multidisciplinario",
-    tagline: "Formulario inteligente para analizar, diagnosticar y recomendar soluciones adaptadas.",
-    customRequest: "Solicitud personalizada",
-    domain: "Dominio / Tema",
-    expected: "Resultado esperado",
-    budget: "Presupuesto indicativo",
-    currency: "Moneda",
-    name: "Nombre completo",
-    phone: "Teléfono (WhatsApp)",
-    email: "Email",
-    details: "Detalles / Contexto",
-    mode: "Modo de entrega",
-    send: "Enviar solicitud",
-    reset: "Reiniciar",
-    about: "Acerca de",
-    aboutText: "e-META estructura las solicitudes y produce una síntesis estratégica adaptada al contexto.",
-    faq: "FAQ",
-    faqQ: "¿Cómo funciona e-META?",
-    contact: "Contacto",
-    footer: "© 2025 e-META • Simplemente. Inteligentemente."
+    _flag: "🇪🇸", _code: "ES", _dir: "ltr", _defaultCurrency: "EUR",
+    nav_home: "Inicio", nav_about: "Acerca de", nav_faq: "FAQ", nav_contact: "Contacto",
+    hero_title: "e-META — El asistente de IA multidisciplinario",
+    hero_sub: "Formulario inteligente para analizar, diagnosticar y recomendar soluciones adecuadas.",
+    form_title: "Solicitud personalizada",
+    label_domain: "Dominio / Tema",
+    label_expected: "Resultado esperado",
+    label_budget: "Presupuesto indicativo",
+    label_currency: "Moneda",
+    label_fullname: "Nombre completo",
+    label_phone: "Teléfono (WhatsApp)",
+    label_email: "Email",
+    label_details: "Detalles / Contexto",
+    label_delivery: "Modo de entrega",
+    delivery_whatsapp: "WhatsApp",
+    delivery_email: "Email",
+    delivery_display: "Visualización directa",
+    btn_send: "Enviar solicitud",
+    btn_reset: "Restablecer",
+    about_title: "Acerca de",
+    about_body: "e-META estructura las solicitudes y produce una síntesis estratégica adaptada al contexto.",
+    faq_q1: "¿Cómo funciona e-META?",
+    faq_a1: "Complete el formulario; e-META analiza sus datos, propone una síntesis y la entrega según el modo elegido.",
+    contact_title: "Contacto",
+    contact_label: "Email:",
+    footer: "© 2025 e-META • Simple. Inteligentemente.",
+    placeholders: {
+      expected: "Ej: Expediente de financiación, plan estratégico, prototipo…",
+      budget: "Monto estimado",
+      fullname: "Su nombre completo",
+      phone: "+34…",
+      email: "ejemplo@mail.com",
+      details: "Describa el contexto, restricciones o prioridades…"
+    },
+    themes: [
+      "— Dominio —","Agricultura","Medio ambiente","Energía","Comercio",
+      "E-commerce","Finanzas","FinTech","Financiación","Marketing",
+      "Tecnología","Educación","Salud","Transporte","Bienes raíces"
+    ],
+    currencies: {
+      EUR: "EUR — Euro", USD: "USD — Dólar", GBP: "GBP — Libra",
+      XOF: "XOF — Franco CFA", MXN: "MXN — Peso", ARS: "ARS — Peso Argentino",
+      COP: "COP — Peso Colombiano", CLP: "CLP — Peso Chileno", BRL: "BRL — Real"
+    }
   },
   ar: {
-    title: "إي-ميتا — المساعد الذكي متعدد التخصصات",
-    tagline: "نموذج ذكي لتحليل وتشخيص واقتراح حلول مناسبة.",
-    customRequest: "طلب مخصص",
-    domain: "المجال / الموضوع",
-    expected: "النتيجة المتوقعة",
-    budget: "الميزانية التقديرية",
-    currency: "العملة",
-    name: "الاسم الكامل",
-    phone: "الهاتف (واتساب)",
-    email: "البريد الإلكتروني",
-    details: "التفاصيل / السياق",
-    mode: "وضع التسليم",
-    send: "إرسال الطلب",
-    reset: "إعادة تعيين",
-    about: "حول",
-    aboutText: "تقوم e-META بتنظيم الطلبات وإنتاج تحليل استراتيجي متكيف مع السياق.",
-    faq: "الأسئلة الشائعة",
-    faqQ: "كيف تعمل e-META؟",
-    contact: "اتصال",
-    footer: "© 2025 إي-ميتا • ببساطة. بذكاء."
+    _flag: "🇸🇦", _code: "AR", _dir: "rtl", _defaultCurrency: "SAR",
+    nav_home: "الرئيسية", nav_about: "حول", nav_faq: "الأسئلة الشائعة", nav_contact: "اتصال",
+    hero_title: "e-META — المساعد الذكي المتعدد المجالات",
+    hero_sub: "نموذج ذكي للتحليل والتشخيص والتوصية بحلول مناسبة.",
+    form_title: "طلب مخصص",
+    label_domain: "المجال / الموضوع",
+    label_expected: "النتيجة المتوقعة",
+    label_budget: "الميزانية التقديرية",
+    label_currency: "العملة",
+    label_fullname: "الاسم الكامل",
+    label_phone: "الهاتف (واتساب)",
+    label_email: "البريد الإلكتروني",
+    label_details: "التفاصيل / السياق",
+    label_delivery: "طريقة الاسترجاع",
+    delivery_whatsapp: "واتساب",
+    delivery_email: "البريد",
+    delivery_display: "عرض مباشر",
+    btn_send: "إرسال الطلب",
+    btn_reset: "إعادة الضبط",
+    about_title: "حول",
+    about_body: "يقوم e-META بهيكلة الطلبات وإنتاج تحليل استراتيجي مناسب للسياق.",
+    faq_q1: "كيف يعمل e-META؟",
+    faq_a1: "املأ النموذج، يحلل e-META بياناتك ويقدم خلاصة وفق طريقة الاسترجاع المختارة.",
+    contact_title: "اتصال",
+    contact_label: "البريد:",
+    footer: "© 2025 e-META • ببساطة. بذكاء.",
+    placeholders: {
+      expected: "مثال: ملف تمويل، خطة إستراتيجية، نموذج أولي…",
+      budget: "المبلغ التقديري",
+      fullname: "اسمك الكامل",
+      phone: "+966…",
+      email: "example@mail.com",
+      details: "صف السياق أو القيود أو الأولويات…"
+    },
+    themes: [
+      "— اختر —","الزراعة","البيئة","الطاقة","التجارة",
+      "التجارة الإلكترونية","المالية","التقنية المالية","التمويل","التسويق",
+      "التكنولوجيا","التعليم","الصحة","النقل","العقارات"
+    ],
+    currencies: {
+      SAR:"SAR — الريال السعودي", AED:"AED — الدرهم", QAR:"QAR — الريال القطري",
+      MAD:"MAD — الدرهم المغربي", EGP:"EGP — الجنيه", DZD:"DZD — الدينار",
+      TND:"TND — الدينار التونسي", USD:"USD — الدولار", EUR:"EUR — اليورو"
+    }
   }
 };
 
-// === LISTE DYNAMIQUE DES DOMAINES =========================================
-const domainOptions = [
-  "Agriculture", "Énergie", "Éducation", "Santé", "Finance", "Commerce",
-  "Transport", "Environnement", "Technologie", "BTP / Construction",
-  "Industrie", "Tourisme", "Communication", "Innovation", "Recherche & Développement",
-  "Transformation digitale", "Sécurité", "Gouvernance", "Autre"
-];
-
-// === LISTE DYNAMIQUE DES DEVISES ==========================================
-const currencies = {
-  fr: ["XOF — Franc CFA", "USD — Dollar américain", "EUR — Euro", "GBP — Livre sterling"],
-  en: ["USD — US Dollar", "EUR — Euro", "GBP — Pound Sterling", "GHS — Ghana Cedi"],
-  es: ["USD — Dólar estadounidense", "EUR — Euro", "MXN — Peso mexicano", "ARS — Peso argentino"],
-  ar: ["SAR — ريال سعودي", "AED — درهم إماراتي", "EGP — جنيه مصري", "USD — دولار أمريكي"]
+// WhatsApp routing per language/region (configurable)
+const WHATSAPP_MAP = {
+  fr: "221782607212",
+  en: "447700900000",
+  es: "34600000000",
+  ar: "966500000000"
 };
 
-// === TABLE DES NUMÉROS WHATSAPP PAR LANGUE ================================
-const WA_CONTACTS = {
-  fr: { number: "221782607212", name: "e-META Sénégal" },
-  en: { number: "233550120874", name: "e-META Ghana" },
-  es: { number: "34631102478",  name: "e-META España" },
-  ar: { number: "971521905611", name: "e-META Dubai" }
+// --- DOM refs ---
+const els = {
+  langToggle: document.getElementById("langToggle"),
+  langMenu: document.getElementById("langMenu"),
+  langFlag: document.getElementById("langFlag"),
+  langCode: document.getElementById("langCode"),
+  burgerBtn: document.getElementById("burgerBtn"),
+  mainNav: document.getElementById("mainNav"),
+  themeSelect: document.getElementById("themeSelect"),
+  currencySelect: document.getElementById("currencySelect"),
+  expected: document.getElementById("expected"),
+  budget: document.getElementById("budget"),
+  fullname: document.getElementById("fullname"),
+  phone: document.getElementById("phone"),
+  email: document.getElementById("email"),
+  details: document.getElementById("details"),
+  sendBtn: document.getElementById("sendBtn"),
+  whatsappBtn: document.getElementById("whatsappBtn"),
+  footerText: document.getElementById("footerText")
 };
 
-// === INITIALISATION DOMAINE + DEVISE ======================================
-function populateSelects(lang = "fr") {
-  const domainSelect = document.getElementById("domainSelect");
-  const currencySelect = document.getElementById("currencySelect");
-  if (!domainSelect || !currencySelect) return;
+let LANG = (localStorage.getItem("EMETA_LANG") || "fr");
 
-  // Domaines
-  domainSelect.innerHTML = domainOptions.map(opt => `<option>${opt}</option>`).join("");
+// Populate selects
+function fillThemesAndCurrencies() {
+  const t = I18N[LANG];
 
-  // Devises
-  const list = currencies[lang] || currencies.fr;
-  currencySelect.innerHTML = list.map(cur => `<option>${cur}</option>`).join("");
+  // Themes
+  els.themeSelect.innerHTML = "";
+  t.themes.forEach((label, idx) => {
+    const opt = document.createElement("option");
+    opt.value = idx === 0 ? "" : label;
+    opt.textContent = label;
+    els.themeSelect.appendChild(opt);
+  });
+
+  // Currencies
+  els.currencySelect.innerHTML = "";
+  Object.entries(t.currencies).forEach(([code, label]) => {
+    const opt = document.createElement("option");
+    opt.value = code;
+    opt.textContent = label;
+    els.currencySelect.appendChild(opt);
+  });
+
+  // Default currency per language
+  const def = t._defaultCurrency;
+  if (def && t.currencies[def]) els.currencySelect.value = def;
 }
 
-// === TRADUCTION DYNAMIQUE DU CONTENU ======================================
-function applyTranslations(lang) {
-  state.lang = lang;
-  const t = i18n[lang];
-  if (!t) return;
+// Apply language
+function applyLang() {
+  const dict = I18N[LANG];
 
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.dataset.i18n;
-    if (t[key]) el.textContent = t[key];
+  // Direction (RTL for Arabic)
+  document.documentElement.lang = LANG;
+  if (dict._dir === "rtl") document.body.classList.add("rtl");
+  else document.body.classList.remove("rtl");
+
+  // Nav & labels
+  document.querySelectorAll("[data-i18n]").forEach(node => {
+    const key = node.getAttribute("data-i18n");
+    if (dict[key]) node.textContent = dict[key];
   });
 
   // Placeholders
-  document.getElementById("expectedResult").placeholder =
-    lang === "fr" ? "Ex : Dossier de financement, plan stratégique, prototype..." :
-    lang === "en" ? "Ex: Funding file, strategic plan, prototype..." :
-    lang === "es" ? "Ej: Archivo de financiación, plan estratégico, prototipo..." :
-                    "مثال: ملف تمويل، خطة استراتيجية، نموذج أولي...";
+  els.expected.placeholder = dict.placeholders.expected;
+  els.budget.placeholder = dict.placeholders.budget;
+  els.fullname.placeholder = dict.placeholders.fullname;
+  els.phone.placeholder = dict.placeholders.phone;
+  els.email.placeholder = dict.placeholders.email;
+  els.details.placeholder = dict.placeholders.details;
 
-  document.getElementById("budgetInput").placeholder =
-    lang === "fr" ? "Montant estimé" :
-    lang === "en" ? "Estimated amount" :
-    lang === "es" ? "Monto estimado" :
-                    "المبلغ المقدر";
+  // Footer
+  els.footerText.textContent = dict.footer;
 
-  document.getElementById("fullName").placeholder =
-    lang === "fr" ? "Votre nom complet" :
-    lang === "en" ? "Your full name" :
-    lang === "es" ? "Tu nombre completo" :
-                    "اسمك الكامل";
+  // Flag
+  els.langFlag.textContent = dict._flag;
+  els.langCode.textContent = dict._code;
 
-  document.getElementById("emailInput").placeholder =
-    lang === "fr" ? "exemple@mail.com" :
-    lang === "en" ? "example@mail.com" :
-    lang === "es" ? "ejemplo@mail.com" :
-                    "example@mail.com";
-
-  document.getElementById("detailsInput").placeholder =
-    lang === "fr" ? "Décrivez le contexte, contraintes ou priorités..." :
-    lang === "en" ? "Describe the context, constraints or priorities..." :
-    lang === "es" ? "Describa el contexto, restricciones o prioridades..." :
-                    "صف السياق أو القيود أو الأولويات...";
-
-  populateSelects(lang);
-  updateFlag(lang);
+  fillThemesAndCurrencies();
 }
 
-// === GESTION DU SÉLECTEUR DE LANGUE ========================================
-function updateFlag(lang) {
-  const flagMap = { fr: "🇫🇷", en: "🇬🇧", es: "🇪🇸", ar: "🇸🇦" };
-  const btn = document.getElementById("languageSelect");
-  if (btn) btn.textContent = flagMap[lang] + " " + lang.toUpperCase();
-}
+// Language menu events
+els.langToggle.addEventListener("click", () => {
+  const open = els.langMenu.classList.toggle("show");
+  els.langToggle.setAttribute("aria-expanded", open ? "true" : "false");
+});
 
-document.querySelectorAll(".lang-option").forEach(opt => {
-  opt.addEventListener("click", () => {
-    const lang = opt.dataset.lang;
-    applyTranslations(lang);
+els.langMenu.querySelectorAll("li").forEach(li => {
+  li.addEventListener("click", () => {
+    LANG = li.dataset.lang;
+    localStorage.setItem("EMETA_LANG", LANG);
+    els.langMenu.classList.remove("show");
+    applyLang();
   });
 });
 
-// === WHATSAPP ROUTING AUTOMATIQUE =========================================
-function openWhatsAppDynamic() {
-  const lang = state.lang || "fr";
-  const { number, name } = WA_CONTACTS[lang] || WA_CONTACTS.fr;
-
-  const domain = document.getElementById("domainSelect")?.value || "";
-  const result = document.getElementById("expectedResult")?.value || "";
-  const budget = document.getElementById("budgetInput")?.value || "";
-  const currency = document.getElementById("currencySelect")?.value || "";
-  const fullname = document.getElementById("fullName")?.value || "";
-  const phone = document.getElementById("phoneInput")?.value || "";
-  const email = document.getElementById("emailInput")?.value || "";
-  const details = document.getElementById("detailsInput")?.value || "";
-
-  const t = i18n[lang];
-  const text = encodeURIComponent(
-`${t.title}
-🌍 ${t.domain}: ${domain}
-🎯 ${t.expected}: ${result}
-💰 ${t.budget}: ${budget} ${currency}
-👤 ${t.name}: ${fullname}
-📞 ${t.phone}: ${phone}
-📧 ${t.email}: ${email}
-📝 ${t.details}: ${details}
-
-${t.footer}`
-  );
-
-  window.open(`https://wa.me/${number}?text=${text}`, "_blank", "noopener");
-}
-
-// === ÉVÉNEMENT BOUTON WHATSAPP ============================================
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("whatsappBtn");
-  if (btn) btn.addEventListener("click", e => {
-    e.preventDefault();
-    openWhatsAppDynamic();
-  });
-  applyTranslations("fr");
+// Burger menu
+els.burgerBtn.addEventListener("click", () => {
+  els.mainNav.classList.toggle("show");
 });
 
-// === UI HOOKS : menu mobile & langue (à coller en bas de script.js v3.7) ===
-document.addEventListener("DOMContentLoaded", () => {
-  const navToggle = document.querySelector(".nav-toggle");
-  const primaryNav = document.getElementById("primaryNav");
-  if (navToggle && primaryNav) {
-    navToggle.addEventListener("click", () => primaryNav.classList.toggle("open"));
-  }
+// WhatsApp routing
+function buildWhatsappLink() {
+  const num = WHATSAPP_MAP[LANG] || WHATSAPP_MAP.fr;
+  const theme = els.themeSelect.value || "";
+  const exp = els.expected.value || "";
+  const bud = els.budget.value || "";
+  const cur = els.currencySelect.value || "";
+  const name = els.fullname.value || "";
+  const phone = els.phone.value || "";
+  const detail = els.details.value || "";
 
-  const langBtn = document.getElementById("languageSelect");
-  const langMenu = document.getElementById("languageMenu");
-  if (langBtn && langMenu) {
-    langBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      langMenu.classList.toggle("show");
-    });
-    document.addEventListener("click", (e) => {
-      if (!langMenu.contains(e.target) && e.target !== langBtn) langMenu.classList.remove("show");
-    });
-  }
+  const msg =
+`e-META Request
+Name: ${name}
+Phone: ${phone}
+Domain: ${theme}
+Expected: ${exp}
+Budget: ${bud} ${cur}
+Details: ${detail}`;
 
-  // Envoi bouton principal = même logique que WhatsApp si "whatsapp" coché
-  const send = document.getElementById("sendBtn");
-  if (send) {
-    send.addEventListener("click", () => {
-      const mode = (document.querySelector('input[name="delivery"]:checked')||{}).value;
-      if (mode === "whatsapp") openWhatsAppDynamic();
-      else if (mode === "email") alert("Mode Email: à câbler avec ton scénario (Make / SMTP).");
-      else alert("Affichage direct: à afficher dans la page/résumé.");
-    });
+  return `https://wa.me/${num}?text=${encodeURIComponent(msg)}`;
+}
+
+// WhatsApp button header
+els.whatsappBtn.addEventListener("click", () => {
+  window.open(buildWhatsappLink(), "_blank");
+});
+
+// Send button (uses selected delivery mode)
+els.sendBtn.addEventListener("click", () => {
+  const mode = document.querySelector('input[name="delivery"]:checked')?.value || "whatsapp";
+  if (mode === "whatsapp") {
+    window.open(buildWhatsappLink(), "_blank");
+  } else if (mode === "email") {
+    const mailto = `mailto:contact@e-meta.app?subject=e-META Request&body=${encodeURIComponent(buildEmailBody())}`;
+    window.location.href = mailto;
+  } else {
+    alert("✅ Requête prise en compte. Résultat affiché ici (mode démo).");
   }
 });
 
-// === ÉTAT GLOBAL ===
-const state={lang:"fr"};
-
-// === TRADUCTIONS (mêmes textes que v3.7) ===
-const i18n={fr:{title:"e-META — L’assistant IA pluridisciplinaire",tagline:"Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.",customRequest:"Requête personnalisée",domain:"Domaine / Thème",expected:"Résultat attendu",budget:"Budget indicatif",currency:"Devise",name:"Nom complet",phone:"Téléphone (WhatsApp)",email:"Email",details:"Détails / Contexte",mode:"Mode de restitution",send:"Envoyer la requête",reset:"Réinitialiser",about:"À propos",aboutText:"e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.",faq:"FAQ",faqQ:"Comment fonctionne e-META ?",contact:"Contact",footer:"© 2025 e-META • Simplement. Intelligemment."},
-en:{title:"e-META — The Multidisciplinary AI Assistant",tagline:"Smart form to analyze, diagnose and recommend suitable solutions.",customRequest:"Custom Request",domain:"Domain / Topic",expected:"Expected result",budget:"Indicative budget",currency:"Currency",name:"Full name",phone:"Phone (WhatsApp)",email:"Email",details:"Details / Context",mode:"Delivery mode",send:"Send request",reset:"Reset",about:"About",aboutText:"e-META structures requests and produces a strategic synthesis adapted to context.",faq:"FAQ",faqQ:"How does e-META work ?",contact:"Contact",footer:"© 2025 e-META • Simply. Intelligently."},
-es:{title:"e-META — El asistente IA multidisciplinario",tagline:"Formulario inteligente para analizar, diagnosticar y recomendar soluciones adaptadas.",customRequest:"Solicitud personalizada",domain:"Dominio / Tema",expected:"Resultado esperado",budget:"Presupuesto indicativo",currency:"Moneda",name:"Nombre completo",phone:"Teléfono (WhatsApp)",email:"Email",details:"Detalles / Contexto",mode:"Modo de entrega",send:"Enviar solicitud",reset:"Reiniciar",about:"Acerca de",aboutText:"e-META estructura las solicitudes y produce una síntesis estratégica adaptada al contexto.",faq:"FAQ",faqQ:"¿Cómo funciona e-META ?",contact:"Contacto",footer:"© 2025 e-META • Simplemente. Inteligentemente."},
-ar:{title:"إي-ميتا — المساعد الذكي متعدد التخصصات",tagline:"نموذج ذكي لتحليل وتشخيص واقـتراح حلول مناسبة.",customRequest:"طلب مخصص",domain:"المجال / الموضوع",expected:"النتيجة المتوقعة",budget:"الميزانية التقديرية",currency:"العملة",name:"الاسم الكامل",phone:"الهاتف (واتساب)",email:"البريد الإلكتروني",details:"التفاصيل / السياق",mode:"وضع التسليم",send:"إرسال الطلب",reset:"إعادة تعيين",about:"حول",aboutText:"تنظم e-META الطلبات وتنتج تحليلاً استراتيجياً يتكيف مع السياق.",faq:"الأسئلة الشائعة",faqQ:"كيف تعمل e-META؟",contact:"اتصال",footer:"© 2025 إي-ميتا • ببساطة. بذكاء."}};
-
-// === DOMAINES & DEVISES ===
-const domains={fr:["Agriculture","Énergie","Éducation","Santé","Finance","Commerce","Environnement","Technologie","BTP / Construction","Autre"],
-en:["Agriculture","Energy","Education","Health","Finance","Trade","Environment","Technology","Construction","Other"],
-es:["Agricultura","Energía","Educación","Salud","Finanzas","Comercio","Medio ambiente","Tecnología","Construcción","Otro"],
-ar:["الزراعة","الطاقة","التعليم","الصحة","التمويل","التجارة","البيئة","التكنولوجيا","البناء","أخرى"]};
-const currencies={fr:["XOF — Franc CFA","USD — Dollar américain","EUR — Euro"],en:["USD — US Dollar","EUR — Euro","GBP — Pound Sterling"],es:["USD — Dólar EE.UU.","EUR — Euro","MXN — Peso mexicano"],ar:["SAR — ريال سعودي","AED — درهم إماراتي","USD — دولار أمريكي"]};
-
-// === WHATSAPP PAR LANGUE ===
-const WA_CONTACTS={fr:"221782607212",en:"233550120874",es:"34631102478",ar:"971521905611"};
-
-// === CHARGEMENT LISTES ===
-function populateSelects(lang){
- const d=document.getElementById("domainSelect"),c=document.getElementById("currencySelect");
- d.innerHTML=domains[lang].map(x=>`<option>${x}</option>`).join("");
- c.innerHTML=currencies[lang].map(x=>`<option>${x}</option>`).join("");
+function buildEmailBody(){
+  const theme = els.themeSelect.value || "";
+  const exp = els.expected.value || "";
+  const bud = els.budget.value || "";
+  const cur = els.currencySelect.value || "";
+  const name = els.fullname.value || "";
+  const phone = els.phone.value || "";
+  const mail = els.email.value || "";
+  const detail = els.details.value || "";
+  return `Name: ${name}
+Phone: ${phone}
+Email: ${mail}
+Domain: ${theme}
+Expected: ${exp}
+Budget: ${bud} ${cur}
+Details:
+${detail}
+`;
 }
 
-// === TRADUCTION ===
-function applyTranslations(lang){
- state.lang=lang;const t=i18n[lang];
- document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(t[k])el.textContent=t[k];});
- const p=(
+// Init
+applyLang();
+
+// Close lang menu on outside click
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".langbox")) els.langMenu.classList.remove("show");
+});
