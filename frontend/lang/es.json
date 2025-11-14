@@ -1,51 +1,77 @@
 {
-  "siteTitle":"e-META — Asistente IA",
-  "nav.home":"Inicio",
-  "nav.packs":"Packs",
-  "nav.about":"Acerca",
-  "nav.faq":"FAQ",
-  "nav.contact":"Contacto",
-  "hero.title":"e-META — Asistente IA multidisciplinar",
-  "hero.subtitle":"Paquetes de formularios especializados, síntesis y recomendaciones accionables.",
-  "buttons.discover":"Descubrir packs",
-  "buttons.whatsapp":"Contactar WhatsApp",
-  "buttons.open":"Abrir",
-  "buttons.send":"Enviar",
-  "buttons.cancel":"Cancelar",
-  "packs.title":"Nuestros packs",
-  "packs.subtitle":"Packs diseñados para diagnosticar, priorizar y recomendar acciones concretas.",
-  "packs.list":[
-    {"id":"marketing","title":"Marketing","description":"Resumen de campaña, estimación de presupuesto y canales.","suggestion":"Ej: Obtener un plan de marketing..."},
-    {"id":"funding","title":"Funding","description":"Solicitud de financiación estructurada, modelos financieros.","suggestion":"Ej: Solicitud de financiación..."},
-    {"id":"recruitment","title":"Recruitment","description":"Descripción de rol, presupuesto y calendario.","suggestion":"Ej: Reclutar jefe de proyecto..."},
-    {"id":"product","title":"Product","description":"Posicionamiento, pricing, GTM.","suggestion":"Ej: Validar posicionamiento..."}
+  "code": "ES",
+  "flag": "🇪🇸",
+  "footer": "© 2025 e-META • Simplemente. Inteligentemente.",
+  "nav": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "faq": "FAQ",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "e-META — El asistente de IA multidisciplinario",
+    "subtitle": "Formulario inteligente para analizar, diagnosticar y recomendar soluciones adecuadas."
+  },
+  "form": {
+    "title": "Solicitud personalizada",
+    "theme": "Dominio / Tema",
+    "expected": "Resultado esperado",
+    "budget": "Presupuesto indicativo",
+    "currency": "Divisa",
+    "fullname": "Nombre completo",
+    "phone": "Teléfono (WhatsApp)",
+    "email": "Email",
+    "details": "Detalles / Contexto",
+    "delivery_mode": "Modo de entrega",
+    "delivery_whatsapp": "WhatsApp",
+    "delivery_email": "Email",
+    "delivery_display": "Visualización directa",
+    "send_btn": "Enviar solicitud"
+  },
+  "placeholders": {
+    "expected": "Ej.: expediente de financiación, plan estratégico...",
+    "budget": "Monto estimado",
+    "fullname": "Su nombre completo",
+    "phone": "+221…",
+    "email": "ejemplo@mail.com",
+    "details": "Describa el contexto, restricciones o prioridades…"
+  },
+  "about": {
+    "title": "Acerca de",
+    "body": "e-META estructura las solicitudes y produce una síntesis estratégica adaptada a su contexto."
+  },
+  "faq": {
+    "title": "FAQ",
+    "q1": "¿Cómo funciona e-META?",
+    "a1": "Complete el formulario y reciba una síntesis inteligente mediante el canal elegido."
+  },
+  "contact": {
+    "title": "Contacto",
+    "emailLabel": "Email :"
+  },
+  "themes": [
+    "— Dominio —",
+    "Agricultura",
+    "Transporte",
+    "Energía",
+    "Finanzas y Banca",
+    "Bienes Raíces",
+    "Tecnología e IA",
+    "Educación y Formación",
+    "Salud",
+    "Industria y Producción",
+    "Servicios",
+    "Emprendimiento y Startups",
+    "Proyectos Públicos / ONG",
+    "Estrategia y Gobernanza",
+    "Otro"
   ],
-  "about.title":"Acerca",
-  "about.text":"e-META ayuda a actores de todos los sectores a estructurar sus decisiones mediante packs de formularios especializados y síntesis accionables.",
-  "about.footer":"e-META proporciona formularios y síntesis para apoyar la toma de decisiones.",
-  "faq.title":"FAQ",
-  "faq.items":["¿Cómo funciona e-META?","¿Es gratis?"],
-  "contact.title":"Contacto",
-  "form.title":"Pack — Solicitud",
-  "form.requestLabel":"Resultado esperado",
-  "form.requestPlaceholder":"Ej: Obtener un plan de marketing...",
-  "form.teamSize":"Tamaño del equipo",
-  "form.budget":"Presupuesto indicativo",
-  "form.name":"Nombre",
-  "form.email":"Email",
-  "form.phone":"Teléfono (WhatsApp)",
-  "form.details":"Detalles",
-  "form.detailsPlaceholder":"Describa contexto, objetivos...",
-  "form.modeLabel":"Modo de entrega",
-  "form.mode.email":"Email",
-  "form.mode.whatsapp":"WhatsApp",
-  "form.mode.display":"Mostrar",
-  "form.errors.missing":"Por favor complete los campos requeridos.",
-  "form.sending":"Enviando...",
-  "form.sent":"Gracias — le responderemos pronto."
+  "currencies": [
+    { "value": "EUR", "label": "EUR — Euro" },
+    { "value": "USD", "label": "USD — Dólar estadounidense" },
+    { "value": "GBP", "label": "GBP — Libra esterlina" },
+    { "value": "XOF", "label": "XOF — Franco CFA" },
+    { "value": "CNY", "label": "CNY — Yuan chino" }
+  ],
+  "whatsapp_greeting": "Hola, deseo recibir asistencia vía e-META para una nueva solicitud."
 }
-// 🇪🇸 Español
-label_mode: "Modo de entrega",
-mode_whatsapp: "WhatsApp",
-mode_email: "Correo",
-mode_display: "Visualización directa",
