@@ -3,6 +3,27 @@
    ===================================================== */
 
 const LANG_CONFIG = {
+   // URL du webhook Make (à remplacer par la tienne)
+const MAKE_WEBHOOK_URL = "https://hook.eu2.make.com/h7dfvrhhe382dtbim745aj3pxh8k53sw;
+
+// Envoi des données du formulaire vers Make
+function sendToMake(payload) {
+  if (!MAKE_WEBHOOK_URL) return;
+  try {
+    fetch(MAKE_WEBHOOK_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    }).catch((err) => {
+      console.error("Erreur envoi Make :", err);
+    });
+  } catch (e) {
+    console.error("Erreur fetch Make :", e);
+  }
+}
+
   fr: {
     code: "FR",
     flag: "🇫🇷",
@@ -604,6 +625,25 @@ document.addEventListener("DOMContentLoaded", () => {
         "whatsapp";
       const summary = buildFormSummary(currentLang);
       const cfg = LANG_CONFIG[currentLang] || LANG_CONFIG.fr;
+       
+           // 1) Construire le payload pour Make
+    const payload = {
+      lang: currentLang,
+      theme: document.getElementById("themeSelect")?.value || "",
+      expected: document.getElementById("expected")?.value || "",
+      budget: document.getElementById("budget")?.value || "",
+      currency: document.getElementById("currencySelect")?.value || "",
+      fullname: document.getElementById("fullname")?.value || "",
+      phone: document.getElementById("phone")?.value || "",
+      email: document.getElementById("email")?.value || "",
+      details: document.getElementById("details")?.value || "",
+      deliveryMode: delivery,
+      summary // le résumé déjà construit
+    };
+
+    // 2) Envoi silencieux vers Make
+    sendToMake(payload);
+
 
       if (delivery === "whatsapp") {
         const url = buildWhatsappUrl(currentLang, false);
