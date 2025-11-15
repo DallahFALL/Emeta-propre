@@ -1,313 +1,217 @@
-/* =====================================================
-   e-META v4.3 – Multilingue, WhatsApp, Make & UI
-   Version stable, propre, compatible GitHub Pages
-   ===================================================== */
+/* ============================================================
+   e-META v4.4 — Langues, Thèmes, Devises, WhatsApp, Make, UI
+   Version propre, stable, compatible GitHub Pages
+   ============================================================ */
 
-
-/* -----------------------------------------------------
-   1) Webhook Make
------------------------------------------------------ */
-const MAKE_WEBHOOK_URL =
-  "https://hook.eu2.make.com/h7dfvrhhe382dtbim745aj3pxh8k53sw";
-
-// Envoi silencieux vers MAKE
-function sendToMake(payload) {
-  try {
-    fetch(MAKE_WEBHOOK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    }).catch((err) => console.error("Erreur Make :", err));
-  } catch (e) {
-    console.error("Erreur fetch Make :", e);
-  }
-}
-
-
-/* -----------------------------------------------------
-   2) Configuration multilingue
------------------------------------------------------ */
-const LANG_CONFIG = {
-  fr: {
-    code: "FR",
-    flag: "🇫🇷",
-    whatsappNumber: "221782607212",
-    defaultCurrency: "XOF",
-    texts: {
-      nav_home: "Accueil",
-      nav_about: "À propos",
-      nav_faq: "FAQ",
-      nav_contact: "Contact",
-      hero_title: "e-META — L’assistant IA pluridisciplinaire",
-      hero_sub:
-        "Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.",
-      form_title: "Requête personnalisée",
-
-      label_theme: "Domaine / Thème",
-      label_expected: "Résultat attendu",
-      label_budget: "Budget indicatif",
-      label_currency: "Devise",
-      label_fullname: "Nom complet",
-      label_phone: "Téléphone (WhatsApp)",
-      label_email: "Email",
-      label_details: "Détails / Contexte",
-
-      legend_delivery: "Mode de restitution",
-      delivery_whatsapp: "WhatsApp",
-      delivery_email: "Email",
-      delivery_display: "Affichage direct",
-
-      btn_send: "Envoyer la requête",
-
-      about_title: "À propos",
-      about_body:
-        "e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.",
-      faq_title: "FAQ",
-      faq_q1: "Comment fonctionne e-META ?",
-      faq_a1:
-        "Remplissez le formulaire avec votre besoin, choisissez le mode de restitution et recevez une synthèse intelligente adaptée à votre contexte.",
-      contact_title: "Contact",
-      contact_emailLabel: "Email :",
-      footer: "© 2025 e-META • Simplement. Intelligemment.",
-      whatsapp_greeting:
-        "Bonjour, je souhaite une assistance via e-META pour une nouvelle requête.",
-    },
-
-    placeholders: {
-      expected: "Ex : Dossier de financement, plan stratégique...",
-      budget: "Montant estimé",
-      fullname: "Votre nom complet",
-      phone: "+221…",
-      email: "exemple@mail.com",
-      details:
-        "Décrivez le contexte, les contraintes ou les priorités importantes…",
-    },
-
-    themes: [
-      "— Domaine —",
-      "Agriculture",
-      "Transport",
-      "Énergie",
-      "Finances & Banque",
-      "Immobilier",
-      "Technologie & IA",
-      "Éducation & Formation",
-      "Santé",
-      "Industrie & Production",
-      "Services",
-      "Entrepreneuriat & Startups",
-      "Projets publics / ONG",
-      "Stratégie & Gouvernance",
-      "Autre",
-    ],
-
-    currencies: [
-      { value: "XOF", label: "XOF — Franc CFA" },
-      { value: "EUR", label: "EUR — Euro" },
-      { value: "USD", label: "USD — Dollar américain" },
-      { value: "GBP", label: "GBP — Livre sterling" },
-      { value: "CNY", label: "CNY — Yuan chinois" },
-    ],
-  },
-
-  /* NOTE :
-     Pour gagner du temps, je laisse EN/ES/AR identiques à ta version,
-     je les ai testés et TOUS fonctionnent.
-     ----> Tu peux coller l’intégralité EN/ES/AR ici, rien à changer.
-  */
-  
-  en: { ... LANG_CONFIG_en_original ... },
-  es: { ... LANG_CONFIG_es_original ... },
-  ar: { ... LANG_CONFIG_ar_original ... }
-};
-
+const MAKE_WEBHOOK_URL = "https://hook.eu2.make.com/xxxxxxx"; // ← mettre ton URL Make ici
 
 let currentLang = "fr";
 
-
-/* -----------------------------------------------------
-   3) Helpers
------------------------------------------------------ */
-
-function populateSelect(selectEl, options, selectedValue) {
-  if (!selectEl) return;
-  selectEl.innerHTML = "";
-  options.forEach((opt) => {
-    const o = document.createElement("option");
-    o.value = opt.value || opt;
-    o.textContent = opt.label || opt;
-    if (o.value === selectedValue) o.selected = true;
-    selectEl.appendChild(o);
-  });
+/* =========================================
+   Chargement JSON i18n
+   ========================================= */
+async function loadLangJSON(lang) {
+  try {
+    const res = await fetch(`${lang}.json`);
+    return await res.json();
+  } catch (e) {
+    console.error("Erreur chargement JSON:", e);
+    return null;
+  }
 }
 
-function buildFormSummary(lang) {
-  const cfg = LANG_CONFIG[lang];
-
-  const t = cfg.texts;
-
-  const valueOf = (id) =>
-    document.getElementById(id)?.value?.trim() || "-";
-
-  return (
-    `${t.label_theme}: ${valueOf("themeSelect")}\n` +
-    `${t.label_expected}: ${valueOf("expected")}\n` +
-    `${t.label_budget}: ${valueOf("budget")} ${valueOf("currencySelect")}\n` +
-    `${t.label_fullname}: ${valueOf("fullname")}\n` +
-    `${t.label_phone}: ${valueOf("phone")}\n` +
-    `${t.label_email}: ${valueOf("email")}\n` +
-    `${t.label_details}:\n${valueOf("details")}`
-  );
-}
-
-function buildWhatsappUrl(lang, headerOnly = false) {
-  const cfg = LANG_CONFIG[lang];
-  const number = cfg.whatsappNumber.replace(/\D/g, "");
-  let msg = cfg.texts.whatsapp_greeting;
-
-  if (!headerOnly) msg += "\n\n" + buildFormSummary(lang);
-
-  return `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
-}
-
-
-/* -----------------------------------------------------
-   4) Application de la langue
------------------------------------------------------ */
-
-function applyLanguage(lang) {
-  const cfg = LANG_CONFIG[lang];
+/* =========================================
+   Appliquer la langue
+   ========================================= */
+async function applyLanguage(lang) {
+  const cfg = await loadLangJSON(lang);
   if (!cfg) return;
 
   currentLang = lang;
-
   document.documentElement.lang = lang;
   document.body.classList.toggle("rtl", lang === "ar");
 
-  const t = cfg.texts;
+  /* TEXTES DIRECTS */
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    if (cfg.texts[key]) el.textContent = cfg.texts[key];
+  });
 
-  document.querySelector('[data-i18n="nav_home"]').textContent = t.nav_home;
-  document.querySelector('[data-i18n="nav_about"]').textContent = t.nav_about;
-  document.querySelector('[data-i18n="nav_faq"]').textContent = t.nav_faq;
-  document.querySelector('[data-i18n="nav_contact"]').textContent = t.nav_contact;
+  /* PLACEHOLDERS */
+  document.querySelector("#expected").placeholder = cfg.placeholders.expected;
+  document.querySelector("#budget").placeholder   = cfg.placeholders.budget;
+  document.querySelector("#fullname").placeholder = cfg.placeholders.fullname;
+  document.querySelector("#phone").placeholder    = cfg.placeholders.phone;
+  document.querySelector("#email").placeholder    = cfg.placeholders.email;
+  document.querySelector("#details").placeholder  = cfg.placeholders.details;
 
-  document.querySelector('[data-i18n="hero_title"]').textContent = t.hero_title;
-  document.querySelector('[data-i18n="hero_sub"]').textContent = t.hero_sub;
-
-  document.querySelector('[data-i18n="form_title"]').textContent =
-    t.form_title;
-
-  const labels = document.querySelectorAll("#requestForm .grid label");
-  labels[0].textContent = t.label_theme;
-  labels[1].textContent = t.label_expected;
-  labels[2].textContent = t.label_budget;
-  labels[3].textContent = t.label_currency;
-  labels[4].textContent = t.label_fullname;
-  labels[5].textContent = t.label_phone;
-  labels[6].textContent = t.label_email;
-  labels[7].textContent = t.label_details;
-
-  document.querySelector(".delivery legend").textContent = t.legend_delivery;
-
-  const deliveryLabels = document.querySelectorAll(".delivery label");
-  deliveryLabels[0].lastChild.textContent = " " + t.delivery_whatsapp;
-  deliveryLabels[1].lastChild.textContent = " " + t.delivery_email;
-  deliveryLabels[2].lastChild.textContent = " " + t.delivery_display;
-
-  document.getElementById("expected").placeholder = cfg.placeholders.expected;
-  document.getElementById("budget").placeholder = cfg.placeholders.budget;
-  document.getElementById("fullname").placeholder = cfg.placeholders.fullname;
-  document.getElementById("phone").placeholder = cfg.placeholders.phone;
-  document.getElementById("email").placeholder = cfg.placeholders.email;
-  document.getElementById("details").placeholder = cfg.placeholders.details;
-
+  /* LISTE : DOMAINES / THEMES */
   populateSelect(
-    document.getElementById("themeSelect"),
-    cfg.themes.map((e) => ({ value: e, label: e })),
+    document.querySelector("#themeSelect"),
+    cfg.themes.map(th => ({ value: th, label: th })),
     cfg.themes[0]
   );
 
+  /* LISTE : DEVISES */
   populateSelect(
-    document.getElementById("currencySelect"),
+    document.querySelector("#currencySelect"),
     cfg.currencies,
     cfg.defaultCurrency
   );
 
-  document.querySelector("#about h3").textContent = t.about_title;
-  document.querySelector("#about p").textContent = t.about_body;
-
-  document.querySelector("#faq h3").textContent = t.faq_title;
-  document.querySelector("#faq summary").textContent = t.faq_q1;
-  document.querySelector("#faq details p").textContent = t.faq_a1;
-
-  const contactP = document.querySelector("#contact p");
-  const emailLink = contactP.querySelector("a");
-  contactP.textContent = `${t.contact_emailLabel} `;
-  contactP.appendChild(emailLink);
-
-  document.getElementById("footerText").textContent = t.footer;
-
-  document.getElementById("langFlag").textContent = cfg.flag;
-  document.getElementById("langCode").textContent = cfg.code;
+  /* Mise à jour flag + code langue */
+  document.querySelector("#langFlag").textContent = cfg.flag;
+  document.querySelector("#langCode").textContent = cfg.code;
 }
 
+/* =========================================
+   Helpers
+   ========================================= */
+function populateSelect(selectEl, options, selectedValue) {
+  if (!selectEl) return;
+  selectEl.innerHTML = "";
+  options.forEach(opt => {
+    const o = document.createElement("option");
+    o.value = opt.value;
+    o.textContent = opt.label;
+    if (opt.value === selectedValue) o.selected = true;
+    selectEl.appendChild(o);
+  });
+}
 
-/* -----------------------------------------------------
-   5) UI ready
------------------------------------------------------ */
+function getVal(id) {
+  return document.getElementById(id)?.value?.trim() || "-";
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-  document
-    .getElementById("whatsappBtn")
-    ?.addEventListener("click", () =>
-      window.open(buildWhatsappUrl(currentLang, true), "_blank")
+/* =========================================
+   Générer le résumé
+   ========================================= */
+function buildFormSummary(cfg) {
+  return (
+    `${cfg.texts.label_theme}: ${getVal("themeSelect")}\n` +
+    `${cfg.texts.label_expected}: ${getVal("expected")}\n` +
+    `${cfg.texts.label_budget}: ${getVal("budget")} ${getVal("currencySelect")}\n` +
+    `${cfg.texts.label_fullname}: ${getVal("fullname")}\n` +
+    `${cfg.texts.label_phone}: ${getVal("phone")}\n` +
+    `${cfg.texts.label_email}: ${getVal("email")}\n` +
+    `${cfg.texts.label_details}:\n${getVal("details")}`
+  );
+}
+
+/* =========================================
+   WhatsApp
+   ========================================= */
+async function buildWhatsappUrl(isHeader = false) {
+  const cfg = await loadLangJSON(currentLang);
+  if (!cfg) return;
+
+  const number = cfg.whatsappNumber.replace(/\D/g, "");
+  let msg = cfg.texts.whatsapp_greeting;
+
+  if (!isHeader) msg += "\n\n" + buildFormSummary(cfg);
+
+  return `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
+}
+
+/* =========================================
+   Envoi vers MAKE
+   ========================================= */
+async function sendToMake() {
+  const cfg = await loadLangJSON(currentLang);
+  const payload = {
+    lang: currentLang,
+    theme: getVal("themeSelect"),
+    expected: getVal("expected"),
+    budget: getVal("budget"),
+    currency: getVal("currencySelect"),
+    fullname: getVal("fullname"),
+    phone: getVal("phone"),
+    email: getVal("email"),
+    details: getVal("details"),
+    summary: buildFormSummary(cfg)
+  };
+
+  if (!MAKE_WEBHOOK_URL) return;
+
+  fetch(MAKE_WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  }).catch(err => console.error("Erreur Make:", err));
+}
+
+/* =========================================
+   Affichage direct
+   ========================================= */
+function displayInline(summary) {
+  const win = window.open("", "_blank", "width=600,height=700");
+  if (win) {
+    win.document.write(
+      `<pre style="font-family:system-ui; white-space:pre-wrap; padding:16px;">${summary}</pre>`
     );
+  } else {
+    alert(summary);
+  }
+}
 
-  document.getElementById("sendBtn")?.addEventListener("click", () => {
-    const delivery =
-      document.querySelector('input[name="delivery"]:checked')?.value ||
-      "whatsapp";
+/* =========================================
+   DOM READY
+   ========================================= */
+document.addEventListener("DOMContentLoaded", async () => {
 
-    const summary = buildFormSummary(currentLang);
+  /* LANG MENU */
+  const langToggle = document.querySelector("#langToggle");
+  const langMenu   = document.querySelector("#langMenu");
 
-    const payload = {
-      lang: currentLang,
-      theme: document.getElementById("themeSelect")?.value || "",
-      expected: document.getElementById("expected")?.value || "",
-      budget: document.getElementById("budget")?.value || "",
-      currency: document.getElementById("currencySelect")?.value || "",
-      fullname: document.getElementById("fullname")?.value || "",
-      phone: document.getElementById("phone")?.value || "",
-      email: document.getElementById("email")?.value || "",
-      details: document.getElementById("details")?.value || "",
-      deliveryMode: delivery,
-      summary,
-    };
+  langToggle.addEventListener("click", e => {
+    e.stopPropagation();
+    langMenu.classList.toggle("show");
+  });
 
-    sendToMake(payload);
+  langMenu.querySelectorAll("li").forEach(li => {
+    li.addEventListener("click", () => {
+      applyLanguage(li.dataset.lang);
+      langMenu.classList.remove("show");
+    });
+  });
 
+  document.addEventListener("click", () => langMenu.classList.remove("show"));
+
+  /* BURGER */
+  document.querySelector("#burgerBtn").addEventListener("click", () => {
+    document.querySelector("#burgerBtn").classList.toggle("active");
+    document.querySelector("#mainNav").classList.toggle("open");
+  });
+
+  /* WHATSAPP HEADER */
+  document.querySelector("#whatsappBtn").addEventListener("click", async () => {
+    const url = await buildWhatsappUrl(true);
+    if (url) window.open(url, "_blank");
+  });
+
+  /* SEND FORM */
+  document.querySelector("#sendBtn").addEventListener("click", async () => {
+    const cfg = await loadLangJSON(currentLang);
+    const delivery = document.querySelector('input[name="delivery"]:checked').value;
+
+    const summary = buildFormSummary(cfg);
+
+    /* Envoi silencieux vers MAKE */
+    sendToMake();
+
+    /* Routage */
     if (delivery === "whatsapp") {
-      window.open(buildWhatsappUrl(currentLang, false), "_blank");
+      const url = await buildWhatsappUrl(false);
+      if (url) window.open(url, "_blank");
     } else if (delivery === "email") {
-      const subject = {
-        fr: "Nouvelle requête e-META",
-        en: "New e-META Request",
-        es: "Nueva solicitud e-META",
-        ar: "طلب جديد عبر e-META",
-      }[currentLang];
-
+      const subject = cfg.texts.subject || "Nouvelle requête e-META";
       window.location.href =
-        `mailto:contact@e-meta.app?subject=` +
-        encodeURIComponent(subject) +
-        `&body=` +
-        encodeURIComponent(summary);
+        `mailto:contact@e-meta.app?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(summary)}`;
     } else {
-      const win = window.open("", "_blank", "width=600,height=700");
-      win.document.write(
-        `<pre style="font-family:system-ui;white-space:pre-wrap;padding:16px;">${summary}</pre>`
-      );
+      displayInline(summary);
     }
   });
 
+  /* Charger FR au démarrage */
   applyLanguage("fr");
 });
