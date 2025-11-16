@@ -1,5 +1,5 @@
-/* =========================
-   e-META v4.1 - Global reset
+/* ========================= 
+   e-META v4.6 - Global reset
    ========================= */
 
 *,
@@ -360,6 +360,7 @@ textarea:focus {
   margin-top: 1.4rem;
   display: flex;
   justify-content: center;
+  gap: 0.75rem;
 }
 
 .btn-primary {
@@ -382,29 +383,25 @@ textarea:focus {
   box-shadow: 0 20px 40px rgba(37, 99, 235, 0.45);
 }
 
-/* =========================
-   Secondary Button
-   ========================= */
-
+/* Nouveau bouton secondaire */
 .btn-secondary {
   border-radius: 999px;
-  border: 2px solid #2563eb;
-  background: #ffffff;
-  color: #2563eb;
-  padding: 0.65rem 1.7rem;
+  border: 1px solid #d1d5db;
+  padding: 0.65rem 1.4rem;
   font-size: 0.95rem;
-  font-weight: 600;
+  background: #ffffff;
+  color: #374151;
+  font-weight: 500;
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease,
-    background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    background 0.15s ease, border-color 0.15s ease;
 }
 
 .btn-secondary:hover {
-  background: #2563eb;
-  color: #ffffff;
-  border-color: #1d4ed8;
   transform: translateY(-1px);
-  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.28);
+  background: #f3f4f6;
+  border-color: #9ca3af;
+  box-shadow: 0 12px 24px rgba(148, 163, 184, 0.35);
 }
 
 /* =========================
