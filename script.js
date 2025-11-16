@@ -3,6 +3,8 @@
    Langues, thèmes, devises, WhatsApp, Email, Display, Make
    ===================================================== */
 
+console.log("e-META v4.3_connect_make loaded");
+
 /* ------------ Webhook Make ------------ */
 const MAKE_WEBHOOK_URL =
   "https://hook.eu2.make.com/h7dfvrhhe382dtbim745aj3pxh8k53sw";
@@ -460,7 +462,7 @@ function applyLanguage(lang) {
     .querySelectorAll('[data-i18n="form_title"]')
     .forEach((el) => (el.textContent = t.form_title));
 
-  // Labels formulaire (en s’appuyant sur data-i18n)
+  // Labels du formulaire via data-i18n
   const labelMap = [
     "label_theme",
     "label_expected",
@@ -475,7 +477,7 @@ function applyLanguage(lang) {
     document
       .querySelectorAll(`[data-i18n="${key}"]`)
       .forEach((el) => {
-        el.textContent = t[key] || el.textContent;
+        if (t[key]) el.textContent = t[key];
       });
   });
 
@@ -644,7 +646,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Envoi silencieux vers Make
       sendToMake(payload);
 
-      // Routage local côté client
+      // Routage côté client
       if (delivery === "whatsapp") {
         const url = buildWhatsappUrl(currentLang, false);
         if (url) window.open(url, "_blank");
