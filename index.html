@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>e-META — Assistant IA Multilingue</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
 
   <!-- Styles -->
- <script src="script.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Script -->
+  <script src="script.js" defer></script>
 </head>
 
 <body>
   <!-- HEADER -->
   <header class="header">
     <div class="nav-wrapper">
-
       <a href="#home" class="brand">
-        <img id="logo" src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" height="100">
+        <img id="logo" src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" class="logo" />
+        <span class="brand-text">e-META</span>
       </a>
 
       <button id="burgerBtn" class="burger">
@@ -49,17 +52,17 @@
           </ul>
         </div>
       </div>
-
     </div>
   </header>
 
   <!-- MAIN -->
   <main class="container">
-
     <!-- HERO -->
     <section id="home" class="hero">
       <h1 data-i18n="hero_title">e-META — L’assistant IA pluridisciplinaire</h1>
-      <p data-i18n="hero_sub">Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.</p>
+      <p data-i18n="hero_sub">
+        Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.
+      </p>
     </section>
 
     <!-- FORM -->
@@ -74,12 +77,12 @@
 
         <div>
           <label data-i18n="label_expected">Résultat attendu</label>
-          <input id="expected" type="text">
+          <input id="expected" type="text" />
         </div>
 
         <div>
           <label data-i18n="label_budget">Budget indicatif</label>
-          <input id="budget" type="text">
+          <input id="budget" type="text" />
         </div>
 
         <div>
@@ -89,17 +92,17 @@
 
         <div>
           <label data-i18n="label_fullname">Nom complet</label>
-          <input id="fullname" type="text">
+          <input id="fullname" type="text" />
         </div>
 
         <div>
           <label data-i18n="label_phone">Téléphone (WhatsApp)</label>
-          <input id="phone" type="tel">
+          <input id="phone" type="tel" />
         </div>
 
         <div class="full">
           <label data-i18n="label_email">Email</label>
-          <input id="email" type="email">
+          <input id="email" type="email" />
         </div>
 
         <div class="full">
@@ -109,57 +112,64 @@
       </div>
 
       <fieldset class="delivery full">
-        <legend data-i18n="label_delivery">Mode de restitution</legend>
+        <legend data-i18n="legend_delivery">Mode de restitution</legend>
 
         <label>
-          <input type="radio" name="delivery" value="whatsapp" checked>
-          <span data-i18n="opt_whatsapp">WhatsApp</span>
+          <input type="radio" name="delivery" value="whatsapp" checked />
+          <span data-i18n="delivery_whatsapp">WhatsApp</span>
         </label>
 
         <label>
-          <input type="radio" name="delivery" value="email">
-          <span data-i18n="opt_email">Email</span>
+          <input type="radio" name="delivery" value="email" />
+          <span data-i18n="delivery_email">Email</span>
         </label>
 
         <label>
-          <input type="radio" name="delivery" value="display">
-          <span data-i18n="opt_display">Affichage direct</span>
+          <input type="radio" name="delivery" value="display" />
+          <span data-i18n="delivery_display">Affichage direct</span>
         </label>
       </fieldset>
 
       <div class="buttons">
-        <button id="sendBtn" type="button" class="btn-primary" data-i18n="btn_send">Envoyer</button>
+        <button id="sendBtn" type="button" class="btn-primary" data-i18n="btn_send">
+          Envoyer la requête
+        </button>
       </div>
     </form>
 
     <!-- ABOUT -->
     <section id="about" class="section">
       <h3 data-i18n="about_title">À propos</h3>
-      <p data-i18n="about_desc">
+      <p data-i18n="about_body">
         e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.
       </p>
     </section>
 
     <!-- FAQ -->
     <section id="faq" class="section">
-      <h3>FAQ</h3>
+      <h3 data-i18n="faq_title">FAQ</h3>
       <details>
         <summary data-i18n="faq_q1">Comment fonctionne e-META ?</summary>
-        <p data-i18n="faq_a1">Remplissez le formulaire et recevez votre synthèse via le canal choisi.</p>
+        <p data-i18n="faq_a1">
+          Remplissez le formulaire avec votre besoin, choisissez le mode de restitution et recevez une synthèse
+          intelligente adaptée à votre contexte.
+        </p>
       </details>
     </section>
 
     <!-- CONTACT -->
     <section id="contact" class="section">
       <h3 data-i18n="contact_title">Contact</h3>
-      <p>Email : <a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
+      <p>
+        <span data-i18n="contact_emailLabel">Email :</span>
+        <a href="mailto:contact@e-meta.app">contact@e-meta.app</a>
+      </p>
     </section>
-
   </main>
 
   <!-- FOOTER -->
   <footer class="footer">
     <p id="footerText">© 2025 e-META • Simplement. Intelligemment.</p>
-  </footer> 
+  </footer>
 </body>
 </html>
