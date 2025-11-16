@@ -41,7 +41,8 @@ const LANG_CONFIG = {
       delivery_display: "Affichage direct",
 
       btn_send: "Envoyer la requête",
-
+      btn_reset: "Réinitialiser",
+       
       about_title: "À propos",
       about_body:
         "e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.",
@@ -120,7 +121,8 @@ const LANG_CONFIG = {
       delivery_display: "Direct display",
 
       btn_send: "Send request",
-
+      btn_reset: "Reset",
+       
       about_title: "About",
       about_body:
         "e-META structures your request and produces a strategic summary adapted to your context.",
@@ -199,6 +201,7 @@ const LANG_CONFIG = {
       delivery_display: "Visualización directa",
 
       btn_send: "Enviar solicitud",
+      btn_reset: "Reiniciar",
 
       about_title: "Acerca de",
       about_body:
@@ -279,7 +282,8 @@ const LANG_CONFIG = {
       delivery_display: "عرض مباشر",
 
       btn_send: "إرسال الطلب",
-
+      btn_reset: "إعادة التهيئة",
+       
       about_title: "حول",
       about_body:
         "يقوم e-META بتنظيم طلبك وإنتاج خلاصة استراتيجية مناسبة لسياقك.",
