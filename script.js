@@ -1,37 +1,14 @@
 /* =====================================================
-   e-META v4.3_connect_make
-   Langues, thèmes, devises, WhatsApp, Email, Display, Make
+   e-META v4.4 – Multilingue, WhatsApp, Make & UI
+   Compatible GitHub Pages, responsive OK
    ===================================================== */
 
-console.log("e-META v4.3_connect_make loaded");
-
-/* ------------ Webhook Make ------------ */
+/* ========= Webhook Make ========= */
+// 👉 Tu peux changer l'URL ici si besoin
 const MAKE_WEBHOOK_URL =
   "https://hook.eu2.make.com/h7dfvrhhe382dtbim745aj3pxh8k53sw";
 
-/**
- * Envoi silencieux des données vers Make
- * @param {Object} payload
- */
-function sendToMake(payload) {
-  if (!MAKE_WEBHOOK_URL) return;
-
-  try {
-    fetch(MAKE_WEBHOOK_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
-    }).catch((err) => {
-      console.error("Erreur d'envoi vers Make :", err);
-    });
-  } catch (e) {
-    console.error("Erreur fetch Make :", e);
-  }
-}
-
-/* ------------ Configuration des langues ------------ */
+/* ========= Config langues ========= */
 
 const LANG_CONFIG = {
   fr: {
@@ -59,9 +36,9 @@ const LANG_CONFIG = {
       label_details: "Détails / Contexte",
 
       legend_delivery: "Mode de restitution",
-      opt_whatsapp: "WhatsApp",
-      opt_email: "Email",
-      opt_display: "Affichage direct",
+      delivery_whatsapp: "WhatsApp",
+      delivery_email: "Email",
+      delivery_display: "Affichage direct",
 
       btn_send: "Envoyer la requête",
 
@@ -138,9 +115,9 @@ const LANG_CONFIG = {
       label_details: "Details / Context",
 
       legend_delivery: "Delivery mode",
-      opt_whatsapp: "WhatsApp",
-      opt_email: "Email",
-      opt_display: "Direct display",
+      delivery_whatsapp: "WhatsApp",
+      delivery_email: "Email",
+      delivery_display: "Direct display",
 
       btn_send: "Send request",
 
@@ -217,9 +194,9 @@ const LANG_CONFIG = {
       label_details: "Detalles / Contexto",
 
       legend_delivery: "Modo de entrega",
-      opt_whatsapp: "WhatsApp",
-      opt_email: "Email",
-      opt_display: "Visualización directa",
+      delivery_whatsapp: "WhatsApp",
+      delivery_email: "Email",
+      delivery_display: "Visualización directa",
 
       btn_send: "Enviar solicitud",
 
@@ -297,9 +274,9 @@ const LANG_CONFIG = {
       label_details: "التفاصيل / السياق",
 
       legend_delivery: "طريقة الإرسال",
-      opt_whatsapp: "واتساب",
-      opt_email: "البريد الإلكتروني",
-      opt_display: "عرض مباشر",
+      delivery_whatsapp: "واتساب",
+      delivery_email: "البريد الإلكتروني",
+      delivery_display: "عرض مباشر",
 
       btn_send: "إرسال الطلب",
 
@@ -353,21 +330,21 @@ const LANG_CONFIG = {
 
 let currentLang = "fr";
 
-/* =====================================================
+/* =============================
    Helpers
-   ===================================================== */
+   ============================= */
 
 function populateSelect(selectEl, options, selectedValue) {
   if (!selectEl) return;
   selectEl.innerHTML = "";
   options.forEach((opt) => {
-    const option = document.createElement("option");
-    option.value = opt.value || opt;
-    option.textContent = opt.label || opt;
-    if (selectedValue && selectedValue === option.value) {
-      option.selected = true;
+    const o = document.createElement("option");
+    o.value = opt.value || opt;
+    o.textContent = opt.label || opt;
+    if (selectedValue && selectedValue === o.value) {
+      o.selected = true;
     }
-    selectEl.appendChild(option);
+    selectEl.appendChild(o);
   });
   if (!selectedValue && options.length > 0) {
     selectEl.selectedIndex = 0;
@@ -376,7 +353,6 @@ function populateSelect(selectEl, options, selectedValue) {
 
 function buildFormSummary(lang) {
   const cfg = LANG_CONFIG[lang] || LANG_CONFIG.fr;
-  const t = cfg.texts;
 
   const getVal = (id) =>
     document.getElementById(id)?.value?.trim() || "-";
@@ -384,14 +360,15 @@ function buildFormSummary(lang) {
   const theme = getVal("themeSelect");
   const expected = getVal("expected");
   const budget = getVal("budget");
-  const currency =
-    document.getElementById("currencySelect")?.value || "";
+  const currency = document.getElementById("currencySelect")?.value || "";
   const fullname = getVal("fullname");
   const phone = getVal("phone");
   const email = getVal("email");
   const details = getVal("details");
 
-  const lines = [
+  const t = cfg.texts;
+
+  return [
     `${t.label_theme}: ${theme}`,
     `${t.label_expected}: ${expected}`,
     `${t.label_budget}: ${budget} ${currency}`,
@@ -400,36 +377,54 @@ function buildFormSummary(lang) {
     `${t.label_email}: ${email}`,
     `${t.label_details}:`,
     details
-  ];
-
-  return lines.join("\n");
+  ].join("\n");
 }
 
-function buildWhatsappUrl(lang, headerOnly = false) {
+function buildWhatsappUrl(lang, isHeaderButton = false) {
   const cfg = LANG_CONFIG[lang] || LANG_CONFIG.fr;
   const number = (cfg.whatsappNumber || "").replace(/\D/g, "");
   if (!number) return null;
 
-  let msg = cfg.texts.whatsapp_greeting;
-  if (!headerOnly) {
+  let msg;
+  if (isHeaderButton) {
+    msg = cfg.texts.whatsapp_greeting;
+  } else {
     const summary = buildFormSummary(lang);
-    msg += `\n\n${summary}`;
+    msg = `${cfg.texts.whatsapp_greeting}\n\n${summary}`;
   }
 
   return `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
 }
 
-/* =====================================================
+/* ===== Envoi silencieux vers Make ===== */
+
+function sendToMake(payload) {
+  if (!MAKE_WEBHOOK_URL) return;
+  try {
+    fetch(MAKE_WEBHOOK_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    }).catch((err) => {
+      console.error("Erreur envoi Make :", err);
+    });
+  } catch (e) {
+    console.error("Erreur fetch Make :", e);
+  }
+}
+
+/* =============================
    Application de la langue
-   ===================================================== */
+   ============================= */
 
 function applyLanguage(lang) {
   const cfg = LANG_CONFIG[lang];
   if (!cfg) return;
-
   currentLang = lang;
 
-  // Attribut lang + direction
+  // html lang & RTL
   document.documentElement.lang = lang === "ar" ? "ar" : lang;
   document.body.classList.toggle("rtl", lang === "ar");
 
@@ -462,40 +457,38 @@ function applyLanguage(lang) {
     .querySelectorAll('[data-i18n="form_title"]')
     .forEach((el) => (el.textContent = t.form_title));
 
-  // Labels du formulaire via data-i18n
-  const labelMap = [
-    "label_theme",
-    "label_expected",
-    "label_budget",
-    "label_currency",
-    "label_fullname",
-    "label_phone",
-    "label_email",
-    "label_details"
-  ];
-  labelMap.forEach((key) => {
-    document
-      .querySelectorAll(`[data-i18n="${key}"]`)
-      .forEach((el) => {
-        if (t[key]) el.textContent = t[key];
-      });
-  });
+  const form = document.getElementById("requestForm");
+  if (form) {
+    const labels = form.querySelectorAll(".grid label");
+    if (labels[0]) labels[0].textContent = t.label_theme;
+    if (labels[1]) labels[1].textContent = t.label_expected;
+    if (labels[2]) labels[2].textContent = t.label_budget;
+    if (labels[3]) labels[3].textContent = t.label_currency;
+    if (labels[4]) labels[4].textContent = t.label_fullname;
+    if (labels[5]) labels[5].textContent = t.label_phone;
+    if (labels[6]) labels[6].textContent = t.label_email;
+    if (labels[7]) labels[7].textContent = t.label_details;
 
-  // Légende + options du mode de restitution
-  const legend = document.querySelector('[data-i18n="label_delivery"]');
-  if (legend) legend.textContent = t.legend_delivery;
+    const legend = form.querySelector(".delivery legend");
+    if (legend) legend.textContent = t.legend_delivery;
 
-  const optWhatsApp = document.querySelector('[data-i18n="opt_whatsapp"]');
-  const optEmail = document.querySelector('[data-i18n="opt_email"]');
-  const optDisplay = document.querySelector('[data-i18n="opt_display"]');
+    const deliveryLabels = form.querySelectorAll(".delivery label");
+    if (deliveryLabels[0]) {
+      const span = deliveryLabels[0].querySelector("span");
+      if (span) span.textContent = t.delivery_whatsapp;
+    }
+    if (deliveryLabels[1]) {
+      const span = deliveryLabels[1].querySelector("span");
+      if (span) span.textContent = t.delivery_email;
+    }
+    if (deliveryLabels[2]) {
+      const span = deliveryLabels[2].querySelector("span");
+      if (span) span.textContent = t.delivery_display;
+    }
 
-  if (optWhatsApp) optWhatsApp.textContent = t.opt_whatsapp;
-  if (optEmail) optEmail.textContent = t.opt_email;
-  if (optDisplay) optDisplay.textContent = t.opt_display;
-
-  // Bouton Envoyer
-  const sendBtn = document.getElementById("sendBtn");
-  if (sendBtn) sendBtn.textContent = t.btn_send;
+    const sendBtn = document.getElementById("sendBtn");
+    if (sendBtn) sendBtn.textContent = t.btn_send;
+  }
 
   // Placeholders
   const expectedInput = document.getElementById("expected");
@@ -515,30 +508,28 @@ function applyLanguage(lang) {
   const themeSelect = document.getElementById("themeSelect");
   populateSelect(
     themeSelect,
-    cfg.themes.map((label) => ({ value: label, label })),
-    cfg.themes[0]
+    cfg.themes.map((label) => ({ value: label, label }))
   );
 
   const currencySelect = document.getElementById("currencySelect");
   populateSelect(currencySelect, cfg.currencies, cfg.defaultCurrency);
 
   // Sections
-  const aboutTitle = document.querySelector('[data-i18n="about_title"]');
-  const aboutDesc = document.querySelector('[data-i18n="about_desc"]');
+  const aboutTitle = document.querySelector("#about h3");
+  const aboutBody = document.querySelector("#about p");
   if (aboutTitle) aboutTitle.textContent = t.about_title;
-  if (aboutDesc) aboutDesc.textContent = t.about_body;
+  if (aboutBody) aboutBody.textContent = t.about_body;
 
   const faqTitle = document.querySelector("#faq h3");
-  if (faqTitle && t.faq_title) faqTitle.textContent = t.faq_title;
-  const faqQ1 = document.querySelector('[data-i18n="faq_q1"]');
-  const faqA1 = document.querySelector('[data-i18n="faq_a1"]');
-  if (faqQ1) faqQ1.textContent = t.faq_q1;
-  if (faqA1) faqA1.textContent = t.faq_a1;
+  const faqSummary = document.querySelector("#faq summary");
+  const faqBody = document.querySelector("#faq details p");
+  if (faqTitle) faqTitle.textContent = t.faq_title;
+  if (faqSummary) faqSummary.textContent = t.faq_q1;
+  if (faqBody) faqBody.textContent = t.faq_a1;
 
-  const contactTitle = document.querySelector('[data-i18n="contact_title"]');
-  if (contactTitle) contactTitle.textContent = t.contact_title;
-
+  const contactTitle = document.querySelector("#contact h3");
   const contactP = document.querySelector("#contact p");
+  if (contactTitle) contactTitle.textContent = t.contact_title;
   if (contactP) {
     const emailLink = contactP.querySelector("a");
     contactP.textContent = `${t.contact_emailLabel} `;
@@ -548,18 +539,20 @@ function applyLanguage(lang) {
   const footerText = document.getElementById("footerText");
   if (footerText) footerText.textContent = t.footer;
 
-  // Bouton langue (flag + code)
+  // Lang button (flag + code)
   const langFlag = document.getElementById("langFlag");
   const langCode = document.getElementById("langCode");
   if (langFlag) langFlag.textContent = cfg.flag;
   if (langCode) langCode.textContent = cfg.code;
 }
 
-/* =====================================================
-   Wiring UI
-   ===================================================== */
+/* =============================
+   UI wiring on DOM ready
+   ============================= */
 
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("e-META v4.4 loaded");
+
   const burgerBtn = document.getElementById("burgerBtn");
   const mainNav = document.getElementById("mainNav");
   const langToggle = document.getElementById("langToggle");
@@ -567,7 +560,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const whatsappBtn = document.getElementById("whatsappBtn");
   const sendBtn = document.getElementById("sendBtn");
 
-  /* --- Burger menu (responsive) --- */
+  /* --- Burger menu --- */
   if (burgerBtn && mainNav) {
     burgerBtn.addEventListener("click", () => {
       burgerBtn.classList.toggle("active");
@@ -628,7 +621,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const summary = buildFormSummary(currentLang);
 
-      // Payload pour Make
+      // payload pour Make
       const payload = {
         lang: currentLang,
         theme: document.getElementById("themeSelect")?.value || "",
@@ -646,7 +639,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Envoi silencieux vers Make
       sendToMake(payload);
 
-      // Routage côté client
+      // Comportement côté utilisateur
       if (delivery === "whatsapp") {
         const url = buildWhatsappUrl(currentLang, false);
         if (url) window.open(url, "_blank");
@@ -664,7 +657,6 @@ document.addEventListener("DOMContentLoaded", () => {
         )}&body=${encodeURIComponent(summary)}`;
         window.location.href = mailto;
       } else {
-        // Affichage direct
         const win = window.open("", "_blank", "width=600,height=700");
         if (win) {
           win.document.write(
@@ -677,6 +669,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* --- Langue par défaut --- */
+  /* --- Langues : appliquer FR par défaut --- */
   applyLanguage("fr");
 });
