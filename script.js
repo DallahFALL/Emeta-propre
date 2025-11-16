@@ -492,6 +492,9 @@ function applyLanguage(lang) {
 
     const sendBtn = document.getElementById("sendBtn");
     if (sendBtn) sendBtn.textContent = t.btn_send;
+     const resetBtn = document.getElementById("resetBtn");
+    if (resetBtn && t.btn_reset) resetBtn.textContent = t.btn_reset;
+
   }
 
   // Placeholders
@@ -563,6 +566,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const langMenu = document.getElementById("langMenu");
   const whatsappBtn = document.getElementById("whatsappBtn");
   const sendBtn = document.getElementById("sendBtn");
+  const burgerBtn = document.getElementById("burgerBtn");
+  const mainNav = document.getElementById("mainNav");
+  const langToggle = document.getElementById("langToggle");
+  const langMenu = document.getElementById("langMenu");
+  const whatsappBtn = document.getElementById("whatsappBtn");
+  const sendBtn = document.getElementById("sendBtn");
+  const resetBtn = document.getElementById("resetBtn");  // 🔹 AJOUT
+
 
   /* --- Burger menu --- */
   if (burgerBtn && mainNav) {
@@ -622,6 +633,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const delivery =
         document.querySelector('input[name="delivery"]:checked')?.value ||
         "whatsapp";
+  /* --- Bouton Réinitialiser --- */
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+    const form = document.getElementById("requestForm");
+    if (form) {
+      form.reset();              // on vide les champs + radios
+    }
+    applyLanguage(currentLang);  // on remet les listes & libellés propres
+  });
+}
 
       const summary = buildFormSummary(currentLang);
 
