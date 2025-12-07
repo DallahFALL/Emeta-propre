@@ -41,31 +41,129 @@
       <p data-i18n="hero_sub">Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.</p>
     </section>
 
-    <form id="requestForm" class="form">
-      <h2 data-i18n="form_title">Requête personnalisée</h2>
-      <div class="grid">
-        <div><label data-i18n="label_theme">Domaine / Thème</label><select id="themeSelect"></select></div>
-        <div><label data-i18n="label_expected">Résultat attendu</label><input id="expected" type="text"></div>
-        <div><label data-i18n="label_budget">Budget indicatif</label><input id="budget" type="text"></div>
-        <div><label data-i18n="label_currency">Devise</label><select id="currencySelect"></select></div>
-        <div><label data-i18n="label_fullname">Nom complet</label><input id="fullname" type="text"></div>
-        <div><label data-i18n="label_phone">Téléphone (WhatsApp)</label><input id="phone" type="tel"></div>
-        <div class="full"><label data-i18n="label_email">Email</label><input id="email" type="email"></div>
-        <div class="full"><label data-i18n="label_details">Détails / Contexte</label><textarea id="details"></textarea></div>
-      </div>
+    <!-- ==============================
+     FORMULAIRE e-META v5.0
+     ============================== -->
 
-      <fieldset class="delivery full">
-        <legend data-i18n="legend_delivery">Mode de restitution</legend>
-        <label><input type="radio" name="delivery" value="whatsapp" checked><span data-i18n="delivery_whatsapp">WhatsApp</span></label>
-        <label><input type="radio" name="delivery" value="email"><span data-i18n="delivery_email">Email</span></label>
-        <label><input type="radio" name="delivery" value="display"><span data-i18n="delivery_display">Affichage direct</span></label>
-      </fieldset>
+<section id="e-meta-form" class="emeta-section">
 
-      <div class="buttons">
-        <button id="resetBtn" type="button" class="btn-secondary">Réinitialiser</button>
-        <button id="sendBtn" type="button" class="btn-primary">Envoyer la requête</button>
-      </div>
-    </form>
+  <h2 class="emeta-title" data-i18n="form_title">
+    Requête décisionnelle e-META
+  </h2>
+
+  <form id="emetaForm" class="emeta-form">
+
+    <!-- IDENTITÉ -->
+    <div class="emeta-group">
+      <label data-i18n="label_full_name">Nom complet</label>
+      <input id="full_name" type="text" required>
+    </div>
+
+    <div class="emeta-group">
+      <label data-i18n="label_email">Email (optionnel)</label>
+      <input id="email" type="email">
+    </div>
+
+    <div class="emeta-group">
+      <label data-i18n="label_whatsapp">WhatsApp (optionnel)</label>
+      <input id="whatsapp" type="tel" placeholder="+221…">
+    </div>
+
+    <!-- LANGUE -->
+    <div class="emeta-group">
+      <label data-i18n="label_language">Langue</label>
+      <select id="language">
+        <option value="fr">🇫🇷 Français</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="ar">🇸🇦 العربية</option>
+      </select>
+    </div>
+
+    <!-- DÉCISION -->
+    <div class="emeta-group">
+      <label data-i18n="label_domain">Domaine / Thème</label>
+      <select id="domain"></select>
+    </div>
+
+    <div class="emeta-group">
+      <label data-i18n="label_title">Titre court de la décision</label>
+      <input id="decision_title" type="text">
+    </div>
+
+    <div class="emeta-group">
+      <label data-i18n="label_context">Contexte détaillé</label>
+      <textarea id="context" rows="4"></textarea>
+    </div>
+
+    <div class="emeta-group">
+      <label data-i18n="label_objectives">Objectifs recherchés</label>
+      <textarea id="objectives" rows="3"></textarea>
+    </div>
+
+    <div class="emeta-group">
+      <label data-i18n="label_constraints">Contraintes (optionnel)</label>
+      <textarea id="constraints" rows="3"></textarea>
+    </div>
+
+    <!-- BUDGET -->
+    <div class="emeta-group">
+      <label data-i18n="label_budget_amount">Budget (montant)</label>
+      <input id="budget_amount" type="number">
+    </div>
+
+    <div class="emeta-group">
+      <label data-i18n="label_budget_currency">Devise</label>
+      <select id="budget_currency"></select>
+    </div>
+
+    <!-- TEMPS -->
+    <div class="emeta-group">
+      <label data-i18n="label_deadline">Délai souhaité</label>
+      <input id="deadline" type="text" placeholder="Ex: 3 mois / 2026 / Q1…">
+    </div>
+
+    <div class="emeta-group">
+      <label data-i18n="label_urgency">Urgence (1–5)</label>
+      <input id="urgency" type="number" min="1" max="5" value="3">
+    </div>
+
+    <!-- SORTIE -->
+    <fieldset class="emeta-fieldset">
+      <legend data-i18n="label_output">Mode de restitution</legend>
+
+      <label><input type="radio" name="output_preference" value="auto" checked> Automatique</label>
+      <label><input type="radio" name="output_preference" value="email"> Email</label>
+      <label><input type="radio" name="output_preference" value="whatsapp"> WhatsApp</label>
+      <label><input type="radio" name="output_preference" value="affichage"> Affichage direct</label>
+    </fieldset>
+
+    <!-- PIÈCE JOINTE -->
+    <div class="emeta-group">
+      <label data-i18n="label_attachment">Lien fichier (optionnel)</label>
+      <input id="attachment_url" type="url">
+    </div>
+
+    <!-- CONSENTEMENT -->
+    <div class="emeta-group emeta-consent">
+      <label>
+        <input id="consent" type="checkbox">
+        <span data-i18n="label_consent">
+          J’autorise e-META à analyser mes données pour fournir une réponse personnalisée.
+        </span>
+      </label>
+    </div>
+
+    <!-- BOUTONS -->
+    <div class="emeta-buttons">
+      <button type="button" id="resetBtn" class="btn-secondary">Réinitialiser</button>
+      <button type="button" id="sendBtn" class="btn-primary">Envoyer</button>
+    </div>
+
+  </form>
+
+</section>
+
 
     <section id="about" class="section"><h3>À propos</h3><p>e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.</p></section>
     <section id="faq" class="section"><h3>FAQ</h3><details><summary>Comment fonctionne e-META ?</summary><p>Remplissez le formulaire et recevez votre synthèse via le canal choisi.</p></details></section>
