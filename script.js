@@ -3,7 +3,7 @@
    ===================================================== */
 
 /* --- Webhook Make (fonctionnel) --- */
-const MAKE_WEBHOOK_URL = "https://hook.eu2.make.com/6vp7brpcyshvkyj3u54nhn18moly0udj";
+const MAKE_WEBHOOK_URL = "https://hook.eu2.make.com/y3wqqqp52ec9nt2t2gazmckzc3rihkwi";
 
 /* --- Config langues --- */
 const LANG_CONFIG = {
