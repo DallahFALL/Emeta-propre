@@ -651,3 +651,75 @@ body.rtl .section details p {
   padding-right: 0.2rem;
   padding-left: 0;
 }
+
+/* Conteneur du formulaire e-META */
+.emeta-section {
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+  padding: 2rem 1.5rem;
+}
+
+/* Forme de la carte */
+.emeta-form {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* Groupes de champs */
+.emeta-group {
+  margin-bottom: 1rem;
+}
+
+/* Mode de restitution plus compact et centré */
+.emeta-fieldset {
+  max-width: 640px;
+  margin: 1.5rem auto;
+  padding: 1.25rem 1.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background: rgba(255, 255, 255, 0.9);
+  display: grid;
+  gap: 0.5rem;
+}
+
+/* Labels des radios */
+.emeta-fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Boutons */
+.emeta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+/* Consentement + lien RGPD */
+.emeta-consent span {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+.emeta-privacy-link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+  .emeta-section {
+    padding-inline: 1rem;
+  }
+  .emeta-form {
+    max-width: 100%;
+  }
+  .emeta-fieldset {
+    width: 100%;
+  }
+  .emeta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
