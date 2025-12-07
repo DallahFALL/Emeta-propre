@@ -70,15 +70,7 @@
     </div>
 
     <!-- LANGUE -->
-    <div class="emeta-group">
-      <label data-i18n="label_language">Langue</label>
-      <select id="language">
-        <option value="fr">🇫🇷 Français</option>
-        <option value="en">🇬🇧 English</option>
-        <option value="es">🇪🇸 Español</option>
-        <option value="ar">🇸🇦 العربية</option>
-      </select>
-    </div>
+    <input id="language" type="hidden" value="fr">
 
     <!-- DÉCISION -->
     <div class="emeta-group">
@@ -130,13 +122,28 @@
 
     <!-- SORTIE -->
     <fieldset class="emeta-fieldset">
-      <legend data-i18n="label_output">Mode de restitution</legend>
+  <legend data-i18n="label_output">Mode de restitution</legend>
 
-      <label><input type="radio" name="output_preference" value="auto" checked> Automatique</label>
-      <label><input type="radio" name="output_preference" value="email"> Email</label>
-      <label><input type="radio" name="output_preference" value="whatsapp"> WhatsApp</label>
-      <label><input type="radio" name="output_preference" value="affichage"> Affichage direct</label>
-    </fieldset>
+  <label>
+    <input type="radio" name="output_preference" value="auto" checked>
+    <span data-i18n="output_auto">Automatique</span>
+  </label>
+
+  <label>
+    <input type="radio" name="output_preference" value="email">
+    <span data-i18n="output_email">Email</span>
+  </label>
+
+  <label>
+    <input type="radio" name="output_preference" value="whatsapp">
+    <span data-i18n="output_whatsapp">WhatsApp</span>
+  </label>
+
+  <label>
+    <input type="radio" name="output_preference" value="affichage">
+    <span data-i18n="output_display">Affichage direct</span>
+  </label>
+</fieldset
 
     <!-- PIÈCE JOINTE -->
     <div class="emeta-group">
@@ -146,13 +153,20 @@
 
     <!-- CONSENTEMENT -->
     <div class="emeta-group emeta-consent">
-      <label>
-        <input id="consent" type="checkbox">
-        <span data-i18n="label_consent">
-          J’autorise e-META à analyser mes données pour fournir une réponse personnalisée.
-        </span>
-      </label>
-    </div>
+  <label>
+    <input id="consent" type="checkbox">
+    <span>
+      <span data-i18n="label_consent_main">
+        J’autorise e-META à analyser mes données pour fournir une réponse personnalisée.
+      </span>
+      <a href="privacy.html" target="_blank"
+         class="emeta-privacy-link"
+         data-i18n="label_privacy_link">
+        Voir la politique de confidentialité
+      </a>.
+    </span>
+  </label>
+</div>
 
     <!-- BOUTONS -->
     <div class="emeta-buttons">
