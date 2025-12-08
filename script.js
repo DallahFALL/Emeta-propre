@@ -656,3 +656,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // Langue par défaut
   applyLanguage("fr");
 });
+
+/* --- BURGER MENU MOBILE --- */
+const burger = document.getElementById("burgerBtn");
+const mobileNav = document.getElementById("mainNav");
+
+if (burger && mobileNav) {
+  burger.addEventListener("click", () => {
+    mobileNav.classList.toggle("open");
+  });
+}
