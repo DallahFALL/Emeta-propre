@@ -549,13 +549,15 @@ document.addEventListener("DOMContentLoaded", () => {
       e.stopPropagation();
       langMenu.classList.toggle("show");
     });
-    langMenu.querySelectorAll("li").forEach(li => {
-      li.addEventListener("click", () => {
-        const lang = li.dataset.lang || "fr";
-        applyLanguage(lang);
-        langMenu.classList.remove("show");
-      });
-    });
+    langMenu.querySelectorAll("li").forEach((item) => {
+  item.addEventListener("click", () => {
+    const lang = item.dataset.lang;
+    applyLanguage(lang);
+    localStorage.setItem("eMetaLang", lang); // 🔴 ligne à ajouter
+    langMenu.classList.remove("show");
+  });
+});
+
     document.addEventListener("click", e => {
       if (!langMenu.contains(e.target) && e.target !== langToggle) {
         langMenu.classList.remove("show");
