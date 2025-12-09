@@ -377,3 +377,45 @@ if (form) {
         }
     });
 }
+document.addEventListener("DOMContentLoaded", () => {
+    loadHeader();
+    initLanguageSwitcher();
+});
+function loadHeader() {
+    document.getElementById("headerContainer").innerHTML = `
+        <header class="header">
+            <div class="nav-wrapper">
+                <a href="index.html#home" class="brand">
+                    <img id="logo" src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" height="42">
+                </a>
+
+                <button id="burgerBtn" class="burger">
+                    <span></span><span></span><span></span>
+                </button>
+
+                <nav id="mainNav" class="nav">
+                    <a href="index.html#home" data-i18n="nav_home">Accueil</a>
+                    <a href="index.html#about" data-i18n="nav_about">À propos</a>
+                    <a href="index.html#faq" data-i18n="nav_faq">FAQ</a>
+                    <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
+                </nav>
+
+                <div class="actions">
+                    <button id="whatsappBtn" class="btn-wa">WhatsApp</button>
+                    <div class="langbox">
+                        <button id="langToggle" class="lang-btn" type="button">
+                            <span id="langFlag">🇫🇷</span>
+                            <span id="langCode">FR</span> ▼
+                        </button>
+                        <ul id="langMenu" class="lang-menu">
+                            <li data-lang="fr">🇫🇷 Français</li>
+                            <li data-lang="en">🇬🇧 English</li>
+                            <li data-lang="es">🇪🇸 Español</li>
+                            <li data-lang="ar">🇸🇦 العربية</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+    `;
+}
