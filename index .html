@@ -246,6 +246,35 @@
   </p>
 </section>
   </main>
+<!-- SECTION CONTACT (connectée à Make) -->
+<section id="contact" class="section">
+  <h3 data-i18n="contact_title">Contact</h3>
+  <p data-i18n="contact_text">
+    Pour toute question, partenariat ou projet spécifique, vous pouvez nous écrire ci-dessous.
+  </p>
+
+  <form id="contactForm" class="emeta-form">
+    <div class="emeta-group">
+      <label data-i18n="contact_name">Nom complet</label>
+      <input id="contact_name" type="text" placeholder="Votre nom" data-i18n-placeholder="ph_name" required>
+    </div>
+
+    <div class="emeta-group">
+      <label data-i18n="contact_email">Email</label>
+      <input id="contact_email" type="email" placeholder="adresse@email.com" data-i18n-placeholder="ph_email" required>
+    </div>
+
+    <div class="emeta-group">
+      <label data-i18n="contact_message">Message</label>
+      <textarea id="contact_message" rows="3" placeholder="Votre message"
+                data-i18n-placeholder="ph_message" required></textarea>
+    </div>
+
+    <div class="emeta-buttons">
+      <button type="submit" class="btn-primary" data-i18n="send">Envoyer</button>
+    </div>
+  </form>
+</section>
 
   <!-- FOOTER -->
   <footer class="footer">
