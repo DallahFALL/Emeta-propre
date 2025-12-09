@@ -3,62 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>e-META — Assistant IA décisionnel</title>
+  <title>e-META – Assistant IA pluridisciplinaire</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 
 <body>
-  <!-- HEADER -->
-  <header class="header">
-    <div class="nav-wrapper">
 
-      <a href="#home" class="brand">
-        <img id="logo" src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" height="100">
-      </a>
-
-      <!-- Burger (mobile only) -->
-      <button id="burgerBtn" class="burger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-
-      <!-- Navigation -->
-      <nav id="mainNav" class="nav">
-        <a href="#home" data-i18n="nav_home">Accueil</a>
-        <a href="#about" data-i18n="nav_about">À propos</a>
-        <a href="#faq" data-i18n="nav_faq">FAQ</a>
-        <a href="#contact" data-i18n="nav_contact">Contact</a>
-      </nav>
-
-      <!-- Actions -->
-      <div class="actions">
-        <button id="whatsappBtn" class="btn-wa">WhatsApp</button>
-
-        <div class="langbox">
-          <button id="langToggle" class="lang-btn">
-            <span id="currentLang">FR</span> ▼
-          </button>
-
-          <ul id="langMenu" class="lang-menu">
-            <li data-lang="fr">🇫🇷 Français</li>
-            <li data-lang="en">🇬🇧 English</li>
-            <li data-lang="es">🇪🇸 Español</li>
-            <li data-lang="ar">🇸🇦 العربية</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </header>
+  <!-- HEADER injecté automatiquement -->
+  <div id="headerContainer"></div>
 
   <!-- HERO -->
   <section id="home" class="hero">
     <div class="hero-inner">
-      <div class="hero-badge" data-i18n="hero_badge">IA décisionnelle</div>
+      <div class="hero-badge" data-i18n="badge_ai">IA décisionnelle</div>
       <h1 data-i18n="hero_title">e-META — L’assistant IA pluridisciplinaire</h1>
       <p class="hero-sub" data-i18n="hero_sub">
         Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.
@@ -66,57 +25,66 @@
     </div>
   </section>
 
-  <!-- FORMULAIRE e-META (NON MODIFIÉ, RESPECT TOTAL) -->
+  <!-- FORMULAIRE DÉCISIONNEL -->
   <section class="emeta-section">
     <div class="form-wrapper">
       <h2 class="form-title" data-i18n="form_title">Requête décisionnelle e-META</h2>
 
       <form id="emetaForm" class="emeta-form">
 
+        <!-- Identité -->
         <div class="emeta-group">
           <label data-i18n="label_fullname">Nom complet</label>
-          <input id="fullname" type="text" required />
+          <input type="text" id="fullname" placeholder="ex : Abdoulaye FALL" />
         </div>
 
-        <div class="emeta-group">
-          <label>Email (optionnel)</label>
-          <input id="email" type="email" />
+        <div class="emeta-row">
+          <div class="emeta-group">
+            <label data-i18n="label_email">Email (optionnel)</label>
+            <input type="email" id="email" placeholder="ex : contact@e-meta.app" />
+          </div>
+
+          <div class="emeta-group">
+            <label data-i18n="label_phone">Téléphone WhatsApp (optionnel)</label>
+            <input type="tel" id="phone" placeholder="+221 77 000 00 00" />
+          </div>
         </div>
 
-        <div class="emeta-group">
-          <label data-i18n="label_phone">WhatsApp (optionnel)</label>
-          <input id="phone" type="tel" placeholder="+221…" />
-        </div>
-
-        <div class="emeta-group">
-          <label data-i18n="label_lang">Langue</label>
-          <select id="langSelect"></select>
-        </div>
-
+        <!-- Sélection du domaine -->
         <div class="emeta-group">
           <label data-i18n="label_domain">Domaine / Thème</label>
           <select id="domainSelect"></select>
         </div>
 
+        <!-- Titre -->
         <div class="emeta-group">
           <label data-i18n="label_title">Titre court de la décision</label>
-          <input id="title" type="text" placeholder="Ex : lancement d’une station-service…" />
+          <input type="text" id="decision_title" placeholder="ex : Lancement d’une station-service" />
         </div>
 
+        <!-- Contexte -->
         <div class="emeta-group">
           <label data-i18n="label_context">Contexte détaillé</label>
-          <textarea id="context"></textarea>
+          <textarea id="context" placeholder="Décrivez la situation actuelle…"></textarea>
         </div>
 
+        <!-- Objectifs -->
         <div class="emeta-group">
           <label data-i18n="label_objectives">Objectifs recherchés</label>
-          <textarea id="objectives"></textarea>
+          <textarea id="objectives" placeholder="Quels résultats attendez-vous ?"></textarea>
         </div>
 
+        <!-- Contraintes -->
+        <div class="emeta-group">
+          <label data-i18n="label_constraints">Contraintes / limites</label>
+          <textarea id="constraints" placeholder="Contraintes techniques, financières, légales…"></textarea>
+        </div>
+
+        <!-- Budget -->
         <div class="emeta-row">
           <div class="emeta-group">
-            <label data-i18n="label_budget">Budget</label>
-            <input id="budget" type="number" />
+            <label data-i18n="label_budget">Budget indicatif</label>
+            <input type="number" id="budget_amount" placeholder="ex : 70000" />
           </div>
 
           <div class="emeta-group">
@@ -125,55 +93,66 @@
           </div>
         </div>
 
-        <div class="emeta-group">
-          <label data-i18n="label_deadline">Délai souhaité</label>
-          <input id="deadline" type="text" />
+        <!-- Deadline + Urgency -->
+        <div class="emeta-row">
+          <div class="emeta-group">
+            <label data-i18n="label_deadline">Délai souhaité</label>
+            <input type="text" id="deadline" placeholder="ex : 30 jours" />
+          </div>
+
+          <div class="emeta-group">
+            <label data-i18n="label_urgency">Urgence (1–5)</label>
+            <input type="number" id="urgency" min="1" max="5" value="3" />
+          </div>
         </div>
 
-        <div class="emeta-group">
-          <label data-i18n="label_urgency">Urgence (1–5)</label>
-          <input id="urgency" type="number" min="1" max="5" />
-        </div>
-
+        <!-- Delivery mode -->
         <fieldset class="emeta-fieldset">
           <legend data-i18n="label_delivery">Mode de restitution</legend>
 
-          <label><input type="radio" name="delivery" value="auto" checked> <span data-i18n="delivery_auto">Automatique</span></label>
-          <label><input type="radio" name="delivery" value="email"> <span data-i18n="delivery_email">Email</span></label>
-          <label><input type="radio" name="delivery" value="whatsapp"> <span data-i18n="delivery_whatsapp">WhatsApp</span></label>
-          <label><input type="radio" name="delivery" value="display"> <span data-i18n="delivery_display">Affichage direct</span></label>
+          <label><input type="radio" name="delivery" value="auto" checked />
+            <span data-i18n="delivery_auto">Automatique</span>
+          </label>
+
+          <label><input type="radio" name="delivery" value="email" />
+            <span data-i18n="delivery_email">Email</span>
+          </label>
+
+          <label><input type="radio" name="delivery" value="whatsapp" />
+            <span data-i18n="delivery_whatsapp">WhatsApp</span>
+          </label>
+
+          <label><input type="radio" name="delivery" value="display" />
+            <span data-i18n="delivery_display">Affichage direct</span>
+          </label>
         </fieldset>
 
+        <!-- File URL -->
         <div class="emeta-group">
           <label data-i18n="label_file">Lien fichier (optionnel)</label>
-          <input id="attachment" type="url" placeholder="https://…" />
+          <input type="url" id="attachment" placeholder="URL Google Drive, PDF…" />
         </div>
 
-        <div class="emeta-group emeta-consent">
-          <label>
-            <input type="checkbox" id="consent" required>
-            <span data-i18n="label_consent">
-              J’autorise e-META à analyser mes données.
-            </span>
-            <a href="privacy.html" class="emeta-privacy-link" data-i18n="privacy_link">Voir la politique de confidentialité</a>
-          </label>
-        </div>
+        <!-- Consent -->
+        <label class="emeta-consent">
+          <input type="checkbox" id="consent" />
+          <span data-i18n="label_consent">
+            J’autorise e-META à analyser mes données.
+          </span>
+          <a href="privacy.html" class="emeta-privacy-link" data-i18n="label_privacy">Voir la politique de confidentialité</a>
+        </label>
 
+        <!-- Buttons -->
         <div class="emeta-buttons">
-          <button type="reset" class="btn-secondary" data-i18n="btn_reset">Réinitialiser</button>
-          <button type="submit" id="sendBtn" class="btn-primary" data-i18n="btn_send">Envoyer</button>
+          <button type="button" id="resetBtn" class="btn-secondary" data-i18n="btn_reset">Réinitialiser</button>
+          <button type="button" id="sendBtn" class="btn-primary" data-i18n="btn_send">Envoyer</button>
         </div>
-
       </form>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>© 2025 e-META • Simplement. Intelligemment.</p>
-  </footer>
+  <!-- Footer injecté automatiquement -->
+  <div id="footerContainer"></div>
 
-  <!-- SCRIPT (OPTION A — SÉCURISÉ) -->
-  <script src="script.js"></script>
 </body>
 </html>
