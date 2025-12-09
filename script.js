@@ -653,11 +653,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Langue par défaut
-  applyLanguage("fr");
-});
-
-// --- MENU MOBILE ---
+  /* ========================
+   MENU MOBILE
+======================== */
 const burgerBtn = document.getElementById("burgerBtn");
 const mainNav = document.getElementById("mainNav");
 
@@ -666,3 +664,103 @@ burgerBtn.addEventListener("click", () => {
   mainNav.classList.toggle("open");
 });
 
+/* ========================
+   SWITCHER DE LANGUES
+======================== */
+const langToggle = document.getElementById("langToggle");
+const langMenu   = document.getElementById("langMenu");
+const currentLang = document.getElementById("currentLang");
+
+langToggle.addEventListener("click", () => {
+  langMenu.classList.toggle("show");
+});
+
+// Traductions
+const i18n = {
+  fr: { nav_home:"Accueil", nav_about:"À propos", nav_faq:"FAQ", nav_contact:"Contact",
+        badge:"IA décisionnelle",
+        hero_title:"e-META — L’assistant IA pluridisciplinaire",
+        hero_sub:"Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.",
+        form_title:"Requête décisionnelle e-META",
+        full_name:"Nom complet", email:"Email (optionnel)", whatsapp:"WhatsApp (optionnel)",
+        language:"Langue", domain:"Domaine / Thème",
+        decision_title:"Titre court de la décision",
+        context:"Contexte détaillé", objectives:"Objectifs recherchés",
+        constraints:"Contraintes / limites",
+        budget_amount:"Budget (optionnel)", budget_currency:"Devise",
+        deadline:"Délai souhaité", urgency:"Urgence (1–5)",
+        output_preference:"Mode de restitution",
+        auto:"Automatique",
+        file_link:"Lien fichier (optionnel)",
+        consent_msg:"J’autorise e-META à analyser mes données pour fournir une réponse personnalisée.",
+        privacy_link:"Voir la politique de confidentialité",
+        reset:"Réinitialiser", send:"Envoyer",
+        about_title:"À propos",
+        about_text:"e-META structure vos demandes et produit une synthèse stratégique adaptée au contexte.",
+        faq_q1:"Comment fonctionne e-META ?",
+        faq_a1:"Remplissez le formulaire et recevez votre synthèse via le canal choisi."
+  },
+
+  // 🔥 Même structure pour EN / ES / AR
+  en: { /* ... */ },
+  es: { /* ... */ },
+  ar: { /* ... */ }
+};
+
+// Appliquer la traduction
+function applyLanguage(lang) {
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    if (i18n[lang][key]) el.textContent = i18n[lang][key];
+  });
+
+  // Gestion RTL
+  if (lang === "ar") document.body.classList.add("rtl");
+  else document.body.classList.remove("rtl");
+
+  currentLang.textContent = lang.toUpperCase();
+}
+
+// Sélection d’une langue
+langMenu.querySelectorAll("li").forEach(li => {
+  li.addEventListener("click", () => {
+    const lang = li.dataset.lang;
+    applyLanguage(lang);
+    langMenu.classList.remove("show");
+  });
+});
+
+
+/* ========================
+   FORMULAIRE → MAKE WEBHOOK
+======================== */
+document.getElementById("emetaForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const payload = {
+    full_name: full_name.value,
+    email: email.value,
+    whatsapp: whatsapp.value,
+    language: language.value,
+    domain: domain.value,
+    decision_title: decision_title.value,
+    context: context.value,
+    objectives: objectives.value,
+    constraints: constraints.value,
+    budget_amount: budget_amount.value,
+    budget_currency: budget_currency.value,
+    deadline: deadline.value,
+    urgency: urgency.value,
+    output_preference: document.querySelector("input[name='output']:checked").value,
+    attachment_url: attachment_url.value,
+    consent: consent.checked
+  };
+
+  await fetch("https://hook.eu1.make.com/TON_WEBHOOK", {
+    method: "POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(payload)
+  });
+
+  alert("Votre requête a été envoyée avec succès !");
+});
