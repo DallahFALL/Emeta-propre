@@ -421,4 +421,40 @@ document.addEventListener("click", () => {
     wa.onclick = () => {
         window.open("https://wa.me/221782607212", "_blank");
     };
+   /* ============================
+   FORMULAIRE DE CONTACT → MAKE
+============================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const contactForm = document.getElementById("contactForm");
+  if (!contactForm) return;
+
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const payload = {
+      name: document.getElementById("contact_name").value,
+      email: document.getElementById("contact_email").value,
+      message: document.getElementById("contact_message").value,
+      lang: localStorage.getItem("emetaLang") || "fr"
+    };
+
+    try {
+      await fetch(MAKE_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "contact_message",
+          payload
+        })
+      });
+
+      alert("Votre message a été envoyé avec succès.");
+      contactForm.reset();
+    } catch (err) {
+      alert("Erreur lors de l’envoi. Veuillez réessayer.");
+    }
+  });
+});
+
 });
