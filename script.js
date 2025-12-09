@@ -6,7 +6,8 @@
    - Formulaire e-META
    - Compatibilité multi-pages
    ============================================================ */
-
+// URL du Webhook Make (à personnaliser)
+const MAKE_WEBHOOK_URL = "https://hook.eu2.make.com/TON_WEBHOOK_ICI";
 
 /* ============================================================
    1. INJECTION HEADER + FOOTER (toutes pages)
@@ -387,14 +388,14 @@ document.addEventListener("click", () => {
         }
 
         try {
-            await fetch(
-                "https://hook.eu2.make.com/xxxxxxxxxxxxxx",  // ← Ton Webhook
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data)
-                }
-            );
+            await fetch(MAKE_WEBHOOK_URL, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    type: "decision_request",
+    payload: data
+  })
+});
 
             alert("Votre requête a été envoyée avec succès !");
         }
