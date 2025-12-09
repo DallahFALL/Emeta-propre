@@ -1,78 +1,111 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>e-META — Politique de confidentialité</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Politique de confidentialité – e-META</title>
+
+  <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
 
 <body>
-  <header class="header">
-    <div class="nav-wrapper">
-      <a href="index.html" class="brand">
-        <img src="01_Logo_Sources/eMETA-official-logo.svg.png" height="60">
-      </a>
 
-      <button id="burgerBtn" class="burger"><span></span><span></span><span></span></button>
+<!-- ===========================
+     HEADER SPÉCIAL PRIVACY
+=========================== -->
+<header class="header">
+  <div class="nav-wrapper">
 
-      <nav id="mainNav" class="nav">
-        <a href="index.html#home" data-i18n="nav_home">Accueil</a>
-        <a href="index.html#about" data-i18n="nav_about">À propos</a>
-        <a href="index.html#faq" data-i18n="nav_faq">FAQ</a>
-        <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
-      </nav>
+    <!-- LOGO -->
+    <a href="index.html#home" class="brand">
+      <img src="01_Logo_Sources/EMETA-official-logo.svg" alt="e-META Logo" class="logo">
+      <span class="brand-name">e-META</span>
+    </a>
 
-      <div class="actions">
-        <div class="langbox">
-          <button id="langToggle" class="lang-btn">
-            <span id="currentLang">FR</span> ▼
-          </button>
-          <ul id="langMenu" class="lang-menu">
-            <li data-lang="fr">🇫🇷 Français</li>
-            <li data-lang="en">🇬🇧 English</li>
-            <li data-lang="es">🇪🇸 Español</li>
-            <li data-lang="ar">🇸🇦 العربية</li>
-          </ul>
-        </div>
+    <!-- PAS DE MENU ICI -->
+    <nav></nav>
+
+    <!-- ACTIONS : WhatsApp + Langues -->
+    <div class="actions">
+      <a href="https://wa.me/221782607212" target="_blank" class="btn-wa">WhatsApp</a>
+
+      <div class="langbox">
+        <button id="langToggle" class="lang-btn">
+          <span id="currentLang">FR</span> ▼
+        </button>
+        <ul id="langMenu" class="lang-menu">
+          <li data-lang="fr">FR — Français</li>
+          <li data-lang="en">EN — English</li>
+          <li data-lang="es">ES — Español</li>
+          <li data-lang="ar">AR — العربية</li>
+        </ul>
       </div>
     </div>
-  </header>
 
-  <main class="section" id="privacyContent">
+  </div>
+</header>
 
-    <h1 data-i18n="privacy_title">Politique de confidentialité – e-META</h1>
-    <p><strong data-i18n="privacy_updated">Dernière mise à jour :</strong> 08/12/2025</p>
 
-    <h2 data-i18n="privacy_section1">1. Données collectées</h2>
-    <ul>
-      <li data-i18n="privacy_d1">Identité : nom et prénom</li>
-      <li data-i18n="privacy_d2">Coordonnées : email, WhatsApp</li>
-      <li data-i18n="privacy_d3">Informations de contexte : domaine, titre du projet, objectifs, contraintes</li>
-      <li data-i18n="privacy_d4">Budget : montant + devise</li>
-      <li data-i18n="privacy_d5">Informations complémentaires : délai, urgence, lien fichier</li>
-      <li data-i18n="privacy_d6">Préférences : mode de restitution</li>
-    </ul>
+<!-- ===========================
+     CONTENU PRIVACY
+=========================== -->
+<section class="section" style="margin-top:40px;">
+  <h1 data-i18n="privacy_title">Politique de confidentialité – e-META</h1>
+  <p><strong data-i18n="privacy_update">Dernière mise à jour :</strong> 08/12/2025</p>
 
-    <h2 data-i18n="privacy_section2">2. Finalité du traitement</h2>
+  <h2 data-i18n="privacy_1">1. Données collectées</h2>
+  <p data-i18n="privacy_1_txt">
+    Les données suivantes peuvent être collectées via e-META :
+  </p>
+  <ul>
+    <li data-i18n="privacy_1_a">Identité : nom et prénom</li>
+    <li data-i18n="privacy_1_b">Coordonnées : email, WhatsApp</li>
+    <li data-i18n="privacy_1_c">Informations de contexte : domaine, titre du projet, objectifs, contraintes</li>
+    <li data-i18n="privacy_1_d">Budget : montant + devise</li>
+    <li data-i18n="privacy_1_e">Informations complémentaires : délai, urgence, lien fichier</li>
+    <li data-i18n="privacy_1_f">Préférences : méthode de restitution</li>
+  </ul>
 
-    <p data-i18n="privacy_f1">Vos données sont utilisées exclusivement pour générer une réponse personnalisée.</p>
-    <p data-i18n="privacy_f2">Aucune donnée n’est vendue ou partagée.</p>
+  <h2 data-i18n="privacy_2">2. Finalité du traitement</h2>
+  <p data-i18n="privacy_2_txt">
+    Vos données servent uniquement à générer une analyse personnalisée via IA.  
+    Elles ne sont jamais vendues ni partagées.
+  </p>
 
-    <h2 data-i18n="privacy_section3">3. Durée de conservation</h2>
-    <p data-i18n="privacy_ret">Les données sont conservées uniquement le temps nécessaire à l’analyse.</p>
+  <h2 data-i18n="privacy_3">3. Durée de conservation</h2>
+  <p data-i18n="privacy_3_txt">
+    Les données sont conservées uniquement le temps nécessaire à l’analyse puis automatiquement supprimées.
+  </p>
 
-    <h2 data-i18n="privacy_section4">4. Sécurité</h2>
-    <p data-i18n="privacy_sec">Les données sont transmises via un canal sécurisé et traitées de manière confidentielle.</p>
+  <h2 data-i18n="privacy_4">4. Sécurité</h2>
+  <p data-i18n="privacy_4_txt">
+    e-META applique des mesures avancées pour protéger vos données (chiffrement, stockage sécurisé).
+  </p>
 
-    <h2 data-i18n="privacy_section5">5. Vos droits</h2>
-    <p data-i18n="privacy_rights">Vous pouvez demander la suppression ou consultation de vos données à tout moment.</p>
+  <h2 data-i18n="privacy_5">5. Vos droits</h2>
+  <p data-i18n="privacy_5_txt">
+    Vous pouvez demander la suppression de vos données à tout moment :  
+    <a href="mailto:contact@e-meta.app">contact@e-meta.app</a>
+  </p>
+</section>
 
-  </main>
 
-  <footer class="footer">
-    © 2025 e-META
-  </footer>
+<!-- ===========================
+     FOOTER COMPLET
+=========================== -->
+<footer class="footer">
+  <div class="footer-links">
+
+    <a href="index.html#home" data-i18n="nav_home">Accueil</a> |
+    <a href="index.html#about" data-i18n="nav_about">À propos</a> |
+    <a href="index.html#faq" data-i18n="nav_faq">FAQ</a> |
+    <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
+
+  </div>
+
+  <p>© 2025 e-META — Simplement. Intelligemment.</p>
+</footer>
+
 </body>
 </html>
