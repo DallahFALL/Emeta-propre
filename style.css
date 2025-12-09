@@ -473,6 +473,16 @@ body.rtl .form-wrapper {
   .nav-wrapper {
     padding: 0.65rem 1rem;
   }
+ .actions {
+  display: flex !important;
+  position: absolute;
+  right: 60px;
+  top: 8px;
+}
+
+.btn-wa {
+  display: inline-flex !important;
+} 
 
   /* MENU MOBILE FULL SCREEN */
   .nav {
