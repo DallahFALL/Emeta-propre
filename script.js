@@ -287,6 +287,14 @@ function applyTranslations(lang) {
     // Update language label
     document.getElementById("currentLang").innerText = lang.toUpperCase();
 }
+function applyPlaceholderTranslations(lang) {
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    if (i18n[lang] && i18n[lang][key]) {
+      el.placeholder = i18n[lang][key];
+    }
+  });
+}
 
 
 /* ============================================================
@@ -308,6 +316,7 @@ document.addEventListener("click", () => {
         };
     });
 });
+applyPlaceholderTranslations(lang);
 
 
 /* ============================================================
