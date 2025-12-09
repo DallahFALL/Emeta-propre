@@ -1,280 +1,78 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title data-i18n="privacy_title">Politique de confidentialité – e-META</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>e-META — Politique de confidentialité</title>
   <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
 </head>
 
 <body>
-  <!-- Sélecteur de langue flottant (même style que le site) -->
-  <div class="langbox-privacy" style="position:fixed;top:20px;right:20px;z-index:50;">
-    <button id="langTogglePrivacy" class="lang-btn" type="button"
-            style="background:#fff;padding:10px 18px;border-radius:40px;border:1px solid #ddd;cursor:pointer;font-weight:600;display:flex;align-items:center;gap:6px;">
-      <span id="privacyFlag">🇫🇷</span>
-      <span id="privacyCode">FR</span> ▼
-    </button>
+  <header class="header">
+    <div class="nav-wrapper">
+      <a href="index.html" class="brand">
+        <img src="01_Logo_Sources/eMETA-official-logo.svg.png" height="60">
+      </a>
 
-    <ul id="langMenuPrivacy" class="lang-menu"
-        style="display:none;position:absolute;right:0;margin-top:6px;background:#fff;border-radius:14px;border:1px solid #ddd;box-shadow:0 10px 26px rgba(15,23,42,0.15);list-style:none;padding:6px 0;min-width:160px;">
-      <li data-lang="fr" style="padding:6px 14px;cursor:pointer;">🇫🇷 Français</li>
-      <li data-lang="en" style="padding:6px 14px;cursor:pointer;">🇬🇧 English</li>
-      <li data-lang="es" style="padding:6px 14px;cursor:pointer;">🇪🇸 Español</li>
-      <li data-lang="ar" style="padding:6px 14px;cursor:pointer;">🇸🇦 العربية</li>
-    </ul>
-  </div>
+      <button id="burgerBtn" class="burger"><span></span><span></span><span></span></button>
 
-  <!-- Conteneur principal -->
-  <main class="container-privacy" style="
-      max-width:850px;
-      margin:120px auto 60px;
-      background:#ffffff;
-      padding:40px 50px;
-      border-radius:22px;
-      box-shadow:0 8px 22px rgba(15,23,42,0.08);
-      font-family:'Poppins',sans-serif;
-      color:#222;
-      line-height:1.7;
-    ">
+      <nav id="mainNav" class="nav">
+        <a href="index.html#home" data-i18n="nav_home">Accueil</a>
+        <a href="index.html#about" data-i18n="nav_about">À propos</a>
+        <a href="index.html#faq" data-i18n="nav_faq">FAQ</a>
+        <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
+      </nav>
 
-    <h1 data-i18n="privacy_title" style="
-        font-size:32px;
-        font-weight:700;
-        margin-bottom:8px;
-        background:linear-gradient(90deg,#005CFF,#0099ff);
-        -webkit-background-clip:text;
-        -webkit-text-fill-color:transparent;
-      ">
-      Politique de confidentialité – e-META
-    </h1>
+      <div class="actions">
+        <div class="langbox">
+          <button id="langToggle" class="lang-btn">
+            <span id="currentLang">FR</span> ▼
+          </button>
+          <ul id="langMenu" class="lang-menu">
+            <li data-lang="fr">🇫🇷 Français</li>
+            <li data-lang="en">🇬🇧 English</li>
+            <li data-lang="es">🇪🇸 Español</li>
+            <li data-lang="ar">🇸🇦 العربية</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
 
-    <p data-i18n="privacy_updated" style="margin-bottom:24px;color:#555;">
-      Dernière mise à jour : 08/12/2025
-    </p>
+  <main class="section" id="privacyContent">
 
-    <h2 data-i18n="privacy_h1" style="font-size:22px;font-weight:600;color:#005CFF;margin-top:30px;">
-      1. Données collectées
-    </h2>
-    <p data-i18n="privacy_p1" style="color:#333;">
-      Dans le cadre de l’utilisation d’e-META, les données suivantes peuvent être collectées :
-    </p>
+    <h1 data-i18n="privacy_title">Politique de confidentialité – e-META</h1>
+    <p><strong data-i18n="privacy_updated">Dernière mise à jour :</strong> 08/12/2025</p>
 
-    <ul style="padding-left:20px;margin-top:10px;color:#333;">
-      <li data-i18n="privacy_li1">Identité : nom et prénom.</li>
-      <li data-i18n="privacy_li2">Coordonnées : adresse email, numéro WhatsApp.</li>
-      <li data-i18n="privacy_li3">Informations de contexte : domaine, titre de la décision, description détaillée.</li>
-      <li data-i18n="privacy_li4">Objectifs, contraintes, niveau d’urgence et délai souhaité.</li>
-      <li data-i18n="privacy_li5">Informations financières : budget indicatif et devise.</li>
-      <li data-i18n="privacy_li6">Lien vers un fichier externe, le cas échéant.</li>
+    <h2 data-i18n="privacy_section1">1. Données collectées</h2>
+    <ul>
+      <li data-i18n="privacy_d1">Identité : nom et prénom</li>
+      <li data-i18n="privacy_d2">Coordonnées : email, WhatsApp</li>
+      <li data-i18n="privacy_d3">Informations de contexte : domaine, titre du projet, objectifs, contraintes</li>
+      <li data-i18n="privacy_d4">Budget : montant + devise</li>
+      <li data-i18n="privacy_d5">Informations complémentaires : délai, urgence, lien fichier</li>
+      <li data-i18n="privacy_d6">Préférences : mode de restitution</li>
     </ul>
 
-    <h2 data-i18n="privacy_h2" style="font-size:22px;font-weight:600;color:#005CFF;margin-top:30px;">
-      2. Finalité du traitement
-    </h2>
-    <p data-i18n="privacy_p2" style="color:#333;">
-      Vos données sont utilisées exclusivement pour analyser votre requête et générer une réponse personnalisée.
-    </p>
-    <ul style="padding-left:20px;margin-top:10px;color:#333;">
-      <li data-i18n="privacy_li7">Analyser votre situation à l’aide d’un moteur d’IA.</li>
-      <li data-i18n="privacy_li8">Générer une synthèse décisionnelle adaptée à votre contexte.</li>
-      <li data-i18n="privacy_li9">Vous transmettre le résultat via le canal choisi (email, WhatsApp ou affichage direct).</li>
-    </ul>
+    <h2 data-i18n="privacy_section2">2. Finalité du traitement</h2>
 
-    <h2 data-i18n="privacy_h3" style="font-size:22px;font-weight:600;color:#005CFF;margin-top:30px;">
-      3. Conservation des données
-    </h2>
-    <p data-i18n="privacy_p3" style="color:#333;">
-      Les données sont conservées uniquement pendant la durée nécessaire pour fournir le service, puis supprimées ou anonymisées.
-    </p>
+    <p data-i18n="privacy_f1">Vos données sont utilisées exclusivement pour générer une réponse personnalisée.</p>
+    <p data-i18n="privacy_f2">Aucune donnée n’est vendue ou partagée.</p>
 
-    <h2 data-i18n="privacy_h4" style="font-size:22px;font-weight:600;color:#005CFF;margin-top:30px;">
-      4. Vos droits
-    </h2>
-    <p data-i18n="privacy_p4" style="color:#333;">
-      Vous pouvez demander l’accès, la rectification ou la suppression de vos données en écrivant à : contact@e-meta.app.
-    </p>
+    <h2 data-i18n="privacy_section3">3. Durée de conservation</h2>
+    <p data-i18n="privacy_ret">Les données sont conservées uniquement le temps nécessaire à l’analyse.</p>
 
-    <h2 data-i18n="privacy_h5" style="font-size:22px;font-weight:600;color:#005CFF;margin-top:30px;">
-      5. Contact
-    </h2>
-    <p data-i18n="privacy_p5" style="color:#333;">
-      Pour toute question concernant cette politique, vous pouvez nous contacter à l’adresse : contact@e-meta.app.
-    </p>
+    <h2 data-i18n="privacy_section4">4. Sécurité</h2>
+    <p data-i18n="privacy_sec">Les données sont transmises via un canal sécurisé et traitées de manière confidentielle.</p>
+
+    <h2 data-i18n="privacy_section5">5. Vos droits</h2>
+    <p data-i18n="privacy_rights">Vous pouvez demander la suppression ou consultation de vos données à tout moment.</p>
+
   </main>
 
-  <!-- Script de traduction dédié à la page privacy -->
-  <script>
-    // Dictionnaire multilingue
-    const PRIVACY_I18N = {
-      fr: {
-        privacy_title: "Politique de confidentialité – e-META",
-        privacy_updated: "Dernière mise à jour : 08/12/2025",
-        privacy_h1: "1. Données collectées",
-        privacy_p1: "Dans le cadre de l’utilisation d’e-META, les données suivantes peuvent être collectées :",
-        privacy_li1: "Identité : nom et prénom.",
-        privacy_li2: "Coordonnées : adresse email, numéro WhatsApp.",
-        privacy_li3: "Informations de contexte : domaine, titre de la décision, description détaillée.",
-        privacy_li4: "Objectifs, contraintes, niveau d’urgence et délai souhaité.",
-        privacy_li5: "Informations financières : budget indicatif et devise.",
-        privacy_li6: "Lien vers un fichier externe, le cas échéant.",
-        privacy_h2: "2. Finalité du traitement",
-        privacy_p2: "Vos données sont utilisées exclusivement pour analyser votre requête et générer une réponse personnalisée.",
-        privacy_li7: "Analyser votre situation à l’aide d’un moteur d’IA.",
-        privacy_li8: "Générer une synthèse décisionnelle adaptée à votre contexte.",
-        privacy_li9: "Vous transmettre le résultat via le canal choisi (email, WhatsApp ou affichage direct).",
-        privacy_h3: "3. Conservation des données",
-        privacy_p3: "Les données sont conservées uniquement pendant la durée nécessaire pour fournir le service, puis supprimées ou anonymisées.",
-        privacy_h4: "4. Vos droits",
-        privacy_p4: "Vous pouvez demander l’accès, la rectification ou la suppression de vos données en écrivant à : contact@e-meta.app.",
-        privacy_h5: "5. Contact",
-        privacy_p5: "Pour toute question concernant cette politique, vous pouvez nous contacter à l’adresse : contact@e-meta.app."
-      },
-      en: {
-        privacy_title: "Privacy Policy – e-META",
-        privacy_updated: "Last update: 08/12/2025",
-        privacy_h1: "1. Data collected",
-        privacy_p1: "In the context of using e-META, the following data may be collected:",
-        privacy_li1: "Identity: first name and last name.",
-        privacy_li2: "Contact details: email address, WhatsApp number.",
-        privacy_li3: "Context information: domain, decision title, detailed description.",
-        privacy_li4: "Objectives, constraints, level of urgency and desired deadline.",
-        privacy_li5: "Financial information: indicative budget and currency.",
-        privacy_li6: "Link to an external file, where applicable.",
-        privacy_h2: "2. Purpose of processing",
-        privacy_p2: "Your data is used solely to analyze your request and generate a tailored response.",
-        privacy_li7: "Analyze your situation using an AI engine.",
-        privacy_li8: "Generate a decision-oriented summary adapted to your context.",
-        privacy_li9: "Send the result through the chosen channel (email, WhatsApp or on-screen display).",
-        privacy_h3: "3. Data retention",
-        privacy_p3: "Data is kept only for the time necessary to provide the service, then deleted or anonymized.",
-        privacy_h4: "4. Your rights",
-        privacy_p4: "You may request access, rectification or deletion of your data by writing to: contact@e-meta.app.",
-        privacy_h5: "5. Contact",
-        privacy_p5: "For any questions regarding this policy, you can contact us at: contact@e-meta.app."
-      },
-      es: {
-        privacy_title: "Política de privacidad – e-META",
-        privacy_updated: "Última actualización: 08/12/2025",
-        privacy_h1: "1. Datos recopilados",
-        privacy_p1: "En el marco del uso de e-META, se pueden recopilar los siguientes datos:",
-        privacy_li1: "Identidad: nombre y apellido.",
-        privacy_li2: "Datos de contacto: correo electrónico, número de WhatsApp.",
-        privacy_li3: "Información de contexto: dominio, título de la decisión, descripción detallada.",
-        privacy_li4: "Objetivos, restricciones, nivel de urgencia y plazo deseado.",
-        privacy_li5: "Información financiera: presupuesto indicativo y moneda.",
-        privacy_li6: "Enlace a un archivo externo, en su caso.",
-        privacy_h2: "2. Finalidad del tratamiento",
-        privacy_p2: "Sus datos se utilizan exclusivamente para analizar su solicitud y generar una respuesta personalizada.",
-        privacy_li7: "Analizar su situación mediante un motor de IA.",
-        privacy_li8: "Generar una síntesis de decisión adaptada a su contexto.",
-        privacy_li9: "Enviar el resultado por el canal elegido (correo electrónico, WhatsApp o visualización directa).",
-        privacy_h3: "3. Conservación de los datos",
-        privacy_p3: "Los datos se conservan solo durante el tiempo necesario para prestar el servicio, tras lo cual se eliminan o anonimizan.",
-        privacy_h4: "4. Sus derechos",
-        privacy_p4: "Puede solicitar el acceso, rectificación o supresión de sus datos escribiendo a: contact@e-meta.app.",
-        privacy_h5: "5. Contacto",
-        privacy_p5: "Para cualquier consulta sobre esta política, puede ponerse en contacto con nosotros en: contact@e-meta.app."
-      },
-      ar: {
-        privacy_title: "سياسة الخصوصية – e-META",
-        privacy_updated: "آخر تحديث: 08/12/2025",
-        privacy_h1: "1. البيانات التي يتم جمعها",
-        privacy_p1: "في إطار استخدام e-META، قد يتم جمع البيانات التالية:",
-        privacy_li1: "الهوية: الاسم الكامل.",
-        privacy_li2: "بيانات الاتصال: البريد الإلكتروني، رقم واتساب.",
-        privacy_li3: "معلومات السياق: المجال، عنوان القرار، الوصف التفصيلي.",
-        privacy_li4: "الأهداف، القيود، مستوى الإلحاح والمدة الزمنية المطلوبة.",
-        privacy_li5: "البيانات المالية: الميزانية التقديرية والعملة.",
-        privacy_li6: "رابط لملف خارجي عند الاقتضاء.",
-        privacy_h2: "2. غرض المعالجة",
-        privacy_p2: "تُستخدم بياناتكم حصريًا لتحليل طلبكم وتوليد استجابة مخصصة.",
-        privacy_li7: "تحليل وضعكم باستخدام محرّك ذكاء اصطناعي.",
-        privacy_li8: "توليد ملخص لاتخاذ القرار مناسب لسياقكم.",
-        privacy_li9: "إرسال النتيجة عبر القناة التي تختارونها (البريد الإلكتروني، واتساب أو العرض المباشر).",
-        privacy_h3: "3. الاحتفاظ بالبيانات",
-        privacy_p3: "يتم الاحتفاظ بالبيانات فقط للمدة اللازمة لتقديم الخدمة، ثم تُحذف أو تُجَرَّد من هويتها.",
-        privacy_h4: "4. حقوقكم",
-        privacy_p4: "يمكنكم طلب الوصول إلى بياناتكم أو تعديلها أو حذفها عبر البريد: contact@e-meta.app.",
-        privacy_h5: "5. الاتصال",
-        privacy_p5: "لأي استفسار بخصوص هذه السياسة، يمكنكم الاتصال بنا على: contact@e-meta.app."
-      }
-    };
-
-    function getPrivacyLangFromUrl() {
-      const params = new URLSearchParams(window.location.search);
-      const l = params.get("lang");
-      if (l && PRIVACY_I18N[l]) return l;
-      return null;
-    }
-
-    function getInitialPrivacyLang() {
-      const fromUrl = getPrivacyLangFromUrl();
-      if (fromUrl) return fromUrl;
-      const stored = localStorage.getItem("eMetaLang");
-      if (stored && PRIVACY_I18N[stored]) return stored;
-      return "fr";
-    }
-
-    function applyPrivacyLang(lang) {
-      const dict = PRIVACY_I18N[lang] || PRIVACY_I18N.fr;
-
-      document.documentElement.lang = lang === "ar" ? "ar" : lang;
-      document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-      document.body.classList.toggle("rtl", lang === "ar");
-
-      document.querySelectorAll("[data-i18n]").forEach((el) => {
-        const key = el.getAttribute("data-i18n");
-        if (dict[key]) el.textContent = dict[key];
-      });
-
-      const meta = {
-        fr: ["🇫🇷", "FR"],
-        en: ["🇬🇧", "EN"],
-        es: ["🇪🇸", "ES"],
-        ar: ["🇸🇦", "AR"]
-      };
-      const flagSpan = document.getElementById("privacyFlag");
-      const codeSpan = document.getElementById("privacyCode");
-      if (meta[lang] && flagSpan && codeSpan) {
-        flagSpan.textContent = meta[lang][0];
-        codeSpan.textContent = meta[lang][1];
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      let currentLang = getInitialPrivacyLang();
-      localStorage.setItem("eMetaLang", currentLang);
-      applyPrivacyLang(currentLang);
-
-      const toggle = document.getElementById("langTogglePrivacy");
-      const menu = document.getElementById("langMenuPrivacy");
-
-      if (toggle && menu) {
-        toggle.addEventListener("click", (e) => {
-          e.stopPropagation();
-          menu.style.display = menu.style.display === "block" ? "none" : "block";
-        });
-
-        menu.querySelectorAll("li[data-lang]").forEach((li) => {
-          li.addEventListener("click", () => {
-            const lang = li.getAttribute("data-lang");
-            currentLang = lang;
-            localStorage.setItem("eMetaLang", lang);
-            applyPrivacyLang(lang);
-            menu.style.display = "none";
-          });
-        });
-
-        document.addEventListener("click", (e) => {
-          if (!menu.contains(e.target) && e.target !== toggle) {
-            menu.style.display = "none";
-          }
-        });
-      }
-    });
-  </script>
+  <footer class="footer">
+    © 2025 e-META
+  </footer>
 </body>
 </html>
