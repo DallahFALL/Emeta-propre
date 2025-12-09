@@ -3,44 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>e-META — Assistant IA Multilingue</title>
+
+  <title data-i18n="page_title_main">e-META — Assistant IA Multilingue</title>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Styles -->
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- JS (charge une seule fois) -->
+  <!-- JS -->
   <script src="script.js" defer></script>
 </head>
 
 <body>
+
   <!-- HEADER -->
   <header class="header">
     <div class="nav-wrapper">
 
+      <!-- LOGO -->
       <a href="#home" class="brand">
         <img id="logo" src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" class="logo">
         <span class="brand-text">e-META</span>
       </a>
 
+      <!-- BURGER MOBILE -->
       <button id="burgerBtn" class="burger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
 
+      <!-- NAVIGATION -->
       <nav id="mainNav" class="nav">
         <a href="#home" data-i18n="nav_home">Accueil</a>
         <a href="#about" data-i18n="nav_about">À propos</a>
         <a href="#faq" data-i18n="nav_faq">FAQ</a>
         <a href="#contact" data-i18n="nav_contact">Contact</a>
+        <a href="privacy.html" data-i18n="footer_privacy">Politique de confidentialité</a>
       </nav>
 
+      <!-- ACTIONS -->
       <div class="actions">
-        <button id="whatsappBtn" class="btn-wa">WhatsApp</button>
 
+        <!-- WhatsApp -->
+        <button id="whatsappBtn" class="btn-wa whatsappBtnGlobal">
+          WhatsApp
+        </button>
+
+        <!-- LANG SWITCH -->
         <div class="langbox">
-          <button id="langToggle" class="lang-btn" type="button">
+          <button id="langToggle" class="lang-btn">
             <span id="langFlag">🇫🇷</span>
             <span id="langCode">FR</span> ▼
           </button>
@@ -52,15 +64,16 @@
             <li data-lang="ar">🇸🇦 العربية</li>
           </ul>
         </div>
+
       </div>
 
     </div>
   </header>
 
-  <!-- MAIN -->
+  <!-- MAIN CONTENT -->
   <main class="container">
 
-    <!-- HERO -->
+    <!-- HERO SECTION -->
     <section id="home" class="hero">
       <h1 data-i18n="hero_title">e-META — L’assistant IA pluridisciplinaire</h1>
       <p data-i18n="hero_sub">
@@ -68,11 +81,12 @@
       </p>
     </section>
 
-    <!-- FORM -->
+    <!-- FORMULAIRE -->
     <form id="requestForm" class="form">
       <h2 data-i18n="form_title">Requête personnalisée</h2>
 
       <div class="grid">
+
         <div>
           <label data-i18n="label_theme">Domaine / Thème</label>
           <select id="themeSelect"></select>
@@ -114,6 +128,7 @@
         </div>
       </div>
 
+      <!-- MODE DE RESTITUTION -->
       <fieldset class="delivery full">
         <legend data-i18n="legend_delivery">Mode de restitution</legend>
 
@@ -133,33 +148,45 @@
         </label>
       </fieldset>
 
+      <!-- BOUTONS -->
       <div class="buttons">
-        <button id="resetBtn" type="button" class="btn-secondary">Réinitialiser</button>
-        <button id="sendBtn" type="button" class="btn-primary">Envoyer la requête</button>
+        <button id="resetBtn" type="button" class="btn-secondary" data-i18n="btn_reset">
+          Réinitialiser
+        </button>
+
+        <button id="sendBtn" type="button" class="btn-primary" data-i18n="btn_send">
+          Envoyer la requête
+        </button>
       </div>
+
     </form>
 
     <!-- ABOUT -->
     <section id="about" class="section">
-      <h3>À propos</h3>
-      <p>
+      <h3 data-i18n="about_title">À propos</h3>
+      <p data-i18n="about_body">
         e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.
       </p>
     </section>
 
     <!-- FAQ -->
     <section id="faq" class="section">
-      <h3>FAQ</h3>
+      <h3 data-i18n="faq_title">FAQ</h3>
       <details>
-        <summary>Comment fonctionne e-META ?</summary>
-        <p>Remplissez le formulaire et recevez votre synthèse via le canal choisi.</p>
+        <summary data-i18n="faq_q1">Comment fonctionne e-META ?</summary>
+        <p data-i18n="faq_a1">
+          Remplissez le formulaire et recevez votre synthèse via le canal choisi.
+        </p>
       </details>
     </section>
 
     <!-- CONTACT -->
     <section id="contact" class="section">
-      <h3>Contact</h3>
-      <p>Email : <a href="mailto:contact@e-meta.app">contact@e-meta.app</a></p>
+      <h3 data-i18n="contact_title">Contact</h3>
+      <p>
+        <span data-i18n="contact_emailLabel">Email :</span>
+        <a href="mailto:contact@e-meta.app">contact@e-meta.app</a>
+      </p>
     </section>
 
   </main>
@@ -168,5 +195,6 @@
   <footer class="footer">
     <p id="footerText">© 2025 e-META • Simplement. Intelligemment.</p>
   </footer>
+
 </body>
 </html>
