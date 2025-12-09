@@ -657,12 +657,12 @@ document.addEventListener("DOMContentLoaded", () => {
   applyLanguage("fr");
 });
 
-/* --- BURGER MENU MOBILE --- */
-const burger = document.getElementById("burgerBtn");
-const mobileNav = document.getElementById("mainNav");
+// --- MENU MOBILE ---
+const burgerBtn = document.getElementById("burgerBtn");
+const mainNav = document.getElementById("mainNav");
 
-if (burger && mobileNav) {
-  burger.addEventListener("click", () => {
-    mobileNav.classList.toggle("open");
-  });
-}
+burgerBtn.addEventListener("click", () => {
+  burgerBtn.classList.toggle("active");
+  mainNav.classList.toggle("open");
+});
+
