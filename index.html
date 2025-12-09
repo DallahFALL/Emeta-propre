@@ -1,1 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>e-META — Assistant IA décisionnel</title>
 
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="nav-wrapper">
+
+      <a href="#home" class="brand">
+        <img id="logo" src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" height="60">
+      </a>
+
+      <!-- Burger (mobile only) -->
+      <button id="burgerBtn" class="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Navigation -->
+      <nav id="mainNav" class="nav">
+        <a href="#home" data-i18n="nav_home">Accueil</a>
+        <a href="#about" data-i18n="nav_about">À propos</a>
+        <a href="#faq" data-i18n="nav_faq">FAQ</a>
+        <a href="#contact" data-i18n="nav_contact">Contact</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="actions">
+        <button id="whatsappBtn" class="btn-wa">WhatsApp</button>
+
+        <div class="langbox">
+          <button id="langToggle" class="lang-btn">
+            <span id="currentLang">FR</span> ▼
+          </button>
+
+          <ul id="langMenu" class="lang-menu">
+            <li data-lang="fr">🇫🇷 Français</li>
+            <li data-lang="en">🇬🇧 English</li>
+            <li data-lang="es">🇪🇸 Español</li>
+            <li data-lang="ar">🇸🇦 العربية</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge" data-i18n="hero_badge">IA décisionnelle</div>
+      <h1 data-i18n="hero_title">e-META — L’assistant IA pluridisciplinaire</h1>
+      <p class="hero-sub" data-i18n="hero_sub">
+        Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.
+      </p>
+    </div>
+  </section>
+
+  <!-- FORMULAIRE e-META (NON MODIFIÉ, RESPECT TOTAL) -->
+  <section class="emeta-section">
+    <div class="form-wrapper">
+      <h2 class="form-title" data-i18n="form_title">Requête décisionnelle e-META</h2>
+
+      <form id="emetaForm" class="emeta-form">
+
+        <div class="emeta-group">
+          <label data-i18n="label_fullname">Nom complet</label>
+          <input id="fullname" type="text" required />
+        </div>
+
+        <div class="emeta-group">
+          <label>Email (optionnel)</label>
+          <input id="email" type="email" />
+        </div>
+
+        <div class="emeta-group">
+          <label data-i18n="label_phone">WhatsApp (optionnel)</label>
+          <input id="phone" type="tel" placeholder="+221…" />
+        </div>
+
+        <div class="emeta-group">
+          <label data-i18n="label_lang">Langue</label>
+          <select id="langSelect"></select>
+        </div>
+
+        <div class="emeta-group">
+          <label data-i18n="label_domain">Domaine / Thème</label>
+          <select id="domainSelect"></select>
+        </div>
+
+        <div class="emeta-group">
+          <label data-i18n="label_title">Titre court de la décision</label>
+          <input id="title" type="text" placeholder="Ex : lancement d’une station-service…" />
+        </div>
+
+        <div class="emeta-group">
+          <label data-i18n="label_context">Contexte détaillé</label>
+          <textarea id="context"></textarea>
+        </div>
+
+        <div class="emeta-group">
+          <label data-i18n="label_objectives">Objectifs recherchés</label>
+          <textarea id="objectives"></textarea>
+        </div>
+
+        <div class="emeta-row">
+          <div class="emeta-group">
+            <label data-i18n="label_budget">Budget</label>
+            <input id="budget" type="number" />
+          </div>
+
+          <div class="emeta-group">
+            <label data-i18n="label_currency">Devise</label>
+            <select id="currencySelect"></select>
+          </div>
+        </div>
+
+        <div class="emeta-group">
+          <label data-i18n="label_deadline">Délai souhaité</label>
+          <input id="deadline" type="text" />
+        </div>
+
+        <div class="emeta-group">
+          <label data-i18n="label_urgency">Urgence (1–5)</label>
+          <input id="urgency" type="number" min="1" max="5" />
+        </div>
+
+        <fieldset class="emeta-fieldset">
+          <legend data-i18n="label_delivery">Mode de restitution</legend>
+
+          <label><input type="radio" name="delivery" value="auto" checked> <span data-i18n="delivery_auto">Automatique</span></label>
+          <label><input type="radio" name="delivery" value="email"> <span data-i18n="delivery_email">Email</span></label>
+          <label><input type="radio" name="delivery" value="whatsapp"> <span data-i18n="delivery_whatsapp">WhatsApp</span></label>
+          <label><input type="radio" name="delivery" value="display"> <span data-i18n="delivery_display">Affichage direct</span></label>
+        </fieldset>
+
+        <div class="emeta-group">
+          <label data-i18n="label_file">Lien fichier (optionnel)</label>
+          <input id="attachment" type="url" placeholder="https://…" />
+        </div>
+
+        <div class="emeta-group emeta-consent">
+          <label>
+            <input type="checkbox" id="consent" required>
+            <span data-i18n="label_consent">
+              J’autorise e-META à analyser mes données.
+            </span>
+            <a href="privacy.html" class="emeta-privacy-link" data-i18n="privacy_link">Voir la politique de confidentialité</a>
+          </label>
+        </div>
+
+        <div class="emeta-buttons">
+          <button type="reset" class="btn-secondary" data-i18n="btn_reset">Réinitialiser</button>
+          <button type="submit" id="sendBtn" class="btn-primary" data-i18n="btn_send">Envoyer</button>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 e-META • Simplement. Intelligemment.</p>
+  </footer>
+
+  <!-- SCRIPT (OPTION A — SÉCURISÉ) -->
+  <script src="script.js"></script>
+</body>
+</html>
