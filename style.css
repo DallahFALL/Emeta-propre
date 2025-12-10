@@ -80,12 +80,13 @@ body {
   gap: 0.6rem;
   text-decoration: none;
 }
-/* TON LOGO OFFICIEL */
-
 .logo-img {
-  filter: invert(1) brightness(2);
+  background: white;
+  padding: 6px;
+  border-radius: 10px;
   height: 48px;
 }
+
 .logo-mark {
   width: 32px;
   height: 32px;
