@@ -82,6 +82,11 @@ body {
   color: var(--text-main);
 }
 
+.logo-img {
+  filter: invert(1) brightness(2);
+  height: 48px;
+}
+
 .logo-mark {
   width: 32px;
   height: 32px;
