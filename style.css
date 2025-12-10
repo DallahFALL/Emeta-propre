@@ -87,32 +87,32 @@ body {
   height: 48px;
 }
 
-.logo-mark {
-  width: 32px;
-  height: 32px;
-  border-radius: 40% 70% 50% 80%;
-  background: radial-gradient(circle at 25% 20%, #f97316, #ea580c);
-  display: inline-flex;
+/* LOGO */
+
+/* Conteneur du logo dans le header */
+.logo {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 1rem;
-  color: #0b1020;
-  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+  gap: 0.6rem;
+  text-decoration: none;
 }
 
-.logo-text {
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 1.1rem;
+/* Nouveau logo image (blanc + glow bleu) */
+.logo-img {
+  height: 48px;       /* Ajustable (48 = parfait pour un header) */
+  width: auto;
+  display: block;
+  border-radius: 6px; /* Optionnel pour arrondir légèrement */
 }
 
+/* Anciennes classes du logo textuel (désactivées mais conservées si tu les réutilises ailleurs) */
+
+.logo-mark,
+.logo-text,
 .logo-tagline {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  opacity: 0.9;
+  display: none !important;
 }
+
 
 /* NAV */
 
