@@ -1,36 +1,113 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Confidentialité – e-META</title>
-<link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="privacy.title">e-META – Politique de confidentialité</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
 </head>
 <body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">e</span>
+        <span class="logo-text">META</span>
+        <span class="logo-tagline" data-i18n="tagline">
+          Assistant IA multilingue de prise de décision
+        </span>
+      </a>
 
-<header class="header">
-  <div class="nav-wrapper">
-    <div class="brand">e‑META</div>
-    <button id="burgerBtn" class="burger"><span></span><span></span><span></span></button>
-    <nav id="mainNav" class="nav">
-      <a href="index.html">Accueil</a>
-      <a href="index.html#about">À propos</a>
-      <a href="index.html#faq">FAQ</a>
-      <a href="index.html#contact">Contact</a>
-    </nav>
-  </div>
-</header>
+      <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
 
-<section class="privacy">
-  <h1>Politique de confidentialité</h1>
-  <p>Vos données sont protégées et ne sont jamais revendues.</p>
-  <p>Nous collectons uniquement ce qui permet l’analyse IA.</p>
-</section>
+      <nav class="nav" id="mainNav">
+        <ul>
+          <li><a href="index.html#hero" data-i18n="nav.home">Accueil</a></li>
+          <li><a href="index.html#form" data-i18n="nav.form">Formulaire</a></li>
+          <li><a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a></li>
+        </ul>
+      </nav>
 
-<footer class="footer">
-  © 2025 e‑META – Simplement. Intelligemment.
-</footer>
+      <div class="header-actions">
+        <select id="languageSwitcher" class="lang-select" aria-label="Sélection de la langue">
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+          <option value="ar">ع</option>
+        </select>
+        <button type="button"
+                class="btn-whatsapp whatsappBtnGlobal"
+                data-i18n="btn.whatsapp">
+          Requête personnalisée
+        </button>
+      </div>
+    </div>
+  </header>
 
+  <main class="privacy-main">
+    <div class="container privacy-content">
+      <h1 data-i18n="privacy.heading">
+        Politique de confidentialité e-META
+      </h1>
+
+      <p data-i18n="privacy.intro">
+        Cette page décrit la manière dont e-META traite les informations que
+        vous fournissez via le formulaire de décision stratégique.
+      </p>
+
+      <h2 data-i18n="privacy.section1.title">1. Données collectées</h2>
+      <p data-i18n="privacy.section1.text">
+        Les données collectées via le formulaire (problème, objectifs, budget,
+        coordonnées, etc.) sont utilisées exclusivement pour générer une
+        analyse stratégique personnalisée via e-META.
+      </p>
+
+      <h2 data-i18n="privacy.section2.title">2. Utilisation des données</h2>
+      <p data-i18n="privacy.section2.text">
+        Les informations sont utilisées uniquement pour produire la synthèse
+        demandée (email, message WhatsApp, PDF ou affichage). e-META ne vend
+        pas, ne loue pas et ne cède pas vos données personnelles à des tiers.
+      </p>
+
+      <h2 data-i18n="privacy.section3.title">
+        3. Durée de conservation
+      </h2>
+      <p data-i18n="privacy.section3.text">
+        Les données peuvent être conservées pour améliorer la qualité des
+        recommandations et pour l’historique de vos analyses. Vous pouvez
+        demander la suppression de vos données sur simple demande.
+      </p>
+
+      <h2 data-i18n="privacy.section4.title">4. Sécurité</h2>
+      <p data-i18n="privacy.section4.text">
+        e-META met en œuvre des mesures techniques et organisationnelles pour
+        protéger vos données contre les accès non autorisés, la perte ou la
+        divulgation.
+      </p>
+
+      <h2 data-i18n="privacy.section5.title">5. Contact</h2>
+      <p data-i18n="privacy.section5.text">
+        Pour toute question ou demande relative à vos données, vous pouvez
+        contacter l’administrateur d’e-META via le formulaire ou le canal
+        WhatsApp indiqué sur la page principale.
+      </p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p data-i18n="footer.text">
+        e-META – Assistant IA de décision. Donnez à vos projets un niveau
+        d’analyse stratégique premium.
+      </p>
+      <a href="privacy.html" class="footer-link" data-i18n="footer.privacy">
+        Politique de confidentialité
+      </a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
