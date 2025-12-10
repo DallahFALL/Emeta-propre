@@ -91,6 +91,10 @@ body {
 .logo-tagline {
   color: rgba(255,255,255,0.75) !important;
 }
+.logo,
+.logo * {
+  filter: invert(1) brightness(2);
+}
 
 
 /* NAV */
