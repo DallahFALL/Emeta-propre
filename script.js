@@ -1,11 +1,16 @@
-/* =====================================================
-   e-META v5.0 – Multilingue, WhatsApp, Make, UI responsive
-   ===================================================== */
+/* =========================================
+   e-META v5.0 – SCRIPT GLOBAL (STYLE A)
+   - Multilingue FR/EN/ES/AR
+   - WhatsApp + Email + Affichage direct
+   - Webhook Make optionnel
+   ========================================= */
 
-/* ---------- CONFIG MAKE WEBHOOK ---------- */
-const MAKE_WEBHOOK_URL = "https://hook.eu2.make.com/dagmll5s04nubg7dp2gujws72zzedvx2";
+const MAKE_WEBHOOK_URL =
+  "https://hook.eu2.make.com/dagmll5s04nubg7dp2gujws72zzedvx2"; // adapte si besoin
 
-/* ---------- CONFIG LANGUES & TRADUCTIONS ---------- */
+let currentLang = "fr";
+
+/* ---------- Configuration langues ---------- */
 
 const LANG_CONFIG = {
   fr: {
@@ -13,22 +18,24 @@ const LANG_CONFIG = {
     flag: "🇫🇷",
     whatsappNumber: "221782607212",
     defaultCurrency: "XOF",
-    i18n: {
-      // Titres page
-      page_title_main: "e-META – Assistant IA Multilingue",
+    texts: {
+      /* nav & titre */
+      page_title_main: "e-META — Assistant IA Multilingue",
       nav_home: "Accueil",
       nav_about: "À propos",
       nav_faq: "FAQ",
       nav_contact: "Contact",
       nav_privacy: "Politique de confidentialité",
 
+      /* hero */
       hero_title: "e-META — L’assistant IA pluridisciplinaire",
       hero_sub:
         "Formulaire intelligent pour analyser, diagnostiquer et recommander des solutions adaptées.",
 
+      /* formulaire */
       form_title: "Requête personnalisée",
-
       label_theme: "Domaine / Thème",
+      label_title: "Titre court de la décision",
       label_expected: "Résultat attendu",
       label_budget: "Budget indicatif",
       label_currency: "Devise",
@@ -36,63 +43,68 @@ const LANG_CONFIG = {
       label_phone: "Téléphone (WhatsApp)",
       label_email: "Email",
       label_details: "Détails / Contexte",
+      label_file: "Lien fichier (optionnel)",
 
       legend_delivery: "Mode de restitution",
       delivery_whatsapp: "WhatsApp",
       delivery_email: "Email",
       delivery_display: "Affichage direct",
 
+      btn_send: "Envoyer la requête",
+      btn_reset: "Réinitialiser",
+
+      /* sections */
       about_title: "À propos",
       about_body:
         "e-META structure les demandes et produit une synthèse stratégique adaptée au contexte.",
       faq_title: "FAQ",
       faq_q1: "Comment fonctionne e-META ?",
       faq_a1:
-        "Remplissez le formulaire avec votre besoin, choisissez le mode de restitution et recevez une synthèse intelligente.",
+        "Remplissez le formulaire et recevez une analyse intelligente selon le mode de restitution choisi.",
       contact_title: "Contact",
-      contact_intro: "Email :",
-      footer_text: "© 2025 e-META • Simplement. Intelligemment.",
+      contact_emailLabel: "Email :",
 
-      // Politique de confidentialité
+      footer: "© 2025 e-META • Simplement. Intelligemment.",
+
+      /* WhatsApp */
+      whatsapp_greeting:
+        "Bonjour, je souhaite une assistance via e-META pour une nouvelle requête.",
+
+      /* Privacy */
       privacy_title: "Politique de confidentialité – e-META",
       privacy_h1: "Politique de confidentialité – e-META",
       privacy_updated: "Dernière mise à jour :",
       privacy_1_title: "1. Données collectées",
-      privacy_1_1:
-        "Identité : nom et prénom.",
-      privacy_1_2:
-        "Coordonnées : email, téléphone WhatsApp.",
+      privacy_1_1: "Identité : nom et prénom",
+      privacy_1_2: "Coordonnées : email, WhatsApp",
       privacy_1_3:
-        "Informations de contexte : domaine, objectifs, contraintes.",
-      privacy_1_4:
-        "Budget : montant et devise.",
+        "Informations de contexte : domaine, titre du projet, objectifs, contraintes",
+      privacy_1_4: "Budget : montant + devise",
       privacy_1_5:
-        "Informations complémentaires : délai, urgence, lien de fichier.",
-
+        "Informations complémentaires : délai, urgence, lien fichier et préférences de restitution",
       privacy_2_title: "2. Finalité du traitement",
       privacy_2_text:
-        "Vos données sont utilisées uniquement pour analyser votre demande et générer une réponse personnalisée via l’IA. Elles ne sont jamais revendues ni partagées à des tiers commerciaux.",
-
+        "Vos données servent uniquement à générer une analyse personnalisée via IA. Elles ne sont jamais vendues ni partagées.",
       privacy_3_title: "3. Durée de conservation",
       privacy_3_text:
-        "Les données sont conservées uniquement le temps nécessaire à l’analyse puis éventuellement anonymisées pour améliorer les performances du service.",
-
+        "Les données sont conservées uniquement le temps nécessaire à l’analyse, puis supprimées ou anonymisées.",
       privacy_4_title: "4. Sécurité",
       privacy_4_text:
-        "e-META applique des mesures techniques et organisationnelles pour protéger vos données (canaux sécurisés, stockage contrôlé, accès limité).",
-
+        "e-META applique des mesures avancées pour protéger vos données (chiffrement, accès restreints, stockage sécurisé).",
       privacy_5_title: "5. Vos droits",
       privacy_5_text:
-        "Vous pouvez demander la suppression ou la correction de vos données en écrivant à : contact@e-meta.app."
+        "Vous pouvez demander la suppression de vos données à tout moment en écrivant à contact@e-meta.app."
     },
     placeholders: {
-      expected: "Ex : dossier de financement, plan stratégique, prototype...",
+      decisionTitle: "Ex : Étude de faisabilité, stratégie, diagnostic…",
+      expected: "Ex : Dossier de financement, plan stratégique, prototype…",
       budget: "Montant estimé",
       fullname: "Votre nom complet",
       phone: "+221…",
       email: "exemple@mail.com",
       details:
-        "Décrivez le contexte, les contraintes ou les priorités importantes…"
+        "Décrivez le contexte, les contraintes ou les priorités importantes…",
+      filelink: "URL Google Drive, PDF, document en ligne…"
     },
     themes: [
       "— Domaine —",
@@ -117,9 +129,7 @@ const LANG_CONFIG = {
       { value: "USD", label: "USD — Dollar américain" },
       { value: "GBP", label: "GBP — Livre sterling" },
       { value: "CNY", label: "CNY — Yuan chinois" }
-    ],
-    whatsapp_greeting:
-      "Bonjour, je souhaite une assistance via e-META pour une nouvelle requête."
+    ]
   },
 
   en: {
@@ -127,8 +137,8 @@ const LANG_CONFIG = {
     flag: "🇬🇧",
     whatsappNumber: "221782607212",
     defaultCurrency: "USD",
-    i18n: {
-      page_title_main: "e-META – Multilingual AI Assistant",
+    texts: {
+      page_title_main: "e-META — Multilingual AI Assistant",
       nav_home: "Home",
       nav_about: "About",
       nav_faq: "FAQ",
@@ -137,10 +147,11 @@ const LANG_CONFIG = {
 
       hero_title: "e-META — The Multidisciplinary AI Assistant",
       hero_sub:
-        "Smart form to analyze, diagnose and recommend tailored solutions.",
+        "Smart form to analyze, diagnose and recommend the most suitable solutions.",
 
       form_title: "Custom request",
       label_theme: "Domain / Topic",
+      label_title: "Decision short title",
       label_expected: "Expected result",
       label_budget: "Indicative budget",
       label_currency: "Currency",
@@ -148,62 +159,65 @@ const LANG_CONFIG = {
       label_phone: "Phone (WhatsApp)",
       label_email: "Email",
       label_details: "Details / Context",
+      label_file: "File link (optional)",
 
       legend_delivery: "Delivery mode",
       delivery_whatsapp: "WhatsApp",
       delivery_email: "Email",
       delivery_display: "Direct display",
 
+      btn_send: "Send request",
+      btn_reset: "Reset",
+
       about_title: "About",
       about_body:
-        "e-META structures your request and produces a strategic summary adapted to your context.",
+        "e-META structures your requests and produces a strategic summary tailored to your context.",
       faq_title: "FAQ",
       faq_q1: "How does e-META work?",
       faq_a1:
-        "Fill in the form with your needs, choose how you want to receive the result and e-META generates an intelligent summary.",
+        "Fill in the form and receive an intelligent analysis using your preferred output channel.",
       contact_title: "Contact",
-      contact_intro: "Email:",
-      footer_text: "© 2025 e-META • Simply. Intelligently.",
+      contact_emailLabel: "Email:",
+
+      footer: "© 2025 e-META • Simply. Intelligently.",
+
+      whatsapp_greeting:
+        "Hello, I would like support from e-META for a new request.",
 
       privacy_title: "Privacy policy – e-META",
       privacy_h1: "Privacy policy – e-META",
       privacy_updated: "Last update:",
       privacy_1_title: "1. Data collected",
-      privacy_1_1:
-        "Identity: first and last name.",
-      privacy_1_2:
-        "Contact details: email, WhatsApp phone number.",
+      privacy_1_1: "Identity: first and last name",
+      privacy_1_2: "Contact details: email, WhatsApp",
       privacy_1_3:
-        "Context information: domain, objectives, constraints.",
-      privacy_1_4:
-        "Budget: amount and currency.",
+        "Context information: domain, project title, objectives, constraints",
+      privacy_1_4: "Budget: amount + currency",
       privacy_1_5:
-        "Additional information: deadline, urgency, file link.",
-
+        "Additional information: deadline, urgency, file link and delivery preferences",
       privacy_2_title: "2. Purpose of processing",
       privacy_2_text:
-        "Your data is used only to analyse your request and generate a personalised AI-based answer. It is never sold or shared with commercial third parties.",
-
-      privacy_3_title: "3. Storage duration",
+        "Your data is only used to generate a personalized AI-powered analysis. It is never sold or shared.",
+      privacy_3_title: "3. Retention period",
       privacy_3_text:
-        "Data is stored only for the time necessary to process your request and may then be anonymised to improve the service.",
-
+        "Data is stored only for the time required to perform the analysis, then deleted or anonymized.",
       privacy_4_title: "4. Security",
       privacy_4_text:
-        "e-META applies technical and organisational measures to protect your data (secured channels, controlled storage, restricted access).",
-
+        "e-META applies advanced measures to protect your data (encryption, restricted access, secure storage).",
       privacy_5_title: "5. Your rights",
       privacy_5_text:
-        "You may request deletion or correction of your data by contacting: contact@e-meta.app."
+        "You can request the deletion of your data at any time by writing to contact@e-meta.app."
     },
     placeholders: {
-      expected: "Ex: funding file, strategic plan, prototype...",
+      decisionTitle: "Ex: Feasibility study, strategy, diagnosis…",
+      expected: "Ex: Funding file, strategic plan, prototype...",
       budget: "Estimated amount",
       fullname: "Your full name",
       phone: "+221…",
       email: "example@mail.com",
       details:
-        "Describe the context, constraints or key priorities for your request…"
+        "Describe the context, constraints or key priorities for your request…",
+      filelink: "Google Drive URL, PDF, online document…"
     },
     themes: [
       "— Domain —",
@@ -211,7 +225,7 @@ const LANG_CONFIG = {
       "Transport",
       "Energy",
       "Finance & Banking",
-      "Real estate",
+      "Real Estate",
       "Technology & AI",
       "Education & Training",
       "Health",
@@ -228,9 +242,7 @@ const LANG_CONFIG = {
       { value: "GBP", label: "GBP — Pound sterling" },
       { value: "XOF", label: "XOF — West African CFA" },
       { value: "CNY", label: "CNY — Chinese Yuan" }
-    ],
-    whatsapp_greeting:
-      "Hello, I would like support from e-META for a new request."
+    ]
   },
 
   es: {
@@ -238,8 +250,8 @@ const LANG_CONFIG = {
     flag: "🇪🇸",
     whatsappNumber: "221782607212",
     defaultCurrency: "EUR",
-    i18n: {
-      page_title_main: "e-META – Asistente IA Multilingüe",
+    texts: {
+      page_title_main: "e-META — Asistente de IA multilingüe",
       nav_home: "Inicio",
       nav_about: "Acerca de",
       nav_faq: "FAQ",
@@ -252,6 +264,7 @@ const LANG_CONFIG = {
 
       form_title: "Solicitud personalizada",
       label_theme: "Dominio / Tema",
+      label_title: "Título breve de la decisión",
       label_expected: "Resultado esperado",
       label_budget: "Presupuesto indicativo",
       label_currency: "Divisa",
@@ -259,11 +272,15 @@ const LANG_CONFIG = {
       label_phone: "Teléfono (WhatsApp)",
       label_email: "Email",
       label_details: "Detalles / Contexto",
+      label_file: "Enlace de archivo (opcional)",
 
       legend_delivery: "Modo de entrega",
       delivery_whatsapp: "WhatsApp",
       delivery_email: "Email",
       delivery_display: "Visualización directa",
+
+      btn_send: "Enviar solicitud",
+      btn_reset: "Restablecer",
 
       about_title: "Acerca de",
       about_body:
@@ -271,43 +288,41 @@ const LANG_CONFIG = {
       faq_title: "FAQ",
       faq_q1: "¿Cómo funciona e-META?",
       faq_a1:
-        "Complete el formulario con su necesidad, elija el modo de entrega y reciba una síntesis inteligente.",
+        "Complete el formulario y reciba un análisis inteligente en el canal de entrega elegido.",
       contact_title: "Contacto",
-      contact_intro: "Email:",
-      footer_text: "© 2025 e-META • Simplemente. Inteligentemente.",
+      contact_emailLabel: "Email:",
+
+      footer: "© 2025 e-META • Simplemente. Inteligentemente.",
+
+      whatsapp_greeting:
+        "Hola, me gustaría recibir apoyo de e-META para una nueva solicitud.",
 
       privacy_title: "Política de privacidad – e-META",
       privacy_h1: "Política de privacidad – e-META",
       privacy_updated: "Última actualización:",
       privacy_1_title: "1. Datos recopilados",
-      privacy_1_1:
-        "Identidad: nombre y apellidos.",
-      privacy_1_2:
-        "Datos de contacto: email, teléfono WhatsApp.",
+      privacy_1_1: "Identidad: nombre y apellidos",
+      privacy_1_2: "Datos de contacto: email, WhatsApp",
       privacy_1_3:
-        "Información de contexto: dominio, objetivos, restricciones.",
-      privacy_1_4:
-        "Presupuesto: importe y divisa.",
+        "Información de contexto: dominio, título del proyecto, objetivos, restricciones",
+      privacy_1_4: "Presupuesto: importe + divisa",
       privacy_1_5:
-        "Información adicional: plazo, urgencia, enlace de archivo.",
-
+        "Información adicional: plazo, urgencia, enlace de archivo y preferencias de entrega",
       privacy_2_title: "2. Finalidad del tratamiento",
       privacy_2_text:
-        "Sus datos se utilizan únicamente para analizar su solicitud y generar una respuesta personalizada mediante IA. Nunca se venden ni se comparten con terceros comerciales.",
-
-      privacy_3_title: "3. Duración de conservación",
+        "Sus datos se usan únicamente para generar un análisis personalizado mediante IA. Nunca se venden ni se comparten.",
+      privacy_3_title: "3. Plazo de conservación",
       privacy_3_text:
-        "Los datos se conservan solo durante el tiempo necesario para el análisis y pueden anonimizarse posteriormente para mejorar el servicio.",
-
+        "Los datos se conservan sólo durante el tiempo necesario para el análisis y luego se eliminan o anonimizan.",
       privacy_4_title: "4. Seguridad",
       privacy_4_text:
-        "e-META aplica medidas técnicas y organizativas para proteger sus datos (canales seguros, almacenamiento controlado, acceso restringido).",
-
+        "e-META aplica medidas avanzadas para proteger sus datos (cifrado, accesos restringidos, almacenamiento seguro).",
       privacy_5_title: "5. Sus derechos",
       privacy_5_text:
-        "Puede solicitar la eliminación o corrección de sus datos escribiendo a: contact@e-meta.app."
+        "Puede solicitar la eliminación de sus datos en cualquier momento escribiendo a contact@e-meta.app."
     },
     placeholders: {
+      decisionTitle: "Ej.: estudio de viabilidad, estrategia, diagnóstico…",
       expected:
         "Ej.: expediente de financiación, plan estratégico, prototipo...",
       budget: "Monto estimado",
@@ -315,7 +330,8 @@ const LANG_CONFIG = {
       phone: "+221…",
       email: "ejemplo@mail.com",
       details:
-        "Describa el contexto, las restricciones o las prioridades importantes…"
+        "Describa el contexto, las restricciones o las prioridades importantes…",
+      filelink: "URL de Google Drive, PDF, documento en línea…"
     },
     themes: [
       "— Dominio —",
@@ -340,9 +356,7 @@ const LANG_CONFIG = {
       { value: "GBP", label: "GBP — Libra esterlina" },
       { value: "XOF", label: "XOF — Franco CFA" },
       { value: "CNY", label: "CNY — Yuan chino" }
-    ],
-    whatsapp_greeting:
-      "Hola, me gustaría recibir apoyo de e-META para una nueva solicitud."
+    ]
   },
 
   ar: {
@@ -350,33 +364,37 @@ const LANG_CONFIG = {
     flag: "🇸🇦",
     whatsappNumber: "221782607212",
     defaultCurrency: "XOF",
-    i18n: {
-      page_title_main: "e-META – المساعد الذكي متعدّد اللغات",
+    texts: {
+      page_title_main: "e-META — المساعد الذكي متعدّد اللغات",
       nav_home: "الرئيسية",
       nav_about: "حول",
       nav_faq: "الأسئلة الشائعة",
       nav_contact: "اتصال",
       nav_privacy: "سياسة الخصوصية",
 
-      hero_title: "e-META — المساعد الذكي متعدّد التخصصات",
+      hero_title: "e-META — المساعد الذكي متعدّد التخصّصات",
       hero_sub:
-        "نموذج ذكي لتحليل طلبك، تشخيصه و اقتراح حلول مناسبة حسب السياق.",
+        "نموذج ذكي لتحليل طلبك وتشخيصه واقتراح حلول مناسبة حسب السياق.",
 
       form_title: "طلب مخصّص",
-
       label_theme: "المجال / الموضوع",
-      label_expected: "النتيجة المتوقعة",
+      label_title: "عنوان مختصر للقرار",
+      label_expected: "النتيجة المتوقّعة",
       label_budget: "الميزانية التقديرية",
       label_currency: "العملة",
       label_fullname: "الاسم الكامل",
       label_phone: "الهاتف (واتساب)",
       label_email: "البريد الإلكتروني",
       label_details: "التفاصيل / السياق",
+      label_file: "رابط الملف (اختياري)",
 
       legend_delivery: "طريقة الإرسال",
       delivery_whatsapp: "واتساب",
       delivery_email: "البريد الإلكتروني",
       delivery_display: "عرض مباشر",
+
+      btn_send: "إرسال الطلب",
+      btn_reset: "إعادة التهيئة",
 
       about_title: "حول",
       about_body:
@@ -384,65 +402,64 @@ const LANG_CONFIG = {
       faq_title: "الأسئلة الشائعة",
       faq_q1: "كيف يعمل e-META؟",
       faq_a1:
-        "قم بملء النموذج باحتياجاتك، واختر طريقة الاستلام، وسيُنشئ e-META خلاصة ذكية مكيّفة مع وضعك.",
+        "املأ النموذج واختر طريقة الاستلام، وسيولّد e-META خلاصة ذكية ملائمة لوضعك.",
       contact_title: "اتصال",
-      contact_intro: "البريد الإلكتروني:",
-      footer_text: "© 2025 e-META • ببساطة. بذكاء.",
+      contact_emailLabel: "البريد الإلكتروني:",
+
+      footer: "© 2025 e-META • ببساطة. بذكاء.",
+
+      whatsapp_greeting:
+        "مرحباً، أود الحصول على مساعدة من e-META بخصوص طلب جديد.",
 
       privacy_title: "سياسة الخصوصية – e-META",
       privacy_h1: "سياسة الخصوصية – e-META",
       privacy_updated: "آخر تحديث:",
       privacy_1_title: "1. البيانات التي يتم جمعها",
-      privacy_1_1:
-        "الهوية: الاسم و اللقب.",
-      privacy_1_2:
-        "بيانات الاتصال: البريد الإلكتروني، رقم هاتف واتساب.",
+      privacy_1_1: "الهوية: الاسم واللقب",
+      privacy_1_2: "بيانات الاتصال: البريد الإلكتروني، واتساب",
       privacy_1_3:
-        "معلومات السياق: المجال، الأهداف، القيود.",
-      privacy_1_4:
-        "الميزانية: المبلغ و العملة.",
+        "معلومات السياق: المجال، عنوان المشروع، الأهداف، القيود",
+      privacy_1_4: "الميزانية: المبلغ + العملة",
       privacy_1_5:
-        "معلومات إضافية: الأجل، درجة الاستعجال، رابط الملف.",
-
+        "معلومات إضافية: الأجل، درجة الاستعجال، رابط الملف وتفضيلات الإرسال",
       privacy_2_title: "2. هدف المعالجة",
       privacy_2_text:
-        "نستعمل بياناتك فقط لتحليل طلبك و إنشاء إجابة مخصصة عبر الذكاء الاصطناعي. لا تُباع بياناتك و لا تُشارك مع أطراف تجارية.",
-
+        "تُستخدم بياناتك فقط لإنتاج تحليل شخصي عبر الذكاء الاصطناعي، ولا تُباع أو تُشارك أبداً.",
       privacy_3_title: "3. مدة الاحتفاظ بالبيانات",
       privacy_3_text:
-        "تُحتفظ البيانات للمدة اللازمة فقط لمعالجة الطلب، ثم يمكن إخفاء هويتها لتحسين أداء الخدمة.",
-
+        "تُحفظ البيانات فقط للمدّة اللازمة لإجراء التحليل ثم يتم حذفها أو إخفاء هويتها.",
       privacy_4_title: "4. الأمان",
       privacy_4_text:
-        "يطبق e-META تدابير تقنية و تنظيمية لحماية بياناتك (قنوات مؤمنة، تخزين مراقب، صلاحيات وصول محدودة).",
-
+        "يعتمد e-META تدابير متقدّمة لحماية بياناتك (تشفير، وصول مقيّد، تخزين آمن).",
       privacy_5_title: "5. حقوقك",
       privacy_5_text:
-        "يمكنك طلب حذف أو تصحيح بياناتك عبر البريد: contact@e-meta.app."
+        "يمكنك طلب حذف بياناتك في أي وقت عبر مراسلة contact@e-meta.app."
     },
     placeholders: {
-      expected: "مثال: ملف تمويل، خطة استراتيجية، نموذج أولي...",
+      decisionTitle: "مثال: دراسة جدوى، خطة استراتيجية، تشخيص…",
+      expected: "مثال: ملف تمويل، خطة استراتيجية، نموذج أولي…",
       budget: "المبلغ التقديري",
       fullname: "اسمك الكامل",
       phone: "+221…",
       email: "example@mail.com",
-      details: "اشرح السياق و القيود أو الأولويات المهمة…"
+      details: "اشرح السياق والقيود أو الأولويات المهمة…",
+      filelink: "رابط Google Drive أو PDF أو وثيقة إلكترونية…"
     },
     themes: [
       "— اختر مجالاً —",
       "الزراعة",
       "النقل",
       "الطاقة",
-      "المالية و البنوك",
+      "المالية والبنوك",
       "العقار",
-      "التقنية و الذكاء الاصطناعي",
-      "التعليم و التدريب",
+      "التقنية والذكاء الاصطناعي",
+      "التعليم والتدريب",
       "الصحة",
-      "الصناعة و الإنتاج",
+      "الصناعة والإنتاج",
       "الخدمات",
-      "الريادة و الشركات الناشئة",
+      "الريادة والشركات الناشئة",
       "المشاريع العامة / المنظمات",
-      "الاستراتيجية و الحوكمة",
+      "الاستراتيجية والحوكمة",
       "أخرى"
     ],
     currencies: [
@@ -451,17 +468,11 @@ const LANG_CONFIG = {
       { value: "EUR", label: "EUR — يورو" },
       { value: "GBP", label: "GBP — جنيه إسترليني" },
       { value: "CNY", label: "CNY — يوان صيني" }
-    ],
-    whatsapp_greeting:
-      "مرحباً، أود الحصول على مساعدة من e-META لطلب جديد."
+    ]
   }
 };
 
-let currentLang = "fr";
-
-/* =====================================================
-   HELPERS
-   ===================================================== */
+/* ---------- Helpers ---------- */
 
 function populateSelect(selectEl, options, selectedValue) {
   if (!selectEl) return;
@@ -475,16 +486,14 @@ function populateSelect(selectEl, options, selectedValue) {
     }
     selectEl.appendChild(o);
   });
-  if (!selectedValue && options[0]) {
-    selectEl.selectedIndex = 0;
-  }
 }
 
 function buildFormSummary(lang) {
   const cfg = LANG_CONFIG[lang] || LANG_CONFIG.fr;
-  const t = cfg.i18n;
+  const t = cfg.texts;
 
   const theme = document.getElementById("themeSelect")?.value || "";
+  const decisionTitle = document.getElementById("decisionTitle")?.value || "";
   const expected = document.getElementById("expected")?.value || "";
   const budget = document.getElementById("budget")?.value || "";
   const currency = document.getElementById("currencySelect")?.value || "";
@@ -492,16 +501,20 @@ function buildFormSummary(lang) {
   const phone = document.getElementById("phone")?.value || "";
   const email = document.getElementById("email")?.value || "";
   const details = document.getElementById("details")?.value || "";
+  const filelink = document.getElementById("filelink")?.value || "";
 
   const lines = [
     `${t.label_theme}: ${theme || "-"}`,
+    `${t.label_title}: ${decisionTitle || "-"}`,
     `${t.label_expected}: ${expected || "-"}`,
     `${t.label_budget}: ${budget || "-"} ${currency}`,
     `${t.label_fullname}: ${fullname || "-"}`,
     `${t.label_phone}: ${phone || "-"}`,
     `${t.label_email}: ${email || "-"}`,
     `${t.label_details}:`,
-    details || "-"
+    details || "-",
+    "",
+    `${t.label_file}: ${filelink || "-"}`
   ];
 
   return lines.join("\n");
@@ -514,14 +527,16 @@ function buildWhatsappUrl(lang, isHeaderButton = false) {
 
   let msg;
   if (isHeaderButton) {
-    msg = cfg.whatsapp_greeting;
+    msg = cfg.texts.whatsapp_greeting;
   } else {
     const summary = buildFormSummary(lang);
-    msg = `${cfg.whatsapp_greeting}\n\n${summary}`;
+    msg = `${cfg.texts.whatsapp_greeting}\n\n${summary}`;
   }
 
   return `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
 }
+
+/* Envoi vers Make (silencieux) */
 
 function sendToMake(payload) {
   if (!MAKE_WEBHOOK_URL) return;
@@ -536,159 +551,81 @@ function sendToMake(payload) {
   }
 }
 
-/* =====================================================
-   LANGUAGE APPLICATION
-   ===================================================== */
+/* ---------- Application de la langue ---------- */
 
 function applyLanguage(lang) {
   const cfg = LANG_CONFIG[lang];
   if (!cfg) return;
-
   currentLang = lang;
-  localStorage.setItem("eMetaLang", lang);
 
-  const i18n = cfg.i18n;
-
+  // html lang + RTL
   document.documentElement.lang = lang === "ar" ? "ar" : lang;
   document.body.classList.toggle("rtl", lang === "ar");
 
-  // Tous les éléments avec data-i18n
+  const t = cfg.texts;
+
+  // Tous les éléments data-i18n
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");
-    const txt = i18n[key];
-    if (txt) {
-      el.textContent = txt;
+    const value = t[key];
+    if (!value) return;
+
+    if (el.tagName === "TITLE") {
+      el.textContent = value;
+    } else {
+      el.textContent = value;
     }
   });
 
-  // Placeholders
-  const expectedInput = document.getElementById("expected");
-  if (expectedInput) expectedInput.placeholder = cfg.placeholders.expected;
-  const budgetInput = document.getElementById("budget");
-  if (budgetInput) budgetInput.placeholder = cfg.placeholders.budget;
-  const fullnameInput = document.getElementById("fullname");
-  if (fullnameInput) fullnameInput.placeholder = cfg.placeholders.fullname;
-  const phoneInput = document.getElementById("phone");
-  if (phoneInput) phoneInput.placeholder = cfg.placeholders.phone;
-  const emailInput = document.getElementById("email");
-  if (emailInput) emailInput.placeholder = cfg.placeholders.email;
-  const detailsInput = document.getElementById("details");
-  if (detailsInput) detailsInput.placeholder = cfg.placeholders.details;
+  // Bouton WhatsApp texte (facultatif)
+  const waBtn = document.getElementById("whatsappBtn");
+  if (waBtn) waBtn.textContent = "WhatsApp";
 
-  // Listes déroulantes
+  // Placeholders
+  const p = cfg.placeholders;
+  const decisionTitle = document.getElementById("decisionTitle");
+  if (decisionTitle) decisionTitle.placeholder = p.decisionTitle || "";
+  const expected = document.getElementById("expected");
+  if (expected) expected.placeholder = p.expected || "";
+  const budget = document.getElementById("budget");
+  if (budget) budget.placeholder = p.budget || "";
+  const fullname = document.getElementById("fullname");
+  if (fullname) fullname.placeholder = p.fullname || "";
+  const phone = document.getElementById("phone");
+  if (phone) phone.placeholder = p.phone || "";
+  const email = document.getElementById("email");
+  if (email) email.placeholder = p.email || "";
+  const details = document.getElementById("details");
+  if (details) details.placeholder = p.details || "";
+  const filelink = document.getElementById("filelink");
+  if (filelink) filelink.placeholder = p.filelink || "";
+
+  // Listes (thèmes / devises)
   const themeSelect = document.getElementById("themeSelect");
-  if (themeSelect) {
+  if (themeSelect)
     populateSelect(
       themeSelect,
       cfg.themes.map((label) => ({ value: label, label }))
     );
-  }
 
   const currencySelect = document.getElementById("currencySelect");
-  if (currencySelect) {
+  if (currencySelect)
     populateSelect(currencySelect, cfg.currencies, cfg.defaultCurrency);
-  }
 
-  // Sections About / FAQ / Contact / Footer si présents
-  const aboutTitle = document.querySelector("#about h3");
-  if (aboutTitle && i18n.about_title) aboutTitle.textContent = i18n.about_title;
-  const aboutBody = document.querySelector("#about p");
-  if (aboutBody && i18n.about_body) aboutBody.textContent = i18n.about_body;
-
-  const faqTitle = document.querySelector("#faq h3");
-  if (faqTitle && i18n.faq_title) faqTitle.textContent = i18n.faq_title;
-  const faqSummary = document.querySelector("#faq summary");
-  if (faqSummary && i18n.faq_q1) faqSummary.textContent = i18n.faq_q1;
-  const faqBody = document.querySelector("#faq details p");
-  if (faqBody && i18n.faq_a1) faqBody.textContent = i18n.faq_a1;
-
-  const contactTitle = document.querySelector("#contact h3");
-  if (contactTitle && i18n.contact_title)
-    contactTitle.textContent = i18n.contact_title;
-  const contactP = document.querySelector("#contact p");
-  if (contactP) {
-    const link = contactP.querySelector("a");
-    contactP.textContent = i18n.contact_intro ? i18n.contact_intro + " " : "";
-    if (link) contactP.appendChild(link);
-  }
-
+  // Texte du footer (si id présent)
   const footerText = document.getElementById("footerText");
-  if (footerText && i18n.footer_text) footerText.textContent = i18n.footer_text;
+  if (footerText && t.footer) footerText.textContent = t.footer;
 
-  // Bouton langue (flag + code)
+  // Flag + code
   const langFlag = document.getElementById("langFlag");
   const langCode = document.getElementById("langCode");
   if (langFlag) langFlag.textContent = cfg.flag;
   if (langCode) langCode.textContent = cfg.code;
 }
 
-/* =====================================================
-   HEADER & FOOTER TEMPLATE (pour privacy.html)
-   ===================================================== */
-
-function injectLayoutIfNeeded() {
-  const headerContainer = document.getElementById("headerContainer");
-  if (headerContainer) {
-    headerContainer.innerHTML = `
-      <header class="header">
-        <div class="nav-wrapper">
-          <a href="index.html#home" class="brand">
-            <img id="logo" src="01_Logo_Sources/eMETA-official-logo.svg.png" alt="e-META Logo" class="logo">
-            <span class="brand-text">e-META</span>
-          </a>
-
-          <button id="burgerBtn" class="burger" aria-label="Menu">
-            <span></span><span></span><span></span>
-          </button>
-
-          <nav id="mainNav" class="nav">
-            <a href="index.html#home" data-i18n="nav_home">Accueil</a>
-            <a href="index.html#about" data-i18n="nav_about">À propos</a>
-            <a href="index.html#faq" data-i18n="nav_faq">FAQ</a>
-            <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
-            <a href="privacy.html" data-i18n="nav_privacy">Politique de confidentialité</a>
-          </nav>
-
-          <div class="actions">
-            <button id="whatsappBtn" class="btn-wa">WhatsApp</button>
-            <div class="langbox">
-              <button id="langToggle" class="lang-btn" type="button">
-                <span id="langFlag">🇫🇷</span>
-                <span id="langCode">FR</span> ▼
-              </button>
-              <ul id="langMenu" class="lang-menu">
-                <li data-lang="fr">🇫🇷 Français</li>
-                <li data-lang="en">🇬🇧 English</li>
-                <li data-lang="es">🇪🇸 Español</li>
-                <li data-lang="ar">🇸🇦 العربية</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </header>
-    `;
-  }
-
-  const footerContainer = document.getElementById("footerContainer");
-  if (footerContainer) {
-    footerContainer.innerHTML = `
-      <footer class="footer">
-        <p id="footerText" data-i18n="footer_text">© 2025 e-META • Simplement. Intelligemment.</p>
-      </footer>
-    `;
-  }
-}
-
-/* =====================================================
-   DOM READY
-   ===================================================== */
+/* ---------- Wiring DOM ---------- */
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("e-META v5.0 loaded");
-
-  // Si on est sur privacy.html, on injecte header+footer
-  injectLayoutIfNeeded();
-
   const burgerBtn = document.getElementById("burgerBtn");
   const mainNav = document.getElementById("mainNav");
   const langToggle = document.getElementById("langToggle");
@@ -696,8 +633,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const whatsappBtn = document.getElementById("whatsappBtn");
   const sendBtn = document.getElementById("sendBtn");
   const resetBtn = document.getElementById("resetBtn");
+  const form = document.getElementById("requestForm");
 
-  /* ------- Burger menu ------- */
+  /* --- Burger menu --- */
   if (burgerBtn && mainNav) {
     burgerBtn.addEventListener("click", () => {
       burgerBtn.classList.toggle("active");
@@ -712,14 +650,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     window.addEventListener("resize", () => {
-      if (window.innerWidth > 860) {
+      if (window.innerWidth > 900) {
         burgerBtn.classList.remove("active");
         mainNav.classList.remove("open");
       }
     });
   }
 
-  /* ------- Language selector ------- */
+  /* --- Sélecteur de langue --- */
   if (langToggle && langMenu) {
     langToggle.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -741,7 +679,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ------- WhatsApp header button ------- */
+  /* --- Bouton WhatsApp (header) --- */
   if (whatsappBtn) {
     whatsappBtn.addEventListener("click", () => {
       const url = buildWhatsappUrl(currentLang, true);
@@ -749,17 +687,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ------- Form send ------- */
-  if (sendBtn) {
+  /* --- Envoi formulaire --- */
+  if (sendBtn && form) {
     sendBtn.addEventListener("click", () => {
       const delivery =
         document.querySelector('input[name="delivery"]:checked')?.value ||
         "whatsapp";
+
       const summary = buildFormSummary(currentLang);
 
       const payload = {
         lang: currentLang,
         theme: document.getElementById("themeSelect")?.value || "",
+        decisionTitle: document.getElementById("decisionTitle")?.value || "",
         expected: document.getElementById("expected")?.value || "",
         budget: document.getElementById("budget")?.value || "",
         currency: document.getElementById("currencySelect")?.value || "",
@@ -767,6 +707,7 @@ document.addEventListener("DOMContentLoaded", () => {
         phone: document.getElementById("phone")?.value || "",
         email: document.getElementById("email")?.value || "",
         details: document.getElementById("details")?.value || "",
+        filelink: document.getElementById("filelink")?.value || "",
         deliveryMode: delivery,
         summary
       };
@@ -791,6 +732,7 @@ document.addEventListener("DOMContentLoaded", () => {
         )}&body=${encodeURIComponent(summary)}`;
         window.location.href = mailto;
       } else {
+        // Affichage direct
         const win = window.open("", "_blank", "width=600,height=700");
         if (win) {
           win.document.write(
@@ -803,16 +745,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ------- Reset ------- */
-  if (resetBtn) {
+  /* --- Reset formulaire --- */
+  if (resetBtn && form) {
     resetBtn.addEventListener("click", () => {
-      const form = document.getElementById("requestForm");
-      if (form) form.reset();
+      form.reset();
+      // réapplique placeholders + listes
       applyLanguage(currentLang || "fr");
     });
   }
 
-  // Langue par défaut (ou dernière langue utilisée)
-  const savedLang = localStorage.getItem("eMetaLang") || "fr";
-  applyLanguage(savedLang);
+  // Langue par défaut
+  applyLanguage("fr");
 });
