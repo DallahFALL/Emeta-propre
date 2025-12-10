@@ -1,52 +1,65 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="privacy_title">Politique de confidentialité – e-META</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 </head>
-<body>
 
-  <!-- HEADER (identique à l’accueil) -->
+<body>
+  <!-- HEADER identique -->
   <header class="header">
     <div class="nav-wrapper">
       <a href="index.html#home" class="brand">
-        <img id="logo" src="01_Logo_Sources/EMETA-official-logo.svg" alt="e-META Logo" class="logo">
+        <img
+          id="logo"
+          src="01_Logo_Sources/eMETA-official-logo.svg.png"
+          alt="e-META Logo"
+          class="logo"
+        />
         <span class="brand-name">e-META</span>
       </a>
 
-      <nav class="nav" id="mainNav">
+      <button id="burgerBtn" class="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav id="mainNav" class="nav">
         <a href="index.html#home" data-i18n="nav_home">Accueil</a>
         <a href="index.html#about" data-i18n="nav_about">À propos</a>
         <a href="index.html#faq" data-i18n="nav_faq">FAQ</a>
         <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
+        <a href="privacy.html" data-i18n="nav_privacy">Politique de confidentialité</a>
       </nav>
 
       <div class="actions">
-        <button class="btn-wa whatsappBtnGlobal" id="whatsappBtnHeader">WhatsApp</button>
+        <button
+          class="btn-wa whatsappBtnGlobal"
+          id="whatsappBtnPrivacy"
+          type="button"
+        >
+          WhatsApp
+        </button>
 
         <div class="langbox">
-          <button class="lang-btn" id="langToggle">
+          <button class="lang-btn" id="langToggle" type="button">
             <span id="langFlag">🇫🇷</span>
-            <span id="langCode">FR</span>
+            <span id="langCode">FR</span> ▼
           </button>
           <ul class="lang-menu" id="langMenu">
-            <li data-lang="fr">🇫🇷 FR</li>
-            <li data-lang="en">🇬🇧 EN</li>
-            <li data-lang="es">🇪🇸 ES</li>
-            <li data-lang="ar">🇸🇦 AR</li>
+            <li data-lang="fr">🇫🇷 Français</li>
+            <li data-lang="en">🇬🇧 English</li>
+            <li data-lang="es">🇪🇸 Español</li>
+            <li data-lang="ar">🇸🇦 العربية</li>
           </ul>
         </div>
-
-        <button class="burger" id="burgerBtn" aria-label="Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </div>
     </div>
   </header>
@@ -65,37 +78,45 @@
       </p>
       <ul class="privacy-list">
         <li data-i18n="privacy_1_1">Identité : nom et prénom</li>
-        <li data-i18n="privacy_1_2">Coordonnées : email, WhatsApp</li>
-        <li data-i18n="privacy_1_3">Informations de contexte : domaine, titre du projet, objectifs, contraintes</li>
-        <li data-i18n="privacy_1_4">Budget : montant + devise</li>
-        <li data-i18n="privacy_1_5">Informations complémentaires : délai, urgence, lien fichier</li>
-        <li data-i18n="privacy_1_6">Préférences : méthode de restitution</li>
+        <li data-i18n="privacy_1_2">Coordonnées : email, numéro WhatsApp</li>
+        <li data-i18n="privacy_1_3">
+          Informations liées à la décision : domaine, titre de la décision, objectifs, contraintes, contexte détaillé
+        </li>
+        <li data-i18n="privacy_1_4">
+          Budget : montant estimatif et devise
+        </li>
+        <li data-i18n="privacy_1_5">
+          Paramètres complémentaires : délai souhaité, niveau d’urgence, lien vers un fichier ou document
+        </li>
+        <li data-i18n="privacy_1_6">
+          Préférences de restitution : canal choisi (WhatsApp, email, affichage direct)
+        </li>
       </ul>
 
       <h2 data-i18n="privacy_2_title">2. Finalité du traitement</h2>
       <p data-i18n="privacy_2_text">
-        Vos données servent uniquement à générer une analyse personnalisée via IA. Elles ne sont jamais vendues ni partagées.
+        Les données sont utilisées uniquement pour analyser votre situation, générer une synthèse décisionnelle via l’IA et vous la restituer via le canal choisi. Vos données ne sont ni vendues ni louées à des tiers.
       </p>
 
       <h2 data-i18n="privacy_3_title">3. Durée de conservation</h2>
       <p data-i18n="privacy_3_text">
-        Les données sont conservées uniquement le temps nécessaire à l’analyse, puis automatiquement supprimées ou anonymisées.
+        Les données sont conservées uniquement pendant la durée nécessaire au traitement de votre demande, puis peuvent être anonymisées à des fins de statistiques et d’amélioration du service.
       </p>
 
       <h2 data-i18n="privacy_4_title">4. Sécurité</h2>
       <p data-i18n="privacy_4_text">
-        e-META applique des mesures avancées pour protéger vos données (chiffrement, accès restreints, stockage sécurisé).
+        e-META met en œuvre des mesures techniques et organisationnelles pour protéger vos données (canaux sécurisés, accès restreints, bonnes pratiques de confidentialité). Vous êtes invité à ne jamais transmettre d’informations hautement sensibles via le formulaire.
       </p>
 
       <h2 data-i18n="privacy_5_title">5. Vos droits</h2>
       <p data-i18n="privacy_5_text">
-        Vous pouvez demander la suppression de vos données à tout moment en écrivant à
-        <a href="mailto:contact@e-meta.app">contact@e-meta.app</a>.
+        Vous pouvez demander la suppression ou la rectification de vos données en écrivant à
+        <a href="mailto:contact@e-meta.app">contact@e-meta.app</a>. Selon votre pays de résidence, vous pouvez également disposer de droits complémentaires (accès, limitation du traitement, portabilité, etc.).
       </p>
     </section>
   </main>
 
-  <!-- FOOTER identique -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
       <nav class="footer-nav">
@@ -105,9 +126,10 @@
         <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
         <a href="privacy.html" data-i18n="footer_privacy">Politique de confidentialité</a>
       </nav>
-      <p id="footerText">© 2025 e-META • Simplement. Intelligemment.</p>
+      <p id="footerText" data-i18n="footer">
+        © 2025 e-META • Simplement. Intelligemment.
+      </p>
     </div>
   </footer>
-
 </body>
 </html>
