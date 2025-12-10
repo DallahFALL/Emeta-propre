@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>e-META – Assistant IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+
+<header class="header">
+  <div class="nav-wrapper">
+    <div class="brand">e‑META</div>
+    <button id="burgerBtn" class="burger"><span></span><span></span><span></span></button>
+    <nav id="mainNav" class="nav">
+      <a href="#home">Accueil</a>
+      <a href="#about">À propos</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <a href="privacy.html">Confidentialité</a>
+    </nav>
+  </div>
+</header>
+
+<section id="home" class="hero">
+  <h1>Assistant IA Pluridisciplinaire</h1>
+  <p>Formulaire intelligent pour une analyse et synthèse automatique.</p>
+</section>
+
+<section class="form-section">
+<form class="form">
+  <label>Domaine</label>
+  <select><option>Technologie</option><option>Éducation</option><option>Finance</option></select>
+
+  <label>Résultat attendu</label>
+  <input type="text" placeholder="Ex : Business plan">
+
+  <label>Budget</label>
+  <input type="number" placeholder="Montant">
+
+  <label>Détails</label>
+  <textarea placeholder="Expliquez votre contexte..."></textarea>
+
+  <label>Mode de restitution</label>
+  <div class="delivery">
+    <label><input type="radio" name="del" checked> WhatsApp</label>
+    <label><input type="radio" name="del"> Email</label>
+    <label><input type="radio" name="del"> Affichage direct</label>
+  </div>
+
+  <button class="btn-primary" type="button">Envoyer</button>
+</form>
+</section>
+
+<footer class="footer">
+  © 2025 e‑META – Simplement. Intelligemment.
+</footer>
+
+</body>
+</html>
