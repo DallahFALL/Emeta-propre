@@ -72,45 +72,24 @@ body {
   padding: 0.75rem 0;
 }
 
-/* LOGO */
+/* Convertir l'ancien logo en blanc */
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  text-decoration: none;
-}
-.logo-img {
-  background: white;
-  padding: 6px;
-  border-radius: 10px;
-  height: 48px;
+/* Le symbole hexagonal */
+.logo-mark {
+  background: none !important;
+  color: white !important;
+  border: 2px solid white !important;
+  box-shadow: none !important;
 }
 
-/* LOGO */
-
-/* Conteneur du logo dans le header */
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  text-decoration: none;
+/* Le texte "e-META" */
+.logo-text {
+  color: white !important;
 }
 
-/* Nouveau logo image (blanc + glow bleu) */
-.logo-img {
-  height: 48px;       /* Ajustable (48 = parfait pour un header) */
-  width: auto;
-  display: block;
-  border-radius: 6px; /* Optionnel pour arrondir légèrement */
-}
-
-/* Anciennes classes du logo textuel (désactivées mais conservées si tu les réutilises ailleurs) */
-
-.logo-mark,
-.logo-text,
+/* Le sous-texte "Assistant IA multilingue..." */
 .logo-tagline {
-  display: none !important;
+  color: rgba(255,255,255,0.75) !important;
 }
 
 
