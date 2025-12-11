@@ -133,6 +133,12 @@ body {
   align-items: center;
   gap: 0.6rem;
 }
+.logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+  filter: invert(1) brightness(2);
+}
 
 .lang-select {
   background: rgba(15, 23, 42, 0.8);
