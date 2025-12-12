@@ -1033,3 +1033,202 @@ input[type="url"]:focus {
   font-size: 0.8rem;
   opacity: 0.7;
 }
+
+/* =====================================================
+   e-META v5 — FIXES DEFINITIFS (NO HTML CHANGE)
+   Checkbox alignment + overflow + responsive + burger
+===================================================== */
+
+/* Empêche tout débordement horizontal */
+html, body { overflow-x: hidden; }
+.container { max-width: 1200px; }
+.form-section, .field-group, #emetaForm { max-width: 100%; }
+
+/* Cadres qui débordent : on coupe proprement */
+.field-group {
+  overflow: hidden;
+}
+
+/* =========================
+   CHECKBOX GRID (FIX HARD)
+========================= */
+
+/* la grille des 4 modes */
+.checkbox-grid{
+  display:grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px 24px !important;
+  margin-top: 10px !important;
+  width: 100% !important;
+}
+
+/* chaque item = input + texte COLLÉS */
+.checkbox-item{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap: 10px !important;
+  width: 100% !important;
+  padding: 8px 10px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  background: rgba(255,255,255,.03) !important;
+}
+
+/* ⚠️ si un ancien CSS force "grid" sur label, on écrase */
+.checkbox-item *{
+  margin:0 !important;
+}
+
+/* input checkbox fixe (pas de décalage) */
+.checkbox-item input[type="checkbox"]{
+  width: 18px !important;
+  height: 18px !important;
+  flex: 0 0 18px !important;
+  margin: 0 !important;
+  accent-color: #3b82f6;
+}
+
+/* texte lisible & collé */
+.checkbox-item span{
+  display:inline-block !important;
+  line-height: 1.35 !important;
+  white-space: normal !important;
+}
+
+/* Responsive : en mobile → 1 colonne */
+@media (max-width: 720px){
+  .checkbox-grid{
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+}
+
+/* =========================
+   RGPD (case + texte collés)
+========================= */
+.checkbox-row{
+  display:flex !important;
+  align-items:flex-start !important;
+  gap: 10px !important;
+  width: 100% !important;
+  margin-top: 16px !important;
+}
+
+.checkbox-row label{
+  display:flex !important;
+  align-items:flex-start !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.checkbox-row input[type="checkbox"]{
+  width: 18px !important;
+  height: 18px !important;
+  flex: 0 0 18px !important;
+  margin-top: 3px !important;
+}
+
+/* =========================
+   LIEN FICHIER (actif & clair)
+========================= */
+#fileLink,
+input[type="url"]{
+  pointer-events: auto !important;
+  cursor: text !important;
+  position: relative;
+  z-index: 2;
+}
+
+#fileLink:focus,
+input[type="url"]:focus{
+  border-color:#3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59,130,246,.25) !important;
+}
+
+/* =========================
+   FORM INLINE : éviter débordement mobile
+========================= */
+.field-inline{
+  display:grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  width: 100% !important;
+}
+
+@media (max-width: 900px){
+  .field-inline{ grid-template-columns: 1fr !important; }
+}
+
+/* inputs/textarea ne dépassent jamais */
+#emetaForm input,
+#emetaForm select,
+#emetaForm textarea{
+  width:100% !important;
+  min-width:0 !important;
+}
+
+/* =========================
+   BOUTONS centrés & responsive
+========================= */
+.form-actions{
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
+}
+
+.form-actions button{
+  min-width: 240px;
+}
+
+@media (max-width: 640px){
+  .form-actions{
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .form-actions button{
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+/* =========================
+   BURGER MENU (évite menu vide)
+========================= */
+.burger{ display:none; }
+
+@media (max-width: 900px){
+  .burger{ display:inline-flex !important; }
+
+  /* nav cachée par défaut */
+  .nav{
+    width:100%;
+    display:none;
+    padding: 12px;
+    border-radius: 16px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+  }
+
+  /* visible quand JS ajoute is-open */
+  .nav.is-open{ display:block !important; }
+
+  .nav ul{
+    display:flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    margin:0 !important;
+    padding:0 !important;
+    list-style:none !important;
+  }
+
+  .nav a{
+    display:block;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(255,255,255,.03);
+  }
+}
