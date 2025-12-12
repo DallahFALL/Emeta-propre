@@ -7,6 +7,11 @@
 // 1. DICTIONNAIRE I18N
 // ----------------------
 const translations = {
+  fr: { /* … */ },
+  en: { /* … */ },
+  es: { /* … */ },
+  ar: { /* … */ }
+};
 
   // =====================
   // 🇫🇷 FRENCH (reference)
