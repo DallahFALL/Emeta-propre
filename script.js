@@ -471,11 +471,3 @@ document.addEventListener("DOMContentLoaded", () => {
   setupWhatsAppCTA();
 });
 
-const burger = document.getElementById("burgerBtn");
-const nav = document.getElementById("mainNav");
-if (burger && nav) {
-  burger.addEventListener("click", () => {
-    nav.classList.toggle("is-open");
-    burger.classList.toggle("is-open");
-  });
-}
