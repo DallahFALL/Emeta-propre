@@ -37,7 +37,9 @@ window.addEventListener("load", () => {
     langSelect.addEventListener("change", e => applyLang(e.target.value));
   }
 
-  // ===== BURGER =====
+console.log("script.js chargé");
+
+document.addEventListener("DOMContentLoaded", () => {
   const burger = document.getElementById("burgerBtn");
   const nav = document.getElementById("mainNav");
 
@@ -45,7 +47,10 @@ window.addEventListener("load", () => {
     burger.addEventListener("click", () => {
       nav.classList.toggle("is-open");
       burger.classList.toggle("is-open");
+      burger.setAttribute(
+        "aria-expanded",
+        nav.classList.contains("is-open")
+      );
     });
   }
-
 });
