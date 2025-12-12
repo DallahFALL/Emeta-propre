@@ -1232,3 +1232,19 @@ input[type="url"]:focus{
     background: rgba(255,255,255,.03);
   }
 }
+
+/* FIX INPUT URL NON CLIQUABLE */
+.field,
+.field * {
+  pointer-events: auto !important;
+}
+
+.field-group {
+  position: relative;
+  z-index: 1;
+}
+
+#fileLink {
+  position: relative;
+  z-index: 5;
+}
