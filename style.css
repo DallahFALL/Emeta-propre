@@ -1287,3 +1287,15 @@ main {
     display: block;
   }
 }
+
+/* Force interaction inputs */
+input, textarea, select {
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* Neutralise overlays */
+.field-group, .form-section, main, body {
+  pointer-events: auto;
+}
