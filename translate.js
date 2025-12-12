@@ -1,3 +1,4 @@
+console.log("translate.js chargé");
 // =========================================
 //  e-META Translation Engine v5.0 PRO
 //  FR + ES + AR (RTL support)
