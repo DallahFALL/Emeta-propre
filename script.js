@@ -471,3 +471,32 @@ document.addEventListener("DOMContentLoaded", () => {
   setupWhatsAppCTA();
 });
 
+/* =========================
+   BURGER MENU – SAFE MODE
+   (ne casse PAS la traduction)
+========================= */
+window.addEventListener("load", () => {
+  const burger = document.getElementById("burgerBtn");
+  const nav = document.getElementById("mainNav");
+
+  if (!burger || !nav) return;
+
+  burger.addEventListener("click", () => {
+    nav.classList.toggle("is-open");
+    burger.classList.toggle("is-open");
+
+    burger.setAttribute(
+      "aria-expanded",
+      burger.classList.contains("is-open") ? "true" : "false"
+    );
+  });
+
+  // Ferme le menu quand on clique un lien (mobile UX)
+  nav.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("is-open");
+      burger.classList.remove("is-open");
+      burger.setAttribute("aria-expanded", "false");
+    });
+  });
+});
