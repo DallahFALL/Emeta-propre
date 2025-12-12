@@ -1,70 +1,51 @@
-/* =====================================================
-   e-META CORE JS (SAFE / STABLE / i18n COMPATIBLE)
-===================================================== */
+console.log("script.js chargé");
 
-(function () {
+window.addEventListener("load", () => {
 
-  /* ---------- I18N ---------- */
-
+  // ===== I18N =====
   const DEFAULT_LANG = "fr";
+  const lang = localStorage.getItem("lang") || DEFAULT_LANG;
 
-  function applyTranslations(lang) {
-    const dict = translations[lang] || translations[DEFAULT_LANG];
+  if (typeof translations === "undefined") {
+    console.error("translations non défini");
+    return;
+  }
+
+  function applyLang(l) {
+    const dict = translations[l] || translations[DEFAULT_LANG];
 
     document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
-      if (dict[key]) el.textContent = dict[key];
+      const k = el.dataset.i18n;
+      if (dict[k]) el.textContent = dict[k];
     });
 
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-      const key = el.getAttribute("data-i18n-placeholder");
-      if (dict[key]) el.placeholder = dict[key];
+      const k = el.dataset.i18nPlaceholder;
+      if (dict[k]) el.placeholder = dict[k];
     });
 
-    document.documentElement.lang = lang;
-    document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
-
-    localStorage.setItem("lang", lang);
+    document.documentElement.lang = l;
+    document.documentElement.dir = (l === "ar") ? "rtl" : "ltr";
+    localStorage.setItem("lang", l);
   }
 
-  window.setLanguage = function (lang) {
-    applyTranslations(lang);
-  };
+  applyLang(lang);
 
-  /* ---------- INIT ---------- */
+  const langSelect = document.getElementById("languageSwitcher");
+  if (langSelect) {
+    langSelect.value = lang;
+    langSelect.addEventListener("change", e => applyLang(e.target.value));
+  }
 
-  window.addEventListener("load", () => {
+  // ===== BURGER =====
+  const burger = document.getElementById("burgerBtn");
+  const nav = document.getElementById("mainNav");
 
-    /* Language */
-    const savedLang = localStorage.getItem("lang") || DEFAULT_LANG;
-    const langSelect = document.getElementById("languageSwitcher");
-    if (langSelect) {
-      langSelect.value = savedLang;
-      langSelect.addEventListener("change", e => {
-        setLanguage(e.target.value);
-      });
-    }
-    setLanguage(savedLang);
+  if (burger && nav) {
+    burger.addEventListener("click", () => {
+      nav.classList.toggle("is-open");
+      burger.classList.toggle("is-open");
+    });
+  }
 
-    /* ---------- BURGER ---------- */
-
-    const burger = document.getElementById("burgerBtn");
-    const nav = document.getElementById("mainNav");
-
-    if (burger && nav) {
-      burger.addEventListener("click", () => {
-        nav.classList.toggle("is-open");
-        burger.classList.toggle("is-open");
-      });
-
-      nav.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => {
-          nav.classList.remove("is-open");
-          burger.classList.remove("is-open");
-        });
-      });
-    }
-
-  });
-
-})();
+});
