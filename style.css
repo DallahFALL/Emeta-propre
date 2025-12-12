@@ -934,3 +934,102 @@ input:focus, textarea:focus, select:focus{
   outline: none;
   box-shadow: 0 0 0 3px rgba(60,130,246,.25);
 }
+
+/* =====================================================
+   FIX UX – MODE DE RESTITUTION / CONTACT / FOOTER
+   (sans modifier le HTML du formulaire)
+===================================================== */
+
+/* 1️⃣ CHECKBOXES : rapprocher cases + libellés */
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem 2rem;
+  margin-top: 0.75rem;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  line-height: 1.4;
+}
+
+.checkbox-item input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  accent-color: #3b82f6; /* bleu e-META */
+}
+
+/* 2️⃣ LIEN FICHIER : rendre visuellement actif */
+input[type="url"] {
+  cursor: text;
+}
+
+input[type="url"]:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59,130,246,0.25);
+}
+
+/* 3️⃣ RGPD : rapprocher case + texte */
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.checkbox-row input[type="checkbox"] {
+  margin-top: 0.25rem;
+  width: 18px;
+  height: 18px;
+}
+
+/* 4️⃣ BOUTONS : centrage pro & responsive */
+.form-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.form-actions button {
+  min-width: 220px;
+}
+
+/* Mobile : boutons pleine largeur */
+@media (max-width: 640px) {
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
+}
+
+/* 5️⃣ FOOTER : texte bas + année */
+.site-footer {
+  padding: 1.5rem 0;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.footer-inner::after {
+  content: "e-META © 2025";
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
