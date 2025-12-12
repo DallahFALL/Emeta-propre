@@ -416,11 +416,6 @@ function setupBurger() {
   const burger = document.getElementById("burgerBtn");
 const nav = document.getElementById("mainNav");
 if (burger && nav) {
-  burger.addEventListener("click", () => {
-    nav.classList.toggle("is-open");
-    burger.classList.toggle("is-open");
-  });
-}
 
   const close = () => {
     nav.classList.remove("is-open");
@@ -475,3 +470,12 @@ document.addEventListener("DOMContentLoaded", () => {
   setupBurger();
   setupWhatsAppCTA();
 });
+
+const burger = document.getElementById("burgerBtn");
+const nav = document.getElementById("mainNav");
+if (burger && nav) {
+  burger.addEventListener("click", () => {
+    nav.classList.toggle("is-open");
+    burger.classList.toggle("is-open");
+  });
+}
