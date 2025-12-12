@@ -784,3 +784,153 @@ body.rtl .header-actions{
   margin-left:0;
   margin-right:auto;
 }
+
+/* ===============================
+   e-META v5 PRO — Responsive Patch
+   (colle en bas de style.css)
+=============================== */
+
+* { box-sizing: border-box; }
+.container { width:100%; max-width:1200px; margin:0 auto; padding:0 16px; }
+
+html, body { overflow-x: hidden; }
+
+/* ---------- HEADER (burger pro) ---------- */
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.nav ul{
+  display:flex;
+  gap:18px;
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.burger{
+  display:none;
+  background:transparent;
+  border:0;
+  padding:10px;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+.burger span{
+  display:block;
+  width:26px;
+  height:2px;
+  margin:6px 0;
+  border-radius:999px;
+  background:rgba(255,255,255,.92);
+  transition:transform .2s ease, opacity .2s ease;
+}
+
+.burger.is-open span:nth-child(1){ transform:translateY(8px) rotate(45deg); }
+.burger.is-open span:nth-child(2){ opacity:0; }
+.burger.is-open span:nth-child(3){ transform:translateY(-8px) rotate(-45deg); }
+
+@media (max-width: 900px){
+  .burger{ display:inline-flex; }
+  .logo-tagline{ display:none; }
+
+  .nav{
+    width:100%;
+    display:none;
+    padding:12px;
+    border-radius:16px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .nav.is-open{ display:block; }
+
+  .nav ul{ flex-direction:column; gap:10px; }
+
+  .header-actions{ margin-left:auto; }
+}
+
+/* ---------- HERO responsive ---------- */
+.hero-inner{
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap:24px;
+  align-items:start;
+}
+
+@media (max-width: 900px){
+  .hero-inner{ grid-template-columns:1fr; }
+  .hero-panel{ order:2; }
+}
+
+/* ---------- FORM responsive (fix principal) ---------- */
+#emetaForm .field-group{
+  border-radius:18px;
+}
+
+#emetaForm .field-inline{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:16px;
+}
+
+#emetaForm .field-with-unit{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap:10px;
+  align-items:center;
+}
+
+#emetaForm input,
+#emetaForm select,
+#emetaForm textarea{
+  width:100%;
+  min-width:0;
+}
+
+.checkbox-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:12px;
+}
+
+.form-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:flex-start;
+}
+
+@media (max-width: 768px){
+  #emetaForm .field-inline{ grid-template-columns:1fr; }
+  .checkbox-grid{ grid-template-columns:1fr; }
+  .form-actions{ flex-direction:column; align-items:stretch; }
+}
+
+/* ---------- RTL (AR) ---------- */
+body.rtl { direction: rtl; }
+body.rtl .nav ul{ direction: rtl; }
+body.rtl .form-actions{ justify-content:flex-end; }
+body.rtl input, body.rtl textarea, body.rtl select{ direction: rtl; }
+
+/* ---------- Micro animations (premium) ---------- */
+.btn-primary, .btn-secondary, .btn-whatsapp, .lang-select, .nav a{
+  transition: transform .15s ease, opacity .15s ease, box-shadow .15s ease;
+}
+.btn-primary:hover, .btn-secondary:hover, .btn-whatsapp:hover{
+  transform: translateY(-1px);
+}
+input:focus, textarea:focus, select:focus{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(60,130,246,.25);
+}
