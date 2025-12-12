@@ -253,6 +253,86 @@ const translations = {
   }
 };
 
+en: {
+
+  // HEADER
+  "menu.home": "Home",
+  "menu.form": "Form",
+  "menu.privacy": "Privacy",
+  "menu.custom": "Custom request",
+  "tagline": "Multilingual AI decision-making assistant",
+
+  // HERO
+  "hero.title": "Give your decisions the level of a premium consulting firm",
+  "hero.subtitle": "e-META analyzes your context, objectives, constraints, KPIs and resources to generate a clear, actionable and documented roadmap.",
+  "hero.point1": "Structured analysis: problem, objectives, constraints, risks, KPIs.",
+  "hero.point2": "Actionable synthesis: recommendations, action plan, deliverables.",
+  "hero.point3": "Personalized delivery: Email, WhatsApp, PDF or on-screen display.",
+  "hero.button": "Start a strategic analysis",
+
+  // FORM — SECTION 1
+  "form.section1": "1. GENERAL INFORMATION",
+  "form.domain": "Domain / Main theme",
+  "form.select": "Select…",
+
+  "domain.hr": "Human Resources & Organization",
+  "domain.strategy": "Strategy & Development",
+  "domain.finance": "Finance & Investment",
+  "domain.marketing": "Marketing & Communication",
+  "domain.tech": "Technology & Digital Transformation",
+  "domain.operations": "Operations & Process Optimization",
+  "domain.risk": "Risk Management & Compliance",
+  "domain.other": "Other domain",
+
+  "form.projectType": "Project type",
+  "form.projectType.placeholder": "Select a project type",
+
+  "ptype.analysis": "Strategic analysis",
+  "ptype.market": "Market study",
+  "ptype.plan": "Action plan / Roadmap",
+  "ptype.optimization": "Optimization project",
+  "ptype.organization": "Organizational restructuring",
+  "ptype.risk": "Risk assessment",
+  "ptype.problem": "Problem solving",
+
+  "form.shortTitle": "Short title of the project or decision",
+  "form.shortTitle.placeholder": "e.g. Optimization of e-META distribution strategy",
+
+  // SECTION 2
+  "form.section2": "2. STRATEGIC ANALYSIS — CONSULTING LEVEL",
+  "form.coreProblem": "Core problem to solve",
+  "form.coreProblem.placeholder": "Clearly describe the problem, decision or challenge you are facing.",
+  "form.objectives": "Main objectives",
+  "form.objectives.placeholder": "List 3 to 5 objectives you want to achieve.",
+  "form.constraints": "Constraints & risks",
+  "form.constraints.placeholder": "Limited budget, tight deadlines, human resources, regulations, etc.",
+
+  // SECTION 3
+  "form.section3": "3. RESOURCES & KPIs",
+  "form.resources": "Available resources",
+  "form.resources.placeholder": "Teams, tools, data, partners, skills, etc.",
+  "form.kpi": "Key performance indicators (KPIs)",
+  "form.kpi.placeholder": "Expected measurable outcomes.",
+
+  // SECTION 4
+  "form.section4": "4. DELIVERABLES & CONTACT",
+  "form.delivery": "Preferred delivery method",
+
+  "delivery.email": "Email",
+  "delivery.whatsapp": "WhatsApp",
+  "delivery.pdf": "PDF file",
+  "delivery.display": "On-screen display",
+
+  "form.email": "Your email (optional)",
+  "form.email.placeholder": "Enter your email address",
+  "form.whatsapp": "Your WhatsApp number (optional)",
+  "form.whatsapp.placeholder": "+1 …",
+
+  "form.submit": "Submit request",
+
+  // FOOTER
+  "footer.rights": "All rights reserved © e-META"
+}
 
 // ----------------------
 // 2. MISE À JOUR DES TEXTES
