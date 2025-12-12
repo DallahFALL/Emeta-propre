@@ -3,37 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>e-META – Assistant IA de Décision</title>
-  <meta name="description" content="e-META — Assistant IA multilingue de prise de décision. Analyse stratégique premium, style cabinet de conseil.">
-<meta name="theme-color" content="#0b1020">
-<link rel="canonical" href="https://e-meta.app/">
+
+  <!-- SEO / Meta -->
+  <meta name="description" content="e-META — Assistant IA multilingue de prise de décision. Analyse stratégique premium, style cabinet de conseil." />
+  <meta name="theme-color" content="#0b1020" />
+  <link rel="canonical" href="https://e-meta.app/" />
+  <meta name="google" content="notranslate" />
+
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="favicon.png" />
-  <meta name="google" content="notranslate">
 </head>
+
 <body>
   <!-- HEADER -->
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="logo">
-        <span class="logo-mark">e</span>
+      <a href="index.html" class="logo" aria-label="e-META">
+        <span class="logo-mark" aria-hidden="true">e</span>
         <span class="logo-text">META</span>
         <span class="logo-tagline" data-i18n="tagline">
           Assistant IA multilingue de prise de décision
         </span>
       </a>
 
-      <button class="burger"
+      <button
+        class="burger"
         id="burgerBtn"
         aria-label="Ouvrir le menu"
         aria-expanded="false"
-        type="button">
-  <span></span>
-  <span></span>
-  <span></span>
-</button>
+        type="button"
+      >
+        <span></span><span></span><span></span>
+      </button>
 
-      <nav class="nav" id="mainNav">
+      <nav class="nav" id="mainNav" aria-label="Navigation principale">
         <ul>
           <li><a href="#hero" data-i18n="nav.home">Accueil</a></li>
           <li><a href="#form" data-i18n="nav.form">Formulaire</a></li>
@@ -48,9 +53,12 @@
           <option value="es">ES</option>
           <option value="ar">ع</option>
         </select>
-        <button type="button"
-                class="btn-whatsapp whatsappBtnGlobal"
-                data-i18n="btn.whatsapp">
+
+        <button
+          type="button"
+          class="btn-whatsapp whatsappBtnGlobal"
+          data-i18n="btn.whatsapp"
+        >
           Requête personnalisée
         </button>
       </div>
@@ -65,6 +73,7 @@
           <h1 data-i18n="hero.title">
             Donnez à vos décisions le niveau d’un cabinet de consulting premium
           </h1>
+
           <p class="hero-subtitle" data-i18n="hero.subtitle">
             e-META analyse votre contexte, vos objectifs, vos contraintes,
             vos KPIs et vos ressources pour générer une feuille de route claire,
@@ -99,6 +108,7 @@
               Formulaire ultra-premium, inspiré des cabinets Deloitte / EY.
             </span>
           </div>
+
           <p class="hero-note" data-i18n="hero.note">
             Temps estimé : 5 à 10 minutes pour remplir le formulaire,
             gain : des heures de réflexion structurée.
@@ -113,12 +123,15 @@
         <h2 data-i18n="form.title">
           Formulaire e-META – Version Ultra-Premium (Consulting Business)
         </h2>
+
         <p class="form-intro" data-i18n="form.intro">
           Plus vos réponses sont précises, plus la synthèse de e-META sera
           professionnelle et exploitable.
         </p>
 
+        <!-- ⚠️ Formulaire : INCHANGÉ (structure/ids/champs conservés) -->
         <form id="emetaForm" novalidate>
+
           <!-- BLOC 1 – Informations générales -->
           <fieldset class="field-group">
             <legend data-i18n="group.general">1. Informations générales</legend>
@@ -411,19 +424,23 @@
               <p class="field-label-strong" data-i18n="field.outputMode.label">
                 Mode de restitution souhaité (vous pouvez en cocher plusieurs)
               </p>
+
               <div class="checkbox-grid">
                 <label class="checkbox-item">
                   <input type="checkbox" name="outputEmail" value="1" />
                   <span data-i18n="field.outputMode.email">Email détaillé</span>
                 </label>
+
                 <label class="checkbox-item">
                   <input type="checkbox" name="outputWhatsApp" value="1" />
                   <span data-i18n="field.outputMode.whatsapp">Message WhatsApp structuré</span>
                 </label>
+
                 <label class="checkbox-item">
                   <input type="checkbox" name="outputPdf" value="1" />
                   <span data-i18n="field.outputMode.pdf">Synthèse PDF</span>
                 </label>
+
                 <label class="checkbox-item">
                   <input type="checkbox" name="outputDisplay" value="1" />
                   <span data-i18n="field.outputMode.display">Affichage simple dans e-META</span>
@@ -508,10 +525,12 @@
       <a href="privacy.html" class="footer-link" data-i18n="footer.privacy">
         Politique de confidentialité
       </a>
+      <p class="footer-bottom">e-META © 2025</p>
     </div>
   </footer>
 
+  <!-- Scripts : ordre obligatoire -->
   <script src="translate.js"></script>
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
