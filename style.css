@@ -388,3 +388,47 @@ html[dir="rtl"] {
 html[dir="rtl"] .checkbox-item {
   flex-direction: row-reverse;
 }
+
+/* =====================================================
+   MOBILE HEADER FIX — LANG & WHATSAPP
+===================================================== */
+@media (max-width: 480px) {
+
+  .header-inner {
+    flex-wrap: wrap;
+    row-gap: 0.6rem;
+  }
+
+  /* Zone actions sous le header */
+  .header-actions {
+    order: 3;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+
+  .lang-select,
+  .btn-whatsapp {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .btn-whatsapp {
+    font-size: 0.9rem;
+    padding: 0.55rem 0.75rem;
+    white-space: normal; /* autorise le retour à la ligne */
+  }
+
+  /* Logo + burger restent sur la même ligne */
+  .logo {
+    flex: 1;
+  }
+
+  .burger {
+    order: 2;
+  }
+}
