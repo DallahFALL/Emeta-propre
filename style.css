@@ -438,3 +438,46 @@ html[dir="rtl"] .checkbox-item {
     order: 2;
   }
 }
+
+/* =====================================================
+   FIX MOBILE — STABILITÉ HORIZONTALE FORMULAIRE
+===================================================== */
+
+/* Empêche tout débordement horizontal */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Sécurise les conteneurs principaux */
+.container,
+.form-section,
+.field-group,
+.field,
+.field-inline,
+.checkbox-grid {
+  max-width: 100%;
+}
+
+/* Corrige les grilles qui dépassent sur mobile */
+@media (max-width: 600px) {
+  .field-inline,
+  .checkbox-grid {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .field-inline > *,
+  .checkbox-grid > * {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Sécurise inputs et textarea */
+input,
+select,
+textarea {
+  max-width: 100%;
+}
