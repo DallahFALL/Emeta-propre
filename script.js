@@ -124,6 +124,8 @@
 
       "field.fileLink.label": "Lien vers un fichier ou dossier (facultatif)",
       "field.fileLink.placeholder": "Lien Google Drive, Dropbox, Notion, PDF, etc.",
+      "field.fileLink.hint":
+      "Collez ici un lien vers un fichier (Google Drive, Dropbox, Notion, PDF en ligne…)",
 
       "field.consent.label":
         "J’accepte que les informations fournies soient utilisées uniquement pour générer une analyse e-META. Aucune donnée personnelle ne sera revendue ou partagée à des tiers.",
@@ -238,6 +240,8 @@
 
       "field.fileLink.label": "File or folder link (optional)",
       "field.fileLink.placeholder": "Google Drive, Dropbox, Notion, PDF link, etc.",
+      "field.fileLink.hint":
+      "Paste a link to a file (Google Drive, Dropbox, Notion, online PDF…)",
 
       "field.consent.label":
         "I agree that the provided information will be used only to generate an e-META analysis. No personal data will be sold or shared with third parties.",
@@ -351,6 +355,8 @@
 
       "field.fileLink.label": "Enlace a archivo o carpeta (opcional)",
       "field.fileLink.placeholder": "Google Drive, Dropbox, Notion, PDF, etc.",
+      "field.fileLink.hint":
+      "Pegue aquí un enlace a un archivo (Google Drive, Dropbox, Notion, PDF en línea…)",
 
       "field.consent.label":
         "Acepto que la información proporcionada se use únicamente para generar un análisis e-META. No se venderán ni compartirán datos personales con terceros.",
@@ -464,6 +470,8 @@
 
       "field.fileLink.label": "رابط ملف أو مجلد (اختياري)",
       "field.fileLink.placeholder": "Google Drive أو Dropbox أو Notion أو PDF...",
+      "field.fileLink.hint":
+      "الصق هنا رابطًا لملف (Google Drive أو Dropbox أو Notion أو ملف PDF عبر الإنترنت…)",
 
       "field.consent.label":
         "أوافق على استخدام المعلومات المقدمة فقط لإنشاء تحليل e-META. لن يتم بيع أي بيانات شخصية أو مشاركتها مع أطراف ثالثة.",
