@@ -262,6 +262,12 @@ textarea {
   color: white;
   position: relative;
   z-index: 2; /* INPUT URL CLIQUABLE */
+   .field-hint {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
 }
 
 textarea {
