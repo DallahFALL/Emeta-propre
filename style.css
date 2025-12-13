@@ -481,3 +481,22 @@ select,
 textarea {
   max-width: 100%;
 }
+
+/* =====================================================
+   HERO TITLE — AJUSTEMENT PRO
+===================================================== */
+
+.hero h1 {
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  line-height: 1.25;
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+/* Mobile : titre plus compact */
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 1.45rem;
+    line-height: 1.3;
+  }
+}
