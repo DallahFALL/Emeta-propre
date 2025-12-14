@@ -8,7 +8,10 @@
 
 (function () {
   "use strict";
-
+/* =========================
+     CONFIG
+  ========================= */
+  const MAKE_WEBHOOK_URL = "https://hook.eu2.make.com/9giawgap6b3yjmxtx5i9bc30hjixbu48";
   /* ---------------------------
      1) DICTIONNAIRE TRADUCTIONS
      --------------------------- */
@@ -852,6 +855,61 @@
       });
     });
   }
+  /* ---------------------------
+     5bis) FORM SUBMIT → MAKE
+     --------------------------- */
+  function initForm() {
+    const form = document.getElementById("emetaForm");
+    if (!form) return;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const payload = {
+        domain: document.getElementById("domain")?.value || "",
+        projectType: document.getElementById("projectType")?.value || "",
+        projectTitle: document.getElementById("projectTitle")?.value || "",
+        problem: document.getElementById("problem")?.value || "",
+        objectives: document.getElementById("objectives")?.value || "",
+        constraints: document.getElementById("constraints")?.value || "",
+        kpis: document.getElementById("kpis")?.value || "",
+        resources: document.getElementById("resources")?.value || "",
+        deliverables: document.getElementById("deliverables")?.value || "",
+        successIndicators: document.getElementById("successIndicators")?.value || "",
+        context: document.getElementById("context")?.value || "",
+
+        budgetMin: document.getElementById("budgetMin")?.value || "",
+        budgetMax: document.getElementById("budgetMax")?.value || "",
+        currency: document.getElementById("currency")?.value || "",
+        deadline: document.getElementById("deadline")?.value || "",
+        urgency: document.getElementById("urgency")?.value || "",
+
+        outputEmail: document.querySelector("[name='outputEmail']")?.checked ? 1 : 0,
+        outputWhatsApp: document.querySelector("[name='outputWhatsApp']")?.checked ? 1 : 0,
+        outputPdf: document.querySelector("[name='outputPdf']")?.checked ? 1 : 0,
+        outputDisplay: document.querySelector("[name='outputDisplay']")?.checked ? 1 : 0,
+
+        email: document.getElementById("email")?.value || "",
+        whatsapp: document.getElementById("whatsapp")?.value || "",
+        fileLink: document.getElementById("fileLink")?.value || "",
+
+        language: localStorage.getItem("emeta_lang") || "fr"
+      };
+
+      fetch(MAKE_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+        .then(() => {
+          alert("✅ Requête envoyée avec succès");
+          form.reset();
+        })
+        .catch(() => {
+          alert("❌ Erreur lors de l’envoi. Merci de réessayer.");
+        });
+    });
+  }
 
   /* ---------------------------
      6) INIT (NO BREAK)
@@ -866,6 +924,7 @@
     initBurger();
     initLanguageSwitcher();
     initWhatsAppGlobal();
+     initForm(); // ⬅️ AJOUT ICI
   }
 
   if (document.readyState === "loading") {
