@@ -72,33 +72,34 @@ img {
   gap: 16px;
 }
 
-/* LOGO */
+/* === e-META OFFICIAL LOGO === */
+
 .logo {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  text-decoration: none;
+  line-height: 1.1;
 }
 
 .logo-mark {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #f97316;
-  color: #0b1020;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #4A6CF7; /* Bleu e-META */
 }
 
 .logo-text {
+  font-size: 2.2rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
+  color: #ffffff;
 }
 
 .logo-tagline {
+  margin-top: 4px;
   font-size: 0.75rem;
-  color: var(--text-muted);
+  font-weight: 400;
+  color: #B0B7D1;
+  max-width: 260px;
 }
 
 /* =====================================================
