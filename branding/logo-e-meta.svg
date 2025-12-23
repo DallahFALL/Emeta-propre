@@ -1,13 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="420" height="120" viewBox="0 0 420 120">
-  <style>
-    .mark { fill:#E5531D; font-weight:700; font-size:48px; font-family:Arial, Helvetica, sans-serif; }
-    .text { fill:#FFFFFF; font-weight:800; font-size:48px; letter-spacing:6px; font-family:Arial, Helvetica, sans-serif; }
-    .tag  { fill:#B0B7D1; font-size:14px; font-family:Arial, Helvetica, sans-serif; }
-  </style>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="520"
+     height="120"
+     viewBox="0 0 520 120"
+     role="img"
+     aria-label="e-META – Assistant IA multilingue de prise de décision">
 
-  <text x="10" y="55" class="mark">e</text>
-  <text x="40" y="55" class="text">META</text>
-  <text x="10" y="90" class="tag">Assistant IA multilingue de prise de décision</text>
+  <rect width="100%" height="100%" fill="transparent"/>
+
+  <!-- e (orange foncé) -->
+  <text x="20"
+        y="70"
+        font-family="Inter, Arial, sans-serif"
+        font-size="64"
+        font-weight="700"
+        fill="#E5531D">e</text>
+
+  <!-- META -->
+  <text x="70"
+        y="70"
+        font-family="Inter, Arial, sans-serif"
+        font-size="64"
+        font-weight="600"
+        fill="#FFFFFF">META</text>
+
+  <!-- Tagline -->
+  <text x="22"
+        y="102"
+        font-family="Inter, Arial, sans-serif"
+        font-size="18"
+        fill="#AAB0FF">
+    Assistant IA multilingue de prise de décision
+  </text>
+
 </svg>
-
-Add official e-META logo (orange dark) – master SVG
