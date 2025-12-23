@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="120" viewBox="0 0 420 120">
+  <style>
+    .mark { fill:#E5531D; font-weight:700; font-size:48px; font-family:Arial, Helvetica, sans-serif; }
+    .text { fill:#FFFFFF; font-weight:800; font-size:48px; letter-spacing:6px; font-family:Arial, Helvetica, sans-serif; }
+    .tag  { fill:#B0B7D1; font-size:14px; font-family:Arial, Helvetica, sans-serif; }
+  </style>
+
+  <text x="10" y="55" class="mark">e</text>
+  <text x="40" y="55" class="text">META</text>
+  <text x="10" y="90" class="tag">Assistant IA multilingue de prise de décision</text>
+</svg>
