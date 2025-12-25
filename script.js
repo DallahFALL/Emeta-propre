@@ -153,3 +153,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// ================= INIT (FIX) =================
+function initFormSubmit() {
+  // --- ton code actuel de initForm ici (submit, reset, handlers) ---
+  // IMPORTANT : ne rappelle plus jamais initFormSubmit() ici.
+}
+
+function init() {
+  initBurgerMenu();
+  initLanguageSwitcher();
+  initFormSubmit();
+}
+
+document.addEventListener("DOMContentLoaded", init);
