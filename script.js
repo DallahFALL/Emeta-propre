@@ -72,3 +72,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+/* ================= WHATSAPP CTA ================= */
+const whatsappBtn = document.getElementById("ctaWhatsApp");
+
+if (whatsappBtn) {
+  whatsappBtn.addEventListener("click", () => {
+    const phone = "221782607212"; // format international sans +
+    const msg = encodeURIComponent(
+      "Bonjour, je souhaite une requête personnalisée via e-META."
+    );
+    window.open(`https://wa.me/${phone}?text=${msg}`, "_blank");
+  });
+}
