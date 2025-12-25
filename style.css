@@ -227,3 +227,15 @@ textarea{resize:vertical}
   border-radius:14px;
   border:1px solid var(--line);
 }
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+}
+
+.btn-primary:active,
+.btn-secondary:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
