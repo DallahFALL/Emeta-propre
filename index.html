@@ -100,6 +100,85 @@
     <!-- ⚠ FORMULAIRE EXISTANT CONSERVÉ -->
     <!-- Seuls labels / placeholders doivent recevoir data-i18n -->
     <!-- Tu peux continuer champ par champ -->
+<form id="form">
+
+  <fieldset class="field-group">
+    <legend data-i18n="form.section.general"></legend>
+
+    <div class="field">
+      <label data-i18n="form.domain"></label>
+      <select name="domain">
+        <option value="" data-i18n="form.choose"></option>
+        <option value="business" data-i18n="domain.business"></option>
+        <option value="tech" data-i18n="domain.tech"></option>
+        <option value="agriculture" data-i18n="domain.agriculture"></option>
+        <option value="finance" data-i18n="domain.finance"></option>
+        <option value="other" data-i18n="domain.other"></option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label data-i18n="form.projectType"></label>
+      <input type="text" name="projectType" data-i18n-placeholder="form.projectType.ph">
+    </div>
+
+    <div class="field">
+      <label data-i18n="form.projectTitle"></label>
+      <input type="text" name="projectTitle" data-i18n-placeholder="form.projectTitle.ph">
+    </div>
+  </fieldset>
+
+  <fieldset class="field-group">
+    <legend data-i18n="form.section.analysis"></legend>
+
+    <div class="field">
+      <label data-i18n="form.problem"></label>
+      <textarea name="problem" data-i18n-placeholder="form.problem.ph"></textarea>
+    </div>
+
+    <div class="field">
+      <label data-i18n="form.objectives"></label>
+      <textarea name="objectives" data-i18n-placeholder="form.objectives.ph"></textarea>
+    </div>
+
+    <div class="field">
+      <label data-i18n="form.constraints"></label>
+      <textarea name="constraints" data-i18n-placeholder="form.constraints.ph"></textarea>
+    </div>
+
+    <div class="field">
+      <label data-i18n="form.kpis"></label>
+      <textarea name="kpis" data-i18n-placeholder="form.kpis.ph"></textarea>
+    </div>
+  </fieldset>
+
+  <fieldset class="field-group">
+    <legend data-i18n="form.section.restitution"></legend>
+
+    <div class="checkbox-grid">
+      <label><input type="checkbox" name="want_email"> <span data-i18n="restitution.email"></span></label>
+      <label><input type="checkbox" name="want_whatsapp"> <span data-i18n="restitution.whatsapp"></span></label>
+      <label><input type="checkbox" name="want_pdf"> <span data-i18n="restitution.pdf"></span></label>
+      <label><input type="checkbox" name="want_display"> <span data-i18n="restitution.display"></span></label>
+    </div>
+
+    <div class="field">
+      <label data-i18n="form.email"></label>
+      <input type="email" name="email" data-i18n-placeholder="form.email.ph">
+    </div>
+
+    <div class="field">
+      <label data-i18n="form.whatsapp"></label>
+      <input type="tel" name="whatsapp" data-i18n-placeholder="form.whatsapp.ph">
+    </div>
+  </fieldset>
+
+  <div class="form-actions">
+    <button type="submit" class="btn-primary" data-i18n="form.submit"></button>
+    <button type="reset" class="btn-secondary" data-i18n="form.reset"></button>
+  </div>
+
+</form>
 
   </div>
 </section>
