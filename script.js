@@ -43,15 +43,15 @@ function applyLanguage(lang){
   localStorage.setItem("lang",lang);
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
-  const switcher=document.getElementById("languageSwitcher");
-  const saved=localStorage.getItem("lang")||"fr";
-
-  if(switcher){
-    switcher.value=saved;
-    switcher.addEventListener("change",e=>applyLanguage(e.target.value));
+document.addEventListener("DOMContentLoaded", () => {
+  const switcher = document.getElementById("languageSwitcher");
+  const lang = localStorage.getItem("lang") || "fr";
+  if (switcher) {
+    switcher.value = lang;
+    switcher.addEventListener("change", e => applyLanguage(e.target.value));
   }
-  applyLanguage(saved);
+  applyLanguage(lang);
+});
 
   /* MENU MOBILE */
   const burger=document.getElementById("burgerBtn");
