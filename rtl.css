@@ -1,176 +1,55 @@
 /* =====================================================
-   e-META — rtl.css (FINAL)
-   Compatible style.css harmonisé
-   Langues RTL : AR, HE, FA
+   e-META — rtl.css
+   RTL overrides (Arabic) compatible with style.css
 ===================================================== */
 
-/* Direction globale */
-html[dir="rtl"] {
+html[dir="rtl"], html[dir="rtl"] body {
   direction: rtl;
-}
-
-html[dir="rtl"] body {
   text-align: right;
-}
-
-/* ================= HEADER ================= */
-
-/* Header layout inversé */
-html[dir="rtl"] .header-inner {
-  flex-direction: row-reverse;
-}
-
-/* Logo RTL */
-html[dir="rtl"] .logo {
-  flex-direction: row-reverse;
 }
 
 html[dir="rtl"] .logo-tagline {
   margin-left: 0;
-  margin-right: 8px;
+  margin-right: 10px;
 }
 
-/* Navigation */
 html[dir="rtl"] .nav ul {
   flex-direction: row-reverse;
 }
 
-html[dir="rtl"] .nav a {
-  text-align: center;
-}
-
-/* Header actions */
+html[dir="rtl"] .header-inner,
 html[dir="rtl"] .header-actions {
   flex-direction: row-reverse;
 }
 
-/* ================= HERO ================= */
-
-/* Grid inversé */
 html[dir="rtl"] .hero-inner {
   direction: rtl;
 }
 
-html[dir="rtl"] .hero-text {
-  text-align: right;
-}
-
-/* Listes */
-html[dir="rtl"] .hero-points {
+html[dir="rtl"] .hero-points,
+html[dir="rtl"] .problem-list {
   padding-left: 0;
   padding-right: 18px;
 }
 
-/* ================= FORM ================= */
-
-/* Titres et légendes */
-html[dir="rtl"] legend,
-html[dir="rtl"] label,
-html[dir="rtl"] h1,
-html[dir="rtl"] h2,
-html[dir="rtl"] h3 {
-  text-align: right;
+html[dir="rtl"] .checkbox-row input {
+  margin-right: 0;
+  margin-left: 8px;
 }
 
-/* Champs */
-html[dir="rtl"] input,
-html[dir="rtl"] select,
-html[dir="rtl"] textarea {
-  text-align: right;
-}
-
-/* Field inline inversé */
 html[dir="rtl"] .field-inline {
   direction: rtl;
 }
 
-/* Checkbox grid */
-html[dir="rtl"] .checkbox-grid {
-  direction: rtl;
+html[dir="rtl"] .nav.open ul {
+  text-align: right;
 }
-
-html[dir="rtl"] .checkbox-row {
-  display: flex;
-  align-items: center;
-  flex-direction: row-reverse;
-  gap: 8px;
-}
-
-html[dir="rtl"] .checkbox-row input {
-  margin-left: 8px;
-  margin-right: 0;
-}
-
-/* Actions boutons */
-html[dir="rtl"] .form-actions {
-  flex-direction: row-reverse;
-}
-
-/* ================= FOOTER ================= */
 
 html[dir="rtl"] .footer-inner {
-  text-align: center;
+  flex-direction: row-reverse;
 }
 
-/* ================= MOBILE ================= */
-
-@media (max-width: 900px) {
-
-  html[dir="rtl"] .nav.open ul {
-    direction: rtl;
-    text-align: right;
-  }
-
-  html[dir="rtl"] .header-inner {
-    flex-direction: row-reverse;
-  }
-
-}
-
-/* ================= FIX VISUEL ARABE ================= */
-
-/* Police plus lisible en arabe */
-html[dir="rtl"] body {
-  font-family: "Segoe UI", "Tahoma", "Arial", sans-serif;
-  letter-spacing: 0;
-}
-
-/* Evite chevauchement texte */
-html[dir="rtl"] .hero h1 {
-  line-height: 1.35;
-}
-
-/* Listes propres */
-html[dir="rtl"] ul {
-  padding-left: 0;
-  padding-right: 20px;
-}
-
-@media (max-width: 768px) {
-
-  html[dir="rtl"] h1,
-  html[dir="rtl"] h2,
-  html[dir="rtl"] h3 {
-    text-align: right;
-  }
-
-  html[dir="rtl"] .field-inline,
-  html[dir="rtl"] .checkbox-grid {
-    grid-template-columns: 1fr;
-  }
-
-  html[dir="rtl"] .form-actions {
-    flex-direction: column;
-  }
-
-  html[dir="rtl"] input,
-  html[dir="rtl"] textarea,
-  html[dir="rtl"] select {
-    text-align: right;
-  }
-}
-
-.privacy-page ul {
-  padding-right: 20px;
-  padding-left: 0;
+@media (max-width: 600px) {
+  html[dir="rtl"] .logo-tagline { display: none; }
+  html[dir="rtl"] .footer-inner { justify-content: center; text-align: center; }
 }
