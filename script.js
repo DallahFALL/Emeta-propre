@@ -60,3 +60,15 @@ function displayResult(html) {
   }
 }
 
+/* ================= MOBILE MENU ================= */
+document.addEventListener("DOMContentLoaded", () => {
+  const burger = document.getElementById("burgerBtn");
+  const nav = document.getElementById("mainNav");
+
+  if (burger && nav) {
+    burger.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("open");
+      burger.setAttribute("aria-expanded", isOpen);
+    });
+  }
+});
