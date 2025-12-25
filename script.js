@@ -102,3 +102,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   applyLanguage(saved);
 });
+
+function displayResult(html) {
+  const section = document.getElementById("result-section");
+  const container = document.getElementById("resultContent");
+
+  if (section && container) {
+    container.innerHTML = html;
+    section.style.display = "block";
+    section.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
