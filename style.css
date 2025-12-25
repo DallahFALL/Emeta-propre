@@ -211,21 +211,20 @@ textarea { resize: vertical; }
 .btn-primary { border-color: rgba(232,90,26,0.35); background: rgba(232,90,26,0.16); }
 .btn-secondary { opacity: .9; }
 
-/* ================= FOOTER ================= */
+/* ================= FOOTER FIX ================= */
 .site-footer {
-  border-top: 1px solid var(--line);
-  padding: 22px 0;
   text-align: center;
 }
+
 .footer-inner {
-  display: flex;
-  gap: 12px;
-  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 6px;
 }
-.footer-link { color: var(--text-muted); }
-.footer-copy { color: var(--text-muted); }
+
+.footer-link {
+  font-size: 14px;
+}
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 900px) {
