@@ -1,55 +1,21 @@
-/* =====================================================
-   e-META — rtl.css
-   RTL overrides (Arabic) compatible with style.css
-===================================================== */
-
-html[dir="rtl"], html[dir="rtl"] body {
+html[dir="rtl"] {
   direction: rtl;
-  text-align: right;
 }
 
-html[dir="rtl"] .logo-tagline {
-  margin-left: 0;
-  margin-right: 10px;
+html[dir="rtl"] .logo {
+  flex-direction: row-reverse;
 }
 
 html[dir="rtl"] .nav ul {
   flex-direction: row-reverse;
 }
 
-html[dir="rtl"] .header-inner,
-html[dir="rtl"] .header-actions {
-  flex-direction: row-reverse;
-}
-
-html[dir="rtl"] .hero-inner {
-  direction: rtl;
-}
-
-html[dir="rtl"] .hero-points,
-html[dir="rtl"] .problem-list {
-  padding-left: 0;
-  padding-right: 18px;
-}
-
-html[dir="rtl"] .checkbox-row input {
-  margin-right: 0;
-  margin-left: 8px;
-}
-
 html[dir="rtl"] .field-inline {
-  direction: rtl;
+  grid-template-columns: 1fr;
 }
 
-html[dir="rtl"] .nav.open ul {
+html[dir="rtl"] input,
+html[dir="rtl"] textarea,
+html[dir="rtl"] select {
   text-align: right;
-}
-
-html[dir="rtl"] .footer-inner {
-  flex-direction: row-reverse;
-}
-
-@media (max-width: 600px) {
-  html[dir="rtl"] .logo-tagline { display: none; }
-  html[dir="rtl"] .footer-inner { justify-content: center; text-align: center; }
 }
