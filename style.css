@@ -381,3 +381,43 @@ textarea {
   border-radius: 14px;
   border: 1px solid var(--line);
 }
+
+/* ================= MOBILE GLOBAL ================= */
+@media (max-width: 768px) {
+
+  h1 { font-size: 22px; }
+  h2 { font-size: 18px; }
+  h3 { font-size: 16px; }
+
+  .hero h1 {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+
+  .hero-subtitle,
+  .hero-subtext {
+    font-size: 14px;
+  }
+
+  .field-inline,
+  .checkbox-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 14px;
+  }
+
+  .form-actions {
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+}
