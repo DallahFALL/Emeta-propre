@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title data-i18n="privacy.meta.title">Politique de confidentialité – e-META</title>
-  <meta name="description"
-        content="Politique de confidentialité e-META. Protection des données, usage responsable de l’IA et respect des normes internationales." />
+  <meta name="description" content="Politique de confidentialité e-META. Protection des données, usage responsable de l’IA." />
   <meta name="theme-color" content="#0b1020" />
   <link rel="canonical" href="https://e-meta.app/privacy.html" />
 
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
+  <link rel="icon" type="image/png" href="favicon.png" />
 </head>
 
 <body>
@@ -19,7 +19,7 @@
 <header class="site-header">
   <div class="container header-inner">
 
-    <a href="index.html" class="logo" aria-label="e-META – Decision Intelligence Assistant">
+    <a href="index.html" class="logo" aria-label="e-META">
       <span class="logo-mark">e</span>
       <span class="logo-text">META</span>
       <span class="logo-tagline" data-i18n="tagline">Assistant IA multilingue de prise de décision</span>
@@ -31,87 +31,76 @@
 
     <nav class="nav" id="mainNav">
       <ul>
-        <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
+        <li><a href="index.html#hero" data-i18n="nav.home">Accueil</a></li>
         <li><a href="index.html#form" data-i18n="nav.form">Formulaire</a></li>
+        <li><a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a></li>
       </ul>
     </nav>
 
     <div class="header-actions">
-      <select id="languageSwitcher" class="lang-select" aria-label="Language selector">
+      <select id="languageSwitcher" class="lang-select" aria-label="Language">
         <option value="fr">FR</option>
         <option value="en">EN</option>
         <option value="es">ES</option>
         <option value="ar">ع</option>
       </select>
+
+      <button type="button" id="ctaWhatsApp" class="btn-whatsapp whatsappBtnGlobal" data-i18n="btn.customRequest">
+        Requête personnalisée
+      </button>
     </div>
 
   </div>
 </header>
 
-<main class="privacy-page">
-  <section class="form-section">
-    <div class="container">
+<main class="form-section">
+  <div class="container">
 
-      <h1 data-i18n="privacy.title">Politique de confidentialité</h1>
-      <p class="form-intro" data-i18n="privacy.intro">
-        Cette politique explique comment e-META collecte, utilise et protège vos informations lorsque vous utilisez notre service.
-      </p>
+    <h1 data-i18n="privacy.h1">Politique de confidentialité</h1>
+    <p class="form-intro" data-i18n="privacy.intro">
+      La présente politique explique comment e-META collecte, utilise et protège vos informations.
+    </p>
 
-      <h2 data-i18n="privacy.section1.title">1. Responsable du traitement</h2>
-      <p data-i18n="privacy.section1.text">
-        Le service e-META est édité par son porteur de projet. Pour toute question relative à la protection des données, utilisez les coordonnées indiquées sur le site.
-      </p>
+    <div class="field-group">
+      <h2 data-i18n="privacy.s1.title">1. Responsable du traitement</h2>
+      <p data-i18n="privacy.s1.text">e-META est édité par son porteur de projet...</p>
 
-      <h2 data-i18n="privacy.section2.title">2. Données collectées</h2>
-      <p data-i18n="privacy.section2.text">Les catégories de données suivantes peuvent être collectées :</p>
-      <ul>
-        <li data-i18n="privacy.section2.item1">Informations fournies volontairement dans le formulaire (contexte, objectifs, contraintes, données de projet).</li>
-        <li data-i18n="privacy.section2.item2">Coordonnées de contact si vous les renseignez (adresse e-mail, numéro WhatsApp).</li>
-        <li data-i18n="privacy.section2.item3">Liens vers des documents externes (Drive, Dropbox, Notion, PDF en ligne, etc.).</li>
-      </ul>
+      <h2 data-i18n="privacy.s2.title">2. Données collectées</h2>
+      <p data-i18n="privacy.s2.text">Nous collectons uniquement les données fournies...</p>
 
-      <h2 data-i18n="privacy.section3.title">3. Finalités du traitement</h2>
-      <ul>
-        <li data-i18n="privacy.section3.item1">Générer une synthèse décisionnelle structurée (analyse, options, recommandations).</li>
-        <li data-i18n="privacy.section3.item2">Restituer le résultat via e-mail, WhatsApp, PDF ou affichage selon votre choix.</li>
-        <li data-i18n="privacy.section3.item3">Améliorer la qualité du service (statistiques anonymisées, debug).</li>
-      </ul>
+      <h2 data-i18n="privacy.s3.title">3. Finalité</h2>
+      <p data-i18n="privacy.s3.text">Les données sont utilisées pour générer...</p>
 
-      <h2 data-i18n="privacy.section4.title">4. Base légale</h2>
-      <p data-i18n="privacy.section4.text1">Le traitement repose sur votre consentement et/ou l’exécution du service demandé.</p>
-      <p data-i18n="privacy.section4.text2">Vous pouvez retirer votre consentement à tout moment en nous contactant.</p>
+      <h2 data-i18n="privacy.s4.title">4. IA & limites</h2>
+      <p data-i18n="privacy.s4.text">Les résultats constituent une aide à la décision...</p>
 
-      <h2 data-i18n="privacy.section5.title">5. Durée de conservation</h2>
-      <p data-i18n="privacy.section5.text">Les données sont conservées le temps nécessaire à la fourniture du service et à des fins légales/techniques, puis supprimées ou anonymisées.</p>
+      <h2 data-i18n="privacy.s5.title">5. Partage</h2>
+      <p data-i18n="privacy.s5.text">Les données ne sont ni vendues ni cédées...</p>
 
-      <h2 data-i18n="privacy.section6.title">6. Partage des données</h2>
-      <p data-i18n="privacy.section6.text">Aucune donnée personnelle n’est vendue. Des prestataires techniques peuvent traiter des données uniquement pour exécuter le service (hébergement, e-mail, WhatsApp).</p>
+      <h2 data-i18n="privacy.s6.title">6. Conservation</h2>
+      <p data-i18n="privacy.s6.text">Les données sont conservées le temps nécessaire...</p>
 
-      <h2 data-i18n="privacy.section7.title">7. Sécurité</h2>
-      <p data-i18n="privacy.section7.text">Nous mettons en œuvre des mesures raisonnables de sécurité (contrôles d’accès, chiffrement en transit, bonnes pratiques).</p>
+      <h2 data-i18n="privacy.s7.title">7. Sécurité</h2>
+      <p data-i18n="privacy.s7.text">Nous appliquons des mesures raisonnables...</p>
 
-      <h2 data-i18n="privacy.section8.title">8. Vos droits</h2>
-      <ul>
-        <li data-i18n="privacy.section8.item1">Accès, rectification et mise à jour de vos données.</li>
-        <li data-i18n="privacy.section8.item2">Suppression et limitation du traitement (selon les cas).</li>
-        <li data-i18n="privacy.section8.item3">Portabilité des données lorsque applicable.</li>
-        <li data-i18n="privacy.section8.item4">Opposition au traitement dans certains cas.</li>
-      </ul>
+      <h2 data-i18n="privacy.s8.title">8. Vos droits</h2>
+      <p data-i18n="privacy.s8.text">Vous pouvez demander l’accès, la rectification...</p>
 
-      <h2 data-i18n="privacy.section9.title">9. Transferts internationaux</h2>
-      <p data-i18n="privacy.section9.text">Certains prestataires peuvent être situés hors de votre pays. Nous privilégions des garanties appropriées lorsque nécessaire.</p>
+      <h2 data-i18n="privacy.s9.title">9. Modifications</h2>
+      <p data-i18n="privacy.s9.text">Cette politique peut être mise à jour...</p>
 
-      <h2 data-i18n="privacy.section10.title">10. Contact</h2>
-      <p data-i18n="privacy.section10.text">Pour toute question sur la confidentialité, contactez-nous via les coordonnées figurant sur le site e-meta.app.</p>
-
+      <h2 data-i18n="privacy.s10.title">10. Contact</h2>
+      <p data-i18n="privacy.s10.text">Pour toute question relative à cette politique...</p>
     </div>
-  </section>
+
+  </div>
 </main>
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p class="footer-copy" data-i18n="footer.text">e-META © 2025 — Assistant IA de décision stratégique</p>
-    <a href="index.html" class="footer-link" data-i18n="footer.back">Retour à l’accueil</a>
+    <p data-i18n="footer.text">e-META © 2025 — Strategic decision intelligence assistant</p>
+    <a href="privacy.html" class="footer-link" data-i18n="footer.privacy">Privacy policy</a>
+    <p class="footer-copy">© e-META 2025</p>
   </div>
 </footer>
 
