@@ -169,3 +169,8 @@ html[dir="rtl"] ul {
     text-align: right;
   }
 }
+
+.privacy-page ul {
+  padding-right: 20px;
+  padding-left: 0;
+}
