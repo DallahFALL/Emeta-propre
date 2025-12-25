@@ -1,107 +1,147 @@
-/* ================================
-   RTL GLOBAL
-================================ */
+/* =====================================================
+   e-META — rtl.css (FINAL)
+   Compatible style.css harmonisé
+   Langues RTL : AR, HE, FA
+===================================================== */
+
+/* Direction globale */
 html[dir="rtl"] {
   direction: rtl;
-  text-align: right;
 }
 
 html[dir="rtl"] body {
-  font-family: "Tajawal", "Cairo", system-ui, sans-serif;
-}
-
-/* ================================
-   NAV / HEADER
-================================ */
-html[dir="rtl"] header nav {
-  flex-direction: row-reverse;
-}
-
-html[dir="rtl"] .nav-links {
-  flex-direction: row-reverse;
-  gap: 1rem;
-}
-
-/* ================================
-   LISTES (problème •••)
-================================ */
-html[dir="rtl"] ul {
-  padding-right: 1.2rem;
-  padding-left: 0;
-}
-
-html[dir="rtl"] li {
   text-align: right;
-  list-style-position: inside;
 }
 
-/* ================================
-   FORMULAIRE – MOBILE SAFE
-================================ */
-form {
-  max-width: 100%;
-  overflow-x: hidden;
+/* ================= HEADER ================= */
+
+/* Header layout inversé */
+html[dir="rtl"] .header-inner {
+  flex-direction: row-reverse;
 }
 
-.field-group,
-.field,
-input,
-select,
-textarea {
-  max-width: 100%;
-  box-sizing: border-box;
+/* Logo RTL */
+html[dir="rtl"] .logo {
+  flex-direction: row-reverse;
 }
 
-/* ================================
-   BOUTONS – CENTRÉS
-================================ */
-.form-actions,
-.form-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+html[dir="rtl"] .logo-tagline {
+  margin-left: 0;
+  margin-right: 8px;
 }
 
-.form-actions button {
-  width: 100%;
-  max-width: 320px;
+/* Navigation */
+html[dir="rtl"] .nav ul {
+  flex-direction: row-reverse;
 }
 
-/* ================================
-   FOOTER – PRO
-================================ */
-footer {
+html[dir="rtl"] .nav a {
   text-align: center;
-  padding: 1.2rem 1rem;
-  font-size: 0.85rem;
-  opacity: 0.85;
 }
 
-footer a {
-  font-size: 0.85rem;
+/* Header actions */
+html[dir="rtl"] .header-actions {
+  flex-direction: row-reverse;
 }
 
-/* ================================
-   TYPOGRAPHIE – MOBILE
-================================ */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 1.4rem;
-    line-height: 1.4;
+/* ================= HERO ================= */
+
+/* Grid inversé */
+html[dir="rtl"] .hero-inner {
+  direction: rtl;
+}
+
+html[dir="rtl"] .hero-text {
+  text-align: right;
+}
+
+/* Listes */
+html[dir="rtl"] .hero-points {
+  padding-left: 0;
+  padding-right: 18px;
+}
+
+/* ================= FORM ================= */
+
+/* Titres et légendes */
+html[dir="rtl"] legend,
+html[dir="rtl"] label,
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3 {
+  text-align: right;
+}
+
+/* Champs */
+html[dir="rtl"] input,
+html[dir="rtl"] select,
+html[dir="rtl"] textarea {
+  text-align: right;
+}
+
+/* Field inline inversé */
+html[dir="rtl"] .field-inline {
+  direction: rtl;
+}
+
+/* Checkbox grid */
+html[dir="rtl"] .checkbox-grid {
+  direction: rtl;
+}
+
+html[dir="rtl"] .checkbox-row {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  gap: 8px;
+}
+
+html[dir="rtl"] .checkbox-row input {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+/* Actions boutons */
+html[dir="rtl"] .form-actions {
+  flex-direction: row-reverse;
+}
+
+/* ================= FOOTER ================= */
+
+html[dir="rtl"] .footer-inner {
+  text-align: center;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 900px) {
+
+  html[dir="rtl"] .nav.open ul {
+    direction: rtl;
+    text-align: right;
   }
 
-  h2 {
-    font-size: 1.15rem;
+  html[dir="rtl"] .header-inner {
+    flex-direction: row-reverse;
   }
 
-  .hero-subtitle,
-  .baseline,
-  .tagline {
-    font-size: 0.9rem;
-  }
+}
 
-  footer {
-    font-size: 0.75rem;
-  }
+/* ================= FIX VISUEL ARABE ================= */
+
+/* Police plus lisible en arabe */
+html[dir="rtl"] body {
+  font-family: "Segoe UI", "Tahoma", "Arial", sans-serif;
+  letter-spacing: 0;
+}
+
+/* Evite chevauchement texte */
+html[dir="rtl"] .hero h1 {
+  line-height: 1.35;
+}
+
+/* Listes propres */
+html[dir="rtl"] ul {
+  padding-left: 0;
+  padding-right: 20px;
 }
