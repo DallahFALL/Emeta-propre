@@ -265,3 +265,10 @@ textarea{resize:vertical}
     align-items: center;
   }
 }
+
+@media (max-width: 900px) {
+  .btn-whatsapp {
+    width: 100%;
+    text-align: center;
+  }
+}
