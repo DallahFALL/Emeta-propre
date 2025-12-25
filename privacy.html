@@ -10,11 +10,8 @@
   <meta name="theme-color" content="#0b1020" />
   <link rel="canonical" href="https://e-meta.app/privacy.html" />
 
-  <link rel="icon" type="image/x-icon" href="branding/favicon.ico">
-  <link rel="apple-touch-icon" href="branding/logo-e-meta-square.png">
-
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="rtl.css" />
+  <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
 </head>
 
 <body>
@@ -28,8 +25,7 @@
       <span class="logo-tagline" data-i18n="tagline">Assistant IA multilingue de prise de décision</span>
     </a>
 
-    <button class="burger" id="burgerBtn" type="button"
-      aria-label="Ouvrir le menu" aria-expanded="false">
+    <button class="burger" id="burgerBtn" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
 
@@ -58,71 +54,55 @@
 
       <h1 data-i18n="privacy.title">Politique de confidentialité</h1>
       <p class="form-intro" data-i18n="privacy.intro">
-        Cette politique explique comment e-META collecte, utilise et protège vos informations lorsque vous utilisez notre assistant d’aide à la décision.
+        Cette politique explique comment e-META collecte, utilise et protège vos informations lorsque vous utilisez notre service.
       </p>
 
       <h2 data-i18n="privacy.section1.title">1. Responsable du traitement</h2>
       <p data-i18n="privacy.section1.text">
-        Le service e-META est édité par son porteur de projet. Pour toute question relative à la protection des données, vous pouvez nous contacter via les coordonnées indiquées sur le site.
+        Le service e-META est édité par son porteur de projet. Pour toute question relative à la protection des données, utilisez les coordonnées indiquées sur le site.
       </p>
 
       <h2 data-i18n="privacy.section2.title">2. Données collectées</h2>
-      <p data-i18n="privacy.section2.text">
-        Dans le cadre de l’utilisation du service e-META, les catégories de données suivantes peuvent être collectées :
-      </p>
+      <p data-i18n="privacy.section2.text">Les catégories de données suivantes peuvent être collectées :</p>
       <ul>
-        <li data-i18n="privacy.section2.item1">Informations saisies dans le formulaire (contexte, objectifs, contraintes, données de projet).</li>
+        <li data-i18n="privacy.section2.item1">Informations fournies volontairement dans le formulaire (contexte, objectifs, contraintes, données de projet).</li>
         <li data-i18n="privacy.section2.item2">Coordonnées de contact si vous les renseignez (adresse e-mail, numéro WhatsApp).</li>
-        <li data-i18n="privacy.section2.item3">Liens vers des documents externes (Google Drive, Dropbox, Notion, PDF en ligne, etc.).</li>
+        <li data-i18n="privacy.section2.item3">Liens vers des documents externes (Drive, Dropbox, Notion, PDF en ligne, etc.).</li>
       </ul>
 
       <h2 data-i18n="privacy.section3.title">3. Finalités du traitement</h2>
       <ul>
-        <li data-i18n="privacy.section3.item1">Générer une synthèse structurée et des recommandations décisionnelles.</li>
-        <li data-i18n="privacy.section3.item2">Assurer la restitution des résultats (affichage, e-mail, WhatsApp, PDF selon votre choix).</li>
-        <li data-i18n="privacy.section3.item3">Améliorer la qualité du service (statistiques et contrôle qualité, sans revente de données).</li>
+        <li data-i18n="privacy.section3.item1">Générer une synthèse décisionnelle structurée (analyse, options, recommandations).</li>
+        <li data-i18n="privacy.section3.item2">Restituer le résultat via e-mail, WhatsApp, PDF ou affichage selon votre choix.</li>
+        <li data-i18n="privacy.section3.item3">Améliorer la qualité du service (statistiques anonymisées, debug).</li>
       </ul>
 
       <h2 data-i18n="privacy.section4.title">4. Base légale</h2>
-      <p data-i18n="privacy.section4.text1">
-        Le traitement repose principalement sur votre consentement (données que vous fournissez volontairement) et sur l’exécution du service demandé.
-      </p>
-      <p data-i18n="privacy.section4.text2">
-        Vous pouvez retirer votre consentement à tout moment en cessant d’utiliser le service ou en nous contactant.
-      </p>
+      <p data-i18n="privacy.section4.text1">Le traitement repose sur votre consentement et/ou l’exécution du service demandé.</p>
+      <p data-i18n="privacy.section4.text2">Vous pouvez retirer votre consentement à tout moment en nous contactant.</p>
 
-      <h2 data-i18n="privacy.section5.title">5. Partage des données</h2>
-      <p data-i18n="privacy.section5.text">
-        e-META ne vend pas vos données. Les données peuvent transiter via des prestataires techniques nécessaires au fonctionnement (hébergement, e-mail, WhatsApp, IA), uniquement pour exécuter le service.
-      </p>
+      <h2 data-i18n="privacy.section5.title">5. Durée de conservation</h2>
+      <p data-i18n="privacy.section5.text">Les données sont conservées le temps nécessaire à la fourniture du service et à des fins légales/techniques, puis supprimées ou anonymisées.</p>
 
-      <h2 data-i18n="privacy.section6.title">6. Durée de conservation</h2>
-      <p data-i18n="privacy.section6.text">
-        Les données sont conservées pendant la durée strictement nécessaire à la réalisation de l’analyse et à la restitution, puis supprimées ou anonymisées selon la configuration du système.
-      </p>
+      <h2 data-i18n="privacy.section6.title">6. Partage des données</h2>
+      <p data-i18n="privacy.section6.text">Aucune donnée personnelle n’est vendue. Des prestataires techniques peuvent traiter des données uniquement pour exécuter le service (hébergement, e-mail, WhatsApp).</p>
 
       <h2 data-i18n="privacy.section7.title">7. Sécurité</h2>
-      <p data-i18n="privacy.section7.text">
-        Nous mettons en œuvre des mesures de sécurité raisonnables pour protéger vos informations contre l’accès non autorisé, la perte et l’altération.
-      </p>
+      <p data-i18n="privacy.section7.text">Nous mettons en œuvre des mesures raisonnables de sécurité (contrôles d’accès, chiffrement en transit, bonnes pratiques).</p>
 
       <h2 data-i18n="privacy.section8.title">8. Vos droits</h2>
       <ul>
-        <li data-i18n="privacy.section8.item1">Droit d’accès, de rectification et d’effacement.</li>
-        <li data-i18n="privacy.section8.item2">Droit d’opposition et de limitation du traitement.</li>
-        <li data-i18n="privacy.section8.item3">Droit à la portabilité lorsque applicable.</li>
-        <li data-i18n="privacy.section8.item4">Droit de retirer votre consentement à tout moment.</li>
+        <li data-i18n="privacy.section8.item1">Accès, rectification et mise à jour de vos données.</li>
+        <li data-i18n="privacy.section8.item2">Suppression et limitation du traitement (selon les cas).</li>
+        <li data-i18n="privacy.section8.item3">Portabilité des données lorsque applicable.</li>
+        <li data-i18n="privacy.section8.item4">Opposition au traitement dans certains cas.</li>
       </ul>
 
       <h2 data-i18n="privacy.section9.title">9. Transferts internationaux</h2>
-      <p data-i18n="privacy.section9.text">
-        Certains prestataires peuvent être situés hors de votre pays. Dans ce cas, nous cherchons à appliquer des garanties appropriées lorsque nécessaire.
-      </p>
+      <p data-i18n="privacy.section9.text">Certains prestataires peuvent être situés hors de votre pays. Nous privilégions des garanties appropriées lorsque nécessaire.</p>
 
       <h2 data-i18n="privacy.section10.title">10. Contact</h2>
-      <p data-i18n="privacy.section10.text">
-        Pour toute demande liée à la confidentialité, contactez-nous via les coordonnées du site.
-      </p>
+      <p data-i18n="privacy.section10.text">Pour toute question sur la confidentialité, contactez-nous via les coordonnées figurant sur le site e-meta.app.</p>
 
     </div>
   </section>
@@ -130,7 +110,7 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p class="footer-copy">© e-META 2025</p>
+    <p class="footer-copy" data-i18n="footer.text">e-META © 2025 — Assistant IA de décision stratégique</p>
     <a href="index.html" class="footer-link" data-i18n="footer.back">Retour à l’accueil</a>
   </div>
 </footer>
