@@ -1,131 +1,107 @@
-/* ============================= */
-/* RTL GLOBAL SETTINGS */
-/* ============================= */
-
+/* ================================
+   RTL GLOBAL
+================================ */
 html[dir="rtl"] {
   direction: rtl;
-}
-
-html[dir="rtl"] body {
   text-align: right;
 }
 
-/* ============================= */
-/* HEADER & NAV */
-/* ============================= */
+html[dir="rtl"] body {
+  font-family: "Tajawal", "Cairo", system-ui, sans-serif;
+}
 
-html[dir="rtl"] header,
-html[dir="rtl"] nav {
-  direction: rtl;
+/* ================================
+   NAV / HEADER
+================================ */
+html[dir="rtl"] header nav {
+  flex-direction: row-reverse;
 }
 
 html[dir="rtl"] .nav-links {
   flex-direction: row-reverse;
-}
-
-/* ============================= */
-/* HERO / TITLES */
-/* ============================= */
-
-/* Grand titre hero */
-html[dir="rtl"] .hero h1 {
-  font-size: 1.8rem;        /* desktop */
-  line-height: 1.4;
-}
-
-/* Sous-titre hero */
-html[dir="rtl"] .hero-subtitle {
-  font-size: 1rem;
-  line-height: 1.6;
-  opacity: 0.9;
-}
-
-/* Texte branding (footer & header) */
-html[dir="rtl"] .logo-tagline,
-html[dir="rtl"] .footer-tagline {
-  font-size: 0.85rem;
-  opacity: 0.85;
-}
-
-/* ============================= */
-/* FORM CONTAINER */
-/* ============================= */
-
-html[dir="rtl"] .form-section {
-  width: 100%;
-  overflow-x: hidden;
-}
-
-html[dir="rtl"] form {
-  max-width: 100%;
-}
-
-/* Champs */
-html[dir="rtl"] input,
-html[dir="rtl"] textarea,
-html[dir="rtl"] select {
-  width: 100%;
-  box-sizing: border-box;
-  font-size: 0.95rem;
-}
-
-/* ============================= */
-/* BUTTONS – CENTRAGE */
-/* ============================= */
-
-.form-actions {
-  display: flex;
-  justify-content: center;
   gap: 1rem;
-  flex-wrap: wrap;
-  margin-top: 1.5rem;
 }
 
-.form-actions button {
-  min-width: 200px;
-  text-align: center;
-}
-
-/* ============================= */
-/* MOBILE RESPONSIVE */
-/* ============================= */
-
-@media (max-width: 768px) {
-
-  /* Hero */
-  html[dir="rtl"] .hero h1 {
-    font-size: 1.4rem;
-  }
-
-  html[dir="rtl"] .hero-subtitle {
-    font-size: 0.95rem;
-  }
-
-  /* Branding text */
-  html[dir="rtl"] .logo-tagline {
-    font-size: 0.75rem;
-  }
-
-  /* Form spacing */
-  html[dir="rtl"] .field-group {
-    padding: 1rem;
-  }
-
-  /* Buttons full width on mobile */
-  .form-actions button {
-    width: 100%;
-  }
-}
-
-/* ============================= */
-/* LISTS (PROBLEM SECTION) */
-/* ============================= */
-
+/* ================================
+   LISTES (problème •••)
+================================ */
 html[dir="rtl"] ul {
   padding-right: 1.2rem;
   padding-left: 0;
 }
 
 html[dir="rtl"] li {
-  line-height: 1.7;
+  text-align: right;
+  list-style-position: inside;
+}
+
+/* ================================
+   FORMULAIRE – MOBILE SAFE
+================================ */
+form {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.field-group,
+.field,
+input,
+select,
+textarea {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* ================================
+   BOUTONS – CENTRÉS
+================================ */
+.form-actions,
+.form-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-actions button {
+  width: 100%;
+  max-width: 320px;
+}
+
+/* ================================
+   FOOTER – PRO
+================================ */
+footer {
+  text-align: center;
+  padding: 1.2rem 1rem;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+footer a {
+  font-size: 0.85rem;
+}
+
+/* ================================
+   TYPOGRAPHIE – MOBILE
+================================ */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.4rem;
+    line-height: 1.4;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+  }
+
+  .hero-subtitle,
+  .baseline,
+  .tagline {
+    font-size: 0.9rem;
+  }
+
+  footer {
+    font-size: 0.75rem;
+  }
 }
