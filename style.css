@@ -238,3 +238,19 @@ textarea{resize:vertical}
   transform: translateY(0);
   box-shadow: none;
 }
+
+@media (max-width: 600px) {
+  .header-inner {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nav.open {
+    width: 100%;
+  }
+}
