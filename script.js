@@ -1,6 +1,5 @@
 /* =====================================================
-   e-META — script.js
-   i18n + RTL + UI fixes
+   e-META — script.js (i18n GLOBAL + RTL)
 ===================================================== */
 
 const translations = {
@@ -11,14 +10,14 @@ const translations = {
     "nav.privacy": "Confidentialité",
 
     "hero.title": "Donnez à vos décisions le niveau d’un cabinet de consulting premium",
-    "hero.subtitle": "e-META analyse votre contexte, vos objectifs et vos contraintes pour produire une recommandation claire et actionnable.",
+    "hero.subtitle": "e-META analyse votre contexte, vos objectifs, vos contraintes, vos KPIs et vos ressources pour générer une feuille de route claire, exploitable et documentée.",
+    "hero.claim": "e-META n’est pas un chatbot. C’est un moteur d’intelligence décisionnelle inspiré par des cadres de conseil de premier ordre.",
+
     "cta.start": "Démarrer une analyse stratégique",
 
-    "form.submit": "Envoyer ma requête",
-    "form.reset": "Réinitialiser le formulaire",
-
-    "footer.text": "e-META — Assistant IA de décision stratégique",
-    "footer.privacy": "Politique de confidentialité"
+    "footer.text": "e-META © 2025 — Assistant IA de décision stratégique",
+    "footer.privacy": "Politique de confidentialité",
+    "footer.back": "Retour à l’accueil"
   },
 
   en: {
@@ -29,76 +28,71 @@ const translations = {
 
     "hero.title": "Give your decisions the level of a premium consulting firm",
     "hero.subtitle": "e-META analyzes your context, objectives and constraints to deliver clear, actionable recommendations.",
+    "hero.claim": "e-META is not a chatbot. It is a decision intelligence engine inspired by top-tier consulting frameworks.",
+
     "cta.start": "Start a strategic analysis",
 
-    "form.submit": "Submit request",
-    "form.reset": "Reset form",
-
-    "footer.text": "e-META — Strategic decision intelligence assistant",
-    "footer.privacy": "Privacy policy"
+    "footer.text": "e-META © 2025 — Strategic decision AI assistant",
+    "footer.privacy": "Privacy policy",
+    "footer.back": "Back to home"
   },
 
   ar: {
-    tagline: "مساعد ذكي متعدد اللغات لاتخاذ القرار",
+    tagline: "مساعد ذكاء اصطناعي متعدد اللغات لاتخاذ القرار",
     "nav.home": "الرئيسية",
     "nav.form": "النموذج",
     "nav.privacy": "الخصوصية",
 
-    "hero.title": "امنح قراراتك مستوى مكاتب الاستشارات المتميزة",
-    "hero.subtitle": "يحلل e-META سياقك وأهدافك وقيودك لتقديم توصيات واضحة وقابلة للتنفيذ.",
+    "hero.title": "امنح قراراتك مستوى شركات الاستشارات العالمية",
+    "hero.subtitle": "يقوم e-META بتحليل السياق والأهداف والقيود ومؤشرات الأداء لتقديم توصيات واضحة وقابلة للتنفيذ.",
+    "hero.claim": "e-META ليس روبوت دردشة، بل محرك ذكاء لاتخاذ القرار مستوحى من أطر الاستشارات العالمية.",
+
     "cta.start": "بدء تحليل استراتيجي",
 
-    "form.submit": "إرسال الطلب",
-    "form.reset": "إعادة تعيين النموذج",
-
-    "footer.text": "e-META — مساعد ذكي لاتخاذ القرار الاستراتيجي",
-    "footer.privacy": "سياسة الخصوصية"
+    "footer.text": "e-META © 2025 — مساعد ذكاء استراتيجي",
+    "footer.privacy": "سياسة الخصوصية",
+    "footer.back": "العودة إلى الرئيسية"
   }
 };
 
-/* ===== APPLY LANGUAGE ===== */
 function applyLanguage(lang) {
+  const dict = translations[lang];
+  if (!dict) return;
+
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
 
-  // RTL CSS
-  let rtl = document.getElementById("rtl-css");
-  if (lang === "ar") {
-    if (!rtl) {
-      rtl = document.createElement("link");
-      rtl.rel = "stylesheet";
-      rtl.href = "rtl.css";
-      rtl.id = "rtl-css";
-      document.head.appendChild(rtl);
-    }
-  } else if (rtl) {
-    rtl.remove();
+  const rtlStylesheet = document.getElementById("rtlStylesheet");
+  if (rtlStylesheet) {
+    rtlStylesheet.disabled = lang !== "ar";
   }
 
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
-    if (translations[lang][key]) {
-      el.textContent = translations[lang][key];
-    }
-  });
-
-  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-    const key = el.getAttribute("data-i18n-placeholder");
-    if (translations[lang][key]) {
-      el.placeholder = translations[lang][key];
-    }
+    if (dict[key]) el.textContent = dict[key];
   });
 
   localStorage.setItem("lang", lang);
 }
 
-/* ===== INIT ===== */
 document.addEventListener("DOMContentLoaded", () => {
+  const savedLang = localStorage.getItem("lang") || "fr";
+  applyLanguage(savedLang);
+
   const switcher = document.getElementById("languageSwitcher");
-  const saved = localStorage.getItem("lang") || "fr";
   if (switcher) {
-    switcher.value = saved;
-    switcher.addEventListener("change", e => applyLanguage(e.target.value));
+    switcher.value = savedLang;
+    switcher.addEventListener("change", e => {
+      applyLanguage(e.target.value);
+    });
   }
-  applyLanguage(saved);
+
+  // Burger menu
+  const burger = document.getElementById("burgerBtn");
+  const nav = document.getElementById("mainNav");
+  if (burger && nav) {
+    burger.addEventListener("click", () => {
+      nav.classList.toggle("open");
+    });
+  }
 });
