@@ -291,3 +291,21 @@ textarea{resize:vertical}
   text-align: center;
   cursor: pointer;
 }
+
+.section-title {
+  margin-bottom: 12px;
+}
+
+.section-intro,
+.section-transition {
+  max-width: 720px;
+  opacity: 0.85;
+}
+
+.problem-list {
+  margin: 20px 0 30px;
+}
+
+.form-title {
+  margin-top: 40px;
+}
