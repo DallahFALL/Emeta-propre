@@ -1,43 +1,4 @@
-<!-- ================= PROBLEM ================= -->
-<section id="form" class="form-section">
-  <div class="container">
 
-    <!-- PROBLEM TITLE -->
-    <h2 class="section-title" data-i18n="problem_title">
-      The real problem
-    </h2>
-
-    <!-- PROBLEM INTRO -->
-    <p class="section-intro" data-i18n="problem_intro">
-      Strategic decisions are often complex, unstructured, and taken without a clear framework.
-    </p>
-
-    <!-- PROBLEM LIST -->
-    <ul class="problem-list">
-      <li data-i18n="problem_1">
-        Too much information, not enough clarity
-      </li>
-      <li data-i18n="problem_2">
-        Decisions based on intuition instead of structure
-      </li>
-      <li data-i18n="problem_3">
-        Consulting expertise is expensive or inaccessible
-      </li>
-    </ul>
-
-    <!-- TRANSITION -->
-    <p class="section-transition" data-i18n="problem_transition">
-      e-META structures your thinking and transforms complexity into clear, actionable decisions.
-    </p>
-
-    <!-- FORM TITLE -->
-    <h2 class="form-title" data-i18n="form.title">
-      e-META Form — Ultra-Premium Version
-    </h2>
-
-    <p class="form-intro" data-i18n="form.intro">
-      Complete the fields below to receive your personalized strategic analysis.
-    </p>
 
     <!-- ⚠️ TON FORMULAIRE RESTE ICI, STRICTEMENT INCHANGÉ -->
     <form id="emetaForm" novalidate>
