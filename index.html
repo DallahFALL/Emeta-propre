@@ -4,15 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>e-META</title>
+  <!-- SEO -->
+  <title>e-META – Assistant IA de Décision</title>
+  <meta name="description" content="e-META — Assistant IA multilingue de prise de décision. Analyse stratégique premium, style cabinet de conseil." />
   <meta name="theme-color" content="#0b1020" />
+  <link rel="canonical" href="https://e-meta.app/" />
 
+  <!-- Assets -->
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
+  <link rel="icon" type="image/png" href="favicon.png" />
 </head>
 
 <body>
 
+<!-- ================= HEADER ================= -->
 <header class="site-header">
   <div class="container header-inner">
 
@@ -20,30 +25,35 @@
     <a href="index.html" class="logo">
       <span class="logo-mark">e</span>
       <span class="logo-text">META</span>
-      <span class="logo-tagline" data-i18n="tagline"></span>
+      <span class="logo-tagline" data-i18n="tagline">
+        Assistant IA multilingue de prise de décision
+      </span>
     </a>
 
     <!-- BURGER -->
     <button
       class="burger"
       id="burgerBtn"
-      aria-label="Menu"
+      type="button"
+      aria-label="Ouvrir le menu"
       aria-expanded="false">
-      <span></span><span></span><span></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
 
     <!-- NAV -->
     <nav class="nav" id="mainNav">
       <ul>
-        <li><a href="#hero" data-i18n="nav.home"></a></li>
-        <li><a href="#form" data-i18n="nav.form"></a></li>
-        <li><a href="privacy.html" data-i18n="nav.privacy"></a></li>
+        <li><a href="#hero" data-i18n="nav.home">Accueil</a></li>
+        <li><a href="#form" data-i18n="nav.form">Formulaire</a></li>
+        <li><a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a></li>
       </ul>
     </nav>
 
     <!-- ACTIONS -->
     <div class="header-actions">
-      <select id="languageSwitcher" class="lang-select">
+      <select id="languageSwitcher" class="lang-select" aria-label="Sélection de la langue">
         <option value="fr">FR</option>
         <option value="en">EN</option>
         <option value="es">ES</option>
@@ -51,15 +61,16 @@
       </select>
 
       <button
-        id="ctaRequest"
+        type="button"
         class="btn-whatsapp whatsappBtnGlobal"
-        data-i18n="btn.customRequest">
+        data-i18n="btn.whatsapp">
+        Requête personnalisée
       </button>
     </div>
-
   </div>
 </header>
 
+<!-- ================= MAIN ================= -->
 <main>
 
 <!-- HERO -->
@@ -67,52 +78,445 @@
   <div class="container hero-inner">
 
     <div class="hero-text">
-      <h1 data-i18n="hero.title"></h1>
+      <h1 data-i18n="hero.title">
+        Donnez à vos décisions le niveau d’un cabinet de consulting premium
+      </h1>
 
-      <p class="hero-subtitle" data-i18n="hero.subtitle"></p>
+      <p class="hero-subtitle" data-i18n="hero.subtitle">
+        e-META analyse votre contexte, vos objectifs, vos contraintes,
+        vos KPIs et vos ressources pour générer une feuille de route claire,
+        exploitable et documentée.
+      </p>
 
-      <p class="hero-subtext" data-i18n="hero.note"></p>
-
-      <div class="hero-cta">
-        <a href="#form" class="btn-primary" data-i18n="hero.cta"></a>
-      </div>
-    </div>
-
-    <div class="hero-panel">
-      <p data-i18n="hero.panel"></p>
-      <ul class="hero-list">
+      <ul class="hero-highlights">
         <li data-i18n="hero.point1"></li>
         <li data-i18n="hero.point2"></li>
         <li data-i18n="hero.point3"></li>
       </ul>
+
+      <div class="hero-cta">
+        <a href="#form" class="btn-primary" data-i18n="hero.cta">
+          Commencer une analyse stratégique
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-panel">
+      <div class="hero-badge">
+        <span class="badge-title" data-i18n="hero.badge.title"></span>
+        <span class="badge-text" data-i18n="hero.badge.text"></span>
+      </div>
+      <p class="hero-note" data-i18n="hero.note"></p>
     </div>
 
   </div>
 </section>
 
-<!-- FORM -->
-<section id="form" class="form-section">
-  <div class="container">
+<!-- FORMULAIRE ULTRA-PREMIUM -->
+    <section id="form" class="form-section">
+      <div class="container">
+        <h2 data-i18n="form.title">
+          Formulaire e-META – Version Ultra-Premium (Consulting Business)
+        </h2>
+        <p class="form-intro" data-i18n="form.intro">
+          Plus vos réponses sont précises, plus la synthèse de e-META sera
+          professionnelle et exploitable.
+        </p>
 
-    <h2 data-i18n="form.title"></h2>
-    <p class="form-intro" data-i18n="form.intro"></p>
+        <form id="emetaForm" novalidate>
+          <!-- BLOC 1 – Informations générales -->
+          <fieldset class="field-group">
+            <legend data-i18n="group.general">1. Informations générales</legend>
 
-    <!-- ⚠ FORMULAIRE EXISTANT CONSERVÉ -->
-    <!-- Seuls labels / placeholders doivent recevoir data-i18n -->
-    <!-- Tu peux continuer champ par champ -->
+            <div class="field">
+              <label for="domain" data-i18n="field.domain.label">
+                Domaine / Thème principal
+              </label>
+              <select id="domain" name="domain">
+                <option value="" data-i18n="field.domain.placeholder">
+                  Sélectionnez un domaine
+                </option>
+                <option value="strategy" data-i18n="field.domain.strategy">
+                  Stratégie & Gouvernance
+                </option>
+                <option value="finance" data-i18n="field.domain.finance">
+                  Finance & Modèle économique
+                </option>
+                <option value="marketing" data-i18n="field.domain.marketing">
+                  Marketing & Croissance
+                </option>
+                <option value="operations" data-i18n="field.domain.operations">
+                  Opérations & Supply Chain
+                </option>
+                <option value="hr" data-i18n="field.domain.hr">
+                  Ressources humaines & Organisation
+                </option>
+                <option value="it" data-i18n="field.domain.it">
+                  Systèmes d’information & IA
+                </option>
+                <option value="legal" data-i18n="field.domain.legal">
+                  Juridique & Conformité
+                </option>
+                <option value="impact" data-i18n="field.domain.impact">
+                  Impact social & environnemental
+                </option>
+                <option value="other" data-i18n="field.domain.other">
+                  Autre (préciser dans le contexte)
+                </option>
+              </select>
+            </div>
 
-  </div>
-</section>
+            <div class="field">
+              <label for="projectType" data-i18n="field.projectType.label">
+                Type de projet
+              </label>
+              <select id="projectType" name="projectType">
+                <option value="" data-i18n="field.projectType.placeholder">
+                  Sélectionnez le type de projet
+                </option>
+                <option value="diagnostic" data-i18n="field.projectType.diagnostic">
+                  Diagnostic & Analyse
+                </option>
+                <option value="business_model" data-i18n="field.projectType.business">
+                  Business model / Plan d’affaires
+                </option>
+                <option value="roadmap" data-i18n="field.projectType.roadmap">
+                  Feuille de route stratégique
+                </option>
+                <option value="process" data-i18n="field.projectType.process">
+                  Optimisation de processus
+                </option>
+                <option value="prototype" data-i18n="field.projectType.prototype">
+                  Prototypage / MVP
+                </option>
+                <option value="funding" data-i18n="field.projectType.funding">
+                  Dossier de financement / levée de fonds
+                </option>
+                <option value="other" data-i18n="field.projectType.other">
+                  Autre
+                </option>
+              </select>
+            </div>
 
-</main>
+            <div class="field">
+              <label for="projectTitle" data-i18n="field.projectTitle.label">
+                Titre court du projet ou de la décision
+              </label>
+              <input
+                type="text"
+                id="projectTitle"
+                name="projectTitle"
+                data-i18n-placeholder="field.projectTitle.placeholder"
+                placeholder="Ex : Optimisation de la stratégie de distribution e-META"
+              />
+            </div>
+          </fieldset>
 
+          <!-- BLOC 2 – Analyse stratégique type cabinet de conseil -->
+          <fieldset class="field-group">
+            <legend data-i18n="group.analysis">
+              2. Analyse stratégique – Niveau cabinet de conseil
+            </legend>
+
+            <div class="field">
+              <label for="problem" data-i18n="field.problem.label">
+                Problème central à résoudre
+              </label>
+              <textarea
+                id="problem"
+                name="problem"
+                rows="3"
+                data-i18n-placeholder="field.problem.placeholder"
+                placeholder="Décrivez clairement le problème, la décision ou le défi principal auquel vous faites face."
+              ></textarea>
+            </div>
+
+            <div class="field field-inline">
+              <div class="field">
+                <label for="objectives" data-i18n="field.objectives.label">
+                  Objectifs principaux
+                </label>
+                <textarea
+                  id="objectives"
+                  name="objectives"
+                  rows="3"
+                  data-i18n-placeholder="field.objectives.placeholder"
+                  placeholder="Listez 3 à 5 objectifs que vous souhaitez atteindre."
+                ></textarea>
+              </div>
+
+              <div class="field">
+                <label for="constraints" data-i18n="field.constraints.label">
+                  Contraintes & risques majeurs
+                </label>
+                <textarea
+                  id="constraints"
+                  name="constraints"
+                  rows="3"
+                  data-i18n-placeholder="field.constraints.placeholder"
+                  placeholder="Budget limité, délais courts, ressources humaines, contraintes réglementaires, etc."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="field field-inline">
+              <div class="field">
+                <label for="kpis" data-i18n="field.kpis.label">
+                  KPIs / Indicateurs de performance visés
+                </label>
+                <textarea
+                  id="kpis"
+                  name="kpis"
+                  rows="3"
+                  data-i18n-placeholder="field.kpis.placeholder"
+                  placeholder="Ex : CA mensuel, marge, nombre de clients actifs, délais de traitement, satisfaction client, etc."
+                ></textarea>
+              </div>
+
+              <div class="field">
+                <label for="resources" data-i18n="field.resources.label">
+                  Ressources déjà disponibles
+                </label>
+                <textarea
+                  id="resources"
+                  name="resources"
+                  rows="3"
+                  data-i18n-placeholder="field.resources.placeholder"
+                  placeholder="Équipe, outils, partenaires, données, budget initial, infrastructure, etc."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="field field-inline">
+              <div class="field">
+                <label for="deliverables" data-i18n="field.deliverables.label">
+                  Livrables attendus
+                </label>
+                <textarea
+                  id="deliverables"
+                  name="deliverables"
+                  rows="3"
+                  data-i18n-placeholder="field.deliverables.placeholder"
+                  placeholder="Ex : note stratégique, plan d’actions, business plan, canevas financier, argumentaire, pitch deck, etc."
+                ></textarea>
+              </div>
+
+              <div class="field">
+                <label for="successIndicators" data-i18n="field.successIndicators.label">
+                  Indicateurs de succès (comment saurez-vous que c’est une réussite ?)
+                </label>
+                <textarea
+                  id="successIndicators"
+                  name="successIndicators"
+                  rows="3"
+                  data-i18n-placeholder="field.successIndicators.placeholder"
+                  placeholder="Ex : atteindre un certain niveau de ventes, signer un partenariat, valider un pilote, etc."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="context" data-i18n="field.context.label">
+                Contexte détaillé (facultatif mais fortement recommandé)
+              </label>
+              <textarea
+                id="context"
+                name="context"
+                rows="4"
+                data-i18n-placeholder="field.context.placeholder"
+                placeholder="Expliquez le contexte global, l’historique, les acteurs impliqués, les décisions déjà prises, etc."
+              ></textarea>
+            </div>
+          </fieldset>
+
+          <!-- BLOC 3 – Budget, délais & urgence -->
+          <fieldset class="field-group">
+            <legend data-i18n="group.budget">3. Budget, délais & urgence</legend>
+
+            <div class="field field-inline">
+              <div class="field">
+                <label for="budgetMin" data-i18n="field.budgetMin.label">
+                  Budget minimum envisagé
+                </label>
+                <div class="field-with-unit">
+                  <input
+                    type="number"
+                    id="budgetMin"
+                    name="budgetMin"
+                    min="0"
+                    step="0.01"
+                    data-i18n-placeholder="field.budgetMin.placeholder"
+                    placeholder="Ex : 1000000"
+                  />
+                  <select id="currency" name="currency">
+                    <option value="XOF">XOF</option>
+                    <option value="EUR">EUR</option>
+                    <option value="USD">USD</option>
+                    <option value="GBP">GBP</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="budgetMax" data-i18n="field.budgetMax.label">
+                  Budget maximum (si applicable)
+                </label>
+                <input
+                  type="number"
+                  id="budgetMax"
+                  name="budgetMax"
+                  min="0"
+                  step="0.01"
+                  data-i18n-placeholder="field.budgetMax.placeholder"
+                  placeholder="Ex : 2500000"
+                />
+              </div>
+            </div>
+
+            <div class="field field-inline">
+              <div class="field">
+                <label for="deadline" data-i18n="field.deadline.label">
+                  Délai souhaité pour disposer de la synthèse / recommandation
+                </label>
+                <input
+                  type="text"
+                  id="deadline"
+                  name="deadline"
+                  data-i18n-placeholder="field.deadline.placeholder"
+                  placeholder="Ex : 7 jours, 1 mois, avant telle date précise..."
+                />
+              </div>
+
+              <div class="field">
+                <label for="urgency" data-i18n="field.urgency.label">
+                  Niveau d’urgence (1 = faible, 5 = critique)
+                </label>
+                <input
+                  type="range"
+                  id="urgency"
+                  name="urgency"
+                  min="1"
+                  max="5"
+                  value="3"
+                />
+                <div class="range-labels">
+                  <span data-i18n="field.urgency.low">Faible</span>
+                  <span data-i18n="field.urgency.medium">Normal</span>
+                  <span data-i18n="field.urgency.high">Critique</span>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- BLOC 4 – Mode de restitution & contact -->
+          <fieldset class="field-group">
+            <legend data-i18n="group.output">4. Mode de restitution & contact</legend>
+
+            <div class="field">
+              <p class="field-label-strong" data-i18n="field.outputMode.label">
+                Mode de restitution souhaité (vous pouvez en cocher plusieurs)
+              </p>
+              <div class="checkbox-grid">
+                <label class="checkbox-item">
+                  <input type="checkbox" name="outputEmail" value="1" />
+                  <span data-i18n="field.outputMode.email">Email détaillé</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="outputWhatsApp" value="1" />
+                  <span data-i18n="field.outputMode.whatsapp">Message WhatsApp structuré</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="outputPdf" value="1" />
+                  <span data-i18n="field.outputMode.pdf">Synthèse PDF</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="outputDisplay" value="1" />
+                  <span data-i18n="field.outputMode.display">Affichage simple dans e-META</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="field field-inline">
+              <div class="field">
+                <label for="email" data-i18n="field.email.label">
+                  Adresse e-mail (si restitution par email ou PDF)
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  data-i18n-placeholder="field.email.placeholder"
+                  placeholder="adresse@email.com"
+                />
+              </div>
+
+              <div class="field">
+                <label for="whatsapp" data-i18n="field.whatsapp.label">
+                  Numéro WhatsApp avec indicatif pays
+                </label>
+                <input
+                  type="tel"
+                  id="whatsapp"
+                  name="whatsapp"
+                  data-i18n-placeholder="field.whatsapp.placeholder"
+                  placeholder="+221782607212"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+  <label for="fileLink" data-i18n="field.fileLink.label">
+    Lien vers un fichier ou dossier (facultatif)
+  </label>
+
+  <input
+    type="url"
+    id="fileLink"
+    name="fileLink"
+    data-i18n-placeholder="field.fileLink.placeholder"
+    placeholder="Lien Google Drive, Dropbox, Notion, PDF, etc."
+  />
+
+  <small class="field-hint" data-i18n="field.fileLink.hint"></small>
+</div>
+
+            <div class="field checkbox-row">
+              <label>
+                <input type="checkbox" id="consent" name="consent" required />
+                <span data-i18n="field.consent.label">
+                  J’accepte que les informations fournies soient utilisées uniquement
+                  pour générer une analyse e-META. Aucune donnée personnelle
+                  ne sera revendue ou partagée à des tiers.
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- BOUTONS -->
+          <div class="form-actions">
+            <button type="submit" class="btn-primary" data-i18n="form.submit">
+              Envoyer ma requête
+            </button>
+            <button type="reset" class="btn-secondary" data-i18n="form.reset">
+              Réinitialiser le formulaire
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+            </main>
+  
+<!-- ================= FOOTER ================= -->
 <footer class="site-footer">
   <div class="container footer-inner">
     <p data-i18n="footer.text"></p>
     <a href="privacy.html" class="footer-link" data-i18n="footer.privacy"></a>
+    <p class="footer-copy">© e-META 2025</p>
   </div>
 </footer>
 
+<!-- ================= SCRIPT ================= -->
 <script src="script.js"></script>
+
 </body>
 </html>
