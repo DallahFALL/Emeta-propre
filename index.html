@@ -516,17 +516,20 @@
           </fieldset>
 
           <!-- BOUTONS -->
-          <div class="form-actions">
-            <button type="submit" class="btn-primary" data-i18n="form.submit">
-              Envoyer ma requête
-            </button>
-            <button type="reset" class="btn-secondary" data-i18n="form.reset">
-              Réinitialiser le formulaire
-            </button>
-          </div>
-        </form>
+          <div id="formStatus" role="status" aria-live="polite"></div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary" data-i18n="form.send">
+          Submit request
+        </button>
+        <button type="reset" class="btn-secondary" data-i18n="form.reset">
+          Reset form
+        </button>
       </div>
-    </section>
+    </form>
+
+  </div>
+</section>
             </main>
   
 <!-- ================= FOOTER ================= -->
