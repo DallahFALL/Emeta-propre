@@ -1,106 +1,48 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title data-i18n="privacy.meta.title">Politique de confidentialité – e-META</title>
-  <meta name="description" content="Politique de confidentialité e-META. Protection des données, usage responsable de l’IA." />
-  <meta name="theme-color" content="#0b1020" />
-  <link rel="canonical" href="https://e-meta.app/privacy.html" />
-
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <meta charset="UTF-8">
+  <title>e-META — Privacy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled>
 </head>
 
 <body>
 
 <header class="site-header">
   <div class="container header-inner">
-
-    <a href="index.html" class="logo" aria-label="e-META">
-      <span class="logo-mark">e</span>
-      <span class="logo-text">META</span>
-      <span class="logo-tagline" data-i18n="tagline">Assistant IA multilingue de prise de décision</span>
+    <a href="index.html" class="logo">
+      <span class="logo-mark">e</span><span class="logo-text">META</span>
     </a>
 
-    <button class="burger" id="burgerBtn" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="nav" id="mainNav">
-      <ul>
-        <li><a href="index.html#hero" data-i18n="nav.home">Accueil</a></li>
-        <li><a href="index.html#form" data-i18n="nav.form">Formulaire</a></li>
-        <li><a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a></li>
-      </ul>
-    </nav>
-
-    <div class="header-actions">
-      <select id="languageSwitcher" class="lang-select" aria-label="Language">
-        <option value="fr">FR</option>
-        <option value="en">EN</option>
-        <option value="es">ES</option>
-        <option value="ar">ع</option>
-      </select>
-
-      <button type="button" id="ctaWhatsApp" class="btn-whatsapp whatsappBtnGlobal" data-i18n="btn.customRequest">
-        Requête personnalisée
-      </button>
-    </div>
-
+    <select id="languageSwitcher" class="lang-select">
+      <option value="fr">FR</option>
+      <option value="en">EN</option>
+      <option value="es">ES</option>
+      <option value="ar">ع</option>
+    </select>
   </div>
 </header>
 
-<main class="form-section">
-  <div class="container">
+<main class="container" style="padding:40px 0">
+  <h1 data-i18n="privacy.title"></h1>
 
-    <h1 data-i18n="privacy.h1">Politique de confidentialité</h1>
-    <p class="form-intro" data-i18n="privacy.intro">
-      La présente politique explique comment e-META collecte, utilise et protège vos informations.
-    </p>
+  <p data-i18n="privacy.intro"></p>
 
-    <div class="field-group">
-      <h2 data-i18n="privacy.s1.title">1. Responsable du traitement</h2>
-      <p data-i18n="privacy.s1.text">e-META est édité par son porteur de projet...</p>
+  <h2 data-i18n="privacy.data"></h2>
+  <p data-i18n="privacy.data.text"></p>
 
-      <h2 data-i18n="privacy.s2.title">2. Données collectées</h2>
-      <p data-i18n="privacy.s2.text">Nous collectons uniquement les données fournies...</p>
+  <h2 data-i18n="privacy.use"></h2>
+  <p data-i18n="privacy.use.text"></p>
 
-      <h2 data-i18n="privacy.s3.title">3. Finalité</h2>
-      <p data-i18n="privacy.s3.text">Les données sont utilisées pour générer...</p>
-
-      <h2 data-i18n="privacy.s4.title">4. IA & limites</h2>
-      <p data-i18n="privacy.s4.text">Les résultats constituent une aide à la décision...</p>
-
-      <h2 data-i18n="privacy.s5.title">5. Partage</h2>
-      <p data-i18n="privacy.s5.text">Les données ne sont ni vendues ni cédées...</p>
-
-      <h2 data-i18n="privacy.s6.title">6. Conservation</h2>
-      <p data-i18n="privacy.s6.text">Les données sont conservées le temps nécessaire...</p>
-
-      <h2 data-i18n="privacy.s7.title">7. Sécurité</h2>
-      <p data-i18n="privacy.s7.text">Nous appliquons des mesures raisonnables...</p>
-
-      <h2 data-i18n="privacy.s8.title">8. Vos droits</h2>
-      <p data-i18n="privacy.s8.text">Vous pouvez demander l’accès, la rectification...</p>
-
-      <h2 data-i18n="privacy.s9.title">9. Modifications</h2>
-      <p data-i18n="privacy.s9.text">Cette politique peut être mise à jour...</p>
-
-      <h2 data-i18n="privacy.s10.title">10. Contact</h2>
-      <p data-i18n="privacy.s10.text">Pour toute question relative à cette politique...</p>
-    </div>
-
-  </div>
+  <h2 data-i18n="privacy.contact"></h2>
+  <p data-i18n="privacy.contact.text"></p>
 </main>
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p data-i18n="footer.text">e-META © 2025 — Strategic decision intelligence assistant</p>
-    <a href="privacy.html" class="footer-link" data-i18n="footer.privacy">Privacy policy</a>
-    <p class="footer-copy">© e-META 2025</p>
+    <p data-i18n="footer.text"></p>
   </div>
 </footer>
 
