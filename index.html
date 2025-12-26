@@ -432,60 +432,26 @@
           </fieldset>
 
           <!-- BLOC 4 – Mode de restitution & contact -->
-          <fieldset class="field-group">
-            <legend data-i18n="group.output">4. Mode de restitution & contact</legend>
+      <fieldset class="field-group">
+        <legend data-i18n="form.delivery.title"></legend>
 
-            <div class="field">
-              <p class="field-label-strong" data-i18n="field.outputMode.label">
-                Mode de restitution souhaité (vous pouvez en cocher plusieurs)
-              </p>
-              <div class="checkbox-grid">
-                <label class="checkbox-item">
-                  <input type="checkbox" name="outputEmail" value="1" />
-                  <span data-i18n="field.outputMode.email">Email détaillé</span>
-                </label>
-                <label class="checkbox-item">
-                  <input type="checkbox" name="outputWhatsApp" value="1" />
-                  <span data-i18n="field.outputMode.whatsapp">Message WhatsApp structuré</span>
-                </label>
-                <label class="checkbox-item">
-                  <input type="checkbox" name="outputPdf" value="1" />
-                  <span data-i18n="field.outputMode.pdf">Synthèse PDF</span>
-                </label>
-                <label class="checkbox-item">
-                  <input type="checkbox" name="outputDisplay" value="1" />
-                  <span data-i18n="field.outputMode.display">Affichage simple dans e-META</span>
-                </label>
-              </div>
-            </div>
+        <div class="checkbox-grid">
+          <label><input type="checkbox"> <span data-i18n="form.delivery.email"></span></label>
+          <label><input type="checkbox"> <span data-i18n="form.delivery.whatsapp"></span></label>
+          <label><input type="checkbox"> <span data-i18n="form.delivery.pdf"></span></label>
+          <label><input type="checkbox"> <span data-i18n="form.delivery.screen"></span></label>
+        </div>
 
-            <div class="field field-inline">
-              <div class="field">
-                <label for="email" data-i18n="field.email.label">
-                  Adresse e-mail (si restitution par email ou PDF)
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  data-i18n-placeholder="field.email.placeholder"
-                  placeholder="adresse@email.com"
-                />
-              </div>
-
-              <div class="field">
-                <label for="whatsapp" data-i18n="field.whatsapp.label">
-                  Numéro WhatsApp avec indicatif pays
-                </label>
-                <input
-                  type="tel"
-                  id="whatsapp"
-                  name="whatsapp"
-                  data-i18n-placeholder="field.whatsapp.placeholder"
-                  placeholder="+221782607212"
-                />
-              </div>
-            </div>
+        <div class="field-inline">
+          <div class="field">
+            <label data-i18n="form.email"></label>
+            <input type="email" placeholder="email@example.com">
+          </div>
+          <div class="field">
+            <label data-i18n="form.whatsapp"></label>
+            <input type="tel" placeholder="+221xxxxxxxxx">
+          </div>
+        </div>
 
             <div class="field">
   <label for="fileLink" data-i18n="field.fileLink.label">
