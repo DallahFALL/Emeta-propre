@@ -1,19 +1,94 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <title data-i18n="nav.privacy"></title>
-  <link rel="stylesheet" href="./style.css">
-  <script src="./script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title data-i18n="privacy.meta.title">Politique de confidentialité – e-META</title>
+  <meta name="description"
+        content="Politique de confidentialité e-META. Protection des données et usage responsable de l’IA." />
+  <meta name="theme-color" content="#0b1020" />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
 </head>
 
 <body>
-<main class="container">
-  <h1 data-i18n="nav.privacy"></h1>
-  <p>
-    e-META utilise vos données uniquement pour générer une analyse.
-    Aucune donnée personnelle n’est vendue ou partagée.
-  </p>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="container header-inner">
+
+    <a href="index.html" class="logo">
+      <span class="logo-mark">e</span>
+      <span class="logo-text">META</span>
+      <span class="logo-tagline" data-i18n="tagline">
+        Assistant IA multilingue de prise de décision
+      </span>
+    </a>
+
+    <button class="burger" id="burgerBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav" id="mainNav">
+      <ul>
+        <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
+        <li><a href="index.html#form" data-i18n="nav.form">Formulaire</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <select id="languageSwitcher" class="lang-select">
+        <option value="fr">FR</option>
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+        <option value="ar">ع</option>
+      </select>
+    </div>
+
+  </div>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main class="privacy-page">
+  <section class="form-section">
+    <div class="container">
+
+      <h1 data-i18n="privacy.title">Politique de confidentialité</h1>
+      <p class="form-intro" data-i18n="privacy.intro"></p>
+
+      <h2 data-i18n="privacy.s1.title"></h2>
+      <p data-i18n="privacy.s1.text"></p>
+
+      <h2 data-i18n="privacy.s2.title"></h2>
+      <ul>
+        <li data-i18n="privacy.s2.item1"></li>
+        <li data-i18n="privacy.s2.item2"></li>
+        <li data-i18n="privacy.s2.item3"></li>
+      </ul>
+
+      <h2 data-i18n="privacy.s3.title"></h2>
+      <p data-i18n="privacy.s3.text"></p>
+
+      <!-- BOUTON RETOUR -->
+      <div class="privacy-actions">
+        <a href="index.html" class="btn-secondary" data-i18n="privacy.back">
+          ← Retour à l’accueil
+        </a>
+      </div>
+
+    </div>
+  </section>
 </main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="footer-copy">© e-META 2025</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
