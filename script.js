@@ -141,7 +141,48 @@ const I18N = {
     "footer.privacy": "سياسة الخصوصية"
   }
 };
+/* ===== FORM ===== */
 
+"form.section.general": "Informations générales",
+"form.section.analysis": "Analyse & objectifs",
+"form.section.restitution": "Mode de restitution",
+
+"form.domain": "Domaine / thème",
+"form.choose": "Choisir…",
+"form.projectType": "Type de projet",
+"form.projectType.ph": "Ex : Lancement, optimisation, expansion",
+"form.projectTitle": "Titre du projet",
+"form.projectTitle.ph": "Ex : Lancement international",
+
+"form.problem": "Problème / défi",
+"form.problem.ph": "Décrivez le problème en une ou deux phrases…",
+
+"form.objectives": "Objectifs",
+"form.objectives.ph": "Que souhaitez-vous atteindre ?",
+
+"form.constraints": "Contraintes",
+"form.constraints.ph": "Temps, budget, réglementation…",
+
+"form.kpis": "KPIs visés",
+"form.kpis.ph": "Chiffre d’affaires, délais, qualité…",
+
+"restitution.email": "Email",
+"restitution.whatsapp": "WhatsApp",
+"restitution.pdf": "PDF",
+"restitution.display": "Affichage direct",
+
+"form.email": "Adresse email",
+"form.email.ph": "adresse@email.com",
+
+"form.whatsapp": "Numéro WhatsApp",
+"form.whatsapp.ph": "+221XXXXXXXXX",
+
+/* ===== DOMAINES ===== */
+"domain.business": "Business / Stratégie",
+"domain.tech": "Technologie",
+"domain.agriculture": "Agriculture",
+"domain.finance": "Finance",
+"domain.other": "Autre"
 
   function getLang() {
     const saved = (localStorage.getItem(STORAGE_KEY) || "").toLowerCase();
