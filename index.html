@@ -5,14 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SEO -->
-  <title>e-META – Assistant IA de Décision</title>
-  <meta name="description" content="e-META — Assistant IA multilingue de prise de décision. Analyse stratégique premium, style cabinet de conseil." />
+  <title>e-META — Decision Intelligence Engine</title>
+  <meta name="description"
+        content="e-META n’est pas un chatbot. C’est un moteur d’intelligence décisionnelle inspiré par des cadres de conseil de premier ordre." />
   <meta name="theme-color" content="#0b1020" />
   <link rel="canonical" href="https://e-meta.app/" />
 
-  <!-- Assets -->
+  <!-- Branding -->
+  <link rel="icon" type="image/x-icon" href="branding/favicon.ico" />
+  <link rel="apple-touch-icon" href="branding/logo-e-meta-square.png" />
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
 </head>
 
 <body>
@@ -21,8 +26,7 @@
 <header class="site-header">
   <div class="container header-inner">
 
-    <!-- LOGO -->
-    <a href="index.html" class="logo">
+    <a href="index.html" class="logo" aria-label="e-META — Decision Intelligence Engine">
       <span class="logo-mark">e</span>
       <span class="logo-text">META</span>
       <span class="logo-tagline" data-i18n="tagline">
@@ -30,19 +34,10 @@
       </span>
     </a>
 
-    <!-- BURGER -->
-    <button
-      class="burger"
-      id="burgerBtn"
-      type="button"
-      aria-label="Ouvrir le menu"
-      aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
+    <button class="burger" id="burgerBtn" type="button" aria-label="Menu">
+      <span></span><span></span><span></span>
     </button>
 
-    <!-- NAV -->
     <nav class="nav" id="mainNav">
       <ul>
         <li><a href="#hero" data-i18n="nav.home">Accueil</a></li>
@@ -50,6 +45,77 @@
         <li><a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a></li>
       </ul>
     </nav>
+
+    <div class="header-actions">
+      <select id="languageSwitcher" class="lang-select">
+        <option value="fr">FR</option>
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+        <option value="ar">ع</option>
+      </select>
+
+      <button class="btn-whatsapp" data-i18n="btn.custom">
+        Requête personnalisée
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section id="hero" class="hero">
+  <div class="container hero-inner">
+
+    <div class="hero-text">
+      <h1 data-i18n="hero.title">
+        Donnez à vos décisions le niveau d’un cabinet de consulting premium
+      </h1>
+
+      <p class="hero-subtitle" data-i18n="hero.subtitle">
+        e-META analyse votre contexte, vos objectifs, vos contraintes, vos KPIs et vos ressources
+        pour générer une feuille de route claire, exploitable et documentée.
+      </p>
+
+      <p class="hero-subtext" data-i18n="hero.positioning">
+        e-META n’est pas un chatbot. C’est un moteur d’intelligence décisionnelle inspiré
+        par des cadres de conseil de premier ordre.
+      </p>
+
+      <button id="ctaStart" class="cta-primary" data-i18n="cta.start">
+        Démarrer une analyse stratégique
+      </button>
+
+      <ul class="hero-points">
+        <li data-i18n="hero.point1"></li>
+        <li data-i18n="hero.point2"></li>
+        <li data-i18n="hero.point3"></li>
+      </ul>
+    </div>
+
+    <div class="hero-panel">
+      <div class="hero-badge">
+        <span class="badge-title" data-i18n="hero.badge.title">Version PRO v5.0</span>
+        <span class="badge-text" data-i18n="hero.badge.text">
+          Formulaire ultra-premium, inspiré des cabinets Deloitte / EY
+        </span>
+      </div>
+      <p class="hero-note" data-i18n="hero.note"></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= FORM ================= -->
+<section id="form" class="form-section">
+  <div class="container">
+
+    <h2 data-i18n="problem_title">The real problem</h2>
+
+    <ul class="problem-list">
+      <li data-i18n="problem_1"></li>
+      <li data-i18n="problem_2"></li>
+      <li data-i18n="problem_3"></li>
+    </ul>
 
     <!-- ACTIONS -->
     <div class="header-actions">
