@@ -37,6 +37,17 @@
 
       "footer.text": "e-META © 2025 — Assistant IA de décision stratégique",
       "footer.privacy": "Politique de confidentialité"
+       "privacy.title": "Politique de confidentialité",
+"privacy.intro": "Cette politique explique comment e-META collecte, utilise et protège vos données.",
+"privacy.s1.title": "1. Responsable du traitement",
+"privacy.s1.text": "e-META est édité par son porteur de projet.",
+"privacy.s2.title": "2. Données collectées",
+"privacy.s2.item1": "Informations fournies dans le formulaire.",
+"privacy.s2.item2": "Coordonnées si renseignées.",
+"privacy.s2.item3": "Liens vers des documents externes.",
+"privacy.s3.title": "3. Finalité du traitement",
+"privacy.s3.text": "Produire une analyse stratégique personnalisée.",
+"privacy.back": "Retour à l’accueil"
     },
 
     en: {
@@ -68,6 +79,17 @@
 
       "footer.text": "e-META © 2025 — Strategic decision AI assistant",
       "footer.privacy": "Privacy policy"
+   "privacy.title": "Privacy policy",
+"privacy.intro": "This policy explains how e-META collects, uses and protects your data.",
+"privacy.s1.title": "1. Data controller",
+"privacy.s1.text": "e-META is operated by its project owner.",
+"privacy.s2.title": "2. Data collected",
+"privacy.s2.item1": "Information provided through the form.",
+"privacy.s2.item2": "Contact details if provided.",
+"privacy.s2.item3": "Links to external documents.",
+"privacy.s3.title": "3. Purpose",
+"privacy.s3.text": "To deliver a personalized strategic analysis.",
+"privacy.back": "Back to home"
     },
 
     ar: {
@@ -99,6 +121,17 @@
 
       "footer.text": "© e-META 2025 — مساعد ذكاء اصطناعي لاتخاذ القرار",
       "footer.privacy": "سياسة الخصوصية"
+       "privacy.title": "سياسة الخصوصية",
+"privacy.intro": "توضح هذه السياسة كيفية جمع واستخدام وحماية بياناتك.",
+"privacy.s1.title": "1. مسؤول المعالجة",
+"privacy.s1.text": "يتم تشغيل e-META من قبل صاحب المشروع.",
+"privacy.s2.title": "2. البيانات التي يتم جمعها",
+"privacy.s2.item1": "المعلومات المقدمة عبر النموذج.",
+"privacy.s2.item2": "بيانات الاتصال إذا تم إدخالها.",
+"privacy.s2.item3": "روابط لمستندات خارجية.",
+"privacy.s3.title": "3. الغرض من المعالجة",
+"privacy.s3.text": "تقديم تحليل استراتيجي مخصص.",
+"privacy.back": "العودة إلى الصفحة الرئيسية"
     }
   };
 
