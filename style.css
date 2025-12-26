@@ -334,3 +334,28 @@ textarea{resize:vertical}
     z-index: 5;
   }
 }
+
+@media (max-width: 900px) {
+  .header-inner {
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    flex: 1 1 100%;
+    justify-content: center;
+    z-index: 3;
+  }
+
+  .burger {
+    z-index: 4;
+  }
+
+  .nav.open {
+    position: absolute;
+    top: 64px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    z-index: 5;
+  }
+}
