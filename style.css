@@ -311,3 +311,61 @@ textarea{resize:vertical;}
     white-space: nowrap;
   }
 }
+
+/* ================================
+   RUBRIQUE 4 — MODE RESTITUTION
+================================ */
+
+/* Checkbox propre */
+.check-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.check-line input {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Grid restitution */
+.restitution-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 24px;
+  margin: 12px 0 18px;
+}
+
+/* Contact inputs */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* Consentement */
+.consent-line {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+
+  .restitution-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .check-line {
+    font-size: 0.9rem;
+  }
+}
