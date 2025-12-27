@@ -279,3 +279,35 @@ textarea{resize:vertical;}
     font-size: 1.6rem;
   }
 }
+
+/* ================================
+   HEADER MOBILE FIX
+================================ */
+@media (max-width: 768px) {
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .logo {
+    max-width: 70%;
+    overflow: hidden;
+  }
+
+  .logo-tagline {
+    display: none;
+  }
+
+  .header-actions {
+    gap: 6px;
+  }
+
+  .btn-whatsapp {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+}
