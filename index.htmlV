@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>e-META</title>
+<meta content="#0b1020" name="theme-color"/>
+<link href="style.css" rel="stylesheet"/>
+<link disabled="" href="rtl.css" id="rtlStylesheet" rel="stylesheet"/>
+</head>
+<body>
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+<div class="container header-inner">
+<a aria-label="e-META – Decision Intelligence Assistant" class="logo" href="index.html">
+<span class="logo-mark">e</span>
+<span class="logo-text">META</span>
+<span class="logo-tagline" data-i18n="tagline">Assistant IA multilingue de prise de décision</span>
+</a>
+<button aria-expanded="false" aria-label="Ouvrir le menu" class="burger" id="burgerBtn" type="button">
+<span></span><span></span><span></span>
+</button>
+<nav class="nav" id="mainNav">
+<ul>
+<li><a data-i18n="nav.home" href="index.html">Accueil</a></li>
+<li><a data-i18n="nav.form" href="#form">Formulaire</a></li>
+<li><a data-i18n="nav.privacy" href="privacy.html">Confidentialité</a></li>
+</ul>
+</nav>
+<div class="header-actions">
+<select aria-label="Language selector" class="lang-select" id="languageSwitcher">
+<option value="fr">FR</option>
+<option value="en">EN</option>
+<option value="es">ES</option>
+<option value="ar">ع</option>
+</select>
+<button class="btn-whatsapp" data-i18n="btn.custom" id="btnCustomRequest" type="button">Requête personnalisée</button>
+</div>
+</div>
+</header>
+<!-- ================= HERO ================= -->
+<section class="hero" id="hero">
+<div class="container hero-inner">
+<div class="hero-text">
+<h1 data-i18n="hero.title">
+      Donnez à vos décisions le niveau d’un cabinet de consulting premium
+    </h1>
+<p class="hero-subtitle" data-i18n="hero.subtitle">
+      e-META analyse votre contexte, vos objectifs, vos contraintes, vos KPIs et vos ressources pour générer une feuille de route claire, exploitable et documentée.
+    </p>
+<p class="hero-subtext" data-i18n="hero.claim">
+      e-META n’est pas un chatbot. C’est un moteur d’intelligence décisionnelle inspiré par des cadres de conseil de premier ordre.
+    </p>
+<button class="cta-primary" data-i18n="cta.start" id="ctaStart" type="button">
+      Démarrer une analyse stratégique
+    </button>
+<ul class="hero-points">
+<li data-i18n="hero.point1">Analyse structurée : problème, objectifs, contraintes, risques, KPIs.</li>
+<li data-i18n="hero.point2">Synthèse actionnable : recommandations, plan d’actions, livrables.</li>
+<li data-i18n="hero.point3">Restitution personnalisée : Email, WhatsApp, PDF ou affichage direct.</li>
+</ul>
+</div>
+<div class="hero-panel">
+<div class="hero-badge">
+<span class="badge-title" data-i18n="hero.badge.title">Version PRO v5.0</span>
+<span class="badge-text" data-i18n="hero.badge.text">
+        Formulaire ultra-premium, inspiré des cabinets Deloitte / EY
+      </span>
+</div>
+<p class="hero-note" data-i18n="hero.note"></p>
+</div>
+</div>
+</section>
+<!-- ================= FORM ================= -->
+<section class="form-section" id="form">
+<div class="container">
+<h2 class="section-title" data-i18n="problem_title">
+      The real problem
+    </h2>
+<p class="section-intro" data-i18n="problem_intro">
+      Strategic decisions are often complex, unstructured, and taken without a clear framework.
+    </p>
+<ul class="problem-list">
+<li data-i18n="problem_1"></li>
+<li data-i18n="problem_2"></li>
+<li data-i18n="problem_3"></li>
+</ul>
+<p class="section-transition" data-i18n="problem_transition"></p>
+<h2 class="section-title" data-i18n="form.title">e-META Form — Ultra-Premium Version</h2>
+<p class="section-intro" data-i18n="form.intro">Complete the fields below to receive your personalized strategic analysis.</p>
+
+<!-- ✅ TON FORMULAIRE (Make) — inchangé : IDs / names conservés -->
+<form id="emetaForm" novalidate="">
+<!-- ====== (contenu du formulaire inchangé) ====== -->
+<fieldset class="field-group">
+<legend>1. Informations générales</legend>
+<div class="field">
+<label for="domainMain">Domaine / Thème principal</label>
+<select id="domainMain" name="domainMain">
+<option value="">Sélectionnez un domaine</option>
+<option>Business / Stratégie</option>
+<option>Marketing / Vente</option>
+<option>Finance</option>
+<option>RH / Organisation</option>
+<option>Tech / Produit</option>
+<option>Juridique</option>
+<option>Autre</option>
+</select>
+</div>
+<div class="field">
+<label for="projectType">Type de projet</label>
+<select id="projectType" name="projectType">
+<option value="">Sélectionnez le type de projet</option>
+<option>Création / Lancement</option>
+<option>Optimisation</option>
+<option>Audit / Diagnostic</option>
+<option>Crise / Urgence</option>
+<option>Décision personnelle</option>
+<option>Autre</option>
+</select>
+</div>
+<div class="field">
+<label for="projectTitle">Titre court du projet ou de la décision</label>
+<input id="projectTitle" name="projectTitle" placeholder="Ex : Optimisation de la stratégie de distribution e-META" type="text"/>
+</div>
+</fieldset>
+
+<!-- ... (le reste de ton formulaire original est conservé tel quel) ... -->
+
+<fieldset class="field-group">
+<legend>4. Mode de restitution &amp; contact</legend>
+
+<p class="field-label-strong">Mode de restitution souhaité (vous pouvez en cocher plusieurs)</p>
+
+<div class="checkbox-grid">
+<label class="checkbox-item"><input name="outputEmail" type="checkbox"/><span>Email détaillé</span></label>
+<label class="checkbox-item"><input name="outputWhatsapp" type="checkbox"/><span>Message WhatsApp structuré</span></label>
+<label class="checkbox-item"><input name="outputPdf" type="checkbox"/><span>Synthèse PDF</span></label>
+<label class="checkbox-item"><input name="outputDisplay" type="checkbox"/><span>Affichage simple dans e-META</span></label>
+</div>
+
+<div class="field-inline" style="margin-top:12px;">
+<div class="field">
+<label for="contactEmail">Adresse e-mail (si restitution par email ou PDF)</label>
+<input id="contactEmail" name="contactEmail" placeholder="adresse@email.com" type="email"/>
+</div>
+<div class="field">
+<label for="contactWhatsapp">Numéro WhatsApp avec indicatif pays</label>
+<input id="contactWhatsapp" name="contactWhatsapp" placeholder="+221782607212" type="tel"/>
+</div>
+</div>
+
+<div class="field" style="margin-top:12px;">
+<label for="externalLink">Lien vers un fichier ou dossier (facultatif)</label>
+<input id="externalLink" name="externalLink" placeholder="Lien Google Drive, Dropbox, Notion, PDF, etc." type="url"/>
+</div>
+
+<div class="field" style="margin-top:10px;">
+<label class="checkbox-item" style="justify-content:flex-start;">
+<input name="consent" required="" type="checkbox"/>
+<span>J’accepte que les informations fournies soient utilisées uniquement pour générer une analyse e-META. Aucune donnée personnelle ne sera revendue ou partagée à des tiers.</span>
+</label>
+</div>
+</fieldset>
+
+<div id="formStatus" role="status" aria-live="polite"></div>
+
+<div class="form-actions">
+<button class="btn-primary" data-i18n="form.send" type="submit">Envoyer ma requête</button>
+<button class="btn-secondary" data-i18n="form.reset" type="reset">Réinitialiser le formulaire</button>
+</div>
+</form>
+</div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+<div class="container footer-inner">
+<p class="footer-copy" data-i18n="footer.text">e-META © 2025 — Assistant IA de décision stratégique</p>
+<a class="footer-link" data-i18n="footer.privacy" href="privacy.html">Politique de confidentialité</a>
+</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
