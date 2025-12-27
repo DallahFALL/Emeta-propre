@@ -206,3 +206,62 @@ textarea{resize:vertical;}
   border-radius:14px;
   border:1px solid var(--line);
 }
+
+/* ===== Rubrique 4 : Mode de restitution & contact ===== */
+.field-group.restitution .field-label-strong{
+  margin: 8px 0 12px;
+  font-weight: 700;
+}
+
+/* Options */
+.options-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 12px 22px;
+  margin: 10px 0 18px;
+}
+
+.option{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  cursor: pointer;
+}
+
+.option input[type="checkbox"]{
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+.option span{
+  line-height: 1.35;
+}
+
+/* Contact */
+.contact-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 16px;
+  margin: 10px 0 14px;
+}
+
+/* Consent */
+.option.consent{
+  margin-top: 14px;
+  align-items: flex-start;
+}
+.option.consent input{
+  margin-top: 3px;
+}
+
+/* Mobile */
+@media (max-width: 768px){
+  .options-grid{ grid-template-columns: 1fr; }
+  .contact-grid{ grid-template-columns: 1fr; }
+}
