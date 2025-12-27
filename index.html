@@ -128,90 +128,64 @@
 
 <!-- ... (le reste de ton formulaire original est conservé tel quel) ... -->
       
-<fieldset class="field-group">
+<fieldset class="field-group restitution">
   <legend>4. Mode de restitution &amp; contact</legend>
 
   <p class="field-label-strong">
     Mode de restitution souhaité (vous pouvez en cocher plusieurs)
   </p>
 
-  <!-- ✅ GRID STABLE -->
-  <div class="restitution-grid">
-
-    <label class="check-line">
-      <input type="checkbox" name="outputEmail">
+  <!-- ✅ Options alignées (2 colonnes desktop / 1 colonne mobile) -->
+  <div class="options-grid">
+    <label class="option">
+      <input type="checkbox" id="outputEmail" name="outputEmail">
       <span>Email détaillé</span>
     </label>
 
-    <label class="check-line">
-      <input type="checkbox" name="outputWhatsapp">
+    <label class="option">
+      <input type="checkbox" id="outputWhatsapp" name="outputWhatsapp">
       <span>Message WhatsApp structuré</span>
     </label>
 
-    <label class="check-line">
-      <input type="checkbox" name="outputPdf">
+    <label class="option">
+      <input type="checkbox" id="outputPdf" name="outputPdf">
       <span>Synthèse PDF</span>
     </label>
 
-    <label class="check-line">
-      <input type="checkbox" name="outputDisplay">
+    <label class="option">
+      <input type="checkbox" id="outputDisplay" name="outputDisplay">
       <span>Affichage simple dans e-META</span>
     </label>
-
   </div>
 
-  <!-- ✅ CONTACT -->
+  <!-- ✅ Contact (2 colonnes desktop / 1 colonne mobile) -->
   <div class="contact-grid">
-
     <div class="field">
-      <label for="contactEmail">
-        Adresse e-mail (si restitution par email ou PDF)
-      </label>
-      <input
-        type="email"
-        id="contactEmail"
-        name="contactEmail"
-        placeholder="adresse@email.com"
-      >
+      <label for="contactEmail">Adresse e-mail (si restitution par email ou PDF)</label>
+      <input type="email" id="contactEmail" name="contactEmail" placeholder="adresse@email.com">
     </div>
 
     <div class="field">
-      <label for="contactWhatsapp">
-        Numéro WhatsApp avec indicatif pays
-      </label>
-      <input
-        type="tel"
-        id="contactWhatsapp"
-        name="contactWhatsapp"
-        placeholder="+221782607212"
-      >
+      <label for="contactWhatsapp">Numéro WhatsApp avec indicatif pays</label>
+      <input type="tel" id="contactWhatsapp" name="contactWhatsapp" placeholder="+221782607212">
     </div>
-
   </div>
 
   <div class="field">
-    <label for="externalLink">
-      Lien vers un fichier ou dossier (facultatif)
-    </label>
-    <input
-      type="url"
-      id="externalLink"
-      name="externalLink"
-      placeholder="Lien Google Drive, Dropbox, Notion, PDF, etc."
-    >
+    <label for="externalLink">Lien vers un fichier ou dossier (facultatif)</label>
+    <input type="url" id="externalLink" name="externalLink"
+           placeholder="Lien Google Drive, Dropbox, Notion, PDF, etc.">
   </div>
 
-  <label class="check-line consent-line">
-    <input type="checkbox" name="consent" required>
+  <!-- ✅ Consentement : même principe (input collé au texte) -->
+  <label class="option consent">
+    <input type="checkbox" id="consent" name="consent" required>
     <span>
-      J’accepte que les informations fournies soient utilisées uniquement pour
-      générer une analyse e-META. Aucune donnée personnelle ne sera revendue ou
-      partagée à des tiers.
+      J’accepte que les informations fournies soient utilisées uniquement pour générer une analyse e-META.
+      Aucune donnée personnelle ne sera revendue ou partagée à des tiers.
     </span>
   </label>
-
 </fieldset>
-
 
 <div id="formStatus" role="status" aria-live="polite"></div>
 
