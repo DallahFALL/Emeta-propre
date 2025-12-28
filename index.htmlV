@@ -11,7 +11,34 @@
 </head>
 <body>
 <!-- ================= HEADER ================= -->
-
+<header class="site-header">
+<div class="container header-inner">
+<a aria-label="e-META – Decision Intelligence Assistant" class="logo" href="index.html">
+<span class="logo-mark">e</span>
+<span class="logo-text">META</span>
+<span class="logo-tagline" data-i18n="tagline">Assistant IA multilingue de prise de décision</span>
+</a>
+<button aria-expanded="false" aria-label="Ouvrir le menu" class="burger" id="burgerBtn" type="button">
+<span></span><span></span><span></span>
+</button>
+<nav class="nav" id="mainNav">
+<ul>
+<li><a data-i18n="nav.home" href="index.html">Accueil</a></li>
+<li><a data-i18n="nav.form" href="#form">Formulaire</a></li>
+<li><a data-i18n="nav.privacy" href="privacy.html">Confidentialité</a></li>
+</ul>
+</nav>
+<div class="header-actions">
+<select aria-label="Language selector" class="lang-select" id="languageSwitcher">
+<option value="fr">FR</option>
+<option value="en">EN</option>
+<option value="es">ES</option>
+<option value="ar">ع</option>
+</select>
+<button class="btn-whatsapp" data-i18n="btn.custom" id="btnCustomRequest" type="button">Requête personnalisée</button>
+</div>
+</div>
+</header>
 <!-- ================= HERO ================= -->
 <section class="hero" id="hero">
 <div class="container hero-inner">
