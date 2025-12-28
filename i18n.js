@@ -1,18 +1,13 @@
 /* =====================================================
-   e-META — i18n.js (HARMONISÉ & STABLE)
+   e-META — i18n.js (GLOBAL)
+   Languages: FR / EN / ES / AR
 ===================================================== */
 
 window.I18N = window.I18N || {};
 
-/* =========================
-   FR — Français
-========================= */
 window.I18N.fr = Object.assign({}, window.I18N.fr, {
-
-  /* ===== META ===== */
   "meta.title": "e-META — Assistant IA de décision stratégique",
 
-  /* ===== HEADER ===== */
   "tagline": "Assistant IA multilingue de prise de décision",
   "nav.home": "Accueil",
   "nav.form": "Formulaire",
@@ -109,27 +104,17 @@ window.I18N.fr = Object.assign({}, window.I18N.fr, {
   "form.contact.email": "Adresse e-mail",
   "form.contact.whatsapp": "Numéro WhatsApp avec indicatif pays",
 
-  * ===== PRIVACY PAGE ===== */
   "privacy.title": "Politique de confidentialité",
   "privacy.intro": "Cette politique explique comment e-META collecte, utilise et protège vos informations.",
-  "privacy.content":
-    "Cette page présente la politique de confidentialité et les engagements d’e-META concernant la protection, l’utilisation et la sécurisation des données fournies par les utilisateurs dans le cadre de l’assistant e-META.",
   "privacy.back": "← Retour à l’accueil",
-  /* ===== FOOTER ===== */
+
   "footer.text": "e-META © 2025 — Assistant IA de décision stratégique",
   "footer.privacy": "Politique de confidentialité"
-
 });
 
-/* =========================
-   EN — English
-========================= */
 window.I18N.en = Object.assign({}, window.I18N.en, {
-
-  /* ===== META ===== */
   "meta.title": "e-META — Strategic Decision AI Assistant",
 
-  /* ===== HEADER ===== */
   "tagline": "Multilingual AI decision intelligence assistant",
   "nav.home": "Home",
   "nav.form": "Form",
@@ -226,17 +211,12 @@ window.I18N.en = Object.assign({}, window.I18N.en, {
   "form.contact.email": "Email address",
   "form.contact.whatsapp": "WhatsApp number with country code",
 
-  /* ===== PRIVACY PAGE ===== */
-  "privacy.title": "Privacy Policy",
-  "privacy.intro": "This policy explains how e-META collects, uses, and protects your information.",
-  "privacy.content":
-    "This page outlines e-META’s privacy policy and commitments regarding the protection, use, and security of user data within the e-META assistant.",
+  "privacy.title": "Privacy policy",
+  "privacy.intro": "This policy explains how e-META collects, uses and protects your information.",
   "privacy.back": "← Back to home",
-   
- /* ===== FOOTER ===== */
+
   "footer.text": "e-META © 2025 — Strategic Decision AI Assistant",
   "footer.privacy": "Privacy policy"
-
 });
 
 window.I18N.es = Object.assign({}, window.I18N.es, {
