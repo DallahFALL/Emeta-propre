@@ -51,3 +51,7 @@ html[dir="rtl"] .checkbox-row input{
 }
 
 /* Footer centered already in style.css */
+
+html[dir="rtl"] .header-container{
+  flex-direction: row-reverse;
+}
