@@ -288,3 +288,25 @@
   });
 
 })();
+
+(function () {
+  const missing = [];
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (!window.I18N?.fr?.[key]) {
+      missing.push(key);
+      el.style.outline = "2px solid red";
+    }
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    if (!window.I18N?.fr?.[key]) {
+      missing.push(key);
+      el.style.outline = "2px dashed orange";
+    }
+  });
+
+  console.table([...new Set(missing)]);
+})();
