@@ -1,98 +1,144 @@
 /* =====================================================
-   e-META — script.js FINAL (PRO)
-   - i18n dynamique (FR / EN / ES / AR)
-   - RTL auto (dir + rtl.css)
-   - Burger menu mobile (stable)
-   - CTA scroll vers #form
-   - Langue persistée (localStorage)
+   e-META — script.js
+   Version PRO internationale — CLEAN & MAINTENABLE
+   -----------------------------------------------------
+   ✔ i18n FR / EN / ES / AR
+   ✔ RTL automatique
+   ✔ Menu mobile stable
+   ✔ CTA scroll
+   ✔ Langue persistée
 ===================================================== */
 
-(function () {
+(() => {
   "use strict";
 
-  /* =====================
-     CONFIG
-  ===================== */
-  const DEFAULT_LANG = "fr";
-  const STORAGE_KEY = "emeta_lang";
+  /* =========================
+     CONFIGURATION
+  ========================= */
+  const CONFIG = {
+    defaultLang: "fr",
+    storageKey: "emeta_lang",
+    rtlLangs: ["ar"]
+  };
 
-  const rtlStylesheet = document.getElementById("rtlStylesheet");
+  /* =========================
+     DOM HELPERS
+  ========================= */
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  const qs = (s, r = document) => r.querySelector(s);
-  const qsa = (s, r = document) => Array.from(r.querySelectorAll(s));
-
-  /* =====================
+  /* =========================
      I18N DICTIONARY
-     (reprend exactement ta base validée)
-  ===================== */
-  const I18N = window.I18N || {}; 
-  // ⬆️ optionnel si tu veux externaliser plus tard
-  // sinon laisse ton objet I18N inline ici si tu préfères
+     (SOURCE UNIQUE)
+  ========================= */
+  const I18N = {
+    fr: {
+      "meta.title": "e-META",
+      tagline: "Assistant IA multilingue de prise de décision",
+      "nav.home": "Accueil",
+      "nav.form": "Formulaire",
+      "nav.privacy": "Confidentialité",
+      "btn.custom": "Requête personnalisée",
+      "cta.start": "Démarrer une analyse stratégique",
+      "footer.text": "e-META © 2025 — Assistant IA de décision stratégique",
+      "footer.privacy": "Politique de confidentialité"
+    },
 
-  /* =====================
-     RTL HANDLER
-  ===================== */
-  function setRTL(enable) {
-    document.documentElement.dir = enable ? "rtl" : "ltr";
-    if (rtlStylesheet) rtlStylesheet.disabled = !enable;
+    en: {
+      "meta.title": "e-META",
+      tagline: "Multilingual AI decision intelligence assistant",
+      "nav.home": "Home",
+      "nav.form": "Form",
+      "nav.privacy": "Privacy",
+      "btn.custom": "Custom request",
+      "cta.start": "Start a strategic analysis",
+      "footer.text": "e-META © 2025 — Strategic decision AI assistant",
+      "footer.privacy": "Privacy policy"
+    },
+
+    es: {
+      "meta.title": "e-META",
+      tagline: "Asistente multilingüe de IA para decisiones",
+      "nav.home": "Inicio",
+      "nav.form": "Formulario",
+      "nav.privacy": "Privacidad",
+      "btn.custom": "Solicitud personalizada",
+      "cta.start": "Iniciar un análisis estratégico",
+      "footer.text": "e-META © 2025 — Asistente IA para decisiones estratégicas",
+      "footer.privacy": "Política de privacidad"
+    },
+
+    ar: {
+      "meta.title": "e-META",
+      tagline: "مساعد ذكاء اصطناعي متعدد اللغات لاتخاذ القرار",
+      "nav.home": "الرئيسية",
+      "nav.form": "النموذج",
+      "nav.privacy": "الخصوصية",
+      "btn.custom": "طلب مخصص",
+      "cta.start": "بدء تحليل استراتيجي",
+      "footer.text": "© e-META 2025 — مساعد ذكاء اصطناعي لاتخاذ القرار",
+      "footer.privacy": "سياسة الخصوصية"
+    }
+  };
+
+  /* =========================
+     RTL MANAGEMENT
+  ========================= */
+  function applyRTL(lang) {
+    const isRTL = CONFIG.rtlLangs.includes(lang);
+    document.documentElement.dir = isRTL ? "rtl" : "ltr";
+
+    const rtlCss = $("#rtlStylesheet");
+    if (rtlCss) rtlCss.disabled = !isRTL;
   }
 
-  /* =====================
+  /* =========================
      APPLY TRANSLATIONS
-  ===================== */
-  function applyI18n(dict) {
-    if (!dict) return;
+  ========================= */
+  function applyTranslations(lang) {
+    const dict = I18N[lang] || I18N[CONFIG.defaultLang];
 
-    qsa("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
+    $$("[data-i18n]").forEach(el => {
+      const key = el.dataset.i18n;
       if (dict[key]) el.textContent = dict[key];
     });
 
-    qsa("[data-i18n-placeholder]").forEach(el => {
-      const key = el.getAttribute("data-i18n-placeholder");
-      if (dict[key]) el.setAttribute("placeholder", dict[key]);
-    });
-
-    qsa("[data-i18n-value]").forEach(el => {
-      const key = el.getAttribute("data-i18n-value");
-      if (dict[key]) el.value = dict[key];
+    $$("[data-i18n-placeholder]").forEach(el => {
+      const key = el.dataset.i18nPlaceholder;
+      if (dict[key]) el.placeholder = dict[key];
     });
 
     if (dict["meta.title"]) document.title = dict["meta.title"];
   }
 
-  /* =====================
-     APPLY LANGUAGE
-  ===================== */
-  function applyLanguage(lang) {
-    const dict = I18N[lang] || I18N[DEFAULT_LANG];
+  /* =========================
+     LANGUAGE SWITCH
+  ========================= */
+  function setLanguage(lang) {
     document.documentElement.lang = lang;
+    applyRTL(lang);
+    applyTranslations(lang);
+    localStorage.setItem(CONFIG.storageKey, lang);
 
-    setRTL(lang === "ar");
-    applyI18n(dict);
-
-    const switcher = qs("#languageSwitcher");
+    const switcher = $("#languageSwitcher");
     if (switcher) switcher.value = lang;
-
-    localStorage.setItem(STORAGE_KEY, lang);
   }
 
-  /* =====================
-     BURGER MENU (MOBILE)
-  ===================== */
-  function initBurgerMenu() {
-    const burger = qs("#burgerBtn");
-    const nav = qs("#mainNav");
-
+  /* =========================
+     MOBILE MENU
+  ========================= */
+  function initMobileMenu() {
+    const burger = $("#burgerBtn");
+    const nav = $("#mainNav");
     if (!burger || !nav) return;
 
     burger.addEventListener("click", e => {
       e.stopPropagation();
       const open = nav.classList.toggle("open");
-      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      burger.setAttribute("aria-expanded", open);
     });
 
-    qsa("a", nav).forEach(link => {
+    $$("a", nav).forEach(link => {
       link.addEventListener("click", () => {
         nav.classList.remove("open");
         burger.setAttribute("aria-expanded", "false");
@@ -107,41 +153,42 @@
     });
   }
 
-  /* =====================
+  /* =========================
      CTA SCROLL
-  ===================== */
+  ========================= */
   function initCTA() {
     const scrollToForm = () => {
-      const form = qs("#form");
-      if (form) form.scrollIntoView({ behavior: "smooth", block: "start" });
+      const target = $("#form");
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     };
 
-    const ctaHero = qs("#ctaStart");
-    const ctaHeader = qs("#btnCustomRequest");
+    const ctaHero = $("#ctaStart");
+    const ctaHeader = $("#btnCustomRequest");
 
     if (ctaHero) ctaHero.addEventListener("click", scrollToForm);
     if (ctaHeader) ctaHeader.addEventListener("click", scrollToForm);
   }
 
-  /* =====================
-     LANGUAGE SWITCHER
-  ===================== */
-  function initLanguageSwitcher() {
-    const switcher = qs("#languageSwitcher");
-    if (!switcher) return;
-    switcher.addEventListener("change", e => applyLanguage(e.target.value));
+  /* =========================
+     INIT
+  ========================= */
+  function init() {
+    initMobileMenu();
+    initCTA();
+
+    const switcher = $("#languageSwitcher");
+    if (switcher) {
+      switcher.addEventListener("change", e => setLanguage(e.target.value));
+    }
+
+    const savedLang =
+      localStorage.getItem(CONFIG.storageKey) || CONFIG.defaultLang;
+
+    setLanguage(savedLang);
   }
 
-  /* =====================
-     INIT
-  ===================== */
-  document.addEventListener("DOMContentLoaded", () => {
-    initBurgerMenu();
-    initCTA();
-    initLanguageSwitcher();
-
-    const savedLang = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
-    applyLanguage(savedLang);
-  });
+  document.addEventListener("DOMContentLoaded", init);
 
 })();
