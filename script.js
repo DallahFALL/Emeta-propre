@@ -254,10 +254,21 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    initBurger();
-    initCTA();
-    initLangSwitcher();
-    setLanguage(localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG);
-  });
+  const savedLang = localStorage.getItem("emeta_lang") || "fr";
 
-})();
+  if (typeof window.I18N === "object") {
+    applyLanguage(savedLang);
+  }
+
+  if (document.getElementById("languageSwitcher")) {
+    initLanguageSwitcher();
+  }
+
+  if (document.getElementById("burgerBtn") && document.getElementById("mainNav")) {
+    initBurgerMenu();
+  }
+
+  if (document.getElementById("ctaStart") || document.getElementById("btnCustomRequest")) {
+    initCTA();
+  }
+});
