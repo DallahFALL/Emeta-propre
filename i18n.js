@@ -432,3 +432,17 @@ window.I18N.ar = Object.assign({}, window.I18N.ar, {
   "footer.text": "© e-META 2025 — مساعد ذكاء اصطناعي لاتخاذ القرار",
   "footer.privacy": "سياسة الخصوصية"
 });
+
+privacy: {
+  title: "Politique de confidentialité",
+  intro: "Cette politique explique comment e-META collecte, utilise et protège vos informations.",
+  back: "← Retour à l’accueil"
+},
+legal: {
+  title: "Mentions légales",
+  text: "e-META est un service numérique d’aide à la décision basé sur l’intelligence artificielle. Contact : contact@e-meta.app"
+},
+terms: {
+  title: "Conditions générales d’utilisation",
+  back: "← Retour à l’accueil"
+}
