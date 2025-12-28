@@ -74,3 +74,54 @@
 <script src="script.js"></script>
 </body>
 </html>
+
+document.addEventListener("DOMContentLoaded", () => {
+  // ===== i18n SAFE INIT =====
+  const DEFAULT_LANG = "fr";
+  const STORAGE_KEY = "emeta_lang";
+
+  function setLanguage(lang) {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+    const dict = window.I18N?.[lang] || {};
+    const fallback = window.I18N?.fr || {};
+
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      const val = dict[key] || fallback[key];
+      if (typeof val === "string") el.textContent = val;
+    });
+
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+      const key = el.getAttribute("data-i18n-placeholder");
+      const val = dict[key] || fallback[key];
+      if (typeof val === "string") el.setAttribute("placeholder", val);
+    });
+
+    localStorage.setItem(STORAGE_KEY, lang);
+  }
+
+  // ===== APPLY SAVED LANG =====
+  const savedLang = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
+  setLanguage(savedLang);
+
+  // ===== LANGUAGE SWITCHER SAFE =====
+  const switcher = document.getElementById("languageSwitcher");
+  if (switcher) {
+    switcher.value = savedLang;
+    switcher.addEventListener("change", e => {
+      setLanguage(e.target.value);
+    });
+  }
+
+  // ===== BURGER MENU SAFE =====
+  const burger = document.getElementById("burgerBtn");
+  const nav = document.getElementById("mainNav");
+
+  if (burger && nav) {
+    burger.addEventListener("click", () => {
+      nav.classList.toggle("open");
+    });
+  }
+});
