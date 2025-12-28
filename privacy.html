@@ -2,25 +2,22 @@
 <html lang="fr" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title data-i18n="privacy.meta.title">Politique de confidentialité – e-META</title>
-  <meta name="description"
-        content="Politique de confidentialité e-META. Protection des données et usage responsable de l’intelligence artificielle." />
+  <title data-i18n="privacy.title">Politique de confidentialité</title>
   <meta name="theme-color" content="#0b1020" />
-  <link rel="canonical" href="https://e-meta.app/privacy.html" />
 
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
+<!-- ================= HEADER ================= -->
 <header class="site-header">
   <div class="container header-inner">
 
-    <a href="index.html" class="logo" aria-label="e-META">
-      <span class="logo-mark">e</span>
-      <span class="logo-text">META</span>
+    <a class="logo" href="index.html" aria-label="e-META">
+      <span class="logo-mark">e</span><span class="logo-text">META</span>
       <span class="logo-tagline" data-i18n="tagline"></span>
     </a>
 
@@ -32,11 +29,12 @@
       <ul>
         <li><a href="index.html" data-i18n="nav.home"></a></li>
         <li><a href="index.html#form" data-i18n="nav.form"></a></li>
+        <li><a href="privacy.html" data-i18n="nav.privacy"></a></li>
       </ul>
     </nav>
 
     <div class="header-actions">
-      <select id="languageSwitcher" class="lang-select" aria-label="Language selector">
+      <select id="languageSwitcher" class="lang-select">
         <option value="fr">FR</option>
         <option value="en">EN</option>
         <option value="es">ES</option>
@@ -47,40 +45,45 @@
   </div>
 </header>
 
-<main class="privacy-page">
-  <section class="form-section">
-    <div class="container" style="max-width: 900px;">
+<!-- ================= HERO (Privacy) ================= -->
+<section class="hero">
+  <div class="container hero-inner">
 
-      <h1 data-i18n="privacy.title"></h1>
+    <div class="hero-text">
+      <h1 data-i18n="privacy.title">Politique de confidentialité</h1>
 
-      <p class="form-intro" data-i18n="privacy.intro"></p>
+      <p class="hero-subtitle" data-i18n="privacy.intro">
+        Cette politique explique comment e-META collecte, utilise et protège vos informations.
+      </p>
 
-      <h2 data-i18n="privacy.simple.section1.title"></h2>
-      <p data-i18n="privacy.simple.section1.text"></p>
-
-      <h2 data-i18n="privacy.simple.section2.title"></h2>
-      <ul>
-        <li data-i18n="privacy.simple.section2.item1"></li>
-        <li data-i18n="privacy.simple.section2.item2"></li>
+      <ul class="hero-points">
+        <li data-i18n="privacy.point1"></li>
+        <li data-i18n="privacy.point2"></li>
+        <li data-i18n="privacy.point3"></li>
+        <li data-i18n="privacy.point4"></li>
       </ul>
 
-      <h2 data-i18n="privacy.simple.section3.title"></h2>
-      <p data-i18n="privacy.simple.section3.text"></p>
+      <p class="hero-subtext" data-i18n="privacy.note"></p>
 
-      <h2 data-i18n="privacy.simple.section4.title"></h2>
-      <p data-i18n="privacy.simple.section4.text"></p>
-
-      <h2 data-i18n="privacy.simple.section5.title"></h2>
-      <p data-i18n="privacy.simple.section5.text"></p>
-
+      <a href="index.html" class="cta-primary" style="margin-top:16px;" data-i18n="privacy.back">
+        ← Retour à l’accueil
+      </a>
     </div>
-  </section>
-</main>
 
+    <aside class="hero-panel">
+      <p class="hero-note" data-i18n="privacy.side">
+        e-META respecte une approche responsable, transparente et limitée des données.
+      </p>
+    </aside>
+
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
 <footer class="site-footer">
   <div class="container footer-inner">
     <p class="footer-copy" data-i18n="footer.text"></p>
-    <a href="index.html" class="footer-link" data-i18n="footer.back"></a>
+    <a href="privacy.html" class="footer-link" data-i18n="footer.privacy"></a>
   </div>
 </footer>
 
