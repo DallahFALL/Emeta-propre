@@ -397,5 +397,40 @@
 
 burgerBtn.addEventListener("click", () => {
   mainNav.classList.toggle("open");
+  /* ===============================
+   MOBILE MENU — FIX FINAL
+=============================== */
+document.addEventListener("DOMContentLoaded", () => {
+
+  const burger = document.getElementById("burgerBtn");
+  const nav = document.getElementById("mainNav");
+
+  if (!burger || !nav) return;
+
+  // Toggle menu
+  burger.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isOpen = nav.classList.toggle("open");
+    burger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  });
+
+  // Close menu when clicking a link
+  nav.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("open");
+      burger.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!nav.classList.contains("open")) return;
+    if (nav.contains(e.target) || burger.contains(e.target)) return;
+    nav.classList.remove("open");
+    burger.setAttribute("aria-expanded", "false");
+  });
+
+});
+ 
 });
 
