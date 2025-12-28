@@ -34,33 +34,26 @@
     document.documentElement.dir = rtl ? "rtl" : "ltr";
   }
 
-  function applyI18n(lang) {
-    const dict = getDict(lang);
+ function applyI18n(lang) {
+  const dict = window.I18N?.[lang] || {};
+  const fallback = window.I18N?.fr || {};
 
-    // text nodes
-    $$("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
-      const val = dict[key];
-      if (typeof val === "string" && val.trim() !== "") {
-        el.textContent = val;
-      }
-    });
-
-    // placeholders
-    $$("[data-i18n-placeholder]").forEach(el => {
-      const key = el.getAttribute("data-i18n-placeholder");
-      const val = dict[key];
-      if (typeof val === "string" && val.trim() !== "") {
-        el.setAttribute("placeholder", val);
-      }
-    });
-
-    // title
-    const titleVal = dict["meta.title"];
-    if (typeof titleVal === "string" && titleVal.trim() !== "") {
-      document.title = titleVal;
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    const val = dict[key] || fallback[key];
+    if (typeof val === "string") {
+      el.textContent = val;
     }
-  }
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    const val = dict[key] || fallback[key];
+    if (typeof val === "string") {
+      el.setAttribute("placeholder", val);
+    }
+  });
+}
 
   function setLanguage(lang) {
     document.documentElement.lang = lang;
@@ -289,24 +282,5 @@
 
 })();
 
-(function () {
-  const missing = [];
 
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.getAttribute("data-i18n");
-    if (!window.I18N?.fr?.[key]) {
-      missing.push(key);
-      el.style.outline = "2px solid red";
-    }
-  });
-
-  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-    const key = el.getAttribute("data-i18n-placeholder");
-    if (!window.I18N?.fr?.[key]) {
-      missing.push(key);
-      el.style.outline = "2px dashed orange";
-    }
-  });
-
-  console.table([...new Set(missing)]);
-})();
+  
