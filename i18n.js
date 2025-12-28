@@ -104,10 +104,26 @@ window.I18N.fr = Object.assign({}, window.I18N.fr, {
   "form.contact.email": "Adresse e-mail",
   "form.contact.whatsapp": "Numéro WhatsApp avec indicatif pays",
 
-  "privacy.title": "Politique de confidentialité",
-  "privacy.intro": "Cette politique explique comment e-META collecte, utilise et protège vos informations.",
-  "privacy.back": "← Retour à l’accueil",
+ "privacy.meta.title": "Politique de confidentialité – e-META",
+"privacy.title": "Politique de confidentialité",
+"privacy.intro": "Votre confiance est essentielle. Cette page explique simplement comment vos informations sont utilisées.",
 
+"privacy.simple.section1.title": "Ce que nous collectons",
+"privacy.simple.section1.text": "Nous collectons uniquement les informations que vous choisissez de fournir via le formulaire e-META.",
+
+"privacy.simple.section2.title": "À quoi servent vos données",
+"privacy.simple.section2.item1": "Générer une analyse stratégique personnalisée.",
+"privacy.simple.section2.item2": "Vous restituer le résultat selon le mode choisi (affichage, e-mail, WhatsApp, PDF).",
+
+"privacy.simple.section3.title": "Respect et confidentialité",
+"privacy.simple.section3.text": "Vos données ne sont ni vendues, ni partagées, ni utilisées à des fins publicitaires.",
+
+"privacy.simple.section4.title": "Sécurité",
+"privacy.simple.section4.text": "Nous appliquons des mesures raisonnables pour protéger vos informations.",
+
+"privacy.simple.section5.title": "Nature du service",
+"privacy.simple.section5.text": "e-META est un outil d’aide à la décision et ne remplace pas un avis professionnel."
+ 
   "footer.text": "e-META © 2025 — Assistant IA de décision stratégique",
   "footer.privacy": "Politique de confidentialité"
 });
@@ -211,9 +227,25 @@ window.I18N.en = Object.assign({}, window.I18N.en, {
   "form.contact.email": "Email address",
   "form.contact.whatsapp": "WhatsApp number with country code",
 
-  "privacy.title": "Privacy policy",
-  "privacy.intro": "This policy explains how e-META collects, uses and protects your information.",
-  "privacy.back": "← Back to home",
+  "privacy.meta.title": "Privacy Policy – e-META",
+"privacy.title": "Privacy Policy",
+"privacy.intro": "Your trust matters. This page explains in simple terms how your information is used.",
+
+"privacy.simple.section1.title": "What we collect",
+"privacy.simple.section1.text": "We only collect the information you choose to provide through the e-META form.",
+
+"privacy.simple.section2.title": "How your data is used",
+"privacy.simple.section2.item1": "Generate a personalized strategic analysis.",
+"privacy.simple.section2.item2": "Deliver results via display, email, WhatsApp, or PDF.",
+
+"privacy.simple.section3.title": "Privacy and respect",
+"privacy.simple.section3.text": "Your data is never sold, shared, or used for advertising.",
+
+"privacy.simple.section4.title": "Security",
+"privacy.simple.section4.text": "Reasonable safeguards are applied to protect your information.",
+
+"privacy.simple.section5.title": "Service nature",
+"privacy.simple.section5.text": "e-META is a decision-support tool and does not replace professional advice."
 
   "footer.text": "e-META © 2025 — Strategic Decision AI Assistant",
   "footer.privacy": "Privacy policy"
