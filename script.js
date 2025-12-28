@@ -34,26 +34,33 @@
     document.documentElement.dir = rtl ? "rtl" : "ltr";
   }
 
- function applyI18n(lang) {
-  const dict = window.I18N?.[lang] || {};
-  const fallback = window.I18N?.fr || {};
+  function applyI18n(lang) {
+    const dict = getDict(lang);
 
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.getAttribute("data-i18n");
-    const val = dict[key] || fallback[key];
-    if (typeof val === "string") {
-      el.textContent = val;
-    }
-  });
+    // text nodes
+    $$("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      const val = dict[key];
+      if (typeof val === "string" && val.trim() !== "") {
+        el.textContent = val;
+      }
+    });
 
-  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-    const key = el.getAttribute("data-i18n-placeholder");
-    const val = dict[key] || fallback[key];
-    if (typeof val === "string") {
-      el.setAttribute("placeholder", val);
+    // placeholders
+    $$("[data-i18n-placeholder]").forEach(el => {
+      const key = el.getAttribute("data-i18n-placeholder");
+      const val = dict[key];
+      if (typeof val === "string" && val.trim() !== "") {
+        el.setAttribute("placeholder", val);
+      }
+    });
+
+    // title
+    const titleVal = dict["meta.title"];
+    if (typeof titleVal === "string" && titleVal.trim() !== "") {
+      document.title = titleVal;
     }
-  });
-}
+  }
 
   function setLanguage(lang) {
     document.documentElement.lang = lang;
@@ -281,6 +288,3 @@
   });
 
 })();
-
-
-  
