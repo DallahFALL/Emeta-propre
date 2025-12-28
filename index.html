@@ -136,21 +136,23 @@
       <!-- ✅ ERREUR HTML CORRIGÉE : suppression du <form> parasite -->
 
       <fieldset class="field-group">
-        <legend>1. Informations générales</legend>
+  <legend data-i18n="form.group.general"></legend>
 
-        <div class="field">
-          <label for="domainMain">Domaine / Thème principal</label>
-          <select id="domainMain" name="domainMain">
-            <option value="">Sélectionnez un domaine</option>
-            <option>Business / Stratégie</option>
-            <option>Marketing / Vente</option>
-            <option>Finance</option>
-            <option>RH / Organisation</option>
-            <option>Tech / Produit</option>
-            <option>Juridique</option>
-            <option>Autre</option>
-          </select>
-        </div>
+  <div class="field">
+    <label for="domainMain" data-i18n="form.domain.label"></label>
+
+    <select id="domainMain" name="domainMain">
+      <option value="" data-i18n="form.domain.select"></option>
+      <option value="business" data-i18n="form.domain.business"></option>
+      <option value="marketing" data-i18n="form.domain.marketing"></option>
+      <option value="finance" data-i18n="form.domain.finance"></option>
+      <option value="hr" data-i18n="form.domain.hr"></option>
+      <option value="tech" data-i18n="form.domain.tech"></option>
+      <option value="legal" data-i18n="form.domain.legal"></option>
+      <option value="other" data-i18n="form.domain.other"></option>
+    </select>
+  </div>
+</fieldset>
 
         <div class="field">
           <label for="projectType">Type de projet</label>
