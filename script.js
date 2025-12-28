@@ -1,290 +1,76 @@
-/* =====================================================
-   e-META — script.js PRO (International + Make + Display)
-   - i18n dynamique FR / EN / ES / AR (window.I18N)
-   - Ne remplace JAMAIS par du vide si clé manquante
-   - RTL auto via <html dir="rtl">
-   - Burger menu mobile stable
-   - CTA scroll vers #form
-   - Persist langue (localStorage)
-   - Submit: POST JSON vers Make Webhook
-   - Affichage direct si outputDisplay (réponse Make)
-===================================================== */
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="privacy.title">Politique de confidentialité</title>
 
-(() => {
-  "use strict";
+  <meta name="theme-color" content="#0b1020" />
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-  const DEFAULT_LANG = "fr";
-  const STORAGE_KEY = "emeta_lang";
-  const RTL_LANGS = new Set(["ar"]);
+<body>
 
-  // ✅ Mets ici ton Webhook Make (Custom webhook URL)
-  // Exemple: https://hook.eu1.make.com/xxxxxxxxxxxxxxxxxxxx
-  const MAKE_WEBHOOK_URL = "PASTE_YOUR_MAKE_WEBHOOK_URL_HERE";
+<header class="site-header">
+  <div class="container header-inner">
 
-  const $ = (s, r = document) => r.querySelector(s);
-  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+    <a href="index.html" class="logo" aria-label="e-META">
+      <span class="logo-mark">e</span><span class="logo-text">META</span>
+      <span class="logo-tagline" data-i18n="tagline">Assistant IA multilingue de prise de décision</span>
+    </a>
 
-  const getDict = (lang) => {
-    const all = window.I18N || {};
-    return all[lang] || all[DEFAULT_LANG] || {};
-  };
+    <button class="burger" id="burgerBtn" type="button" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
 
-  function setRTL(lang) {
-    const rtl = RTL_LANGS.has(lang);
-    document.documentElement.dir = rtl ? "rtl" : "ltr";
-  }
+    <nav class="nav" id="mainNav" aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
+        <li><a href="index.html#form" data-i18n="nav.form">Formulaire</a></li>
+      </ul>
+    </nav>
 
-  function applyI18n(lang) {
-    const dict = getDict(lang);
+    <div class="header-actions">
+      <select id="languageSwitcher" class="lang-select" aria-label="Language selector">
+        <option value="fr">FR</option>
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+        <option value="ar">ع</option>
+      </select>
 
-    // text nodes
-    $$("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
-      const val = dict[key];
-      if (typeof val === "string" && val.trim() !== "") {
-        el.textContent = val;
-      }
-    });
+      <a class="header-cta" href="index.html#form" data-i18n="btn.custom">Requête personnalisée</a>
+    </div>
 
-    // placeholders
-    $$("[data-i18n-placeholder]").forEach(el => {
-      const key = el.getAttribute("data-i18n-placeholder");
-      const val = dict[key];
-      if (typeof val === "string" && val.trim() !== "") {
-        el.setAttribute("placeholder", val);
-      }
-    });
+  </div>
+</header>
 
-    // title
-    const titleVal = dict["meta.title"];
-    if (typeof titleVal === "string" && titleVal.trim() !== "") {
-      document.title = titleVal;
-    }
-  }
+<main class="privacy-page">
+  <section class="hero">
+    <div class="container">
+      <div class="hero-text" style="max-width: 900px; margin: 0 auto;">
+        <h1 data-i18n="privacy.title">Politique de confidentialité</h1>
+        <p class="hero-subtitle" data-i18n="privacy.intro">
+          Cette politique explique comment e-META collecte, utilise et protège vos informations.
+        </p>
 
-  function setLanguage(lang) {
-    document.documentElement.lang = lang;
-    setRTL(lang);
-    applyI18n(lang);
+        <p style="color: rgba(255,255,255,.86); line-height: 1.7;">
+          (Tu peux garder ton contenu juridique complet ici — il restera lisible et traduisible si tu ajoutes les clés i18n.)
+        </p>
 
-    const switcher = $("#languageSwitcher");
-    if (switcher && switcher.value !== lang) switcher.value = lang;
+        <a class="privacy-back" href="index.html" data-i18n="privacy.back">← Retour à l’accueil</a>
+      </div>
+    </div>
+  </section>
+</main>
 
-    localStorage.setItem(STORAGE_KEY, lang);
-  }
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="footer-copy" data-i18n="footer.text">e-META © 2025 — Assistant IA de décision stratégique</p>
+    <a href="privacy.html" class="footer-link" data-i18n="footer.privacy">Politique de confidentialité</a>
+  </div>
+</footer>
 
-  function initBurger() {
-    const burger = $("#burgerBtn");
-    const nav = $("#mainNav");
-    if (!burger || !nav) return;
-
-    burger.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const open = nav.classList.toggle("open");
-      burger.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-
-    $$("a", nav).forEach(a => {
-      a.addEventListener("click", () => {
-        nav.classList.remove("open");
-        burger.setAttribute("aria-expanded", "false");
-      });
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!nav.classList.contains("open")) return;
-      if (nav.contains(e.target) || burger.contains(e.target)) return;
-      nav.classList.remove("open");
-      burger.setAttribute("aria-expanded", "false");
-    });
-  }
-
-  function initCTA() {
-    const go = () => {
-      const form = $("#form");
-      if (form) form.scrollIntoView({ behavior: "smooth", block: "start" });
-    };
-    const ctaHero = $("#ctaStart");
-    const ctaHeader = $("#btnCustomRequest");
-    if (ctaHero) ctaHero.addEventListener("click", go);
-    if (ctaHeader) ctaHeader.addEventListener("click", go);
-  }
-
-  function initLangSwitcher() {
-    const switcher = $("#languageSwitcher");
-    if (!switcher) return;
-    switcher.addEventListener("change", (e) => setLanguage(e.target.value));
-  }
-
-  function setStatus(msg) {
-    const status = $("#formStatus");
-    if (status) status.textContent = msg || "";
-  }
-
-  function showDisplayPanel(content, isHtml = false) {
-    const panel = $("#displayPanel");
-    const box = $("#displayContent");
-    if (!panel || !box) return;
-
-    if (isHtml) {
-      box.innerHTML = content;
-    } else {
-      box.innerHTML = `<pre>${escapeHtml(String(content || ""))}</pre>`;
-    }
-
-    panel.hidden = false;
-    panel.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  function hideDisplayPanel() {
-    const panel = $("#displayPanel");
-    if (panel) panel.hidden = true;
-  }
-
-  function escapeHtml(str) {
-    return str
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
-  function collectFormData(formEl) {
-    const fd = new FormData(formEl);
-    const data = {};
-
-    for (const [k, v] of fd.entries()) {
-      // handle checkboxes manually below
-      if (k in data) {
-        if (!Array.isArray(data[k])) data[k] = [data[k]];
-        data[k].push(v);
-      } else {
-        data[k] = v;
-      }
-    }
-
-    // checkboxes
-    data.outputEmail = !!$("#outputEmail")?.checked;
-    data.outputWhatsapp = !!$("#outputWhatsapp")?.checked;
-    data.outputPdf = !!$("#outputPdf")?.checked;
-    data.outputDisplay = !!$("#outputDisplay")?.checked;
-
-    data.consent = !!$("#consent")?.checked;
-
-    // urgency range numeric
-    const urg = $("#urgency");
-    data.urgency = urg ? Number(urg.value || 3) : 3;
-
-    // language
-    data.lang = document.documentElement.lang || DEFAULT_LANG;
-    data.dir = document.documentElement.dir || "ltr";
-
-    // timestamp
-    data.submittedAt = new Date().toISOString();
-
-    return data;
-  }
-
-  async function postToMake(payload) {
-    if (!MAKE_WEBHOOK_URL || MAKE_WEBHOOK_URL.includes("PASTE_YOUR")) {
-      throw new Error("MAKE_WEBHOOK_URL is not set.");
-    }
-
-    const res = await fetch(MAKE_WEBHOOK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-
-    const text = await res.text();
-
-    // Make peut répondre vide ou texte
-    // On tente JSON sinon on garde texte
-    try {
-      return JSON.parse(text);
-    } catch {
-      return { ok: res.ok, display_text: text };
-    }
-  }
-
-  function initDisplayClose() {
-    const btn = $("#displayCloseBtn");
-    if (!btn) return;
-    btn.addEventListener("click", hideDisplayPanel);
-  }
-
-  function initFormSubmit() {
-    const form = $("#emetaForm");
-    if (!form) return;
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      hideDisplayPanel();
-      setStatus("");
-
-      // consent mandatory
-      const consent = $("#consent");
-      if (!consent?.checked) {
-        setStatus("⚠️ Consentement requis.");
-        consent?.focus();
-        return;
-      }
-
-      const payload = collectFormData(form);
-
-      // If WhatsApp output selected, WhatsApp number should exist (soft validation)
-      if (payload.outputWhatsapp && !payload.contactWhatsapp) {
-        setStatus("⚠️ WhatsApp sélectionné : veuillez renseigner le numéro.");
-        $("#contactWhatsapp")?.focus();
-        return;
-      }
-
-      // If Email output selected, email should exist (soft validation)
-      if (payload.outputEmail && !payload.contactEmail) {
-        setStatus("⚠️ Email sélectionné : veuillez renseigner l’adresse e-mail.");
-        $("#contactEmail")?.focus();
-        return;
-      }
-
-      setStatus("⏳ Envoi en cours…");
-
-      try {
-        const result = await postToMake(payload);
-
-        // ✅ Affichage direct si demandé (et si Make renvoie quelque chose)
-        if (payload.outputDisplay) {
-          const html = result?.display_html;
-          const txt = result?.display_text || result?.message || JSON.stringify(result, null, 2);
-          if (typeof html === "string" && html.trim() !== "") {
-            showDisplayPanel(html, true);
-          } else {
-            showDisplayPanel(txt, false);
-          }
-        }
-
-        setStatus("✅ Requête envoyée avec succès.");
-        // Option : reset automatique si tu veux
-        // form.reset();
-
-      } catch (err) {
-        setStatus("❌ Erreur d’envoi. Vérifiez le Webhook Make.");
-        if ($("#outputDisplay")?.checked) {
-          showDisplayPanel(String(err?.message || err), false);
-        }
-      }
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    initBurger();
-    initCTA();
-    initLangSwitcher();
-    initDisplayClose();
-    initFormSubmit();
-
-    const saved = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
-    setLanguage(saved);
-  });
-
-})();
+<script src="i18n.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
