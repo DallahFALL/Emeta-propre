@@ -117,7 +117,303 @@
 
       <!-- 👉 Tu peux recoller ici ton formulaire tel quel
            (la responsivité est désormais assurée par la structure globale) -->
+ id="emetaForm" novalidate="">
+<!-- ====== (contenu du formulaire inchangé) ====== -->
+<fieldset class="field-group">
+<legend>1. Informations générales</legend>
+<div class="field"><form
+<label for="domainMain">Domaine / Thème principal</label>
+<select id="domainMain" name="domainMain">
+<option value="">Sélectionnez un domaine</option>
+<option>Business / Stratégie</option>
+<option>Marketing / Vente</option>
+<option>Finance</option>
+<option>RH / Organisation</option>
+<option>Tech / Produit</option>
+<option>Juridique</option>
+<option>Autre</option>
+</select>
+</div>
+<div class="field">
+<label for="projectType">Type de projet</label>
+<select id="projectType" name="projectType">
+<option value="">Sélectionnez le type de projet</option>
+<option>Création / Lancement</option>
+<option>Optimisation</option>
+<option>Audit / Diagnostic</option>
+<option>Crise / Urgence</option>
+<option>Décision personnelle</option>
+<option>Autre</option>
+</select>
+</div>
+<div class="field">
+<label for="projectTitle">Titre court du projet ou de la décision</label>
+<input id="projectTitle" name="projectTitle" placeholder="Ex : Optimisation de la stratégie de distribution e-META" type="text"/>
+</div>
+</fieldset>
 
+<!-- ... (le reste de ton formulaire original est conservé tel quel) ... -->
+ <!-- BLOC 2 – Analyse stratégique type cabinet de conseil -->
+          <fieldset class="field-group">
+            <legend data-i18n="group.analysis">
+              2. Analyse stratégique – Niveau cabinet de conseil
+            </legend>
+
+            <div class="field">
+              <label for="problem" data-i18n="field.problem.label">
+                Problème central à résoudre
+              </label>
+              <textarea
+                id="problem"
+                name="problem"
+                rows="3"
+                data-i18n-placeholder="field.problem.placeholder"
+                placeholder="Décrivez clairement le problème, la décision ou le défi principal auquel vous faites face."
+              ></textarea>
+            </div>
+
+            <div class="field field-inline">
+              <div class="field">
+                <label for="objectives" data-i18n="field.objectives.label">
+                  Objectifs principaux
+                </label>
+                <textarea
+                  id="objectives"
+                  name="objectives"
+                  rows="3"
+                  data-i18n-placeholder="field.objectives.placeholder"
+                  placeholder="Listez 3 à 5 objectifs que vous souhaitez atteindre."
+                ></textarea>
+              </div>
+
+              <div class="field">
+                <label for="constraints" data-i18n="field.constraints.label">
+                  Contraintes & risques majeurs
+                </label>
+                <textarea
+                  id="constraints"
+                  name="constraints"
+                  rows="3"
+                  data-i18n-placeholder="field.constraints.placeholder"
+                  placeholder="Budget limité, délais courts, ressources humaines, contraintes réglementaires, etc."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="field field-inline">
+              <div class="field">
+                <label for="kpis" data-i18n="field.kpis.label">
+                  KPIs / Indicateurs de performance visés
+                </label>
+                <textarea
+                  id="kpis"
+                  name="kpis"
+                  rows="3"
+                  data-i18n-placeholder="field.kpis.placeholder"
+                  placeholder="Ex : CA mensuel, marge, nombre de clients actifs, délais de traitement, satisfaction client, etc."
+                ></textarea>
+              </div>
+
+              <div class="field">
+                <label for="resources" data-i18n="field.resources.label">
+                  Ressources déjà disponibles
+                </label>
+                <textarea
+                  id="resources"
+                  name="resources"
+                  rows="3"
+                  data-i18n-placeholder="field.resources.placeholder"
+                  placeholder="Équipe, outils, partenaires, données, budget initial, infrastructure, etc."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="field field-inline">
+              <div class="field">
+                <label for="deliverables" data-i18n="field.deliverables.label">
+                  Livrables attendus
+                </label>
+                <textarea
+                  id="deliverables"
+                  name="deliverables"
+                  rows="3"
+                  data-i18n-placeholder="field.deliverables.placeholder"
+                  placeholder="Ex : note stratégique, plan d’actions, business plan, canevas financier, argumentaire, pitch deck, etc."
+                ></textarea>
+              </div>
+
+              <div class="field">
+                <label for="successIndicators" data-i18n="field.successIndicators.label">
+                  Indicateurs de succès (comment saurez-vous que c’est une réussite ?)
+                </label>
+                <textarea
+                  id="successIndicators"
+                  name="successIndicators"
+                  rows="3"
+                  data-i18n-placeholder="field.successIndicators.placeholder"
+                  placeholder="Ex : atteindre un certain niveau de ventes, signer un partenariat, valider un pilote, etc."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="context" data-i18n="field.context.label">
+                Contexte détaillé (facultatif mais fortement recommandé)
+              </label>
+              <textarea
+                id="context"
+                name="context"
+                rows="4"
+                data-i18n-placeholder="field.context.placeholder"
+                placeholder="Expliquez le contexte global, l’historique, les acteurs impliqués, les décisions déjà prises, etc."
+              ></textarea>
+            </div>
+          </fieldset>
+
+          <!-- BLOC 3 – Budget, délais & urgence -->
+          <fieldset class="field-group">
+            <legend data-i18n="group.budget">3. Budget, délais & urgence</legend>
+
+            <div class="field field-inline">
+              <div class="field">
+                <label for="budgetMin" data-i18n="field.budgetMin.label">
+                  Budget minimum envisagé
+                </label>
+                <div class="field-with-unit">
+                  <input
+                    type="number"
+                    id="budgetMin"
+                    name="budgetMin"
+                    min="0"
+                    step="0.01"
+                    data-i18n-placeholder="field.budgetMin.placeholder"
+                    placeholder="Ex : 1000000"
+                  />
+                  <select id="currency" name="currency">
+                    <option value="XOF">XOF</option>
+                    <option value="EUR">EUR</option>
+                    <option value="USD">USD</option>
+                    <option value="GBP">GBP</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="budgetMax" data-i18n="field.budgetMax.label">
+                  Budget maximum (si applicable)
+                </label>
+                <input
+                  type="number"
+                  id="budgetMax"
+                  name="budgetMax"
+                  min="0"
+                  step="0.01"
+                  data-i18n-placeholder="field.budgetMax.placeholder"
+                  placeholder="Ex : 2500000"
+                />
+              </div>
+            </div>
+
+            <div class="field field-inline">
+              <div class="field">
+                <label for="deadline" data-i18n="field.deadline.label">
+                  Délai souhaité pour disposer de la synthèse / recommandation
+                </label>
+                <input
+                  type="text"
+                  id="deadline"
+                  name="deadline"
+                  data-i18n-placeholder="field.deadline.placeholder"
+                  placeholder="Ex : 7 jours, 1 mois, avant telle date précise..."
+                />
+              </div>
+
+              <div class="field">
+                <label for="urgency" data-i18n="field.urgency.label">
+                  Niveau d’urgence (1 = faible, 5 = critique)
+                </label>
+                <input
+                  type="range"
+                  id="urgency"
+                  name="urgency"
+                  min="1"
+                  max="5"
+                  value="3"
+                />
+                <div class="range-labels">
+                  <span data-i18n="field.urgency.low">Faible</span>
+                  <span data-i18n="field.urgency.medium">Normal</span>
+                  <span data-i18n="field.urgency.high">Critique</span>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+     
+<fieldset class="field-group restitution">
+  <legend>4. Mode de restitution &amp; contact</legend>
+
+  <p class="field-label-strong">
+    Mode de restitution souhaité (vous pouvez en cocher plusieurs)
+  </p>
+
+  <!-- ✅ Options alignées (2 colonnes desktop / 1 colonne mobile) -->
+  <div class="options-grid">
+    <label class="option">
+      <input type="checkbox" id="outputEmail" name="outputEmail">
+      <span>Email détaillé</span>
+    </label>
+
+    <label class="option">
+      <input type="checkbox" id="outputWhatsapp" name="outputWhatsapp">
+      <span>Message WhatsApp structuré</span>
+    </label>
+
+    <label class="option">
+      <input type="checkbox" id="outputPdf" name="outputPdf">
+      <span>Synthèse PDF</span>
+    </label>
+
+    <label class="option">
+      <input type="checkbox" id="outputDisplay" name="outputDisplay">
+      <span>Affichage simple dans e-META</span>
+    </label>
+  </div>
+
+  <!-- ✅ Contact (2 colonnes desktop / 1 colonne mobile) -->
+  <div class="contact-grid">
+    <div class="field">
+      <label for="contactEmail">Adresse e-mail (si restitution par email ou PDF)</label>
+      <input type="email" id="contactEmail" name="contactEmail" placeholder="adresse@email.com">
+    </div>
+
+    <div class="field">
+      <label for="contactWhatsapp">Numéro WhatsApp avec indicatif pays</label>
+      <input type="tel" id="contactWhatsapp" name="contactWhatsapp" placeholder="+221782607212">
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="externalLink">Lien vers un fichier ou dossier (facultatif)</label>
+    <input type="url" id="externalLink" name="externalLink"
+           placeholder="Lien Google Drive, Dropbox, Notion, PDF, etc.">
+  </div>
+
+  <!-- ✅ Consentement : même principe (input collé au texte) -->
+  <label class="option consent">
+    <input type="checkbox" id="consent" name="consent" required>
+    <span>
+      J’accepte que les informations fournies soient utilisées uniquement pour générer une analyse e-META.
+      Aucune donnée personnelle ne sera revendue ou partagée à des tiers.
+    </span>
+  </label>
+</fieldset>
+
+<div id="formStatus" role="status" aria-live="polite"></div>
+
+<div class="form-actions">
+<button class="btn-primary" data-i18n="form.send" type="submit">Envoyer ma requête</button>
+<button class="btn-secondary" data-i18n="form.reset" type="reset">Réinitialiser le formulaire</button>
+</div>
     </form>
 
   </div>
