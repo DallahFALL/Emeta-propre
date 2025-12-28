@@ -1,54 +1,38 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title data-i18n="meta.title">e-META</title>
-  <meta name="theme-color" content="#0b1020" />
 
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
 </head>
 
 <body>
 
 <!-- ================= HEADER ================= -->
 <header class="site-header">
-  <div class="container header-inner">
+  <div class="header-inner">
 
-    <a href="index.html" class="logo" aria-label="e-META">
-      <span class="logo-mark">e</span>
-      <span class="logo-text">META</span>
-      <span class="logo-tagline" data-i18n="tagline">
-        Assistant IA multilingue de prise de décision
-      </span>
-    </a>
+    <div class="logo">
+      <span class="logo-mark">e</span><span class="logo-text">META</span>
+      <span class="logo-tagline" data-i18n="tagline"></span>
+    </div>
 
-    <button class="burger" id="burgerBtn" type="button"
-            aria-label="Menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="burger" id="burgerBtn">☰</button>
 
-    <nav class="nav" id="mainNav" aria-label="Main navigation">
-      <ul>
-        <li><a href="#hero" data-i18n="nav.home">Accueil</a></li>
-        <li><a href="#form" data-i18n="nav.form">Formulaire</a></li>
-        <li><a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a></li>
-      </ul>
+    <nav class="nav" id="mainNav">
+      <a href="#form" data-i18n="nav.form"></a>
+      <a href="privacy.html" data-i18n="nav.privacy"></a>
     </nav>
 
     <div class="header-actions">
-      <select id="languageSwitcher" class="lang-select" aria-label="Language selector">
+      <select id="languageSwitcher">
         <option value="fr">FR</option>
         <option value="en">EN</option>
         <option value="es">ES</option>
         <option value="ar">ع</option>
       </select>
-
-      <a href="#form" class="header-cta" id="btnCustomRequest"
-         data-i18n="btn.custom">
-        Requête personnalisée
-      </a>
     </div>
 
   </div>
@@ -119,8 +103,11 @@
 </section>
 
 <!-- ================= FORM ================= -->
-<section class="form-section" id="form">
-  <div class="container">
+<main class="container">
+
+  <section id="form" class="form-section">
+    <h1 data-i18n="form.title"></h1>
+    <p data-i18n="form.intro"></p>
 
     <h2 class="section-title" data-i18n="form.title">
       Formulaire e-META — Version Ultra-Premium
@@ -131,7 +118,7 @@
       personnalisée.
     </p>
 
-    <form id="emetaForm" novalidate>
+    <form id="emetaForm">
 
   <!-- =========================
        1. INFORMATIONS GÉNÉRALES
@@ -139,12 +126,17 @@
   <fieldset class="field-group">
     <legend data-i18n="group.general">1. Informations générales</legend>
 
-    <div class="field">
-      <label for="domainMain" data-i18n="field.domain.label">
-        Domaine / Thème principal
-      </label>
-      <select id="domainMain" name="domainMain">
-        <option value="" data-i18n="field.domain.placeholder">
+    <fieldset>
+        <legend data-i18n="group.general"></legend>
+
+        <label data-i18n="field.domain.label"></label>
+        <select>
+          <option data-i18n="field.domain.placeholder"></option>
+        </select>
+
+        <label data-i18n="field.projectTitle.label"></label>
+        <input data-i18n-placeholder="field.projectTitle.placeholder" />
+      </fieldset>
           Sélectionnez un domaine
         </option>
         <option data-i18n="domain.business">Business / Strategy</option>
