@@ -394,3 +394,8 @@
     applyLang(localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG);
   });
 })();
+
+burgerBtn.addEventListener("click", () => {
+  mainNav.classList.toggle("open");
+});
+
