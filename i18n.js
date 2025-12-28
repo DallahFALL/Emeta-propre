@@ -110,7 +110,7 @@ window.I18N.fr = Object.assign({}, window.I18N.fr, {
 "privacy.point2": "Vos données servent exclusivement à générer votre analyse stratégique.",
 "privacy.point3": "Aucune donnée n’est vendue, partagée ou utilisée à des fins publicitaires.",
 "privacy.point4": "Vous pouvez demander la suppression de vos données à tout moment.",
-"privacy.note": "e-META est un outil d’aide à la décision, pas un service de conseil professionnel.",
+"privacy.note": "e-META est un outil d’aide à la décision et ne remplace pas un avis professionnel.",
 "privacy.side": "Approche responsable, sécurisée et respectueuse des utilisateurs.",
 "privacy.back": "← Retour à l’accueil"
  
@@ -224,7 +224,7 @@ window.I18N.en = Object.assign({}, window.I18N.en, {
 "privacy.point3": "No data is sold, shared, or used for advertising.",
 "privacy.point4": "You may request data deletion at any time.",
 "privacy.note": "e-META is a decision-support tool, not professional advice.",
-"privacy.side": "Responsible, secure and transparent data approach.",
+"privacy.side": "A responsible, secure and user-respectful approach.",
 "privacy.back": "← Back to home"
 
   "footer.text": "e-META © 2025 — Strategic Decision AI Assistant",
