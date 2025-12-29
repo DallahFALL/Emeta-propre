@@ -1,5 +1,6 @@
 /* =====================================================
-   e-META — i18n.js (UNIFIED / PRO / 4 LANGUAGES)
+   e-META — i18n.js FINAL
+   FR / EN / ES / AR (RTL)
 ===================================================== */
 
 window.I18N = window.I18N || {};
@@ -8,7 +9,6 @@ window.I18N = window.I18N || {};
    FR
 ========================= */
 window.I18N.fr = {
-
   /* META */
   "meta.title": "e-META — Assistant IA de décision stratégique",
 
@@ -33,26 +33,60 @@ window.I18N.fr = {
   "hero.badge.text": "Formulaire ultra-premium, inspiré des cabinets Deloitte / EY.",
   "hero.note": "Temps estimé : 5 à 10 minutes. Gain : des heures de réflexion structurée.",
 
-  /* FORM (placeholders inclus) */
+  /* FORM — labels + placeholders */
+  "form.title": "Formulaire e-META — Version Ultra-Premium",
+  "form.intro": "Complétez les champs ci-dessous pour recevoir votre analyse stratégique personnalisée.",
+
+  "form.projectTitle.label": "Titre du projet ou de la décision",
   "form.projectTitle.placeholder": "Ex : Optimisation de la stratégie de distribution e-META",
+
+  "form.problem.label": "Problème central à résoudre",
   "form.problem.placeholder": "Décrivez clairement le problème, la décision ou le défi principal.",
-  "form.objectives.placeholder": "Objectifs stratégiques à atteindre",
-  "form.constraints.placeholder": "Contraintes, risques, limites",
-  "form.kpis.placeholder": "KPIs visés",
-  "form.resources.placeholder": "Ressources disponibles",
-  "form.deliverables.placeholder": "Livrables attendus",
-  "form.successIndicators.placeholder": "Indicateurs de succès",
-  "form.context.placeholder": "Contexte complémentaire si nécessaire",
+
+  "form.objectives.label": "Objectifs principaux",
+  "form.objectives.placeholder": "Résultats stratégiques attendus",
+
+  "form.constraints.label": "Contraintes et risques",
+  "form.constraints.placeholder": "Contraintes financières, techniques, humaines, réglementaires…",
+
+  "form.kpis.label": "KPIs / Indicateurs de performance",
+  "form.kpis.placeholder": "Indicateurs permettant de mesurer le succès",
+
+  "form.resources.label": "Ressources disponibles",
+  "form.resources.placeholder": "Équipe, budget, outils, partenaires…",
+
+  "form.deliverables.label": "Livrables attendus",
+  "form.deliverables.placeholder": "Rapport, plan d’action, feuille de route…",
+
+  "form.successIndicators.label": "Indicateurs de succès",
+  "form.successIndicators.placeholder": "Ce qui permettra de valider la réussite",
+
+  "form.context.label": "Contexte complémentaire (facultatif)",
+  "form.context.placeholder": "Toute information utile à l’analyse",
+
+  "form.deadline.label": "Délai souhaité",
   "form.deadline.placeholder": "Ex : 7 jours, 1 mois, avant une date précise",
+
+  "form.output.email": "Email détaillé",
+  "form.output.whatsapp": "Message WhatsApp structuré",
+  "form.output.pdf": "Synthèse PDF",
+  "form.output.display": "Affichage direct dans e-META",
+
+  "form.contact.email": "Adresse e-mail",
+  "form.contact.whatsapp": "Numéro WhatsApp (avec indicatif pays)",
+
+  "form.consent": "J’accepte que les informations fournies soient utilisées uniquement pour générer une analyse e-META.",
+  "form.send": "Envoyer ma requête",
+  "form.reset": "Réinitialiser le formulaire",
 
   /* PRIVACY */
   "privacy.title": "Politique de confidentialité",
-  "privacy.intro": "Votre confiance est essentielle. Voici comment e-META utilise vos informations.",
-  "privacy.p1": "Nous collectons uniquement les données que vous fournissez volontairement.",
-  "privacy.p2": "Les données servent exclusivement à l’analyse stratégique demandée.",
-  "privacy.p3": "Aucune exploitation commerciale ou publicitaire.",
-  "privacy.p4": "Suppression des données possible à tout moment.",
-  "privacy.note": "e-META est un outil d’aide à la décision et ne remplace pas un avis professionnel.",
+  "privacy.intro": "Votre confiance est essentielle. Voici comment e-META protège vos données.",
+  "privacy.p1": "Nous collectons uniquement les données nécessaires à l’analyse demandée.",
+  "privacy.p2": "Aucune exploitation commerciale ou publicitaire.",
+  "privacy.p3": "Restitution confidentielle selon le mode choisi.",
+  "privacy.p4": "Suppression possible à tout moment sur simple demande.",
+  "privacy.note": "e-META est un outil d’aide à la décision et ne remplace pas un professionnel.",
   "privacy.side": "Approche responsable, sécurisée et conforme aux standards internationaux.",
   "privacy.back": "← Retour à l’accueil",
 
@@ -77,19 +111,11 @@ window.I18N.en = {
   "hero.claim": "e-META is not a chatbot. It is a decision intelligence engine.",
   "cta.start": "Start a strategic analysis",
 
-  "hero.point1": "Structured analysis: problem, objectives, constraints, risks, KPIs.",
-  "hero.point2": "Actionable synthesis: recommendations, action plan, deliverables.",
-  "hero.point3": "Personalized delivery: Email, WhatsApp, PDF or direct display.",
-
-  "hero.badge.title": "PRO Version v5.0",
-  "hero.badge.text": "Ultra-premium form inspired by Deloitte / EY.",
-  "hero.note": "Estimated time: 5–10 minutes. Value: hours of structured thinking saved.",
-
   "privacy.title": "Privacy Policy",
-  "privacy.intro": "Your trust matters. Here is how e-META uses your information.",
-  "privacy.p1": "We only collect data you voluntarily provide.",
-  "privacy.p2": "Data is used solely for the requested analysis.",
-  "privacy.p3": "No commercial or advertising use.",
+  "privacy.intro": "Your trust matters. Here is how e-META protects your data.",
+  "privacy.p1": "Only necessary data is collected.",
+  "privacy.p2": "No commercial or advertising use.",
+  "privacy.p3": "Confidential delivery according to your choice.",
   "privacy.p4": "Data deletion possible at any time.",
   "privacy.note": "e-META is a decision-support tool, not professional advice.",
   "privacy.side": "Responsible and secure approach compliant with international standards.",
@@ -106,8 +132,15 @@ window.I18N.es = {
   "hero.title": "Lleve sus decisiones al nivel de una consultora premium",
   "hero.subtitle": "e-META analiza su contexto, objetivos, restricciones y recursos.",
   "cta.start": "Iniciar análisis estratégico",
+
   "privacy.title": "Política de privacidad",
-  "privacy.side": "Enfoque responsable y seguro conforme a estándares internacionales"
+  "privacy.intro": "Su confianza es esencial. Así protegemos sus datos.",
+  "privacy.p1": "Recopilamos solo los datos necesarios.",
+  "privacy.p2": "Sin uso comercial ni publicitario.",
+  "privacy.p3": "Entrega confidencial según su elección.",
+  "privacy.p4": "Eliminación de datos en cualquier momento.",
+  "privacy.side": "Enfoque responsable y seguro conforme a estándares internacionales",
+  "privacy.back": "← Volver al inicio"
 };
 
 /* =========================
@@ -115,8 +148,15 @@ window.I18N.es = {
 ========================= */
 window.I18N.ar = {
   "hero.title": "ارتقِ بقراراتك إلى مستوى مكاتب الاستشارات المتميزة",
-  "hero.subtitle": "يحلل e-META السياق والأهداف والقيود والمؤشرات.",
+  "hero.subtitle": "يحلل e-META السياق والأهداف والقيود والمؤشرات والموارد.",
   "cta.start": "بدء تحليل استراتيجي",
+
   "privacy.title": "سياسة الخصوصية",
-  "privacy.side": "نهج مسؤول وآمن ومتوافق مع المعايير الدولية"
+  "privacy.intro": "ثقتك مهمة. نوضح هنا كيفية حماية بياناتك.",
+  "privacy.p1": "نقوم بجمع البيانات الضرورية فقط.",
+  "privacy.p2": "لا يوجد استخدام تجاري أو إعلاني.",
+  "privacy.p3": "تسليم سري حسب اختيارك.",
+  "privacy.p4": "إمكانية حذف البيانات في أي وقت.",
+  "privacy.side": "نهج مسؤول وآمن ومتوافق مع المعايير الدولية",
+  "privacy.back": "← العودة إلى الصفحة الرئيسية"
 };
