@@ -56,14 +56,11 @@ window.I18N.en = {
   "nav.form": "Form",
   "nav.privacy": "Privacy",
 
-  "home.badge": "PRO Version v5.0",
-  "home.subtitle": "Premium form inspired by Deloitte / EY consulting firms",
-  "home.time": "Estimated time: 5–10 minutes",
-  "home.value": "Value: hours of structured thinking saved",
-  "home.title": "Give your decisions the level of a premium consulting firm",
-  "home.desc1": "e-META analyzes your context, objectives, constraints, KPIs and resources.",
-  "home.desc2": "e-META is not a chatbot. It is a decision-intelligence engine.",
-  "home.cta": "Start a strategic analysis",
+  "home.badge": "Version PRO v5.0",
+"home.title": "Donnez à vos décisions le niveau d’un cabinet de consulting premium",
+"home.desc1": "e-META analyse votre contexte, vos objectifs, vos contraintes, vos KPIs et vos ressources pour générer une feuille de route claire.",
+"home.desc2": "e-META n’est pas un chatbot. C’est un moteur d’intelligence décisionnelle inspiré des cabinets de conseil.",
+"home.cta": "Démarrer une analyse stratégique"
 
   "privacy.title": "Privacy Policy",
   "privacy.intro": "Your trust matters. Here is how e-META uses your information.",
