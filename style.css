@@ -485,3 +485,22 @@ html[dir="rtl"] .logo{ align-items:baseline; }
     padding: 16px;
   }
 }
+
+@media (max-width: 520px) {
+  .hero h1 {
+    font-size: 1.6rem;
+    line-height: 1.25;
+  }
+
+  .hero-points li {
+    margin-bottom: 12px;
+  }
+
+  .field-group {
+    margin-bottom: 28px;
+  }
+
+  .section-intro {
+    font-size: 0.95rem;
+  }
+}
