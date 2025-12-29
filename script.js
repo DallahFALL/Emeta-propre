@@ -1,7 +1,7 @@
 /* =====================================================
    e-META — script.js PRO (International + Make + Display)
    - i18n dynamique FR / EN / ES / AR (window.I18N)
-   - Ne remplace JAMAIS par du vide si clé manquante
+   - Logs console si clé i18n manquante
    - RTL auto via <html dir="rtl">
    - Burger menu mobile stable
    - CTA scroll vers #form
@@ -15,63 +15,72 @@
 
   const DEFAULT_LANG = "fr";
   const STORAGE_KEY = "emeta_lang";
-  const RTL_LANGS = new Set(["ar"]);
 
-  // ✅ Mets ici ton Webhook Make (Custom webhook URL)
-  // Exemple: https://hook.eu1.make.com/xxxxxxxxxxxxxxxxxxxx
+  // ✅ Mets ici ton Webhook Make
   const MAKE_WEBHOOK_URL = "PASTE_YOUR_MAKE_WEBHOOK_URL_HERE";
 
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
-  const getDict = (lang) => {
-    const all = window.I18N || {};
-    return all[lang] || all[DEFAULT_LANG] || {};
-  };
+  /* =====================================================
+     🌍 I18N — FONCTION FINALE (celle que tu as validée)
+  ===================================================== */
+  function applyTranslations(lang) {
+    const dict = window.I18N?.[lang];
+    if (!dict) return;
 
-  function setRTL(lang) {
-    const rtl = RTL_LANGS.has(lang);
-    document.documentElement.dir = rtl ? "rtl" : "ltr";
-  }
-
-  function applyI18n(lang) {
-    const dict = getDict(lang);
-
-    // text nodes
-    $$("[data-i18n]").forEach(el => {
+    // Texte normal
+    document.querySelectorAll("[data-i18n]").forEach(el => {
       const key = el.getAttribute("data-i18n");
-      const val = dict[key];
-      if (typeof val === "string" && val.trim() !== "") {
-        el.textContent = val;
+      if (dict[key]) {
+        el.textContent = dict[key];
+      } else {
+        console.warn("Missing i18n key:", key);
+        el.textContent = "";
       }
     });
 
-    // placeholders
-    $$("[data-i18n-placeholder]").forEach(el => {
+    // Placeholders
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
       const key = el.getAttribute("data-i18n-placeholder");
-      const val = dict[key];
-      if (typeof val === "string" && val.trim() !== "") {
-        el.setAttribute("placeholder", val);
+      if (dict[key]) {
+        el.placeholder = dict[key];
+      } else {
+        console.warn("Missing placeholder key:", key);
+        el.placeholder = "";
       }
     });
 
-    // title
-    const titleVal = dict["meta.title"];
-    if (typeof titleVal === "string" && titleVal.trim() !== "") {
-      document.title = titleVal;
+    // RTL support
+    if (lang === "ar") {
+      document.documentElement.setAttribute("dir", "rtl");
+      document.documentElement.classList.add("rtl");
+    } else {
+      document.documentElement.setAttribute("dir", "ltr");
+      document.documentElement.classList.remove("rtl");
+    }
+
+    // <title>
+    if (dict["meta.title"]) {
+      document.title = dict["meta.title"];
     }
   }
 
   function setLanguage(lang) {
     document.documentElement.lang = lang;
-    setRTL(lang);
-    applyI18n(lang);
+    applyTranslations(lang);
 
     const switcher = $("#languageSwitcher");
-    if (switcher && switcher.value !== lang) switcher.value = lang;
+    if (switcher && switcher.value !== lang) {
+      switcher.value = lang;
+    }
 
     localStorage.setItem(STORAGE_KEY, lang);
   }
+
+  /* =====================================================
+     UI
+  ===================================================== */
 
   function initBurger() {
     const burger = $("#burgerBtn");
@@ -104,17 +113,19 @@
       const form = $("#form");
       if (form) form.scrollIntoView({ behavior: "smooth", block: "start" });
     };
-    const ctaHero = $("#ctaStart");
-    const ctaHeader = $("#btnCustomRequest");
-    if (ctaHero) ctaHero.addEventListener("click", go);
-    if (ctaHeader) ctaHeader.addEventListener("click", go);
+    $("#ctaStart")?.addEventListener("click", go);
+    $("#btnCustomRequest")?.addEventListener("click", go);
   }
 
   function initLangSwitcher() {
     const switcher = $("#languageSwitcher");
     if (!switcher) return;
-    switcher.addEventListener("change", (e) => setLanguage(e.target.value));
+    switcher.addEventListener("change", e => setLanguage(e.target.value));
   }
+
+  /* =====================================================
+     DISPLAY PANEL
+  ===================================================== */
 
   function setStatus(msg) {
     const status = $("#formStatus");
@@ -126,19 +137,16 @@
     const box = $("#displayContent");
     if (!panel || !box) return;
 
-    if (isHtml) {
-      box.innerHTML = content;
-    } else {
-      box.innerHTML = `<pre>${escapeHtml(String(content || ""))}</pre>`;
-    }
+    box.innerHTML = isHtml
+      ? content
+      : `<pre>${escapeHtml(String(content || ""))}</pre>`;
 
     panel.hidden = false;
     panel.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function hideDisplayPanel() {
-    const panel = $("#displayPanel");
-    if (panel) panel.hidden = true;
+    $("#displayPanel")?.setAttribute("hidden", "true");
   }
 
   function escapeHtml(str) {
@@ -150,12 +158,15 @@
       .replaceAll("'", "&#039;");
   }
 
+  /* =====================================================
+     FORM & MAKE
+  ===================================================== */
+
   function collectFormData(formEl) {
     const fd = new FormData(formEl);
     const data = {};
 
     for (const [k, v] of fd.entries()) {
-      // handle checkboxes manually below
       if (k in data) {
         if (!Array.isArray(data[k])) data[k] = [data[k]];
         data[k].push(v);
@@ -164,23 +175,15 @@
       }
     }
 
-    // checkboxes
     data.outputEmail = !!$("#outputEmail")?.checked;
     data.outputWhatsapp = !!$("#outputWhatsapp")?.checked;
     data.outputPdf = !!$("#outputPdf")?.checked;
     data.outputDisplay = !!$("#outputDisplay")?.checked;
-
     data.consent = !!$("#consent")?.checked;
 
-    // urgency range numeric
-    const urg = $("#urgency");
-    data.urgency = urg ? Number(urg.value || 3) : 3;
-
-    // language
+    data.urgency = Number($("#urgency")?.value || 3);
     data.lang = document.documentElement.lang || DEFAULT_LANG;
     data.dir = document.documentElement.dir || "ltr";
-
-    // timestamp
     data.submittedAt = new Date().toISOString();
 
     return data;
@@ -198,9 +201,6 @@
     });
 
     const text = await res.text();
-
-    // Make peut répondre vide ou texte
-    // On tente JSON sinon on garde texte
     try {
       return JSON.parse(text);
     } catch {
@@ -209,9 +209,7 @@
   }
 
   function initDisplayClose() {
-    const btn = $("#displayCloseBtn");
-    if (!btn) return;
-    btn.addEventListener("click", hideDisplayPanel);
+    $("#displayCloseBtn")?.addEventListener("click", hideDisplayPanel);
   }
 
   function initFormSubmit() {
@@ -223,27 +221,20 @@
       hideDisplayPanel();
       setStatus("");
 
-      // consent mandatory
-      const consent = $("#consent");
-      if (!consent?.checked) {
+      if (!$("#consent")?.checked) {
         setStatus("⚠️ Consentement requis.");
-        consent?.focus();
         return;
       }
 
       const payload = collectFormData(form);
 
-      // If WhatsApp output selected, WhatsApp number should exist (soft validation)
       if (payload.outputWhatsapp && !payload.contactWhatsapp) {
-        setStatus("⚠️ WhatsApp sélectionné : veuillez renseigner le numéro.");
-        $("#contactWhatsapp")?.focus();
+        setStatus("⚠️ WhatsApp sélectionné : numéro requis.");
         return;
       }
 
-      // If Email output selected, email should exist (soft validation)
       if (payload.outputEmail && !payload.contactEmail) {
-        setStatus("⚠️ Email sélectionné : veuillez renseigner l’adresse e-mail.");
-        $("#contactEmail")?.focus();
+        setStatus("⚠️ Email sélectionné : adresse requise.");
         return;
       }
 
@@ -252,29 +243,23 @@
       try {
         const result = await postToMake(payload);
 
-        // ✅ Affichage direct si demandé (et si Make renvoie quelque chose)
         if (payload.outputDisplay) {
           const html = result?.display_html;
-          const txt = result?.display_text || result?.message || JSON.stringify(result, null, 2);
-          if (typeof html === "string" && html.trim() !== "") {
-            showDisplayPanel(html, true);
-          } else {
-            showDisplayPanel(txt, false);
-          }
+          const txt = result?.display_text || JSON.stringify(result, null, 2);
+          showDisplayPanel(html && html.trim() ? html : txt, !!html);
         }
 
         setStatus("✅ Requête envoyée avec succès.");
-        // Option : reset automatique si tu veux
-        // form.reset();
-
       } catch (err) {
-        setStatus("❌ Erreur d’envoi. Vérifiez le Webhook Make.");
-        if ($("#outputDisplay")?.checked) {
-          showDisplayPanel(String(err?.message || err), false);
-        }
+        setStatus("❌ Erreur d’envoi.");
+        showDisplayPanel(String(err.message || err), false);
       }
     });
   }
+
+  /* =====================================================
+     INIT
+  ===================================================== */
 
   document.addEventListener("DOMContentLoaded", () => {
     initBurger();
