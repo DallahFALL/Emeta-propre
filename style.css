@@ -467,3 +467,21 @@ html[dir="rtl"] body{ direction:rtl; }
 html[dir="rtl"] .hero-points{ padding-left:0; padding-right:18px; }
 html[dir="rtl"] .nav.open{ left:16px; right:16px; } /* stable */
 html[dir="rtl"] .logo{ align-items:baseline; }
+
+@media (max-width: 600px) {
+  .field label {
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+
+  .field textarea,
+  .field input,
+  .field select {
+    padding: 14px;
+    font-size: 1rem;
+  }
+
+  .field-group {
+    padding: 16px;
+  }
+}
