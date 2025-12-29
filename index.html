@@ -99,263 +99,100 @@
     </p>
 
     <!-- ✅ COLLER ICI LE BLOC B (FORMULAIRE) -->
-    <form id="emetaForm" class="emeta-form" novalidate>
+<form id="metaForm" class="form">
 
-      <!-- ========== 1. INFORMATIONS GÉNÉRALES ========== -->
-      <fieldset class="field-group">
-        <legend data-i18n="form.group.general">1. Informations générales</legend>
+  <!-- 1. Informations générales -->
+  <fieldset class="field-group">
+    <legend data-i18n="form.section.general">1. Informations générales</legend>
 
-        <div class="field">
-          <label for="domainMain" data-i18n="form.domain.label">Domaine / Thème principal</label>
-          <select id="domainMain" name="domainMain" required>
-            <option value="" data-i18n="form.domain.select">Sélectionnez un domaine</option>
-            <option value="business" data-i18n="form.domain.business">Business / Stratégie</option>
-            <option value="marketing" data-i18n="form.domain.marketing">Marketing / Vente</option>
-            <option value="finance" data-i18n="form.domain.finance">Finance</option>
-            <option value="hr" data-i18n="form.domain.hr">RH / Organisation</option>
-            <option value="tech" data-i18n="form.domain.tech">Tech / Produit</option>
-            <option value="legal" data-i18n="form.domain.legal">Juridique</option>
-            <option value="other" data-i18n="form.domain.other">Autre</option>
-          </select>
-        </div>
+    <label data-i18n="form.domain.label" for="domainMain">Domaine / Thème principal</label>
+    <select id="domainMain" name="domainMain">
+      <option value="" data-i18n="form.domain.placeholder">
+        Sélectionnez un domaine
+      </option>
+      <option data-i18n="form.domain.business">Business / Stratégie</option>
+      <option data-i18n="form.domain.marketing">Marketing / Vente</option>
+      <option data-i18n="form.domain.finance">Finance</option>
+      <option data-i18n="form.domain.tech">Technologie / Digital</option>
+      <option data-i18n="form.domain.other">Autre</option>
+    </select>
 
-        <div class="field">
-          <label for="projectType" data-i18n="form.projectType.label">Type de projet</label>
-          <select id="projectType" name="projectType" required>
-            <option value="" data-i18n="form.projectType.select">Sélectionnez le type de projet</option>
-            <option value="launch" data-i18n="form.projectType.launch">Création / Lancement</option>
-            <option value="optimization" data-i18n="form.projectType.optimization">Optimisation</option>
-            <option value="audit" data-i18n="form.projectType.audit">Audit / Diagnostic</option>
-            <option value="crisis" data-i18n="form.projectType.crisis">Crise / Urgence</option>
-            <option value="personal" data-i18n="form.projectType.personal">Décision personnelle</option>
-            <option value="other" data-i18n="form.projectType.other">Autre</option>
-          </select>
-        </div>
+    <label data-i18n="form.project.label" for="projectTitle">
+      Titre court du projet ou de la décision
+    </label>
+    <input
+      type="text"
+      id="projectTitle"
+      name="projectTitle"
+      data-i18n-placeholder="form.project.placeholder"
+      placeholder="Ex : Lancement d’un nouveau service digital"
+    />
+  </fieldset>
 
-        <div class="field">
-          <label for="projectTitle" data-i18n="form.projectTitle.label">Titre court du projet ou de la décision</label>
-          <input
-            type="text"
-            id="projectTitle"
-            name="projectTitle"
-            data-i18n-placeholder="form.projectTitle.placeholder"
-            placeholder="Ex : Optimisation de la stratégie de distribution e-META"
-            required
-          />
-        </div>
-      </fieldset>
+  <!-- 2. Problème central -->
+  <fieldset class="field-group">
+    <legend data-i18n="form.section.problem">2. Problème central</legend>
 
-      <!-- ========== 2. ANALYSE STRATÉGIQUE ========== -->
-      <fieldset class="field-group">
-        <legend data-i18n="form.group.analysis">2. Analyse stratégique — Niveau cabinet de conseil</legend>
+    <textarea
+      id="problem"
+      name="problem"
+      rows="4"
+      data-i18n-placeholder="form.problem.placeholder"
+      placeholder="Décrivez clairement le problème ou la décision à prendre"
+    ></textarea>
+  </fieldset>
 
-        <div class="field">
-          <label for="problem" data-i18n="form.problem.label">Problème central à résoudre</label>
-          <textarea
-            id="problem"
-            name="problem"
-            rows="4"
-            data-i18n-placeholder="form.problem.placeholder"
-            placeholder="Décrivez clairement le problème, la décision ou le défi principal."
-            required
-          ></textarea>
-        </div>
+  <!-- 3. Objectifs -->
+  <fieldset class="field-group">
+    <legend data-i18n="form.section.objectives">3. Objectifs</legend>
 
-        <div class="field-inline">
-          <div class="field">
-            <label for="objectives" data-i18n="form.objectives.label">Objectifs principaux</label>
-            <textarea
-              id="objectives"
-              name="objectives"
-              rows="3"
-              data-i18n-placeholder="form.objectives.placeholder"
-              required
-            ></textarea>
-          </div>
+    <textarea
+      id="objectives"
+      name="objectives"
+      rows="3"
+      data-i18n-placeholder="form.objectives.placeholder"
+      placeholder="Quels résultats souhaitez-vous atteindre ?"
+    ></textarea>
+  </fieldset>
 
-          <div class="field">
-            <label for="constraints" data-i18n="form.constraints.label">Contraintes & risques majeurs</label>
-            <textarea
-              id="constraints"
-              name="constraints"
-              rows="3"
-              data-i18n-placeholder="form.constraints.placeholder"
-              required
-            ></textarea>
-          </div>
-        </div>
+  <!-- 4. Contraintes -->
+  <fieldset class="field-group">
+    <legend data-i18n="form.section.constraints">4. Contraintes & limites</legend>
 
-        <div class="field-inline">
-          <div class="field">
-            <label for="kpis" data-i18n="form.kpis.label">KPIs / Indicateurs de performance visés</label>
-            <textarea
-              id="kpis"
-              name="kpis"
-              rows="3"
-              data-i18n-placeholder="form.kpis.placeholder"
-            ></textarea>
-          </div>
+    <textarea
+      id="constraints"
+      name="constraints"
+      rows="3"
+      data-i18n-placeholder="form.constraints.placeholder"
+      placeholder="Budget, délais, ressources, règles internes…"
+    ></textarea>
+  </fieldset>
 
-          <div class="field">
-            <label for="resources" data-i18n="form.resources.label">Ressources déjà disponibles</label>
-            <textarea
-              id="resources"
-              name="resources"
-              rows="3"
-              data-i18n-placeholder="form.resources.placeholder"
-            ></textarea>
-          </div>
-        </div>
+  <!-- 5. Contact -->
+  <fieldset class="field-group">
+    <legend data-i18n="form.section.contact">5. Restitution (facultatif)</legend>
 
-        <div class="field-inline">
-          <div class="field">
-            <label for="deliverables" data-i18n="form.deliverables.label">Livrables attendus</label>
-            <textarea
-              id="deliverables"
-              name="deliverables"
-              rows="3"
-              data-i18n-placeholder="form.deliverables.placeholder"
-            ></textarea>
-          </div>
+    <input
+      type="email"
+      name="email"
+      data-i18n-placeholder="form.contact.email"
+      placeholder="Adresse e-mail (facultatif)"
+    />
 
-          <div class="field">
-            <label for="successIndicators" data-i18n="form.successIndicators.label">Indicateurs de succès</label>
-            <textarea
-              id="successIndicators"
-              name="successIndicators"
-              rows="3"
-              data-i18n-placeholder="form.successIndicators.placeholder"
-            ></textarea>
-          </div>
-        </div>
+    <input
+      type="tel"
+      name="whatsapp"
+      data-i18n-placeholder="form.contact.whatsapp"
+      placeholder="Numéro WhatsApp (facultatif)"
+    />
+  </fieldset>
 
-        <div class="field">
-          <label for="context" data-i18n="form.context.label">Contexte détaillé (facultatif)</label>
-          <textarea
-            id="context"
-            name="context"
-            rows="4"
-            data-i18n-placeholder="form.context.placeholder"
-          ></textarea>
-        </div>
+  <button type="submit" class="cta-primary" data-i18n="form.submit">
+    Lancer l’analyse stratégique
+  </button>
 
-        <div class="field">
-          <label for="externalLink" data-i18n="form.externalLink.label">Lien vers un fichier ou dossier (facultatif)</label>
-          <input type="url" id="externalLink" name="externalLink" placeholder="https://..." />
-        </div>
-      </fieldset>
+</form>
 
-      <!-- ========== 3. BUDGET, DÉLAIS & URGENCE ========== -->
-      <fieldset class="field-group">
-        <legend data-i18n="form.group.budget">3. Budget, délais & urgence</legend>
-
-        <div class="field-inline">
-          <div class="field">
-            <label for="budgetMin" data-i18n="form.budgetMin.label">Budget minimum envisagé</label>
-            <div class="field-with-unit">
-              <input type="number" id="budgetMin" name="budgetMin" min="0" inputmode="numeric" />
-              <select id="currency" name="currency" aria-label="Currency">
-                <option value="XOF">XOF</option>
-                <option value="EUR">EUR</option>
-                <option value="USD">USD</option>
-                <option value="GBP">GBP</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="budgetMax" data-i18n="form.budgetMax.label">Budget maximum (si applicable)</label>
-            <input type="number" id="budgetMax" name="budgetMax" min="0" inputmode="numeric" />
-          </div>
-        </div>
-
-        <div class="field-inline">
-          <div class="field">
-            <label for="deadline" data-i18n="form.deadline.label">Délai souhaité</label>
-            <input
-              type="text"
-              id="deadline"
-              name="deadline"
-              data-i18n-placeholder="form.deadline.placeholder"
-              placeholder="Ex : 7 jours, 1 mois, avant une date précise"
-            />
-          </div>
-
-          <div class="field">
-            <label for="urgency" data-i18n="form.urgency.label">Niveau d’urgence</label>
-            <input type="range" id="urgency" name="urgency" min="1" max="5" value="3" />
-            <div class="range-labels">
-              <span data-i18n="form.urgency.low">Faible</span>
-              <span data-i18n="form.urgency.medium">Normal</span>
-              <span data-i18n="form.urgency.high">Critique</span>
-            </div>
-          </div>
-        </div>
-      </fieldset>
-
-      <!-- ========== 4. RESTITUTION & CONTACT ========== -->
-      <fieldset class="field-group">
-        <legend data-i18n="form.group.output">4. Mode de restitution & contact</legend>
-
-        <div class="options-grid" role="group" aria-label="Output selection">
-          <label class="option">
-            <input type="checkbox" id="outputEmail" name="outputEmail" />
-            <span data-i18n="form.output.email">Email détaillé</span>
-          </label>
-
-          <label class="option">
-            <input type="checkbox" id="outputWhatsapp" name="outputWhatsapp" />
-            <span data-i18n="form.output.whatsapp">Message WhatsApp structuré</span>
-          </label>
-
-          <label class="option">
-            <input type="checkbox" id="outputPdf" name="outputPdf" />
-            <span data-i18n="form.output.pdf">Synthèse PDF</span>
-          </label>
-
-          <label class="option">
-            <input type="checkbox" id="outputDisplay" name="outputDisplay" />
-            <span data-i18n="form.output.display">Affichage direct dans e-META</span>
-          </label>
-        </div>
-
-        <div class="contact-grid">
-          <div class="field">
-            <label for="contactEmail" data-i18n="form.contact.email">Adresse e-mail</label>
-            <input type="email" id="contactEmail" name="contactEmail" autocomplete="email" />
-          </div>
-
-          <div class="field">
-            <label for="contactWhatsapp" data-i18n="form.contact.whatsapp">Numéro WhatsApp avec indicatif pays</label>
-            <input type="tel" id="contactWhatsapp" name="contactWhatsapp" autocomplete="tel" />
-          </div>
-        </div>
-
-        <label class="option consent">
-          <input type="checkbox" id="consent" name="consent" required />
-          <span data-i18n="form.consent">
-            J’accepte que les informations fournies soient utilisées uniquement pour générer une analyse e-META.
-          </span>
-        </label>
-      </fieldset>
-
-      <div class="form-actions">
-        <button type="submit" class="btn-primary" data-i18n="form.send">Envoyer ma requête</button>
-        <button type="reset" class="btn-secondary" data-i18n="form.reset">Réinitialiser le formulaire</button>
-      </div>
-
-      <!-- ========== ZONE D’AFFICHAGE DIRECT ========== -->
-      <section id="displayPanel" class="display-panel" hidden>
-        <div class="display-head">
-          <h3 class="display-title">e-META</h3>
-          <button class="display-close" type="button" id="displayCloseBtn" aria-label="Close">✕</button>
-        </div>
-        <div id="displayContent" class="display-content"></div>
-      </section>
-
-      <p class="form-status" id="formStatus" aria-live="polite"></p>
-
-    </form>
   </section>
 </main>
 
