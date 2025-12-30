@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title data-i18n="privacy.meta.title">Politique de confidentialité — e-META</title>
+  <title data-i18n="privacy.meta.title">
+    Politique de confidentialité — e-META
+  </title>
 
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="rtl.css" />
@@ -24,7 +26,7 @@
       </span>
     </a>
 
-    <nav class="nav">
+    <nav class="nav" id="mainNav">
       <ul>
         <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
         <li><a href="index.html#form" data-i18n="nav.form">Formulaire</a></li>
@@ -42,22 +44,22 @@
 </header>
 
 <!-- ================= MAIN ================= -->
-<main class="privacy-main">
+<main class="legal-main">
 
-  <section class="privacy-section">
-    <div class="container privacy-inner">
+  <section class="legal-section">
+    <div class="container legal-container">
 
-      <article class="privacy-card">
+      <article class="legal-card">
 
-        <h1 data-i18n="privacy.title">
+        <h1 class="legal-title" data-i18n="privacy.title">
           Politique de confidentialité
         </h1>
 
-        <p class="privacy-intro" data-i18n="privacy.intro">
+        <p class="legal-intro" data-i18n="privacy.intro">
           Votre confiance est essentielle. Voici comment e-META protège vos données.
         </p>
 
-        <ul class="privacy-list">
+        <ul class="legal-list">
           <li data-i18n="privacy.point1">
             e-META collecte uniquement les informations nécessaires à l’analyse demandée.
           </li>
@@ -75,9 +77,11 @@
           </li>
         </ul>
 
-        <a href="index.html" class="btn-secondary" data-i18n="privacy.back">
-          ← Retour à l’accueil
-        </a>
+        <div class="legal-actions">
+          <a href="index.html" class="btn-secondary" data-i18n="privacy.back">
+            ← Retour à l’accueil
+          </a>
+        </div>
 
       </article>
 
