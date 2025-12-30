@@ -193,6 +193,14 @@ h1,h2,h3,p,li{ overflow-wrap:anywhere; }
   }
   .header-cta{ width:100%; padding:12px; font-size:.95rem; }
 }
+/* Force visibilité CTA header */
+.header-cta {
+  background: linear-gradient(
+    135deg,
+    rgba(232,90,26,1),
+    rgba(232,90,26,.85)
+  );
+}
 
 .nav.open{
   display:block;
