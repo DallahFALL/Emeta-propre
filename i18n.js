@@ -1,17 +1,14 @@
 /* =====================================================
-   e-META — i18n.js PRO
-   FR / EN / ES / AR (RTL)
-   Structure cohérente • clés uniques • stable
+   e-META — i18n.js FINAL
+   Langues : FR / EN / ES / AR
+   RTL auto pour AR
 ===================================================== */
 
 const I18N = {
-
-  /* =========================
-     FRANÇAIS
-  ========================= */
   fr: {
-    langDir: "ltr",
-
+    meta: {
+      title: "e-META — Assistant IA de décision stratégique"
+    },
     tagline: "Assistant IA multilingue de prise de décision",
 
     nav: {
@@ -21,7 +18,6 @@ const I18N = {
     },
 
     cta: {
-      start: "Démarrer une analyse stratégique",
       custom: "Requête personnalisée"
     },
 
@@ -44,68 +40,176 @@ const I18N = {
 
     form: {
       title: "Formulaire e-META — Version Ultra-Premium",
-      intro:
-        "Répondez avec précision : chaque information améliore la qualité de l’analyse stratégique générée."
+      subtitle:
+        "Complétez les champs ci-dessous pour recevoir une analyse stratégique structurée, fiable et orientée décision.",
+
+      group: {
+        general: "1. Informations générales",
+        analysis: "2. Analyse stratégique",
+        budget: "3. Budget & urgence",
+        output: "4. Restitution & contact"
+      },
+
+      domain: {
+        label: "Domaine principal",
+        select: "Sélectionnez un domaine",
+        business: "Business / Stratégie",
+        marketing: "Marketing / Vente",
+        finance: "Finance",
+        hr: "Ressources humaines",
+        tech: "Technologie / IT",
+        legal: "Juridique / Réglementaire",
+        other: "Autre"
+      },
+
+      projectType: {
+        label: "Type de projet",
+        select: "Sélectionnez un type",
+        launch: "Lancement",
+        optimization: "Optimisation",
+        audit: "Audit / Diagnostic",
+        crisis: "Gestion de crise",
+        personal: "Décision personnelle",
+        other: "Autre"
+      },
+
+      projectTitle: {
+        label: "Intitulé du projet",
+        placeholder: "Ex : Lancement d’un nouveau service digital"
+      },
+
+      problem: {
+        label: "Problématique principale",
+        placeholder:
+          "Décrivez clairement le problème ou la décision à prendre"
+      },
+
+      objectives: {
+        label: "Objectifs",
+        placeholder: "Quels résultats souhaitez-vous atteindre ?"
+      },
+
+      constraints: {
+        label: "Contraintes",
+        placeholder: "Contraintes budgétaires, temporelles, humaines, etc."
+      },
+
+      kpis: {
+        label: "Indicateurs clés (KPIs)",
+        placeholder: "Comment mesurerez-vous le succès ?"
+      },
+
+      resources: {
+        label: "Ressources disponibles",
+        placeholder: "Équipe, outils, partenaires, budget existant…"
+      },
+
+      deliverables: {
+        label: "Livrables attendus",
+        placeholder: "Rapport, plan d’action, scénarios, recommandations…"
+      },
+
+      successIndicators: {
+        label: "Critères de succès",
+        placeholder: "À quoi saura-t-on que la décision est la bonne ?"
+      },
+
+      context: {
+        label: "Contexte complémentaire",
+        placeholder: "Informations utiles supplémentaires"
+      },
+
+      externalLink: {
+        label: "Lien externe (optionnel)",
+        placeholder: "Lien vers un document ou une ressource"
+      },
+
+      budgetMin: {
+        label: "Budget minimum estimé"
+      },
+
+      budgetMax: {
+        label: "Budget maximum estimé"
+      },
+
+      deadline: {
+        label: "Échéance souhaitée",
+        placeholder: "Ex : 30 jours, fin du trimestre…"
+      },
+
+      urgency: {
+        label: "Niveau d’urgence",
+        low: "Faible",
+        medium: "Moyen",
+        high: "Élevé"
+      },
+
+      output: {
+        email: "Restitution par e-mail",
+        whatsapp: "Restitution via WhatsApp",
+        pdf: "Rapport PDF",
+        display: "Affichage direct à l’écran"
+      },
+
+      contact: {
+        email: "Adresse e-mail",
+        email: {
+          placeholder: "exemple@email.com"
+        },
+        whatsapp: "Numéro WhatsApp",
+        whatsapp: {
+          placeholder: "+221 XX XXX XX XX"
+        }
+      },
+
+      consent:
+        "J’accepte que mes informations soient utilisées uniquement pour produire cette analyse décisionnelle.",
+
+      send: "Envoyer la requête",
+      reset: "Réinitialiser le formulaire"
     },
 
     privacy: {
-      meta: {
-        title: "Politique de confidentialité — e-META"
-      },
       title: "Politique de confidentialité",
       intro:
-        "Votre confiance est essentielle. Cette politique explique comment e-META collecte, utilise et protège vos données.",
+        "Votre confiance est essentielle. Cette politique explique de manière transparente comment e-META collecte, utilise et protège vos données.",
 
-      block1: { title: "Protection des données" },
-      block2: { title: "Responsabilité et usage" },
-
-      data: {
-        1: "e-META collecte uniquement les informations nécessaires à l’analyse demandée.",
-        2: "Aucune donnée n’est vendue, louée ou exploitée à des fins commerciales ou publicitaires.",
-        3: "Les données sont traitées de manière sécurisée et confidentielle.",
-        4: "L’utilisateur peut demander la suppression de ses données à tout moment."
+      block1: {
+        title: "Protection des données"
       },
 
-      usage: {
-        1: "e-META est un outil d’aide à la décision et ne remplace pas un conseil professionnel spécialisé.",
-        2: "Les analyses générées ne constituent ni un avis juridique, financier, médical ou réglementaire.",
-        3: "L’utilisateur reste seul responsable des décisions prises à partir des résultats fournis.",
-        4: "L’utilisation de la plateforme implique l’acceptation pleine et entière de cette politique."
+      block2: {
+        title: "Responsabilité et usage"
       },
 
-      back: "← Retour à la page principale"
+      point5:
+        "e-META est un outil d’aide à la décision fondé sur une analyse structurée des informations fournies par l’utilisateur.",
+      point6:
+        "Les analyses générées ne constituent pas un conseil juridique, financier, médical ou réglementaire.",
+      point7:
+        "L’utilisateur demeure seul responsable des décisions prises sur la base des résultats fournis.",
+      point8:
+        "Aucune décision automatisée n’est imposée : e-META éclaire et structure la réflexion stratégique."
     },
 
     footer: {
-      copy: "e-META © 2025 — Assistant IA de décision stratégique"
+      text: "e-META © 2025 — Assistant IA de décision stratégique",
+      privacy: "Politique de confidentialité"
     }
   },
 
-  /* =========================
-     ENGLISH
-  ========================= */
+  /* ================= ENGLISH ================= */
   en: {
-    langDir: "ltr",
-
-    tagline: "Multilingual AI decision-making assistant",
-
-    nav: {
-      home: "Home",
-      form: "Form",
-      privacy: "Privacy"
-    },
-
-    cta: {
-      start: "Start a strategic analysis",
-      custom: "Custom request"
-    },
-
+    meta: { title: "e-META — Strategic Decision AI Assistant" },
+    tagline: "Multilingual AI assistant for decision-making",
+    nav: { home: "Home", form: "Form", privacy: "Privacy" },
+    cta: { custom: "Custom request" },
     hero: {
-      title: "Make decisions at the level of a premium consulting firm",
+      title: "Make decisions at a premium consulting level",
       subtitle:
-        "e-META analyzes your context, objectives, constraints, risks and key indicators to deliver clear, actionable decision insights.",
+        "e-META analyzes your context, objectives, constraints, risks and key indicators to deliver clear, actionable insights.",
       p1: "Structured analysis: problem, objectives, constraints, risks, KPIs.",
-      p2: "Actionable recommendations and decision-support scenarios.",
+      p2: "Actionable recommendations and decision scenarios.",
       p3: "Personalized delivery: on-screen, email, WhatsApp or PDF.",
       cta: "Start a strategic analysis",
       note: "e-META is not a chatbot. It is a decision intelligence engine.",
@@ -116,194 +220,85 @@ const I18N = {
           "Equivalent to the combined work of a senior consultant, a business analyst and a decision strategist."
       }
     },
-
-    form: {
-      title: "e-META Form — Ultra-Premium Version",
-      intro:
-        "Answer accurately: every detail improves the quality of the generated strategic analysis."
-    },
-
-    privacy: {
-      meta: {
-        title: "Privacy Policy — e-META"
-      },
-      title: "Privacy Policy",
-      intro:
-        "Your trust matters. This policy explains how e-META collects, uses and protects your data.",
-
-      block1: { title: "Data protection" },
-      block2: { title: "Responsibility and usage" },
-
-      data: {
-        1: "e-META collects only the information required for the requested analysis.",
-        2: "No data is sold, rented or used for advertising purposes.",
-        3: "All data is processed securely and confidentially.",
-        4: "Users may request deletion of their data at any time."
-      },
-
-      usage: {
-        1: "e-META is a decision-support tool and does not replace professional advice.",
-        2: "Generated analyses are not legal, financial, medical or regulatory advice.",
-        3: "Users remain fully responsible for decisions made based on the results.",
-        4: "Using the platform implies full acceptance of this privacy policy."
-      },
-
-      back: "← Back to main page"
-    },
-
     footer: {
-      copy: "e-META © 2025 — Strategic decision AI assistant"
+      text: "e-META © 2025 — Strategic Decision AI Assistant",
+      privacy: "Privacy policy"
     }
   },
 
-  /* =========================
-     ESPAÑOL
-  ========================= */
+  /* ================= ESPAÑOL ================= */
   es: {
-    langDir: "ltr",
-
-    tagline: "Asistente de IA multilingüe para la toma de decisiones",
-
-    nav: {
-      home: "Inicio",
-      form: "Formulario",
-      privacy: "Privacidad"
-    },
-
-    cta: {
-      start: "Iniciar análisis estratégico",
-      custom: "Solicitud personalizada"
-    },
-
+    meta: { title: "e-META — Asistente IA de decisión estratégica" },
+    tagline: "Asistente IA multilingüe para la toma de decisiones",
+    nav: { home: "Inicio", form: "Formulario", privacy: "Privacidad" },
+    cta: { custom: "Solicitud personalizada" },
     hero: {
-      title: "Tome decisiones al nivel de una consultora premium",
+      title: "Tome decisiones al nivel de una consultoría premium",
       subtitle:
-        "e-META analiza su contexto, objetivos, restricciones, riesgos e indicadores clave para generar una síntesis clara y accionable.",
+        "e-META analiza su contexto, objetivos, restricciones y riesgos para ofrecer una síntesis clara y útil.",
       p1: "Análisis estructurado: problema, objetivos, restricciones, riesgos, KPIs.",
-      p2: "Recomendaciones accionables y escenarios de apoyo a la decisión.",
-      p3: "Entrega personalizada: pantalla, correo electrónico, WhatsApp o PDF.",
+      p2: "Recomendaciones accionables y escenarios de decisión.",
+      p3: "Entrega personalizada: pantalla, correo, WhatsApp o PDF.",
       cta: "Iniciar análisis estratégico",
-      note: "e-META no es un chatbot. Es un motor de inteligencia decisional.",
-      metric: {
-        value: "+12 horas",
-        label: "de análisis estratégico simulado",
-        sub:
-          "Equivalente al trabajo combinado de un consultor senior, un analista de negocio y un estratega."
-      }
+      note: "e-META no es un chatbot. Es un motor de inteligencia decisional."
     },
-
-    form: {
-      title: "Formulario e-META — Versión Ultra-Premium",
-      intro:
-        "Responda con precisión: cada dato mejora la calidad del análisis estratégico generado."
-    },
-
-    privacy: {
-      meta: {
-        title: "Política de privacidad — e-META"
-      },
-      title: "Política de privacidad",
-      intro:
-        "Su confianza es esencial. Esta política explica cómo e-META protege sus datos.",
-
-      block1: { title: "Protección de datos" },
-      block2: { title: "Responsabilidad y uso" },
-
-      data: {
-        1: "e-META recopila solo la información necesaria para el análisis solicitado.",
-        2: "Los datos no se venden, alquilan ni utilizan con fines publicitarios.",
-        3: "La información se procesa de forma segura y confidencial.",
-        4: "El usuario puede solicitar la eliminación de sus datos en cualquier momento."
-      },
-
-      usage: {
-        1: "e-META es una herramienta de apoyo a la decisión, no un asesor profesional.",
-        2: "Los análisis no constituyen asesoramiento legal, financiero o médico.",
-        3: "El usuario es responsable de las decisiones tomadas.",
-        4: "El uso de la plataforma implica la aceptación total de esta política."
-      },
-
-      back: "← Volver a la página principal"
-    },
-
     footer: {
-      copy: "e-META © 2025 — Asistente de IA para decisiones estratégicas"
+      text: "e-META © 2025 — Asistente IA de decisión estratégica",
+      privacy: "Política de privacidad"
     }
   },
 
-  /* =========================
-     العربية (RTL)
-  ========================= */
+  /* ================= العربية ================= */
   ar: {
-    langDir: "rtl",
-
+    meta: { title: "e-META — مساعد ذكاء اصطناعي لاتخاذ القرار" },
     tagline: "مساعد ذكي متعدد اللغات لدعم اتخاذ القرار",
-
-    nav: {
-      home: "الرئيسية",
-      form: "النموذج",
-      privacy: "الخصوصية"
-    },
-
-    cta: {
-      start: "بدء تحليل استراتيجي",
-      custom: "طلب مخصص"
-    },
-
+    nav: { home: "الرئيسية", form: "النموذج", privacy: "الخصوصية" },
+    cta: { custom: "طلب مخصص" },
     hero: {
-      title: "اتخذ قرارات بمستوى شركة استشارات رفيعة",
+      title: "اتخذ قرارات بمستوى مكاتب الاستشارات المتميزة",
       subtitle:
-        "يحلل e-META سياقك وأهدافك والقيود والمخاطر والمؤشرات الرئيسية لتقديم خلاصة قرار واضحة وقابلة للتنفيذ.",
-      p1: "تحليل منظم: المشكلة، الأهداف، القيود، المخاطر، مؤشرات الأداء.",
-      p2: "توصيات عملية وسيناريوهات لدعم القرار.",
-      p3: "تسليم مخصص: عرض مباشر، بريد إلكتروني، واتساب أو PDF.",
-      cta: "بدء تحليل استراتيجي",
-      note: "e-META ليس روبوت محادثة، بل محرك ذكاء قراري.",
-      metric: {
-        value: "+12 ساعة",
-        label: "من التحليل الاستراتيجي المُحاكى",
-        sub:
-          "يعادل العمل المشترك لمستشار أول، ومحلل أعمال، وخبير استراتيجي."
-      }
+        "يقوم e-META بتحليل السياق والأهداف والقيود والمخاطر لتقديم رؤية استراتيجية واضحة.",
+      p1: "تحليل منظم: المشكلة، الأهداف، القيود، المخاطر، المؤشرات.",
+      p2: "توصيات عملية وسيناريوهات دعم القرار.",
+      p3: "عرض مخصص: شاشة، بريد إلكتروني، واتساب أو PDF.",
+      cta: "ابدأ التحليل الاستراتيجي",
+      note: "e-META ليس روبوت محادثة، بل محرك ذكاء لاتخاذ القرار."
     },
-
-    form: {
-      title: "نموذج e-META — النسخة الفاخرة",
-      intro:
-        "أدخل المعلومات بدقة، فكل تفصيل يحسن جودة التحليل الاستراتيجي."
-    },
-
-    privacy: {
-      meta: {
-        title: "سياسة الخصوصية — e-META"
-      },
-      title: "سياسة الخصوصية",
-      intro:
-        "ثقتك مهمة. تشرح هذه السياسة كيفية جمع بياناتك واستخدامها وحمايتها.",
-
-      block1: { title: "حماية البيانات" },
-      block2: { title: "المسؤولية والاستخدام" },
-
-      data: {
-        1: "يجمع e-META فقط البيانات اللازمة للتحليل المطلوب.",
-        2: "لا يتم بيع البيانات أو تأجيرها أو استخدامها لأغراض إعلانية.",
-        3: "تُعالج البيانات بشكل آمن وسري.",
-        4: "يمكن للمستخدم طلب حذف بياناته في أي وقت."
-      },
-
-      usage: {
-        1: "e-META أداة لدعم اتخاذ القرار ولا يغني عن الاستشارة المهنية.",
-        2: "التحليلات المقدمة ليست استشارة قانونية أو مالية أو طبية.",
-        3: "يبقى المستخدم مسؤولاً عن القرارات المتخذة.",
-        4: "استخدام المنصة يعني القبول الكامل لهذه السياسة."
-      },
-
-      back: "← العودة إلى الصفحة الرئيسية"
-    },
-
     footer: {
-      copy: "e-META © 2025 — مساعد ذكاء اصطناعي للقرار الاستراتيجي"
+      text: "e-META © 2025 — مساعد ذكي لاتخاذ القرار",
+      privacy: "سياسة الخصوصية"
     }
   }
-
 };
+
+/* ================= APPLY ================= */
+function applyLanguage(lang) {
+  const dict = I18N[lang];
+  if (!dict) return;
+
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n").split(".");
+    let val = dict;
+    key.forEach(k => (val = val?.[k]));
+    if (val) el.textContent = val;
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const key = el.getAttribute("data-i18n-placeholder").split(".");
+    let val = dict;
+    key.forEach(k => (val = val?.[k]));
+    if (val) el.placeholder = val;
+  });
+}
+
+const savedLang = localStorage.getItem("lang") || "fr";
+applyLanguage(savedLang);
+
+document.getElementById("languageSwitcher")?.addEventListener("change", e => {
+  const lang = e.target.value;
+  localStorage.setItem("lang", lang);
+  applyLanguage(lang);
+});
