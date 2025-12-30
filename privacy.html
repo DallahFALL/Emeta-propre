@@ -26,7 +26,7 @@
       </span>
     </a>
 
-    <nav class="nav" id="mainNav">
+    <nav class="nav">
       <ul>
         <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
         <li><a href="index.html#form" data-i18n="nav.form">Formulaire</a></li>
@@ -44,46 +44,73 @@
 </header>
 
 <!-- ================= MAIN ================= -->
-<main class="legal-main">
+<main class="privacy-main">
 
-  <section class="legal-section">
-    <div class="container legal-container">
+  <section class="privacy-section">
+    <div class="container">
 
-      <article class="legal-card">
+      <h1 class="privacy-title" data-i18n="privacy.title">
+        Politique de confidentialité
+      </h1>
 
-        <h1 class="legal-title" data-i18n="privacy.title">
-          Politique de confidentialité
-        </h1>
+      <p class="privacy-intro" data-i18n="privacy.intro">
+        Votre confiance est essentielle. Voici comment e-META protège vos données.
+      </p>
 
-        <p class="legal-intro" data-i18n="privacy.intro">
-          Votre confiance est essentielle. Voici comment e-META protège vos données.
-        </p>
+      <!-- GRID -->
+      <div class="privacy-grid">
 
-        <ul class="legal-list">
-          <li data-i18n="privacy.point1">
-            e-META collecte uniquement les informations nécessaires à l’analyse demandée.
-          </li>
-          <li data-i18n="privacy.point2">
-            Aucune donnée n’est vendue, partagée ou exploitée à des fins publicitaires.
-          </li>
-          <li data-i18n="privacy.point3">
-            Les résultats sont transmis de manière confidentielle via le canal sélectionné.
-          </li>
-          <li data-i18n="privacy.point4">
-            Vous pouvez demander la suppression de vos données à tout moment.
-          </li>
-          <li data-i18n="privacy.point5">
-            e-META est un outil d’aide à la décision et ne remplace pas un avis professionnel.
-          </li>
-        </ul>
+        <!-- LEFT BLOCK -->
+        <article class="privacy-card">
+          <h2 data-i18n="privacy.block1.title">
+            Protection des données
+          </h2>
 
-        <div class="legal-actions">
-          <a href="index.html" class="btn-secondary" data-i18n="privacy.back">
-            ← Retour à l’accueil
-          </a>
-        </div>
+          <ul class="privacy-list">
+            <li data-i18n="privacy.point1">
+              e-META collecte uniquement les informations nécessaires à la génération de l’analyse demandée.
+            </li>
+            <li data-i18n="privacy.point2">
+              Aucune donnée n’est vendue, louée ou exploitée à des fins commerciales ou publicitaires.
+            </li>
+            <li data-i18n="privacy.point3">
+              Les résultats sont transmis de manière confidentielle via le canal choisi par l’utilisateur.
+            </li>
+            <li data-i18n="privacy.point4">
+              Vous pouvez demander la suppression de vos données à tout moment.
+            </li>
+          </ul>
+        </article>
 
-      </article>
+        <!-- RIGHT BLOCK -->
+        <article class="privacy-card">
+          <h2 data-i18n="privacy.block2.title">
+            Responsabilité & usage
+          </h2>
+
+          <ul class="privacy-list">
+            <li data-i18n="privacy.point5">
+              e-META est un outil d’aide à la décision basé sur l’analyse structurée de vos informations.
+            </li>
+            <li data-i18n="privacy.point6">
+              Les recommandations fournies ne remplacent pas un avis professionnel spécialisé.
+            </li>
+            <li data-i18n="privacy.point7">
+              L’utilisateur reste seul responsable des décisions prises à partir des analyses générées.
+            </li>
+            <li data-i18n="privacy.point8">
+              Aucune donnée sensible n’est conservée au-delà du strict nécessaire au traitement.
+            </li>
+          </ul>
+        </article>
+
+      </div>
+
+      <div class="privacy-actions">
+        <a href="index.html" class="btn-secondary" data-i18n="privacy.back">
+          ← Retour à la page principale
+        </a>
+      </div>
 
     </div>
   </section>
