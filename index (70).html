@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="meta.title">e-META</title>
+  <meta name="theme-color" content="#0b1020" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="container header-inner">
+
+    <!-- LOGO -->
+    <a href="index.html" class="logo">
+      <span class="logo-mark">e</span>
+      <span class="logo-text">META</span>
+      <span class="logo-tagline" data-i18n="tagline"></span>
+    </a>
+
+    <!-- BURGER (mobile) -->
+    <button
+      class="burger"
+      id="burgerBtn"
+      aria-label="Menu"
+      aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="mainNav">
+      <ul>
+        <li><a href="index.html" data-i18n="nav.home"></a></li>
+        <li><a href="#form" data-i18n="nav.form"></a></li>
+        <li><a href="privacy.html" data-i18n="nav.privacy"></a></li>
+      </ul>
+    </nav>
+
+    <!-- ACTIONS -->
+    <div class="header-actions">
+
+      <!-- LANG SWITCHER -->
+      <select
+        id="languageSwitcher"
+        class="lang-select"
+        aria-label="Language selector">
+        <option value="fr">FR</option>
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+        <option value="ar">ع</option>
+      </select>
+
+      <!-- CTA HEADER -->
+      <button
+        class="cta-header"
+        id="btnCustomRequest"
+        type="button"
+        data-i18n="cta.custom">
+      </button>
+
+    </div>
+
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+
+    <!-- LEFT -->
+    <div class="hero-text">
+
+      <h1 data-i18n="hero.title">
+        Prenez des décisions au niveau d’un cabinet de conseil premium
+      </h1>
+
+      <p class="hero-subtitle" data-i18n="hero.subtitle">
+        e-META analyse votre contexte, vos objectifs, vos contraintes,
+        vos risques et vos indicateurs clés pour produire une feuille de route claire et exploitable.
+      </p>
+
+      <p class="hero-claim" data-i18n="hero.claim">
+        e-META n’est pas un chatbot. C’est un moteur d’intelligence décisionnelle.
+      </p>
+
+      <ul class="hero-points">
+        <li data-i18n="hero.point1">
+          Analyse structurée : problème, objectifs, contraintes, risques et KPIs.
+        </li>
+        <li data-i18n="hero.point2">
+          Synthèse actionnable : recommandations claires et plan d’actions priorisé.
+        </li>
+        <li data-i18n="hero.point3">
+          Restitution personnalisée : affichage direct, e-mail, WhatsApp ou PDF.
+        </li>
+      </ul>
+
+      <button class="cta-primary" id="ctaStart" type="button" data-i18n="cta.start">
+        Démarrer une analyse stratégique
+      </button>
+
+    </div>
+
+    <!-- RIGHT -->
+    <aside class="hero-panel">
+      <p class="hero-note" data-i18n="hero.note">
+        e-META accompagne dirigeants, entrepreneurs et organisations
+        dans leurs décisions complexes à fort enjeu.
+      </p>
+    </aside>
+
+  </div>
+</section>
+<h2 class="form-title" data-i18n="form.title">
+  Formulaire e-META — Version Ultra-Premium
+</h2>
+
+<p class="form-intro" data-i18n="form.intro">
+  Complétez les champs ci-dessous pour recevoir une analyse stratégique
+  personnalisée, structurée selon les standards des cabinets de conseil.
+</p>
+
+<!-- ================= FORM ================= -->
+<main class="container">
+  <section id="form" class="form-section">
+    <h2 class="section-title" data-i18n="form.title">Formulaire e-META — Version Ultra-Premium</h2>
+    <p class="section-intro" data-i18n="form.intro">
+      Complétez les champs ci-dessous pour recevoir votre analyse stratégique personnalisée.
+    </p>
+
+    <!-- ✅ COLLER ICI LE BLOC B (FORMULAIRE) -->
+  <form id="emetaForm" class="emeta-form" novalidate>
+
+  <!-- ========== 1. INFORMATIONS GÉNÉRALES ========== -->
+  <fieldset class="field-group">
+    <legend data-i18n="form.group.general"></legend>
+
+    <div class="field">
+      <label for="domainMain" data-i18n="form.domain.label"></label>
+      <select id="domainMain" name="domainMain" required>
+        <option value="" data-i18n="form.domain.select"></option>
+        <option value="business" data-i18n="form.domain.business"></option>
+        <option value="marketing" data-i18n="form.domain.marketing"></option>
+        <option value="finance" data-i18n="form.domain.finance"></option>
+        <option value="hr" data-i18n="form.domain.hr"></option>
+        <option value="tech" data-i18n="form.domain.tech"></option>
+        <option value="legal" data-i18n="form.domain.legal"></option>
+        <option value="other" data-i18n="form.domain.other"></option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="projectType" data-i18n="form.projectType.label"></label>
+      <select id="projectType" name="projectType" required>
+        <option value="" data-i18n="form.projectType.select"></option>
+        <option value="launch" data-i18n="form.projectType.launch"></option>
+        <option value="optimization" data-i18n="form.projectType.optimization"></option>
+        <option value="audit" data-i18n="form.projectType.audit"></option>
+        <option value="crisis" data-i18n="form.projectType.crisis"></option>
+        <option value="personal" data-i18n="form.projectType.personal"></option>
+        <option value="other" data-i18n="form.projectType.other"></option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="projectTitle" data-i18n="form.projectTitle.label"></label>
+      <input
+        type="text"
+        id="projectTitle"
+        name="projectTitle"
+        data-i18n-placeholder="form.projectTitle.placeholder"
+        required
+      />
+    </div>
+  </fieldset>
+
+  <!-- ========== 2. ANALYSE STRATÉGIQUE ========== -->
+  <fieldset class="field-group">
+    <legend data-i18n="form.group.analysis"></legend>
+
+    <div class="field">
+      <label for="problem" data-i18n="form.problem.label"></label>
+      <textarea
+        id="problem"
+        name="problem"
+        rows="4"
+        data-i18n-placeholder="form.problem.placeholder"
+        required
+      ></textarea>
+    </div>
+
+    <div class="field-inline">
+      <div class="field">
+        <label for="objectives" data-i18n="form.objectives.label"></label>
+        <textarea
+          id="objectives"
+          name="objectives"
+          rows="3"
+          data-i18n-placeholder="form.objectives.placeholder"
+          required
+        ></textarea>
+      </div>
+
+      <div class="field">
+        <label for="constraints" data-i18n="form.constraints.label"></label>
+        <textarea
+          id="constraints"
+          name="constraints"
+          rows="3"
+          data-i18n-placeholder="form.constraints.placeholder"
+          required
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="field-inline">
+      <div class="field">
+        <label for="kpis" data-i18n="form.kpis.label"></label>
+        <textarea
+          id="kpis"
+          name="kpis"
+          rows="3"
+          data-i18n-placeholder="form.kpis.placeholder"
+        ></textarea>
+      </div>
+
+      <div class="field">
+        <label for="resources" data-i18n="form.resources.label"></label>
+        <textarea
+          id="resources"
+          name="resources"
+          rows="3"
+          data-i18n-placeholder="form.resources.placeholder"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="field-inline">
+      <div class="field">
+        <label for="deliverables" data-i18n="form.deliverables.label"></label>
+        <textarea
+          id="deliverables"
+          name="deliverables"
+          rows="3"
+          data-i18n-placeholder="form.deliverables.placeholder"
+        ></textarea>
+      </div>
+
+      <div class="field">
+        <label for="successIndicators" data-i18n="form.successIndicators.label"></label>
+        <textarea
+          id="successIndicators"
+          name="successIndicators"
+          rows="3"
+          data-i18n-placeholder="form.successIndicators.placeholder"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="context" data-i18n="form.context.label"></label>
+      <textarea
+        id="context"
+        name="context"
+        rows="4"
+        data-i18n-placeholder="form.context.placeholder"
+      ></textarea>
+    </div>
+
+    <div class="field">
+      <label for="externalLink" data-i18n="form.externalLink.label"></label>
+      <input
+        type="url"
+        id="externalLink"
+        name="externalLink"
+        data-i18n-placeholder="form.externalLink.placeholder"
+      />
+    </div>
+  </fieldset>
+
+  <!-- ========== 3. BUDGET & URGENCE ========== -->
+  <fieldset class="field-group">
+    <legend data-i18n="form.group.budget"></legend>
+
+    <div class="field-inline">
+      <div class="field">
+        <label for="budgetMin" data-i18n="form.budgetMin.label"></label>
+        <div class="field-with-unit">
+          <input type="number" id="budgetMin" name="budgetMin" min="0">
+          <select id="currency" name="currency">
+            <option value="XOF">XOF</option>
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="budgetMax" data-i18n="form.budgetMax.label"></label>
+        <input type="number" id="budgetMax" name="budgetMax" min="0">
+      </div>
+    </div>
+
+    <div class="field-inline">
+      <div class="field">
+        <label for="deadline" data-i18n="form.deadline.label"></label>
+        <input
+          type="text"
+          id="deadline"
+          name="deadline"
+          data-i18n-placeholder="form.deadline.placeholder"
+        />
+      </div>
+
+      <div class="field">
+        <label for="urgency" data-i18n="form.urgency.label"></label>
+        <input type="range" id="urgency" name="urgency" min="1" max="5" value="3">
+        <div class="range-labels">
+          <span data-i18n="form.urgency.low"></span>
+          <span data-i18n="form.urgency.medium"></span>
+          <span data-i18n="form.urgency.high"></span>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <!-- ========== 4. RESTITUTION & CONTACT ========== -->
+  <fieldset class="field-group">
+    <legend data-i18n="form.group.output"></legend>
+
+    <div class="options-grid">
+      <label class="option"><input type="checkbox" name="outputEmail"> <span data-i18n="form.output.email"></span></label>
+      <label class="option"><input type="checkbox" name="outputWhatsapp"> <span data-i18n="form.output.whatsapp"></span></label>
+      <label class="option"><input type="checkbox" name="outputPdf"> <span data-i18n="form.output.pdf"></span></label>
+      <label class="option"><input type="checkbox" name="outputDisplay"> <span data-i18n="form.output.display"></span></label>
+    </div>
+
+    <div class="contact-grid">
+      <div class="field">
+        <label for="contactEmail" data-i18n="form.contact.email"></label>
+        <input
+          type="email"
+          id="contactEmail"
+          name="contactEmail"
+          data-i18n-placeholder="form.contact.email.placeholder"
+        />
+      </div>
+
+      <div class="field">
+        <label for="contactWhatsapp" data-i18n="form.contact.whatsapp"></label>
+        <input
+          type="tel"
+          id="contactWhatsapp"
+          name="contactWhatsapp"
+          data-i18n-placeholder="form.contact.whatsapp.placeholder"
+        />
+      </div>
+    </div>
+
+    <label class="option consent">
+      <input type="checkbox" id="consent" name="consent" required>
+      <span data-i18n="form.consent"></span>
+    </label>
+  </fieldset>
+
+  <div class="form-actions">
+    <button type="submit" class="btn-primary" data-i18n="form.send"></button>
+    <button type="reset" class="btn-secondary" data-i18n="form.reset"></button>
+  </div>
+
+  <p class="form-status" id="formStatus" aria-live="polite"></p>
+
+</form>
+
+  </section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="footer-copy" data-i18n="footer.text"></p>
+    <a href="privacy.html" class="footer-link" data-i18n="footer.privacy">Politique de confidentialité</a>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
