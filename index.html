@@ -301,41 +301,86 @@
           placeholder="Optimiste, réaliste, pessimiste…"
           data-i18n-placeholder="form.scenario.ph"></textarea>
 
-        <label data-i18n="form.trends">Thématiques stratégiques</label>
-        <div class="options-grid">
-          <label><input type="checkbox"> IA & automatisation</label>
-          <label><input type="checkbox"> Croissance & scaling</label>
-          <label><input type="checkbox"> Optimisation des coûts</label>
-          <label><input type="checkbox"> ESG & impact</label>
-          <label><input type="checkbox"> Réglementation</label>
-          <label><input type="checkbox"> Innovation produit</label>
-        </div>
-      </div>
+       <!-- ================= THÉMATIQUES STRATÉGIQUES ================= -->
+<fieldset class="field-group">
+  <legend data-i18n="form.themes.title">Thématiques stratégiques</legend>
 
-      <!-- ===== GROUPE 4 : LIVRABLES ===== -->
-      <div class="form-card">
-        <h3 data-i18n="form.group.output">4. Restitution & livrables</h3>
+  <div class="checkbox-grid">
+    <label class="check-item">
+      <input type="checkbox" name="themes" value="ai">
+      <span data-i18n="form.themes.ai">IA & automatisation</span>
+    </label>
 
-        <div class="options-grid">
-          <label><input type="checkbox"> Synthèse exécutive</label>
-          <label><input type="checkbox"> Plan d’action</label>
-          <label><input type="checkbox"> Tableau de KPIs</label>
-          <label><input type="checkbox"> Analyse des risques</label>
-          <label><input type="checkbox"> Rapport PDF professionnel</label>
-          <label><input type="checkbox"> Envoi Email / WhatsApp</label>
-        </div>
-      </div>
+    <label class="check-item">
+      <input type="checkbox" name="themes" value="scaling">
+      <span data-i18n="form.themes.scaling">Croissance & scaling</span>
+    </label>
 
-      <!-- ===== ACTIONS ===== -->
-      <div class="form-actions">
-        <button type="submit" class="cta-submit" data-i18n="cta.submit">
-          Envoyer la requête stratégique
-        </button>
+    <label class="check-item">
+      <input type="checkbox" name="themes" value="costs">
+      <span data-i18n="form.themes.costs">Optimisation des coûts</span>
+    </label>
 
-        <p class="form-confirmation" id="formConfirmation" hidden>
-          ✅ <span data-i18n="form.sent">Requête envoyée avec succès</span>
-        </p>
-      </div>
+    <label class="check-item">
+      <input type="checkbox" name="themes" value="esg">
+      <span data-i18n="form.themes.esg">ESG & impact</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="themes" value="regulation">
+      <span data-i18n="form.themes.regulation">Réglementation</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="themes" value="innovation">
+      <span data-i18n="form.themes.innovation">Innovation produit</span>
+    </label>
+  </div>
+</fieldset>
+
+<!-- ================= RESTITUTION & LIVRABLES ================= -->
+<fieldset class="field-group">
+  <legend data-i18n="form.outputs.title">Restitution & livrables</legend>
+
+  <div class="checkbox-grid">
+    <label class="check-item">
+      <input type="checkbox" name="outputs" value="summary">
+      <span data-i18n="form.outputs.summary">Synthèse exécutive</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="outputs" value="actionplan">
+      <span data-i18n="form.outputs.action">Plan d’action</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="outputs" value="kpi">
+      <span data-i18n="form.outputs.kpi">Tableau de KPIs</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="outputs" value="risk">
+      <span data-i18n="form.outputs.risk">Analyse des risques</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="outputs" value="pdf">
+      <span data-i18n="form.outputs.pdf">Rapport PDF professionnel</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="outputs" value="delivery">
+      <span data-i18n="form.outputs.delivery">Envoi Email / WhatsApp</span>
+    </label>
+  </div>
+</fieldset>
+
+<!-- ================= ACTIONS ================= -->
+<div class="form-actions">
+  <button type="submit" class="btn-submit" data-i18n="form.submit">
+    Envoyer la requête stratégique
+  </button>
+</div>
 
     </form>
 
@@ -343,32 +388,21 @@
 </section>
   
  <footer class="site-footer">
-  <div class="container footer-inner">
+  <div class="container footer-grid">
 
-    <div class="footer-cols">
-      <div>
-        <strong>e-META</strong>
-        <p data-i18n="footer.tagline">
-          Moteur d’intelligence décisionnelle stratégique.
-        </p>
-      </div>
-
-      <div>
-        <strong data-i18n="footer.links">Liens</strong>
-        <ul>
-          <li><a href="#form" data-i18n="nav.form">Formulaire</a></li>
-          <li><a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <strong data-i18n="footer.legal">Légal</strong>
-        <p>
-          © 2025 e-META<br>
-          <span data-i18n="footer.rights">Tous droits réservés</span>
-        </p>
-      </div>
+    <div class="footer-brand">
+      <strong>e-META</strong>
+      <p>Moteur d’intelligence décisionnelle stratégique.</p>
     </div>
 
+    <div class="footer-links">
+      <a href="#form" data-i18n="footer.form">Formulaire</a>
+      <a href="privacy.html" data-i18n="footer.privacy">Confidentialité</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 e-META — Tous droits réservés
   </div>
 </footer>
