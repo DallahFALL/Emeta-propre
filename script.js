@@ -1,13 +1,13 @@
 /* =====================================================
-   e-META — script.js PRO (International + Make + Display)
-   - i18n dynamique FR / EN / ES / AR (window.I18N)
-   - Logs console si clé i18n manquante
-   - RTL auto via <html dir="rtl">
+   e-META — script.js FINAL (PRO • International • Stable)
+   - i18n dynamique FR / EN / ES / AR (objets imbriqués)
+   - Ne remplace JAMAIS par du vide si clé manquante
+   - Placeholders i18n (data-i18n-placeholder)
+   - RTL auto (ar) + class .rtl
    - Burger menu mobile stable
-   - CTA scroll vers #form
+   - Scroll CTA vers #form
    - Persist langue (localStorage)
-   - Submit: POST JSON vers Make Webhook
-   - Affichage direct si outputDisplay (réponse Make)
+   - Compat index.html + privacy.html
 ===================================================== */
 
 (() => {
@@ -15,72 +15,99 @@
 
   const DEFAULT_LANG = "fr";
   const STORAGE_KEY = "emeta_lang";
+  const RTL_LANGS = new Set(["ar"]);
 
-  // ✅ Mets ici ton Webhook Make
-  const MAKE_WEBHOOK_URL = "PASTE_YOUR_MAKE_WEBHOOK_URL_HERE";
+  // Helpers
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  const $ = (s, r = document) => r.querySelector(s);
-  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
-
-  /* =====================================================
-     🌍 I18N — FONCTION FINALE (celle que tu as validée)
-  ===================================================== */
-  function applyTranslations(lang) {
-    const dict = window.I18N?.[lang];
-    if (!dict) return;
-
-    // Texte normal
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
-      if (dict[key]) {
-        el.textContent = dict[key];
-      } else {
-        console.warn("Missing i18n key:", key);
-        el.textContent = "";
-      }
-    });
-
-    // Placeholders
-    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-      const key = el.getAttribute("data-i18n-placeholder");
-      if (dict[key]) {
-        el.placeholder = dict[key];
-      } else {
-        console.warn("Missing placeholder key:", key);
-        el.placeholder = "";
-      }
-    });
-
-    // RTL support
-    if (lang === "ar") {
-      document.documentElement.setAttribute("dir", "rtl");
-      document.documentElement.classList.add("rtl");
-    } else {
-      document.documentElement.setAttribute("dir", "ltr");
-      document.documentElement.classList.remove("rtl");
+  // Safe getter for nested paths: "nav.home" => dict.nav.home
+  function getByPath(obj, path) {
+    if (!obj || !path) return undefined;
+    const parts = String(path).split(".");
+    let cur = obj;
+    for (const p of parts) {
+      if (cur && typeof cur === "object" && p in cur) cur = cur[p];
+      else return undefined;
     }
+    return cur;
+  }
 
-    // <title>
-    if (dict["meta.title"]) {
-      document.title = dict["meta.title"];
+  function getDict(lang) {
+    const all = window.I18N || window.I18n || {};
+    return all[lang] || all[DEFAULT_LANG] || {};
+  }
+
+  function setRTL(lang) {
+    const rtl = RTL_LANGS.has(lang);
+    document.documentElement.setAttribute("dir", rtl ? "rtl" : "ltr");
+    document.documentElement.classList.toggle("rtl", rtl);
+  }
+
+  function applyTranslations(lang) {
+    const dict = getDict(lang);
+
+    // 1) Text nodes
+    $$("[data-i18n]").forEach((el) => {
+      const key = el.getAttribute("data-i18n");
+      const val = getByPath(dict, key);
+
+      // ✅ Only set if it's a non-empty string
+      if (typeof val === "string" && val.trim() !== "") {
+        el.textContent = val;
+      } else {
+        // ❗ Don't wipe existing content (avoids empty UI)
+        // console.warn("Missing i18n key:", key);
+      }
+    });
+
+    // 2) Placeholders
+    $$("[data-i18n-placeholder]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-placeholder");
+      const val = getByPath(dict, key);
+
+      if (typeof val === "string" && val.trim() !== "") {
+        el.setAttribute("placeholder", val);
+      } else {
+        // don't wipe placeholder
+        // console.warn("Missing placeholder key:", key);
+      }
+    });
+
+    // 3) Page title (optional)
+    const titleKey = document.querySelector("title")?.getAttribute("data-i18n");
+    if (titleKey) {
+      const t = getByPath(dict, titleKey);
+      if (typeof t === "string" && t.trim() !== "") document.title = t;
     }
   }
 
   function setLanguage(lang) {
-    document.documentElement.lang = lang;
-    applyTranslations(lang);
+    const safe = (window.I18N && window.I18N[lang]) ? lang : DEFAULT_LANG;
 
-    const switcher = $("#languageSwitcher");
-    if (switcher && switcher.value !== lang) {
-      switcher.value = lang;
-    }
+    document.documentElement.setAttribute("lang", safe);
+    setRTL(safe);
+    applyTranslations(safe);
 
-    localStorage.setItem(STORAGE_KEY, lang);
+    // Sync both possible switcher ids (index + privacy)
+    const s1 = $("#languageSwitcher");
+    const s2 = $("#langSwitcher");
+    if (s1 && s1.value !== safe) s1.value = safe;
+    if (s2 && s2.value !== safe) s2.value = safe;
+
+    localStorage.setItem(STORAGE_KEY, safe);
   }
 
-  /* =====================================================
-     UI
-  ===================================================== */
+  // Global function for onclick usage (CTA)
+  window.scrollToForm = function scrollToForm() {
+    const form = document.getElementById("form");
+    if (form) {
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      // If no #form on the page (privacy.html), go home
+      // optional: location.href = "index.html#form";
+    }
+  };
 
   function initBurger() {
     const burger = $("#burgerBtn");
@@ -93,7 +120,7 @@
       burger.setAttribute("aria-expanded", open ? "true" : "false");
     });
 
-    $$("a", nav).forEach(a => {
+    $$("a", nav).forEach((a) => {
       a.addEventListener("click", () => {
         nav.classList.remove("open");
         burger.setAttribute("aria-expanded", "false");
@@ -108,170 +135,29 @@
     });
   }
 
-  function scrollToForm() {
-  const form = document.getElementById("form");
-  if (form) {
-    form.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }
-}
-
-    $("#ctaStart")?.addEventListener("click", go);
-    $("#btnCustomRequest")?.addEventListener("click", go);
-  }
-
   function initLangSwitcher() {
-    const switcher = $("#languageSwitcher");
-    if (!switcher) return;
-    switcher.addEventListener("change", e => setLanguage(e.target.value));
-  }
+    const switchers = [$("#languageSwitcher"), $("#langSwitcher")].filter(Boolean);
+    if (!switchers.length) return;
 
-  /* =====================================================
-     DISPLAY PANEL
-  ===================================================== */
-
-  function setStatus(msg) {
-    const status = $("#formStatus");
-    if (status) status.textContent = msg || "";
-  }
-
-  function showDisplayPanel(content, isHtml = false) {
-    const panel = $("#displayPanel");
-    const box = $("#displayContent");
-    if (!panel || !box) return;
-
-    box.innerHTML = isHtml
-      ? content
-      : `<pre>${escapeHtml(String(content || ""))}</pre>`;
-
-    panel.hidden = false;
-    panel.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  function hideDisplayPanel() {
-    $("#displayPanel")?.setAttribute("hidden", "true");
-  }
-
-  function escapeHtml(str) {
-    return str
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
-  /* =====================================================
-     FORM & MAKE
-  ===================================================== */
-
-  function collectFormData(formEl) {
-    const fd = new FormData(formEl);
-    const data = {};
-
-    for (const [k, v] of fd.entries()) {
-      if (k in data) {
-        if (!Array.isArray(data[k])) data[k] = [data[k]];
-        data[k].push(v);
-      } else {
-        data[k] = v;
-      }
-    }
-
-    data.outputEmail = !!$("#outputEmail")?.checked;
-    data.outputWhatsapp = !!$("#outputWhatsapp")?.checked;
-    data.outputPdf = !!$("#outputPdf")?.checked;
-    data.outputDisplay = !!$("#outputDisplay")?.checked;
-    data.consent = !!$("#consent")?.checked;
-
-    data.urgency = Number($("#urgency")?.value || 3);
-    data.lang = document.documentElement.lang || DEFAULT_LANG;
-    data.dir = document.documentElement.dir || "ltr";
-    data.submittedAt = new Date().toISOString();
-
-    return data;
-  }
-
-  async function postToMake(payload) {
-    if (!MAKE_WEBHOOK_URL || MAKE_WEBHOOK_URL.includes("PASTE_YOUR")) {
-      throw new Error("MAKE_WEBHOOK_URL is not set.");
-    }
-
-    const res = await fetch(MAKE_WEBHOOK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-
-    const text = await res.text();
-    try {
-      return JSON.parse(text);
-    } catch {
-      return { ok: res.ok, display_text: text };
-    }
-  }
-
-  function initDisplayClose() {
-    $("#displayCloseBtn")?.addEventListener("click", hideDisplayPanel);
-  }
-
-  function initFormSubmit() {
-    const form = $("#emetaForm");
-    if (!form) return;
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      hideDisplayPanel();
-      setStatus("");
-
-      if (!$("#consent")?.checked) {
-        setStatus("⚠️ Consentement requis.");
-        return;
-      }
-
-      const payload = collectFormData(form);
-
-      if (payload.outputWhatsapp && !payload.contactWhatsapp) {
-        setStatus("⚠️ WhatsApp sélectionné : numéro requis.");
-        return;
-      }
-
-      if (payload.outputEmail && !payload.contactEmail) {
-        setStatus("⚠️ Email sélectionné : adresse requise.");
-        return;
-      }
-
-      setStatus("⏳ Envoi en cours…");
-
-      try {
-        const result = await postToMake(payload);
-
-        if (payload.outputDisplay) {
-          const html = result?.display_html;
-          const txt = result?.display_text || JSON.stringify(result, null, 2);
-          showDisplayPanel(html && html.trim() ? html : txt, !!html);
-        }
-
-        setStatus("✅ Requête envoyée avec succès.");
-      } catch (err) {
-        setStatus("❌ Erreur d’envoi.");
-        showDisplayPanel(String(err.message || err), false);
-      }
+    switchers.forEach((sw) => {
+      sw.addEventListener("change", (e) => setLanguage(e.target.value));
     });
   }
 
-  /* =====================================================
-     INIT
-  ===================================================== */
+  // Optional: make page feel faster by pre-applying saved language ASAP
+  function earlyApplySavedLanguage() {
+    const saved = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
+    // apply minimal html attributes early
+    document.documentElement.setAttribute("lang", saved);
+    setRTL(saved);
+  }
+
+  // Run
+  earlyApplySavedLanguage();
 
   document.addEventListener("DOMContentLoaded", () => {
     initBurger();
-    initCTA();
     initLangSwitcher();
-    initDisplayClose();
-    initFormSubmit();
 
     const saved = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
     setLanguage(saved);
