@@ -164,3 +164,17 @@
   });
 
 })();
+
+// Scroll fiable vers le formulaire
+function scrollToForm() {
+  const form = document.getElementById("form");
+  if (!form) return;
+
+  const yOffset = -90; // compense le header sticky
+  const y = form.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+  window.scrollTo({
+    top: y,
+    behavior: "smooth"
+  });
+}
