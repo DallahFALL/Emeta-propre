@@ -537,75 +537,13 @@ body {
   cursor: pointer;
 }
 
-/* FOOTER */
-.site-footer {
-  background: #0b1020;
-  color: #fff;
-  padding: 40px 16px 0;
-}
-
-.footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
-  flex-wrap: wrap;
-  text-align: center;
-}
-
-.footer-brand {
-  flex: 1 1 240px;
-}
-
-.footer-nav {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.footer-nav a {
-  color: #cfd6ff;
-  text-decoration: none;
-  font-size: 0.95rem;
-}
-
-.footer-bottom {
-  margin-top: 32px;
-  padding: 16px 0;
-  text-align: center;
-  font-size: 0.85rem;
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
-
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr; }
-
-  .nav {
-    display: none;
-    position: absolute;
-    top: 64px;
-    left: 0;
-    right: 0;
-    background: #050914;
-    flex-direction: column;
-    padding: 16px;
-  }
-
-  .nav.open { display: flex; }
-  .burger { display: block; }
-}
-
-/* ================= FOOTER FIX FINAL ================= */
+/* ================= FOOTER COMPACT FINAL ================= */
 
 .site-footer {
   background: #0b1020;
   color: #ffffff;
-  padding-top: 40px;
   border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 24px 0 16px;
 }
 
 .footer-inner {
@@ -615,31 +553,32 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 10px; /* 👈 réduit fortement */
   text-align: center;
 }
 
 .footer-brand strong {
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
+  font-size: 1rem;
+  letter-spacing: 0.4px;
 }
 
 .footer-brand p {
-  font-size: 0.9rem;
-  opacity: 0.85;
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin: 0;
 }
 
 .footer-links {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+  gap: 16px;
   justify-content: center;
+  margin-top: 6px;
 }
 
 .footer-links a {
+  font-size: 0.85rem;
   color: #cfd6ff;
   text-decoration: none;
-  font-size: 0.9rem;
 }
 
 .footer-links a:hover {
@@ -647,9 +586,8 @@ body {
 }
 
 .footer-copy {
-  margin-top: 32px;
-  padding: 16px 0;
-  font-size: 0.8rem;
+  margin-top: 10px; /* 👈 réduit */
+  font-size: 0.75rem;
   text-align: center;
-  opacity: 0.7;
+  opacity: 0.6;
 }
