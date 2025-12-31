@@ -539,22 +539,45 @@ body {
 
 /* FOOTER */
 .site-footer {
-  padding: 40px 0;
-  border-top: 1px solid rgba(255,255,255,.08);
+  background: #0b1020;
+  color: #fff;
+  padding: 40px 16px 0;
 }
 
-.footer-inner {
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
   text-align: center;
-  gap: 12px;
 }
 
-.footer-links a {
-  margin: 0 8px;
-  color: #ccc;
+.footer-brand {
+  flex: 1 1 240px;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer-nav a {
+  color: #cfd6ff;
   text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.footer-bottom {
+  margin-top: 32px;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 
 /* RESPONSIVE */
