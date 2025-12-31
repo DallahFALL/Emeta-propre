@@ -178,3 +178,14 @@ function scrollToForm() {
     behavior: "smooth"
   });
 }
+
+function scrollToForm() {
+  const form = document.getElementById("form");
+  if (form) {
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+document.getElementById("burgerBtn")?.addEventListener("click", () => {
+  document.getElementById("mainNav")?.classList.toggle("open");
+});
