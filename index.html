@@ -216,162 +216,159 @@
     </div>
   </section>
 
-  <!-- FORM -->
-  <section class="form-section" id="form">
-    <div class="container">
-      <h2 class="section-title" data-i18n="form.title">Formulaire e-META — Version Ultra-Premium</h2>
-      <p class="section-intro" data-i18n="form.intro">
-        Complétez les champs ci-dessous pour recevoir une analyse structurée, fiable et orientée décision.
-      </p>
+ <!-- ================= FORM ================= -->
+<section class="form-section" id="form">
+  <div class="container">
 
-      <div class="form-shell">
-        <form id="emetaForm" novalidate>
+    <h2 class="section-title" data-i18n="form.title">
+      Formulaire e-META — Analyse stratégique avancée
+    </h2>
 
-          <!-- CARD 1 -->
-          <div class="form-card">
-            <h3 data-i18n="form.group.general">1. Informations générales</h3>
+    <form id="emetaForm" class="emeta-form">
 
-            <div class="grid-2">
-              <div>
-                <label for="domainMain" data-i18n="form.domain.label">Domaine / Thème principal</label>
-                <select id="domainMain" name="domainMain" required>
-                  <option value="" data-i18n="form.domain.select">Sélectionnez un domaine</option>
-                  <option value="business" data-i18n="form.domain.business">Business / Stratégie</option>
-                  <option value="marketing" data-i18n="form.domain.marketing">Marketing / Vente</option>
-                  <option value="finance" data-i18n="form.domain.finance">Finance</option>
-                  <option value="hr" data-i18n="form.domain.hr">RH / Management</option>
-                  <option value="tech" data-i18n="form.domain.tech">Tech / Produit</option>
-                  <option value="legal" data-i18n="form.domain.legal">Juridique / Conformité</option>
-                  <option value="other" data-i18n="form.domain.other">Autre</option>
-                </select>
-              </div>
+      <!-- ===== GROUPE 1 : CONTEXTE ===== -->
+      <div class="form-card">
+        <h3 data-i18n="form.group.context">1. Contexte & positionnement</h3>
 
-              <div>
-                <label for="projectTitle" data-i18n="form.projectTitle.label">Intitulé du projet</label>
-                <input
-                  id="projectTitle"
-                  name="projectTitle"
-                  type="text"
-                  required
-                  placeholder="Ex : Lancement d’un nouveau service digital"
-                  data-i18n-placeholder="form.projectTitle.placeholder"
-                />
-              </div>
-            </div>
+        <div class="grid-2">
+          <div>
+            <label data-i18n="form.context.country">Pays / Zone</label>
+            <input type="text"
+              placeholder="Ex : Sénégal, France, Afrique de l’Ouest"
+              data-i18n-placeholder="form.context.country.ph">
           </div>
 
-          <!-- CARD 2 -->
-          <div class="form-card">
-            <h3 data-i18n="form.group.analysis">2. Analyse stratégique</h3>
-
-            <label for="problem" data-i18n="form.problem.label">Problématique principale</label>
-            <textarea
-              id="problem"
-              name="problem"
-              required
-              placeholder="Décrivez clairement le problème ou la décision à prendre…"
-              data-i18n-placeholder="form.problem.placeholder"
-            ></textarea>
-
-            <div class="grid-2" style="margin-top:14px;">
-              <div>
-                <label for="objectives" data-i18n="form.objectives.label">Objectifs visés</label>
-                <textarea
-                  id="objectives"
-                  name="objectives"
-                  placeholder="Ex : augmenter la rentabilité, réduire un risque, accélérer l’exécution…"
-                  data-i18n-placeholder="form.objectives.placeholder"
-                ></textarea>
-              </div>
-              <div>
-                <label for="constraints" data-i18n="form.constraints.label">Contraintes / limites</label>
-                <textarea
-                  id="constraints"
-                  name="constraints"
-                  placeholder="Ex : budget, délai, équipe, réglementation, ressources…"
-                  data-i18n-placeholder="form.constraints.placeholder"
-                ></textarea>
-              </div>
-            </div>
+          <div>
+            <label data-i18n="form.context.sector">Secteur / Marché</label>
+            <input type="text"
+              placeholder="Ex : Fintech, Agrobusiness, E-commerce"
+              data-i18n-placeholder="form.context.sector.ph">
           </div>
+        </div>
 
-          <!-- CARD 3 -->
-          <div class="form-card">
-            <h3 data-i18n="form.group.output">3. Restitution</h3>
-
-            <div class="options-grid">
-              <label class="opt">
-                <input type="checkbox" id="outputEmail" />
-                <span data-i18n="form.output.email">Restitution par e-mail</span>
-              </label>
-
-              <label class="opt">
-                <input type="checkbox" id="outputWhatsapp" />
-                <span data-i18n="form.output.whatsapp">Restitution via WhatsApp</span>
-              </label>
-
-              <label class="opt">
-                <input type="checkbox" id="outputPdf" />
-                <span data-i18n="form.output.pdf">Rapport PDF</span>
-              </label>
-
-              <label class="opt">
-                <input type="checkbox" id="outputDisplay" />
-                <span data-i18n="form.output.display">Affichage direct à l’écran</span>
-              </label>
-            </div>
-
-            <div class="grid-2" style="margin-top:14px;">
-              <div>
-                <label for="contactEmail" data-i18n="form.contact.email">E-mail</label>
-                <input
-                  id="contactEmail"
-                  type="email"
-                  placeholder="exemple@email.com"
-                  data-i18n-placeholder="form.contact.email.placeholder"
-                />
-              </div>
-              <div>
-                <label for="contactWhatsapp" data-i18n="form.contact.whatsapp">WhatsApp</label>
-                <input
-                  id="contactWhatsapp"
-                  type="tel"
-                  placeholder="+221 XX XXX XX XX"
-                  data-i18n-placeholder="form.contact.whatsapp.placeholder"
-                />
-              </div>
-            </div>
-
-            <label class="opt" style="margin-top:14px;">
-              <input type="checkbox" id="consent" required />
-              <span data-i18n="form.consent">
-                J’accepte que mes informations soient utilisées uniquement pour produire cette analyse décisionnelle.
-              </span>
-            </label>
-          </div>
-
-          <div class="form-actions">
-            <button class="btn-primary" type="submit" data-i18n="form.send">Envoyer la requête</button>
-            <button class="btn-secondary" type="reset" data-i18n="form.reset">Réinitialiser le formulaire</button>
-          </div>
-
-          <p class="form-status" id="formStatus" aria-live="polite"></p>
-        </form>
+        <label data-i18n="form.context.stakeholders">Parties prenantes clés</label>
+        <textarea
+          placeholder="Clients, partenaires, régulateurs, équipes internes…"
+          data-i18n-placeholder="form.context.stakeholders.ph"></textarea>
       </div>
 
-    </div>
-  </section>
+      <!-- ===== GROUPE 2 : OBJECTIFS & KPIs ===== -->
+      <div class="form-card">
+        <h3 data-i18n="form.group.kpi">2. Objectifs stratégiques & KPIs</h3>
 
-</main>
+        <label data-i18n="form.kpi.objectives">Objectifs prioritaires</label>
+        <textarea
+          placeholder="Croissance, rentabilité, expansion, efficacité…"
+          data-i18n-placeholder="form.kpi.objectives.ph"></textarea>
 
-<footer class="site-footer">
+        <label data-i18n="form.kpi.metrics">Indicateurs clés (KPIs)</label>
+        <textarea
+          placeholder="CA, ROI, CAC, churn, délais, parts de marché…"
+          data-i18n-placeholder="form.kpi.metrics.ph"></textarea>
+
+        <div class="grid-2">
+          <div>
+            <label data-i18n="form.kpi.horizon">Horizon temporel</label>
+            <select>
+              <option data-i18n="form.kpi.short">Court terme (0–3 mois)</option>
+              <option data-i18n="form.kpi.mid">Moyen terme (3–12 mois)</option>
+              <option data-i18n="form.kpi.long">Long terme (+12 mois)</option>
+            </select>
+          </div>
+
+          <div>
+            <label data-i18n="form.kpi.priority">Priorité</label>
+            <select>
+              <option>Critique</option>
+              <option>Élevée</option>
+              <option>Moyenne</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== GROUPE 3 : RISQUES & TENDANCES ===== -->
+      <div class="form-card">
+        <h3 data-i18n="form.group.risk">3. Risques, scénarios & tendances</h3>
+
+        <label data-i18n="form.risk.main">Risques majeurs</label>
+        <textarea
+          placeholder="Financiers, réglementaires, opérationnels…"
+          data-i18n-placeholder="form.risk.main.ph"></textarea>
+
+        <label data-i18n="form.scenario">Scénarios envisagés</label>
+        <textarea
+          placeholder="Optimiste, réaliste, pessimiste…"
+          data-i18n-placeholder="form.scenario.ph"></textarea>
+
+        <label data-i18n="form.trends">Thématiques stratégiques</label>
+        <div class="options-grid">
+          <label><input type="checkbox"> IA & automatisation</label>
+          <label><input type="checkbox"> Croissance & scaling</label>
+          <label><input type="checkbox"> Optimisation des coûts</label>
+          <label><input type="checkbox"> ESG & impact</label>
+          <label><input type="checkbox"> Réglementation</label>
+          <label><input type="checkbox"> Innovation produit</label>
+        </div>
+      </div>
+
+      <!-- ===== GROUPE 4 : LIVRABLES ===== -->
+      <div class="form-card">
+        <h3 data-i18n="form.group.output">4. Restitution & livrables</h3>
+
+        <div class="options-grid">
+          <label><input type="checkbox"> Synthèse exécutive</label>
+          <label><input type="checkbox"> Plan d’action</label>
+          <label><input type="checkbox"> Tableau de KPIs</label>
+          <label><input type="checkbox"> Analyse des risques</label>
+          <label><input type="checkbox"> Rapport PDF professionnel</label>
+          <label><input type="checkbox"> Envoi Email / WhatsApp</label>
+        </div>
+      </div>
+
+      <!-- ===== ACTIONS ===== -->
+      <div class="form-actions">
+        <button type="submit" class="cta-submit" data-i18n="cta.submit">
+          Envoyer la requête stratégique
+        </button>
+
+        <p class="form-confirmation" id="formConfirmation" hidden>
+          ✅ <span data-i18n="form.sent">Requête envoyée avec succès</span>
+        </p>
+      </div>
+
+    </form>
+
+  </div>
+</section>
+  
+ <footer class="site-footer">
   <div class="container footer-inner">
-    <p class="footer-copy" data-i18n="footer.copy">e-META © 2025 — Assistant IA de décision stratégique</p>
+
+    <div class="footer-cols">
+      <div>
+        <strong>e-META</strong>
+        <p data-i18n="footer.tagline">
+          Moteur d’intelligence décisionnelle stratégique.
+        </p>
+      </div>
+
+      <div>
+        <strong data-i18n="footer.links">Liens</strong>
+        <ul>
+          <li><a href="#form" data-i18n="nav.form">Formulaire</a></li>
+          <li><a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <strong data-i18n="footer.legal">Légal</strong>
+        <p>
+          © 2025 e-META<br>
+          <span data-i18n="footer.rights">Tous droits réservés</span>
+        </p>
+      </div>
+    </div>
+
   </div>
 </footer>
-
-<script src="i18n.js"></script>
-<script src="script.js"></script>
-
-</body>
-</html>
