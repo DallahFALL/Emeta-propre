@@ -6,38 +6,159 @@
   <title data-i18n="meta.title">e-META — Assistant IA de prise de décision</title>
 
   <link rel="stylesheet" href="style.css" />
+
+  <!-- ✅ CSS CRITIQUE (anti-casse responsive) -->
+  <style>
+    :root{
+      --bg:#0b1020; --panel:#0f172a; --panel2:#020617;
+      --text:#fff; --muted:rgba(255,255,255,.72);
+      --line:rgba(255,255,255,.10); --brand:#e85a1a;
+      --radius:16px;
+    }
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; }
+    body{ background:var(--bg); color:var(--text); overflow-x:hidden; }
+
+    .container{ width:min(1120px, calc(100% - 32px)); margin:0 auto; }
+    @media (max-width:520px){ .container{ width:calc(100% - 24px); } }
+
+    /* Header actions safety */
+    .header-actions{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .lang-select{ max-width:90px; }
+    .header-cta{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 16px; border-radius:999px; border:1px solid rgba(255,255,255,.14);
+      background:linear-gradient(135deg, rgba(232,90,26,.95), rgba(232,90,26,.75));
+      color:#fff; font-weight:800; cursor:pointer; white-space:nowrap;
+    }
+    .header-cta:hover{ filter:brightness(1.05); }
+    @media (max-width:900px){
+      .header-cta{ width:100%; }
+      .lang-select{ width:100%; max-width:none; }
+    }
+
+    /* Hero grid */
+    .hero{ padding:42px 0 18px; }
+    .hero-inner{ display:grid; grid-template-columns:1.15fr .85fr; gap:18px; }
+    .hero-text,.hero-panel{
+      border:1px solid var(--line); border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(15,23,42,.9), rgba(2,6,23,.95));
+      padding:22px;
+    }
+    .hero h1{ margin:0 0 10px; font-size:clamp(1.7rem, 3.2vw, 2.5rem); line-height:1.2; }
+    .hero-sub{ color:var(--muted); margin:0 0 14px; line-height:1.55; }
+    .hero-points{ margin:0; padding-left:18px; color:var(--muted); }
+    .hero-points li{ margin:0 0 8px; }
+    .cta-primary{
+      margin-top:14px;
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 16px; border-radius:14px;
+      border:1px solid rgba(232,90,26,.35);
+      background:rgba(232,90,26,.18);
+      color:#fff; font-weight:900; cursor:pointer;
+    }
+    .cta-primary:hover{ background:rgba(232,90,26,.24); }
+    @media (max-width:900px){
+      .hero{ padding:26px 0 14px; }
+      .hero-inner{ grid-template-columns:1fr; }
+      .cta-primary{ width:100%; }
+    }
+
+    /* Form */
+    .form-section{ padding:28px 0 48px; }
+    .section-title{ margin:0 0 8px; font-size:clamp(1.25rem, 2vw, 1.6rem); }
+    .section-intro{ margin:0 0 18px; color:var(--muted); line-height:1.55; max-width:820px; }
+
+    .form-shell{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(15,23,42,.85), rgba(2,6,23,.95));
+      padding:18px;
+    }
+
+    .form-card{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      padding:16px;
+      margin-bottom:14px;
+      background:rgba(255,255,255,.03);
+    }
+    .form-card h3{ margin:0 0 12px; font-size:1rem; letter-spacing:.02em; }
+    .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    @media (max-width:900px){ .grid-2{ grid-template-columns:1fr; } }
+
+    label{ display:block; font-weight:700; margin:0 0 6px; }
+    input,select,textarea{
+      width:100%;
+      background:var(--panel2);
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:12px;
+      padding:12px 12px;
+      color:#fff;
+      outline:none;
+    }
+    textarea{ resize:vertical; min-height:110px; }
+    ::placeholder{ color:rgba(255,255,255,.45); }
+
+    .options-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:8px; }
+    @media (max-width:900px){ .options-grid{ grid-template-columns:1fr; } }
+
+    .opt{
+      display:flex; align-items:flex-start; gap:10px;
+      padding:12px; border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+    }
+    .opt input{ width:18px; height:18px; margin-top:2px; }
+
+    .form-actions{
+      display:flex; gap:12px; flex-wrap:wrap; justify-content:center;
+      margin-top:14px;
+    }
+    .btn-primary,.btn-secondary{
+      padding:12px 16px; border-radius:14px; border:1px solid var(--line);
+      background:rgba(255,255,255,.06); color:#fff; font-weight:900; cursor:pointer;
+      min-width:220px;
+    }
+    .btn-primary{
+      border-color:rgba(232,90,26,.35);
+      background:rgba(232,90,26,.16);
+    }
+    @media (max-width:520px){
+      .btn-primary,.btn-secondary{ min-width:100%; }
+    }
+
+    .form-status{ margin:12px 0 0; text-align:center; color:var(--muted); min-height:22px; }
+
+    /* RTL */
+    html[dir="rtl"] body{ direction:rtl; }
+    html[dir="rtl"] .hero-points{ padding-left:0; padding-right:18px; }
+  </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
 <header class="site-header">
   <div class="container header-inner">
 
-    <!-- LOGO -->
     <div class="logo">
       <span class="logo-mark">e</span>
       <span class="logo-text">META</span>
-      <span class="logo-tagline" data-i18n="tagline">
-        Assistant IA multilingue de prise de décision
-      </span>
+      <span class="logo-tagline" data-i18n="tagline">Assistant IA multilingue de prise de décision</span>
     </div>
 
-    <!-- BURGER -->
     <button class="burger" id="burgerBtn" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
 
-    <!-- NAV -->
     <nav class="nav" id="mainNav">
       <ul>
-        <li><a href="#top" data-i18n="nav.home"></a></li>
-        <li><a href="#form" data-i18n="nav.form"></a></li>
-        <li><a href="privacy.html" data-i18n="nav.privacy"></a></li>
+        <li><a href="#top" data-i18n="nav.home">Accueil</a></li>
+        <li><a href="#form" data-i18n="nav.form">Formulaire</a></li>
+        <li><a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a></li>
       </ul>
     </nav>
 
-    <!-- ACTIONS -->
     <div class="header-actions">
       <select id="languageSwitcher" class="lang-select" aria-label="Language">
         <option value="fr">FR</option>
@@ -52,194 +173,200 @@
         type="button"
         data-i18n="cta.custom"
         onclick="scrollToForm()">
+        Requête personnalisée
       </button>
     </div>
 
   </div>
 </header>
 
-<!-- ================= MAIN ================= -->
 <main id="top">
 
-  <!-- ================= HERO ================= -->
+  <!-- HERO -->
   <section class="hero">
     <div class="container hero-inner">
 
-      <!-- LEFT -->
       <div class="hero-text">
-        <h1 data-i18n="hero.title"></h1>
+        <h1 data-i18n="hero.title">Prenez des décisions au niveau d’un cabinet de conseil premium</h1>
 
-        <p class="hero-subtext" data-i18n="hero.subtitle"></p>
+        <p class="hero-sub" data-i18n="hero.subtitle">
+          e-META analyse votre contexte, objectifs, contraintes, risques et indicateurs clés afin de produire une synthèse claire et exploitable.
+        </p>
 
         <ul class="hero-points">
-          <li data-i18n="hero.point1"></li>
-          <li data-i18n="hero.point2"></li>
-          <li data-i18n="hero.point3"></li>
+          <li data-i18n="hero.point1">Analyse structurée : problème, objectifs, contraintes, risques, KPIs.</li>
+          <li data-i18n="hero.point2">Recommandations actionnables et scénarios d’aide à la décision.</li>
+          <li data-i18n="hero.point3">Restitution personnalisée : affichage, e-mail, WhatsApp ou PDF.</li>
         </ul>
 
-        <button
-          class="cta-primary"
-          type="button"
-          onclick="scrollToForm()"
-          data-i18n="cta.start">
+        <button class="cta-primary" type="button" onclick="scrollToForm()" data-i18n="cta.start">
+          Démarrer une analyse stratégique
         </button>
       </div>
 
-      <!-- RIGHT -->
       <aside class="hero-panel">
-        <p class="hero-note" data-i18n="hero.note"></p>
+        <p data-i18n="hero.note">
+          e-META n’est pas un chatbot. C’est un moteur d’intelligence décisionnelle.
+        </p>
+        <p style="margin:12px 0 0; color:var(--muted);" data-i18n="hero.metric">
+          +12 heures d’analyse stratégique simulée — équivalent au travail combiné d’un consultant senior, d’un analyste métier et d’un stratège.
+        </p>
       </aside>
 
     </div>
   </section>
 
-  <!-- ================= FORMULAIRE ================= -->
+  <!-- FORM -->
   <section class="form-section" id="form">
     <div class="container">
+      <h2 class="section-title" data-i18n="form.title">Formulaire e-META — Version Ultra-Premium</h2>
+      <p class="section-intro" data-i18n="form.intro">
+        Complétez les champs ci-dessous pour recevoir une analyse structurée, fiable et orientée décision.
+      </p>
 
-      <h2 class="section-title" data-i18n="form.title"></h2>
-      <p class="section-intro" data-i18n="form.intro"></p>
+      <div class="form-shell">
+        <form id="emetaForm" novalidate>
 
-      <form id="emetaForm" novalidate>
+          <!-- CARD 1 -->
+          <div class="form-card">
+            <h3 data-i18n="form.group.general">1. Informations générales</h3>
 
-        <!-- GROUPE 1 -->
-        <fieldset class="field-group">
-          <legend data-i18n="form.group.general"></legend>
+            <div class="grid-2">
+              <div>
+                <label for="domainMain" data-i18n="form.domain.label">Domaine / Thème principal</label>
+                <select id="domainMain" name="domainMain" required>
+                  <option value="" data-i18n="form.domain.select">Sélectionnez un domaine</option>
+                  <option value="business" data-i18n="form.domain.business">Business / Stratégie</option>
+                  <option value="marketing" data-i18n="form.domain.marketing">Marketing / Vente</option>
+                  <option value="finance" data-i18n="form.domain.finance">Finance</option>
+                  <option value="hr" data-i18n="form.domain.hr">RH / Management</option>
+                  <option value="tech" data-i18n="form.domain.tech">Tech / Produit</option>
+                  <option value="legal" data-i18n="form.domain.legal">Juridique / Conformité</option>
+                  <option value="other" data-i18n="form.domain.other">Autre</option>
+                </select>
+              </div>
 
-          <div class="field">
-            <label for="domainMain" data-i18n="form.domain.label"></label>
-            <select id="domainMain" name="domainMain" required>
-              <option value="" data-i18n="form.domain.select"></option>
-              <option value="business" data-i18n="form.domain.business"></option>
-              <option value="marketing" data-i18n="form.domain.marketing"></option>
-              <option value="finance" data-i18n="form.domain.finance"></option>
-              <option value="hr" data-i18n="form.domain.hr"></option>
-              <option value="tech" data-i18n="form.domain.tech"></option>
-              <option value="legal" data-i18n="form.domain.legal"></option>
-              <option value="other" data-i18n="form.domain.other"></option>
-            </select>
+              <div>
+                <label for="projectTitle" data-i18n="form.projectTitle.label">Intitulé du projet</label>
+                <input
+                  id="projectTitle"
+                  name="projectTitle"
+                  type="text"
+                  required
+                  placeholder="Ex : Lancement d’un nouveau service digital"
+                  data-i18n-placeholder="form.projectTitle.placeholder"
+                />
+              </div>
+            </div>
           </div>
 
-          <div class="field">
-            <label for="projectTitle" data-i18n="form.projectTitle.label"></label>
-            <input
-              type="text"
-              id="projectTitle"
-              name="projectTitle"
-              data-i18n-placeholder="form.projectTitle.placeholder"
-              required
-            />
-          </div>
-        </fieldset>
+          <!-- CARD 2 -->
+          <div class="form-card">
+            <h3 data-i18n="form.group.analysis">2. Analyse stratégique</h3>
 
-        <!-- GROUPE 2 -->
-        <fieldset class="field-group">
-          <legend data-i18n="form.group.analysis"></legend>
-
-          <div class="field">
-            <label for="problem" data-i18n="form.problem.label"></label>
+            <label for="problem" data-i18n="form.problem.label">Problématique principale</label>
             <textarea
               id="problem"
               name="problem"
-              rows="4"
-              data-i18n-placeholder="form.problem.placeholder"
               required
+              placeholder="Décrivez clairement le problème ou la décision à prendre…"
+              data-i18n-placeholder="form.problem.placeholder"
             ></textarea>
-          </div>
 
-          <div class="field-inline">
-            <div class="field">
-              <label for="objectives" data-i18n="form.objectives.label"></label>
-              <textarea
-                id="objectives"
-                name="objectives"
-                rows="3"
-                data-i18n-placeholder="form.objectives.placeholder"
-              ></textarea>
-            </div>
-
-            <div class="field">
-              <label for="constraints" data-i18n="form.constraints.label"></label>
-              <textarea
-                id="constraints"
-                name="constraints"
-                rows="3"
-                data-i18n-placeholder="form.constraints.placeholder"
-              ></textarea>
-            </div>
-          </div>
-        </fieldset>
-
-        <!-- GROUPE 3 -->
-        <fieldset class="field-group">
-          <legend data-i18n="form.group.output"></legend>
-
-          <div class="options-grid">
-            <label class="option">
-              <input type="checkbox" id="outputEmail" />
-              <span data-i18n="form.output.email"></span>
-            </label>
-
-            <label class="option">
-              <input type="checkbox" id="outputWhatsapp" />
-              <span data-i18n="form.output.whatsapp"></span>
-            </label>
-
-            <label class="option">
-              <input type="checkbox" id="outputPdf" />
-              <span data-i18n="form.output.pdf"></span>
-            </label>
-
-            <label class="option">
-              <input type="checkbox" id="outputDisplay" />
-              <span data-i18n="form.output.display"></span>
-            </label>
-          </div>
-
-          <div class="contact-grid">
-            <div class="field">
-              <label for="contactEmail" data-i18n="form.contact.email"></label>
-              <input
-                type="email"
-                id="contactEmail"
-                data-i18n-placeholder="form.contact.email.placeholder"
-              />
-            </div>
-
-            <div class="field">
-              <label for="contactWhatsapp" data-i18n="form.contact.whatsapp"></label>
-              <input
-                type="tel"
-                id="contactWhatsapp"
-                data-i18n-placeholder="form.contact.whatsapp.placeholder"
-              />
+            <div class="grid-2" style="margin-top:14px;">
+              <div>
+                <label for="objectives" data-i18n="form.objectives.label">Objectifs visés</label>
+                <textarea
+                  id="objectives"
+                  name="objectives"
+                  placeholder="Ex : augmenter la rentabilité, réduire un risque, accélérer l’exécution…"
+                  data-i18n-placeholder="form.objectives.placeholder"
+                ></textarea>
+              </div>
+              <div>
+                <label for="constraints" data-i18n="form.constraints.label">Contraintes / limites</label>
+                <textarea
+                  id="constraints"
+                  name="constraints"
+                  placeholder="Ex : budget, délai, équipe, réglementation, ressources…"
+                  data-i18n-placeholder="form.constraints.placeholder"
+                ></textarea>
+              </div>
             </div>
           </div>
 
-          <label class="option consent">
-            <input type="checkbox" id="consent" required />
-            <span data-i18n="form.consent"></span>
-          </label>
-        </fieldset>
+          <!-- CARD 3 -->
+          <div class="form-card">
+            <h3 data-i18n="form.group.output">3. Restitution</h3>
 
-        <div class="form-actions">
-          <button type="submit" class="btn-primary" data-i18n="form.send"></button>
-          <button type="reset" class="btn-secondary" data-i18n="form.reset"></button>
-        </div>
+            <div class="options-grid">
+              <label class="opt">
+                <input type="checkbox" id="outputEmail" />
+                <span data-i18n="form.output.email">Restitution par e-mail</span>
+              </label>
 
-        <p class="form-status" id="formStatus" aria-live="polite"></p>
+              <label class="opt">
+                <input type="checkbox" id="outputWhatsapp" />
+                <span data-i18n="form.output.whatsapp">Restitution via WhatsApp</span>
+              </label>
 
-      </form>
+              <label class="opt">
+                <input type="checkbox" id="outputPdf" />
+                <span data-i18n="form.output.pdf">Rapport PDF</span>
+              </label>
+
+              <label class="opt">
+                <input type="checkbox" id="outputDisplay" />
+                <span data-i18n="form.output.display">Affichage direct à l’écran</span>
+              </label>
+            </div>
+
+            <div class="grid-2" style="margin-top:14px;">
+              <div>
+                <label for="contactEmail" data-i18n="form.contact.email">E-mail</label>
+                <input
+                  id="contactEmail"
+                  type="email"
+                  placeholder="exemple@email.com"
+                  data-i18n-placeholder="form.contact.email.placeholder"
+                />
+              </div>
+              <div>
+                <label for="contactWhatsapp" data-i18n="form.contact.whatsapp">WhatsApp</label>
+                <input
+                  id="contactWhatsapp"
+                  type="tel"
+                  placeholder="+221 XX XXX XX XX"
+                  data-i18n-placeholder="form.contact.whatsapp.placeholder"
+                />
+              </div>
+            </div>
+
+            <label class="opt" style="margin-top:14px;">
+              <input type="checkbox" id="consent" required />
+              <span data-i18n="form.consent">
+                J’accepte que mes informations soient utilisées uniquement pour produire cette analyse décisionnelle.
+              </span>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn-primary" type="submit" data-i18n="form.send">Envoyer la requête</button>
+            <button class="btn-secondary" type="reset" data-i18n="form.reset">Réinitialiser le formulaire</button>
+          </div>
+
+          <p class="form-status" id="formStatus" aria-live="polite"></p>
+        </form>
+      </div>
 
     </div>
   </section>
 
 </main>
 
-<!-- ================= FOOTER ================= -->
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p class="footer-copy" data-i18n="footer.copy"></p>
+    <p class="footer-copy" data-i18n="footer.copy">e-META © 2025 — Assistant IA de décision stratégique</p>
   </div>
 </footer>
 
