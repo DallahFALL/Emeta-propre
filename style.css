@@ -46,21 +46,19 @@ img{ max-width:100%; height:auto; }
 
 /* ================= HEADER ================= */
 
-.site-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(11,16,32,.92);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line);
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #0b1020;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-.header-inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px;
-  padding:14px 0;
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 /* Logo */
