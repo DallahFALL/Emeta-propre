@@ -88,9 +88,145 @@
   </div>
 </section>
 
-<!-- ================= FORMULAIRE ================= -->
+<!-- ================= FORMULAIRE e-META ================= -->
 <section class="form-section" id="form">
   <div class="container">
+
+    <h2 class="section-title" data-i18n="form.title"></h2>
+    <p class="section-intro" data-i18n="form.intro"></p>
+
+    <form id="emetaForm" class="emeta-form" novalidate>
+
+      <!-- GROUPE 1 -->
+      <fieldset class="field-group">
+        <legend data-i18n="form.group.general"></legend>
+
+        <div class="field">
+          <label for="domainMain" data-i18n="form.domain.label"></label>
+          <select id="domainMain" name="domainMain" required>
+            <option value="" data-i18n="form.domain.select"></option>
+            <option value="business" data-i18n="form.domain.business"></option>
+            <option value="marketing" data-i18n="form.domain.marketing"></option>
+            <option value="finance" data-i18n="form.domain.finance"></option>
+            <option value="hr" data-i18n="form.domain.hr"></option>
+            <option value="tech" data-i18n="form.domain.tech"></option>
+            <option value="legal" data-i18n="form.domain.legal"></option>
+            <option value="other" data-i18n="form.domain.other"></option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="projectTitle" data-i18n="form.projectTitle.label"></label>
+          <input
+            type="text"
+            id="projectTitle"
+            name="projectTitle"
+            data-i18n-placeholder="form.projectTitle.placeholder"
+            required
+          />
+        </div>
+      </fieldset>
+
+      <!-- GROUPE 2 -->
+      <fieldset class="field-group">
+        <legend data-i18n="form.group.analysis"></legend>
+
+        <div class="field">
+          <label for="problem" data-i18n="form.problem.label"></label>
+          <textarea
+            id="problem"
+            name="problem"
+            rows="4"
+            data-i18n-placeholder="form.problem.placeholder"
+            required
+          ></textarea>
+        </div>
+
+        <div class="field-inline">
+          <div class="field">
+            <label for="objectives" data-i18n="form.objectives.label"></label>
+            <textarea
+              id="objectives"
+              name="objectives"
+              rows="3"
+              data-i18n-placeholder="form.objectives.placeholder"
+            ></textarea>
+          </div>
+
+          <div class="field">
+            <label for="constraints" data-i18n="form.constraints.label"></label>
+            <textarea
+              id="constraints"
+              name="constraints"
+              rows="3"
+              data-i18n-placeholder="form.constraints.placeholder"
+            ></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- GROUPE 3 -->
+      <fieldset class="field-group">
+        <legend data-i18n="form.group.output"></legend>
+
+        <div class="options-grid">
+          <label class="option">
+            <input type="checkbox" id="outputEmail" />
+            <span data-i18n="form.output.email"></span>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" id="outputWhatsapp" />
+            <span data-i18n="form.output.whatsapp"></span>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" id="outputPdf" />
+            <span data-i18n="form.output.pdf"></span>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" id="outputDisplay" />
+            <span data-i18n="form.output.display"></span>
+          </label>
+        </div>
+
+        <div class="contact-grid">
+          <div class="field">
+            <label for="contactEmail" data-i18n="form.contact.email"></label>
+            <input
+              type="email"
+              id="contactEmail"
+              data-i18n-placeholder="form.contact.email.placeholder"
+            />
+          </div>
+
+          <div class="field">
+            <label for="contactWhatsapp" data-i18n="form.contact.whatsapp"></label>
+            <input
+              type="tel"
+              id="contactWhatsapp"
+              data-i18n-placeholder="form.contact.whatsapp.placeholder"
+            />
+          </div>
+        </div>
+
+        <label class="option consent">
+          <input type="checkbox" id="consent" required />
+          <span data-i18n="form.consent"></span>
+        </label>
+      </fieldset>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary" data-i18n="form.send"></button>
+        <button type="reset" class="btn-secondary" data-i18n="form.reset"></button>
+      </div>
+
+      <p class="form-status" id="formStatus" aria-live="polite"></p>
+
+    </form>
+  </div>
+</section>
 
     <h2 class="section-title">
       Formulaire e-META — Analyse stratégique avancée
