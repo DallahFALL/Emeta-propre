@@ -1,10 +1,12 @@
 /* =====================================================
-   e-META — STYLE.CSS FINAL
-   Desktop & Mobile — Clean & Stable
+   e-META — STYLE.CSS FINAL RESPONSIVE
+   Desktop & Mobile — Stable / Clean / PRO
 ===================================================== */
 
 /* ================= RESET & BASE ================= */
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -79,7 +81,7 @@ img {
 /* NAV */
 .nav {
   display: flex;
-  gap: 20px;
+  gap: 22px;
 }
 
 .nav a {
@@ -203,6 +205,52 @@ img {
   font-size: 1.6rem;
 }
 
+/* FORM CARD */
+.form-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 28px;
+}
+
+.form-card h3 {
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+}
+
+/* INPUTS */
+input,
+textarea,
+select {
+  width: 100%;
+  background: #0f162e;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+label {
+  display: block;
+  margin: 14px 0 6px;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+/* GRID 2 */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
 /* FIELDSET */
 .field-group {
   border: 1px solid rgba(255,255,255,0.1);
@@ -259,34 +307,34 @@ img {
 /* ================= FOOTER ================= */
 .site-footer {
   border-top: 1px solid rgba(255,255,255,0.08);
-  padding: 36px 0 16px;
+  padding: 28px 0 18px;
   text-align: center;
 }
 
-.footer-grid {
+.footer-inner {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   align-items: center;
 }
 
 .footer-brand strong {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
 }
 
 .footer-brand p {
-  opacity: 0.75;
+  opacity: 0.7;
   font-size: 0.9rem;
 }
 
 .footer-links {
   display: flex;
-  gap: 16px;
+  gap: 18px;
   font-size: 0.9rem;
 }
 
-.footer-bottom {
-  margin-top: 12px;
+.footer-copy {
+  margin-top: 10px;
   font-size: 0.8rem;
   opacity: 0.6;
 }
@@ -331,6 +379,10 @@ img {
 
   .hero h1 {
     font-size: 1.7rem;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
   }
 
   .checkbox-grid {
