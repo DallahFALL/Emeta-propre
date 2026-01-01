@@ -183,46 +183,74 @@
           placeholder="Optimiste, réaliste, pessimiste…"
           data-i18n-placeholder="form.scenario.ph"></textarea>
 
-        <label data-i18n="form.trends">Thématiques stratégiques</label>
-        <div class="options-grid">
-          <label><input type="checkbox"> IA & automatisation</label>
-          <label><input type="checkbox"> Croissance & scaling</label>
-          <label><input type="checkbox"> Optimisation des coûts</label>
-          <label><input type="checkbox"> ESG & impact</label>
-          <label><input type="checkbox"> Réglementation</label>
-          <label><input type="checkbox"> Innovation produit</label>
-        </div>
+       <section class="form-section" id="form">
+  <div class="container">
+
+    <h2 class="section-title">
+      Formulaire e-META — Version Ultra-Premium
+    </h2>
+
+    <!-- ================= THÉMATIQUES ================= -->
+    <fieldset class="field-group">
+      <legend>Thématiques stratégiques</legend>
+
+      <div class="checkbox-grid">
+        <label class="check-item">
+          <input type="checkbox"> <span>IA & automatisation</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox"> <span>Croissance & scaling</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox"> <span>Optimisation des coûts</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox"> <span>ESG & impact</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox"> <span>Réglementation</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox"> <span>Innovation produit</span>
+        </label>
       </div>
+    </fieldset>
 
-      <!-- ===== GROUPE 4 : LIVRABLES ===== -->
-      <div class="form-card">
-        <h3 data-i18n="form.group.output">4. Restitution & livrables</h3>
+    <!-- ================= LIVRABLES ================= -->
+    <fieldset class="field-group">
+      <legend>Restitution & livrables</legend>
 
-        <div class="options-grid">
-          <label><input type="checkbox"> Synthèse exécutive</label>
-          <label><input type="checkbox"> Plan d’action</label>
-          <label><input type="checkbox"> Tableau de KPIs</label>
-          <label><input type="checkbox"> Analyse des risques</label>
-          <label><input type="checkbox"> Rapport PDF professionnel</label>
-          <label><input type="checkbox"> Envoi Email / WhatsApp</label>
-        </div>
+      <div class="checkbox-grid">
+        <label class="check-item">
+          <input type="checkbox"> <span>Synthèse exécutive</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox"> <span>Plan d’action</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox"> <span>Tableau de KPIs</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox"> <span>Analyse des risques</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox"> <span>Rapport PDF professionnel</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox"> <span>Envoi Email / WhatsApp</span>
+        </label>
       </div>
+    </fieldset>
 
-      <!-- ===== ACTIONS ===== -->
-      <div class="form-actions">
-        <button type="submit" class="cta-submit" data-i18n="cta.submit">
-          Envoyer la requête stratégique
-        </button>
-
-        <p class="form-confirmation" id="formConfirmation" hidden>
-          ✅ <span data-i18n="form.sent">Requête envoyée avec succès</span>
-        </p>
-      </div>
-
-    </form>
+    <!-- ================= CTA ================= -->
+    <div class="form-actions">
+      <button type="button" class="btn-submit">
+        Envoyer la requête stratégique
+      </button>
+    </div>
 
   </div>
-</section>
+</section> 
 
 <footer class="site-footer">
   <div class="container footer-inner">
