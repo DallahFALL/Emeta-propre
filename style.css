@@ -264,26 +264,56 @@ label {
   font-weight: 600;
 }
 
-/* CHECKBOX GRID */
+/* ================= CHECKBOX GRID — FIX RESPONSIVE ================= */
+
 .checkbox-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px 20px;
-  margin-top: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
 }
 
 .check-item {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(255,255,255,0.04);
-  padding: 10px 14px;
-  border-radius: 10px;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(255,255,255,0.05);
+  padding: 14px 16px;
+  border-radius: 12px;
   cursor: pointer;
+  transition: background 0.2s ease, border 0.2s ease;
+}
+
+.check-item:hover {
+  background: rgba(255,255,255,0.08);
 }
 
 .check-item input {
-  transform: scale(1.1);
+  margin-top: 3px;
+  flex-shrink: 0;
+  transform: scale(1.15);
+}
+
+.check-item span {
+  display: block;
+  line-height: 1.4;
+  font-size: 0.95rem;
+  opacity: 0.95;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .check-item {
+    padding: 12px 14px;
+  }
+
+  .check-item span {
+    font-size: 0.9rem;
+  }
 }
 
 /* SUBMIT */
