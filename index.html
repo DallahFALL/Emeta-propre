@@ -2,82 +2,56 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>e-META — Assistant IA de prise de décision</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>e-META Pro — Assistant IA Décisionnel</title>
+
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 
-<body id="top">
+<body>
 
 <!-- ================= HEADER ================= -->
 <header class="site-header">
   <div class="container header-inner">
 
     <div class="logo">
-      <span class="logo-mark">e</span>
+      <span class="logo-mark">e-</span>
       <span class="logo-text">META</span>
-      <span class="logo-tagline">Assistant IA multilingue de prise de décision</span>
+      <span class="logo-tagline">Decision AI</span>
     </div>
 
-    <button class="burger" id="burgerBtn" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="nav" id="mainNav">
-      <a href="#top">Accueil</a>
-      <a href="#form">Formulaire</a>
-      <a href="privacy.html">Confidentialité</a>
+    <nav class="nav">
+      <a href="#how">Comment ça marche</a>
+      <a href="#form">Analyse</a>
+      <a href="#contact">Contact</a>
     </nav>
 
     <div class="header-actions">
-      <select class="lang-select">
-        <option>FR</option>
-        <option>EN</option>
-        <option>ES</option>
-        <option>AR</option>
-      </select>
-
-      <button class="cta-custom" onclick="scrollToForm()">
-        Requête personnalisée
-      </button>
+      <a href="#form" class="cta-header">Requête personnalisée</a>
     </div>
 
   </div>
 </header>
-
-<main>
 
 <!-- ================= HERO ================= -->
 <section class="hero">
   <div class="container hero-grid">
 
     <div class="hero-box">
-      <h1>Prenez des décisions au niveau d’un cabinet de conseil premium</h1>
-
+      <h1>Prenez de meilleures décisions<br>avec l’IA stratégique</h1>
       <p>
-        e-META analyse votre contexte, vos objectifs, contraintes, risques et KPIs
-        afin de produire une synthèse stratégique claire, priorisée et exploitable.
+        e-META analyse votre situation, structure vos options
+        et vous livre une recommandation claire et actionnable.
       </p>
-
-      <ul class="hero-points">
-        <li>Analyse structurée & stratégique</li>
-        <li>Recommandations actionnables</li>
-        <li>Restitution personnalisée</li>
-      </ul>
-
-      <button class="cta-primary" onclick="scrollToForm()">
-        Démarrer une analyse stratégique
-      </button>
+      <a href="#form" class="cta-primary">Lancer une analyse</a>
     </div>
 
-    <div class="hero-box muted">
+    <div class="hero-box">
       <p>
-        e-META n’est pas un chatbot.<br>
-        C’est un moteur d’intelligence décisionnelle.
-      </p>
-      <p class="small">
-        +12h d’analyse stratégique simulée — équivalent
-        au travail combiné d’un consultant senior.
+        ✔ Analyse multi-critères<br>
+        ✔ Synthèse stratégique<br>
+        ✔ Restitution claire pour décideurs
       </p>
     </div>
 
@@ -85,96 +59,65 @@
 </section>
 
 <!-- ================= FORM ================= -->
-<section class="form-section" id="form">
+<section id="form" class="form-section">
   <div class="container">
 
-    <h2 class="section-title">
-      Formulaire e-META — Analyse stratégique avancée
-    </h2>
+    <h2 class="section-title">Formulaire d’analyse stratégique</h2>
 
-    <form class="emeta-form">
+    <form method="POST" action="">
 
-      <!-- A. CONTEXTE -->
-      <div class="form-card">
-        <h3>1. Contexte & organisation</h3>
-
-        <div class="grid-2">
-          <div>
-            <label>Pays / Zone</label>
-            <input type="text" placeholder="Ex : Sénégal, France, Afrique de l’Ouest">
-          </div>
-          <div>
-            <label>Secteur / Activité</label>
-            <input type="text" placeholder="Fintech, Agrobusiness, Industrie…">
-          </div>
-        </div>
-
-        <label>Organisation / projet concerné</label>
-        <textarea placeholder="Décrivez brièvement votre organisation ou projet"></textarea>
-      </div>
-
-      <!-- B. OBJECTIFS & KPI -->
-      <div class="form-card">
-        <h3>2. Objectifs stratégiques & indicateurs</h3>
-
-        <label>Objectifs prioritaires</label>
-        <textarea placeholder="Croissance, rentabilité, expansion, optimisation…"></textarea>
-
-        <label>KPIs ou indicateurs clés</label>
-        <textarea placeholder="CA, ROI, parts de marché, délais, churn…"></textarea>
-      </div>
-
-      <!-- C. RISQUES -->
-      <div class="form-card">
-        <h3>3. Enjeux, risques & scénarios</h3>
-
-        <label>Risques majeurs</label>
-        <textarea placeholder="Financiers, réglementaires, opérationnels…"></textarea>
-
-        <label>Scénarios envisagés</label>
-        <textarea placeholder="Optimiste, réaliste, pessimiste…"></textarea>
-      </div>
-
-      <!-- D. THÉMATIQUES -->
+      <!-- GROUPE 1 -->
       <fieldset class="field-group">
-        <legend>Thématiques stratégiques</legend>
+        <legend>1. Contexte général</legend>
 
-        <div class="checkbox-grid">
-          <label class="check-item"><input type="checkbox"> IA & automatisation</label>
-          <label class="check-item"><input type="checkbox"> Croissance & scaling</label>
-          <label class="check-item"><input type="checkbox"> Optimisation des coûts</label>
-          <label class="check-item"><input type="checkbox"> ESG & impact</label>
-          <label class="check-item"><input type="checkbox"> Réglementation</label>
-          <label class="check-item"><input type="checkbox"> Innovation produit</label>
-        </div>
+        <label>
+          Domaine concerné
+          <select name="domain" required>
+            <option value="">Sélectionner</option>
+            <option>Business / Stratégie</option>
+            <option>Finance</option>
+            <option>Marketing</option>
+            <option>Projet / Organisation</option>
+            <option>Technologie</option>
+          </select>
+        </label>
+
+        <label>
+          Problème ou décision à analyser
+          <textarea name="problem" rows="4" placeholder="Décrivez clairement votre situation…" required></textarea>
+        </label>
       </fieldset>
 
-      <!-- E. LIVRABLES -->
+      <!-- GROUPE 2 -->
       <fieldset class="field-group">
-        <legend>Restitution & livrables attendus</legend>
+        <legend>2. Axes d’analyse souhaités</legend>
 
         <div class="checkbox-grid">
-          <label class="check-item"><input type="checkbox"> Synthèse exécutive</label>
-          <label class="check-item"><input type="checkbox"> Plan d’action</label>
-          <label class="check-item"><input type="checkbox"> Tableau de KPIs</label>
-          <label class="check-item"><input type="checkbox"> Analyse des risques</label>
-          <label class="check-item"><input type="checkbox"> Rapport PDF professionnel</label>
-          <label class="check-item"><input type="checkbox"> Envoi Email / WhatsApp</label>
+          <label class="check-item">
+            <input type="checkbox" name="axes[]" value="Risque">
+            Analyse des risques
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" name="axes[]" value="Rentabilité">
+            Rentabilité / Impact financier
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" name="axes[]" value="Faisabilité">
+            Faisabilité opérationnelle
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" name="axes[]" value="Opportunité">
+            Opportunités stratégiques
+          </label>
         </div>
       </fieldset>
-
-      <!-- F. PIÈCE JOINTE -->
-      <div class="form-card">
-        <h3>Documents complémentaires (optionnel)</h3>
-        <input type="file">
-        <p class="form-hint">
-          Vous pouvez joindre un document existant (PDF, Word, Excel, présentation…)
-        </p>
-      </div>
 
       <!-- SUBMIT -->
       <div class="form-actions">
-        <button class="btn-submit">
+        <button type="submit" class="cta-submit">
           Envoyer la requête stratégique
         </button>
       </div>
@@ -184,36 +127,14 @@
   </div>
 </section>
 
-</main>
-
 <!-- ================= FOOTER ================= -->
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <strong><span style="color:#ff8a00">e</span>-META</strong>
-      <p>Moteur d’intelligence décisionnelle stratégique.</p>
-    </div>
-
-    <div class="footer-links">
-      <a href="#form">Formulaire</a>
-      <a href="privacy.html">Confidentialité</a>
-    </div>
-  </div>
-
-  <div class="footer-copy">
-    © 2025 e-META — Tous droits réservés
+<footer class="site-footer" id="contact">
+  <div class="container">
+    <p class="footer-brand">
+      © 2026 <strong><span>e-</span>META</strong> — Intelligence décisionnelle
+    </p>
   </div>
 </footer>
-
-<script>
-  function scrollToForm() {
-    document.getElementById("form")?.scrollIntoView({ behavior: "smooth" });
-  }
-
-  const burger = document.getElementById("burgerBtn");
-  const nav = document.getElementById("mainNav");
-  burger?.addEventListener("click", () => nav.classList.toggle("open"));
-</script>
 
 </body>
 </html>
