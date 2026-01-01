@@ -111,11 +111,6 @@ img{ max-width:100%; height:auto; }
   color:#fff;
 }
 
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
 
 .lang-select{
   background:var(--panel2);
