@@ -88,11 +88,176 @@
   </div>
 </section>
 
-<!-- ================= FORMULAIRE e-META ================= -->
+<!-- ================= FORM ================= -->
 <section class="form-section" id="form">
   <div class="container">
 
+    <h2 class="section-title" data-i18n="form.title">
+      Formulaire e-META — Analyse stratégique avancée
+    </h2>
 
+    <form id="emetaForm" class="emeta-form">
+
+      <!-- ===== GROUPE 1 : CONTEXTE ===== -->
+      <div class="form-card">
+        <h3 data-i18n="form.group.context">1. Contexte & positionnement</h3>
+
+        <div class="grid-2">
+          <div>
+            <label data-i18n="form.context.country">Pays / Zone</label>
+            <input type="text"
+              placeholder="Ex : Sénégal, France, Afrique de l’Ouest"
+              data-i18n-placeholder="form.context.country.ph">
+          </div>
+
+          <div>
+            <label data-i18n="form.context.sector">Secteur / Marché</label>
+            <input type="text"
+              placeholder="Ex : Fintech, Agrobusiness, E-commerce"
+              data-i18n-placeholder="form.context.sector.ph">
+          </div>
+        </div>
+
+        <label data-i18n="form.context.stakeholders">Parties prenantes clés</label>
+        <textarea
+          placeholder="Clients, partenaires, régulateurs, équipes internes…"
+          data-i18n-placeholder="form.context.stakeholders.ph"></textarea>
+      </div>
+
+      <!-- ===== GROUPE 2 : OBJECTIFS & KPIs ===== -->
+      <div class="form-card">
+        <h3 data-i18n="form.group.kpi">2. Objectifs stratégiques & KPIs</h3>
+
+        <label data-i18n="form.kpi.objectives">Objectifs prioritaires</label>
+        <textarea
+          placeholder="Croissance, rentabilité, expansion, efficacité…"
+          data-i18n-placeholder="form.kpi.objectives.ph"></textarea>
+
+        <label data-i18n="form.kpi.metrics">Indicateurs clés (KPIs)</label>
+        <textarea
+          placeholder="CA, ROI, CAC, churn, délais, parts de marché…"
+          data-i18n-placeholder="form.kpi.metrics.ph"></textarea>
+
+        <div class="grid-2">
+          <div>
+            <label data-i18n="form.kpi.horizon">Horizon temporel</label>
+            <select>
+              <option data-i18n="form.kpi.short">Court terme (0–3 mois)</option>
+              <option data-i18n="form.kpi.mid">Moyen terme (3–12 mois)</option>
+              <option data-i18n="form.kpi.long">Long terme (+12 mois)</option>
+            </select>
+          </div>
+
+          <div>
+            <label data-i18n="form.kpi.priority">Priorité</label>
+            <select>
+              <option>Critique</option>
+              <option>Élevée</option>
+              <option>Moyenne</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== GROUPE 3 : RISQUES & TENDANCES ===== -->
+      <div class="form-card">
+        <h3 data-i18n="form.group.risk">3. Risques, scénarios & tendances</h3>
+
+        <label data-i18n="form.risk.main">Risques majeurs</label>
+        <textarea
+          placeholder="Financiers, réglementaires, opérationnels…"
+          data-i18n-placeholder="form.risk.main.ph"></textarea>
+
+        <label data-i18n="form.scenario">Scénarios envisagés</label>
+        <textarea
+          placeholder="Optimiste, réaliste, pessimiste…"
+          data-i18n-placeholder="form.scenario.ph"></textarea>
+
+       <!-- ================= THÉMATIQUES STRATÉGIQUES ================= -->
+<fieldset class="field-group">
+  <legend data-i18n="form.themes.title">Thématiques stratégiques</legend>
+
+  <div class="checkbox-grid">
+    <label class="check-item">
+      <input type="checkbox" name="themes" value="ai">
+      <span data-i18n="form.themes.ai">IA & automatisation</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="themes" value="scaling">
+      <span data-i18n="form.themes.scaling">Croissance & scaling</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="themes" value="costs">
+      <span data-i18n="form.themes.costs">Optimisation des coûts</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="themes" value="esg">
+      <span data-i18n="form.themes.esg">ESG & impact</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="themes" value="regulation">
+      <span data-i18n="form.themes.regulation">Réglementation</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="themes" value="innovation">
+      <span data-i18n="form.themes.innovation">Innovation produit</span>
+    </label>
+  </div>
+</fieldset>
+
+<!-- ================= RESTITUTION & LIVRABLES ================= -->
+<fieldset class="field-group">
+  <legend data-i18n="form.outputs.title">Restitution & livrables</legend>
+
+  <div class="checkbox-grid">
+    <label class="check-item">
+      <input type="checkbox" name="outputs" value="summary">
+      <span data-i18n="form.outputs.summary">Synthèse exécutive</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="outputs" value="actionplan">
+      <span data-i18n="form.outputs.action">Plan d’action</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="outputs" value="kpi">
+      <span data-i18n="form.outputs.kpi">Tableau de KPIs</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="outputs" value="risk">
+      <span data-i18n="form.outputs.risk">Analyse des risques</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="outputs" value="pdf">
+      <span data-i18n="form.outputs.pdf">Rapport PDF professionnel</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" name="outputs" value="delivery">
+      <span data-i18n="form.outputs.delivery">Envoi Email / WhatsApp</span>
+    </label>
+  </div>
+</fieldset>
+
+<!-- ================= ACTIONS ================= -->
+<div class="form-actions">
+  <button type="submit" class="btn-submit" data-i18n="form.submit">
+    Envoyer la requête stratégique
+  </button>
+</div>
+
+    </form>
+
+  </div>
+</section>
 
     <fieldset class="field-group">
       <legend>Thématiques stratégiques</legend>
