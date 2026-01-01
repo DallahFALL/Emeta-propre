@@ -190,120 +190,82 @@
       Formulaire e-META — Version Ultra-Premium
     </h2>
 
-    <form id="emetaForm" class="emeta-form" method="post" enctype="multipart/form-data">
+   <form id="emetaForm" class="emeta-form" method="post" enctype="multipart/form-data">
 
-      <!-- ================= THÉMATIQUES ================= -->
-      <fieldset class="field-group">
-        <legend data-i18n="form.themes.title">Thématiques stratégiques</legend>
+  <!-- ================= THÉMATIQUES STRATÉGIQUES ================= -->
+  <fieldset class="field-group">
+    <legend data-i18n="form.themes.title">Thématiques stratégiques</legend>
 
-        <div class="checkbox-grid">
-          <label class="check-item" for="theme_ai">
-            <input id="theme_ai" type="checkbox" name="themes[]" value="ai">
-            <span data-i18n="form.themes.ai">IA & automatisation</span>
-          </label>
+    <div class="checkbox-grid">
+      <label class="check-item">
+        <input type="checkbox" name="themes[]" value="ai">
+        <span data-i18n="form.themes.ai">IA & automatisation</span>
+      </label>
 
-          <label class="check-item" for="theme_scaling">
-            <input id="theme_scaling" type="checkbox" name="themes[]" value="scaling">
-            <span data-i18n="form.themes.scaling">Croissance & scaling</span>
-          </label>
+      <label class="check-item">
+        <input type="checkbox" name="themes[]" value="scaling">
+        <span data-i18n="form.themes.scaling">Croissance & scaling</span>
+      </label>
 
-          <label class="check-item" for="theme_costs">
-            <input id="theme_costs" type="checkbox" name="themes[]" value="costs">
-            <span data-i18n="form.themes.costs">Optimisation des coûts</span>
-          </label>
+      <label class="check-item">
+        <input type="checkbox" name="themes[]" value="costs">
+        <span data-i18n="form.themes.costs">Optimisation des coûts</span>
+      </label>
 
-          <label class="check-item" for="theme_esg">
-            <input id="theme_esg" type="checkbox" name="themes[]" value="esg">
-            <span data-i18n="form.themes.esg">ESG & impact</span>
-          </label>
+      <label class="check-item">
+        <input type="checkbox" name="themes[]" value="esg">
+        <span data-i18n="form.themes.esg">ESG & impact</span>
+      </label>
 
-          <label class="check-item" for="theme_regulation">
-            <input id="theme_regulation" type="checkbox" name="themes[]" value="regulation">
-            <span data-i18n="form.themes.regulation">Réglementation</span>
-          </label>
+      <label class="check-item">
+        <input type="checkbox" name="themes[]" value="regulation">
+        <span data-i18n="form.themes.regulation">Réglementation</span>
+      </label>
 
-          <label class="check-item" for="theme_innovation">
-            <input id="theme_innovation" type="checkbox" name="themes[]" value="innovation">
-            <span data-i18n="form.themes.innovation">Innovation produit</span>
-          </label>
-        </div>
-      </fieldset>
+      <label class="check-item">
+        <input type="checkbox" name="themes[]" value="innovation">
+        <span data-i18n="form.themes.innovation">Innovation produit</span>
+      </label>
+    </div>
+  </fieldset>
 
-      <!-- ================= LIVRABLES ================= -->
-      <fieldset class="field-group">
-        <legend data-i18n="form.outputs.title">Restitution & livrables attendus</legend>
+  <!-- ================= LIVRABLES ATTENDUS ================= -->
+  <fieldset class="field-group">
+    <legend data-i18n="form.outputs.title">Restitution & livrables attendus</legend>
 
-        <div class="checkbox-grid">
-          <label class="check-item" for="out_summary">
-            <input id="out_summary" type="checkbox" name="outputs[]" value="summary">
-            <span data-i18n="form.outputs.summary">Synthèse exécutive</span>
-          </label>
+    <div class="checkbox-grid">
+      <label class="check-item">
+        <input type="checkbox" name="outputs[]" value="summary">
+        <span data-i18n="form.outputs.summary">Synthèse exécutive</span>
+      </label>
 
-          <label class="check-item" for="out_actionplan">
-            <input id="out_actionplan" type="checkbox" name="outputs[]" value="actionplan">
-            <span data-i18n="form.outputs.action">Plan d’action</span>
-          </label>
+      <label class="check-item">
+        <input type="checkbox" name="outputs[]" value="actionplan">
+        <span data-i18n="form.outputs.action">Plan d’action</span>
+      </label>
 
-          <label class="check-item" for="out_kpi">
-            <input id="out_kpi" type="checkbox" name="outputs[]" value="kpi">
-            <span data-i18n="form.outputs.kpi">Tableau de KPIs</span>
-          </label>
+      <label class="check-item">
+        <input type="checkbox" name="outputs[]" value="kpi">
+        <span data-i18n="form.outputs.kpi">Tableau de KPIs</span>
+      </label>
 
-          <label class="check-item" for="out_risk">
-            <input id="out_risk" type="checkbox" name="outputs[]" value="risk">
-            <span data-i18n="form.outputs.risk">Analyse des risques</span>
-          </label>
+      <label class="check-item">
+        <input type="checkbox" name="outputs[]" value="risk">
+        <span data-i18n="form.outputs.risk">Analyse des risques</span>
+      </label>
 
-          <label class="check-item" for="out_pdf">
-            <input id="out_pdf" type="checkbox" name="outputs[]" value="pdf">
-            <span data-i18n="form.outputs.pdf">Rapport PDF professionnel</span>
-          </label>
+      <label class="check-item">
+        <input type="checkbox" name="outputs[]" value="pdf">
+        <span data-i18n="form.outputs.pdf">Rapport PDF professionnel</span>
+      </label>
 
-          <label class="check-item" for="out_delivery">
-            <input id="out_delivery" type="checkbox" name="outputs[]" value="delivery">
-            <span data-i18n="form.outputs.delivery">Envoi Email / WhatsApp</span>
-          </label>
-        </div>
-      </fieldset>
-
-      <!-- ================= DOCUMENTS (UPLOAD + LIEN) ================= -->
-      <div class="form-card">
-        <h3 data-i18n="form.docs.title">Documents complémentaires</h3>
-
-        <label for="userFile" data-i18n="form.docs.uploadLabel">Joindre un fichier (optionnel)</label>
-        <input
-          id="userFile"
-          name="user_file"
-          type="file"
-          accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.png,.jpg,.jpeg"
-        />
-
-        <label for="userFileLink" data-i18n="form.docs.linkLabel">Ou coller un lien vers vos fichiers (Google Drive / Dropbox)</label>
-        <input
-          id="userFileLink"
-          name="user_file_link"
-          type="url"
-          placeholder="https://drive.google.com/..."
-          data-i18n-placeholder="form.docs.linkPh"
-        />
-
-        <p class="hint" data-i18n="form.docs.hint">
-          Ajoutez un fichier ou un lien si vous avez déjà un document (PDF, Word, Excel, présentation…).
-        </p>
-      </div>
-
-      <!-- ================= CTA ================= -->
-      <div class="form-actions">
-        <button type="submit" class="cta-submit" data-i18n="form.submit">
-          Envoyer la requête stratégique
-        </button>
-      </div>
-
-    </form>
-
-  </div>
-</section>
-
+      <label class="check-item">
+        <input type="checkbox" name="outputs[]" value="delivery">
+        <span data-i18n="form.outputs.delivery">Envoi Email / WhatsApp</span>
+      </label>
+    </div>
+  </fieldset>
+ 
 <footer class="site-footer">
   <div class="container footer-inner">
 
