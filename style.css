@@ -275,3 +275,24 @@ input, textarea, select {
 
   .hero h1 { font-size: 1.7rem; }
 }
+
+/* ================= CTA HERO — RESPONSIVE FIX ================= */
+
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .cta-primary {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px 18px;
+    font-size: 0.95rem;
+  }
+}
