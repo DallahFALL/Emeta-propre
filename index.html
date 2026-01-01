@@ -265,7 +265,45 @@
       </label>
     </div>
   </fieldset>
- 
+   <!-- ================= DOCUMENTS COMPLÉMENTAIRES ================= -->
+  <div class="form-card">
+    <h3 data-i18n="form.docs.title">Documents complémentaires</h3>
+
+    <label for="userFile" data-i18n="form.docs.uploadLabel">
+      Joindre un fichier (optionnel)
+    </label>
+    <input
+      id="userFile"
+      name="user_file"
+      type="file"
+      accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.png,.jpg,.jpeg"
+    />
+
+    <label for="userFileLink" data-i18n="form.docs.linkLabel">
+      Ou coller un lien vers vos fichiers (Google Drive / Dropbox)
+    </label>
+    <input
+      id="userFileLink"
+      name="user_file_link"
+      type="url"
+      placeholder="https://drive.google.com/..."
+      data-i18n-placeholder="form.docs.linkPh"
+    />
+
+    <p class="hint" data-i18n="form.docs.hint">
+      Ajoutez un fichier ou un lien si vous disposez déjà de documents utiles.
+    </p>
+  </div>
+
+  <!-- ================= CTA FINAL ================= -->
+  <div class="form-actions">
+    <button type="submit" class="cta-submit" data-i18n="form.submit">
+      Envoyer la requête stratégique
+    </button>
+  </div>
+
+</form>
+
 <footer class="site-footer">
   <div class="container footer-inner">
 
