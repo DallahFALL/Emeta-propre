@@ -284,3 +284,12 @@ input, textarea, select {
 
   .hero h1 { font-size: 1.7rem; }
 }
+@media (max-width: 768px) {
+
+  .cta-custom {
+    width: 100%;
+    padding: 14px;
+    font-size: 0.9rem;
+  }
+
+}
