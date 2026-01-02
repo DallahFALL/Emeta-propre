@@ -14,9 +14,10 @@
   <div class="container header-inner">
 
     <div class="logo">
-      <span class="logo-mark">e</span>
-      <span class="logo-text">META</span>
-      <span class="logo-tagline">Assistant IA multilingue de prise de décision</span>
+      <span class="logo-tagline" data-i18n="footer.tagline">
+  Assistant IA multilingue de prise de décision
+</span>
+
     </div>
 
     <button class="burger" id="burgerBtn" aria-label="Menu">
@@ -24,9 +25,9 @@
     </button>
 
     <nav class="nav" id="mainNav">
-      <a href="#top">Accueil</a>
-      <a href="#form">Analyse</a>
-      <a href="privacy.html">Confidentialité</a>
+      <a href="#top" data-i18n="nav.home">Accueil</a>
+<a href="#form" data-i18n="nav.form">Analyse</a>
+<a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a>
     </nav>
 
     <div class="header-actions">
@@ -37,9 +38,9 @@
         <option value="ar">AR</option>
       </select>
 
-      <button class="cta-custom" onclick="scrollToForm()">
-        Requête personnalisée
-      </button>
+     <button class="cta-custom" onclick="scrollToForm()" data-i18n="cta.custom">
+  Requête personnalisée
+</button>
     </div>
 
   </div>
@@ -52,25 +53,21 @@
   <div class="container hero-grid">
 
     <div class="hero-box">
-      <h1>
-        Prenez des décisions au niveau d’un cabinet de conseil premium
-      </h1>
+     <h1 data-i18n="hero.title">
+  Prenez des décisions au niveau d’un cabinet de conseil premium
+</h1>
 
-      <p>
-        e-META transforme votre situation complexe en une
-        <strong>synthèse stratégique claire</strong>,
-        avec des recommandations exploitables et priorisées.
-      </p>
+<p data-i18n="hero.subtitle">
+  e-META transforme votre situation complexe en une synthèse stratégique claire.
+</p>
 
-      <ul class="hero-points">
-        <li>Analyse stratégique structurée</li>
-        <li>Scénarios et arbitrages décisionnels</li>
-        <li>Restitution professionnelle personnalisée</li>
-      </ul>
+<li data-i18n="hero.points.0">Analyse stratégique structurée</li>
+<li data-i18n="hero.points.1">Scénarios et arbitrages décisionnels</li>
+<li data-i18n="hero.points.2">Restitution professionnelle personnalisée</li>
 
-      <button class="cta-primary" type="button" onclick="scrollToForm()">
-        Démarrer une analyse stratégique
-      </button>
+<button class="cta-primary" onclick="scrollToForm()" data-i18n="cta.start">
+  Démarrer une analyse stratégique
+</button>
     </div>
 
     <div class="hero-box muted">
@@ -91,9 +88,9 @@
 <section class="form-section" id="form">
   <div class="container">
 
-    <h2 class="section-title">
-      Analyse stratégique avancée — Formulaire e-META
-    </h2>
+    <h2 class="section-title" data-i18n="form.title">
+  Analyse stratégique avancée — Formulaire e-META
+</h2>
 
     <form class="emeta-form" autocomplete="off">
 
@@ -103,8 +100,8 @@
 
         <div class="grid-2">
           <div>
-            <label for="country">Pays / Zone géographique</label>
-            <input id="country" name="country" type="text"
+            <label data-i18n="form.country">Pays / Zone géographique</label>
+<input type="text" data-i18n-placeholder="form.country_ph">
               placeholder="Ex : Sénégal, Union Européenne, Afrique de l’Ouest" />
           </div>
 
