@@ -1,46 +1,39 @@
 const I18N = {
   fr: {
     nav: { home: "Accueil", form: "Analyse", privacy: "Confidentialité" },
-    hero: {
-      title: "Prenez des décisions au niveau d’un cabinet de conseil premium",
-      subtitle: "e-META transforme votre situation complexe en une synthèse stratégique claire.",
-      points: [
-        "Analyse stratégique structurée",
-        "Scénarios décisionnels et arbitrages",
-        "Restitution professionnelle personnalisée"
-      ],
-      sideNote: "e-META n’est pas un chatbot.",
-      sideSub: "C’est un moteur d’intelligence décisionnelle."
-    },
     cta: {
       start: "Démarrer une analyse stratégique",
       custom: "Requête personnalisée",
       submit: "Envoyer la requête stratégique"
     },
+    hero: {
+      title: "Prenez des décisions au niveau d’un cabinet de conseil premium",
+      subtitle: "e-META transforme la complexité en recommandations stratégiques exploitables.",
+      points: [
+        "Analyse stratégique structurée",
+        "Scénarios et arbitrages décisionnels",
+        "Restitution professionnelle personnalisée"
+      ],
+      sideNote: "e-META n’est pas un chatbot.",
+      sideSub: "C’est un moteur d’intelligence décisionnelle."
+    },
     form: {
       title: "Analyse stratégique avancée — Formulaire e-META",
       context: {
-        title: "Contexte & organisation",
-        country: "Pays / Zone",
+        title: "Contexte général",
+        country: "Pays / Zone géographique",
         country_ph: "Ex : Sénégal, Europe, Afrique de l’Ouest",
         sector: "Secteur / Activité",
         sector_ph: "Fintech, Agrobusiness, Industrie…",
-        project: "Organisation / projet",
-        project_ph: "Décrivez votre projet ou organisation"
+        project: "Organisation ou projet analysé",
+        project_ph: "Décrivez votre contexte"
       },
       objectives: {
-        title: "Objectifs & indicateurs",
+        title: "Objectifs stratégiques",
         goals: "Objectifs prioritaires",
         goals_ph: "Croissance, rentabilité, expansion…",
         kpi: "Indicateurs clés",
-        kpi_ph: "CA, ROI, parts de marché…"
-      },
-      risks: {
-        title: "Enjeux & risques",
-        main: "Risques majeurs",
-        main_ph: "Financiers, réglementaires, opérationnels…",
-        scenarios: "Scénarios envisagés",
-        scenarios_ph: "Optimiste, réaliste, pessimiste…"
+        kpi_ph: "ROI, CA, délais, parts de marché…"
       },
       themes: {
         title: "Thématiques stratégiques",
@@ -60,46 +53,39 @@ const I18N = {
 
   en: {
     nav: { home: "Home", form: "Analysis", privacy: "Privacy" },
-    hero: {
-      title: "Make decisions at a premium consulting level",
-      subtitle: "e-META turns complex situations into clear strategic insights.",
-      points: [
-        "Structured strategic analysis",
-        "Decision scenarios and trade-offs",
-        "Professional tailored delivery"
-      ],
-      sideNote: "e-META is not a chatbot.",
-      sideSub: "It is a decision intelligence engine."
-    },
     cta: {
       start: "Start strategic analysis",
       custom: "Custom request",
       submit: "Submit strategic request"
     },
+    hero: {
+      title: "Make decisions at a premium consulting level",
+      subtitle: "e-META turns complexity into clear strategic recommendations.",
+      points: [
+        "Structured strategic analysis",
+        "Decision scenarios & trade-offs",
+        "Professional tailored insights"
+      ],
+      sideNote: "e-META is not a chatbot.",
+      sideSub: "It is a decision intelligence engine."
+    },
     form: {
       title: "Advanced strategic analysis — e-META form",
       context: {
-        title: "Context & organization",
+        title: "General context",
         country: "Country / Region",
-        country_ph: "e.g. Senegal, Europe, West Africa",
-        sector: "Sector / Activity",
-        sector_ph: "Fintech, Agribusiness, Industry…",
-        project: "Organization / project",
-        project_ph: "Describe your project or organization"
+        country_ph: "e.g. Senegal, Europe",
+        sector: "Sector / Industry",
+        sector_ph: "Fintech, Industry…",
+        project: "Organization or project",
+        project_ph: "Describe your situation"
       },
       objectives: {
-        title: "Objectives & KPIs",
-        goals: "Key objectives",
+        title: "Strategic objectives",
+        goals: "Main objectives",
         goals_ph: "Growth, profitability, expansion…",
         kpi: "Key indicators",
-        kpi_ph: "Revenue, ROI, market share…"
-      },
-      risks: {
-        title: "Risks & challenges",
-        main: "Major risks",
-        main_ph: "Financial, regulatory, operational…",
-        scenarios: "Scenarios",
-        scenarios_ph: "Optimistic, realistic, pessimistic…"
+        kpi_ph: "ROI, revenue, KPIs…"
       },
       themes: {
         title: "Strategic themes",
@@ -117,61 +103,50 @@ const I18N = {
     }
   },
 
-  ar: {
-    nav: { home: "الرئيسية", form: "التحليل", privacy: "الخصوصية" },
-    hero: {
-      title: "اتخذ قرارات بمستوى مكاتب الاستشارات",
-      subtitle: "e-META يحول التعقيد إلى رؤية استراتيجية واضحة.",
-      points: [
-        "تحليل استراتيجي منظم",
-        "سيناريوهات وقرارات",
-        "مخرجات احترافية مخصصة"
-      ],
-      sideNote: "e-META ليس روبوت دردشة.",
-      sideSub: "إنه محرك ذكاء لاتخاذ القرار."
+  es: {
+    nav: { home: "Inicio", form: "Análisis", privacy: "Privacidad" },
+    cta: {
+      start: "Iniciar análisis estratégico",
+      custom: "Solicitud personalizada",
+      submit: "Enviar solicitud estratégica"
     },
+    hero: {
+      title: "Tome decisiones al nivel de una consultora premium",
+      subtitle: "e-META convierte la complejidad en recomendaciones estratégicas claras.",
+      points: [
+        "Análisis estratégico estructurado",
+        "Escenarios y decisiones",
+        "Resultados profesionales personalizados"
+      ],
+      sideNote: "e-META no es un chatbot.",
+      sideSub: "Es un motor de inteligencia decisional."
+    },
+    footer: {
+      tagline: "Asistente de IA multilingüe para decisiones estratégicas",
+      rights: "Todos los derechos reservados"
+    }
+  },
+
+  ar: {
+    nav: { home: "الرئيسية", form: "تحليل", privacy: "الخصوصية" },
     cta: {
       start: "بدء التحليل الاستراتيجي",
       custom: "طلب مخصص",
-      submit: "إرسال الطلب الاستراتيجي"
+      submit: "إرسال الطلب"
     },
-    form: {
-      title: "تحليل استراتيجي متقدم — نموذج e-META",
-      context: {
-        title: "السياق والتنظيم",
-        country: "الدولة / المنطقة",
-        country_ph: "مثال: السنغال، أوروبا",
-        sector: "القطاع / النشاط",
-        sector_ph: "التقنية المالية، الزراعة…",
-        project: "المشروع أو المنظمة",
-        project_ph: "صف مشروعك أو منظمتك"
-      },
-      objectives: {
-        title: "الأهداف والمؤشرات",
-        goals: "الأهداف الرئيسية",
-        goals_ph: "النمو، الربحية، التوسع…",
-        kpi: "المؤشرات",
-        kpi_ph: "الإيرادات، العائد…"
-      },
-      risks: {
-        title: "المخاطر والتحديات",
-        main: "المخاطر الرئيسية",
-        main_ph: "مالية، تنظيمية، تشغيلية…",
-        scenarios: "السيناريوهات",
-        scenarios_ph: "متفائل، واقعي، متشائم…"
-      },
-      themes: {
-        title: "المواضيع الاستراتيجية",
-        ai: "الذكاء الاصطناعي",
-        scaling: "النمو والتوسع",
-        costs: "خفض التكاليف",
-        esg: "الأثر والاستدامة",
-        regulation: "التنظيم",
-        innovation: "ابتكار المنتج"
-      }
+    hero: {
+      title: "اتخذ قرارات بمستوى شركات الاستشارات الكبرى",
+      subtitle: "e-META يحول التعقيد إلى توصيات استراتيجية واضحة.",
+      points: [
+        "تحليل استراتيجي منظم",
+        "سيناريوهات اتخاذ القرار",
+        "نتائج احترافية مخصصة"
+      ],
+      sideNote: "e-META ليس روبوت محادثة.",
+      sideSub: "إنه محرك ذكاء لاتخاذ القرار."
     },
     footer: {
-      tagline: "مساعد ذكاء اصطناعي لاتخاذ القرار",
+      tagline: "مساعد ذكاء اصطناعي متعدد اللغات لاتخاذ القرار",
       rights: "جميع الحقوق محفوظة"
     }
   }
