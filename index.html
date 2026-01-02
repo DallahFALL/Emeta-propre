@@ -25,16 +25,16 @@
 
     <nav class="nav" id="mainNav">
       <a href="#top">Accueil</a>
-      <a href="#form">Formulaire</a>
+      <a href="#form">Analyse</a>
       <a href="privacy.html">Confidentialité</a>
     </nav>
 
     <div class="header-actions">
-      <select class="lang-select">
-        <option>FR</option>
-        <option>EN</option>
-        <option>ES</option>
-        <option>AR</option>
+      <select class="lang-select" aria-label="Language">
+        <option value="fr">FR</option>
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+        <option value="ar">AR</option>
       </select>
 
       <button class="cta-custom" onclick="scrollToForm()">
@@ -47,28 +47,31 @@
 
 <main>
 
- <!-- ================= HERO ================= -->
-  <section class="hero">
-    <div class="container hero-grid">
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="container hero-grid">
 
-      <div class="hero-box">
-        <h1>Prenez des décisions au niveau d’un cabinet de conseil premium</h1>
+    <div class="hero-box">
+      <h1>
+        Prenez des décisions au niveau d’un cabinet de conseil premium
+      </h1>
 
-        <p>
-          e-META analyse votre contexte, objectifs, contraintes, risques et indicateurs clés
-          afin de produire une synthèse stratégique claire et exploitable.
-        </p>
+      <p>
+        e-META transforme votre situation complexe en une
+        <strong>synthèse stratégique claire</strong>,
+        avec des recommandations exploitables et priorisées.
+      </p>
 
-        <ul class="hero-points">
-          <li>Analyse structurée & stratégique</li>
-          <li>Recommandations actionnables</li>
-          <li>Restitution personnalisée</li>
-        </ul>
+      <ul class="hero-points">
+        <li>Analyse stratégique structurée</li>
+        <li>Scénarios et arbitrages décisionnels</li>
+        <li>Restitution professionnelle personnalisée</li>
+      </ul>
 
-        <button class="cta-primary" type="button" onclick="scrollToForm()">
-          Démarrer une analyse stratégique
-        </button>
-      </div>
+      <button class="cta-primary" type="button" onclick="scrollToForm()">
+        Démarrer une analyse stratégique
+      </button>
+    </div>
 
     <div class="hero-box muted">
       <p>
@@ -76,8 +79,8 @@
         C’est un moteur d’intelligence décisionnelle.
       </p>
       <p class="small">
-        +12h d’analyse stratégique simulée — équivalent
-        au travail combiné d’un consultant senior.
+        Équivalent à plusieurs heures d’analyse
+        réalisées par un consultant senior.
       </p>
     </div>
 
@@ -89,92 +92,101 @@
   <div class="container">
 
     <h2 class="section-title">
-      Formulaire e-META — Analyse stratégique avancée
+      Analyse stratégique avancée — Formulaire e-META
     </h2>
 
-    <form class="emeta-form">
+    <form class="emeta-form" autocomplete="off">
 
       <!-- A. CONTEXTE -->
       <div class="form-card">
-        <h3>1. Contexte & organisation</h3>
+        <h3>1. Contexte général</h3>
 
         <div class="grid-2">
           <div>
-            <label>Pays / Zone</label>
-            <input type="text" placeholder="Ex : Sénégal, France, Afrique de l’Ouest">
+            <label for="country">Pays / Zone géographique</label>
+            <input id="country" name="country" type="text"
+              placeholder="Ex : Sénégal, Union Européenne, Afrique de l’Ouest" />
           </div>
+
           <div>
-            <label>Secteur / Activité</label>
-            <input type="text" placeholder="Fintech, Agrobusiness, Industrie…">
+            <label for="sector">Secteur / Domaine d’activité</label>
+            <input id="sector" name="sector" type="text"
+              placeholder="Ex : Fintech, Agrobusiness, Industrie, Services…" />
           </div>
         </div>
 
-        <label>Organisation / projet concerné</label>
-        <textarea placeholder="Décrivez brièvement votre organisation ou projet"></textarea>
+        <label for="organization">Organisation ou projet analysé</label>
+        <textarea id="organization" name="organization"
+          placeholder="Présentez brièvement l’organisation, le projet ou la situation à analyser"></textarea>
       </div>
 
-      <!-- B. OBJECTIFS & KPI -->
+      <!-- B. OBJECTIFS -->
       <div class="form-card">
-        <h3>2. Objectifs stratégiques & indicateurs</h3>
+        <h3>2. Objectifs stratégiques</h3>
 
-        <label>Objectifs prioritaires</label>
-        <textarea placeholder="Croissance, rentabilité, expansion, optimisation…"></textarea>
+        <label for="objectives">Objectifs prioritaires</label>
+        <textarea id="objectives" name="objectives"
+          placeholder="Ex : croissance, rentabilité, réduction des risques, expansion, repositionnement…"></textarea>
 
-        <label>KPIs ou indicateurs clés</label>
-        <textarea placeholder="CA, ROI, parts de marché, délais, churn…"></textarea>
+        <label for="kpi">Indicateurs clés (KPIs)</label>
+        <textarea id="kpi" name="kpi"
+          placeholder="Ex : chiffre d’affaires, ROI, parts de marché, délais, performance opérationnelle…"></textarea>
       </div>
 
       <!-- C. RISQUES -->
       <div class="form-card">
-        <h3>3. Enjeux, risques & scénarios</h3>
+        <h3>3. Enjeux, risques et incertitudes</h3>
 
-        <label>Risques majeurs</label>
-        <textarea placeholder="Financiers, réglementaires, opérationnels…"></textarea>
+        <label for="risks">Principaux risques identifiés</label>
+        <textarea id="risks" name="risks"
+          placeholder="Financiers, réglementaires, humains, technologiques, concurrentiels…"></textarea>
 
-        <label>Scénarios envisagés</label>
-        <textarea placeholder="Optimiste, réaliste, pessimiste…"></textarea>
+        <label for="scenarios">Scénarios envisagés</label>
+        <textarea id="scenarios" name="scenarios"
+          placeholder="Optimiste, réaliste, pessimiste ou scénarios alternatifs"></textarea>
       </div>
 
       <!-- D. THÉMATIQUES -->
       <fieldset class="field-group">
-        <legend>Thématiques stratégiques</legend>
+        <legend>Thématiques stratégiques à analyser</legend>
 
         <div class="checkbox-grid">
-          <label class="check-item"><input type="checkbox"> IA & automatisation</label>
-          <label class="check-item"><input type="checkbox"> Croissance & scaling</label>
-          <label class="check-item"><input type="checkbox"> Optimisation des coûts</label>
-          <label class="check-item"><input type="checkbox"> ESG & impact</label>
-          <label class="check-item"><input type="checkbox"> Réglementation</label>
-          <label class="check-item"><input type="checkbox"> Innovation produit</label>
+          <label class="check-item"><input type="checkbox" name="themes" value="ai"> IA & automatisation</label>
+          <label class="check-item"><input type="checkbox" name="themes" value="growth"> Croissance & scaling</label>
+          <label class="check-item"><input type="checkbox" name="themes" value="cost"> Optimisation des coûts</label>
+          <label class="check-item"><input type="checkbox" name="themes" value="esg"> ESG & impact</label>
+          <label class="check-item"><input type="checkbox" name="themes" value="regulation"> Réglementation</label>
+          <label class="check-item"><input type="checkbox" name="themes" value="innovation"> Innovation produit</label>
         </div>
       </fieldset>
 
       <!-- E. LIVRABLES -->
       <fieldset class="field-group">
-        <legend>Restitution & livrables attendus</legend>
+        <legend>Livrables attendus</legend>
 
         <div class="checkbox-grid">
-          <label class="check-item"><input type="checkbox"> Synthèse exécutive</label>
-          <label class="check-item"><input type="checkbox"> Plan d’action</label>
-          <label class="check-item"><input type="checkbox"> Tableau de KPIs</label>
-          <label class="check-item"><input type="checkbox"> Analyse des risques</label>
-          <label class="check-item"><input type="checkbox"> Rapport PDF professionnel</label>
-          <label class="check-item"><input type="checkbox"> Envoi Email / WhatsApp</label>
+          <label class="check-item"><input type="checkbox" name="deliverables" value="summary"> Synthèse exécutive</label>
+          <label class="check-item"><input type="checkbox" name="deliverables" value="action"> Plan d’action priorisé</label>
+          <label class="check-item"><input type="checkbox" name="deliverables" value="kpi"> Tableau de bord KPIs</label>
+          <label class="check-item"><input type="checkbox" name="deliverables" value="risk"> Analyse des risques</label>
+          <label class="check-item"><input type="checkbox" name="deliverables" value="pdf"> Rapport PDF professionnel</label>
+          <label class="check-item"><input type="checkbox" name="deliverables" value="delivery"> Envoi Email / WhatsApp</label>
         </div>
       </fieldset>
 
-      <!-- F. PIÈCE JOINTE -->
+      <!-- F. DOCUMENTS -->
       <div class="form-card">
         <h3>Documents complémentaires (optionnel)</h3>
-        <input type="file">
-        <p class="form-hint">
-          Vous pouvez joindre un document existant (PDF, Word, Excel, présentation…)
+        <input type="file" name="attachment" />
+        <p class="hint">
+          Vous pouvez joindre tout document utile :
+          business plan, rapport, tableau financier, présentation…
         </p>
       </div>
 
       <!-- SUBMIT -->
       <div class="form-actions">
-        <button class="btn-submit">
+        <button class="btn-submit" type="submit">
           Envoyer la requête stratégique
         </button>
       </div>
@@ -195,7 +207,7 @@
     </div>
 
     <div class="footer-links">
-      <a href="#form">Formulaire</a>
+      <a href="#form">Analyse</a>
       <a href="privacy.html">Confidentialité</a>
     </div>
   </div>
