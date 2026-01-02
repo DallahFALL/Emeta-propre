@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>e-META — Assistant IA de prise de décision</title>
+
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
 </head>
 
 <body id="top">
@@ -16,7 +18,9 @@
     <div class="logo">
       <span class="logo-mark">e</span>
       <span class="logo-text">META</span>
-      <span class="logo-tagline">Assistant IA multilingue de prise de décision</span>
+      <span class="logo-tagline" data-i18n="footer.tagline">
+        Assistant IA multilingue de prise de décision
+      </span>
     </div>
 
     <button class="burger" id="burgerBtn" aria-label="Menu">
@@ -24,20 +28,21 @@
     </button>
 
     <nav class="nav" id="mainNav">
-      <a href="#top">Accueil</a>
-      <a href="#form">Formulaire</a>
-      <a href="privacy.html">Confidentialité</a>
+      <a href="#top" data-i18n="nav.home">Accueil</a>
+      <a href="#form" data-i18n="nav.form">Analyse</a>
+      <a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a>
     </nav>
 
     <div class="header-actions">
-      <select class="lang-select">
-        <option>FR</option>
-        <option>EN</option>
-        <option>ES</option>
-        <option>AR</option>
+      <select class="lang-select" id="langSelect" aria-label="Language">
+        <option value="fr">FR</option>
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+        <option value="ar">AR</option>
       </select>
 
-      <button class="cta-custom" onclick="scrollToForm()">
+      <!-- bouton volontairement plus compact -->
+      <button class="cta-custom" onclick="scrollToForm()" data-i18n="cta.custom">
         Requête personnalisée
       </button>
     </div>
@@ -47,38 +52,29 @@
 
 <main>
 
- <!-- ================= HERO ================= -->
-  <section class="hero">
-    <div class="container hero-grid">
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="container hero-grid">
 
-      <div class="hero-box">
-        <h1>Prenez des décisions au niveau d’un cabinet de conseil premium</h1>
+    <div class="hero-box">
+      <h1 data-i18n="hero.title"></h1>
 
-        <p>
-          e-META analyse votre contexte, objectifs, contraintes, risques et indicateurs clés
-          afin de produire une synthèse stratégique claire et exploitable.
-        </p>
+      <p data-i18n="hero.subtitle"></p>
 
-        <ul class="hero-points">
-          <li>Analyse structurée & stratégique</li>
-          <li>Recommandations actionnables</li>
-          <li>Restitution personnalisée</li>
-        </ul>
+      <ul class="hero-points">
+        <li data-i18n="hero.points.0"></li>
+        <li data-i18n="hero.points.1"></li>
+        <li data-i18n="hero.points.2"></li>
+      </ul>
 
-        <button class="cta-primary" type="button" onclick="scrollToForm()">
-          Démarrer une analyse stratégique
-        </button>
-      </div>
+      <button class="cta-primary" onclick="scrollToForm()" data-i18n="cta.start">
+        Démarrer une analyse stratégique
+      </button>
+    </div>
 
     <div class="hero-box muted">
-      <p>
-        e-META n’est pas un chatbot.<br>
-        C’est un moteur d’intelligence décisionnelle.
-      </p>
-      <p class="small">
-        +12h d’analyse stratégique simulée — équivalent
-        au travail combiné d’un consultant senior.
-      </p>
+      <p data-i18n="hero.sideNote"></p>
+      <p class="small" data-i18n="hero.sideSub"></p>
     </div>
 
   </div>
@@ -88,95 +84,68 @@
 <section class="form-section" id="form">
   <div class="container">
 
-    <h2 class="section-title">
-      Formulaire e-META — Analyse stratégique avancée
-    </h2>
+    <h2 class="section-title" data-i18n="form.title"></h2>
 
-    <form class="emeta-form">
+    <form class="emeta-form" autocomplete="off">
 
-      <!-- A. CONTEXTE -->
+      <!-- CONTEXTE -->
       <div class="form-card">
-        <h3>1. Contexte & organisation</h3>
+        <h3 data-i18n="form.context.title"></h3>
 
         <div class="grid-2">
           <div>
-            <label>Pays / Zone</label>
-            <input type="text" placeholder="Ex : Sénégal, France, Afrique de l’Ouest">
+            <label data-i18n="form.context.country"></label>
+            <input type="text" data-i18n-placeholder="form.context.country_ph">
           </div>
           <div>
-            <label>Secteur / Activité</label>
-            <input type="text" placeholder="Fintech, Agrobusiness, Industrie…">
+            <label data-i18n="form.context.sector"></label>
+            <input type="text" data-i18n-placeholder="form.context.sector_ph">
           </div>
         </div>
 
-        <label>Organisation / projet concerné</label>
-        <textarea placeholder="Décrivez brièvement votre organisation ou projet"></textarea>
+        <label data-i18n="form.context.project"></label>
+        <textarea data-i18n-placeholder="form.context.project_ph"></textarea>
       </div>
 
-      <!-- B. OBJECTIFS & KPI -->
+      <!-- OBJECTIFS -->
       <div class="form-card">
-        <h3>2. Objectifs stratégiques & indicateurs</h3>
+        <h3 data-i18n="form.objectives.title"></h3>
 
-        <label>Objectifs prioritaires</label>
-        <textarea placeholder="Croissance, rentabilité, expansion, optimisation…"></textarea>
+        <label data-i18n="form.objectives.goals"></label>
+        <textarea data-i18n-placeholder="form.objectives.goals_ph"></textarea>
 
-        <label>KPIs ou indicateurs clés</label>
-        <textarea placeholder="CA, ROI, parts de marché, délais, churn…"></textarea>
+        <label data-i18n="form.objectives.kpi"></label>
+        <textarea data-i18n-placeholder="form.objectives.kpi_ph"></textarea>
       </div>
 
-      <!-- C. RISQUES -->
+      <!-- RISQUES -->
       <div class="form-card">
-        <h3>3. Enjeux, risques & scénarios</h3>
+        <h3 data-i18n="form.risks.title"></h3>
 
-        <label>Risques majeurs</label>
-        <textarea placeholder="Financiers, réglementaires, opérationnels…"></textarea>
+        <label data-i18n="form.risks.main"></label>
+        <textarea data-i18n-placeholder="form.risks.main_ph"></textarea>
 
-        <label>Scénarios envisagés</label>
-        <textarea placeholder="Optimiste, réaliste, pessimiste…"></textarea>
+        <label data-i18n="form.risks.scenarios"></label>
+        <textarea data-i18n-placeholder="form.risks.scenarios_ph"></textarea>
       </div>
 
-      <!-- D. THÉMATIQUES -->
+      <!-- THEMES -->
       <fieldset class="field-group">
-        <legend>Thématiques stratégiques</legend>
+        <legend data-i18n="form.themes.title"></legend>
 
         <div class="checkbox-grid">
-          <label class="check-item"><input type="checkbox"> IA & automatisation</label>
-          <label class="check-item"><input type="checkbox"> Croissance & scaling</label>
-          <label class="check-item"><input type="checkbox"> Optimisation des coûts</label>
-          <label class="check-item"><input type="checkbox"> ESG & impact</label>
-          <label class="check-item"><input type="checkbox"> Réglementation</label>
-          <label class="check-item"><input type="checkbox"> Innovation produit</label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="form.themes.ai"></span></label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="form.themes.scaling"></span></label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="form.themes.costs"></span></label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="form.themes.esg"></span></label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="form.themes.regulation"></span></label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="form.themes.innovation"></span></label>
         </div>
       </fieldset>
-
-      <!-- E. LIVRABLES -->
-      <fieldset class="field-group">
-        <legend>Restitution & livrables attendus</legend>
-
-        <div class="checkbox-grid">
-          <label class="check-item"><input type="checkbox"> Synthèse exécutive</label>
-          <label class="check-item"><input type="checkbox"> Plan d’action</label>
-          <label class="check-item"><input type="checkbox"> Tableau de KPIs</label>
-          <label class="check-item"><input type="checkbox"> Analyse des risques</label>
-          <label class="check-item"><input type="checkbox"> Rapport PDF professionnel</label>
-          <label class="check-item"><input type="checkbox"> Envoi Email / WhatsApp</label>
-        </div>
-      </fieldset>
-
-      <!-- F. PIÈCE JOINTE -->
-      <div class="form-card">
-        <h3>Documents complémentaires (optionnel)</h3>
-        <input type="file">
-        <p class="form-hint">
-          Vous pouvez joindre un document existant (PDF, Word, Excel, présentation…)
-        </p>
-      </div>
 
       <!-- SUBMIT -->
       <div class="form-actions">
-        <button class="btn-submit">
-          Envoyer la requête stratégique
-        </button>
+        <button class="btn-submit" data-i18n="cta.submit"></button>
       </div>
 
     </form>
@@ -191,28 +160,59 @@
   <div class="container footer-inner">
     <div class="footer-brand">
       <strong><span style="color:#ff8a00">e</span>-META</strong>
-      <p>Moteur d’intelligence décisionnelle stratégique.</p>
-    </div>
-
-    <div class="footer-links">
-      <a href="#form">Formulaire</a>
-      <a href="privacy.html">Confidentialité</a>
+      <p data-i18n="footer.tagline"></p>
     </div>
   </div>
 
   <div class="footer-copy">
-    © 2025 e-META — Tous droits réservés
+    © 2025 e-META — <span data-i18n="footer.rights"></span>
   </div>
 </footer>
 
-<script>
-  function scrollToForm() {
-    document.getElementById("form")?.scrollIntoView({ behavior: "smooth" });
-  }
+<!-- ================= SCRIPTS ================= -->
+<script src="i18n.js"></script>
 
-  const burger = document.getElementById("burgerBtn");
-  const nav = document.getElementById("mainNav");
-  burger?.addEventListener("click", () => nav.classList.toggle("open"));
+<script>
+function scrollToForm() {
+  document.getElementById("form")?.scrollIntoView({ behavior: "smooth" });
+}
+
+const burger = document.getElementById("burgerBtn");
+const nav = document.getElementById("mainNav");
+burger?.addEventListener("click", () => nav.classList.toggle("open"));
+
+const select = document.getElementById("langSelect");
+const rtl = document.getElementById("rtlStylesheet");
+
+function applyI18n(lang) {
+  const dict = I18N[lang];
+  if (!dict) return;
+
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  rtl.disabled = lang !== "ar";
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const keys = el.dataset.i18n.split(".");
+    let val = dict;
+    keys.forEach(k => val = val?.[k]);
+    if (val) el.textContent = val;
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const keys = el.dataset.i18nPlaceholder.split(".");
+    let val = dict;
+    keys.forEach(k => val = val?.[k]);
+    if (val) el.placeholder = val;
+  });
+
+  localStorage.setItem("lang", lang);
+}
+
+const savedLang = localStorage.getItem("lang") || "fr";
+select.value = savedLang;
+applyI18n(savedLang);
+select.addEventListener("change", e => applyI18n(e.target.value));
 </script>
 
 </body>
