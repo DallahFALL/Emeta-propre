@@ -48,3 +48,19 @@ document.addEventListener("DOMContentLoaded", () => {
   applyTranslations(savedLang);
 });
 </script>
+
+.header-actions {
+  flex-wrap: wrap;
+}
+
+.cta-custom {
+  max-width: 100%;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .header-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
