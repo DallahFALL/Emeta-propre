@@ -45,6 +45,9 @@ const I18N = {
         innovation: "Innovation produit"
       }
     },
+    cta: {
+  submit: "Envoyer la requête stratégique"
+}
     footer: {
       tagline: "Assistant IA multilingue de prise de décision stratégique",
       rights: "Tous droits réservés"
@@ -151,3 +154,31 @@ const I18N = {
     }
   }
 };
+es: {
+  nav: {
+    home: "Inicio",
+    form: "Análisis",
+    privacy: "Privacidad"
+  },
+  cta: {
+    start: "Iniciar análisis estratégico",
+    custom: "Solicitud personalizada",
+    submit: "Enviar solicitud estratégica"
+  },
+  form: {
+    themes: {
+      title: "Temáticas estratégicas",
+      ai: "IA y automatización",
+      scaling: "Crecimiento y escalabilidad",
+      costs: "Optimización de costos",
+      esg: "ESG e impacto",
+      regulation: "Regulación",
+      innovation: "Innovación de producto"
+    }
+  },
+  footer: {
+    tagline: "Asistente de IA multilingüe para decisiones estratégicas",
+    rights: "Todos los derechos reservados"
+  }
+}
+
