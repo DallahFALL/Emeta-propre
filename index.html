@@ -34,7 +34,7 @@
     </nav>
 
     <div class="header-actions">
-      <select class="lang-select" id="langSelect">
+      <select class="lang-select" id="langSelect" aria-label="Language">
         <option value="fr">FR</option>
         <option value="en">EN</option>
         <option value="ar">AR</option>
@@ -55,13 +55,9 @@
   <div class="container hero-grid">
 
     <div class="hero-box">
-      <h1 data-i18n="hero.title">
-        Prenez des décisions au niveau d’un cabinet de conseil premium
-      </h1>
+      <h1 data-i18n="hero.title"></h1>
 
-      <p data-i18n="hero.subtitle">
-        e-META transforme votre situation complexe en une synthèse stratégique claire.
-      </p>
+      <p data-i18n="hero.subtitle"></p>
 
       <ul class="hero-points">
         <li data-i18n="hero.points.0"></li>
@@ -69,7 +65,7 @@
         <li data-i18n="hero.points.2"></li>
       </ul>
 
-      <button class="cta-primary" onclick="scrollToForm()" data-i18n="cta.start">
+      <button class="cta-primary" type="button" onclick="scrollToForm()" data-i18n="cta.start">
         Démarrer une analyse stratégique
       </button>
     </div>
@@ -88,66 +84,88 @@
 
     <h2 class="section-title" data-i18n="form.title"></h2>
 
-    <form class="emeta-form">
+    <form class="emeta-form" autocomplete="off">
 
-      <!-- CONTEXTE -->
+      <!-- A. CONTEXTE -->
       <div class="form-card">
         <h3 data-i18n="form.context.title"></h3>
 
         <div class="grid-2">
           <div>
             <label data-i18n="form.context.country"></label>
-            <input type="text" data-i18n-placeholder="form.context.country_ph">
+            <input type="text" name="country" data-i18n-placeholder="form.context.country_ph">
           </div>
+
           <div>
             <label data-i18n="form.context.sector"></label>
-            <input type="text" data-i18n-placeholder="form.context.sector_ph">
+            <input type="text" name="sector" data-i18n-placeholder="form.context.sector_ph">
           </div>
         </div>
 
         <label data-i18n="form.context.project"></label>
-        <textarea data-i18n-placeholder="form.context.project_ph"></textarea>
+        <textarea name="organization" data-i18n-placeholder="form.context.project_ph"></textarea>
       </div>
 
-      <!-- OBJECTIFS -->
+      <!-- B. OBJECTIFS -->
       <div class="form-card">
         <h3 data-i18n="form.objectives.title"></h3>
 
         <label data-i18n="form.objectives.goals"></label>
-        <textarea data-i18n-placeholder="form.objectives.goals_ph"></textarea>
+        <textarea name="objectives" data-i18n-placeholder="form.objectives.goals_ph"></textarea>
 
         <label data-i18n="form.objectives.kpi"></label>
-        <textarea data-i18n-placeholder="form.objectives.kpi_ph"></textarea>
+        <textarea name="kpi" data-i18n-placeholder="form.objectives.kpi_ph"></textarea>
       </div>
 
-      <!-- RISQUES -->
+      <!-- C. RISQUES -->
       <div class="form-card">
         <h3 data-i18n="form.risks.title"></h3>
 
         <label data-i18n="form.risks.main"></label>
-        <textarea data-i18n-placeholder="form.risks.main_ph"></textarea>
+        <textarea name="risks" data-i18n-placeholder="form.risks.main_ph"></textarea>
 
         <label data-i18n="form.risks.scenarios"></label>
-        <textarea data-i18n-placeholder="form.risks.scenarios_ph"></textarea>
+        <textarea name="scenarios" data-i18n-placeholder="form.risks.scenarios_ph"></textarea>
       </div>
 
-      <!-- THEMES -->
+      <!-- D. THÉMATIQUES -->
       <fieldset class="field-group">
         <legend data-i18n="form.themes.title"></legend>
 
         <div class="checkbox-grid">
-          <label class="check-item"><input type="checkbox"> <span data-i18n="form.themes.ai"></span></label>
-          <label class="check-item"><input type="checkbox"> <span data-i18n="form.themes.scaling"></span></label>
-          <label class="check-item"><input type="checkbox"> <span data-i18n="form.themes.costs"></span></label>
-          <label class="check-item"><input type="checkbox"> <span data-i18n="form.themes.esg"></span></label>
-          <label class="check-item"><input type="checkbox"> <span data-i18n="form.themes.regulation"></span></label>
-          <label class="check-item"><input type="checkbox"> <span data-i18n="form.themes.innovation"></span></label>
+          <label class="check-item"><input type="checkbox" name="themes" value="ai"> <span data-i18n="form.themes.ai"></span></label>
+          <label class="check-item"><input type="checkbox" name="themes" value="scaling"> <span data-i18n="form.themes.scaling"></span></label>
+          <label class="check-item"><input type="checkbox" name="themes" value="costs"> <span data-i18n="form.themes.costs"></span></label>
+          <label class="check-item"><input type="checkbox" name="themes" value="esg"> <span data-i18n="form.themes.esg"></span></label>
+          <label class="check-item"><input type="checkbox" name="themes" value="regulation"> <span data-i18n="form.themes.regulation"></span></label>
+          <label class="check-item"><input type="checkbox" name="themes" value="innovation"> <span data-i18n="form.themes.innovation"></span></label>
         </div>
       </fieldset>
 
+      <!-- E. LIVRABLES -->
+      <fieldset class="field-group">
+        <legend data-i18n="form.deliverables.title"></legend>
+
+        <div class="checkbox-grid">
+          <label class="check-item"><input type="checkbox" name="deliverables" value="summary"> <span data-i18n="form.deliverables.summary"></span></label>
+          <label class="check-item"><input type="checkbox" name="deliverables" value="action"> <span data-i18n="form.deliverables.action"></span></label>
+          <label class="check-item"><input type="checkbox" name="deliverables" value="kpi"> <span data-i18n="form.deliverables.kpi"></span></label>
+          <label class="check-item"><input type="checkbox" name="deliverables" value="risk"> <span data-i18n="form.deliverables.risk"></span></label>
+          <label class="check-item"><input type="checkbox" name="deliverables" value="pdf"> <span data-i18n="form.deliverables.pdf"></span></label>
+          <label class="check-item"><input type="checkbox" name="deliverables" value="delivery"> <span data-i18n="form.deliverables.delivery"></span></label>
+        </div>
+      </fieldset>
+
+      <!-- F. DOCUMENTS -->
+      <div class="form-card">
+        <h3 data-i18n="form.upload.title"></h3>
+        <input type="file" name="attachment">
+        <p class="hint" data-i18n="form.upload.hint"></p>
+      </div>
+
       <!-- SUBMIT -->
       <div class="form-actions">
-        <button class="btn-submit" data-i18n="cta.submit"></button>
+        <button class="btn-submit" type="submit" data-i18n="cta.submit"></button>
       </div>
 
     </form>
@@ -171,7 +189,6 @@
   </div>
 </footer>
 
-<!-- ================= SCRIPTS ================= -->
 <script src="i18n.js"></script>
 
 <script>
