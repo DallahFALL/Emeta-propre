@@ -1,38 +1,50 @@
+<script>
+/* ================= e-META i18n ENGINE ================= */
+
+const DEFAULT_LANG = "fr";
+const STORAGE_KEY = "emeta_lang";
+
+function applyTranslations(lang) {
+  const dict = I18N[lang];
+  if (!dict) return;
+
+  // Texte simple
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const keys = el.dataset.i18n.split(".");
+    let value = dict;
+    keys.forEach(k => value = value?.[k]);
+    if (value) el.textContent = value;
+  });
+
+  // Placeholders
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const keys = el.dataset.i18nPlaceholder.split(".");
+    let value = dict;
+    keys.forEach(k => value = value?.[k]);
+    if (value) el.placeholder = value;
+  });
+
+  // Lang + RTL
+  document.documentElement.lang = lang;
+  document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
+}
+
+function setLanguage(lang) {
+  localStorage.setItem(STORAGE_KEY, lang);
+  applyTranslations(lang);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  const savedLang = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
+  const select = document.querySelector(".lang-select");
 
-  /* ================= CTA HERO ================= */
-  const ctaStart = document.querySelector(".cta-primary");
-  const formSection = document.querySelector("#form");
-
-  if (ctaStart && formSection) {
-    ctaStart.addEventListener("click", () => {
-      formSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+  if (select) {
+    select.value = savedLang;
+    select.addEventListener("change", e => {
+      setLanguage(e.target.value);
     });
   }
 
-  /* ================= HEADER CTA ================= */
-  const ctaHeader = document.querySelector(".cta-header");
-
-  if (ctaHeader && formSection) {
-    ctaHeader.addEventListener("click", () => {
-      formSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    });
-  }
-
-  /* ================= SUBMIT (PLACEHOLDER) ================= */
-  const submitBtn = document.querySelector(".cta-submit");
-
-  if (submitBtn) {
-    submitBtn.addEventListener("click", () => {
-      // Ici Make / Webhook
-      console.log("Requête stratégique envoyée");
-    });
-  }
-
+  applyTranslations(savedLang);
 });
+</script>
