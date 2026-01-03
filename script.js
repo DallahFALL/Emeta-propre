@@ -1,8 +1,4 @@
-/* =====================================================
-   e-META — script.js FINAL (NO HTML TOUCH)
-   - Active i18n sur TOUTES les pages
-   - Ne modifie AUCUN HTML
-===================================================== */
+/* ================= e-META i18n GLOBAL ================= */
 
 (function () {
   "use strict";
@@ -25,13 +21,11 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     const lang = getLang();
-
-    // 🔒 Appliquer la langue à TOUTE la page
     applyLang(lang);
 
-    // 🔒 Synchroniser tous les selects de langue (s'il y en a)
+    // Activer TOUS les sélecteurs de langue existants
     document.querySelectorAll("select").forEach(sel => {
-      if (sel.options.length >= 4) {
+      if ([...sel.options].some(o => ["fr","en","es","ar"].includes(o.value?.toLowerCase()))) {
         sel.value = lang;
         sel.addEventListener("change", e => {
           const next = e.target.value;
