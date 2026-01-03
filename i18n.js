@@ -339,3 +339,32 @@
   }
 };
 
+window.applyTranslations = function (lang) {
+  const dict = I18N[lang] || I18N.fr;
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    const parts = key.split(".");
+    let value = dict;
+
+    for (const p of parts) {
+      if (!value[p]) return;
+      value = value[p];
+    }
+
+    el.textContent = value;
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    const parts = key.split(".");
+    let value = dict;
+
+    for (const p of parts) {
+      if (!value[p]) return;
+      value = value[p];
+    }
+
+    el.setAttribute("placeholder", value);
+  });
+};
