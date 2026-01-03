@@ -1,66 +1,76 @@
-<script>
-/* ================= e-META i18n ENGINE ================= */
+/* =====================================================
+   e-META — script.js FINAL
+   - i18n dynamique
+   - RTL automatique
+   - Persistance langue
+   - index.html + privacy.html
+===================================================== */
 
-const DEFAULT_LANG = "fr";
-const STORAGE_KEY = "emeta_lang";
+(function () {
+  const STORAGE_KEY = "emeta_lang";
+  const DEFAULT_LANG = "fr";
 
-function applyTranslations(lang) {
-  const dict = I18N[lang];
-  if (!dict) return;
+  const langSelect =
+    document.getElementById("langSelect") ||
+    document.getElementById("langSwitcher");
 
-  // Texte simple
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const keys = el.dataset.i18n.split(".");
-    let value = dict;
-    keys.forEach(k => value = value?.[k]);
-    if (value) el.textContent = value;
-  });
+  function resolve(obj, path) {
+    return path.split(".").reduce((o, k) => (o ? o[k] : null), obj);
+  }
 
-  // Placeholders
-  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-    const keys = el.dataset.i18nPlaceholder.split(".");
-    let value = dict;
-    keys.forEach(k => value = value?.[k]);
-    if (value) el.placeholder = value;
-  });
+  function applyI18n(lang) {
+    const dict = I18N[lang];
+    if (!dict) return;
 
-  // Lang + RTL
-  document.documentElement.lang = lang;
-  document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
-}
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
 
-function setLanguage(lang) {
-  localStorage.setItem(STORAGE_KEY, lang);
-  applyTranslations(lang);
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const savedLang = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
-  const select = document.querySelector(".lang-select");
-
-  if (select) {
-    select.value = savedLang;
-    select.addEventListener("change", e => {
-      setLanguage(e.target.value);
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const val = resolve(dict, el.dataset.i18n);
+      if (val) el.textContent = val;
     });
+
+    document
+      .querySelectorAll("[data-i18n-placeholder]")
+      .forEach(el => {
+        const val = resolve(dict, el.dataset.i18nPlaceholder);
+        if (val) el.placeholder = val;
+      });
+
+    document
+      .querySelectorAll("title[data-i18n]")
+      .forEach(el => {
+        const val = resolve(dict, el.dataset.i18n);
+        if (val) document.title = val;
+      });
+
+    localStorage.setItem(STORAGE_KEY, lang);
   }
 
-  applyTranslations(savedLang);
-});
-</script>
+  const savedLang = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
 
-.header-actions {
-  flex-wrap: wrap;
-}
-
-.cta-custom {
-  max-width: 100%;
-  text-align: center;
-}
-
-@media (max-width: 480px) {
-  .header-actions {
-    flex-direction: column;
-    align-items: stretch;
+  if (langSelect) {
+    langSelect.value = savedLang;
+    langSelect.addEventListener("change", e =>
+      applyI18n(e.target.value)
+    );
   }
-}
+
+  applyI18n(savedLang);
+
+  // Burger menu (sécurisé)
+  const burger = document.getElementById("burgerBtn");
+  const nav = document.getElementById("mainNav");
+  if (burger && nav) {
+    burger.addEventListener("click", () =>
+      nav.classList.toggle("open")
+    );
+  }
+
+  // Scroll CTA
+  window.scrollToForm = function () {
+    document
+      .getElementById("form")
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
+})();
