@@ -328,22 +328,14 @@
 
   /* ================== MOTEUR ================== */
 
-  window.applyTranslations = function (lang) {
-    const dict = I18N[lang] || I18N.fr;
+ window.setLanguage = function (lang) {
+  document.documentElement.lang = lang;
+  document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
 
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.dataset.i18n.split(".");
-      let value = dict;
-      key.forEach(k => value = value?.[k]);
-      if (value) el.textContent = value;
-    });
+  localStorage.setItem("lang", lang);
 
-    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-      const key = el.dataset.i18nPlaceholder.split(".");
-      let value = dict;
-      key.forEach(k => value = value?.[k]);
-      if (value) el.setAttribute("placeholder", value);
-    });
-  };
+  if (typeof window.applyTranslations === "function") {
+    window.applyTranslations(lang);
+  }
+};
 
-})();
