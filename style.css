@@ -478,3 +478,37 @@ input[type="file"]::file-selector-button:hover {
     display: none;
   }
 }
+/* ================= FIX HERO VISIBILITY ================= */
+
+/* Header réellement fixe sans écraser le contenu */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Décaler tout le contenu sous le header */
+body {
+  padding-top: 84px; /* ajuste si besoin (64–88px) */
+}
+
+/* HERO : garantir visibilité du titre */
+.hero {
+  min-height: calc(100vh - 84px);
+  display: flex;
+  align-items: center;
+  overflow: visible;
+}
+
+/* Empêcher le masquage du h1 */
+.hero h1 {
+  position: relative;
+  z-index: 2;
+}
+
+/* Sécurité mobile */
+@media (max-width: 768px) {
+  body { padding-top: 96px; }
+  .hero { min-height: auto; padding-top: 24px; }
+}
