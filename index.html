@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>e-META — Assistant IA de prise de décision</title>
-
   <link rel="stylesheet" href="style.css" />
-  <!-- RTL (si tu l'utilises) -->
   <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
 </head>
 
 <body id="top">
 
 <!-- ================= HEADER ================= -->
-<header class="site-header" id="siteHeader">
+<header class="site-header">
   <div class="container header-inner">
 
     <div class="logo">
       <span class="logo-mark">e</span>
       <span class="logo-text">META</span>
-      <span class="logo-tagline">Assistant IA multilingue de prise de décision</span>
+      <span class="logo-tagline" data-i18n="header.tagline">
+        Assistant IA multilingue de prise de décision
+      </span>
     </div>
 
     <button class="burger" id="burgerBtn" aria-label="Menu">
@@ -33,15 +33,14 @@
     </nav>
 
     <div class="header-actions">
-      <!-- Aligné avec script.js -->
-      <select class="lang-select" id="langSelect" aria-label="Language">
+      <select class="lang-select" id="langSelect">
         <option value="fr">FR</option>
         <option value="en">EN</option>
         <option value="es">ES</option>
         <option value="ar">AR</option>
       </select>
 
-      <button class="cta-custom" type="button" onclick="scrollToForm()">
+      <button class="cta-custom" onclick="scrollToForm()" data-i18n="cta.custom">
         Requête personnalisée
       </button>
     </div>
@@ -51,35 +50,37 @@
 
 <main>
 
- <!-- ================= HERO ================= -->
-  <section class="hero">
-    <div class="container hero-grid">
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="container hero-grid">
 
-      <div class="hero-box">
-        <h1 data-i18n="hero.title">...</h1>
-        <p data-i18n="hero.subtitle">...</p>
-        <p>
-          e-META analyse votre contexte, objectifs, contraintes, risques et indicateurs clés
-          afin de produire une synthèse stratégique claire et exploitable.
-        </p>
+    <div class="hero-box">
+      <h1 data-i18n="hero.title">
+        Prenez des décisions au niveau d’un cabinet de conseil premium
+      </h1>
 
-        <ul class="hero-points">
-          <li>Analyse structurée & stratégique</li>
-          <li>Recommandations actionnables</li>
-          <li>Restitution personnalisée</li>
-        </ul>
+      <p data-i18n="hero.desc">
+        e-META analyse votre contexte, objectifs, contraintes, risques et indicateurs clés
+        afin de produire une synthèse stratégique claire et exploitable.
+      </p>
 
-        <button class="cta-primary" type="button" onclick="scrollToForm()">
-          Démarrer une analyse stratégique
-        </button>
-      </div>
+      <ul class="hero-points">
+        <li data-i18n="hero.p1">Analyse structurée & stratégique</li>
+        <li data-i18n="hero.p2">Recommandations actionnables</li>
+        <li data-i18n="hero.p3">Restitution personnalisée</li>
+      </ul>
+
+      <button class="cta-primary" type="button" onclick="scrollToForm()" data-i18n="cta.start">
+        Démarrer une analyse stratégique
+      </button>
+    </div>
 
     <div class="hero-box muted">
-      <p>
+      <p data-i18n="hero.note1">
         e-META n’est pas un chatbot.<br>
         C’est un moteur d’intelligence décisionnelle.
       </p>
-      <p class="small">
+      <p class="small" data-i18n="hero.note2">
         +12h d’analyse stratégique simulée — équivalent
         au travail combiné d’un consultant senior.
       </p>
@@ -92,7 +93,7 @@
 <section class="form-section" id="form">
   <div class="container">
 
-    <h2 class="section-title">
+    <h2 class="section-title" data-i18n="form.title">
       Formulaire e-META — Analyse stratégique avancée
     </h2>
 
@@ -100,89 +101,94 @@
 
       <!-- A. CONTEXTE -->
       <div class="form-card">
-        <h3>1. Contexte & organisation</h3>
+        <h3 data-i18n="form.s1">1. Contexte & organisation</h3>
 
         <div class="grid-2">
           <div>
-            <label>Pays / Zone</label>
-            <input type="text" placeholder="Ex : Sénégal, France, Afrique de l’Ouest">
+            <label data-i18n="form.country">Pays / Zone</label>
+            <input type="text" data-i18n-placeholder="ph.country"
+              placeholder="Ex : Sénégal, France, Afrique de l’Ouest">
           </div>
           <div>
-            <label>Secteur / Activité</label>
-            <input type="text" placeholder="Fintech, Agrobusiness, Industrie…">
+            <label data-i18n="form.sector">Secteur / Activité</label>
+            <input type="text" data-i18n-placeholder="ph.sector"
+              placeholder="Fintech, Agrobusiness, Industrie…">
           </div>
         </div>
 
-        <label>Organisation / projet concerné</label>
-        <textarea placeholder="Décrivez brièvement votre organisation ou projet"></textarea>
+        <label data-i18n="form.org">Organisation / projet concerné</label>
+        <textarea data-i18n-placeholder="ph.org"
+          placeholder="Décrivez brièvement votre organisation ou projet"></textarea>
       </div>
 
-      <!-- B. OBJECTIFS & KPI -->
+      <!-- B. OBJECTIFS -->
       <div class="form-card">
-        <h3>2. Objectifs stratégiques & indicateurs</h3>
+        <h3 data-i18n="form.s2">2. Objectifs stratégiques & indicateurs</h3>
 
-        <label>Objectifs prioritaires</label>
-        <textarea placeholder="Croissance, rentabilité, expansion, optimisation…"></textarea>
+        <label data-i18n="form.goals">Objectifs prioritaires</label>
+        <textarea data-i18n-placeholder="ph.goals"
+          placeholder="Croissance, rentabilité, expansion, optimisation…"></textarea>
 
-        <label>KPIs ou indicateurs clés</label>
-        <textarea placeholder="CA, ROI, parts de marché, délais, churn…"></textarea>
+        <label data-i18n="form.kpi">KPIs ou indicateurs clés</label>
+        <textarea data-i18n-placeholder="ph.kpi"
+          placeholder="CA, ROI, parts de marché, délais, churn…"></textarea>
       </div>
 
       <!-- C. RISQUES -->
       <div class="form-card">
-        <h3>3. Enjeux, risques & scénarios</h3>
+        <h3 data-i18n="form.s3">3. Enjeux, risques & scénarios</h3>
 
-        <label>Risques majeurs</label>
-        <textarea placeholder="Financiers, réglementaires, opérationnels…"></textarea>
+        <label data-i18n="form.risks">Risques majeurs</label>
+        <textarea data-i18n-placeholder="ph.risks"
+          placeholder="Financiers, réglementaires, opérationnels…"></textarea>
 
-        <label>Scénarios envisagés</label>
-        <textarea placeholder="Optimiste, réaliste, pessimiste…"></textarea>
+        <label data-i18n="form.scenarios">Scénarios envisagés</label>
+        <textarea data-i18n-placeholder="ph.scenarios"
+          placeholder="Optimiste, réaliste, pessimiste…"></textarea>
       </div>
 
       <!-- D. THÉMATIQUES -->
       <fieldset class="field-group">
-        <legend>Thématiques stratégiques</legend>
+        <legend data-i18n="form.themes">Thématiques stratégiques</legend>
 
         <div class="checkbox-grid">
-          <label class="check-item"><input type="checkbox"> IA & automatisation</label>
-          <label class="check-item"><input type="checkbox"> Croissance & scaling</label>
-          <label class="check-item"><input type="checkbox"> Optimisation des coûts</label>
-          <label class="check-item"><input type="checkbox"> ESG & impact</label>
-          <label class="check-item"><input type="checkbox"> Réglementation</label>
-          <label class="check-item"><input type="checkbox"> Innovation produit</label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="theme.ai">IA & automatisation</span></label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="theme.growth">Croissance & scaling</span></label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="theme.cost">Optimisation des coûts</span></label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="theme.esg">ESG & impact</span></label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="theme.reg">Réglementation</span></label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="theme.product">Innovation produit</span></label>
         </div>
       </fieldset>
 
       <!-- E. LIVRABLES -->
       <fieldset class="field-group">
-        <legend>Restitution & livrables attendus</legend>
+        <legend data-i18n="form.outputs">Restitution & livrables attendus</legend>
 
         <div class="checkbox-grid">
-          <label class="check-item"><input type="checkbox"> Synthèse exécutive</label>
-          <label class="check-item"><input type="checkbox"> Plan d’action</label>
-          <label class="check-item"><input type="checkbox"> Tableau de KPIs</label>
-          <label class="check-item"><input type="checkbox"> Analyse des risques</label>
-          <label class="check-item"><input type="checkbox"> Rapport PDF professionnel</label>
-          <label class="check-item"><input type="checkbox"> Envoi Email / WhatsApp</label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="out.exec">Synthèse exécutive</span></label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="out.plan">Plan d’action</span></label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="out.kpi">Tableau de KPIs</span></label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="out.risk">Analyse des risques</span></label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="out.pdf">Rapport PDF professionnel</span></label>
+          <label class="check-item"><input type="checkbox"> <span data-i18n="out.send">Envoi Email / WhatsApp</span></label>
         </div>
       </fieldset>
 
       <!-- F. PIÈCE JOINTE -->
       <div class="form-card">
-        <h3>Documents complémentaires (optionnel)</h3>
+        <h3 data-i18n="form.upload">Documents complémentaires (optionnel)</h3>
         <input type="file">
-        <p class="form-hint">
+        <p class="form-hint" data-i18n="form.uploadHint">
           Vous pouvez joindre un document existant (PDF, Word, Excel, présentation…)
         </p>
       </div>
 
       <!-- SUBMIT -->
       <div class="form-actions">
-        <button data-i18n="cta.start">Démarrer une analyse stratégique</button>
-<button data-i18n="cta.custom">Requête personnalisée</button>
-<button class="btn-submit" data-i18n="cta.submit">
-  Envoyer la requête stratégique
-</button>
+        <button class="btn-submit" data-i18n="cta.submit">
+          Envoyer la requête stratégique
+        </button>
       </div>
 
     </form>
@@ -197,21 +203,28 @@
   <div class="container footer-inner">
     <div class="footer-brand">
       <strong><span style="color:#ff8a00">e</span>-META</strong>
-      <p>Moteur d’intelligence décisionnelle stratégique.</p>
+      <p data-i18n="footer.tagline">Moteur d’intelligence décisionnelle stratégique.</p>
     </div>
 
-    <p data-i18n="footer.tagline">...</p>
-<a data-i18n="footer.form">Formulaire</a>
-<a data-i18n="footer.privacy">Confidentialité</a>
-<span data-i18n="footer.rights">Tous droits réservés</span>
+    <div class="footer-links">
+      <a href="#form" data-i18n="nav.form">Formulaire</a>
+      <a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a>
+    </div>
+  </div>
+
+  <div class="footer-copy" data-i18n="footer.rights">
+    © 2025 e-META — Tous droits réservés
   </div>
 </footer>
 
-<!-- ================= SCRIPTS (alignement) ================= -->
 <script>
   function scrollToForm() {
     document.getElementById("form")?.scrollIntoView({ behavior: "smooth" });
   }
+
+  const burger = document.getElementById("burgerBtn");
+  const nav = document.getElementById("mainNav");
+  burger?.addEventListener("click", () => nav.classList.toggle("open"));
 </script>
 
 <script src="i18n.js"></script>
