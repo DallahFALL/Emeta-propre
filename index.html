@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>e-META — Assistant IA de prise de décision</title>
+
   <link rel="stylesheet" href="style.css" />
+  <!-- RTL (si tu l'utilises) -->
+  <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
 </head>
 
 <body id="top">
 
 <!-- ================= HEADER ================= -->
-<header class="site-header">
+<header class="site-header" id="siteHeader">
   <div class="container header-inner">
 
     <div class="logo">
@@ -30,14 +33,15 @@
     </nav>
 
     <div class="header-actions">
-      <select class="lang-select">
-        <option>FR</option>
-        <option>EN</option>
-        <option>ES</option>
-        <option>AR</option>
+      <!-- Aligné avec script.js -->
+      <select class="lang-select" id="langSelect" aria-label="Language">
+        <option value="fr">FR</option>
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+        <option value="ar">AR</option>
       </select>
 
-      <button class="cta-custom" onclick="scrollToForm()">
+      <button class="cta-custom" type="button" onclick="scrollToForm()">
         Requête personnalisée
       </button>
     </div>
@@ -205,15 +209,15 @@
   </div>
 </footer>
 
+<!-- ================= SCRIPTS (alignement) ================= -->
 <script>
   function scrollToForm() {
     document.getElementById("form")?.scrollIntoView({ behavior: "smooth" });
   }
-
-  const burger = document.getElementById("burgerBtn");
-  const nav = document.getElementById("mainNav");
-  burger?.addEventListener("click", () => nav.classList.toggle("open"));
 </script>
+
+<script src="i18n.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
