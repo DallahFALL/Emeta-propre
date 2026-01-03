@@ -1,4 +1,9 @@
-/* ================= e-META i18n GLOBAL ================= */
+/* =====================================================
+   e-META — script.js FINAL STABLE
+   - Une seule source de vérité pour la langue
+   - Compatible index.html + privacy.html
+   - Support AR + RTL
+===================================================== */
 
 (function () {
   "use strict";
@@ -23,16 +28,13 @@
     const lang = getLang();
     applyLang(lang);
 
-    // Activer TOUS les sélecteurs de langue existants
-    document.querySelectorAll("select").forEach(sel => {
-      if ([...sel.options].some(o => ["fr","en","es","ar"].includes(o.value?.toLowerCase()))) {
-        sel.value = lang;
-        sel.addEventListener("change", e => {
-          const next = e.target.value;
-          localStorage.setItem(STORAGE_KEY, next);
-          applyLang(next);
-        });
-      }
+    document.querySelectorAll("select.lang-select").forEach(select => {
+      select.value = lang;
+      select.addEventListener("change", e => {
+        const next = e.target.value;
+        localStorage.setItem(STORAGE_KEY, next);
+        applyLang(next);
+      });
     });
   });
 
