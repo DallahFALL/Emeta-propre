@@ -110,30 +110,15 @@
   }
 
   /* ============== INIT ============== */
-  document.addEventListener("DOMContentLoaded", () => {
-    // 1) Init langue (IMPORTANT : c’est ça qui manquait sur index)
-    const lang = getSavedLang();
-    setLanguage(lang);
+ document.addEventListener("DOMContentLoaded", () => {
+  const lang = localStorage.getItem("lang") || "fr";
+  window.setLanguage(lang);
 
-    // 2) Listener sur select langues
-    const langSelect = document.getElementById("langSelect");
-    if (langSelect) {
-      // Valeur initiale
-      langSelect.value = lang;
-
-      langSelect.addEventListener("change", () => {
-        setLanguage(langSelect.value);
-      });
-    }
-
-    // 3) CTA scroll vers formulaire
-    bindScrollToForm();
-
-    // 4) Burger mobile (si présent)
-    bindBurgerMenu();
-  });
-
-  // Exposer si besoin ailleurs
-  window.setLanguage = setLanguage;
-
-})();
+  const select = document.getElementById("langSelect");
+  if (select) {
+    select.value = lang;
+    select.addEventListener("change", (e) => {
+      window.setLanguage(e.target.value);
+    });
+  }
+});
