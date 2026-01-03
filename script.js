@@ -1,124 +1,45 @@
 /* =====================================================
-   e-META — script.js FINAL (Production Stable)
-   - Langues dynamiques FR / EN / ES / AR (+ RTL auto)
-   - Persist lang via localStorage
-   - CTA "Requête personnalisée" : scroll vers #form
-   - Menu burger mobile (si présent)
-   - Compatible index.html + privacy.html
+   e-META — script.js FINAL (NO HTML TOUCH)
+   - Active i18n sur TOUTES les pages
+   - Ne modifie AUCUN HTML
 ===================================================== */
 
 (function () {
   "use strict";
 
-  const DEFAULT_LANG = "fr";
   const STORAGE_KEY = "lang";
+  const DEFAULT_LANG = "fr";
 
-  /* ============== HELPERS ============== */
-  function getSavedLang() {
-    const v = (localStorage.getItem(STORAGE_KEY) || "").trim();
-    return v || DEFAULT_LANG;
+  function getLang() {
+    return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
   }
 
-  function setDirAndLang(lang) {
+  function applyLang(lang) {
     document.documentElement.lang = lang;
     document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
-    document.body.classList.toggle("rtl", lang === "ar"); // optionnel si tu utilises rtl.css
-  }
 
-  function safeApplyTranslations(lang) {
-    // i18n.js expose window.applyTranslations
     if (typeof window.applyTranslations === "function") {
       window.applyTranslations(lang);
-    } else {
-      // Si i18n.js n'est pas chargé, on évite de casser la page
-      console.warn("[e-META] applyTranslations() introuvable. Vérifie le chargement de i18n.js.");
     }
   }
 
-  /* ============== LANG SWITCH ============== */
-  function setLanguage(lang) {
-    const next = lang || DEFAULT_LANG;
-    localStorage.setItem(STORAGE_KEY, next);
+  document.addEventListener("DOMContentLoaded", () => {
+    const lang = getLang();
 
-    setDirAndLang(next);
-    safeApplyTranslations(next);
+    // 🔒 Appliquer la langue à TOUTE la page
+    applyLang(lang);
 
-    // Synchroniser le select si présent
-    const sel = document.getElementById("langSelect");
-    if (sel && sel.value !== next) sel.value = next;
-  }
-
-  /* ============== SCROLL CTA -> FORM ============== */
-  function bindScrollToForm() {
-    // CTA possible en header ou hero
-    const triggers = [
-      document.querySelector('[data-scroll-to="form"]'),
-      document.getElementById("ctaForm"),
-      document.getElementById("ctaRequest"),
-      document.querySelector('a[href="#form"]'),
-      document.querySelector('button[data-target="#form"]')
-    ].filter(Boolean);
-
-    const formAnchor = document.getElementById("form") || document.querySelector("#form");
-
-    if (!formAnchor) return;
-
-    triggers.forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        formAnchor.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
+    // 🔒 Synchroniser tous les selects de langue (s'il y en a)
+    document.querySelectorAll("select").forEach(sel => {
+      if (sel.options.length >= 4) {
+        sel.value = lang;
+        sel.addEventListener("change", e => {
+          const next = e.target.value;
+          localStorage.setItem(STORAGE_KEY, next);
+          applyLang(next);
+        });
+      }
     });
-  }
+  });
 
-  /* ============== BURGER MENU (si présent) ============== */
-  function bindBurgerMenu() {
-    const burger = document.getElementById("burger");
-    const nav = document.getElementById("mobileNav") || document.querySelector(".mobile-nav");
-    const overlay = document.getElementById("navOverlay");
-
-    if (!burger || !nav) return;
-
-    function open() {
-      nav.classList.add("open");
-      burger.setAttribute("aria-expanded", "true");
-      if (overlay) overlay.classList.add("open");
-      document.body.classList.add("no-scroll");
-    }
-
-    function close() {
-      nav.classList.remove("open");
-      burger.setAttribute("aria-expanded", "false");
-      if (overlay) overlay.classList.remove("open");
-      document.body.classList.remove("no-scroll");
-    }
-
-    function toggle() {
-      nav.classList.contains("open") ? close() : open();
-    }
-
-    burger.addEventListener("click", toggle);
-    if (overlay) overlay.addEventListener("click", close);
-
-    // Fermer au clic sur un lien
-    nav.querySelectorAll("a").forEach(a => a.addEventListener("click", close));
-
-    // Fermer avec ESC
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") close();
-    });
-  }
-
-  /* ============== INIT ============== */
- document.addEventListener("DOMContentLoaded", () => {
-  const lang = localStorage.getItem("lang") || "fr";
-  window.setLanguage(lang);
-
-  const select = document.getElementById("langSelect");
-  if (select) {
-    select.value = lang;
-    select.addEventListener("change", (e) => {
-      window.setLanguage(e.target.value);
-    });
-  }
-});
+})();
