@@ -512,3 +512,35 @@ body {
   body { padding-top: 96px; }
   .hero { min-height: auto; padding-top: 24px; }
 }
+/* ===== HEADER FIX MOBILE ===== */
+
+@media (max-width: 768px) {
+
+  .logo {
+    flex-wrap: wrap;
+  }
+
+  .logo-tagline {
+    display: block;
+    width: 100%;
+    font-size: 0.75rem;
+    opacity: 0.75;
+    margin-top: 2px;
+  }
+
+  .header-actions {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .lang-select {
+    flex: 1 1 80px;
+  }
+
+  .cta-custom {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
