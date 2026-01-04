@@ -15,8 +15,6 @@
     const rtl = document.getElementById("rtlStylesheet");
     if (rtl) rtl.disabled = (lang !== "ar");
   }
-const val = resolveKey(dict, key);
-if (val != null) el.textContent = val;
 
   function applyI18n(lang) {
     const dict = (window.I18N && window.I18N[lang]) ? window.I18N[lang] : null;
@@ -24,14 +22,12 @@ if (val != null) el.textContent = val;
 
     document.querySelectorAll("[data-i18n]").forEach(el => {
       const key = el.getAttribute("data-i18n");
-      const val = resolveKey(dict, key);
-if (val != null) el.textContent = val;
+      if (dict[key] != null) el.textContent = dict[key];
     });
 
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-      const val = resolveKey(dict, key);
-if (val != null) el.setAttribute("placeholder", val);
-
+      const key = el.getAttribute("data-i18n-placeholder");
+      if (dict[key] != null) el.setAttribute("placeholder", dict[key]);
     });
   }
 
