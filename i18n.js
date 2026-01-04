@@ -397,39 +397,3 @@ window.I18N = {
   }
 };
 
-i18n.fr = {
-  ...i18n.fr,
-
-  "privacy.meta.title": "Politique de confidentialité — e-META",
-  "privacy.title": "Politique de confidentialité — e-META",
-  "privacy.updated": "Dernière mise à jour : janvier 2026",
-
-  "privacy.s1.title": "1. Introduction",
-  "privacy.s1.text": "Votre confiance est essentielle. La présente politique explique comment e-META collecte, utilise et protège les informations fournies. e-META est un outil d’aide à la décision stratégique basé sur l’intelligence artificielle et ne constitue pas un conseil juridique, financier, médical ou réglementaire.",
-
-  "privacy.s2.title": "2. Données collectées",
-  "privacy.s2.text": "e-META collecte uniquement les informations nécessaires à la production d’une analyse personnalisée : informations saisies dans les formulaires, données de contact si une restitution est demandée, fichiers ou liens transmis volontairement. Aucune donnée n’est collectée à l’insu de l’utilisateur.",
-
-  "privacy.s3.title": "3. Utilisation des données",
-  "privacy.s3.text": "Les données sont utilisées exclusivement pour générer l’analyse stratégique, adapter le mode de restitution et améliorer la qualité des recommandations. Elles ne sont jamais revendues ni transmises à des tiers non autorisés.",
-
-  "privacy.s4.title": "4. Intelligence artificielle & responsabilité",
-  "privacy.s4.text": "Les analyses fournies sont indicatives. L’utilisateur reste seul responsable des décisions prises. e-META ne saurait être tenu responsable des conséquences liées à l’utilisation des résultats.",
-
-  "privacy.s5.title": "5. Conservation des données",
-  "privacy.s5.text": "Les données sont conservées uniquement pour la durée nécessaire à l’analyse ou jusqu’à demande de suppression par l’utilisateur.",
-
-  "privacy.s6.title": "6. Sécurité et confidentialité",
-  "privacy.s6.text": "Des mesures raisonnables sont mises en œuvre pour garantir la confidentialité et la sécurité des données. Aucun système ne peut toutefois garantir une sécurité absolue.",
-
-  "privacy.s7.title": "7. Droits des utilisateurs",
-  "privacy.s7.text": "Chaque utilisateur peut accéder à ses données, demander leur rectification, leur suppression ou limiter certains traitements.",
-
-  "privacy.s8.title": "8. Évolution de la politique",
-  "privacy.s8.text": "Cette politique peut être modifiée à tout moment pour refléter les évolutions légales, fonctionnelles ou technologiques.",
-
-  "privacy.s9.title": "9. Acceptation",
-  "privacy.s9.text": "L’utilisation de la plateforme implique l’acceptation pleine et entière de cette politique.",
-
-  "privacy.back": "← Retour à l’accueil"
-};
