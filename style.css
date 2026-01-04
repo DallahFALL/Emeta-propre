@@ -88,3 +88,19 @@ textarea{min-height:110px;resize:vertical}
   .field-with-unit{grid-template-columns:1fr}
   .cta-primary{width:100%}
 }
+/* Privacy page — responsive align */
+.privacy-section {
+  padding: clamp(2.5rem, 6vw, 4rem) 0;
+}
+
+.privacy-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .privacy-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
