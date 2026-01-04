@@ -506,3 +506,27 @@ input[type="file"]::file-selector-button:hover {
     text-align: center;
   }
 }
+
+/* ===============================
+   HEADER STICKY — FIX DEFINITIF
+================================ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(180deg, #070b1a 0%, #0b1020 100%);
+}
+
+/* IMPORTANT : aucun parent ne doit bloquer sticky */
+html,
+body {
+  overflow-x: hidden;
+}
+
+main,
+.page,
+.wrapper,
+#app {
+  overflow: visible !important;
+}
