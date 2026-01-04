@@ -7,16 +7,20 @@
 
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
+
+  <script defer src="i18n.js"></script>
+  <script defer src="script.js"></script>
 </head>
 
 <body id="top">
 
+<!-- ================= HEADER (IDENTIQUE index.html) ================= -->
 <header class="site-header">
   <div class="container header-inner">
-    <a class="logo" href="index.html#top" aria-label="e-META">
+    <a class="logo" href="index.html#top">
       <span class="logo-mark">e</span>
       <span class="logo-text">META</span>
-      <span class="logo-tagline" data-i18n="header.tagline">Assistant IA multilingue de prise de décision</span>
+      <span class="logo-tagline" data-i18n="header.tagline"></span>
     </a>
 
     <button class="burger" id="burgerBtn" type="button" aria-label="Menu" aria-expanded="false">
@@ -24,13 +28,12 @@
     </button>
 
     <nav class="nav" id="mainNav">
-      <a href="index.html#top" data-i18n="nav.home">Accueil</a>
-      <a href="index.html#form" data-i18n="nav.form">Formulaire</a>
-      <a href="privacy.html" data-i18n="nav.privacy" aria-current="page">Confidentialité</a>
+      <a href="index.html#top" data-i18n="nav.home"></a>
+      <a href="index.html#form" data-i18n="nav.form"></a>
+      <a href="privacy.html" aria-current="page" data-i18n="nav.privacy"></a>
     </nav>
 
     <div class="header-actions">
-      <!-- IMPORTANT : même ID que sur index.html -->
       <select class="lang-select" id="langSelect" aria-label="Langue">
         <option value="fr">FR</option>
         <option value="en">EN</option>
@@ -38,129 +41,108 @@
         <option value="ar">AR</option>
       </select>
 
-      <!-- (optionnel) même bouton que sur index.html -->
-      <button class="cta-custom" type="button" id="customBtn" onclick="location.href='index.html#form'" data-i18n="cta.custom">
-        Requête personnalisée
-      </button>
+      <button class="cta-custom" type="button" onclick="location.href='index.html#form'"
+        data-i18n="cta.custom"></button>
     </div>
   </div>
 </header>
 
+<!-- ================= MAIN ================= -->
 <main>
-  <!-- On réutilise les classes déjà responsives de style.css -->
-  <section class="form-section" id="privacy">
+  <section class="privacy-section">
     <div class="container">
-      <h2 class="section-title" data-i18n="privacy.title">Politique de confidentialité</h2>
 
-      <p class="form-intro" data-i18n="privacy.intro">
-        Votre confiance est essentielle. La présente politique explique de manière transparente comment e-META collecte,
-        utilise et protège les informations fournies par ses utilisateurs lors de l’utilisation de la plateforme.
-      </p>
+      <h1 class="section-title" data-i18n="privacy.title"></h1>
+      <p class="privacy-intro" data-i18n="privacy.intro"></p>
 
-      <!-- Grille responsive déjà gérée par .grid-2 (=> 1 colonne sur mobile) -->
-      <div class="grid-2">
+      <div class="privacy-grid">
 
-        <section class="field-group">
-          <h3 data-i18n="privacy.s1.title">1. Introduction</h3>
-          <p data-i18n="privacy.s1.p1">
-            e-META est un outil d’aide à la décision stratégique basé sur l’intelligence artificielle.
-            Il ne constitue ni un conseil juridique, financier, médical ou réglementaire.
-          </p>
-        </section>
+        <article class="privacy-card">
+          <h2 data-i18n="privacy.s1.title"></h2>
+          <p data-i18n="privacy.s1.p1"></p>
+        </article>
 
-        <section class="field-group">
-          <h3 data-i18n="privacy.s2.title">2. Données collectées</h3>
-          <ul class="hero-points">
-            <li data-i18n="privacy.s2.l1">Les informations saisies volontairement (contexte, objectifs, contraintes, indicateurs, etc.).</li>
-            <li data-i18n="privacy.s2.l2">Les données de contact (e-mail, WhatsApp) si une restitution par ces canaux est demandée.</li>
-            <li data-i18n="privacy.s2.l3">Les fichiers ou liens transmis volontairement par l’utilisateur.</li>
-            <li data-i18n="privacy.s2.l4">Aucune donnée n’est collectée à l’insu de l’utilisateur.</li>
+        <article class="privacy-card">
+          <h2 data-i18n="privacy.s2.title"></h2>
+          <ul>
+            <li data-i18n="privacy.s2.l1"></li>
+            <li data-i18n="privacy.s2.l2"></li>
+            <li data-i18n="privacy.s2.l3"></li>
+            <li data-i18n="privacy.s2.l4"></li>
           </ul>
-        </section>
+        </article>
 
-        <section class="field-group">
-          <h3 data-i18n="privacy.s3.title">3. Utilisation des données</h3>
-          <ul class="hero-points">
-            <li data-i18n="privacy.s3.l1">Générer une analyse stratégique personnalisée via e-META.</li>
-            <li data-i18n="privacy.s3.l2">Adapter le niveau de restitution (email, WhatsApp, PDF ou affichage).</li>
-            <li data-i18n="privacy.s3.l3">Améliorer la qualité globale des recommandations proposées.</li>
-            <li data-i18n="privacy.s3.l4">Les données ne sont jamais revendues, louées ou transmises à des tiers non autorisés.</li>
+        <article class="privacy-card">
+          <h2 data-i18n="privacy.s3.title"></h2>
+          <ul>
+            <li data-i18n="privacy.s3.l1"></li>
+            <li data-i18n="privacy.s3.l2"></li>
+            <li data-i18n="privacy.s3.l3"></li>
+            <li data-i18n="privacy.s3.l4"></li>
           </ul>
-        </section>
+        </article>
 
-        <section class="field-group">
-          <h3 data-i18n="privacy.s4.title">4. Intelligence artificielle & responsabilité</h3>
-          <ul class="hero-points">
-            <li data-i18n="privacy.s4.l1">Les recommandations fournies sont indicatives et non contraignantes.</li>
-            <li data-i18n="privacy.s4.l2">L’utilisateur reste seul responsable des décisions prises.</li>
-            <li data-i18n="privacy.s4.l3">e-META ne saurait être tenu responsable des conséquences directes ou indirectes liées à l’utilisation des résultats.</li>
+        <article class="privacy-card">
+          <h2 data-i18n="privacy.s4.title"></h2>
+          <ul>
+            <li data-i18n="privacy.s4.l1"></li>
+            <li data-i18n="privacy.s4.l2"></li>
+            <li data-i18n="privacy.s4.l3"></li>
           </ul>
-        </section>
+        </article>
 
-        <section class="field-group">
-          <h3 data-i18n="privacy.s5.title">5. Conservation des données</h3>
-          <ul class="hero-points">
-            <li data-i18n="privacy.s5.l1">Pour la durée strictement nécessaire à la production de l’analyse.</li>
-            <li data-i18n="privacy.s5.l2">Ou jusqu’à demande explicite de suppression par l’utilisateur.</li>
-            <li data-i18n="privacy.s5.l3">L’utilisateur peut à tout moment demander la suppression de ses données.</li>
+        <article class="privacy-card">
+          <h2 data-i18n="privacy.s5.title"></h2>
+          <ul>
+            <li data-i18n="privacy.s5.l1"></li>
+            <li data-i18n="privacy.s5.l2"></li>
+            <li data-i18n="privacy.s5.l3"></li>
           </ul>
-        </section>
+        </article>
 
-        <section class="field-group">
-          <h3 data-i18n="privacy.s6.title">6. Sécurité et confidentialité</h3>
-          <p data-i18n="privacy.s6.p1">
-            e-META met en œuvre des mesures techniques et organisationnelles raisonnables afin de protéger les informations.
-            Malgré ces mesures, aucun système n’étant infaillible, e-META ne peut garantir une sécurité absolue.
-          </p>
-        </section>
+        <article class="privacy-card">
+          <h2 data-i18n="privacy.s6.title"></h2>
+          <p data-i18n="privacy.s6.p1"></p>
+        </article>
 
-        <section class="field-group">
-          <h3 data-i18n="privacy.s7.title">7. Droits des utilisateurs</h3>
-          <ul class="hero-points">
-            <li data-i18n="privacy.s7.l1">Accéder à ses données.</li>
-            <li data-i18n="privacy.s7.l2">Demander leur rectification.</li>
-            <li data-i18n="privacy.s7.l3">Demander leur suppression.</li>
-            <li data-i18n="privacy.s7.l4">Limiter ou refuser certains traitements.</li>
+        <article class="privacy-card">
+          <h2 data-i18n="privacy.s7.title"></h2>
+          <ul>
+            <li data-i18n="privacy.s7.l1"></li>
+            <li data-i18n="privacy.s7.l2"></li>
+            <li data-i18n="privacy.s7.l3"></li>
+            <li data-i18n="privacy.s7.l4"></li>
           </ul>
-        </section>
+        </article>
 
-        <section class="field-group">
-          <h3 data-i18n="privacy.s8.title">8. Évolution de la politique</h3>
-          <p data-i18n="privacy.s8.p1">
-            La présente politique peut être mise à jour à tout moment afin de refléter les évolutions légales,
-            les améliorations fonctionnelles ou les changements technologiques.
-            La version en vigueur est celle publiée sur le site au moment de la consultation.
-          </p>
-        </section>
+        <article class="privacy-card">
+          <h2 data-i18n="privacy.s8.title"></h2>
+          <p data-i18n="privacy.s8.p1"></p>
+        </article>
+
+        <article class="privacy-card full">
+          <h2 data-i18n="privacy.s9.title"></h2>
+          <p data-i18n="privacy.s9.p1"></p>
+          <p class="privacy-update" data-i18n="privacy.updated"></p>
+
+          <div class="privacy-actions">
+            <a href="index.html" class="btn-secondary" data-i18n="privacy.back"></a>
+          </div>
+        </article>
 
       </div>
-
-      <section class="field-group" style="margin-top:16px">
-        <h3 data-i18n="privacy.s9.title">9. Acceptation</h3>
-        <p data-i18n="privacy.s9.p1">
-          L’utilisation de la plateforme e-META implique l’acceptation pleine et entière de la présente politique de confidentialité.
-        </p>
-        <p class="hint" data-i18n="privacy.updated">Dernière mise à jour : janvier 2026</p>
-
-        <div class="form-actions" style="margin-top:10px">
-          <a class="btn-secondary" href="index.html#top" data-i18n="privacy.back">← Retour à l’accueil</a>
-        </div>
-      </section>
-
     </div>
   </section>
 </main>
 
+<!-- ================= FOOTER ================= -->
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p data-i18n="footer.text">e-META — Moteur d’intelligence décisionnelle stratégique.</p>
-    <a class="footer-link" href="privacy.html" data-i18n="footer.privacy">Politique de confidentialité</a>
-    <p class="footer-copy" data-i18n="footer.copy">© 2026 e-META — Tous droits réservés</p>
+    <p data-i18n="footer.text"></p>
+    <a class="footer-link" href="privacy.html" data-i18n="footer.privacy"></a>
+    <p class="footer-copy" data-i18n="footer.copy"></p>
   </div>
 </footer>
 
-<!-- Même ordre que ta logique : i18n puis script -->
-<script src="i18n.js"></script>
-<script src="script.js"></script>
 </body>
 </html>
