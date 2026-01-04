@@ -2,12 +2,13 @@
 <html lang="fr" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title data-i18n="privacy.meta.title">Politique de confidentialité — e-META</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="rtl.css" />
+  <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
 
   <!-- JS -->
   <script defer src="i18n.js"></script>
@@ -35,8 +36,9 @@
       </ul>
     </nav>
 
+    <!-- ⚠️ ID harmonisé avec script.js -->
     <div class="header-actions">
-      <select class="lang-select" id="langSwitcher" aria-label="Langue">
+      <select class="lang-select" id="langSelect" aria-label="Langue">
         <option value="fr">FR</option>
         <option value="en">EN</option>
         <option value="es">ES</option>
@@ -71,18 +73,10 @@
           </h2>
 
           <ul class="privacy-list">
-            <li data-i18n="privacy.block1.p1">
-              Les informations saisies sont utilisées uniquement pour produire une analyse décisionnelle personnalisée.
-            </li>
-            <li data-i18n="privacy.block1.p2">
-              Aucune donnée n’est vendue, louée ou transmise à des tiers non autorisés.
-            </li>
-            <li data-i18n="privacy.block1.p3">
-              Les données sont traitées de manière sécurisée et confidentielle.
-            </li>
-            <li data-i18n="privacy.block1.p4">
-              Les utilisateurs peuvent demander la suppression de leurs données à tout moment.
-            </li>
+            <li data-i18n="privacy.block1.p1"></li>
+            <li data-i18n="privacy.block1.p2"></li>
+            <li data-i18n="privacy.block1.p3"></li>
+            <li data-i18n="privacy.block1.p4"></li>
           </ul>
         </article>
 
@@ -93,18 +87,10 @@
           </h2>
 
           <ul class="privacy-list">
-            <li data-i18n="privacy.block2.p1">
-              e-META est un outil d’aide à la décision basé sur les informations fournies par l’utilisateur.
-            </li>
-            <li data-i18n="privacy.block2.p2">
-              Les analyses générées ne constituent pas un conseil juridique, financier, médical ou réglementaire.
-            </li>
-            <li data-i18n="privacy.block2.p3">
-              L’utilisateur reste seul responsable des décisions prises.
-            </li>
-            <li data-i18n="privacy.block2.p4">
-              L’utilisation de la plateforme implique l’acceptation pleine et entière de cette politique.
-            </li>
+            <li data-i18n="privacy.block2.p1"></li>
+            <li data-i18n="privacy.block2.p2"></li>
+            <li data-i18n="privacy.block2.p3"></li>
+            <li data-i18n="privacy.block2.p4"></li>
           </ul>
         </article>
 
@@ -125,7 +111,8 @@
 <footer class="site-footer">
   <div class="container footer-inner">
     <p class="footer-copy">
-      © 2025 e-META — <span data-i18n="footer.rights">Assistant IA de décision stratégique</span>
+      © 2025 e-META —
+      <span data-i18n="footer.rights">Assistant IA de décision stratégique</span>
     </p>
   </div>
 </footer>
