@@ -396,3 +396,19 @@ window.I18N = {
     "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة"
   }
 };
+// PRIVACY
+"privacy.meta.title": "Politique de confidentialité — e-META",
+"privacy.title": "Politique de confidentialité",
+"footer.back": "Retour à l’accueil"
+
+"privacy.meta.title": "Privacy Policy — e-META",
+"privacy.title": "Privacy Policy",
+"footer.back": "Back to home"
+
+"privacy.meta.title": "Política de privacidad — e-META",
+"privacy.title": "Política de privacidad",
+"footer.back": "Volver al inicio"
+
+"privacy.meta.title": "سياسة الخصوصية — e-META",
+"privacy.title": "سياسة الخصوصية",
+"footer.back": "العودة إلى الصفحة الرئيسية"
