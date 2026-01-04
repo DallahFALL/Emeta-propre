@@ -114,4 +114,12 @@ textarea{min-height:110px;resize:vertical}
 .privacy-card li:empty {
   display: none;
 }
+/* Security: avoid empty privacy collapse */
+.privacy-card {
+  min-height: 120px;
+}
+
+html[dir="rtl"] .privacy-card {
+  text-align: right;
+}
 
