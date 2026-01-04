@@ -397,23 +397,29 @@ window.I18N = {
   }
 };
 
-privacy: {
-  meta: { title: "Politique de confidentialité — e-META" },
-  title: "Politique de confidentialité",
-  intro: "Votre confiance est essentielle. Cette politique explique de manière transparente comment e-META collecte, utilise et protège vos informations.",
-  s1: { title: "1. Introduction", text: "e-META est un outil d’aide à la décision stratégique basé sur l’intelligence artificielle." },
-  s2: {
-    title: "2. Données collectées",
-    l1: "Informations saisies volontairement dans les formulaires",
-    l2: "Coordonnées de contact fournies par l’utilisateur",
-    l3: "Fichiers ou liens transmis volontairement"
-  },
-  s3: { title: "3. Utilisation des données", text: "Les données sont utilisées exclusivement pour produire une analyse stratégique personnalisée." },
-  s4: { title: "4. Intelligence artificielle & responsabilité", text: "Les recommandations fournies sont indicatives et non contraignantes." },
-  s5: { title: "5. Conservation des données", text: "Les données sont conservées uniquement pendant la durée nécessaire au traitement." },
-  s6: { title: "6. Sécurité", text: "e-META met en œuvre des mesures raisonnables pour protéger les informations." },
-  s7: { title: "7. Droits des utilisateurs", text: "Chaque utilisateur peut demander l’accès ou la suppression de ses données." },
-  s8: { title: "8. Évolution", text: "Cette politique peut être mise à jour à tout moment." },
-  update: "Dernière mise à jour : janvier 2026",
-  back: "← Retour à l’accueil"
-}
+/* ================= PRIVACY — SAFE MODE ================= */
+
+i18n.fr = {
+  ...i18n.fr,
+
+  "privacy.meta.title": "Politique de confidentialité — e-META",
+  "privacy.title": "Politique de confidentialité",
+  "privacy.intro": "Votre confiance est essentielle. Cette politique explique de manière claire comment e-META collecte, utilise et protège vos informations.",
+
+  "privacy.s1.title": "1. Données collectées",
+  "privacy.s1.text": "e-META collecte uniquement les informations que vous fournissez volontairement dans le cadre de votre analyse stratégique.",
+
+  "privacy.s2.title": "2. Utilisation des données",
+  "privacy.s2.text": "Les données sont utilisées exclusivement pour produire une analyse décisionnelle personnalisée.",
+
+  "privacy.s3.title": "3. Confidentialité & sécurité",
+  "privacy.s3.text": "Les informations sont traitées de manière confidentielle et sécurisée. Aucune donnée n’est transmise à des tiers non autorisés.",
+
+  "privacy.s4.title": "4. Responsabilité d’usage",
+  "privacy.s4.text": "Les analyses fournies par e-META constituent une aide à la décision et non un conseil professionnel engageant.",
+
+  "privacy.s5.title": "5. Droits de l’utilisateur",
+  "privacy.s5.text": "Vous pouvez demander la suppression ou la modification de vos données à tout moment.",
+
+  "privacy.back": "Retour à la page principale"
+};
