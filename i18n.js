@@ -500,3 +500,29 @@ const I18N = {
 })();
 window.I18N = I18N;
 
+function applyI18n(lang) {
+  const dict = I18N[lang];
+  if (!dict) return;
+
+  document.documentElement.lang = lang;
+  document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    const value = key.split(".").reduce((o, k) => o?.[k], dict);
+    if (value) el.textContent = value;
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const key = el.dataset.i18nPlaceholder;
+    const value = key.split(".").reduce((o, k) => o?.[k], dict);
+    if (value) el.placeholder = value;
+  });
+
+  document.title =
+    dict["meta.title"] ||
+    dict.meta?.title ||
+    document.title;
+}
+
+
