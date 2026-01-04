@@ -397,105 +397,39 @@ window.I18N = {
   }
 };
 
-/* ================= PRIVACY — SAFE MODE ================= */
-
 i18n.fr = {
   ...i18n.fr,
 
   "privacy.meta.title": "Politique de confidentialité — e-META",
-  "privacy.title": "Politique de confidentialité",
-  "privacy.intro": "Votre confiance est essentielle. Cette politique explique de manière claire comment e-META collecte, utilise et protège vos informations.",
+  "privacy.title": "Politique de confidentialité — e-META",
+  "privacy.updated": "Dernière mise à jour : janvier 2026",
 
-  "privacy.s1.title": "1. Données collectées",
-  "privacy.s1.text": "e-META collecte uniquement les informations que vous fournissez volontairement dans le cadre de votre analyse stratégique.",
+  "privacy.s1.title": "1. Introduction",
+  "privacy.s1.text": "Votre confiance est essentielle. La présente politique explique comment e-META collecte, utilise et protège les informations fournies. e-META est un outil d’aide à la décision stratégique basé sur l’intelligence artificielle et ne constitue pas un conseil juridique, financier, médical ou réglementaire.",
 
-  "privacy.s2.title": "2. Utilisation des données",
-  "privacy.s2.text": "Les données sont utilisées exclusivement pour produire une analyse décisionnelle personnalisée.",
+  "privacy.s2.title": "2. Données collectées",
+  "privacy.s2.text": "e-META collecte uniquement les informations nécessaires à la production d’une analyse personnalisée : informations saisies dans les formulaires, données de contact si une restitution est demandée, fichiers ou liens transmis volontairement. Aucune donnée n’est collectée à l’insu de l’utilisateur.",
 
-  "privacy.s3.title": "3. Confidentialité & sécurité",
-  "privacy.s3.text": "Les informations sont traitées de manière confidentielle et sécurisée. Aucune donnée n’est transmise à des tiers non autorisés.",
+  "privacy.s3.title": "3. Utilisation des données",
+  "privacy.s3.text": "Les données sont utilisées exclusivement pour générer l’analyse stratégique, adapter le mode de restitution et améliorer la qualité des recommandations. Elles ne sont jamais revendues ni transmises à des tiers non autorisés.",
 
-  "privacy.s4.title": "4. Responsabilité d’usage",
-  "privacy.s4.text": "Les analyses fournies par e-META constituent une aide à la décision et non un conseil professionnel engageant.",
+  "privacy.s4.title": "4. Intelligence artificielle & responsabilité",
+  "privacy.s4.text": "Les analyses fournies sont indicatives. L’utilisateur reste seul responsable des décisions prises. e-META ne saurait être tenu responsable des conséquences liées à l’utilisation des résultats.",
 
-  "privacy.s5.title": "5. Droits de l’utilisateur",
-  "privacy.s5.text": "Vous pouvez demander la suppression ou la modification de vos données à tout moment.",
+  "privacy.s5.title": "5. Conservation des données",
+  "privacy.s5.text": "Les données sont conservées uniquement pour la durée nécessaire à l’analyse ou jusqu’à demande de suppression par l’utilisateur.",
 
-  "privacy.back": "Retour à la page principale"
+  "privacy.s6.title": "6. Sécurité et confidentialité",
+  "privacy.s6.text": "Des mesures raisonnables sont mises en œuvre pour garantir la confidentialité et la sécurité des données. Aucun système ne peut toutefois garantir une sécurité absolue.",
+
+  "privacy.s7.title": "7. Droits des utilisateurs",
+  "privacy.s7.text": "Chaque utilisateur peut accéder à ses données, demander leur rectification, leur suppression ou limiter certains traitements.",
+
+  "privacy.s8.title": "8. Évolution de la politique",
+  "privacy.s8.text": "Cette politique peut être modifiée à tout moment pour refléter les évolutions légales, fonctionnelles ou technologiques.",
+
+  "privacy.s9.title": "9. Acceptation",
+  "privacy.s9.text": "L’utilisation de la plateforme implique l’acceptation pleine et entière de cette politique.",
+
+  "privacy.back": "← Retour à l’accueil"
 };
-
-i18n.en = {
-  ...i18n.en,
-
-  "privacy.meta.title": "Privacy Policy — e-META",
-  "privacy.title": "Privacy Policy",
-  "privacy.intro": "Your trust matters. This policy explains how e-META collects, uses and protects your information.",
-
-  "privacy.s1.title": "1. Data collected",
-  "privacy.s1.text": "e-META only collects information you voluntarily provide as part of a strategic analysis.",
-
-  "privacy.s2.title": "2. Use of data",
-  "privacy.s2.text": "Data is used exclusively to generate a personalized decision analysis.",
-
-  "privacy.s3.title": "3. Confidentiality & security",
-  "privacy.s3.text": "All information is processed securely and confidentially. No data is shared with unauthorized third parties.",
-
-  "privacy.s4.title": "4. Responsibility of use",
-  "privacy.s4.text": "e-META provides decision support only and does not replace professional advice.",
-
-  "privacy.s5.title": "5. User rights",
-  "privacy.s5.text": "You may request deletion or modification of your data at any time.",
-
-  "privacy.back": "Back to main page"
-};
-
-i18n.es = {
-  ...i18n.es,
-
-  "privacy.meta.title": "Política de privacidad — e-META",
-  "privacy.title": "Política de privacidad",
-  "privacy.intro": "Tu confianza es fundamental. Esta política explica cómo e-META recopila, utiliza y protege tus datos.",
-
-  "privacy.s1.title": "1. Datos recopilados",
-  "privacy.s1.text": "e-META recopila únicamente la información que proporcionas voluntariamente.",
-
-  "privacy.s2.title": "2. Uso de los datos",
-  "privacy.s2.text": "Los datos se utilizan exclusivamente para generar un análisis estratégico personalizado.",
-
-  "privacy.s3.title": "3. Confidencialidad y seguridad",
-  "privacy.s3.text": "Los datos se procesan de forma segura y confidencial.",
-
-  "privacy.s4.title": "4. Responsabilidad de uso",
-  "privacy.s4.text": "e-META es una herramienta de apoyo a la decisión y no sustituye asesoramiento profesional.",
-
-  "privacy.s5.title": "5. Derechos del usuario",
-  "privacy.s5.text": "Puedes solicitar la eliminación o modificación de tus datos en cualquier momento.",
-
-  "privacy.back": "Volver a la página principal"
-};
-
-i18n.ar = {
-  ...i18n.ar,
-
-  "privacy.meta.title": "سياسة الخصوصية — e-META",
-  "privacy.title": "سياسة الخصوصية",
-  "privacy.intro": "ثقتك مهمة. توضح هذه السياسة كيفية جمع واستخدام وحماية بياناتك.",
-
-  "privacy.s1.title": "١. البيانات التي يتم جمعها",
-  "privacy.s1.text": "تجمع e-META فقط المعلومات التي تقدمها طوعًا.",
-
-  "privacy.s2.title": "٢. استخدام البيانات",
-  "privacy.s2.text": "تُستخدم البيانات حصريًا لإنتاج تحليل استراتيجي مخصص.",
-
-  "privacy.s3.title": "٣. السرية والأمان",
-  "privacy.s3.text": "تتم معالجة جميع البيانات بشكل آمن وسري.",
-
-  "privacy.s4.title": "٤. مسؤولية الاستخدام",
-  "privacy.s4.text": "e-META أداة دعم قرار ولا تُعد بديلاً عن الاستشارة المهنية.",
-
-  "privacy.s5.title": "٥. حقوق المستخدم",
-  "privacy.s5.text": "يمكنك طلب حذف أو تعديل بياناتك في أي وقت.",
-
-  "privacy.back": "العودة إلى الصفحة الرئيسية"
-};
-
