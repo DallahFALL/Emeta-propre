@@ -2,50 +2,50 @@
 <html lang="fr" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title data-i18n="privacy.meta.title">Politique de confidentialité – e-META</title>
+  <title data-i18n="privacy.meta.title">
+    Politique de confidentialité — e-META
+  </title>
+
   <meta name="description"
-        content="Politique de confidentialité e-META. Protection des données, usage responsable de l’IA et respect des normes internationales." />
-  <meta name="theme-color" content="#0b1020" />
-  <link rel="canonical" href="https://e-meta.app/privacy.html" />
+        content="Politique de confidentialité de e-META — Assistant IA d’aide à la décision stratégique." />
 
+  <!-- CSS EXISTANTS -->
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
+
 </head>
 
-<body>
+<body id="top">
 
 <!-- ================= HEADER ================= -->
 <header class="site-header">
   <div class="container header-inner">
 
-    <a href="index.html" class="logo">
+    <div class="logo">
       <span class="logo-mark">e</span>
       <span class="logo-text">META</span>
-    </a>
+      <span class="logo-tagline" data-i18n="header.tagline">
+        Assistant IA multilingue de prise de décision
+      </span>
+    </div>
 
-    <button
-      class="burger"
-      id="burgerBtn"
-      type="button"
-      aria-label="Ouvrir le menu"
-      aria-expanded="false">
+    <button class="burger" id="burgerBtn" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
 
     <nav class="nav" id="mainNav">
-      <ul>
-        <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
-        <li><a href="index.html#form" data-i18n="nav.form">Formulaire</a></li>
-      </ul>
+      <a href="index.html" data-i18n="nav.home">Accueil</a>
+      <a href="index.html#form" data-i18n="nav.form">Formulaire</a>
     </nav>
 
     <div class="header-actions">
-      <select id="languageSwitcher" class="lang-select" aria-label="Language selector">
+      <select class="lang-select" id="langSelect">
         <option value="fr">FR</option>
         <option value="en">EN</option>
         <option value="es">ES</option>
-        <option value="ar">ع</option>
+        <option value="ar">AR</option>
       </select>
     </div>
 
@@ -53,72 +53,117 @@
 </header>
 
 <!-- ================= MAIN ================= -->
-<main class="privacy-page">
-  <section class="form-section">
-    <div class="container">
+<main>
 
-      <h1 data-i18n="privacy.title"></h1>
-      <p class="form-intro" data-i18n="privacy.intro"></p>
+<section class="privacy-section">
+  <div class="container privacy-content">
 
-      <h2 data-i18n="privacy.section1.title"></h2>
-      <p data-i18n="privacy.section1.text"></p>
+    <h1 data-i18n="privacy.title">
+      Politique de confidentialité
+    </h1>
 
-      <h2 data-i18n="privacy.section2.title"></h2>
-      <p data-i18n="privacy.section2.text"></p>
-      <ul>
-        <li data-i18n="privacy.section2.item1"></li>
-        <li data-i18n="privacy.section2.item2"></li>
-        <li data-i18n="privacy.section2.item3"></li>
-      </ul>
+    <p class="privacy-intro" data-i18n="privacy.intro">
+      Votre confiance est essentielle. Cette politique explique de manière transparente
+      comment e-META collecte, utilise et protège vos informations.
+    </p>
 
-      <h2 data-i18n="privacy.section3.title"></h2>
-      <ul>
-        <li data-i18n="privacy.section3.item1"></li>
-        <li data-i18n="privacy.section3.item2"></li>
-        <li data-i18n="privacy.section3.item3"></li>
-      </ul>
+    <h2 data-i18n="privacy.s1.title">1. Introduction</h2>
+    <p data-i18n="privacy.s1.text">
+      e-META est un outil d’aide à la décision stratégique basé sur l’intelligence artificielle.
+      Il ne constitue ni un conseil juridique, financier, médical ou réglementaire.
+    </p>
 
-      <h2 data-i18n="privacy.section4.title"></h2>
-      <p data-i18n="privacy.section4.text1"></p>
-      <p data-i18n="privacy.section4.text2"></p>
+    <h2 data-i18n="privacy.s2.title">2. Données collectées</h2>
+    <ul>
+      <li data-i18n="privacy.s2.l1">
+        Informations saisies volontairement dans les formulaires
+      </li>
+      <li data-i18n="privacy.s2.l2">
+        Coordonnées de contact fournies par l’utilisateur
+      </li>
+      <li data-i18n="privacy.s2.l3">
+        Fichiers ou liens transmis volontairement
+      </li>
+    </ul>
 
-      <h2 data-i18n="privacy.section5.title"></h2>
-      <p data-i18n="privacy.section5.text"></p>
+    <h2 data-i18n="privacy.s3.title">3. Utilisation des données</h2>
+    <p data-i18n="privacy.s3.text">
+      Les données sont utilisées exclusivement pour produire une analyse stratégique
+      personnalisée et améliorer la qualité des recommandations.
+    </p>
 
-      <h2 data-i18n="privacy.section6.title"></h2>
-      <p data-i18n="privacy.section6.text"></p>
+    <h2 data-i18n="privacy.s4.title">4. Intelligence artificielle & responsabilité</h2>
+    <p data-i18n="privacy.s4.text">
+      Les recommandations fournies sont indicatives. L’utilisateur reste seul responsable
+      des décisions prises sur la base des analyses générées par e-META.
+    </p>
 
-      <h2 data-i18n="privacy.section7.title"></h2>
-      <p data-i18n="privacy.section7.text"></p>
+    <h2 data-i18n="privacy.s5.title">5. Conservation des données</h2>
+    <p data-i18n="privacy.s5.text">
+      Les données sont conservées uniquement pendant la durée nécessaire au traitement,
+      sauf demande explicite de suppression.
+    </p>
 
-      <h2 data-i18n="privacy.section8.title"></h2>
-      <ul>
-        <li data-i18n="privacy.section8.item1"></li>
-        <li data-i18n="privacy.section8.item2"></li>
-        <li data-i18n="privacy.section8.item3"></li>
-        <li data-i18n="privacy.section8.item4"></li>
-      </ul>
+    <h2 data-i18n="privacy.s6.title">6. Sécurité</h2>
+    <p data-i18n="privacy.s6.text">
+      e-META met en œuvre des mesures raisonnables afin de garantir la confidentialité
+      et la sécurité des informations transmises.
+    </p>
 
-      <h2 data-i18n="privacy.section9.title"></h2>
-      <p data-i18n="privacy.section9.text"></p>
+    <h2 data-i18n="privacy.s7.title">7. Droits des utilisateurs</h2>
+    <p data-i18n="privacy.s7.text">
+      Chaque utilisateur peut demander l’accès, la rectification ou la suppression
+      de ses données à tout moment.
+    </p>
 
-      <h2 data-i18n="privacy.section10.title"></h2>
-      <p data-i18n="privacy.section10.text"></p>
+    <h2 data-i18n="privacy.s8.title">8. Évolution</h2>
+    <p data-i18n="privacy.s8.text">
+      Cette politique peut être mise à jour afin de refléter les évolutions légales,
+      techniques ou fonctionnelles de e-META.
+    </p>
 
-    </div>
-  </section>
+    <p class="privacy-update" data-i18n="privacy.update">
+      Dernière mise à jour : janvier 2026
+    </p>
+
+    <a href="index.html" class="privacy-back" data-i18n="privacy.back">
+      ← Retour à l’accueil
+    </a>
+
+  </div>
+</section>
+
 </main>
 
 <!-- ================= FOOTER ================= -->
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>© e-META 2025</p>
-    <a href="index.html" class="footer-link" data-i18n="footer.back">
-      Retour à l’accueil
-    </a>
+    <div class="footer-brand">
+      <strong><span style="color:#ff8a00">e</span>-META</strong>
+      <p data-i18n="footer.tagline">
+        Moteur d’intelligence décisionnelle stratégique.
+      </p>
+    </div>
+
+    <div class="footer-links">
+      <a href="index.html#form" data-i18n="nav.form">Formulaire</a>
+    </div>
+  </div>
+
+  <div class="footer-copy" data-i18n="footer.rights">
+    © 2025 e-META — Tous droits réservés
   </div>
 </footer>
 
+<!-- ================= JS EXISTANTS ================= -->
+<script src="i18n.js"></script>
 <script src="script.js"></script>
+
+<script>
+  const burger = document.getElementById("burgerBtn");
+  const nav = document.getElementById("mainNav");
+  burger?.addEventListener("click", () => nav.classList.toggle("open"));
+</script>
+
 </body>
 </html>
