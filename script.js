@@ -1,76 +1,55 @@
 /* =====================================================
-   e-META — SCRIPT UNIQUE & STABLE
-   ✔ Multilingue global (index + privacy)
-   ✔ RTL / LTR auto
-   ✔ Header responsive
-   ✔ Burger mobile
-   ✔ CTA scroll
+   e-META — script.js
+   Langues globales + RTL + placeholders + persistance
 ===================================================== */
 
-(function () {
-  "use strict";
-
-  const STORAGE_KEY = "lang";
+document.addEventListener("DOMContentLoaded", () => {
   const DEFAULT_LANG = "fr";
+  const STORAGE_KEY = "emeta_lang";
 
-  /* ================= LANG ================= */
-  function getLang() {
-    return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
-  }
+  const langSelect = document.getElementById("langSelect");
+  const rtlStylesheet = document.getElementById("rtlStylesheet");
 
-  function setLang(lang) {
+  function applyTranslations(lang) {
+    if (!window.I18N || !I18N[lang]) return;
+
+    /* Texte classique */
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (I18N[lang][key]) {
+        el.innerHTML = I18N[lang][key];
+      }
+    });
+
+    /* Placeholders */
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+      const key = el.getAttribute("data-i18n-placeholder");
+      if (I18N[lang][key]) {
+        el.setAttribute("placeholder", I18N[lang][key]);
+      }
+    });
+
+    /* Direction RTL */
+    if (lang === "ar") {
+      document.documentElement.setAttribute("dir", "rtl");
+      document.documentElement.setAttribute("lang", "ar");
+      rtlStylesheet?.removeAttribute("disabled");
+    } else {
+      document.documentElement.setAttribute("dir", "ltr");
+      document.documentElement.setAttribute("lang", lang);
+      rtlStylesheet?.setAttribute("disabled", "true");
+    }
+
     localStorage.setItem(STORAGE_KEY, lang);
-    applyLang(lang);
   }
 
-  function applyLang(lang) {
-    document.documentElement.lang = lang;
-    document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
+  /* Initialisation */
+  const savedLang = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
+  if (langSelect) langSelect.value = savedLang;
+  applyTranslations(savedLang);
 
-    // RTL CSS
-    const rtlCSS = document.getElementById("rtlStylesheet");
-    if (rtlCSS) rtlCSS.disabled = (lang !== "ar");
-
-    // Traductions
-    if (typeof window.applyTranslations === "function") {
-      window.applyTranslations(lang);
-    }
-
-    // Sync sélecteurs langue
-    document.querySelectorAll("select.lang-select").forEach(sel => {
-      sel.value = lang;
-    });
-  }
-
-  /* ================= DOM READY ================= */
-  document.addEventListener("DOMContentLoaded", () => {
-
-    /* ===== INIT LANG ===== */
-    applyLang(getLang());
-
-    document.querySelectorAll("select.lang-select").forEach(sel => {
-      sel.addEventListener("change", e => setLang(e.target.value));
-    });
-
-    /* ===== BURGER MENU ===== */
-    const burger = document.getElementById("burgerBtn");
-    const nav = document.getElementById("mainNav");
-
-    if (burger && nav) {
-      burger.addEventListener("click", () => {
-        nav.classList.toggle("open");
-      });
-    }
-
-    /* ===== CTA HERO SCROLL ===== */
-    const ctaStart = document.querySelector(".cta-primary");
-    const formSection = document.querySelector("#form");
-
-    if (ctaStart && formSection) {
-      ctaStart.addEventListener("click", () => {
-        formSection.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    }
+  /* Changement manuel */
+  langSelect?.addEventListener("change", e => {
+    applyTranslations(e.target.value);
   });
-
-})();
+});
