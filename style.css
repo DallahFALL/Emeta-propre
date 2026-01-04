@@ -92,10 +92,11 @@ textarea{min-height:110px;resize:vertical}
    FIX — Sticky header (SAFE)
    À coller tout en bas de style.css
 ========================= */
-.site-header{
+.site-header {
   position: sticky;
   top: 0;
-  z-index: 2000;
+  z-index: 1000;
+  background: #070b1a;
 }
 
 /* IMPORTANT : si un parent a overflow:hidden/auto, sticky peut casser */
