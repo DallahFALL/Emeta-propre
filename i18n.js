@@ -81,3 +81,6 @@ window.applyTranslations = function (lang) {
     if (dict[key]) el.placeholder = dict[key];
   });
 };
+
+/* ===== Sécurité d'initialisation ===== */
+window.I18N = window.I18N || I18N;
