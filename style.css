@@ -88,17 +88,41 @@ textarea{min-height:110px;resize:vertical}
   .field-with-unit{grid-template-columns:1fr}
   .cta-primary{width:100%}
 }
-
-/* ================= HEADER FIXE — SAFE ================= */
-
-.site-header {
+/* =========================
+   FIX — Sticky header (SAFE)
+   À coller tout en bas de style.css
+========================= */
+.site-header{
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 2000;
 }
 
-/* Sécurité si un parent casse le sticky */
-body {
-  overflow-x: hidden;
+/* IMPORTANT : si un parent a overflow:hidden/auto, sticky peut casser */
+body{ overflow-x:hidden; }
+main{ overflow: visible; }
+
+/* Sur mobile : empêche la barre d’actions de déborder */
+.header-inner{
+  gap: 12px;
+  flex-wrap: wrap;
 }
+
+.header-actions{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.lang-select{
+  max-width: 110px;
+}
+
+@media (max-width: 520px){
+  .header-actions{ width: 100%; justify-content: space-between; }
+  .cta-custom{ width: auto; max-width: 100%; }
+}
+
 
