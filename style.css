@@ -107,4 +107,11 @@ textarea{min-height:110px;resize:vertical}
 .privacy-card.full {
   grid-column: 1 / -1;
 }
+.privacy-card ul:empty {
+  display: none;
+}
+
+.privacy-card li:empty {
+  display: none;
+}
 
