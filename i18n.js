@@ -396,19 +396,106 @@ window.I18N = {
     "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة"
   }
 };
-// PRIVACY
-"privacy.meta.title": "Politique de confidentialité — e-META",
-"privacy.title": "Politique de confidentialité",
-"footer.back": "Retour à l’accueil"
 
-"privacy.meta.title": "Privacy Policy — e-META",
-"privacy.title": "Privacy Policy",
-"footer.back": "Back to home"
+/* =========================
+   e-META — Privacy vNext i18n (SAFE MERGE)
+   À coller à la fin de i18n.js
+========================= */
 
-"privacy.meta.title": "Política de privacidad — e-META",
-"privacy.title": "Política de privacidad",
-"footer.back": "Volver al inicio"
+(function () {
+  // suppose que ton dictionnaire s'appelle I18N (comme dans tes versions)
+  if (typeof I18N !== "object") return;
 
-"privacy.meta.title": "سياسة الخصوصية — e-META",
-"privacy.title": "سياسة الخصوصية",
-"footer.back": "العودة إلى الصفحة الرئيسية"
+  const ensure = (lang) => {
+    I18N[lang] = I18N[lang] || {};
+    I18N[lang].privacy = I18N[lang].privacy || {};
+    I18N[lang].header = I18N[lang].header || {};
+    I18N[lang].footer = I18N[lang].footer || {};
+    I18N[lang].nav = I18N[lang].nav || {};
+    I18N[lang].cta = I18N[lang].cta || {};
+  };
+
+  ["fr","en","es","ar"].forEach(ensure);
+
+  // --- FR
+  Object.assign(I18N.fr.header, {
+    tagline: I18N.fr.header.tagline || "Assistant IA multilingue de prise de décision",
+  });
+
+  Object.assign(I18N.fr.privacy, {
+    meta: { title: "Politique de confidentialité — e-META" },
+    title: "Politique de confidentialité",
+    intro:
+      "Votre confiance est essentielle. La présente politique explique de manière transparente comment e-META collecte, utilise et protège les informations fournies lors de l’utilisation de la plateforme.",
+    s1: { title: "1. Introduction", p1: "e-META est un outil d’aide à la décision stratégique basé sur l’intelligence artificielle. Il ne constitue ni un conseil juridique, financier, médical ou réglementaire." },
+    s2: { title: "2. Données collectées", l1: "Les informations saisies volontairement dans les formulaires (contexte, objectifs, contraintes, indicateurs, etc.).", l2: "Les données de contact (e-mail, WhatsApp) si une restitution via ces canaux est demandée.", l3: "Les fichiers ou liens transmis volontairement par l’utilisateur.", l4: "Aucune donnée n’est collectée à l’insu de l’utilisateur." },
+    s3: { title: "3. Utilisation des données", l1: "Générer une analyse stratégique personnalisée via e-META.", l2: "Adapter le mode de restitution (e-mail, WhatsApp, PDF ou affichage).", l3: "Améliorer la qualité globale des recommandations.", l4: "Les données ne sont jamais revendues, louées ou transmises à des tiers non autorisés." },
+    s4: { title: "4. IA & responsabilité", l1: "Les recommandations sont indicatives et non contraignantes.", l2: "L’utilisateur reste seul responsable des décisions prises.", l3: "e-META ne saurait être tenu responsable des conséquences directes ou indirectes liées à l’utilisation des résultats." },
+    s5: { title: "5. Conservation des données", l1: "Les données sont conservées le temps strictement nécessaire à la production de l’analyse.", l2: "Ou jusqu’à demande explicite de suppression par l’utilisateur.", l3: "Vous pouvez demander la suppression de vos données à tout moment." },
+    s6: { title: "6. Sécurité & confidentialité", p1: "e-META met en œuvre des mesures techniques et organisationnelles raisonnables pour protéger les informations. Aucun système n’étant infaillible, une sécurité absolue ne peut être garantie." },
+    s7: { title: "7. Droits des utilisateurs", l1: "Accéder à vos données.", l2: "Demander leur rectification.", l3: "Demander leur suppression.", l4: "Limiter ou refuser certains traitements." },
+    s8: { title: "8. Évolution de la politique", p1: "Cette politique peut être mise à jour à tout moment pour refléter les évolutions légales, fonctionnelles ou technologiques. La version applicable est celle publiée sur le site au moment de la consultation." },
+    s9: { title: "9. Acceptation", p1: "L’utilisation de la plateforme e-META implique l’acceptation pleine et entière de la présente politique." },
+    updated: "Dernière mise à jour : janvier 2026",
+    back: "← Retour à l’accueil",
+  });
+
+  // --- EN
+  Object.assign(I18N.en.privacy, {
+    meta: { title: "Privacy Policy — e-META" },
+    title: "Privacy Policy",
+    intro:
+      "Your trust matters. This policy explains clearly how e-META collects, uses, and protects information provided while using the platform.",
+    s1: { title: "1. Introduction", p1: "e-META is an AI-powered decision-support tool. It is not legal, financial, medical, or regulatory advice." },
+    s2: { title: "2. Data we collect", l1: "Information you voluntarily submit (context, goals, constraints, KPIs, etc.).", l2: "Contact details (email, WhatsApp) if you request delivery through these channels.", l3: "Files or links you voluntarily provide.", l4: "No data is collected without your knowledge." },
+    s3: { title: "3. How we use data", l1: "Generate a personalized strategic analysis via e-META.", l2: "Adapt the delivery format (email, WhatsApp, PDF, or on-screen).", l3: "Improve recommendation quality.", l4: "Data is never sold, rented, or shared with unauthorized third parties." },
+    s4: { title: "4. AI & responsibility", l1: "Recommendations are indicative and not binding.", l2: "You remain solely responsible for decisions you make.", l3: "e-META cannot be held liable for direct or indirect consequences of using the results." },
+    s5: { title: "5. Data retention", l1: "Data is kept only as long as needed to produce the analysis.", l2: "Or until you explicitly request deletion.", l3: "You can request deletion at any time." },
+    s6: { title: "6. Security", p1: "e-META implements reasonable technical and organizational safeguards. However, no system can guarantee absolute security." },
+    s7: { title: "7. Your rights", l1: "Access your data.", l2: "Request correction.", l3: "Request deletion.", l4: "Limit or object to certain processing." },
+    s8: { title: "8. Policy updates", p1: "We may update this policy to reflect legal, functional, or technological changes. The version displayed on the site is the one that applies." },
+    s9: { title: "9. Acceptance", p1: "Using e-META means you fully accept this privacy policy." },
+    updated: "Last updated: January 2026",
+    back: "← Back to home",
+  });
+
+  // --- ES
+  Object.assign(I18N.es.privacy, {
+    meta: { title: "Política de privacidad — e-META" },
+    title: "Política de privacidad",
+    intro:
+      "Tu confianza es esencial. Esta política explica de forma clara cómo e-META recopila, usa y protege la información proporcionada al utilizar la plataforma.",
+    s1: { title: "1. Introducción", p1: "e-META es una herramienta de apoyo a la decisión basada en IA. No es asesoramiento legal, financiero, médico ni regulatorio." },
+    s2: { title: "2. Datos recopilados", l1: "Información que introduces voluntariamente (contexto, objetivos, restricciones, KPIs, etc.).", l2: "Datos de contacto (email, WhatsApp) si solicitas entrega por esos canales.", l3: "Archivos o enlaces que proporcionas voluntariamente.", l4: "No se recopilan datos sin tu conocimiento." },
+    s3: { title: "3. Uso de los datos", l1: "Generar un análisis estratégico personalizado.", l2: "Adaptar el formato de entrega (email, WhatsApp, PDF o en pantalla).", l3: "Mejorar la calidad de las recomendaciones.", l4: "Los datos nunca se venden, alquilan ni comparten con terceros no autorizados." },
+    s4: { title: "4. IA y responsabilidad", l1: "Las recomendaciones son orientativas y no vinculantes.", l2: "El usuario es el único responsable de sus decisiones.", l3: "e-META no será responsable de consecuencias directas o indirectas del uso de los resultados." },
+    s5: { title: "5. Conservación", l1: "Los datos se conservan solo el tiempo necesario para producir el análisis.", l2: "O hasta que solicites su eliminación.", l3: "Puedes solicitar la eliminación en cualquier momento." },
+    s6: { title: "6. Seguridad", p1: "e-META aplica medidas razonables de seguridad. Ningún sistema puede garantizar seguridad absoluta." },
+    s7: { title: "7. Derechos", l1: "Acceder a tus datos.", l2: "Solicitar corrección.", l3: "Solicitar eliminación.", l4: "Limitar u oponerte a ciertos tratamientos." },
+    s8: { title: "8. Cambios", p1: "Podemos actualizar esta política por cambios legales, funcionales o tecnológicos. Se aplica la versión publicada en el sitio." },
+    s9: { title: "9. Aceptación", p1: "El uso de e-META implica la aceptación total de esta política." },
+    updated: "Última actualización: enero de 2026",
+    back: "← Volver al inicio",
+  });
+
+  // --- AR
+  Object.assign(I18N.ar.privacy, {
+    meta: { title: "سياسة الخصوصية — e-META" },
+    title: "سياسة الخصوصية",
+    intro:
+      "ثقتك مهمة. تشرح هذه السياسة بشكل واضح كيف تجمع e-META المعلومات وتستخدمها وتحميها أثناء استخدام المنصة.",
+    s1: { title: "1) مقدمة", p1: "e-META أداة لدعم اتخاذ القرار بالاعتماد على الذكاء الاصطناعي، وليست استشارة قانونية أو مالية أو طبية أو تنظيمية." },
+    s2: { title: "2) البيانات التي نجمعها", l1: "المعلومات التي تُدخلها طوعًا (السياق، الأهداف، القيود، المؤشرات…)", l2: "بيانات الاتصال (البريد، واتساب) إذا طلبت الاستلام عبر هذه القنوات.", l3: "الملفات أو الروابط التي تقدمها طوعًا.", l4: "لا يتم جمع أي بيانات دون علمك." },
+    s3: { title: "3) استخدام البيانات", l1: "إنتاج تحليل استراتيجي مخصص.", l2: "تكييف طريقة التسليم (بريد/واتساب/PDF/عرض).", l3: "تحسين جودة التوصيات.", l4: "لا يتم بيع البيانات أو تأجيرها أو مشاركتها مع أطراف غير مخولة." },
+    s4: { title: "4) الذكاء الاصطناعي والمسؤولية", l1: "التوصيات إرشادية وغير ملزمة.", l2: "المستخدم مسؤول وحده عن قراراته.", l3: "لا تتحمل e-META مسؤولية النتائج المباشرة أو غير المباشرة لاستخدام المخرجات." },
+    s5: { title: "5) مدة الاحتفاظ", l1: "نحتفظ بالبيانات للمدة اللازمة لإنتاج التحليل فقط.", l2: "أو حتى تطلب حذفها صراحةً.", l3: "يمكنك طلب الحذف في أي وقت." },
+    s6: { title: "6) الأمان", p1: "تطبق e-META إجراءات حماية معقولة، لكن لا يوجد نظام يضمن أمانًا مطلقًا." },
+    s7: { title: "7) حقوق المستخدم", l1: "الوصول إلى بياناتك.", l2: "طلب تصحيحها.", l3: "طلب حذفها.", l4: "تقييد أو الاعتراض على بعض المعالجة." },
+    s8: { title: "8) تحديث السياسة", p1: "قد نحدّث هذه السياسة لمواكبة التغييرات القانونية أو الوظيفية أو التقنية. النسخة المنشورة على الموقع هي السارية." },
+    s9: { title: "9) القبول", p1: "استخدام e-META يعني قبول هذه السياسة بالكامل." },
+    updated: "آخر تحديث: يناير 2026",
+    back: "← العودة إلى الرئيسية",
+  });
+
+})();
+
