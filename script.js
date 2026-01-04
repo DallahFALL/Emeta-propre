@@ -50,9 +50,16 @@
 
     // Text content
     document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
-      if (dict[key]) el.textContent = dict[key];
-    });
+  const key = el.getAttribute("data-i18n");
+  const value = dict[key];
+
+  if (value && value.trim() !== "") {
+    el.textContent = value;
+    el.style.display = "";
+  } else {
+    el.style.display = "none";
+  }
+});
 
     // Placeholders
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
