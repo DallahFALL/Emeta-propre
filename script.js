@@ -22,12 +22,14 @@
 
     document.querySelectorAll("[data-i18n]").forEach(el => {
       const key = el.getAttribute("data-i18n");
-      if (dict[key] != null) el.textContent = dict[key];
+      const value = key.split(".").reduce((o, k) => o && o[k], dict);
+if (value != null) el.textContent = value;
     });
 
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
       const key = el.getAttribute("data-i18n-placeholder");
-      if (dict[key] != null) el.setAttribute("placeholder", dict[key]);
+  const value = key.split(".").reduce((o, k) => o && o[k], dict);
+if (value != null) el.setAttribute("placeholder", value); 
     });
   }
 
@@ -35,9 +37,15 @@
     localStorage.setItem(STORAGE_KEY, lang);
     setRtl(lang);
     applyI18n(lang);
-    const sel = document.getElementById("langSelect");
+    const sel = document.getElementById("langSwitcher");
     if (sel) sel.value = lang;
   }
+// Update document title (supports meta.title or privacy.meta.title)
+if (dict["meta.title"]) {
+  document.title = dict["meta.title"];
+} else if (dict.meta && dict.meta.title) {
+  document.title = dict.meta.title;
+}
 
   function scrollToForm() {
     const form = document.getElementById("form");
@@ -49,7 +57,7 @@
     setLang(getLang());
 
     // language switch
-    const langSelect = document.getElementById("langSelect");
+    const langSelect = document.getElementById("langSwitcher");
     if (langSelect) {
       langSelect.addEventListener("change", (e) => setLang(e.target.value));
     }
