@@ -423,3 +423,79 @@ i18n.fr = {
 
   "privacy.back": "Retour à la page principale"
 };
+
+i18n.en = {
+  ...i18n.en,
+
+  "privacy.meta.title": "Privacy Policy — e-META",
+  "privacy.title": "Privacy Policy",
+  "privacy.intro": "Your trust matters. This policy explains how e-META collects, uses and protects your information.",
+
+  "privacy.s1.title": "1. Data collected",
+  "privacy.s1.text": "e-META only collects information you voluntarily provide as part of a strategic analysis.",
+
+  "privacy.s2.title": "2. Use of data",
+  "privacy.s2.text": "Data is used exclusively to generate a personalized decision analysis.",
+
+  "privacy.s3.title": "3. Confidentiality & security",
+  "privacy.s3.text": "All information is processed securely and confidentially. No data is shared with unauthorized third parties.",
+
+  "privacy.s4.title": "4. Responsibility of use",
+  "privacy.s4.text": "e-META provides decision support only and does not replace professional advice.",
+
+  "privacy.s5.title": "5. User rights",
+  "privacy.s5.text": "You may request deletion or modification of your data at any time.",
+
+  "privacy.back": "Back to main page"
+};
+
+i18n.es = {
+  ...i18n.es,
+
+  "privacy.meta.title": "Política de privacidad — e-META",
+  "privacy.title": "Política de privacidad",
+  "privacy.intro": "Tu confianza es fundamental. Esta política explica cómo e-META recopila, utiliza y protege tus datos.",
+
+  "privacy.s1.title": "1. Datos recopilados",
+  "privacy.s1.text": "e-META recopila únicamente la información que proporcionas voluntariamente.",
+
+  "privacy.s2.title": "2. Uso de los datos",
+  "privacy.s2.text": "Los datos se utilizan exclusivamente para generar un análisis estratégico personalizado.",
+
+  "privacy.s3.title": "3. Confidencialidad y seguridad",
+  "privacy.s3.text": "Los datos se procesan de forma segura y confidencial.",
+
+  "privacy.s4.title": "4. Responsabilidad de uso",
+  "privacy.s4.text": "e-META es una herramienta de apoyo a la decisión y no sustituye asesoramiento profesional.",
+
+  "privacy.s5.title": "5. Derechos del usuario",
+  "privacy.s5.text": "Puedes solicitar la eliminación o modificación de tus datos en cualquier momento.",
+
+  "privacy.back": "Volver a la página principal"
+};
+
+i18n.ar = {
+  ...i18n.ar,
+
+  "privacy.meta.title": "سياسة الخصوصية — e-META",
+  "privacy.title": "سياسة الخصوصية",
+  "privacy.intro": "ثقتك مهمة. توضح هذه السياسة كيفية جمع واستخدام وحماية بياناتك.",
+
+  "privacy.s1.title": "١. البيانات التي يتم جمعها",
+  "privacy.s1.text": "تجمع e-META فقط المعلومات التي تقدمها طوعًا.",
+
+  "privacy.s2.title": "٢. استخدام البيانات",
+  "privacy.s2.text": "تُستخدم البيانات حصريًا لإنتاج تحليل استراتيجي مخصص.",
+
+  "privacy.s3.title": "٣. السرية والأمان",
+  "privacy.s3.text": "تتم معالجة جميع البيانات بشكل آمن وسري.",
+
+  "privacy.s4.title": "٤. مسؤولية الاستخدام",
+  "privacy.s4.text": "e-META أداة دعم قرار ولا تُعد بديلاً عن الاستشارة المهنية.",
+
+  "privacy.s5.title": "٥. حقوق المستخدم",
+  "privacy.s5.text": "يمكنك طلب حذف أو تعديل بياناتك في أي وقت.",
+
+  "privacy.back": "العودة إلى الصفحة الرئيسية"
+};
+
