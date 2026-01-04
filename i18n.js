@@ -1,5 +1,5 @@
 // i18n.js — e-META vNext (FR / EN / ES / AR)
-window.I18N = {
+const I18N = {
   fr: {
     "meta.title": "e-META — Assistant IA de prise de décision",
     "header.tagline": "Assistant IA multilingue de prise de décision",
@@ -498,4 +498,5 @@ window.I18N = {
   });
 
 })();
+window.I18N = I18N;
 
