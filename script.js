@@ -30,6 +30,29 @@
       if (dict[key] != null) el.setAttribute("placeholder", dict[key]);
     });
   }
+function applyI18n(lang) {
+  const dict = (window.I18N && window.I18N[lang]) ? window.I18N[lang] : null;
+  if (!dict) return;
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+
+    if (dict[key] != null && dict[key].trim() !== "") {
+      el.textContent = dict[key];
+      el.style.display = "";
+    } else {
+      // 🔒 fallback sécurisé : on masque l’élément vide
+      el.style.display = "none";
+    }
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    if (dict[key] != null) {
+      el.setAttribute("placeholder", dict[key]);
+    }
+  });
+}
 
   function setLang(lang) {
     localStorage.setItem(STORAGE_KEY, lang);
