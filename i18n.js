@@ -396,3 +396,24 @@ window.I18N = {
     "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة"
   }
 };
+
+privacy: {
+  meta: { title: "Politique de confidentialité — e-META" },
+  title: "Politique de confidentialité",
+  intro: "Votre confiance est essentielle. Cette politique explique de manière transparente comment e-META collecte, utilise et protège vos informations.",
+  s1: { title: "1. Introduction", text: "e-META est un outil d’aide à la décision stratégique basé sur l’intelligence artificielle." },
+  s2: {
+    title: "2. Données collectées",
+    l1: "Informations saisies volontairement dans les formulaires",
+    l2: "Coordonnées de contact fournies par l’utilisateur",
+    l3: "Fichiers ou liens transmis volontairement"
+  },
+  s3: { title: "3. Utilisation des données", text: "Les données sont utilisées exclusivement pour produire une analyse stratégique personnalisée." },
+  s4: { title: "4. Intelligence artificielle & responsabilité", text: "Les recommandations fournies sont indicatives et non contraignantes." },
+  s5: { title: "5. Conservation des données", text: "Les données sont conservées uniquement pendant la durée nécessaire au traitement." },
+  s6: { title: "6. Sécurité", text: "e-META met en œuvre des mesures raisonnables pour protéger les informations." },
+  s7: { title: "7. Droits des utilisateurs", text: "Chaque utilisateur peut demander l’accès ou la suppression de ses données." },
+  s8: { title: "8. Évolution", text: "Cette politique peut être mise à jour à tout moment." },
+  update: "Dernière mise à jour : janvier 2026",
+  back: "← Retour à l’accueil"
+}
