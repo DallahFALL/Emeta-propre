@@ -197,6 +197,52 @@ window.I18N = {
     "footer.privacy": "Privacy policy",
     "footer.copy": "© 2026 e-META — All rights reserved"
   },
+  
+"privacy.title": "🔐 Privacy Policy — e-META",
+"privacy.intro": "Your trust is essential. This privacy policy explains transparently how e-META collects, uses and protects the information provided by users when using the platform.",
+
+"privacy.1.title": "1. Introduction",
+"privacy.1.p1": "e-META is a strategic decision-support tool based on artificial intelligence. It does not constitute legal, financial, medical or regulatory advice.",
+
+"privacy.2.title": "2. Data collected",
+"privacy.2.li1": "Information voluntarily entered in forms (context, objectives, constraints, indicators, etc.).",
+"privacy.2.li2": "Contact details provided by the user (email address, WhatsApp number) if delivery through these channels is requested.",
+"privacy.2.li3": "Files or links voluntarily shared by the user.",
+"privacy.2.p": "No data is collected without the user’s knowledge.",
+
+"privacy.3.title": "3. Use of data",
+"privacy.3.li1": "Generate a personalized strategic analysis via e-META.",
+"privacy.3.li2": "Adapt the delivery format (email, WhatsApp, PDF or on-screen display).",
+"privacy.3.li3": "Improve the overall quality of the recommendations.",
+"privacy.3.p": "Data is never sold, rented or shared with unauthorized third parties.",
+
+"privacy.4.title": "4. Artificial intelligence & responsibility",
+"privacy.4.li1": "Analyses are generated using AI models and decision-support methodologies.",
+"privacy.4.li2": "Recommendations are indicative and non-binding.",
+"privacy.4.li3": "The user remains fully responsible for decisions made.",
+"privacy.4.li4": "e-META cannot be held liable for consequences resulting from the use of the analyses.",
+
+"privacy.5.title": "5. Data retention",
+"privacy.5.li1": "For the time strictly necessary to generate the analysis.",
+"privacy.5.li2": "Or until an explicit deletion request by the user.",
+"privacy.5.p": "Users may request deletion of their data at any time.",
+
+"privacy.6.title": "6. Security and confidentiality",
+"privacy.6.p1": "e-META implements reasonable technical and organizational measures to protect data confidentiality, integrity and access.",
+"privacy.6.p2": "However, no system can guarantee absolute security.",
+
+"privacy.7.title": "7. User rights",
+"privacy.7.li1": "Access their data.",
+"privacy.7.li2": "Request rectification.",
+"privacy.7.li3": "Request deletion.",
+"privacy.7.li4": "Limit or object to certain processing.",
+
+"privacy.8.title": "8. Policy updates",
+"privacy.8.p": "This policy may be updated to reflect legal, functional or technological changes. The applicable version is the one published at the time of consultation.",
+
+"privacy.9.title": "9. Acceptance",
+"privacy.9.p": "Using the e-META platform implies full acceptance of this privacy policy.",
+"privacy.update": "Last update: January 2026"
 
   es: {
     "meta.title": "e-META — Asistente IA para decisiones",
@@ -297,6 +343,52 @@ window.I18N = {
     "footer.copy": "© 2026 e-META — Todos los derechos reservados"
   },
 
+"privacy.title": "🔐 Política de privacidad — e-META",
+"privacy.intro": "Tu confianza es esencial. Esta política explica de forma transparente cómo e-META recopila, utiliza y protege la información proporcionada por los usuarios.",
+
+"privacy.1.title": "1. Introducción",
+"privacy.1.p1": "e-META es una herramienta de apoyo a la toma de decisiones estratégicas basada en inteligencia artificial. No constituye asesoramiento legal, financiero, médico ni regulatorio.",
+
+"privacy.2.title": "2. Datos recopilados",
+"privacy.2.li1": "Información introducida voluntariamente en los formularios (contexto, objetivos, restricciones, indicadores, etc.).",
+"privacy.2.li2": "Datos de contacto proporcionados por el usuario (correo electrónico, WhatsApp) si se solicita una entrega por estos medios.",
+"privacy.2.li3": "Archivos o enlaces compartidos voluntariamente por el usuario.",
+"privacy.2.p": "No se recopila ningún dato sin el conocimiento del usuario.",
+
+"privacy.3.title": "3. Uso de los datos",
+"privacy.3.li1": "Generar un análisis estratégico personalizado mediante e-META.",
+"privacy.3.li2": "Adaptar el formato de entrega (email, WhatsApp, PDF o visualización).",
+"privacy.3.li3": "Mejorar la calidad general de las recomendaciones.",
+"privacy.3.p": "Los datos nunca se venden ni se comparten con terceros no autorizados.",
+
+"privacy.4.title": "4. Inteligencia artificial y responsabilidad",
+"privacy.4.li1": "Los análisis se basan en modelos de IA y metodologías de apoyo a la decisión.",
+"privacy.4.li2": "Las recomendaciones son orientativas y no vinculantes.",
+"privacy.4.li3": "El usuario es el único responsable de las decisiones tomadas.",
+"privacy.4.li4": "e-META no se hace responsable de las consecuencias derivadas del uso de los resultados.",
+
+"privacy.5.title": "5. Conservación de datos",
+"privacy.5.li1": "Durante el tiempo estrictamente necesario para generar el análisis.",
+"privacy.5.li2": "O hasta solicitud expresa de eliminación por parte del usuario.",
+"privacy.5.p": "El usuario puede solicitar la eliminación de sus datos en cualquier momento.",
+
+"privacy.6.title": "6. Seguridad y confidencialidad",
+"privacy.6.p1": "e-META aplica medidas técnicas y organizativas razonables para proteger los datos.",
+"privacy.6.p2": "No obstante, ningún sistema puede garantizar una seguridad absoluta.",
+
+"privacy.7.title": "7. Derechos del usuario",
+"privacy.7.li1": "Acceder a sus datos.",
+"privacy.7.li2": "Solicitar su rectificación.",
+"privacy.7.li3": "Solicitar su eliminación.",
+"privacy.7.li4": "Limitar u oponerse a determinados tratamientos.",
+
+"privacy.8.title": "8. Actualización de la política",
+"privacy.8.p": "Esta política puede actualizarse para reflejar cambios legales, funcionales o tecnológicos.",
+
+"privacy.9.title": "9. Aceptación",
+"privacy.9.p": "El uso de la plataforma e-META implica la aceptación total de esta política de privacidad.",
+"privacy.update": "Última actualización: enero de 2026"
+
   ar: {
     "meta.title": "e-META — مساعد ذكاء اصطناعي لاتخاذ القرار",
     "header.tagline": "مساعد متعدد اللغات لاتخاذ القرار",
@@ -396,3 +488,49 @@ window.I18N = {
     "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة"
   }
 };
+
+"privacy.title": "🔐 سياسة الخصوصية — e-META",
+"privacy.intro": "ثقتك مهمة بالنسبة لنا. تشرح هذه السياسة بشكل شفاف كيفية جمع واستخدام وحماية البيانات التي يقدمها المستخدمون.",
+
+"privacy.1.title": "1. المقدمة",
+"privacy.1.p1": "e-META أداة دعم لاتخاذ القرار الاستراتيجي تعتمد على الذكاء الاصطناعي. ولا تُعد استشارة قانونية أو مالية أو طبية أو تنظيمية.",
+
+"privacy.2.title": "2. البيانات التي يتم جمعها",
+"privacy.2.li1": "المعلومات التي يُدخلها المستخدم طوعًا في النماذج.",
+"privacy.2.li2": "بيانات التواصل (البريد الإلكتروني، واتساب) إذا طُلب التسليم عبر هذه القنوات.",
+"privacy.2.li3": "الملفات أو الروابط التي يشاركها المستخدم طوعًا.",
+"privacy.2.p": "لا يتم جمع أي بيانات دون علم المستخدم.",
+
+"privacy.3.title": "3. استخدام البيانات",
+"privacy.3.li1": "إنشاء تحليل استراتيجي مخصص عبر e-META.",
+"privacy.3.li2": "تكييف طريقة التسليم (بريد، واتساب، PDF أو عرض مباشر).",
+"privacy.3.li3": "تحسين جودة التوصيات.",
+"privacy.3.p": "لا يتم بيع البيانات أو مشاركتها مع أطراف غير مخولة.",
+
+"privacy.4.title": "4. الذكاء الاصطناعي والمسؤولية",
+"privacy.4.li1": "تعتمد التحليلات على نماذج الذكاء الاصطناعي.",
+"privacy.4.li2": "التوصيات إرشادية وغير ملزمة.",
+"privacy.4.li3": "المستخدم مسؤول بالكامل عن قراراته.",
+"privacy.4.li4": "لا تتحمل e-META أي مسؤولية عن النتائج المترتبة على استخدام التحليل.",
+
+"privacy.5.title": "5. الاحتفاظ بالبيانات",
+"privacy.5.li1": "للمدة اللازمة فقط لإنجاز التحليل.",
+"privacy.5.li2": "أو حتى طلب الحذف من قبل المستخدم.",
+"privacy.5.p": "يمكن للمستخدم طلب حذف بياناته في أي وقت.",
+
+"privacy.6.title": "6. الأمان والسرية",
+"privacy.6.p1": "تطبق e-META إجراءات تقنية وتنظيمية معقولة لحماية البيانات.",
+"privacy.6.p2": "ومع ذلك، لا يمكن ضمان أمان مطلق.",
+
+"privacy.7.title": "7. حقوق المستخدم",
+"privacy.7.li1": "الوصول إلى البيانات.",
+"privacy.7.li2": "طلب التصحيح.",
+"privacy.7.li3": "طلب الحذف.",
+"privacy.7.li4": "تقييد أو رفض بعض المعالجات.",
+
+"privacy.8.title": "8. تحديث السياسة",
+"privacy.8.p": "قد يتم تحديث هذه السياسة لتعكس التغييرات القانونية أو التقنية.",
+
+"privacy.9.title": "9. القبول",
+"privacy.9.p": "يُعد استخدام منصة e-META قبولًا كاملًا لسياسة الخصوصية.",
+"privacy.update": "آخر تحديث: يناير 2026"
