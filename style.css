@@ -116,3 +116,24 @@ textarea{min-height:110px;resize:vertical}
 .site-footer {
   text-align: center;
 }
+.legal-container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 16px;
+}
+
+.legal-container h1 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.legal-container h2 {
+  margin-top: 32px;
+  font-size: 1.3rem;
+}
+
+.legal-container p,
+.legal-container li {
+  line-height: 1.7;
+  opacity: 0.9;
+}
