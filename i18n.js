@@ -98,6 +98,76 @@ window.I18N = {
     "footer.privacy": "Politique de confidentialité",
     "footer.copy": "© 2026 e-META — Tous droits réservés"
   },
+privacy: {
+  meta: { title: "Politique de confidentialité — e-META" },
+  title: "🔐 Politique de confidentialité — e-META",
+  intro: "Votre confiance est essentielle. Cette politique explique de manière transparente comment e-META collecte, utilise et protège vos informations.",
+
+  "1": {
+    title: "1. Introduction",
+    p1: "La présente politique de confidentialité explique comment e-META collecte, utilise et protège les informations fournies par ses utilisateurs.",
+    p2: "e-META est un outil d’aide à la décision stratégique basé sur l’intelligence artificielle. Il ne constitue pas un conseil juridique, financier, médical ou réglementaire."
+  },
+
+  "2": {
+    title: "2. Données collectées",
+    li1: "Informations saisies volontairement dans les formulaires.",
+    li2: "Données de contact (email, WhatsApp) si une restitution est demandée.",
+    li3: "Fichiers ou liens transmis volontairement.",
+    p: "Aucune donnée n’est collectée à l’insu de l’utilisateur."
+  },
+
+  "3": {
+    title: "3. Utilisation des données",
+    li1: "Générer une analyse stratégique personnalisée.",
+    li2: "Adapter le mode de restitution (Email, WhatsApp, PDF ou affichage).",
+    li3: "Améliorer la qualité des recommandations.",
+    p: "Les données ne sont jamais revendues ni transmises à des tiers non autorisés."
+  },
+
+  "4": {
+    title: "4. Intelligence artificielle & responsabilité",
+    li1: "Les analyses reposent sur des modèles d’intelligence artificielle.",
+    li2: "Les recommandations sont indicatives et non contraignantes.",
+    li3: "L’utilisateur reste seul responsable des décisions prises."
+  },
+
+  "5": {
+    title: "5. Conservation des données",
+    li1: "Durée strictement nécessaire à la production de l’analyse.",
+    li2: "Ou jusqu’à demande explicite de suppression.",
+    p: "L’utilisateur peut demander la suppression de ses données à tout moment."
+  },
+
+  "6": {
+    title: "6. Sécurité et confidentialité",
+    p1: "e-META met en œuvre des mesures raisonnables pour protéger les données.",
+    p2: "Aucun système n’étant infaillible, une sécurité absolue ne peut être garantie."
+  },
+
+  "7": {
+    title: "7. Droits des utilisateurs",
+    li1: "Accéder à leurs données.",
+    li2: "Demander leur rectification.",
+    li3: "Demander leur suppression.",
+    li4: "Limiter ou refuser certains traitements.",
+    p: "Toute demande peut être formulée via les canaux officiels de la plateforme."
+  },
+
+  "8": {
+    title: "8. Évolution de la politique",
+    p1: "Cette politique peut être mise à jour à tout moment.",
+    p2: "La version en vigueur est celle publiée sur le site."
+  },
+
+  "9": {
+    title: "9. Acceptation",
+    p: "L’utilisation de la plateforme implique l’acceptation pleine et entière de cette politique."
+  },
+
+  update: "Dernière mise à jour : janvier 2026",
+  back: "← Retour à l’accueil"
+}
 
   en: {
     "meta.title": "e-META — Decision-Making AI Assistant",
