@@ -88,3 +88,22 @@ textarea{min-height:110px;resize:vertical}
   .field-with-unit{grid-template-columns:1fr}
   .cta-primary{width:100%}
 }
+.privacy-container {
+  max-width: 900px;
+}
+
+.privacy-block {
+  margin-bottom: 2.5rem;
+}
+
+.privacy-title {
+  margin-bottom: 2rem;
+}
+
+.privacy-block h2 {
+  margin-bottom: 0.75rem;
+}
+
+.site-footer {
+  text-align: center;
+}
