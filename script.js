@@ -1,85 +1,65 @@
-// script.js — e-META vNext (stable)
+/* =====================================================
+   e-META — script.js FINAL STABLE
+   - Langue globale (localStorage)
+   - Compatible index.html + privacy.html
+   - Aucun impact sur responsive
+===================================================== */
+
 (function () {
   "use strict";
 
-  const STORAGE_KEY = "emeta_lang";
   const DEFAULT_LANG = "fr";
+  const STORAGE_KEY = "lang";
 
-  function getLang() {
+  /* ---------- Utils ---------- */
+  function getSavedLang() {
     return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
   }
 
-  function setRtl(lang) {
-    document.documentElement.lang = lang;
-    document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
-    const rtl = document.getElementById("rtlStylesheet");
-    if (rtl) rtl.disabled = (lang !== "ar");
+  function saveLang(lang) {
+    localStorage.setItem(STORAGE_KEY, lang);
   }
 
-  function applyI18n(lang) {
-    const dict = (window.I18N && window.I18N[lang]) ? window.I18N[lang] : null;
-    if (!dict) return;
+  function setDirection(lang) {
+    document.documentElement.setAttribute("lang", lang);
+    document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+  }
+
+  /* ---------- Traduction ---------- */
+  function translatePage(lang) {
+    if (!window.I18N || !window.I18N[lang]) return;
 
     document.querySelectorAll("[data-i18n]").forEach(el => {
       const key = el.getAttribute("data-i18n");
-      if (dict[key] != null) el.textContent = dict[key];
+      const value = window.I18N[lang][key];
+      if (value) el.textContent = value;
     });
 
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
       const key = el.getAttribute("data-i18n-placeholder");
-      if (dict[key] != null) el.setAttribute("placeholder", dict[key]);
+      const value = window.I18N[lang][key];
+      if (value) el.setAttribute("placeholder", value);
     });
   }
 
-  function setLang(lang) {
-    localStorage.setItem(STORAGE_KEY, lang);
-    setRtl(lang);
-    applyI18n(lang);
-    const sel = document.getElementById("langSelect");
-    if (sel) sel.value = lang;
-  }
-
-  function scrollToForm() {
-    const form = document.getElementById("form");
-    if (form) form.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
+  /* ---------- Initialisation ---------- */
   document.addEventListener("DOMContentLoaded", () => {
-    // init language
-    setLang(getLang());
+    const lang = getSavedLang();
+    setDirection(lang);
+    translatePage(lang);
 
-    // language switch
-    const langSelect = document.getElementById("langSelect");
-    if (langSelect) {
-      langSelect.addEventListener("change", (e) => setLang(e.target.value));
-    }
+    // Le sélecteur de langue n'existe QUE sur index.html
+    const switcher = document.getElementById("langSwitcher");
+    if (switcher) {
+      switcher.value = lang;
 
-    // burger
-    const burger = document.getElementById("burgerBtn");
-    const nav = document.getElementById("mainNav");
-    if (burger && nav) {
-      burger.addEventListener("click", () => {
-        nav.classList.toggle("open");
-        burger.setAttribute("aria-expanded", nav.classList.contains("open") ? "true" : "false");
-      });
-    }
-
-    // CTA buttons
-    const startBtn = document.getElementById("startBtn");
-    const customBtn = document.getElementById("customBtn");
-    startBtn && startBtn.addEventListener("click", scrollToForm);
-    customBtn && customBtn.addEventListener("click", scrollToForm);
-
-    // basic client-side validation message (light)
-    const form = document.getElementById("emetaForm");
-    if (form) {
-      form.addEventListener("submit", (e) => {
-        const consent = document.getElementById("consent");
-        if (consent && !consent.checked) {
-          e.preventDefault();
-          consent.focus();
-        }
+      switcher.addEventListener("change", () => {
+        const newLang = switcher.value;
+        saveLang(newLang);
+        setDirection(newLang);
+        translatePage(newLang);
       });
     }
   });
+
 })();
