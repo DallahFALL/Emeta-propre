@@ -3,144 +3,117 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title data-i18n="privacy.meta.title">Politique de confidentialité — e-META</title>
 
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
 
+  <!-- JS -->
   <script defer src="i18n.js"></script>
   <script defer src="script.js"></script>
 </head>
 
-<body id="top">
+<body>
 
-<!-- ================= HEADER (IDENTIQUE index.html) ================= -->
+<!-- ================= HEADER ================= -->
 <header class="site-header">
   <div class="container header-inner">
-    <a class="logo" href="index.html#top">
+
+    <div class="logo">
       <span class="logo-mark">e</span>
       <span class="logo-text">META</span>
-      <span class="logo-tagline" data-i18n="header.tagline"></span>
-    </a>
+      <span class="logo-tagline" data-i18n="site.tagline">
+        Assistant IA multilingue de prise de décision
+      </span>
+    </div>
 
-    <button class="burger" id="burgerBtn" type="button" aria-label="Menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="nav" id="mainNav">
-      <a href="index.html#top" data-i18n="nav.home"></a>
-      <a href="index.html#form" data-i18n="nav.form"></a>
-      <a href="privacy.html" aria-current="page" data-i18n="nav.privacy"></a>
+    <nav class="nav">
+      <ul>
+        <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
+        <li><a href="index.html#form" data-i18n="nav.form">Formulaire</a></li>
+      </ul>
     </nav>
 
+    <!-- ⚠️ ID harmonisé avec script.js -->
     <div class="header-actions">
       <select class="lang-select" id="langSelect" aria-label="Langue">
         <option value="fr">FR</option>
         <option value="en">EN</option>
         <option value="es">ES</option>
-        <option value="ar">AR</option>
+        <option value="ar">ع</option>
       </select>
-
-      <button class="cta-custom" type="button" onclick="location.href='index.html#form'"
-        data-i18n="cta.custom"></button>
     </div>
+
   </div>
 </header>
 
 <!-- ================= MAIN ================= -->
-<main>
+<main class="privacy-main">
+
   <section class="privacy-section">
     <div class="container">
 
-      <h1 class="section-title" data-i18n="privacy.title"></h1>
-      <p class="privacy-intro" data-i18n="privacy.intro"></p>
+      <h1 class="privacy-title" data-i18n="privacy.title">
+        Politique de confidentialité
+      </h1>
+
+      <p class="privacy-intro" data-i18n="privacy.intro">
+        Votre confiance est essentielle. Cette politique explique de manière transparente
+        comment e-META collecte, utilise et protège vos données.
+      </p>
 
       <div class="privacy-grid">
 
+        <!-- BLOC 1 -->
         <article class="privacy-card">
-          <h2 data-i18n="privacy.s1.title"></h2>
-          <p data-i18n="privacy.s1.p1"></p>
-        </article>
+          <h2 data-i18n="privacy.block1.title">
+            Protection des données
+          </h2>
 
-        <article class="privacy-card">
-          <h2 data-i18n="privacy.s2.title"></h2>
-          <ul>
-            <li data-i18n="privacy.s2.l1"></li>
-            <li data-i18n="privacy.s2.l2"></li>
-            <li data-i18n="privacy.s2.l3"></li>
-            <li data-i18n="privacy.s2.l4"></li>
+          <ul class="privacy-list">
+            <li data-i18n="privacy.block1.p1"></li>
+            <li data-i18n="privacy.block1.p2"></li>
+            <li data-i18n="privacy.block1.p3"></li>
+            <li data-i18n="privacy.block1.p4"></li>
           </ul>
         </article>
 
+        <!-- BLOC 2 -->
         <article class="privacy-card">
-          <h2 data-i18n="privacy.s3.title"></h2>
-          <ul>
-            <li data-i18n="privacy.s3.l1"></li>
-            <li data-i18n="privacy.s3.l2"></li>
-            <li data-i18n="privacy.s3.l3"></li>
-            <li data-i18n="privacy.s3.l4"></li>
+          <h2 data-i18n="privacy.block2.title">
+            Responsabilité et usage
+          </h2>
+
+          <ul class="privacy-list">
+            <li data-i18n="privacy.block2.p1"></li>
+            <li data-i18n="privacy.block2.p2"></li>
+            <li data-i18n="privacy.block2.p3"></li>
+            <li data-i18n="privacy.block2.p4"></li>
           </ul>
-        </article>
-
-        <article class="privacy-card">
-          <h2 data-i18n="privacy.s4.title"></h2>
-          <ul>
-            <li data-i18n="privacy.s4.l1"></li>
-            <li data-i18n="privacy.s4.l2"></li>
-            <li data-i18n="privacy.s4.l3"></li>
-          </ul>
-        </article>
-
-        <article class="privacy-card">
-          <h2 data-i18n="privacy.s5.title"></h2>
-          <ul>
-            <li data-i18n="privacy.s5.l1"></li>
-            <li data-i18n="privacy.s5.l2"></li>
-            <li data-i18n="privacy.s5.l3"></li>
-          </ul>
-        </article>
-
-        <article class="privacy-card">
-          <h2 data-i18n="privacy.s6.title"></h2>
-          <p data-i18n="privacy.s6.p1"></p>
-        </article>
-
-        <article class="privacy-card">
-          <h2 data-i18n="privacy.s7.title"></h2>
-          <ul>
-            <li data-i18n="privacy.s7.l1"></li>
-            <li data-i18n="privacy.s7.l2"></li>
-            <li data-i18n="privacy.s7.l3"></li>
-            <li data-i18n="privacy.s7.l4"></li>
-          </ul>
-        </article>
-
-        <article class="privacy-card">
-          <h2 data-i18n="privacy.s8.title"></h2>
-          <p data-i18n="privacy.s8.p1"></p>
-        </article>
-
-        <article class="privacy-card full">
-          <h2 data-i18n="privacy.s9.title"></h2>
-          <p data-i18n="privacy.s9.p1"></p>
-          <p class="privacy-update" data-i18n="privacy.updated"></p>
-
-          <div class="privacy-actions">
-            <a href="index.html" class="btn-secondary" data-i18n="privacy.back"></a>
-          </div>
         </article>
 
       </div>
+
+      <div class="privacy-actions">
+        <a href="index.html" class="cta-secondary" data-i18n="privacy.back">
+          ← Retour à la page principale
+        </a>
+      </div>
+
     </div>
   </section>
+
 </main>
 
 <!-- ================= FOOTER ================= -->
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p data-i18n="footer.text"></p>
-    <a class="footer-link" href="privacy.html" data-i18n="footer.privacy"></a>
-    <p class="footer-copy" data-i18n="footer.copy"></p>
+    <p class="footer-copy">
+      © 2025 e-META —
+      <span data-i18n="footer.rights">Assistant IA de décision stratégique</span>
+    </p>
   </div>
 </footer>
 
