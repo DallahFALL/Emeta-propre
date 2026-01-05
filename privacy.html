@@ -2,120 +2,131 @@
 <html lang="fr" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Politique de confidentialité — e-META</title>
 
-  <title data-i18n="privacy.meta.title">Politique de confidentialité — e-META</title>
-
-  <!-- CSS -->
+  <!-- CSS principal -->
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
-
-  <!-- JS -->
-  <script defer src="i18n.js"></script>
-  <script defer src="script.js"></script>
+  <!-- CSS RTL (optionnel mais recommandé) -->
+  <link rel="stylesheet" href="rtl.css" />
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
-<header class="site-header">
-  <div class="container header-inner">
+  <!-- ================= HEADER (IDENTIQUE À index.html) ================= -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">e</span>
+        <span class="logo-text">META</span>
+      </a>
 
-    <div class="logo">
-      <span class="logo-mark">e</span>
-      <span class="logo-text">META</span>
-      <span class="logo-tagline" data-i18n="site.tagline">
-        Assistant IA multilingue de prise de décision
-      </span>
+      <nav class="nav">
+        <a href="index.html">Accueil</a>
+        <a href="index.html#form">Formulaire</a>
+        <a href="privacy.html" aria-current="page">Confidentialité</a>
+      </nav>
+
+      <div class="header-actions">
+        <select class="lang-switch" aria-label="Langue">
+          <option value="fr" selected>FR</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+          <option value="ar">AR</option>
+        </select>
+      </div>
     </div>
+  </header>
 
-    <nav class="nav">
-      <ul>
-        <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
-        <li><a href="index.html#form" data-i18n="nav.form">Formulaire</a></li>
-      </ul>
-    </nav>
+  <!-- ================= MAIN ================= -->
+  <main class="privacy-page">
+    <section class="privacy-container">
 
-    <!-- ⚠️ ID harmonisé avec script.js -->
-    <div class="header-actions">
-      <select class="lang-select" id="langSelect" aria-label="Langue">
-        <option value="fr">FR</option>
-        <option value="en">EN</option>
-        <option value="es">ES</option>
-        <option value="ar">ع</option>
-      </select>
-    </div>
+      <h1>Politique de confidentialité</h1>
 
-  </div>
-</header>
-
-<!-- ================= MAIN ================= -->
-<main class="privacy-main">
-
-  <section class="privacy-section">
-    <div class="container">
-
-      <h1 class="privacy-title" data-i18n="privacy.title">
-        Politique de confidentialité
-      </h1>
-
-      <p class="privacy-intro" data-i18n="privacy.intro">
-        Votre confiance est essentielle. Cette politique explique de manière transparente
-        comment e-META collecte, utilise et protège vos données.
+      <p class="privacy-intro">
+        Votre confiance est essentielle. La présente politique explique de manière
+        transparente comment e-META collecte, utilise et protège les informations
+        fournies par ses utilisateurs.
       </p>
 
-      <div class="privacy-grid">
+      <h2>1. Introduction</h2>
+      <p>
+        e-META est un outil d’aide à la décision stratégique basé sur l’intelligence
+        artificielle. Il ne constitue ni un conseil juridique, financier, médical
+        ou réglementaire.
+      </p>
 
-        <!-- BLOC 1 -->
-        <article class="privacy-card">
-          <h2 data-i18n="privacy.block1.title">
-            Protection des données
-          </h2>
+      <h2>2. Données collectées</h2>
+      <ul>
+        <li>Informations saisies volontairement (contexte, objectifs, contraintes, indicateurs).</li>
+        <li>Données de contact (email, WhatsApp) si une restitution est demandée.</li>
+        <li>Fichiers ou liens transmis volontairement par l’utilisateur.</li>
+        <li>Aucune donnée n’est collectée à l’insu de l’utilisateur.</li>
+      </ul>
 
-          <ul class="privacy-list">
-            <li data-i18n="privacy.block1.p1"></li>
-            <li data-i18n="privacy.block1.p2"></li>
-            <li data-i18n="privacy.block1.p3"></li>
-            <li data-i18n="privacy.block1.p4"></li>
-          </ul>
-        </article>
+      <h2>3. Utilisation des données</h2>
+      <ul>
+        <li>Générer une analyse stratégique personnalisée via e-META.</li>
+        <li>Adapter le format de restitution (email, WhatsApp, PDF ou affichage).</li>
+        <li>Améliorer la qualité et la pertinence des recommandations.</li>
+      </ul>
 
-        <!-- BLOC 2 -->
-        <article class="privacy-card">
-          <h2 data-i18n="privacy.block2.title">
-            Responsabilité et usage
-          </h2>
+      <h2>4. Intelligence artificielle & responsabilité</h2>
+      <p>
+        Les recommandations fournies par e-META sont indicatives, non contraignantes,
+        et doivent être interprétées comme une aide à la décision.
+      </p>
 
-          <ul class="privacy-list">
-            <li data-i18n="privacy.block2.p1"></li>
-            <li data-i18n="privacy.block2.p2"></li>
-            <li data-i18n="privacy.block2.p3"></li>
-            <li data-i18n="privacy.block2.p4"></li>
-          </ul>
-        </article>
+      <h2>5. Conservation des données</h2>
+      <p>
+        Les données sont conservées uniquement pendant la durée nécessaire à la
+        génération et à la restitution de l’analyse, sauf obligation légale contraire.
+      </p>
 
+      <h2>6. Sécurité</h2>
+      <p>
+        e-META met en œuvre des mesures techniques et organisationnelles pour protéger
+        les données contre tout accès non autorisé.
+      </p>
+
+      <h2>7. Droits des utilisateurs</h2>
+      <ul>
+        <li>Accéder à leurs données.</li>
+        <li>Demander leur rectification.</li>
+        <li>Demander leur suppression.</li>
+        <li>Limiter ou refuser certains traitements.</li>
+      </ul>
+
+      <h2>8. Évolution de la politique</h2>
+      <p>
+        La présente politique peut être mise à jour à tout moment afin de refléter
+        les évolutions légales ou techniques. La version en vigueur est celle publiée
+        sur le site au moment de la consultation.
+      </p>
+
+      <h2>9. Acceptation</h2>
+      <p>
+        L’utilisation de la plateforme e-META implique l’acceptation pleine et entière
+        de la présente politique de confidentialité.
+      </p>
+
+      <p class="privacy-update">
+        Dernière mise à jour : janvier 2026
+      </p>
+
+      <div class="privacy-back">
+        <a href="index.html" class="btn-secondary">← Retour à l’accueil</a>
       </div>
 
-      <div class="privacy-actions">
-        <a href="index.html" class="cta-secondary" data-i18n="privacy.back">
-          ← Retour à la page principale
-        </a>
-      </div>
+    </section>
+  </main>
 
-    </div>
-  </section>
-
-</main>
-
-<!-- ================= FOOTER ================= -->
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <p class="footer-copy">
-      © 2025 e-META —
-      <span data-i18n="footer.rights">Assistant IA de décision stratégique</span>
-    </p>
-  </div>
-</footer>
+  <!-- ================= FOOTER (IDENTIQUE À index.html) ================= -->
+  <footer class="site-footer">
+    <p>e-META — Moteur d’intelligence décisionnelle stratégique.</p>
+    <p>© 2026 e-META — Tous droits réservés</p>
+  </footer>
 
 </body>
 </html>
