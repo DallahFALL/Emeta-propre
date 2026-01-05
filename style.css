@@ -104,3 +104,15 @@ textarea{min-height:110px;resize:vertical}
     grid-template-columns: repeat(2, 1fr);
   }
 }
+.privacy-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.privacy-block {
+  margin-bottom: 32px;
+}
+
+.site-footer {
+  text-align: center;
+}
