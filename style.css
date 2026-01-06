@@ -327,3 +327,101 @@ textarea {
   }
 
 }
+/* ================================
+   RESPONSIVE CORE FIX — e-META
+   ================================ */
+
+/* Sécurité globale */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* ---------- HEADER ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: linear-gradient(180deg, #070b1a 0%, #050814 100%);
+  backdrop-filter: blur(6px);
+}
+
+/* ---------- HERO ---------- */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+/* ---------- FORM GRIDS ---------- */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ================================
+   MOBILE & TABLET
+   ================================ */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  /* Header */
+  .header-inner {
+    flex-wrap: wrap;
+  }
+
+  .nav {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .nav.active {
+    display: flex;
+  }
+
+  .burger {
+    display: block;
+  }
+
+  /* Hero */
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-box {
+    padding: 20px;
+  }
+
+  /* Form */
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .emeta-form textarea,
+  .emeta-form input,
+  .emeta-form select {
+    width: 100%;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
