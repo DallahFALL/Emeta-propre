@@ -1,9 +1,19 @@
-// script.js — e-META vNext (stable)
+// =====================================================
+// e-META — script.js FINAL PRO
+// Langues • RTL • Burger • Scroll • UX safe
+// Aligné avec index.html + style.css FINAL
+// =====================================================
+
 (function () {
   "use strict";
 
   const STORAGE_KEY = "emeta_lang";
   const DEFAULT_LANG = "fr";
+  const HEADER_OFFSET = 64; // hauteur du header fixe
+
+  /* ---------- Utils ---------- */
+  const $ = (sel) => document.querySelector(sel);
+  const $$ = (sel) => document.querySelectorAll(sel);
 
   function getLang() {
     return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
@@ -16,18 +26,25 @@
     if (rtl) rtl.disabled = (lang !== "ar");
   }
 
+  /* ---------- i18n ---------- */
+  function resolveKey(obj, path) {
+    return path.split(".").reduce((acc, k) => acc && acc[k], obj);
+  }
+
   function applyI18n(lang) {
     const dict = (window.I18N && window.I18N[lang]) ? window.I18N[lang] : null;
     if (!dict) return;
 
-    document.querySelectorAll("[data-i18n]").forEach(el => {
+    $$("[data-i18n]").forEach(el => {
       const key = el.getAttribute("data-i18n");
-      if (dict[key] != null) el.textContent = dict[key];
+      const value = resolveKey(dict, key);
+      if (value != null) el.textContent = value;
     });
 
-    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    $$("[data-i18n-placeholder]").forEach(el => {
       const key = el.getAttribute("data-i18n-placeholder");
-      if (dict[key] != null) el.setAttribute("placeholder", dict[key]);
+      const value = resolveKey(dict, key);
+      if (value != null) el.setAttribute("placeholder", value);
     });
   }
 
@@ -35,46 +52,64 @@
     localStorage.setItem(STORAGE_KEY, lang);
     setRtl(lang);
     applyI18n(lang);
-    const sel = document.getElementById("langSelect");
+    const sel = $("#langSelect");
     if (sel) sel.value = lang;
   }
 
+  /* ---------- Scroll ---------- */
   function scrollToForm() {
-    const form = document.getElementById("form");
-    if (form) form.scrollIntoView({ behavior: "smooth", block: "start" });
+    const target = $("#form");
+    if (!target) return;
+
+    const y =
+      target.getBoundingClientRect().top +
+      window.pageYOffset -
+      HEADER_OFFSET;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
   }
 
+  /* ---------- Init ---------- */
   document.addEventListener("DOMContentLoaded", () => {
-    // init language
+
+    /* Langue */
     setLang(getLang());
 
-    // language switch
-    const langSelect = document.getElementById("langSelect");
+    const langSelect = $("#langSelect");
     if (langSelect) {
-      langSelect.addEventListener("change", (e) => setLang(e.target.value));
+      langSelect.addEventListener("change", e => setLang(e.target.value));
     }
 
-    // burger
-    const burger = document.getElementById("burgerBtn");
-    const nav = document.getElementById("mainNav");
+    /* Burger menu */
+    const burger = $("#burgerBtn");
+    const nav = $("#mainNav");
+
     if (burger && nav) {
       burger.addEventListener("click", () => {
-        nav.classList.toggle("open");
-        burger.setAttribute("aria-expanded", nav.classList.contains("open") ? "true" : "false");
+        const open = nav.classList.toggle("open");
+        burger.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+
+      // fermer menu après clic
+      nav.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => {
+          nav.classList.remove("open");
+          burger.setAttribute("aria-expanded", "false");
+        });
       });
     }
 
-    // CTA buttons
-    const startBtn = document.getElementById("startBtn");
-    const customBtn = document.getElementById("customBtn");
+    /* CTA */
+    const startBtn = $("#startBtn");
+    const customBtn = $("#customBtn");
     startBtn && startBtn.addEventListener("click", scrollToForm);
     customBtn && customBtn.addEventListener("click", scrollToForm);
 
-    // basic client-side validation message (light)
-    const form = document.getElementById("emetaForm");
+    /* Validation légère */
+    const form = $("#emetaForm");
     if (form) {
-      form.addEventListener("submit", (e) => {
-        const consent = document.getElementById("consent");
+      form.addEventListener("submit", e => {
+        const consent = $("#consent");
         if (consent && !consent.checked) {
           e.preventDefault();
           consent.focus();
@@ -82,4 +117,5 @@
       });
     }
   });
+
 })();
