@@ -1,128 +1,183 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Politique de confidentialité — e-META</title>
+  <title data-i18n="privacy.meta.title">Politique de confidentialité — e-META</title>
 
-  <!-- CSS global du site -->
+  <!-- CSS (mêmes fichiers que index.html) -->
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="rtl.css" />
 
-  <!-- Meta SEO minimal -->
-  <meta name="robots" content="noindex, nofollow">
+  <!-- Fix PRIVACY responsive + mise en page (sans toucher style.css) -->
+  <style>
+    /* Page safe: évite tout débordement horizontal */
+    html, body { overflow-x: hidden; }
+
+    /* Cache le sélecteur de langue UNIQUEMENT sur privacy (mais le garde en DOM pour éviter crash JS) */
+    .privacy-hide-lang { display: none !important; }
+
+    /* Bloc principal responsive */
+    .privacy-main {
+      padding: 56px 0 72px;
+    }
+    .privacy-shell {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    .privacy-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 22px 22px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    }
+    .privacy-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 8px;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1.15;
+    }
+    .privacy-lead {
+      margin: 0 0 18px;
+      opacity: 0.92;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+    .privacy-section {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .privacy-section h2 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+      letter-spacing: 0.2px;
+    }
+    .privacy-section p, .privacy-section li {
+      line-height: 1.65;
+      opacity: 0.95;
+    }
+    .privacy-section ul {
+      margin: 10px 0 0 18px;
+      padding: 0;
+    }
+    .privacy-actions {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* RTL confort */
+    [dir="rtl"] .privacy-section ul { margin: 10px 18px 0 0; }
+    [dir="rtl"] .privacy-title { flex-direction: row-reverse; justify-content: flex-start; }
+  </style>
+
+  <!-- JS (mêmes fichiers que index.html) -->
+  <script defer src="i18n.js"></script>
+  <script defer src="script.js"></script>
 </head>
 
 <body>
+  <!-- HEADER identique (ou très proche) de index.html -->
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <a class="logo" href="index.html#top" aria-label="e-META">
+        <span class="logo-mark">e</span><span class="logo-text">META</span>
+        <span class="logo-tagline" data-i18n="brand.tagline">Assistant IA multilingue de prise de décision</span>
+      </a>
 
-<!-- ================= HEADER MINIMAL (LEGAL) ================= -->
-<header class="legal-header">
-  <div class="legal-header-inner">
-    <a href="index.html" class="logo">
-      <span class="logo-mark">e</span><span class="logo-text">META</span>
-    </a>
-    <nav class="legal-nav">
-      <a href="index.html">Accueil</a>
-      <a href="index.html#form">Formulaire</a>
-    </nav>
-  </div>
-</header>
+      <nav class="nav">
+        <a href="index.html#top" data-i18n="nav.home">Accueil</a>
+        <a href="index.html#form" data-i18n="nav.form">Formulaire</a>
+        <a href="privacy.html" aria-current="page" data-i18n="nav.privacy">Confidentialité</a>
+      </nav>
 
-<!-- ================= MAIN ================= -->
-<main class="legal-main">
-  <article class="legal-container">
+      <div class="header-actions">
+        <!-- IMPORTANT: on le garde pour éviter que ton script.js plante,
+             mais on le cache sur la page privacy -->
+        <select id="langSelect" class="lang-select privacy-hide-lang" aria-hidden="true" tabindex="-1">
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+          <option value="ar">AR</option>
+        </select>
 
-    <h1>🔒 Politique de confidentialité — e-META</h1>
+        <a class="cta-custom" href="index.html#form" id="customBtn" data-i18n="cta.custom">
+          Requête personnalisée
+        </a>
+      </div>
 
-    <p>
-      Votre confiance est essentielle. Cette politique de confidentialité explique
-      comment <strong>e-META</strong> collecte, utilise et protège les informations
-      transmises via la plateforme.
-    </p>
+      <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
 
-    <!-- ================= 1 ================= -->
-    <h2>1. Introduction</h2>
-    <p>
-      e-META est un assistant d’aide à la décision basé sur l’intelligence artificielle.
-      Les données fournies par l’utilisateur sont utilisées exclusivement pour produire
-      des analyses et recommandations.
-    </p>
+    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+      <a href="index.html#top" data-i18n="nav.home">Accueil</a>
+      <a href="index.html#form" data-i18n="nav.form">Formulaire</a>
+      <a href="privacy.html" aria-current="page" data-i18n="nav.privacy">Confidentialité</a>
+      <a class="cta-custom" href="index.html#form" data-i18n="cta.custom">Requête personnalisée</a>
+    </div>
+  </header>
 
-    <!-- ================= 2 ================= -->
-    <h2>2. Données collectées</h2>
-    <ul>
-      <li>Données saisies volontairement dans le formulaire (contexte, objectifs, contraintes, etc.)</li>
-      <li>Données techniques anonymes nécessaires au fonctionnement du service</li>
-    </ul>
+  <!-- MAIN -->
+  <main class="privacy-main">
+    <div class="privacy-shell">
+      <article class="privacy-card">
+        <h1 class="privacy-title">
+          <span aria-hidden="true">🔒</span>
+          <span data-i18n="privacy.title">Politique de confidentialité — e-META</span>
+        </h1>
 
-    <!-- ================= 3 ================= -->
-    <h2>3. Utilisation des données</h2>
-    <p>
-      Les données collectées servent uniquement à :
-    </p>
-    <ul>
-      <li>Produire des recommandations personnalisées</li>
-      <li>Améliorer la qualité des analyses</li>
-    </ul>
+        <p class="privacy-lead" data-i18n="privacy.intro">
+          Votre confiance est essentielle. Cette politique explique comment e-META collecte, utilise et protège vos informations.
+        </p>
 
-    <!-- ================= 4 ================= -->
-    <h2>4. Intelligence artificielle & responsabilité</h2>
-    <p>
-      Les résultats fournis par e-META constituent une aide à la décision.
-      Ils ne remplacent pas un avis professionnel, juridique ou financier.
-      L’utilisateur reste seul responsable des décisions prises.
-    </p>
+        <section class="privacy-section" id="intro">
+          <h2 data-i18n="privacy.data.title">Données collectées</h2>
+          <ul>
+            <li data-i18n="privacy.data.items.0">Données saisies dans le formulaire</li>
+            <li data-i18n="privacy.data.items.1">Email / WhatsApp uniquement si fourni</li>
+            <li data-i18n="privacy.data.items.2">Données techniques (navigateur, logs) pour sécurité</li>
+          </ul>
+        </section>
 
-    <!-- ================= 5 ================= -->
-    <h2>5. Conservation des données</h2>
-    <p>
-      Les données sont conservées uniquement pour la durée nécessaire
-      à la génération des analyses, sauf obligation légale contraire.
-    </p>
+        <section class="privacy-section" id="usage">
+          <h2 data-i18n="privacy.liability.title">IA & responsabilité</h2>
+          <p data-i18n="privacy.liability.text">
+            e-META fournit une aide à la décision. Les résultats sont informatifs et ne constituent pas un conseil juridique, médical ou financier.
+          </p>
+        </section>
 
-    <!-- ================= 6 ================= -->
-    <h2>6. Sécurité</h2>
-    <p>
-      e-META met en œuvre des mesures techniques et organisationnelles
-      pour protéger les données contre tout accès non autorisé,
-      perte ou divulgation.
-    </p>
+        <section class="privacy-section" id="back">
+          <div class="privacy-actions">
+            <a class="cta-primary" href="index.html#top" data-i18n="privacy.back">← Retour à l’accueil</a>
+          </div>
+        </section>
+      </article>
+    </div>
+  </main>
 
-    <!-- ================= 7 ================= -->
-    <h2>7. Droits des utilisateurs</h2>
-    <p>
-      Conformément aux réglementations en vigueur, vous disposez des droits suivants :
-    </p>
-    <ul>
-      <li>Droit d’accès</li>
-      <li>Droit de rectification</li>
-      <li>Droit à l’effacement</li>
-    </ul>
+  <!-- Mini script de sûreté : applique lang/dir même si un module externe échoue -->
+  <script>
+    (function () {
+      try {
+        var lang = localStorage.getItem("lang") || localStorage.getItem("eMETA_lang") || "fr";
+        lang = (lang || "fr").toLowerCase();
+        if (!["fr","en","es","ar"].includes(lang)) lang = "fr";
+        document.documentElement.lang = lang;
+        document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
 
-    <!-- ================= 8 ================= -->
-    <h2>8. Évolution de la politique</h2>
-    <p>
-      Cette politique peut être mise à jour à tout moment afin de rester conforme
-      aux évolutions légales et techniques.
-    </p>
-
-    <!-- ================= 9 ================= -->
-    <h2>9. Acceptation</h2>
-    <p>
-      L’utilisation du service e-META implique l’acceptation pleine et entière
-      de la présente politique de confidentialité.
-    </p>
-
-    <p style="margin-top:40px;">
-      ← <a href="index.html">Retour à l’accueil</a>
-    </p>
-
-  </article>
-</main>
-
-<!-- ================= FOOTER SIMPLE ================= -->
-<footer style="text-align:center; padding:24px 16px; opacity:0.6; font-size:0.85rem;">
-  © e-META — Tous droits réservés
-</footer>
-
+        // synchronise le select caché pour ne pas perturber script.js
+        var sel = document.getElementById("langSelect");
+        if (sel) sel.value = lang;
+      } catch(e) {}
+    })();
+  </script>
 </body>
 </html>
