@@ -1,254 +1,242 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title data-i18n="meta.title">e-META — Assistant IA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>e-META — Assistant IA</title>
 
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
+  <style>
+    :root {
+      --bg-main: #070b1a;
+      --bg-card: rgba(255,255,255,0.04);
+      --border-soft: rgba(255,255,255,0.08);
+      --text-main: #ffffff;
+      --text-muted: rgba(255,255,255,0.75);
+      --accent: #ff8a00;
+      --radius: 18px;
+      --max-width: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      background: linear-gradient(180deg, #060918, #090d22);
+      color: var(--text-main);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== HEADER ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(6,9,24,0.9);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+
+    .logo span { color: var(--accent); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cta {
+      background: var(--accent);
+      color: #000;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* ===== MAIN ===== */
+    main {
+      padding: 40px 16px 80px;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-top: 0;
+    }
+
+    p {
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ===== FORM ===== */
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      background: rgba(255,255,255,0.03);
+      color: var(--text-main);
+      font-size: 0.95rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+      grid-column: 1 / -1;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    button.submit {
+      grid-column: 1 / -1;
+      margin-top: 10px;
+      background: var(--accent);
+      border: none;
+      border-radius: 999px;
+      padding: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
-<body id="top">
+<body>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="logo" href="#top">
-      <span class="logo-mark">e</span>
-      <span class="logo-text">META</span>
-      <span class="logo-tagline" data-i18n="header.tagline">Assistant IA multilingue de prise de décision</span>
-    </a>
-
-    <button class="burger" id="burgerBtn" type="button" aria-label="Menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="nav" id="mainNav">
-      <a href="#top" data-i18n="nav.home">Accueil</a>
-      <a href="#form" data-i18n="nav.form">Formulaire</a>
-      <a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a>
-    </nav>
-
-    <div class="header-actions">
-      <select class="lang-select" id="langSelect" aria-label="Langue">
-        <option value="fr">FR</option>
-        <option value="en">EN</option>
-        <option value="es">ES</option>
-        <option value="ar">AR</option>
-      </select>
-
-      <button class="cta-custom" type="button" id="customBtn" data-i18n="cta.custom">Requête personnalisée</button>
+<header>
+  <div class="header-inner">
+    <div class="logo"><span>e</span>-META</div>
+    <div class="nav-right">
+      <a href="privacy.html">Confidentialité</a>
+      <a class="cta" href="#form">Requête personnalisée</a>
     </div>
   </div>
 </header>
 
 <main>
-  <section class="hero" id="hero">
-    <div class="container hero-grid">
-      <div class="hero-box">
-        <h1 data-i18n="hero.title">Donnez à vos décisions le niveau d’un cabinet de conseil premium</h1>
-        <p class="hero-subtitle" data-i18n="hero.subtitle"></p>
+  <div class="container">
 
-        <ul class="hero-points">
-          <li data-i18n="hero.point1"></li>
-          <li data-i18n="hero.point2"></li>
-          <li data-i18n="hero.point3"></li>
-        </ul>
-
-        <button class="cta-primary" type="button" id="startBtn" data-i18n="hero.cta">Commencer une analyse stratégique</button>
+    <section class="hero">
+      <div class="card">
+        <h1>Donnez à vos décisions le niveau d’un cabinet de conseil premium</h1>
+        <p>
+          e-META structure votre contexte, objectifs et contraintes
+          afin de produire une recommandation claire, actionnable et documentée.
+        </p>
       </div>
 
-      <div class="hero-box muted">
-        <div class="hero-badge">
-          <span class="badge-title" data-i18n="hero.badge.title"></span>
-          <span class="badge-text" data-i18n="hero.badge.text"></span>
+      <div class="card"></div>
+    </section>
+
+    <section class="card" id="form">
+      <form>
+
+        <div class="field">
+          <label>Domaine</label>
+          <select>
+            <option>Business / Stratégie</option>
+            <option>Finance</option>
+            <option>Marketing</option>
+            <option>Projet</option>
+          </select>
         </div>
-        <p class="hero-note" data-i18n="hero.note"></p>
-      </div>
-    </div>
-  </section>
 
-  <section class="form-section" id="form">
-    <div class="container">
-      <h2 class="section-title" data-i18n="form.title"></h2>
-      <p class="form-intro" data-i18n="form.intro"></p>
-
-      <form id="emetaForm" class="emeta-form" novalidate>
-
-        <fieldset class="field-group">
-          <legend data-i18n="group.general"></legend>
-
-          <div class="grid-2">
-            <div class="field">
-              <label for="domain" data-i18n="field.domain.label"></label>
-              <select id="domain" name="domain" required>
-                <option value="" data-i18n="field.domain.placeholder"></option>
-                <option value="strategy" data-i18n="field.domain.strategy"></option>
-                <option value="finance" data-i18n="field.domain.finance"></option>
-                <option value="marketing" data-i18n="field.domain.marketing"></option>
-                <option value="operations" data-i18n="field.domain.operations"></option>
-                <option value="it" data-i18n="field.domain.it"></option>
-                <option value="legal" data-i18n="field.domain.legal"></option>
-                <option value="impact" data-i18n="field.domain.impact"></option>
-                <option value="other" data-i18n="field.domain.other"></option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="decisionType" data-i18n="field.decisionType.label"></label>
-              <select id="decisionType" name="decisionType" required>
-                <option value="" data-i18n="field.decisionType.placeholder"></option>
-                <option value="t1" data-i18n="field.decisionType.t1"></option>
-                <option value="t2" data-i18n="field.decisionType.t2"></option>
-                <option value="t3" data-i18n="field.decisionType.t3"></option>
-                <option value="t4" data-i18n="field.decisionType.t4"></option>
-                <option value="t5" data-i18n="field.decisionType.t5"></option>
-                <option value="t6" data-i18n="field.decisionType.t6"></option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="decisionTitle" data-i18n="field.title.label"></label>
-            <input id="decisionTitle" name="decisionTitle" type="text" data-i18n-placeholder="field.title.ph" />
-            <div class="hint" data-i18n="field.title.hint"></div>
-          </div>
-        </fieldset>
-
-        <fieldset class="field-group">
-          <legend data-i18n="group.analysis"></legend>
-
-          <div class="field">
-            <label for="problem" data-i18n="field.problem.label"></label>
-            <textarea id="problem" name="problem" rows="4" data-i18n-placeholder="field.problem.ph"></textarea>
-          </div>
-
-          <div class="grid-2">
-            <div class="field">
-              <label for="objectives" data-i18n="field.objectives.label"></label>
-              <textarea id="objectives" name="objectives" rows="4" data-i18n-placeholder="field.objectives.ph"></textarea>
-            </div>
-            <div class="field">
-              <label for="constraints" data-i18n="field.constraints.label"></label>
-              <textarea id="constraints" name="constraints" rows="4" data-i18n-placeholder="field.constraints.ph"></textarea>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="field">
-              <label for="kpis" data-i18n="field.kpis.label"></label>
-              <textarea id="kpis" name="kpis" rows="4" data-i18n-placeholder="field.kpis.ph"></textarea>
-            </div>
-            <div class="field">
-              <label for="resources" data-i18n="field.resources.label"></label>
-              <textarea id="resources" name="resources" rows="4" data-i18n-placeholder="field.resources.ph"></textarea>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="context" data-i18n="field.context.label"></label>
-            <textarea id="context" name="context" rows="5" data-i18n-placeholder="field.context.ph"></textarea>
-          </div>
-        </fieldset>
-
-        <fieldset class="field-group">
-          <legend data-i18n="group.budget"></legend>
-
-          <div class="grid-2">
-            <div class="field">
-              <label for="budgetMin" data-i18n="field.budgetMin.label"></label>
-              <div class="field-with-unit">
-                <input id="budgetMin" name="budgetMin" type="number" min="0" step="1" data-i18n-placeholder="field.budgetMin.ph" />
-                <select id="currency" name="currency">
-                  <option value="XOF">XOF</option>
-                  <option value="EUR">EUR</option>
-                  <option value="USD">USD</option>
-                  <option value="GBP">GBP</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="budgetMax" data-i18n="field.budgetMax.label"></label>
-              <input id="budgetMax" name="budgetMax" type="number" min="0" step="1" data-i18n-placeholder="field.budgetMax.ph" />
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="field">
-              <label for="deadline" data-i18n="field.deadline.label"></label>
-              <input id="deadline" name="deadline" type="text" data-i18n-placeholder="field.deadline.ph" />
-            </div>
-
-            <div class="field">
-              <label for="urgency" data-i18n="field.urgency.label"></label>
-              <input id="urgency" name="urgency" type="range" min="1" max="5" value="3" />
-              <div class="range-labels">
-                <span data-i18n="field.urgency.low"></span>
-                <span data-i18n="field.urgency.medium"></span>
-                <span data-i18n="field.urgency.high"></span>
-              </div>
-            </div>
-          </div>
-        </fieldset>
-
-        <fieldset class="field-group">
-          <legend data-i18n="group.output"></legend>
-
-          <div class="field">
-            <div class="field-label-strong" data-i18n="field.outputMode.label"></div>
-            <div class="checkbox-grid">
-              <label class="check-item"><input type="checkbox" name="out_email" value="1" /><span data-i18n="field.outputMode.email"></span></label>
-              <label class="check-item"><input type="checkbox" name="out_whatsapp" value="1" /><span data-i18n="field.outputMode.whatsapp"></span></label>
-              <label class="check-item"><input type="checkbox" name="out_pdf" value="1" /><span data-i18n="field.outputMode.pdf"></span></label>
-              <label class="check-item"><input type="checkbox" name="out_display" value="1" /><span data-i18n="field.outputMode.display"></span></label>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="field">
-              <label for="email" data-i18n="field.email.label"></label>
-              <input id="email" name="email" type="email" data-i18n-placeholder="field.email.ph" />
-            </div>
-            <div class="field">
-              <label for="whatsapp" data-i18n="field.whatsapp.label"></label>
-              <input id="whatsapp" name="whatsapp" type="tel" data-i18n-placeholder="field.whatsapp.ph" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="fileLink" data-i18n="field.fileLink.label"></label>
-            <input id="fileLink" name="fileLink" type="url" data-i18n-placeholder="field.fileLink.ph" />
-            <div class="hint" data-i18n="field.fileLink.hint"></div>
-          </div>
-        </fieldset>
-
-        <fieldset class="field-group">
-          <legend data-i18n="group.trust"></legend>
-          <label class="check-item">
-            <input type="checkbox" id="consent" name="consent" required />
-            <span data-i18n="field.consent.label"></span>
-          </label>
-        </fieldset>
-
-        <div class="form-actions">
-          <button type="submit" class="btn-submit" data-i18n="form.submit"></button>
-          <button type="reset" class="btn-secondary" data-i18n="form.reset"></button>
+        <div class="field">
+          <label>Niveau d’urgence</label>
+          <select>
+            <option>Faible</option>
+            <option>Moyen</option>
+            <option>Élevé</option>
+          </select>
         </div>
+
+        <div class="field full">
+          <label>Objectif principal</label>
+          <input type="text" placeholder="Décrivez l’objectif à atteindre">
+        </div>
+
+        <div class="field full">
+          <label>Contexte et contraintes</label>
+          <textarea placeholder="Expliquez la situation, les limites, les risques…"></textarea>
+        </div>
+
+        <button class="submit">Lancer l’analyse</button>
+
       </form>
-    </div>
-  </section>
+    </section>
+
+  </div>
 </main>
 
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <p data-i18n="footer.text"></p>
-    <a class="footer-link" href="privacy.html" data-i18n="footer.privacy"></a>
-    <p class="footer-copy" data-i18n="footer.copy"></p>
-  </div>
-</footer>
-
-<script src="i18n.js"></script>
-<script src="script.js"></script>
 </body>
 </html>
