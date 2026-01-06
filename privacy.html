@@ -27,7 +27,7 @@
       </span>
     </a>
 
-    <button class="burger" id="burgerBtn" aria-label="Menu">
+    <button class="burger" id="burgerBtn" type="button" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
 
@@ -37,7 +37,7 @@
     </nav>
 
     <div class="header-actions">
-      <select class="lang-select" id="langSelect">
+      <select class="lang-select" id="langSelect" aria-label="Langue">
         <option value="fr">FR</option>
         <option value="en">EN</option>
         <option value="es">ES</option>
@@ -51,37 +51,31 @@
 <!-- ================= MAIN ================= -->
 <main>
 
-<section class="privacy-section">
+<section class="form-section">
   <div class="container">
 
-    <h1 class="privacy-title" data-i18n="privacy.title">
+    <h1 class="section-title" data-i18n="privacy.title">
       Politique de confidentialité
     </h1>
 
-    <!-- ⚠️ ZONE PROTÉGÉE — NE RIEN CASSER -->
-    <!-- Tu colles ICI ton contenu juridique EXISTANT, mot pour mot -->
+    <!-- ================= CONTENU JURIDIQUE ================= -->
+    <!-- ⚠️ ZONE PROTÉGÉE : COLLE ICI TON TEXTE MOT POUR MOT -->
+    <div class="field-group">
 
-    <section class="privacy-content">
-      <!-- 
-        ⛔ Ne change rien au texte juridique.
-        ⛔ Tu peux coller exactement ton contenu actuel ici.
-        ⛔ Les listes, paragraphes, titres sont conservés.
-      -->
-
-      <!-- EXEMPLE DE STRUCTURE (à remplacer par TON TEXTE) -->
+      <!-- EXEMPLE — À REMPLACER PAR TON TEXTE EXACT -->
       <p>
         e-META attache une importance particulière à la protection des données
         personnelles de ses utilisateurs.
       </p>
 
       <ul>
-        <li>Collecte minimale des données nécessaires</li>
-        <li>Utilisation exclusive pour l’analyse stratégique</li>
-        <li>Aucune revente ou partage à des tiers</li>
+        <li>Collecte minimale des données strictement nécessaires</li>
+        <li>Utilisation exclusive pour l’analyse stratégique demandée</li>
+        <li>Aucune revente, cession ou partage à des tiers</li>
       </ul>
 
       <!-- FIN ZONE CONTENU -->
-    </section>
+    </div>
 
   </div>
 </section>
@@ -91,6 +85,7 @@
 <!-- ================= FOOTER ================= -->
 <footer class="site-footer">
   <div class="container footer-inner">
+
     <p data-i18n="footer.text">
       e-META — Moteur d’intelligence décisionnelle stratégique.
     </p>
@@ -102,6 +97,7 @@
     <p class="footer-copy" data-i18n="footer.copy">
       © 2026 e-META — Tous droits réservés
     </p>
+
   </div>
 </footer>
 
