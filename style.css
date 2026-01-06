@@ -1,13 +1,9 @@
 /* =====================================================
-   e-META vNext — style.css FINAL FIXED + RESPONSIVE
-   Corrige :
-   - Header FIXE
-   - Menu mobile
-   - Langues
-   - Responsive global
+   e-META — STYLE.CSS FINAL PRO (fondation stable)
+   Aligné STRICTEMENT avec le bon index.html
 ===================================================== */
 
-/* ========== RESET ========== */
+/* ================= RESET ================= */
 *,
 *::before,
 *::after {
@@ -19,13 +15,8 @@ html, body {
   padding: 0;
   background: #070b1a;
   color: #ffffff;
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   overflow-x: hidden;
-}
-
-/* Compense le header FIXE */
-body {
-  padding-top: 76px;
 }
 
 a {
@@ -33,38 +24,47 @@ a {
   text-decoration: none;
 }
 
-img {
-  max-width: 100%;
-  display: block;
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
 }
 
-/* ========== CONTAINER ========== */
+/* ================= CONTAINER ================= */
 .container {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 16px;
 }
 
-/* ========== HEADER FIXE ========== */
+/* ================= HEADER FIXE ================= */
 .site-header {
-  position: fixed;           /* 🔥 FIXED */
+  position: fixed;            /* ✅ FIXE AU SCROLL */
   top: 0;
   left: 0;
-  right: 0;
-  z-index: 2000;
+  width: 100%;
+  z-index: 1000;
   background: linear-gradient(180deg, #0b1020, #070b1a);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
 .header-inner {
-  min-height: 76px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 12px;
+  min-height: 64px;
+  padding: 12px 0;
 }
 
-/* Logo */
+/* Compensation du header fixe */
+body {
+  padding-top: 64px;
+}
+
+/* ================= LOGO ================= */
 .logo {
   display: flex;
   align-items: center;
@@ -74,22 +74,22 @@ img {
 
 .logo-mark {
   font-weight: 900;
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   color: #ff8a00;
 }
 
 .logo-text {
   font-weight: 900;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
 }
 
 .logo-tagline {
-  font-size: 0.75rem;
-  opacity: 0.75;
+  opacity: .75;
+  font-size: .78rem;
   margin-left: 6px;
 }
 
-/* ========== NAVIGATION ========== */
+/* ================= NAV ================= */
 .nav {
   display: flex;
   gap: 18px;
@@ -97,45 +97,45 @@ img {
 }
 
 .nav a {
-  opacity: 0.9;
-  font-weight: 500;
+  opacity: .9;
 }
 
 .nav a:hover {
   opacity: 1;
 }
 
-/* ========== ACTIONS HEADER ========== */
+/* ================= HEADER ACTIONS ================= */
 .header-actions {
   display: flex;
-  align-items: center;
   gap: 10px;
+  align-items: center;
 }
 
 .lang-select {
   background: #0f162e;
   color: #fff;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,.2);
   border-radius: 999px;
-  padding: 8px 12px;
+  padding: 8px 10px;
 }
 
 .cta-custom {
-  background: linear-gradient(135deg, #ff7a18, #ff9f1c);
+  background: linear-gradient(135deg,#ff7a18,#ff9f1c);
   border: none;
   color: #fff;
   border-radius: 999px;
-  padding: 10px 16px;
+  padding: 10px 14px;
   font-weight: 800;
   cursor: pointer;
 }
 
-/* ========== BURGER ========== */
+/* ================= BURGER ================= */
 .burger {
   display: none;
   background: none;
   border: none;
   padding: 10px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -147,47 +147,73 @@ img {
   margin: 4px 0;
 }
 
-/* ========== HERO ========== */
+/* ================= HERO ================= */
 .hero {
   padding: 48px 0;
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1.25fr 1fr;
   gap: 18px;
 }
 
 .hero-box {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
   border-radius: 16px;
   padding: 22px;
 }
 
-.hero h1 {
-  margin: 0 0 12px;
-  font-size: 2rem;
-  line-height: 1.25;
+.hero-box.muted {
+  opacity: .95;
 }
 
-.hero-subtitle,
-.hero-note {
-  opacity: 0.9;
+.hero h1 {
+  margin: 0 0 12px;
+  font-size: clamp(1.6rem, 2.8vw, 2rem);
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  opacity: .9;
   line-height: 1.6;
+  margin: 0 0 14px;
 }
 
 .hero-points {
+  margin: 0;
   padding-left: 18px;
 }
 
 .hero-points li {
-  margin: 6px 0;
+  margin: 7px 0;
+  opacity: .9;
+}
+
+.hero-badge {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.badge-title {
+  font-weight: 900;
+}
+
+.badge-text {
+  opacity: .85;
+}
+
+.hero-note {
+  opacity: .85;
+  line-height: 1.6;
+  margin: 0;
 }
 
 .cta-primary {
-  margin-top: 14px;
-  background: linear-gradient(135deg, #ff7a18, #ff9f1c);
+  background: linear-gradient(135deg,#ff7a18,#ff9f1c);
   border: none;
   color: #fff;
   border-radius: 999px;
@@ -196,27 +222,34 @@ img {
   cursor: pointer;
 }
 
-/* ========== FORM ========== */
+/* ================= FORM ================= */
 .form-section {
-  padding: 40px 0 64px;
+  padding: 34px 0 56px;
 }
 
 .section-title {
+  margin: 0 0 10px;
+  font-size: 1.4rem;
   text-align: center;
-  margin-bottom: 10px;
 }
 
 .form-intro {
   text-align: center;
-  opacity: 0.85;
-  margin-bottom: 20px;
+  opacity: .85;
+  line-height: 1.6;
+  margin: 0 0 18px;
+}
+
+.emeta-form {
+  max-width: 920px;
+  margin: 0 auto;
 }
 
 .field-group {
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,.12);
   border-radius: 16px;
   padding: 18px;
-  margin-bottom: 16px;
+  margin: 0 0 16px;
 }
 
 .field-group legend {
@@ -230,8 +263,9 @@ img {
 
 label {
   display: block;
-  margin-bottom: 6px;
-  opacity: 0.9;
+  margin: 0 0 6px;
+  opacity: .9;
+  font-size: .92rem;
 }
 
 input,
@@ -240,7 +274,7 @@ textarea {
   width: 100%;
   background: #0f162e;
   color: #fff;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,.15);
   border-radius: 12px;
   padding: 12px;
   font-size: 1rem;
@@ -251,21 +285,34 @@ textarea {
   resize: vertical;
 }
 
+.hint {
+  opacity: .75;
+  font-size: .9rem;
+  line-height: 1.45;
+  margin-top: 6px;
+}
+
 .grid-2 {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0,1fr));
   gap: 12px;
 }
 
 .field-with-unit {
   display: grid;
-  grid-template-columns: 1fr 120px;
+  grid-template-columns: 1fr 110px;
   gap: 10px;
 }
 
+.field-label-strong {
+  font-weight: 900;
+  margin: 0 0 10px;
+}
+
+/* ================= CHECKBOX ================= */
 .checkbox-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
   gap: 10px;
 }
 
@@ -273,17 +320,32 @@ textarea {
   display: grid;
   grid-template-columns: 18px 1fr;
   gap: 10px;
+  align-items: start;
   padding: 12px;
-  background: rgba(255,255,255,0.04);
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.06);
   border-radius: 14px;
 }
 
-/* ========== ACTIONS FORM ========== */
+.check-item input {
+  margin-top: 3px;
+}
+
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  opacity: .8;
+  font-size: .85rem;
+  margin-top: 6px;
+}
+
+/* ================= ACTIONS ================= */
 .form-actions {
   display: flex;
+  gap: 10px;
   justify-content: center;
-  gap: 12px;
   flex-wrap: wrap;
+  margin-top: 14px;
 }
 
 .btn-submit,
@@ -295,28 +357,45 @@ textarea {
 }
 
 .btn-submit {
-  background: linear-gradient(135deg, #ff7a18, #ff9f1c);
+  background: linear-gradient(135deg,#ff7a18,#ff9f1c);
   border: none;
+  color: #fff;
 }
 
 .btn-secondary {
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
 }
 
-/* ========== FOOTER ========== */
+/* ================= FOOTER ================= */
 .site-footer {
-  border-top: 1px solid rgba(255,255,255,0.08);
-  padding: 24px 0;
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding: 22px 0;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
   text-align: center;
 }
 
-.footer-copy {
-  opacity: 0.65;
-  font-size: 0.85rem;
+.footer-link {
+  opacity: .9;
 }
 
-/* ========== RESPONSIVE ========== */
+.footer-link:hover {
+  opacity: 1;
+}
+
+.footer-copy {
+  opacity: .65;
+  font-size: .85rem;
+}
+
+/* ================= RESPONSIVE ================= */
 @media (max-width: 900px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -332,8 +411,8 @@ textarea {
     display: none;
     width: 100%;
     flex-direction: column;
-    gap: 12px;
-    padding: 12px 0;
+    gap: 10px;
+    margin-top: 10px;
   }
 
   .nav.open {
@@ -364,4 +443,9 @@ textarea {
   .cta-primary {
     width: 100%;
   }
+}
+
+/* ================= RTL ================= */
+html[dir="rtl"] {
+  direction: rtl;
 }
