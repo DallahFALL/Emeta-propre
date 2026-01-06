@@ -1,54 +1,68 @@
 /* =====================================================
-   e-META — script.js FINAL (GLOBAL)
-   - Lang select (id="langSelect" ou tout <select> compatible)
-   - localStorage key UNIQUE : "lang"
-   - Appelle window.applyTranslations(lang)
+   e-META — script.js FINAL
+   - Langue globale unique (localStorage)
+   - RTL automatique pour AR
+   - Aucun i18n exécuté sur privacy.html
 ===================================================== */
 
 (function () {
   "use strict";
 
-  const STORAGE_KEY = "lang";
+  const LANG_KEY = "emeta_lang";
   const DEFAULT_LANG = "fr";
-  const SUPPORTED = ["fr", "en", "es", "ar"];
+
+  /* ==========================
+     LANGUE GLOBALE
+  ========================== */
 
   function getLang() {
-    const v = (localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG).toLowerCase();
-    return SUPPORTED.includes(v) ? v : DEFAULT_LANG;
+    return localStorage.getItem(LANG_KEY) || DEFAULT_LANG;
   }
 
   function setLang(lang) {
-    const v = (lang || DEFAULT_LANG).toLowerCase();
-    const finalLang = SUPPORTED.includes(v) ? v : DEFAULT_LANG;
+    localStorage.setItem(LANG_KEY, lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
+  }
 
-    localStorage.setItem(STORAGE_KEY, finalLang);
+  // Appliquer la langue dès le chargement
+  const currentLang = getLang();
+  setLang(currentLang);
 
-    // RTL
-    document.documentElement.lang = finalLang;
-    document.documentElement.dir = finalLang === "ar" ? "rtl" : "ltr";
+  /* ==========================
+     SELECTEUR DE LANGUE (INDEX UNIQUEMENT)
+  ========================== */
 
-    // Translation engine (from i18n.js)
-    if (typeof window.applyTranslations === "function") {
-      window.applyTranslations(finalLang);
-    }
+  const langSelect = document.querySelector("[data-lang-select]");
+  if (langSelect) {
+    langSelect.value = currentLang;
 
-    // Sync selects
-    document.querySelectorAll("select").forEach((sel) => {
-      const hasLangOptions = [...sel.options].some((o) => SUPPORTED.includes((o.value || "").toLowerCase()));
-      if (hasLangOptions) sel.value = finalLang;
+    langSelect.addEventListener("change", (e) => {
+      setLang(e.target.value);
+      location.reload();
     });
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    // init
-    setLang(getLang());
+  /* ==========================
+     I18N — UNIQUEMENT SUR INDEX
+  ========================== */
 
-    // bind all selects having lang options
-    document.querySelectorAll("select").forEach((sel) => {
-      const hasLangOptions = [...sel.options].some((o) => SUPPORTED.includes((o.value || "").toLowerCase()));
-      if (!hasLangOptions) return;
+  if (document.body.dataset.page === "home" && window.I18N) {
+    const translations = window.I18N[currentLang] || {};
 
-      sel.addEventListener("change", (e) => setLang(e.target.value));
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.dataset.i18n;
+      if (translations[key]) {
+        el.innerHTML = translations[key];
+      }
     });
-  });
+
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+      const key = el.dataset.i18nPlaceholder;
+      if (translations[key]) {
+        el.placeholder = translations[key];
+      }
+    });
+  }
+
 })();
