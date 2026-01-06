@@ -1,85 +1,115 @@
-// script.js — e-META vNext (stable)
+/* =====================================================
+   e-META — script.js (International + Stable)
+   - Burger menu mobile
+   - Lang FR / EN / ES / AR (+ RTL auto)
+   - Apply data-i18n + data-i18n-placeholder
+   - Persist lang via localStorage
+   - CTA scroll to #form
+===================================================== */
+
 (function () {
   "use strict";
 
-  const STORAGE_KEY = "emeta_lang";
   const DEFAULT_LANG = "fr";
+  const STORAGE_KEY = "e_meta_lang";
+
+  const dict = window.I18N_DICT || {};
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
   function getLang() {
-    return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return (saved && dict[saved]) ? saved : DEFAULT_LANG;
   }
 
-  function setRtl(lang) {
-    document.documentElement.lang = lang;
-    document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
-    const rtl = document.getElementById("rtlStylesheet");
-    if (rtl) rtl.disabled = (lang !== "ar");
+  function setDirForLang(lang) {
+    const isRTL = (lang === "ar");
+    document.documentElement.setAttribute("dir", isRTL ? "rtl" : "ltr");
+    document.documentElement.setAttribute("lang", lang);
+  }
+
+  function t(lang, key) {
+    const parts = key.split(".");
+    let cur = dict[lang];
+    for (const p of parts) {
+      if (!cur || typeof cur !== "object") return null;
+      cur = cur[p];
+    }
+    return (typeof cur === "string") ? cur : null;
   }
 
   function applyI18n(lang) {
-    const dict = (window.I18N && window.I18N[lang]) ? window.I18N[lang] : null;
-    if (!dict) return;
-
-    document.querySelectorAll("[data-i18n]").forEach(el => {
+    // texts
+    $$("[data-i18n]").forEach(el => {
       const key = el.getAttribute("data-i18n");
-      if (dict[key] != null) el.textContent = dict[key];
+      const value = t(lang, key);
+      if (value !== null) el.textContent = value;
     });
 
-    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    // placeholders
+    $$("[data-i18n-placeholder]").forEach(el => {
       const key = el.getAttribute("data-i18n-placeholder");
-      if (dict[key] != null) el.setAttribute("placeholder", dict[key]);
+      const value = t(lang, key);
+      if (value !== null) el.setAttribute("placeholder", value);
+    });
+
+    // document title
+    const title = t(lang, "meta.title");
+    if (title) document.title = title;
+  }
+
+  function initLangUI() {
+    const select = $("#langSelect");
+    if (!select) return;
+
+    const lang = getLang();
+    select.value = lang;
+
+    select.addEventListener("change", () => {
+      const next = select.value;
+      if (!dict[next]) return;
+      localStorage.setItem(STORAGE_KEY, next);
+      setDirForLang(next);
+      applyI18n(next);
     });
   }
 
-  function setLang(lang) {
-    localStorage.setItem(STORAGE_KEY, lang);
-    setRtl(lang);
-    applyI18n(lang);
-    const sel = document.getElementById("langSelect");
-    if (sel) sel.value = lang;
+  function initBurger() {
+    const btn = $("#burgerBtn");
+    const panel = $("#mobilePanel");
+    if (!btn || !panel) return;
+
+    btn.addEventListener("click", () => {
+      panel.classList.toggle("open");
+      btn.setAttribute("aria-expanded", panel.classList.contains("open") ? "true" : "false");
+    });
+
+    // Close panel on link click
+    $$("#mobilePanel a").forEach(a => {
+      a.addEventListener("click", () => {
+        panel.classList.remove("open");
+        btn.setAttribute("aria-expanded", "false");
+      });
+    });
   }
 
-  function scrollToForm() {
-    const form = document.getElementById("form");
-    if (form) form.scrollIntoView({ behavior: "smooth", block: "start" });
+  function initCTA() {
+    const cta = $("#ctaScroll");
+    const target = $("#form");
+    if (!cta || !target) return;
+
+    cta.addEventListener("click", (e) => {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    // init language
-    setLang(getLang());
+  // Boot
+  const lang = getLang();
+  setDirForLang(lang);
+  applyI18n(lang);
+  initLangUI();
+  initBurger();
+  initCTA();
 
-    // language switch
-    const langSelect = document.getElementById("langSelect");
-    if (langSelect) {
-      langSelect.addEventListener("change", (e) => setLang(e.target.value));
-    }
-
-    // burger
-    const burger = document.getElementById("burgerBtn");
-    const nav = document.getElementById("mainNav");
-    if (burger && nav) {
-      burger.addEventListener("click", () => {
-        nav.classList.toggle("open");
-        burger.setAttribute("aria-expanded", nav.classList.contains("open") ? "true" : "false");
-      });
-    }
-
-    // CTA buttons
-    const startBtn = document.getElementById("startBtn");
-    const customBtn = document.getElementById("customBtn");
-    startBtn && startBtn.addEventListener("click", scrollToForm);
-    customBtn && customBtn.addEventListener("click", scrollToForm);
-
-    // basic client-side validation message (light)
-    const form = document.getElementById("emetaForm");
-    if (form) {
-      form.addEventListener("submit", (e) => {
-        const consent = document.getElementById("consent");
-        if (consent && !consent.checked) {
-          e.preventDefault();
-          consent.focus();
-        }
-      });
-    }
-  });
 })();
