@@ -98,9 +98,6 @@ window.I18N = {
     "footer.privacy": "Politique de confidentialité",
     "footer.copy": "© 2026 e-META — Tous droits réservés"
   },
-"privacy.meta.title": "Politique de confidentialité — e-META",
-"privacy.title": "Politique de confidentialité",
-"footer.back": "Retour à l’accueil",
 
   en: {
     "meta.title": "e-META — Decision-Making AI Assistant",
@@ -200,9 +197,6 @@ window.I18N = {
     "footer.privacy": "Privacy policy",
     "footer.copy": "© 2026 e-META — All rights reserved"
   },
-"privacy.meta.title": "Privacy Policy — e-META",
-"privacy.title": "Privacy Policy",
-"footer.back": "Back to home",
 
   es: {
     "meta.title": "e-META — Asistente IA para decisiones",
@@ -302,9 +296,6 @@ window.I18N = {
     "footer.privacy": "Política de privacidad",
     "footer.copy": "© 2026 e-META — Todos los derechos reservados"
   },
-"privacy.meta.title": "Política de privacidad — e-META",
-"privacy.title": "Política de privacidad",
-"footer.back": "Volver al inicio",
 
   ar: {
     "meta.title": "e-META — مساعد ذكاء اصطناعي لاتخاذ القرار",
@@ -405,6 +396,3 @@ window.I18N = {
     "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة"
   }
 };
-"privacy.meta.title": "سياسة الخصوصية — e-META",
-"privacy.title": "سياسة الخصوصية",
-"footer.back": "العودة إلى الصفحة الرئيسية",
