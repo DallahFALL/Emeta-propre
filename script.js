@@ -1,115 +1,85 @@
-/* =====================================================
-   e-META — script.js (International + Stable)
-   - Burger menu mobile
-   - Lang FR / EN / ES / AR (+ RTL auto)
-   - Apply data-i18n + data-i18n-placeholder
-   - Persist lang via localStorage
-   - CTA scroll to #form
-===================================================== */
-
+// script.js — e-META vNext (stable)
 (function () {
   "use strict";
 
+  const STORAGE_KEY = "emeta_lang";
   const DEFAULT_LANG = "fr";
-  const STORAGE_KEY = "e_meta_lang";
-
-  const dict = window.I18N_DICT || {};
-  const $ = (sel, root = document) => root.querySelector(sel);
-  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
   function getLang() {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return (saved && dict[saved]) ? saved : DEFAULT_LANG;
+    return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
   }
 
-  function setDirForLang(lang) {
-    const isRTL = (lang === "ar");
-    document.documentElement.setAttribute("dir", isRTL ? "rtl" : "ltr");
-    document.documentElement.setAttribute("lang", lang);
-  }
-
-  function t(lang, key) {
-    const parts = key.split(".");
-    let cur = dict[lang];
-    for (const p of parts) {
-      if (!cur || typeof cur !== "object") return null;
-      cur = cur[p];
-    }
-    return (typeof cur === "string") ? cur : null;
+  function setRtl(lang) {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
+    const rtl = document.getElementById("rtlStylesheet");
+    if (rtl) rtl.disabled = (lang !== "ar");
   }
 
   function applyI18n(lang) {
-    // texts
-    $$("[data-i18n]").forEach(el => {
+    const dict = (window.I18N && window.I18N[lang]) ? window.I18N[lang] : null;
+    if (!dict) return;
+
+    document.querySelectorAll("[data-i18n]").forEach(el => {
       const key = el.getAttribute("data-i18n");
-      const value = t(lang, key);
-      if (value !== null) el.textContent = value;
+      if (dict[key] != null) el.textContent = dict[key];
     });
 
-    // placeholders
-    $$("[data-i18n-placeholder]").forEach(el => {
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
       const key = el.getAttribute("data-i18n-placeholder");
-      const value = t(lang, key);
-      if (value !== null) el.setAttribute("placeholder", value);
-    });
-
-    // document title
-    const title = t(lang, "meta.title");
-    if (title) document.title = title;
-  }
-
-  function initLangUI() {
-    const select = $("#langSelect");
-    if (!select) return;
-
-    const lang = getLang();
-    select.value = lang;
-
-    select.addEventListener("change", () => {
-      const next = select.value;
-      if (!dict[next]) return;
-      localStorage.setItem(STORAGE_KEY, next);
-      setDirForLang(next);
-      applyI18n(next);
+      if (dict[key] != null) el.setAttribute("placeholder", dict[key]);
     });
   }
 
-  function initBurger() {
-    const btn = $("#burgerBtn");
-    const panel = $("#mobilePanel");
-    if (!btn || !panel) return;
+  function setLang(lang) {
+    localStorage.setItem(STORAGE_KEY, lang);
+    setRtl(lang);
+    applyI18n(lang);
+    const sel = document.getElementById("langSelect");
+    if (sel) sel.value = lang;
+  }
 
-    btn.addEventListener("click", () => {
-      panel.classList.toggle("open");
-      btn.setAttribute("aria-expanded", panel.classList.contains("open") ? "true" : "false");
-    });
+  function scrollToForm() {
+    const form = document.getElementById("form");
+    if (form) form.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 
-    // Close panel on link click
-    $$("#mobilePanel a").forEach(a => {
-      a.addEventListener("click", () => {
-        panel.classList.remove("open");
-        btn.setAttribute("aria-expanded", "false");
+  document.addEventListener("DOMContentLoaded", () => {
+    // init language
+    setLang(getLang());
+
+    // language switch
+    const langSelect = document.getElementById("langSelect");
+    if (langSelect) {
+      langSelect.addEventListener("change", (e) => setLang(e.target.value));
+    }
+
+    // burger
+    const burger = document.getElementById("burgerBtn");
+    const nav = document.getElementById("mainNav");
+    if (burger && nav) {
+      burger.addEventListener("click", () => {
+        nav.classList.toggle("open");
+        burger.setAttribute("aria-expanded", nav.classList.contains("open") ? "true" : "false");
       });
-    });
-  }
+    }
 
-  function initCTA() {
-    const cta = $("#ctaScroll");
-    const target = $("#form");
-    if (!cta || !target) return;
+    // CTA buttons
+    const startBtn = document.getElementById("startBtn");
+    const customBtn = document.getElementById("customBtn");
+    startBtn && startBtn.addEventListener("click", scrollToForm);
+    customBtn && customBtn.addEventListener("click", scrollToForm);
 
-    cta.addEventListener("click", (e) => {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  }
-
-  // Boot
-  const lang = getLang();
-  setDirForLang(lang);
-  applyI18n(lang);
-  initLangUI();
-  initBurger();
-  initCTA();
-
+    // basic client-side validation message (light)
+    const form = document.getElementById("emetaForm");
+    if (form) {
+      form.addEventListener("submit", (e) => {
+        const consent = document.getElementById("consent");
+        if (consent && !consent.checked) {
+          e.preventDefault();
+          consent.focus();
+        }
+      });
+    }
+  });
 })();
