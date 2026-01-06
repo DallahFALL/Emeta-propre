@@ -9,7 +9,10 @@
 
   const STORAGE_KEY = "emeta_lang";
   const DEFAULT_LANG = "fr";
-  const HEADER_OFFSET = 64; // hauteur du header fixe
+  function getHeaderOffset(){
+  const h = document.querySelector(".site-header");
+  return h ? Math.ceil(h.getBoundingClientRect().height) : 72;
+}
 
   /* ---------- Utils ---------- */
   const $ = (sel) => document.querySelector(sel);
@@ -64,7 +67,7 @@
     const y =
       target.getBoundingClientRect().top +
       window.pageYOffset -
-      HEADER_OFFSET;
+      getHeaderOffset();
 
     window.scrollTo({ top: y, behavior: "smooth" });
   }
