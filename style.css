@@ -1,6 +1,7 @@
 /* =====================================================
-   e-META — STYLE.CSS FINAL PRO (fondation stable)
-   Aligné STRICTEMENT avec le bon index.html
+   e-META — STYLE.CSS FINAL PRO (STABLE)
+   Header FIXE • Responsive • Mobile menu clean
+   Aligné avec index.html / script.js / i18n.js
 ===================================================== */
 
 /* ================= RESET ================= */
@@ -41,13 +42,18 @@ textarea {
 
 /* ================= HEADER FIXE ================= */
 .site-header {
-  position: fixed;            /* ✅ FIXE AU SCROLL */
+  position: fixed;          /* FIXE AU SCROLL */
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 10000;           /* Toujours au-dessus */
   background: linear-gradient(180deg, #0b1020, #070b1a);
   border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+/* Compensation hauteur header */
+body {
+  padding-top: 72px;
 }
 
 .header-inner {
@@ -55,13 +61,8 @@ textarea {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  min-height: 64px;
+  min-height: 72px;
   padding: 12px 0;
-}
-
-/* Compensation du header fixe */
-body {
-  padding-top: 64px;
 }
 
 /* ================= LOGO ================= */
@@ -70,6 +71,7 @@ body {
   align-items: center;
   gap: 6px;
   white-space: nowrap;
+  min-width: 0;
 }
 
 .logo-mark {
@@ -87,6 +89,10 @@ body {
   opacity: .75;
   font-size: .78rem;
   margin-left: 6px;
+  max-width: 38ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* ================= NAV ================= */
@@ -109,6 +115,8 @@ body {
   display: flex;
   gap: 10px;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .lang-select {
@@ -117,10 +125,11 @@ body {
   border: 1px solid rgba(255,255,255,.2);
   border-radius: 999px;
   padding: 8px 10px;
+  width: 110px;
 }
 
 .cta-custom {
-  background: linear-gradient(135deg,#ff7a18,#ff9f1c);
+  background: linear-gradient(135deg, #ff7a18, #ff9f1c);
   border: none;
   color: #fff;
   border-radius: 999px;
@@ -213,7 +222,7 @@ body {
 }
 
 .cta-primary {
-  background: linear-gradient(135deg,#ff7a18,#ff9f1c);
+  background: linear-gradient(135deg, #ff7a18, #ff9f1c);
   border: none;
   color: #fff;
   border-radius: 999px;
@@ -357,7 +366,7 @@ textarea {
 }
 
 .btn-submit {
-  background: linear-gradient(135deg,#ff7a18,#ff9f1c);
+  background: linear-gradient(135deg, #ff7a18, #ff9f1c);
   border: none;
   color: #fff;
 }
@@ -403,24 +412,36 @@ textarea {
 }
 
 @media (max-width: 760px) {
+
   .burger {
     display: block;
   }
 
+  /* gagner de la place */
+  .logo-tagline {
+    display: none;
+  }
+
+  .header-inner {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  /* Menu mobile */
   .nav {
     display: none;
     width: 100%;
     flex-direction: column;
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 8px;
+    padding: 12px;
+    background: rgba(7,11,26,.92);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 14px;
   }
 
   .nav.open {
     display: flex;
-  }
-
-  .header-inner {
-    flex-wrap: wrap;
   }
 
   .header-actions {
