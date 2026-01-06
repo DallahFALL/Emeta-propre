@@ -346,3 +346,113 @@ html[dir="rtl"] .logo { flex-direction: row-reverse; }
 html[dir="rtl"] .header-inner { direction: rtl; }
 html[dir="rtl"] .hero, 
 html[dir="rtl"] .form-wrap { direction: rtl; }
+
+/* =====================================================
+   e-META — FIX RESPONSIVE FINAL
+   À coller EN BAS de style.css
+===================================================== */
+
+/* ---------- MOBILE & TABLET ---------- */
+@media (max-width: 1024px) {
+
+  /* ===== HEADER ===== */
+  .header-inner {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .header-actions {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+    margin-left: auto;
+  }
+
+  /* Mobile panel visible via JS */
+  .mobile-panel {
+    display: none;
+    padding: 12px 0;
+  }
+
+  .mobile-panel.open {
+    display: block;
+  }
+
+  .mobile-panel .nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .mobile-panel .actions {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* ===== HERO ===== */
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+
+  .hero-box {
+    width: 100%;
+  }
+
+  /* ===== FORM ===== */
+  .form-section .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .emeta-form {
+    width: 100%;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .field-with-unit {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn,
+  .btn-submit,
+  .btn-secondary,
+  .cta-primary {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ---------- SMALL MOBILE ---------- */
+@media (max-width: 480px) {
+
+  h1 {
+    font-size: 1.6rem;
+    line-height: 1.25;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .hero-points li {
+    font-size: 0.9rem;
+  }
+
+  .site-header {
+    padding-bottom: 6px;
+  }
+}
