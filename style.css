@@ -137,3 +137,62 @@ textarea{min-height:110px;resize:vertical}
   line-height: 1.7;
   opacity: 0.9;
 }
+/* =====================================================
+   FORMULAIRE — RESPONSIVE FIX FINAL
+===================================================== */
+
+/* Conteneur général */
+.form-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* Grille desktop */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Champs */
+input,
+select,
+textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* SECTION */
+section {
+  min-height: auto;
+}
+
+/* BODY */
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* ==========================
+   MOBILE / TABLETTE
+========================== */
+
+@media (max-width: 768px) {
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-container {
+    padding: 12px;
+  }
+
+  .cta,
+  button {
+    width: 100%;
+    text-align: center;
+  }
+}
