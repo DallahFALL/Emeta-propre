@@ -3,13 +3,60 @@
 a{color:inherit;text-decoration:none}
 .container{max-width:1100px;margin:0 auto;padding:0 16px}
 
-/* Header sticky */
-.site-header{position:sticky;top:0;z-index:999;background:linear-gradient(180deg,#0b1020,#070b1a);border-bottom:1px solid rgba(255,255,255,.08)}
-.header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px;padding:12px 0}
-.logo{display:flex;align-items:center;gap:6px;white-space:nowrap}
-.logo-mark{font-weight:900;font-size:1.35rem;color:#ff8a00}
-.logo-text{font-weight:900;font-size:1.1rem}
-.logo-tagline{opacity:.75;font-size:.78rem;margin-left:6px}
+/* ================= HEADER STICKY (FIX FINAL) ================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  width: 100%;
+  background: linear-gradient(180deg, #0b1020 0%, #070b1a 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  /* CRUCIAL */
+  left: 0;
+  right: 0;
+}
+
+/* Inner */
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  min-height: 64px;
+  padding: 12px 16px;
+
+  /* CRUCIAL */
+  position: relative;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.logo-mark {
+  font-weight: 900;
+  font-size: 1.35rem;
+  color: #ff8a00;
+}
+
+.logo-text {
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+.logo-tagline {
+  opacity: 0.75;
+  font-size: 0.78rem;
+  margin-left: 6px;
+}
 
 /* Burger */
 .burger{display:none;background:none;border:none;padding:10px;border-radius:10px;cursor:pointer}
@@ -76,7 +123,7 @@ textarea{min-height:110px;resize:vertical}
 /* Responsive */
 @media (max-width: 900px){
   .hero-grid{grid-template-columns:1fr}
-}
+ }
 @media (max-width: 760px){
   .burger{display:block}
   .nav{display:none;width:100%;flex-direction:column;gap:10px;margin-top:10px}
