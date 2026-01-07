@@ -41,36 +41,43 @@
 
   function scrollToForm() {
     const form = document.getElementById("form");
-    if (form) form.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (form) {
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    // init language
+    // Init langue (synchro globale index + privacy)
     setLang(getLang());
 
-    // language switch
+    // Sélecteur de langue
     const langSelect = document.getElementById("langSelect");
     if (langSelect) {
-      langSelect.addEventListener("change", (e) => setLang(e.target.value));
+      langSelect.addEventListener("change", (e) => {
+        setLang(e.target.value);
+      });
     }
 
-    // burger
+    // Menu burger
     const burger = document.getElementById("burgerBtn");
     const nav = document.getElementById("mainNav");
     if (burger && nav) {
       burger.addEventListener("click", () => {
         nav.classList.toggle("open");
-        burger.setAttribute("aria-expanded", nav.classList.contains("open") ? "true" : "false");
+        burger.setAttribute(
+          "aria-expanded",
+          nav.classList.contains("open") ? "true" : "false"
+        );
       });
     }
 
-    // CTA buttons
+    // CTA
     const startBtn = document.getElementById("startBtn");
     const customBtn = document.getElementById("customBtn");
-    startBtn && startBtn.addEventListener("click", scrollToForm);
-    customBtn && customBtn.addEventListener("click", scrollToForm);
+    if (startBtn) startBtn.addEventListener("click", scrollToForm);
+    if (customBtn) customBtn.addEventListener("click", scrollToForm);
 
-    // basic client-side validation message (light)
+    // Validation légère consentement
     const form = document.getElementById("emetaForm");
     if (form) {
       form.addEventListener("submit", (e) => {
