@@ -66,7 +66,19 @@ a{color:inherit;text-decoration:none}
 .nav a{opacity:.9}
 .nav a:hover{opacity:1}
 .header-actions{display:flex;gap:10px;align-items:center}
-.lang-select{background:#0f162e;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:8px 10px}
+.lang-select{
+  background:rgba(255,255,255,.05);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:.85rem;
+  min-width:56px;
+}
+.lang-select{
+  background:transparent;
+  border:1px solid rgba(255,255,255,.15);
+}
 .cta-custom{background:linear-gradient(135deg,#ff7a18,#ff9f1c);border:none;color:#fff;border-radius:999px;padding:10px 14px;font-weight:800;cursor:pointer}
 
 /* Hero */
@@ -119,18 +131,88 @@ textarea{min-height:110px;resize:vertical}
 .footer-link:hover{opacity:1}
 .footer-copy{opacity:.65;font-size:.85rem}
 
-/* Responsive */
-@media (max-width: 900px){
-  .hero-grid{grid-template-columns:1fr}
-}
+/* ================= HEADER RESPONSIVE ================= */
+
 @media (max-width: 760px){
-  .burger{display:block}
-  .nav{display:none;width:100%;flex-direction:column;gap:10px;margin-top:10px}
-  .nav.open{display:flex}
-  .header-inner{flex-wrap:wrap}
-  .header-actions{width:100%;justify-content:space-between}
-  .cta-custom{width:100%}
-  .grid-2{grid-template-columns:1fr}
-  .field-with-unit{grid-template-columns:1fr}
-  .cta-primary{width:100%}
+
+  /* Afficher le burger */
+  .burger{
+    display:block;
+  }
+
+  /* Navigation cachée par défaut */
+  .nav{
+    display:none;
+    width:100%;
+    flex-direction:column;
+    gap:12px;
+    padding:12px 0;
+    border-top:1px solid rgba(255,255,255,.08);
+  }
+
+  /* Nav ouverte */
+  .nav.open{
+    display:flex;
+  }
+
+  /* Le header s'empile */
+  .header-inner{
+    flex-wrap:wrap;
+  }
+
+  /* Actions sur une ligne propre */
+  .header-actions{
+    width:100%;
+    justify-content:space-between;
+    margin-top:8px;
+  }
+
+  /* Bouton CTA prend toute la largeur */
+  .cta-custom{
+    width:100%;
+    text-align:center;
+  }
 }
+/* ================= HEADER RESPONSIVE ================= */
+
+@media (max-width: 760px){
+
+  /* Afficher le burger */
+  .burger{
+    display:block;
+  }
+
+  /* Navigation cachée par défaut */
+  .nav{
+    display:none;
+    width:100%;
+    flex-direction:column;
+    gap:12px;
+    padding:12px 0;
+    border-top:1px solid rgba(255,255,255,.08);
+  }
+
+  /* Nav ouverte */
+  .nav.open{
+    display:flex;
+  }
+
+  /* Le header s'empile */
+  .header-inner{
+    flex-wrap:wrap;
+  }
+
+  /* Actions sur une ligne propre */
+  .header-actions{
+    width:100%;
+    justify-content:space-between;
+    margin-top:8px;
+  }
+
+  /* Bouton CTA prend toute la largeur */
+  .cta-custom{
+    width:100%;
+    text-align:center;
+  }
+}
+
