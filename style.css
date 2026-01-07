@@ -166,3 +166,43 @@ a{color:inherit;text-decoration:none}
   font-size:.78rem;
   margin-left:6px;
 }
+/* ================= HEADER MOBILE — COMPACT ================= */
+@media (max-width: 768px){
+
+  /* Header plus fin */
+  .header-inner{
+    min-height:56px;
+    padding:8px 12px;
+  }
+
+  /* Masquer la tagline sur mobile */
+  .logo-tagline{
+    display:none;
+  }
+
+  /* Logo légèrement réduit */
+  .logo-mark{
+    font-size:1.2rem;
+  }
+
+  .logo-text{
+    font-size:1rem;
+  }
+
+  /* Sélecteur langue plus discret */
+  .lang-select{
+    padding:6px 8px;
+    font-size:.85rem;
+  }
+
+  /* Bouton CTA plus fin */
+  .cta-custom{
+    padding:8px 12px;
+    font-size:.85rem;
+  }
+
+  /* Ajuster la compensation du body */
+  body{
+    padding-top:56px;
+  }
+}
