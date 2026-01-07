@@ -39,6 +39,7 @@ img {
 /* =====================================================
    HEADER STICKY (FIX DÉFINITIF)
 ===================================================== */
+/* ================= HEADER STICKY (FINAL STABLE) ================= */
 
 .site-header {
   position: sticky;
@@ -50,11 +51,13 @@ img {
   right: 0;
 
   background: linear-gradient(180deg, #0b1020 0%, #070b1a 100%);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 
+  /* évite les bugs sticky */
   will-change: transform;
 }
 
+/* Inner */
 .header-inner {
   display: flex;
   align-items: center;
@@ -67,7 +70,8 @@ img {
   position: relative;
 }
 
-/* Logo */
+/* ================= LOGO ================= */
+
 .logo {
   display: flex;
   align-items: center;
@@ -93,7 +97,8 @@ img {
   margin-left: 6px;
 }
 
-/* Burger */
+/* ================= BURGER ================= */
+
 .burger {
   display: none;
   background: none;
@@ -107,11 +112,12 @@ img {
   display: block;
   width: 22px;
   height: 2px;
-  background: #ffffff;
+  background: #fff;
   margin: 4px 0;
 }
 
-/* Nav desktop */
+/* ================= NAV DESKTOP ================= */
+
 .nav {
   display: flex;
   gap: 18px;
@@ -126,7 +132,8 @@ img {
   opacity: 1;
 }
 
-/* Header actions */
+/* ================= ACTIONS ================= */
+
 .header-actions {
   display: flex;
   gap: 10px;
@@ -135,8 +142,8 @@ img {
 
 .lang-select {
   background: #0f162e;
-  color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.2);
   border-radius: 999px;
   padding: 8px 10px;
 }
@@ -144,11 +151,72 @@ img {
 .cta-custom {
   background: linear-gradient(135deg,#ff7a18,#ff9f1c);
   border: none;
-  color: #ffffff;
+  color: #fff;
   border-radius: 999px;
   padding: 10px 14px;
   font-weight: 800;
   cursor: pointer;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 760px) {
+
+  .logo-tagline {
+    display: none;
+  }
+
+  .burger {
+    display: block;
+  }
+
+  .header-inner {
+    flex-wrap: wrap;
+  }
+
+  /* menu déroulant propre */
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    display: none;
+    flex-direction: column;
+    gap: 0;
+
+    background: #0b1020;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+
+  .nav a {
+    padding: 14px 18px;
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+
+  .nav.open {
+    display: flex;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .cta-custom {
+    width: 100%;
+  }
+}
+
+/* ================= RTL ================= */
+
+html[dir="rtl"] .header-inner {
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .nav {
+  text-align: right;
 }
 
 /* =====================================================
