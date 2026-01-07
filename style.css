@@ -1,6 +1,5 @@
 /* =====================================================
-   e-META vNext — STYLE.CSS FINAL
-   Sticky Header • Mobile Menu • Responsive • RTL Safe
+   e-META vNext — STYLE.CSS FINAL (HEADER FIXED)
 ===================================================== */
 
 /* ============== RESET & BASE ============== */
@@ -19,50 +18,46 @@ html, body {
   overflow-x: hidden;
 }
 
+/* ⚠️ CRUCIAL : compense la hauteur du header FIXED */
+body {
+  padding-top: 76px; /* hauteur header */
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-img {
-  max-width: 100%;
-  display: block;
-}
-
-/* ============== CONTAINER ============== */
 .container {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 16px;
 }
 
-/* ================= HEADER STICKY (FIX FINAL) ================= */
+/* =====================================================
+   HEADER FIXED (SOLUTION STABLE)
+===================================================== */
+
 .site-header {
-  position: sticky;
+  position: fixed;   /* ✅ FIX DEFINITIF */
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
 
   width: 100%;
   background: linear-gradient(180deg, #0b1020 0%, #070b1a 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-
-  /* CRUCIAL */
-  left: 0;
-  right: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-/* Inner */
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
 
-  min-height: 64px;
+  min-height: 76px;
   padding: 12px 16px;
-
-  /* CRUCIAL */
-  position: relative;
 }
 
 /* Logo */
@@ -71,7 +66,6 @@ img {
   align-items: center;
   gap: 6px;
   white-space: nowrap;
-  flex-shrink: 0;
 }
 
 .logo-mark {
@@ -170,209 +164,18 @@ img {
   padding: 22px;
 }
 
-.hero-box.muted {
-  opacity: 0.95;
-}
-
-.hero h1 {
-  margin: 0 0 12px;
-  font-size: 2rem;
-  line-height: 1.2;
-}
-
-.hero-subtitle {
-  opacity: 0.9;
-  line-height: 1.6;
-  margin: 0 0 14px;
-}
-
-.hero-points {
-  margin: 0;
-  padding-left: 18px;
-}
-
-.hero-points li {
-  margin: 7px 0;
-  opacity: 0.9;
-}
-
-.hero-badge {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 10px;
-}
-
-.badge-title {
-  font-weight: 900;
-}
-
-.badge-text {
-  opacity: 0.85;
-}
-
-.hero-note {
-  opacity: 0.85;
-  line-height: 1.6;
-  margin: 0;
-}
-
-.cta-primary {
-  background: linear-gradient(135deg,#ff7a18,#ff9f1c);
-  border: none;
-  color: #ffffff;
-  border-radius: 999px;
-  padding: 14px 18px;
-  font-weight: 900;
-  cursor: pointer;
-}
-
 /* =====================================================
-   FORMULAIRE
+   FORM
 ===================================================== */
 
 .form-section {
   padding: 34px 0 56px;
 }
 
-.section-title {
-  margin: 0 0 10px;
-  font-size: 1.4rem;
-  text-align: center;
-}
-
-.form-intro {
-  text-align: center;
-  opacity: 0.85;
-  line-height: 1.6;
-  margin: 0 0 18px;
-}
-
-.emeta-form {
-  display: block;
-}
-
-.field-group {
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 16px;
-  padding: 18px;
-  margin: 0 0 16px;
-}
-
-.field-group legend {
-  padding: 0 10px;
-  font-weight: 900;
-}
-
-.field {
-  margin: 12px 0;
-}
-
-label {
-  display: block;
-  margin: 0 0 6px;
-  opacity: 0.9;
-  font-size: 0.92rem;
-}
-
-input,
-select,
-textarea {
-  width: 100%;
-  background: #0f162e;
-  color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 12px;
-  padding: 12px;
-  font-size: 1rem;
-}
-
-textarea {
-  min-height: 110px;
-  resize: vertical;
-}
-
-.hint {
-  opacity: 0.75;
-  font-size: 0.9rem;
-  line-height: 1.45;
-  margin-top: 6px;
-}
-
 .grid-2 {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0,1fr));
   gap: 12px;
-}
-
-.field-with-unit {
-  display: grid;
-  grid-template-columns: 1fr 110px;
-  gap: 10px;
-}
-
-.field-label-strong {
-  font-weight: 900;
-  margin: 0 0 10px;
-}
-
-/* Checkbox grid */
-.checkbox-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
-  gap: 10px;
-}
-
-.check-item {
-  display: grid;
-  grid-template-columns: 18px 1fr;
-  gap: 10px;
-  align-items: start;
-  padding: 12px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 14px;
-}
-
-.check-item input {
-  margin-top: 3px;
-}
-
-.range-labels {
-  display: flex;
-  justify-content: space-between;
-  opacity: 0.8;
-  font-size: 0.85rem;
-  margin-top: 6px;
-}
-
-/* Actions */
-.form-actions {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 14px;
-}
-
-.btn-submit,
-.btn-secondary {
-  border-radius: 999px;
-  padding: 12px 18px;
-  font-weight: 900;
-  cursor: pointer;
-}
-
-.btn-submit {
-  background: linear-gradient(135deg,#ff7a18,#ff9f1c);
-  border: none;
-  color: #ffffff;
-}
-
-.btn-secondary {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.2);
-  color: #ffffff;
 }
 
 /* =====================================================
@@ -390,19 +193,6 @@ textarea {
   gap: 10px;
   align-items: center;
   text-align: center;
-}
-
-.footer-link {
-  opacity: 0.9;
-}
-
-.footer-link:hover {
-  opacity: 1;
-}
-
-.footer-copy {
-  opacity: 0.65;
-  font-size: 0.85rem;
 }
 
 /* =====================================================
@@ -442,13 +232,13 @@ textarea {
     border-bottom: 1px solid rgba(255,255,255,0.08);
   }
 
+  .nav.open {
+    display: flex;
+  }
+
   .nav a {
     padding: 14px 18px;
     border-top: 1px solid rgba(255,255,255,0.08);
-  }
-
-  .nav.open {
-    display: flex;
   }
 
   .header-actions {
@@ -457,22 +247,17 @@ textarea {
     margin-top: 10px;
   }
 
-  .cta-custom,
-  .cta-primary {
+  .cta-custom {
     width: 100%;
   }
 
   .grid-2 {
     grid-template-columns: 1fr;
   }
-
-  .field-with-unit {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* =====================================================
-   RTL SUPPORT
+   RTL
 ===================================================== */
 
 html[dir="rtl"] {
@@ -481,8 +266,4 @@ html[dir="rtl"] {
 
 html[dir="rtl"] .header-inner {
   flex-direction: row-reverse;
-}
-
-html[dir="rtl"] .nav {
-  text-align: right;
 }
