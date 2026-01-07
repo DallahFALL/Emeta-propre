@@ -1,6 +1,6 @@
 /* e-META vNext — style.css (minimal, pro, responsive) */
 *{box-sizing:border-box}html,body{margin:0;padding:0;background:#070b1a;color:#fff;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;overflow-x:hidden}body{
-  padding-top:64px; /* hauteur réelle du header */
+  padding-top:72px; /* hauteur réelle du header */
 }
 
 a{color:inherit;text-decoration:none}
