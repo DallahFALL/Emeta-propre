@@ -1,8 +1,8 @@
 /* =====================================================
-   e-META vNext — STYLE.CSS FINAL (HEADER FIXED)
+   e-META — STYLE.CSS STABLE (NO FORM DEFORMATION)
 ===================================================== */
 
-/* ============== RESET & BASE ============== */
+/* ---------- BASE ---------- */
 *,
 *::before,
 *::after {
@@ -18,9 +18,9 @@ html, body {
   overflow-x: hidden;
 }
 
-/* ⚠️ CRUCIAL : compense la hauteur du header FIXED */
+/* Compensation header fixed */
 body {
-  padding-top: 76px; /* hauteur header */
+  padding-top: 78px;
 }
 
 a {
@@ -35,17 +35,16 @@ a {
 }
 
 /* =====================================================
-   HEADER FIXED (SOLUTION STABLE)
+   HEADER FIXED (SANS IMPACT FORMULAIRE)
 ===================================================== */
 
 .site-header {
-  position: fixed;   /* ✅ FIX DEFINITIF */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
 
-  width: 100%;
   background: linear-gradient(180deg, #0b1020 0%, #070b1a 100%);
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
@@ -56,7 +55,7 @@ a {
   justify-content: space-between;
   gap: 12px;
 
-  min-height: 76px;
+  min-height: 78px;
   padding: 12px 16px;
 }
 
@@ -80,27 +79,9 @@ a {
 }
 
 .logo-tagline {
-  opacity: 0.75;
   font-size: 0.78rem;
+  opacity: 0.75;
   margin-left: 6px;
-}
-
-/* Burger */
-.burger {
-  display: none;
-  background: none;
-  border: none;
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.burger span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: #ffffff;
-  margin: 4px 0;
 }
 
 /* Nav desktop */
@@ -128,9 +109,9 @@ a {
 .lang-select {
   background: #0f162e;
   color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.25);
   border-radius: 999px;
-  padding: 8px 10px;
+  padding: 8px 12px;
 }
 
 .cta-custom {
@@ -138,13 +119,30 @@ a {
   border: none;
   color: #ffffff;
   border-radius: 999px;
-  padding: 10px 14px;
+  padding: 10px 16px;
   font-weight: 800;
   cursor: pointer;
 }
 
+/* Burger */
+.burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #ffffff;
+  margin: 4px 0;
+}
+
 /* =====================================================
-   HERO
+   HERO (INCHANGÉ)
 ===================================================== */
 
 .hero {
@@ -165,17 +163,101 @@ a {
 }
 
 /* =====================================================
-   FORM
+   FORMULAIRE — NE PAS DÉFORMER
+   (styles volontairement neutres)
 ===================================================== */
 
 .form-section {
-  padding: 34px 0 56px;
+  padding: 40px 0 60px;
+}
+
+.section-title,
+.form-intro {
+  text-align: center;
+}
+
+.emeta-form {
+  width: 100%;
+}
+
+/* Respecte ton HTML existant */
+.field-group {
+  margin-bottom: 22px;
+}
+
+.field-group legend {
+  font-weight: 700;
+}
+
+.field {
+  margin: 12px 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  background: #0f162e;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical;
 }
 
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 14px;
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
   gap: 12px;
+}
+
+.check-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+/* Actions */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-submit,
+.btn-secondary {
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg,#ff7a18,#ff9f1c);
+  border: none;
+  color: #ffffff;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #ffffff;
 }
 
 /* =====================================================
@@ -184,7 +266,7 @@ a {
 
 .site-footer {
   border-top: 1px solid rgba(255,255,255,0.08);
-  padding: 22px 0;
+  padding: 24px 0;
 }
 
 .footer-inner {
@@ -215,10 +297,6 @@ a {
     display: block;
   }
 
-  .header-inner {
-    flex-wrap: wrap;
-  }
-
   .nav {
     position: absolute;
     top: 100%;
@@ -227,7 +305,6 @@ a {
 
     display: none;
     flex-direction: column;
-
     background: #0b1020;
     border-bottom: 1px solid rgba(255,255,255,0.08);
   }
@@ -239,6 +316,10 @@ a {
   .nav a {
     padding: 14px 18px;
     border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .header-inner {
+    flex-wrap: wrap;
   }
 
   .header-actions {
