@@ -88,15 +88,3 @@ textarea{min-height:110px;resize:vertical}
   .field-with-unit{grid-template-columns:1fr}
   .cta-primary{width:100%}
 }
-/* ================= HEADER FIXE — SAFE ================= */
-
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-/* Sécurité si un parent casse le sticky */
-body {
-  overflow-x: hidden;
-}
