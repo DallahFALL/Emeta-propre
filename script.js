@@ -32,12 +32,28 @@
   }
 
   function setLang(lang) {
-    localStorage.setItem(STORAGE_KEY, lang);
-    setRtl(lang);
-    applyI18n(lang);
-    const sel = document.getElementById("langSelect");
-    if (sel) sel.value = lang;
+  localStorage.setItem(STORAGE_KEY, lang);
+
+  setRtl(lang);
+  applyI18n(lang);
+  updatePdfLinks(lang); // ✅ ICI et seulement ici
+    function updatePdfLinks(lang) {
+  const map = {
+    fr: "pdf/e-META_Guide_Privacy_CGU_FR.pdf",
+    en: "pdf/e-META_Guide_Privacy_CGU_EN.pdf",
+    es: "pdf/e-META_Guide_Privacy_CGU_ES.pdf",
+    ar: "pdf/e-META_Guide_Privacy_CGU_AR.pdf"
+  };
+
+  const link = document.getElementById("pdfGuideLink");
+  if (link && map[lang]) {
+    link.href = map[lang];
   }
+}
+
+  const sel = document.getElementById("langSelect");
+  if (sel) sel.value = lang;
+}
 
   function scrollToForm() {
     const form = document.getElementById("form");
@@ -45,6 +61,19 @@
       form.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }
+function updatePdfLinks(lang) {
+  const map = {
+    fr: "pdf/e-META_Guide_Privacy_CGU_FR.pdf",
+    en: "pdf/e-META_Guide_Privacy_CGU_EN.pdf",
+    es: "pdf/e-META_Guide_Privacy_CGU_ES.pdf",
+    ar: "pdf/e-META_Guide_Privacy_CGU_AR.pdf"
+  };
+
+  const link = document.getElementById("pdfGuideLink");
+  if (link && map[lang]) {
+    link.href = map[lang];
+  }
+}
 
   document.addEventListener("DOMContentLoaded", () => {
     // Init langue (synchro globale index + privacy)
