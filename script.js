@@ -5,6 +5,10 @@
   const STORAGE_KEY = "emeta_lang";
   const DEFAULT_LANG = "fr";
 
+  /* =========================
+     LANG HELPERS
+  ========================= */
+
   function getLang() {
     return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
   }
@@ -12,6 +16,7 @@
   function setRtl(lang) {
     document.documentElement.lang = lang;
     document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
+
     const rtl = document.getElementById("rtlStylesheet");
     if (rtl) rtl.disabled = (lang !== "ar");
   }
@@ -31,29 +36,42 @@
     });
   }
 
-  function setLang(lang) {
-  localStorage.setItem(STORAGE_KEY, lang);
+  /* =========================
+     PDF LINKS (UNIQUE)
+  ========================= */
 
-  setRtl(lang);
-  applyI18n(lang);
-  updatePdfLinks(lang); // ✅ ICI et seulement ici
-    function updatePdfLinks(lang) {
-  const map = {
-    fr: "pdf/e-META_Guide_Privacy_CGU_FR.pdf",
-    en: "pdf/e-META_Guide_Privacy_CGU_EN.pdf",
-    es: "pdf/e-META_Guide_Privacy_CGU_ES.pdf",
-    ar: "pdf/e-META_Guide_Privacy_CGU_AR.pdf"
-  };
+  function updatePdfLinks(lang) {
+    const map = {
+      fr: "pdf/e-META_Guide_Privacy_CGU_FR.pdf",
+      en: "pdf/e-META_Guide_Privacy_CGU_EN.pdf",
+      es: "pdf/e-META_Guide_Privacy_CGU_ES.pdf",
+      ar: "pdf/e-META_Guide_Privacy_CGU_AR.pdf"
+    };
 
-  const link = document.getElementById("pdfGuideLink");
-  if (link && map[lang]) {
-    link.href = map[lang];
+    const link = document.getElementById("pdfGuideLink");
+    if (link && map[lang]) {
+      link.href = map[lang];
+    }
   }
-}
 
-  const sel = document.getElementById("langSelect");
-  if (sel) sel.value = lang;
-}
+  /* =========================
+     MAIN LANG SWITCHER
+  ========================= */
+
+  function setLang(lang) {
+    localStorage.setItem(STORAGE_KEY, lang);
+
+    setRtl(lang);
+    applyI18n(lang);
+    updatePdfLinks(lang);
+
+    const sel = document.getElementById("langSelect");
+    if (sel) sel.value = lang;
+  }
+
+  /* =========================
+     UI HELPERS
+  ========================= */
 
   function scrollToForm() {
     const form = document.getElementById("form");
@@ -61,35 +79,15 @@
       form.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }
-function updatePdfLinks(lang) {
-  const map = {
-    fr: "pdf/e-META_Guide_Privacy_CGU_FR.pdf",
-    en: "pdf/e-META_Guide_Privacy_CGU_EN.pdf",
-    es: "pdf/e-META_Guide_Privacy_CGU_ES.pdf",
-    ar: "pdf/e-META_Guide_Privacy_CGU_AR.pdf"
-  };
 
-  const link = document.getElementById("pdfGuideLink");
-  if (link && map[lang]) {
-    link.href = map[lang];
-  }
-}
+  /* =========================
+     DOM READY
+  ========================= */
 
   document.addEventListener("DOMContentLoaded", () => {
-    // Init langue (synchro globale index + privacy)
-    setLang(getLang());
-const pdfByLang = {
-  fr: "/docs/e-META_Guide_Privacy_CGU_FR.pdf",
-  en: "/docs/e-META_Guide_Privacy_CGU_EN.pdf",
-  es: "/docs/e-META_Guide_Privacy_CGU_ES.pdf",
-  ar: "/docs/e-META_Guide_Privacy_CGU_AR.pdf"
-};
 
-const pdfLink = document.getElementById("pdfGuideLink");
-if (pdfLink) {
-  const lang = localStorage.getItem("emeta_lang") || "fr";
-  pdfLink.href = pdfByLang[lang] || pdfByLang.fr;
-}
+    // Init langue globale (index + privacy + PDFs)
+    setLang(getLang());
 
     // Sélecteur de langue
     const langSelect = document.getElementById("langSelect");
@@ -112,13 +110,13 @@ if (pdfLink) {
       });
     }
 
-    // CTA
+    // CTA vers formulaire
     const startBtn = document.getElementById("startBtn");
     const customBtn = document.getElementById("customBtn");
     if (startBtn) startBtn.addEventListener("click", scrollToForm);
     if (customBtn) customBtn.addEventListener("click", scrollToForm);
 
-    // Validation légère consentement
+    // Validation légère du consentement
     const form = document.getElementById("emetaForm");
     if (form) {
       form.addEventListener("submit", (e) => {
@@ -130,4 +128,5 @@ if (pdfLink) {
       });
     }
   });
+
 })();
