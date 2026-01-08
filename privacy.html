@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Politique de confidentialité — e-META</title>
 
-  <!-- Base style (reprend ton thème sans casser index.html) -->
+  <title data-i18n="privacy.meta.title">Politique de confidentialité — e-META</title>
+
+  <!-- STYLE (cohérent avec index.html) -->
   <style>
     :root {
       --bg-main: #070b1a;
@@ -18,9 +19,7 @@
       --max-width: 920px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -29,12 +28,9 @@
       color: var(--text-main);
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
-    /* ===== HEADER SIMPLE (SANS LANGUE) ===== */
+    /* HEADER */
     header {
       position: sticky;
       top: 0;
@@ -59,19 +55,15 @@
       letter-spacing: 0.5px;
     }
 
-    .logo span {
-      color: var(--accent);
-    }
+    .logo span { color: var(--accent); }
 
     .back-home {
       font-size: 0.9rem;
       color: var(--text-muted);
     }
 
-    /* ===== CONTENU ===== */
-    main {
-      padding: 40px 16px 80px;
-    }
+    /* CONTENT */
+    main { padding: 40px 16px 80px; }
 
     .privacy-container {
       max-width: var(--max-width);
@@ -89,14 +81,9 @@
       margin-bottom: 24px;
     }
 
-    .privacy-header .icon {
-      font-size: 1.8rem;
-    }
+    .icon { font-size: 1.8rem; }
 
-    h1 {
-      font-size: 1.6rem;
-      margin: 0;
-    }
+    h1 { font-size: 1.6rem; margin: 0; }
 
     .intro {
       color: var(--text-muted);
@@ -116,10 +103,7 @@
       font-size: 0.95rem;
     }
 
-    ul {
-      padding-left: 18px;
-      margin: 10px 0 0;
-    }
+    ul { padding-left: 18px; margin: 10px 0 0; }
 
     footer {
       margin-top: 40px;
@@ -130,15 +114,21 @@
       text-align: center;
     }
 
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 600px) {
-      .privacy-container {
-        padding: 22px 18px;
-      }
+    /* RTL */
+    [dir="rtl"] {
+      direction: rtl;
+      text-align: right;
+    }
 
-      h1 {
-        font-size: 1.4rem;
-      }
+    [dir="rtl"] ul {
+      padding-right: 18px;
+      padding-left: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .privacy-container { padding: 22px 18px; }
+      h1 { font-size: 1.4rem; }
     }
   </style>
 </head>
@@ -148,7 +138,7 @@
 <header>
   <div class="header-inner">
     <div class="logo"><span>e</span>-META</div>
-    <a class="back-home" href="index.html">← Retour à l’accueil</a>
+    <a class="back-home" href="index.html" data-i18n="privacy.back">← Retour à l’accueil</a>
   </div>
 </header>
 
@@ -157,80 +147,55 @@
 
     <div class="privacy-header">
       <div class="icon">🔒</div>
-      <h1>Politique de confidentialité — e-META</h1>
+      <h1 data-i18n="privacy.title">Politique de confidentialité — e-META</h1>
     </div>
 
-    <p class="intro">
-      Votre confiance est essentielle. Cette politique explique de manière transparente
-      comment e-META collecte, utilise et protège les informations fournies lors de
-      l’utilisation de la plateforme.
-    </p>
+    <p class="intro" data-i18n="privacy.intro"></p>
 
-    <h2>1. Introduction</h2>
-    <p>
-      e-META est un assistant d’aide à la décision basé sur l’intelligence artificielle.
-      Il ne constitue ni un conseil juridique, financier, médical ou réglementaire.
-    </p>
+    <h2 data-i18n="privacy.s1.title"></h2>
+    <p data-i18n="privacy.s1.text"></p>
 
-    <h2>2. Données collectées</h2>
+    <h2 data-i18n="privacy.s2.title"></h2>
     <ul>
-      <li>Informations saisies volontairement dans les formulaires (contexte, objectifs, contraintes, indicateurs).</li>
-      <li>Données de contact (email, WhatsApp) uniquement si une restitution est demandée.</li>
-      <li>Fichiers ou liens transmis volontairement par l’utilisateur.</li>
-      <li>Données techniques anonymes nécessaires au fonctionnement du service.</li>
+      <li data-i18n="privacy.s2.l1"></li>
+      <li data-i18n="privacy.s2.l2"></li>
+      <li data-i18n="privacy.s2.l3"></li>
+      <li data-i18n="privacy.s2.l4"></li>
     </ul>
 
-    <h2>3. Utilisation des données</h2>
+    <h2 data-i18n="privacy.s3.title"></h2>
     <ul>
-      <li>Génération d’analyses décisionnelles personnalisées.</li>
-      <li>Amélioration continue de la qualité des recommandations.</li>
-      <li>Restitution des résultats à l’utilisateur sur le canal choisi.</li>
+      <li data-i18n="privacy.s3.l1"></li>
+      <li data-i18n="privacy.s3.l2"></li>
+      <li data-i18n="privacy.s3.l3"></li>
     </ul>
 
-    <h2>4. IA & responsabilité</h2>
-    <p>
-      Les analyses produites par e-META sont des aides à la décision.
-      L’utilisateur reste seul responsable des décisions prises à partir des recommandations.
-    </p>
+    <h2 data-i18n="privacy.s4.title"></h2>
+    <p data-i18n="privacy.s4.text"></p>
 
-    <h2>5. Conservation des données</h2>
-    <p>
-      Les données sont conservées uniquement pendant la durée nécessaire
-      à la production et à la restitution des analyses, sauf obligation légale contraire.
-    </p>
+    <h2 data-i18n="privacy.s5.title"></h2>
+    <p data-i18n="privacy.s5.text"></p>
 
-    <h2>6. Sécurité</h2>
-    <p>
-      e-META met en œuvre des mesures techniques et organisationnelles
-      afin de protéger les données contre tout accès non autorisé, perte ou altération.
-    </p>
+    <h2 data-i18n="privacy.s6.title"></h2>
+    <p data-i18n="privacy.s6.text"></p>
 
-    <h2>7. Droits des utilisateurs</h2>
-    <p>
-      Vous pouvez demander l’accès, la rectification ou la suppression de vos données
-      en contactant l’équipe e-META.
-    </p>
+    <h2 data-i18n="privacy.s7.title"></h2>
+    <p data-i18n="privacy.s7.text"></p>
 
-    <h2>8. Évolution</h2>
-    <p>
-      Cette politique peut être mise à jour à tout moment afin de refléter
-      les évolutions du service ou du cadre réglementaire.
-    </p>
+    <h2 data-i18n="privacy.s8.title"></h2>
+    <p data-i18n="privacy.s8.text"></p>
 
-    <h2>9. Acceptation</h2>
-    <p>
-      L’utilisation de la plateforme e-META implique l’acceptation pleine et entière
-      de la présente politique de confidentialité.
-    </p>
+    <h2 data-i18n="privacy.s9.title"></h2>
+    <p data-i18n="privacy.s9.text"></p>
 
-    <footer>
-      © e-META — Tous droits réservés
-    </footer>
+    <footer data-i18n="privacy.footer"></footer>
 
   </section>
 </main>
 
-</body>
-</html>
+<!-- SCRIPTS I18N (OBLIGATOIRES) -->
 <script src="i18n.js"></script>
 <script src="script.js"></script>
+
+</body>
+</html>
