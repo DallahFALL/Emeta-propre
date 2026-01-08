@@ -97,6 +97,27 @@ window.I18N = {
     "footer.text": "e-META — Moteur d’intelligence décisionnelle stratégique.",
     "footer.privacy": "Politique de confidentialité",
     "footer.copy": "© 2026 e-META — Tous droits réservés"
+    "privacy.meta.title":"Politique de confidentialité — e-META",
+"privacy.back":"← Retour à l’accueil",
+"privacy.title":"Politique de confidentialité — e-META",
+"privacy.intro":"e-META accorde une importance particulière à la protection des données personnelles de ses utilisateurs.",
+"privacy.s1.title":"1. Introduction",
+"privacy.s1.text":"e-META est un outil d’aide à la décision stratégique basé sur l’intelligence artificielle.",
+"privacy.s2.title":"2. Données collectées",
+"privacy.s2.li1":"Informations saisies volontairement dans les formulaires.",
+"privacy.s2.li2":"Données de contact si une restitution est demandée.",
+"privacy.s2.li3":"Fichiers ou liens transmis volontairement.",
+"privacy.s3.title":"3. Utilisation des données",
+"privacy.s3.li1":"Génération d’analyses stratégiques personnalisées.",
+"privacy.s3.li2":"Adaptation du format de restitution.",
+"privacy.s3.li3":"Amélioration continue des recommandations.",
+"privacy.s4.title":"4. IA & responsabilité",
+"privacy.s4.text":"Les recommandations sont indicatives. L’utilisateur reste responsable de ses décisions.",
+"privacy.s5.title":"5. Conservation & sécurité",
+"privacy.s5.text":"Les données sont conservées uniquement le temps nécessaire et protégées par des mesures appropriées.",
+"privacy.pdf.label":"Version officielle PDF",
+"privacy.pdf.btn":"Télécharger le PDF officiel",
+"privacy.footer":"© 2026 e-META — Tous droits réservés"
   },
 
   en: {
