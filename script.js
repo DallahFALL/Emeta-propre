@@ -49,6 +49,18 @@
   document.addEventListener("DOMContentLoaded", () => {
     // Init langue (synchro globale index + privacy)
     setLang(getLang());
+const pdfByLang = {
+  fr: "/docs/e-META_Guide_Privacy_CGU_FR.pdf",
+  en: "/docs/e-META_Guide_Privacy_CGU_EN.pdf",
+  es: "/docs/e-META_Guide_Privacy_CGU_ES.pdf",
+  ar: "/docs/e-META_Guide_Privacy_CGU_AR.pdf"
+};
+
+const pdfLink = document.getElementById("pdfGuideLink");
+if (pdfLink) {
+  const lang = localStorage.getItem("emeta_lang") || "fr";
+  pdfLink.href = pdfByLang[lang] || pdfByLang.fr;
+}
 
     // Sélecteur de langue
     const langSelect = document.getElementById("langSelect");
