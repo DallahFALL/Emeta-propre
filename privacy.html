@@ -3,29 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Politique de confidentialité — e-META</title>
+  <title data-i18n="privacy.meta.title">Politique de confidentialité — e-META</title>
 
   <style>
-    :root {
+    :root{
       --bg-main:#070b1a;
-      --bg-card:rgba(255,255,255,0.04);
-      --border-soft:rgba(255,255,255,0.08);
+      --bg-card:rgba(255,255,255,.04);
+      --border-soft:rgba(255,255,255,.08);
       --text-main:#fff;
-      --text-muted:rgba(255,255,255,0.75);
+      --text-muted:rgba(255,255,255,.75);
       --accent:#ff8a00;
       --radius:18px;
       --max-width:960px;
     }
 
     *{box-sizing:border-box}
-
     body{
       margin:0;
       font-family:Inter,system-ui,-apple-system,sans-serif;
       background:linear-gradient(180deg,#060918,#090d22);
       color:var(--text-main);
     }
-
     a{color:inherit;text-decoration:none}
 
     header{
@@ -46,17 +44,9 @@
       align-items:center;
     }
 
-    .logo{
-      font-weight:900;
-      font-size:1.2rem;
-      letter-spacing:.4px;
-    }
+    .logo{font-weight:900;font-size:1.2rem}
     .logo span{color:var(--accent)}
-
-    .back-home{
-      font-size:.9rem;
-      color:var(--text-muted);
-    }
+    .back-home{font-size:.9rem;color:var(--text-muted)}
 
     main{padding:48px 16px 80px}
 
@@ -69,34 +59,16 @@
       padding:36px 32px;
     }
 
-    .privacy-header{
-      display:flex;
-      gap:14px;
-      align-items:center;
-      margin-bottom:24px;
-    }
-
-    h1{margin:0;font-size:1.6rem}
-
-    h2{
-      margin-top:28px;
-      margin-bottom:10px;
-      font-size:1.15rem;
-    }
-
-    p,li{
-      font-size:.95rem;
-      line-height:1.65;
-      color:var(--text-muted);
-    }
-
+    h1{margin:0 0 20px;font-size:1.6rem}
+    h2{margin-top:28px;margin-bottom:10px;font-size:1.15rem}
+    p,li{font-size:.95rem;line-height:1.65;color:var(--text-muted)}
     ul{padding-left:18px}
 
     .pdf-box{
       margin-top:32px;
       padding:20px;
       border-radius:14px;
-      background:rgba(255,255,255,0.03);
+      background:rgba(255,255,255,.03);
       border:1px dashed var(--border-soft);
       text-align:center;
     }
@@ -108,7 +80,7 @@
       border-radius:999px;
       background:var(--accent);
       color:#000;
-      font-weight:700;
+      font-weight:800;
       font-size:.9rem;
     }
 
@@ -133,71 +105,52 @@
 <header>
   <div class="header-inner">
     <div class="logo"><span>e</span>-META</div>
-    <a class="back-home" href="index.html">← Retour à l’accueil</a>
+    <a class="back-home" href="index.html" data-i18n="privacy.back">← Retour à l’accueil</a>
   </div>
 </header>
 
 <main>
   <section class="privacy-container">
 
-    <div class="privacy-header">
-      <div style="font-size:1.8rem">🔐</div>
-      <h1>Politique de confidentialité — e-META</h1>
-    </div>
+    <h1 data-i18n="privacy.title">Politique de confidentialité — e-META</h1>
 
-    <p>
-      e-META attache une importance particulière à la protection des données personnelles
-      de ses utilisateurs. La présente politique décrit de manière transparente la
-      collecte, l’utilisation et la protection des informations.
-    </p>
+    <p data-i18n="privacy.intro"></p>
 
-    <h2>1. Introduction</h2>
-    <p>
-      e-META est un outil d’aide à la décision stratégique basé sur l’intelligence
-      artificielle. Il ne constitue ni un conseil juridique, financier, médical ou
-      réglementaire.
-    </p>
+    <h2 data-i18n="privacy.s1.title"></h2>
+    <p data-i18n="privacy.s1.text"></p>
 
-    <h2>2. Données collectées</h2>
+    <h2 data-i18n="privacy.s2.title"></h2>
     <ul>
-      <li>Informations saisies volontairement dans les formulaires.</li>
-      <li>Données de contact si une restitution est demandée.</li>
-      <li>Fichiers ou liens transmis volontairement.</li>
+      <li data-i18n="privacy.s2.li1"></li>
+      <li data-i18n="privacy.s2.li2"></li>
+      <li data-i18n="privacy.s2.li3"></li>
     </ul>
 
-    <h2>3. Utilisation des données</h2>
+    <h2 data-i18n="privacy.s3.title"></h2>
     <ul>
-      <li>Génération d’analyses stratégiques personnalisées.</li>
-      <li>Adaptation du format de restitution.</li>
-      <li>Amélioration continue des recommandations.</li>
+      <li data-i18n="privacy.s3.li1"></li>
+      <li data-i18n="privacy.s3.li2"></li>
+      <li data-i18n="privacy.s3.li3"></li>
     </ul>
 
-    <h2>4. Intelligence artificielle & responsabilité</h2>
-    <p>
-      Les recommandations fournies sont indicatives. L’utilisateur demeure seul
-      responsable des décisions prises sur la base des analyses.
-    </p>
+    <h2 data-i18n="privacy.s4.title"></h2>
+    <p data-i18n="privacy.s4.text"></p>
 
-    <h2>5. Conservation et sécurité</h2>
-    <p>
-      Les données sont conservées uniquement pour la durée nécessaire et protégées
-      par des mesures techniques et organisationnelles raisonnables.
-    </p>
+    <h2 data-i18n="privacy.s5.title"></h2>
+    <p data-i18n="privacy.s5.text"></p>
 
     <div class="pdf-box">
-      <p><strong>Version officielle PDF</strong></p>
-      <p>Téléchargez la version juridique complète et archivable :</p>
-      <a href="e-META_Politique_de_confidentialite_2026.pdf" target="_blank">
-        Télécharger le PDF officiel
-      </a>
+      <p data-i18n="privacy.pdf.label"></p>
+      <a href="e-META_Politique_de_confidentialite_2026.pdf" target="_blank"
+         data-i18n="privacy.pdf.btn"></a>
     </div>
 
-    <footer>
-      © 2026 e-META — Tous droits réservés
-    </footer>
+    <footer data-i18n="privacy.footer"></footer>
 
   </section>
 </main>
 
+<script src="i18n.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
