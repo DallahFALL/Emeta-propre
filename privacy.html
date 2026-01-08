@@ -191,6 +191,20 @@
   Télécharger le PDF officiel
 </a>
     </div>
+<script>
+  const lang = localStorage.getItem("emeta_lang") || "fr";
+  const pdfMap = {
+    fr: "docs/privacy_fr.pdf",
+    en: "docs/privacy_en.pdf",
+    es: "docs/privacy_es.pdf",
+    ar: "docs/privacy_ar.pdf"
+  };
+
+  const link = document.getElementById("privacyPdf");
+  if (link && pdfMap[lang]) {
+    link.href = pdfMap[lang];
+  }
+</script>
 
     <footer>
       © 2026 e-META — Tous droits réservés
