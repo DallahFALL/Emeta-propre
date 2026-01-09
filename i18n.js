@@ -1,5 +1,25 @@
 // i18n.js — e-META vNext (FR / EN / ES / AR)
 window.I18N = {
+  help: {
+  title: {
+    fr: "Besoin d’aide avant de commencer ?",
+    en: "Need help before starting?",
+    es: "¿Necesita ayuda antes de empezar?",
+    ar: "هل تحتاج إلى مساعدة قبل البدء؟"
+  },
+  privacy: {
+    fr: "🔒 Politique de confidentialité (PDF)",
+    en: "🔒 Privacy policy (PDF)",
+    es: "🔒 Política de privacidad (PDF)",
+    ar: "🔒 سياسة الخصوصية (PDF)"
+  },
+  guide: {
+    fr: "📘 Guide officiel pour bien remplir le formulaire",
+    en: "📘 Official guide to complete the form",
+    es: "📘 Guía oficial para completar el formulario",
+    ar: "📘 الدليل الرسمي لملء النموذج"
+  }
+}
   fr: {
     "meta.title": "e-META — Assistant IA de prise de décision",
     "header.tagline": "Assistant IA multilingue de prise de décision",
