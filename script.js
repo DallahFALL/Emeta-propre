@@ -32,7 +32,6 @@
   }
 
   function updatePdfLinks(lang) {
-   function updatePdfLinks(lang) {
   const guideMap = {
     fr: "pdf/eMETA_Guide_Formulaire_FR.pdf",
     en: "pdf/eMETA_Guide_Formulaire_EN.pdf",
