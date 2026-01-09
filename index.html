@@ -77,40 +77,28 @@
      AIDE & DOCUMENTS OFFICIELS
 ================================ -->
 <div class="form-help">
-  <div class="help-card">
-    <h3 data-i18n="help.title">Besoin d’aide avant de commencer ?</h3>
-    <p data-i18n="help.text">
-      Consultez nos documents pour mieux comprendre comment remplir le formulaire
-      et comment vos données sont utilisées.
-    </p>
+  <p data-i18n="help.intro">
+    Besoin d’aide avant de commencer ?
+  </p>
 
-    <div class="help-actions">
-      <a href="pdf/privacy_fr.pdf"
-         target="_blank"
-         class="help-link"
-         data-i18n="help.privacy">
-        🔐 Politique de confidentialité (PDF)
-      </a>
+  <div class="help-actions">
+    <a id="pdfPrivacyLink"
+       class="help-link"
+       target="_blank"
+       rel="noopener">
+       🔐 <span data-i18n="help.privacy">Politique de confidentialité (PDF)</span>
+    </a>
 
-      <a href="pdf/guide_formulaire_fr.pdf"
-         target="_blank"
-         class="help-link"
-         data-i18n="help.guide">
-        📘 Guide pour bien remplir le formulaire
-      </a>
-    </div>
+    <a id="pdfGuideLink"
+       class="help-link"
+       target="_blank"
+       rel="noopener">
+       📘 <span data-i18n="help.guide">Guide officiel pour bien remplir le formulaire</span>
+    </a>
   </div>
 </div>
-<p class="form-help">
-  <a
-    id="pdfGuideLink"
-    href="pdf/eMETA_Guide_Officiel_Formulaire_Privacy_CGU_FR.pdf"
-    target="_blank"
-    rel="noopener"
-  >
-    📘 Guide officiel pour bien remplir le formulaire (PDF)
-  </a>
-</p>
+
+<form id="emetaForm" class="emeta-form" novalidate>
 
       <form id="emetaForm" class="emeta-form" novalidate>
 
