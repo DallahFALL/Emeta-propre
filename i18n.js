@@ -23,10 +23,6 @@ window.I18N = {
     "form.title": "Formulaire e-META vNext — Analyse stratégique premium",
     "form.intro": "Plus vos réponses sont précises, plus la recommandation e-META sera juste, nuancée et exploitable.",
     
-    "help.title": "Besoin d’aide avant de commencer ?",
-    "help.privacy": "🔒 Politique de confidentialité (PDF)",
-    "help.guide": "📘 Guide officiel pour bien remplir le formulaire"
-   },
     "group.general": "1) Qualifier la décision",
     "field.domain.label": "Domaine principal",
     "field.domain.placeholder": "Sélectionnez un domaine",
@@ -126,10 +122,7 @@ window.I18N = {
     "form.title": "e-META vNext Form — Premium strategic analysis",
     "form.intro": "The more precise your answers, the more accurate and useful your e-META recommendation will be.",
     en: {
-    "help.title": "Need help before starting?",
-    "help.privacy": "🔒 Privacy policy (PDF)",
-    "help.guide": "📘 Official guide to complete the form"
-    },
+      
     "group.general": "1) Qualify the decision",
     "field.domain.label": "Main domain",
     "field.domain.placeholder": "Select a domain",
@@ -228,11 +221,7 @@ window.I18N = {
 
     "form.title": "Formulario e-META vNext — Análisis estratégico premium",
     "form.intro": "Cuanto más precisas sean tus respuestas, más útil y exacta será la recomendación de e-META.",
-     es: {
-    "help.title": "¿Necesita ayuda antes de empezar?",
-    "help.privacy": "🔒 Política de privacidad (PDF)",
-    "help.guide": "📘 Guía oficial para completar el formulario"
-    },
+    
     "group.general": "1) Definir la decisión",
     "field.domain.label": "Dominio principal",
     "field.domain.placeholder": "Selecciona un dominio",
@@ -331,12 +320,7 @@ window.I18N = {
 
     "form.title": "نموذج e-META vNext — تحليل استراتيجي متميز",
     "form.intro": "كلما كانت إجاباتك أدق، كانت توصية e-META أكثر دقة وفائدة.",
-    ar: {
-    "help.title": "هل تحتاج إلى مساعدة قبل البدء؟",
-    "help.privacy": "🔒 سياسة الخصوصية (PDF)",
-    "help.guide": "📘 الدليل الرسمي لملء النموذج"
-    }
-    };
+    
     "group.general": "1) تحديد القرار",
     "field.domain.label": "المجال الرئيسي",
     "field.domain.placeholder": "اختر مجالاً",
