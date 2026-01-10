@@ -1,10 +1,10 @@
 // i18n.js — e-META vNext (FR / EN / ES / AR)
-help: {  
-};
+
 window.I18N = {
   fr: {
     "meta.title": "e-META — Assistant IA de prise de décision",
     "header.tagline": "Assistant IA multilingue de prise de décision",
+
     "nav.home": "Accueil",
     "nav.form": "Formulaire",
     "nav.privacy": "Confidentialité",
@@ -16,12 +16,34 @@ window.I18N = {
     "hero.point2": "Recommandations actionnables + risques + KPIs",
     "hero.point3": "Restitution personnalisée (Email / WhatsApp / PDF)",
     "hero.cta": "Commencer une analyse stratégique",
-    "hero.badge.title": "Mode cabinet",
-    "hero.badge.text": "Cadres d’analyse + feuille de route",
-    "hero.note": "e-META n’est pas un chatbot : c’est un moteur d’intelligence décisionnelle.",
 
     "form.title": "Formulaire e-META vNext — Analyse stratégique premium",
-    "form.intro": "Plus vos réponses sont précises, plus la recommandation e-META sera juste, nuancée et exploitable.",
+    "form.intro": "Plus vos réponses sont précises, plus la recommandation sera pertinente.",
+
+    /* ✅ AIDE & DOCUMENTS */
+    "help.title": "Besoin d’aide avant de commencer ?",
+    "help.privacy": "🔒 Politique de confidentialité (PDF)",
+    "help.guide": "📘 Guide officiel pour bien remplir le formulaire"
+  },
+
+  en: {
+    "help.title": "Need help before starting?",
+    "help.privacy": "🔒 Privacy policy (PDF)",
+    "help.guide": "📘 Official guide to complete the form"
+  },
+
+  es: {
+    "help.title": "¿Necesita ayuda antes de empezar?",
+    "help.privacy": "🔒 Política de privacidad (PDF)",
+    "help.guide": "📘 Guía oficial para completar el formulario"
+  },
+
+  ar: {
+    "help.title": "هل تحتاج إلى مساعدة قبل البدء؟",
+    "help.privacy": "🔒 سياسة الخصوصية (PDF)",
+    "help.guide": "📘 الدليل الرسمي لملء النموذج"
+  }
+};
     
     "group.general": "1) Qualifier la décision",
     "field.domain.label": "Domaine principal",
