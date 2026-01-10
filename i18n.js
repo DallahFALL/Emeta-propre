@@ -121,7 +121,6 @@ window.I18N = {
 
     "form.title": "e-META vNext Form — Premium strategic analysis",
     "form.intro": "The more precise your answers, the more accurate and useful your e-META recommendation will be.",
-    en: {
       
     "group.general": "1) Qualify the decision",
     "field.domain.label": "Main domain",
