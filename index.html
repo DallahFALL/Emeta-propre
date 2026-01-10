@@ -69,28 +69,34 @@
   </section>
 
   <section class="form-section" id="form">
-    <div class="container">
-      <h2 class="section-title" data-i18n="form.title"></h2>
-      <p class="form-intro" data-i18n="form.intro"></p>
+  <div class="container">
 
-<!-- ===============================
-     AIDE & DOCUMENTS OFFICIELS
-================================ -->
-<div class="form-help">
-  <h3>Besoin d’aide avant de commencer ?</h3>
+    <h2 class="section-title" data-i18n="form.title"></h2>
+    <p class="form-intro" data-i18n="form.intro"></p>
 
-<a class="help-btn">
-  🔒 Politique de confidentialité (PDF)
-</a>
+    <!-- ===============================
+         AIDE & DOCUMENTS OFFICIELS
+    ================================ -->
+    <div class="form-help">
+      <h3 data-i18n="help.title"></h3>
 
-<a class="help-btn">
-  📘 Guide officiel pour bien remplir le formulaire
-</a>
-  
-  </div>
-</div>
+      <a class="help-btn"
+         href="pdf/eMETA_Privacy_CGU_FR.pdf"
+         target="_blank"
+         data-i18n="help.privacy">
+      </a>
 
-<form id="emetaForm" class="emeta-form" novalidate>
+      <a class="help-btn"
+         href="pdf/eMETA_Guide_Officiel_Formulaire_FR.pdf"
+         target="_blank"
+         data-i18n="help.guide">
+      </a>
+    </div>
+
+    <!-- ===============================
+         FORMULAIRE
+    ================================ -->
+    <form id="emetaForm" class="emeta-form" novalidate>
 
         <fieldset class="field-group">
           <legend data-i18n="group.general"></legend>
