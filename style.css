@@ -202,29 +202,16 @@ a{color:inherit;text-decoration:none}
   }
 
   /* Ajuster la compensation du body */
-  body{
-    padding-top:56px;
-  }
-}
-.form-help {
-  margin: 24px auto 28px;
-}
-
-.help-card {
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.08);
+ .form-help {
+  margin: 24px 0;
+  padding: 20px;
   border-radius: 16px;
-  padding: 18px 20px;
+  background: rgba(255,255,255,0.03);
 }
 
-.help-card h3 {
-  margin: 0 0 8px;
-  font-size: 1.05rem;
-}
-
-.help-card p {
-  opacity: .85;
-  margin: 0 0 12px;
+.form-help h3 {
+  margin-bottom: 12px;
+  font-size: 1rem;
 }
 
 .help-actions {
@@ -233,16 +220,13 @@ a{color:inherit;text-decoration:none}
   gap: 12px;
 }
 
-.help-link {
-  display: inline-block;
+.help-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 10px 14px;
   border-radius: 999px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.12);
-  font-weight: 700;
-  font-size: .9rem;
-}
-
-.help-link:hover {
-  background: rgba(255,255,255,.1);
+  background: rgba(255,255,255,0.08);
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
