@@ -1,6 +1,4 @@
 // i18n.js — e-META vNext (FR / EN / ES / AR)
-help: {  
-};
 window.I18N = {
   fr: {
     "meta.title": "e-META — Assistant IA de prise de décision",
