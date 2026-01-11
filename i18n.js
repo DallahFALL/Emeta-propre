@@ -14,9 +14,7 @@ window.I18N = {
     "hero.point2": "Recommandations actionnables + risques + KPIs",
     "hero.point3": "Restitution personnalisée (Email / WhatsApp / PDF)",
     "hero.cta": "Commencer une analyse stratégique",
-    "hero.badge.title": "Mode cabinet",
-    "hero.badge.text": "Cadres d’analyse + feuille de route",
-    "hero.note": "e-META n’est pas un chatbot : c’est un moteur d’intelligence décisionnelle.",
+    "form.badge.cabinet": "Analyse structurée — niveau cabinet de conseil"
 
     "help.title": "Besoin d’aide avant de commencer ?",
     "help.privacy": "🔒 Politique de confidentialité",
