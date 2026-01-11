@@ -111,10 +111,13 @@
     document.getElementById("langSelect")
       ?.addEventListener("change", e => setLang(e.target.value));
 
-    document.getElementById("burgerBtn")
-      ?.addEventListener("click", () =>
-        document.getElementById("mainNav")?.classList.toggle("open")
-      );
+  const burger = document.getElementById("burgerBtn");
+  const nav = document.getElementById("mainNav");
+
+  burger?.addEventListener("click", () => {
+  const open = nav.classList.toggle("open");
+  burger.setAttribute("aria-expanded", open);
+  });
 
     document.getElementById("startBtn")?.addEventListener("click", scrollToForm);
     document.getElementById("customBtn")?.addEventListener("click", scrollToForm);
