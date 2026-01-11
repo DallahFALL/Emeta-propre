@@ -40,6 +40,13 @@ a{color:inherit;text-decoration:none}
 
 /* Form */
 .form-section{padding:34px 0 56px}
+/* Badge niveau cabinet (Formulaire) */
+.form-badge {
+  display: inline-block;
+  margin: 12px 0 16px;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
 .section-title{margin:0 0 10px;font-size:1.4rem;text-align:center}
 .form-intro{text-align:center;opacity:.85;line-height:1.6;margin:0 0 18px}
 .emeta-form{display:block}
