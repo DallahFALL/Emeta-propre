@@ -36,17 +36,32 @@
         <option value="es">ES</option>
         <option value="ar">AR</option>
       </select>
-
-      <button class="cta-custom" type="button" id="customBtn" data-i18n="cta.custom">Requête personnalisée</button>
-    </div>
-  </div>
+      
+      <button
+  class="cta-custom"
+  type="button"
+  id="customBtn"
+  data-i18n="cta.custom">
+  Requête personnalisée
+</button>
+</div>
+</div>
 </header>
 
 <main>
+
+  <!-- =========================
+       HERO SECTION
+  ========================== -->
   <section class="hero" id="hero">
     <div class="container hero-grid">
+
+      <!-- TEXTE HERO -->
       <div class="hero-box">
-        <h1 data-i18n="hero.title">Donnez à vos décisions le niveau d’un cabinet de conseil premium</h1>
+        <h1 data-i18n="hero.title">
+          Donnez à vos décisions le niveau d’un cabinet de conseil premium
+        </h1>
+
         <p class="hero-subtitle" data-i18n="hero.subtitle"></p>
 
         <ul class="hero-points">
@@ -55,47 +70,81 @@
           <li data-i18n="hero.point3"></li>
         </ul>
 
-        <button class="cta-primary" type="button" id="startBtn" data-i18n="hero.cta">Commencer une analyse stratégique</button>
+        <button
+          class="cta-primary"
+          type="button"
+          id="startBtn"
+          data-i18n="hero.cta">
+          Commencer une analyse stratégique
+        </button>
       </div>
 
-      <div class="hero-badge">
+      <!-- BADGE + NOTE HERO -->
+      <div class="hero-box muted">
+        <div class="hero-badge">
           <span class="badge-title" data-i18n="hero.badge.title"></span>
           <span class="badge-text" data-i18n="hero.badge.text"></span>
-        </div>  
+        </div>
+
         <p class="hero-note" data-i18n="hero.note"></p>
       </div>
+
     </div>
   </section>
 
+  <!-- =========================
+       FORM SECTION
+  ========================== -->
   <section class="form-section" id="form">
-  <div class="container">
-    <h2 class="section-title" data-i18n="form.title"></h2>
-    <p class="form-intro" data-i18n="form.intro"></p>
+    <div class="container">
 
-    <div class="form-help">
-      <h3 data-i18n="help.title"></h3>
+      <h2 class="section-title" data-i18n="form.title"></h2>
 
-      <div class="help-actions">
-  <a
-    id="pdfPrivacyLink"
-    class="help-btn"
-    data-i18n="help.privacy"
-    aria-label="Politique de confidentialité"
-  ></a>
+      <!-- BADGE CABINET (BON ENDROIT) -->
+      <div class="form-badge">
+        🧠 <span data-i18n="form.badge.cabinet"></span>
+      </div>
 
-  <a
-    id="pdfGuideLink"
-    class="help-btn"
-    data-i18n="help.guide"
-    aria-label="Guide de remplissage"
-  ></a>
-</div>
+      <p class="form-intro" data-i18n="form.intro"></p>
 
-    <form id="emetaForm" class="emeta-form" novalidate>
-      <!-- fieldsets... -->
-    </form>
-  </div>
-</section>
+      <!-- AIDE & DOCUMENTS -->
+      <div class="form-help">
+        <h3 data-i18n="help.title"></h3>
+
+        <div class="help-actions">
+          <a
+            id="pdfPrivacyLink"
+            class="help-btn"
+            data-i18n="help.privacy"
+            target="_blank"
+            rel="noopener"
+            aria-label="Politique de confidentialité">
+          </a>
+
+          <a
+            id="pdfGuideLink"
+            class="help-btn"
+            data-i18n="help.guide"
+            target="_blank"
+            rel="noopener"
+            aria-label="Guide de remplissage">
+          </a>
+        </div>
+      </div>
+
+      <!-- FORMULAIRE -->
+      <form id="emetaForm" class="emeta-form" novalidate>
+
+        <fieldset class="field-group">
+          <!-- champs -->
+        </fieldset>
+
+      </form>
+
+    </div>
+  </section>
+
+</main>
 
         <fieldset class="field-group">
           <legend data-i18n="group.general"></legend>
