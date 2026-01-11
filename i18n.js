@@ -18,6 +18,10 @@ window.I18N = {
     "hero.badge.text": "Cadres d’analyse + feuille de route",
     "hero.note": "e-META n’est pas un chatbot : c’est un moteur d’intelligence décisionnelle.",
 
+    "help.title": "Besoin d’aide avant de commencer ?",
+    "help.privacy": "🔒 Politique de confidentialité",
+    "help.guide": "📘 Guide officiel pour bien remplir le formulaire",
+
     "form.title": "Formulaire e-META vNext — Analyse stratégique premium",
     "form.intro": "Plus vos réponses sont précises, plus la recommandation e-META sera juste, nuancée et exploitable.",
     
@@ -116,6 +120,10 @@ window.I18N = {
     "hero.badge.title": "Consulting mode",
     "hero.badge.text": "Frameworks + roadmap",
     "hero.note": "e-META is not a chatbot: it’s a decision intelligence engine.",
+
+    "help.title": "Need help before starting?",
+    "help.privacy": "🔒 Privacy policy",
+    "help.guide": "📘 Official guide to complete the form",
 
     "form.title": "e-META vNext Form — Premium strategic analysis",
     "form.intro": "The more precise your answers, the more accurate and useful your e-META recommendation will be.",
@@ -216,6 +224,10 @@ window.I18N = {
     "hero.badge.text": "Marcos + hoja de ruta",
     "hero.note": "e-META no es un chatbot: es un motor de inteligencia de decisiones.",
 
+    "help.title": "¿Necesita ayuda antes de empezar?",
+    "help.privacy": "🔒 Política de privacidad",
+    "help.guide": "📘 Guía oficial para completar el formulario",
+
     "form.title": "Formulario e-META vNext — Análisis estratégico premium",
     "form.intro": "Cuanto más precisas sean tus respuestas, más útil y exacta será la recomendación de e-META.",
     
@@ -315,6 +327,10 @@ window.I18N = {
     "hero.badge.text": "أطر تحليل + خارطة طريق",
     "hero.note": "e-META ليس روبوت دردشة: إنه محرك ذكاء لاتخاذ القرار.",
 
+    "help.title": "هل تحتاج إلى مساعدة قبل البدء؟",
+    "help.privacy": "🔒 سياسة الخصوصية",
+    "help.guide": "📘 الدليل الرسمي لملء النموذج",
+ 
     "form.title": "نموذج e-META vNext — تحليل استراتيجي متميز",
     "form.intro": "كلما كانت إجاباتك أدق، كانت توصية e-META أكثر دقة وفائدة.",
     
