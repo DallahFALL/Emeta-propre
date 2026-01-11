@@ -1,10 +1,16 @@
-// script.js — e-META vNext (stable)
+// script.js — e-META vNext (PRO • Stable • i18n + PDF par langue)
 (function () {
   "use strict";
 
+  /* ============================
+     CONFIG
+  ============================ */
   const STORAGE_KEY = "emeta_lang";
   const DEFAULT_LANG = "fr";
 
+  /* ============================
+     LANG MANAGEMENT
+  ============================ */
   function getLang() {
     return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
   }
@@ -12,10 +18,16 @@
   function setRtl(lang) {
     document.documentElement.lang = lang;
     document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
-    const rtl = document.getElementById("rtlStylesheet");
-    if (rtl) rtl.disabled = (lang !== "ar");
+
+    const rtlStylesheet = document.getElementById("rtlStylesheet");
+    if (rtlStylesheet) {
+      rtlStylesheet.disabled = (lang !== "ar");
+    }
   }
 
+  /* ============================
+     I18N APPLY
+  ============================ */
   function applyI18n(lang) {
     const dict = window.I18N?.[lang];
     if (!dict) return;
@@ -31,38 +43,56 @@
     });
   }
 
-  function updatePdfLinks(lang) {
-  const guideMap = {
-    fr: "pdf/eMETA_Guide_Formulaire_FR.pdf",
-    en: "pdf/eMETA_Guide_Formulaire_EN.pdf",
-    es: "pdf/eMETA_Guide_Formulaire_ES.pdf",
-    ar: "pdf/eMETA_Guide_Formulaire_AR.pdf"
-  };
+  /* ============================
+     PDF LINKS (PRO par langue)
+  ============================ */
+  function syncHelpLinks(lang) {
+    const guideMap = {
+      fr: "/pdf/eMETA_Guide_Formulaire_FR.pdf",
+      en: "/pdf/eMETA_Guide_Formulaire_EN.pdf",
+      es: "/pdf/eMETA_Guide_Formulaire_ES.pdf",
+      ar: "/pdf/eMETA_Guide_Formulaire_AR.pdf"
+    };
 
-  const privacyMap = {
-    fr: "pdf/eMETA_Privacy_CGU_FR.pdf",
-    en: "pdf/eMETA_Privacy_CGU_EN.pdf",
-    es: "pdf/eMETA_Privacy_CGU_ES.pdf",
-    ar: "pdf/eMETA_Privacy_CGU_AR.pdf"
-  };
+    const privacyMap = {
+      fr: "/pdf/eMETA_Privacy_CGU_FR.pdf",
+      en: "/pdf/eMETA_Privacy_CGU_EN.pdf",
+      es: "/pdf/eMETA_Privacy_CGU_ES.pdf",
+      ar: "/pdf/eMETA_Privacy_CGU_AR.pdf"
+    };
 
-  const guide = document.getElementById("pdfGuideLink");
-  const privacy = document.getElementById("pdfPrivacyLink");
+    const guideBtn = document.getElementById("pdfGuideLink");
+    const privacyBtn = document.getElementById("pdfPrivacyLink");
 
-  if (guide) guide.href = guideMap[lang] || guideMap.fr;
-  if (privacy) privacy.href = privacyMap[lang] || privacyMap.fr;
-}
+    if (guideBtn) {
+      guideBtn.href = guideMap[lang] || guideMap.fr;
+      guideBtn.setAttribute("target", "_blank");
+      guideBtn.setAttribute("rel", "noopener");
+    }
 
+    if (privacyBtn) {
+      privacyBtn.href = privacyMap[lang] || privacyMap.fr;
+      privacyBtn.setAttribute("target", "_blank");
+      privacyBtn.setAttribute("rel", "noopener");
+    }
+  }
+
+  /* ============================
+     SET LANGUAGE (CENTRAL)
+  ============================ */
   function setLang(lang) {
     localStorage.setItem(STORAGE_KEY, lang);
     setRtl(lang);
     applyI18n(lang);
-    updatePdfLinks(lang);
+    syncHelpLinks(lang);
 
-    const sel = document.getElementById("langSelect");
-    if (sel) sel.value = lang;
+    const select = document.getElementById("langSelect");
+    if (select) select.value = lang;
   }
 
+  /* ============================
+     UX HELPERS
+  ============================ */
   function scrollToForm() {
     document.getElementById("form")?.scrollIntoView({
       behavior: "smooth",
@@ -70,6 +100,9 @@
     });
   }
 
+  /* ============================
+     INIT
+  ============================ */
   document.addEventListener("DOMContentLoaded", () => {
     setLang(getLang());
 
@@ -86,8 +119,10 @@
 
     document.getElementById("emetaForm")
       ?.addEventListener("submit", e => {
-        if (!document.getElementById("consent")?.checked) {
+        const consent = document.getElementById("consent");
+        if (consent && !consent.checked) {
           e.preventDefault();
+          consent.focus();
         }
       });
   });
