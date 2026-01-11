@@ -99,10 +99,16 @@ window.I18N = {
     "form.submit": "Générer ma recommandation e-META",
     "form.reset": "Réinitialiser",
 
+    // ===== AIDE PEDAGOGIQUE PAR CHAMP =====
+   "help.problem": "Expliquez le vrai problème stratégique, pas seulement les symptômes visibles.",
+   "help.objectives": "Limitez-vous à 3–5 objectifs mesurables et hiérarchisés.",
+   "help.constraints": "Incluez contraintes internes ET externes (budget, délais, réglementation…).",
+   "help.kpis": "Choisissez des indicateurs directement liés à la réussite de la décision.",
+
     "footer.text": "e-META — Moteur d’intelligence décisionnelle stratégique.",
     "footer.privacy": "Politique de confidentialité",
     "footer.copy": "© 2026 e-META — Tous droits réservés"
-  },
+   },
 
   en: {
     "meta.title": "e-META — Decision-Making AI Assistant",
