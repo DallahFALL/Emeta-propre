@@ -73,21 +73,14 @@
   }
 
   function initBurger() {
-    const btn = document.getElementById("burgerBtn");
-    const nav = document.getElementById("mainNav");
-    if (!btn || !nav) return;
+    const burger = document.getElementById("burgerBtn");
+const nav = document.getElementById("mainNav");
 
-    btn.addEventListener("click", () => {
-      const isOpen = nav.classList.toggle("open");
-      btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
-    });
+burger?.addEventListener("click", () => {
+  const open = nav.classList.toggle("open");
+  burger.setAttribute("aria-expanded", open);
+});
 
-    nav.querySelectorAll("a").forEach((a) => {
-      a.addEventListener("click", () => {
-        nav.classList.remove("open");
-        btn.setAttribute("aria-expanded", "false");
-      });
-    });
   }
 
   document.addEventListener("DOMContentLoaded", () => {
