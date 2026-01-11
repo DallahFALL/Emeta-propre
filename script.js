@@ -122,10 +122,11 @@
     document.getElementById("emetaForm")
       ?.addEventListener("submit", e => {
         const consent = document.getElementById("consent");
-        if (consent && !consent.checked) {
-          e.preventDefault();
-          consent.focus();
-        }
+        if (!consent.checked) {
+  e.preventDefault();
+  consent.closest(".field")?.classList.add("error");
+  alert(window.I18N[getLang()]["error.consent"]);
+}
       });
   });
 })();
