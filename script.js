@@ -37,11 +37,13 @@
       if (dict[key]) el.textContent = dict[key];
     });
 
-    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-      const key = el.dataset.i18nPlaceholder;
-      if (dict[key]) el.placeholder = dict[key];
-    });
-  }
+    document.querySelectorAll(".help-icon").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const key = "help." + btn.dataset.help;
+    const lang = getLang();
+    alert(window.I18N[lang][key] || "");
+  });
+});
 
   /* ============================
      PDF LINKS (PRO par langue)
