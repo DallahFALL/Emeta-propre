@@ -282,3 +282,14 @@ a{color:inherit;text-decoration:none}
     grid-template-columns: 1fr;
   }
 }
+@media (max-width: 768px) {
+  .help-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .help-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
