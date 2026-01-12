@@ -1,3 +1,8 @@
+/* =====================================================
+   e-META vNext — style.css
+   Clean • Stable • Responsive • Mobile-first corrigé
+===================================================== */
+
 /* ===============================
    BASE
 ================================ */
@@ -28,7 +33,7 @@ a {
 }
 
 /* ===============================
-   HEADER FIXE (UNE SEULE FOIS)
+   HEADER FIXE (UNIQUE)
 ================================ */
 .site-header {
   position: fixed;
@@ -41,7 +46,7 @@ a {
 }
 
 body {
-  padding-top: 72px;
+  padding-top: 72px; /* compensation header */
 }
 
 .header-inner {
@@ -159,16 +164,26 @@ body {
 }
 
 /* ===============================
-   AIDE FORMULAIRE
+   AIDE FORMULAIRE — DESKTOP
 ================================ */
 .form-help {
   max-width: 900px;
   margin: 24px auto;
-  padding: 18px;
+  padding: 18px 20px;
   border-radius: 16px;
-  background: rgba(255,255,255,0.04);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.04),
+    rgba(255,255,255,0.02)
+  );
   border: 1px solid rgba(255,255,255,0.08);
   text-align: center;
+}
+
+.form-help h3 {
+  margin: 0 0 14px;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .help-actions {
@@ -176,7 +191,6 @@ body {
   justify-content: center;
   gap: 14px;
   flex-wrap: wrap;
-  margin-top: 12px;
 }
 
 .help-btn {
@@ -186,9 +200,16 @@ body {
   padding: 10px 16px;
   border-radius: 999px;
   font-size: 0.9rem;
+  font-weight: 600;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.18);
   white-space: nowrap;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.help-btn:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-1px);
 }
 
 /* ===============================
@@ -208,6 +229,7 @@ body {
   padding: 12px 20px;
   border-radius: 999px;
   font-weight: 900;
+  cursor: pointer;
 }
 
 .btn-submit:disabled {
@@ -216,7 +238,7 @@ body {
 }
 
 /* ===============================
-   RESPONSIVE
+   RESPONSIVE — TABLET
 ================================ */
 @media (max-width: 900px) {
   .hero-grid {
@@ -224,11 +246,17 @@ body {
   }
 }
 
+/* ===============================
+   RESPONSIVE — MOBILE (FIX FINAL)
+================================ */
 @media (max-width: 768px) {
+
+  /* Header */
   .logo-tagline {
     display: none;
   }
 
+  /* Hero */
   .hero h1 {
     font-size: 1.4rem;
     text-align: center;
@@ -238,27 +266,41 @@ body {
     text-align: center;
   }
 
+  /* Badge */
   .form-badge {
     font-size: 0.8rem;
+    white-space: normal;
+    text-align: center;
   }
 
-  /* MOBILE : on garde seulement Politique */
-  #pdfGuideLink {
-    display: none;
+  /* Aide : simplification totale */
+  .form-help {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 16px 0 0;
   }
 
   .help-actions {
-    flex-direction: column;
+    display: grid;
+    gap: 10px;
+  }
+
+  /* On garde UNIQUEMENT Politique */
+  #pdfGuideLink {
+    display: none !important;
   }
 
   .help-btn {
     width: 100%;
     justify-content: center;
+    font-size: 0.9rem;
   }
 
-  /* SUPPRESSION DÉFINITIVE DU CADRE FANTÔME */
+  /* AUCUN cadre / pseudo-élément */
   .form-help::before,
   .form-help::after {
-    content: none;
+    content: none !important;
+    display: none !important;
   }
 }
