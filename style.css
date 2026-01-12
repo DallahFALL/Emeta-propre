@@ -387,3 +387,43 @@ a{color:inherit;text-decoration:none}
 .hint.subtle {
   opacity: 0.6;
 }
+/* ================= FORM HELP ================= */
+
+.form-help{
+  margin:24px auto;
+  max-width:900px;
+  text-align:center;
+}
+
+.help-actions{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.help-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:10px 14px;
+  border-radius:999px;
+  font-size:0.85rem;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  white-space:nowrap;
+}
+
+/* Mobile */
+@media (max-width:640px){
+  .help-actions{
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .help-btn{
+    width:100%;
+    justify-content:center;
+  }
+}
