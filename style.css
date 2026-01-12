@@ -1,11 +1,9 @@
 /* =====================================================
-   e-META vNext — style.css
-   Clean • Stable • Responsive • Mobile-first corrigé
+   e-META vNext — STYLE.CSS FINAL PRO
+   Responsive • Clean • Stable
 ===================================================== */
 
-/* ===============================
-   BASE
-================================ */
+/* ================= RESET ================= */
 *,
 *::before,
 *::after {
@@ -21,32 +19,26 @@ html, body {
   overflow-x: hidden;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+a { color: inherit; text-decoration: none; }
 
+/* ================= CONTAINER ================= */
 .container {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 16px;
 }
 
-/* ===============================
-   HEADER FIXE (UNIQUE)
-================================ */
+/* ================= HEADER FIXE ================= */
 .site-header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   z-index: 1000;
   background: linear-gradient(180deg, #0b1020, #070b1a);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
 body {
-  padding-top: 72px; /* compensation header */
+  padding-top: 72px;
 }
 
 .header-inner {
@@ -57,6 +49,7 @@ body {
   gap: 12px;
 }
 
+/* ================= LOGO ================= */
 .logo {
   display: flex;
   align-items: center;
@@ -76,13 +69,11 @@ body {
 }
 
 .logo-tagline {
-  font-size: 0.78rem;
-  opacity: 0.75;
+  font-size: .78rem;
+  opacity: .75;
 }
 
-/* ===============================
-   HERO
-================================ */
+/* ================= HERO ================= */
 .hero {
   padding: 48px 0;
 }
@@ -94,8 +85,8 @@ body {
 }
 
 .hero-box {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
   border-radius: 16px;
   padding: 22px;
 }
@@ -107,7 +98,7 @@ body {
 }
 
 .hero-subtitle {
-  opacity: 0.9;
+  opacity: .9;
   margin-bottom: 14px;
 }
 
@@ -120,19 +111,18 @@ body {
 }
 
 .cta-primary {
-  margin-top: 12px;
-  background: linear-gradient(135deg, #ff7a18, #ff9f1c);
+  margin-top: 14px;
+  width: fit-content;
+  background: linear-gradient(135deg,#ff7a18,#ff9f1c);
   border: none;
   color: #fff;
   border-radius: 999px;
-  padding: 14px 20px;
+  padding: 14px 22px;
   font-weight: 900;
   cursor: pointer;
 }
 
-/* ===============================
-   FORM HEADER
-================================ */
+/* ================= FORM HEADER ================= */
 .form-header {
   max-width: 900px;
   margin: 0 auto 24px;
@@ -148,115 +138,167 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin: 12px auto;
+  margin: 12px auto 16px;
   padding: 6px 14px;
-  font-size: 0.85rem;
-  border-radius: 999px;
-  background: rgba(255,138,0,0.12);
-  color: #ff9f1c;
+  font-size: .85rem;
   font-weight: 600;
-  white-space: nowrap;
+  border-radius: 999px;
+  background: rgba(255,138,0,.12);
+  color: #ff9f1c;
 }
 
 .form-intro {
-  opacity: 0.85;
+  opacity: .85;
   line-height: 1.6;
 }
 
-/* ===============================
-   AIDE FORMULAIRE — DESKTOP
-================================ */
+/* ================= FORM ================= */
+.emeta-form {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ================= FIELDSETS ================= */
+.field-group {
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+
+.field-group legend {
+  padding: 0 10px;
+  font-weight: 900;
+}
+
+/* ================= FIELDS ================= */
+.field {
+  margin: 14px 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: .92rem;
+  opacity: .9;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  background: #0f162e;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 1rem;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.hint {
+  margin-top: 6px;
+  font-size: .85rem;
+  opacity: .7;
+}
+
+/* ================= GRIDS ================= */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 14px;
+}
+
+.field-with-unit {
+  display: grid;
+  grid-template-columns: 1fr 110px;
+  gap: 10px;
+}
+
+/* ================= CHECKBOX ================= */
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+  gap: 10px;
+}
+
+.check-item {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+/* ================= AIDE FORMULAIRE ================= */
 .form-help {
   max-width: 900px;
   margin: 24px auto;
-  padding: 18px 20px;
+  padding: 18px;
   border-radius: 16px;
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.04),
-    rgba(255,255,255,0.02)
-  );
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
   text-align: center;
-}
-
-.form-help h3 {
-  margin: 0 0 14px;
-  font-size: 1rem;
-  font-weight: 700;
 }
 
 .help-actions {
   display: flex;
-  justify-content: center;
   gap: 14px;
+  justify-content: center;
   flex-wrap: wrap;
+  margin-top: 12px;
 }
 
 .help-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
   padding: 10px 16px;
   border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.18);
+  font-size: .9rem;
   white-space: nowrap;
-  transition: background .2s ease, transform .2s ease;
 }
 
-.help-btn:hover {
-  background: rgba(255,255,255,0.12);
-  transform: translateY(-1px);
-}
-
-/* ===============================
-   FORM ACTIONS
-================================ */
+/* ================= ACTIONS ================= */
 .form-actions {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin-top: 20px;
+  gap: 14px;
+  margin: 26px 0;
+  flex-wrap: wrap;
 }
 
 .btn-submit {
-  background: linear-gradient(135deg, #ff7a18, #ff9f1c);
+  background: linear-gradient(135deg,#ff7a18,#ff9f1c);
   border: none;
   color: #fff;
-  padding: 12px 20px;
+  padding: 14px 26px;
   border-radius: 999px;
   font-weight: 900;
-  cursor: pointer;
 }
 
 .btn-submit:disabled {
-  opacity: 0.45;
+  opacity: .45;
   cursor: not-allowed;
 }
 
-/* ===============================
-   RESPONSIVE — TABLET
-================================ */
+/* ================= RESPONSIVE ================= */
 @media (max-width: 900px) {
   .hero-grid {
     grid-template-columns: 1fr;
   }
 }
 
-/* ===============================
-   RESPONSIVE — MOBILE (FIX FINAL)
-================================ */
 @media (max-width: 768px) {
 
-  /* Header */
-  .logo-tagline {
-    display: none;
-  }
+  .logo-tagline { display: none; }
 
-  /* Hero */
   .hero h1 {
     font-size: 1.4rem;
     text-align: center;
@@ -266,41 +308,30 @@ body {
     text-align: center;
   }
 
-  /* Badge */
-  .form-badge {
-    font-size: 0.8rem;
-    white-space: normal;
-    text-align: center;
+  .cta-primary {
+    width: 100%;
   }
 
-  /* Aide : simplification totale */
-  .form-help {
-    background: transparent;
-    border: none;
-    padding: 0;
-    margin: 16px 0 0;
+  .grid-2,
+  .field-with-unit {
+    grid-template-columns: 1fr;
   }
+
+  /* Mobile : garder UNIQUEMENT Politique */
+  #pdfGuideLink { display: none !important; }
 
   .help-actions {
-    display: grid;
-    gap: 10px;
-  }
-
-  /* On garde UNIQUEMENT Politique */
-  #pdfGuideLink {
-    display: none !important;
+    flex-direction: column;
   }
 
   .help-btn {
     width: 100%;
     justify-content: center;
-    font-size: 0.9rem;
   }
 
-  /* AUCUN cadre / pseudo-élément */
-  .form-help::before,
-  .form-help::after {
-    content: none !important;
-    display: none !important;
+  .form-help {
+    background: transparent;
+    border: none;
+    padding: 0;
   }
 }
