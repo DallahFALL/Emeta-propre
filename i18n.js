@@ -133,6 +133,7 @@ window.I18N = {
     "help.guide": "📘 Official guide to complete the form",
 
     "form.title": "e-META vNext Form — Premium strategic analysis",
+    "form.badge.cabinet": "Structured analysis — consulting firm level",
     "form.intro": "The more precise your answers, the more accurate and useful your e-META recommendation will be.",
       
     "group.general": "1) Qualify the decision",
@@ -236,6 +237,7 @@ window.I18N = {
     "help.guide": "📘 Guía oficial para completar el formulario",
 
     "form.title": "Formulario e-META vNext — Análisis estratégico premium",
+    "form.badge.cabinet": "Análisis estructurado — nivel consultoría",
     "form.intro": "Cuanto más precisas sean tus respuestas, más útil y exacta será la recomendación de e-META.",
     
     "group.general": "1) Definir la decisión",
@@ -339,6 +341,7 @@ window.I18N = {
     "help.guide": "📘 الدليل الرسمي لملء النموذج",
  
     "form.title": "نموذج e-META vNext — تحليل استراتيجي متميز",
+    "form.badge.cabinet": "تحليل منظم — بمستوى مكتب استشارات",
     "form.intro": "كلما كانت إجاباتك أدق، كانت توصية e-META أكثر دقة وفائدة.",
     
     "group.general": "1) تحديد القرار",
