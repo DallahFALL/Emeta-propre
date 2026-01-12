@@ -502,3 +502,35 @@ a{color:inherit;text-decoration:none}
     margin-bottom: 0;
   }
 }
+@media (max-width: 767px){
+
+  /* 1) on garde seulement le bouton "Politique" */
+  #pdfGuideLink{ display:none !important; }
+
+  /* 2) on supprime toute zone/cadre parasite autour */
+  .form-help{
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 16px 0 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* 3) les boutons en colonne propre */
+  .help-actions{
+    display: grid !important;
+    gap: 10px !important;
+  }
+
+  /* 4) IMPORTANT : supprimer tout élément vide juste après les boutons */
+  .help-actions + *{
+    display:none !important;
+  }
+
+  /* 5) si le “cadre” est un pseudo-élément */
+  .form-help::before,
+  .form-help::after{
+    content:none !important;
+    display:none !important;
+  }
+}
