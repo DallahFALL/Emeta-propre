@@ -427,3 +427,78 @@ a{color:inherit;text-decoration:none}
     justify-content:center;
   }
 }
+/* ===============================
+   AIDE FORMULAIRE — DESKTOP
+================================ */
+
+.form-help {
+  margin: 24px 0;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.form-help h3 {
+  margin: 0 0 14px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* Conteneur des boutons */
+.help-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Boutons aide */
+.help-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: all .25s ease;
+}
+
+.help-btn:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-1px);
+}
+/* ===============================
+   MOBILE — SIMPLIFICATION AIDE
+================================ */
+@media (max-width: 767px) {
+
+  /* Empilement propre */
+  .help-actions {
+    flex-direction: column;
+  }
+
+  /* MASQUER le guide officiel sur mobile */
+  #pdfGuideLink {
+    display: none !important;
+  }
+
+  /* Réduction padding cadre */
+  .form-help {
+    padding: 14px;
+  }
+}
+/* Nettoyage mobile bas de page */
+@media (max-width: 767px) {
+  .form-section::after {
+    content: none;
+  }
+
+  .emeta-form > :last-child {
+    margin-bottom: 0;
+  }
+}
