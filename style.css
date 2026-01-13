@@ -309,14 +309,6 @@ a{color:inherit;text-decoration:none}
   color: #ff8a00;
   font-weight: 600;
 }
-  /* ================================
-   FORM HELP — RESPONSIVE SAFE
-================================ */
-
-/* Conteneur de l'aide */
-.form-help,
-.form-intro,
-.help-box
 
 @media (max-width: 768px) {
   .logo {
@@ -553,6 +545,35 @@ a{color:inherit;text-decoration:none}
     display:none !important;
   }
 }
+  /* ===============================
+   FORM HELP — DESKTOP
+================================ */
+
+.form-help {
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.form-help h3,
+.form-help strong {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+/* Groupe de boutons */
+.form-help .help-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 /* ================================
    FORM FIELDS — RESPONSIVE SAFE
 ================================ */
