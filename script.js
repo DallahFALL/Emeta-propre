@@ -1,11 +1,10 @@
 /* =====================================================
-   e-META — script.js FINAL PRO
+   e-META — script.js FINAL PRO (STABLE)
    - Burger menu mobile
    - Scroll intelligent vers formulaire
-   - Gestion langues FR / EN / ES / AR
-   - Persistance langue (localStorage)
-   - RTL auto (ar)
-   - Compatible index.html + privacy.html
+   - Activation bouton submit
+   - Langue persistée (index + privacy)
+   - Compatible RTL
 ===================================================== */
 
 (function () {
@@ -13,22 +12,23 @@
 
   /* ===============================
      CONFIG
-  ============================== */
+  =============================== */
   const DEFAULT_LANG = "fr";
-  const STORAGE_KEY = "emeta_lang";
+  const STORAGE_KEY = "eMETA_lang";
 
   /* ===============================
      DOM READY
-  ============================== */
+  =============================== */
   document.addEventListener("DOMContentLoaded", () => {
     initBurger();
     initScrollButtons();
     initLanguage();
+    initSubmitLogic();
   });
 
   /* ===============================
      BURGER MENU
-  ============================== */
+  =============================== */
   function initBurger() {
     const burger = document.getElementById("burgerBtn");
     const nav = document.getElementById("mainNav");
@@ -36,11 +36,11 @@
     if (!burger || !nav) return;
 
     burger.addEventListener("click", () => {
-      const open = nav.classList.toggle("open");
-      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      const isOpen = nav.classList.toggle("open");
+      burger.setAttribute("aria-expanded", isOpen);
     });
 
-    // Fermer menu au clic sur un lien
+    // Fermer menu après clic (mobile)
     nav.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         nav.classList.remove("open");
@@ -51,85 +51,93 @@
 
   /* ===============================
      SCROLL VERS FORMULAIRE
-  ============================== */
+  =============================== */
   function initScrollButtons() {
-    const form = document.getElementById("form");
-
-    if (!form) return;
-
     const scrollToForm = () => {
-      form.scrollIntoView({
+      document.getElementById("form")?.scrollIntoView({
         behavior: "smooth",
         block: "start"
       });
     };
 
-    document.getElementById("startBtn")?.addEventListener("click", scrollToForm);
-    document.getElementById("customBtn")?.addEventListener("click", scrollToForm);
+    document.getElementById("startBtn")
+      ?.addEventListener("click", scrollToForm);
 
-    // Lien menu "Formulaire"
-    document.querySelectorAll('a[href="#form"]').forEach(link => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        scrollToForm();
-      });
-    });
+    document.getElementById("customBtn")
+      ?.addEventListener("click", scrollToForm);
   }
 
   /* ===============================
-     LANGUES & RTL
-  ============================== */
+     LANGUE + PERSISTENCE
+  =============================== */
   function initLanguage() {
     const select = document.getElementById("langSelect");
-    if (!select) return;
+    if (!select || typeof window.I18N === "undefined") return;
 
-    // Langue stockée
     const savedLang = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
-    select.value = savedLang;
     applyLanguage(savedLang);
+    select.value = savedLang;
 
-    // Changement utilisateur
-    select.addEventListener("change", () => {
-      const lang = select.value;
-      localStorage.setItem(STORAGE_KEY, lang);
-      applyLanguage(lang);
+    select.addEventListener("change", e => {
+      applyLanguage(e.target.value);
+    });
+  }
+
+  function applyLanguage(lang) {
+    localStorage.setItem(STORAGE_KEY, lang);
+
+    // Direction RTL
+    document.documentElement.setAttribute(
+      "dir",
+      lang === "ar" ? "rtl" : "ltr"
+    );
+
+    // Feuille RTL
+    const rtl = document.getElementById("rtlStylesheet");
+    if (rtl) rtl.disabled = lang !== "ar";
+
+    // Texte
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (window.I18N[lang]?.[key]) {
+        el.textContent = window.I18N[lang][key];
+      }
+    });
+
+    // Placeholders
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+      const key = el.getAttribute("data-i18n-placeholder");
+      if (window.I18N[lang]?.[key]) {
+        el.setAttribute("placeholder", window.I18N[lang][key]);
+      }
     });
   }
 
   /* ===============================
-     APPLY LANGUAGE
-  ============================== */
-  function applyLanguage(lang) {
-    // Direction RTL
-    const isRTL = lang === "ar";
-    document.documentElement.setAttribute("lang", lang);
-    document.documentElement.setAttribute("dir", isRTL ? "rtl" : "ltr");
+     BOUTON SUBMIT INTELLIGENT
+  =============================== */
+  function initSubmitLogic() {
+    const form = document.querySelector("form");
+    const submitBtn = document.querySelector(".btn-submit");
 
-    // Charger RTL CSS si nécessaire
-    const rtlCSS = document.getElementById("rtlStylesheet");
-    if (rtlCSS) {
-      rtlCSS.disabled = !isRTL;
-    }
+    if (!form || !submitBtn) return;
 
-    // Traductions
-    if (window.I18N && window.I18N[lang]) {
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if (window.I18N[lang][key]) {
-          el.innerHTML = window.I18N[lang][key];
-        }
-      });
-    }
+    const requiredFields = form.querySelectorAll(
+      "select[required], input[required], textarea[required]"
+    );
+    const consent = form.querySelector('input[type="checkbox"]');
 
-    // Placeholders
-    if (window.I18N && window.I18N[lang]) {
-      document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-        const key = el.getAttribute("data-i18n-placeholder");
-        if (window.I18N[lang][key]) {
-          el.setAttribute("placeholder", window.I18N[lang][key]);
-        }
-      });
-    }
+    const updateState = () => {
+      const fieldsOk = [...requiredFields].every(f => f.value.trim() !== "");
+      const consentOk = !consent || consent.checked;
+
+      submitBtn.disabled = !(fieldsOk && consentOk);
+    };
+
+    form.addEventListener("input", updateState);
+    form.addEventListener("change", updateState);
+
+    updateState();
   }
 
 })();
