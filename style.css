@@ -555,6 +555,18 @@ a{color:inherit;text-decoration:none}
   max-width: 100%;
   box-sizing: border-box;
 }
+  select {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #ff8a00 50%),
+    linear-gradient(135deg, #ff8a00 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(1em + 2px),
+    calc(100% - 13px) calc(1em + 2px);
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
 @media (max-width: 768px) {
 
   .form-section {
