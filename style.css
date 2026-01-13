@@ -658,3 +658,83 @@ a{color:inherit;text-decoration:none}
     display: none;
   }
 }
+/* =====================================================
+   FIX — DOUBLON TITRE "QUALIFIER LA DÉCISION"
+===================================================== */
+
+/* Masquer tout titre redondant AVANT le premier fieldset */
+.emeta-form > h3,
+.emeta-form > .form-step,
+.emeta-form > .step-title {
+  display: none !important;
+}
+
+/* Garder le legend comme seul titre */
+.field-group legend {
+  display: block;
+}
+/* =====================================================
+   FIX — AIDE FORMULAIRE (NETTOYAGE TOTAL)
+===================================================== */
+
+/* Neutralisation complète de tout ancien bloc aide */
+.form-help,
+.form-help *,
+.help-actions,
+.help-btn {
+  display: none !important;
+}
+
+/* Icônes flottantes — comportement final */
+.help-icons {
+  position: fixed;
+  right: 18px;
+  bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10000;
+}
+
+/* Icône */
+.help-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(15,20,40,0.95);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0;
+  transition: all 0.2s ease;
+}
+
+.help-privacy::before { content: "🔒"; font-size: 18px; }
+.help-guide::before   { content: "ⓘ"; font-size: 18px; }
+
+/* Hover desktop */
+.help-icon:hover {
+  background: rgba(255,138,0,0.18);
+  border-color: rgba(255,138,0,0.45);
+  transform: translateY(-2px);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .help-icons {
+    right: 12px;
+    bottom: 16px;
+  }
+
+  .help-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* UX mobile : garder seulement la confidentialité */
+  .help-guide {
+    display: none;
+  }
+}
