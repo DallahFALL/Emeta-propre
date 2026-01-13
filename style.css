@@ -119,47 +119,186 @@ body {
   font-weight: 800;
   cursor: pointer;
 }
-.burger {
-  display: none;
-  background: none;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
+.hero {
+  padding: 48px 0;
 }
 
-.burger span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: #fff;
-  margin: 4px 0;
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 20px;
 }
 
-.nav {
-  display: flex;
-  gap: 18px;
+.hero-box {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  padding: 22px;
 }
 
-.header-actions {
-  display: flex;
-  gap: 10px;
-  align-items: center;
+.hero h1 {
+  font-size: 2rem;
+  line-height: 1.25;
 }
 
-.lang-select {
-  background: #0f162e;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 999px;
-  padding: 6px 10px;
+.hero-subtitle {
+  opacity: .9;
+  margin-bottom: 14px;
 }
 
-.cta-custom {
+.cta-primary {
+  margin-top: 14px;
+  width: fit-content;
+  max-width: 100%;
   background: linear-gradient(135deg,#ff7a18,#ff9f1c);
   border: none;
   color: #fff;
   border-radius: 999px;
-  padding: 8px 14px;
+  padding: 14px 20px;
+  font-weight: 900;
+}
+/* ===============================
+   FORM GLOBAL
+================================ */
+form,
+fieldset {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+fieldset {
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+
+legend {
+  padding: 0 10px;
   font-weight: 800;
-  cursor: pointer;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: .9rem;
+  opacity: .9;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  max-width: 100%;
+  background: #0f162e;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+/* ===============================
+   OPTIONS / CHECKBOX
+================================ */
+.option-row,
+.checkbox-row {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.06);
+  margin-bottom: 10px;
+}
+.form-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn-submit,
+.btn-secondary {
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 900;
+  max-width: 100%;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg,#ff7a18,#ff9f1c);
+  border: none;
+  color: #fff;
+}
+
+.btn-submit:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
+}
+@media (max-width: 768px) {
+
+  body { padding-top: 64px; }
+
+  .logo-tagline { display: none; }
+
+  .burger { display: block; }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .nav.open { display: flex; }
+
+  .header-inner {
+    flex-wrap: wrap;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .cta-custom {
+    width: 100%;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .hero-box {
+    text-align: center;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .btn-submit,
+  .btn-secondary {
+    width: 100%;
+  }
 }
