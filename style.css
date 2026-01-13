@@ -738,3 +738,46 @@ a{color:inherit;text-decoration:none}
     display: none;
   }
 }
+/* ===============================
+   FORM HEADER — PRO
+================================ */
+
+.form-header {
+  max-width: 900px;
+  margin: 0 auto 28px;
+  text-align: center;
+}
+
+.section-title {
+  margin: 0 0 8px;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.form-intro {
+  margin-top: 12px;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+/* ===============================
+   FIELDSET / LEGEND — PRO
+================================ */
+
+.field-group {
+  margin-top: 24px;
+}
+
+/* Legend = titre d’étape (pas un H2 bis) */
+.field-legend {
+  font-size: 1rem;
+  font-weight: 700;
+  opacity: 0.85;
+  padding: 0 8px;
+}
+
+/* Option UX : numérotation légère */
+.field-legend::before {
+  content: "1. ";
+  opacity: 0.6;
+}
