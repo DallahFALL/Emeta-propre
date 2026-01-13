@@ -472,6 +472,16 @@ a{color:inherit;text-decoration:none}
   background: rgba(255,255,255,0.12);
   transform: translateY(-1px);
 }
+ /* ================================
+   FORM CONTAINER — PRO WIDTH
+================================ */
+
+.form-section {
+  max-width: 980px;           /* 👈 largeur PRO (au lieu de full width) */
+  margin: 0 auto;             /* centrage */
+  padding: 0 20px;            /* sécurité mobile */
+}
+ 
 /* ===============================
    MOBILE — SIMPLIFICATION AIDE
 ================================ */
