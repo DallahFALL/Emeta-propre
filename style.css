@@ -544,3 +544,14 @@ a{color:inherit;text-decoration:none}
     display:none !important;
   }
 }
+/* ================================
+   FORM FIELDS — RESPONSIVE SAFE
+================================ */
+
+.form-section input,
+.form-section select,
+.form-section textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
