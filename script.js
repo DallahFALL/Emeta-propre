@@ -149,3 +149,58 @@
   });
 
 })();
+/* =====================================================
+   e-META — RÉSUMÉ INTELLIGENT AVANT SOUMISSION
+===================================================== */
+
+(function () {
+  const form = document.getElementById("emetaForm");
+  const summaryBox = document.getElementById("summaryBox");
+  const summaryContent = document.getElementById("summaryContent");
+  const submitBtn = form.querySelector(".btn-submit");
+
+  if (!form || !submitBtn) return;
+
+  // Intercepter le clic sur "Soumettre"
+  submitBtn.addEventListener("click", function (e) {
+    if (submitBtn.disabled) return;
+
+    e.preventDefault();
+    generateSummary();
+  });
+
+  function generateSummary() {
+    summaryContent.innerHTML = "";
+
+    const fields = form.querySelectorAll("input, textarea, select");
+    fields.forEach((field) => {
+      if (!field.name || !field.value) return;
+      if (field.type === "checkbox" && !field.checked) return;
+
+      const label = form.querySelector(`label[for="${field.id}"]`);
+      const labelText = label ? label.innerText : field.name;
+
+      const item = document.createElement("div");
+      item.className = "summary-item";
+      item.innerHTML = `
+        <span>${labelText}</span>
+        <strong>${field.value}</strong>
+      `;
+      summaryContent.appendChild(item);
+    });
+
+    summaryBox.hidden = false;
+    summaryBox.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  // Modifier → revenir au formulaire
+  document.getElementById("editSummaryBtn")?.addEventListener("click", () => {
+    summaryBox.hidden = true;
+  });
+
+  // Confirmer → envoi réel
+  document.getElementById("confirmSummaryBtn")?.addEventListener("click", () => {
+    summaryBox.hidden = true;
+    form.submit();
+  });
+})();
