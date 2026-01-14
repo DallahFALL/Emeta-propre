@@ -283,28 +283,51 @@
           </div>
         </fieldset>
 
-        <fieldset class="field-group">
-          <legend data-i18n="group.trust"></legend>
-          <label class="check-item">
-            <input type="checkbox" id="consent" name="consent" required />
-            <span data-i18n="field.consent.label"></span>
-          </label>
-        </fieldset>
+        <!-- CONSENTEMENT -->
+<fieldset class="field-group">
+  <legend data-i18n="group.trust"></legend>
+  <label class="check-item">
+    <input type="checkbox" id="consent" name="consent" required />
+    <span data-i18n="field.consent.label"></span>
+  </label>
+</fieldset>
 
-        <div class="form-actions">
-          <button
-  type="submit"
-  class="btn-submit"
-  data-i18n="form.submit"
-  disabled>
-</button>
+<!-- =========================
+     RÉSUMÉ AVANT SOUMISSION
+========================== -->
+<div id="summaryBox" class="summary-box" hidden>
+  <h3 class="summary-title" data-i18n="summary.title">
+    Vérification finale
+  </h3>
 
-<button
-  type="reset"
-  class="btn-secondary"
-  data-i18n="form.reset">
-</button>
-        </div>
+  <div class="summary-content" id="summaryContent"></div>
+
+  <div class="summary-actions">
+    <button type="button" class="btn-secondary" id="editSummaryBtn">
+      Modifier
+    </button>
+    <button type="button" class="btn-submit" id="confirmSummaryBtn">
+      Confirmer et envoyer
+    </button>
+  </div>
+</div>
+
+<!-- ACTIONS DU FORMULAIRE -->
+<div class="form-actions">
+  <button
+    type="submit"
+    class="btn-submit"
+    data-i18n="form.submit"
+    disabled>
+  </button>
+
+  <button
+    type="reset"
+    class="btn-secondary"
+    data-i18n="form.reset">
+  </button>
+</div>
+
       </form>
     </div>
   </section>
