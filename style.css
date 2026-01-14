@@ -781,3 +781,47 @@ a{color:inherit;text-decoration:none}
   content: "1. ";
   opacity: 0.6;
 }
+/* =====================================================
+   e-META — FORM STEPS STICKY (PRO UX)
+===================================================== */
+
+/* Étape visible au scroll */
+.field-group {
+  position: relative;
+  padding-top: 28px;
+}
+
+/* Legend sticky */
+.field-legend {
+  position: sticky;
+  top: 78px; /* sous le header */
+  z-index: 5;
+
+  background: linear-gradient(
+    180deg,
+    rgba(11,16,32,0.98),
+    rgba(11,16,32,0.90)
+  );
+
+  padding: 6px 12px;
+  margin-left: -12px;
+  margin-right: -12px;
+
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Séparateur visuel subtil */
+.field-group:not(:first-of-type) {
+  margin-top: 32px;
+}
+
+/* Mobile : plus discret */
+@media (max-width: 768px) {
+  .field-legend {
+    top: 66px;
+    font-size: 0.9rem;
+  }
+}
