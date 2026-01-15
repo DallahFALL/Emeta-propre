@@ -49,7 +49,7 @@ fr: {
   /* ===== FOOTER ===== */
   "footer.text": "e-META — Moteur d’intelligence décisionnelle stratégique.",
   "footer.privacy": "Politique de confidentialité",
-  "footer.copy": "© 2026 e-META — Tous droits réservés"
+  "footer.copy": "© 2026 e-META — Tous droits réservés",
 },
  
   en: {
