@@ -1,27 +1,54 @@
 // i18n.js — e-META vNext (FR / EN / ES / AR)
 window.I18N = {
-"privacy.meta.title": "Politique de confidentialité — e-META",
-"privacy.title": "Politique de confidentialité",
-"privacy.back": "← Retour à l’accueil",
+fr: {
+  "meta.title": "e-META — Assistant IA de prise de décision",
+  "header.tagline": "Assistant IA multilingue de prise de décision",
 
-"privacy.intro": "e-META accorde une importance majeure à la protection des données personnelles. Cette politique explique de manière transparente comment les informations sont collectées, utilisées et protégées.",
+  "nav.home": "Accueil",
+  "nav.form": "Formulaire",
+  "nav.privacy": "Confidentialité",
+  "cta.custom": "Requête personnalisée",
 
-"privacy.section1.title": "1. Nature du service",
-"privacy.section1.text": "e-META est un assistant d’aide à la décision stratégique basé sur l’intelligence artificielle. Les analyses fournies ne constituent ni un conseil juridique, financier, médical ou réglementaire.",
+  "hero.title": "Donnez à vos décisions le niveau d’un cabinet de conseil premium",
+  "hero.subtitle": "e-META structure votre contexte, objectifs, contraintes et indicateurs pour produire une recommandation claire, actionnable et documentée.",
+  "hero.point1": "Analyse structurée (niveau consultant senior)",
+  "hero.point2": "Recommandations actionnables + risques + KPIs",
+  "hero.point3": "Restitution personnalisée (Email / WhatsApp / PDF)",
+  "hero.cta": "Commencer une analyse stratégique",
+  "hero.badge.title": "Mode cabinet",
+  "hero.badge.text": "Cadres d’analyse + feuille de route",
+  "hero.note": "e-META n’est pas un chatbot : c’est un moteur d’intelligence décisionnelle.",
 
-"privacy.section2.title": "2. Données collectées",
-"privacy.section2.item1": "Informations saisies volontairement dans les formulaires.",
-"privacy.section2.item2": "Coordonnées de contact si une restitution est demandée.",
-"privacy.section2.item3": "Documents ou liens transmis volontairement par l’utilisateur.",
+  "help.title": "Besoin d’aide avant de commencer ?",
+  "help.privacy": "🔒 Politique de confidentialité",
+  "help.guide": "📘 Guide officiel pour bien remplir le formulaire",
 
-"privacy.section3.title": "3. Utilisation des données",
-"privacy.section3.text": "Les données sont utilisées exclusivement pour générer des analyses personnalisées, adapter le format de restitution et améliorer la qualité des recommandations.",
+  "form.title": "Formulaire e-META vNext — Analyse stratégique premium",
+  "form.badge.cabinet": "Analyse structurée — niveau cabinet de conseil",
+  "form.intro": "Plus vos réponses sont précises, plus la recommandation e-META sera juste, nuancée et exploitable.",
 
-"privacy.section4.title": "4. Conservation et sécurité",
-"privacy.section4.text": "Les données sont conservées uniquement pour la durée nécessaire à l’analyse et protégées par des mesures techniques et organisationnelles raisonnables.",
+  "group.general": "1) Qualifier la décision",
+  "group.analysis": "2) Structurer l’analyse (niveau cabinet)",
+  "group.budget": "3) Ambition, budget & urgence",
+  "group.output": "4) Restitution & contact",
+  "group.trust": "Confiance & consentement",
 
-"privacy.section5.title": "5. Responsabilité",
-"privacy.section5.text": "L’utilisateur reste seul responsable des décisions prises sur la base des analyses fournies par e-META.",
+  "field.consent.label": "J’accepte que les informations fournies soient utilisées uniquement pour générer mon analyse e-META. Aucune donnée ne sera revendue.",
+
+  "form.submit": "Générer ma recommandation e-META",
+  "form.reset": "Réinitialiser",
+
+  "help.problem": "Expliquez le vrai problème stratégique, pas seulement les symptômes visibles.",
+  "help.objectives": "Limitez-vous à 3–5 objectifs mesurables et hiérarchisés.",
+  "help.constraints": "Incluez contraintes internes ET externes (budget, délais, réglementation…).",
+  "help.kpis": "Choisissez des indicateurs directement liés à la réussite de la décision.",
+
+  "privacy.back": "← Retour à l’accueil",
+
+  "footer.text": "e-META — Moteur d’intelligence décisionnelle stratégique.",
+  "footer.privacy": "Politique de confidentialité",
+  "footer.copy": "© 2026 e-META — Tous droits réservés"
+}
  
   "privacy.meta.title": "Privacy Policy — e-META",
 "privacy.title": "Privacy Policy",
