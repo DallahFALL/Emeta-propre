@@ -1,6 +1,6 @@
 // i18n.js — e-META vNext (FR / EN / ES / AR)
 window.I18N = {
- fr: {
+fr: {
   /* ===== META / HEADER ===== */
   "meta.title": "e-META — Assistant IA de prise de décision",
   "header.tagline": "Assistant IA multilingue de prise de décision",
@@ -22,7 +22,7 @@ window.I18N = {
   "hero.badge.text": "Cadres d’analyse + feuille de route",
   "hero.note": "e-META n’est pas un chatbot : c’est un moteur d’intelligence décisionnelle.",
 
-  /* ===== AIDE AVANT FORMULAIRE ===== */
+  /* ===== AIDE ===== */
   "help.title": "Besoin d’aide avant de commencer ?",
   "help.privacy": "🔒 Politique de confidentialité",
   "help.guide": "📘 Guide officiel pour bien remplir le formulaire",
@@ -39,92 +39,18 @@ window.I18N = {
   "group.output": "4) Restitution & contact",
   "group.trust": "Confiance & consentement",
 
-  /* ===== CHAMPS ===== */
-  "field.domain.label": "Domaine principal",
-  "field.domain.placeholder": "Sélectionnez un domaine",
-  "field.domain.strategy": "Stratégie & gouvernance",
-  "field.domain.finance": "Finance & modèle économique",
-  "field.domain.marketing": "Marketing & croissance",
-  "field.domain.operations": "Opérations & organisation",
-  "field.domain.it": "Innovation / IA / digital",
-  "field.domain.legal": "Juridique & conformité",
-  "field.domain.impact": "Impact social & environnemental",
-  "field.domain.other": "Autre",
-
-  "field.decisionType.label": "Nature de la décision",
-  "field.decisionType.placeholder": "Sélectionnez un type",
-  "field.decisionType.t1": "Décision stratégique structurante",
-  "field.decisionType.t2": "Optimisation / amélioration d’un existant",
-  "field.decisionType.t3": "Arbitrage entre plusieurs options",
-  "field.decisionType.t4": "Lancement de projet / produit",
-  "field.decisionType.t5": "Réponse à une urgence",
-  "field.decisionType.t6": "Préparation d’un dossier (financement, comité, partenaire)",
-
-  "field.title.label": "Titre court de la décision",
-  "field.title.ph": "Ex : Repenser notre stratégie de distribution au Sénégal",
-  "field.title.hint": "Une phrase courte et précise : elle guidera toute la synthèse.",
-
-  "field.problem.label": "Problème central à résoudre",
-  "field.problem.ph": "Décrivez le vrai problème (pas seulement les symptômes).",
-  "field.objectives.label": "Objectifs prioritaires (3–5 max)",
-  "field.objectives.ph": "Ex : augmenter la marge, réduire le churn, accélérer le déploiement…",
-  "field.constraints.label": "Contraintes & risques majeurs",
-  "field.constraints.ph": "Budget, délais, réglementation, ressources, résistance interne…",
-  "field.kpis.label": "KPIs / indicateurs de succès",
-  "field.kpis.ph": "Ex : CA, ROI, NPS, délais, qualité, satisfaction…",
-  "field.resources.label": "Ressources déjà disponibles",
-  "field.resources.ph": "Équipe, outils, données, partenaires, budget initial…",
-  "field.context.label": "Contexte détaillé (recommandé)",
-  "field.context.ph": "Historique, acteurs, décisions déjà prises, contraintes locales…",
-
-  "field.budgetMin.label": "Budget minimum envisagé",
-  "field.budgetMin.ph": "Ex : 1000000",
-  "field.budgetMax.label": "Budget maximum (si applicable)",
-  "field.budgetMax.ph": "Ex : 2500000",
-  "field.deadline.label": "Délai souhaité",
-  "field.deadline.ph": "Ex : 7 jours, 1 mois, avant une date précise…",
-  "field.urgency.label": "Niveau d’urgence",
-  "field.urgency.low": "Faible",
-  "field.urgency.medium": "Normal",
-  "field.urgency.high": "Critique",
-
-  "field.outputMode.label": "Mode de restitution souhaité (plusieurs choix possibles)",
-  "field.outputMode.email": "Email structuré (détaillé)",
-  "field.outputMode.whatsapp": "WhatsApp (synthétique & action)",
-  "field.outputMode.pdf": "PDF professionnel",
-  "field.outputMode.display": "Affichage direct sur e-META",
-
-  "field.email.label": "Adresse email (si email ou PDF)",
-  "field.email.ph": "adresse@email.com",
-  "field.whatsapp.label": "Numéro WhatsApp (avec indicatif)",
-  "field.whatsapp.ph": "+221782607212",
-
-  "field.fileLink.label": "Lien vers un fichier/dossier (optionnel)",
-  "field.fileLink.ph": "Google Drive, Dropbox, Notion, PDF, etc.",
-  "field.fileLink.hint": "Ajoutez un lien si vous avez déjà un document utile (plan, chiffres, pitch, etc.).",
-
-  "field.consent.label": "J’accepte que les informations fournies soient utilisées uniquement pour générer mon analyse e-META. Aucune donnée ne sera revendue.",
-
   /* ===== ACTIONS ===== */
   "form.submit": "Générer ma recommandation e-META",
   "form.reset": "Réinitialiser",
-
-  /* ===== AIDE PEDAGOGIQUE ===== */
-  "help.problem": "Expliquez le vrai problème stratégique, pas seulement les symptômes visibles.",
-  "help.objectives": "Limitez-vous à 3–5 objectifs mesurables et hiérarchisés.",
-  "help.constraints": "Incluez contraintes internes ET externes (budget, délais, réglementation…).",
-  "help.kpis": "Choisissez des indicateurs directement liés à la réussite de la décision.",
 
   /* ===== PRIVACY ===== */
   "privacy.back": "← Retour à l’accueil",
 
   /* ===== FOOTER ===== */
-    "footer.text": "e-META — Moteur d’intelligence décisionnelle stratégique.",
+  "footer.text": "e-META — Moteur d’intelligence décisionnelle stratégique.",
   "footer.privacy": "Politique de confidentialité",
-  "footer.copy": "© 2026 e-META — Tous droits réservés",
-
-  "privacy.back": "← Retour à l’accueil"
-}
+  "footer.copy": "© 2026 e-META — Tous droits réservés"
+},
  
   en: {
     "meta.title": "e-META — Decision-Making AI Assistant",
