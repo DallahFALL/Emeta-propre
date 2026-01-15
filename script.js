@@ -236,4 +236,30 @@
     form.addEventListener("change", saveFormState);
 
   });
+   /* =====================================================
+   e-META — i18n AUTO SUR PAGES SECONDAIRES (privacy, etc.)
+===================================================== */
+
+(function applyLangOnAllPages() {
+  const lang = localStorage.getItem("emeta_lang") || "fr";
+
+  // HTML lang + dir
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+  // RTL CSS
+  const rtl = document.getElementById("rtlStylesheet");
+  if (rtl) rtl.disabled = lang !== "ar";
+
+  // I18N contenu
+  const dict = window.I18N?.[lang];
+  if (!dict) return;
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    if (dict[key]) el.textContent = dict[key];
+  });
+
+})();
+
 })();
