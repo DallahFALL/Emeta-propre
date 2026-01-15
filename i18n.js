@@ -119,9 +119,11 @@ window.I18N = {
   "privacy.back": "← Retour à l’accueil",
 
   /* ===== FOOTER ===== */
-  "footer.text": "e-META — Moteur d’intelligence décisionnelle stratégique.",
+    "footer.text": "e-META — Moteur d’intelligence décisionnelle stratégique.",
   "footer.privacy": "Politique de confidentialité",
-  "footer.copy": "© 2026 e-META — Tous droits réservés"
+  "footer.copy": "© 2026 e-META — Tous droits réservés",
+
+  "privacy.back": "← Retour à l’accueil"
 }
  
   en: {
