@@ -209,21 +209,91 @@
         win.print();
       });
 
-    /* Confirmer → IA */
-    document.getElementById("confirmSummaryBtn")
-      ?.addEventListener("click", () => {
-        let aiSummary = "CONTEXTE STRUCTURÉ DE LA DÉCISION :\n\n";
-        summaryContent.querySelectorAll(".summary-item").forEach(item => {
-          const label = item.querySelector("span")?.innerText;
-          const value = item.querySelector("strong")?.innerText;
-          if (label && value) aiSummary += `- ${label} : ${value}\n`;
-        });
+/* Confirmer → IA (verrou UX + résumé + submit) */
+document.getElementById("confirmSummaryBtn")
+  ?.addEventListener("click", () => {
 
-        const hidden = document.getElementById("metaSummaryInput");
-        if (hidden) hidden.value = aiSummary;
+    const btn = document.getElementById("confirmSummaryBtn");
+    if (!btn) return;
 
-        form.submit();
-      });
+    // 🔒 Verrou UX
+    btn.disabled = true;
+    btn.textContent = "Analyse en cours…";
+
+    // 🧠 Génération du résumé structuré IA
+    let aiSummary = "CONTEXTE STRUCTURÉ DE LA DÉCISION :\n\n";
+
+    summaryContent.querySelectorAll(".summary-item").forEach(item => {
+      const label = item.querySelector("span")?.innerText;
+      const value = item.querySelector("strong")?.innerText;
+      if (label && value) {
+        aiSummary += `- ${label} : ${value}\n`;
+      }
+    });
+
+    // 🧾 Injection dans le champ caché
+    const hidden = document.getElementById("metaSummaryInput");
+    if (hidden) hidden.value = aiSummary;
+
+    // 🚀 Envoi réel du formulaire
+    form.submit();
   });
+ 
+/* =====================================================
+   e-META — SAUVEGARDE LOCALE AUTOMATIQUE (PRO)
+===================================================== */
+
+const AUTOSAVE_KEY = "emeta_form_autosave";
+
+/* Sauvegarde */
+function saveFormState() {
+  const data = {};
+
+  form.querySelectorAll("input, textarea, select").forEach(el => {
+    if (!el.name) return;
+
+    if (el.type === "checkbox") {
+      data[el.name] = el.checked;
+    } else {
+      data[el.name] = el.value;
+    }
+  });
+
+  localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(data));
+}
+
+/* Restauration */
+function restoreFormState() {
+  const raw = localStorage.getItem(AUTOSAVE_KEY);
+  if (!raw) return;
+
+  try {
+    const data = JSON.parse(raw);
+
+    form.querySelectorAll("input, textarea, select").forEach(el => {
+      if (!el.name || !(el.name in data)) return;
+
+      if (el.type === "checkbox") {
+        el.checked = data[el.name];
+      } else {
+        el.value = data[el.name];
+      }
+    });
+  } catch (e) {
+    console.warn("e-META autosave: données corrompues");
+  }
+}
+
+/* Auto-save sur modification */
+form.addEventListener("input", saveFormState);
+form.addEventListener("change", saveFormState);
+
+/* Restore au chargement */
+restoreFormState();
+
+/* Nettoyage après envoi confirmé */
+document.getElementById("confirmSummaryBtn")?.addEventListener("click", () => {
+  localStorage.removeItem(AUTOSAVE_KEY);
+});
 
 })();
