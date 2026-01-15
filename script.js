@@ -1,12 +1,17 @@
 /* =====================================================
-   e-META — script.js FINAL PRO (CLEAN)
+   e-META — script.js FINAL PRO (CLEAN & STABLE)
    - i18n FR / EN / ES / AR
    - RTL automatique
    - Liens PDF dynamiques
    - Menu mobile
    - CTA scroll
    - Validation intelligente
-   - Résumé + Score + PDF + Pré-prompt IA
+   - Résumé intelligent
+   - Score de complétude
+   - PDF résumé
+   - Pré-prompt IA
+   - Verrou UX
+   - Sauvegarde locale automatique
 ===================================================== */
 
 (function () {
@@ -14,6 +19,7 @@
 
   /* ================= CONFIG ================= */
   const STORAGE_KEY = "emeta_lang";
+  const AUTOSAVE_KEY = "emeta_form_autosave";
   const DEFAULT_LANG = "fr";
 
   const GUIDE_PDF = {
@@ -38,7 +44,6 @@
   function setRtl(lang) {
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-
     const rtl = document.getElementById("rtlStylesheet");
     if (rtl) rtl.disabled = lang !== "ar";
   }
@@ -61,7 +66,6 @@
   function syncHelpLinks(lang) {
     const guide = document.getElementById("pdfGuideLink");
     const privacy = document.getElementById("pdfPrivacyLink");
-
     if (guide) guide.href = GUIDE_PDF[lang] || GUIDE_PDF.fr;
     if (privacy) privacy.href = PRIVACY_PDF[lang] || PRIVACY_PDF.fr;
   }
@@ -71,34 +75,12 @@
     setRtl(lang);
     applyI18n(lang);
     syncHelpLinks(lang);
-
     const select = document.getElementById("langSelect");
     if (select) select.value = lang;
   }
 
-  /* ================= SCROLL ================= */
   function scrollToForm() {
-    document.getElementById("form")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }
-
-  /* ================= VALIDATION ================= */
-  function updateSubmitState() {
-    const title = document.getElementById("decisionTitle");
-    const problem = document.getElementById("problem");
-    const consent = document.getElementById("consent");
-    const submitBtn = document.querySelector(".btn-submit");
-
-    if (!title || !problem || !consent || !submitBtn) return;
-
-    const isValid =
-      title.value.trim().length >= 5 &&
-      problem.value.trim().length >= 20 &&
-      consent.checked;
-
-    submitBtn.disabled = !isValid;
+    document.getElementById("form")?.scrollIntoView({ behavior: "smooth" });
   }
 
   /* ================= DOM READY ================= */
@@ -110,32 +92,44 @@
 
     if (!form || !submitBtn || !summaryBox || !summaryContent) return;
 
-    /* Lang init */
+    /* ===== Lang init ===== */
     setLang(getLang());
-
     document.getElementById("langSelect")
       ?.addEventListener("change", e => setLang(e.target.value));
 
+    /* ===== Menu ===== */
     document.getElementById("burgerBtn")
       ?.addEventListener("click", () => {
         document.getElementById("mainNav")?.classList.toggle("open");
       });
 
+    /* ===== CTA ===== */
     document.getElementById("startBtn")?.addEventListener("click", scrollToForm);
     document.getElementById("customBtn")?.addEventListener("click", scrollToForm);
 
-    ["decisionTitle", "problem"].forEach(id => {
-      document.getElementById(id)
-        ?.addEventListener("input", updateSubmitState);
-    });
+    /* ===== Validation intelligente ===== */
+    function updateSubmitState() {
+      const title = document.getElementById("decisionTitle");
+      const problem = document.getElementById("problem");
+      const consent = document.getElementById("consent");
 
+      const valid =
+        title?.value.trim().length >= 5 &&
+        problem?.value.trim().length >= 20 &&
+        consent?.checked;
+
+      submitBtn.disabled = !valid;
+    }
+
+    ["decisionTitle", "problem"].forEach(id =>
+      document.getElementById(id)?.addEventListener("input", updateSubmitState)
+    );
     document.getElementById("consent")
       ?.addEventListener("change", updateSubmitState);
 
     updateSubmitState();
 
     /* ================= RÉSUMÉ INTELLIGENT ================= */
-
     submitBtn.addEventListener("click", e => {
       if (submitBtn.disabled) return;
       e.preventDefault();
@@ -146,154 +140,100 @@
       summaryContent.innerHTML = "";
 
       const fields = form.querySelectorAll("input, textarea, select");
-      fields.forEach(field => {
-        if (!field.name || !field.value) return;
-        if (field.type === "checkbox" && !field.checked) return;
+      fields.forEach(f => {
+        if (!f.name || !f.value) return;
+        if (f.type === "checkbox" && !f.checked) return;
 
-        const label = form.querySelector(`label[for="${field.id}"]`);
-        const labelText = label ? label.innerText : field.name;
-
+        const label = form.querySelector(`label[for="${f.id}"]`);
         const item = document.createElement("div");
         item.className = "summary-item";
-        item.innerHTML = `<span>${labelText}</span><strong>${field.value}</strong>`;
+        item.innerHTML = `<span>${label?.innerText || f.name}</span><strong>${f.value}</strong>`;
         summaryContent.appendChild(item);
       });
 
       /* ===== SCORE ===== */
       const scoreFill = document.getElementById("scoreFill");
       const scoreText = document.getElementById("scoreText");
-
-      const requiredFields = form.querySelectorAll(
-        "input[required], textarea[required], select[required]"
-      );
+      const required = form.querySelectorAll("input[required], textarea[required], select[required]");
 
       let filled = 0;
-      requiredFields.forEach(f => {
-        if (
-          (f.type === "checkbox" && f.checked) ||
-          (f.type !== "checkbox" && f.value.trim() !== "")
-        ) filled++;
+      required.forEach(f => {
+        if ((f.type === "checkbox" && f.checked) || (f.value || "").trim()) filled++;
       });
 
-      const score = Math.round((filled / requiredFields.length) * 100);
+      const score = Math.round((filled / required.length) * 100);
       if (scoreFill) scoreFill.style.width = score + "%";
       if (scoreText) {
         scoreText.textContent =
           score < 50 ? "Demande incomplète – amélioration recommandée"
-          : score < 80 ? "Bonne base – quelques précisions utiles"
+          : score < 80 ? "Bonne base – précisions utiles"
           : "Demande très bien structurée";
       }
 
       summaryBox.hidden = false;
-      summaryBox.scrollIntoView({ behavior: "smooth", block: "start" });
+      summaryBox.scrollIntoView({ behavior: "smooth" });
     }
 
-    /* Modifier */
     document.getElementById("editSummaryBtn")
-      ?.addEventListener("click", () => {
-        summaryBox.hidden = true;
-      });
+      ?.addEventListener("click", () => summaryBox.hidden = true);
 
-    /* Télécharger PDF */
     document.getElementById("downloadSummaryBtn")
       ?.addEventListener("click", () => {
         const win = window.open("", "_blank");
         win.document.write(`
-          <html><head><title>Résumé e-META</title></head>
-          <body style="font-family:Arial;padding:24px">
-            <h1>Résumé de la demande</h1>
-            ${summaryContent.innerHTML}
+          <html><body style="font-family:Arial;padding:24px">
+          <h1>Résumé e-META</h1>${summaryContent.innerHTML}
           </body></html>
         `);
         win.document.close();
         win.print();
       });
 
-/* Confirmer → IA (verrou UX + résumé + submit) */
-document.getElementById("confirmSummaryBtn")
-  ?.addEventListener("click", () => {
+    /* ===== CONFIRMATION FINALE (UX LOCK + IA) ===== */
+    document.getElementById("confirmSummaryBtn")
+      ?.addEventListener("click", () => {
 
-    const btn = document.getElementById("confirmSummaryBtn");
-    if (!btn) return;
+        const btn = document.getElementById("confirmSummaryBtn");
+        btn.disabled = true;
+        btn.textContent = "Analyse en cours…";
 
-    // 🔒 Verrou UX
-    btn.disabled = true;
-    btn.textContent = "Analyse en cours…";
+        let aiSummary = "CONTEXTE STRUCTURÉ DE LA DÉCISION :\n\n";
+        summaryContent.querySelectorAll(".summary-item").forEach(item => {
+          aiSummary += `- ${item.innerText.replace(/\n/g, " : ")}\n`;
+        });
 
-    // 🧠 Génération du résumé structuré IA
-    let aiSummary = "CONTEXTE STRUCTURÉ DE LA DÉCISION :\n\n";
+        document.getElementById("metaSummaryInput").value = aiSummary;
+        localStorage.removeItem(AUTOSAVE_KEY);
 
-    summaryContent.querySelectorAll(".summary-item").forEach(item => {
-      const label = item.querySelector("span")?.innerText;
-      const value = item.querySelector("strong")?.innerText;
-      if (label && value) {
-        aiSummary += `- ${label} : ${value}\n`;
-      }
-    });
+        form.submit();
+      });
 
-    // 🧾 Injection dans le champ caché
-    const hidden = document.getElementById("metaSummaryInput");
-    if (hidden) hidden.value = aiSummary;
-
-    // 🚀 Envoi réel du formulaire
-    form.submit();
-  });
- 
-/* =====================================================
-   e-META — SAUVEGARDE LOCALE AUTOMATIQUE (PRO)
-===================================================== */
-
-const AUTOSAVE_KEY = "emeta_form_autosave";
-
-/* Sauvegarde */
-function saveFormState() {
-  const data = {};
-
-  form.querySelectorAll("input, textarea, select").forEach(el => {
-    if (!el.name) return;
-
-    if (el.type === "checkbox") {
-      data[el.name] = el.checked;
-    } else {
-      data[el.name] = el.value;
+    /* ================= AUTOSAVE ================= */
+    function saveFormState() {
+      const data = {};
+      form.querySelectorAll("input, textarea, select").forEach(el => {
+        if (!el.name) return;
+        data[el.name] = el.type === "checkbox" ? el.checked : el.value;
+      });
+      localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(data));
     }
+
+    function restoreFormState() {
+      const raw = localStorage.getItem(AUTOSAVE_KEY);
+      if (!raw) return;
+      try {
+        const data = JSON.parse(raw);
+        form.querySelectorAll("input, textarea, select").forEach(el => {
+          if (el.name in data) {
+            el.type === "checkbox" ? el.checked = data[el.name] : el.value = data[el.name];
+          }
+        });
+      } catch {}
+    }
+
+    restoreFormState();
+    form.addEventListener("input", saveFormState);
+    form.addEventListener("change", saveFormState);
+
   });
-
-  localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(data));
-}
-
-/* Restauration */
-function restoreFormState() {
-  const raw = localStorage.getItem(AUTOSAVE_KEY);
-  if (!raw) return;
-
-  try {
-    const data = JSON.parse(raw);
-
-    form.querySelectorAll("input, textarea, select").forEach(el => {
-      if (!el.name || !(el.name in data)) return;
-
-      if (el.type === "checkbox") {
-        el.checked = data[el.name];
-      } else {
-        el.value = data[el.name];
-      }
-    });
-  } catch (e) {
-    console.warn("e-META autosave: données corrompues");
-  }
-}
-
-/* Auto-save sur modification */
-form.addEventListener("input", saveFormState);
-form.addEventListener("change", saveFormState);
-
-/* Restore au chargement */
-restoreFormState();
-
-/* Nettoyage après envoi confirmé */
-document.getElementById("confirmSummaryBtn")?.addEventListener("click", () => {
-  localStorage.removeItem(AUTOSAVE_KEY);
-});
-
 })();
