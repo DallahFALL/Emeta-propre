@@ -1,11 +1,12 @@
 /* =====================================================
-   e-META — script.js FINAL PRO
-   - Langues dynamiques FR / EN / ES / AR
+   e-META — script.js FINAL PRO (CLEAN)
+   - i18n FR / EN / ES / AR
    - RTL automatique
-   - Liens PDF dynamiques par langue
-   - Burger menu mobile
-   - Scroll CTA vers formulaire
-   - Activation intelligente du bouton submit
+   - Liens PDF dynamiques
+   - Menu mobile
+   - CTA scroll
+   - Validation intelligente
+   - Résumé + Score + PDF + Pré-prompt IA
 ===================================================== */
 
 (function () {
@@ -42,7 +43,6 @@
     if (rtl) rtl.disabled = lang !== "ar";
   }
 
-  /* ================= I18N ================= */
   function applyI18n(lang) {
     const dict = window.I18N?.[lang];
     if (!dict) return;
@@ -58,7 +58,6 @@
     });
   }
 
-  /* ================= PDF LINKS ================= */
   function syncHelpLinks(lang) {
     const guide = document.getElementById("pdfGuideLink");
     const privacy = document.getElementById("pdfPrivacyLink");
@@ -67,10 +66,8 @@
     if (privacy) privacy.href = PRIVACY_PDF[lang] || PRIVACY_PDF.fr;
   }
 
-  /* ================= SET LANG ================= */
   function setLang(lang) {
     localStorage.setItem(STORAGE_KEY, lang);
-
     setRtl(lang);
     applyI18n(lang);
     syncHelpLinks(lang);
@@ -87,7 +84,7 @@
     });
   }
 
-  /* ================= SUBMIT LOGIC (PRO) ================= */
+  /* ================= VALIDATION ================= */
   function updateSubmitState() {
     const title = document.getElementById("decisionTitle");
     const problem = document.getElementById("problem");
@@ -106,101 +103,127 @@
 
   /* ================= DOM READY ================= */
   document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("emetaForm");
+    const submitBtn = form?.querySelector(".btn-submit");
+    const summaryBox = document.getElementById("summaryBox");
+    const summaryContent = document.getElementById("summaryContent");
+
+    if (!form || !submitBtn || !summaryBox || !summaryContent) return;
+
     /* Lang init */
     setLang(getLang());
 
-    /* Lang switch */
-    document
-      .getElementById("langSelect")
+    document.getElementById("langSelect")
       ?.addEventListener("change", e => setLang(e.target.value));
 
-    /* Burger menu */
-    document
-      .getElementById("burgerBtn")
+    document.getElementById("burgerBtn")
       ?.addEventListener("click", () => {
-        const nav = document.getElementById("mainNav");
-        nav?.classList.toggle("open");
+        document.getElementById("mainNav")?.classList.toggle("open");
       });
 
-    /* CTA scroll */
     document.getElementById("startBtn")?.addEventListener("click", scrollToForm);
     document.getElementById("customBtn")?.addEventListener("click", scrollToForm);
 
-    /* Submit intelligent */
     ["decisionTitle", "problem"].forEach(id => {
       document.getElementById(id)
         ?.addEventListener("input", updateSubmitState);
     });
 
-    document
-      .getElementById("consent")
+    document.getElementById("consent")
       ?.addEventListener("change", updateSubmitState);
 
     updateSubmitState();
 
-    /* Sécurité submit */
-    document
-      .getElementById("emetaForm")
-      ?.addEventListener("submit", e => {
-        if (document.querySelector(".btn-submit")?.disabled) {
-          e.preventDefault();
-        }
+    /* ================= RÉSUMÉ INTELLIGENT ================= */
+
+    submitBtn.addEventListener("click", e => {
+      if (submitBtn.disabled) return;
+      e.preventDefault();
+      generateSummary();
+    });
+
+    function generateSummary() {
+      summaryContent.innerHTML = "";
+
+      const fields = form.querySelectorAll("input, textarea, select");
+      fields.forEach(field => {
+        if (!field.name || !field.value) return;
+        if (field.type === "checkbox" && !field.checked) return;
+
+        const label = form.querySelector(`label[for="${field.id}"]`);
+        const labelText = label ? label.innerText : field.name;
+
+        const item = document.createElement("div");
+        item.className = "summary-item";
+        item.innerHTML = `<span>${labelText}</span><strong>${field.value}</strong>`;
+        summaryContent.appendChild(item);
+      });
+
+      /* ===== SCORE ===== */
+      const scoreFill = document.getElementById("scoreFill");
+      const scoreText = document.getElementById("scoreText");
+
+      const requiredFields = form.querySelectorAll(
+        "input[required], textarea[required], select[required]"
+      );
+
+      let filled = 0;
+      requiredFields.forEach(f => {
+        if (
+          (f.type === "checkbox" && f.checked) ||
+          (f.type !== "checkbox" && f.value.trim() !== "")
+        ) filled++;
+      });
+
+      const score = Math.round((filled / requiredFields.length) * 100);
+      if (scoreFill) scoreFill.style.width = score + "%";
+      if (scoreText) {
+        scoreText.textContent =
+          score < 50 ? "Demande incomplète – amélioration recommandée"
+          : score < 80 ? "Bonne base – quelques précisions utiles"
+          : "Demande très bien structurée";
+      }
+
+      summaryBox.hidden = false;
+      summaryBox.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    /* Modifier */
+    document.getElementById("editSummaryBtn")
+      ?.addEventListener("click", () => {
+        summaryBox.hidden = true;
+      });
+
+    /* Télécharger PDF */
+    document.getElementById("downloadSummaryBtn")
+      ?.addEventListener("click", () => {
+        const win = window.open("", "_blank");
+        win.document.write(`
+          <html><head><title>Résumé e-META</title></head>
+          <body style="font-family:Arial;padding:24px">
+            <h1>Résumé de la demande</h1>
+            ${summaryContent.innerHTML}
+          </body></html>
+        `);
+        win.document.close();
+        win.print();
+      });
+
+    /* Confirmer → IA */
+    document.getElementById("confirmSummaryBtn")
+      ?.addEventListener("click", () => {
+        let aiSummary = "CONTEXTE STRUCTURÉ DE LA DÉCISION :\n\n";
+        summaryContent.querySelectorAll(".summary-item").forEach(item => {
+          const label = item.querySelector("span")?.innerText;
+          const value = item.querySelector("strong")?.innerText;
+          if (label && value) aiSummary += `- ${label} : ${value}\n`;
+        });
+
+        const hidden = document.getElementById("metaSummaryInput");
+        if (hidden) hidden.value = aiSummary;
+
+        form.submit();
       });
   });
 
-})();
-/* =====================================================
-   e-META — RÉSUMÉ INTELLIGENT AVANT SOUMISSION
-===================================================== */
-
-(function () {
-  const form = document.getElementById("emetaForm");
-  const summaryBox = document.getElementById("summaryBox");
-  const summaryContent = document.getElementById("summaryContent");
-  const submitBtn = form.querySelector(".btn-submit");
-
-  if (!form || !submitBtn) return;
-
-  // Intercepter le clic sur "Soumettre"
-  submitBtn.addEventListener("click", function (e) {
-    if (submitBtn.disabled) return;
-
-    e.preventDefault();
-    generateSummary();
-  });
-
-  function generateSummary() {
-    summaryContent.innerHTML = "";
-
-    const fields = form.querySelectorAll("input, textarea, select");
-    fields.forEach((field) => {
-      if (!field.name || !field.value) return;
-      if (field.type === "checkbox" && !field.checked) return;
-
-      const label = form.querySelector(`label[for="${field.id}"]`);
-      const labelText = label ? label.innerText : field.name;
-
-      const item = document.createElement("div");
-      item.className = "summary-item";
-      item.innerHTML = `
-        <span>${labelText}</span>
-        <strong>${field.value}</strong>
-      `;
-      summaryContent.appendChild(item);
-    });
-
-    summaryBox.hidden = false;
-    summaryBox.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  // Modifier → revenir au formulaire
-  document.getElementById("editSummaryBtn")?.addEventListener("click", () => {
-    summaryBox.hidden = true;
-  });
-
-  // Confirmer → envoi réel
-  document.getElementById("confirmSummaryBtn")?.addEventListener("click", () => {
-    summaryBox.hidden = true;
-    form.submit();
-  });
 })();
