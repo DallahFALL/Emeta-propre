@@ -46,6 +46,34 @@ fr: {
   /* ===== PRIVACY ===== */
   "privacy.back": "← Retour à l’accueil",
 
+  /* ===== PRIVACY PAGE ===== */
+"privacy.meta.title": "Politique de confidentialité — e-META",
+"privacy.title": "Politique de confidentialité — e-META",
+"privacy.intro": "e-META attache une importance particulière à la protection des données personnelles de ses utilisateurs. La présente politique décrit de manière transparente la collecte, l’utilisation et la protection des informations.",
+
+"privacy.section1.title": "1. Introduction",
+"privacy.section1.text": "e-META est un outil d’aide à la décision stratégique basé sur l’intelligence artificielle. Il ne constitue ni un conseil juridique, financier, médical ou réglementaire.",
+
+"privacy.section2.title": "2. Données collectées",
+"privacy.section2.item1": "Informations saisies volontairement dans les formulaires.",
+"privacy.section2.item2": "Données de contact si une restitution est demandée (email, WhatsApp).",
+"privacy.section2.item3": "Fichiers ou liens transmis volontairement.",
+
+"privacy.section3.title": "3. Utilisation des données",
+"privacy.section3.item1": "Génération d’analyses stratégiques personnalisées.",
+"privacy.section3.item2": "Adaptation du format de restitution (Email / WhatsApp / PDF).",
+"privacy.section3.item3": "Amélioration continue de la qualité des recommandations.",
+
+"privacy.section4.title": "4. Intelligence artificielle & responsabilité",
+"privacy.section4.text": "Les recommandations fournies sont indicatives. L’utilisateur demeure seul responsable des décisions prises sur la base des analyses.",
+
+"privacy.section5.title": "5. Conservation et sécurité",
+"privacy.section5.text": "Les données sont conservées uniquement pour la durée nécessaire et protégées par des mesures techniques et organisationnelles raisonnables.",
+
+"privacy.pdf.title": "Version officielle PDF",
+"privacy.pdf.desc": "Téléchargez la version juridique complète et archivable :",
+"privacy.download": "Télécharger la version officielle (PDF)",
+
   /* ===== FOOTER ===== */
   "footer.text": "e-META — Moteur d’intelligence décisionnelle stratégique.",
   "footer.privacy": "Politique de confidentialité",
