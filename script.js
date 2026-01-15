@@ -2,24 +2,19 @@
    e-META — script.js FINAL PRO (CLEAN & STABLE)
    - i18n FR / EN / ES / AR
    - RTL automatique
-   - Liens PDF dynamiques
    - Menu mobile
    - CTA scroll
-   - Validation intelligente
-   - Résumé intelligent
-   - Score de complétude
-   - PDF résumé
-   - Pré-prompt IA
-   - Verrou UX
-   - Sauvegarde locale automatique
+   - Autosave local
+   - Submit sécurisé
+   - Compatible index.html & privacy.html
 ===================================================== */
 
 (function () {
   "use strict";
 
   /* ================= CONFIG ================= */
-  const STORAGE_KEY = "emeta_lang";
-  const AUTOSAVE_KEY = "emeta_form_autosave";
+  const STORAGE_LANG = "emeta_lang";
+  const STORAGE_AUTOSAVE = "emeta_form_autosave";
   const DEFAULT_LANG = "fr";
 
   const GUIDE_PDF = {
@@ -38,14 +33,14 @@
 
   /* ================= LANG ================= */
   function getLang() {
-    return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
+    return localStorage.getItem(STORAGE_LANG) || DEFAULT_LANG;
   }
 
   function setRtl(lang) {
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-    const rtl = document.getElementById("rtlStylesheet");
-    if (rtl) rtl.disabled = lang !== "ar";
+    const rtlCss = document.getElementById("rtlStylesheet");
+    if (rtlCss) rtlCss.disabled = lang !== "ar";
   }
 
   function applyI18n(lang) {
@@ -71,7 +66,7 @@
   }
 
   function setLang(lang) {
-    localStorage.setItem(STORAGE_KEY, lang);
+    localStorage.setItem(STORAGE_LANG, lang);
     setRtl(lang);
     applyI18n(lang);
     syncHelpLinks(lang);
@@ -79,187 +74,74 @@
     if (select) select.value = lang;
   }
 
+  /* ================= AUTOSAVE ================= */
+  function saveFormState(form) {
+    const data = {};
+    form.querySelectorAll("input, textarea, select").forEach(el => {
+      if (!el.name) return;
+      data[el.name] = el.type === "checkbox" ? el.checked : el.value;
+    });
+    localStorage.setItem(STORAGE_AUTOSAVE, JSON.stringify(data));
+  }
+
+  function restoreFormState(form) {
+    const raw = localStorage.getItem(STORAGE_AUTOSAVE);
+    if (!raw) return;
+    try {
+      const data = JSON.parse(raw);
+      form.querySelectorAll("input, textarea, select").forEach(el => {
+        if (el.name in data) {
+          el.type === "checkbox"
+            ? (el.checked = data[el.name])
+            : (el.value = data[el.name]);
+        }
+      });
+    } catch {}
+  }
+
+  /* ================= SCROLL ================= */
   function scrollToForm() {
-    document.getElementById("form")?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("emetaForm")
+      ?.scrollIntoView({ behavior: "smooth" });
   }
 
   /* ================= DOM READY ================= */
   document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("emetaForm");
-    const submitBtn = form?.querySelector(".btn-submit");
-    const summaryBox = document.getElementById("summaryBox");
-    const summaryContent = document.getElementById("summaryContent");
 
-    if (!form || !submitBtn || !summaryBox || !summaryContent) return;
-
-    /* ===== Lang init ===== */
+    /* LANG INIT (TOUTES PAGES) */
     setLang(getLang());
     document.getElementById("langSelect")
       ?.addEventListener("change", e => setLang(e.target.value));
 
-    /* ===== Menu ===== */
-    document.getElementById("burgerBtn")
-      ?.addEventListener("click", () => {
-        document.getElementById("mainNav")?.classList.toggle("open");
-      });
+    /* CTA HERO */
+    document.querySelectorAll("[data-scroll-form]")
+      .forEach(btn => btn.addEventListener("click", scrollToForm));
 
-    /* ===== CTA ===== */
-    document.getElementById("startBtn")?.addEventListener("click", scrollToForm);
-    document.getElementById("customBtn")?.addEventListener("click", scrollToForm);
+    /* FORM (si présent) */
+    const form = document.getElementById("emetaForm");
+    if (!form) return;
 
-    /* ===== Validation intelligente ===== */
-    function updateSubmitState() {
-      const title = document.getElementById("decisionTitle");
-      const problem = document.getElementById("problem");
-      const consent = document.getElementById("consent");
+    restoreFormState(form);
+    form.addEventListener("input", () => saveFormState(form));
+    form.addEventListener("change", () => saveFormState(form));
 
-      const valid =
-        title?.value.trim().length >= 5 &&
-        problem?.value.trim().length >= 20 &&
-        consent?.checked;
-
-      submitBtn.disabled = !valid;
-    }
-
-    ["decisionTitle", "problem"].forEach(id =>
-      document.getElementById(id)?.addEventListener("input", updateSubmitState)
-    );
-    document.getElementById("consent")
-      ?.addEventListener("change", updateSubmitState);
-
-    updateSubmitState();
-
-    /* ================= RÉSUMÉ INTELLIGENT ================= */
-    submitBtn.addEventListener("click", e => {
-      if (submitBtn.disabled) return;
-      e.preventDefault();
-      generateSummary();
-    });
-
-    function generateSummary() {
-      summaryContent.innerHTML = "";
-
-      const fields = form.querySelectorAll("input, textarea, select");
-      fields.forEach(f => {
-        if (!f.name || !f.value) return;
-        if (f.type === "checkbox" && !f.checked) return;
-
-        const label = form.querySelector(`label[for="${f.id}"]`);
-        const item = document.createElement("div");
-        item.className = "summary-item";
-        item.innerHTML = `<span>${label?.innerText || f.name}</span><strong>${f.value}</strong>`;
-        summaryContent.appendChild(item);
-      });
-
-      /* ===== SCORE ===== */
-      const scoreFill = document.getElementById("scoreFill");
-      const scoreText = document.getElementById("scoreText");
-      const required = form.querySelectorAll("input[required], textarea[required], select[required]");
-
-      let filled = 0;
-      required.forEach(f => {
-        if ((f.type === "checkbox" && f.checked) || (f.value || "").trim()) filled++;
-      });
-
-      const score = Math.round((filled / required.length) * 100);
-      if (scoreFill) scoreFill.style.width = score + "%";
-      if (scoreText) {
-        scoreText.textContent =
-          score < 50 ? "Demande incomplète – amélioration recommandée"
-          : score < 80 ? "Bonne base – précisions utiles"
-          : "Demande très bien structurée";
-      }
-
-      summaryBox.hidden = false;
-      summaryBox.scrollIntoView({ behavior: "smooth" });
-    }
-
-    document.getElementById("editSummaryBtn")
-      ?.addEventListener("click", () => summaryBox.hidden = true);
-
-    document.getElementById("downloadSummaryBtn")
-      ?.addEventListener("click", () => {
-        const win = window.open("", "_blank");
-        win.document.write(`
-          <html><body style="font-family:Arial;padding:24px">
-          <h1>Résumé e-META</h1>${summaryContent.innerHTML}
-          </body></html>
-        `);
-        win.document.close();
-        win.print();
-      });
-
-    /* ===== CONFIRMATION FINALE (UX LOCK + IA) ===== */
-    document.getElementById("confirmSummaryBtn")
-      ?.addEventListener("click", () => {
-
-        const btn = document.getElementById("confirmSummaryBtn");
-        btn.disabled = true;
-        btn.textContent = "Analyse en cours…";
-
-        let aiSummary = "CONTEXTE STRUCTURÉ DE LA DÉCISION :\n\n";
-        summaryContent.querySelectorAll(".summary-item").forEach(item => {
-          aiSummary += `- ${item.innerText.replace(/\n/g, " : ")}\n`;
-        });
-
-        document.getElementById("metaSummaryInput").value = aiSummary;
-        localStorage.removeItem(AUTOSAVE_KEY);
-
+    /* SUBMIT UX LOCK */
+    const confirmBtn = document.getElementById("confirmSummaryBtn");
+    if (confirmBtn) {
+      confirmBtn.addEventListener("click", () => {
+        confirmBtn.disabled = true;
+        confirmBtn.textContent = "Analyse en cours…";
         form.submit();
       });
-
-    /* ================= AUTOSAVE ================= */
-    function saveFormState() {
-      const data = {};
-      form.querySelectorAll("input, textarea, select").forEach(el => {
-        if (!el.name) return;
-        data[el.name] = el.type === "checkbox" ? el.checked : el.value;
-      });
-      localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(data));
     }
 
-    function restoreFormState() {
-      const raw = localStorage.getItem(AUTOSAVE_KEY);
-      if (!raw) return;
-      try {
-        const data = JSON.parse(raw);
-        form.querySelectorAll("input, textarea, select").forEach(el => {
-          if (el.name in data) {
-            el.type === "checkbox" ? el.checked = data[el.name] : el.value = data[el.name];
-          }
-        });
-      } catch {}
-    }
-
-    restoreFormState();
-    form.addEventListener("input", saveFormState);
-    form.addEventListener("change", saveFormState);
-
-  });
-   /* =====================================================
-   e-META — i18n AUTO SUR PAGES SECONDAIRES (privacy, etc.)
-===================================================== */
-
-(function applyLangOnAllPages() {
-  const lang = localStorage.getItem("emeta_lang") || "fr";
-
-  // HTML lang + dir
-  document.documentElement.lang = lang;
-  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-
-  // RTL CSS
-  const rtl = document.getElementById("rtlStylesheet");
-  if (rtl) rtl.disabled = lang !== "ar";
-
-  // I18N contenu
-  const dict = window.I18N?.[lang];
-  if (!dict) return;
-
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.dataset.i18n;
-    if (dict[key]) el.textContent = dict[key];
   });
 
-})();
+  /* ================= I18N PAGES SECONDAIRES ================= */
+  (function applyLangEverywhere() {
+    const lang = getLang();
+    setRtl(lang);
+    applyI18n(lang);
+  })();
 
 })();
