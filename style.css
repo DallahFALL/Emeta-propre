@@ -400,3 +400,19 @@ fieldset > legend {
 .consent-item input {
   accent-color: #ff9f1c;
 }
+/* =====================================================
+   AIDE FORMULAIRE — POSITION HAUTE
+===================================================== */
+.help-top {
+  justify-content: center;
+  margin: 10px 0 28px;
+}
+
+/* =====================================================
+   ACTIONS FORMULAIRE — POSITION BASSE
+===================================================== */
+.form-actions {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
