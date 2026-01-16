@@ -506,3 +506,30 @@ fieldset > legend {
     line-height: 1.5;
   }
 }
+/* =====================================================
+   HERO — CENTRAGE MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+  .hero-box {
+    text-align: center;
+  }
+
+  .hero-box h1 {
+    text-align: center;
+  }
+
+  .hero-subtitle,
+  .hero-points {
+    text-align: center;
+  }
+
+  .hero-points {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .hero-points li::before {
+    content: "• ";
+  }
+}
