@@ -81,16 +81,18 @@
       </button>
     </div>
 
-    <div class="hero-box muted">
-      <div class="hero-badge">
-        <span class="badge-title" data-i18n="hero.badge.title"></span>
-        <span class="badge-text" data-i18n="hero.badge.text"></span>
-      </div>
-      <p class="hero-note" data-i18n="hero.note"></p>
-    </div>
+     <!-- BADGE + NOTE HERO -->
+      <div class="hero-box muted">
+        <div class="hero-badge">
+          <span class="badge-title" data-i18n="hero.badge.title"></span>
+          <span class="badge-text" data-i18n="hero.badge.text"></span>
+        </div>
 
-  </div>
-</section>
+        <p class="hero-note" data-i18n="hero.note"></p>
+      </div>
+
+    </div>
+  </section>
 
 <!-- =========================
      FORM SECTION
@@ -98,6 +100,7 @@
 <section id="form">
   <div class="container">
 
+    <!-- EN-TÊTE DE SECTION -->
     <header class="form-header">
       <h2 class="section-title" data-i18n="form.title"></h2>
 
@@ -108,57 +111,84 @@
       <p class="form-intro" data-i18n="form.intro"></p>
     </header>
 
-    <!-- =========================
-         FORMULAIRE (UNIQUE)
-    ========================== -->
+    <!-- FORMULAIRE -->
     <form id="emetaForm" class="emeta-form" novalidate>
 
       <!-- ÉTAPE 1 -->
       <fieldset class="field-group">
         <legend class="field-legend" data-i18n="group.general"></legend>
-
-        <div class="grid-2">
-          <div class="field">
-            <label for="domain" data-i18n="field.domain.label"></label>
-            <select id="domain" name="domain" required>
-              <option value="" data-i18n="field.domain.placeholder"></option>
-              <option value="strategy" data-i18n="field.domain.strategy"></option>
-              <option value="finance" data-i18n="field.domain.finance"></option>
-              <option value="marketing" data-i18n="field.domain.marketing"></option>
-              <option value="operations" data-i18n="field.domain.operations"></option>
-              <option value="it" data-i18n="field.domain.it"></option>
-              <option value="legal" data-i18n="field.domain.legal"></option>
-              <option value="impact" data-i18n="field.domain.impact"></option>
-              <option value="other" data-i18n="field.domain.other"></option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="decisionType" data-i18n="field.decisionType.label"></label>
-            <select id="decisionType" name="decisionType" required>
-              <option value="" data-i18n="field.decisionType.placeholder"></option>
-              <option value="t1" data-i18n="field.decisionType.t1"></option>
-              <option value="t2" data-i18n="field.decisionType.t2"></option>
-              <option value="t3" data-i18n="field.decisionType.t3"></option>
-              <option value="t4" data-i18n="field.decisionType.t4"></option>
-              <option value="t5" data-i18n="field.decisionType.t5"></option>
-              <option value="t6" data-i18n="field.decisionType.t6"></option>
-            </select>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="decisionTitle" data-i18n="field.title.label"></label>
-          <input id="decisionTitle" name="decisionTitle" type="text"
-                 data-i18n-placeholder="field.title.ph" />
-          <div class="hint" data-i18n="field.title.hint"></div>
-        </div>
+        
       </fieldset>
 
-      <!-- 🔽 LES AUTRES FIELDSETS (analysis, budget, output, trust, actions)
-           SONT À LAISSER STRICTEMENT IDENTIQUES
-           → tu peux les recoller ici SANS RIEN CHANGER
-      --><fieldset class="field-group">
+    </form>
+  </div>
+</section>
+
+<!-- =========================
+     HELP ICONS — GLOBAL
+========================== -->
+<div class="help-icons">
+  <a
+    id="pdfPrivacyLink"
+    class="help-icon help-privacy"
+    data-i18n="help.privacy"
+    href="privacy.html"
+    target="_blank"
+    rel="noopener"
+    aria-label="Politique de confidentialité">
+  </a>
+
+  <a
+    id="pdfGuideLink"
+    class="help-icon help-guide"
+    data-i18n="help.guide"
+    target="_blank"
+    rel="noopener"
+    aria-label="Guide officiel">
+  </a>
+</div>
+
+</main>
+
+        <fieldset class="field-group">
+          <div class="grid-2">
+            <div class="field">
+              <label for="domain" data-i18n="field.domain.label"></label>
+              <select id="domain" name="domain" required>
+                <option value="" data-i18n="field.domain.placeholder"></option>
+                <option value="strategy" data-i18n="field.domain.strategy"></option>
+                <option value="finance" data-i18n="field.domain.finance"></option>
+                <option value="marketing" data-i18n="field.domain.marketing"></option>
+                <option value="operations" data-i18n="field.domain.operations"></option>
+                <option value="it" data-i18n="field.domain.it"></option>
+                <option value="legal" data-i18n="field.domain.legal"></option>
+                <option value="impact" data-i18n="field.domain.impact"></option>
+                <option value="other" data-i18n="field.domain.other"></option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="decisionType" data-i18n="field.decisionType.label"></label>
+              <select id="decisionType" name="decisionType" required>
+                <option value="" data-i18n="field.decisionType.placeholder"></option>
+                <option value="t1" data-i18n="field.decisionType.t1"></option>
+                <option value="t2" data-i18n="field.decisionType.t2"></option>
+                <option value="t3" data-i18n="field.decisionType.t3"></option>
+                <option value="t4" data-i18n="field.decisionType.t4"></option>
+                <option value="t5" data-i18n="field.decisionType.t5"></option>
+                <option value="t6" data-i18n="field.decisionType.t6"></option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="decisionTitle" data-i18n="field.title.label"></label>
+            <input id="decisionTitle" name="decisionTitle" type="text" data-i18n-placeholder="field.title.ph" />
+            <div class="hint" data-i18n="field.title.hint"></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="field-group">
           <legend data-i18n="group.analysis"></legend>
 
           <div class="field">
@@ -300,41 +330,8 @@
       </form>
     </div>
   </section>
-
-    </form>
-
-  </div>
-</section>
-
-<!-- =========================
-     HELP ICONS — GLOBAL
-========================== -->
-<div class="help-icons">
-  <a
-    id="pdfPrivacyLink"
-    class="help-icon help-privacy"
-    data-i18n="help.privacy"
-    href="privacy.html"
-    target="_blank"
-    rel="noopener"
-    aria-label="Politique de confidentialité">
-  </a>
-
-  <a
-    id="pdfGuideLink"
-    class="help-icon help-guide"
-    data-i18n="help.guide"
-    target="_blank"
-    rel="noopener"
-    aria-label="Guide officiel">
-  </a>
-</div>
-
 </main>
 
-<!-- =========================
-     FOOTER
-========================== -->
 <footer class="site-footer">
   <div class="container footer-inner">
     <p data-i18n="footer.text"></p>
