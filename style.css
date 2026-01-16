@@ -464,3 +464,23 @@ fieldset > legend {
     grid-template-columns: 1fr;
   }
 }
+/* =====================================================
+   CONSENTEMENT — VISIBILITÉ & RGPD
+===================================================== */
+
+.consent-group {
+  border: 2px solid rgba(255,159,28,0.6);
+  background: rgba(255,159,28,0.05);
+}
+
+.consent-item {
+  margin-top: 10px;
+  padding: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.consent-item input {
+  accent-color: #ff9f1c;
+  transform: scale(1.25);
+}
