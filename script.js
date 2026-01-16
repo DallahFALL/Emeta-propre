@@ -62,3 +62,33 @@
   });
 
 })();
+/* =====================================================
+   RESPONSIVE NAV + SCROLL FIX
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  // Burger menu
+  const burger = document.getElementById("burgerBtn");
+  const nav = document.getElementById("mainNav");
+
+  if (burger && nav) {
+    burger.addEventListener("click", () => {
+      nav.classList.toggle("active");
+      burger.setAttribute(
+        "aria-expanded",
+        nav.classList.contains("active")
+      );
+    });
+  }
+
+  // Scroll vers formulaire
+  const startBtn = document.getElementById("startBtn");
+  const formSection = document.getElementById("form");
+
+  if (startBtn && formSection) {
+    startBtn.addEventListener("click", () => {
+      formSection.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+});
