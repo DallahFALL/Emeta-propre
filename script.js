@@ -1,17 +1,12 @@
 /* =====================================================
    e-META — script.js FINAL PRO
-   - Langues dynamiques FR / EN / ES / AR
-   - RTL automatique
-   - Liens PDF dynamiques par langue
-   - Burger menu mobile
-   - Scroll CTA vers formulaire
-   - Activation intelligente du bouton submit
+   Stable • Unifié • Compatible style.css & index.html
 ===================================================== */
 
 (function () {
   "use strict";
 
-  /* ================= CONFIG ================= */
+  /* ================== CONFIG ================== */
   const STORAGE_KEY = "emeta_lang";
   const DEFAULT_LANG = "fr";
 
@@ -29,20 +24,19 @@
     ar: "pdf/eMETA_Privacy_CGU_AR.pdf"
   };
 
-  /* ================= LANG ================= */
+  /* ================== LANG ================== */
   function getLang() {
     return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
   }
 
-  function setRtl(lang) {
+  function setDirection(lang) {
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
 
-    const rtl = document.getElementById("rtlStylesheet");
-    if (rtl) rtl.disabled = lang !== "ar";
+    const rtlCss = document.getElementById("rtlStylesheet");
+    if (rtlCss) rtlCss.disabled = lang !== "ar";
   }
 
-  /* ================= I18N ================= */
   function applyI18n(lang) {
     const dict = window.I18N?.[lang];
     if (!dict) return;
@@ -58,7 +52,6 @@
     });
   }
 
-  /* ================= PDF LINKS ================= */
   function syncHelpLinks(lang) {
     const guide = document.getElementById("pdfGuideLink");
     const privacy = document.getElementById("pdfPrivacyLink");
@@ -67,11 +60,9 @@
     if (privacy) privacy.href = PRIVACY_PDF[lang] || PRIVACY_PDF.fr;
   }
 
-  /* ================= SET LANG ================= */
   function setLang(lang) {
     localStorage.setItem(STORAGE_KEY, lang);
-
-    setRtl(lang);
+    setDirection(lang);
     applyI18n(lang);
     syncHelpLinks(lang);
 
@@ -79,7 +70,7 @@
     if (select) select.value = lang;
   }
 
-  /* ================= SCROLL ================= */
+  /* ================== UI ================== */
   function scrollToForm() {
     document.getElementById("form")?.scrollIntoView({
       behavior: "smooth",
@@ -87,7 +78,22 @@
     });
   }
 
-  /* ================= SUBMIT LOGIC (PRO) ================= */
+  function initBurgerMenu() {
+    const burger = document.getElementById("burgerBtn");
+    const nav = document.getElementById("mainNav");
+
+    if (!burger || !nav) return;
+
+    burger.addEventListener("click", () => {
+      nav.classList.toggle("open");
+      burger.setAttribute(
+        "aria-expanded",
+        nav.classList.contains("open")
+      );
+    });
+  }
+
+  /* ================== SUBMIT LOGIC ================== */
   function updateSubmitState() {
     const title = document.getElementById("decisionTitle");
     const problem = document.getElementById("problem");
@@ -104,29 +110,25 @@
     submitBtn.disabled = !isValid;
   }
 
-  /* ================= DOM READY ================= */
+  /* ================== DOM READY ================== */
   document.addEventListener("DOMContentLoaded", () => {
-    /* Lang init */
+
+    /* Langue initiale */
     setLang(getLang());
 
-    /* Lang switch */
+    /* Changement langue */
     document
       .getElementById("langSelect")
       ?.addEventListener("change", e => setLang(e.target.value));
 
-    /* Burger menu */
-    document
-      .getElementById("burgerBtn")
-      ?.addEventListener("click", () => {
-        const nav = document.getElementById("mainNav");
-        nav?.classList.toggle("open");
-      });
+    /* Burger */
+    initBurgerMenu();
 
     /* CTA scroll */
     document.getElementById("startBtn")?.addEventListener("click", scrollToForm);
     document.getElementById("customBtn")?.addEventListener("click", scrollToForm);
 
-    /* Submit intelligent */
+    /* Validation submit */
     ["decisionTitle", "problem"].forEach(id => {
       document.getElementById(id)
         ?.addEventListener("input", updateSubmitState);
@@ -148,59 +150,4 @@
       });
   });
 
-})();
-/* =====================================================
-   e-META — RÉSUMÉ INTELLIGENT AVANT SOUMISSION
-===================================================== */
-
-(function () {
-  const form = document.getElementById("emetaForm");
-  const summaryBox = document.getElementById("summaryBox");
-  const summaryContent = document.getElementById("summaryContent");
-  const submitBtn = form.querySelector(".btn-submit");
-
-  if (!form || !submitBtn) return;
-
-  // Intercepter le clic sur "Soumettre"
-  submitBtn.addEventListener("click", function (e) {
-    if (submitBtn.disabled) return;
-
-    e.preventDefault();
-    generateSummary();
-  });
-
-  function generateSummary() {
-    summaryContent.innerHTML = "";
-
-    const fields = form.querySelectorAll("input, textarea, select");
-    fields.forEach((field) => {
-      if (!field.name || !field.value) return;
-      if (field.type === "checkbox" && !field.checked) return;
-
-      const label = form.querySelector(`label[for="${field.id}"]`);
-      const labelText = label ? label.innerText : field.name;
-
-      const item = document.createElement("div");
-      item.className = "summary-item";
-      item.innerHTML = `
-        <span>${labelText}</span>
-        <strong>${field.value}</strong>
-      `;
-      summaryContent.appendChild(item);
-    });
-
-    summaryBox.hidden = false;
-    summaryBox.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  // Modifier → revenir au formulaire
-  document.getElementById("editSummaryBtn")?.addEventListener("click", () => {
-    summaryBox.hidden = true;
-  });
-
-  // Confirmer → envoi réel
-  document.getElementById("confirmSummaryBtn")?.addEventListener("click", () => {
-    summaryBox.hidden = true;
-    form.submit();
-  });
 })();
