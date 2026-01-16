@@ -249,3 +249,28 @@ textarea {
   .cta-primary,
   .cta-custom { width: 100%; }
 }
+/* =====================================================
+   HELP ICONS
+===================================================== */
+.help-icons {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 20px 0 40px;
+}
+
+.help-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  opacity: .9;
+}
+
+.help-icon:hover {
+  opacity: 1;
+}
