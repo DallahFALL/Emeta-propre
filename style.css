@@ -993,3 +993,53 @@ a{color:inherit;text-decoration:none}
   font-size: 0.85rem;
   opacity: 0.8;
 }
+/* ===============================
+   FORM SAFE VISIBILITY
+=============================== */
+
+.emeta-form,
+.field-group {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* ===============================
+   RESPONSIVE GRIDS
+=============================== */
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .header-inner {
+    flex-wrap: wrap;
+  }
+
+  .nav {
+    display: none;
+    width: 100%;
+  }
+
+  .nav.open {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* ===============================
+   FORM WIDTH CONTROL
+=============================== */
+
+.emeta-form {
+  max-width: 900px;
+  margin: 0 auto;
+}
