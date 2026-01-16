@@ -1,9 +1,9 @@
 /* =====================================================
-   e-META — style.css FINAL RESPONSIVE SAFE
-   Objectif : rendre la page responsive SANS casser
+   e-META — STYLE.CSS PRODUCTION CLEAN
+   Responsive • Stable • Sans conflit
 ===================================================== */
 
-/* ===== RESET ===== */
+/* ================= RESET ================= */
 *,
 *::before,
 *::after {
@@ -13,20 +13,21 @@
 html, body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  overflow-x: hidden;
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background: radial-gradient(circle at top, #0b1020, #05070f 60%);
   color: #ffffff;
-  overflow-x: hidden;
 }
 
-/* ===== CONTAINER ===== */
+/* ================= CONTAINER ================= */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 16px;
 }
 
-/* ===== HEADER ===== */
+/* ================= HEADER ================= */
 .site-header {
   position: sticky;
   top: 0;
@@ -44,17 +45,20 @@ html, body {
   min-height: 64px;
 }
 
+/* LOGO */
 .logo {
   display: flex;
   align-items: center;
   gap: 6px;
   white-space: nowrap;
+  text-decoration: none;
+  color: inherit;
 }
 
 .logo-mark {
-  color: #ff8a00;
   font-weight: 800;
   font-size: 1.4rem;
+  color: #ff8a00;
 }
 
 .logo-text {
@@ -63,27 +67,29 @@ html, body {
 }
 
 .logo-tagline {
-  font-size: .75rem;
-  opacity: .75;
+  font-size: 0.75rem;
+  opacity: 0.75;
   margin-left: 6px;
 }
 
-/* ===== NAV ===== */
+/* ================= NAV ================= */
 .nav {
   display: flex;
   gap: 20px;
 }
 
 .nav a {
-  font-size: .95rem;
-  opacity: .85;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  text-decoration: none;
+  color: inherit;
 }
 
 .nav a:hover {
   opacity: 1;
 }
 
-/* ===== ACTIONS ===== */
+/* ================= HEADER ACTIONS ================= */
 .header-actions {
   display: flex;
   align-items: center;
@@ -108,13 +114,14 @@ html, body {
   cursor: pointer;
 }
 
-/* ===== BURGER ===== */
+/* ================= BURGER ================= */
 .burger {
   display: none;
   flex-direction: column;
   gap: 4px;
   background: none;
   border: none;
+  cursor: pointer;
 }
 
 .burger span {
@@ -123,7 +130,7 @@ html, body {
   background: #fff;
 }
 
-/* ===== HERO ===== */
+/* ================= HERO ================= */
 .hero {
   padding: 64px 0 48px;
 }
@@ -135,17 +142,21 @@ html, body {
 }
 
 .hero-box {
-  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.04),
+    rgba(255,255,255,.02)
+  );
   border: 1px solid rgba(255,255,255,.08);
   border-radius: 16px;
   padding: 24px;
 }
 
 .hero-box.muted {
-  opacity: .9;
+  opacity: 0.9;
 }
 
-/* ===== FORM ===== */
+/* ================= FORM ================= */
 .form-header {
   margin: 48px 0 24px;
   text-align: center;
@@ -155,13 +166,18 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 32px;
+  width: 100%;
 }
 
 .field-group {
   border: 1px solid rgba(255,255,255,.08);
   border-radius: 16px;
   padding: 24px;
-  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.03),
+    rgba(255,255,255,.01)
+  );
 }
 
 .field {
@@ -171,8 +187,8 @@ html, body {
 }
 
 .field label {
-  font-size: .85rem;
-  opacity: .85;
+  font-size: 0.85rem;
+  opacity: 0.85;
 }
 
 input,
@@ -190,14 +206,14 @@ textarea {
   resize: vertical;
 }
 
-/* ===== GRIDS ===== */
+/* ================= GRIDS ================= */
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
-/* ===== CHECKBOX ===== */
+/* ================= CHECKBOX ================= */
 .checkbox-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -210,7 +226,7 @@ textarea {
   align-items: center;
 }
 
-/* ===== HELP ICONS ===== */
+/* ================= HELP ICONS ================= */
 .help-icons {
   position: fixed;
   bottom: 20px;
@@ -218,135 +234,45 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  z-index: 900;
 }
 
 .help-icon {
   background: rgba(255,255,255,.08);
   padding: 10px 14px;
   border-radius: 999px;
-  font-size: .85rem;
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: inherit;
 }
 
-/* ===== FOOTER ===== */
+/* ================= FOOTER ================= */
 .site-footer {
   margin-top: 80px;
   padding: 32px 0;
   text-align: center;
-  opacity: .75;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .nav {
-    display: none;
-    position: absolute;
-    top: 64px;
-    right: 16px;
-    flex-direction: column;
-    background: #0b1020;
-    padding: 16px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,.1);
-  }
-
-  .nav.open {
-    display: flex;
-  }
-
-  .burger {
-    display: flex;
-  }
-
-  .grid-2 {
-    grid-template-columns: 1fr;
-  }
-
-  .header-actions {
-    gap: 8px;
-  }
-}
-/* =====================================================
-   RESPONSIVE CORE FIX — e-META
-   (mobile-first, non destructif)
-===================================================== */
-
-/* ---------- GLOBAL ---------- */
-html, body {
-  width: 100%;
-  overflow-x: hidden;
-}
-
-.container {
-  max-width: 1200px;
-  padding: 0 16px;
-  margin: 0 auto;
-}
-
-/* ---------- GRIDS ---------- */
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-/* ---------- FORM ---------- */
-.emeta-form {
-  width: 100%;
-}
-
-.field,
-.field-group,
-textarea,
-input,
-select {
-  width: 100%;
-}
-
-/* ---------- HEADER ---------- */
-.header-inner {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.nav {
-  display: flex;
-  gap: 16px;
+  opacity: 0.75;
 }
 
 /* =====================================================
-   TABLET ≤ 1024px
+   RESPONSIVE — UNIQUE & FINAL
 ===================================================== */
+
 @media (max-width: 1024px) {
-
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
   }
 
   .grid-2 {
     grid-template-columns: 1fr;
   }
-
-  .nav {
-    gap: 12px;
-  }
 }
 
-/* =====================================================
-   MOBILE ≤ 768px
-===================================================== */
 @media (max-width: 768px) {
 
   /* HEADER */
   .burger {
-    display: block;
+    display: flex;
   }
 
   .nav {
@@ -357,20 +283,16 @@ select {
     background: #0b1020;
     flex-direction: column;
     padding: 16px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
     display: none;
   }
 
-  .nav.active {
+  .nav.nav-open {
     display: flex;
   }
 
   .header-actions {
     gap: 8px;
-  }
-
-  /* HERO */
-  .hero {
-    padding: 32px 0;
   }
 
   /* FORM */
@@ -389,6 +311,7 @@ select {
 
   /* HELP ICONS */
   .help-icons {
+    left: auto;
     right: 12px;
     bottom: 12px;
   }
