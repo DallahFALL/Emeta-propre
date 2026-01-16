@@ -1,1045 +1,273 @@
-/* e-META vNext — style.css (minimal, pro, responsive) */
-*{box-sizing:border-box}html,body{margin:0;padding:0;background:#070b1a;color:#fff;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-.container{max-width:1100px;margin:0 auto;padding:0 16px}
-
-/* Header sticky */
-.site-header{position:sticky;top:0;z-index:999;background:linear-gradient(180deg,#0b1020,#070b1a);border-bottom:1px solid rgba(255,255,255,.08)}
-.header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px;padding:12px 0}
-.logo{display:flex;align-items:center;gap:6px;white-space:nowrap}
-.logo-mark{font-weight:900;font-size:1.35rem;color:#ff8a00}
-.logo-text{font-weight:900;font-size:1.1rem}
-.logo-tagline{opacity:.75;font-size:.78rem;margin-left:6px}
-
-/* Burger */
-.burger{display:none;background:none;border:none;padding:10px;border-radius:10px;cursor:pointer}
-.burger span{display:block;width:22px;height:2px;background:#fff;margin:4px 0}
-
-/* Nav + actions */
-.nav{display:flex;gap:18px;align-items:center}
-.nav a{opacity:.9}
-.nav a:hover{opacity:1}
-.header-actions{display:flex;gap:10px;align-items:center}
-.lang-select{background:#0f162e;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:8px 10px}
-.cta-custom{background:linear-gradient(135deg,#ff7a18,#ff9f1c);border:none;color:#fff;border-radius:999px;padding:10px 14px;font-weight:800;cursor:pointer}
-
-/* Hero */
-.hero{padding:48px 0}
-.hero-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:18px}
-.hero-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:22px}
-.hero-box.muted{opacity:.95}
-.hero h1{margin:0 0 12px;font-size:2rem;line-height:1.2}
-.hero-subtitle{opacity:.9;line-height:1.6;margin:0 0 14px}
-.hero-points{margin:0;padding-left:18px}
-.hero-points li{margin:7px 0;opacity:.9}
-.hero-badge{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
-.badge-title{font-weight:900}
-.badge-text{opacity:.85}
-.hero-note{opacity:.85;line-height:1.6;margin:0}
-.cta-primary{background:linear-gradient(135deg,#ff7a18,#ff9f1c);border:none;color:#fff;border-radius:999px;padding:14px 18px;font-weight:900;cursor:pointer}
-
-/* ================= FORM HEADER ================= */
-
-.form-header{
-  max-width:900px;
-  margin:0 auto 24px;
-  text-align:center;
-}
-
-/* Badge cabinet */
-.form-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  margin:12px auto 16px;
-  padding:6px 14px;
-  font-size:0.85rem;
-  font-weight:600;
-  border-radius:999px;
-  background:rgba(255,138,0,.12);
-  color:#ff9f1c;
-  white-space:nowrap;
-}
-
-/* Mobile */
-@media (max-width:640px){
-  .form-badge{
-    font-size:0.8rem;
-  }
-}
-
-.section-title{margin:0 0 10px;font-size:1.4rem;text-align:center}
-.form-intro{text-align:center;opacity:.85;line-height:1.6;margin:0 0 18px}
-.emeta-form{display:block}
-.field-group{border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px;margin:0 0 16px}
-.field-group legend{padding:0 10px;font-weight:900}
-.field{margin:12px 0}
-label{display:block;margin:0 0 6px;opacity:.9;font-size:.92rem}
-input,select,textarea{width:100%;background:#0f162e;color:#fff;border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:12px 12px;font-size:1rem}
-textarea{min-height:110px;resize:vertical}
-.hint{opacity:.75;font-size:.9rem;line-height:1.45;margin-top:6px}
-.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.field-with-unit{display:grid;grid-template-columns:1fr 110px;gap:10px}
-.field-label-strong{font-weight:900;margin:0 0 10px}
-
-/* Checkbox grid */
-.checkbox-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
-.check-item{display:grid;grid-template-columns:18px 1fr;gap:10px;align-items:start;padding:12px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px}
-.check-item input{margin-top:3px}
-.range-labels{display:flex;justify-content:space-between;opacity:.8;font-size:.85rem;margin-top:6px}
-
-/* ================= FORM ACTIONS ================= */
-.form-actions{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-top:14px;
-}
-
-/* Boutons */
-.btn-submit,
-.btn-secondary{
-  border-radius:999px;
-  padding:12px 18px;
-  font-weight:900;
-  cursor:pointer;
-  transition:opacity .2s ease, transform .2s ease;
-}
-
-/* Submit actif */
-.btn-submit{
-  background:linear-gradient(135deg,#ff7a18,#ff9f1c);
-  border:none;
-  color:#fff;
-}
-
-/* Submit désactivé (ÉTAT PRO) */
-.btn-submit:disabled{
-  opacity:0.45;
-  cursor:not-allowed;
-  pointer-events:none;
-  filter:grayscale(30%);
-}
-
-/* Submit actif explicite */
-.btn-submit:not(:disabled){
-  opacity:1;
-  cursor:pointer;
-}
-
-/* Secondaire */
-.btn-secondary{
-  background:transparent;
-  border:1px solid rgba(255,255,255,.2);
-  color:#fff;
-}
-
-/* Footer */
-.site-footer{border-top:1px solid rgba(255,255,255,.08);padding:22px 0}
-.footer-inner{display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center}
-.footer-link{opacity:.9}
-.footer-link:hover{opacity:1}
-.footer-copy{opacity:.65;font-size:.85rem}
-
-/* Responsive */
-@media (max-width: 900px){
-  .hero-grid{grid-template-columns:1fr}
-}
-@media (max-width: 760px){
-  .burger{display:block}
-  .nav{display:none;width:100%;flex-direction:column;gap:10px;margin-top:10px}
-  .nav.open{display:flex}
-  .header-inner{flex-wrap:wrap}
-  .header-actions{width:100%;justify-content:space-between}
-  .cta-custom{width:100%}
-  .grid-2{grid-template-columns:1fr}
-  .field-with-unit{grid-template-columns:1fr}
-  .cta-primary{width:100%}
-}
-/* ================= HEADER STICKY — FIX DÉFINITIF ================= */
-
-/* Base */
-*{box-sizing:border-box}
-
-html,body{
-  margin:0;
-  padding:0;
-  background:#070b1a;
-  color:#fff;
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-  overflow-x:hidden;
-}
-
-/* Compensation du header fixe */
-body{
-  padding-top:72px; /* hauteur réelle du header */
-}
-
-a{color:inherit;text-decoration:none}
-
-.container{
-  max-width:1100px;
-  margin:0 auto;
-  padding:0 16px;
-}
-
-/* Header */
-.site-header{
-  position:fixed;        /* clé : reste collé */
-  top:0;
-  left:0;
-  right:0;
-  width:100%;
-  z-index:9999;
-
-  background:linear-gradient(180deg,#0b1020,#070b1a);
-  border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-/* Inner */
-.header-inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-
-  min-height:64px;
-  padding:12px 16px;
-
-  position:relative;
-}
-
-/* Logo */
-.logo{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  white-space:nowrap;
-  flex-shrink:0;
-}
-
-.logo-mark{
-  font-weight:900;
-  font-size:1.35rem;
-  color:#ff8a00;
-}
-
-.logo-text{
-  font-weight:900;
-  font-size:1.1rem;
-}
-
-.logo-tagline{
-  opacity:.75;
-  font-size:.78rem;
-  margin-left:6px;
-}
-/* ================= HEADER MOBILE — COMPACT ================= */
-@media (max-width: 768px){
-
-  /* Header plus fin */
-  .header-inner{
-    min-height:56px;
-    padding:8px 12px;
-  }
-
-  /* Masquer la tagline sur mobile */
-  .logo-tagline{
-    display:none;
-  }
-
-  /* Logo légèrement réduit */
-  .logo-mark{
-    font-size:1.2rem;
-  }
-
-  .logo-text{
-    font-size:1rem;
-  }
-
-  /* Sélecteur langue plus discret */
-  .lang-select{
-    padding:6px 8px;
-    font-size:.85rem;
-  }
-
-  /* Bouton CTA plus fin */
-  .cta-custom{
-    padding:8px 12px;
-    font-size:.85rem;
-  }
-
-  /* Ajuster la compensation du body */
- .form-help {
-  margin: 24px 0;
-  padding: 20px;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.03);
-}
-
-.form-help h3 {
-  margin-bottom: 12px;
-  font-size: 1rem;
-}
-
-.help-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.help-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.08);
-  font-size: 0.9rem;
-  white-space: nowrap;
-}
-.form-badge {
-  display: inline-block;
-  margin: 12px 0 8px;
-  padding: 6px 12px;
-  font-size: 0.85rem;
-  border-radius: 999px;
-  background: rgba(255,138,0,0.12);
-  color: #ff8a00;
-  font-weight: 600;
-}
-
-@media (max-width: 768px) {
-  .logo {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-
-  .logo-tagline {
-    font-size: 0.75rem;
-    text-align: left;
-    line-height: 1.2;
-  }
-}
-@media (max-width: 768px) {
-  .hero-box {
-    text-align: center;
-  }
-
-  .hero-title,
-  .hero-box h1 {
-    text-align: center;
-    font-size: 1.4rem;
-    line-height: 1.3;
-  }
-
-  .hero-subtitle {
-    text-align: center;
-    font-size: 0.85rem;
-    opacity: 0.85;
-    margin-bottom: 16px;
-  }
-}
-@media (max-width: 1024px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .grid-2 {
-    grid-template-columns: 1fr;
-  }
-}
-@media (max-width: 768px) {
-  .help-actions {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .help-btn {
-    width: 100%;
-    text-align: center;
-  }
-}
-@media (max-width: 768px) {
-  .form-badge {
-    font-size: 0.8rem;
-    text-align: center;
-    width: 100%;
-  }
-}
-.field textarea {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 14px 16px;
-  line-height: 1.5;
-}
-
-/* Hint pédagogique */
-.hint {
-  margin-top: 6px;
-  font-size: 0.85rem;
-  opacity: 0.7;
-}
-
-/* Hint discret (optionnel mais recommandé) */
-.hint.subtle {
-  opacity: 0.6;
-}
-/* ================= FORM HELP ================= */
-
-.form-help{
-  margin:24px auto;
-  max-width:900px;
-  text-align:center;
-}
-
-.help-actions{
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-top:12px;
-}
-
-.help-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:10px 14px;
-  border-radius:999px;
-  font-size:0.85rem;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);
-  white-space:nowrap;
-}
-
-/* Mobile */
-@media (max-width:640px){
-  .help-actions{
-    flex-direction:column;
-    align-items:center;
-  }
-
-  .help-btn{
-    width:100%;
-    justify-content:center;
-  }
-}
-/* ===============================
-   AIDE FORMULAIRE — DESKTOP
-================================ */
-
-.form-help {
-  margin: 24px 0;
-  padding: 18px 20px;
-  border-radius: 16px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.form-help h3 {
-  margin: 0 0 14px;
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-/* Conteneur des boutons */
-.help-actions {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-/* Boutons aide */
-.help-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #fff;
-  text-decoration: none;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.18);
-  transition: all .25s ease;
-}
-
-.help-btn:hover {
-  background: rgba(255,255,255,0.12);
-  transform: translateY(-1px);
-}
- /* ================================
-   FORM CONTAINER — PRO WIDTH
-================================ */
-
-.form-section {
-  max-width: 980px;           /* 👈 largeur PRO (au lieu de full width) */
-  margin: 0 auto;             /* centrage */
-  padding: 0 20px;            /* sécurité mobile */
-}
- 
-/* ===============================
-   MOBILE — SIMPLIFICATION AIDE
-================================ */
-@media (max-width: 767px) {
-
-  /* Empilement propre */
-  .help-actions {
-    flex-direction: column;
-  }
-
-  /* MASQUER le guide officiel sur mobile */
-  #pdfGuideLink {
-    display: none !important;
-  }
-
-  /* Réduction padding cadre */
-  .form-help {
-    padding: 14px;
-  }
-}
-/* Nettoyage mobile bas de page */
-@media (max-width: 767px) {
-  .form-section::after {
-    content: none;
-  }
-
-  .emeta-form > :last-child {
-    margin-bottom: 0;
-  }
-}
-@media (max-width: 767px){
-
-  /* 1) on garde seulement le bouton "Politique" */
-  #pdfGuideLink{ display:none !important; }
-
-  /* 2) on supprime toute zone/cadre parasite autour */
-  .form-help{
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 16px 0 0 !important;
-    box-shadow: none !important;
-  }
-
-  /* 3) les boutons en colonne propre */
-  .help-actions{
-    display: grid !important;
-    gap: 10px !important;
-  }
-
-  /* 4) IMPORTANT : supprimer tout élément vide juste après les boutons */
-  .help-actions + *{
-    display:none !important;
-  }
-
-  /* 5) si le “cadre” est un pseudo-élément */
-  .form-help::before,
-  .form-help::after{
-    content:none !important;
-    display:none !important;
-  }
-}
-
-/* ================================
-   FORM FIELDS — RESPONSIVE SAFE
-================================ */
-
-.form-section input,
-.form-section select,
-.form-section textarea {
-  width: 100%;
-  max-width: 100%;
+/* =====================================================
+   e-META — style.css FINAL RESPONSIVE SAFE
+   Objectif : rendre la page responsive SANS casser
+===================================================== */
+
+/* ===== RESET ===== */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
-  select {
-  appearance: none;
-  background-image:
-    linear-gradient(45deg, transparent 50%, #ff8a00 50%),
-    linear-gradient(135deg, #ff8a00 50%, transparent 50%);
-  background-position:
-    calc(100% - 18px) calc(1em + 2px),
-    calc(100% - 13px) calc(1em + 2px);
-  background-size: 5px 5px;
-  background-repeat: no-repeat;
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: radial-gradient(circle at top, #0b1020, #05070f 60%);
+  color: #ffffff;
+  overflow-x: hidden;
 }
 
-@media (max-width: 768px) {
-
-  .form-section {
-    max-width: 100%;
-    padding: 0 14px;
-  }
-
-  .form-row,
-  .form-grid,
-  .form-columns {
-    grid-template-columns: 1fr !important;
-    display: grid;
-    gap: 14px;
-  }
-}
-/* =====================================================
-   e-META — HELP ICONS (COMPOSANT UNIQUE)
-   Icônes discrètes flottantes (ⓘ / 🔒)
-===================================================== */
-
-/* Désactivation totale des anciens blocs aide */
-.form-help,
-.help-actions,
-.help-btn {
-  display: none !important;
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
 }
 
-/* Conteneur flottant */
-.help-icons {
-  position: fixed;
-  right: 18px;
-  bottom: 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 10000;
-}
-
-/* Icône générique */
-.help-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(15,20,40,0.95);
-  border: 1px solid rgba(255,255,255,0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0;              /* cache le texte i18n */
-  cursor: pointer;
-  transition: all .2s ease;
-}
-
-/* Icônes via pseudo-éléments */
-.help-privacy::before {
-  content: "🔒";
-  font-size: 18px;
-}
-
-.help-guide::before {
-  content: "ⓘ";
-  font-size: 18px;
-}
-
-/* Hover */
-.help-icon:hover {
-  background: rgba(255,138,0,0.18);
-  border-color: rgba(255,138,0,0.45);
-  transform: translateY(-2px);
-}
-
-/* Mobile : plus discret */
-@media (max-width: 768px) {
-  .help-icons {
-    right: 12px;
-    bottom: 16px;
-    gap: 10px;
-  }
-
-  .help-icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  /* Option UX : masquer le guide sur mobile */
-  .help-guide {
-    display: none;
-  }
-}
-/* =====================================================
-   FIX — DOUBLON TITRE "QUALIFIER LA DÉCISION"
-===================================================== */
-
-/* Masquer tout titre redondant AVANT le premier fieldset */
-.emeta-form > h3,
-.emeta-form > .form-step,
-.emeta-form > .step-title {
-  display: none !important;
-}
-
-/* Garder le legend comme seul titre */
-.field-group legend {
-  display: block;
-}
-/* =====================================================
-   FIX — AIDE FORMULAIRE (NETTOYAGE TOTAL)
-===================================================== */
-
-/* Neutralisation complète de tout ancien bloc aide */
-.form-help,
-.form-help *,
-.help-actions,
-.help-btn {
-  display: none !important;
-}
-
-/* Icônes flottantes — comportement final */
-.help-icons {
-  position: fixed;
-  right: 18px;
-  bottom: 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 10000;
-}
-
-/* Icône */
-.help-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(15,20,40,0.95);
-  border: 1px solid rgba(255,255,255,0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 0;
-  transition: all 0.2s ease;
-}
-
-.help-privacy::before { content: "🔒"; font-size: 18px; }
-.help-guide::before   { content: "ⓘ"; font-size: 18px; }
-
-/* Hover desktop */
-.help-icon:hover {
-  background: rgba(255,138,0,0.18);
-  border-color: rgba(255,138,0,0.45);
-  transform: translateY(-2px);
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .help-icons {
-    right: 12px;
-    bottom: 16px;
-  }
-
-  .help-icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  /* UX mobile : garder seulement la confidentialité */
-  .help-guide {
-    display: none;
-  }
-}
-/* ===============================
-   FORM HEADER — PRO
-================================ */
-
-.form-header {
-  max-width: 900px;
-  margin: 0 auto 28px;
-  text-align: center;
-}
-
-.section-title {
-  margin: 0 0 8px;
-  font-size: 1.6rem;
-  font-weight: 800;
-}
-
-.form-intro {
-  margin-top: 12px;
-  opacity: 0.85;
-  line-height: 1.6;
-}
-
-/* ===============================
-   FIELDSET / LEGEND — PRO
-================================ */
-
-.field-group {
-  margin-top: 24px;
-}
-
-/* Legend = titre d’étape (pas un H2 bis) */
-.field-legend {
-  font-size: 1rem;
-  font-weight: 700;
-  opacity: 0.85;
-  padding: 0 8px;
-}
-
-/* Option UX : numérotation légère */
-.field-legend::before {
-  content: "1. ";
-  opacity: 0.6;
-}
-/* =====================================================
-   e-META — FORM STEPS STICKY (PRO UX)
-===================================================== */
-
-/* Étape visible au scroll */
-.field-group {
-  position: relative;
-  padding-top: 28px;
-}
-
-/* Legend sticky */
-.field-legend {
+/* ===== HEADER ===== */
+.site-header {
   position: sticky;
-  top: 78px; /* sous le header */
-  z-index: 5;
-
-  background: linear-gradient(
-    180deg,
-    rgba(11,16,32,0.98),
-    rgba(11,16,32,0.90)
-  );
-
-  padding: 6px 12px;
-  margin-left: -12px;
-  margin-right: -12px;
-
-  font-weight: 700;
-  font-size: 0.95rem;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.08);
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(180deg, rgba(5,7,15,.95), rgba(5,7,15,.85));
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
-/* Séparateur visuel subtil */
-.field-group:not(:first-of-type) {
-  margin-top: 32px;
-}
-
-/* Mobile : plus discret */
-@media (max-width: 768px) {
-  .field-legend {
-    top: 66px;
-    font-size: 0.9rem;
-  }
-}
-/* =====================================================
-   e-META — INDICATEUR D'ÉTAPES (CSS ONLY)
-===================================================== */
-
-/* Conteneur */
-.form-steps {
-  max-width: 900px;
-  margin: 0 auto 18px;
+.header-inner {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  font-size: 0.85rem;
-  opacity: 0.85;
+  gap: 16px;
+  min-height: 64px;
 }
 
-/* Étape */
-.form-steps .step {
-  flex: 1;
-  text-align: center;
-  padding: 6px 8px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.08);
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   white-space: nowrap;
 }
 
-/* Étape active — fallback par défaut */
-.form-steps .step-1 {
-  background: rgba(255,138,0,0.18);
-  border-color: rgba(255,138,0,0.45);
-  font-weight: 700;
-}
-
-/* ===============================
-   ACTIVATION AUTOMATIQUE (CSS)
-   Basée sur la position du scroll
-================================ */
-
-/* Étape 1 */
-.emeta-form:has(fieldset:nth-of-type(1):hover) ~ .form-steps .step-1,
-.emeta-form:has(fieldset:nth-of-type(1):focus-within) ~ .form-steps .step-1 {
-  background: rgba(255,138,0,0.18);
-  border-color: rgba(255,138,0,0.45);
-  font-weight: 700;
-}
-
-/* Étape 2 */
-.emeta-form:has(fieldset:nth-of-type(2):focus-within) ~ .form-steps .step-2 {
-  background: rgba(255,138,0,0.18);
-  border-color: rgba(255,138,0,0.45);
-  font-weight: 700;
-}
-
-/* Étape 3 */
-.emeta-form:has(fieldset:nth-of-type(3):focus-within) ~ .form-steps .step-3 {
-  background: rgba(255,138,0,0.18);
-  border-color: rgba(255,138,0,0.45);
-  font-weight: 700;
-}
-
-/* Étape 4 */
-.emeta-form:has(fieldset:nth-of-type(4):focus-within) ~ .form-steps .step-4 {
-  background: rgba(255,138,0,0.18);
-  border-color: rgba(255,138,0,0.45);
-  font-weight: 700;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .form-steps {
-    overflow-x: auto;
-    justify-content: flex-start;
-    padding-bottom: 6px;
-  }
-
-  .form-steps .step {
-    flex: 0 0 auto;
-    min-width: 120px;
-  }
-}
-/* =====================================================
-   e-META — RÉSUMÉ INTELLIGENT AVANT SOUMISSION
-===================================================== */
-
-.summary-box {
-  margin-top: 24px;
-  padding: 20px;
-  border-radius: 16px;
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.06),
-    rgba(255,255,255,0.03)
-  );
-  border: 1px solid rgba(255,255,255,0.12);
-}
-
-.summary-title {
-  margin: 0 0 12px;
-  font-size: 1.1rem;
+.logo-mark {
+  color: #ff8a00;
   font-weight: 800;
+  font-size: 1.4rem;
 }
 
-.summary-content {
-  display: grid;
-  gap: 8px;
-  font-size: 0.9rem;
-  opacity: 0.95;
+.logo-text {
+  font-weight: 800;
+  font-size: 1.2rem;
 }
 
-.summary-item {
+.logo-tagline {
+  font-size: .75rem;
+  opacity: .75;
+  margin-left: 6px;
+}
+
+/* ===== NAV ===== */
+.nav {
   display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding-bottom: 6px;
-  border-bottom: 1px dashed rgba(255,255,255,0.1);
+  gap: 20px;
 }
 
-.summary-item span:first-child {
-  opacity: 0.75;
+.nav a {
+  font-size: .95rem;
+  opacity: .85;
 }
 
-.summary-actions {
+.nav a:hover {
+  opacity: 1;
+}
+
+/* ===== ACTIONS ===== */
+.header-actions {
   display: flex;
+  align-items: center;
   gap: 12px;
-  justify-content: flex-end;
-  margin-top: 16px;
-  flex-wrap: wrap;
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-  .summary-item {
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .summary-actions {
-    justify-content: center;
-  }
-}
-/* ===============================
-   SCORE DE COMPLETUDE
-================================ */
-
-.summary-score {
-  margin-bottom: 14px;
-}
-
-.score-bar {
-  height: 8px;
-  background: rgba(255,255,255,0.1);
+.lang-select {
+  background: #0f152d;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.15);
   border-radius: 999px;
-  overflow: hidden;
+  padding: 6px 12px;
 }
 
-.score-bar span {
-  display: block;
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg,#ff7a18,#ff9f1c);
-  transition: width .3s ease;
+.cta-custom {
+  background: linear-gradient(135deg, #ff8a00, #ffb347);
+  color: #000;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.score-text {
-  margin-top: 6px;
-  font-size: 0.85rem;
-  opacity: 0.8;
+/* ===== BURGER ===== */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
 }
-/* ===============================
-   FORM SAFE VISIBILITY
-=============================== */
 
-.emeta-form,
+.burger span {
+  width: 22px;
+  height: 2px;
+  background: #fff;
+}
+
+/* ===== HERO ===== */
+.hero {
+  padding: 64px 0 48px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.hero-box {
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.hero-box.muted {
+  opacity: .9;
+}
+
+/* ===== FORM ===== */
+.form-header {
+  margin: 48px 0 24px;
+  text-align: center;
+}
+
+.emeta-form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
 .field-group {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  padding: 24px;
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
 }
 
-/* ===============================
-   RESPONSIVE GRIDS
-=============================== */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
 
+.field label {
+  font-size: .85rem;
+  opacity: .85;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: #0f152d;
+  color: #fff;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* ===== GRIDS ===== */
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
-@media (max-width: 768px) {
-  .grid-2 {
+/* ===== CHECKBOX ===== */
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.check-item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ===== HELP ICONS ===== */
+.help-icons {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.help-icon {
+  background: rgba(255,255,255,.08);
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: .85rem;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+  margin-top: 80px;
+  padding: 32px 0;
+  text-align: center;
+  opacity: .75;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .hero-grid {
     grid-template-columns: 1fr;
   }
+}
 
-  .header-inner {
-    flex-wrap: wrap;
-  }
-
+@media (max-width: 768px) {
   .nav {
     display: none;
-    width: 100%;
+    position: absolute;
+    top: 64px;
+    right: 16px;
+    flex-direction: column;
+    background: #0b1020;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.1);
   }
 
   .nav.open {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
   }
-}
 
-/* ===============================
-   FORM WIDTH CONTROL
-=============================== */
+  .burger {
+    display: flex;
+  }
 
-.emeta-form {
-  max-width: 900px;
-  margin: 0 auto;
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .header-actions {
+    gap: 8px;
+  }
 }
