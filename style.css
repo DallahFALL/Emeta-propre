@@ -533,3 +533,36 @@ fieldset > legend {
     content: "• ";
   }
 }
+/* =====================================================
+   CONSENTEMENT — FIX DÉFINITIF RESPONSIVE
+===================================================== */
+
+/* Desktop */
+.consent-group .consent-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-content: center;
+}
+
+/* Mobile : override TOTAL */
+@media (max-width: 768px) {
+  .consent-group .consent-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 12px;
+  }
+
+  .consent-group .consent-item input {
+    margin: 0 auto;
+  }
+
+  .consent-group .consent-item span {
+    display: block;
+    width: 100%;
+    line-height: 1.5;
+  }
+}
