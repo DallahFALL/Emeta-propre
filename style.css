@@ -484,3 +484,25 @@ fieldset > legend {
   accent-color: #ff9f1c;
   transform: scale(1.25);
 }
+/* =====================================================
+   CONSENTEMENT — RESPONSIVE FIX
+===================================================== */
+
+.consent-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+  .consent-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .consent-item span {
+    line-height: 1.5;
+  }
+}
