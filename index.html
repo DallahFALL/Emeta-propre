@@ -107,13 +107,28 @@
       </div>
 
       <p class="form-intro" data-i18n="form.intro"></p>
-    </header>
+    </header
+    
 <!-- =========================
-     ACTIONS FORMULAIRE
+     AIDE — FORMULAIRE
 ========================== -->
-<div class="form-actions">
-  <button type="submit" class="btn-submit" data-i18n="form.submit"></button>
-  <button type="reset" class="btn-reset" data-i18n="form.reset"></button>
+<div class="help-icons help-top">
+  <a
+    id="pdfPrivacyLink"
+    class="help-icon help-privacy"
+    data-i18n="help.privacy"
+    href="privacy.html"
+    target="_blank"
+    rel="noopener">
+  </a>
+
+  <a
+    id="pdfGuideLink"
+    class="help-icon help-guide"
+    data-i18n="help.guide"
+    target="_blank"
+    rel="noopener">
+  </a>
 </div>
 
     <!-- =========================
@@ -306,46 +321,18 @@
     </div>
   </fieldset>
 
-  <!-- =========================
-       CONSENTEMENT
-  ========================== -->
-  <fieldset class="field-group consent-group">
-  <legend data-i18n="group.trust"></legend>
-
-  <label class="check-item consent-item">
-    <input type="checkbox" name="consent" required />
-    <span data-i18n="field.consent.label"></span>
-  </label>
-</fieldset>
+ <!-- =========================
+     ACTIONS FORMULAIRE
+========================== -->
+<div class="form-actions">
+  <button type="submit" class="btn-submit" data-i18n="form.submit"></button>
+  <button type="reset" class="btn-reset" data-i18n="form.reset"></button>
+</div>
 
 </form>
 
   </div>
 </section>
-
-<!-- =========================
-     HELP ICONS — GLOBAL
-========================== -->
-<div class="help-icons">
-  <a
-    id="pdfPrivacyLink"
-    class="help-icon help-privacy"
-    data-i18n="help.privacy"
-    href="privacy.html"
-    target="_blank"
-    rel="noopener"
-    aria-label="Politique de confidentialité">
-  </a>
-
-  <a
-    id="pdfGuideLink"
-    class="help-icon help-guide"
-    data-i18n="help.guide"
-    target="_blank"
-    rel="noopener"
-    aria-label="Guide officiel">
-  </a>
-</div>
 
 </main>
 
