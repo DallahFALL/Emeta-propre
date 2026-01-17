@@ -37,89 +37,74 @@
         <option value="ar">AR</option>
       </select>
 
-      <button class="cta-custom" type="button" id="customBtn" data-i18n="cta.custom">Requête personnalisée</button>
-    </div>
-  </div>
-</header>
-
-<main>
-  <section class="hero" id="hero">
-    <div class="container hero-grid">
-      <div class="hero-box">
-        <h1 data-i18n="hero.title">Donnez à vos décisions le niveau d’un cabinet de conseil premium</h1>
-        <p class="hero-subtitle" data-i18n="hero.subtitle"></p>
-
-        <ul class="hero-points">
-          <li data-i18n="hero.point1"></li>
-          <li data-i18n="hero.point2"></li>
-          <li data-i18n="hero.point3"></li>
-        </ul>
-
-        <button class="cta-primary" type="button" id="startBtn" data-i18n="hero.cta">Commencer une analyse stratégique</button>
-      </div>
-
-      <div class="hero-box muted">
-        <div class="hero-badge">
-          <span class="badge-title" data-i18n="hero.badge.title"></span>
-          <span class="badge-text" data-i18n="hero.badge.text"></span>
-        </div>
-        <p class="hero-note" data-i18n="hero.note"></p>
-      </div>
-    </div>
-  </section>
-
- <section class="form-section" id="form">
-  <div class="container">
-
-    <h2 class="section-title" data-i18n="form.title"></h2>
-    <p class="form-intro" data-i18n="form.intro"></p>
-
-    <!-- ===============================
-     AIDE & DOCUMENTS OFFICIELS
-================================ -->
-<div class="form-help">
-
-  <h3 data-i18n="help.title"></h3>
-
-  <div class="help-actions">
-    <a
-      class="help-btn"
-      href="privacy.html"
-      data-i18n="help.privacy"
-    ></a>
-
-    <a
-      class="help-btn"
-      href="/pdf/eMETA_Guide_Formulaire_FR.pdf"
-      data-i18n="help.guide"
-      target="_blank"
-      rel="noopener"
-    ></a>
-  </div>
-
+<button
+  class="cta-primary"
+  type="button"
+  id="startBtn"
+  data-i18n="hero.cta">
+  Commencer une analyse stratégique
+</button>
 </div>
 
-    <!-- ===============================
-         FORMULAIRE
-    ================================ -->
-    <form id="emetaForm" class="emeta-form" novalidate>
+<div class="hero-box muted">
+  <div class="hero-badge">
+    <span class="badge-title" data-i18n="hero.badge.title"></span>
+    <span class="badge-text" data-i18n="hero.badge.text"></span>
+  </div>
+  <p class="hero-note" data-i18n="hero.note"></p>
+</div>
 
-        <fieldset class="field-group">
-          <legend data-i18n="group.general"></legend>
+</div>
+</section>
 
 <section class="form-section" id="form">
-   <div class="form-header">
-  <h2 class="section-title" data-i18n="form.title"></h2>
+  <div class="container">
 
-  <div class="form-badge">
-    🧠 <span data-i18n="form.badge.cabinet"></span>
-  </div>
+    <!-- =========================
+         FORM HEADER
+    ========================== -->
+    <div class="form-header">
+      <h2 class="section-title" data-i18n="form.title"></h2>
 
-  <p class="form-intro" data-i18n="form.intro"></p>
-</div>
+      <div class="form-badge">
+        🧠 <span data-i18n="form.badge.cabinet"></span>
+      </div>
 
+      <p class="form-intro" data-i18n="form.intro"></p>
+    </div>
 
-          <div class="grid-2">
+    <!-- =========================
+         AIDE & DOCUMENTS
+    ========================== -->
+    <div class="form-help">
+      <h3 data-i18n="help.title"></h3>
+
+      <div class="help-actions">
+        <a
+          class="help-btn"
+          href="privacy.html"
+          data-i18n="help.privacy">
+        </a>
+
+        <a
+          class="help-btn"
+          href="/pdf/eMETA_Guide_Formulaire_FR.pdf"
+          data-i18n="help.guide"
+          target="_blank"
+          rel="noopener">
+        </a>
+      </div>
+    </div>
+
+    <!-- =========================
+         FORMULAIRE
+    ========================== -->
+    <form id="emetaForm" class="emeta-form" novalidate>
+
+      <fieldset class="field-group">
+        <legend data-i18n="group.general"></legend>
+
+        <div class="grid-2">
             <div class="field">
               <label for="domain" data-i18n="field.domain.label"></label>
               <select id="domain" name="domain" required>
