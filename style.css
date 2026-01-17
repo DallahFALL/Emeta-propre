@@ -599,3 +599,8 @@ fieldset > legend {
     line-height: 1.5;
   }
 }
+/* Empêche le consentement d'hériter du style carte */
+.consent-item {
+  background: rgba(255,159,28,0.08);
+  border: 1px solid rgba(255,159,28,0.35);
+}
