@@ -131,9 +131,9 @@
   </a>
 </div>
 
-    <!-- =========================
-         FORMULAIRE (UNIQUE)
-    ========================== -->
+<!-- ========================= 
+     FORMULAIRE (UNIQUE)
+========================== -->
 <form id="emetaForm" class="emeta-form" novalidate>
 
   <!-- =========================
@@ -174,11 +174,8 @@
 
     <div class="field">
       <label for="decisionTitle" data-i18n="field.title.label"></label>
-      <input
-        id="decisionTitle"
-        name="decisionTitle"
-        type="text"
-        data-i18n-placeholder="field.title.ph" />
+      <input id="decisionTitle" name="decisionTitle" type="text"
+             data-i18n-placeholder="field.title.ph" />
       <div class="hint" data-i18n="field.title.hint"></div>
     </div>
   </fieldset>
@@ -191,11 +188,8 @@
 
     <div class="field">
       <label for="problem" data-i18n="field.problem.label"></label>
-      <textarea
-        id="problem"
-        name="problem"
-        rows="4"
-        data-i18n-placeholder="field.problem.ph"></textarea>
+      <textarea id="problem" name="problem" rows="4"
+                data-i18n-placeholder="field.problem.ph"></textarea>
       <div class="hint subtle" data-i18n="help.problem"></div>
     </div>
 
@@ -203,12 +197,12 @@
       <div class="field">
         <label for="objectives" data-i18n="field.objectives.label"></label>
         <textarea id="objectives" name="objectives" rows="4"
-          data-i18n-placeholder="field.objectives.ph"></textarea>
+                  data-i18n-placeholder="field.objectives.ph"></textarea>
       </div>
       <div class="field">
         <label for="constraints" data-i18n="field.constraints.label"></label>
         <textarea id="constraints" name="constraints" rows="4"
-          data-i18n-placeholder="field.constraints.ph"></textarea>
+                  data-i18n-placeholder="field.constraints.ph"></textarea>
       </div>
     </div>
 
@@ -216,19 +210,19 @@
       <div class="field">
         <label for="kpis" data-i18n="field.kpis.label"></label>
         <textarea id="kpis" name="kpis" rows="4"
-          data-i18n-placeholder="field.kpis.ph"></textarea>
+                  data-i18n-placeholder="field.kpis.ph"></textarea>
       </div>
       <div class="field">
         <label for="resources" data-i18n="field.resources.label"></label>
         <textarea id="resources" name="resources" rows="4"
-          data-i18n-placeholder="field.resources.ph"></textarea>
+                  data-i18n-placeholder="field.resources.ph"></textarea>
       </div>
     </div>
 
     <div class="field">
       <label for="context" data-i18n="field.context.label"></label>
       <textarea id="context" name="context" rows="5"
-        data-i18n-placeholder="field.context.ph"></textarea>
+                data-i18n-placeholder="field.context.ph"></textarea>
     </div>
   </fieldset>
 
@@ -243,7 +237,7 @@
         <label for="budgetMin" data-i18n="field.budgetMin.label"></label>
         <div class="field-with-unit">
           <input id="budgetMin" name="budgetMin" type="number" min="0"
-            data-i18n-placeholder="field.budgetMin.ph" />
+                 data-i18n-placeholder="field.budgetMin.ph" />
           <select id="currency" name="currency">
             <option value="XOF">XOF</option>
             <option value="EUR">EUR</option>
@@ -256,7 +250,7 @@
       <div class="field">
         <label for="budgetMax" data-i18n="field.budgetMax.label"></label>
         <input id="budgetMax" name="budgetMax" type="number" min="0"
-          data-i18n-placeholder="field.budgetMax.ph" />
+               data-i18n-placeholder="field.budgetMax.ph" />
       </div>
     </div>
 
@@ -264,7 +258,7 @@
       <div class="field">
         <label for="deadline" data-i18n="field.deadline.label"></label>
         <input id="deadline" name="deadline" type="text"
-          data-i18n-placeholder="field.deadline.ph" />
+               data-i18n-placeholder="field.deadline.ph" />
       </div>
 
       <div class="field">
@@ -283,103 +277,71 @@
        ÉTAPE 4 — SORTIE
   ========================== -->
   <fieldset class="field-group">
-  <legend data-i18n="group.output"></legend>
-
-  <div class="field">
-    <div class="field-label-strong" data-i18n="field.outputMode.label"></div>
-
-    <div class="checkbox-grid">
-
-      <label class="consent-item">
-        <input type="checkbox" name="out_email" value="1" />
-        <span data-i18n="field.outputMode.email"></span>
-      </label>
-
-      <label class="consent-item">
-        <input type="checkbox" name="out_whatsapp" value="1" />
-        <span data-i18n="field.outputMode.whatsapp"></span>
-      </label>
-
-      <label class="consent-item">
-        <input type="checkbox" name="out_pdf" value="1" />
-        <span data-i18n="field.outputMode.pdf"></span>
-      </label>
-
-      <label class="consent-item">
-        <input type="checkbox" name="out_display" value="1" />
-        <span data-i18n="field.outputMode.display"></span>
-      </label>
-
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="field">
-      <label for="email" data-i18n="field.email.label"></label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        data-i18n-placeholder="field.email.ph" />
-    </div>
+    <legend data-i18n="group.output"></legend>
 
     <div class="field">
-      <label for="whatsapp" data-i18n="field.whatsapp.label"></label>
-      <input
-        id="whatsapp"
-        name="whatsapp"
-        type="tel"
-        data-i18n-placeholder="field.whatsapp.ph" />
+      <div class="field-label-strong" data-i18n="field.outputMode.label"></div>
+
+      <div class="checkbox-grid">
+        <label class="consent-item">
+          <input type="checkbox" name="out_email" />
+          <span data-i18n="field.outputMode.email"></span>
+        </label>
+
+        <label class="consent-item">
+          <input type="checkbox" name="out_whatsapp" />
+          <span data-i18n="field.outputMode.whatsapp"></span>
+        </label>
+
+        <label class="consent-item">
+          <input type="checkbox" name="out_pdf" />
+          <span data-i18n="field.outputMode.pdf"></span>
+        </label>
+
+        <label class="consent-item">
+          <input type="checkbox" name="out_display" />
+          <span data-i18n="field.outputMode.display"></span>
+        </label>
+      </div>
     </div>
+
+    <div class="grid-2">
+      <div class="field">
+        <label for="email" data-i18n="field.email.label"></label>
+        <input id="email" name="email" type="email"
+               data-i18n-placeholder="field.email.ph" />
+      </div>
+
+      <div class="field">
+        <label for="whatsapp" data-i18n="field.whatsapp.label"></label>
+        <input id="whatsapp" name="whatsapp" type="tel"
+               data-i18n-placeholder="field.whatsapp.ph" />
+      </div>
+    </div>
+  </fieldset>
+
+  <!-- =========================
+       CONSENTEMENT
+  ========================== -->
+  <fieldset class="field-group consent-group">
+    <legend data-i18n="group.trust"></legend>
+
+    <label class="consent-item">
+      <input type="checkbox" id="consent" name="consent" required />
+      <span data-i18n="field.consent.label"></span>
+    </label>
+  </fieldset>
+
+  <!-- =========================
+       ACTIONS
+  ========================== -->
+  <div class="form-actions">
+    <button type="submit" class="btn-submit" data-i18n="form.submit"></button>
+    <button type="reset" class="btn-reset" data-i18n="form.reset"></button>
   </div>
-</fieldset>
-
-/* =====================================================
-   FORM — CONSENTEMENT (HARMONISÉ)
-===================================================== */
-
-.consent-group {
-  margin-top: 24px;
-}
-
-.consent-group .consent-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 20px;
-
-  border-radius: 16px;
-  background: rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,159,28,0.45);
-  text-align: center;
-}
-
-/* MOBILE */
-@media (max-width: 640px) {
-  .consent-group .consent-item {
-    flex-direction: column;
-    gap: 12px;
-  }
-}
-
- <!-- =========================
-     ACTIONS FORMULAIRE
-========================== -->
-<div class="form-actions">
-  <button type="submit" class="btn-submit" data-i18n="form.submit"></button>
-  <button type="reset" class="btn-reset" data-i18n="form.reset"></button>
-</div>
 
 </form>
 
-  </div>
-</section>
-
-</main>
 
 <!-- =========================
      FOOTER
