@@ -57,12 +57,12 @@
 </div>
 </section>
 
-<section class="form-section" id="form">
+<!-- =========================
+     FORM SECTION
+========================== -->
+<section id="form">
   <div class="container">
 
-    <!-- =========================
-         FORM HEADER
-    ========================== -->
     <div class="form-header">
       <h2 class="section-title" data-i18n="form.title"></h2>
 
@@ -73,28 +73,44 @@
       <p class="form-intro" data-i18n="form.intro"></p>
     </div>
 
-    <!-- =========================
-         AIDE & DOCUMENTS
-    ========================== -->
-    <div class="form-help">
-      <h3 data-i18n="help.title"></h3>
+    <!-- FORMULAIRE -->
+    <form id="emetaForm" class="emeta-form" novalidate>
 
-      <div class="help-actions">
-        <a
-          class="help-btn"
-          href="privacy.html"
-          data-i18n="help.privacy">
-        </a>
+      <fieldset class="field-group">
+        <legend data-i18n="group.general"></legend>
+        <!-- champs -->
+      </fieldset>
 
-        <a
-          class="help-btn"
-          href="/pdf/eMETA_Guide_Formulaire_FR.pdf"
-          data-i18n="help.guide"
-          target="_blank"
-          rel="noopener">
-        </a>
-      </div>
-    </div>
+      <!-- autres fieldsets ici -->
+
+    </form>
+
+  </div>
+</section>
+
+<!-- HELP ICONS — GLOBAL & FLOTTANT -->
+<div class="help-icons">
+  <a
+    id="pdfPrivacyLink"
+    class="help-icon help-privacy"
+    data-i18n="help.privacy"
+    href="privacy.html"
+    target="_blank"
+    rel="noopener"
+    aria-label="Politique de confidentialité">
+  </a>
+
+  <a
+    id="pdfGuideLink"
+    class="help-icon help-guide"
+    data-i18n="help.guide"
+    target="_blank"
+    rel="noopener"
+    aria-label="Guide officiel">
+  </a>
+</div>
+
+</main>
 
     <!-- =========================
          FORMULAIRE
