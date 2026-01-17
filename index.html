@@ -334,17 +334,37 @@
   </div>
 </fieldset>
 
-<!-- =========================
-     CONSENTEMENT
-========================== -->
-<fieldset class="field-group consent-group">
-  <legend data-i18n="group.trust"></legend>
+/* =====================================================
+   FORM — CONSENTEMENT (HARMONISÉ)
+===================================================== */
 
-  <label class="consent-item">
-    <input type="checkbox" id="consent" name="consent" required />
-    <span data-i18n="field.consent.label"></span>
-  </label>
-</fieldset>
+.consent-group {
+  margin-top: 24px;
+}
+
+.consent-group .consent-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px;
+
+  border-radius: 16px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,159,28,0.45);
+  text-align: center;
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .consent-group .consent-item {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
 
  <!-- =========================
      ACTIONS FORMULAIRE
