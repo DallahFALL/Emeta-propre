@@ -246,3 +246,58 @@ a{color:inherit;text-decoration:none}
 .help-link:hover {
   background: rgba(255,255,255,.1);
 }
+/* =====================================================
+   e-META — PATCH UX AIDE FORMULAIRE (SAFE)
+   - Cache le titre "Besoin d'aide avant de commencer"
+   - Centre les liens d'aide
+   - Responsive desktop / mobile
+===================================================== */
+
+/* Cache le texte explicatif */
+.help-title,
+.help-intro,
+.help-text {
+  display: none !important;
+}
+
+/* Conteneur des liens */
+.help-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 24px auto 32px;
+  flex-wrap: wrap;
+}
+
+/* Style boutons/liens */
+.help-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-size: 0.9rem;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.help-links a:hover {
+  background: rgba(255,138,0,0.15);
+  border-color: rgba(255,138,0,0.4);
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .help-links {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .help-links a {
+    width: 100%;
+    justify-content: center;
+  }
+}
