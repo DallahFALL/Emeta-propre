@@ -195,88 +195,6 @@ textarea {
 }
 
 /* =====================================================
-   MODE DE RESTITUTION — FIX DÉFINITIF
-===================================================== */
-.checkbox-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0,1fr));
-  gap: 16px;
-  margin: 14px 0;
-}
-
-.checkbox-grid .consent-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-
-  padding: 16px;
-  border-radius: 14px;
-  text-align: center;
-
-  background: rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,159,28,0.35);
-  cursor: pointer;
-}
-
-.checkbox-grid input {
-  accent-color: #ff9f1c;
-  transform: scale(1.15);
-}
-
-/* Tablet */
-@media (max-width: 900px) {
-  .checkbox-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Mobile */
-@media (max-width: 640px) {
-  .checkbox-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* =====================================================
-   CONSENTEMENT — FIX DÉFINITIF
-===================================================== */
-.consent-group {
-  border: 2px solid rgba(255,159,28,0.5);
-  background: rgba(255,159,28,0.05);
-}
-
-.consent-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 20px;
-
-  border-radius: 16px;
-  background: rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,159,28,0.4);
-  font-weight: 600;
-}
-
-.consent-item input {
-  accent-color: #ff9f1c;
-  transform: scale(1.25);
-}
-
-/* Mobile */
-@media (max-width: 640px) {
-  .consent-item {
-    flex-direction: column;
-    text-align: center;
-    gap: 14px;
-  }
-}
-
-/* =====================================================
    ACTIONS FORMULAIRE
 ===================================================== */
 .form-actions {
@@ -352,5 +270,103 @@ textarea {
   .cta-primary,
   .cta-custom {
     width: 100%;
+  }
+}
+/* =====================================================
+   FORM — MODE DE RESTITUTION (PROPRE & RESPONSIVE)
+===================================================== */
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 14px 0 18px;
+}
+
+.checkbox-grid .consent-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 16px;
+  min-height: 56px;
+
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 159, 28, 0.35);
+
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.checkbox-grid .consent-item:hover {
+  border-color: #ff9f1c;
+  background: rgba(255, 159, 28, 0.08);
+}
+
+.checkbox-grid .consent-item input {
+  accent-color: #ff9f1c;
+  transform: scale(1.15);
+}
+
+/* ===== TABLET ===== */
+@media (max-width: 900px) {
+  .checkbox-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 640px) {
+  .checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =====================================================
+   CONSENTEMENT — PROPRE & RESPONSIVE
+===================================================== */
+
+.consent-group {
+  border: 2px solid rgba(255, 159, 28, 0.45);
+  background: rgba(255, 159, 28, 0.05);
+}
+
+.consent-group .consent-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px;
+
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 159, 28, 0.4);
+
+  font-weight: 600;
+  text-align: center;
+}
+
+.consent-group .consent-item input {
+  accent-color: #ff9f1c;
+  transform: scale(1.25);
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 640px) {
+  .consent-group .consent-item {
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px 14px;
+  }
+
+  .consent-group .consent-item span {
+    width: 100%;
+    line-height: 1.5;
   }
 }
