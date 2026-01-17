@@ -643,3 +643,21 @@ fieldset > legend {
     line-height: 1.5;
   }
 }
+/* === CONSENTEMENT — OVERRIDE DE SECOURS === */
+fieldset.consent-group label {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 12px !important;
+}
+
+fieldset.consent-group label input {
+  transform: scale(1.3) !important;
+}
+
+fieldset.consent-group label span {
+  width: 100% !important;
+  line-height: 1.5 !important;
+}
