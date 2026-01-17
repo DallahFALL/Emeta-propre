@@ -661,3 +661,53 @@ fieldset.consent-group label span {
   width: 100% !important;
   line-height: 1.5 !important;
 }
+/* =====================================================
+   CONSENTEMENT — FIX FINAL VALIDÉ
+===================================================== */
+
+/* Conteneur */
+.consent-group {
+  display: block;
+}
+
+/* Bloc consentement */
+.consent-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px;
+
+  border-radius: 16px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,159,28,0.4);
+  font-weight: 600;
+}
+
+/* Checkbox */
+.consent-item input {
+  flex-shrink: 0;
+}
+
+/* Texte */
+.consent-item span {
+  line-height: 1.5;
+}
+
+/* ===== MOBILE : vraie bascule ===== */
+@media (max-width: 640px) {
+  .consent-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+    padding: 18px 14px;
+  }
+
+  .consent-item span {
+    width: 100%;
+  }
+}
