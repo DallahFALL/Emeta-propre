@@ -1,9 +1,11 @@
 /* =====================================================
-   e-META — style.css FINAL PRO
-   Stable • Responsive • Form-safe
+   e-META — style.css CLEAN & STABLE
+   ✔ Responsive réel
+   ✔ Form-safe
+   ✔ Sans doublons
 ===================================================== */
 
-/* ========== RESET ========== */
+/* ================= RESET ================= */
 *,
 *::before,
 *::after {
@@ -19,9 +21,12 @@ html, body {
   overflow-x: hidden;
 }
 
-a { color: inherit; text-decoration: none; }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-/* ========== CONTAINER ========== */
+/* ================= CONTAINER ================= */
 .container {
   max-width: 1100px;
   margin: 0 auto;
@@ -47,7 +52,6 @@ a { color: inherit; text-decoration: none; }
   min-height: 64px;
 }
 
-/* Logo */
 .logo {
   display: flex;
   align-items: center;
@@ -59,17 +63,12 @@ a { color: inherit; text-decoration: none; }
 .logo-text { font-weight: 900; font-size: 1.1rem; }
 .logo-tagline { font-size: .75rem; opacity: .75; margin-left: 6px; }
 
-/* Nav */
 .nav {
   display: flex;
   gap: 18px;
   align-items: center;
 }
 
-.nav a { opacity: .9; }
-.nav a:hover { opacity: 1; }
-
-/* Actions */
 .header-actions {
   display: flex;
   gap: 10px;
@@ -113,7 +112,9 @@ a { color: inherit; text-decoration: none; }
 /* =====================================================
    HERO
 ===================================================== */
-.hero { padding: 48px 0; }
+.hero {
+  padding: 48px 0;
+}
 
 .hero-grid {
   display: grid;
@@ -128,11 +129,10 @@ a { color: inherit; text-decoration: none; }
   padding: 22px;
 }
 
-.hero-box.muted { opacity: .95; }
-
-.hero h1 { margin: 0 0 12px; font-size: 2rem; }
-.hero-subtitle { opacity: .9; line-height: 1.6; }
-.hero-points { padding-left: 18px; }
+.hero h1 {
+  margin: 0 0 12px;
+  font-size: 2rem;
+}
 
 .cta-primary {
   margin-top: 16px;
@@ -146,25 +146,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* =====================================================
-   FORM
+   FORM — BASE
 ===================================================== */
-.form-header {
-  max-width: 900px;
-  margin: 0 auto 24px;
-  text-align: center;
-}
-
-.form-badge {
-  display: inline-flex;
-  gap: 6px;
-  margin: 12px 0;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: .85rem;
-  background: rgba(255,138,0,.12);
-  color: #ff9f1c;
-}
-
 .emeta-form {
   max-width: 980px;
   margin: 0 auto;
@@ -177,7 +160,15 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 16px;
 }
 
-.field { margin: 12px 0; }
+fieldset > legend {
+  font-weight: 800;
+  padding: 0 8px;
+  color: #ff9f1c;
+}
+
+.field {
+  margin: 12px 0;
+}
 
 input,
 select,
@@ -204,132 +195,95 @@ textarea {
 }
 
 /* =====================================================
-   FOOTER
+   MODE DE RESTITUTION — FIX DÉFINITIF
 ===================================================== */
-.site-footer {
-  border-top: 1px solid rgba(255,255,255,.08);
-  padding: 22px 0;
-  text-align: center;
-}
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-@media (max-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 768px) {
-
-  .burger { display: block; }
-
-  .nav {
-    display: none;
-    width: 100%;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 12px;
-  }
-
-  .nav.open { display: flex; }
-
-  .header-inner { flex-wrap: wrap; }
-
-  .header-actions {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .logo-tagline { display: none; }
-
-  .grid-2 { grid-template-columns: 1fr; }
-
-  .field-with-unit { grid-template-columns: 1fr; }
-
-  .cta-primary,
-  .cta-custom { width: 100%; }
-}
-/* =====================================================
-   HELP ICONS
-===================================================== */
-.help-icons {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin: 20px 0 40px;
-}
-
-.help-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 14px;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.15);
-  opacity: .9;
-}
-
-.help-icon:hover {
-  opacity: 1;
-}
-/* =====================================================
-   FORM — UX ENHANCEMENTS
-===================================================== */
-
-/* Legend */
-.field-legend,
-fieldset > legend {
-  font-weight: 800;
-  padding: 0 8px;
-  color: #ff9f1c;
-}
-
-/* Hints */
-.hint {
-  margin-top: 6px;
-  font-size: 0.8rem;
-  opacity: 0.8;
-}
-
-.hint.subtle {
-  opacity: 0.65;
-}
-
-/* Checkboxes */
 .checkbox-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 10px;
-  margin-top: 10px;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 16px;
+  margin: 14px 0;
 }
 
-.check-item {
+.checkbox-grid .consent-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(255,255,255,.04);
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,.1);
+  justify-content: center;
+  gap: 10px;
+
+  padding: 16px;
+  border-radius: 14px;
+  text-align: center;
+
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,159,28,0.35);
+  cursor: pointer;
 }
 
-/* Range */
-.range-labels {
+.checkbox-grid input {
+  accent-color: #ff9f1c;
+  transform: scale(1.15);
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .checkbox-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =====================================================
+   CONSENTEMENT — FIX DÉFINITIF
+===================================================== */
+.consent-group {
+  border: 2px solid rgba(255,159,28,0.5);
+  background: rgba(255,159,28,0.05);
+}
+
+.consent-item {
   display: flex;
-  justify-content: space-between;
-  font-size: 0.75rem;
-  opacity: 0.7;
-  margin-top: 4px;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px;
+
+  border-radius: 16px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,159,28,0.4);
+  font-weight: 600;
 }
 
-/* Form actions */
+.consent-item input {
+  accent-color: #ff9f1c;
+  transform: scale(1.25);
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .consent-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+  }
+}
+
+/* =====================================================
+   ACTIONS FORMULAIRE
+===================================================== */
 .form-actions {
   display: flex;
   gap: 14px;
   justify-content: center;
-  margin: 30px 0 10px;
+  margin: 32px 0 12px;
   flex-wrap: wrap;
 }
 
@@ -351,402 +305,52 @@ fieldset > legend {
   border-radius: 999px;
   cursor: pointer;
 }
-/* =====================================================
-   OUTPUT MODE — PREMIUM UX
-===================================================== */
-
-.checkbox-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 14px;
-}
-
-.check-item {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  border-radius: 14px;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.12);
-  cursor: pointer;
-  transition: all .2s ease;
-}
-
-.check-item:hover {
-  border-color: rgba(255,159,28,.6);
-  background: rgba(255,159,28,.06);
-}
-
-.check-item input {
-  accent-color: #ff9f1c;
-  transform: scale(1.2);
-}
-/* =====================================================
-   CONSENTEMENT — LEGAL UX
-===================================================== */
-
-.consent-group {
-  border-color: rgba(255,159,28,.4);
-}
-
-.consent-item {
-  background: rgba(255,159,28,.08);
-  border: 1px solid rgba(255,159,28,.35);
-  font-weight: 600;
-}
-
-.consent-item input {
-  accent-color: #ff9f1c;
-}
-/* =====================================================
-   AIDE FORMULAIRE — POSITION HAUTE
-===================================================== */
-.help-top {
-  justify-content: center;
-  margin: 10px 0 28px;
-}
 
 /* =====================================================
-   ACTIONS FORMULAIRE — POSITION BASSE
+   RESPONSIVE GLOBAL
 ===================================================== */
-.form-actions {
-  margin-top: 32px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255,255,255,.08);
-}
-/* =====================================================
-   MODE DE RESTITUTION — RESPONSIVE FIX
-===================================================== */
-
-.checkbox-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin: 14px 0;
-}
-
-.check-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  min-height: 56px;
-  padding: 14px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.15);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.check-item:hover {
-  border-color: #ff9f1c;
-  background: rgba(255,159,28,0.08);
-}
-
-.check-item input {
-  accent-color: #ff9f1c;
-  transform: scale(1.15);
-}
-
-/* ===== TABLET ===== */
 @media (max-width: 900px) {
-  .checkbox-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* ===== MOBILE ===== */
-@media (max-width: 520px) {
-  .checkbox-grid {
+  .hero-grid {
     grid-template-columns: 1fr;
   }
 }
-/* =====================================================
-   CONSENTEMENT — VISIBILITÉ & RGPD
-===================================================== */
 
-.consent-group {
-  border: 2px solid rgba(255,159,28,0.6);
-  background: rgba(255,159,28,0.05);
-}
+@media (max-width: 768px) {
+  .burger { display: block; }
 
-.consent-item {
-  margin-top: 10px;
-  padding: 16px;
-  font-weight: 700;
-  color: #fff;
-}
-
-.consent-item input {
-  accent-color: #ff9f1c;
-  transform: scale(1.25);
-}
-/* =====================================================
-   CONSENTEMENT — RESPONSIVE FIX
-===================================================== */
-
-.consent-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-/* ===== MOBILE ===== */
-@media (max-width: 600px) {
-  .consent-item {
+  .nav {
+    display: none;
+    width: 100%;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .consent-item span {
-    line-height: 1.5;
-  }
-}
-/* =====================================================
-   HERO — CENTRAGE MOBILE
-===================================================== */
-
-@media (max-width: 768px) {
-  .hero-box {
-    text-align: center;
-  }
-
-  .hero-box h1 {
-    text-align: center;
-  }
-
-  .hero-subtitle,
-  .hero-points {
-    text-align: center;
-  }
-
-  .hero-points {
-    list-style: none;
-    padding-left: 0;
-  }
-
-  .hero-points li::before {
-    content: "• ";
-  }
-}
-/* =====================================================
-   CONSENTEMENT — FIX DÉFINITIF RESPONSIVE
-===================================================== */
-
-/* Desktop */
-.consent-group .consent-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  justify-content: center;
-}
-
-/* Mobile : override TOTAL */
-@media (max-width: 768px) {
-  .consent-group .consent-item {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
     gap: 12px;
+    margin-top: 12px;
   }
 
-  .consent-group .consent-item input {
-    margin: 0 auto;
+  .nav.open { display: flex; }
+
+  .header-inner {
+    flex-wrap: wrap;
   }
 
-  .consent-group .consent-item span {
-    display: block;
+  .header-actions {
     width: 100%;
-    line-height: 1.5;
-  }
-}
-/* =====================================================
-   CONSENTEMENT — FIX DÉFINITIF RESPONSIVE
-===================================================== */
-
-/* Desktop */
-.consent-group .consent-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  justify-content: center;
-}
-
-/* Mobile : override TOTAL */
-@media (max-width: 768px) {
-  .consent-group .consent-item {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-    gap: 12px;
+    justify-content: space-between;
   }
 
-  .consent-group .consent-item input {
-    margin: 0 auto;
+  .logo-tagline {
+    display: none;
   }
 
-  .consent-group .consent-item span {
-    display: block;
-    width: 100%;
-    line-height: 1.5;
-  }
-}
-/* Empêche le consentement d'hériter du style carte */
-.consent-item {
-  background: rgba(255,159,28,0.08);
-  border: 1px solid rgba(255,159,28,0.35);
-}
-/* =====================================================
-   CONSENTEMENT — FIX PRO DÉFINITIF
-===================================================== */
-
-.consent-group {
-  border: 2px solid rgba(255,159,28,0.6);
-  background: rgba(255,159,28,0.05);
-}
-
-/* Desktop */
-.consent-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  padding: 18px;
-  border-radius: 14px;
-  background: rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,159,28,0.35);
-  font-weight: 600;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .consent-item {
-    flex-direction: column;
-    text-align: center;
-    gap: 12px;
-  }
-
-  .consent-item input {
-    transform: scale(1.3);
-  }
-
-  .consent-item span {
-    width: 100%;
-    line-height: 1.5;
-  }
-}
-/* === CONSENTEMENT — OVERRIDE DE SECOURS === */
-fieldset.consent-group label {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  gap: 12px !important;
-}
-
-fieldset.consent-group label input {
-  transform: scale(1.3) !important;
-}
-
-fieldset.consent-group label span {
-  width: 100% !important;
-  line-height: 1.5 !important;
-}
-/* =====================================================
-   CONSENTEMENT — FIX FINAL VALIDÉ
-===================================================== */
-
-/* Conteneur */
-.consent-group {
-  display: block;
-}
-
-/* Bloc consentement */
-.consent-item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 20px;
-
-  border-radius: 16px;
-  background: rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,159,28,0.4);
-  font-weight: 600;
-}
-
-/* Checkbox */
-.consent-item input {
-  flex-shrink: 0;
-}
-
-/* Texte */
-.consent-item span {
-  line-height: 1.5;
-}
-
-/* ===== MOBILE : vraie bascule ===== */
-@media (max-width: 640px) {
-  .consent-item {
-    flex-direction: column;
-    text-align: center;
-    gap: 14px;
-    padding: 18px 14px;
-  }
-
-  .consent-item span {
-    width: 100%;
-  }
-}
-/* =====================================================
-   FORM — MODE DE RESTITUTION (FIX FINAL)
-===================================================== */
-
-.checkbox-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-  margin: 12px 0 18px;
-}
-
-.checkbox-grid .consent-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-
-  padding: 16px;
-  border-radius: 14px;
-  cursor: pointer;
-
-  background: rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,159,28,0.35);
-  text-align: center;
-}
-
-/* TABLET */
-@media (max-width: 900px) {
-  .checkbox-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* MOBILE */
-@media (max-width: 640px) {
-  .checkbox-grid {
+  .grid-2 {
     grid-template-columns: 1fr;
+  }
+
+  .field-with-unit {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-primary,
+  .cta-custom {
+    width: 100%;
   }
 }
