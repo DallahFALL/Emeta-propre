@@ -1,1 +1,11 @@
-body{direction:rtl}
+/* =====================================================
+   RTL — SAFE MODE (AR ONLY)
+===================================================== */
+
+html[dir="rtl"] {
+  direction: rtl;
+}
+
+html[dir="rtl"] body {
+  direction: rtl;
+}
