@@ -20,10 +20,10 @@ window.I18N = {
     hero: {
     badge: {
     title: "Analyse stratégique — niveau cabinet",
-    text: "Une approche structurée inspirée des cabinets de conseil pour éclairer vos décisions complexes."
+    text: "Une approche structurée inspirée des cabinets de conseil pour éclairer vos décisions complexes.",
     },
-   note: "Ce n’est pas un chatbot. Chaque réponse est analysée selon une méthodologie décisionnelle avancée."
-   }
+   note: "Ce n’est pas un chatbot. Chaque réponse est analysée selon une méthodologie décisionnelle avancée.",
+   },
 
     "help.title": "Besoin d’aide avant de commencer ?",
     "help.privacy": "🔒 Politique de confidentialité",
@@ -134,10 +134,10 @@ window.I18N = {
     hero: {
     badge: {
     title: "Strategic analysis — consulting level",
-    text: "A structured approach inspired by top consulting firms to support complex decision-making."
+    text: "A structured approach inspired by top consulting firms to support complex decision-making.",
     },
     note: "This is not a chatbot. Each input is analyzed using a professional decision framework."
-    }
+    },
 
     "help.title": "Need help before starting?",
     "help.privacy": "🔒 Privacy policy",
