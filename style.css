@@ -65,7 +65,13 @@ textarea{min-height:110px;resize:vertical}
 .btn-submit,.btn-secondary{border-radius:999px;padding:12px 18px;font-weight:900;cursor:pointer}
 .btn-submit{background:linear-gradient(135deg,#ff7a18,#ff9f1c);border:none;color:#fff}
 .btn-secondary{background:transparent;border:1px solid rgba(255,255,255,.2);color:#fff}
-
+/* ================= TRUST MICRO-COPY ================= */
+.form-trust-note{
+  margin-top:12px;
+  font-size:.85rem;
+  opacity:.7;
+  text-align:center;
+}
 /* Footer */
 .site-footer{border-top:1px solid rgba(255,255,255,.08);padding:22px 0}
 .footer-inner{display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center}
