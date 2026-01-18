@@ -412,3 +412,24 @@ a{color:inherit;text-decoration:none}
   max-width: 900px;       /* lisibilité optimale */
   margin: 0 auto;
 }
+/* ===============================
+   FOOTER — BRAND SIGNATURE
+================================ */
+.footer-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.site-footer .logo-mark {
+  color: #ff8a00;
+  font-weight: 900;
+}
+
+.site-footer .logo-text {
+  color: #ffffff;
+  font-weight: 800;
+}
