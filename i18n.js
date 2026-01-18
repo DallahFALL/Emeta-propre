@@ -109,7 +109,7 @@ window.I18N = {
     "form.submit": "Générer ma recommandation e-META",
     "form.reset": "Réinitialiser",
 
-    "footer.text": "e-META — Moteur d’intelligence décisionnelle stratégique.",
+    "footer.text": "— Moteur d’intelligence décisionnelle stratégique.",
     "footer.privacy": "Politique de confidentialité",
     "footer.copy": "© 2026 e-META — Tous droits réservés"
   },
