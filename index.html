@@ -13,29 +13,34 @@
 
 <header class="site-header">
   <div class="container header-inner">
+
     <a class="logo" href="#top">
       <span class="logo-mark">e</span>
       <span class="logo-text">META</span>
-      <span class="logo-tagline" data-i18n="header.tagline">Assistant IA multilingue de prise de décision</span>
+      <span class="logo-tagline" data-i18n="header.tagline"></span>
     </a>
 
-    <button class="burger" id="burgerBtn" type="button" aria-label="Menu" aria-expanded="false">
+    <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
 
     <nav class="nav" id="mainNav">
-      <a href="#top" data-i18n="nav.home">Accueil</a>
-      <a href="#form" data-i18n="nav.form">Formulaire</a>
-      <a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a>
+      <a href="#top" data-i18n="nav.home"></a>
+      <a href="#form" data-i18n="nav.form"></a>
+      <a href="privacy.html" data-i18n="nav.privacy"></a>
     </nav>
 
     <div class="header-actions">
-      <select class="lang-select" id="langSelect" aria-label="Langue">
+      <select class="lang-select" id="langSelect">
         <option value="fr">FR</option>
         <option value="en">EN</option>
         <option value="es">ES</option>
         <option value="ar">AR</option>
       </select>
+    </div>
+
+  </div>
+</header>
 
 <button
   class="cta-primary"
@@ -46,21 +51,44 @@
 </button>
 </div>
 
-<div class="hero-box muted">
-  <div class="hero-badge">
-    <span class="badge-title" data-i18n="hero.badge.title"></span>
-    <span class="badge-text" data-i18n="hero.badge.text"></span>
-  </div>
-  <p class="hero-note" data-i18n="hero.note"></p>
-</div>
+<section class="hero" id="hero">
+  <div class="container hero-grid">
 
-</div>
+    <!-- BLOC GAUCHE -->
+    <div class="hero-box">
+      <h1 data-i18n="hero.title"></h1>
+      <p class="hero-subtitle" data-i18n="hero.subtitle"></p>
+
+      <ul class="hero-points">
+        <li data-i18n="hero.point1"></li>
+        <li data-i18n="hero.point2"></li>
+        <li data-i18n="hero.point3"></li>
+      </ul>
+
+      <button
+        class="cta-primary"
+        type="button"
+        id="startBtn"
+        data-i18n="hero.cta">
+      </button>
+    </div>
+
+    <!-- BLOC DROIT -->
+    <div class="hero-box muted">
+      <div class="hero-badge">
+        <span class="badge-title" data-i18n="hero.badge.title"></span>
+        <span class="badge-text" data-i18n="hero.badge.text"></span>
+      </div>
+      <p class="hero-note" data-i18n="hero.note"></p>
+    </div>
+
+  </div>
 </section>
 
 <!-- =========================
      FORM SECTION
 ========================== -->
-<section id="form">
+<section class="form-section" id="form">
   <div class="container">
 
     <div class="form-header">
@@ -72,16 +100,7 @@
 
       <p class="form-intro" data-i18n="form.intro"></p>
     </div>
-
-    <!-- FORMULAIRE -->
     <form id="emetaForm" class="emeta-form" novalidate>
-
-      <fieldset class="field-group">
-        <legend data-i18n="group.general"></legend>
-        <!-- champs -->
-      </fieldset>
-
-      <!-- autres fieldsets ici -->
 
     </form>
 
@@ -90,32 +109,16 @@
 
 <!-- HELP ICONS — GLOBAL & FLOTTANT -->
 <div class="help-icons">
-  <a
-    id="pdfPrivacyLink"
-    class="help-icon help-privacy"
-    data-i18n="help.privacy"
-    href="privacy.html"
-    target="_blank"
-    rel="noopener"
-    aria-label="Politique de confidentialité">
-  </a>
+  <a id="pdfPrivacyLink" class="help-icon help-privacy"
+     href="privacy.html" target="_blank" rel="noopener"
+     data-i18n="help.privacy"></a>
 
-  <a
-    id="pdfGuideLink"
-    class="help-icon help-guide"
-    data-i18n="help.guide"
-    target="_blank"
-    rel="noopener"
-    aria-label="Guide officiel">
-  </a>
+  <a id="pdfGuideLink" class="help-icon help-guide"
+     target="_blank" rel="noopener"
+     data-i18n="help.guide"></a>
 </div>
 
 </main>
-
-    <!-- =========================
-         FORMULAIRE
-    ========================== -->
-    <form id="emetaForm" class="emeta-form" novalidate>
 
       <fieldset class="field-group">
         <legend data-i18n="group.general"></legend>
