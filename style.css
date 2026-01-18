@@ -412,3 +412,30 @@ a{color:inherit;text-decoration:none}
   max-width: 900px;       /* lisibilité optimale */
   margin: 0 auto;
 }
+/* =========================
+   HERO GRID — PREMIUM FIX
+========================= */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* MODE CABINET VISIBLE */
+.hero-cabinet {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* MOBILE : empilement propre */
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-cabinet {
+    margin-top: 24px;
+  }
+}
