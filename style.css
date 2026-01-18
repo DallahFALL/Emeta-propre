@@ -72,12 +72,59 @@ textarea{min-height:110px;resize:vertical}
   opacity:.7;
   text-align:center;
 }
-/* Footer */
-.site-footer{border-top:1px solid rgba(255,255,255,.08);padding:22px 0}
-.footer-inner{display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center}
-.footer-link{opacity:.9}
-.footer-link:hover{opacity:1}
-.footer-copy{opacity:.65;font-size:.85rem}
+/* ================= FOOTER ================= */
+.site-footer{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:22px 0;
+}
+
+/* Structure */
+.footer-inner{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  align-items:center;
+  text-align:center;
+}
+
+/* Brand discret */
+.footer-brand{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:6px;
+  font-weight:600;
+  font-size:0.95rem;
+  opacity:.92;
+}
+
+/* Logo e-META */
+.site-footer .logo-mark{
+  color:#ff8a00;
+  font-weight:900;
+  font-size:1rem;
+}
+
+.site-footer .logo-text{
+  color:#ffffff;
+  font-weight:800;
+  font-size:0.98rem;
+  letter-spacing:.2px;
+}
+
+/* Liens */
+.footer-link{
+  opacity:.9;
+}
+.footer-link:hover{
+  opacity:1;
+}
+
+/* Copyright */
+.footer-copy{
+  opacity:.65;
+  font-size:.85rem;
+}
 
 /* Responsive */
 @media (max-width: 900px){
