@@ -98,7 +98,7 @@ window.I18N = {
     "field.objectives.hint": "Quels résultats concrets souhaitez-vous atteindre ? (croissance, réduction de risque, clarté décisionnelle…)",
     "field.constraints.hint": "Contraintes financières, humaines, réglementaires ou temporelles à prendre en compte.",
     "field.kpis.hint": "Indicateurs permettant de juger si la décision est un succès.",
-    "field.context.hint": "Éléments utiles : marché, environnement, historique, parties prenantes."
+    "field.context.hint": "Éléments utiles : marché, environnement, historique, parties prenantes.",
     "form.submit": "Générer ma recommandation e-META",
     "form.reset": "Réinitialiser",
 
