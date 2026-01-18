@@ -94,7 +94,11 @@ window.I18N = {
 
     "group.trust": "Confiance & consentement",
     "field.consent.label": "J’accepte que les informations fournies soient utilisées uniquement pour générer mon analyse e-META. Aucune donnée ne sera revendue.",
-
+    "field.problem.hint": "Décrivez la situation réelle telle que vous la vivez aujourd’hui. Plus le contexte est précis, plus la recommandation e-META sera pertinente.",
+    "field.objectives.hint": "Quels résultats concrets souhaitez-vous atteindre ? (croissance, réduction de risque, clarté décisionnelle…)",
+    "field.constraints.hint": "Contraintes financières, humaines, réglementaires ou temporelles à prendre en compte.",
+    "field.kpis.hint": "Indicateurs permettant de juger si la décision est un succès.",
+    "field.context.hint": "Éléments utiles : marché, environnement, historique, parties prenantes."
     "form.submit": "Générer ma recommandation e-META",
     "form.reset": "Réinitialiser",
 
