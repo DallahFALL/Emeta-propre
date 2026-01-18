@@ -219,7 +219,7 @@ window.I18N = {
     "form.submit": "Generate my e-META recommendation",
     "form.reset": "Reset",
 
-    "footer.text": "e-META — Strategic decision intelligence engine.",
+    "footer.text": "— Strategic decision intelligence engine.",
     "footer.privacy": "Privacy policy",
     "footer.copy": "© 2026 e-META — All rights reserved"
   },
@@ -322,7 +322,7 @@ window.I18N = {
     "form.submit": "Generar mi recomendación e-META",
     "form.reset": "Restablecer",
 
-    "footer.text": "e-META — Motor de inteligencia estratégica para decisiones.",
+    "footer.text": "— Motor de inteligencia para la toma de decisiones estratégicas.",
     "footer.privacy": "Política de privacidad",
     "footer.copy": "© 2026 e-META — Todos los derechos reservados"
   },
@@ -425,7 +425,7 @@ window.I18N = {
     "form.submit": "إنشاء توصية e-META",
     "form.reset": "إعادة ضبط",
 
-    "footer.text": "e-META — محرك ذكاء استراتيجي لاتخاذ القرار.",
+    "footer.text": "— محرك الذكاء لاتخاذ القرارات الاستراتيجية.",
     "footer.privacy": "سياسة الخصوصية",
     "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة"
   }
