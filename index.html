@@ -11,7 +11,6 @@
 
 <body id="top">
 
-<!-- ================= HEADER ================= -->
 <header class="site-header">
   <div class="container header-inner">
 
@@ -38,17 +37,20 @@
         <option value="es">ES</option>
         <option value="ar">AR</option>
       </select>
+    </div>
+
   </div>
 </header>
+
+<main>
 
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="container hero-grid">
 
-    <!-- BLOC GAUCHE -->
+    <!-- PROMESSE -->
     <div class="hero-box hero-main">
       <h1 data-i18n="hero.title"></h1>
-
       <p class="hero-subtitle" data-i18n="hero.subtitle"></p>
 
       <ul class="hero-points">
@@ -65,9 +67,9 @@
       </button>
     </div>
 
-    <!-- BLOC DROIT : MODE CABINET -->
-    <div class="hero-box hero-cabinet">
-      <h3>TEST MODE CABINET</h3>
+    <!-- MODE CABINET -->
+    <div class="hero-box muted hero-cabinet">
+      <h3 data-i18n="hero.badge.title"></h3>
       <p data-i18n="hero.badge.text"></p>
       <p class="hero-note" data-i18n="hero.note"></p>
     </div>
@@ -75,13 +77,19 @@
   </div>
 </section>
 
-<!-- =========================
-     FORM SECTION
-========================== -->
+<!-- FORM -->
 <section class="form-section" id="form">
   <div class="container">
 
-<form id="emetaForm" class="emeta-form" novalidate>
+    <div class="form-header">
+      <div class="form-badge">
+        🧠 <span data-i18n="form.badge.cabinet"></span>
+      </div>
+      <h2 class="section-title" data-i18n="form.title"></h2>
+      <p class="form-intro" data-i18n="form.intro"></p>
+    </div>
+
+    <form id="emetaForm" class="emeta-form" novalidate>
 
   <!-- =========================
        1) QUALIFIER LA DÉCISION
