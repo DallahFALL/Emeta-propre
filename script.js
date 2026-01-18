@@ -92,3 +92,31 @@
       });
   });
 })();
+/* ===============================
+   CTA INTELLIGENT e-META
+=============================== */
+
+function updateSubmitState() {
+  const title = document.getElementById("decisionTitle");
+  const problem = document.getElementById("problem");
+  const consent = document.getElementById("consent");
+  const submit = document.getElementById("submitBtn");
+
+  if (!title || !problem || !consent || !submit) return;
+
+  const valid =
+    title.value.trim().length >= 5 &&
+    problem.value.trim().length >= 30 &&
+    consent.checked;
+
+  submit.disabled = !valid;
+}
+
+["decisionTitle", "problem"].forEach(id => {
+  document.getElementById(id)?.addEventListener("input", updateSubmitState);
+});
+
+document.getElementById("consent")
+  ?.addEventListener("change", updateSubmitState);
+
+updateSubmitState();
