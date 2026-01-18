@@ -412,3 +412,15 @@ a{color:inherit;text-decoration:none}
   max-width: 900px;       /* lisibilité optimale */
   margin: 0 auto;
 }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 32px;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+}
