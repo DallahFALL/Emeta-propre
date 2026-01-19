@@ -123,16 +123,9 @@ window.I18N = {
     "hero.point2": "Actionable recommendations + risks + KPIs",
     "hero.point3": "Personalized delivery (Email / WhatsApp / PDF)",
     "hero.cta": "Start a strategic analysis",
-    "hero.badge.title": "Consulting mode",
-    "hero.badge.text": "Frameworks + roadmap",
-    "hero.note": "e-META is not a chatbot: it’s a decision intelligence engine.",
-    hero: {
-    badge: {
-    title: "Strategic analysis — consulting level",
-    text: "A structured approach inspired by top consulting firms to support complex decision-making.",
-    },
-    note: "This is not a chatbot. Each input is analyzed using a professional decision framework."
-    },
+     "hero.badge.title": "Strategic analysis — consulting level",
+     "hero.badge.text": "A structured approach inspired by top consulting firms to support complex decision-making.",
+     "hero.note": "This is not a chatbot. Each input is analyzed using a professional decision framework.",
 
     "help.title": "Need help before starting?",
     "help.privacy": "🔒 Privacy policy",
