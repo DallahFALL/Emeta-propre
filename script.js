@@ -79,3 +79,7 @@
   });
 
 })();
+document.querySelectorAll('a[href="privacy.html"]').forEach(link => {
+  const lang = localStorage.getItem("emeta_lang") || "fr";
+  link.href = `privacy.html?lang=${lang}`;
+});
