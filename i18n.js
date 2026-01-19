@@ -450,13 +450,13 @@ window.I18N = {
     "field.kpis.hint": "مؤشرات تسمح بتقييم ما إذا كان القرار ناجحًا.",
     "field.context.hint": "عناصر مفيدة: السوق، البيئة، الخلفية التاريخية، الأطراف المعنية.",
     "field.budgetMin.label": "الحد الأدنى للميزانية",
-    "field.budgetMax.label": "الحد الأقصى للميزانية"
+    "field.budgetMax.label": "الحد الأقصى للميزانية" ,
 
      "form.submit": "إنشاء توصية e-META",
      "form.reset": "إعادة ضبط",
 
     "footer.text": "— محرك الذكاء لاتخاذ القرارات الاستراتيجية.",
     "footer.privacy": "سياسة الخصوصية",
-    "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة"
+    "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة",
   }
 };
