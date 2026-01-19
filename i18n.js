@@ -341,7 +341,7 @@ window.I18N = {
    "field.context.hint":
    "Elementos útiles: mercado, entorno, historial, partes interesadas.",
    "field.budgetMin.label": "Presupuesto mínimo",
-   "field.budgetMax.label": "Presupuesto máximo"?
+   "field.budgetMax.label": "Presupuesto máximo",
 
     "form.submit": "Generar mi recomendación e-META",
     "form.reset": "Restablecer",
