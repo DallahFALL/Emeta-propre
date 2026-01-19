@@ -228,12 +228,12 @@ window.I18N = {
     "field.context.hint":
     "Useful elements: market, environment, history, stakeholders.",
     "field.budgetMin.label": "Minimum budget",
-    "field.budgetMax.label": "Maximum budget"
+    "field.budgetMax.label": "Maximum budget",
     "form.submit": "Generate my e-META recommendation",
     "form.reset": "Reset",
     "footer.text": "— Strategic decision intelligence engine.",
     "footer.privacy": "Privacy policy",
-    "footer.copy": "© 2026 e-META — All rights reserved"
+    "footer.copy": "© 2026 e-META — All rights reserved",
     },
 
   es: {
