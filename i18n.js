@@ -330,6 +330,18 @@ window.I18N = {
 
     "group.trust": "Confianza y consentimiento",
     "field.consent.label": "Acepto que la información se use solo para generar mi análisis e-META. No se revenderán datos.",
+    "field.problem.hint":
+    "Describa la situación real tal como la vive hoy. Cuanto más preciso sea el contexto, más pertinente será la recomendación e-META.",
+   "field.objectives.hint":
+   "¿Qué resultados concretos desea alcanzar? (crecimiento, reducción de riesgos, claridad en la toma de decisiones…)",
+   "field.constraints.hint":
+   "Restricciones financieras, humanas, regulatorias o temporales que deben tenerse en cuenta.",
+   "field.kpis.hint":
+   "Indicadores que permiten evaluar si la decisión es un éxito.",
+   "field.context.hint":
+   "Elementos útiles: mercado, entorno, historial, partes interesadas.",
+   "field.budgetMin.label": "Presupuesto mínimo",
+   "field.budgetMax.label": "Presupuesto máximo"?
 
     "form.submit": "Generar mi recomendación e-META",
     "form.reset": "Restablecer",
@@ -337,8 +349,7 @@ window.I18N = {
     "footer.text": "— Motor de inteligencia para la toma de decisiones estratégicas.",
     "footer.privacy": "Política de privacidad",
     "footer.copy": "© 2026 e-META — Todos los derechos reservados"
-  },
-
+  
   ar: {
     "meta.title": "e-META — مساعد ذكاء اصطناعي لاتخاذ القرار",
     "header.tagline": "مساعد متعدد اللغات لاتخاذ القرار",
@@ -433,9 +444,16 @@ window.I18N = {
 
     "group.trust": "الثقة والموافقة",
     "field.consent.label": "أوافق على استخدام المعلومات فقط لإنشاء تحليلي عبر e-META. لن يتم بيع البيانات.",
+    "field.problem.hint": "صف الوضع الحقيقي كما تعيشه اليوم. كلما كان السياق أدق، كانت توصية e-META أكثر ملاءمة.",
+    "field.objectives.hint": "ما هي النتائج الملموسة التي تسعى إلى تحقيقها؟ (النمو، تقليل المخاطر، وضوح القرار…)",
+    "field.constraints.hint": "القيود المالية أو البشرية أو التنظيمية أو الزمنية التي يجب أخذها بعين الاعتبار.",
+    "field.kpis.hint": "مؤشرات تسمح بتقييم ما إذا كان القرار ناجحًا.",
+    "field.context.hint": "عناصر مفيدة: السوق، البيئة، الخلفية التاريخية، الأطراف المعنية.",
+    "field.budgetMin.label": "الحد الأدنى للميزانية",
+    "field.budgetMax.label": "الحد الأقصى للميزانية"
 
-    "form.submit": "إنشاء توصية e-META",
-    "form.reset": "إعادة ضبط",
+     "form.submit": "إنشاء توصية e-META",
+     "form.reset": "إعادة ضبط",
 
     "footer.text": "— محرك الذكاء لاتخاذ القرارات الاستراتيجية.",
     "footer.privacy": "سياسة الخصوصية",
