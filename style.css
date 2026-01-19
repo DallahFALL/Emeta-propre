@@ -572,9 +572,4 @@ a{color:inherit;text-decoration:none}
     transform: scale(0.9);
   }
 }
-@media (max-width: 480px) {
-  .logo-tagline {
-    content: "Assistant IA décisionnel";
-  }
-}
 
