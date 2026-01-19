@@ -3,6 +3,8 @@ window.I18N = {
   fr: {
     "meta.title": "e-META — Assistant IA de prise de décision",
     "header.tagline": "Assistant IA multilingue de prise de décision",
+    "privacy.title": "Politique de confidentialité — e-META",
+    "privacy.intro": "e-META attache une importance particulière à la protection des données personnelles.",
     "nav.home": "Accueil",
     "nav.form": "Formulaire",
     "nav.privacy": "Confidentialité",
@@ -112,6 +114,8 @@ window.I18N = {
   en: {
     "meta.title": "e-META — Decision-Making AI Assistant",
     "header.tagline": "Multilingual decision-making AI assistant",
+    "privacy.title": "Privacy Policy — e-META",
+    "privacy.intro": "e-META places strong importance on protecting user data.",
     "nav.home": "Home",
     "nav.form": "Form",
     "nav.privacy": "Privacy",
@@ -225,6 +229,7 @@ window.I18N = {
   es: {
     "meta.title": "e-META — Asistente IA para decisiones",
     "header.tagline": "Asistente IA multilingüe para tomar decisiones",
+    "privacy.title": "Política de privacidad — e-META",
     "nav.home": "Inicio",
     "nav.form": "Formulario",
     "nav.privacy": "Privacidad",
@@ -340,6 +345,7 @@ window.I18N = {
   ar: {
     "meta.title": "e-META — مساعد ذكاء اصطناعي لاتخاذ القرار",
     "header.tagline": "مساعد متعدد اللغات لاتخاذ القرار",
+    "privacy.title": "سياسة الخصوصية — e-META",
     "nav.home": "الرئيسية",
     "nav.form": "النموذج",
     "nav.privacy": "الخصوصية",
