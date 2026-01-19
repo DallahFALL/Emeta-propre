@@ -1,122 +1,81 @@
-// script.js — e-META vNext (stable)
+/* =====================================================
+   e-META — script.js vNext (STABLE)
+   - Lang persistence (index + privacy)
+   - i18n FR / EN / ES / AR
+   - URL param ?lang=xx (option PRO)
+===================================================== */
+
 (function () {
   "use strict";
 
   const STORAGE_KEY = "emeta_lang";
   const DEFAULT_LANG = "fr";
 
+  /* ===============================
+     1. Déterminer la langue active
+  =============================== */
   function getLang() {
+    // 1️⃣ priorité à l’URL (?lang=en)
+    const params = new URLSearchParams(window.location.search);
+    const urlLang = params.get("lang");
+
+    if (urlLang) {
+      localStorage.setItem(STORAGE_KEY, urlLang);
+      return urlLang;
+    }
+
+    // 2️⃣ sinon localStorage
     return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
   }
 
-  function setRtl(lang) {
+  /* ===============================
+     2. Appliquer la langue
+  =============================== */
+  function applyLanguage(lang) {
+    if (!window.I18N || !window.I18N[lang]) return;
+
     document.documentElement.lang = lang;
-    document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+    // RTL stylesheet
     const rtl = document.getElementById("rtlStylesheet");
-    if (rtl) rtl.disabled = (lang !== "ar");
-  }
+    if (rtl) rtl.disabled = lang !== "ar";
 
-  function applyI18n(lang) {
-    const dict = window.I18N?.[lang];
-    if (!dict) return;
-
+    // Text content
     document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.dataset.i18n;
-      if (dict[key]) el.textContent = dict[key];
+      const key = el.getAttribute("data-i18n");
+      if (window.I18N[lang][key]) {
+        el.textContent = window.I18N[lang][key];
+      }
     });
 
+    // Placeholders
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-      const key = el.dataset.i18nPlaceholder;
-      if (dict[key]) el.placeholder = dict[key];
+      const key = el.getAttribute("data-i18n-placeholder");
+      if (window.I18N[lang][key]) {
+        el.setAttribute("placeholder", window.I18N[lang][key]);
+      }
     });
   }
 
-  function updatePdfLinks(lang) {
-  const guideMap = {
-    fr: "pdf/eMETA_Guide_Formulaire_FR.pdf",
-    en: "pdf/eMETA_Guide_Formulaire_EN.pdf",
-    es: "pdf/eMETA_Guide_Formulaire_ES.pdf",
-    ar: "pdf/eMETA_Guide_Formulaire_AR.pdf"
-  };
-
-  const privacyMap = {
-    fr: "pdf/eMETA_Privacy_CGU_FR.pdf",
-    en: "pdf/eMETA_Privacy_CGU_EN.pdf",
-    es: "pdf/eMETA_Privacy_CGU_ES.pdf",
-    ar: "pdf/eMETA_Privacy_CGU_AR.pdf"
-  };
-
-  const guide = document.getElementById("pdfGuideLink");
-  const privacy = document.getElementById("pdfPrivacyLink");
-
-  if (guide) guide.href = guideMap[lang] || guideMap.fr;
-  if (privacy) privacy.href = privacyMap[lang] || privacyMap.fr;
-}
-
-  function setLang(lang) {
-    localStorage.setItem(STORAGE_KEY, lang);
-    setRtl(lang);
-    applyI18n(lang);
-    updatePdfLinks(lang);
-
-    const sel = document.getElementById("langSelect");
-    if (sel) sel.value = lang;
-  }
-
-  function scrollToForm() {
-    document.getElementById("form")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }
-
+  /* ===============================
+     3. Initialisation au chargement
+  =============================== */
   document.addEventListener("DOMContentLoaded", () => {
-    setLang(getLang());
+    const lang = getLang();
+    applyLanguage(lang);
 
-    document.getElementById("langSelect")
-      ?.addEventListener("change", e => setLang(e.target.value));
+    // Sync select langue si présent
+    const langSelect = document.getElementById("langSelect");
+    if (langSelect) {
+      langSelect.value = lang;
 
-    document.getElementById("burgerBtn")
-      ?.addEventListener("click", () =>
-        document.getElementById("mainNav")?.classList.toggle("open")
-      );
-
-    document.getElementById("startBtn")?.addEventListener("click", scrollToForm);
-    document.getElementById("customBtn")?.addEventListener("click", scrollToForm);
-
-    document.getElementById("emetaForm")
-      ?.addEventListener("submit", e => {
-        if (!document.getElementById("consent")?.checked) {
-          e.preventDefault();
-        }
+      langSelect.addEventListener("change", e => {
+        const newLang = e.target.value;
+        localStorage.setItem(STORAGE_KEY, newLang);
+        applyLanguage(newLang);
       });
+    }
   });
+
 })();
-/* ===============================
-   CTA INTELLIGENT e-META
-=============================== */
-
-function updateSubmitState() {
-  const title = document.getElementById("decisionTitle");
-  const problem = document.getElementById("problem");
-  const consent = document.getElementById("consent");
-  const submit = document.getElementById("submitBtn");
-
-  if (!title || !problem || !consent || !submit) return;
-
-  const valid =
-    title.value.trim().length >= 5 &&
-    problem.value.trim().length >= 30 &&
-    consent.checked;
-
-  submit.disabled = !valid;
-}
-
-["decisionTitle", "problem"].forEach(id => {
-  document.getElementById(id)?.addEventListener("input", updateSubmitState);
-});
-
-document.getElementById("consent")
-  ?.addEventListener("change", updateSubmitState);
-
-updateSubmitState();
