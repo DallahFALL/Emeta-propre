@@ -173,4 +173,4 @@ window.I18N = {
      (à conserver telles quelles depuis ta version validée)
   ===== */
 
-};
+}
