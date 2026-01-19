@@ -108,8 +108,40 @@ window.I18N = {
 
     "footer.text": "— Moteur d’intelligence décisionnelle stratégique.",
     "footer.privacy": "Politique de confidentialité",
-    "footer.copy": "© 2026 e-META — Tous droits réservés"
-  },
+    "footer.copy": "© 2026 e-META — Tous droits réservés",
+    "privacy.meta.title": "Politique de confidentialité — e-META",
+    
+    "privacy.back": "← Retour à l’accueil",
+    "privacy.title": "Politique de confidentialité",
+    "privacy.intro":
+    "e-META attache une importance particulière à la protection des données personnelles de ses utilisateurs. La présente politique décrit de manière transparente la collecte, l’utilisation et la protection des informations.",
+
+   "privacy.section1.title": "1. Introduction",
+   "privacy.section1.text":
+   "e-META est un outil d’aide à la décision stratégique basé sur l’intelligence artificielle. Il ne constitue ni un conseil juridique, financier, médical ou réglementaire.",
+
+   "privacy.section2.title": "2. Données collectées",
+   "privacy.section2.item1": "Informations saisies volontairement dans les formulaires.",
+   "privacy.section2.item2": "Données de contact si une restitution est demandée.",
+   "privacy.section2.item3": "Fichiers ou liens transmis volontairement.",
+
+   "privacy.section3.title": "3. Utilisation des données",
+   "privacy.section3.item1": "Génération d’analyses stratégiques personnalisées.",
+   "privacy.section3.item2": "Adaptation du format de restitution.",
+   "privacy.section3.item3": "Amélioration continue des recommandations.",
+
+   "privacy.section4.title": "4. Intelligence artificielle & responsabilité",
+   "privacy.section4.text":
+   "Les recommandations fournies sont indicatives. L’utilisateur demeure seul responsable des décisions prises sur la base des analyses.",
+
+   "privacy.section5.title": "5. Conservation et sécurité",
+   "privacy.section5.text":
+   "Les données sont conservées uniquement pour la durée nécessaire et protégées par des mesures techniques et organisationnelles raisonnables.",
+
+   "privacy.pdf.title": "Version officielle PDF",
+   "privacy.pdf.text": "Téléchargez la version juridique complète et archivable :",
+   "privacy.download": "Télécharger la version officielle (PDF)",
+    },
 
   en: {
     "meta.title": "e-META — Decision-Making AI Assistant",
@@ -224,7 +256,40 @@ window.I18N = {
     "footer.text": "— Strategic decision intelligence engine.",
     "footer.privacy": "Privacy policy",
     "footer.copy": "© 2026 e-META — All rights reserved",
-    },
+   "privacy.meta.title": "Privacy Policy — e-META",
+    
+   "privacy.back": "← Back to home",
+   "privacy.title": "Privacy Policy",
+   "privacy.intro":
+   "e-META places great importance on protecting users’ personal data. This policy transparently describes how information is collected, used, and protected.",
+
+   "privacy.section1.title": "1. Introduction",
+   "privacy.section1.text":
+   "e-META is a strategic decision-support tool powered by artificial intelligence. It does not constitute legal, financial, medical, or regulatory advice.",
+
+  "privacy.section2.title": "2. Data collected",
+  "privacy.section2.item1": "Information voluntarily entered in forms.",
+  "privacy.section2.item2": "Contact details if a delivery is requested.",
+  "privacy.section2.item3": "Files or links voluntarily provided.",
+
+  "privacy.section3.title": "3. Data usage",
+  "privacy.section3.item1": "Generation of personalized strategic analyses.",
+  "privacy.section3.item2": "Adaptation of the delivery format.",
+  "privacy.section3.item3": "Continuous improvement of recommendations.",
+
+  "privacy.section4.title": "4. Artificial intelligence & liability",
+  "privacy.section4.text":
+  "The recommendations provided are indicative. The user remains solely responsible for decisions made based on the analyses.",
+
+  "privacy.section5.title": "5. Data retention & security",
+  "privacy.section5.text":
+  "Data is retained only for the necessary duration and protected by reasonable technical and organizational measures.",
+
+  "privacy.pdf.title": "Official PDF version",
+  "privacy.pdf.text": "Download the complete and archivable legal version:",
+  "privacy.download": "Download the official version (PDF)",
+
+   },
 
   es: {
     "meta.title": "e-META — Asistente IA para decisiones",
@@ -340,6 +405,39 @@ window.I18N = {
     "footer.text": "— Motor de inteligencia para la toma de decisiones estratégicas.",
     "footer.privacy": "Política de privacidad",
     "footer.copy": "© 2026 e-META — Todos los derechos reservados",
+
+    "privacy.meta.title": "Política de privacidad — e-META",
+    "privacy.back": "← Volver al inicio",
+    "privacy.title": "Política de privacidad",
+    "privacy.intro":
+    "e-META otorga gran importancia a la protección de los datos personales de sus usuarios. Esta política describe de forma transparente la recopilación, el uso y la protección de la información.",
+
+    "privacy.section1.title": "1. Introducción",
+    "privacy.section1.text":
+    "e-META es una herramienta de apoyo a la toma de decisiones estratégicas basada en inteligencia artificial. No constituye asesoramiento legal, financiero, médico o regulatorio.",
+
+    "privacy.section2.title": "2. Datos recopilados",
+    "privacy.section2.item1": "Información introducida voluntariamente en los formularios.",
+    "privacy.section2.item2": "Datos de contacto si se solicita una entrega.",
+    "privacy.section2.item3": "Archivos o enlaces proporcionados voluntariamente.",
+
+    "privacy.section3.title": "3. Uso de los datos",
+    "privacy.section3.item1": "Generación de análisis estratégicos personalizados.",
+    "privacy.section3.item2": "Adaptación del formato de entrega.",
+    "privacy.section3.item3": "Mejora continua de las recomendaciones.",
+
+    "privacy.section4.title": "4. Inteligencia artificial y responsabilidad",
+    "privacy.section4.text":
+    "Las recomendaciones proporcionadas son orientativas. El usuario sigue siendo el único responsable de las decisiones tomadas.",
+
+    "privacy.section5.title": "5. Conservación y seguridad",
+    "privacy.section5.text":
+    "Los datos se conservan solo durante el tiempo necesario y se protegen mediante medidas técnicas y organizativas razonables.",
+
+    "privacy.pdf.title": "Versión oficial en PDF",
+    "privacy.pdf.text": "Descargue la versión legal completa y archivable:",
+    "privacy.download": "Descargar la versión oficial (PDF)",
+
   },
 
   ar: {
@@ -451,5 +549,37 @@ window.I18N = {
     "footer.text": "— محرك الذكاء لاتخاذ القرارات الاستراتيجية.",
     "footer.privacy": "سياسة الخصوصية",
     "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة",
-  }
-};
+
+    "privacy.meta.title": "سياسة الخصوصية — e-META",
+    "privacy.back": "← العودة إلى الصفحة الرئيسية",
+    "privacy.title": "سياسة الخصوصية",
+    "privacy.intro":
+    "يولي e-META أهمية كبيرة لحماية البيانات الشخصية لمستخدميه. توضح هذه السياسة بشفافية كيفية جمع المعلومات واستخدامها وحمايتها.",
+
+    "privacy.section1.title": "1. مقدمة",
+    "privacy.section1.text":
+    "e-META أداة لدعم اتخاذ القرار الاستراتيجي تعتمد على الذكاء الاصطناعي. ولا تشكل استشارة قانونية أو مالية أو طبية أو تنظيمية.",
+
+    "privacy.section2.title": "2. البيانات التي يتم جمعها",
+    "privacy.section2.item1": "المعلومات التي يتم إدخالها طوعًا في النماذج.",
+    "privacy.section2.item2": "بيانات الاتصال في حال طلب التسليم.",
+    "privacy.section2.item3": "الملفات أو الروابط المقدمة طوعًا.",
+
+    "privacy.section3.title": "3. استخدام البيانات",
+    "privacy.section3.item1": "إنتاج تحليلات استراتيجية مخصصة.",
+    "privacy.section3.item2": "تكييف طريقة التسليم.",
+    "privacy.section3.item3": "التحسين المستمر للتوصيات.",
+
+    "privacy.section4.title": "4. الذكاء الاصطناعي والمسؤولية",
+    "privacy.section4.text":
+    "التوصيات المقدمة إرشادية فقط. ويظل المستخدم مسؤولًا بالكامل عن القرارات المتخذة.",
+
+    "privacy.section5.title": "5. الاحتفاظ بالبيانات وأمنها",
+    "privacy.section5.text":
+    "يتم الاحتفاظ بالبيانات فقط للمدة اللازمة وحمايتها بإجراءات تقنية وتنظيمية معقولة.",
+
+    "privacy.pdf.title": "النسخة الرسمية بصيغة PDF",
+    "privacy.pdf.text": "قم بتنزيل النسخة القانونية الكاملة والقابلة للأرشفة:",
+    "privacy.download": "تحميل النسخة الرسمية (PDF)",
+   }
+ };
