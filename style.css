@@ -572,15 +572,9 @@ a{color:inherit;text-decoration:none}
     transform: scale(0.9);
   }
 }
-/* ===============================
-   VARIANTE PRO — SLOGAN MOBILE
-================================ */
 @media (max-width: 480px) {
   .logo-tagline {
-    font-size: 0.6rem;
-    max-width: 140px;
-    white-space: normal;
-    line-height: 1.2;
-    opacity: 0.85;
+    content: "Assistant IA décisionnel";
   }
 }
+
