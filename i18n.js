@@ -334,8 +334,8 @@ window.I18N = {
 
     "footer.text": "— Motor de inteligencia para la toma de decisiones estratégicas.",
     "footer.privacy": "Política de privacidad",
-    "footer.copy": "© 2026 e-META — Todos los derechos reservados"
-  
+    "footer.copy": "© 2026 e-META — Todos los derechos reservados",
+  },
   ar: {
     "meta.title": "e-META — مساعد ذكاء اصطناعي لاتخاذ القرار",
     "header.tagline": "مساعد متعدد اللغات لاتخاذ القرار",
