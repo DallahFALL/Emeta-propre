@@ -106,6 +106,8 @@ window.I18N = {
     "field.constraints.hint": "Contraintes financières, humaines, réglementaires ou temporelles à prendre en compte.",
     "field.kpis.hint": "Indicateurs permettant de juger si la décision est un succès.",
     "field.context.hint": "Éléments utiles : marché, environnement, historique, parties prenantes.",
+    "field.budgetMin.label": "Budget minimum",
+    "field.budgetMax.label": "Budget maximum",
     "form.submit": "Générer ma recommandation e-META",
     "form.reset": "Réinitialiser",
 
@@ -215,14 +217,24 @@ window.I18N = {
 
     "group.trust": "Trust & consent",
     "field.consent.label": "I agree that the provided information is used only to generate my e-META analysis. No data will be resold.",
-
+    "field.problem.hint":
+    "Describe the real situation as you experience it today. The more precise the context, the more relevant the recommendation.",
+    "field.objectives.hint":
+    "What concrete outcomes do you want to achieve? (growth, risk reduction, decision clarity…)",
+    "field.constraints.hint":
+    "Financial, human, regulatory or time constraints to take into account.",
+    "field.kpis.hint":
+    "Indicators used to assess whether the decision is successful.",
+    "field.context.hint":
+    "Useful elements: market, environment, history, stakeholders.",
+    "field.budgetMin.label": "Minimum budget",
+    "field.budgetMax.label": "Maximum budget"
     "form.submit": "Generate my e-META recommendation",
     "form.reset": "Reset",
-
     "footer.text": "— Strategic decision intelligence engine.",
     "footer.privacy": "Privacy policy",
     "footer.copy": "© 2026 e-META — All rights reserved"
-  },
+    },
 
   es: {
     "meta.title": "e-META — Asistente IA para decisiones",
