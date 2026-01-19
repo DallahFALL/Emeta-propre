@@ -165,7 +165,7 @@ window.I18N = {
 
     "privacy.pdf.title": "Version officielle PDF",
     "privacy.pdf.text": "Téléchargez la version juridique complète :",
-    "privacy.download": "Télécharger le PDF officiel"
+    "privacy.download": "Télécharger le PDF officiel",
   }
 
   /* ===== EN / ES / AR =====
