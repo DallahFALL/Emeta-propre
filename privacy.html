@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Politique de confidentialité — e-META</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="privacy.meta.title">Politique de confidentialité — e-META</title>
 
+  <!-- ===== STYLE (SAFE & RESPONSIVE) ===== -->
   <style>
-    :root {
+    :root{
       --bg-main:#070b1a;
       --bg-card:rgba(255,255,255,0.04);
       --border-soft:rgba(255,255,255,0.08);
-      --text-main:#fff;
+      --text-main:#ffffff;
       --text-muted:rgba(255,255,255,0.75);
       --accent:#ff8a00;
       --radius:18px;
@@ -18,7 +19,6 @@
     }
 
     *{box-sizing:border-box}
-
     body{
       margin:0;
       font-family:Inter,system-ui,-apple-system,sans-serif;
@@ -32,7 +32,7 @@
       position:sticky;
       top:0;
       z-index:100;
-      background:rgba(6,9,24,.9);
+      background:rgba(6,9,24,.92);
       backdrop-filter:blur(8px);
       border-bottom:1px solid var(--border-soft);
     }
@@ -44,18 +44,21 @@
       display:flex;
       justify-content:space-between;
       align-items:center;
+      gap:12px;
     }
 
     .logo{
       font-weight:900;
-      font-size:1.2rem;
+      font-size:1.15rem;
       letter-spacing:.4px;
+      white-space:nowrap;
     }
     .logo span{color:var(--accent)}
 
     .back-home{
       font-size:.9rem;
       color:var(--text-muted);
+      white-space:nowrap;
     }
 
     main{padding:48px 16px 80px}
@@ -77,12 +80,7 @@
     }
 
     h1{margin:0;font-size:1.6rem}
-
-    h2{
-      margin-top:28px;
-      margin-bottom:10px;
-      font-size:1.15rem;
-    }
+    h2{margin-top:28px;margin-bottom:10px;font-size:1.15rem}
 
     p,li{
       font-size:.95rem;
@@ -133,7 +131,7 @@
 <header>
   <div class="header-inner">
     <div class="logo"><span>e</span>-META</div>
-    <a class="back-home" href="index.html">← Retour à l’accueil</a>
+    <a class="back-home" href="index.html" data-i18n="privacy.back">← Retour à l’accueil</a>
   </div>
 </header>
 
@@ -145,56 +143,64 @@
       <h1 data-i18n="privacy.title"></h1>
     </div>
 
-    <p>
-      e-META attache une importance particulière à la protection des données personnelles
-      de ses utilisateurs. La présente politique décrit de manière transparente la
-      collecte, l’utilisation et la protection des informations.
-    </p>
+    <p data-i18n="privacy.intro"></p>
 
-    <h2>1. Introduction</h2>
-    <p>
-      e-META est un outil d’aide à la décision stratégique basé sur l’intelligence
-      artificielle. Il ne constitue ni un conseil juridique, financier, médical ou
-      réglementaire.
-    </p>
+    <h2 data-i18n="privacy.section1.title"></h2>
+    <p data-i18n="privacy.section1.text"></p>
 
-    <h2>2. Données collectées</h2>
+    <h2 data-i18n="privacy.section2.title"></h2>
     <ul>
-      <li>Informations saisies volontairement dans les formulaires.</li>
-      <li>Données de contact si une restitution est demandée.</li>
-      <li>Fichiers ou liens transmis volontairement.</li>
+      <li data-i18n="privacy.section2.item1"></li>
+      <li data-i18n="privacy.section2.item2"></li>
+      <li data-i18n="privacy.section2.item3"></li>
     </ul>
 
-    <h2>3. Utilisation des données</h2>
+    <h2 data-i18n="privacy.section3.title"></h2>
     <ul>
-      <li>Génération d’analyses stratégiques personnalisées.</li>
-      <li>Adaptation du format de restitution.</li>
-      <li>Amélioration continue des recommandations.</li>
+      <li data-i18n="privacy.section3.item1"></li>
+      <li data-i18n="privacy.section3.item2"></li>
+      <li data-i18n="privacy.section3.item3"></li>
     </ul>
 
-    <h2>4. Intelligence artificielle & responsabilité</h2>
-    <p>
-      Les recommandations fournies sont indicatives. L’utilisateur demeure seul
-      responsable des décisions prises sur la base des analyses.
-    </p>
+    <h2 data-i18n="privacy.section4.title"></h2>
+    <p data-i18n="privacy.section4.text"></p>
 
-    <h2>5. Conservation et sécurité</h2>
-    <p>
-      Les données sont conservées uniquement pour la durée nécessaire et protégées
-      par des mesures techniques et organisationnelles raisonnables.
-    </p>
+    <h2 data-i18n="privacy.section5.title"></h2>
+    <p data-i18n="privacy.section5.text"></p>
 
     <div class="pdf-box">
-      <p><strong>Version officielle PDF</strong></p>
-      <p>Téléchargez la version juridique complète et archivable :</p>
-      <a id="pdfPrivacyLink"
-   class="btn-primary"
-   target="_blank"
-   data-i18n="privacy.download">
-   Télécharger la version officielle (PDF)
-</a>
+      <p><strong data-i18n="privacy.pdf.title"></strong></p>
+      <p data-i18n="privacy.pdf.text"></p>
+      <a id="privacyPdf" target="_blank" data-i18n="privacy.download"></a>
     </div>
+
+    <footer>
+      <span data-i18n="footer.copy"></span>
+    </footer>
+
+  </section>
+</main>
+
+<!-- ===== i18n ENGINE ===== -->
+<script src="i18n.js"></script>
+<script src="script.js"></script>
+
+<!-- ===== LANG SYNC + RTL ===== -->
 <script>
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const urlLang = params.get("lang");
+  if (urlLang) localStorage.setItem("emeta_lang", urlLang);
+
+  const lang = localStorage.getItem("emeta_lang") || "fr";
+  document.documentElement.lang = lang;
+  document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
+})();
+</script>
+
+<!-- ===== PDF LANGUAGE SWITCH ===== -->
+<script>
+(function(){
   const lang = localStorage.getItem("emeta_lang") || "fr";
   const pdfMap = {
     fr: "docs/privacy_fr.pdf",
@@ -202,19 +208,10 @@
     es: "docs/privacy_es.pdf",
     ar: "docs/privacy_ar.pdf"
   };
-
   const link = document.getElementById("privacyPdf");
-  if (link && pdfMap[lang]) {
-    link.href = pdfMap[lang];
-  }
+  if (link && pdfMap[lang]) link.href = pdfMap[lang];
+})();
 </script>
-
-    <footer>
-      © 2026 e-META — Tous droits réservés
-    </footer>
-
-  </section>
-</main>
 
 </body>
 </html>
