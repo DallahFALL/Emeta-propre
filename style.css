@@ -480,3 +480,31 @@ a{color:inherit;text-decoration:none}
   color: #ffffff;
   font-weight: 800;
 }
+/* =========================
+   MOBILE — HERO CENTER FIX
+========================= */
+@media (max-width: 768px) {
+
+  .hero-box,
+  .hero-main,
+  .hero-cabinet {
+    text-align: center;
+  }
+
+  .hero-box h1,
+  .hero-box h2,
+  .hero-box h3 {
+    text-align: center;
+  }
+
+  .hero-points {
+    text-align: center;
+    padding-left: 0;
+    list-style-position: inside;
+  }
+
+  .cta-primary {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
