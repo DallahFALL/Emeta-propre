@@ -1,91 +1,135 @@
 /* =====================================================
    e-META — script.js vNext FINAL PRO
-   i18n COMPLETE • Index + Privacy
-   Text + Placeholder + RTL
+   International • Stable • Index + Privacy Sync
+   FR / EN / ES / AR • RTL auto • Mobile UX ready
 ===================================================== */
 
 (function () {
   "use strict";
 
+  /* =========================
+     CONFIG
+  ========================= */
   const STORAGE_KEY = "emeta_lang";
   const DEFAULT_LANG = "fr";
   const RTL_LANGS = ["ar"];
 
   /* =========================
-     LANG RESOLUTION
+     LANGUAGE RESOLUTION
   ========================= */
-  function getLang() {
+  function getLangFromURL() {
     const params = new URLSearchParams(window.location.search);
+    return params.get("lang");
+  }
+
+  function getStoredLang() {
+    return localStorage.getItem(STORAGE_KEY);
+  }
+
+  function resolveLang() {
     return (
-      params.get("lang") ||
-      localStorage.getItem(STORAGE_KEY) ||
+      getLangFromURL() ||
+      getStoredLang() ||
       DEFAULT_LANG
     );
   }
 
   function setLang(lang) {
     localStorage.setItem(STORAGE_KEY, lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
   }
 
+  const currentLang = resolveLang();
+  setLang(currentLang);
+
   /* =========================
-     APPLY I18N
+     APPLY I18N (TEXT + PLACEHOLDER)
   ========================= */
   function applyI18n(lang) {
-    const dict = window.I18N?.[lang];
-    if (!dict) return;
+    if (!window.I18N || !window.I18N[lang]) return;
 
-    /* ---- TEXT CONTENT ---- */
+    const dict = window.I18N[lang];
+
     document.querySelectorAll("[data-i18n]").forEach(el => {
       const key = el.getAttribute("data-i18n");
       if (dict[key]) el.textContent = dict[key];
     });
 
-    /* ---- PLACEHOLDERS ---- */
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
       const key = el.getAttribute("data-i18n-placeholder");
       if (dict[key]) el.setAttribute("placeholder", dict[key]);
     });
 
-    /* ---- TITLE ATTR ---- */
-    document.querySelectorAll("[data-i18n-title]").forEach(el => {
-      const key = el.getAttribute("data-i18n-title");
-      if (dict[key]) el.setAttribute("title", dict[key]);
-    });
-
-    /* ---- HTML LANG + DIR ---- */
-    document.documentElement.lang = lang;
-    document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
-
-    /* ---- RTL CSS ---- */
-    const rtlSheet = document.getElementById("rtlStylesheet");
-    if (rtlSheet) {
-      rtlSheet.disabled = !RTL_LANGS.includes(lang);
-    }
+    document.title =
+      dict["privacy.meta.title"] ||
+      dict["meta.title"] ||
+      document.title;
   }
+
+  applyI18n(currentLang);
 
   /* =========================
      LANGUAGE SELECTOR
   ========================= */
-  function initLangSelector(lang) {
-    const select = document.getElementById("langSelect");
-    if (!select) return;
+  const langSelect = document.getElementById("langSelect");
+  if (langSelect) {
+    langSelect.value = currentLang;
 
-    select.value = lang;
-    select.addEventListener("change", () => {
-      const newLang = select.value;
+    langSelect.addEventListener("change", () => {
+      const newLang = langSelect.value;
       setLang(newLang);
       applyI18n(newLang);
+      updatePrivacyLinks(newLang);
     });
   }
 
   /* =========================
-     INIT
+     PRIVACY LINKS LANG SYNC
   ========================= */
-  document.addEventListener("DOMContentLoaded", () => {
-    const lang = getLang();
-    setLang(lang);
-    applyI18n(lang);
-    initLangSelector(lang);
-  });
+  function updatePrivacyLinks(lang) {
+    document.querySelectorAll('a[href="privacy.html"]').forEach(link => {
+      link.href = `privacy.html?lang=${lang}`;
+    });
+  }
+
+  updatePrivacyLinks(currentLang);
+
+  /* =========================
+     BURGER MENU — MOBILE (FIXED)
+  ========================= */
+  const burger = document.getElementById("burgerBtn");
+  const nav = document.getElementById("mainNav");
+
+  if (burger && nav) {
+    burger.addEventListener("click", () => {
+      nav.classList.toggle("is-open");
+      burger.setAttribute(
+        "aria-expanded",
+        nav.classList.contains("is-open")
+      );
+    });
+
+    /* Close menu on link click (UX PRO) */
+    nav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("is-open");
+        burger.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
+  /* =========================
+     CTA HERO → FORM SCROLL
+  ========================= */
+  const startBtn = document.getElementById("startBtn");
+  if (startBtn) {
+    startBtn.addEventListener("click", () => {
+      const form = document.getElementById("form");
+      if (form) {
+        form.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  }
 
 })();
