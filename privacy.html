@@ -4,52 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Title injecté par i18n -->
   <title data-i18n="privacy.meta.title"></title>
 
-  <!-- Styles globaux -->
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
 </head>
 
 <body class="privacy-page">
 
-  <!-- =========================
-       HEADER
-  ========================== -->
+  <!-- HEADER IDENTIQUE À INDEX -->
   <header class="site-header">
     <div class="container header-inner">
 
-      <a class="logo" href="index.html" aria-label="e-META">
+      <a class="logo" href="index.html">
         <span class="logo-mark">e</span>
         <span class="logo-text">META</span>
       </a>
 
+      <!-- ⚠️ AUCUN TEXTE EN DUR -->
       <a class="back-home" href="index.html" data-i18n="privacy.back"></a>
 
     </div>
   </header>
 
-  <!-- =========================
-       MAIN
-  ========================== -->
-  <main class="privacy-main">
-    <section class="privacy-container">
+  <main>
+    <section class="privacy-container container">
 
-      <!-- Title -->
       <div class="privacy-header">
         <div class="privacy-icon">🔐</div>
         <h1 data-i18n="privacy.title"></h1>
       </div>
 
-      <!-- Intro -->
-      <p class="privacy-intro" data-i18n="privacy.intro"></p>
+      <p data-i18n="privacy.intro"></p>
 
-      <!-- Section 1 -->
       <h2 data-i18n="privacy.section1.title"></h2>
       <p data-i18n="privacy.section1.text"></p>
 
-      <!-- Section 2 -->
       <h2 data-i18n="privacy.section2.title"></h2>
       <ul>
         <li data-i18n="privacy.section2.item1"></li>
@@ -57,7 +47,6 @@
         <li data-i18n="privacy.section2.item3"></li>
       </ul>
 
-      <!-- Section 3 -->
       <h2 data-i18n="privacy.section3.title"></h2>
       <ul>
         <li data-i18n="privacy.section3.item1"></li>
@@ -65,19 +54,14 @@
         <li data-i18n="privacy.section3.item3"></li>
       </ul>
 
-      <!-- Section 4 -->
       <h2 data-i18n="privacy.section4.title"></h2>
       <p data-i18n="privacy.section4.text"></p>
 
-      <!-- Section 5 -->
       <h2 data-i18n="privacy.section5.title"></h2>
       <p data-i18n="privacy.section5.text"></p>
 
-      <!-- PDF -->
       <div class="pdf-box">
-        <p class="pdf-title">
-          <strong data-i18n="privacy.pdf.title"></strong>
-        </p>
+        <p><strong data-i18n="privacy.pdf.title"></strong></p>
         <p data-i18n="privacy.pdf.text"></p>
         <a
           id="pdfPrivacyLink"
@@ -88,7 +72,6 @@
         </a>
       </div>
 
-      <!-- Footer -->
       <footer class="privacy-footer">
         <span data-i18n="footer.copy"></span>
       </footer>
@@ -96,9 +79,7 @@
     </section>
   </main>
 
-  <!-- =========================
-       SCRIPTS (UNIQUE)
-  ========================== -->
+  <!-- UN SEUL MOTEUR I18N -->
   <script src="i18n.js"></script>
   <script src="script.js"></script>
 
