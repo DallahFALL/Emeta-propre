@@ -4,7 +4,7 @@
    FR / EN / ES / AR • RTL auto • Mobile UX ready
 ===================================================== */
 
-(function () {
+document.addEventListener("DOMContentLoaded", function () {
   "use strict";
 
   /* =========================
@@ -14,11 +14,9 @@
   const DEFAULT_LANG = "fr";
   const RTL_LANGS = ["ar"];
 
-  /* =========================
-     LANGUAGE RESOLUTION
-  ========================= */
   function getLangFromURL() {
-    return new URLSearchParams(window.location.search).get("lang");
+    const params = new URLSearchParams(window.location.search);
+    return params.get("lang");
   }
 
   function getStoredLang() {
@@ -40,83 +38,48 @@
     }
   }
 
-  const currentLang = resolveLang();
-  setLang(currentLang);
-
-  /* =========================
-     APPLY I18N (TEXT + PLACEHOLDER)
-  ========================= */
   function applyI18n(lang) {
     if (!window.I18N || !window.I18N[lang]) return;
     const dict = window.I18N[lang];
 
-    // Text
     document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.dataset.i18n;
+      const key = el.getAttribute("data-i18n");
       if (dict[key]) el.textContent = dict[key];
     });
 
-    // Placeholders
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-      const key = el.dataset.i18nPlaceholder;
-      if (dict[key]) el.placeholder = dict[key];
+      const key = el.getAttribute("data-i18n-placeholder");
+      if (dict[key]) el.setAttribute("placeholder", dict[key]);
     });
 
-    // Title (context-aware)
-    if (document.body.classList.contains("privacy-page") && dict["privacy.meta.title"]) {
-      document.title = dict["privacy.meta.title"];
-    } else if (dict["meta.title"]) {
-      document.title = dict["meta.title"];
-    }
+    document.title =
+      dict["meta.title"] ||
+      document.title;
   }
 
-  applyI18n(currentLang);
+  const lang = resolveLang();
+  setLang(lang);
+  applyI18n(lang);
 
-  /* =========================
-     LANGUAGE SELECTOR (INDEX)
-  ========================= */
   const langSelect = document.getElementById("langSelect");
   if (langSelect) {
-    langSelect.value = currentLang;
+    langSelect.value = lang;
     langSelect.addEventListener("change", () => {
       const newLang = langSelect.value;
       setLang(newLang);
       applyI18n(newLang);
       updatePrivacyLinks(newLang);
-      syncPrivacyPDF(newLang);
     });
   }
 
-  /* =========================
-     PRIVACY LINKS LANG SYNC
-  ========================= */
   function updatePrivacyLinks(lang) {
     document.querySelectorAll('a[href="privacy.html"]').forEach(link => {
       link.href = `privacy.html?lang=${lang}`;
     });
   }
-  updatePrivacyLinks(currentLang);
 
-  /* =========================
-     PRIVACY PDF LANG SWITCH
-  ========================= */
-  function syncPrivacyPDF(lang) {
-    const link = document.getElementById("pdfPrivacyLink");
-    if (!link) return;
+  updatePrivacyLinks(lang);
 
-    const map = {
-      fr: "docs/privacy_fr.pdf",
-      en: "docs/privacy_en.pdf",
-      es: "docs/privacy_es.pdf",
-      ar: "docs/privacy_ar.pdf"
-    };
-    link.href = map[lang] || map.fr;
-  }
-  syncPrivacyPDF(currentLang);
-
-  /* =========================
-     BURGER MENU — MOBILE
-  ========================= */
   const burger = document.getElementById("burgerBtn");
   const nav = document.getElementById("mainNav");
 
@@ -137,9 +100,6 @@
     });
   }
 
-  /* =========================
-     CTA HERO → FORM
-  ========================= */
   const startBtn = document.getElementById("startBtn");
   if (startBtn) {
     startBtn.addEventListener("click", () => {
@@ -147,5 +107,4 @@
       if (form) form.scrollIntoView({ behavior: "smooth" });
     });
   }
-
-})();
+});
