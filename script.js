@@ -18,8 +18,7 @@
      LANGUAGE RESOLUTION
   ========================= */
   function getLangFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get("lang");
+    return new URLSearchParams(window.location.search).get("lang");
   }
 
   function getStoredLang() {
@@ -27,17 +26,18 @@
   }
 
   function resolveLang() {
-    return (
-      getLangFromURL() ||
-      getStoredLang() ||
-      DEFAULT_LANG
-    );
+    return getLangFromURL() || getStoredLang() || DEFAULT_LANG;
   }
 
   function setLang(lang) {
     localStorage.setItem(STORAGE_KEY, lang);
     document.documentElement.lang = lang;
     document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
+
+    const rtlCSS = document.getElementById("rtlStylesheet");
+    if (rtlCSS) {
+      rtlCSS.disabled = !RTL_LANGS.includes(lang);
+    }
   }
 
   const currentLang = resolveLang();
@@ -48,39 +48,42 @@
   ========================= */
   function applyI18n(lang) {
     if (!window.I18N || !window.I18N[lang]) return;
-
     const dict = window.I18N[lang];
 
+    // Text
     document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
+      const key = el.dataset.i18n;
       if (dict[key]) el.textContent = dict[key];
     });
 
+    // Placeholders
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-      const key = el.getAttribute("data-i18n-placeholder");
-      if (dict[key]) el.setAttribute("placeholder", dict[key]);
+      const key = el.dataset.i18nPlaceholder;
+      if (dict[key]) el.placeholder = dict[key];
     });
 
-    document.title =
-      dict["privacy.meta.title"] ||
-      dict["meta.title"] ||
-      document.title;
+    // Title (context-aware)
+    if (document.body.classList.contains("privacy-page") && dict["privacy.meta.title"]) {
+      document.title = dict["privacy.meta.title"];
+    } else if (dict["meta.title"]) {
+      document.title = dict["meta.title"];
+    }
   }
 
   applyI18n(currentLang);
 
   /* =========================
-     LANGUAGE SELECTOR
+     LANGUAGE SELECTOR (INDEX)
   ========================= */
   const langSelect = document.getElementById("langSelect");
   if (langSelect) {
     langSelect.value = currentLang;
-
     langSelect.addEventListener("change", () => {
       const newLang = langSelect.value;
       setLang(newLang);
       applyI18n(newLang);
       updatePrivacyLinks(newLang);
+      syncPrivacyPDF(newLang);
     });
   }
 
@@ -92,11 +95,27 @@
       link.href = `privacy.html?lang=${lang}`;
     });
   }
-
   updatePrivacyLinks(currentLang);
 
   /* =========================
-     BURGER MENU — MOBILE (FIXED)
+     PRIVACY PDF LANG SWITCH
+  ========================= */
+  function syncPrivacyPDF(lang) {
+    const link = document.getElementById("pdfPrivacyLink");
+    if (!link) return;
+
+    const map = {
+      fr: "docs/privacy_fr.pdf",
+      en: "docs/privacy_en.pdf",
+      es: "docs/privacy_es.pdf",
+      ar: "docs/privacy_ar.pdf"
+    };
+    link.href = map[lang] || map.fr;
+  }
+  syncPrivacyPDF(currentLang);
+
+  /* =========================
+     BURGER MENU — MOBILE
   ========================= */
   const burger = document.getElementById("burgerBtn");
   const nav = document.getElementById("mainNav");
@@ -110,7 +129,6 @@
       );
     });
 
-    /* Close menu on link click (UX PRO) */
     nav.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         nav.classList.remove("is-open");
@@ -120,15 +138,13 @@
   }
 
   /* =========================
-     CTA HERO → FORM SCROLL
+     CTA HERO → FORM
   ========================= */
   const startBtn = document.getElementById("startBtn");
   if (startBtn) {
     startBtn.addEventListener("click", () => {
       const form = document.getElementById("form");
-      if (form) {
-        form.scrollIntoView({ behavior: "smooth" });
-      }
+      if (form) form.scrollIntoView({ behavior: "smooth" });
     });
   }
 
