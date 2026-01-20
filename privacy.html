@@ -126,16 +126,16 @@
   </style>
 </head>
 
-<body>
+<body class="privacy-page">
 
 <header>
   <div class="header-inner">
     <div class="logo"><span>e</span>-META</div>
-    <a class="back-home" href="index.html" data-i18n="privacy.back">← Retour à l’accueil</a>
+    <a class="back-home" href="index.html" data-i18n="privacy.back"></a>
   </div>
 </header>
 
-<main>
+<main> 
   <section class="privacy-container">
 
     <div class="privacy-header">
@@ -171,7 +171,7 @@
     <div class="pdf-box">
       <p><strong data-i18n="privacy.pdf.title"></strong></p>
       <p data-i18n="privacy.pdf.text"></p>
-      <a id="privacyPdf" target="_blank" data-i18n="privacy.download"></a>
+      <a id="pdfPrivacyLink" target="_blank" data-i18n="privacy.download"></a>
     </div>
 
     <footer>
@@ -181,37 +181,10 @@
   </section>
 </main>
 
-<!-- ===== i18n ENGINE ===== -->
+<!-- ===== I18N ENGINE (UNIQUE) ===== -->
 <script src="i18n.js"></script>
 <script src="script.js"></script>
 
-<!-- ===== LANG SYNC + RTL ===== -->
-<script>
-(function () {
-  const params = new URLSearchParams(window.location.search);
-  const urlLang = params.get("lang");
-  if (urlLang) localStorage.setItem("emeta_lang", urlLang);
-
-  const lang = localStorage.getItem("emeta_lang") || "fr";
-  document.documentElement.lang = lang;
-  document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
-})();
-</script>
-
-<!-- ===== PDF LANGUAGE SWITCH ===== -->
-<script>
-(function(){
-  const lang = localStorage.getItem("emeta_lang") || "fr";
-  const pdfMap = {
-    fr: "docs/privacy_fr.pdf",
-    en: "docs/privacy_en.pdf",
-    es: "docs/privacy_es.pdf",
-    ar: "docs/privacy_ar.pdf"
-  };
-  const link = document.getElementById("privacyPdf");
-  if (link && pdfMap[lang]) link.href = pdfMap[lang];
-})();
-</script>
-
 </body>
+
 </html>
