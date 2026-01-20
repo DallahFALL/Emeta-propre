@@ -1,9 +1,3 @@
-/* =====================================================
-   e-META — script.js vNext FINAL PRO
-   International • Stable • Index + Privacy Sync
-   FR / EN / ES / AR • RTL auto • Mobile UX ready
-===================================================== */
-
 document.addEventListener("DOMContentLoaded", function () {
   "use strict";
 
@@ -14,17 +8,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const DEFAULT_LANG = "fr";
   const RTL_LANGS = ["ar"];
 
+  /* =========================
+     LANG RESOLUTION
+  ========================= */
   function getLangFromURL() {
     const params = new URLSearchParams(window.location.search);
     return params.get("lang");
   }
 
-  function getStoredLang() {
-    return localStorage.getItem(STORAGE_KEY);
-  }
-
   function resolveLang() {
-    return getLangFromURL() || getStoredLang() || DEFAULT_LANG;
+    return (
+      getLangFromURL() ||
+      localStorage.getItem(STORAGE_KEY) ||
+      DEFAULT_LANG
+    );
   }
 
   function setLang(lang) {
@@ -33,11 +30,12 @@ document.addEventListener("DOMContentLoaded", function () {
     document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
 
     const rtlCSS = document.getElementById("rtlStylesheet");
-    if (rtlCSS) {
-      rtlCSS.disabled = !RTL_LANGS.includes(lang);
-    }
+    if (rtlCSS) rtlCSS.disabled = !RTL_LANGS.includes(lang);
   }
 
+  /* =========================
+     APPLY I18N (CORE)
+  ========================= */
   function applyI18n(lang) {
     if (!window.I18N || !window.I18N[lang]) return;
     const dict = window.I18N[lang];
@@ -53,14 +51,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     document.title =
+      dict["privacy.meta.title"] ||
       dict["meta.title"] ||
       document.title;
   }
 
+  /* =========================
+     INIT LANGUAGE
+  ========================= */
   const lang = resolveLang();
   setLang(lang);
   applyI18n(lang);
 
+  /* =========================
+     LANG SELECT (IF EXISTS)
+  ========================= */
   const langSelect = document.getElementById("langSelect");
   if (langSelect) {
     langSelect.value = lang;
@@ -68,18 +73,23 @@ document.addEventListener("DOMContentLoaded", function () {
       const newLang = langSelect.value;
       setLang(newLang);
       applyI18n(newLang);
-      updatePrivacyLinks(newLang);
+      syncPrivacyLinks(newLang);
     });
   }
 
-  function updatePrivacyLinks(lang) {
+  /* =========================
+     PRIVACY LINK SYNC
+  ========================= */
+  function syncPrivacyLinks(lang) {
     document.querySelectorAll('a[href="privacy.html"]').forEach(link => {
       link.href = `privacy.html?lang=${lang}`;
     });
   }
+  syncPrivacyLinks(lang);
 
-  updatePrivacyLinks(lang);
-
+  /* =========================
+     BURGER MENU (SAFE)
+  ========================= */
   const burger = document.getElementById("burgerBtn");
   const nav = document.getElementById("mainNav");
 
@@ -100,11 +110,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  /* =========================
+     CTA HERO → FORM (SAFE)
+  ========================= */
   const startBtn = document.getElementById("startBtn");
-  if (startBtn) {
+  const form = document.getElementById("form");
+
+  if (startBtn && form) {
     startBtn.addEventListener("click", () => {
-      const form = document.getElementById("form");
-      if (form) form.scrollIntoView({ behavior: "smooth" });
+      form.scrollIntoView({ behavior: "smooth" });
     });
   }
 });
