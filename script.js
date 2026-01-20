@@ -1,5 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
   "use strict";
+/* =========================
+   URL → STORAGE SYNC (FIX PRIVACY)
+========================= */
+(function syncLangFromURL(){
+  const params = new URLSearchParams(window.location.search);
+  const urlLang = params.get("lang");
+  if (urlLang) {
+    localStorage.setItem("emeta_lang", urlLang);
+  }
+})();
 
   /* =========================
      CONFIG
