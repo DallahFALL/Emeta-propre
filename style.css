@@ -603,4 +603,56 @@ a{color:inherit;text-decoration:none}
     font-size:.7rem;
   }
 }
+/* ================= HEADER MOBILE ================= */
+@media (max-width: 768px) {
+
+  .header-inner {
+    gap: 8px;
+  }
+
+  .logo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo-tagline {
+    font-size: 0.7rem;
+    opacity: 0.85;
+    white-space: normal;
+  }
+
+  .lang-select {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    min-width: 56px;
+  }
+}
+
+/* ================= HERO MOBILE ================= */
+@media (max-width: 768px) {
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .hero-main h1 {
+    font-size: 1.6rem;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .hero-subtitle {
+    text-align: center;
+  }
+
+  .hero-points {
+    padding-left: 0;
+  }
+
+  .cta-primary {
+    display: block;
+    margin: 16px auto 0;
+  }
+}
 
