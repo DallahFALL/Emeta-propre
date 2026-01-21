@@ -1,15 +1,13 @@
-document.addEventListener("DOMContentLoaded", function () {
+/* =====================================================
+   e-META — SCRIPT.JS FINAL PRO
+   - i18n stable (index + privacy)
+   - Header sticky + auto-shrink (no jump)
+   - Burger menu responsive
+   - Mobile safe / RTL safe
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
   "use strict";
-/* =========================
-   URL → STORAGE SYNC (FIX PRIVACY)
-========================= */
-(function syncLangFromURL(){
-  const params = new URLSearchParams(window.location.search);
-  const urlLang = params.get("lang");
-  if (urlLang) {
-    localStorage.setItem("emeta_lang", urlLang);
-  }
-})();
 
   /* =========================
      CONFIG
@@ -19,11 +17,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const RTL_LANGS = ["ar"];
 
   /* =========================
+     URL → STORAGE SYNC
+  ========================= */
+  (function syncLangFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const urlLang = params.get("lang");
+    if (urlLang) {
+      localStorage.setItem(STORAGE_KEY, urlLang);
+    }
+  })();
+
+  /* =========================
      LANG RESOLUTION
   ========================= */
   function getLangFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get("lang");
+    return new URLSearchParams(window.location.search).get("lang");
   }
 
   function resolveLang() {
@@ -44,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* =========================
-     APPLY I18N (CORE)
+     APPLY I18N
   ========================= */
   function applyI18n(lang) {
     if (!window.I18N || !window.I18N[lang]) return;
@@ -67,14 +75,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* =========================
-     INIT LANGUAGE
+     INIT LANG
   ========================= */
   const lang = resolveLang();
   setLang(lang);
   applyI18n(lang);
 
   /* =========================
-     LANG SELECT (IF EXISTS)
+     LANG SELECT
   ========================= */
   const langSelect = document.getElementById("langSelect");
   if (langSelect) {
@@ -98,18 +106,15 @@ document.addEventListener("DOMContentLoaded", function () {
   syncPrivacyLinks(lang);
 
   /* =========================
-     BURGER MENU (SAFE)
+     BURGER MENU (MOBILE SAFE)
   ========================= */
   const burger = document.getElementById("burgerBtn");
   const nav = document.getElementById("mainNav");
 
   if (burger && nav) {
     burger.addEventListener("click", () => {
-      nav.classList.toggle("is-open");
-      burger.setAttribute(
-        "aria-expanded",
-        nav.classList.contains("is-open")
-      );
+      const isOpen = nav.classList.toggle("is-open");
+      burger.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
 
     nav.querySelectorAll("a").forEach(link => {
@@ -121,33 +126,35 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* =========================
-     CTA HERO → FORM (SAFE)
+     CTA HERO → FORM
   ========================= */
   const startBtn = document.getElementById("startBtn");
   const form = document.getElementById("form");
 
   if (startBtn && form) {
     startBtn.addEventListener("click", () => {
-      form.scrollIntoView({ behavior: "smooth" });
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }
 });
+
 /* =====================================================
-   HEADER AUTO-SHRINK ON SCROLL — PRO++ (FIXED)
+   HEADER STICKY + AUTO-SHRINK — PRO++ (NO JUMP)
 ===================================================== */
 (function () {
-  const siteHeader = document.querySelector(".site-header");
-  if (!siteHeader) return;
+  const header = document.querySelector(".site-header");
+  if (!header) return;
+
+  let lastState = false;
 
   window.addEventListener(
     "scroll",
     () => {
-      const scrollY = window.scrollY || window.pageYOffset;
+      const shouldShrink = window.scrollY > 40;
 
-      if (scrollY > 40) {
-        siteHeader.classList.add("is-shrink");
-      } else {
-        siteHeader.classList.remove("is-shrink");
+      if (shouldShrink !== lastState) {
+        header.classList.toggle("is-shrink", shouldShrink);
+        lastState = shouldShrink;
       }
     },
     { passive: true }
