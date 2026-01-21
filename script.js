@@ -132,3 +132,24 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+/* =====================================================
+   HEADER AUTO-SHRINK ON SCROLL — PRO++
+===================================================== */
+(function () {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
+
+  let lastScroll = 0;
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > 40) {
+      header.classList.add("is-shrink");
+    } else {
+      header.classList.remove("is-shrink");
+    }
+
+    lastScroll = currentScroll;
+  });
+})();
