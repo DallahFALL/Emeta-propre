@@ -140,16 +140,16 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!header) return;
 
   let lastScroll = 0;
+const header = document.querySelector(".site-header");
 
-  window.addEventListener("scroll", () => {
-    const currentScroll = window.scrollY;
+window.addEventListener("scroll", () => {
+  const current = window.scrollY;
 
-    if (currentScroll > 40) {
-      header.classList.add("is-shrink");
-    } else {
-      header.classList.remove("is-shrink");
-    }
+  if (current > 40 && !header.classList.contains("is-shrink")) {
+    header.classList.add("is-shrink");
+  } else if (current <= 40 && header.classList.contains("is-shrink")) {
+    header.classList.remove("is-shrink");
+  }
 
-    lastScroll = currentScroll;
-  });
-})();
+  lastScroll = current;
+}, { passive: true });
