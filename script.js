@@ -1,9 +1,10 @@
 /* =====================================================
    e-META — SCRIPT.JS FINAL PRO
    - i18n stable (index + privacy)
-   - Header sticky + auto-shrink (no jump)
-   - Burger menu responsive
-   - Mobile safe / RTL safe
+   - Header fixed + auto-shrink (no jump)
+   - Header intelligent (hide down / show up)
+   - Burger menu mobile safe
+   - RTL safe
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -19,42 +20,36 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =========================
      URL → STORAGE SYNC
   ========================= */
-  (function syncLangFromURL() {
+  (() => {
     const params = new URLSearchParams(window.location.search);
     const urlLang = params.get("lang");
-    if (urlLang) {
-      localStorage.setItem(STORAGE_KEY, urlLang);
-    }
+    if (urlLang) localStorage.setItem(STORAGE_KEY, urlLang);
   })();
 
   /* =========================
      LANG RESOLUTION
   ========================= */
-  function getLangFromURL() {
-    return new URLSearchParams(window.location.search).get("lang");
-  }
+  const getLangFromURL = () =>
+    new URLSearchParams(window.location.search).get("lang");
 
-  function resolveLang() {
-    return (
-      getLangFromURL() ||
-      localStorage.getItem(STORAGE_KEY) ||
-      DEFAULT_LANG
-    );
-  }
+  const resolveLang = () =>
+    getLangFromURL() ||
+    localStorage.getItem(STORAGE_KEY) ||
+    DEFAULT_LANG;
 
-  function setLang(lang) {
+  const setLang = lang => {
     localStorage.setItem(STORAGE_KEY, lang);
     document.documentElement.lang = lang;
     document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
 
     const rtlCSS = document.getElementById("rtlStylesheet");
     if (rtlCSS) rtlCSS.disabled = !RTL_LANGS.includes(lang);
-  }
+  };
 
   /* =========================
      APPLY I18N
   ========================= */
-  function applyI18n(lang) {
+  const applyI18n = lang => {
     if (!window.I18N || !window.I18N[lang]) return;
     const dict = window.I18N[lang];
 
@@ -72,10 +67,10 @@ document.addEventListener("DOMContentLoaded", () => {
       dict["privacy.meta.title"] ||
       dict["meta.title"] ||
       document.title;
-  }
+  };
 
   /* =========================
-     INIT LANG
+     INIT LANGUAGE
   ========================= */
   const lang = resolveLang();
   setLang(lang);
@@ -106,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
   syncPrivacyLinks(lang);
 
   /* =========================
-     BURGER MENU (MOBILE SAFE)
+     BURGER MENU — MOBILE SAFE
   ========================= */
   const burger = document.getElementById("burgerBtn");
   const nav = document.getElementById("mainNav");
@@ -139,26 +134,46 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =====================================================
-   HEADER AUTO-SHRINK (NO JUMP) — SAFE
+   HEADER INTELLIGENT — PRO++
+   - shrink après 40px
+   - hide on scroll down
+   - show on scroll up
+   - no jump / rAF optimisé
 ===================================================== */
-(function () {
-  const siteHeader = document.querySelector(".site-header");
-  if (!siteHeader) return;
+(() => {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
 
+  let lastY = window.scrollY;
   let ticking = false;
 
-  function update() {
-    const y = window.scrollY || window.pageYOffset || 0;
-    siteHeader.classList.toggle("is-shrink", y > 40);
-    ticking = false;
-  }
+  const onScroll = () => {
+    const y = window.scrollY;
 
-  window.addEventListener("scroll", () => {
-    if (!ticking) {
-      ticking = true;
-      window.requestAnimationFrame(update);
+    /* Shrink visuel */
+    header.classList.toggle("is-shrink", y > 40);
+
+    /* Hide / show intelligent */
+    if (y > lastY && y > 120) {
+      header.classList.add("is-hidden");     // scroll down
+    } else {
+      header.classList.remove("is-hidden"); // scroll up
     }
-  }, { passive: true });
 
-  update();
+    lastY = y;
+    ticking = false;
+  };
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        window.requestAnimationFrame(onScroll);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
+
+  onScroll(); // init
 })();
