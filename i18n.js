@@ -202,7 +202,7 @@ window.I18N = {
   "privacy.pdf.title": "Official PDF version",
   "privacy.pdf.text":
     "Download the complete legal and archivable version:",
-  "privacy.download": "Download official version (PDF)"
+  "privacy.download": "Download official version (PDF)",
 },
 
 
