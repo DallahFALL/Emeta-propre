@@ -171,41 +171,154 @@ window.I18N = {
   /* =====================================================
      EN — English
   ===================================================== */
-  en: {
-  "privacy.meta.title": "Privacy Policy — e-META",
-  "privacy.back": "← Back to home",
-  "privacy.title": "Privacy Policy",
-  "privacy.intro": "e-META places great importance on the protection of personal data.",
+   en: {
 
-  "privacy.section1.title": "1. Introduction",
-  "privacy.section1.text":
-    "e-META is an AI-powered strategic decision support tool. It does not constitute legal, financial, medical or regulatory advice.",
+    "meta.title": "e-META — Decision-Making AI Assistant",
+    "privacy.meta.title": "Privacy Policy — e-META",
 
-  "privacy.section2.title": "2. Data collected",
-  "privacy.section2.item1": "Information entered in forms.",
-  "privacy.section2.item2": "Contact data if delivery is requested.",
-  "privacy.section2.item3": "Files or links provided.",
+    "header.tagline": "Multilingual decision-making AI assistant",
+    "nav.home": "Home",
+    "nav.form": "Form",
+    "nav.privacy": "Privacy",
+    "cta.custom": "Custom request",
 
-  "privacy.section3.title": "3. Use of data",
-  "privacy.section3.item1": "Generation of personalized analyses.",
-  "privacy.section3.item2": "Adaptation of delivery format.",
-  "privacy.section3.item3": "Continuous improvement.",
+    "hero.title": "Make decisions at a premium consulting-firm level",
+    "hero.subtitle": "e-META structures your context, goals, constraints and KPIs to deliver a clear, actionable and documented recommendation.",
+    "hero.point1": "Structured analysis (senior consultant level)",
+    "hero.point2": "Actionable recommendations + risks + KPIs",
+    "hero.point3": "Personalized delivery (Email / WhatsApp / PDF)",
+    "hero.cta": "Start a strategic analysis",
+    "hero.badge.title": "Strategic analysis — consulting level",
+    "hero.badge.text": "A structured approach inspired by top consulting firms.",
+    "hero.note": "e-META is not a chatbot: it is a decision intelligence engine.",
 
-  "privacy.section4.title": "4. AI & responsibility",
-  "privacy.section4.text":
-    "The recommendations provided are indicative. The user remains solely responsible for decisions made based on the analyses.",
+    "help.title": "Need help before starting?",
+    "help.privacy": "🔒 Privacy policy",
+    "help.guide": "📘 Official guide to complete the form",
 
-  "privacy.section5.title": "5. Retention & security",
-  "privacy.section5.text":
-    "Data is retained only for the necessary duration and protected by reasonable technical and organizational measures.",
+    "form.badge.cabinet": "Consulting-firm mode",
+    "form.title": "e-META vNext Form — Premium strategic analysis",
+    "form.intro": "The more precise your answers, the more accurate and useful the e-META recommendation will be.",
 
-  "privacy.pdf.title": "Official PDF version",
-  "privacy.pdf.text":
-    "Download the complete legal and archivable version:",
-  "privacy.download": "Download official version (PDF)",
-},
+    "group.general": "1) Qualify the decision",
+    "field.domain.label": "Main domain",
+    "field.domain.placeholder": "Select a domain",
+    "field.domain.strategy": "Strategy & governance",
+    "field.domain.finance": "Finance & business model",
+    "field.domain.marketing": "Marketing & growth",
+    "field.domain.operations": "Operations & organization",
+    "field.domain.it": "Innovation / AI / digital",
+    "field.domain.legal": "Legal & compliance",
+    "field.domain.impact": "Social & environmental impact",
+    "field.domain.other": "Other",
 
+    "field.decisionType.label": "Decision type",
+    "field.decisionType.placeholder": "Select a type",
+    "field.decisionType.t1": "High-stakes strategic decision",
+    "field.decisionType.t2": "Optimization / improvement",
+    "field.decisionType.t3": "Trade-off between options",
+    "field.decisionType.t4": "Project / product launch",
+    "field.decisionType.t5": "Urgent situation",
+    "field.decisionType.t6": "Dossier preparation (funding, committee…)",
 
+    "field.title.label": "Short decision title",
+    "field.title.ph": "E.g. Rethink our distribution strategy in Senegal",
+    "field.title.hint": "Clear and concise sentence.",
+
+    "group.analysis": "2) Structure the analysis (consulting level)",
+    "field.problem.label": "Core problem",
+    "field.problem.ph": "Describe the real problem.",
+    "field.problem.hint": "The more precise the context, the better the analysis.",
+
+    "field.objectives.label": "Priority objectives (3–5 max)",
+    "field.objectives.ph": "E.g. increase margin, reduce churn…",
+    "field.objectives.hint": "Expected concrete outcomes.",
+
+    "field.constraints.label": "Constraints & risks",
+    "field.constraints.ph": "Budget, timeline, regulation…",
+    "field.constraints.hint": "Key constraints to consider.",
+
+    "field.kpis.label": "KPIs / indicators",
+    "field.kpis.ph": "Revenue, ROI, NPS, timelines…",
+    "field.kpis.hint": "How to measure success?",
+
+    "field.resources.label": "Available resources",
+    "field.resources.ph": "Team, tools, budget…",
+
+    "field.context.label": "Detailed context",
+    "field.context.ph": "History, stakeholders, environment…",
+    "field.context.hint": "Additional useful information.",
+
+    "group.budget": "3) Ambition, budget & urgency",
+    "field.budgetMin.label": "Minimum budget",
+    "field.budgetMin.ph": "E.g. 1000000",
+    "field.budgetMax.label": "Maximum budget",
+    "field.budgetMax.ph": "E.g. 2500000",
+
+    "field.deadline.label": "Desired timeline",
+    "field.deadline.ph": "E.g. 1 month",
+
+    "field.urgency.label": "Urgency level",
+    "field.urgency.low": "Low",
+    "field.urgency.medium": "Normal",
+    "field.urgency.high": "Critical",
+
+    "group.output": "4) Delivery & contact",
+    "field.outputMode.label": "Delivery mode",
+    "field.outputMode.email": "Structured email",
+    "field.outputMode.whatsapp": "WhatsApp",
+    "field.outputMode.pdf": "Professional PDF",
+    "field.outputMode.display": "Direct display",
+
+    "field.email.label": "Email address",
+    "field.email.ph": "name@email.com",
+
+    "field.whatsapp.label": "WhatsApp number",
+    "field.whatsapp.ph": "+221XXXXXXXXX",
+
+    "field.fileLink.label": "File link (optional)",
+    "field.fileLink.ph": "Drive, Dropbox, Notion…",
+    "field.fileLink.hint": "Existing document.",
+
+    "group.trust": "Trust & consent",
+    "field.consent.label": "I agree that my information is used only to generate the analysis.",
+    "form.trust.note": "Your data remains strictly confidential.",
+
+    "form.submit": "Generate my e-META recommendation",
+    "form.reset": "Reset",
+
+    "footer.text": "— Strategic decision intelligence engine.",
+    "footer.privacy": "Privacy policy",
+    "footer.copy": "© 2026 e-META — All rights reserved",
+
+    "privacy.back": "← Back to home",
+    "privacy.title": "Privacy Policy",
+    "privacy.intro": "e-META places strong importance on protecting personal data.",
+
+    "privacy.section1.title": "1. Introduction",
+    "privacy.section1.text": "e-META is a strategic decision-support tool powered by AI.",
+
+    "privacy.section2.title": "2. Data collected",
+    "privacy.section2.item1": "Information entered in forms.",
+    "privacy.section2.item2": "Contact data if delivery is requested.",
+    "privacy.section2.item3": "Files or links provided.",
+
+    "privacy.section3.title": "3. Data usage",
+    "privacy.section3.item1": "Generation of personalized analyses.",
+    "privacy.section3.item2": "Adaptation of delivery.",
+    "privacy.section3.item3": "Continuous improvement.",
+
+    "privacy.section4.title": "4. AI & liability",
+    "privacy.section4.text": "Recommendations are indicative only.",
+
+    "privacy.section5.title": "5. Retention & security",
+    "privacy.section5.text": "Data is protected with reasonable measures.",
+
+    "privacy.pdf.title": "Official PDF version",
+    "privacy.pdf.text": "Download the complete legal version:",
+    "privacy.download": "Download the official PDF"
+  }, 
+   
   /* =====================================================
      ES — Español
   ===================================================== */
