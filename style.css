@@ -707,4 +707,51 @@ a{color:inherit;text-decoration:none}
     line-height: 1.2;
   }
 }
+/* =====================================================
+   HEADER — MOBILE COMPACT FIX
+   (ne casse PAS desktop)
+===================================================== */
+@media (max-width: 768px) {
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    height: auto;
+  }
+
+  .header-inner {
+    padding: 8px 12px;           /* 🔽 réduit hauteur */
+    gap: 10px;
+  }
+
+  /* Logo plus compact */
+  .logo {
+    font-size: 1rem;
+  }
+
+  .logo-tagline {
+    display: none;               /* 🔥 supprime la tagline sur mobile */
+  }
+
+  /* Lang selector plus discret */
+  .lang-select {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+  }
+
+  /* Burger plus compact */
+  .burger {
+    width: 34px;
+    height: 28px;
+  }
+
+  .burger span {
+    height: 2px;
+  }
+
+  /* Évite que le header cache le contenu */
+  body {
+    scroll-padding-top: 64px;
+  }
+}
 
