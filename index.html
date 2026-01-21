@@ -14,37 +14,34 @@
   <!-- =========================
        HEADER
   ========================== -->
-  <header class="site-header">
-    <div class="container header-inner">
-
-      <a class="logo" href="#top" aria-label="e-META">
-        <span class="logo-mark">e</span>
-        <span class="logo-text">META</span>
-        <span class="logo-tagline" data-i18n="header.tagline"></span>
-
-      </a>
-
-      <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-
-      <nav class="nav" id="mainNav">
-        <a href="#top" data-i18n="nav.home"></a>
-        <a href="#form" data-i18n="nav.form"></a>
-        <a href="privacy.html" data-i18n="nav.privacy"></a>
-      </nav>
-
-      <div class="header-actions">
-        <select class="lang-select" id="langSelect" aria-label="Language">
-          <option value="fr">FR</option>
-          <option value="en">EN</option>
-          <option value="es">ES</option>
-          <option value="ar">AR</option>
-        </select>
-      </div>
-
+ <header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="logo-mark">e</span>
+      <span class="logo-text">META</span>
+      <span class="logo-tagline" data-i18n="header.tagline">
+        Assistant IA multilingue pour la prise de décision
+      </span>
     </div>
-  </header>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#hero" data-i18n="nav.home">Accueil</a>
+      <a href="#form" data-i18n="nav.form">Forme</a>
+      <a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a>
+    </nav>
+
+    <select id="langSelect" class="lang-select">
+      <option value="fr">FR</option>
+      <option value="en">EN</option>
+      <option value="es">ES</option>
+      <option value="ar">AR</option>
+    </select>
+
+    <button id="burgerBtn" class="burger" aria-expanded="false">
+      ☰
+    </button>
+  </div>
+</header>
 
   <main>
 
