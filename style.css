@@ -1241,3 +1241,144 @@ body {
     font-size: 0.7rem;
   }
 }
+/* ================= HEADER PRO FIX (FIXED + SHRINK + MOBILE) ================= */
+:root{
+  --header-h: 76px;
+  --header-h-shrink: 58px;
+}
+
+/* Compense le header fixed */
+body{ padding-top: var(--header-h); }
+
+.site-header{
+  position: fixed; /* ✅ fixe desktop + mobile */
+  top: 0; left: 0; right: 0;
+  z-index: 1200;
+  background: linear-gradient(180deg,#0b1020,#070b1a);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(10px);
+  transform: translateZ(0);
+  will-change: padding, height, transform;
+}
+
+/* Inner */
+.header-inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  min-height: var(--header-h);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+}
+
+/* Logo */
+.logo{
+  display:flex;
+  align-items:center;
+  gap: 6px;
+  min-width: 0;
+  text-decoration: none;
+}
+.logo-mark{ font-weight:900; font-size:1.45rem; color:#ff8a00; }
+.logo-text{ font-weight:900; font-size:1.15rem; color:#fff; }
+
+/* ✅ Slogan : ne s’écrase pas / ne sort pas */
+.logo-tagline{
+  margin-left: 10px;
+  font-size: .82rem;
+  opacity: .78;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 320px;
+}
+
+/* Nav desktop */
+.nav{
+  display:flex;
+  align-items:center;
+  gap: 18px;
+}
+.nav a{ color:#fff; opacity:.92; }
+.nav a:hover{ opacity:1; }
+
+/* Actions */
+.header-actions{ display:flex; align-items:center; gap:10px; }
+
+/* ✅ Lang select moins large */
+.lang-select{
+  width: 92px;
+  max-width: 92px;
+  background:#0f162e;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:999px;
+  padding: 8px 10px;
+}
+
+/* Burger */
+.burger{
+  display:none;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+}
+.burger span{
+  display:block;
+  width: 22px;
+  height: 2px;
+  background:#fff;
+  margin: 4px 0;
+}
+
+/* ✅ Shrink state (sans saut) */
+.site-header.is-shrink .header-inner{
+  min-height: var(--header-h-shrink);
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.site-header.is-shrink .logo-mark{ font-size:1.25rem; }
+.site-header.is-shrink .logo-text{ font-size:1.05rem; }
+.site-header.is-shrink .logo-tagline{
+  font-size: .78rem;
+  opacity: .72;
+  max-width: 260px;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 900px){
+  .burger{ display:inline-flex; align-items:center; justify-content:center; }
+  .nav{ display:none; } /* ✅ menu caché, remplacé par burger */
+  .logo-tagline{ max-width: 200px; } /* évite choc logo/slogan */
+}
+
+/* Menu mobile overlay */
+@media (max-width: 900px){
+  .nav.is-open{
+    display:flex;
+    flex-direction: column;
+    gap: 14px;
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    top: var(--header-h); /* sous le header */
+    padding: 14px;
+    border-radius: 16px;
+    background: rgba(10,14,32,.98);
+    border: 1px solid rgba(255,255,255,.10);
+    z-index: 1201;
+  }
+
+  /* quand header shrink, menu remonte correctement */
+  .site-header.is-shrink ~ main .nav.is-open{ top: var(--header-h-shrink); }
+}
+
+/* Ultra petit */
+@media (max-width: 420px){
+  .lang-select{ width: 76px; max-width: 76px; }
+  .logo-tagline{ display:none; } /* ✅ évite chevauchement */
+}
