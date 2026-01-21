@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =====================================================
-   HEADER STICKY + AUTO-SHRINK — PRO++ (NO JUMP)
+   HEADER AUTO-SHRINK — PRO STABLE
 ===================================================== */
 (function () {
   const header = document.querySelector(".site-header");
