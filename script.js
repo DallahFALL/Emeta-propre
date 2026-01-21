@@ -133,23 +133,23 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 /* =====================================================
-   HEADER AUTO-SHRINK ON SCROLL — PRO++
+   HEADER AUTO-SHRINK ON SCROLL — PRO++ (FIXED)
 ===================================================== */
 (function () {
-  const header = document.querySelector(".site-header");
-  if (!header) return;
+  const siteHeader = document.querySelector(".site-header");
+  if (!siteHeader) return;
 
-  let lastScroll = 0;
-const header = document.querySelector(".site-header");
+  window.addEventListener(
+    "scroll",
+    () => {
+      const scrollY = window.scrollY || window.pageYOffset;
 
-window.addEventListener("scroll", () => {
-  const current = window.scrollY;
-
-  if (current > 40 && !header.classList.contains("is-shrink")) {
-    header.classList.add("is-shrink");
-  } else if (current <= 40 && header.classList.contains("is-shrink")) {
-    header.classList.remove("is-shrink");
-  }
-
-  lastScroll = current;
-}, { passive: true });
+      if (scrollY > 40) {
+        siteHeader.classList.add("is-shrink");
+      } else {
+        siteHeader.classList.remove("is-shrink");
+      }
+    },
+    { passive: true }
+  );
+})();
