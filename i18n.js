@@ -172,26 +172,39 @@ window.I18N = {
      EN — English
   ===================================================== */
   en: {
-
-  /* ================= META ================= */
-  "meta.title": "e-META — Decision-Making AI Assistant",
   "privacy.meta.title": "Privacy Policy — e-META",
+  "privacy.back": "← Back to home",
+  "privacy.title": "Privacy Policy",
+  "privacy.intro": "e-META places great importance on the protection of personal data.",
 
-  /* ================= HEADER ================= */
-  "header.tagline": "Multilingual decision-making AI assistant",
+  "privacy.section1.title": "1. Introduction",
+  "privacy.section1.text":
+    "e-META is an AI-powered strategic decision support tool. It does not constitute legal, financial, medical or regulatory advice.",
 
-  /* ================= NAV ================= */
-  "nav.home": "Home",
-  "nav.form": "Form",
-  "nav.privacy": "Privacy",
+  "privacy.section2.title": "2. Data collected",
+  "privacy.section2.item1": "Information entered in forms.",
+  "privacy.section2.item2": "Contact data if delivery is requested.",
+  "privacy.section2.item3": "Files or links provided.",
 
-  /* ================= HERO ================= */
-  "hero.title": "Make decisions at a premium consulting-firm level",
-  "hero.subtitle": "e-META structures your context, objectives, constraints and KPIs to deliver a clear, actionable and documented recommendation.",
-  "hero.point1": "Structured analysis (senior consultant level)",
-  "hero.point2": "Actionable recommendations, risks and KPIs",
-  "hero.point3": "Personalized delivery (Email / WhatsApp / PDF)",
-  "hero.cta": "Start
+  "privacy.section3.title": "3. Use of data",
+  "privacy.section3.item1": "Generation of personalized analyses.",
+  "privacy.section3.item2": "Adaptation of delivery format.",
+  "privacy.section3.item3": "Continuous improvement.",
+
+  "privacy.section4.title": "4. AI & responsibility",
+  "privacy.section4.text":
+    "The recommendations provided are indicative. The user remains solely responsible for decisions made based on the analyses.",
+
+  "privacy.section5.title": "5. Retention & security",
+  "privacy.section5.text":
+    "Data is retained only for the necessary duration and protected by reasonable technical and organizational measures.",
+
+  "privacy.pdf.title": "Official PDF version",
+  "privacy.pdf.text":
+    "Download the complete legal and archivable version:",
+  "privacy.download": "Download official version (PDF)"
+},
+
 
   /* =====================================================
      ES — Español
