@@ -139,24 +139,30 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =====================================================
-   HEADER AUTO-SHRINK — PRO STABLE
+   HEADER AUTO-SHRINK — PRO / STABLE
 ===================================================== */
 (function () {
   const header = document.querySelector(".site-header");
   if (!header) return;
 
-  let lastState = false;
+  let ticking = false;
 
-  window.addEventListener(
-    "scroll",
-    () => {
-      const shouldShrink = window.scrollY > 40;
+  function onScroll() {
+    const y = window.scrollY;
 
-      if (shouldShrink !== lastState) {
-        header.classList.toggle("is-shrink", shouldShrink);
-        lastState = shouldShrink;
-      }
-    },
-    { passive: true }
-  );
+    if (y > 40) {
+      header.classList.add("is-shrink");
+    } else {
+      header.classList.remove("is-shrink");
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(onScroll);
+      ticking = true;
+    }
+  }, { passive: true });
 })();
