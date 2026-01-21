@@ -1109,3 +1109,135 @@ body {
     max-width: 60px;
   }
 }
+/* =====================================================
+   HEADER FIXE — PRO STANDARD
+===================================================== */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  background: rgba(6, 9, 24, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+
+  transition: padding 0.25s ease, height 0.25s ease;
+}
+
+/* hauteur stable */
+.site-header {
+  height: 72px;
+}
+
+/* compensation du header fixe */
+body {
+  padding-top: 72px;
+}
+
+/* inner */
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* LOGO PRO */
+.logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.logo-main {
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+.logo-main span {
+  color: var(--accent);
+}
+
+.logo-sub {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+/* NAV DESKTOP */
+.nav {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+/* LANG SELECT */
+.lang-select {
+  min-width: 64px;
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+/* =====================================================
+   SHRINK STATE (VISUEL SEULEMENT)
+===================================================== */
+
+.site-header.is-shrink {
+  height: 58px;
+}
+
+.site-header.is-shrink .header-inner {
+  padding: 8px 20px;
+}
+
+.site-header.is-shrink .logo-sub {
+  display: none; /* PRO : slogan disparaît proprement */
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+.burger {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  .nav {
+    position: fixed;
+    top: 58px;
+    left: 0;
+    right: 0;
+
+    background: rgba(6, 9, 24, 0.98);
+    flex-direction: column;
+    gap: 14px;
+    padding: 20px;
+
+    transform: translateY(-120%);
+    transition: transform 0.25s ease;
+  }
+
+  .nav.is-open {
+    transform: translateY(0);
+  }
+
+  .burger {
+    display: block;
+    background: none;
+    border: none;
+  }
+
+  .logo-sub {
+    font-size: 0.7rem;
+  }
+}
