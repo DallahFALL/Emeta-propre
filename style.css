@@ -900,3 +900,121 @@ a{color:inherit;text-decoration:none}
 .site-header.is-shrink {
   height: 56px;
 }
+/* ================= HEADER FIXED PRO ================= */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(6,9,24,0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.25s ease;
+}
+
+/* hauteur stable */
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  max-width: 60%;
+}
+
+.logo-mark {
+  color: #ff8a00;
+  font-weight: 900;
+  font-size: 1.4rem;
+}
+
+.logo-text {
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+.logo-tagline {
+  font-size: 0.7rem;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+/* AUTO-SHRINK */
+.site-header.is-shrink .header-inner {
+  padding: 8px 16px;
+}
+
+.site-header.is-shrink .logo-tagline {
+  display: none;
+}
+
+/* NAV */
+.main-nav {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.lang-select {
+  margin-left: 12px;
+}
+
+/* BURGER */
+.burger {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  .brand {
+    max-width: 100%;
+  }
+
+  .logo-tagline {
+    width: 100%;
+    font-size: 0.65rem;
+  }
+
+  .main-nav {
+    position: fixed;
+    top: 64px;
+    right: 0;
+    background: #070b1a;
+    flex-direction: column;
+    padding: 16px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .main-nav.is-open {
+    transform: translateX(0);
+  }
+
+  .burger {
+    display: block;
+    margin-left: auto;
+  }
+}
+
+/* IMPORTANT : compenser le header */
+body {
+  padding-top: 96px;
+}
+
+.site-header.is-shrink ~ body {
+  padding-top: 72px;
+}
