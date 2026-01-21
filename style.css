@@ -1018,3 +1018,94 @@ body {
 .site-header.is-shrink ~ body {
   padding-top: 72px;
 }
+/* ================= HEADER PRO FIXED ================= */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  background: linear-gradient(180deg, #060918, #090d22);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+/* Reserve space for fixed header */
+body {
+  padding-top: 88px; /* hauteur header NORMAL */
+}
+
+/* Inner layout */
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Logo */
+.site-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  flex-shrink: 0;
+}
+
+.site-logo .brand {
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+.site-logo .tagline {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+/* Language selector */
+.lang-select {
+  max-width: 70px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+/* ================= SHRINK MODE ================= */
+.site-header.is-shrink {
+  transform: translateY(-18px);
+}
+
+.site-header.is-shrink .tagline {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  body {
+    padding-top: 72px;
+  }
+
+  .header-inner {
+    padding: 10px 14px;
+  }
+
+  .site-logo .brand {
+    font-size: 1rem;
+  }
+
+  .site-logo .tagline {
+    font-size: 0.65rem;
+  }
+
+  .lang-select {
+    max-width: 60px;
+  }
+}
