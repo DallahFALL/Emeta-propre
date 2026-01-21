@@ -193,12 +193,44 @@
 
   </section>
 </main>
+<script>
+  
+/* ===== LANG SYNC FROM URL (CRITICAL FIX) ===== */
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const urlLang = params.get("lang");
+  if (urlLang) {
+    localStorage.setItem("emeta_lang", urlLang);
+    document.documentElement.lang = urlLang;
+    document.documentElement.dir = (urlLang === "ar") ? "rtl" : "ltr";
+  }
+})();
+</script>
 
 <!-- ✅ i18n engine unique (comme index) -->
 <script src="i18n.js"></script>
 <script src="script.js"></script>
 
-<!-- ✅ PDF language switch (corrigé) -->
+<!-- ✅ LANG SYNC (FIX) -->
+<script>
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const urlLang = params.get("lang");
+  if (urlLang) {
+    localStorage.setItem("emeta_lang", urlLang);
+    document.documentElement.lang = urlLang;
+    document.documentElement.dir = (urlLang === "ar") ? "rtl" : "ltr";
+  }
+})();
+</script>
+
+<!-- ✅ i18n engine -->
+<script src="i18n.js"></script>
+
+<!-- ✅ main logic -->
+<script src="script.js"></script>
+
+<!-- ✅ PDF language switch -->
 <script>
 (function(){
   const lang = localStorage.getItem("emeta_lang") || "fr";
@@ -212,6 +244,3 @@
   if (link && pdfMap[lang]) link.href = pdfMap[lang];
 })();
 </script>
-
-</body>
-</html>
