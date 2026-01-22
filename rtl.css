@@ -1,22 +1,2 @@
-html[dir="rtl"] body {
-  text-align: right;
-}
-
-html[dir="rtl"] .header-inner,
-html[dir="rtl"] .hero-grid,
-html[dir="rtl"] .grid-2 {
-  direction: rtl;
-}
-
-html[dir="rtl"] .checkbox-grid {
-  direction: rtl;
-}
-
-html[dir="rtl"] .logo {
-  flex-direction: row-reverse;
-}
-
-html[dir="rtl"] .cta-primary,
-html[dir="rtl"] .cta-custom {
-  text-align: center;
-}
+/* RTL overrides — minimal */
+html[dir='rtl'] { direction: rtl; }
