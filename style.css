@@ -491,3 +491,21 @@ textarea {
     padding-top: 24px;
   }
 }
+/* ===============================
+   FORM — FIN PROPRE & RESPIRATION
+================================ */
+
+.form-actions {
+  margin-top: 32px;
+}
+
+.form-actions button {
+  min-width: 240px;
+}
+
+/* Micro-copy confiance */
+.form-trust-note {
+  margin-top: 18px;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
