@@ -386,3 +386,108 @@ main > section:first-child {
     margin-top: 0;
   }
 }
+/* ===============================
+   LAYOUT GLOBAL — RESPONSIVE FIX
+================================ */
+
+main {
+  width: 100%;
+}
+
+.section,
+.hero,
+.form-section {
+  width: 100%;
+}
+
+.hero .container,
+.form-section .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+/* ===============================
+   HERO — RESPONSIVE CLEAN
+================================ */
+
+.hero {
+  padding: 56px 0 40px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    text-align: center;
+  }
+
+  .hero-points {
+    padding-left: 0;
+    list-style-position: inside;
+  }
+}
+/* ===============================
+   FORM — STRUCTURE PRO RESPONSIVE
+================================ */
+
+.emeta-form {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.field-group {
+  width: 100%;
+}
+
+.field {
+  width: 100%;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+/* Champs en 2 colonnes desktop */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Mobile = 1 colonne */
+@media (max-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+.field-group {
+  border-radius: 14px;
+  padding: 20px 18px;
+}
+
+.field-group legend {
+  max-width: 100%;
+  white-space: normal;
+}
+@media (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* empêche zoom iOS */
+  }
+
+  .form-section {
+    padding-top: 24px;
+  }
+}
