@@ -1,136 +1,251 @@
-/* e-META — style.css (ready-to-paste patch)
-   - Header fixed + no-jump compensation
-   - Responsive breakpoints for mobile
-   - Form width constraints and safe grids
-   - Help icons floating, RTL minimal support
-   Paste this file as your style.css (replace existing) */
+# e-META — Patch Mobile
 
+**Fichier créé dans le canevas :** `e-META — Patch mobile (style.css + script.js)`
+
+Ce canevas contient **deux fichiers prêts à coller** : `style.css` et `script.js` (version mobile-first et responsive). Ils corrigent :
+
+* header fixe et compact sans saut au scroll
+* menu burger accessible et fermé après clic
+* hero et formulaire optimisés pour mobile (stack vertical, espacement)
+* titres de sections du formulaire en **orange** pour guider l'utilisateur
+* ancrage propre vers `#form` (bouton « Commencer une analyse stratégique »)
+* i18n hook intact (compatible `i18n.js` déjà présent)
+
+---
+
+## Mode d'emploi rapide
+
+1. Remplace `style.css` et `script.js` dans ton dépôt par les contenus ci‑dessous (copier-coller).
+2. Vérifie que `index.html` contient :
+
+   * `<link rel="stylesheet" href="style.css">`
+   * `<script src="i18n.js"></script>` (avant)
+   * `<script src="script.js"></script>` (dernier)
+3. Tester : Chrome DevTools → Mobile (iPhone/Pixel) puis régler la langue via le sélecteur.
+4. Vérifier : bouton orange **Commencer une analyse stratégique** scrolle vers `#form` ; menu burger fonctionne ; privacy page conserve i18n.
+
+---
+
+## Contenu : `style.css`
+
+```css
+/* e-META — style.css (patch mobile-first, responsive)
+   Paste-ready: remplace ton style.css actuel
+*/
 :root{
-  --bg-main:#070b1a;
-  --bg-card:rgba(255,255,255,0.03);
-  --text-main:#ffffff;
-  --text-muted:rgba(255,255,255,0.75);
-  --accent:#ff8a00;
-  --max-width:1100px;
-  --header-height-desktop:72px;
-  --header-height-mobile:56px;
-  --breakpoint-md:900px;
-  --breakpoint-sm:768px;
+  --bg:#070b1a;
+  --card:rgba(255,255,255,0.03);
+  --muted:rgba(255,255,255,0.78);
+  --accent:#ff8a00; /* ORANGE e-META */
+  --border:rgba(255,255,255,0.08);
+  --radius:14px;
+  --max:1100px;
+  --header-h:64px;
 }
 
-/* Reset & base */
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--bg-main);color:var(--text-main);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;overflow-x:hidden}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:#fff;}
+body{padding-top:var(--header-h);overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-.container{max-width:var(--max-width);margin:0 auto;padding:0 16px}
+.container{max-width:var(--max);margin:0 auto;padding:0 16px}
 
-/* ================= HEADER FIXED ================= */
-.site-header{
-  position:fixed;
-  top:0;left:0;right:0;width:100%;
-  z-index:9999;
-  background:linear-gradient(180deg,#0b1020,#070b1a);
-  border-bottom:1px solid rgba(255,255,255,.06);
-  transition:padding .25s ease, box-shadow .25s ease, transform .15s ease;
-  will-change:transform;
-}
-.header-inner{
-  max-width:var(--max-width);
-  margin:0 auto;
-  padding:12px 16px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  min-height:var(--header-height-desktop);
-}
-.logo{display:flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:0}
-.logo-mark{font-weight:900;font-size:1.35rem;color:var(--accent)}
-.logo-text{font-weight:900;font-size:1.1rem}
-.logo-tagline{opacity:.75;font-size:.78rem;margin-left:6px}
+/* ===== Header ===== */
+.site-header{position:fixed;inset:0 0 auto 0;top:0;left:0;right:0;height:var(--header-h);background:linear-gradient(180deg,#0b1020,#070b1a);border-bottom:1px solid var(--border);z-index:9999;display:flex;align-items:center}
+.header-inner{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px}
+.logo{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.logo-mark{font-weight:900;font-size:1.2rem;color:var(--accent)}
+.logo-text{font-weight:900;font-size:1rem}
+.logo-tagline{font-size:.78rem;opacity:.85}
 
-/* Burger */
+/* burger */
 .burger{display:none;background:none;border:none;padding:8px;border-radius:8px;cursor:pointer}
-.burger span{display:block;width:22px;height:2px;background:#fff;margin:4px 0;border-radius:2px}
+.burger span{display:block;width:20px;height:2px;background:#fff;margin:4px 0}
 
-/* Nav & actions */
 .nav{display:flex;gap:18px;align-items:center}
-.nav a{opacity:.95;padding:6px 8px;border-radius:8px}
-.nav a:hover{opacity:1;background:rgba(255,255,255,0.02)}
+.nav a{opacity:.95}
+.nav.is-open{display:flex}
+
 .header-actions{display:flex;gap:10px;align-items:center}
-.lang-select{background:#0f162e;color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 10px}
+.lang-select{background:#0f162e;color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px}
 
-/* CTA */
-.cta-custom{background:linear-gradient(135deg,#ff7a18,#ff9f1c);border:none;color:#fff;border-radius:999px;padding:10px 14px;font-weight:800;cursor:pointer}
+/* CTA header (optional small) */
+.cta-custom{display:none}
 
-/* HERO */
-.hero{padding:var(--header-height-desktop) 0 40px}
-.hero-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:18px;align-items:start}
-.hero-box{background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px}
-.hero h1{margin:0 0 12px;font-size:2rem;line-height:1.18}
-.hero-subtitle{opacity:.9;line-height:1.6;margin:0 0 14px}
-.hero-points{margin:0;padding-left:18px}
-.cta-primary{background:linear-gradient(135deg,#ff7a18,#ff9f1c);border:none;color:#fff;border-radius:999px;padding:12px 18px;font-weight:900;cursor:pointer;width:100%}
+/* ===== Hero ===== */
+.hero{padding:20px 0 26px}
+.hero-grid{display:flex;gap:18px;align-items:flex-start}
+.hero-main{flex:1}
+.hero-side{width:250px;flex-shrink:0}
+.hero-title{font-size:1.75rem;line-height:1.05;margin:0 0 10px}
+.hero-subtitle{opacity:.9;margin:0 0 12px}
+.cta-primary{background:var(--accent);color:#030303;border:none;border-radius:999px;padding:12px 16px;font-weight:800;cursor:pointer;display:inline-block}
 
-/* FORM */
-.form-section{padding:30px 0 56px}
-.section-title{margin:0 0 10px;font-size:1.4rem;text-align:center}
-.form-intro{text-align:center;opacity:.9;line-height:1.6;margin:0 0 18px}
-.emeta-form{display:block;max-width:860px;margin:0 auto}
-.field-group{border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px;margin:0 0 16px}
-.field-group legend{padding:0 10px;font-weight:900}
+/* ===== Form ===== */
+.form-section{padding:18px 0 56px}
+.section-title{font-size:1.2rem;text-align:center;margin:6px 0}
+.form-intro{text-align:center;color:var(--muted);margin-bottom:12px}
+.emeta-form{max-width:920px;margin:0 auto}
+.field-group{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin:12px 0}
+.field-group legend{font-weight:900;padding:0 8px;color:var(--accent)}
 .field{margin:12px 0}
-label{display:block;margin:0 0 6px;opacity:.95;font-size:.92rem}
-input,select,textarea{width:100%;background:#0f162e;color:#fff;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px;font-size:1rem}
-textarea{min-height:110px;resize:vertical}
-.hint{opacity:.78;font-size:.9rem;line-height:1.45;margin-top:6px}
-
-/* Grids */
-.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+label{display:block;margin-bottom:6px;color:var(--muted);font-size:.95rem}
+input,select,textarea{width:100%;background:#0f162e;color:#fff;border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:10px;font-size:1rem}
+textarea{min-height:110px}
+.hint{color:var(--muted);font-size:.9rem;margin-top:6px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .field-with-unit{display:grid;grid-template-columns:1fr 110px;gap:10px}
-.checkbox-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
-.check-item{display:grid;grid-template-columns:18px 1fr;gap:10px;align-items:start;padding:10px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:10px}
+.checkbox-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.check-item{display:flex;gap:10px;align-items:flex-start;padding:10px;background:rgba(255,255,255,.02);border-radius:12px}
 
-/* Actions */
-.form-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
-.btn-submit,.btn-secondary{border-radius:999px;padding:12px 18px;font-weight:800;cursor:pointer}
-.btn-submit{background:linear-gradient(135deg,#ff7a18,#ff9f1c);border:none;color:#fff}
-.btn-secondary{background:transparent;border:1px solid rgba(255,255,255,.08);color:#fff}
+/* make section titles very visible in orange */
+.field-group .group-title{display:block;font-weight:900;color:var(--accent);margin-bottom:8px}
+
+/* actions */
+.form-actions{display:flex;gap:10px;justify-content:center;margin-top:12px}
+.btn-submit{background:var(--accent);color:#000;border-radius:999px;padding:12px 18px;font-weight:900;border:none}
+.btn-secondary{background:transparent;border:1px solid rgba(255,255,255,.08);padding:12px 16px;border-radius:999px}
+
+/* help icons floating */
+.help-icons{position:fixed;right:18px;bottom:22px;display:flex;flex-direction:column;gap:12px;z-index:10000}
+.help-icon{width:44px;height:44px;border-radius:50%;background:rgba(15,20,40,0.95);display:flex;align-items:center;justify-content:center}
 
 /* Footer */
-.site-footer{border-top:1px solid rgba(255,255,255,.06);padding:20px 0;margin-top:30px}
-.footer-inner{display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center}
+.site-footer{border-top:1px solid var(--border);padding:22px 0;margin-top:20px}
+.footer-inner{display:flex;flex-direction:column;align-items:center;gap:8px}
 
-/* Help icons floating */
-.help-icons{position:fixed;right:18px;bottom:22px;display:flex;flex-direction:column;gap:12px;z-index:10000}
-.help-icon{width:46px;height:46px;border-radius:50%;background:rgba(15,20,40,0.96);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0}
-.help-privacy::before{content:"🔒";font-size:18px}
-.help-guide::before{content:"ⓘ";font-size:18px}
-.help-icon:hover{transform:translateY(-3px);background:rgba(255,138,0,0.12);border-color:rgba(255,138,0,0.35)}
-
-/* Responsive rules */
-@media (max-width: var(--breakpoint-md)){
-  .hero-grid{grid-template-columns:1fr;gap:12px}
-  .emeta-form{max-width:92%;}
-  .hero h1{font-size:1.8rem}
+/* ===== Responsive ===== */
+@media (max-width:900px){
+  .hero-grid{flex-direction:column}
+  .hero-side{width:100%}
 }
-@media (max-width: var(--breakpoint-sm)){
+@media (max-width:760px){
   .burger{display:block}
-  .nav{display:none}
-  .nav.is-open{display:flex;flex-direction:column;padding:12px;gap:12px;background:#0b1020;border-bottom:1px solid rgba(255,255,255,.04)}
-  .header-inner{padding:8px 12px;min-height:var(--header-height-mobile)}
-  body{padding-top:var(--header-height-mobile)}
+  .nav{display:none;flex-direction:column;background:#0b1020;border-top:1px solid var(--border);padding:10px 16px}
+  .nav.is-open{display:flex}
+  .header-inner{padding:8px 12px}
   .logo-tagline{display:none}
+  .hero-title{font-size:1.4rem}
+  .form-intro{padding:0 8px}
   .grid-2{grid-template-columns:1fr}
   .field-with-unit{grid-template-columns:1fr}
-  .cta-primary{width:100%}
+  .help-icon{width:40px;height:40px}
+  .site-header{height:56px}
+  body{padding-top:56px}
+  .cta-primary{width:100%;text-align:center}
 }
 
-/* Small polish */
-input[type="range"]{width:100%}
-fieldset{margin:0;padding:0}
+/* small screen polish */
+@media (max-width:420px){
+  .hero-title{font-size:1.2rem}
+  .logo-mark{font-size:1.1rem}
+}
 
-html[dir="rtl"] body{text-align:right}
-html[dir="rtl"] .header-inner{direction:rtl}
-html[dir="rtl"] .grid-2{direction:rtl}
+/* small styling for privacy page (keeps i18n) */
+.privacy-container{max-width:900px;margin:24px auto;padding:20px;background:var(--card);border-radius:12px;border:1px solid var(--border)}
+
+/* focus outlines for accessibility */
+button:focus,input:focus,select:focus,textarea:focus{outline:3px solid rgba(255,138,0,0.18);outline-offset:2px}
+```
+
+---
+
+## Contenu : `script.js`
+
+```javascript
+/* e-META — script.js (patch mobile-ready)
+   Paste-ready: remplace ton script.js actuel
+*/
+(function(){
+  'use strict';
+  const STORAGE_KEY = 'emeta_lang';
+  const DEFAULT_LANG = 'fr';
+  const RTL_LANGS = ['ar'];
+
+  function resolveLang(){
+    return new URLSearchParams(window.location.search).get('lang') || localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
+  }
+
+  function setLang(lang){
+    localStorage.setItem(STORAGE_KEY, lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = RTL_LANGS.includes(lang) ? 'rtl' : 'ltr';
+  }
+
+  function applyI18n(lang){
+    if(!window.I18N || !window.I18N[lang]) return;
+    const dict = window.I18N[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const k = el.getAttribute('data-i18n');
+      if(dict[k]) el.textContent = dict[k];
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+      const k = el.getAttribute('data-i18n-placeholder');
+      if(dict[k]) el.placeholder = dict[k];
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const lang = resolveLang();
+    setLang(lang);
+    applyI18n(lang);
+
+    // lang select
+    const langSelect = document.getElementById('langSelect');
+    if(langSelect){
+      langSelect.value = lang;
+      langSelect.addEventListener('change', ()=>{
+        setLang(langSelect.value);
+        applyI18n(langSelect.value);
+      });
+    }
+
+    // Burger menu
+    const burger = document.getElementById('burgerBtn') || document.querySelector('.burger');
+    const nav = document.getElementById('mainNav') || document.querySelector('.nav');
+    if(burger && nav){
+      burger.addEventListener('click', ()=>{
+        const open = nav.classList.toggle('is-open');
+        burger.setAttribute('aria-expanded', String(open));
+      });
+      nav.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=>{
+        nav.classList.remove('is-open');
+        if(burger) burger.setAttribute('aria-expanded','false');
+      }));
+    }
+
+    // Start button -> scroll to form
+    const startBtn = document.getElementById('startBtn');
+    if(startBtn){
+      startBtn.addEventListener('click', ()=>{
+        const f = document.getElementById('form');
+        if(f) f.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    }
+
+    // Make sure form groups have visible orange headings (assist for screen readers)
+    document.querySelectorAll('.field-group legend').forEach(leg=>{leg.classList.add('group-title')});
+
+    // small accessibility: add role nav if missed
+    if(nav && !nav.getAttribute('role')) nav.setAttribute('role','navigation');
+
+  });
+})();
+```
+
+---
+
+### Tests rapides après collage
+
+* Ouvrir site -> mobile view (Chrome DevTools) -> vérifier header compact + logo lisible.
+* Cliquer burger -> nav s'ouvre -> cliquer lien ferme nav.
+* Cliquer « Commencer une analyse stratégique » -> scroll vers `#form`.
+* Changer langue -> contenus traduits (FR / EN / ES / AR) et `dir` passe en `rtl` pour AR.
+
+---
+
+Si tu veux, j'ajoute aussi :
+
+* une version `style.min.css` et `script.min.js` pour remplacer en production
+* un petit script `clean_and_zip.sh` pour re-générer ton ZIP prêt à uploader
+
+*Ouvre ce document dans le canevas pour copier-coller les fichiers.*
