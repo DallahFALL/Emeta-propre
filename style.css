@@ -401,3 +401,183 @@ a{color:inherit;text-decoration:none}
     display: none;
   }
 }
+/* =====================================================
+   e-META — PATCH FINAL RESPONSIVE & STABILITÉ
+   (Ajout ciblé — aucune régression)
+===================================================== */
+
+/* =====================
+   1️⃣ HEADER FIXED + NO JUMP
+===================== */
+
+/* On neutralise les anciens sticky */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 9999;
+  will-change: transform;
+  transition: padding .25s ease, box-shadow .25s ease;
+}
+
+/* Hauteur de référence (desktop) */
+body {
+  padding-top: 72px;
+}
+
+/* État shrink (piloté par script.js) */
+.site-header.is-shrink {
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
+
+.site-header.is-shrink .header-inner {
+  min-height: 56px;
+  padding: 8px 16px;
+}
+
+/* =====================
+   2️⃣ HEADER MOBILE PROPRE
+===================== */
+@media (max-width: 768px) {
+
+  body {
+    padding-top: 56px;
+  }
+
+  .logo-tagline {
+    display: none;
+  }
+
+  .header-inner {
+    flex-wrap: nowrap;
+  }
+
+  .lang-select {
+    font-size: .85rem;
+    padding: 6px 8px;
+  }
+}
+
+/* =====================
+   3️⃣ NAV MOBILE (FIX BURGER)
+===================== */
+
+/* État fermé par défaut */
+.nav {
+  transition: max-height .25s ease, opacity .2s ease;
+}
+
+/* État ouvert (aligné avec script.js => .is-open) */
+@media (max-width: 760px) {
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    background: #0b1020;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+
+    padding: 0 16px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+  }
+
+  .nav.is-open {
+    padding: 16px;
+    max-height: 320px;
+    opacity: 1;
+  }
+}
+
+/* =====================
+   4️⃣ HERO RESPONSIVE PREMIUM
+===================== */
+
+.hero {
+  padding-top: 24px; /* évite l’effet écrasé sous header */
+}
+
+.hero h1 {
+  max-width: 22ch;
+}
+
+.hero-subtitle {
+  max-width: 56ch;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .hero h1 {
+    max-width: 100%;
+    font-size: 1.75rem;
+  }
+
+  .hero-subtitle {
+    max-width: 100%;
+  }
+}
+
+/* =====================
+   5️⃣ FORMULAIRE — CADRAGE CABINET
+===================== */
+
+.form-section .container {
+  max-width: 960px;  /* clé : évite le full-width brutal */
+}
+
+.emeta-form {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* Champs respirent mieux */
+.field-group {
+  scroll-margin-top: 96px; /* ancre propre avec header fixed */
+}
+
+/* =====================
+   6️⃣ GRILLES — SAFE MOBILE
+===================== */
+
+.grid-2 {
+  gap: 14px;
+}
+
+@media (max-width: 760px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .field-with-unit {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =====================
+   7️⃣ RANGE SLIDER STABLE
+===================== */
+input[type="range"] {
+  width: 100%;
+}
+
+/* =====================
+   8️⃣ HELP ICONS — SAFE ZONE
+===================== */
+
+.help-icons {
+  pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  .help-guide {
+    display: none;
+  }
+}
