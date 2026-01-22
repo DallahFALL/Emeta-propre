@@ -3,61 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="e-META — assistant IA multilingue d'aide à la décision. Synthèses, recommandations et restitution par email/WhatsApp/PDF." />
   <title data-i18n="meta.title">e-META — Assistant IA</title>
 
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
+  <meta name="description" content="e-META — assistant IA multilingue d'aide à la décision" />
 </head>
 
 <body id="top">
 
-<header class="site-header">
-  <div class="container header-inner">
+  <!-- ================= HEADER ================= -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
 
-    <a class="logo" href="#top" aria-label="e-META">
-      <span class="logo-mark">e</span>
-      <span class="logo-text">META</span>
-      <span class="logo-tagline" data-i18n="header.tagline"></span>
-    </a>
+      <a class="logo" href="#top">
+        <span class="logo-mark">e</span>
+        <span class="logo-text">META</span>
+        <span class="logo-tagline" data-i18n="header.tagline"></span>
+      </a>
 
-    <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+      <div class="header-actions">
+        <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">
+          <span></span><span></span><span></span>
+        </button>
 
-    <nav class="nav" id="mainNav" role="navigation" aria-label="Main Navigation">
-      <a href="#top" data-i18n="nav.home"></a>
-      <a href="#form" data-i18n="nav.form"></a>
-      <a href="privacy.html" data-i18n="nav.privacy"></a>
-    </nav>
+        <nav class="nav" id="mainNav" role="navigation">
+          <a href="#top" data-i18n="nav.home"></a>
+          <a href="#form" data-i18n="nav.form"></a>
+          <a href="privacy.html" data-i18n="nav.privacy"></a>
+        </nav>
 
-    <div class="header-actions">
-      <select class="lang-select" id="langSelect" aria-label="Choisir la langue">
-        <option value="fr">FR</option>
-        <option value="en">EN</option>
-        <option value="es">ES</option>
-        <option value="ar">AR</option>
-      </select>
+        <select class="lang-select" id="langSelect" aria-label="Langue">
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+          <option value="ar">AR</option>
+        </select>
+      </div>
+
     </div>
+  </header>
 
-  </div>
-</header>
+  <main>
 
-<main>
-
+    <!-- ================= HERO ================= -->
     <section class="hero" id="hero">
       <div class="container hero-grid">
+
+        <!-- PROMESSE -->
         <div class="hero-box hero-main">
           <h1 class="hero-title" data-i18n="hero.title"></h1>
+
           <p class="hero-subtitle" data-i18n="hero.subtitle"></p>
+
           <ul class="hero-points">
             <li data-i18n="hero.point1"></li>
             <li data-i18n="hero.point2"></li>
             <li data-i18n="hero.point3"></li>
           </ul>
-          <button class="cta-primary" type="button" id="startBtn" data-i18n="hero.cta"></button>
+
+          <button class="cta-primary" type="button" id="startBtn" data-i18n="hero.cta" aria-controls="form"></button>
         </div>
 
+        <!-- MODE CABINET (PAS UN CHATBOT) -->
         <div class="hero-box muted hero-cabinet">
           <h3 data-i18n="hero.badge.title"></h3>
           <p data-i18n="hero.badge.text"></p>
@@ -67,8 +75,10 @@
       </div>
     </section>
 
+    <!-- ================= FORM SECTION ================= -->
     <section class="form-section" id="form">
       <div class="container">
+
         <div class="form-header">
           <div class="form-badge">🧠 <span data-i18n="form.badge.cabinet"></span></div>
           <h2 class="section-title" data-i18n="form.title"></h2>
@@ -77,6 +87,7 @@
 
         <form id="emetaForm" class="emeta-form" novalidate>
 
+          <!-- GROUP 1 -->
           <fieldset class="field-group">
             <legend data-i18n="group.general"></legend>
 
@@ -117,26 +128,24 @@
             </div>
           </fieldset>
 
+          <!-- GROUP 2 -->
           <fieldset class="field-group">
             <legend data-i18n="group.analysis"></legend>
 
             <div class="field">
               <label for="problem" data-i18n="field.problem.label"></label>
               <textarea id="problem" name="problem" rows="4" data-i18n-placeholder="field.problem.ph"></textarea>
-              <div class="hint" data-i18n="field.problem.hint"></div>
             </div>
 
             <div class="grid-2">
               <div class="field">
                 <label for="objectives" data-i18n="field.objectives.label"></label>
                 <textarea id="objectives" name="objectives" rows="4" data-i18n-placeholder="field.objectives.ph"></textarea>
-                <div class="hint" data-i18n="field.objectives.hint"></div>
               </div>
 
               <div class="field">
                 <label for="constraints" data-i18n="field.constraints.label"></label>
                 <textarea id="constraints" name="constraints" rows="4" data-i18n-placeholder="field.constraints.ph"></textarea>
-                <div class="hint" data-i18n="field.constraints.hint"></div>
               </div>
             </div>
 
@@ -144,7 +153,6 @@
               <div class="field">
                 <label for="kpis" data-i18n="field.kpis.label"></label>
                 <textarea id="kpis" name="kpis" rows="4" data-i18n-placeholder="field.kpis.ph"></textarea>
-                <div class="hint" data-i18n="field.kpis.hint"></div>
               </div>
 
               <div class="field">
@@ -156,10 +164,10 @@
             <div class="field">
               <label for="context" data-i18n="field.context.label"></label>
               <textarea id="context" name="context" rows="5" data-i18n-placeholder="field.context.ph"></textarea>
-              <div class="hint" data-i18n="field.context.hint"></div>
             </div>
           </fieldset>
 
+          <!-- GROUP 3 -->
           <fieldset class="field-group">
             <legend data-i18n="group.budget"></legend>
 
@@ -201,31 +209,17 @@
             </div>
           </fieldset>
 
+          <!-- GROUP 4 -->
           <fieldset class="field-group">
             <legend data-i18n="group.output"></legend>
 
             <div class="field">
               <div class="field-label-strong" data-i18n="field.outputMode.label"></div>
               <div class="checkbox-grid">
-                <label class="check-item">
-                  <input type="checkbox" name="out_email" value="1" />
-                  <span data-i18n="field.outputMode.email"></span>
-                </label>
-
-                <label class="check-item">
-                  <input type="checkbox" name="out_whatsapp" value="1" />
-                  <span data-i18n="field.outputMode.whatsapp"></span>
-                </label>
-
-                <label class="check-item">
-                  <input type="checkbox" name="out_pdf" value="1" />
-                  <span data-i18n="field.outputMode.pdf"></span>
-                </label>
-
-                <label class="check-item">
-                  <input type="checkbox" name="out_display" value="1" />
-                  <span data-i18n="field.outputMode.display"></span>
-                </label>
+                <label class="check-item"><input type="checkbox" name="out_email" value="1" /><span data-i18n="field.outputMode.email"></span></label>
+                <label class="check-item"><input type="checkbox" name="out_whatsapp" value="1" /><span data-i18n="field.outputMode.whatsapp"></span></label>
+                <label class="check-item"><input type="checkbox" name="out_pdf" value="1" /><span data-i18n="field.outputMode.pdf"></span></label>
+                <label class="check-item"><input type="checkbox" name="out_display" value="1" /><span data-i18n="field.outputMode.display"></span></label>
               </div>
             </div>
 
@@ -248,6 +242,7 @@
             </div>
           </fieldset>
 
+          <!-- TRUST -->
           <fieldset class="field-group">
             <legend data-i18n="group.trust"></legend>
             <label class="check-item">
@@ -256,6 +251,7 @@
             </label>
           </fieldset>
 
+          <!-- ACTIONS -->
           <div class="form-actions">
             <button type="submit" class="btn-submit" data-i18n="form.submit"></button>
             <button type="reset" class="btn-secondary" data-i18n="form.reset"></button>
@@ -264,26 +260,29 @@
           <p class="form-trust-note" data-i18n="form.trust.note"></p>
 
         </form>
+
       </div>
     </section>
 
+    <!-- HELP ICONS — GLOBAL -->
     <div class="help-icons">
-      <a href="privacy.html" target="_blank" rel="noopener" class="help-icon help-privacy" aria-label="Politique de confidentialité"></a>
-      <a href="guide.html" target="_blank" rel="noopener" class="help-icon help-guide" aria-label="Guide officiel"></a>
+      <a href="privacy.html" target="_blank" rel="noopener" class="help-icon help-privacy" aria-label="Politique de confidentialité" data-i18n="help.privacy"></a>
+      <a href="guide.html" target="_blank" rel="noopener" class="help-icon help-guide" aria-label="Guide officiel" data-i18n="help.guide"></a>
     </div>
 
   </main>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div class="footer-brand" aria-label="e-META"><span class="logo-mark">e</span><span class="logo-text">META</span><span data-i18n="footer.text"></span></div>
+      <div class="footer-brand" aria-hidden="true"><span class="logo-mark">e</span><span class="logo-text">META</span></div>
       <a class="footer-link" href="privacy.html" data-i18n="footer.privacy"></a>
       <p class="footer-copy" data-i18n="footer.copy"></p>
     </div>
   </footer>
 
+  <!-- SCRIPTS -->
   <script src="i18n.js"></script>
   <script src="script.js"></script>
-
 </body>
 </html>
