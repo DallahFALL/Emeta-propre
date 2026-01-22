@@ -177,3 +177,157 @@ document.addEventListener("DOMContentLoaded", () => {
 
   onScroll(); // init
 })();
+/* ===============================
+   HERO — CADRAGE CABINET PRO
+================================ */
+
+.hero {
+  padding: 72px 0 56px;
+}
+
+.hero-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+
+/* Texte principal */
+.hero h1 {
+  max-width: 680px;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  line-height: 1.15;
+}
+
+/* Texte descriptif */
+.hero-subtitle,
+.hero-points {
+  max-width: 620px;
+}
+
+/* Colonne droite cabinet */
+.hero-cabinet {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 28px;
+}
+
+/* CTA */
+.cta-primary {
+  margin-top: 18px;
+}
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .hero h1,
+  .hero-subtitle,
+  .hero-points {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-points {
+    list-style-position: inside;
+    padding-left: 0;
+  }
+}
+/* ===============================
+   FORM — CADRAGE PRO CABINET
+================================ */
+
+.form-section {
+  padding: 64px 0 80px;
+}
+
+.emeta-form {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Fieldsets élégants */
+.field-group {
+  padding: 28px;
+  margin-bottom: 24px;
+}
+
+/* Titres */
+.field-group legend {
+  font-size: 1.05rem;
+}
+
+/* Champs */
+.field {
+  margin-bottom: 18px;
+}
+
+/* Textareas équilibrées */
+textarea {
+  min-height: 140px;
+}
+
+/* Grille PRO desktop */
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+@media (max-width: 900px) {
+  .emeta-form {
+    padding: 0 6px;
+  }
+
+  .field-group {
+    padding: 20px;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  textarea {
+    min-height: 120px;
+  }
+}
+@media (max-width: 900px) {
+  .emeta-form {
+    padding: 0 6px;
+  }
+
+  .field-group {
+    padding: 20px;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  textarea {
+    min-height: 120px;
+  }
+}
+/* ===============================
+   FORM — FIN PROPRE & RESPIRATION
+================================ */
+
+.form-actions {
+  margin-top: 32px;
+}
+
+.form-actions button {
+  min-width: 240px;
+}
+
+/* Micro-copy confiance */
+.form-trust-note {
+  margin-top: 18px;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
