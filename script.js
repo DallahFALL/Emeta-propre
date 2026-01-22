@@ -1,10 +1,8 @@
-/* =====================================================
-   e-META — SCRIPT.JS FINAL PRO
+/* e-META — script.js FINAL PRO
    - i18n stable
    - Header auto-shrink (no jump)
    - Burger menu responsive
-===================================================== */
-
+*/
 document.addEventListener("DOMContentLoaded", () => {
   "use strict";
 
@@ -12,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const DEFAULT_LANG = "fr";
   const RTL_LANGS = ["ar"];
 
-  /* LANG RESOLUTION */
   function resolveLang(){
     return (
       new URLSearchParams(window.location.search).get("lang") ||
@@ -25,6 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem(STORAGE_KEY, lang);
     document.documentElement.lang = lang;
     document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
+    // activate rtl stylesheet if needed
+    const rtl = document.getElementById('rtlStylesheet');
+    if(rtl) rtl.disabled = !RTL_LANGS.includes(lang);
   }
 
   function applyI18n(lang){
@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setLang(lang);
   applyI18n(lang);
 
-  /* LANG SELECT */
   const langSelect = document.getElementById("langSelect");
   if(langSelect){
     langSelect.value = lang;
@@ -56,14 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* BURGER MENU */
   const burger = document.getElementById("burgerBtn");
   const nav = document.getElementById("mainNav");
 
   if(burger && nav){
     burger.addEventListener("click",()=>{
       const open = nav.classList.toggle("is-open");
-      burger.setAttribute("aria-expanded",open);
+      burger.setAttribute("aria-expanded", open);
     });
 
     nav.querySelectorAll("a").forEach(a=>{
@@ -74,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* HEADER SHRINK */
   const header = document.querySelector(".site-header");
   let ticking=false;
 
