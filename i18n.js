@@ -1,3 +1,8 @@
+/* i18n.js — e-META
+   - Traductions + moteur i18n léger
+   - Remplace le fichier existant. Coller tel quel.
+*/
+
 window.I18N = {
   fr: {
     "meta.title": "e-META — Assistant IA",
@@ -40,7 +45,7 @@ window.I18N = {
     "field.title.hint": "Un titre court aide à synthétiser la recommandation.",
 
     "field.problem.label": "Quel est le problème / la décision à prendre ?",
-    "field.problem.ph": "Décrivez en 2-4 phrases le contexte",
+    "field.problem.ph": "Décrivez en 2-4 phrases",
 
     "field.objectives.label": "Objectifs prioritaires (3-5 max)",
     "field.objectives.ph": "Ex: augmenter la marge, réduire le churn...",
@@ -372,5 +377,282 @@ window.I18N = {
   }
 };
 
-// Export small helper for scripts
+// Helper accessors
 window.getI18n = function(lang){ return window.I18N[lang] || window.I18N['fr']; };
+window._emeta_i18n = window._emeta_i18n || {};
+
+/* ===== i18n engine ===== */
+(function () {
+  'use strict';
+
+  const STORAGE_KEY = 'emeta_lang';
+  const DEFAULT_LANG = 'fr';
+  const RTL_LANG = 'ar';
+
+  // detect language from URL param, then localStorage, then browser
+  function detectLang() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const urlLang = params.get('lang');
+      if (urlLang && window.I18N[urlLang]) return urlLang;
+    } catch (e) { /* ignore */ }
+
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored && window.I18N[stored]) return stored;
+
+    const nav = (navigator.language||navigator.userLanguage||'').slice(0,2);
+    if (nav && window.I18N[nav]) return nav;
+
+    return DEFAULT_LANG;
+  }
+
+  function setDocumentLang(lang){
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === RTL_LANG) ? 'rtl' : 'ltr';
+    // enable/disable rtl.css if present
+    const rtlLink = document.getElementById('rtlStylesheet');
+    if(rtlLink){
+      try{ rtlLink.disabled = (lang !== RTL_LANG); }catch(e){}
+    }
+  }
+
+  function applyTextNodes(dict) {
+    // data-i18n => textContent
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.getAttribute('data-i18n');
+      if(!key) return;
+      const v = dict[key];
+      if(typeof v === 'string') {
+        // prefer textContent for accessibility; preserve innerHTML only if explicitly requested (data-i18n-html)
+        if(el.hasAttribute('data-i18n-html')) el.innerHTML = v;
+        else el.textContent = v;
+      }
+    });
+
+    // data-i18n-placeholder => placeholder attribute
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+      const key = el.getAttribute('data-i18n-placeholder');
+      if(!key) return;
+      const v = dict[key];
+      if(typeof v === 'string') el.placeholder = v;
+    });
+  }
+
+  function populateSelectOptions(lang, dict) {
+    // domain
+    const domainSelect = document.getElementById('domain');
+    if(domainSelect && Array.isArray(dict['field.domain.options'])){
+      const opts = dict['field.domain.options'];
+      // keep first placeholder option, then clear rest
+      const placeholderText = dict['field.domain.placeholder'] || opts[0] || '';
+      // rebuild options
+      domainSelect.innerHTML = '';
+      const ph = document.createElement('option');
+      ph.value = '';
+      ph.textContent = placeholderText;
+      domainSelect.appendChild(ph);
+      opts.forEach(v=>{
+        const o = document.createElement('option');
+        o.value = v;
+        o.textContent = v;
+        domainSelect.appendChild(o);
+      });
+    }
+
+    // decisionType
+    const typeSelect = document.getElementById('decisionType');
+    if(typeSelect && Array.isArray(dict['field.decisionType.options'])){
+      const opts = dict['field.decisionType.options'];
+      const placeholderText = dict['field.decisionType.placeholder'] || '';
+      typeSelect.innerHTML = '';
+      const ph = document.createElement('option');
+      ph.value = '';
+      ph.textContent = placeholderText;
+      typeSelect.appendChild(ph);
+      opts.forEach((v,i)=>{
+        const o = document.createElement('option');
+        o.value = 't' + (i+1);
+        o.textContent = v;
+        typeSelect.appendChild(o);
+      });
+    }
+  }
+
+  function updatePDFLinks(lang) {
+    const pdfMap = {
+      fr: 'pdf/eMETA_Privacy_CGU_FR.pdf',
+      en: 'pdf/eMETA_Privacy_CGU_EN.pdf',
+      es: 'pdf/eMETA_Privacy_CGU_ES.pdf',
+      ar: 'pdf/eMETA_Privacy_CGU_AR.pdf'
+    };
+    const guideMap = {
+      fr: 'pdf/eMETA_Guide_Formulaire_FR.pdf',
+      en: 'pdf/eMETA_Guide_Formulaire_EN.pdf',
+      es: 'pdf/eMETA_Guide_Formulaire_ES.pdf',
+      ar: 'pdf/eMETA_Guide_Formulaire_AR.pdf'
+    };
+
+    // privacy pdf link id: privacyPdf or pdfPrivacyLink
+    const p = document.getElementById('privacyPdf') || document.getElementById('pdfPrivacyLink') || document.getElementById('pdfPrivacyLink');
+    if(p && pdfMap[lang]) p.href = pdfMap[lang];
+
+    const helpPrivacy = document.getElementById('helpPrivacy') || document.querySelector('.help-privacy');
+    if(helpPrivacy){
+      // open privacy page with lang param
+      const u = new URL((helpPrivacy.getAttribute('href')||'privacy.html'), location.href);
+      u.searchParams.set('lang', lang);
+      helpPrivacy.setAttribute('href', u.toString());
+      // if it's a link that should show text, fill it
+      if(helpPrivacy.textContent.trim()==='') helpPrivacy.textContent = (window.I18N[lang]['help.privacy'] || 'Privacy');
+    }
+
+    const helpGuide = document.getElementById('helpGuide') || document.querySelector('.help-guide');
+    if(helpGuide){
+      const u = new URL((helpGuide.getAttribute('href')||'guide.html'), location.href);
+      u.searchParams.set('lang', lang);
+      helpGuide.setAttribute('href', u.toString());
+      if(helpGuide.textContent.trim()==='') helpGuide.textContent = (window.I18N[lang]['help.guide'] || 'Guide');
+    }
+
+    // footer privacy links
+    document.querySelectorAll('a[href$="privacy.html"]').forEach(a=>{
+      try{
+        const u = new URL(a.href, location.href);
+        u.searchParams.set('lang', lang);
+        a.href = u.toString();
+      }catch(e){}
+    });
+
+    // footer guide links
+    document.querySelectorAll('a[href$="guide.html"]').forEach(a=>{
+      try{
+        const u = new URL(a.href, location.href);
+        u.searchParams.set('lang', lang);
+        a.href = u.toString();
+      }catch(e){}
+    });
+
+    // direct PDF guide link on page
+    const g = document.getElementById('guidePdf');
+    if(g && guideMap[lang]) g.href = guideMap[lang];
+  }
+
+  function applyMetaTitle(dict) {
+    if(dict['meta.title']) document.title = dict['meta.title'];
+    // update <title data-i18n="meta.title"> if present
+    document.querySelectorAll('title[data-i18n]').forEach(t=>{
+      const key = t.getAttribute('data-i18n');
+      if(dict[key]) t.textContent = dict[key];
+    });
+  }
+
+  function fillHelpIcons(dict) {
+    document.querySelectorAll('.help-icon').forEach(icon=>{
+      if(icon.classList.contains('help-privacy')) {
+        icon.setAttribute('title', dict['help.privacy'] || 'Privacy');
+        // keep icon small — text optional
+        if(icon.textContent.trim()==='') icon.textContent = (dict['help.privacy'] && dict['help.privacy'].split(' ')[0].slice(0,1)) || 'P';
+      }
+      if(icon.classList.contains('help-guide')) {
+        icon.setAttribute('title', dict['help.guide'] || 'Guide');
+        if(icon.textContent.trim()==='') icon.textContent = (dict['help.guide'] && dict['help.guide'].split(' ')[0].slice(0,1)) || 'G';
+      }
+    });
+  }
+
+  // main apply function
+  function applyTranslations(lang) {
+    const dict = window.I18N[lang] || window.I18N[DEFAULT_LANG];
+    setDocumentLang(lang);
+    applyMetaTitle(dict);
+    applyTextNodes(dict);
+    populateSelectOptions(lang, dict);
+    updatePDFLinks(lang);
+    fillHelpIcons(dict);
+
+    // set lang-select control if present
+    const sel = document.getElementById('langSelect');
+    if(sel) {
+      try{ sel.value = lang; }catch(e){}
+    }
+
+    // small fix: ensure placeholder attributes applied for inputs created after i18n
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+      const key = el.getAttribute('data-i18n-placeholder');
+      if(key && dict[key]) el.placeholder = dict[key];
+    });
+
+    // store lang
+    try{ localStorage.setItem(STORAGE_KEY, lang); }catch(e){}
+  }
+
+  // init on DOM ready
+  function init() {
+    const lang = detectLang();
+    applyTranslations(lang);
+
+    // expose setter
+    window._emeta_i18n.setLang = function(l){ if(window.I18N[l]) applyTranslations(l); };
+
+    // lang selector change listener
+    const langSel = document.getElementById('langSelect');
+    if(langSel){
+      langSel.addEventListener('change', function(){
+        const v = this.value;
+        if(window.I18N[v]) {
+          applyTranslations(v);
+          // update current url to include lang param without reloading
+          try{
+            const url = new URL(location.href);
+            url.searchParams.set('lang', v);
+            history.replaceState(null, '', url.toString());
+          }catch(e){}
+        }
+      });
+    }
+
+    // ensure all privacy/guide links open with lang param (dynamic)
+    document.querySelectorAll('a[href$="privacy.html"], a[href$="guide.html"]').forEach(a=>{
+      a.addEventListener('click', function(){
+        const cur = localStorage.getItem(STORAGE_KEY) || detectLang();
+        try{
+          const u = new URL(a.href, location.href);
+          u.searchParams.set('lang', cur);
+          a.href = u.toString();
+        }catch(e){}
+      });
+    });
+
+    // populate selects on focus in case of late injection
+    ['domain','decisionType'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el){
+        el.addEventListener('mousedown', function(){
+          const l = localStorage.getItem(STORAGE_KEY) || detectLang();
+          populateSelectOptions(l, window.I18N[l]||window.I18N[DEFAULT_LANG]);
+        }, {once:true});
+      }
+    });
+
+    // observe mutations in case new nodes are dynamically added later
+    if(window.MutationObserver){
+      const mo = new MutationObserver((mutations)=>{
+        const lang = localStorage.getItem(STORAGE_KEY) || detectLang();
+        mutations.forEach(m=>{
+          if(m.addedNodes && m.addedNodes.length){
+            // re-apply small set
+            applyTextNodes(window.I18N[lang]||window.I18N[DEFAULT_LANG]);
+            populateSelectOptions(lang, window.I18N[lang]||window.I18N[DEFAULT_LANG]);
+            fillHelpIcons(window.I18N[lang]||window.I18N[DEFAULT_LANG]);
+          }
+        });
+      });
+      mo.observe(document.body, {childList:true, subtree:true});
+      window._emeta_i18n._mo = mo;
+    }
+  }
+
+  // DOM ready
+  if(document.readyState !== 'loading') init(); else document.addEventListener('DOMContentLoaded', init);
+
+})();
