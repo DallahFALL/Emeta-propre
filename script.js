@@ -1,76 +1,101 @@
-/* e-META — script.js: menu, small interactions, i18n glue */
+________________________________________
+script.js
 (function(){
   'use strict';
 
-  // wait for i18n engine
-  function ready(fn){
-    if(document.readyState!='loading') fn(); else document.addEventListener('DOMContentLoaded', fn);
+  const LANG_KEY = 'emeta_lang';
+  const defaultLang = localStorage.getItem(LANG_KEY) || (navigator.language||'fr').substr(0,2) || 'fr';
+  let lang = defaultLang in window.I18N ? defaultLang : 'fr';
+
+  function setLang(l){
+    lang = l;
+    localStorage.setItem(LANG_KEY,l);
+    document.documentElement.lang = l;
+    document.documentElement.dir = (l==='ar') ? 'rtl' : 'ltr';
+    applyTranslations();
+    fillSelects();
+    updatePrivacyPdfLink();
   }
 
-  ready(function(){
-    // burger menu
+  function applyTranslations(){
+    const dict = window.getI18n(lang);
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.getAttribute('data-i18n');
+      if(dict[key]) el.textContent = dict[key];
+    });
+    // placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+      const key = el.getAttribute('data-i18n-placeholder');
+      if(dict[key]) el.placeholder = dict[key];
+    });
+  }
+
+  function fillSelects(){
+    const dict = window.getI18n(lang);
+    // domain options
+    const domain = document.getElementById('domain');
+    if(domain && dict['field.domain.options']){
+      domain.innerHTML = '';
+      const ph = document.createElement('option'); ph.value=''; ph.textContent = dict['field.domain.placeholder']; domain.appendChild(ph);
+      dict['field.domain.options'].forEach(opt=>{ const o = document.createElement('option'); o.value = opt; o.textContent = opt; domain.appendChild(o); });
+    }
+    // decisionType
+    const dt = document.getElementById('decisionType');
+    if(dt && dict['field.decisionType.options']){
+      dt.innerHTML = '';
+      const ph = document.createElement('option'); ph.value=''; ph.textContent = dict['field.decisionType.placeholder']; dt.appendChild(ph);
+      dict['field.decisionType.options'].forEach(opt=>{ const o = document.createElement('option'); o.value = opt; o.textContent = opt; dt.appendChild(o); });
+    }
+  }
+
+  function updatePrivacyPdfLink(){
+    const map = {
+      fr: 'pdf/eMETA_Privacy_CGU_FR.pdf',
+      en: 'pdf/eMETA_Privacy_CGU_EN.pdf',
+      es: 'pdf/eMETA_Privacy_CGU_ES.pdf',
+      ar: 'pdf/eMETA_Privacy_CGU_AR.pdf'
+    };
+    const linkEls = document.querySelectorAll('[data-privacy-pdf]');
+    linkEls.forEach(a=>{ a.href = map[lang] || map['fr']; });
+  }
+
+  // menu toggle
+  function setupMenu(){
     const burger = document.getElementById('burgerBtn');
     const nav = document.getElementById('mainNav');
-    if(burger && nav){
-      burger.addEventListener('click', ()=>{
-        const open = nav.classList.toggle('open');
-        burger.setAttribute('aria-expanded', open? 'true':'false');
-      });
-    }
-
-    // start button scroll to form
-    const startBtn = document.getElementById('startBtn');
-    if(startBtn){
-      startBtn.addEventListener('click', ()=>{
-        document.querySelector('#form')?.scrollIntoView({behavior:'smooth',block:'start'});
-      });
-    }
-
-    // ensure select options with data-i18n are populated (fallback)
-    document.querySelectorAll('select').forEach(sel=>{
-      Array.from(sel.options).forEach(opt=>{
-        const key = opt.getAttribute('data-i18n');
-        if(key && opt.textContent.trim()===''){
-          // try to apply from DICT current lang
-          const lang = localStorage.getItem('emeta_lang') || 'fr';
-          const dict = (window.E_META_I18N && window.E_META_I18N.DICT && window.E_META_I18N.DICT[lang]) || {};
-          if(dict[key]) opt.textContent = dict[key];
-        }
-      });
+    if(!burger || !nav) return;
+    burger.addEventListener('click', ()=>{
+      const open = nav.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open? 'true':'false');
+      nav.style.display = open? 'flex':'none';
     });
+  }
 
-    // privacy and guide buttons content fallback
-    document.querySelectorAll('.help-icon').forEach(icon=>{
-      if(icon && icon.textContent.trim()===''){
-        const label = icon.classList.contains('help-privacy') ? 'P' : 'G';
-        icon.textContent = label;
+  // language selector
+  function setupLangSelect(){
+    const sel = document.getElementById('langSelect');
+    if(!sel) return;
+    sel.value = lang;
+    sel.addEventListener('change', e=>{ setLang(e.target.value);
+      // open privacy in same language if user was on privacy
+      if(location.pathname.endsWith('privacy.html')){
+        location.search = '?lang='+e.target.value;
       }
     });
+  }
 
-    // form submit basic handler (prevent accidental submit - adapt to your backend)
-    const form = document.getElementById('emetaForm');
-    if(form){
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-        // do client-side validation quickly
-        if(!form.checkValidity()){ form.reportValidity(); return; }
-        // show a simple confirmation (replace with real submission)
-        alert((document.documentElement.lang==='fr')? 'Formulaire envoyé (simulation)' : 'Form submitted (simulation)');
-      });
-    }
+  // Start CTAs
+  function setupCTAs(){
+    const start = document.getElementById('startBtn');
+    if(start){ start.addEventListener('click', ()=>{ document.getElementById('form')?.scrollIntoView({behavior:'smooth'}); }); }
+  }
 
-    // Language link correctness: open privacy with lang param
-    document.querySelectorAll('a[href$="privacy.html"]').forEach(a=>{
-      a.addEventListener('click', ()=>{
-        const lang = localStorage.getItem('emeta_lang') || 'fr';
-        const url = new URL(a.href, location.href);
-        url.searchParams.set('lang', lang);
-        a.href = url.toString();
-      });
-    });
-
-    // small accessibility: ensure focus outlines for keyboard
-    document.body.addEventListener('keydown', function(e){ if(e.key==='Tab') document.documentElement.classList.add('user-is-tabbing'); });
-
+  // on load
+  document.addEventListener('DOMContentLoaded', ()=>{
+    setupMenu();
+    setupLangSelect();
+    setupCTAs();
+    setLang(lang);
   });
+
 })();
