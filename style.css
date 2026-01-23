@@ -96,3 +96,7 @@ a{color:inherit;text-decoration:none}
 
 /* prevent horizontal overflow */
 html,body,#top{overflow-x:hidden}
+:root { --accent: #ff8a00; /* etc */ }
+.field-group legend { color: var(--accent); font-weight:800; }
+.hero-main h1 { text-align:center; } /* centre le slogan */
+.hero-subtitle, .section-title { text-align:center; }
