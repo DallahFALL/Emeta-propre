@@ -1,107 +1,67 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title data-i18n="privacy.meta.title">Politique de confidentialité — e-META</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    /* petites règles locales sur la page privacy pour garantir lisibilité */
-    main{padding:80px 20px}
-    .privacy-container{max-width:960px;margin:0 auto;background:rgba(255,255,255,0.02);border-radius:14px;padding:28px;border:1px solid rgba(255,255,255,0.03)}
-    .privacy-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-    h1{margin:0;font-size:1.6rem}
-    p,li{color:rgba(255,255,255,0.85);line-height:1.6}
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title data-i18n="privacy.title">Politique de confidentialité — e META</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="index.html"><span class="logo-mark">e</span><span class="logo-text">META</span></a>
-      <div>
-        <select id="langSelectTop" class="lang-select" aria-label="Langue">
-          <option value="fr">FR</option><option value="en">EN</option><option value="es">ES</option><option value="ar">AR</option>
-        </select>
-      </div>
+      <a href="index.html" class="logo"><span class="logo-mark">e</span> <span class="logo-text">META</span></a>
+      <div style="margin-left:auto"><a href="index.html" data-i18n="privacy.back">← Retour à l’accueil</a></div>
     </div>
   </header>
 
-  <main>
-    <section class="privacy-container">
-      <div class="privacy-header">
-        <div style="font-size:1.8rem">🔐</div>
-        <h1 data-i18n="privacy.title">Politique de confidentialité</h1>
-      </div>
-
-      <p data-i18n="privacy.intro">e-META attache une importance particulière à la protection des données personnelles.</p>
-
-      <h2 data-i18n="privacy.section1.title">1. Introduction</h2>
-      <p data-i18n="privacy.section1.text">e-META est un outil d’aide à la décision stratégique basé sur l’IA.</p>
-
-      <h2 data-i18n="privacy.section2.title">2. Données collectées</h2>
-      <ul>
-        <li data-i18n="privacy.section2.item1">Informations saisies dans les formulaires.</li>
-        <li data-i18n="privacy.section2.item2">Données de contact si restitution demandée.</li>
-        <li data-i18n="privacy.section2.item3">Fichiers ou liens fournis.</li>
-      </ul>
-
-      <h2 data-i18n="privacy.section3.title">3. Utilisation</h2>
-      <ul>
-        <li data-i18n="privacy.section3.item1">Génération d’analyses personnalisées.</li>
-        <li data-i18n="privacy.section3.item2">Adaptation de la restitution.</li>
-        <li data-i18n="privacy.section3.item3">Amélioration continue.</li>
-      </ul>
-
-      <div style="margin-top:20px;padding:14px;border-radius:10px;background:rgba(0,0,0,0.2);display:flex;gap:12px;align-items:center;justify-content:space-between">
-        <div>
-          <strong data-i18n="privacy.pdf.title">Télécharger la version PDF</strong>
-          <div style="color:var(--muted);font-size:.95rem" data-i18n="privacy.pdf.text">Téléchargez la politique adaptée à votre langue.</div>
+  <main style="padding:96px 16px 48px">
+    <div class="container">
+      <div class="privacy-container">
+        <div class="privacy-header">
+          <div style="font-size:28px">🔐</div>
+          <h1 data-i18n="privacy.title">Politique de confidentialité</h1>
         </div>
-        <div>
-          <a id="privacyPdf" class="cta-primary" target="_blank" rel="noopener">Télécharger</a>
-        </div>
-      </div>
 
-      <p style="margin-top:18px;color:var(--muted)">© 2026 e-META — Tous droits réservés</p>
-    </section>
+        <p data-i18n="privacy.intro">e META attache une importance particulière à la protection des données.</p>
+
+        <h2 data-i18n="privacy.section1.title">1. Introduction</h2>
+        <p data-i18n="privacy.section1.text">e META est un outil d’aide à la décision stratégique basé sur l’IA.</p>
+
+        <h2 data-i18n="privacy.section2.title">2. Données collectées</h2>
+        <ul>
+          <li data-i18n="privacy.section2.item1">Informations saisies dans les formulaires.</li>
+          <li data-i18n="privacy.section2.item2">Données de contact si restitution demandée.</li>
+          <li data-i18n="privacy.section2.item3">Fichiers ou liens fournis.</li>
+        </ul>
+
+        <div class="pdf-box">
+          <p><strong data-i18n="privacy.pdf.title">Télécharger</strong></p>
+          <p data-i18n="privacy.pdf.text">Téléchargez la version PDF de cette politique dans votre langue.</p>
+          <a id="privacyPdf" target="_blank" rel="noopener">Télécharger la version PDF</a>
+        </div>
+
+        <footer style="margin-top:28px; text-align:center;color:var(--muted)">
+          <small>© 2026 e META — Tous droits réservés</small>
+        </footer>
+      </div>
+    </div>
   </main>
 
   <script src="i18n.js"></script>
   <script>
-    // apply lang from query or LS
+    // lang sync: read ?lang=xx and apply
     (function(){
-      const LS_KEY = "emeta_lang";
       const params = new URLSearchParams(location.search);
-      const urlLang = params.get("lang");
-      const lang = urlLang || localStorage.getItem(LS_KEY) || 'fr';
-      localStorage.setItem(LS_KEY, lang);
-      document.documentElement.lang = lang;
-      document.documentElement.dir = (lang==='ar') ? 'rtl' : 'ltr';
-      // apply i18n if available
-      if(window.I18N && window.I18N[lang]){
-        document.querySelectorAll("[data-i18n]").forEach(el=>{
-          const key = el.getAttribute("data-i18n");
-          if(window.I18N[lang][key]) el.innerText = window.I18N[lang][key];
-        });
-      }
-      // pdf mapping (ensure files exist on server)
-      const pdfMap = {
-        fr: "pdf/eMETA_Privacy_CGU_FR.pdf",
-        en: "pdf/eMETA_Privacy_CGU_EN.pdf",
-        es: "pdf/eMETA_Privacy_CGU_ES.pdf",
-        ar: "pdf/eMETA_Privacy_CGU_AR.pdf"
-      };
-      const link = document.getElementById("privacyPdf");
-      if(link && pdfMap[lang]) link.href = pdfMap[lang];
-      // language top select
-      const top = document.getElementById("langSelectTop");
-      if(top){ top.value = lang; top.addEventListener("change", (e)=> {
-        const next = e.target.value;
-        const url = new URL(location.href);
-        url.searchParams.set("lang", next);
-        // navigate preserving location (reload with new lang)
-        location.href = url.pathname + url.search;
-      });}
+      const urlLang = params.get('lang');
+      const allowed = ['fr','en','es','ar'];
+      const lang = (allowed.includes(urlLang) ? urlLang : (localStorage.getItem('emeta_lang') || 'fr'));
+      localStorage.setItem('emeta_lang', lang);
+      // small PDF map
+      const pdfMap = { fr:'pdf/eMETA_Privacy_CGU_FR.pdf', en:'pdf/eMETA_Privacy_CGU_EN.pdf', es:'pdf/eMETA_Privacy_CGU_ES.pdf', ar:'pdf/eMETA_Privacy_CGU_AR.pdf' };
+      const link = document.getElementById('privacyPdf');
+      if(link){ link.href = pdfMap[lang] || pdfMap.fr; }
+      // give i18n engine a moment
+      setTimeout(()=>{ if(window.E_META_I18N && window.E_META_I18N.apply) window.E_META_I18N.apply(lang); },80);
     })();
   </script>
 </body>
