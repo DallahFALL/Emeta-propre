@@ -1,20 +1,19 @@
-/* e-META — script.js: menu, i18n glue, form stub */
+// e-META — script.js (lightweight)
 (function(){
   'use strict';
-
-  function ready(fn){ if(document.readyState !== 'loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
+  // Wait DOM
+  function ready(fn){ if(document.readyState!='loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
 
   ready(function(){
-    // language detection & persistence
-    const urlParams = new URLSearchParams(location.search);
-    const urlLang = urlParams.get('lang');
-    const saved = localStorage.getItem('emeta_lang');
-    const lang = urlLang || saved || 'fr';
-    setLang(lang);
-
-    // burger menu
+    // --- Elements
     const burger = document.getElementById('burgerBtn');
     const nav = document.getElementById('mainNav');
+    const langBtn = document.getElementById('langBtn');
+    const langList = document.getElementById('langList');
+    const startBtn = document.getElementById('startBtn');
+    const privacyLinks = document.querySelectorAll('a[href$="privacy.html"]');
+
+    // --- Burger menu toggle
     if(burger && nav){
       burger.addEventListener('click', ()=>{
         const open = nav.classList.toggle('open');
@@ -22,101 +21,32 @@
       });
     }
 
-    // populate selects from I18N arrays (if present)
-    function populateSelect(id, optionsKey, placeholderKey){
-      const sel = document.getElementById(id);
-      if(!sel) return;
-      // clear
-      sel.innerHTML = '';
-      const dict = (window.I18N && window.I18N[lang]) || {};
-      const placeholder = dict[placeholderKey] || '';
-      const opts = dict[optionsKey] || [];
-      const empty = document.createElement('option');
-      empty.value = '';
-      empty.textContent = placeholder;
-      sel.appendChild(empty);
-      opts.forEach(o=>{
-        const el = document.createElement('option');
-        el.value = o;
-        el.textContent = o;
-        sel.appendChild(el);
+    // --- Language selector
+    function setLang(lang){
+      try{ localStorage.setItem('emeta_lang', lang); }catch(e){}
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang==='ar')? 'rtl':'ltr';
+      // update visible lang label
+      if(langBtn) langBtn.textContent = (lang||'fr').toUpperCase() + ' ▾';
+      // apply translations (lightweight)
+      if(window.getI18n){ applyTranslations(window.getI18n(lang)); }
+      // ensure privacy links get lang param
+      document.querySelectorAll('a[href$="privacy.html"]').forEach(a=>{
+        try{ const u=new URL(a.href, location.href); u.searchParams.set('lang', lang); a.href = u.toString(); }catch(e){}
       });
     }
 
-    populateSelect('domain','field.domain.options','field.domain.placeholder');
-    populateSelect('decisionType','field.decisionType.options','field.decisionType.placeholder');
-
-    // wire language select UI
-    const langSelect = document.getElementById('langSelect');
-    if(langSelect){
-      langSelect.value = lang;
-      langSelect.addEventListener('change', (e)=>{
-        const newLang = e.target.value;
-        setLang(newLang);
-        // reload page to reflect new locale file where needed; preserve hash
-        const url = new URL(location.href);
-        url.searchParams.set('lang', newLang);
-        // navigate without losing state
-        location.href = url.toString();
-      });
+    // Toggle list
+    if(langBtn && langList){
+      langBtn.addEventListener('click', ()=>{ const open = langList.style.display==='block'; langList.style.display = open? 'none':'block'; langBtn.setAttribute('aria-expanded', (!open).toString()); });
+      // pick language
+      langList.querySelectorAll('li').forEach(li=> li.addEventListener('click', ()=>{ const lang = li.dataset.lang; setLang(lang); langList.style.display='none'; }));
     }
 
-
-    // start button scroll
-    const startBtn = document.getElementById('startBtn');
-    if(startBtn){
-      startBtn.addEventListener('click', ()=>{
-        document.querySelector('#form')?.scrollIntoView({behavior:'smooth',block:'start'});
-      });
-    }
-
-    // help icons labels fallback
-    document.querySelectorAll('.help-icon').forEach(icon=>{
-      if(icon && icon.textContent.trim()===''){
-        icon.textContent = icon.classList.contains('help-privacy')? 'P': 'G';
-      }
-    });
-
-    // form submit stub
-    const form = document.getElementById('emetaForm');
-    if(form){
-      form.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        if(!form.checkValidity()){ form.reportValidity(); return; }
-        alert((lang==='fr')? 'Formulaire envoyé (simulation)' : (lang==='en')? 'Form submitted (simulation)' : 'Form submitted');
-      });
-    }
-
-    // set correct privacy & guide links based on lang
-    const helpPrivacy = document.getElementById('helpPrivacy');
-    const helpGuide = document.getElementById('helpGuide');
-    const privacyLink = document.getElementById('privacyLink');
-    const footerPrivacy = document.getElementById('footerPrivacy');
-    const map = { fr: 'privacy_fr.html', en:'privacy_en.html', es:'privacy_es.html', ar:'privacy_ar.html' };
-    const guideMap = { fr: 'guide_fr.html', en:'guide_en.html', es:'guide_es.html', ar:'guide_ar.html' };
-    function setHelpLinks(l){
-      const p = map[l]||map['fr'];
-      const g = guideMap[l]||guideMap['fr'];
-      if(helpPrivacy) helpPrivacy.href = p;
-      if(helpGuide) helpGuide.href = g;
-      if(privacyLink) privacyLink.href = p;
-      if(footerPrivacy) footerPrivacy.href = p;
-    }
-    setHelpLinks(lang);
-
-    // apply translations to DOM (text and placeholders)
-    applyTranslations(lang);
-
-    // utility functions
-    function setLang(l){
-      localStorage.setItem('emeta_lang', l);
-      document.documentElement.lang = l;
-      document.documentElement.dir = (l === 'ar') ? 'rtl' : 'ltr';
-    }
-
-    function applyTranslations(l){
-      const dict = (window.I18N && window.I18N[l]) || (window.I18N && window.I18N['fr']) || {};
-      // text
+    // apply translations helper
+    function applyTranslations(dict){
+      if(!dict) return;
+      // text content
       document.querySelectorAll('[data-i18n]').forEach(el=>{
         const key = el.getAttribute('data-i18n');
         if(dict[key]) el.textContent = dict[key];
@@ -124,25 +54,41 @@
       // placeholders
       document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
         const key = el.getAttribute('data-i18n-placeholder');
-        if(dict[key]) el.placeholder = dict[key];
+        if(dict[key]) el.setAttribute('placeholder', dict[key]);
       });
-
-      // if selects are empty (populated earlier), ensure first option uses translated placeholder
-      ['domain','decisionType'].forEach(id=>{
-        const s = document.getElementById(id);
-        if(s && s.options && s.options.length>0){
-          const key = (id==='domain')? 'field.domain.placeholder':'field.decisionType.placeholder';
-          if(dict[key]) s.options[0].textContent = dict[key];
-        }
-      });
-
-      // help icons content
-      document.querySelectorAll('.help-icon').forEach(icon=>{
-        const isPrivacy = icon.classList.contains('help-privacy');
-        const key = isPrivacy? 'help.privacy':'help.guide';
-        if(dict[key]) icon.title = dict[key];
-      });
+      // select options population for domain & decisionType
+      const domainSel = document.getElementById('domain');
+      const typeSel = document.getElementById('decisionType');
+      if(domainSel && dict['field.domain.options']){
+        domainSel.innerHTML = '';
+        const ph = document.createElement('option'); ph.value=''; ph.textContent = dict['field.domain.placeholder']||''; domainSel.appendChild(ph);
+        dict['field.domain.options'].forEach((o,i)=>{ const opt=document.createElement('option'); opt.value = 'd'+i; opt.textContent = o; domainSel.appendChild(opt); });
+      }
+      if(typeSel && dict['field.decisionType.options']){
+        typeSel.innerHTML='';
+        const ph = document.createElement('option'); ph.value=''; ph.textContent = dict['field.decisionType.placeholder']||''; typeSel.appendChild(ph);
+        dict['field.decisionType.options'].forEach((o,i)=>{ const opt=document.createElement('option'); opt.value='t'+i; opt.textContent=o; typeSel.appendChild(opt); });
+      }
     }
 
-  }); // ready
+    // --- Start button scroll
+    if(startBtn){ startBtn.addEventListener('click', ()=>{ document.querySelector('#form')?.scrollIntoView({behavior:'smooth',block:'start'}); }); }
+
+    // --- help icon fallback labels
+    document.querySelectorAll('.help-icon').forEach(icon=>{ if(!icon.textContent.trim()){ icon.textContent = icon.classList.contains('help-privacy')? 'P' : 'G'; } });
+
+    // --- simple form handler
+    const form = document.getElementById('emetaForm');
+    if(form){
+      form.addEventListener('submit', function(e){ e.preventDefault(); if(!form.checkValidity()){ form.reportValidity(); return; } alert((document.documentElement.lang==='fr')? 'Formulaire envoyé (simulation)' : 'Form submitted (simulation)'); });
+    }
+
+    // init language from localStorage or html
+    const saved = (localStorage.getItem('emeta_lang')) || (document.documentElement.lang || 'fr');
+    setLang(saved);
+
+    // close lang list when clicking outside
+    document.addEventListener('click', function(e){ if(!e.target.closest('.header-actions') && langList) langList.style.display = 'none'; });
+
+  });
 })();
