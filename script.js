@@ -1,64 +1,45 @@
-// script.js — harmonisé : lang resolve, populate selects, burger, i18n apply
-document.addEventListener('DOMContentLoaded', ()=>{
-  const STORAGE_KEY = 'emeta_lang';
-  const DEFAULT_LANG = 'fr';
-  const RTL_LANGS = ['ar'];
+// script.js — minimal, fast, in charge of language switching + burger + small behaviors
+document.addEventListener('DOMContentLoaded',()=>{
+  const STORAGE_KEY='emeta_lang';
+  const RTL=['ar'];
 
   function resolveLang(){
-    return new URLSearchParams(location.search).get('lang') || localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
+    return new URLSearchParams(location.search).get('lang') || localStorage.getItem(STORAGE_KEY) || 'fr';
   }
-
-  function setLang(lang){
-    localStorage.setItem(STORAGE_KEY, lang);
+  function setLang(lang,opts={push:false}){
+    localStorage.setItem(STORAGE_KEY,lang);
     document.documentElement.lang = lang;
-    document.documentElement.dir = RTL_LANGS.includes(lang)? 'rtl':'ltr';
+    document.documentElement.dir = RTL.includes(lang)?'rtl':'ltr';
+    // update URL param without reloading
+    const url = new URL(location.href);
+    url.searchParams.set('lang',lang);
+    if(opts.push) history.pushState({},'',url.toString()); else history.replaceState({},'',url.toString());
+    // apply
+    if(window.applyTranslations) window.applyTranslations(lang);
+    // update privacy link to include lang
+    document.querySelectorAll('a[href$="privacy.html"]').forEach(a=>{ try{ const u=new URL(a.href,location.href); u.searchParams.set('lang',lang); a.href=u.toString(); }catch(e){} });
+    // update pdf link map if exists
+    const pdf = document.getElementById('pdfPrivacyLink'); if(pdf){ const map={fr:'docs/privacy_fr.pdf',en:'docs/privacy_en.pdf',es:'docs/privacy_es.pdf',ar:'docs/privacy_ar.pdf'}; pdf.href = map[lang]||map.fr; }
   }
 
-  function applyI18n(lang){
-    if(!window.I18N || !window.I18N[lang]) return;
-    const dict = window.I18N[lang];
-    document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.getAttribute('data-i18n'); if(dict[k]) el.textContent = dict[k]; });
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{ const k=el.getAttribute('data-i18n-placeholder'); if(dict[k]) el.placeholder = dict[k]; });
-  }
-
-  function populateSelects(lang){
-    try{
-      const domainOpt = (window.I18N[lang]['field.domain.options'] || window.I18N['fr']['field.domain.options']);
-      const typeOpt = (window.I18N[lang]['field.decisionType.options'] || window.I18N['fr']['field.decisionType.options']);
-      const domain = document.getElementById('domain');
-      const type = document.getElementById('decisionType');
-      if(domain && domainOpt){ domain.innerHTML = '<option value="">'+(window.I18N[lang]['field.domain.placeholder']||'')+'</option>' + domainOpt.map(o=>`<option value="${o}">${o}</option>`).join(''); }
-      if(type && typeOpt){ type.innerHTML = '<option value="">'+(window.I18N[lang]['field.decisionType.placeholder']||'')+'</option>' + typeOpt.map(o=>`<option value="${o}">${o}</option>`).join(''); }
-    }catch(e){console.warn(e)}
-  }
-
-  // Resolve and apply
   const lang = resolveLang();
+  // set selects present on page
+  document.querySelectorAll('#langSelect, #langSelectPrivacy').forEach(sel=>{ if(sel){ sel.value = lang; sel.addEventListener('change',()=>{ setLang(sel.value,{push:true}); location.reload(); }); }});
+
   setLang(lang);
-  applyI18n(lang);
-  populateSelects(lang);
 
-  // Lang select control
-  const langSelect = document.getElementById('langSelect');
-  if(langSelect){ langSelect.value = lang; langSelect.addEventListener('change', ()=>{
-    const v = langSelect.value; setLang(v); applyI18n(v); populateSelects(v);
-    // update privacy link with lang param
-    document.querySelectorAll('a[href$="privacy.html"]').forEach(a=>{ try{ const url = new URL(a.href, location.href); url.searchParams.set('lang', v); a.href = url.toString(); }catch(e){} });
-  }); }
+  // burger menu
+  const burger = document.getElementById('burgerBtn'); const nav = document.getElementById('mainNav');
+  if(burger && nav){ burger.addEventListener('click',()=>{ const open = nav.classList.toggle('is-open'); burger.setAttribute('aria-expanded', open?'true':'false'); });
+    nav.querySelectorAll('a').forEach(a=> a.addEventListener('click',()=>{ nav.classList.remove('is-open'); burger.setAttribute('aria-expanded','false'); }));
+  }
 
-  // BURGER nav
-  const burger = document.getElementById('burgerBtn');
-  const nav = document.getElementById('mainNav');
-  if(burger && nav){ burger.addEventListener('click', ()=>{
-    const open = nav.classList.toggle('is-open');
-    burger.setAttribute('aria-expanded', open);
-  });
-  // close on nav link click
-  nav.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=>{ nav.classList.remove('is-open'); burger.setAttribute('aria-expanded','false'); })); }
+  // start button scroll
+  const startBtn = document.getElementById('startBtn'); if(startBtn){ startBtn.addEventListener('click',()=>{ document.getElementById('form').scrollIntoView({behavior:'smooth',block:'start'}); }); }
 
-  // shrink header on scroll (perf-safe)
-  const header = document.querySelector('.site-header'); let ticking=false;
-  function onScroll(){ header.classList.toggle('is-shrink', window.scrollY>40); ticking=false; }
-  window.addEventListener('scroll', ()=>{ if(!ticking){ ticking=true; requestAnimationFrame(onScroll); } }, {passive:true});
+  // ensure selects visible (remove size issues)
+  ['domain','decisionType'].forEach(id=>{ const el=document.getElementById(id); if(el){ el.style.display='block'; el.style.visibility='visible'; }});
 
+  // small accessibility enhancement: close nav on ESC
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ if(nav) nav.classList.remove('is-open'); if(burger) burger.setAttribute('aria-expanded','false'); }});
 });
