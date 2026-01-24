@@ -1,4 +1,4 @@
-/* e-META — SCRIPT.JS FINAL PRO */
+/* script.js - handles i18n sync, burger, populating selects */
 document.addEventListener("DOMContentLoaded", () => {
   "use strict";
   const STORAGE_KEY = "emeta_lang";
@@ -30,39 +30,73 @@ document.addEventListener("DOMContentLoaded", () => {
       const k = el.getAttribute("data-i18n-placeholder");
       if(dict[k]) el.placeholder = dict[k];
     });
+    const pdfLink = document.getElementById("pdfPrivacyLink");
+    if(pdfLink){
+      const map = { fr: "docs/privacy_fr.pdf", en: "docs/privacy_en.pdf", es: "docs/privacy_es.pdf", ar: "docs/privacy_ar.pdf" };
+      pdfLink.href = map[lang] || map.fr;
+      if(window.I18N[lang]["privacy.download"]) pdfLink.textContent = window.I18N[lang]["privacy.download"];
+    }
+  }
+
+  function populateSelects(lang){
+    try{
+      const domain = document.getElementById("domain");
+      const decType = document.getElementById("decisionType");
+      if(domain && decType && window.I18N && window.I18N[lang]){
+        const opts = window.I18N[lang]["field.domain.options"] || [];
+        domain.innerHTML = '<option value="">'+(window.I18N[lang]['field.domain.placeholder']||'')+'</option>';
+        opts.forEach(o=> domain.insertAdjacentHTML('beforeend', `<option>${o}</option>`));
+        const opts2 = window.I18N[lang]["field.decisionType.options"] || [];
+        decType.innerHTML = '<option value="">'+(window.I18N[lang]['field.decisionType.placeholder']||'')+'</option>';
+        opts2.forEach(o=> decType.insertAdjacentHTML('beforeend', `<option>${o}</option>`));
+      }
+    }catch(e){console.warn(e)}
   }
 
   const lang = resolveLang();
   setLang(lang);
-  applyI18n(lang);
 
-  const langSelect = document.getElementById("langSelect");
-  if(langSelect){
-    langSelect.value = lang;
-    langSelect.addEventListener("change",()=>{
-      setLang(langSelect.value);
-      applyI18n(langSelect.value);
-      // update privacy link with lang param
-      document.querySelectorAll('a[href$="privacy.html"]').forEach(a=>{
-        try{ const url = new URL(a.href, location.href); url.searchParams.set('lang', langSelect.value); a.href = url.toString(); }catch(e){}
+  const init = () => {
+    applyI18n(lang);
+    populateSelects(lang);
+    const langSelect = document.getElementById("langSelect");
+    if(langSelect){
+      langSelect.value = lang;
+      langSelect.addEventListener("change", ()=>{
+        const v = langSelect.value;
+        setLang(v);
+        applyI18n(v);
+        populateSelects(v);
+        document.querySelectorAll('a[href$="privacy.html"]').forEach(a=>{
+          try{ const url = new URL(a.href, location.href); url.searchParams.set('lang', v); a.href = url.toString(); }catch(e){}
+        });
       });
-    });
-  }
+    }
 
-  const burger = document.getElementById("burgerBtn");
-  const nav = document.getElementById("mainNav");
-  if(burger && nav){
-    burger.addEventListener("click",()=>{
-      const open = nav.classList.toggle("is-open");
-      burger.setAttribute("aria-expanded",open);
-    });
-    nav.querySelectorAll("a").forEach(a=>{
-      a.addEventListener("click",()=>{ nav.classList.remove("is-open"); burger.setAttribute("aria-expanded","false"); });
-    });
-  }
+    const burger = document.getElementById("burgerBtn");
+    const nav = document.getElementById("mainNav");
+    if(burger && nav){
+      burger.addEventListener("click", ()=>{
+        const open = nav.classList.toggle("is-open");
+        burger.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      nav.querySelectorAll("a").forEach(a=> a.addEventListener("click", ()=>{
+        if(nav.classList.contains("is-open")) nav.classList.remove("is-open");
+        if(burger) burger.setAttribute("aria-expanded","false");
+      }));
+    }
 
-  const header = document.querySelector(".site-header");
-  let ticking=false;
-  function onScroll(){ header.classList.toggle("is-shrink",window.scrollY>40); ticking=false; }
-  window.addEventListener("scroll",()=>{ if(!ticking){ ticking=true; requestAnimationFrame(onScroll); } },{passive:true});
+    const startBtn = document.getElementById("startBtn");
+    if(startBtn){
+      startBtn.addEventListener("click", ()=>{
+        const el = document.getElementById("form");
+        if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    }
+  };
+
+  if(window.I18N) init();
+  else{
+    window.addEventListener('load', ()=>{ setTimeout(()=>{ if(window.I18N) init(); }, 50); });
+  }
 });
