@@ -1,22 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="e-META — Assistant IA multilingue d'aide à la décision" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="meta.title">e-META — Assistant IA</title>
-
   <link rel="stylesheet" href="style.css" />
-  <!-- rtl.css only if needed; script will flip dir on AR -->
+  <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
 </head>
+
 <body id="top">
+
   <header class="site-header" role="banner">
     <div class="container header-inner">
       <a class="logo" href="#top" aria-label="e-META">
         <span class="logo-mark">e</span>
         <span class="logo-text">META</span>
-        <span class="logo-tagline" data-i18n="header.tagline">Assistant IA multilingue d'aide à la décision</span>
+        <span class="logo-tagline" data-i18n="header.tagline"></span>
       </a>
+
+      <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
 
       <nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
         <a class="nav-link" href="#top" data-i18n="nav.home">Accueil</a>
@@ -25,21 +29,18 @@
       </nav>
 
       <div class="header-actions">
-        <button id="langBtn" class="lang-btn" aria-haspopup="listbox" aria-expanded="false">FR ▾</button>
-        <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        <select class="lang-select" id="langSelect" aria-label="Choisir la langue">
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+          <option value="ar">AR</option>
+        </select>
       </div>
-
-      <!-- Lang list (visually hidden, toggled by JS) -->
-      <ul id="langList" class="lang-list" role="listbox" aria-label="Choisir la langue">
-        <li role="option" data-lang="fr">FR</li>
-        <li role="option" data-lang="en">EN</li>
-        <li role="option" data-lang="es">ES</li>
-        <li role="option" data-lang="ar">AR</li>
-      </ul>
     </div>
   </header>
 
   <main>
+
     <section class="hero" id="hero" aria-label="Présentation">
       <div class="container hero-grid">
         <div class="hero-box hero-main">
@@ -52,13 +53,11 @@
             <li data-i18n="hero.point3">Restitution personnalisée (Email / WhatsApp / PDF)</li>
           </ul>
 
-          <div class="hero-cta">
-            <button class="cta-primary" type="button" id="startBtn" data-i18n="hero.cta">Commencer une analyse stratégique</button>
-          </div>
+          <button class="cta-primary" type="button" id="startBtn" data-i18n="hero.cta">Commencer une analyse stratégique</button>
         </div>
 
-        <aside class="hero-box hero-cabinet" aria-labelledby="cabinetTitle">
-          <h3 id="cabinetTitle" data-i18n="hero.badge.title">Analyse stratégique — niveau cabinet</h3>
+        <aside class="hero-box hero-cabinet" aria-hidden="false">
+          <h3 data-i18n="hero.badge.title">Analyse stratégique — niveau cabinet</h3>
           <p data-i18n="hero.badge.text">Une approche structurée inspirée des cabinets de conseil.</p>
           <p class="hero-note" data-i18n="hero.note">e-META n'est pas un chatbot : c'est un moteur d'intelligence décisionnelle.</p>
         </aside>
@@ -70,37 +69,153 @@
         <div class="form-header">
           <div class="form-badge">🧠 <span data-i18n="form.badge.cabinet">Mode cabinet de conseil</span></div>
           <h2 class="section-title" data-i18n="form.title">Formulaire e-META — Analyse stratégique premium</h2>
-          <p class="form-intro" data-i18n="form.intro">Plus vos réponses sont précises...</p>
+          <p class="form-intro" data-i18n="form.intro">Plus vos réponses sont précises, plus la recommandation e META sera juste et exploitable.</p>
         </div>
-
+     
+        <!-- Le formulaire complet (copiez depuis le canevas si besoin) -->
+        
         <form id="emetaForm" class="emeta-form" novalidate>
-          <!-- field groups will be the same as previous versions; the script populates placeholders and translations -->
 
-          <!-- GROUP 1 -->
           <fieldset class="field-group">
-            <legend class="legend-accent" data-i18n="group.general">1) Qualifier la décision</legend>
+            <legend data-i18n="group.general">1) Qualifier la décision</legend>
 
             <div class="grid-2">
               <div class="field">
                 <label for="domain" data-i18n="field.domain.label">Domaine principal</label>
-                <select id="domain" name="domain" required aria-required="true"></select>
+                <select id="domain" name="domain" required></select>
               </div>
 
               <div class="field">
                 <label for="decisionType" data-i18n="field.decisionType.label">Nature de la décision</label>
-                <select id="decisionType" name="decisionType" required aria-required="true"></select>
+                <select id="decisionType" name="decisionType" required></select>
               </div>
             </div>
 
             <div class="field">
               <label for="decisionTitle" data-i18n="field.title.label">Titre court de la décision</label>
-              <input id="decisionTitle" name="decisionTitle" type="text" autocomplete="off" />
-              <div class="hint" data-i18n="field.title.hint">Un titre court aide à synthétiser la recommandation.</div>
+              <input id="decisionTitle" name="decisionTitle" type="text" autocomplete="off" data-i18n-placeholder="field.title.ph" placeholder="Titre court (3–8 mots)" />
+              <div class="hint" data-i18n="field.title.hint">Ex: Lancer offre X au Sénégal</div>
             </div>
           </fieldset>
 
-          <!-- GROUP 2 -->
-          <!-- (rest of fields identical to earlier structure — the script populates placeholders and translations) -->
+          <fieldset class="field-group">
+            <legend data-i18n="group.analysis">2) Structurer l'analyse</legend>
+
+            <div class="field">
+              <label for="problem" data-i18n="field.problem.label">Contexte & problème</label>
+              <textarea id="problem" name="problem" rows="4" data-i18n-placeholder="field.problem.ph" placeholder="Expliquez le contexte et le problème à résoudre"></textarea>
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="objectives" data-i18n="field.objectives.label">Objectifs prioritaires</label>
+                <textarea id="objectives" name="objectives" rows="4" data-i18n-placeholder="field.objectives.ph" placeholder="Ex: Augmenter marge, réduire churn"></textarea>
+              </div>
+
+              <div class="field">
+                <label for="constraints" data-i18n="field.constraints.label">Contraintes & risques</label>
+                <textarea id="constraints" name="constraints" rows="4" data-i18n-placeholder="field.constraints.ph" placeholder="Budget, délais, régulation..."></textarea>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="kpis" data-i18n="field.kpis.label">KPIs / indicateurs</label>
+                <textarea id="kpis" name="kpis" rows="4" data-i18n-placeholder="field.kpis.ph" placeholder="CA, ROI, NPS, délais..."></textarea>
+              </div>
+
+              <div class="field">
+                <label for="resources" data-i18n="field.resources.label">Ressources disponibles</label>
+                <textarea id="resources" name="resources" rows="4" data-i18n-placeholder="field.resources.ph" placeholder="Équipe, outils, budget..."></textarea>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="context" data-i18n="field.context.label">Contexte détaillé</label>
+              <textarea id="context" name="context" rows="5" data-i18n-placeholder="field.context.ph" placeholder="Historique, acteurs, environnement..."></textarea>
+            </div>
+          </fieldset>
+
+          <fieldset class="field-group">
+            <legend data-i18n="group.budget">3) Ambition, budget & urgence</legend>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="budgetMin" data-i18n="field.budgetMin.label">Budget minimum</label>
+                <div class="field-with-unit">
+                  <input id="budgetMin" name="budgetMin" type="number" min="0" step="1" inputmode="numeric" placeholder="0" />
+                  <select id="currency" name="currency" aria-label="Devise">
+                    <option value="XOF">XOF</option>
+                    <option value="EUR">EUR</option>
+                    <option value="USD">USD</option>
+                    <option value="GBP">GBP</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="budgetMax" data-i18n="field.budgetMax.label">Budget maximum</label>
+                <input id="budgetMax" name="budgetMax" type="number" min="0" step="1" inputmode="numeric" placeholder="00" />
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="deadline" data-i18n="field.deadline.label">Deadlines & contraintes temporelles</label>
+                <input id="deadline" name="deadline" type="text" autocomplete="off" placeholder="Ex: Q3 2026" />
+              </div>
+
+              <div class="field">
+                <label for="urgency" data-i18n="field.urgency.label">Urgence</label>
+                <input id="urgency" name="urgency" type="range" min="1" max="5" value="3" />
+                <div class="range-labels">
+                  <span data-i18n="field.urgency.low">Faible</span>
+                  <span data-i18n="field.urgency.medium">Moyen</span>
+                  <span data-i18n="field.urgency.high">Élevé</span>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="field-group">
+            <legend data-i18n="group.output">4) Restitution & contact</legend>
+
+            <div class="field">
+              <div class="field-label-strong" data-i18n="field.outputMode.label">Mode de restitution</div>
+              <div class="checkbox-grid">
+                <label class="check-item"><input type="checkbox" name="out_email" value="1" /><span data-i18n="field.outputMode.email">Email</span></label>
+                <label class="check-item"><input type="checkbox" name="out_whatsapp" value="1" /><span data-i18n="field.outputMode.whatsapp">WhatsApp</span></label>
+                <label class="check-item"><input type="checkbox" name="out_pdf" value="1" /><span data-i18n="field.outputMode.pdf">PDF</span></label>
+                <label class="check-item"><input type="checkbox" name="out_display" value="1" /><span data-i18n="field.outputMode.display">Affichage</span></label>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="email" data-i18n="field.email.label">Email (facultatif)</label>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="votre@exemple.com" />
+              </div>
+
+              <div class="field">
+                <label for="whatsapp" data-i18n="field.whatsapp.label">WhatsApp (facultatif)</label>
+                <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="+221..." />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="fileLink" data-i18n="field.fileLink.label">Document (lien ou Drive)</label>
+              <input id="fileLink" name="fileLink" type="url" inputmode="url" autocomplete="url" placeholder="Drive, Dropbox, Notion..." />
+              <div class="hint" data-i18n="field.fileLink.hint">Document existant.</div>
+            </div>
+          </fieldset>
+
+          <fieldset class="field-group">
+            <legend data-i18n="group.trust">Confiance et consentement</legend>
+            <label class="check-item">
+              <input type="checkbox" id="consent" name="consent" required />
+              <span data-i18n="field.consent.label">J'accepte que mes informations soient utilisées uniquement pour générer l'analyse.</span>
+            </label>
+          </fieldset>
 
           <div class="form-actions">
             <button type="submit" class="btn-submit" data-i18n="form.submit">Générer ma recommandation e META</button>
@@ -109,12 +224,13 @@
 
           <p class="form-trust-note" data-i18n="form.trust.note">Vos données restent confidentielles.</p>
         </form>
+
       </div>
     </section>
 
     <div class="help-icons">
-      <a id="helpPrivacy" class="help-icon help-privacy" href="privacy.html" aria-label="Politique de confidentialité" target="_blank" rel="noopener">P</a>
-      <a id="helpGuide" class="help-icon help-guide" href="guide.html" aria-label="Guide officiel" target="_blank" rel="noopener">G</a>
+      <a id="helpPrivacy" class="help-icon help-privacy" href="privacy.html" aria-label="Politique de confidentialité" target="_blank" rel="noopener"></a>
+      <a id="helpGuide" class="help-icon help-guide" href="guide.html" aria-label="Guide officiel" target="_blank" rel="noopener"></a>
     </div>
 
   </main>
