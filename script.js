@@ -1,92 +1,68 @@
-// script.js — interactions minimal & stable
-(function(){
-  'use strict';
-  function ready(fn){ if(document.readyState!=='loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
+/* e-META — SCRIPT.JS FINAL PRO */
+document.addEventListener("DOMContentLoaded", () => {
+  "use strict";
+  const STORAGE_KEY = "emeta_lang";
+  const DEFAULT_LANG = "fr";
+  const RTL_LANGS = ["ar"];
 
-  ready(function(){
-    // initialize translations
-    const lang = window.initI18n ? window.initI18n() : (localStorage.getItem('emeta_lang') || 'fr');
+  function resolveLang(){
+    return (
+      new URLSearchParams(window.location.search).get("lang") ||
+      localStorage.getItem(STORAGE_KEY) ||
+      DEFAULT_LANG
+    );
+  }
 
-    // burger
-    const burger = document.getElementById('burgerBtn');
-    const nav = document.getElementById('mainNav');
-    if (burger && nav){
-      burger.addEventListener('click', function(){
-        const isOpen = nav.classList.toggle('open');
-        burger.setAttribute('aria-expanded', isOpen ? 'true':'false');
-      });
-    }
+  function setLang(lang){
+    localStorage.setItem(STORAGE_KEY, lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
+  }
 
-    // start button scroll
-    document.getElementById('startBtn')?.addEventListener('click', function(){
-      document.querySelector('#form')?.scrollIntoView({behavior:'smooth', block:'start'});
+  function applyI18n(lang){
+    if(!window.I18N || !window.I18N[lang]) return;
+    const dict = window.I18N[lang];
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+      const k = el.getAttribute("data-i18n");
+      if(dict[k]) el.textContent = dict[k];
     });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+      const k = el.getAttribute("data-i18n-placeholder");
+      if(dict[k]) el.placeholder = dict[k];
+    });
+  }
 
-    // language small dropdown (pro button)
-    const langBtn = document.getElementById('langBtn');
-    const langList = document.getElementById('langList');
-    if (langBtn && langList){
-      langBtn.textContent = (lang || 'FR').toUpperCase() + ' ▾';
-      langBtn.addEventListener('click', ()=> {
-        const open = langList.classList.toggle('open');
-        langBtn.setAttribute('aria-expanded', open ? 'true':'false');
-      });
-      langList.querySelectorAll('li').forEach(li=>{
-        li.addEventListener('click', ()=>{
-          const newLang = li.getAttribute('data-lang');
-          if (!newLang) return;
-          localStorage.setItem('emeta_lang', newLang);
-          // reload current page with lang param to sync privacy link
-          const u = new URL(location.href);
-          u.searchParams.set('lang', newLang);
-          location.href = u.toString();
-        });
-      });
-    }
+  const lang = resolveLang();
+  setLang(lang);
+  applyI18n(lang);
 
-    // top privacy links must include lang param
-    document.querySelectorAll('a[href$="privacy.html"]').forEach(a=>{
-      a.addEventListener('click', function(e){
-        // ensure lang param appended before navigation
-        const currentLang = localStorage.getItem('emeta_lang') || 'fr';
-        const url = new URL(a.href, location.href);
-        url.searchParams.set('lang', currentLang);
-        a.href = url.toString();
+  const langSelect = document.getElementById("langSelect");
+  if(langSelect){
+    langSelect.value = lang;
+    langSelect.addEventListener("change",()=>{
+      setLang(langSelect.value);
+      applyI18n(langSelect.value);
+      // update privacy link with lang param
+      document.querySelectorAll('a[href$="privacy.html"]').forEach(a=>{
+        try{ const url = new URL(a.href, location.href); url.searchParams.set('lang', langSelect.value); a.href = url.toString(); }catch(e){}
       });
     });
+  }
 
-    // form submit sample (replace with your backend)
-    const form = document.getElementById('emetaForm');
-    if (form){
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-        if (!form.checkValidity()){
-          form.reportValidity();
-          return;
-        }
-        // simple UI feedback (replace with your logic)
-        const langNow = localStorage.getItem('emeta_lang') || 'fr';
-        alert( (langNow==='fr') ? 'Formulaire envoyé (simulation)' : (langNow==='en'?'Form submitted (simulation)':(langNow==='es'?'Formulario enviado (simulación)':'تم إرسال النموذج (محاكاة)')) );
-      });
-    }
-
-    // ensure help-icon text exists (fallback)
-    document.querySelectorAll('.help-icon').forEach(e=>{
-      if (!e.textContent.trim()) e.textContent = e.classList.contains('help-privacy') ? 'P':'G';
+  const burger = document.getElementById("burgerBtn");
+  const nav = document.getElementById("mainNav");
+  if(burger && nav){
+    burger.addEventListener("click",()=>{
+      const open = nav.classList.toggle("is-open");
+      burger.setAttribute("aria-expanded",open);
     });
-
-    // close lang list when clicking outside
-    document.addEventListener('click', function(ev){
-      const list = document.getElementById('langList');
-      const btn = document.getElementById('langBtn');
-      if (!list) return;
-      if (!ev.target.closest('.lang-wrapper')){
-        list.classList.remove('open');
-        btn?.setAttribute('aria-expanded','false');
-      }
+    nav.querySelectorAll("a").forEach(a=>{
+      a.addEventListener("click",()=>{ nav.classList.remove("is-open"); burger.setAttribute("aria-expanded","false"); });
     });
+  }
 
-    // basic keyboard accessibility for burger
-    burger?.addEventListener('keydown', (e)=> { if (e.key==='Enter' || e.key===' ') burger.click(); });
-  });
-})();
+  const header = document.querySelector(".site-header");
+  let ticking=false;
+  function onScroll(){ header.classList.toggle("is-shrink",window.scrollY>40); ticking=false; }
+  window.addEventListener("scroll",()=>{ if(!ticking){ ticking=true; requestAnimationFrame(onScroll); } },{passive:true});
+});
