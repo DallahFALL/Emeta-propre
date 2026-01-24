@@ -23,12 +23,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   function populateSelects(lang){
     try{
-      const domainOpt = (window.I18N[lang] && window.I18N[lang]['field.domain.options']) || window.I18N['fr']['field.domain.options'];
-      const typeOpt = (window.I18N[lang] && window.I18N[lang]['field.decisionType.options']) || window.I18N['fr']['field.decisionType.options'];
+      const domainOpt = (window.I18N[lang]['field.domain.options'] || window.I18N['fr']['field.domain.options']);
+      const typeOpt = (window.I18N[lang]['field.decisionType.options'] || window.I18N['fr']['field.decisionType.options']);
       const domain = document.getElementById('domain');
       const type = document.getElementById('decisionType');
-      if(domain && domainOpt){ domain.innerHTML = '<option value=\"\">'+(window.I18N[lang]['field.domain.placeholder']||'')+'</option>' + domainOpt.map(o=>`<option value=\"${o}\">${o}</option>`).join(''); }
-      if(type && typeOpt){ type.innerHTML = '<option value=\"\">'+(window.I18N[lang]['field.decisionType.placeholder']||'')+'</option>' + typeOpt.map(o=>`<option value=\"${o}\">${o}</option>`).join(''); }
+      if(domain && domainOpt){ domain.innerHTML = '<option value="">'+(window.I18N[lang]['field.domain.placeholder']||'')+'</option>' + domainOpt.map(o=>`<option value="${o}">${o}</option>`).join(''); }
+      if(type && typeOpt){ type.innerHTML = '<option value="">'+(window.I18N[lang]['field.decisionType.placeholder']||'')+'</option>' + typeOpt.map(o=>`<option value="${o}">${o}</option>`).join(''); }
     }catch(e){console.warn(e)}
   }
 
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   if(langSelect){ langSelect.value = lang; langSelect.addEventListener('change', ()=>{
     const v = langSelect.value; setLang(v); applyI18n(v); populateSelects(v);
     // update privacy link with lang param
-    document.querySelectorAll('a[href$=\"privacy.html\"]').forEach(a=>{ try{ const url = new URL(a.href, location.href); url.searchParams.set('lang', v); a.href = url.toString(); }catch(e){} });
+    document.querySelectorAll('a[href$="privacy.html"]').forEach(a=>{ try{ const url = new URL(a.href, location.href); url.searchParams.set('lang', v); a.href = url.toString(); }catch(e){} });
   }); }
 
   // BURGER nav
