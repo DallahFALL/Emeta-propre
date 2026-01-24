@@ -1,23 +1,26 @@
-/* style.css - updated responsive header, burger, language and form */
+/* style.css — organized, responsive */
+
 :root{
   --bg:#070b1a;
   --card:#071022;
   --accent:#ff8a00;
   --muted:rgba(255,255,255,0.78);
   --soft:rgba(255,255,255,0.06);
-  --radius:14px;
+  --radius:12px;
   --container:1100px;
   --gap:16px;
   --max-form-width:980px;
 }
+
+/* basic reset */
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:linear-gradient(180deg,#060918,#070b1a);color:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:linear-gradient(180deg,#060918,#070b1a);color:#fff;-webkit-font-smoothing:antialiased;overscroll-behavior-y:contain}
 a{color:inherit;text-decoration:none}
 .container{max-width:var(--container);margin:0 auto;padding:0 16px}
 
 /* HEADER */
 .site-header{position:fixed;left:0;right:0;top:0;z-index:1200;background:rgba(6,9,24,0.95);border-bottom:1px solid var(--soft);backdrop-filter:blur(6px)}
-.header-inner{max-width:var(--container);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px}
+.header-inner{max-width:var(--container);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px}
 .logo{display:flex;align-items:center;gap:8px;white-space:nowrap;flex:0 1 auto}
 .logo-mark{font-weight:900;font-size:1.05rem;color:var(--accent)}
 .logo-text{font-weight:800;font-size:1rem;letter-spacing:.6px}
@@ -36,7 +39,7 @@ a{color:inherit;text-decoration:none}
 .burger span{display:block;width:22px;height:2px;background:var(--muted);margin:4px 0;border-radius:2px}
 
 /* HERO */
-.hero{padding:100px 0 40px}
+.hero{padding:88px 0 32px}
 .hero-grid{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start}
 .hero-main h1{font-size:2.2rem;line-height:1.05;margin:0 0 14px;text-align:center}
 .hero-subtitle{color:var(--muted);margin:0 0 12px;text-align:center}
@@ -65,14 +68,10 @@ a{color:inherit;text-decoration:none}
 .checkbox-grid{display:flex;flex-wrap:wrap;gap:12px}
 .check-item{display:flex;gap:8px;align-items:center}
 .hint{font-size:.85rem;color:var(--muted);margin-top:6px}
-.form-actions{display:flex;gap:12px;align-items:center;margin-top:12px}
+.form-actions{display:flex;gap:12px;align-items:center;margin-top:12px;flex-wrap:wrap}
 .btn-submit{background:var(--accent);border:0;padding:12px 20px;border-radius:999px;color:#000;font-weight:800}
 .btn-secondary{background:transparent;border:1px solid var(--soft);padding:10px 16px;border-radius:999px;color:var(--muted)}
 .form-trust-note{color:var(--muted);margin-top:12px}
-
-/* PRIVACY */
-.privacy-container{max-width:960px;margin:28px auto;background:rgba(255,255,255,0.03);border-radius:18px;padding:28px;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-.privacy-header{display:flex;gap:12px;align-items:center;margin-bottom:12px}
 
 /* HELP ICONS */
 .help-icons{position:fixed;right:14px;bottom:18px;display:flex;flex-direction:column;gap:10px;z-index:1200}
@@ -92,10 +91,11 @@ a{color:inherit;text-decoration:none}
   .nav{display:none}
   .burger{display:block}
   .logo-slogan{display:none}
-  .privacy-container{margin:18px 12px}
+  .nav.is-open{position:fixed;left:0;right:0;top:60px;background:rgba(6,9,24,0.98);padding:12px 16px;display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--soft)}
+  body.nav-open{overflow:hidden}
 }
 @media(max-width:480px){
-  .header-inner{padding:10px}
+  .header-inner{padding:8px}
   .hero{padding:84px 0 26px}
   .hero-main h1{font-size:1.45rem}
   .emeta-form{padding:14px}
@@ -105,9 +105,6 @@ a{color:inherit;text-decoration:none}
   .logo-text{font-size:.95rem}
   .lang-select{min-width:56px;padding:6px 8px}
 }
-
-/* NAV open state for mobile */
-.nav.is-open{position:fixed;left:0;right:0;top:64px;background:rgba(6,9,24,0.98);padding:18px;display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--soft)}
 
 /* prevent horizontal overflow */
 html,body,#top{overflow-x:hidden}
