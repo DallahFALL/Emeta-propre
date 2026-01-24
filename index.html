@@ -1,22 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title data-i18n="meta.title">e-META — Assistant IA</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- rtl.css can be added if needed and toggled by script -->
   <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
 </head>
 <body id="top">
+
   <header class="site-header" role="banner">
     <div class="container header-inner">
       <a class="logo" href="#top" aria-label="e-META">
         <span class="logo-mark">e</span>
         <span class="logo-text">META</span>
-        <span class="logo-slogan" data-i18n="header.tagline">Assistant IA multilingue de prise de décision</span>
       </a>
 
-      <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">
+      <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
 
@@ -35,6 +36,9 @@
         </select>
       </div>
     </div>
+    <div class="header-slogan" aria-hidden="true">
+      <span class="logo-slogan" data-i18n="header.tagline">Assistant IA multilingue de prise de décision</span>
+    </div>
   </header>
 
   <main>
@@ -43,11 +47,13 @@
         <div class="hero-box hero-main">
           <h1 class="hero-title" data-i18n="hero.title">Donnez à vos décisions le niveau d’un cabinet de conseil premium</h1>
           <p class="hero-subtitle" data-i18n="hero.subtitle">Analyse stratégique structurée, recommandations actionnables et restitution professionnelle.</p>
+
           <ul class="hero-points">
             <li data-i18n="hero.point1">Analyse structurée (niveau consultant senior)</li>
             <li data-i18n="hero.point2">Recommandations actionnables + risques + KPI</li>
             <li data-i18n="hero.point3">Restitution personnalisée (Email / WhatsApp / PDF)</li>
           </ul>
+
           <button class="cta-primary" type="button" id="startBtn" data-i18n="hero.cta">Commencer une analyse stratégique</button>
         </div>
 
@@ -129,7 +135,7 @@
             </div>
           </fieldset>
 
-          <!-- BLOCK 3: Ambition, budget & urgence (ensured present) -->
+          <!-- === Bloc 3 (Ambition, budget & urgence) - ajouté et rempli === -->
           <fieldset class="field-group">
             <legend data-i18n="group.budget">3) Ambition, budget & urgence</legend>
 
@@ -170,6 +176,7 @@
               </div>
             </div>
           </fieldset>
+          <!-- === fin bloc 3 === -->
 
           <fieldset class="field-group">
             <legend data-i18n="group.output">4) Restitution & contact</legend>
@@ -225,13 +232,14 @@
       <a id="helpPrivacy" class="help-icon help-privacy" href="privacy.html" aria-label="Politique de confidentialité" target="_blank" rel="noopener"></a>
       <a id="helpGuide" class="help-icon help-guide" href="guide.html" aria-label="Guide officiel" target="_blank" rel="noopener"></a>
     </div>
+
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand"><span class="logo-mark">e</span><span class="logo-text">META</span></div>
       <a class="footer-link" id="footerPrivacy" href="privacy.html" data-i18n="footer.privacy">Politique de confidentialité</a>
-      <p class="footer-copy" data-i18n="footer.copy">© 2026 e META — Tous droits réservés</p>
+      <p class="footer-copy" data-i18n="footer.copy">© 2026 e-META — Tous droits réservés</p>
     </div>
   </footer>
 
