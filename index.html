@@ -4,16 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title data-i18n="meta.title">e-META — Assistant IA</title>
-  <meta name="description" content="e-META — Assistants IA multilingue de prise de décision" />
   <link rel="stylesheet" href="style.css" />
+  <!-- rtl.css if you need overrides for Arabic (optional) -->
+  <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
 </head>
 <body id="top">
-  <!-- Header (shared) -->
+
   <header class="site-header" role="banner">
     <div class="container header-inner">
       <a class="logo" href="#top" aria-label="e-META">
         <span class="logo-mark">e</span>
         <span class="logo-text">META</span>
+        <span class="logo-tagline" data-i18n="header.tagline">Assistant IA multilingue de prise de décision</span>
       </a>
 
       <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
@@ -21,9 +23,9 @@
       </button>
 
       <nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
-        <a class="nav-link" href="#top" data-i18n="nav.home">Accueil</a>
+        <a class="nav-link" href="index.html" data-i18n="nav.home">Accueil</a>
         <a class="nav-link" href="#form" data-i18n="nav.form">Formulaire</a>
-        <a class="nav-link" id="privacyLink" href="privacy.html" data-i18n="nav.privacy">Confidentialité</a>
+        <a id="privacyLink" class="nav-link" href="privacy.html" data-i18n="nav.privacy">Confidentialité</a>
       </nav>
 
       <div class="header-actions">
@@ -38,6 +40,7 @@
   </header>
 
   <main>
+
     <section class="hero" id="hero" aria-label="Présentation">
       <div class="container hero-grid">
         <div class="hero-box hero-main">
@@ -66,10 +69,12 @@
         <div class="form-header">
           <div class="form-badge">🧠 <span data-i18n="form.badge.cabinet">Mode cabinet de conseil</span></div>
           <h2 class="section-title" data-i18n="form.title">Formulaire e-META — Analyse stratégique premium</h2>
-          <p class="form-intro" data-i18n="form.intro">Plus vos réponses sont précises, plus la recommandation e-META sera juste et exploitable.</p>
+          <p class="form-intro" data-i18n="form.intro">Plus vos réponses sont précises, plus la recommandation e-META sera juste, nuancée et exploitable.</p>
         </div>
 
         <form id="emetaForm" class="emeta-form" novalidate>
+
+          <!-- 1) Qualifier -->
           <fieldset class="field-group">
             <legend data-i18n="group.general">1) Qualifier la décision</legend>
 
@@ -92,6 +97,7 @@
             </div>
           </fieldset>
 
+          <!-- 2) Analyse -->
           <fieldset class="field-group">
             <legend data-i18n="group.analysis">2) Structurer l'analyse</legend>
 
@@ -130,6 +136,7 @@
             </div>
           </fieldset>
 
+          <!-- 3) Budget -->
           <fieldset class="field-group">
             <legend data-i18n="group.budget">3) Ambition, budget & urgence</legend>
 
@@ -171,6 +178,7 @@
             </div>
           </fieldset>
 
+          <!-- 4) Restitution -->
           <fieldset class="field-group">
             <legend data-i18n="group.output">4) Restitution & contact</legend>
 
@@ -217,9 +225,12 @@
           </div>
 
           <p class="form-trust-note" data-i18n="form.trust.note">Vos données restent confidentielles.</p>
+
         </form>
+
       </div>
     </section>
+
   </main>
 
   <footer class="site-footer">
@@ -232,5 +243,6 @@
 
   <script src="i18n.js"></script>
   <script src="script.js"></script>
+
 </body>
 </html>
