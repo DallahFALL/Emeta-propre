@@ -87,136 +87,82 @@
     <legend data-i18n="group.general">1) Qualifier la décision</legend>
 
     <div class="grid-2">
-
       <div class="field">
-        <label for="decisionType" data-i18n="field.decisionType.label">
-          Nature de la décision
-        </label>
+        <label for="decisionType" data-i18n="field.decisionType.label"></label>
         <select id="decisionType" name="decisionType" required>
-          <option value="" data-i18n="field.decisionType.placeholder">
-            Sélectionnez un type de décision
-          </option>
-          <option value="t1" data-i18n="field.decisionType.t1">
-            Décision stratégique structurante
-          </option>
-          <option value="t2" data-i18n="field.decisionType.t2">
-            Optimisation / amélioration d’un existant
-          </option>
-          <option value="t3" data-i18n="field.decisionType.t3">
-            Arbitrage entre plusieurs options
-          </option>
-          <option value="t4" data-i18n="field.decisionType.t4">
-            Lancement de projet / produit
-          </option>
-          <option value="t5" data-i18n="field.decisionType.t5">
-            Réponse à une urgence
-          </option>
-          <option value="t6" data-i18n="field.decisionType.t6">
-            Préparation d’un dossier (financement, comité, partenaire)
-          </option>
+          <option value="" data-i18n="field.decisionType.placeholder"></option>
+          <option value="t1" data-i18n="field.decisionType.t1"></option>
+          <option value="t2" data-i18n="field.decisionType.t2"></option>
+          <option value="t3" data-i18n="field.decisionType.t3"></option>
+          <option value="t4" data-i18n="field.decisionType.t4"></option>
+          <option value="t5" data-i18n="field.decisionType.t5"></option>
+          <option value="t6" data-i18n="field.decisionType.t6"></option>
         </select>
       </div>
 
       <div class="field">
-        <label for="domain" data-i18n="field.domain.label">
-          Domaine principal
-        </label>
+        <label for="domain" data-i18n="field.domain.label"></label>
         <select id="domain" name="domain" required>
-          <option value="" data-i18n="field.domain.placeholder">
-            Sélectionnez un domaine
-          </option>
-          <option value="strategy" data-i18n="field.domain.strategy">
-            Stratégie & gouvernance
-          </option>
-          <option value="finance" data-i18n="field.domain.finance">
-            Finance & modèle économique
-          </option>
-          <option value="marketing" data-i18n="field.domain.marketing">
-            Marketing & croissance
-          </option>
-          <option value="operations" data-i18n="field.domain.operations">
-            Opérations & organisation
-          </option>
-          <option value="it" data-i18n="field.domain.it">
-            Innovation / IA / digital
-          </option>
-          <option value="legal" data-i18n="field.domain.legal">
-            Juridique & conformité
-          </option>
-          <option value="impact" data-i18n="field.domain.impact">
-            Impact social & environnemental
-          </option>
-          <option value="other" data-i18n="field.domain.other">
-            Autre
-          </option>
+          <option value="" data-i18n="field.domain.placeholder"></option>
+          <option value="strategy" data-i18n="field.domain.strategy"></option>
+          <option value="finance" data-i18n="field.domain.finance"></option>
+          <option value="marketing" data-i18n="field.domain.marketing"></option>
+          <option value="operations" data-i18n="field.domain.operations"></option>
+          <option value="it" data-i18n="field.domain.it"></option>
+          <option value="legal" data-i18n="field.domain.legal"></option>
+          <option value="impact" data-i18n="field.domain.impact"></option>
+          <option value="other" data-i18n="field.domain.other"></option>
         </select>
       </div>
-
     </div>
 
     <div class="field">
-      <label for="decisionTitle" data-i18n="field.title.label">
-        Titre court de la décision
-      </label>
+      <label for="decisionTitle" data-i18n="field.title.label"></label>
       <input
         id="decisionTitle"
         name="decisionTitle"
         type="text"
         autocomplete="off"
         data-i18n-placeholder="field.title.ph"
-        placeholder="Ex : Repenser notre stratégie de distribution au Sénégal"
       />
-      <div class="hint" data-i18n="field.title.hint">
-        Une phrase courte et précise : elle guidera toute la synthèse.
-      </div>
+      <div class="hint" data-i18n="field.title.hint"></div>
     </div>
   </fieldset>
 
   <!-- ================= 2) ANALYSE ================= -->
   <fieldset class="field-group">
-    <legend data-i18n="group.analysis">
-      2) Structurer l’analyse (niveau cabinet)
-    </legend>
+    <legend data-i18n="group.analysis"></legend>
 
     <div class="field">
-      <label for="problem" data-i18n="field.problem.label">
-        Problème central à résoudre
-      </label>
+      <label for="problem" data-i18n="field.problem.label"></label>
       <textarea
         id="problem"
         name="problem"
         rows="4"
         data-i18n-placeholder="field.problem.ph"
-        placeholder="Décrivez le vrai problème (pas seulement les symptômes)."
       ></textarea>
       <div class="hint" data-i18n="field.problem.hint"></div>
     </div>
 
     <div class="grid-2">
       <div class="field">
-        <label for="objectives" data-i18n="field.objectives.label">
-          Objectifs prioritaires (3–5 max)
-        </label>
+        <label for="objectives" data-i18n="field.objectives.label"></label>
         <textarea
           id="objectives"
           name="objectives"
           rows="4"
           data-i18n-placeholder="field.objectives.ph"
-          placeholder="Ex : augmenter la marge, réduire le churn…"
         ></textarea>
         <div class="hint" data-i18n="field.objectives.hint"></div>
       </div>
 
       <div class="field">
-        <label for="constraints" data-i18n="field.constraints.label">
-          Contraintes & risques majeurs
-        </label>
+        <label for="constraints" data-i18n="field.constraints.label"></label>
         <textarea
           id="constraints"
           name="constraints"
           rows="4"
           data-i18n-placeholder="field.constraints.ph"
-          placeholder="Budget, délais, réglementation, résistance interne…"
         ></textarea>
         <div class="hint" data-i18n="field.constraints.hint"></div>
       </div>
@@ -224,47 +170,165 @@
 
     <div class="grid-2">
       <div class="field">
-        <label for="kpis" data-i18n="field.kpis.label">
-          KPIs / indicateurs de succès
-        </label>
+        <label for="kpis" data-i18n="field.kpis.label"></label>
         <textarea
           id="kpis"
           name="kpis"
           rows="4"
           data-i18n-placeholder="field.kpis.ph"
-          placeholder="CA, ROI, NPS, délais, qualité…"
         ></textarea>
         <div class="hint" data-i18n="field.kpis.hint"></div>
       </div>
 
       <div class="field">
-        <label for="resources" data-i18n="field.resources.label">
-          Ressources déjà disponibles
-        </label>
+        <label for="resources" data-i18n="field.resources.label"></label>
         <textarea
           id="resources"
           name="resources"
           rows="4"
           data-i18n-placeholder="field.resources.ph"
-          placeholder="Équipe, outils, données, partenaires, budget…"
         ></textarea>
       </div>
     </div>
 
     <div class="field">
-      <label for="context" data-i18n="field.context.label">
-        Contexte détaillé (recommandé)
-      </label>
+      <label for="context" data-i18n="field.context.label"></label>
       <textarea
         id="context"
         name="context"
         rows="5"
         data-i18n-placeholder="field.context.ph"
-        placeholder="Historique, acteurs, décisions passées…"
       ></textarea>
       <div class="hint" data-i18n="field.context.hint"></div>
     </div>
   </fieldset>
+
+  <!-- ================= 3) BUDGET & DÉLAIS ================= -->
+  <fieldset class="field-group">
+    <legend data-i18n="group.budget"></legend>
+
+    <div class="grid-2">
+      <div class="field">
+        <label for="budgetMin" data-i18n="field.budgetMin.label"></label>
+        <input
+          id="budgetMin"
+          name="budgetMin"
+          type="number"
+          min="0"
+          step="1"
+          inputmode="numeric"
+          data-i18n-placeholder="field.budgetMin.ph"
+        />
+      </div>
+
+      <div class="field">
+        <label for="budgetMax" data-i18n="field.budgetMax.label"></label>
+        <input
+          id="budgetMax"
+          name="budgetMax"
+          type="number"
+          min="0"
+          step="1"
+          inputmode="numeric"
+          data-i18n-placeholder="field.budgetMax.ph"
+        />
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="field">
+        <label for="currency" data-i18n="field.currency.label"></label>
+        <select id="currency" name="currency">
+          <option value="XOF">XOF</option>
+          <option value="EUR">EUR</option>
+          <option value="USD">USD</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="deadline" data-i18n="field.deadline.label"></label>
+        <input
+          id="deadline"
+          name="deadline"
+          type="text"
+          data-i18n-placeholder="field.deadline.ph"
+        />
+      </div>
+    </div>
+  </fieldset>
+
+  <!-- ================= 4) RESTITUTION ================= -->
+  <fieldset class="field-group">
+    <legend data-i18n="group.output"></legend>
+
+    <div class="field">
+      <div class="field-label-strong" data-i18n="field.outputMode.label"></div>
+
+      <div class="checkbox-grid">
+        <label class="check-item">
+          <input type="checkbox" name="out_email" value="1" />
+          <span data-i18n="field.outputMode.email"></span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" name="out_whatsapp" value="1" />
+          <span data-i18n="field.outputMode.whatsapp"></span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" name="out_pdf" value="1" />
+          <span data-i18n="field.outputMode.pdf"></span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" name="out_display" value="1" />
+          <span data-i18n="field.outputMode.display"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="field">
+        <label for="email" data-i18n="field.email.label"></label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          data-i18n-placeholder="field.email.ph"
+        />
+      </div>
+
+      <div class="field">
+        <label for="whatsapp" data-i18n="field.whatsapp.label"></label>
+        <input
+          id="whatsapp"
+          name="whatsapp"
+          type="tel"
+          inputmode="tel"
+          data-i18n-placeholder="field.whatsapp.ph"
+        />
+      </div>
+    </div>
+  </fieldset>
+
+  <!-- ================= CONSENTEMENT ================= -->
+  <fieldset class="field-group">
+    <legend data-i18n="group.trust"></legend>
+
+    <label class="check-item">
+      <input type="checkbox" id="consent" name="consent" required />
+      <span data-i18n="field.consent.label"></span>
+    </label>
+  </fieldset>
+
+  <!-- ================= ACTIONS ================= -->
+  <div class="form-actions">
+    <button type="submit" class="btn-submit" data-i18n="form.submit"></button>
+    <button type="reset" class="btn-secondary" data-i18n="form.reset"></button>
+  </div>
+
+  <p class="form-trust-note" data-i18n="form.trust.note"></p>
 
 </form>
 
