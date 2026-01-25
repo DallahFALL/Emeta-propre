@@ -493,3 +493,17 @@ a{color:inherit;text-decoration:none}
 .checkbox-grid {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
+.form-help-link {
+  margin-top: 6px;
+  text-align: center;
+}
+
+.form-help-link a {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  text-decoration: underline;
+}
+
+.form-help-link a:hover {
+  opacity: 0.85;
+}
