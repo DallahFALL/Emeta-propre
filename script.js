@@ -75,3 +75,15 @@
     }
   });
 })();
+
+function formatCurrency(value, currency, lang) {
+  return new Intl.NumberFormat(lang, {
+    style: "currency",
+    currency
+  }).format(value);
+}
+function formatDate(date, lang) {
+  return new Intl.DateTimeFormat(lang, {
+    dateStyle: "long"
+  }).format(date);
+}
