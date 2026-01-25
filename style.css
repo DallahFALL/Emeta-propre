@@ -422,3 +422,19 @@ a{color:inherit;text-decoration:none}
     max-width: 30ch;
   }
 }
+/* =====================================================
+   FORM — RUBRIQUES NUMÉROTÉES (CLARTÉ CABINET)
+===================================================== */
+
+/* Légendes des fieldsets (1,2,3,4) */
+.field-group > legend {
+  color: #ff8a00;              /* orange e-META */
+  font-weight: 900;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+/* Petit rappel visuel : ligne discrète */
+.field-group {
+  border-left: 4px solid rgba(255,138,0,0.35);
+}
