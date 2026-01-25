@@ -113,3 +113,9 @@
   });
 
 })();
+function renderOptionsI18n(dict) {
+  document.querySelectorAll("option[data-i18n]").forEach(opt => {
+    const key = opt.dataset.i18n;
+    if (dict[key]) opt.textContent = dict[key];
+  });
+}
