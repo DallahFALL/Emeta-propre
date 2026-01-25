@@ -1,111 +1,119 @@
 /* =====================================================
-   e-META — i18n.js FINAL COHÉRENT
+   e-META — script.js FINAL COHÉRENT & STABLE
 ===================================================== */
 
-window.I18N = {
-  fr: {
-    /* META */
-    "meta.title": "e-META — Assistant IA de prise de décision",
+(function () {
+  "use strict";
 
-    /* HEADER */
-    "header.tagline": "Assistant IA multilingue de prise de décision",
+  const STORAGE_KEY = "emeta_lang";
+  const DEFAULT_LANG = "fr";
+  const RTL_LANGS = ["ar"];
 
-    /* NAV */
-    "nav.home": "Accueil",
-    "nav.form": "Formulaire",
-    "nav.privacy": "Confidentialité",
-
-    /* HERO */
-    "hero.title": "Donnez à vos décisions le niveau d’un cabinet de conseil premium",
-    "hero.subtitle": "Analyse structurée, recommandations actionnables et restitution professionnelle.",
-    "hero.cta": "Commencer une analyse stratégique",
-
-    /* FORM */
-    "form.title": "Formulaire e-META — Analyse stratégique premium",
-    "form.submit": "Générer ma recommandation e-META",
-    "form.reset": "Réinitialiser",
-
-    /* GROUPS */
-    "group.general": "1) Qualifier la décision",
-    "group.analysis": "2) Structurer l’analyse",
-    "group.budget": "3) Ambition, budget & urgence",
-    "group.output": "4) Restitution & contact",
-    "group.trust": "Confiance et consentement",
-
-    /* FIELDS */
-    "field.title.label": "Titre court de la décision",
-    "field.title.ph": "Ex : Lancer une nouvelle offre au Sénégal",
-
-    "field.problem.label": "Contexte & problème",
-    "field.problem.ph": "Expliquez le contexte et le problème à résoudre",
-
-    "field.consent.label": "J’accepte que mes informations soient utilisées uniquement pour générer l’analyse.",
-
-    /* SELECTS (SOURCE UNIQUE) */
-    "select.domain": [
-      { value: "", label: "Sélectionnez un domaine" },
-      { value: "strategy", label: "Stratégie & gouvernance" },
-      { value: "finance", label: "Finance & modèle économique" },
-      { value: "marketing", label: "Marketing & croissance" },
-      { value: "operations", label: "Opérations & organisation" },
-      { value: "it", label: "Innovation / IA / digital" },
-      { value: "legal", label: "Juridique & conformité" },
-      { value: "other", label: "Autre" }
-    ],
-
-    "select.decisionType": [
-      { value: "", label: "Sélectionnez le type de décision" },
-      { value: "strategic", label: "Décision stratégique" },
-      { value: "optimization", label: "Optimisation" },
-      { value: "arbitrage", label: "Arbitrage" },
-      { value: "launch", label: "Lancement de projet" },
-      { value: "urgent", label: "Urgence" }
-    ],
-
-    /* FOOTER */
-    "footer.copy": "© 2026 e-META — Tous droits réservés",
-
-    /* PRIVACY */
-    "privacy.title": "Politique de confidentialité",
-    "privacy.back": "← Retour à l’accueil",
-    "privacy.text": "Les données sont utilisées exclusivement pour produire l’analyse e-META."
-  },
-
-  en: {
-    "meta.title": "e-META — Decision-Making AI Assistant",
-    "header.tagline": "Multilingual decision-making AI assistant",
-    "nav.home": "Home",
-    "nav.form": "Form",
-    "nav.privacy": "Privacy",
-    "hero.title": "Make decisions at a premium consulting-firm level",
-    "hero.subtitle": "Structured analysis, actionable insights and professional delivery.",
-    "hero.cta": "Start a strategic analysis",
-    "form.title": "e-META Form — Premium strategic analysis",
-    "form.submit": "Generate my e-META recommendation",
-
-    "select.domain": [
-      { value: "", label: "Select a domain" },
-      { value: "strategy", label: "Strategy & governance" },
-      { value: "finance", label: "Finance & business model" },
-      { value: "marketing", label: "Marketing & growth" },
-      { value: "operations", label: "Operations & organization" },
-      { value: "it", label: "Innovation / AI / digital" },
-      { value: "legal", label: "Legal & compliance" },
-      { value: "other", label: "Other" }
-    ],
-
-    "select.decisionType": [
-      { value: "", label: "Select decision type" },
-      { value: "strategic", label: "Strategic decision" },
-      { value: "optimization", label: "Optimization" },
-      { value: "arbitrage", label: "Trade-off" },
-      { value: "launch", label: "Project launch" },
-      { value: "urgent", label: "Urgent decision" }
-    ],
-
-    "footer.copy": "© 2026 e-META — All rights reserved",
-    "privacy.title": "Privacy Policy",
-    "privacy.back": "← Back to home",
-    "privacy.text": "Data is used solely to generate the e-META analysis."
+  /* --------------------
+     LANG CORE
+  -------------------- */
+  function getLang() {
+    return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
   }
-};
+
+  function setLang(lang) {
+    localStorage.setItem(STORAGE_KEY, lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
+
+    const rtlCss = document.getElementById("rtlStylesheet");
+    if (rtlCss) rtlCss.disabled = !RTL_LANGS.includes(lang);
+  }
+
+  /* --------------------
+     SELECT BUILDER
+  -------------------- */
+  function populateSelect(id, items) {
+    const select = document.getElementById(id);
+    if (!select || !Array.isArray(items)) return;
+
+    const previous = select.value;
+    select.innerHTML = "";
+
+    items.forEach(item => {
+      const opt = document.createElement("option");
+      opt.value = item.value;
+      opt.textContent = item.label;
+      select.appendChild(opt);
+    });
+
+    if (previous) select.value = previous;
+  }
+
+  /* --------------------
+     RENDER UI (SINGLE SOURCE)
+  -------------------- */
+  function renderUI(lang) {
+    const dict = window.I18N && window.I18N[lang];
+    if (!dict) {
+      console.warn("i18n missing for lang:", lang);
+      return;
+    }
+
+    /* Text content */
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.dataset.i18n;
+      if (dict[key]) el.textContent = dict[key];
+    });
+
+    /* Placeholders */
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+      const key = el.dataset.i18nPlaceholder;
+      if (dict[key]) el.placeholder = dict[key];
+    });
+
+    /* Dynamic selects */
+    populateSelect("domain", dict["select.domain"]);
+    populateSelect("decisionType", dict["select.decisionType"]);
+
+    /* Meta title */
+    if (dict["meta.title"]) document.title = dict["meta.title"];
+  }
+
+  /* --------------------
+     INIT
+  -------------------- */
+  document.addEventListener("DOMContentLoaded", () => {
+    const lang = getLang();
+    setLang(lang);
+    renderUI(lang);
+
+    /* Language selector */
+    const langSelect = document.getElementById("langSelect");
+    if (langSelect) {
+      langSelect.value = lang;
+      langSelect.addEventListener("change", () => {
+        const newLang = langSelect.value;
+        setLang(newLang);
+        renderUI(newLang);
+
+        /* Mobile repaint safety */
+        requestAnimationFrame(() => renderUI(newLang));
+      });
+    }
+
+    /* Burger */
+    const burger = document.getElementById("burgerBtn");
+    const nav = document.getElementById("mainNav");
+    if (burger && nav) {
+      burger.addEventListener("click", () => {
+        nav.classList.toggle("is-open");
+      });
+    }
+
+    /* CTA scroll */
+    const start = document.getElementById("startBtn");
+    if (start) {
+      start.addEventListener("click", () => {
+        const form = document.getElementById("form");
+        if (form) form.scrollIntoView({ behavior: "smooth" });
+      });
+    }
+  });
+
+})();
