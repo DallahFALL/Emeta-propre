@@ -1,5 +1,5 @@
 /* =====================================================
-   e-META — script.js FINAL STABLE
+   e-META — script.js FINAL STABLE & DEBUGGABLE
 ===================================================== */
 
 (function () {
@@ -9,6 +9,9 @@
   const DEFAULT_LANG = "fr";
   const RTL_LANGS = ["ar"];
 
+  /* --------------------
+     LANG CORE
+  -------------------- */
   function getLang() {
     return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
   }
@@ -22,9 +25,12 @@
     if (rtl) rtl.disabled = !RTL_LANGS.includes(lang);
   }
 
+  /* --------------------
+     SELECT BUILDER
+  -------------------- */
   function populateSelect(id, items) {
     const select = document.getElementById(id);
-    if (!select || !items) return;
+    if (!select || !Array.isArray(items)) return;
 
     const current = select.value;
     select.innerHTML = "";
@@ -39,9 +45,15 @@
     if (current) select.value = current;
   }
 
+  /* --------------------
+     RENDER UI (SINGLE SOURCE OF TRUTH)
+  -------------------- */
   function renderUI(lang) {
-    const dict = window.I18N?.[lang];
-    if (!dict) return;
+    const dict = window.I18N && window.I18N[lang];
+    if (!dict) {
+      console.warn("i18n missing for:", lang);
+      return;
+    }
 
     document.querySelectorAll("[data-i18n]").forEach(el => {
       const key = el.dataset.i18n;
@@ -59,6 +71,12 @@
     if (dict["meta.title"]) document.title = dict["meta.title"];
   }
 
+  /* 🔎 EXPOSER POUR DEBUG (VOLONTAIRE) */
+  window.renderUI = renderUI;
+
+  /* --------------------
+     INIT
+  -------------------- */
   document.addEventListener("DOMContentLoaded", () => {
     const lang = getLang();
     setLang(lang);
@@ -71,7 +89,7 @@
         const l = select.value;
         setLang(l);
         renderUI(l);
-        requestAnimationFrame(() => renderUI(l)); // mobile repaint
+        requestAnimationFrame(() => renderUI(l)); // mobile safety
       });
     }
 
@@ -86,7 +104,8 @@
     const start = document.getElementById("startBtn");
     if (start) {
       start.addEventListener("click", () => {
-        document.getElementById("form").scrollIntoView({ behavior: "smooth" });
+        const form = document.getElementById("form");
+        if (form) form.scrollIntoView({ behavior: "smooth" });
       });
     }
   });
