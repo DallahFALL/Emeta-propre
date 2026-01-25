@@ -453,3 +453,7 @@ a{color:inherit;text-decoration:none}
     max-width: 100%;
   }
 }
+/* Espacement plus respirant entre sections */
+.field-group {
+  margin-bottom: 22px;
+}
