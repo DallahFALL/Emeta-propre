@@ -22,6 +22,7 @@ window.I18N = {
     "help.privacy": "🔒 Politique de confidentialité",
     "help.guide": "📘 Guide officiel pour bien remplir le formulaire",
     "privacy.download": "Télécharger la politique de confidentialité (PDF)",
+    "form.help.download": "Télécharger le guide pour bien remplir",
 
     "form.badge.cabinet": "Mode cabinet de conseil",
     "form.title": "Formulaire e-META vNext — Analyse stratégique premium",
