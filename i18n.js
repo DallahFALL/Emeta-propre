@@ -22,6 +22,7 @@ window.I18N = {
     "help.privacy": "🔒 Politique de confidentialité",
     "help.guide": "📘 Guide officiel pour bien remplir le formulaire",
 
+    "form.badge.cabinet": "Mode cabinet de conseil",
     "form.title": "Formulaire e-META vNext — Analyse stratégique premium",
     "form.intro": "Plus vos réponses sont précises, plus la recommandation e-META sera juste, nuancée et exploitable.",
     
@@ -125,6 +126,7 @@ window.I18N = {
     "help.privacy": "🔒 Privacy policy",
     "help.guide": "📘 Official guide to complete the form",
 
+    "form.badge.cabinet": "Consulting firm mode",
     "form.title": "e-META vNext Form — Premium strategic analysis",
     "form.intro": "The more precise your answers, the more accurate and useful your e-META recommendation will be.",
       
@@ -228,6 +230,7 @@ window.I18N = {
     "help.privacy": "🔒 Política de privacidad",
     "help.guide": "📘 Guía oficial para completar el formulario",
 
+    "form.badge.cabinet": "Modo consultoría estratégica",
     "form.title": "Formulario e-META vNext — Análisis estratégico premium",
     "form.intro": "Cuanto más precisas sean tus respuestas, más útil y exacta será la recomendación de e-META.",
     
@@ -330,7 +333,8 @@ window.I18N = {
     "help.title": "هل تحتاج إلى مساعدة قبل البدء؟",
     "help.privacy": "🔒 سياسة الخصوصية",
     "help.guide": "📘 الدليل الرسمي لملء النموذج",
- 
+
+    "form.badge.cabinet": "وضع مكتب استشارات",
     "form.title": "نموذج e-META vNext — تحليل استراتيجي متميز",
     "form.intro": "كلما كانت إجاباتك أدق، كانت توصية e-META أكثر دقة وفائدة.",
     
