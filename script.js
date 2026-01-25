@@ -1,5 +1,5 @@
 /* =====================================================
-   e-META — script.js FINAL DYNAMIQUE
+   e-META — script.js FINAL STABLE
 ===================================================== */
 
 (function () {
@@ -18,28 +18,28 @@
     document.documentElement.lang = lang;
     document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
 
-    const rtlCss = document.getElementById("rtlStylesheet");
-    if (rtlCss) rtlCss.disabled = !RTL_LANGS.includes(lang);
+    const rtl = document.getElementById("rtlStylesheet");
+    if (rtl) rtl.disabled = !RTL_LANGS.includes(lang);
   }
 
   function populateSelect(id, items) {
     const select = document.getElementById(id);
-    if (!select || !Array.isArray(items)) return;
+    if (!select || !items) return;
 
-    const currentValue = select.value;
+    const current = select.value;
     select.innerHTML = "";
 
-    items.forEach(opt => {
-      const option = document.createElement("option");
-      option.value = opt.value;
-      option.textContent = opt.label;
-      select.appendChild(option);
+    items.forEach(o => {
+      const opt = document.createElement("option");
+      opt.value = o.value;
+      opt.textContent = o.label;
+      select.appendChild(opt);
     });
 
-    if (currentValue) select.value = currentValue;
+    if (current) select.value = current;
   }
 
-  function applyI18n(lang) {
+  function renderUI(lang) {
     const dict = window.I18N?.[lang];
     if (!dict) return;
 
@@ -53,12 +53,8 @@
       if (dict[key]) el.placeholder = dict[key];
     });
 
-    if (dict["select.domain"]) {
-      populateSelect("domain", dict["select.domain"]);
-    }
-    if (dict["select.decisionType"]) {
-      populateSelect("decisionType", dict["select.decisionType"]);
-    }
+    populateSelect("domain", dict["select.domain"]);
+    populateSelect("decisionType", dict["select.decisionType"]);
 
     if (dict["meta.title"]) document.title = dict["meta.title"];
   }
@@ -66,15 +62,16 @@
   document.addEventListener("DOMContentLoaded", () => {
     const lang = getLang();
     setLang(lang);
-    applyI18n(lang);
+    renderUI(lang);
 
-    const langSelect = document.getElementById("langSelect");
-    if (langSelect) {
-      langSelect.value = lang;
-      langSelect.addEventListener("change", () => {
-        setLang(langSelect.value);
-        applyI18n(langSelect.value);
-        requestAnimationFrame(() => applyI18n(langSelect.value)); // mobile repaint
+    const select = document.getElementById("langSelect");
+    if (select) {
+      select.value = lang;
+      select.addEventListener("change", () => {
+        const l = select.value;
+        setLang(l);
+        renderUI(l);
+        requestAnimationFrame(() => renderUI(l)); // mobile repaint
       });
     }
 
