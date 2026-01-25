@@ -25,6 +25,7 @@ window.I18N = {
     "form.badge.cabinet": "Mode cabinet de conseil",
     "form.title": "Formulaire e-META vNext — Analyse stratégique premium",
     "form.intro": "Plus vos réponses sont précises, plus la recommandation e-META sera juste, nuancée et exploitable.",
+    "form.help.download": "Télécharger le guide pour bien remplir",
     
     "group.general": "1) Qualifier la décision",
     "field.domain.label": "Domaine principal",
