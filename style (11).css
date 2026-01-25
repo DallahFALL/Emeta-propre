@@ -1,0 +1,403 @@
+/* e-META vNext — style.css (minimal, pro, responsive) */
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:#070b1a;color:#fff;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:0 16px}
+
+/* Header sticky */
+.site-header{position:sticky;top:0;z-index:999;background:linear-gradient(180deg,#0b1020,#070b1a);border-bottom:1px solid rgba(255,255,255,.08)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px;padding:12px 0}
+.logo{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.logo-mark{font-weight:900;font-size:1.35rem;color:#ff8a00}
+.logo-text{font-weight:900;font-size:1.1rem}
+.logo-tagline{opacity:.75;font-size:.78rem;margin-left:6px}
+
+/* Burger */
+.burger{display:none;background:none;border:none;padding:10px;border-radius:10px;cursor:pointer}
+.burger span{display:block;width:22px;height:2px;background:#fff;margin:4px 0}
+
+/* Nav + actions */
+.nav{display:flex;gap:18px;align-items:center}
+.nav a{opacity:.9}
+.nav a:hover{opacity:1}
+.header-actions{display:flex;gap:10px;align-items:center}
+.lang-select{background:#0f162e;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:8px 10px}
+.cta-custom{background:linear-gradient(135deg,#ff7a18,#ff9f1c);border:none;color:#fff;border-radius:999px;padding:10px 14px;font-weight:800;cursor:pointer}
+
+/* Hero */
+.hero{padding:48px 0}
+.hero-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:18px}
+.hero-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:22px}
+.hero-box.muted{opacity:.95}
+.hero h1{margin:0 0 12px;font-size:2rem;line-height:1.2}
+.hero-subtitle{opacity:.9;line-height:1.6;margin:0 0 14px}
+.hero-points{margin:0;padding-left:18px}
+.hero-points li{margin:7px 0;opacity:.9}
+.hero-badge{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.badge-title{font-weight:900}
+.badge-text{opacity:.85}
+.hero-note{opacity:.85;line-height:1.6;margin:0}
+.cta-primary{background:linear-gradient(135deg,#ff7a18,#ff9f1c);border:none;color:#fff;border-radius:999px;padding:14px 18px;font-weight:900;cursor:pointer}
+
+/* Form */
+.form-section{padding:34px 0 56px}
+.section-title{margin:0 0 10px;font-size:1.4rem;text-align:center}
+.form-intro{text-align:center;opacity:.85;line-height:1.6;margin:0 0 18px}
+.emeta-form{display:block}
+.field-group{border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px;margin:0 0 16px}
+.field-group legend{padding:0 10px;font-weight:900}
+.field{margin:12px 0}
+label{display:block;margin:0 0 6px;opacity:.9;font-size:.92rem}
+input,select,textarea{width:100%;background:#0f162e;color:#fff;border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:12px 12px;font-size:1rem}
+textarea{min-height:110px;resize:vertical}
+.hint{opacity:.75;font-size:.9rem;line-height:1.45;margin-top:6px}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.field-with-unit{display:grid;grid-template-columns:1fr 110px;gap:10px}
+.field-label-strong{font-weight:900;margin:0 0 10px}
+
+/* Checkbox grid */
+.checkbox-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.check-item{display:grid;grid-template-columns:18px 1fr;gap:10px;align-items:start;padding:12px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px}
+.check-item input{margin-top:3px}
+.range-labels{display:flex;justify-content:space-between;opacity:.8;font-size:.85rem;margin-top:6px}
+
+/* Actions */
+.form-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.btn-submit,.btn-secondary{border-radius:999px;padding:12px 18px;font-weight:900;cursor:pointer}
+.btn-submit{background:linear-gradient(135deg,#ff7a18,#ff9f1c);border:none;color:#fff}
+.btn-secondary{background:transparent;border:1px solid rgba(255,255,255,.2);color:#fff}
+
+/* Footer */
+.site-footer{border-top:1px solid rgba(255,255,255,.08);padding:22px 0}
+.footer-inner{display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center}
+.footer-link{opacity:.9}
+.footer-link:hover{opacity:1}
+.footer-copy{opacity:.65;font-size:.85rem}
+
+/* Responsive */
+@media (max-width: 900px){
+  .hero-grid{grid-template-columns:1fr}
+}
+@media (max-width: 760px){
+  .burger{display:block}
+  .nav{display:none;width:100%;flex-direction:column;gap:10px;margin-top:10px}
+  .nav.open{display:flex}
+  .header-inner{flex-wrap:wrap}
+  .header-actions{width:100%;justify-content:space-between}
+  .cta-custom{width:100%}
+  .grid-2{grid-template-columns:1fr}
+  .field-with-unit{grid-template-columns:1fr}
+  .cta-primary{width:100%}
+}
+/* ================= HEADER STICKY — FIX DÉFINITIF ================= */
+
+/* Base */
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  padding:0;
+  background:#070b1a;
+  color:#fff;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  overflow-x:hidden;
+}
+
+/* Compensation du header fixe */
+body{
+  padding-top:72px; /* hauteur réelle du header */
+}
+
+a{color:inherit;text-decoration:none}
+
+.container{
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 16px;
+}
+
+/* Header */
+.site-header{
+  position:fixed;        /* clé : reste collé */
+  top:0;
+  left:0;
+  right:0;
+  width:100%;
+  z-index:9999;
+
+  background:linear-gradient(180deg,#0b1020,#070b1a);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+/* Inner */
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+
+  min-height:64px;
+  padding:12px 16px;
+
+  position:relative;
+}
+
+/* Logo */
+.logo{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+
+.logo-mark{
+  font-weight:900;
+  font-size:1.35rem;
+  color:#ff8a00;
+}
+
+.logo-text{
+  font-weight:900;
+  font-size:1.1rem;
+}
+
+.logo-tagline{
+  opacity:.75;
+  font-size:.78rem;
+  margin-left:6px;
+}
+/* ================= HEADER MOBILE — COMPACT ================= */
+@media (max-width: 768px){
+
+  /* Header plus fin */
+  .header-inner{
+    min-height:56px;
+    padding:8px 12px;
+  }
+
+  /* Masquer la tagline sur mobile */
+  .logo-tagline{
+    display:none;
+  }
+
+  /* Logo légèrement réduit */
+  .logo-mark{
+    font-size:1.2rem;
+  }
+
+  .logo-text{
+    font-size:1rem;
+  }
+
+  /* Sélecteur langue plus discret */
+  .lang-select{
+    padding:6px 8px;
+    font-size:.85rem;
+  }
+
+  /* Bouton CTA plus fin */
+  .cta-custom{
+    padding:8px 12px;
+    font-size:.85rem;
+  }
+
+  /* Ajuster la compensation du body */
+  body{
+    padding-top:56px;
+  }
+}
+.form-help {
+  margin: 24px auto 28px;
+}
+
+.help-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  padding: 18px 20px;
+}
+
+.help-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
+.help-card p {
+  opacity: .85;
+  margin: 0 0 12px;
+}
+
+.help-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.help-link {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  font-weight: 700;
+  font-size: .9rem;
+}
+
+.help-link:hover {
+  background: rgba(255,255,255,.1);
+}
+/* =====================================================
+   e-META — AIDE DISCRÈTE PAR ICÔNES FLOTTANTES
+   - Cache le titre d'aide
+   - Transforme les liens en icônes flottantes
+   - Desktop + Mobile safe
+===================================================== */
+
+/* 1️⃣ Masquer le titre "Besoin d'aide..." */
+.form-help h3 {
+  display: none !important;
+}
+
+/* 2️⃣ Positionnement flottant du bloc aide */
+.form-help {
+  position: fixed;
+  right: 18px;
+  bottom: 22px;
+  z-index: 999;
+}
+
+/* 3️⃣ Stack vertical des icônes */
+.help-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 4️⃣ Style icône flottante */
+.help-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(15, 20, 40, 0.9);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+/* Hover */
+.help-btn:hover {
+  background: rgba(255,138,0,0.18);
+  border-color: rgba(255,138,0,0.45);
+  transform: translateY(-2px);
+}
+
+/* 5️⃣ Icônes via CSS (pas de texte visible) */
+#pdfPrivacyLink::before {
+  content: "🔒";
+}
+
+#pdfGuideLink::before {
+  content: "ⓘ";
+}
+
+/* 6️⃣ Cacher le texte i18n visuellement (reste accessible) */
+.help-btn {
+  font-size: 0;
+}
+
+.help-btn::before {
+  font-size: 18px;
+}
+
+/* 7️⃣ Mobile : ajustement position */
+@media (max-width: 640px) {
+  .form-help {
+    right: 12px;
+    bottom: 16px;
+  }
+
+  .help-btn {
+    width: 40px;
+    height: 40px;
+  }
+}
+/* =====================================================
+   e-META — HELP ICONS (COMPOSANT UNIQUE)
+   Icônes discrètes flottantes (ⓘ / 🔒)
+===================================================== */
+
+/* Désactivation totale des anciens blocs aide */
+.form-help,
+.help-actions,
+.help-btn {
+  display: none !important;
+}
+
+/* Conteneur flottant */
+.help-icons {
+  position: fixed;
+  right: 18px;
+  bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10000;
+}
+
+/* Icône générique */
+.help-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(15,20,40,0.95);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0;              /* cache le texte i18n */
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+/* Icônes via pseudo-éléments */
+.help-privacy::before {
+  content: "🔒";
+  font-size: 18px;
+}
+
+.help-guide::before {
+  content: "ⓘ";
+  font-size: 18px;
+}
+
+/* Hover */
+.help-icon:hover {
+  background: rgba(255,138,0,0.18);
+  border-color: rgba(255,138,0,0.45);
+  transform: translateY(-2px);
+}
+
+/* Mobile : plus discret */
+@media (max-width: 768px) {
+  .help-icons {
+    right: 12px;
+    bottom: 16px;
+    gap: 10px;
+  }
+
+  .help-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Option UX : masquer le guide sur mobile */
+  .help-guide {
+    display: none;
+  }
+}
