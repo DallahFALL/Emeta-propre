@@ -3,13 +3,255 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title data-i18n="meta.title">e-META</title>
+  <title data-i18n="meta.title">e-META — Assistant IA</title>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
 </head>
-<body>
-  <!-- PAGE PRINCIPALE e-META -->
+
+<body id="top">
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="logo" href="#top" aria-label="e-META">
+        <span class="logo-mark">e</span>
+        <span class="logo-text">META</span>
+        <span class="logo-tagline" data-i18n="header.tagline">
+          Assistant IA multilingue de prise de décision
+        </span>
+      </a>
+
+      <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="mainNav" role="navigation">
+        <a class="nav-link" href="#top" data-i18n="nav.home">Accueil</a>
+        <a class="nav-link" href="#form" data-i18n="nav.form">Formulaire</a>
+        <a class="nav-link" href="privacy.html" data-i18n="nav.privacy">Confidentialité</a>
+      </nav>
+
+      <div class="header-actions">
+        <select class="lang-select" id="langSelect" aria-label="Choisir la langue">
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+          <option value="ar">AR</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" aria-label="Présentation">
+      <div class="container hero-grid">
+
+        <div class="hero-box hero-main">
+          <h1 class="hero-title" data-i18n="hero.title">
+            Donnez à vos décisions le niveau d’un cabinet de conseil premium
+          </h1>
+
+          <p class="hero-subtitle" data-i18n="hero.subtitle">
+            Analyse stratégique structurée, recommandations actionnables et restitution professionnelle.
+          </p>
+
+          <ul class="hero-points">
+            <li data-i18n="hero.point1">Analyse structurée (niveau consultant senior)</li>
+            <li data-i18n="hero.point2">Recommandations actionnables + risques + KPIs</li>
+            <li data-i18n="hero.point3">Restitution personnalisée (Email / WhatsApp / PDF)</li>
+          </ul>
+
+          <button class="cta-primary" id="startBtn" type="button" data-i18n="hero.cta">
+            Commencer une analyse stratégique
+          </button>
+        </div>
+
+        <aside class="hero-box hero-cabinet">
+          <h3 data-i18n="hero.badge.title">Analyse stratégique — niveau cabinet</h3>
+          <p data-i18n="hero.badge.text">
+            Une approche structurée inspirée des cabinets de conseil.
+          </p>
+          <p class="hero-note" data-i18n="hero.note">
+            Ce n’est pas un chatbot. Chaque réponse est analysée selon une méthodologie décisionnelle avancée.
+          </p>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- ===== FORM ===== -->
+    <section class="form-section" id="form" aria-label="Formulaire e-META">
+      <div class="container">
+
+        <div class="form-header">
+          <div class="form-badge">
+            🧠 <span data-i18n="form.badge.cabinet">Mode cabinet de conseil</span>
+          </div>
+          <h2 class="section-title" data-i18n="form.title">
+            Formulaire e-META — Analyse stratégique premium
+          </h2>
+          <p class="form-intro" data-i18n="form.intro">
+            Plus vos réponses sont précises, plus la recommandation e-META sera juste, nuancée et exploitable.
+          </p>
+        </div>
+
+        <form id="emetaForm" class="emeta-form" novalidate>
+
+          <!-- 1. Général -->
+          <fieldset class="field-group">
+            <legend data-i18n="group.general">1) Qualifier la décision</legend>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="domain" data-i18n="field.domain.label">Domaine principal</label>
+                <select id="domain" name="domain" required></select>
+              </div>
+
+              <div class="field">
+                <label for="decisionType" data-i18n="field.decisionType.label">Nature de la décision</label>
+                <select id="decisionType" name="decisionType" required></select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="decisionTitle" data-i18n="field.title.label">Titre court de la décision</label>
+              <input
+                id="decisionTitle"
+                name="decisionTitle"
+                type="text"
+                data-i18n-placeholder="field.title.ph"
+                placeholder="Titre court"
+              />
+              <div class="hint" data-i18n="field.title.hint"></div>
+            </div>
+          </fieldset>
+
+          <!-- 2. Analyse -->
+          <fieldset class="field-group">
+            <legend data-i18n="group.analysis">2) Structurer l’analyse</legend>
+
+            <div class="field">
+              <label for="problem" data-i18n="field.problem.label"></label>
+              <textarea id="problem" rows="4" data-i18n-placeholder="field.problem.ph"></textarea>
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="objectives" data-i18n="field.objectives.label"></label>
+                <textarea id="objectives" rows="4" data-i18n-placeholder="field.objectives.ph"></textarea>
+              </div>
+
+              <div class="field">
+                <label for="constraints" data-i18n="field.constraints.label"></label>
+                <textarea id="constraints" rows="4" data-i18n-placeholder="field.constraints.ph"></textarea>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="kpis" data-i18n="field.kpis.label"></label>
+                <textarea id="kpis" rows="4" data-i18n-placeholder="field.kpis.ph"></textarea>
+              </div>
+
+              <div class="field">
+                <label for="resources" data-i18n="field.resources.label"></label>
+                <textarea id="resources" rows="4" data-i18n-placeholder="field.resources.ph"></textarea>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="context" data-i18n="field.context.label"></label>
+              <textarea id="context" rows="5" data-i18n-placeholder="field.context.ph"></textarea>
+            </div>
+          </fieldset>
+
+          <!-- 3. Budget -->
+          <fieldset class="field-group">
+            <legend data-i18n="group.budget">3) Ambition, budget & urgence</legend>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="budgetMin" data-i18n="field.budgetMin.label"></label>
+                <input id="budgetMin" type="number" min="0" />
+              </div>
+
+              <div class="field">
+                <label for="budgetMax" data-i18n="field.budgetMax.label"></label>
+                <input id="budgetMax" type="number" min="0" />
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="deadline" data-i18n="field.deadline.label"></label>
+                <input id="deadline" type="text" />
+              </div>
+
+              <div class="field">
+                <label data-i18n="field.urgency.label"></label>
+                <input id="urgency" type="range" min="1" max="5" value="3" />
+                <div class="range-labels">
+                  <span data-i18n="field.urgency.low"></span>
+                  <span data-i18n="field.urgency.medium"></span>
+                  <span data-i18n="field.urgency.high"></span>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- 4. Sortie -->
+          <fieldset class="field-group">
+            <legend data-i18n="group.output">4) Restitution & contact</legend>
+
+            <div class="checkbox-grid">
+              <label class="check-item">
+                <input type="checkbox" /> <span data-i18n="field.outputMode.email"></span>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" /> <span data-i18n="field.outputMode.whatsapp"></span>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" /> <span data-i18n="field.outputMode.pdf"></span>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" /> <span data-i18n="field.outputMode.display"></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-submit" data-i18n="form.submit"></button>
+            <button type="reset" class="btn-secondary" data-i18n="form.reset"></button>
+          </div>
+
+          <p class="form-trust-note" data-i18n="form.trust.note"></p>
+
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="logo-mark">e</span><span class="logo-text">META</span>
+      </div>
+      <a href="privacy.html" data-i18n="footer.privacy"></a>
+      <p data-i18n="footer.copy"></p>
+    </div>
+  </footer>
+
+  <!-- ================= SCRIPTS ================= -->
   <script src="i18n.js"></script>
   <script src="script.js"></script>
+
 </body>
 </html>
