@@ -110,3 +110,95 @@
     }
   });
 })();
+/* =====================================================
+   e-META — i18n VALIDATOR (DEV TOOL)
+   Détecte :
+   - clés HTML sans traduction
+   - clés i18n non utilisées
+   - selects non peuplés
+===================================================== */
+
+window.validateI18n = function (lang) {
+  const dict = window.I18N?.[lang];
+  if (!dict) {
+    console.error("❌ i18n introuvable pour la langue :", lang);
+    return;
+  }
+
+  console.group(`🔎 i18n VALIDATION — ${lang.toUpperCase()}`);
+
+  /* -----------------------------
+     1. data-i18n manquants
+  ----------------------------- */
+  const missingText = [];
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    if (!dict[key]) {
+      missingText.push(key);
+      el.style.outline = "2px solid red";
+    }
+  });
+
+  if (missingText.length) {
+    console.warn("❌ Clés TEXTE manquantes :", missingText);
+  } else {
+    console.log("✅ Tous les data-i18n sont couverts");
+  }
+
+  /* -----------------------------
+     2. placeholders manquants
+  ----------------------------- */
+  const missingPH = [];
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const key = el.dataset.i18nPlaceholder;
+    if (!dict[key]) {
+      missingPH.push(key);
+      el.style.outline = "2px dashed orange";
+    }
+  });
+
+  if (missingPH.length) {
+    console.warn("❌ Placeholders manquants :", missingPH);
+  } else {
+    console.log("✅ Tous les placeholders sont couverts");
+  }
+
+  /* -----------------------------
+     3. Selects dynamiques
+  ----------------------------- */
+  ["domain", "decisionType"].forEach(id => {
+    const el = document.getElementById(id);
+    const key = `select.${id}`;
+    if (!el) {
+      console.warn(`⚠️ Select #${id} absent du DOM`);
+      return;
+    }
+    if (!Array.isArray(dict[key])) {
+      console.error(`❌ ${key} absent ou invalide dans i18n`);
+      return;
+    }
+    if (el.options.length <= 1) {
+      console.error(`❌ Select #${id} non peuplé`);
+    } else {
+      console.log(`✅ Select #${id} OK (${el.options.length} options)`);
+    }
+  });
+
+  /* -----------------------------
+     4. Clés i18n inutilisées
+  ----------------------------- */
+  const usedKeys = new Set();
+  document.querySelectorAll("[data-i18n]").forEach(el => usedKeys.add(el.dataset.i18n));
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => usedKeys.add(el.dataset.i18nPlaceholder));
+  usedKeys.add("select.domain");
+  usedKeys.add("select.decisionType");
+
+  const unused = Object.keys(dict).filter(k => !usedKeys.has(k));
+  if (unused.length) {
+    console.info("ℹ️ Clés i18n non utilisées :", unused);
+  } else {
+    console.log("✅ Aucune clé i18n inutile");
+  }
+
+  console.groupEnd();
+};
