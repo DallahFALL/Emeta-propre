@@ -256,7 +256,7 @@ en: {
   /* FOOTER */
   "footer.privacy": "Privacy policy",
   "footer.copy": "© 2026 e-META — All rights reserved"
-}
+},
 
 es: {
   "meta.title": "e-META — Asistente IA para la toma de decisiones",
@@ -314,7 +314,7 @@ es: {
 
   "footer.privacy": "Política de privacidad",
   "footer.copy": "© 2026 e-META — Todos los derechos reservados"
-}
+},
 
 ar: {
   "meta.title": "e-META — مساعد ذكاء اصطناعي لاتخاذ القرار",
@@ -371,5 +371,5 @@ ar: {
   "field.decisionType.t6": "إعداد ملف رسمي",
 
   "footer.privacy": "سياسة الخصوصية",
-  "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة"
+  "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة",
 }
