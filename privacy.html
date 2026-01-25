@@ -6,44 +6,42 @@
 
   <title data-i18n="privacy.meta.title"></title>
 
-  <!-- Styles globaux e-META -->
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
 
-  <!-- Styles locaux (ISOLÉS à la page privacy) -->
   <style>
     .privacy-wrapper {
-      max-width: 920px;
-      margin: 48px auto 80px;
-      padding: 32px 28px;
+      max-width: 820px;
+      margin: 64px auto 80px;
+      padding: 32px 24px;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
+      border-radius: 16px;
     }
 
     .privacy-header {
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 24px;
+      gap: 12px;
+      margin-bottom: 20px;
     }
 
     .privacy-header h1 {
       margin: 0;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
     }
 
     .privacy-wrapper h2 {
-      margin-top: 28px;
-      margin-bottom: 10px;
-      font-size: 1.15rem;
+      margin-top: 24px;
+      margin-bottom: 8px;
+      font-size: 1.05rem;
       color: #ff8a00;
     }
 
     .privacy-wrapper p,
     .privacy-wrapper li {
-      font-size: 0.95rem;
-      line-height: 1.65;
+      font-size: 0.92rem;
+      line-height: 1.6;
       opacity: 0.85;
     }
 
@@ -51,39 +49,35 @@
       padding-left: 18px;
     }
 
-    .privacy-pdf {
-      margin-top: 36px;
-      padding: 22px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.03);
-      border: 1px dashed rgba(255,255,255,0.15);
+    .privacy-download {
+      margin-top: 32px;
+      padding-top: 18px;
+      border-top: 1px dashed rgba(255,255,255,0.15);
       text-align: center;
     }
 
-    .privacy-pdf a {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 10px 18px;
-      border-radius: 999px;
-      background: linear-gradient(135deg,#ff7a18,#ff9f1c);
-      color: #000;
-      font-weight: 800;
-      font-size: 0.9rem;
+    .privacy-download a {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      text-decoration: underline;
     }
 
     .privacy-back {
-      display: inline-block;
+      display: block;
       margin-top: 28px;
-      font-size: 0.9rem;
-      opacity: 0.75;
+      text-align: center;
+      font-size: 0.85rem;
+      opacity: 0.6;
     }
 
     @media (max-width: 640px) {
       .privacy-wrapper {
-        padding: 24px 18px;
+        margin: 32px 12px 64px;
+        padding: 24px 16px;
       }
+
       .privacy-header h1 {
-        font-size: 1.35rem;
+        font-size: 1.25rem;
       }
     }
   </style>
@@ -104,7 +98,7 @@
   <section class="privacy-wrapper">
 
     <div class="privacy-header">
-      <div style="font-size:1.8rem">🔐</div>
+      <span>🔐</span>
       <h1 data-i18n="privacy.title"></h1>
     </div>
 
@@ -133,10 +127,7 @@
     <h2 data-i18n="privacy.section5.title"></h2>
     <p data-i18n="privacy.section5.text"></p>
 
-    <div class="privacy-pdf">
-      <p><strong data-i18n="privacy.pdf.title"></strong></p>
-      <p data-i18n="privacy.pdf.text"></p>
-
+    <div class="privacy-download">
       <a
         href="docs/privacy-e-meta.pdf"
         download
@@ -149,13 +140,12 @@
   </section>
 </main>
 
-<a
-  class="footer-link"
-  href="privacy.html"
-  data-i18n="footer.privacy"
-></a>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="footer-copy" data-i18n="footer.copy"></p>
+  </div>
+</footer>
 
-<!-- i18n engine -->
 <script src="i18n.js"></script>
 <script src="script.js"></script>
 
