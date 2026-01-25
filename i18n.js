@@ -371,5 +371,5 @@ ar: {
   "field.decisionType.t6": "إعداد ملف رسمي",
 
   "footer.privacy": "سياسة الخصوصية",
-  "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة",
+  "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة"
 }
