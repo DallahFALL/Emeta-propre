@@ -137,13 +137,6 @@ window.I18N = {
     "footer.copy": "© 2026 e-META — Tous droits réservés"
   }
 
-  /* =====================================================
-     👉 EN / ES / AR
-     (si tu veux, je te les génère dans le message suivant
-      sans toucher au HTML)
-  ===================================================== */
-
-};
 en: {
 
   "meta.title": "e-META — AI Decision Assistant",
