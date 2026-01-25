@@ -1,5 +1,5 @@
 /* =====================================================
-   e-META — script.js FINAL PRO
+   e-META — script.js FINAL
 ===================================================== */
 
 (function () {
@@ -18,8 +18,8 @@
     document.documentElement.lang = lang;
     document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
 
-    const rtl = document.getElementById("rtlStylesheet");
-    if (rtl) rtl.disabled = !RTL_LANGS.includes(lang);
+    const rtlCss = document.getElementById("rtlStylesheet");
+    if (rtlCss) rtlCss.disabled = !RTL_LANGS.includes(lang);
   }
 
   function applyI18n(lang) {
@@ -27,13 +27,13 @@
     if (!dict) return;
 
     document.querySelectorAll("[data-i18n]").forEach(el => {
-      const k = el.dataset.i18n;
-      if (dict[k]) el.textContent = dict[k];
+      const key = el.dataset.i18n;
+      if (dict[key]) el.textContent = dict[key];
     });
 
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-      const k = el.dataset.i18nPlaceholder;
-      if (dict[k]) el.placeholder = dict[k];
+      const key = el.dataset.i18nPlaceholder;
+      if (dict[key]) el.placeholder = dict[key];
     });
 
     if (dict["meta.title"]) document.title = dict["meta.title"];
@@ -68,5 +68,4 @@
       });
     }
   });
-
 })();
