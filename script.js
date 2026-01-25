@@ -1,5 +1,5 @@
 /* =====================================================
-   e-META — script.js FINAL
+   e-META — script.js FINAL DYNAMIQUE
 ===================================================== */
 
 (function () {
@@ -22,6 +22,23 @@
     if (rtlCss) rtlCss.disabled = !RTL_LANGS.includes(lang);
   }
 
+  function populateSelect(id, items) {
+    const select = document.getElementById(id);
+    if (!select || !Array.isArray(items)) return;
+
+    const currentValue = select.value;
+    select.innerHTML = "";
+
+    items.forEach(opt => {
+      const option = document.createElement("option");
+      option.value = opt.value;
+      option.textContent = opt.label;
+      select.appendChild(option);
+    });
+
+    if (currentValue) select.value = currentValue;
+  }
+
   function applyI18n(lang) {
     const dict = window.I18N?.[lang];
     if (!dict) return;
@@ -36,6 +53,13 @@
       if (dict[key]) el.placeholder = dict[key];
     });
 
+    if (dict["select.domain"]) {
+      populateSelect("domain", dict["select.domain"]);
+    }
+    if (dict["select.decisionType"]) {
+      populateSelect("decisionType", dict["select.decisionType"]);
+    }
+
     if (dict["meta.title"]) document.title = dict["meta.title"];
   }
 
@@ -44,12 +68,13 @@
     setLang(lang);
     applyI18n(lang);
 
-    const select = document.getElementById("langSelect");
-    if (select) {
-      select.value = lang;
-      select.addEventListener("change", () => {
-        setLang(select.value);
-        applyI18n(select.value);
+    const langSelect = document.getElementById("langSelect");
+    if (langSelect) {
+      langSelect.value = lang;
+      langSelect.addEventListener("change", () => {
+        setLang(langSelect.value);
+        applyI18n(langSelect.value);
+        requestAnimationFrame(() => applyI18n(langSelect.value)); // mobile repaint
       });
     }
 
