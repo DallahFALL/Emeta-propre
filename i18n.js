@@ -128,6 +128,7 @@ window.I18N = {
     "help.privacy": "🔒 Privacy policy",
     "help.guide": "📘 Official guide to complete the form",
     "privacy.download": "Download the privacy policy (PDF)",
+    "privacy.back": "Back to the form",
     
     "form.badge.cabinet": "Consulting firm mode",
     "form.title": "e-META vNext Form — Premium strategic analysis",
