@@ -8,26 +8,6 @@ window.I18N = {
     "nav.privacy": "Confidentialité",
     "cta.custom": "Requête personnalisée",
 
-    "privacy.title": "Politique de confidentialité & responsabilité",
-    "privacy.intro": "Cette page explique comment e-META utilise vos informations et les limites de responsabilité du service.",
-
-    "privacy.s1.title": "Nature du service",
-    "privacy.s1.text": "e-META est un assistant d’aide à la décision basé sur l’intelligence artificielle. Les analyses fournies sont indicatives.",
-
-    "privacy.s2.title": "Données collectées",
-    "privacy.s2.li1": "Informations saisies volontairement",
-    "privacy.s2.li2": "Coordonnées nécessaires à la restitution",
-    "privacy.s2.li3": "Documents transmis par l’utilisateur",
-
-    "privacy.s3.title": "Utilisation des données",
-    "privacy.s3.text": "Les données sont utilisées uniquement pour produire l’analyse demandée et améliorer le service.",
-
-    "privacy.s4.title": "Responsabilité",
-    "privacy.s4.text": "L’utilisateur reste seul responsable des décisions prises à partir des analyses fournies.",
-
-    "privacy.download": "Télécharger la politique de confidentialité (PDF)",
-    "privacy.back": "← Retour à l’accueil"
-
     "hero.title": "Donnez à vos décisions le niveau d’un cabinet de conseil premium",
     "hero.subtitle": "e-META structure votre contexte, objectifs, contraintes et indicateurs pour produire une recommandation claire, actionnable et documentée.",
     "hero.point1": "Analyse structurée (niveau consultant senior)",
