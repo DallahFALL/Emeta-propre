@@ -33,7 +33,7 @@ window.I18N = {
     "guide.p3": "Indiquez les contraintes ou limites éventuelles.",
     "guide.p4": "Mentionnez les options déjà envisagées.",
     "guide.p5": "Plus votre demande est précise, plus l’analyse sera pertinente.",
-    "guide.back": "← Retour"
+    "guide.back": "← Retour",
     "form.help.download": "Télécharger le guide pour bien remplir",
     
     "group.general": "1) Qualifier la décision",
@@ -306,7 +306,7 @@ window.I18N = {
     "guide.p3": "Indique las limitaciones existentes.",
     "guide.p4": "Mencione las opciones consideradas.",
     "guide.p5": "Cuanto más clara sea la solicitud, mejor será el análisis.",
-    "guide.back": "← Volver"
+    "guide.back": "← Volver",
 
     "form.intro": "Cuanto más precisas sean tus respuestas, más útil y exacta será la recomendación de e-META.",
     "form.help.download": "Descargar la guía para completar correctamente",
