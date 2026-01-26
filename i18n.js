@@ -1,279 +1,214 @@
-// i18n.js — e-META vNext FINAL CLEAN
+/* =====================================================
+   e-META — i18n.js FINAL CLEAN
+   FR / EN / ES / AR
+   Compatible index.html • guide.html • privacy.html
+===================================================== */
+
 window.I18N = {
 
-  /* =====================================================
-     FR — Français (référence)
-  ===================================================== */
+  /* =========================
+     FR — Français
+  ========================= */
   fr: {
 
-    /* Meta */
+    /* GLOBAL */
     "meta.title": "e-META — Assistant IA de prise de décision",
-
-    /* Header / Nav */
-    "header.tagline": "Assistant IA multilingue de prise de décision",
     "nav.home": "Accueil",
     "nav.form": "Formulaire",
     "nav.privacy": "Confidentialité",
 
-    /* Hero */
+    /* HERO */
     "hero.title": "Donnez à vos décisions le niveau d’un cabinet de conseil premium",
-    "hero.subtitle": "e-META structure votre contexte, objectifs, contraintes et indicateurs pour produire une recommandation claire, actionnable et documentée.",
-    "hero.point1": "Analyse structurée (niveau consultant senior)",
-    "hero.point2": "Recommandations actionnables + risques + KPIs",
-    "hero.point3": "Restitution personnalisée (Email / WhatsApp / PDF)",
-    "hero.cta": "Commencer une analyse stratégique",
-    "hero.badge": "Mode cabinet de conseil",
+    "hero.subtitle": "Analyse stratégique structurée et recommandations actionnables",
 
-    /* Aide */
-    "help.guide": "Guide pour bien remplir",
-    "help.privacy": "Politique de confidentialité",
+    /* FORM — TITRE */
+    "form.title.label": "Titre à décision courte",
+    "form.title.placeholder": "Par exemple : Repenser notre stratégie de distribution au Sénégal",
 
-    /* Form Header */
-    "form.title": "Formulaire e-META vNext — Analyse stratégique premium",
-    "form.intro": "Plus vos réponses sont précises, plus la recommandation e-META sera juste, nuancée et exploitable.",
-    "form.help.download": "Télécharger le guide pour bien remplir",
+    /* FORM — STRUCTURE */
+    "form.section2": "2) Structurer l’analyse",
+    "form.problem.label": "Problème fondamental à résoudre",
+    "form.problem.placeholder": "Décrivez le vrai problème, pas seulement les symptômes.",
 
-    /* Groupes */
-    "group.general": "1) Qualifier la décision",
-    "group.analysis": "2) Structurer l’analyse (niveau cabinet)",
-    "group.budget": "3) Ambition, budget & urgence",
-    "group.output": "4) Restitution & contact",
-    "group.trust": "Confiance & consentement",
+    "form.objectives.label": "Objectifs principaux",
+    "form.constraints.label": "Contraintes et risques",
+    "form.kpi.label": "Indicateurs clés de réussite (KPI)",
 
-    /* Champs clés */
-    "field.domain.label": "Domaine principal",
-    "field.domain.placeholder": "Sélectionnez un domaine",
+    /* CONTACT */
+    "form.email.label": "Adresse e-mail",
+    "form.whatsapp.label": "Numéro WhatsApp",
 
-    "field.decisionType.label": "Nature de la décision",
-    "field.decisionType.placeholder": "Sélectionnez un type",
+    /* CONSENT */
+    "form.consent.title": "Confiance et consentement",
+    "form.consent.text": "J’accepte que mes informations soient utilisées uniquement pour produire une analyse via e-META.",
 
-    "field.title.label": "Titre court de la décision",
-    "field.title.ph": "Ex : Repenser notre stratégie de distribution au Sénégal",
-
-    "field.problem.label": "Problème central à résoudre",
-    "field.problem.ph": "Décrivez le vrai problème (pas seulement les symptômes).",
-
-    "field.objectives.label": "Objectifs prioritaires",
-    "field.constraints.label": "Contraintes & risques",
-    "field.kpis.label": "KPIs / indicateurs de succès",
-
-    /* Restitution */
-    "field.output.label": "Mode de restitution souhaité",
-    "field.output.email": "Email structuré",
-    "field.output.whatsapp": "WhatsApp",
-    "field.output.pdf": "PDF professionnel",
-    "field.output.display": "Affichage direct",
-
-    "field.email.label": "Adresse email",
-    "field.email.ph": "adresse@email.com",
-    "field.whatsapp.label": "Numéro WhatsApp",
-    "field.whatsapp.ph": "+221782607212",
-
-    /* Consentement */
-    "field.consent":
-      "J’accepte que les informations fournies soient utilisées uniquement pour générer mon analyse e-META.",
-
-    /* Boutons */
+    /* BUTTONS */
     "form.submit": "Générer ma recommandation e-META",
-    "form.reset": "Réinitialiser",
+    "form.reset": "Réinitialisation",
 
-    /* Footer */
+    /* FOOTER */
     "footer.privacy": "Politique de confidentialité",
-    "footer.copy": "© 2026 e-META — Tous droits réservés",
+    "footer.rights": "© 2026 e-META — Tous droits réservés",
 
-    /* Privacy */
-    "privacy.title": "Politique de confidentialité & responsabilité",
-    "privacy.intro":
-      "Cette page explique comment e-META utilise vos informations et les limites de responsabilité du service.",
-    "privacy.download": "Télécharger la politique de confidentialité (PDF)",
-    "privacy.back": "← Retour à l’accueil",
-
-    /* Guide */
+    /* GUIDE */
     "guide.title": "Guide pour bien remplir",
-    "guide.intro":
-      "Ce guide vous aide à formuler une demande claire afin d’obtenir une analyse pertinente.",
+    "guide.intro": "Ce guide vous aide à formuler une demande claire afin d’obtenir une analyse pertinente.",
     "guide.p1": "Décrivez clairement le contexte de votre décision.",
     "guide.p2": "Précisez l’objectif principal recherché.",
     "guide.p3": "Indiquez les contraintes ou limites éventuelles.",
     "guide.p4": "Mentionnez les options déjà envisagées.",
     "guide.p5": "Plus votre demande est précise, plus l’analyse sera pertinente.",
-    "guide.back": "← Retour au formulaire"
+    "guide.back": "← Retour au formulaire",
+
+    /* PRIVACY */
+    "privacy.title": "Politique de confidentialité & responsabilité",
+    "privacy.download": "Télécharger la politique de confidentialité (PDF)"
   },
 
-  /* =====================================================
+  /* =========================
      EN — English
-  ===================================================== */
+  ========================= */
   en: {
-    "meta.title": "e-META — Decision-Making AI Assistant",
 
-    "header.tagline": "Multilingual decision-making AI assistant",
+    "meta.title": "e-META — Decision-Making AI Assistant",
     "nav.home": "Home",
     "nav.form": "Form",
     "nav.privacy": "Privacy",
 
-    "hero.title": "Make decisions at a premium consulting-firm level",
-    "hero.subtitle": "e-META structures your context, goals, constraints and KPIs to deliver a clear and actionable recommendation.",
-    "hero.point1": "Structured analysis (senior consultant level)",
-    "hero.point2": "Actionable recommendations + risks + KPIs",
-    "hero.point3": "Personalized delivery (Email / WhatsApp / PDF)",
-    "hero.cta": "Start a strategic analysis",
-    "hero.badge": "Consulting mode",
+    "hero.title": "Give your decisions the level of a premium consulting firm",
+    "hero.subtitle": "Structured strategic analysis and actionable recommendations",
 
-    "help.guide": "How to fill the form",
-    "help.privacy": "Privacy policy",
+    "form.title.label": "Short decision title",
+    "form.title.placeholder": "Example: Rethinking our distribution strategy in Senegal",
 
-    "form.title": "e-META vNext Form — Premium strategic analysis",
-    "form.intro": "The more precise your answers, the more relevant the recommendation.",
-    "form.help.download": "Download the completion guide",
+    "form.section2": "2) Structure the analysis",
+    "form.problem.label": "Core problem to solve",
+    "form.problem.placeholder": "Describe the real problem, not just the symptoms.",
 
-    "group.general": "1) Qualify the decision",
-    "group.analysis": "2) Structure the analysis",
-    "group.budget": "3) Budget & urgency",
-    "group.output": "4) Delivery & contact",
-    "group.trust": "Trust & consent",
+    "form.objectives.label": "Main objectives",
+    "form.constraints.label": "Constraints and risks",
+    "form.kpi.label": "Key success indicators (KPIs)",
 
-    "field.domain.label": "Main domain",
-    "field.domain.placeholder": "Select a domain",
+    "form.email.label": "Email address",
+    "form.whatsapp.label": "WhatsApp number",
 
-    "field.decisionType.label": "Decision type",
-    "field.decisionType.placeholder": "Select a type",
-
-    "field.title.label": "Short decision title",
-    "field.title.ph": "E.g. Rethink our distribution strategy in Senegal",
-
-    "field.problem.label": "Core problem to solve",
-    "field.problem.ph": "Describe the real problem, not just symptoms.",
-
-    "field.objectives.label": "Main objectives",
-    "field.constraints.label": "Constraints & risks",
-    "field.kpis.label": "Success KPIs",
-
-    "field.output.label": "Preferred delivery mode",
-    "field.output.email": "Structured email",
-    "field.output.whatsapp": "WhatsApp",
-    "field.output.pdf": "Professional PDF",
-    "field.output.display": "On-screen display",
-
-    "field.email.label": "Email address",
-    "field.email.ph": "name@email.com",
-    "field.whatsapp.label": "WhatsApp number",
-    "field.whatsapp.ph": "+221782607212",
-
-    "field.consent":
-      "I agree that the information provided is used only to generate my e-META analysis.",
+    "form.consent.title": "Trust and consent",
+    "form.consent.text": "I agree that my information will only be used to generate an analysis via e-META.",
 
     "form.submit": "Generate my e-META recommendation",
     "form.reset": "Reset",
 
     "footer.privacy": "Privacy policy",
-    "footer.copy": "© 2026 e-META — All rights reserved",
+    "footer.rights": "© 2026 e-META — All rights reserved",
 
-    "privacy.title": "Privacy & Liability Policy",
-    "privacy.intro": "This page explains how your data is used and the limits of responsibility.",
-    "privacy.download": "Download the privacy policy (PDF)",
-    "privacy.back": "← Back to home",
+    "guide.title": "How to fill in the form",
+    "guide.intro": "This guide helps you formulate a clear request to obtain a relevant analysis.",
+    "guide.p1": "Clearly describe the context of your decision.",
+    "guide.p2": "Specify the main objective you are seeking.",
+    "guide.p3": "Indicate any constraints or limitations.",
+    "guide.p4": "Mention the options already considered.",
+    "guide.p5": "The more precise your request, the more relevant the analysis.",
+    "guide.back": "← Back to form",
 
-    "guide.title": "Form completion guide",
-    "guide.intro": "This guide helps you submit a clear and effective request.",
-    "guide.p1": "Clearly describe your decision context.",
-    "guide.p2": "Specify the main objective.",
-    "guide.p3": "Mention constraints or limitations.",
-    "guide.p4": "List options already considered.",
-    "guide.p5": "The more precise you are, the better the analysis.",
-    "guide.back": "← Back to form"
+    "privacy.title": "Privacy & responsibility policy",
+    "privacy.download": "Download the privacy policy (PDF)"
   },
 
-  /* =====================================================
+  /* =========================
      ES — Español
-  ===================================================== */
+  ========================= */
   es: {
-    "meta.title": "e-META — Asistente IA para decisiones",
 
-    "header.tagline": "Asistente IA multilingüe para la toma de decisiones",
+    "meta.title": "e-META — Asistente de decisiones con IA",
     "nav.home": "Inicio",
     "nav.form": "Formulario",
     "nav.privacy": "Privacidad",
 
-    "hero.title": "Tome decisiones al nivel de una consultora premium",
-    "hero.subtitle": "e-META estructura su contexto, objetivos y restricciones para ofrecer una recomendación clara.",
-    "hero.point1": "Análisis estructurado",
-    "hero.point2": "Recomendaciones accionables",
-    "hero.point3": "Entrega personalizada",
-    "hero.cta": "Iniciar análisis",
-    "hero.badge": "Modo consultoría",
+    "hero.title": "Lleve sus decisiones al nivel de una consultora premium",
+    "hero.subtitle": "Análisis estratégico estructurado y recomendaciones accionables",
 
-    "help.guide": "Guía de uso",
-    "help.privacy": "Política de privacidad",
+    "form.title.label": "Título corto de la decisión",
+    "form.title.placeholder": "Ejemplo: Repensar nuestra estrategia de distribución en Senegal",
 
-    "form.title": "Formulario e-META — Análisis estratégico",
-    "form.intro": "Cuanto más precisas sean sus respuestas, mejor será la recomendación.",
-    "form.help.download": "Descargar la guía",
+    "form.section2": "2) Estructurar el análisis",
+    "form.problem.label": "Problema fundamental a resolver",
+    "form.problem.placeholder": "Describa el problema real, no solo los síntomas.",
 
-    "group.general": "1) Definir la decisión",
-    "group.analysis": "2) Estructurar el análisis",
-    "group.budget": "3) Presupuesto y urgencia",
-    "group.output": "4) Entrega y contacto",
-    "group.trust": "Confianza y consentimiento",
+    "form.objectives.label": "Objetivos principales",
+    "form.constraints.label": "Restricciones y riesgos",
+    "form.kpi.label": "Indicadores clave de éxito (KPI)",
+
+    "form.email.label": "Correo electrónico",
+    "form.whatsapp.label": "Número de WhatsApp",
+
+    "form.consent.title": "Confianza y consentimiento",
+    "form.consent.text": "Acepto que mi información se utilice únicamente para generar un análisis mediante e-META.",
+
+    "form.submit": "Generar mi recomendación e-META",
+    "form.reset": "Reiniciar",
+
+    "footer.privacy": "Política de privacidad",
+    "footer.rights": "© 2026 e-META — Todos los derechos reservados",
+
+    "guide.title": "Guía para completar correctamente",
+    "guide.intro": "Esta guía le ayuda a formular una solicitud clara para obtener un análisis relevante.",
+    "guide.p1": "Describa claramente el contexto de su decisión.",
+    "guide.p2": "Especifique el objetivo principal.",
+    "guide.p3": "Indique las restricciones o limitaciones.",
+    "guide.p4": "Mencione las opciones ya consideradas.",
+    "guide.p5": "Cuanto más precisa sea la solicitud, más relevante será el análisis.",
+    "guide.back": "← Volver al formulario",
 
     "privacy.title": "Política de privacidad y responsabilidad",
-    "privacy.intro": "Explicación del uso de datos y responsabilidades.",
-    "privacy.download": "Descargar la política (PDF)",
-    "privacy.back": "← Volver",
-
-    "guide.title": "Guía para completar",
-    "guide.intro": "Esta guía le ayuda a formular su solicitud.",
-    "guide.p1": "Describa el contexto.",
-    "guide.p2": "Indique el objetivo.",
-    "guide.p3": "Mencione las restricciones.",
-    "guide.p4": "Enumere las opciones.",
-    "guide.p5": "Sea preciso.",
-    "guide.back": "← Volver al formulario"
+    "privacy.download": "Descargar la política de privacidad (PDF)"
   },
 
-  /* =====================================================
+  /* =========================
      AR — العربية
-  ===================================================== */
+  ========================= */
   ar: {
-    "meta.title": "e-META — مساعد ذكي لاتخاذ القرار",
 
-    "header.tagline": "مساعد ذكي متعدد اللغات لاتخاذ القرار",
+    "meta.title": "e-META — مساعد اتخاذ القرار بالذكاء الاصطناعي",
     "nav.home": "الرئيسية",
     "nav.form": "النموذج",
     "nav.privacy": "الخصوصية",
 
-    "hero.title": "اتخذ قرارات بمستوى شركة استشارات",
-    "hero.subtitle": "يقوم e-META بتنظيم السياق والأهداف لإنتاج توصية واضحة.",
-    "hero.point1": "تحليل منظم",
-    "hero.point2": "توصيات قابلة للتنفيذ",
-    "hero.point3": "تسليم مخصص",
-    "hero.cta": "ابدأ التحليل",
-    "hero.badge": "وضع الاستشارات",
+    "hero.title": "امنح قراراتك مستوى مكاتب الاستشارات المتميزة",
+    "hero.subtitle": "تحليل استراتيجي منظم وتوصيات قابلة للتنفيذ",
 
-    "help.guide": "دليل الاستخدام",
-    "help.privacy": "سياسة الخصوصية",
+    "form.title.label": "عنوان مختصر للقرار",
+    "form.title.placeholder": "مثال: إعادة التفكير في استراتيجية التوزيع في السنغال",
 
-    "form.title": "نموذج e-META للتحليل الاستراتيجي",
-    "form.intro": "كلما كانت الإجابات أدق، كانت التوصية أفضل.",
-    "form.help.download": "تحميل الدليل",
+    "form.section2": "2) هيكلة التحليل",
+    "form.problem.label": "المشكلة الأساسية",
+    "form.problem.placeholder": "صف المشكلة الحقيقية وليس الأعراض فقط.",
 
-    "group.general": "١) تحديد القرار",
-    "group.analysis": "٢) هيكلة التحليل",
-    "group.budget": "٣) الميزانية والاستعجال",
-    "group.output": "٤) التسليم والتواصل",
-    "group.trust": "الموافقة",
+    "form.objectives.label": "الأهداف الرئيسية",
+    "form.constraints.label": "القيود والمخاطر",
+    "form.kpi.label": "مؤشرات النجاح الرئيسية",
 
-    "privacy.title": "سياسة الخصوصية والمسؤولية",
-    "privacy.intro": "توضيح استخدام البيانات وحدود المسؤولية.",
-    "privacy.download": "تحميل سياسة الخصوصية (PDF)",
-    "privacy.back": "← العودة",
+    "form.email.label": "البريد الإلكتروني",
+    "form.whatsapp.label": "رقم واتساب",
+
+    "form.consent.title": "الثقة والموافقة",
+    "form.consent.text": "أوافق على استخدام معلوماتي فقط لإنشاء تحليل عبر e-META.",
+
+    "form.submit": "إنشاء توصية e-META",
+    "form.reset": "إعادة التهيئة",
+
+    "footer.privacy": "سياسة الخصوصية",
+    "footer.rights": "© 2026 e-META — جميع الحقوق محفوظة",
 
     "guide.title": "دليل تعبئة النموذج",
-    "guide.intro": "يساعدك هذا الدليل على تقديم طلب واضح.",
-    "guide.p1": "اشرح السياق بوضوح.",
+    "guide.intro": "يساعدك هذا الدليل على صياغة طلب واضح للحصول على تحليل دقيق.",
+    "guide.p1": "صف سياق القرار بوضوح.",
     "guide.p2": "حدد الهدف الرئيسي.",
-    "guide.p3": "اذكر القيود.",
-    "guide.p4": "اعرض الخيارات.",
-    "guide.p5": "الدقة تحسن التحليل.",
-    "guide.back": "← الرجوع للنموذج"
+    "guide.p3": "اذكر القيود أو الحدود.",
+    "guide.p4": "اذكر الخيارات التي تمت دراستها.",
+    "guide.p5": "كلما كان الطلب أدق، كان التحليل أفضل.",
+    "guide.back": "← العودة إلى النموذج",
+
+    "privacy.title": "سياسة الخصوصية والمسؤولية",
+    "privacy.download": "تحميل سياسة الخصوصية (PDF)"
   }
 };
