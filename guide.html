@@ -3,17 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title data-i18n="guide.title"></title>
+  <title data-i18n="guide.title">Guide — e-META</title>
+
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled>
 </head>
 
 <body>
 
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html">
+      <span class="logo-mark">e</span>
+      <span class="logo-text">META</span>
+    </a>
+
+    <a class="btn-secondary" href="index.html" data-i18n="guide.back">← Retour</a>
+  </div>
+</header>
+
 <main class="guide-page">
   <section class="guide-container">
 
-    <h1 data-i18n="guide.title"></h1>
-    <p class="guide.intro" data-i18n="guide.intro"></p>
+    <h1 data-i18n="guide.title">Guide pour bien remplir</h1>
+
+    <p data-i18n="guide.intro">
+      Ce guide vous aide à formuler une demande claire pour obtenir une analyse pertinente.
+    </p>
 
     <ol class="guide-list">
       <li data-i18n="guide.p1"></li>
@@ -23,10 +39,16 @@
       <li data-i18n="guide.p5"></li>
     </ol>
 
-    <a href="index.html" class="guide-back" data-i18n="guide.back"></a>
+    <a href="index.html" class="guide-back" data-i18n="guide.back">← Retour</a>
 
   </section>
 </main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="footer-copy" data-i18n="footer.copy">© 2026 e-META</p>
+  </div>
+</footer>
 
 <script src="i18n.js"></script>
 <script src="script.js"></script>
