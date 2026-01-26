@@ -123,7 +123,7 @@ window.I18N = {
     "privacy.s4.text": "L’utilisateur reste seul responsable des décisions prises à partir des analyses fournies.",
 
     "privacy.download": "Télécharger la politique de confidentialité (PDF)",
-    "privacy.back": "← Retour à l’accueil"
+    "privacy.back": "← Retour à l’accueil",
 
   },
 
@@ -254,7 +254,7 @@ window.I18N = {
      "guide.p3": "Mention key constraints and risks", 
      "guide.p4": "Choose your preferred delivery format",
     "guide.p5": "Be factual: e-META structures, you decide",
-    "guide.back": "← Back to the form"
+    "guide.back": "← Back to the form",
 
   },
 
@@ -385,7 +385,7 @@ window.I18N = {
     "guide.p3": "Mencione restricciones y riesgos clave",
     "guide.p4": "Elija el formato de entrega",
     "guide.p5": "Sea preciso: e-META estructura, usted decide",
-    "guide.back": "← Volver al formulario"
+    "guide.back": "← Volver al formulario",
 
   },
 
@@ -516,7 +516,7 @@ window.I18N = {
     "guide.p3": "اذكر القيود والمخاطر الأساسية",
     "guide.p4": "اختر طريقة التسليم",
     "guide.p5": "كن واضحًا: e-META ينظم وأنت تقرر",
-    "guide.back": "← العودة إلى النموذج"
+    "guide.back": "← العودة إلى النموذج",
 
   }
 };
