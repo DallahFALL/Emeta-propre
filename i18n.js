@@ -96,7 +96,7 @@ const I18N = {
     "privacy.intro": "This page explains how e-META protects your data and its responsibility limits.",
     "privacy.download": "Download the privacy policy (PDF)",
 
-    "footer.copy": "© 2026 e-META — All rights reserved"
+    "footer.copy": "© 2026 e-META — All rights reserved",
   },
 
   /* =====================================================
@@ -139,7 +139,7 @@ const I18N = {
     "privacy.intro": "Esta página explica cómo e-META protege sus datos y sus límites de responsabilidad.",
     "privacy.download": "Descargar la política de privacidad (PDF)",
 
-    "footer.copy": "© 2026 e-META — Todos los derechos reservados"
+    "footer.copy": "© 2026 e-META — Todos los derechos reservados",
   },
 
   /* =====================================================
@@ -182,7 +182,7 @@ const I18N = {
     "privacy.intro": "توضح هذه الصفحة كيفية حماية e-META لبياناتك وحدود المسؤولية.",
     "privacy.download": "تحميل سياسة الخصوصية (PDF)",
 
-    "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة"
+    "footer.copy": ,"© 2026 e-META — جميع الحقوق محفوظة",
   }
 
 };
