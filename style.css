@@ -742,3 +742,89 @@ a{color:inherit;text-decoration:none}
     font-size: 1.2rem;
   }
 }
+/* =====================================================
+   PATCH RESPONSIVE + NARROW FORM (EN/ES safe)
+   À COLLER TOUT EN BAS de style.css
+===================================================== */
+
+/* 1) Form narrower (desktop) */
+.form-section .container{
+  max-width: 980px; /* réduit la largeur globale */
+}
+
+/* si ton form a une classe .emeta-form */
+.emeta-form{
+  max-width: 920px;     /* narrow */
+  margin: 0 auto;       /* centré */
+  width: 100%;
+}
+
+/* si tes fieldsets sont trop larges */
+.field-group{
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 2) Grid responsive qui casse correctement */
+.grid-2{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 14px;
+}
+
+/* force le contenu à ne pas dépasser */
+.grid-2 > *{
+  min-width: 0;
+}
+
+@media (max-width: 860px){
+  .grid-2{
+    grid-template-columns: 1fr; /* mobile = une colonne */
+  }
+}
+
+/* 3) Champs à 100% et sans overflow */
+.field input,
+.field select,
+.field textarea{
+  width: 100%;
+  min-width: 0;
+}
+
+/* 4) Textes longs (EN/ES) : ne cassent plus la mise en page */
+h1,h2,h3,p,label,legend,a,button,li{
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* 5) Boutons : responsive */
+.cta-primary,
+.btn-primary,
+.btn-secondary,
+button{
+  max-width: 100%;
+  white-space: normal;
+}
+
+/* 6) Bloc options/checkbox (si tu as des “chips”) : wrap */
+.options-row,
+.check-row,
+.inline-options{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.options-row > *,
+.check-row > *,
+.inline-options > *{
+  min-width: 220px;
+  flex: 1 1 220px;
+}
+
+/* 7) Version “Ultra-Premium Narrow” pour sections */
+.form-header{
+  max-width: 920px;
+  margin: 0 auto 16px auto;
+}
