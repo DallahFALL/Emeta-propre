@@ -26,6 +26,14 @@ window.I18N = {
     "form.badge.cabinet": "Mode cabinet de conseil",
     "form.title": "Formulaire e-META vNext — Analyse stratégique premium",
     "form.intro": "Plus vos réponses sont précises, plus la recommandation e-META sera juste, nuancée et exploitable.",
+    "guide.title": "Guide pour bien remplir",
+    "guide.intro": "Ce guide vous aide à formuler une demande claire afin d’obtenir une analyse pertinente.",
+    "guide.p1": "Décrivez clairement le contexte de votre décision.",
+    "guide.p2": "Précisez l’objectif principal recherché.",
+    "guide.p3": "Indiquez les contraintes ou limites éventuelles.",
+    "guide.p4": "Mentionnez les options déjà envisagées.",
+    "guide.p5": "Plus votre demande est précise, plus l’analyse sera pertinente.",
+    "guide.back": "← Retour"
     "form.help.download": "Télécharger le guide pour bien remplir",
     
     "group.general": "1) Qualifier la décision",
@@ -153,6 +161,14 @@ window.I18N = {
     "form.badge.cabinet": "Consulting firm mode",
     "form.title": "e-META vNext Form — Premium strategic analysis",
     "form.intro": "The more precise your answers, the more accurate and useful your e-META recommendation will be.",
+    "guide.title": "How to fill the form",
+    "guide.intro": "This guide helps you submit a clear request to receive relevant insights.",
+    "guide.p1": "Clearly describe the context of your decision.",
+    "guide.p2": "Specify the main objective you are pursuing.",
+    "guide.p3": "Mention any constraints or limitations.",
+    "guide.p4": "Indicate options already considered.",
+    "guide.p5": "The clearer your input, the more accurate the analysis.",
+    "guide.back": "← Back"
      "form.help.download": "Download the guide to fill in the form properly",
 
     "group.general": "1) Qualify the decision",
@@ -283,6 +299,15 @@ window.I18N = {
     
     "form.badge.cabinet": "Modo consultoría estratégica",
     "form.title": "Formulario e-META vNext — Análisis estratégico premium",
+    "guide.title": "Guía para completar el formulario",
+    "guide.intro": "Esta guía le ayuda a formular una solicitud clara para obtener un análisis relevante.",
+    "guide.p1": "Describa claramente el contexto de su decisión.",
+    "guide.p2": "Especifique el objetivo principal.",
+    "guide.p3": "Indique las limitaciones existentes.",
+    "guide.p4": "Mencione las opciones consideradas.",
+    "guide.p5": "Cuanto más clara sea la solicitud, mejor será el análisis.",
+    "guide.back": "← Volver"
+
     "form.intro": "Cuanto más precisas sean tus respuestas, más útil y exacta será la recomendación de e-META.",
     "form.help.download": "Descargar la guía para completar correctamente",
 
@@ -415,6 +440,14 @@ window.I18N = {
     "form.badge.cabinet": "وضع مكتب استشارات",
     "form.title": "نموذج e-META vNext — تحليل استراتيجي متميز",
     "form.intro": "كلما كانت إجاباتك أدق، كانت توصية e-META أكثر دقة وفائدة.",
+    "guide.title": "دليل تعبئة النموذج",
+    "guide.intro": "يساعدك هذا الدليل على صياغة طلب واضح للحصول على تحليل دقيق.",
+    "guide.p1": "اشرح سياق القرار بشكل واضح.",
+    "guide.p2": "حدد الهدف الرئيسي.",
+    "guide.p3": "اذكر القيود أو الحدود.",
+    "guide.p4": "اشرح الخيارات التي فكرت بها.",
+    "guide.p5": "كلما كان الطلب أوضح، كان التحليل أدق.",
+     "guide.back": "← رجوع",
     "form.help.download": "تحميل دليل تعبئة النموذج",
 
     "group.general": "1) تحديد القرار",
