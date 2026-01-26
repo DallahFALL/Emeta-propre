@@ -104,6 +104,27 @@ window.I18N = {
     "footer.text": "e-META — Moteur d’intelligence décisionnelle stratégique.",
     "footer.privacy": "Politique de confidentialité",
     "footer.copy": "© 2026 e-META — Tous droits réservés"
+      
+    "privacy.title": "Politique de confidentialité & responsabilité",
+    "privacy.intro": "Cette page explique comment e-META utilise vos informations et les limites de responsabilité du service.",
+
+    "privacy.s1.title": "Nature du service",
+    "privacy.s1.text": "e-META est un assistant d’aide à la décision basé sur l’intelligence artificielle. Les analyses fournies sont indicatives.",
+
+    "privacy.s2.title": "Données collectées",
+    "privacy.s2.li1": "Informations saisies volontairement",
+    "privacy.s2.li2": "Coordonnées nécessaires à la restitution",
+    "privacy.s2.li3": "Documents transmis par l’utilisateur",
+
+    "privacy.s3.title": "Utilisation des données",
+    "privacy.s3.text": "Les données sont utilisées uniquement pour produire l’analyse demandée et améliorer le service.",
+
+    "privacy.s4.title": "Responsabilité",
+    "privacy.s4.text": "L’utilisateur reste seul responsable des décisions prises à partir des analyses fournies.",
+
+    "privacy.download": "Télécharger la politique de confidentialité (PDF)",
+    "privacy.back": "← Retour à l’accueil"
+
   },
 
   en: {
@@ -210,6 +231,31 @@ window.I18N = {
     "footer.text": "e-META — Strategic decision intelligence engine.",
     "footer.privacy": "Privacy policy",
     "footer.copy": "© 2026 e-META — All rights reserved"
+
+    "privacy.title": "Privacy & Liability Policy",
+    "privacy.intro": "This page explains how e-META uses your information and the limits of liability.",
+    "privacy.s1.title": "Nature of the service",
+    "privacy.s1.text": "e-META is an AI-powered decision support assistant. Analyses are indicative only.",
+    "privacy.s2.title": "Data collected",
+    "privacy.s2.li1": "Information voluntarily provided",
+    "privacy.s2.li2": "Contact details for delivery",
+    "privacy.s2.li3": "Documents shared by the user",
+    "privacy.s3.title": "Use of data",
+    "privacy.s3.text": "Data is used solely to generate the requested analysis.",
+    "privacy.s4.title": "Liability",
+    "privacy.s4.text": "Users remain fully responsible for decisions made.",
+    "privacy.download": "Download the privacy policy (PDF)",
+    "privacy.back": "← Back to home",
+
+    "guide.title": "Guide to filling out the form",
+    "guide.intro": "Follow these steps to get the most relevant analysis.",
+    "guide.p1": "Describe the real problem, not just the symptoms",
+    "guide.p2": "Specify up to three priority objectives",
+     "guide.p3": "Mention key constraints and risks", 
+     "guide.p4": "Choose your preferred delivery format",
+    "guide.p5": "Be factual: e-META structures, you decide",
+    "guide.back": "← Back to the form"
+
   },
 
   es: {
@@ -316,6 +362,31 @@ window.I18N = {
     "footer.text": "e-META — Motor de inteligencia estratégica para decisiones.",
     "footer.privacy": "Política de privacidad",
     "footer.copy": "© 2026 e-META — Todos los derechos reservados"
+
+    "privacy.title": "Política de privacidad y responsabilidad",
+    "privacy.intro": "Esta página explica el uso de sus datos y los límites de responsabilidad.",
+    "privacy.s1.title": "Naturaleza del servicio",
+    "privacy.s1.text": "e-META es un asistente de apoyo a la toma de decisiones.",
+    "privacy.s2.title": "Datos recopilados",
+    "privacy.s2.li1": "Información proporcionada voluntariamente",
+    "privacy.s2.li2": "Datos de contacto para la entrega",
+    "privacy.s2.li3": "Documentos compartidos por el usuario",
+    "privacy.s3.title": "Uso de los datos",
+    "privacy.s3.text": "Los datos se usan solo para generar el análisis solicitado.",
+    "privacy.s4.title": "Responsabilidad",
+    "privacy.s4.text": "El usuario es responsable de las decisiones tomadas.",
+    "privacy.download": "Descargar la política de privacidad (PDF)",
+    "privacy.back": "← Volver al inicio",
+
+    "guide.title": "Guía para completar el formulario",
+    "guide.intro": "Siga estos pasos para obtener un análisis pertinente.",
+    "guide.p1": "Describa el problema real",
+    "guide.p2": "Indique hasta tres objetivos prioritarios",
+    "guide.p3": "Mencione restricciones y riesgos clave",
+    "guide.p4": "Elija el formato de entrega",
+    "guide.p5": "Sea preciso: e-META estructura, usted decide",
+    "guide.back": "← Volver al formulario"
+
   },
 
   ar: {
@@ -421,6 +492,31 @@ window.I18N = {
 
     "footer.text": "e-META — محرك ذكاء استراتيجي لاتخاذ القرار.",
     "footer.privacy": "سياسة الخصوصية",
-    "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة"
+    "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة",
+      
+    "privacy.title": "سياسة الخصوصية والمسؤولية",
+    "privacy.intro": "توضح هذه الصفحة كيفية استخدام البيانات وحدود المسؤولية.",
+    "privacy.s1.title": "طبيعة الخدمة",
+    "privacy.s1.text": "e-META هو مساعد ذكي لدعم اتخاذ القرار.",
+    "privacy.s2.title": "البيانات التي يتم جمعها",
+    "privacy.s2.li1": "البيانات المقدمة طوعًا",
+    "privacy.s2.li2": "بيانات الاتصال للتسليم",
+    "privacy.s2.li3": "المستندات التي يشاركها المستخدم",
+    "privacy.s3.title": "استخدام البيانات",
+    "privacy.s3.text": "تُستخدم البيانات فقط لإنتاج التحليل المطلوب.",
+    "privacy.s4.title": "المسؤولية",
+    "privacy.s4.text": "يبقى المستخدم مسؤولًا عن قراراته.",
+    "privacy.download": "تحميل سياسة الخصوصية (PDF)",
+    "privacy.back": "← العودة إلى الصفحة الرئيسية",
+
+    "guide.title": "دليل تعبئة النموذج",
+    "guide.intro": "اتبع هذه الخطوات للحصول على تحليل دقيق.",
+    "guide.p1": "صف المشكلة الحقيقية",
+    "guide.p2": "حدد ثلاثة أهداف كحد أقصى",
+    "guide.p3": "اذكر القيود والمخاطر الأساسية",
+    "guide.p4": "اختر طريقة التسليم",
+    "guide.p5": "كن واضحًا: e-META ينظم وأنت تقرر",
+    "guide.back": "← العودة إلى النموذج"
+
   }
 };
