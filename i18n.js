@@ -22,7 +22,6 @@ window.I18N = {
     "help.privacy": "🔒 Politique de confidentialité",
     "help.guide": "📘 Guide officiel pour bien remplir le formulaire",
     "privacy.download": "Télécharger la politique de confidentialité (PDF)",
-    "form.help.download": "Télécharger le guide pour bien remplir",
 
     "form.badge.cabinet": "Mode cabinet de conseil",
     "form.title": "Formulaire e-META vNext — Analyse stratégique premium",
@@ -129,12 +128,12 @@ window.I18N = {
     "help.privacy": "🔒 Privacy policy",
     "help.guide": "📘 Official guide to complete the form",
     "privacy.download": "Download the privacy policy (PDF)",
-    "privacy.back": "Back to the form",
     
     "form.badge.cabinet": "Consulting firm mode",
     "form.title": "e-META vNext Form — Premium strategic analysis",
     "form.intro": "The more precise your answers, the more accurate and useful your e-META recommendation will be.",
-      
+     "form.help.download": "Download the guide to fill in the form properly",
+
     "group.general": "1) Qualify the decision",
     "field.domain.label": "Main domain",
     "field.domain.placeholder": "Select a domain",
@@ -239,7 +238,8 @@ window.I18N = {
     "form.badge.cabinet": "Modo consultoría estratégica",
     "form.title": "Formulario e-META vNext — Análisis estratégico premium",
     "form.intro": "Cuanto más precisas sean tus respuestas, más útil y exacta será la recomendación de e-META.",
-    
+    "form.help.download": "Descargar la guía para completar correctamente",
+
     "group.general": "1) Definir la decisión",
     "field.domain.label": "Dominio principal",
     "field.domain.placeholder": "Selecciona un dominio",
@@ -344,7 +344,8 @@ window.I18N = {
     "form.badge.cabinet": "وضع مكتب استشارات",
     "form.title": "نموذج e-META vNext — تحليل استراتيجي متميز",
     "form.intro": "كلما كانت إجاباتك أدق، كانت توصية e-META أكثر دقة وفائدة.",
-    
+    "form.help.download": "تحميل دليل تعبئة النموذج",
+
     "group.general": "1) تحديد القرار",
     "field.domain.label": "المجال الرئيسي",
     "field.domain.placeholder": "اختر مجالاً",
