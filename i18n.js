@@ -103,8 +103,8 @@ window.I18N = {
 
     "footer.text": "e-META — Moteur d’intelligence décisionnelle stratégique.",
     "footer.privacy": "Politique de confidentialité",
-    "footer.copy": "© 2026 e-META — Tous droits réservés"
-      
+    "footer.copy": "© 2026 e-META — Tous droits réservés",
+
     "privacy.title": "Politique de confidentialité & responsabilité",
     "privacy.intro": "Cette page explique comment e-META utilise vos informations et les limites de responsabilité du service.",
 
@@ -123,7 +123,7 @@ window.I18N = {
     "privacy.s4.text": "L’utilisateur reste seul responsable des décisions prises à partir des analyses fournies.",
 
     "privacy.download": "Télécharger la politique de confidentialité (PDF)",
-    "privacy.back": "← Retour à l’accueil",
+    "privacy.back": "← Retour à l’accueil"
 
   },
 
@@ -230,7 +230,7 @@ window.I18N = {
 
     "footer.text": "e-META — Strategic decision intelligence engine.",
     "footer.privacy": "Privacy policy",
-    "footer.copy": "© 2026 e-META — All rights reserved"
+    "footer.copy": "© 2026 e-META — All rights reserved",
 
     "privacy.title": "Privacy & Liability Policy",
     "privacy.intro": "This page explains how e-META uses your information and the limits of liability.",
@@ -361,7 +361,7 @@ window.I18N = {
 
     "footer.text": "e-META — Motor de inteligencia estratégica para decisiones.",
     "footer.privacy": "Política de privacidad",
-    "footer.copy": "© 2026 e-META — Todos los derechos reservados"
+    "footer.copy": "© 2026 e-META — Todos los derechos reservados",
 
     "privacy.title": "Política de privacidad y responsabilidad",
     "privacy.intro": "Esta página explica el uso de sus datos y los límites de responsabilidad.",
