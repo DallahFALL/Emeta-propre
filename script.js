@@ -1,11 +1,9 @@
-// script.js — e-META vNext (FINAL • stable • desktop & mobile)
+// script.js — e-META vNext (FINAL LOCK)
 (function () {
   "use strict";
 
   const STORAGE_KEY = "emeta_lang";
   const DEFAULT_LANG = "fr";
-
-  /* ================= CORE ================= */
 
   function getLang() {
     return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
@@ -14,43 +12,34 @@
   function setRtl(lang) {
     document.documentElement.lang = lang;
     document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
-
     const rtl = document.getElementById("rtlStylesheet");
     if (rtl) rtl.disabled = (lang !== "ar");
   }
 
-  /* ================= I18N ================= */
-
   function applyI18n(lang) {
-    const dict = window.I18N?.[lang];
+    const dict = window.I18N && window.I18N[lang];
     if (!dict) {
       console.warn("i18n: language not found →", lang);
       return;
     }
 
-    // Text content
+    // Text nodes
     document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.dataset.i18n;
-      if (dict[key] !== undefined) {
-        el.textContent = dict[key];
-      }
+      const key = el.getAttribute("data-i18n");
+      if (dict[key] !== undefined) el.textContent = dict[key];
     });
 
     // Placeholders
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-      const key = el.dataset.i18nPlaceholder;
-      if (dict[key] !== undefined) {
-        el.placeholder = dict[key];
-      }
+      const key = el.getAttribute("data-i18n-placeholder");
+      if (dict[key] !== undefined) el.placeholder = dict[key];
     });
 
-    // Sync ALL language selectors (desktop + mobile)
-    document.querySelectorAll(".langSelect").forEach(sel => {
-      sel.value = lang;
+    // Sync all language selects (header + menu, etc.)
+    document.querySelectorAll("select.langSelect").forEach(sel => {
+      if (sel.value !== lang) sel.value = lang;
     });
   }
-
-  /* ================= PDF LINKS ================= */
 
   function updatePdfLinks(lang) {
     const guideMap = {
@@ -69,64 +58,52 @@
 
     const guide = document.getElementById("pdfGuideLink");
     const privacy = document.getElementById("pdfPrivacyLink");
-
     if (guide) guide.href = guideMap[lang] || guideMap.fr;
     if (privacy) privacy.href = privacyMap[lang] || privacyMap.fr;
   }
 
-  /* ================= LANGUAGE SWITCH ================= */
-
   function setLang(lang) {
     localStorage.setItem(STORAGE_KEY, lang);
-
     setRtl(lang);
     applyI18n(lang);
     updatePdfLinks(lang);
-
-    // Desktop reflow fix (menus / header sticky)
-    requestAnimationFrame(() => applyI18n(lang));
-    setTimeout(() => applyI18n(lang), 50);
   }
-
-  /* ================= UX ================= */
 
   function scrollToForm() {
-    document.getElementById("form")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
+    document.getElementById("form")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  /* ================= INIT ================= */
-
   document.addEventListener("DOMContentLoaded", () => {
+    // 1) Init language ONCE
     const lang = getLang();
-
-    // Initial apply
     setLang(lang);
 
-    // Language selectors (ALL)
-    document.querySelectorAll(".langSelect").forEach(sel => {
-      sel.addEventListener("change", e => setLang(e.target.value));
+    // 2) Prevent “EN saute” caused by late render/layout
+    requestAnimationFrame(() => applyI18n(lang));
+    setTimeout(() => applyI18n(lang), 80);
+
+    // 3) One event handler for ALL selects (no double listeners)
+    document.addEventListener("change", (e) => {
+      const t = e.target;
+      if (t && t.matches("select.langSelect")) {
+        setLang(t.value);
+      }
     });
 
-    // Burger menu
-    document.getElementById("burgerBtn")
-      ?.addEventListener("click", () =>
-        document.getElementById("mainNav")?.classList.toggle("open")
-      );
+    // Burger
+    document.getElementById("burgerBtn")?.addEventListener("click", () => {
+      document.getElementById("mainNav")?.classList.toggle("open");
+      // re-apply in case menu was injected/hidden
+      applyI18n(getLang());
+    });
 
-    // CTA scroll
+    // CTAs
     document.getElementById("startBtn")?.addEventListener("click", scrollToForm);
     document.getElementById("customBtn")?.addEventListener("click", scrollToForm);
 
-    // Consent check
-    document.getElementById("emetaForm")
-      ?.addEventListener("submit", e => {
-        if (!document.getElementById("consent")?.checked) {
-          e.preventDefault();
-        }
-      });
+    // Consent
+    document.getElementById("emetaForm")?.addEventListener("submit", (e) => {
+      if (!document.getElementById("consent")?.checked) e.preventDefault();
+    });
   });
-
 })();
