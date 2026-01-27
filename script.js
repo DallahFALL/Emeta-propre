@@ -1,9 +1,17 @@
-// script.js — e-META vNext (stable desktop + multi-select)
+// =====================================================
+// e-META — script.js FINAL STABLE
+// - i18n FR / EN / ES / AR
+// - Desktop + Mobile SAFE
+// - Lang select flottant corrigé
+// - RTL auto (AR)
+// =====================================================
 (function () {
   "use strict";
 
   const STORAGE_KEY = "emeta_lang";
   const DEFAULT_LANG = "fr";
+
+  /* ================= UTIL ================= */
 
   function getLang() {
     return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
@@ -12,29 +20,59 @@
   function setRtl(lang) {
     document.documentElement.lang = lang;
     document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
-    const rtl = document.getElementById("rtlStylesheet");
-    if (rtl) rtl.disabled = (lang !== "ar");
+
+    const rtlStylesheet = document.getElementById("rtlStylesheet");
+    if (rtlStylesheet) {
+      rtlStylesheet.disabled = (lang !== "ar");
+    }
   }
 
+  /* ================= I18N ================= */
+
   function applyI18n(lang) {
-    const dict = window.I18N?.[lang];
+    const dict = window.I18N && window.I18N[lang];
     if (!dict) {
       console.warn("i18n: language not found →", lang);
       return;
     }
 
-    // Text nodes
+    // Text content
     document.querySelectorAll("[data-i18n]").forEach(el => {
       const key = el.getAttribute("data-i18n");
-      if (dict[key] !== undefined) el.textContent = dict[key];
+      if (dict[key] !== undefined) {
+        el.textContent = dict[key];
+      }
     });
 
     // Placeholders
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
       const key = el.getAttribute("data-i18n-placeholder");
-      if (dict[key] !== undefined) el.setAttribute("placeholder", dict[key]);
+      if (dict[key] !== undefined) {
+        el.placeholder = dict[key];
+      }
     });
   }
+
+  /* ================= LANG SELECT ================= */
+
+  function syncLangSelect(lang) {
+    const select = document.getElementById("langSelect");
+    if (select && select.value !== lang) {
+      select.value = lang;
+    }
+  }
+
+  function bindLangSelect() {
+    const select = document.getElementById("langSelect");
+    if (!select) return;
+
+    // ⚠️ Un seul listener, une seule fois
+    select.addEventListener("change", e => {
+      setLang(e.target.value);
+    });
+  }
+
+  /* ================= PDF LINKS ================= */
 
   function updatePdfLinks(lang) {
     const guideMap = {
@@ -54,51 +92,76 @@
     const guide = document.getElementById("pdfGuideLink");
     const privacy = document.getElementById("pdfPrivacyLink");
 
-    if (guide) guide.href = guideMap[lang] || guideMap.fr;
-    if (privacy) privacy.href = privacyMap[lang] || privacyMap.fr;
+    if (guide && guideMap[lang]) guide.href = guideMap[lang];
+    if (privacy && privacyMap[lang]) privacy.href = privacyMap[lang];
   }
 
-  function syncLangSelects(lang) {
-    // 🔥 Synchronise TOUS les selects (header + flottant desktop)
-    document.querySelectorAll("select[data-lang-select]").forEach(sel => {
-      sel.value = lang;
-    });
-  }
+  /* ================= CORE ================= */
 
   function setLang(lang) {
     localStorage.setItem(STORAGE_KEY, lang);
+
     setRtl(lang);
     applyI18n(lang);
     updatePdfLinks(lang);
-    syncLangSelects(lang);
+    syncLangSelect(lang);
   }
 
+  /* ================= UI ================= */
+
   function scrollToForm() {
-    document.getElementById("form")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const form = document.getElementById("form");
+    if (form) {
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }
+
+  function bindBurger() {
+    const burger = document.getElementById("burgerBtn");
+    const nav = document.getElementById("mainNav");
+
+    if (!burger || !nav) return;
+
+    burger.addEventListener("click", () => {
+      nav.classList.toggle("open");
+      burger.setAttribute(
+        "aria-expanded",
+        nav.classList.contains("open") ? "true" : "false"
+      );
+    });
+  }
+
+  function bindFormConsent() {
+    const form = document.getElementById("emetaForm");
+    const consent = document.getElementById("consent");
+
+    if (!form || !consent) return;
+
+    form.addEventListener("submit", e => {
+      if (!consent.checked) {
+        e.preventDefault();
+        consent.focus();
+      }
+    });
+  }
+
+  /* ================= INIT ================= */
 
   document.addEventListener("DOMContentLoaded", () => {
     const lang = getLang();
+
+    // 1️⃣ Bind UI (UNE FOIS)
+    bindLangSelect();
+    bindBurger();
+    bindFormConsent();
+
+    // 2️⃣ Apply language (UNE FOIS)
     setLang(lang);
 
-    // ✅ branchement robuste: tous les selects
-    document.querySelectorAll("select[data-lang-select]").forEach(sel => {
-      sel.addEventListener("change", e => setLang(e.target.value));
+    // 3️⃣ Sécurité repaint desktop (fonts/layout)
+    requestAnimationFrame(() => {
+      applyI18n(lang);
     });
-
-    document.getElementById("burgerBtn")?.addEventListener("click", () => {
-      document.getElementById("mainNav")?.classList.toggle("open");
-    });
-
-    document.getElementById("startBtn")?.addEventListener("click", scrollToForm);
-    document.getElementById("customBtn")?.addEventListener("click", scrollToForm);
-
-    document.getElementById("emetaForm")?.addEventListener("submit", e => {
-      if (!document.getElementById("consent")?.checked) e.preventDefault();
-    });
-
-    // 🩹 Anti “desktop jump” (fonts/layout repaint)
-    requestAnimationFrame(() => applyI18n(getLang()));
-    setTimeout(() => applyI18n(getLang()), 80);
   });
+
 })();
