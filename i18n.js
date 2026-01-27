@@ -68,13 +68,13 @@ window.I18N = {
 "field.problem.ph": "Décrivez le vrai problème (pas seulement les symptômes).",
 
 "field.objectives.label": "Objectifs prioritaires (3–5 max)",
-"field.objectives.ph": "Ex. : augmenter la marge, réduire le churn, accélérer le déploiement…",
+"field.objectives.ph": "Ex : augmenter la marge, réduire le churn, accélérer le déploiement…",
 
 "field.constraints.label": "Contraintes & risques majeurs",
 "field.constraints.ph": "Budget, délais, réglementation, ressources, résistance interne…",
 
 "field.kpis.label": "KPIs / indicateurs de succès",
-"field.kpis.ph": "Ex. : chiffre d’affaires, ROI, NPS, délais, qualité, satisfaction…",
+"field.kpis.ph": "Ex : CA, ROI, NPS, délais, qualité, satisfaction…",
 
 "field.resources.label": "Ressources déjà disponibles",
 "field.resources.ph": "Équipe, outils, données, partenaires, budget initial…",
@@ -225,25 +225,25 @@ en: {
   "field.title.hint": "One clear sentence: it will guide the entire synthesis.",
 
   /* ================= GROUP 2 ================= */
-  "group.analysis": "2) Structure the analysis (consulting level)",
+"group.analysis": "2) Structure the analysis (consulting level)",
 
 "field.problem.label": "Core problem to solve",
-"field.problem.ph": "Describe the real problem (not just the symptoms).",
+"field.problem.ph": "Describe the real problem (not only symptoms).",
 
-"field.objectives.label": "Priority objectives (3–5 max)",
-"field.objectives.ph": "E.g. increase margin, reduce churn, accelerate deployment…",
+"field.objectives.label": "Priority goals (3–5 max)",
+"field.objectives.ph": "E.g., increase margin, reduce churn, speed up deployment…",
 
-"field.constraints.label": "Key constraints & risks",
-"field.constraints.ph": "Budget, timelines, regulations, resources, internal resistance…",
+"field.constraints.label": "Constraints & major risks",
+"field.constraints.ph": "Budget, deadlines, regulation, resources, internal resistance…",
 
 "field.kpis.label": "KPIs / success indicators",
-"field.kpis.ph": "E.g. revenue, ROI, NPS, lead time, quality, satisfaction…",
+"field.kpis.ph": "E.g., revenue, ROI, NPS, lead time, quality, satisfaction…",
 
 "field.resources.label": "Available resources",
 "field.resources.ph": "Team, tools, data, partners, initial budget…",
 
 "field.context.label": "Detailed context (recommended)",
-"field.context.ph": "Background, stakeholders, past decisions, local constraints…",
+"field.context.ph": "History, stakeholders, past decisions, local constraints…", 
 
   /* ================= GROUP 3 ================= */
   "group.budget": "3) Ambition, budget & urgency",
@@ -389,13 +389,13 @@ es: {
   /* ================= GROUP 2 ================= */
   "group.analysis": "2) Estructurar el análisis (nivel consultoría)",
 
-"field.problem.label": "Problema central a resolver",
-"field.problem.ph": "Describe el problema real (no solo los síntomas).",
+"field.problem.label": "Problema central",
+"field.problem.ph": "Describe el problema real (no solo síntomas).",
 
 "field.objectives.label": "Objetivos prioritarios (máx. 3–5)",
-"field.objectives.ph": "Ej.: aumentar el margen, reducir churn, acelerar el despliegue…",
+"field.objectives.ph": "Ej.: aumentar margen, reducir churn, acelerar despliegue…",
 
-"field.constraints.label": "Restricciones y riesgos clave",
+"field.constraints.label": "Restricciones y riesgos",
 "field.constraints.ph": "Presupuesto, plazos, regulación, recursos, resistencia interna…",
 
 "field.kpis.label": "KPIs / indicadores de éxito",
@@ -550,23 +550,23 @@ ar: {
   /* ================= GROUP 2 ================= */
  "group.analysis": "2) هيكلة التحليل (مستوى استشاري)",
 
-"field.problem.label": "المشكلة الأساسية المطلوب حلها",
+"field.problem.label": "المشكلة الأساسية",
 "field.problem.ph": "اشرح المشكلة الحقيقية (وليس الأعراض فقط).",
 
 "field.objectives.label": "الأهداف ذات الأولوية (3–5 كحد أقصى)",
-"field.objectives.ph": "مثال: زيادة الهامش، تقليل التسرب، تسريع التنفيذ…",
+"field.objectives.ph": "مثال: زيادة الهامش، خفض التسرب، تسريع التنفيذ…",
 
-"field.constraints.label": "القيود والمخاطر الرئيسية",
-"field.constraints.ph": "الميزانية، الجداول الزمنية، اللوائح، الموارد، مقاومة داخلية…",
+"field.constraints.label": "القيود والمخاطر",
+"field.constraints.ph": "الميزانية، المهل، اللوائح، الموارد، مقاومة داخلية…",
 
-"field.kpis.label": "مؤشرات الأداء / معايير النجاح",
-"field.kpis.ph": "مثال: الإيرادات، ROI، NPS، الوقت، الجودة، الرضا…",
+"field.kpis.label": "المؤشرات / معايير النجاح",
+"field.kpis.ph": "مثال: الإيرادات، ROI، NPS، الزمن، الجودة، الرضا…",
 
 "field.resources.label": "الموارد المتاحة",
 "field.resources.ph": "الفريق، الأدوات، البيانات، الشركاء، ميزانية أولية…",
 
 "field.context.label": "سياق مفصل (مستحسن)",
-"field.context.ph": "الخلفية، الأطراف المعنية، قرارات سابقة، قيود محلية…",
+"field.context.ph": "الخلفية، الأطراف، قرارات سابقة، قيود محلية…",
 
   /* ================= GROUP 3 ================= */
   "group.budget": "3) الطموح والميزانية والاستعجال",
