@@ -1,4 +1,4 @@
-// script.js — e-META vNext (FINAL LOCK)
+// script.js — e-META vNext (stable desktop + multi-select)
 (function () {
   "use strict";
 
@@ -17,7 +17,7 @@
   }
 
   function applyI18n(lang) {
-    const dict = window.I18N && window.I18N[lang];
+    const dict = window.I18N?.[lang];
     if (!dict) {
       console.warn("i18n: language not found →", lang);
       return;
@@ -32,12 +32,7 @@
     // Placeholders
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
       const key = el.getAttribute("data-i18n-placeholder");
-      if (dict[key] !== undefined) el.placeholder = dict[key];
-    });
-
-    // Sync all language selects (header + menu, etc.)
-    document.querySelectorAll("select.langSelect").forEach(sel => {
-      if (sel.value !== lang) sel.value = lang;
+      if (dict[key] !== undefined) el.setAttribute("placeholder", dict[key]);
     });
   }
 
@@ -58,8 +53,16 @@
 
     const guide = document.getElementById("pdfGuideLink");
     const privacy = document.getElementById("pdfPrivacyLink");
+
     if (guide) guide.href = guideMap[lang] || guideMap.fr;
     if (privacy) privacy.href = privacyMap[lang] || privacyMap.fr;
+  }
+
+  function syncLangSelects(lang) {
+    // 🔥 Synchronise TOUS les selects (header + flottant desktop)
+    document.querySelectorAll("select[data-lang-select]").forEach(sel => {
+      sel.value = lang;
+    });
   }
 
   function setLang(lang) {
@@ -67,6 +70,7 @@
     setRtl(lang);
     applyI18n(lang);
     updatePdfLinks(lang);
+    syncLangSelects(lang);
   }
 
   function scrollToForm() {
@@ -74,36 +78,27 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    // 1) Init language ONCE
     const lang = getLang();
     setLang(lang);
 
-    // 2) Prevent “EN saute” caused by late render/layout
-    requestAnimationFrame(() => applyI18n(lang));
-    setTimeout(() => applyI18n(lang), 80);
-
-    // 3) One event handler for ALL selects (no double listeners)
-    document.addEventListener("change", (e) => {
-      const t = e.target;
-      if (t && t.matches("select.langSelect")) {
-        setLang(t.value);
-      }
+    // ✅ branchement robuste: tous les selects
+    document.querySelectorAll("select[data-lang-select]").forEach(sel => {
+      sel.addEventListener("change", e => setLang(e.target.value));
     });
 
-    // Burger
     document.getElementById("burgerBtn")?.addEventListener("click", () => {
       document.getElementById("mainNav")?.classList.toggle("open");
-      // re-apply in case menu was injected/hidden
-      applyI18n(getLang());
     });
 
-    // CTAs
     document.getElementById("startBtn")?.addEventListener("click", scrollToForm);
     document.getElementById("customBtn")?.addEventListener("click", scrollToForm);
 
-    // Consent
-    document.getElementById("emetaForm")?.addEventListener("submit", (e) => {
+    document.getElementById("emetaForm")?.addEventListener("submit", e => {
       if (!document.getElementById("consent")?.checked) e.preventDefault();
     });
+
+    // 🩹 Anti “desktop jump” (fonts/layout repaint)
+    requestAnimationFrame(() => applyI18n(getLang()));
+    setTimeout(() => applyI18n(getLang()), 80);
   });
 })();
