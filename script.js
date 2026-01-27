@@ -67,6 +67,10 @@
     const sel = document.getElementById("langSelect");
     if (sel) sel.value = lang;
   }
+// Re-appliquer i18n après ouverture menu desktop
+document.querySelectorAll(".nav, .main-nav, header").forEach(() => {
+  applyI18n(lang);
+});
 
   function scrollToForm() {
     document.getElementById("form")?.scrollIntoView({
