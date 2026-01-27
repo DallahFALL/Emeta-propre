@@ -31,7 +31,7 @@
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
       const key = el.dataset.i18nPlaceholder;
       if (dict[key] !== undefined) {
-  el.textContent = dict[key];
+  el.placeholder = dict[key];
 }
     });
   }
