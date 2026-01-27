@@ -753,3 +753,30 @@ a{color:inherit;text-decoration:none}
     padding: 0 12px;
   }
 }
+/* ================= HEADER LANG FIX ================= */
+
+/* Empêche le select de casser le layout */
+.header-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Select langue compact et neutre */
+.langSelect {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* Fix desktop : empêche le header d'étirer le contenu */
+.site-header .container,
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
