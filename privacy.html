@@ -202,23 +202,5 @@
   <script src="i18n.js"></script>
   <script src="script.js"></script>
 
-  <!-- PDF dynamique selon la langue (utilise la même clé que script.js: emeta_lang) -->
-  <script>
-    (function(){
-      const STORAGE_KEY = "emeta_lang";
-      const lang = localStorage.getItem(STORAGE_KEY) || "fr";
-
-      const pdfMap = {
-        fr: "docs/privacy_fr.pdf",
-        en: "docs/privacy_en.pdf",
-        es: "docs/privacy_es.pdf",
-        ar: "docs/privacy_ar.pdf"
-      };
-
-      const link = document.getElementById("privacyPdfLink");
-      if (link && pdfMap[lang]) link.href = pdfMap[lang];
-    })();
-  </script>
-
 </body>
 </html>
