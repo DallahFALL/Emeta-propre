@@ -74,7 +74,21 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    setLang(getLang());
+  const lang = getLang();
+
+  // 1️⃣ Appliquer immédiatement
+  setLang(lang);
+
+  // 2️⃣ Ré-appliquer APRÈS rendu complet (fix desktop)
+  requestAnimationFrame(() => {
+    applyI18n(lang);
+  });
+
+  // 3️⃣ Sécurité supplémentaire (fonts/layout desktop)
+  setTimeout(() => {
+    applyI18n(lang);
+  }, 50);
+});
 
     document.getElementById("langSelect")
       ?.addEventListener("change", e => setLang(e.target.value));
