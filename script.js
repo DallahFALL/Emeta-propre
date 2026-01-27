@@ -23,10 +23,10 @@
       return;
     }
 
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.dataset.i18n;
-      if (dict[key]) el.textContent = dict[key];
-    });
+    document.querySelectorAll(".langSelect").forEach(sel => {
+  sel.value = lang;
+  sel.addEventListener("change", e => setLang(e.target.value));
+});
 
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
       const key = el.dataset.i18nPlaceholder;
