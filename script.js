@@ -1,4 +1,4 @@
-// script.js — e-META vNext (stable)
+// script.js — e-META vNext (stable & clean)
 (function () {
   "use strict";
 
@@ -18,7 +18,10 @@
 
   function applyI18n(lang) {
     const dict = window.I18N?.[lang];
-    if (!dict) return;
+    if (!dict) {
+      console.warn("i18n: language not found →", lang);
+      return;
+    }
 
     document.querySelectorAll("[data-i18n]").forEach(el => {
       const key = el.dataset.i18n;
@@ -32,26 +35,26 @@
   }
 
   function updatePdfLinks(lang) {
-  const guideMap = {
-    fr: "pdf/eMETA_Guide_Formulaire_FR.pdf",
-    en: "pdf/eMETA_Guide_Formulaire_EN.pdf",
-    es: "pdf/eMETA_Guide_Formulaire_ES.pdf",
-    ar: "pdf/eMETA_Guide_Formulaire_AR.pdf"
-  };
+    const guideMap = {
+      fr: "pdf/eMETA_Guide_Formulaire_FR.pdf",
+      en: "pdf/eMETA_Guide_Formulaire_EN.pdf",
+      es: "pdf/eMETA_Guide_Formulaire_ES.pdf",
+      ar: "pdf/eMETA_Guide_Formulaire_AR.pdf"
+    };
 
-  const privacyMap = {
-    fr: "pdf/eMETA_Privacy_CGU_FR.pdf",
-    en: "pdf/eMETA_Privacy_CGU_EN.pdf",
-    es: "pdf/eMETA_Privacy_CGU_ES.pdf",
-    ar: "pdf/eMETA_Privacy_CGU_AR.pdf"
-  };
+    const privacyMap = {
+      fr: "pdf/eMETA_Privacy_CGU_FR.pdf",
+      en: "pdf/eMETA_Privacy_CGU_EN.pdf",
+      es: "pdf/eMETA_Privacy_CGU_ES.pdf",
+      ar: "pdf/eMETA_Privacy_CGU_AR.pdf"
+    };
 
-  const guide = document.getElementById("pdfGuideLink");
-  const privacy = document.getElementById("pdfPrivacyLink");
+    const guide = document.getElementById("pdfGuideLink");
+    const privacy = document.getElementById("pdfPrivacyLink");
 
-  if (guide) guide.href = guideMap[lang] || guideMap.fr;
-  if (privacy) privacy.href = privacyMap[lang] || privacyMap.fr;
-}
+    if (guide) guide.href = guideMap[lang] || guideMap.fr;
+    if (privacy) privacy.href = privacyMap[lang] || privacyMap.fr;
+  }
 
   function setLang(lang) {
     localStorage.setItem(STORAGE_KEY, lang);
@@ -91,4 +94,5 @@
         }
       });
   });
+
 })();
