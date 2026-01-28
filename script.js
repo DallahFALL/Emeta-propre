@@ -1,10 +1,11 @@
 // =====================================================
 // e-META — script.js FINAL STABLE
-// - i18n FR / EN / ES / AR
-// - Desktop + Mobile SAFE
-// - Lang select flottant corrigé
-// - RTL auto (AR)
+// i18n FR / EN / ES / AR
+// Desktop + Mobile SAFE
+// Select langue UNIQUE
+// RTL auto (AR)
 // =====================================================
+
 (function () {
   "use strict";
 
@@ -21,10 +22,8 @@
     document.documentElement.lang = lang;
     document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
 
-    const rtlStylesheet = document.getElementById("rtlStylesheet");
-    if (rtlStylesheet) {
-      rtlStylesheet.disabled = (lang !== "ar");
-    }
+    const rtl = document.getElementById("rtlStylesheet");
+    if (rtl) rtl.disabled = (lang !== "ar");
   }
 
   /* ================= I18N ================= */
@@ -32,21 +31,19 @@
   function applyI18n(lang) {
     const dict = window.I18N && window.I18N[lang];
     if (!dict) {
-      console.warn("i18n: language not found →", lang);
+      console.warn("i18n missing for:", lang);
       return;
     }
 
-    // Text content
     document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
+      const key = el.dataset.i18n;
       if (dict[key] !== undefined) {
         el.textContent = dict[key];
       }
     });
 
-    // Placeholders
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-      const key = el.getAttribute("data-i18n-placeholder");
+      const key = el.dataset.i18nPlaceholder;
       if (dict[key] !== undefined) {
         el.placeholder = dict[key];
       }
@@ -55,21 +52,20 @@
 
   /* ================= LANG SELECT ================= */
 
-  function syncLangSelect(lang) {
-    const select = document.getElementById("langSelect");
-    if (select && select.value !== lang) {
-      select.value = lang;
-    }
-  }
-
   function bindLangSelect() {
-    const select = document.getElementById("langSelect");
+    const select = document.querySelector("[data-lang-select]");
     if (!select) return;
 
-    // ⚠️ Un seul listener, une seule fois
     select.addEventListener("change", e => {
       setLang(e.target.value);
     });
+  }
+
+  function syncLangSelect(lang) {
+    const select = document.querySelector("[data-lang-select]");
+    if (select && select.value !== lang) {
+      select.value = lang;
+    }
   }
 
   /* ================= PDF LINKS ================= */
@@ -99,6 +95,8 @@
   /* ================= CORE ================= */
 
   function setLang(lang) {
+    console.log("SET LANG =", lang);
+
     localStorage.setItem(STORAGE_KEY, lang);
 
     setRtl(lang);
@@ -108,13 +106,6 @@
   }
 
   /* ================= UI ================= */
-
-  function scrollToForm() {
-    const form = document.getElementById("form");
-    if (form) {
-      form.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }
 
   function bindBurger() {
     const burger = document.getElementById("burgerBtn");
@@ -148,12 +139,18 @@
   /* ================= INIT ================= */
 
   document.addEventListener("DOMContentLoaded", () => {
-  console.log("LANG INIT =", localStorage.getItem("emeta_lang"));
-  console.log("HTML lang =", document.documentElement.lang);
-  console.log("HTML dir =", document.documentElement.dir);
+    console.log("LANG INIT =", localStorage.getItem(STORAGE_KEY));
+    console.log("HTML lang =", document.documentElement.lang);
+    console.log("HTML dir =", document.documentElement.dir);
 
-  const lang = getLang();
-  console.log("LANG FROM getLang() =", lang);
+    const lang = getLang();
+    console.log("LANG FROM getLang() =", lang);
 
-  setLang(lang);
-});
+    setLang(lang);
+
+    bindLangSelect();
+    bindBurger();
+    bindFormConsent();
+  });
+
+})(); // ← FERMETURE CRITIQUE
