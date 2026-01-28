@@ -148,20 +148,12 @@
   /* ================= INIT ================= */
 
   document.addEventListener("DOMContentLoaded", () => {
-    const lang = getLang();
+  console.log("LANG INIT =", localStorage.getItem("emeta_lang"));
+  console.log("HTML lang =", document.documentElement.lang);
+  console.log("HTML dir =", document.documentElement.dir);
 
-    // 1️⃣ Bind UI (UNE FOIS)
-    bindLangSelect();
-    bindBurger();
-    bindFormConsent();
+  const lang = getLang();
+  console.log("LANG FROM getLang() =", lang);
 
-    // 2️⃣ Apply language (UNE FOIS)
-    setLang(lang);
-
-    // 3️⃣ Sécurité repaint desktop (fonts/layout)
-    requestAnimationFrame(() => {
-      applyI18n(lang);
-    });
-  });
-
-})();
+  setLang(lang);
+});
