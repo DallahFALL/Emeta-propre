@@ -358,3 +358,4 @@ window.I18N = {
     "footer.privacy": "سياسة الخصوصية",
     "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة"
   }
+})();
