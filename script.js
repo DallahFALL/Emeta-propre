@@ -1,9 +1,8 @@
 // =====================================================
-// e-META — script.js FINAL STABLE
+// e-META — script.js FINAL STABLE (FIXED)
 // i18n FR / EN / ES / AR
-// Desktop + Mobile SAFE
-// Select langue UNIQUE
-// RTL auto (AR)
+// Select langue UNIQUE (#langSelect)
+// RTL auto
 // =====================================================
 
 (function () {
@@ -11,6 +10,7 @@
 
   const STORAGE_KEY = "emeta_lang";
   const DEFAULT_LANG = "fr";
+  const LANG_SELECT_ID = "langSelect";
 
   /* ================= UTIL ================= */
 
@@ -31,7 +31,7 @@
   function applyI18n(lang) {
     const dict = window.I18N && window.I18N[lang];
     if (!dict) {
-      console.warn("i18n missing for:", lang);
+      console.error("❌ I18N dictionnaire manquant pour :", lang);
       return;
     }
 
@@ -39,6 +39,8 @@
       const key = el.dataset.i18n;
       if (dict[key] !== undefined) {
         el.textContent = dict[key];
+      } else {
+        console.warn("⚠️ Clé i18n manquante :", key);
       }
     });
 
@@ -53,55 +55,35 @@
   /* ================= LANG SELECT ================= */
 
   function bindLangSelect() {
-    const select = document.querySelector("[data-lang-select]");
-    if (!select) return;
+    const select = document.getElementById(LANG_SELECT_ID);
+    if (!select) {
+      console.error("❌ Select langue introuvable (#langSelect)");
+      return;
+    }
 
-    select.addEventListener("change", e => {
-      setLang(e.target.value);
+    select.addEventListener("change", () => {
+      const lang = select.value;
+      console.log("🌍 LANG CHANGE =", lang);
+      setLang(lang);
     });
   }
 
   function syncLangSelect(lang) {
-    const select = document.querySelector("[data-lang-select]");
+    const select = document.getElementById(LANG_SELECT_ID);
     if (select && select.value !== lang) {
       select.value = lang;
     }
   }
 
-  /* ================= PDF LINKS ================= */
-
-  function updatePdfLinks(lang) {
-    const guideMap = {
-      fr: "pdf/eMETA_Guide_Formulaire_FR.pdf",
-      en: "pdf/eMETA_Guide_Formulaire_EN.pdf",
-      es: "pdf/eMETA_Guide_Formulaire_ES.pdf",
-      ar: "pdf/eMETA_Guide_Formulaire_AR.pdf"
-    };
-
-    const privacyMap = {
-      fr: "pdf/eMETA_Privacy_CGU_FR.pdf",
-      en: "pdf/eMETA_Privacy_CGU_EN.pdf",
-      es: "pdf/eMETA_Privacy_CGU_ES.pdf",
-      ar: "pdf/eMETA_Privacy_CGU_AR.pdf"
-    };
-
-    const guide = document.getElementById("pdfGuideLink");
-    const privacy = document.getElementById("pdfPrivacyLink");
-
-    if (guide && guideMap[lang]) guide.href = guideMap[lang];
-    if (privacy && privacyMap[lang]) privacy.href = privacyMap[lang];
-  }
-
   /* ================= CORE ================= */
 
   function setLang(lang) {
-    console.log("SET LANG =", lang);
+    console.log("✅ SET LANG =", lang);
 
     localStorage.setItem(STORAGE_KEY, lang);
 
     setRtl(lang);
     applyI18n(lang);
-    updatePdfLinks(lang);
     syncLangSelect(lang);
   }
 
@@ -110,7 +92,6 @@
   function bindBurger() {
     const burger = document.getElementById("burgerBtn");
     const nav = document.getElementById("mainNav");
-
     if (!burger || !nav) return;
 
     burger.addEventListener("click", () => {
@@ -125,7 +106,6 @@
   function bindFormConsent() {
     const form = document.getElementById("emetaForm");
     const consent = document.getElementById("consent");
-
     if (!form || !consent) return;
 
     form.addEventListener("submit", e => {
@@ -139,12 +119,10 @@
   /* ================= INIT ================= */
 
   document.addEventListener("DOMContentLoaded", () => {
-    console.log("LANG INIT =", localStorage.getItem(STORAGE_KEY));
-    console.log("HTML lang =", document.documentElement.lang);
-    console.log("HTML dir =", document.documentElement.dir);
-
     const lang = getLang();
-    console.log("LANG FROM getLang() =", lang);
+
+    console.log("🚀 INIT LANG =", lang);
+    console.log("📄 I18N LOADED =", !!window.I18N);
 
     setLang(lang);
 
@@ -153,4 +131,4 @@
     bindFormConsent();
   });
 
-})(); // ← FERMETURE CRITIQUE
+})();
