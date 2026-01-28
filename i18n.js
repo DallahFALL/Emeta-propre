@@ -260,262 +260,101 @@ window.I18N = {
   },
 
   /* ===================================================
-    es: {
-  /* META / HEADER */
-  "meta.title": "e-META — Asistente IA para la toma de decisiones",
-  "header.tagline": "Asistente IA multilingüe para la toma de decisiones",
+  /* ===================================================
+     ES — ESPAÑOL
+  =================================================== */
+  es: {
 
-  "nav.home": "Inicio",
-  "nav.form": "Formulario",
-  "nav.privacy": "Privacidad",
+    "meta.title": "e-META — Asistente IA para la toma de decisiones",
+    "header.tagline": "Asistente IA multilingüe para la toma de decisiones",
 
-  "cta.custom": "Solicitud personalizada",
+    "nav.home": "Inicio",
+    "nav.form": "Formulario",
+    "nav.privacy": "Privacidad",
 
-  /* HERO */
-  "hero.title": "Toma decisiones al nivel de una consultora premium",
-  "hero.subtitle": "e-META estructura tu contexto, objetivos, restricciones e indicadores para ofrecer una recomendación clara, accionable y documentada.",
-  "hero.point1": "Análisis estructurado (nivel consultor senior)",
-  "hero.point2": "Recomendaciones accionables + riesgos + KPIs",
-  "hero.point3": "Entrega personalizada (Email / WhatsApp / PDF)",
-  "hero.cta": "Iniciar un análisis estratégico",
+    "cta.custom": "Solicitud personalizada",
 
-  "hero.badge.title": "Análisis estratégico — nivel consultoría",
-  "hero.badge.text": "Un enfoque estructurado inspirado en las consultoras para aclarar decisiones complejas.",
-  "hero.note": "e-META no es un chatbot: es un motor de inteligencia para decisiones.",
+    "hero.title": "Toma decisiones al nivel de una consultora premium",
+    "hero.subtitle": "e-META estructura tu contexto, objetivos, restricciones e indicadores para ofrecer una recomendación clara, accionable y documentada.",
+    "hero.point1": "Análisis estructurado (nivel consultor senior)",
+    "hero.point2": "Recomendaciones accionables + riesgos + KPIs",
+    "hero.point3": "Entrega personalizada (Email / WhatsApp / PDF)",
+    "hero.cta": "Iniciar un análisis estratégico",
 
-  /* HELP */
-  "help.title": "¿Necesitas ayuda antes de empezar?",
-  "help.privacy": "🔒 Política de privacidad",
-  "help.guide": "📘 Guía oficial para completar el formulario",
+    "hero.badge.title": "Análisis estratégico — nivel consultoría",
+    "hero.badge.text": "Un enfoque estructurado inspirado en las consultoras para aclarar decisiones complejas.",
+    "hero.note": "e-META no es un chatbot: es un motor de inteligencia para decisiones.",
 
-  /* FORM */
-  "form.badge.cabinet": "Modo consultoría",
-  "form.title": "Formulario e-META vNext — Análisis estratégico premium",
-  "form.intro": "Cuanto más precisas sean tus respuestas, más útil y exacta será la recomendación de e-META.",
-  "form.help.download": "Descargar la guía oficial",
+    "form.badge.cabinet": "Modo consultoría",
+    "form.title": "Formulario e-META vNext — Análisis estratégico premium",
+    "form.intro": "Cuanto más precisas sean tus respuestas, más útil y exacta será la recomendación de e-META.",
+    "form.help.download": "Descargar la guía oficial",
 
-  /* GROUP 1 */
-  "group.general": "1) Definir la decisión",
+    "group.general": "1) Definir la decisión",
 
-  "field.decisionType.label": "Tipo de decisión",
-  "field.decisionType.placeholder": "Selecciona un tipo",
-  "field.decisionType.t1": "Decisión estratégica clave",
-  "field.decisionType.t2": "Optimización / mejora",
-  "field.decisionType.t3": "Elección entre opciones",
-  "field.decisionType.t4": "Lanzamiento de proyecto / producto",
-  "field.decisionType.t5": "Respuesta a una urgencia",
-  "field.decisionType.t6": "Preparar un dossier (financiación, comité, socio)",
+    "group.analysis": "2) Estructurar el análisis",
 
-  "field.domain.label": "Dominio principal",
-  "field.domain.placeholder": "Selecciona un dominio",
-  "field.domain.strategy": "Estrategia y gobernanza",
-  "field.domain.finance": "Finanzas y modelo de negocio",
-  "field.domain.marketing": "Marketing y crecimiento",
-  "field.domain.operations": "Operaciones y organización",
-  "field.domain.it": "Innovación / IA / digital",
-  "field.domain.legal": "Legal y cumplimiento",
-  "field.domain.impact": "Impacto social y ambiental",
-  "field.domain.other": "Otro",
+    "group.budget": "3) Presupuesto y plazos",
 
-  "field.title.label": "Título de la decisión",
-  "field.title.ph": "Ej.: Repensar nuestra estrategia de distribución en Senegal",
-  "field.title.hint": "Una frase clara y precisa que guiará toda la síntesis.",
+    "group.output": "4) Entrega y contacto",
 
-  /* GROUP 2 */
-  "group.analysis": "2) Estructurar el análisis (nivel consultoría)",
+    "group.trust": "Confianza y consentimiento",
 
-  "field.problem.label": "Problema central",
-  "field.problem.ph": "Describe el problema real (no solo los síntomas).",
-  "field.problem.hint": "Concéntrate en la causa raíz del problema.",
+    "field.consent.label": "Acepto que mis datos se utilicen solo para generar mi análisis e-META.",
+    "form.trust.note": "Tus datos son estrictamente confidenciales y nunca se revenden.",
 
-  "field.objectives.label": "Objetivos prioritarios (máx. 3–5)",
-  "field.objectives.ph": "Ej.: aumentar margen, reducir churn, acelerar despliegue…",
-  "field.objectives.hint": "Define objetivos medibles y priorizados.",
+    "form.submit": "Generar mi recomendación e-META",
+    "form.reset": "Restablecer",
 
-  "field.constraints.label": "Restricciones y riesgos",
-  "field.constraints.ph": "Presupuesto, plazos, regulación, recursos, resistencia interna…",
-  "field.constraints.hint": "Menciona lo que podría bloquear o ralentizar la decisión.",
+    "footer.privacy": "Política de privacidad",
+    "footer.copy": "© 2026 e-META — Todos los derechos reservados"
+  },
+  /* ===================================================
+     AR — العربية
+  =================================================== */
+  ar: {
 
-  "field.kpis.label": "KPIs / indicadores de éxito",
-  "field.kpis.ph": "Ej.: ingresos, ROI, NPS, tiempos, calidad, satisfacción…",
-  "field.kpis.hint": "Indicadores concretos para medir el éxito.",
+    "meta.title": "e-META — مساعد ذكاء اصطناعي لاتخاذ القرار",
+    "header.tagline": "مساعد متعدد اللغات لاتخاذ القرار",
 
-  "field.resources.label": "Recursos disponibles",
-  "field.resources.ph": "Equipo, herramientas, datos, socios, presupuesto inicial…",
+    "nav.home": "الرئيسية",
+    "nav.form": "النموذج",
+    "nav.privacy": "الخصوصية",
 
-  "field.context.label": "Contexto detallado",
-  "field.context.ph": "Historial, actores, decisiones previas, restricciones locales…",
-  "field.context.hint": "Cuanto más contexto, más pertinente será el análisis.",
+    "cta.custom": "طلب مخصص",
 
-  /* GROUP 3 */
-  "group.budget": "3) Presupuesto y plazos",
+    "hero.title": "اتخذ قرارات بمستوى شركة استشارات متميزة",
+    "hero.subtitle": "يقوم e-META بهيكلة السياق والأهداف والقيود والمؤشرات لتقديم توصية واضحة وقابلة للتنفيذ وموثّقة.",
+    "hero.point1": "تحليل منظم (بمستوى مستشار خبير)",
+    "hero.point2": "توصيات قابلة للتنفيذ + مخاطر + مؤشرات",
+    "hero.point3": "تسليم مخصص (بريد / واتساب / PDF)",
+    "hero.cta": "ابدأ تحليلاً استراتيجياً",
 
-  "field.budgetMin.label": "Presupuesto mínimo",
-  "field.budgetMin.ph": "Ej.: 1000000",
+    "hero.badge.title": "تحليل استراتيجي — مستوى استشاري",
+    "hero.badge.text": "منهجية منظمة مستوحاة من شركات الاستشارات لتوضيح القرارات المعقدة.",
+    "hero.note": "e-META ليس روبوت دردشة: إنه محرك ذكاء لاتخاذ القرار.",
 
-  "field.budgetMax.label": "Presupuesto máximo",
-  "field.budgetMax.ph": "Ej.: 2500000",
+    "form.badge.cabinet": "وضع الاستشارات",
+    "form.title": "نموذج e-META vNext — تحليل استراتيجي متميز",
+    "form.intro": "كلما كانت إجاباتك أدق، كانت توصية e-META أكثر دقة وفائدة.",
+    "form.help.download": "تحميل الدليل الرسمي",
 
-  "field.currency.label": "Moneda",
+    "group.general": "1) تحديد القرار",
 
-  "field.deadline.label": "Plazo deseado",
-  "field.deadline.ph": "Ej.: 7 días, 1 mes, antes de una fecha…",
+    "group.analysis": "2) هيكلة التحليل",
 
-  /* GROUP 4 */
-  "group.output": "4) Entrega y contacto",
+    "group.budget": "3) الميزانية والمدة",
 
-  "field.outputMode.label": "Modo de entrega preferido",
-  "field.outputMode.email": "Email",
-  "field.outputMode.whatsapp": "WhatsApp",
-  "field.outputMode.pdf": "PDF profesional",
-  "field.outputMode.display": "Mostrar en pantalla",
+    "group.output": "4) التسليم وبيانات التواصل",
 
-  "field.email.label": "Correo electrónico",
-  "field.email.ph": "nombre@email.com",
+    "group.trust": "الثقة والموافقة",
 
-  "field.whatsapp.label": "Número de WhatsApp",
-  "field.whatsapp.ph": "+221782607212",
+    "field.consent.label": "أوافق على استخدام بياناتي فقط لإنتاج تحليلي عبر e-META.",
+    "form.trust.note": "بياناتك سرّية تماماً ولا يتم بيعها أبداً.",
 
-  /* TRUST */
-  "group.trust": "Confianza y consentimiento",
-  "field.consent.label": "Acepto que mis datos se utilicen solo para generar mi análisis e-META.",
-  "form.trust.note": "Tus datos son estrictamente confidenciales y nunca se revenden.",
+    "form.submit": "إنشاء توصية e-META",
+    "form.reset": "إعادة ضبط",
 
-  /* ACTIONS */
-  "form.submit": "Generar mi recomendación e-META",
-  "form.reset": "Restablecer",
-
-  /* FOOTER */
-  "footer.privacy": "Política de privacidad",
-  "footer.copy": "© 2026 e-META — Todos los derechos reservados"
-}
-ar: {
-  /* META / HEADER */
-  "meta.title": "e-META — مساعد ذكاء اصطناعي لاتخاذ القرار",
-  "header.tagline": "مساعد متعدد اللغات لاتخاذ القرار",
-
-  "nav.home": "الرئيسية",
-  "nav.form": "النموذج",
-  "nav.privacy": "الخصوصية",
-
-  "cta.custom": "طلب مخصص",
-
-  /* HERO */
-  "hero.title": "اتخذ قرارات بمستوى شركة استشارات متميزة",
-  "hero.subtitle": "يقوم e-META بهيكلة السياق والأهداف والقيود والمؤشرات لتقديم توصية واضحة وقابلة للتنفيذ وموثّقة.",
-  "hero.point1": "تحليل منظم (بمستوى مستشار خبير)",
-  "hero.point2": "توصيات قابلة للتنفيذ + مخاطر + مؤشرات",
-  "hero.point3": "تسليم مخصص (بريد / واتساب / PDF)",
-  "hero.cta": "ابدأ تحليلاً استراتيجياً",
-
-  "hero.badge.title": "تحليل استراتيجي — مستوى استشاري",
-  "hero.badge.text": "منهجية منظمة مستوحاة من شركات الاستشارات لتوضيح القرارات المعقدة.",
-  "hero.note": "e-META ليس روبوت دردشة: إنه محرك ذكاء لاتخاذ القرار.",
-
-  /* HELP */
-  "help.title": "هل تحتاج إلى مساعدة قبل البدء؟",
-  "help.privacy": "🔒 سياسة الخصوصية",
-  "help.guide": "📘 الدليل الرسمي لملء النموذج",
-
-  /* FORM */
-  "form.badge.cabinet": "وضع الاستشارات",
-  "form.title": "نموذج e-META vNext — تحليل استراتيجي متميز",
-  "form.intro": "كلما كانت إجاباتك أدق، كانت توصية e-META أكثر دقة وفائدة.",
-  "form.help.download": "تحميل الدليل الرسمي",
-
-  /* GROUP 1 */
-  "group.general": "1) تحديد القرار",
-
-  "field.decisionType.label": "نوع القرار",
-  "field.decisionType.placeholder": "اختر نوعاً",
-  "field.decisionType.t1": "قرار استراتيجي محوري",
-  "field.decisionType.t2": "تحسين / تطوير",
-  "field.decisionType.t3": "مفاضلة بين خيارات",
-  "field.decisionType.t4": "إطلاق مشروع / منتج",
-  "field.decisionType.t5": "الاستجابة لحالة عاجلة",
-  "field.decisionType.t6": "إعداد ملف (تمويل، لجنة، شريك)",
-
-  "field.domain.label": "المجال الرئيسي",
-  "field.domain.placeholder": "اختر مجالاً",
-  "field.domain.strategy": "الاستراتيجية والحوكمة",
-  "field.domain.finance": "التمويل ونموذج العمل",
-  "field.domain.marketing": "التسويق والنمو",
-  "field.domain.operations": "العمليات والتنظيم",
-  "field.domain.it": "الابتكار / الذكاء الاصطناعي / الرقمي",
-  "field.domain.legal": "القانون والامتثال",
-  "field.domain.impact": "الأثر الاجتماعي والبيئي",
-  "field.domain.other": "أخرى",
-
-  "field.title.label": "عنوان القرار",
-  "field.title.ph": "مثال: إعادة التفكير في استراتيجية التوزيع في السنغال",
-  "field.title.hint": "جملة واضحة ودقيقة تقود كامل الملخص.",
-
-  /* GROUP 2 */
-  "group.analysis": "2) هيكلة التحليل (مستوى استشاري)",
-
-  "field.problem.label": "المشكلة الأساسية",
-  "field.problem.ph": "اشرح المشكلة الحقيقية (وليس الأعراض فقط).",
-  "field.problem.hint": "ركّز على السبب الجذري للمشكلة.",
-
-  "field.objectives.label": "الأهداف ذات الأولوية (3–5 كحد أقصى)",
-  "field.objectives.ph": "مثال: زيادة الهامش، خفض التسرب، تسريع التنفيذ…",
-  "field.objectives.hint": "حدد أهدافاً قابلة للقياس ومرتبة بالأولوية.",
-
-  "field.constraints.label": "القيود والمخاطر",
-  "field.constraints.ph": "الميزانية، المهل، اللوائح، الموارد، مقاومة داخلية…",
-  "field.constraints.hint": "اذكر ما قد يعيق القرار أو يبطئه.",
-
-  "field.kpis.label": "المؤشرات / معايير النجاح",
-  "field.kpis.ph": "مثال: الإيرادات، ROI، NPS، الزمن، الجودة، الرضا…",
-  "field.kpis.hint": "مؤشرات ملموسة لقياس النجاح.",
-
-  "field.resources.label": "الموارد المتاحة",
-  "field.resources.ph": "الفريق، الأدوات، البيانات، الشركاء، ميزانية أولية…",
-
-  "field.context.label": "سياق مفصل",
-  "field.context.ph": "الخلفية، الأطراف، قرارات سابقة، قيود محلية…",
-  "field.context.hint": "كلما زاد السياق، تحسنت جودة التحليل.",
-
-  /* GROUP 3 */
-  "group.budget": "3) الميزانية والمدة",
-
-  "field.budgetMin.label": "الحد الأدنى للميزانية",
-  "field.budgetMin.ph": "مثال: 1000000",
-
-  "field.budgetMax.label": "الحد الأقصى للميزانية",
-  "field.budgetMax.ph": "مثال: 2500000",
-
-  "field.currency.label": "العملة",
-
-  "field.deadline.label": "المدة المطلوبة",
-  "field.deadline.ph": "مثال: 7 أيام، شهر، قبل تاريخ محدد…",
-
-  /* GROUP 4 */
-  "group.output": "4) التسليم وبيانات التواصل",
-
-  "field.outputMode.label": "طريقة التسليم المفضلة",
-  "field.outputMode.email": "البريد الإلكتروني",
-  "field.outputMode.whatsapp": "واتساب",
-  "field.outputMode.pdf": "PDF احترافي",
-  "field.outputMode.display": "عرض على الشاشة",
-
-  "field.email.label": "البريد الإلكتروني",
-  "field.email.ph": "name@email.com",
-
-  "field.whatsapp.label": "رقم واتساب",
-  "field.whatsapp.ph": "+221782607212",
-
-  /* TRUST */
-  "group.trust": "الثقة والموافقة",
-  "field.consent.label": "أوافق على استخدام بياناتي فقط لإنتاج تحليلي عبر e-META.",
-  "form.trust.note": "بياناتك سرّية تماماً ولا يتم بيعها أبداً.",
-
-  /* ACTIONS */
-  "form.submit": "إنشاء توصية e-META",
-  "form.reset": "إعادة ضبط",
-
-  /* FOOTER */
-  "footer.privacy": "سياسة الخصوصية",
-  "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة"
-}
-
+    "footer.privacy": "سياسة الخصوصية",
+    "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة"
+  }
