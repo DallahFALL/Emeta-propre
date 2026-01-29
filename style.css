@@ -1025,3 +1025,12 @@ section {
 @media (max-width: 768px) {
   body { padding-top: var(--header-height); }
 }
+/* Empêche le header de couvrir les ancres/haut de page */
+:root { scroll-padding-top: 86px; }
+
+.app-root { padding-top: 14px; }
+
+/* mobile: header plus haut */
+@media (max-width: 720px){
+  :root { scroll-padding-top: 110px; }
+}
