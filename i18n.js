@@ -480,7 +480,7 @@ es: {
   "field.context.hint": "Cuanto más preciso sea el contexto, mejor será el análisis.",
   
   /* ================= PRIVACY ================= */
-  "privacy.download.label": "Descargar la política de privacidad (PDF)"
+  "privacy.download.label": "Descargar la política de privacidad (PDF)",
   "privacy.title": "Política de privacidad y responsabilidad",
   "privacy.intro": "Esta página explica el uso de sus datos y los límites de responsabilidad.",
 
