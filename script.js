@@ -122,17 +122,17 @@
   }
 
   /* ================= INIT ================= */
-document.addEventListener("DOMContentLoaded", () => {
-  waitForI18N(() => {
-    const lang =
-      localStorage.getItem("emeta_lang") ||
-      document.documentElement.lang ||
-      "fr";
+  document.addEventListener("DOMContentLoaded", () => {
+  const lang = getLang();
+  applyI18n(lang);
+  applyDir(lang);
 
-    applyI18n(lang);
-    applyDir(lang);
-    bindLangUI();
+  // Switch langue
+  document.querySelectorAll("[data-lang]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const selected = btn.dataset.lang;
+      setLang(selected);
+    });
   });
 });
-
   
