@@ -562,4 +562,9 @@ ar: {
   "privacy.s3.text": "تُستخدم البيانات فقط لإنتاج التحليل المطلوب."
 }
  }; 
+}; // ⬅️ FIN UNIQUE DE L’OBJET I18N
+
+if (typeof window !== "undefined") {
+  window.I18N = I18N;
+}
 
