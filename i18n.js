@@ -130,8 +130,16 @@ window.I18N = {
     "footer.text": "e-META — Moteur d’intelligence décisionnelle stratégique.",
     "footer.privacy": "Politique de confidentialité",
     "footer.copy": "© 2026 e-META — Tous droits réservés",
+    
+    /* ===== HINTS MANQUANTS (FORM) ===== */
+    "field.problem.hint": "Explique clairement le problème principal à résoudre.",
+    "field.objectives.hint": "Indique 3 à 5 objectifs maximum, classés par priorité.",
+    "field.constraints.hint": "Mentionne uniquement les contraintes réellement bloquantes.",
+    "field.kpis.hint": "Choisis des indicateurs mesurables et pertinents.",
+    "field.context.hint": "Plus le contexte est précis, plus l’analyse sera pertinente.",
 
     /* ================= PRIVACY PAGE ================= */
+    "privacy.download.label": "Télécharger la politique de confidentialité (PDF)",
     "privacy.title": "Politique de confidentialité & responsabilité",
     "privacy.intro": "Cette page explique comment e-META utilise vos informations et les limites de responsabilité du service.",
 
@@ -293,8 +301,16 @@ en: {
   "footer.text": "e-META — Strategic decision intelligence engine.",
   "footer.privacy": "Privacy policy",
   "footer.copy": "© 2026 e-META — All rights reserved",
+  
+  /* ===== HINTS MANQUANTS (FORM) ===== */
+  "field.problem.hint": "Clearly describe the main problem to solve.",
+  "field.objectives.hint": "List 3 to 5 priority objectives, ranked by importance.",
+  "field.constraints.hint": "Mention only truly blocking constraints.",
+  "field.kpis.hint": "Choose measurable and relevant indicators.",
+  "field.context.hint": "The more precise the context, the better the analysis.",
 
   /* ================= PRIVACY PAGE ================= */
+  "privacy.download.label": "Download the privacy policy (PDF)",
   "privacy.title": "Privacy & Liability Policy",
   "privacy.intro": "This page explains how e-META uses your information and the limits of liability.",
 
@@ -455,8 +471,16 @@ es: {
   "footer.text": "e-META — Motor de inteligencia estratégica para decisiones.",
   "footer.privacy": "Política de privacidad",
   "footer.copy": "© 2026 e-META — Todos los derechos reservados",
-
+  
+  /* ===== HINTS MANQUANTS (FORM) ===== */
+  "field.problem.hint": "Describa claramente el problema principal a resolver.",
+  "field.objectives.hint": "Indique de 3 a 5 objetivos prioritarios.",
+  "field.constraints.hint": "Mencione solo las restricciones realmente bloqueantes.",
+  "field.kpis.hint": "Elija indicadores medibles y relevantes.",
+  "field.context.hint": "Cuanto más preciso sea el contexto, mejor será el análisis.",
+  
   /* ================= PRIVACY ================= */
+  "privacy.download.label": "Descargar la política de privacidad (PDF)"
   "privacy.title": "Política de privacidad y responsabilidad",
   "privacy.intro": "Esta página explica el uso de sus datos y los límites de responsabilidad.",
 
@@ -616,8 +640,16 @@ ar: {
   "footer.text": "e-META — محرك ذكاء استراتيجي لاتخاذ القرار.",
   "footer.privacy": "سياسة الخصوصية",
   "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة",
+    
+  /* ===== HINTS MANQUANTS (FORM) ===== */
+  "field.problem.hint": "اشرح بوضوح المشكلة الرئيسية التي يجب حلها.",
+  "field.objectives.hint": "حدد من 3 إلى 5 أهداف ذات أولوية.",
+  "field.constraints.hint": "اذكر فقط القيود المؤثرة فعليًا.",
+  "field.kpis.hint": "اختر مؤشرات قابلة للقياس وذات صلة.",
+  "field.context.hint": "كلما كان السياق أدق، كانت التوصية أفضل.",
 
   /* ================= PRIVACY ================= */
+  "privacy.download.label": "تحميل سياسة الخصوصية (PDF)"
   "privacy.title": "سياسة الخصوصية والمسؤولية",
   "privacy.intro": "توضح هذه الصفحة كيفية استخدام البيانات وحدود المسؤولية.",
 
