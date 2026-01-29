@@ -20,34 +20,35 @@
     if (rtl) rtl.disabled = (lang !== "ar");
   }
 
-  /* ================= I18N ================= */
+/* ================= I18N ================= */
 
-  function applyI18n(lang) {
-    if (!window.I18N || typeof window.I18N !== "object") {
-      console.error("❌ I18N global manquant ou invalide");
-      return;
-    }
-
-    const dict = window.I18N[lang];
-    if (!dict) {
-      console.error("❌ Dictionnaire i18n manquant :", lang);
-      return;
-    }
-
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.dataset.i18n;
-      if (dict[key] !== undefined) {
-        el.textContent = dict[key];
-      }
-    });
-
-    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-      const key = el.dataset.i18nPlaceholder;
-      if (dict[key] !== undefined) {
-        el.placeholder = dict[key];
-      }
-    });
+function applyI18n(lang) {
+  if (typeof window.I18N !== "object") {
+    console.warn("⚠️ I18N non encore prêt, skip");
+    return;
   }
+
+  const dict = window.I18N[lang];
+  if (!dict) {
+    console.warn("⚠️ Dictionnaire i18n manquant :", lang);
+    return;
+  }
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    if (dict[key] !== undefined) {
+      el.textContent = dict[key];
+    }
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const key = el.dataset.i18nPlaceholder;
+    if (dict[key] !== undefined) {
+      el.placeholder = dict[key];
+    }
+  });
+}
+
 
   /* ================= LANG ================= */
 
