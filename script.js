@@ -2,16 +2,6 @@
    e-META — script.js FINAL STABLE
    i18n SAFE • RTL AUTO • Lang Select UNIQUE
 ===================================================== */
-function waitForI18N(callback, retries = 20) {
-  if (window.I18N) {
-    callback();
-  } else if (retries > 0) {
-    setTimeout(() => waitForI18N(callback, retries - 1), 50);
-  } else {
-    console.error("❌ I18N never loaded");
-  }
-}
-
 (function () {
   "use strict";
 
