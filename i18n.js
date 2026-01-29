@@ -90,7 +90,7 @@ window.I18N = {
 
     "field.budgetMax.label": "Budget maximum (si applicable)",
     "field.budgetMax.ph": "Ex : 2500000",
-
+    "field.currency.label": "Devise",
     "field.deadline.label": "Délai souhaité",
     "field.deadline.ph": "Ex : 7 jours, 1 mois, avant une date précise…",
 
@@ -112,7 +112,7 @@ window.I18N = {
     "field.email.ph": "adresse@email.com",
 
     "field.whatsapp.label": "Numéro WhatsApp (avec indicatif)",
-    "field.whatsapp.ph": "+221782607212",
+    "field.whatsapp.ph": "+221",
 
     "field.fileLink.label": "Lien vers un fichier/dossier (optionnel)",
     "field.fileLink.ph": "Google Drive, Dropbox, Notion, PDF, etc.",
@@ -121,7 +121,7 @@ window.I18N = {
     /* ================= TRUST ================= */
     "group.trust": "Confiance & consentement",
     "field.consent.label": "J’accepte que les informations fournies soient utilisées uniquement pour générer mon analyse e-META. Aucune donnée ne sera revendue.",
-
+    "form.trust.note": "Aucune donnée ne sera revendue ou utilisée hors du cadre e-META.",
     /* ================= ACTIONS ================= */
     "form.submit": "Générer ma recommandation e-META",
     "form.reset": "Réinitialiser",
@@ -250,10 +250,10 @@ en: {
 
   "field.budgetMin.label": "Minimum budget",
   "field.budgetMin.ph": "E.g., 1000000",
-
+  
   "field.budgetMax.label": "Maximum budget (if applicable)",
   "field.budgetMax.ph": "E.g., 2500000",
-
+  "field.currency.label": "Currency",
   "field.deadline.label": "Desired timeline",
   "field.deadline.ph": "E.g., 7 days, 1 month, before a specific date…",
 
@@ -275,7 +275,7 @@ en: {
   "field.email.ph": "name@email.com",
 
   "field.whatsapp.label": "WhatsApp number (with country code)",
-  "field.whatsapp.ph": "+221782607212",
+  "field.whatsapp.ph": "+221",
 
   "field.fileLink.label": "Link to a file/folder (optional)",
   "field.fileLink.ph": "Google Drive, Dropbox, Notion, PDF, etc.",
@@ -284,7 +284,7 @@ en: {
   /* ================= TRUST ================= */
   "group.trust": "Trust & consent",
   "field.consent.label": "I agree that the provided information is used only to generate my e-META analysis. No data will be resold.",
-
+  "form.trust.note": "No data will be resold or used outside the e-META analysis.",
   /* ================= ACTIONS ================= */
   "form.submit": "Generate my e-META recommendation",
   "form.reset": "Reset",
@@ -415,7 +415,7 @@ es: {
 
   "field.budgetMax.label": "Presupuesto máximo (si aplica)",
   "field.budgetMax.ph": "Ej.: 2500000",
-
+  "field.currency.label": "Moneda",
   "field.deadline.label": "Plazo deseado",
   "field.deadline.ph": "Ej.: 7 días, 1 mes, antes de una fecha…",
 
@@ -437,7 +437,7 @@ es: {
   "field.email.ph": "nombre@email.com",
 
   "field.whatsapp.label": "WhatsApp (con prefijo)",
-  "field.whatsapp.ph": "+221782607212",
+  "field.whatsapp.ph": "+221",
 
   "field.fileLink.label": "Enlace a archivo/carpeta (opcional)",
   "field.fileLink.ph": "Google Drive, Dropbox, Notion, PDF, etc.",
@@ -446,7 +446,7 @@ es: {
   /* ================= TRUST ================= */
   "group.trust": "Confianza y consentimiento",
   "field.consent.label": "Acepto que la información se use solo para generar mi análisis e-META. No se revenderán datos.",
-
+  "form.trust.note": "Ningún dato será revendido ni utilizado fuera del análisis e-META.",
   /* ================= ACTIONS ================= */
   "form.submit": "Generar mi recomendación e-META",
   "form.reset": "Restablecer",
@@ -576,7 +576,7 @@ ar: {
 
   "field.budgetMax.label": "الحد الأقصى (إن وجد)",
   "field.budgetMax.ph": "مثال: 2500000",
-
+  "field.currency.label": "العملة",
   "field.deadline.label": "المدة المطلوبة",
   "field.deadline.ph": "مثال: 7 أيام، شهر، قبل تاريخ محدد…",
 
@@ -598,7 +598,7 @@ ar: {
   "field.email.ph": "name@email.com",
 
   "field.whatsapp.label": "رقم واتساب",
-  "field.whatsapp.ph": "+221782607212",
+  "field.whatsapp.ph": "+221",
 
   "field.fileLink.label": "رابط ملف/مجلد (اختياري)",
   "field.fileLink.ph": "Google Drive أو Dropbox أو Notion أو PDF…",
@@ -607,7 +607,7 @@ ar: {
   /* ================= TRUST ================= */
   "group.trust": "الثقة والموافقة",
   "field.consent.label": "أوافق على استخدام المعلومات فقط لإنشاء تحليلي عبر e-META.",
-
+  "form.trust.note": "لن يتم بيع البيانات أو استخدامها خارج إطار تحليل e-META.",
   /* ================= ACTIONS ================= */
   "form.submit": "إنشاء توصية e-META",
   "form.reset": "إعادة ضبط",
