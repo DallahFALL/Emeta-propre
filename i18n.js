@@ -560,8 +560,9 @@ ar: {
   "privacy.s2.li3": "الملفات التي يشاركها المستخدم",
   "privacy.s3.title": "استخدام البيانات",
   "privacy.s3.text": "تُستخدم البيانات فقط لإنتاج التحليل المطلوب."
-}
- }; 
+  }
+};
+  
 }; // ⬅️ FIN UNIQUE DE L’OBJET I18N
 
 if (typeof window !== "undefined") {
