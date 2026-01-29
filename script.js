@@ -1,7 +1,10 @@
-/* =====================================================
-   e-META — script.js FINAL STABLE
-   i18n SAFE • RTL AUTO • Lang Select UNIQUE
-===================================================== */
+// =====================================================
+// e-META — script.js FINAL STABLE (FIXED)
+// i18n FR / EN / ES / AR
+// Select langue UNIQUE (#langSelect)
+// RTL auto
+// =====================================================
+
 (function () {
   "use strict";
 
@@ -9,7 +12,11 @@
   const DEFAULT_LANG = "fr";
   const LANG_SELECT_ID = "langSelect";
 
-  /* ================= RTL ================= */
+  /* ================= UTIL ================= */
+
+  function getLang() {
+    return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
+  }
 
   function setRtl(lang) {
     document.documentElement.lang = lang;
@@ -19,98 +26,45 @@
     if (rtl) rtl.disabled = (lang !== "ar");
   }
 
-/* =======================
-   e-META — I18N ENGINE (SAFE)
-   ======================= */
-(() => {
-  "use strict";
-
-  const DEFAULT_LANG = "fr";
-  const LANG_KEY = "emeta_lang";
-
-  function getLang() {
-    return localStorage.getItem(LANG_KEY) || DEFAULT_LANG;
-  }
+  /* ================= I18N ================= */
 
   function applyI18n(lang) {
-    if (!window.I18N || !window.I18N[lang]) {
-      console.error("❌ I18N global manquant ou dictionnaire absent pour :", lang);
+    const dict = window.I18N && window.I18N[lang];
+    if (!dict) {
+      console.error("❌ I18N dictionnaire manquant pour :", lang);
       return;
     }
-    const dict = window.I18N[lang];
 
-    document.querySelectorAll("[data-i18n]").forEach((el) => {
+    document.querySelectorAll("[data-i18n]").forEach(el => {
       const key = el.dataset.i18n;
-      if (dict[key] !== undefined) el.textContent = dict[key];
+      if (dict[key] !== undefined) {
+        el.textContent = dict[key];
+      } else {
+        console.warn("⚠️ Clé i18n manquante :", key);
+      }
     });
 
-    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
       const key = el.dataset.i18nPlaceholder;
-      if (dict[key] !== undefined) el.placeholder = dict[key];
+      if (dict[key] !== undefined) {
+        el.placeholder = dict[key];
+      }
     });
   }
 
-  function applyDir(lang) {
-    const isRTL = lang === "ar";
-    document.documentElement.dir = isRTL ? "rtl" : "ltr";
-    document.documentElement.lang = lang;
-
-    const rtlCss = document.getElementById("rtlStylesheet");
-    if (rtlCss) rtlCss.disabled = !isRTL;
-  }
-
-  function setLang(lang) {
-    if (!window.I18N || !window.I18N[lang]) return;
-    localStorage.setItem(LANG_KEY, lang);
-    applyI18n(lang);
-    applyDir(lang);
-
-    // sync UI select si présent
-    const select = document.getElementById("langSelect");
-    if (select) select.value = lang;
-  }
-
-  function bindLangUI() {
-    // 1) Select <select id="langSelect">
-    const select = document.getElementById("langSelect");
-    if (select) {
-      select.addEventListener("change", () => setLang(select.value));
-      select.value = getLang();
-    }
-
-    // 2) Boutons data-lang (si tu en as)
-    document.querySelectorAll("[data-lang]").forEach((btn) => {
-      btn.addEventListener("click", () => setLang(btn.dataset.lang));
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const lang = getLang();
-    applyI18n(lang);
-    applyDir(lang);
-    bindLangUI();
-  });
-})();
-
-  /* ================= LANG ================= */
-
-  function getLang() {
-    return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
-  }
-
-  function setLang(lang) {
-    localStorage.setItem(STORAGE_KEY, lang);
-    setRtl(lang);
-    applyI18n(lang);
-    syncLangSelect(lang);
-  }
+  /* ================= LANG SELECT ================= */
 
   function bindLangSelect() {
     const select = document.getElementById(LANG_SELECT_ID);
-    if (!select) return;
+    if (!select) {
+      console.error("❌ Select langue introuvable (#langSelect)");
+      return;
+    }
 
     select.addEventListener("change", () => {
-      setLang(select.value);
+      const lang = select.value;
+      console.log("🌍 LANG CHANGE =", lang);
+      setLang(lang);
     });
   }
 
@@ -121,18 +75,60 @@
     }
   }
 
-  /* ================= INIT ================= */
-  document.addEventListener("DOMContentLoaded", () => {
-  const lang = getLang();
-  applyI18n(lang);
-  applyDir(lang);
+  /* ================= CORE ================= */
 
-  // Switch langue
-  document.querySelectorAll("[data-lang]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const selected = btn.dataset.lang;
-      setLang(selected);
+  function setLang(lang) {
+    console.log("✅ SET LANG =", lang);
+
+    localStorage.setItem(STORAGE_KEY, lang);
+
+    setRtl(lang);
+    applyI18n(lang);
+    syncLangSelect(lang);
+  }
+
+  /* ================= UI ================= */
+
+  function bindBurger() {
+    const burger = document.getElementById("burgerBtn");
+    const nav = document.getElementById("mainNav");
+    if (!burger || !nav) return;
+
+    burger.addEventListener("click", () => {
+      nav.classList.toggle("open");
+      burger.setAttribute(
+        "aria-expanded",
+        nav.classList.contains("open") ? "true" : "false"
+      );
     });
+  }
+
+  function bindFormConsent() {
+    const form = document.getElementById("emetaForm");
+    const consent = document.getElementById("consent");
+    if (!form || !consent) return;
+
+    form.addEventListener("submit", e => {
+      if (!consent.checked) {
+        e.preventDefault();
+        consent.focus();
+      }
+    });
+  }
+
+  /* ================= INIT ================= */
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const lang = getLang();
+
+    console.log("🚀 INIT LANG =", lang);
+    console.log("📄 I18N LOADED =", !!window.I18N);
+
+    setLang(lang);
+
+    bindLangSelect();
+    bindBurger();
+    bindFormConsent();
   });
-});
-  
+
+})();
