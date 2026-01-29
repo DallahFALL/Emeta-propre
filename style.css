@@ -993,3 +993,28 @@ html[dir="rtl"] textarea,
 html[dir="rtl"] select{
   text-align:right;
 }
+/* ===============================
+   FIX HEADER / FORM MOBILE
+   =============================== */
+
+:root {
+  --header-height: 72px;
+}
+
+/* Compense le header sticky */
+main,
+#form,
+section {
+  scroll-margin-top: var(--header-height);
+}
+
+/* Mobile spécifique */
+@media (max-width: 768px) {
+  .site-header {
+    height: var(--header-height);
+  }
+
+  main {
+    padding-top: calc(var(--header-height) + 8px);
+  }
+}
