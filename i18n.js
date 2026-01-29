@@ -511,172 +511,54 @@ es: {
   "guide.back": "← Volver al formulario"
 },
 ar: {
-  /* ================= META / HEADER ================= */
-  "meta.title": "e-META — مساعد ذكاء اصطناعي لاتخاذ القرار",
-  "header.tagline": "مساعد متعدد اللغات لاتخاذ القرار",
+/* =========================
+   AR — العربية (RTL SAFE)
+========================= */
+ar: {
 
+  /* Meta */
+  "meta.title": "e-META — مساعد ذكي لاتخاذ القرار",
+
+  /* Header */
+  "header.tagline": "مساعد ذكي متعدد اللغات لاتخاذ القرار",
+
+  /* Nav */
   "nav.home": "الرئيسية",
   "nav.form": "النموذج",
   "nav.privacy": "الخصوصية",
 
-  "cta.custom": "طلب مخصص",
+  /* CTA */
+  "cta.start": "ابدأ تحليلاً استراتيجياً",
 
-  /* ================= HERO ================= */
-  "hero.title": "اتخذ قرارات بمستوى شركة استشارات متميزة",
-  "hero.subtitle": "يقوم e-META بهيكلة السياق والأهداف والقيود والمؤشرات لإنتاج توصية واضحة وقابلة للتنفيذ وموثّقة.",
-  "hero.point1": "تحليل منظم (بمستوى مستشار خبير)",
-  "hero.point2": "توصيات قابلة للتنفيذ + مخاطر + مؤشرات",
-  "hero.point3": "تسليم مخصص (بريد / واتساب / PDF)",
-  "hero.cta": "ابدأ تحليلاً استراتيجياً",
+  /* Hero */
+  "hero.title": "امنح قراراتك مستوى مكاتب الاستشارات المتميزة",
+  "hero.subtitle": "تنظيم السياق، الأهداف، القيود والمؤشرات لإنتاج توصيات واضحة وقابلة للتنفيذ.",
+  "hero.point1": "تحليل منظم (مستوى استشاري)",
+  "hero.point2": "توصيات عملية + مخاطر + مؤشرات أداء",
+  "hero.point3": "تسليم مخصص (بريد إلكتروني / واتساب / PDF)",
 
-  "hero.badge.title": "وضع الاستشارات",
-  "hero.badge.text": "أطر تحليل + خارطة طريق",
-  "hero.note": "e-META ليس روبوت دردشة: إنه محرك ذكاء لاتخاذ القرار.",
+  /* Sections */
+  "section.analysis.title": "تحليل استراتيجي — مستوى استشاري",
+  "section.analysis.desc": "منهجية منظمة مستوحاة من مكاتب الاستشارات لاتخاذ قرارات معقدة.",
 
-  /* ================= HELP ================= */
-  "help.title": "هل تحتاج إلى مساعدة قبل البدء؟",
-  "help.privacy": "🔒 سياسة الخصوصية",
-  "help.guide": "📘 الدليل الرسمي لملء النموذج",
+  /* Form — Hints */
+  "field.problem.hint": "اشرح المشكلة الأساسية التي تواجهك",
+  "field.objectives.hint": "حدد من 1 إلى 3 أهداف رئيسية",
+  "field.constraints.hint": "اذكر القيود (الميزانية، الوقت، الموارد...)",
+  "field.kpis.hint": "حدد مؤشرات الأداء التي تهمك",
+  "field.context.hint": "كلما كان السياق أوضح كانت التوصيات أدق",
 
-  /* ================= FORM ================= */
-  "form.badge.cabinet": "وضع مكتب استشارات",
-  "form.title": "نموذج e-META vNext — تحليل استراتيجي متميز",
-  "form.intro": "كلما كانت إجاباتك أدق، كانت توصية e-META أكثر دقة وفائدة.",
-  "form.help.download": "تحميل دليل تعبئة النموذج",
-
-  /* ================= GROUP 1 ================= */
-  "group.general": "1) تحديد القرار",
-
-  "field.domain.label": "المجال الرئيسي",
-  "field.domain.placeholder": "اختر مجالاً",
-  "field.domain.strategy": "الاستراتيجية والحوكمة",
-  "field.domain.finance": "التمويل ونموذج العمل",
-  "field.domain.marketing": "التسويق والنمو",
-  "field.domain.operations": "العمليات والتنظيم",
-  "field.domain.it": "الابتكار / الذكاء الاصطناعي / الرقمي",
-  "field.domain.legal": "القانون والامتثال",
-  "field.domain.impact": "الأثر الاجتماعي والبيئي",
-  "field.domain.other": "أخرى",
-
-  "field.decisionType.label": "نوع القرار",
-  "field.decisionType.placeholder": "اختر نوعاً",
-  "field.decisionType.t1": "قرار استراتيجي محوري",
-  "field.decisionType.t2": "تحسين / تطوير",
-  "field.decisionType.t3": "مفاضلة بين خيارات",
-  "field.decisionType.t4": "إطلاق مشروع / منتج",
-  "field.decisionType.t5": "الاستجابة لحالة عاجلة",
-  "field.decisionType.t6": "إعداد ملف (تمويل، لجنة، شريك)",
-
-  "field.title.label": "عنوان قصير للقرار",
-  "field.title.ph": "مثال: إعادة التفكير في استراتيجية التوزيع في السنغال",
-  "field.title.hint": "جملة واضحة واحدة: ستقود كامل الملخص.",
-
-  /* ================= GROUP 2 ================= */
-  "group.analysis": "2) هيكلة التحليل (مستوى استشاري)",
-
-  "field.problem.label": "المشكلة الأساسية",
-  "field.problem.ph": "اشرح المشكلة الحقيقية (وليس الأعراض فقط).",
-
-  "field.objectives.label": "الأهداف ذات الأولوية (3–5 كحد أقصى)",
-  "field.objectives.ph": "مثال: زيادة الهامش، خفض التسرب، تسريع التنفيذ…",
-
-  "field.constraints.label": "القيود والمخاطر",
-  "field.constraints.ph": "الميزانية، المهل، اللوائح، الموارد، مقاومة داخلية…",
-
-  "field.kpis.label": "المؤشرات / معايير النجاح",
-  "field.kpis.ph": "مثال: الإيرادات، ROI، NPS، الزمن، الجودة، الرضا…",
-
-  "field.resources.label": "الموارد المتاحة",
-  "field.resources.ph": "الفريق، الأدوات، البيانات، الشركاء، ميزانية أولية…",
-
-  "field.context.label": "سياق مفصل (مستحسن)",
-  "field.context.ph": "الخلفية، الأطراف، قرارات سابقة، قيود محلية…",
-
-  /* ================= GROUP 3 ================= */
-  "group.budget": "3) الطموح والميزانية والاستعجال",
-
-  "field.budgetMin.label": "الحد الأدنى للميزانية",
-  "field.budgetMin.ph": "مثال: 1000000",
-
-  "field.budgetMax.label": "الحد الأقصى (إن وجد)",
-  "field.budgetMax.ph": "مثال: 2500000",
-  "field.currency.label": "العملة",
-  "field.deadline.label": "المدة المطلوبة",
-  "field.deadline.ph": "مثال: 7 أيام، شهر، قبل تاريخ محدد…",
-
-  "field.urgency.label": "مستوى الاستعجال",
-  "field.urgency.low": "منخفض",
-  "field.urgency.medium": "طبيعي",
-  "field.urgency.high": "حرِج",
-
-  /* ================= GROUP 4 ================= */
-  "group.output": "4) التسليم وبيانات التواصل",
-
-  "field.outputMode.label": "طريقة التسليم (يمكن اختيار أكثر من خيار)",
-  "field.outputMode.email": "بريد منظم (مفصل)",
-  "field.outputMode.whatsapp": "واتساب (موجز وعملي)",
-  "field.outputMode.pdf": "PDF احترافي",
-  "field.outputMode.display": "عرض مباشر داخل e-META",
-
-  "field.email.label": "البريد الإلكتروني",
-  "field.email.ph": "name@email.com",
-
-  "field.whatsapp.label": "رقم واتساب",
-  "field.whatsapp.ph": "+221",
-
-  "field.fileLink.label": "رابط ملف/مجلد (اختياري)",
-  "field.fileLink.ph": "Google Drive أو Dropbox أو Notion أو PDF…",
-  "field.fileLink.hint": "أضف رابطاً إذا كان لديك مستند مفيد.",
-
-  /* ================= TRUST ================= */
-  "group.trust": "الثقة والموافقة",
-  "field.consent.label": "أوافق على استخدام المعلومات فقط لإنشاء تحليلي عبر e-META.",
-  "form.trust.note": "لن يتم بيع البيانات أو استخدامها خارج إطار تحليل e-META.",
-  /* ================= ACTIONS ================= */
-  "form.submit": "إنشاء توصية e-META",
-  "form.reset": "إعادة ضبط",
-
-  /* ================= FOOTER ================= */
-  "footer.text": "e-META — محرك ذكاء استراتيجي لاتخاذ القرار.",
-  "footer.privacy": "سياسة الخصوصية",
-  "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة",
-    
-  /* ===== HINTS MANQUANTS (FORM) ===== */
-  "field.problem.hint": "اشرح بوضوح المشكلة الرئيسية التي يجب حلها.",
-  "field.objectives.hint": "حدد من 3 إلى 5 أهداف ذات أولوية.",
-  "field.constraints.hint": "اذكر فقط القيود المؤثرة فعليًا.",
-  "field.kpis.hint": "اختر مؤشرات قابلة للقياس وذات صلة.",
-  "field.context.hint": "كلما كان السياق أدق، كانت التوصية أفضل.",
-
-/* ================= PRIVACY ================= */
-"privacy.download.label": "تحميل سياسة الخصوصية (PDF)",
-"privacy.title": "سياسة الخصوصية والمسؤولية",
-"privacy.intro": "توضح هذه الصفحة كيفية استخدام البيانات وحدود المسؤولية.",
-
-"privacy.s1.title": "طبيعة الخدمة",
-"privacy.s1.text": "e-META هو مساعد ذكي لدعم اتخاذ القرار. التحليلات المقدمة إرشادية.",
-
-"privacy.s2.title": "البيانات التي يتم جمعها",
-"privacy.s2.li1": "المعلومات التي يُدخلها المستخدم طوعًا",
-"privacy.s2.li2": "بيانات التواصل اللازمة للتسليم",
-"privacy.s2.li3": "المستندات التي يشاركها المستخدم",
-
-"privacy.s3.title": "استخدام البيانات",
-"privacy.s3.text": "تُستخدم البيانات فقط لإنتاج التحليل المطلوب وتحسين الخدمة.",
-
-"privacy.s4.title": "المسؤولية",
-"privacy.s4.text": "يبقى المستخدم مسؤولًا بالكامل عن القرارات التي يتخذها بناءً على التحليل.",
-
-"privacy.back": "← العودة إلى الصفحة الرئيسية",
-
-/* ================= GUIDE ================= */
-"guide.title": "دليل تعبئة النموذج",
-"guide.intro": "اتبع هذه الخطوات للحصول على تحليل أدق.",
-"guide.p1": "صف المشكلة الحقيقية بوضوح.",
-"guide.p2": "حدد الأهداف ذات الأولوية (3 إلى 5 كحد أقصى).",
-"guide.p3": "اذكر القيود والمخاطر الأساسية.",
-"guide.p4": "اختر طريقة التسليم المناسبة.",
-"guide.p5": "كن دقيقًا: e-META ينظم وأنت تقرر.",
-"guide.back": "← رجوع"
+  /* Privacy */
+  "privacy.download.label": "تحميل سياسة الخصوصية (PDF)",
+  "privacy.title": "سياسة الخصوصية والمسؤولية",
+  "privacy.intro": "تشرح هذه الصفحة كيفية استخدام e-META لبياناتك وحدود المسؤولية.",
+  "privacy.s1.title": "طبيعة الخدمة",
+  "privacy.s1.text": "e-META هو مساعد ذكي لاتخاذ القرار. النتائج استشارية وليست إلزامية.",
+  "privacy.s2.title": "البيانات التي يتم جمعها",
+  "privacy.s2.li1": "المعلومات المقدمة طوعاً",
+  "privacy.s2.li2": "بيانات التواصل للتسليم",
+  "privacy.s2.li3": "الملفات التي يشاركها المستخدم",
+  "privacy.s3.title": "استخدام البيانات",
+  "privacy.s3.text": "تُستخدم البيانات فقط لإنتاج التحليل المطلوب."
 }
-};
+
