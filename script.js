@@ -1,20 +1,16 @@
-// =====================================================
-// e-META — script.js FINAL STABLE
-// i18n FR / EN / ES / AR
-// RTL auto
-// =====================================================
+/* =====================================================
+   e-META — script.js FINAL STABLE
+   i18n SAFE • RTL AUTO • Lang Select UNIQUE
+===================================================== */
 
 (function () {
   "use strict";
 
   const STORAGE_KEY = "emeta_lang";
   const DEFAULT_LANG = "fr";
+  const LANG_SELECT_ID = "langSelect";
 
-  /* ================= UTIL ================= */
-
-  function getLang() {
-    return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
-  }
+  /* ================= RTL ================= */
 
   function setRtl(lang) {
     document.documentElement.lang = lang;
@@ -34,7 +30,7 @@
 
     const dict = window.I18N[lang];
     if (!dict) {
-      console.error("❌ Dictionnaire i18n introuvable pour :", lang);
+      console.error("❌ Dictionnaire i18n manquant :", lang);
       return;
     }
 
@@ -42,8 +38,6 @@
       const key = el.dataset.i18n;
       if (dict[key] !== undefined) {
         el.textContent = dict[key];
-      } else {
-        console.warn("⚠️ Clé i18n manquante :", key);
       }
     });
 
@@ -55,20 +49,10 @@
     });
   }
 
-  /* ================= LANG SELECT ================= */
+  /* ================= LANG ================= */
 
-  function bindLangSelect() {
-    const select = document.getElementById("langSelect");
-    if (!select) return;
-
-    select.addEventListener("change", () => {
-      setLang(select.value);
-    });
-  }
-
-  function syncLangSelect(lang) {
-    const select = document.getElementById("langSelect");
-    if (select) select.value = lang;
+  function getLang() {
+    return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
   }
 
   function setLang(lang) {
@@ -78,20 +62,20 @@
     syncLangSelect(lang);
   }
 
-  /* ================= BURGER ================= */
+  function bindLangSelect() {
+    const select = document.getElementById(LANG_SELECT_ID);
+    if (!select) return;
 
-  function bindBurger() {
-    const burger = document.getElementById("burgerBtn");
-    const nav = document.getElementById("mainNav");
-    if (!burger || !nav) return;
-
-    burger.addEventListener("click", () => {
-      nav.classList.toggle("open");
-      burger.setAttribute(
-        "aria-expanded",
-        nav.classList.contains("open") ? "true" : "false"
-      );
+    select.addEventListener("change", () => {
+      setLang(select.value);
     });
+  }
+
+  function syncLangSelect(lang) {
+    const select = document.getElementById(LANG_SELECT_ID);
+    if (select && select.value !== lang) {
+      select.value = lang;
+    }
   }
 
   /* ================= INIT ================= */
@@ -100,7 +84,6 @@
     const lang = getLang();
     setLang(lang);
     bindLangSelect();
-    bindBurger();
   });
 
 })();
