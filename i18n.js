@@ -388,7 +388,7 @@ window.I18N = {
   /* FOOTER */
   "footer.privacy": "Política de privacidad",
   "footer.copy": "© 2026 e-META — Todos los derechos reservados"
-}
+},
 ar: {
   /* META / HEADER */
   "meta.title": "e-META — مساعد ذكاء اصطناعي لاتخاذ القرار",
@@ -518,4 +518,4 @@ ar: {
   "footer.privacy": "سياسة الخصوصية",
   "footer.copy": "© 2026 e-META — جميع الحقوق محفوظة"
 }
-
+};
