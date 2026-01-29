@@ -20,35 +20,68 @@
     if (rtl) rtl.disabled = (lang !== "ar");
   }
 
-/* ================= I18N ================= */
+/* =======================
+   e-META — I18N ENGINE
+   ======================= */
 
+const DEFAULT_LANG = "fr";
+const LANG_KEY = "emeta_lang";
+
+function getLang() {
+  return localStorage.getItem(LANG_KEY) || DEFAULT_LANG;
+}
+
+function setLang(lang) {
+  if (!window.I18N || !window.I18N[lang]) {
+    console.error("❌ I18N dictionnaire manquant pour :", lang);
+    return;
+  }
+
+  localStorage.setItem(LANG_KEY, lang);
+  applyI18n(lang);
+  applyDir(lang);
+}
+
+/* Appliquer textes */
 function applyI18n(lang) {
-  if (typeof window.I18N !== "object") {
-    console.warn("⚠️ I18N non encore prêt, skip");
-    return;
-  }
-
   const dict = window.I18N[lang];
-  if (!dict) {
-    console.warn("⚠️ Dictionnaire i18n manquant :", lang);
-    return;
-  }
+  if (!dict) return;
 
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.dataset.i18n;
-    if (dict[key] !== undefined) {
-      el.textContent = dict[key];
-    }
+    if (dict[key]) el.textContent = dict[key];
   });
 
   document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
     const key = el.dataset.i18nPlaceholder;
-    if (dict[key] !== undefined) {
-      el.placeholder = dict[key];
-    }
+    if (dict[key]) el.placeholder = dict[key];
   });
 }
 
+/* RTL / LTR */
+function applyDir(lang) {
+  const isRTL = lang === "ar";
+  document.documentElement.dir = isRTL ? "rtl" : "ltr";
+  document.documentElement.lang = lang;
+
+  const rtlCss = document.getElementById("rtlStylesheet");
+  if (rtlCss) rtlCss.disabled = !isRTL;
+}
+
+/* Init au chargement */
+document.addEventListener("DOMContentLoaded", () => {
+  const lang = getLang();
+  applyI18n(lang);
+  applyDir(lang);
+
+  // Switch langue
+  document.querySelectorAll("[data-lang]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const selected = btn.dataset.lang;
+      setLang(selected);
+    });
+  });
+});
 
   /* ================= LANG ================= */
 
