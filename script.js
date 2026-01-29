@@ -132,12 +132,17 @@ function waitForI18N(callback, retries = 20) {
   }
 
   /* ================= INIT ================= */
+document.addEventListener("DOMContentLoaded", () => {
+  waitForI18N(() => {
+    const lang =
+      localStorage.getItem("emeta_lang") ||
+      document.documentElement.lang ||
+      "fr";
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const stored = localStorage.getItem("emeta_lang");
-const lang = stored ? stored : DEFAULT_LANG;
-setLang(lang);
-    bindLangSelect();
+    applyI18n(lang);
+    applyDir(lang);
+    bindLangUI();
   });
+});
 
-})();
+  
