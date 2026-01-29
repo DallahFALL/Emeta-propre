@@ -1018,3 +1018,10 @@ section {
     padding-top: calc(var(--header-height) + 8px);
   }
 }
+:root { --header-height: 72px; }
+
+#form, section, main { scroll-margin-top: var(--header-height); }
+
+@media (max-width: 768px) {
+  body { padding-top: var(--header-height); }
+}
