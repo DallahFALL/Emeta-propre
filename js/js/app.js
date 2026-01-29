@@ -1,6 +1,7 @@
 /* =====================================================
    e-META — SPA Router (STABLE)
 ===================================================== */
+console.log("✅ app.js chargé");
 
 (function () {
   const app = document.getElementById("app");
