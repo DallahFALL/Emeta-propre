@@ -82,8 +82,9 @@ function applyI18n(lang) {
   /* ================= INIT ================= */
 
   document.addEventListener("DOMContentLoaded", () => {
-    const lang = getLang();
-    setLang(lang);
+    const stored = localStorage.getItem("emeta_lang");
+const lang = stored ? stored : DEFAULT_LANG;
+setLang(lang);
     bindLangSelect();
   });
 
