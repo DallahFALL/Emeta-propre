@@ -285,7 +285,7 @@ window.I18N = {
   "footer.text": "e-META — Strategic decision intelligence engine.",
   "footer.privacy": "Privacy policy",
   "footer.copy": "© 2026 e-META — All rights reserved"
-}
+},
 es: {
 
   /* ===== META / HEADER ===== */
@@ -423,7 +423,7 @@ es: {
   "footer.text": "e-META — Motor de inteligencia estratégica para la toma de decisiones.",
   "footer.privacy": "Política de privacidad",
   "footer.copy": "© 2026 e-META — Todos los derechos reservados"
-}
+},
 ar: {
 
   /* ===== META / HEADER ===== */
