@@ -1,1 +1,27 @@
-
+{
+    "name": "e-meta-orchestrator-v1",
+    "description": "Système nerveux e-meta : Tally -> IA Expert -> WhatsApp/PDF",
+    "flow": [
+        {
+            "id": 1,
+            "module": "gateway:webhook",
+            "metadata": { "label": "Réception Formulaire Tally" }
+        },
+        {
+            "id": 2,
+            "module": "openai:gpt-4",
+            "metadata": { "label": "Analyse Agent Expert Cabinet" }
+        },
+        {
+            "id": 3,
+            "module": "router:main",
+            "metadata": { "label": "Distribution Omnicanale" }
+        },
+        {
+            "id": 4,
+            "module": "whatsapp:send-message",
+            "metadata": { "label": "Restitution Mobile" }
+        }
+    ],
+    "author": "e-meta.app"
+}
