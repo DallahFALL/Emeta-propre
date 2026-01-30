@@ -1,1 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="e-META - Expertise IA de niveau cabinet conseil. Stratégie, conformité et aide à la décision.">
+    
+    <!-- Open Graph (Pour un bel affichage sur WhatsApp/LinkedIn) -->
+    <meta property="og:title" content="e-META | Assistant IA Stratégique">
+    <meta property="og:description" content="Donnez à vos décisions le niveau d’un cabinet de conseil premium.">
+    <meta property="og:image" content="assets/og-image.jpg">
 
+    <title data-i18n="meta.title">e-META — Assistant IA Premium</title>
+
+    <!-- Polices : Combinaison Serif (Expertise) et Sans-Serif (Moderne) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap">
+    
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="rtl.css" id="rtlStylesheet" disabled />
+</head>
+
+<body id="top">
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a class="logo" href="#top" aria-label="e-META Home">
+            <span class="logo-mark">e</span><span class="logo-text">META</span>
+        </a>
+
+        <div class="tagline" data-i18n="header.tagline">
+            Assistant IA stratégique de niveau Cabinet Conseil
+        </div>
+
+        <div class="header-right">
+            <!-- Sélecteur de langue amélioré -->
+            <div class="lang-wrapper">
+                <select id="uiLangSelect" class="lang-select" aria-label="Select Language">
+                    <option value="fr">FR</option>
+                    <option value="en">EN</option>
+                    <option value="es">ES</option>
+                    <option value="ar">AR</option>
+                </select>
+            </div>
+
+            <button id="burgerBtn" class="burger" aria-label="Menu" aria-expanded="false">
+                <span></span>
+            </button>
+
+            <nav id="mainNav" aria-label="Main navigation">
+                <a href="#hero" data-i18n="nav.home">Accueil</a>
+                <a href="#form-section" data-i18n="nav.form">Expertise</a>
+                <a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <h1 class="hero-title" data-i18n="hero.title">
+                    Donnez à vos décisions le niveau d’un cabinet de conseil premium
+                </h1>
+                <p class="hero-subtitle" data-i18n="hero.subtitle">
+                    e-META structure votre contexte et vos objectifs pour produire une recommandation claire, actionnable et documentée.
+                </p>
+
+                <div class="hero-cta-group">
+                    <a href="#form-section" class="cta-primary" id="startBtn" data-i18n="hero.cta">Commencer l'analyse</a>
+                    <p class="trust-note" data-i18n="hero.trust">Protégé par IA Souveraine & Blockchain</p>
+                </div>
+            </div>
+
+            <aside class="hero-badge-card" aria-hidden="false">
+                <div class="badge-icon">🏛️</div>
+                <h3 data-i18n="hero.badge.title">Analyse Stratégique</h3>
+                <p data-i18n="hero.badge.text">Une méthodologie structurée inspirée des plus grands cabinets mondiaux.</p>
+                <div class="separator"></div>
+                <p class="hero-note" data-i18n="hero.note">Traitement analytique complexe, pas un simple chatbot.</p>
+            </aside>
+        </div>
+    </section>
+
+    <!-- FORM SECTION (Là où Tally apparaîtra) -->
+    <section id="form-section" class="form-section">
+        <div class="container">
+            <div id="tally-container">
+                <!-- Le formulaire Tally sera injecté ici par script.js -->
+                <div class="loader-expert">
+                    <div class="spinner"></div>
+                    <p data-i18n="form.loading">Initialisation de l'expert IA...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <p>&copy; 2026 e-META.app | <span data-i18n="footer.rights">Tous droits réservés.</span></p>
+    </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
