@@ -1,18 +1,18 @@
 # e-meta.app 🚀
-> **Expertise de Niveau Cabinet via IA Omnicanale**
+> **The AI-Powered Expert Form Platform**
 
-e-meta.app transforme la capture de données intelligente en livrables de haute valeur.
+e-meta.app transforme la capture de données en expertise de haut niveau. 
 
-## 🏗️ Architecture du Projet
-- **Frontend :** Tally (Smart Forms)
-- **Orchestration :** Make.com (Workflow Engine)
-- **Intelligence :** Bibliothèque de Prompts e-meta (IA Contextuelle)
-- **Sorties :** WhatsApp Business, PDF Dynamique, Email Professionnel
+## 🌟 Vision
+Fournir des services de conseil de "Niveau Cabinet" de manière instantanée, multilingue et omnicanale.
 
-## 📁 Structure du Repository
-- `/Docs` : Spécifications et scénarios de référence.
-- `/Bibliothèque de prompts` : Le cœur de l'expertise par secteur.
-- `/Orchestration-Make` : Blueprints des scénarios d'automatisation.
+## 🛠 Structure du Projet
+- `/core-logic` : Le moteur technique (Make & Tally).
+- `/docs` : Spécifications techniques et preuves d'antériorité.
+- `/assets` : Ressources graphiques.
 
 ## 🛡️ Propriété Intellectuelle
-Le concept et l'architecture technique sont protégés par horodatage Blockchain (Woleet).
+Ce projet est protégé par horodatage Blockchain via **Woleet**. Toute reproduction de la logique d'orchestration est interdite.
+
+---
+*Développé au Sénégal pour un succès mondial.*
