@@ -1,0 +1,15 @@
+# Structure du Formulaire Intelligent : Expert Business
+
+## 1. Champs de Capture (Variables)
+- `user_name` : Nom du porteur de projet.
+- `project_description` : Description libre (champ long).
+- `sector` : Liste déroulante (Fintech, Agriculture, Services, etc.).
+- `location` : Pays (pour adapter le cadre juridique ex: OHADA).
+- `output_preference` : Choix multiple (WhatsApp, Email, PDF).
+
+## 2. Logique Conditionnelle
+- SI `location` == "Sénégal" OU "Côte d'Ivoire" -> Injecter le dictionnaire juridique OHADA.
+- SI `sector` == "Technologie" -> Activer les questions sur la PI et le RGPD.
+
+## 3. Webhook de sortie
+- URL : `https://hook.make.com/votre_id_unique`
