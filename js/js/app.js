@@ -1,16 +1,17 @@
-console.log("✅ app.js chargé");
+/* ===========================
+   e-META — app.js (CORE)
+=========================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-  const app = document.getElementById("app");
-  if (!app) {
-    console.error("❌ #app introuvable");
-    return;
-  }
+  // 1. Langue persistée
+  const lang = localStorage.getItem("emeta_lang") || "fr";
+  window.setLang(lang, false);
 
-  app.innerHTML = `
-    <section style="padding:40px;color:white">
-      <h1>TEST OK</h1>
-      <p>Le moteur SPA fonctionne.</p>
-    </section>
-  `;
+  // 2. Router initial
+  window.loadRoute(location.hash || "#/home");
+
+  // 3. Écoute navigation
+  window.addEventListener("hashchange", () => {
+    window.loadRoute(location.hash);
+  });
 });
