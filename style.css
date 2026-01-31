@@ -80,27 +80,17 @@ body {
     .tagline { display: block; }
 }
 
-/* --- HERO SECTION --- */
-.hero {
-    padding: 80px 0;
-    background: linear-gradient(135deg, #fdfdfd 0%, #f4f4f4 100%);
-}
-
-.hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-    align-items: center;
-}
-
-@media (min-width: 992px) {
-    .hero-grid { grid-template-columns: 1.5fr 1fr; }
+/* --- HERO SECTION (Mise à jour pour centrage) --- */
+.hero-content {
+    text-align: center; /* Centre le texte */
+    max-width: 800px;   /* Évite que le texte soit trop large sur grand écran */
+    margin: 0 auto;     /* Centre le bloc lui-même */
 }
 
 .hero-title {
     font-family: var(--serif-font);
-    font-size: 3rem;
-    line-height: 1.1;
+    font-size: 3.2rem;  /* Taille desktop */
+    line-height: 1.2;
     color: var(--primary-navy);
     margin-bottom: 25px;
 }
@@ -109,56 +99,28 @@ body {
     font-size: 1.2rem;
     color: #555;
     margin-bottom: 40px;
+    text-align: center;
 }
 
-.cta-primary {
-    display: inline-block;
-    background: var(--primary-navy);
-    color: var(--white);
-    padding: 18px 35px;
-    text-decoration: none;
-    font-weight: 600;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-}
+/* --- RESPONSIVE MOBILE (Ajustement taille police) --- */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 1.8rem; /* Taille réduite pour mobile */
+        padding: 0 10px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
 
-.cta-primary:hover {
-    background: var(--accent-gold);
-    transform: translateY(-3px);
-}
-
-/* --- BADGE CARD (Cabinet Look) --- */
-.hero-badge-card {
-    background: var(--primary-navy);
-    color: var(--white);
-    padding: 40px;
-    border-radius: 2px;
-    box-shadow: 20px 20px 0px var(--accent-gold);
-}
-
-.badge-icon {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-
-.hero-badge-card h3 {
-    font-family: var(--serif-font);
-    margin-bottom: 15px;
-    font-size: 1.5rem;
-}
-
-.separator {
-    height: 1px;
-    background: rgba(197, 160, 89, 0.3);
-    margin: 20px 0;
-}
-
-.hero-note {
-    font-size: 0.85rem;
-    font-style: italic;
-    opacity: 0.8;
+    .hero-grid {
+        grid-template-columns: 1fr; /* Force une seule colonne sur mobile */
+    }
+    
+    .hero-badge-card {
+        margin: 20px; /* Ajoute un peu d'espace autour du badge sur mobile */
+    }
 }
 
 /* --- LANG SELECT --- */
