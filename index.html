@@ -61,39 +61,54 @@
     <section class="hero" id="hero">
         <div class="container hero-grid">
             <div class="hero-content">
-                <h1 class="hero-title" data-i18n="hero.title">
-                    Donnez à vos décisions le niveau d’un cabinet de conseil premium
-                </h1>
-                <p class="hero-subtitle" data-i18n="hero.subtitle">
-                    e-META structure votre contexte et vos objectifs pour produire une recommandation claire, actionnable et documentée.
-                </p>
+                <h1 class="hero-title" data-i18n="hero.title">L’Excellence Stratégique à la portée de chaque Décision.</h1>
+                <p class="hero-subtitle" data-i18n="hero.subtitle">Transformez vos problématiques en plans d'action structurés grâce à une orchestration d'IA de niveau Cabinet Conseil.</p>
 
                 <div class="hero-cta-group">
-                    <a href="#form-section" class="cta-primary" id="startBtn" data-i18n="hero.cta">Commencer l'analyse</a>
-                    <p class="trust-note" data-i18n="hero.trust">Protégé par IA Souveraine & Blockchain</p>
+                    <a href="#form-section" class="cta-primary" id="startBtn" data-i18n="hero.cta">Commencer l'analyse stratégique</a>
+                    <p class="trust-note">
+                        <span data-i18n="hero.trust">🔒 Souveraineté des données & Horodatage Blockchain</span>
+                    </p>
                 </div>
             </div>
 
-           <aside class="hero-badge-card" aria-hidden="false">
+            <aside class="hero-badge-card">
                 <div class="badge-icon">🏛️</div>
-                <h3 data-i18n="hero.badge.title">Analyse Stratégique</h3>
-                <p data-i18n="hero.badge.text">Une méthodologie structurée inspirée des plus grands cabinets mondiaux.</p>
+                <h3 data-i18n="hero.badge.title">Expertise Premium</h3>
+                <p data-i18n="hero.badge.text">Méthodologie décisionnelle rigoureuse pour entrepreneurs et dirigeants exigeants.</p>
                 <div class="separator"></div>
-                <p class="hero-note" data-i18n="hero.note">Traitement analytique complexe, pas un simple chatbot.</p>
+                <p class="hero-note" data-i18n="hero.note">Une approche structurée inspirée des standards Big Four.</p>
             </aside>
         </div>
-    </section> 
+    </section>
 
-    <!-- FORM SECTION (Là où Tally apparaîtra) -->
-    <section id="form-section" class="form-section">
+    <!-- SECTION MÉTHODOLOGIE (Les 3 Étapes) -->
+    <section class="steps-section">
         <div class="container">
-            <div id="tally-container">
-                <!-- Le formulaire Tally sera injecté ici par script.js -->
-                <div class="loader-expert">
-                    <div class="spinner"></div>
-                    <p data-i18n="form.loading">Initialisation de l'expert IA...</p>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-num">01</div>
+                    <h4 data-i18n="step1.title">Diagnostic</h4>
+                    <p data-i18n="step1.text">Capture précise de votre contexte via nos formulaires intelligents.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">02</div>
+                    <h4 data-i18n="step2.title">Orchestration</h4>
+                    <p data-i18n="step2.text">Analyse croisée par nos agents experts (Juridique, Fiscal, Stratégie).</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">03</div>
+                    <h4 data-i18n="step3.title">Livrable</h4>
+                    <p data-i18n="step3.text">Réception de votre rapport d'expertise haute fidélité instantanément.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- SECTION FORMULAIRE -->
+    <section id="form-section" class="form-section">
+        <div class="container" id="tally-container">
+            <!-- Formulaire injecté ici -->
         </div>
     </section>
 </main>
