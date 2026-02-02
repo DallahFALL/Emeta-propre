@@ -24,30 +24,31 @@
 
 <header class="site-header">
     <div class="container header-inner">
-        <a class="logo" href="#top" aria-label="e-META Home">
-            <span class="logo-mark">e</span><span class="logo-text">META</span>
+        <a class="logo-link" href="#top" aria-label="e-META Home">
+            <!-- On remplace le texte par votre nouveau logo officiel -->
+            <img src="assets/logo-emeta.png" alt="e-META LABS Logo" class="main-logo">
         </a>
 
-        <div class="tagline" data-i18n="header.tagline">
-            Assistant IA stratégique de niveau Cabinet Conseil
+        <div class="tagline" data-i18n="header.tagline">.object">Conception et exploitation de plateformes numériques et solutions d'intelligence artificielle.</p>
+                <p class="disclaimer" data-i18n="footer.disclaimer">
+                    Note : e-META est une solution d'aide à la décision. Elle ne se substitue en aucun cas à un conseil réglementé.
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy;
+            L'intelligence stratégique au service de vos décisions.
         </div>
 
         <div class="header-right">
-            <!-- Sélecteur de langue amélioré -->
-            <div class="lang-wrapper">
-                <select id="uiLangSelect" class="lang-select" aria-label="Select Language">
-                    <option value="fr">FR</option>
-                    <option value="en">EN</option>
-                    <option value="es">ES</option>
-                    <option value="ar">AR</option>
-                </select>
-            </div>
+            <select id="uiLangSelect" class="lang-select">
+                <option value="fr">FR</option>
+                <option value="en">EN</option>
+                <option value="es">ES</option>
+                <option value="ar">AR</option>
+            </select>
 
-            <button id="burgerBtn" class="burger" aria-label="Menu" aria-expanded="false">
-                <span></span>
-            </button>
-
-            <nav id="mainNav" aria-label="Main navigation">
+            <nav id="mainNav">
                 <a href="#hero" data-i18n="nav.home">Accueil</a>
                 <a href="#form-section" data-i18n="nav.form">Expertise</a>
                 <a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a>
@@ -55,7 +56,6 @@
         </div>
     </div>
 </header>
-
 <main>
     <!-- HERO SECTION -->
     <section class="hero" id="hero">
@@ -113,11 +113,16 @@
     </section>
 </main>
 
+<!-- FOOTER : Structure SASU & Disclaimer Juridique -->
 <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2026 e-META.app | <span data-i18n="footer.rights">Tous droits réservés.</span></p>
-        </div>
-    </footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="assets/logo-emeta.png" alt="e-META LABS" class="footer-logo">
+                <p><strong>e-META LABS (SASU)</strong></p>
+            </div>
+            <div class="footer-legal">
+                <p data-i18n="footer bijou (le logo et l'IA).
 
 <script src="i18n.js"></script>
 <script src="script.js"></script>
