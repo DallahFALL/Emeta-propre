@@ -50,25 +50,21 @@ const resources = {
 };
 
 function updateContent(lang) {
-    // 1. Mettre à jour tous les textes qui ont l'attribut data-i18n
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (resources[lang] && resources[lang][key]) {
-            el.innerText = resources[lang][key];
+            // Si c'est un bouton ou un lien, on change le texte interne
+            if (el.tagName === 'INPUT' || el.tagName === 'SELECT') {
+                el.value = resources[lang][key];
+            } else {
+                el.innerHTML = resources[lang][key];
+            }
         }
     });
 
-    // 2. Gérer le sens de lecture (RTL pour l'arabe)
-    const rtlStylesheet = document.getElementById('rtlStylesheet');
-    if (lang === 'ar') {
-        document.documentElement.dir = 'rtl';
-        document.documentElement.lang = 'ar';
-        if (rtlStylesheet) rtlStylesheet.disabled = false;
-    } else {
-        document.documentElement.dir = 'ltr';
-        document.documentElement.lang = lang;
-        if (rtlStylesheet) rtlStylesheet.disabled = true;
-    }
+    // Mise à jour de la direction de lecture (RTL pour l'arabe)
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang;
 }
 
 // Initialisation au chargement de la page
