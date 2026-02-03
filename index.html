@@ -13,7 +13,8 @@
 <header class="site-header">
     <div class="container header-inner">
         <a href="index.html" class="logo-brand">
-            <img src="01_Logo_Sources/eMETA-official-logo.png" alt="e-META" class="brand-icon">
+            <!-- Test du chemin direct pour le logo -->
+            <img src="./01_Logo_Sources/eMETA-official-logo.png" alt="e-META" class="brand-icon" onerror="this.src='https://via.placeholder.com/50?text=E'">
             <div class="brand-text">
                 <span class="brand-name">e-META</span>
                 <span class="brand-suffix">LABS</span>
@@ -40,7 +41,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title" data-i18n="hero.title">L’Excellence Stratégique à la portée de chaque Décision.</h1>
-                <p class="hero-subtitle" data-i18n="hero.subtitle">Station de pilotage décisionnelle de niveau Cabinet Conseil pour entrepreneurs et dirigeants.</p>
+                <p class="hero-subtitle" data-i18n="hero.subtitle">Station de pilotage décisionnelle de niveau Cabinet Conseil.</p>
             </div>
         </div>
     </section>
@@ -54,36 +55,47 @@
                 </div>
 
                 <form id="emetaMasterForm">
+                    <!-- 01 SCOPE -->
                     <div class="form-step">
-                        <h3 class="step-title"><span>01</span> <span data-i18n="group.general">Périmètre du Projet</span></h3>
+                        <h3 class="step-title"><span>01</span> <span data-i18n="group.general">Périmètre & Expertise</span></h3>
                         <div class="input-grid">
                             <div class="input-group">
                                 <label data-i18n="field.projectTitle.label">Titre de la Décision</label>
-                                <input type="text" name="projectTitle" placeholder="Ex: Expansion marché Afrique de l'Ouest">
+                                <input type="text" name="projectTitle" data-i18n-placeholder="field.projectTitle.placeholder">
                             </div>
                             <div class="input-group">
                                 <label data-i18n="field.domain.label">Expertise Requise</label>
                                 <select name="domain">
-                                    <option value="strategy">Stratégie Business</option>
-                                    <option value="legal">Conformité Juridique / OHADA</option>
-                                    <option value="finance">Ingénierie Financière</option>
+                                    <option value="ai_transformation" data-i18n="domain.ai">Transformation IA & Digitale</option>
+                                    <option value="fintech_compliance" data-i18n="domain.fintech">Fintech & Conformité Réglementaire</option>
+                                    <option value="strategic_scaling" data-i18n="domain.scaling">Scaling & Expansion Internationale</option>
+                                    <option value="fundraising" data-i18n="domain.funds">Venture Capital & Levée de fonds</option>
+                                    <option value="legal_ohada" data-i18n="domain.legal">Ingénierie Juridique (OHADA/International)</option>
                                 </select>
                             </div>
                         </div>
                     </div>
 
+                    <!-- 02 DEEP ANALYSIS -->
                     <div class="form-step">
-                        <h3 class="step-title"><span>02</span> <span data-i18n="group.analysis">Analyse de Contexte</span></h3>
+                        <h3 class="step-title"><span>02</span> <span data-i18n="group.analysis">Analyse Profonde</span></h3>
                         <div class="input-group">
-                            <label data-i18n="field.problem.label">Problématique & Signaux Faibles</label>
-                            <textarea name="problem" rows="4" placeholder="Décrivez les enjeux critiques de votre situation..."></textarea>
+                            <label data-i18n="field.problem.label">Problématique & Enjeux Critiques</label>
+                            <textarea name="problem" rows="4" data-i18n-placeholder="field.problem.placeholder"></textarea>
                         </div>
-                        <div class="input-group">
-                            <label data-i18n="field.fileLink.label">Audit de Document (Lien Cloud)</label>
-                            <input type="url" name="fileLink" placeholder="Lien vers Business Plan, Contrat ou Bilan (PDF/Docs)">
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label data-i18n="field.market.label">Marché Cible & Concurrence</label>
+                                <input type="text" name="market" data-i18n-placeholder="field.market.placeholder">
+                            </div>
+                            <div class="input-group">
+                                <label data-i18n="field.fileLink.label">Audit Documentaire (Lien Cloud)</label>
+                                <input type="url" name="fileLink" data-i18n-placeholder="field.fileLink.placeholder">
+                            </div>
                         </div>
                     </div>
 
+                    <!-- 03 DELIVERY -->
                     <div class="form-step">
                         <h3 class="step-title"><span>03</span> <span data-i18n="group.output">Canaux de Restitution</span></h3>
                         <div class="input-grid">
