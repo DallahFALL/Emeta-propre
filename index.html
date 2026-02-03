@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="e-META LABS - Expertise IA de niveau cabinet conseil. Stratégie, conformité et aide à la décision.">
-    <title data-i18n="meta.title">e-META — Assistant IA Premium</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="meta.title">e-META LABS – Assistant IA de Décision</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap">
-    <link rel="stylesheet" href="style.css" />
 </head>
-<body id="top">
+<body>
 
 <header class="site-header">
     <div class="container header-inner">
-        <a class="logo-link" href="#top">
-    <img src="assets/logo-emeta.png" alt="e-META LABS" class="main-logo">
-</a>
+        <a href="index.html" class="logo-link">
+            <!-- Chemin du logo corrigé selon votre source -->
+            <img src="01_Logo_Sources/eMETA-official-logo.png" alt="e-META LABS Logo" class="main-logo" height="100">
+        </a>
+
         <div class="tagline" data-i18n="header.tagline">L'intelligence stratégique au service de vos décisions.</div>
+
         <div class="header-right">
-            <select id="uiLangSelect" class="lang-select">
+            <select id="languageSwitcher" class="lang-select">
                 <option value="fr">FR</option>
                 <option value="en">EN</option>
                 <option value="es">ES</option>
                 <option value="ar">AR</option>
             </select>
-            <nav id="mainNav">
+            <nav class="nav" id="mainNav">
                 <a href="#hero" data-i18n="nav.home">Accueil</a>
-                <a href="#form-section" data-i18n="nav.form">Expertise</a>
+                <a href="#form" data-i18n="nav.form">Expertise</a>
                 <a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a>
             </nav>
         </div>
@@ -34,42 +37,90 @@
 </header>
 
 <main>
-    <section class="hero" id="hero">
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero">
         <div class="container hero-content">
             <h1 class="hero-title" data-i18n="hero.title">L’Excellence Stratégique à la portée de chaque Décision.</h1>
-            <p class="hero-subtitle" data-i18n="hero.subtitle">Transformez vos problématiques en plans d'action structurés grâce à une orchestration d'IA de niveau Cabinet Conseil.</p>
-            <div class="hero-cta-group">
-                <a href="#form-section" class="cta-primary" id="startBtn" data-i18n="hero.cta">Commencer l'analyse stratégique</a>
-                <p class="trust-note" data-i18n="hero.trust">🔒 Souveraineté des données & Horodatage Blockchain</p>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">e-META analyse votre contexte, vos KPIs et vos ressources pour générer une feuille de route claire et documentée.</p>
+            <div class="hero-cta">
+                <a href="#form" class="btn-primary" data-i18n="hero.cta">Commencer une analyse stratégique</a>
             </div>
         </div>
     </section>
 
-    <section class="steps-section">
+    <!-- FORMULAIRE UNIVERSEL MASTER -->
+    <section id="form" class="form-section">
         <div class="container">
-            <div class="steps-grid">
-                <div class="step">
-                    <div class="step-num">01</div>
-                    <h4 data-i18n="step1.title">Diagnostic</h4>
-                    <p data-i18n="step1.text">Capture précise de votre contexte via nos formulaires intelligents.</p>
-                </div>
-                <div class="step">
-                    <div class="step-num">02</div>
-                    <h4 data-i18n="step2.title">Orchestration</h4>
-                    <p data-i18n="step2.text">Analyse croisée par nos agents experts (Juridique, Fiscal, Stratégie).</p>
-                </div>
-                <div class="step">
-                    <div class="step-num">03</div>
-                    <h4 data-i18n="step3.title">Livrable</h4>
-                    <p data-i18n="step3.text">Réception de votre rapport d'expertise haute fidélité instantanément.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            <h2 data-i18n="form.title">Diagnostic Stratégique Master</h2>
+            <p class="form-intro" data-i18n="form.intro">Plus vos réponses sont précises, plus l'expertise e-META sera actionnable.</p>
 
-    <section id="form-section" class="form-section">
-        <div class="container" id="tally-container">
-            <!-- Formulaire Tally injecté par script.js -->
+            <form id="emetaForm" class="premium-form">
+                <!-- BLOC 1 : Identité -->
+                <fieldset class="field-group">
+                    <legend data-i18n="group.general">1. Informations générales</legend>
+                    <div class="field">
+                        <label data-i18n="field.projectTitle.label">Titre du projet ou de la décision</label>
+                        <input type="text" name="projectTitle" placeholder="Ex: Expansion marché Afrique de l'Ouest">
+                    </div>
+                    <div class="field-grid">
+                        <div class="field">
+                            <label data-i18n="field.domain.label">Domaine principal</label>
+                            <select name="domain">
+                                <option value="strategy" data-i18n="field.domain.strategy">Stratégie & Gouvernance</option>
+                                <option value="finance" data-i18n="field.domain.finance">Finance & Modèle économique</option>
+                                <option value="legal" data-i18n="field.domain.legal">Juridique & Conformité</option>
+                                <option value="it" data-i18n="field.domain.it">Systèmes d’information & IA</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label data-i18n="field.geography.label">Zone Géographique</label>
+                            <input type="text" name="geography" placeholder="Ex: Sénégal (Zone OHADA)">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- BLOC 2 : Analyse de Fond -->
+                <fieldset class="field-group">
+                    <legend data-i18n="group.analysis">2. Analyse stratégique</legend>
+                    <div class="field">
+                        <label data-i18n="field.problem.label">Problématique centrale</label>
+                        <textarea name="problem" rows="3" placeholder="Décrivez le défi principal..."></textarea>
+                    </div>
+                    <div class="field-grid">
+                        <div class="field">
+                            <label data-i18n="field.objectives.label">Objectifs visés</label>
+                            <textarea name="objectives" rows="3" placeholder="Listez vos 3 buts majeurs..."></textarea>
+                        </div>
+                        <div class="field">
+                            <label data-i18n="field.constraints.label">Contraintes & Risques</label>
+                            <textarea name="constraints" rows="3" placeholder="Budget, délais, régulations..."></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- BLOC 3 : Restitution -->
+                <fieldset class="field-group">
+                    <legend data-i18n="group.output">3. Mode de restitution</legend>
+                    <div class="field">
+                        <label data-i18n="field.fileLink.label">Lien vers document complémentaire (Optionnel)</label>
+                        <input type="url" name="fileLink" placeholder="Lien Google Drive, PDF, Contrat...">
+                    </div>
+                    <div class="field-grid">
+                        <div class="field">
+                            <label data-i18n="field.email.label">Email professionnel</label>
+                            <input type="email" name="email" placeholder="nom@entreprise.com">
+                        </div>
+                        <div class="field">
+                            <label data-i18n="field.whatsapp.label">Numéro WhatsApp</label>
+                            <input type="tel" name="whatsapp" placeholder="+221...">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary" data-i18n="form.submit">Envoyer ma requête</button>
+                </div>
+            </form>
         </div>
     </section>
 </main>
@@ -78,14 +129,12 @@
     <div class="container">
         <div class="footer-legal">
             <h4 class="company-name">e-META LABS <span class="legal-status">(SASU)</span></h4>
-            <p class="social-object" data-i18n="footer.object">Conception, développement et exploitation de solutions d'IA dédiées à l'aide à la décision.</p>
+            <p class="social-object" data-i18n="footer.object">Conception et exploitation de solutions d'IA dédiées à l'aide à la décision.</p>
             <div class="disclaimer-box">
                 <p class="disclaimer-text" data-i18n="footer.disclaimer">Note légale : e-META est une solution d'aide à la décision. Elle ne se substitue en aucun cas à un conseil réglementé.</p>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 e-META LABS | <span data-i18n="footer.rights">Tous droits réservés.</span></p>
-        </div>
+        <p class="footer-bottom">&copy; 2026 e-META LABS | <span data-i18n="footer.rights">Tous droits réservés.</span></p>
     </div>
 </footer>
 
