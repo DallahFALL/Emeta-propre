@@ -1,76 +1,56 @@
-const resources = {
-    fr: {
-        "meta.title": "e-META LABS", "nav.home": "Vision", "nav.form": "Lancer l'Analyse", "nav.privacy": "Politique de Confidentialité",
-        "header.tagline": "L'intelligence stratégique au service de vos décisions.",
-        "hero.title": "L’Excellence Stratégique à la portée de chaque Décision.",
-        "hero.subtitle": "Station de pilotage décisionnelle de niveau Cabinet Conseil.",
-        "form.title": "Expertise Decision Engine", "engine.status": "SYSTÈME PRÊT",
-        "group.general": "01 Périmètre & Expertise", "group.analysis": "02 Analyse de Contexte", "group.output": "03 Canaux de Restitution",
-        "field.projectTitle.label": "Titre de la Décision", "field.projectTitle.placeholder": "Ex: Expansion hôtelière ou Audit IA...",
-        "field.domain.label": "Expertise Requise",
-        "domain.ai": "Souveraineté IA", "domain.finance": "Ingénierie ESG", "domain.ma": "M&A (Fusions-Acquisitions)", "domain.legal": "Optimisation Fiscale OHADA", "domain.crisis": "Gestion de Crise Cyber",
-        "field.industry.label": "Secteur d'Activité",
-        "industry.energy": "Énergies Vertes", "industry.blue": "Blue Economy", "industry.health": "HealthTech", "industry.agri": "Agrobusiness intelligent", "industry.logistics": "Logistique Globale",
-        "field.geography.label": "Zone d'Impact", "field.geography.placeholder": "Sénégal, Europe, USA...",
-        "field.problem.label": "Problématique & Enjeux", "field.problem.placeholder": "Décrivez les enjeux critiques de votre situation...",
-        "field.fileLink.label": "Audit Documentaire (Lien Cloud)", "field.fileLink.placeholder": "Lien vers Business Plan, Contrat ou Bilan",
-        "field.email.label": "Email de Direction", "field.whatsapp.label": "Ligne WhatsApp Expert",
-        "field.outputMode.label": "Mode de livraison souhaité", "field.outputMode.display": "Affichage Direct",
-        "form.submit": "GÉNÉRER L'EXPERTISE E-META", "hero.trust": "🔒 Souveraineté des données & Certification Blockchain",
-        "footer.object": "Conception, développement et exploitation de solutions d'IA dédiées à l'aide à la décision.",
-        "privacy.body": "POLITIQUE DE CONFIDENTIALITÉ e-META LABS\n\n1. SOUVERAINETÉ DES DONNÉES\nVos données stratégiques et confidentielles ne sont jamais partagées avec des tiers ni utilisées pour l'entraînement de modèles d'IA publics.\n\n2. CERTIFICATION BLOCKCHAIN\nChaque diagnostic est horodaté via la technologie Blockchain Bitcoin (Woleet), garantissant l'antériorité et l'intégrité de vos réflexions.\n\n3. CADRE RÉGLEMENTÉ\ne-META est un outil d'aide à la décision. Il ne constitue pas un conseil juridique, fiscal ou comptable et ne remplace pas les professions réglementées."
-    },
-    en: {
-        "nav.home": "Vision", "nav.form": "Launch Analysis", "nav.privacy": "Privacy Policy",
-        "hero.title": "Strategic Excellence for Every Critical Decision.",
-        "hero.subtitle": "Management Consulting-grade decision station.",
-        "group.general": "01 Scope & Expertise", "group.analysis": "02 Deep Analysis", "group.output": "03 Delivery Channels",
-        "engine.status": "SYSTEM READY",
-        "field.projectTitle.label": "Decision Title", "field.projectTitle.placeholder": "e.g. Hotel expansion or AI Audit...",
-        "domain.ai": "AI Sovereignty", "domain.finance": "ESG Engineering", "domain.ma": "M&A", "domain.legal": "OHADA Tax Optimization", "domain.crisis": "Cyber Crisis Management",
-        "industry.energy": "Green Energy", "industry.blue": "Blue Economy", "industry.health": "HealthTech", "industry.agri": "Agribusiness", "industry.logistics": "Global Logistics",
-        "form.submit": "GENERATE E-META EXPERTISE", "hero.trust": "🔒 Sovereign Data & Blockchain Certified",
-        "footer.object": "Design, development, and operation of AI solutions for strategic decision support.",
-        "privacy.body": "PRIVACY POLICY e-META LABS\n\n1. DATA SOVEREIGNTY\nYour strategic and confidential data is never shared with third parties nor used for training public AI models.\n\n2. BLOCKCHAIN CERTIFICATION\nEach diagnostic is timestamped via Bitcoin Blockchain technology (Woleet), ensuring the priority and integrity of your strategic insights.\n\n3. REGULATED FRAMEWORK\ne-META is a decision-support tool. It does not constitute legal, tax, or accounting advice and does not replace regulated professions."
-    },
-    es: {
-        "hero.title": "Excelencia Estratégica para cada Decisión Crítica.",
-        "group.general": "01 Alcance y Especialización", "form.submit": "GENERAR EXPERIENCIA E-META",
-        "privacy.body": "POLÍTICA DE PRIVACIDAD: Sus datos son soberanos y están protegidos por tecnología Blockchain."
-    },
-    ar: {
-        "hero.title": "التميز الاستراتيجي في متناول كل قرار.",
-        "group.general": "01 النطاق والخبرة", "form.submit": "إنشاء خبرة e-META",
-        "privacy.body": "سياسة الخصوصية: بياناتك سيادية ومحمية بتقنية البلوكشين."
-    }
-};
+:root { --navy: #0a192f; --gold: #c5a059; --white: #ffffff; --bg: #f4f7f9; --success: #2ecc71; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--navy); line-height: 1.6; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-function updateContent(lang) {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (resources[lang] && resources[lang][key]) el.innerHTML = resources[lang][key];
-    });
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        const key = el.getAttribute('data-i18n-placeholder');
-        if (resources[lang] && resources[lang][key]) el.setAttribute('placeholder', resources[lang][key]);
-    });
-    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-    document.documentElement.lang = lang;
-}
+/* HEADER */
+.site-header { background: #fff; padding: 15px 0; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 1000; }
+.header-inner { display: flex; justify-content: space-between; align-items: center; }
+.logo-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand-name-full { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--navy); }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const selector = document.getElementById('uiLangSelect');
-    if (selector) {
-        updateContent(selector.value);
-        selector.addEventListener('change', (e) => updateContent(e.target.value));
-    }
+.header-right { display: flex; align-items: center; gap: 20px; }
+.main-nav { display: flex; gap: 20px; }
+.main-nav a { text-decoration: none; color: var(--navy); font-weight: 600; font-size: 0.9rem; }
+.nav-cta { background: var(--navy); color: #fff !important; padding: 8px 15px; border-radius: 4px; }
+.lang-select { padding: 5px; border-radius: 4px; border: 1px solid #ddd; cursor: pointer; }
 
-    // Gestion du Modal
-    const modal = document.getElementById("privacyModal");
-    const btn = document.getElementById("openPrivacy");
-    const span = document.getElementsByClassName("close-modal")[0];
+/* HERO */
+.hero-premium { padding: 100px 0 150px; text-align: center; background: var(--navy); color: #fff; }
+.hero-title { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--gold); margin-bottom: 20px; }
 
-    btn.onclick = () => modal.style.display = "block";
-    span.onclick = () => modal.style.display = "none";
-    window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
-});
+/* FORM CARD */
+.engine-section { margin-top: -80px; padding-bottom: 80px; }
+.decision-card { background: #fff; border-radius: 12px; padding: 50px; box-shadow: 0 40px 80px rgba(0,0,0,0.15); }
+.card-header { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; margin-bottom: 40px; padding-bottom: 20px; }
+.status-dot { height: 10px; width: 10px; background: var(--success); border-radius: 50%; display: inline-block; animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.step-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); margin-bottom: 30px; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+.input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+.input-group { margin-bottom: 25px; }
+.input-group label { display: block; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #666; margin-bottom: 8px; }
+input, select, textarea { width: 100%; padding: 14px; border: 1px solid #d1d9e0; border-radius: 6px; background: #fafbfc; }
+
+/* CHECKBOXES ALIGNMENT FIXED */
+.delivery-grid { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; }
+.deliv-card { flex: 1; min-width: 150px; border: 1px solid #ddd; padding: 15px; border-radius: 6px; display: flex; align-items: center; gap: 10px; cursor: pointer; transition: 0.3s; }
+.deliv-card:hover { border-color: var(--gold); background: #fff; }
+.deliv-card input { width: auto; margin: 0; }
+
+.btn-engine { background: var(--navy); color: #fff; width: 100%; padding: 22px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 1.1rem; }
+.btn-engine:hover { background: var(--gold); transform: translateY(-2px); }
+
+/* FOOTER */
+.site-footer { background: #f8f9fa; padding: 80px 0; text-align: center; }
+.btn-privacy-trigger { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 8px 20px; cursor: pointer; border-radius: 4px; font-weight: 600; }
+
+/* MODAL */
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
+.modal-content { background: #fff; margin: 10% auto; padding: 40px; border-radius: 8px; max-width: 700px; position: relative; }
+.close-modal { position: absolute; right: 20px; top: 10px; font-size: 28px; cursor: pointer; }
+.modal-body { white-space: pre-wrap; font-size: 0.95rem; color: #444; margin-top: 20px; }
+
+[dir="rtl"] { text-align: right; }
+[dir="rtl"] .logo-brand { flex-direction: row-reverse; }
+[dir="rtl"] .header-right { flex-direction: row-reverse; }
