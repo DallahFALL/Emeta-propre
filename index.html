@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="meta.title">e-META LABS — Strategic AI Engine</title>
-    
-    <!-- FAVICON -->
     <link rel="icon" type="image/png" href="assets/logo.png">
-    
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -17,18 +14,16 @@
 <header class="site-header">
     <div class="container header-inner">
         <a href="index.html" class="logo-brand">
-            <!-- LOGO SVG INTEGRÉ (Inaltérable) -->
             <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M20 30L50 15L80 30V70L50 85L20 70V30Z" stroke="#c5a059" stroke-width="6"/>
                 <path d="M35 40C35 40 45 35 50 35C55 35 65 40 65 40V60C65 60 55 65 50 65C45 65 35 60 35 60V40Z" fill="#0a192f"/>
             </svg>
             <span class="brand-name-full">e-META LABS</span>
         </a>
-        
         <div class="header-right">
             <nav class="main-nav">
                 <a href="#hero" data-i18n="nav.home">Vision</a>
-                <a href="#form" class="nav-cta" data-i18n="nav.form">Lancer l'Analyse</a>
+                <a href="#form" class="nav-cta" data-i18n="nav.form">Expertise</a>
             </nav>
             <select id="uiLangSelect" class="lang-select">
                 <option value="fr">FR</option>
@@ -42,11 +37,9 @@
 
 <main>
     <section id="hero" class="hero-premium">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title" data-i18n="hero.title">L’Excellence Stratégique à la portée de chaque Décision.</h1>
-                <p class="hero-subtitle" data-i18n="hero.subtitle">Station de pilotage décisionnelle de niveau Cabinet Conseil pour entrepreneurs et dirigeants.</p>
-            </div>
+        <div class="container hero-content">
+            <h1 class="hero-title" data-i18n="hero.title">L’Excellence Stratégique à la portée de chaque Décision.</h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">Station de pilotage décisionnelle de niveau Cabinet Conseil.</p>
         </div>
     </section>
 
@@ -59,7 +52,7 @@
                 </div>
 
                 <form id="emetaMasterForm">
-                    <!-- SECTION 01 : PÉRIMÈTRE -->
+                    <!-- 01 PERIMETRE -->
                     <div class="form-step">
                         <h3 class="step-title"><span>01</span> <span data-i18n="group.general">Périmètre & Expertise</span></h3>
                         <div class="input-grid">
@@ -71,7 +64,6 @@
                                 <label data-i18n="field.domain.label">Expertise Requise</label>
                                 <select name="domain">
                                     <option value="ai" data-i18n="domain.ai">IA & Souveraineté Numérique</option>
-                                    <option value="esg" data-i18n="domain.finance">Finance Durable & ESG</option>
                                     <option value="legal" data-i18n="domain.legal">Conformité Fintech (OHADA)</option>
                                     <option value="scaling" data-i18n="domain.scaling">Scaling & Gouvernance</option>
                                 </select>
@@ -83,8 +75,7 @@
                                 <select name="industry">
                                     <option value="tourism" data-i18n="industry.tourism">Tourisme & Écotourisme</option>
                                     <option value="construction" data-i18n="industry.construction">BTP & Immobilier Durable</option>
-                                    <option value="agri" data-i18n="industry.agri">Agri-Business & FoodTech</option>
-                                    <option value="tech" data-i18n="industry.tech">Digital & Nouvelles Tech</option>
+                                    <option value="tech" data-i18n="industry.tech">Digital & New Tech</option>
                                 </select>
                             </div>
                             <div class="input-group">
@@ -94,20 +85,16 @@
                         </div>
                     </div>
 
-                    <!-- SECTION 02 : ANALYSE -->
+                    <!-- 02 ANALYSE -->
                     <div class="form-step">
                         <h3 class="step-title"><span>02</span> <span data-i18n="group.analysis">Analyse de Contexte</span></h3>
                         <div class="input-group">
                             <label data-i18n="field.problem.label">Problématique & Enjeux</label>
                             <textarea name="problem" rows="4" data-i18n-placeholder="field.problem.placeholder"></textarea>
                         </div>
-                        <div class="input-group">
-                            <label data-i18n="field.fileLink.label">Audit de Document (Lien Cloud)</label>
-                            <input type="url" name="fileLink" data-i18n-placeholder="field.fileLink.placeholder">
-                        </div>
                     </div>
 
-                    <!-- SECTION 03 : RESTITUTION -->
+                    <!-- 03 RESTITUTION -->
                     <div class="form-step">
                         <h3 class="step-title"><span>03</span> <span data-i18n="group.output">Canaux de Restitution</span></h3>
                         <div class="input-grid">
@@ -120,12 +107,22 @@
                                 <input type="tel" name="whatsapp" placeholder="+221...">
                             </div>
                         </div>
-                        <div class="input-group">
-                            <label data-i18n="field.outputMode.label">Mode de livraison souhaité</label>
-                            <div class="checkbox-row">
-                                <label><input type="checkbox" name="wa" checked> WhatsApp</label>
-                                <label><input type="checkbox" name="mail" checked> Email & PDF</label>
-                                <label><input type="checkbox" name="web"> Affichage Direct</label>
+                        
+                        <div class="delivery-selector">
+                            <p class="selector-label" data-i18n="field.outputMode.label">Mode de livraison souhaité</p>
+                            <div class="checkbox-group">
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="wa" checked>
+                                    <span class="checkbox-text">WhatsApp</span>
+                                </label>
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="mail" checked>
+                                    <span class="checkbox-text">Email & PDF</span>
+                                </label>
+                                <label class="checkbox-card">
+                                    <input type="checkbox" name="web">
+                                    <span class="checkbox-text" data-i18n="field.outputMode.display">Affichage Direct</span>
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -147,9 +144,9 @@
         <h4 class="company-name">e-META LABS <span class="legal-tag">(SASU)</span></h4>
         <p class="social-object" data-i18n="footer.object">Conception, développement et exploitation de solutions d'IA dédiées à l'aide à la décision.</p>
         <div class="legal-box">
-            <p data-i18n="footer.disclaimer">Note légale : e-META est une solution d'aide à la décision. Elle ne se substitue en aucun cas à un conseil réglementé.</p>
+            <p data-i18n="footer.disclaimer">Note légale : e-META est une solution d'aide à la décision. Elle ne constitue pas et ne se substitue en aucun cas à un conseil réglementé.</p>
         </div>
-        <p class="credits">© 2026 e-META LABS | Senegal • Worldwide</p>
+        <p class="credits">© 2026 e-META LABS | <a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a></p>
     </div>
 </footer>
 
