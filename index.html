@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="meta.title">e-META LABS</title>
+    <title data-i18n="meta.title">e-META LABS — Strategic AI Engine</title>
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +14,7 @@
 <header class="site-header">
     <div class="container header-inner">
         <a href="index.html" class="logo-brand">
+            <!-- LOGO SVG INTEGRÉ (Inaltérable et net) -->
             <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M20 30L50 15L80 30V70L50 85L20 70V30Z" stroke="#c5a059" stroke-width="6"/>
                 <path d="M35 40C35 40 45 35 50 35C55 35 65 40 65 40V60C65 60 55 65 50 65C45 65 35 60 35 60V40Z" fill="#0a192f"/>
@@ -52,7 +53,7 @@
                 </div>
 
                 <form id="emetaMasterForm">
-                    <!-- SECTION 01 -->
+                    <!-- SECTION 01 : PÉRIMÈTRE -->
                     <div class="form-step">
                         <h3 class="step-title"><span data-i18n="group.general">01 Périmètre & Expertise</span></h3>
                         <div class="input-grid">
@@ -78,7 +79,7 @@
                                     <option value="energy" data-i18n="industry.energy">Énergies Vertes</option>
                                     <option value="blue" data-i18n="industry.blue">Blue Economy</option>
                                     <option value="health" data-i18n="industry.health">HealthTech</option>
-                                    <option value="agri" data-i18n="industry.agri">Agrobusiness intelligent</option>
+                                    <option value="agri" data-i18n="industry.agri">Agribusiness intelligent</option>
                                     <option value="logistics" data-i18n="industry.logistics">Logistique Globale</option>
                                 </select>
                             </div>
@@ -89,7 +90,7 @@
                         </div>
                     </div>
 
-                    <!-- SECTION 02 -->
+                    <!-- SECTION 02 : ANALYSE -->
                     <div class="form-step">
                         <h3 class="step-title"><span data-i18n="group.analysis">02 Analyse de Contexte</span></h3>
                         <div class="input-group">
@@ -102,7 +103,7 @@
                         </div>
                     </div>
 
-                    <!-- SECTION 03 -->
+                    <!-- SECTION 03 : RESTITUTION -->
                     <div class="form-step">
                         <h3 class="step-title"><span data-i18n="group.output">03 Canaux de Restitution</span></h3>
                         <div class="input-grid">
@@ -130,7 +131,7 @@
                             <span data-i18n="hero.trust">🔒 Souveraineté & Certification Blockchain</span>
                         </p>
                         <button type="submit" class="btn-engine" id="submitBtn">
-                            <span data-i18n="form.submit">Générer l'Expertise e-META</span>
+                            <span data-i18n="form.submit">GÉNÉRER L'EXPERTISE E-META</span>
                         </button>
                     </div>
                 </form>
@@ -150,14 +151,12 @@
     </div>
 </footer>
 
-<!-- MODAL PRIVACY (NOUVEAU) -->
+<!-- MODAL PRIVACY INTÉGRÉE -->
 <div id="privacyModal" class="modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
         <h2 data-i18n="nav.privacy">Politique de Confidentialité</h2>
-        <div class="modal-body" data-i18n="privacy.body">
-            <!-- Rempli par JS -->
-        </div>
+        <div id="modalBody" class="modal-body"></div>
     </div>
 </div>
 
