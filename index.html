@@ -6,34 +6,30 @@
     <title data-i18n="meta.title">e-META LABS — Strategic AI Engine</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <header class="site-header">
-    <brand-labs">LABS</span>
-        </a>
-
-        <div class="header-right">
-            <select id="uidiv class="container header-inner">
-        <a href="index.html" class="logo-brand">LangSelect" class="lang-select">
-                <option value="fr">Français</option>
-                <option value="en">English</option>
-                <option value="es">Español</option>
-            <!-- Votre logo officiel (Hexagone + e-META) -->
-            <img src="01_Logo_Sources/eMETA-official-logo.png" alt="e-META" class="brand-logo
-                <option value="ar">العربية</option>
-            </select>
-            <nav class="main-nav">
-                <-img">
-            <!-- Le suffixe LABS ajouté en texte pour la flexibilité -->
-            <span class="a href="#hero" data-i18n="nav.home">Vision</a>
-                <a href="#form" class="nav-cta" data-i18n="nav.form">Lancer l'Anbrand-labs">LABS</span>
+    <div class="container header-inner">
+        <a href="index.html" class="logo-brand">
+            <img src="01_Logo_Sources/eMETA-official-logo.png" alt="e-META" class="brand-icon">
+            <div class="brand-text">
+                <span class="brand-name">e-META</span>
+                <span class="brand-suffix">LABS</span>
+            </div>
         </a>
         
         <div class="header-right">
             <select id="uiLangSelect" class="lang-select">
-                <option value="fr">Françaisalyse</a>
+                <option value="fr">Français</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="ar">العربية</option>
+            </select>
+            <nav class="main-nav">
+                <a href="#hero" data-i18n="nav.home">Vision</a>
+                <a href="#form" class="nav-cta" data-i18n="nav.form">Lancer l'Analyse</a>
             </nav>
         </div>
     </div>
@@ -41,9 +37,11 @@
 
 <main>
     <section id="hero" class="hero-premium">
-        <div class="container hero-content">
-            <h1 class="hero-title" data-i18n="hero.title">L’Excellence Stratégique à la portée de chaque Décision.</h1>
-            <p class="hero-subtitle" data-i18n="hero.subtitle">L'IA de niveau Cabinet Conseil qui transforme vos données complexes en actifs stratégiques.</p>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title" data-i18n="hero.title">L’Excellence Stratégique à la portée de chaque Décision.</h1>
+                <p class="hero-subtitle" data-i18n="hero.subtitle">Station de pilotage décisionnelle de niveau Cabinet Conseil pour entrepreneurs et dirigeants.</p>
+            </div>
         </div>
     </section>
 
@@ -52,7 +50,7 @@
             <div class="decision-card">
                 <div class="card-header">
                     <h2 data-i18n="form.title">Expertise Decision Engine</h2>
-                    <div class="engine-status"><span class="status-dot"></span> <span data-i18n="engine.status">Système Prêt</span></div>
+                    <div class="engine-status"><span class="status-dot"></span> <span data-i18n="engine.status">SYSTÈME PRÊT</span></div>
                 </div>
 
                 <form id="emetaMasterForm">
@@ -61,28 +59,28 @@
                         <div class="input-grid">
                             <div class="input-group">
                                 <label data-i18n="field.projectTitle.label">Titre de la Décision</label>
-                                <input type="text" name="projectTitle" data-i18n-placeholder="field.projectTitle.placeholder">
+                                <input type="text" name="projectTitle" placeholder="Ex: Expansion marché Afrique de l'Ouest">
                             </div>
                             <div class="input-group">
                                 <label data-i18n="field.domain.label">Expertise Requise</label>
                                 <select name="domain">
-                                    <option value="strategy" data-i18n="field.domain.strategy">Stratégie Business</option>
-                                    <option value="finance" data-i18n="field.domain.finance">Ingénierie Financière</option>
-                                    <option value="legal" data-i18n="field.domain.legal">Conformité Juridique / OHADA</option>
+                                    <option value="strategy">Stratégie Business</option>
+                                    <option value="legal">Conformité Juridique / OHADA</option>
+                                    <option value="finance">Ingénierie Financière</option>
                                 </select>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-step">
-                        <h3 class="step-title"><span>02</span> <span data-i18n="group.analysis">Analyse de Fond</span></h3>
+                        <h3 class="step-title"><span>02</span> <span data-i18n="group.analysis">Analyse de Contexte</span></h3>
                         <div class="input-group">
-                            <label data-i18n="field.problem.label">Problématique & Enjeux</label>
-                            <textarea name="problem" rows="4" data-i18n-placeholder="field.problem.placeholder"></textarea>
+                            <label data-i18n="field.problem.label">Problématique & Signaux Faibles</label>
+                            <textarea name="problem" rows="4" placeholder="Décrivez les enjeux critiques de votre situation..."></textarea>
                         </div>
                         <div class="input-group">
-                            <label data-i18n="field.fileLink.label">Audit de Document (Lien URL)</label>
-                            <input type="url" name="fileLink" data-i18n-placeholder="field.fileLink.placeholder">
+                            <label data-i18n="field.fileLink.label">Audit de Document (Lien Cloud)</label>
+                            <input type="url" name="fileLink" placeholder="Lien vers Business Plan, Contrat ou Bilan (PDF/Docs)">
                         </div>
                     </div>
 
@@ -91,7 +89,7 @@
                         <div class="input-grid">
                             <div class="input-group">
                                 <label data-i18n="field.email.label">Email de Direction</label>
-                                <input type="email" name="email" placeholder="admin@votre-sasu.com">
+                                <input type="email" name="email" placeholder="votre@email.com">
                             </div>
                             <div class="input-group">
                                 <label data-i18n="field.whatsapp.label">Ligne WhatsApp Expert</label>
@@ -102,8 +100,8 @@
 
                     <div class="form-footer">
                         <p class="security-note" data-i18n="hero.trust">🔒 Souveraineté des données & Certification Blockchain</p>
-                        <button type="submit" class="btn-engine" id="submitBtn">
-                            <span data-i18n="form.submit">Générer l'Expertise</span>
+                        <button type="submit" class="btn-engine">
+                            <span data-i18n="form.submit">Générer l'Expertise e-META</span>
                         </button>
                     </div>
                 </form>
@@ -115,9 +113,9 @@
 <footer class="site-footer">
     <div class="container">
         <h4 class="company-name">e-META LABS <span class="legal-tag">(SASU)</span></h4>
-        <p class="footer-mission" data-i18n="footer.object">L'intelligence artificielle dédiée à la haute performance décisionnelle.</p>
+        <p class="social-object" data-i18n="footer.object">Conception, développement et exploitation de solutions d'IA dédiées à l'aide à la décision.</p>
         <div class="legal-box">
-            <p data-i18n="footer.disclaimer">Note : e-META est un outil d'aide à la décision. Il ne se substitue pas aux conseils réglementés.</p>
+            <p data-i18n="footer.disclaimer">Note légale : e-META est une solution d'aide à la décision. Elle ne constitue pas et ne se substitue en aucun cas à un conseil réglementé.</p>
         </div>
         <p class="credits">© 2026 e-META LABS | Senegal • Worldwide</p>
     </div>
