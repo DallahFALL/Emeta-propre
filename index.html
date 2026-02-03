@@ -13,7 +13,8 @@
 <header class="site-header">
     <div class="container header-inner">
         <a href="index.html" class="logo-link">
-            <img src="assets/eMETA-official-logo.png" alt="e-META LABS" class="main-logo">
+            <!-- Chemin exact de votre dossier GitHub -->
+            <img src="01_Logo_Sources/eMETA-official-logo.png" alt="e-META LABS" class="main-logo">
         </a>
         <div class="header-right">
             <select id="uiLangSelect" class="lang-select">
@@ -48,18 +49,18 @@
 
                 <form id="emetaMasterForm">
                     <div class="form-step">
-                        <h3 class="step-title"><span>01</span> <span data-i18n="group.general">Contexte Global</span></h3>
+                        <h3 class="step-title"><span>01</span> <span data-i18n="group.general">Périmètre du Projet</span></h3>
                         <div class="input-grid">
                             <div class="input-group">
-                                <label data-i18n="field.projectTitle.label">Identification du Projet</label>
+                                <label data-i18n="field.projectTitle.label">Titre de la Décision</label>
                                 <input type="text" name="projectTitle" data-i18n-placeholder="field.projectTitle.placeholder">
                             </div>
                             <div class="input-group">
-                                <label data-i18n="field.domain.label">Domaine d'Expertise</label>
+                                <label data-i18n="field.domain.label">Expertise Requise</label>
                                 <select name="domain">
-                                    <option value="strategy" data-i18n="field.domain.strategy">Stratégie & Gouvernance</option>
-                                    <option value="finance" data-i18n="field.domain.finance">Finance & Modèle économique</option>
-                                    <option value="legal" data-i18n="field.domain.legal">Juridique & Conformité</option>
+                                    <option value="strategy" data-i18n="field.domain.strategy">Stratégie Business</option>
+                                    <option value="finance" data-i18n="field.domain.finance">Ingénierie Financière</option>
+                                    <option value="legal" data-i18n="field.domain.legal">Conformité Juridique / OHADA</option>
                                 </select>
                             </div>
                         </div>
