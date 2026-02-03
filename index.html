@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="meta.title">e-META LABS</title>
+    <title data-i18n="meta.title">e-META LABS — Strategic AI</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -13,18 +13,14 @@
 <header class="site-header">
     <div class="container header-inner">
         <a href="index.html" class="logo-brand">
-            <!-- On utilise le nouveau chemin propre -->
-            <img src="assets/logo.png" alt="e-META" class="brand-icon">
-            <div class="brand-text">
-                <span class="brand-name">e-META</span>
-                <span class="brand-suffix">LABS</span>
-            </div>
+            <img src="assets/logo.png" alt="Logo" class="brand-icon">
+            <span class="brand-name-full">e-META LABS</span>
         </a>
         
         <div class="header-right">
             <nav class="main-nav">
                 <a href="#hero" data-i18n="nav.home">Vision</a>
-                <a href="#form" class="nav-cta" data-i18n="nav.form">Expertise</a>
+                <a href="#form" class="nav-cta" data-i18n="nav.form">Lancer l'Analyse</a>
             </nav>
             <select id="uiLangSelect" class="lang-select">
                 <option value="fr">FR</option>
@@ -55,6 +51,7 @@
                 </div>
 
                 <form id="emetaMasterForm">
+                    <!-- 01 PERIMETRE -->
                     <div class="form-step">
                         <h3 class="step-title"><span>01</span> <span data-i18n="group.general">Périmètre & Expertise</span></h3>
                         <div class="input-grid">
@@ -65,15 +62,48 @@
                             <div class="input-group">
                                 <label data-i18n="field.domain.label">Expertise Requise</label>
                                 <select name="domain">
-                                    <option value="ai" data-i18n="domain.ai">IA & Transformation</option>
-                                    <option value="legal" data-i18n="domain.legal">Juridique & OHADA</option>
-                                    <option value="finance" data-i18n="domain.finance">Finance & Scaling</option>
+                                    <option value="ai" data-i18n="domain.ai">IA & Transformation Digitale</option>
+                                    <option value="legal" data-i18n="domain.legal">Juridique & Conformité OHADA</option>
+                                    <option value="scaling" data-i18n="domain.scaling">Scaling & Expansion</option>
+                                    <option value="finance" data-i18n="domain.finance">Ingénierie Financière</option>
                                 </select>
                             </div>
                         </div>
                     </div>
+
+                    <!-- 02 ANALYSE PROFONDE -->
+                    <div class="form-step">
+                        <h3 class="step-title"><span>02</span> <span data-i18n="group.analysis">Analyse de Contexte</span></h3>
+                        <div class="input-group">
+                            <label data-i18n="field.problem.label">Problématique & Enjeux</label>
+                            <textarea name="problem" rows="4" data-i18n-placeholder="field.problem.placeholder"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label data-i18n="field.fileLink.label">Audit de Document (Lien Cloud)</label>
+                            <input type="url" name="fileLink" data-i18n-placeholder="field.fileLink.placeholder">
+                        </div>
+                    </div>
+
+                    <!-- 03 RESTITUTION -->
+                    <div class="form-step">
+                        <h3 class="step-title"><span>03</span> <span data-i18n="group.output">Canaux de Restitution</span></h3>
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label data-i18n="field.email.label">Email de Direction</label>
+                                <input type="email" name="email" placeholder="admin@votre-sasu.com">
+                            </div>
+                            <div class="input-group">
+                                <label data-i18n="field.whatsapp.label">Ligne WhatsApp Expert</label>
+                                <input type="tel" name="whatsapp" placeholder="+221...">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-footer">
-                        <button type="submit" class="btn-engine" data-i18n="form.submit">Lancer l'Analyse</button>
+                        <p class="security-note" data-i18n="hero.trust">🔒 Souveraineté des données & Certification Blockchain</p>
+                        <button type="submit" class="btn-engine">
+                            <span data-i18n="form.submit">Générer l'Expertise e-META</span>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -83,10 +113,12 @@
 
 <footer class="site-footer">
     <div class="container">
-        <h4 class="company-name">e-META LABS (SASU)</h4>
+        <h4 class="company-name">e-META LABS <span class="legal-tag">(SASU)</span></h4>
+        <p class="social-object" data-i18n="footer.object">Conception, développement et exploitation de solutions d'IA dédiées à l'aide à la décision.</p>
         <div class="legal-box">
-            <p data-i18n="footer.disclaimer">Note : e-META est un outil d'aide à la décision sans substitution au conseil réglementé.</p>
+            <p data-i18n="footer.disclaimer">Note légale : e-META est une solution d'aide à la décision. Elle ne constitue pas et ne se substitue en aucun cas à un conseil réglementé (avocat, notaire, expert-comptable).</p>
         </div>
+        <p class="credits">© 2026 e-META LABS | Senegal • Worldwide</p>
     </div>
 </footer>
 
