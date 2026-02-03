@@ -61,4 +61,270 @@ body {
 .brand-icon {
     height: 48px; /* Ajuste la taille de l'hexagone */
     width: auto;
-    transition: transform
+    transition: transform 0.3s ease;
+}
+
+.logo-brand:hover .brand-icon {
+    transform: rotate(10deg) scale(1.05);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.brand-name {
+    font-family: var(--serif-font);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 0.5px;
+}
+
+.brand-suffix {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+/* --- NAVIGATION --- */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.lang-select { 
+    padding: 6px 12px; 
+    border-radius: 4px; 
+    border: 1px solid #ddd; 
+    font-family: var(--sans-font);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.main-nav a { 
+    text-decoration: none; 
+    color: var(--navy); 
+    font-weight: 600; 
+    font-size: 0.9rem; 
+    transition: color 0.3s;
+}
+
+.main-nav a:hover { color: var(--gold); }
+
+.nav-cta { 
+    background: var(--navy); 
+    color: white !important; 
+    padding: 10px 22px; 
+    border-radius: 4px; 
+    transition: all 0.3s;
+}
+
+.nav-cta:hover { 
+    background: var(--gold); 
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3);
+}
+
+/* --- HERO SECTION --- */
+.hero-premium { 
+    padding: 100px 0 150px; 
+    text-align: center; 
+    background: var(--navy); 
+    color: var(--white); 
+}
+
+.hero-title { 
+    font-family: var(--serif-font); 
+    font-size: 3.8rem; 
+    margin-bottom: 25px; 
+    color: var(--gold); 
+    line-height: 1.1;
+}
+
+.hero-subtitle { 
+    font-size: 1.3rem; 
+    opacity: 0.85; 
+    max-width: 750px; 
+    margin: 0 auto; 
+    font-weight: 300;
+}
+
+/* --- DECISION ENGINE CARD --- */
+.engine-section { 
+    margin-top: -80px; 
+    padding-bottom: 100px; 
+}
+
+.decision-card { 
+    background: var(--white); 
+    border-radius: 12px; 
+    box-shadow: 0 40px 80px rgba(10, 25, 47, 0.15); 
+    padding: 60px; 
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.card-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 50px; 
+    border-bottom: 1px solid #f0f0f0; 
+    padding-bottom: 25px; 
+}
+
+.engine-status { 
+    font-size: 0.7rem; 
+    font-weight: 800; 
+    text-transform: uppercase; 
+    color: var(--success); 
+    display: flex; 
+    align-items: center; 
+    letter-spacing: 1.5px;
+}
+
+.status-dot { 
+    height: 10px; 
+    width: 10px; 
+    background: var(--success); 
+    border-radius: 50%; 
+    margin-right: 10px; 
+    animation: pulse 2s infinite; 
+}
+
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+/* --- FORM STEPS --- */
+.form-step { margin-bottom: 60px; }
+
+.step-title { 
+    font-family: var(--serif-font); 
+    font-size: 1.8rem; 
+    margin-bottom: 35px; 
+    display: flex; 
+    align-items: center; 
+}
+
+.step-title span { 
+    color: var(--gold); 
+    margin-right: 20px; 
+    font-style: italic; 
+    font-weight: 900; 
+}
+
+.input-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 35px; 
+}
+
+.input-group { margin-bottom: 30px; }
+
+.input-group label { 
+    display: block; 
+    font-size: 0.75rem; 
+    font-weight: 800; 
+    margin-bottom: 12px; 
+    color: var(--text-slate); 
+    text-transform: uppercase; 
+    letter-spacing: 1.2px;
+}
+
+input, select, textarea { 
+    width: 100%; 
+    padding: 16px; 
+    border: 1px solid #d1d9e0; 
+    border-radius: 6px; 
+    font-size: 1rem; 
+    transition: all 0.3s; 
+    background: #fafbfc;
+}
+
+input:focus, textarea:focus { 
+    border-color: var(--gold); 
+    background: #fff;
+    outline: none; 
+    box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.12); 
+}
+
+.btn-engine { 
+    background: var(--navy); 
+    color: var(--white); 
+    padding: 22px 45px; 
+    border: none; 
+    border-radius: 6px; 
+    font-weight: 700; 
+    cursor: pointer; 
+    transition: all 0.4s; 
+    width: 100%; 
+    font-size: 1.2rem; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+}
+
+.btn-engine:hover { 
+    background: var(--gold); 
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(10, 25, 47, 0.2);
+}
+
+.security-note {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    color: #999;
+}
+
+/* --- FOOTER --- */
+.site-footer { 
+    background: #f8f9fa; 
+    padding: 100px 0 50px; 
+    text-align: center; 
+    border-top: 1px solid #eee; 
+}
+
+.company-name { 
+    font-family: var(--serif-font); 
+    font-size: 1.8rem; 
+    color: var(--navy); 
+    margin-bottom: 15px; 
+}
+
+.social-object { 
+    font-size: 1rem; 
+    color: var(--text-slate); 
+    max-width: 600px; 
+    margin: 0 auto 35px; 
+}
+
+.legal-box { 
+    background: #fff; 
+    border: 1px solid #eee; 
+    padding: 30px; 
+    max-width: 850px; 
+    margin: 30px auto; 
+    font-style: italic; 
+    font-size: 0.9rem; 
+    color: #888; 
+    border-left: 5px solid var(--gold); 
+}
+
+.credits { 
+    font-size: 0.8rem; 
+    color: #bbb; 
+    margin-top: 50px; 
+    letter-spacing: 1px;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 768px) {
+    .hero-title { font-size: 2.6rem; }
+    .input-grid { grid-template-columns: 1fr; }
+    .decision-card { padding: 40px 20px; }
+    .header-inner { flex-direction: column; gap: 15px; }
+    .header-right { gap: 15px; }
+}
