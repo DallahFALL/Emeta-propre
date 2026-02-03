@@ -71,3 +71,34 @@ input:focus { border-color: var(--gold); background: #fff; outline: none; box-sh
     .decision-card { padding: 40px 20px; }
     .header-inner { flex-direction: column; gap: 15px; }
 }
+/* --- CORRECTIF CHECKBOXES RESTITUTION --- */
+.delivery-selector { margin-top: 20px; }
+.selector-label { font-size: 0.8rem; font-weight: 800; color: var(--text-slate); text-transform: uppercase; margin-bottom: 15px; }
+
+.checkbox-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.checkbox-card {
+    background: #fafbfc;
+    border: 1px solid #d1d9e0;
+    padding: 12px 20px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    flex: 1;
+    min-width: 150px;
+}
+
+.checkbox-card:hover { border-color: var(--gold); background: #fff; }
+.checkbox-card input { width: auto; margin: 0; cursor: pointer; }
+.checkbox-text { font-size: 0.9rem; font-weight: 600; color: var(--navy); }
+
+@media (max-width: 600px) {
+    .checkbox-group { flex-direction: column; }
+}
