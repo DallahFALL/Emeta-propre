@@ -9,6 +9,12 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--nav
 .logo-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .brand-name-full { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--navy); }
 
+.header-right { display: flex; align-items: center; gap: 20px; }
+.main-nav { display: flex; gap: 20px; }
+.main-nav a { text-decoration: none; color: var(--navy); font-weight: 600; font-size: 0.9rem; }
+.nav-cta { background: var(--navy); color: #fff !important; padding: 8px 15px; border-radius: 4px; }
+.lang-select { padding: 5px; border-radius: 4px; border: 1px solid #ddd; }
+
 /* HERO */
 .hero-premium { padding: 100px 0 150px; text-align: center; background: var(--navy); color: #fff; }
 .hero-title { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--gold); margin-bottom: 20px; }
@@ -39,4 +45,5 @@ input, select, textarea { width: 100%; padding: 14px; border: 1px solid #d1d9e0;
 .btn-privacy { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 5px 15px; cursor: pointer; border-radius: 4px; margin-top: 10px; }
 
 [dir="rtl"] { text-align: right; }
-[dir="rtl"] .card-header { flex-direction: row-reverse; }
+[dir="rtl"] .logo-brand { flex-direction: row-reverse; }
+[dir="rtl"] .header-right { flex-direction: row-reverse; }
