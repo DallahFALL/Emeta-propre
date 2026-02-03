@@ -14,18 +14,23 @@ html { scroll-behavior: smooth; }
 body { font-family: var(--sans-font); background: var(--bg-light); color: var(--navy); line-height: 1.6; }
 .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-/* --- HEADER --- */
+/* --- HEADER & BRANDING --- */
 .site-header { background: var(--white); padding: 12px 0; border-bottom: 1px solid #e1e8ed; position: sticky; top: 0; z-index: 1000; }
 .header-inner { display: flex; justify-content: space-between; align-items: center; }
 
-.logo-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.brand-icon { height: 48px; width: auto; }
+.logo-brand { display: flex; align-items: center; gap: 15px; text-decoration: none; }
+.brand-icon { 
+    height: 48px; 
+    width: auto; 
+    object-fit: contain; 
+    display: block;
+}
 .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
-.brand-name { font-family: var(--serif-font); font-size: 1.5rem; font-weight: 700; color: var(--navy); }
+.brand-name { font-family: var(--serif-font); font-size: 1.6rem; font-weight: 700; color: var(--navy); }
 .brand-suffix { font-size: 0.65rem; font-weight: 800; color: var(--gold); text-transform: uppercase; letter-spacing: 3px; }
 
 .header-right { display: flex; align-items: center; gap: 25px; }
-.lang-select { padding: 6px; border-radius: 4px; border: 1px solid #ddd; cursor: pointer; }
+.lang-select { padding: 6px; border-radius: 4px; border: 1px solid #ddd; cursor: pointer; font-family: var(--sans-font); }
 .main-nav a { text-decoration: none; color: var(--navy); font-weight: 600; font-size: 0.9rem; margin-left: 15px; }
 .nav-cta { background: var(--navy); color: white !important; padding: 10px 20px; border-radius: 4px; transition: 0.3s; }
 .nav-cta:hover { background: var(--gold); }
@@ -35,9 +40,9 @@ body { font-family: var(--sans-font); background: var(--bg-light); color: var(--
 .hero-title { font-family: var(--serif-font); font-size: 3.5rem; margin-bottom: 25px; color: var(--gold); }
 .hero-subtitle { font-size: 1.3rem; opacity: 0.85; max-width: 750px; margin: 0 auto; font-weight: 300; }
 
-/* --- CARD --- */
+/* --- DECISION CARD --- */
 .engine-section { margin-top: -80px; padding-bottom: 100px; }
-.decision-card { background: var(--white); border-radius: 12px; box-shadow: 0 40px 80px rgba(10, 25, 47, 0.15); padding: 60px; }
+.decision-card { background: var(--white); border-radius: 12px; box-shadow: 0 40px 80px rgba(10, 25, 47, 0.15); padding: 60px; border: 1px solid rgba(0,0,0,0.05); }
 .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; border-bottom: 1px solid #f0f0f0; padding-bottom: 25px; }
 .engine-status { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--success); display: flex; align-items: center; letter-spacing: 1.5px; }
 .status-dot { height: 10px; width: 10px; background: var(--success); border-radius: 50%; margin-right: 10px; animation: pulse 2s infinite; }
@@ -50,10 +55,10 @@ body { font-family: var(--sans-font); background: var(--bg-light); color: var(--
 .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
 .input-group { margin-bottom: 25px; }
 .input-group label { display: block; font-size: 0.75rem; font-weight: 800; margin-bottom: 10px; color: var(--text-slate); text-transform: uppercase; }
-input, select, textarea { width: 100%; padding: 15px; border: 1px solid #d1d9e0; border-radius: 6px; font-size: 1rem; background: #fafbfc; }
+input, select, textarea { width: 100%; padding: 15px; border: 1px solid #d1d9e0; border-radius: 6px; font-size: 1rem; background: #fafbfc; transition: 0.3s; }
+input:focus { border-color: var(--gold); background: #fff; outline: none; }
 .btn-engine { background: var(--navy); color: var(--white); padding: 22px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.4s; width: 100%; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; }
-.btn-engine:hover { background: var(--gold); transform: translateY(-3px); box-shadow: 0 15px 30px rgba(10, 25, 47, 0.2); }
-.security-note { text-align: center; margin-bottom: 15px; font-size: 0.85rem; color: #999; }
+.btn-engine:hover { background: var(--gold); transform: translateY(-3px); }
 
 /* --- FOOTER --- */
 .site-footer { background: #f8f9fa; padding: 100px 0 50px; text-align: center; border-top: 1px solid #eee; }
@@ -62,8 +67,8 @@ input, select, textarea { width: 100%; padding: 15px; border: 1px solid #d1d9e0;
 .credits { font-size: 0.8rem; color: #bbb; margin-top: 40px; }
 
 @media (max-width: 768px) {
-    .hero-title { font-size: 2.5rem; }
+    .hero-title { font-size: 2.2rem; }
     .input-grid { grid-template-columns: 1fr; }
-    .decision-card { padding: 30px 20px; }
-    .header-inner { flex-direction: column; gap: 20px; }
+    .decision-card { padding: 40px 20px; }
+    .header-inner { flex-direction: column; gap: 15px; }
 }
