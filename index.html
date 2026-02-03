@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="meta.title">e-META LABS — Strategic AI Engine</title>
+    <title data-i18n="meta.title">e-META LABS</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -51,9 +52,9 @@
                 </div>
 
                 <form id="emetaMasterForm">
-                    <!-- SECTION 01 : PÉRIMÈTRE & EXPERTISE -->
+                    <!-- SECTION 01 : SCOPE -->
                     <div class="form-step">
-                        <h3 class="step-title"><span>01</span> <span data-i18n="group.general">Périmètre & Expertise</span></h3>
+                        <h3 class="step-title" data-i18n="group.general">01 Périmètre & Expertise</h3>
                         <div class="input-grid">
                             <div class="input-group">
                                 <label data-i18n="field.projectTitle.label">Titre de la Décision</label>
@@ -62,11 +63,11 @@
                             <div class="input-group">
                                 <label data-i18n="field.domain.label">Expertise Requise</label>
                                 <select name="domain">
-                                    <option value="ai" data-i18n="domain.ai">Souveraineté Numérique & IA</option>
-                                    <option value="esg" data-i18n="domain.finance">Finance Durable, ESG & Impact</option>
-                                    <option value="legal" data-i18n="domain.legal">Conformité Fintech & OHADA</option>
-                                    <option value="scaling" data-i18n="domain.scaling">Scaling & Croissance Externe</option>
-                                    <option value="crisis" data-i18n="domain.crisis">Gestion de Crise & Risques</option>
+                                    <option value="ai" data-i18n="domain.ai">Souveraineté IA</option>
+                                    <option value="esg" data-i18n="domain.finance">Ingénierie ESG</option>
+                                    <option value="ma" data-i18n="domain.ma">M&A (Fusions-Acquisitions)</option>
+                                    <option value="legal" data-i18n="domain.legal">Optimisation Fiscale OHADA</option>
+                                    <option value="crisis" data-i18n="domain.crisis">Gestion de Crise Cyber</option>
                                 </select>
                             </div>
                         </div>
@@ -74,12 +75,11 @@
                             <div class="input-group">
                                 <label data-i18n="field.industry.label">Secteur d'Activité</label>
                                 <select name="industry">
-                                    <option value="agri" data-i18n="industry.agri">Agribusiness & Sécurité Alimentaire</option>
-                                    <option value="energy" data-i18n="industry.energy">Énergies & Transition Verte</option>
-                                    <option value="tech" data-i18n="industry.tech">Digital, IA & DeepTech</option>
-                                    <option value="tourism" data-i18n="industry.tourism">Tourisme de Luxe & Écotourisme</option>
-                                    <option value="health" data-i18n="industry.health">Santé, Pharma & Biotech</option>
-                                    <option value="logistics" data-i18n="industry.logistics">Logistique & Supply Chain</option>
+                                    <option value="energy" data-i18n="industry.energy">Énergies Vertes</option>
+                                    <option value="blue" data-i18n="industry.blue">Blue Economy</option>
+                                    <option value="health" data-i18n="industry.health">HealthTech</option>
+                                    <option value="agri" data-i18n="industry.agri">Agrobusiness intelligent</option>
+                                    <option value="logistics" data-i18n="industry.logistics">Logistique Globale</option>
                                 </select>
                             </div>
                             <div class="input-group">
@@ -91,20 +91,20 @@
 
                     <!-- SECTION 02 : ANALYSE -->
                     <div class="form-step">
-                        <h3 class="step-title"><span>02</span> <span data-i18n="group.analysis">Analyse de Contexte</span></h3>
+                        <h3 class="step-title" data-i18n="group.analysis">02 Analyse de Contexte</h3>
                         <div class="input-group">
                             <label data-i18n="field.problem.label">Problématique & Enjeux</label>
                             <textarea name="problem" rows="4" data-i18n-placeholder="field.problem.placeholder"></textarea>
                         </div>
                         <div class="input-group">
-                            <label data-i18n="field.fileLink.label">Audit de Document (Lien Cloud)</label>
+                            <label data-i18n="field.fileLink.label">Audit Documentaire (Lien URL)</label>
                             <input type="url" name="fileLink" data-i18n-placeholder="field.fileLink.placeholder">
                         </div>
                     </div>
 
                     <!-- SECTION 03 : RESTITUTION -->
                     <div class="form-step">
-                        <h3 class="step-title"><span>03</span> <span data-i18n="group.output">Canaux de Restitution</span></h3>
+                        <h3 class="step-title" data-i18n="group.output">03 Canaux de Restitution</h3>
                         <div class="input-grid">
                             <div class="input-group">
                                 <label data-i18n="field.email.label">Email de Direction</label>
@@ -127,7 +127,6 @@
                     </div>
 
                     <div class="form-footer">
-                        <p class="security-note" data-i18n="hero.trust">🔒 Souveraineté des données & Certification Blockchain</p>
                         <button type="submit" class="btn-engine" id="submitBtn">
                             <span data-i18n="form.submit">Générer l'Expertise e-META</span>
                         </button>
@@ -143,13 +142,13 @@
         <h4 class="company-name">e-META LABS <span class="legal-tag">(SASU)</span></h4>
         <p class="social-object" data-i18n="footer.object">Conception, développement et exploitation de solutions d'IA dédiées à l'aide à la décision.</p>
         <div class="legal-box">
-            <p data-i18n="footer.privacy_text">En utilisant e-META, vous acceptez notre politique de souveraineté des données : aucune donnée stratégique n'est partagée avec des tiers.</p>
+            <p data-i18n="footer.privacy_text">Philosophie de Souveraineté : Vos données ne sont jamais partagées.</p>
+            <button class="btn-privacy" onclick="alert(resources[document.documentElement.lang]['privacy.content'])" data-i18n="nav.privacy">Politique de Confidentialité</button>
         </div>
         <p class="credits">© 2026 e-META LABS | Senegal • Worldwide</p>
     </div>
 </footer>
 
 <script src="i18n.js"></script>
-<script src="script.js"></script>
 </body>
 </html>
