@@ -51,26 +51,42 @@
                 </div>
 
                 <form id="emetaMasterForm">
-                    <!-- 01 PERIMETRE -->
-                    <div class="form-step">
-                        <h3 class="step-title"><span>01</span> <span data-i18n="group.general">Périmètre & Expertise</span></h3>
-                        <div class="input-grid">
-                            <div class="input-group">
-                                <label data-i18n="field.projectTitle.label">Titre de la Décision</label>
-                                <input type="text" name="projectTitle" data-i18n-placeholder="field.projectTitle.placeholder">
-                            </div>
-                            <div class="input-group">
-                                <label data-i18n="field.domain.label">Expertise Requise</label>
-                                <select name="domain">
-                                    <option value="ai" data-i18n="domain.ai">IA & Transformation Digitale</option>
-                                    <option value="legal" data-i18n="domain.legal">Juridique & Conformité OHADA</option>
-                                    <option value="scaling" data-i18n="domain.scaling">Scaling & Expansion</option>
-                                    <option value="finance" data-i18n="domain.finance">Ingénierie Financière</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
+                    <!-- 01 PERIMETRE & EXPERTISE -->
+<div class="form-step">
+    <h3 class="step-title"><span>01</span> <span data-i18n="group.general">Périmètre & Expertise</span></h3>
+    <div class="input-grid">
+        <div class="input-group">
+            <label data-i18n="field.projectTitle.label">Titre de la Décision</label>
+            <input type="text" name="projectTitle" data-i18n-placeholder="field.projectTitle.placeholder">
+        </div>
+        <div class="input-group">
+            <label data-i18n="field.domain.label">Expertise Requise</label>
+            <select name="domain">
+                <option value="strategy" data-i18n="domain.strategy">Stratégie Business & Vision</option>
+                <option value="legal" data-i18n="domain.legal">Conformité Juridique & OHADA</option>
+                <option value="scaling" data-i18n="domain.scaling">Scaling & Expansion</option>
+                <option value="finance" data-i18n="domain.finance">Ingénierie Financière</option>
+            </select>
+        </div>
+    </div>
+    <div class="input-grid">
+        <div class="input-group">
+            <label data-i18n="field.industry.label">Secteur d'Activité</label>
+            <select name="industry">
+                <option value="tourism" data-i18n="industry.tourism">Tourisme, Voyage & Loisirs</option>
+                <option value="construction" data-i18n="industry.construction">BTP, Immobilier & Infrastructure</option>
+                <option value="agri" data-i18n="industry.agri">Agro-industrie & Tech-Agri</option>
+                <option value="health" data-i18n="industry.health">Santé & Biotechnologies</option>
+                <option value="tech" data-i18n="industry.tech">Digital, IA & Nouvelles Tech</option>
+                <option value="other" data-i18n="industry.other">Autre secteur spécifique</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label data-i18n="field.geography.label">Zone Géographique d'Impact</label>
+            <input type="text" name="geography" placeholder="Ex: Sénégal, Zone UEMOA, France...">
+        </div>
+    </div>
+</div>
                     <!-- 02 ANALYSE PROFONDE -->
                     <div class="form-step">
                         <h3 class="step-title"><span>02</span> <span data-i18n="group.analysis">Analyse de Contexte</span></h3>
