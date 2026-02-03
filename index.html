@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="meta.title">e-META LABS — Strategic AI Engine</title>
-    <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -23,7 +22,7 @@
         <div class="header-right">
             <nav class="main-nav">
                 <a href="#hero" data-i18n="nav.home">Vision</a>
-                <a href="#form" class="nav-cta" data-i18n="nav.form">Expertise</a>
+                <a href="#form" class="nav-cta" data-i18n="nav.form">Lancer l'Analyse</a>
             </nav>
             <select id="uiLangSelect" class="lang-select">
                 <option value="fr">FR</option>
@@ -52,7 +51,7 @@
                 </div>
 
                 <form id="emetaMasterForm">
-                    <!-- 01 PERIMETRE -->
+                    <!-- SECTION 01 : PÉRIMÈTRE & EXPERTISE -->
                     <div class="form-step">
                         <h3 class="step-title"><span>01</span> <span data-i18n="group.general">Périmètre & Expertise</span></h3>
                         <div class="input-grid">
@@ -63,9 +62,11 @@
                             <div class="input-group">
                                 <label data-i18n="field.domain.label">Expertise Requise</label>
                                 <select name="domain">
-                                    <option value="ai" data-i18n="domain.ai">IA & Souveraineté Numérique</option>
-                                    <option value="legal" data-i18n="domain.legal">Conformité Fintech (OHADA)</option>
-                                    <option value="scaling" data-i18n="domain.scaling">Scaling & Gouvernance</option>
+                                    <option value="ai" data-i18n="domain.ai">Souveraineté Numérique & IA</option>
+                                    <option value="esg" data-i18n="domain.finance">Finance Durable, ESG & Impact</option>
+                                    <option value="legal" data-i18n="domain.legal">Conformité Fintech & OHADA</option>
+                                    <option value="scaling" data-i18n="domain.scaling">Scaling & Croissance Externe</option>
+                                    <option value="crisis" data-i18n="domain.crisis">Gestion de Crise & Risques</option>
                                 </select>
                             </div>
                         </div>
@@ -73,9 +74,12 @@
                             <div class="input-group">
                                 <label data-i18n="field.industry.label">Secteur d'Activité</label>
                                 <select name="industry">
-                                    <option value="tourism" data-i18n="industry.tourism">Tourisme & Écotourisme</option>
-                                    <option value="construction" data-i18n="industry.construction">BTP & Immobilier Durable</option>
-                                    <option value="tech" data-i18n="industry.tech">Digital & New Tech</option>
+                                    <option value="agri" data-i18n="industry.agri">Agribusiness & Sécurité Alimentaire</option>
+                                    <option value="energy" data-i18n="industry.energy">Énergies & Transition Verte</option>
+                                    <option value="tech" data-i18n="industry.tech">Digital, IA & DeepTech</option>
+                                    <option value="tourism" data-i18n="industry.tourism">Tourisme de Luxe & Écotourisme</option>
+                                    <option value="health" data-i18n="industry.health">Santé, Pharma & Biotech</option>
+                                    <option value="logistics" data-i18n="industry.logistics">Logistique & Supply Chain</option>
                                 </select>
                             </div>
                             <div class="input-group">
@@ -85,16 +89,20 @@
                         </div>
                     </div>
 
-                    <!-- 02 ANALYSE -->
+                    <!-- SECTION 02 : ANALYSE -->
                     <div class="form-step">
                         <h3 class="step-title"><span>02</span> <span data-i18n="group.analysis">Analyse de Contexte</span></h3>
                         <div class="input-group">
                             <label data-i18n="field.problem.label">Problématique & Enjeux</label>
                             <textarea name="problem" rows="4" data-i18n-placeholder="field.problem.placeholder"></textarea>
                         </div>
+                        <div class="input-group">
+                            <label data-i18n="field.fileLink.label">Audit de Document (Lien Cloud)</label>
+                            <input type="url" name="fileLink" data-i18n-placeholder="field.fileLink.placeholder">
+                        </div>
                     </div>
 
-                    <!-- 03 RESTITUTION -->
+                    <!-- SECTION 03 : RESTITUTION -->
                     <div class="form-step">
                         <h3 class="step-title"><span>03</span> <span data-i18n="group.output">Canaux de Restitution</span></h3>
                         <div class="input-grid">
@@ -108,28 +116,19 @@
                             </div>
                         </div>
                         
-                        <div class="delivery-selector">
-                            <p class="selector-label" data-i18n="field.outputMode.label">Mode de livraison souhaité</p>
-                            <div class="checkbox-group">
-                                <label class="checkbox-card">
-                                    <input type="checkbox" name="wa" checked>
-                                    <span class="checkbox-text">WhatsApp</span>
-                                </label>
-                                <label class="checkbox-card">
-                                    <input type="checkbox" name="mail" checked>
-                                    <span class="checkbox-text">Email & PDF</span>
-                                </label>
-                                <label class="checkbox-card">
-                                    <input type="checkbox" name="web">
-                                    <span class="checkbox-text" data-i18n="field.outputMode.display">Affichage Direct</span>
-                                </label>
+                        <div class="delivery-container">
+                            <label class="delivery-label" data-i18n="field.outputMode.label">Mode de livraison souhaité</label>
+                            <div class="delivery-grid">
+                                <label class="deliv-card"><input type="checkbox" name="wa" checked> <span>WhatsApp</span></label>
+                                <label class="deliv-card"><input type="checkbox" name="mail" checked> <span>Email & PDF</span></label>
+                                <label class="deliv-card"><input type="checkbox" name="web"> <span data-i18n="field.outputMode.display">Affichage Direct</span></label>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-footer">
                         <p class="security-note" data-i18n="hero.trust">🔒 Souveraineté des données & Certification Blockchain</p>
-                        <button type="submit" class="btn-engine">
+                        <button type="submit" class="btn-engine" id="submitBtn">
                             <span data-i18n="form.submit">Générer l'Expertise e-META</span>
                         </button>
                     </div>
@@ -144,12 +143,13 @@
         <h4 class="company-name">e-META LABS <span class="legal-tag">(SASU)</span></h4>
         <p class="social-object" data-i18n="footer.object">Conception, développement et exploitation de solutions d'IA dédiées à l'aide à la décision.</p>
         <div class="legal-box">
-            <p data-i18n="footer.disclaimer">Note légale : e-META est une solution d'aide à la décision. Elle ne constitue pas et ne se substitue en aucun cas à un conseil réglementé.</p>
+            <p data-i18n="footer.privacy_text">En utilisant e-META, vous acceptez notre politique de souveraineté des données : aucune donnée stratégique n'est partagée avec des tiers.</p>
         </div>
-        <p class="credits">© 2026 e-META LABS | <a href="privacy.html" data-i18n="nav.privacy">Confidentialité</a></p>
+        <p class="credits">© 2026 e-META LABS | Senegal • Worldwide</p>
     </div>
 </footer>
 
 <script src="i18n.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
