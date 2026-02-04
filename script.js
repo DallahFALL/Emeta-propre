@@ -5,7 +5,7 @@
 
 // --- CONFIGURATION ---
 // Assurez-vous que cette URL est celle de votre Webhook Make
-const WEBHOOK_URL = "https://hook.eu1.make.com/VOTRE_CODE_ICI"; 
+const WEBHOOK_URL = "https://hook.eu2.make.com/13p2ha74y3ojikdan9xhkl5ebygcr7a4"; 
 
 // --- NAVIGATION ---
 function nextStep(targetStep) {
