@@ -56,10 +56,11 @@
                     </div>
                 </div>
 
-                <!-- STEP 02: SECTEURS & EXPERTISES -->
+                <!-- STEP 02: SECTEURS & GEOGRAPHIE -->
                 <div class="form-step" id="step-2">
                     <h3 data-i18n="step2_title">02. Matrice Stratégique</h3>
                     
+                    <!-- Secteur -->
                     <label class="section-label" data-i18n="lbl_sector">Secteur Clé</label>
                     <div class="grid-options">
                         <label class="checkbox-btn"><input type="radio" name="sector" value="GreenEnergy"> <span data-i18n="sec_green">Énergies Vertes</span></label>
@@ -68,22 +69,23 @@
                         <label class="checkbox-btn"><input type="radio" name="sector" value="Agrobusiness"> <span data-i18n="sec_agro">Agrobusiness</span></label>
                         <label class="checkbox-btn"><input type="radio" name="sector" value="Logistics"> <span data-i18n="sec_log">Logistique</span></label>
                     </div>
-                    <!-- DANS STEP-2 (index.html) -->
 
-                     <-- Nouveau bloc : Zone Géographique -->
+                    <!-- NOUVEAU : Zone Géographique -->
                     <label class="section-label mt-2" data-i18n="lbl_geo">Zone Géographique</label>
                     <div class="input-group">
-                          <select id="geo-zone" required>
-                       <option value="" disabled selected data-i18n="opt_geo_def">Sélectionner une zone...</option>
-                       <option value="Senegal">Sénégal (Dakar Hub)</option>
-                       <option value="CotedIvoire">Côte d'Ivoire (Abidjan Hub)</option>
-                       <option value="Nigeria">Nigeria (Lagos)</option>
-                       <option value="Maroc">Maroc (Casablanca)</option>
-                       <option value="UAE">UAE (Dubai - Middle East)</option>
-                       <option value="France">France (Europe)</option>
-                       <option value="Global">International / Global</option>
+                        <select id="geo-zone" required>
+                            <option value="" disabled selected data-i18n="opt_geo_def">Sélectionner une zone...</option>
+                            <option value="Senegal">Sénégal (Dakar Hub)</option>
+                            <option value="CotedIvoire">Côte d'Ivoire (Abidjan Hub)</option>
+                            <option value="Nigeria">Nigeria (Lagos)</option>
+                            <option value="Maroc">Maroc (Casablanca)</option>
+                            <option value="UAE">UAE (Dubai - Middle East)</option>
+                            <option value="France">France (Europe)</option>
+                            <option value="Global">International / Global</option>
                         </select>
                     </div>
+
+                    <!-- Expertise -->
                     <label class="section-label mt-2" data-i18n="lbl_expertise">Expertise Requise</label>
                     <div class="grid-options">
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="SouveraineteIA"> <span data-i18n="exp_sov">Souveraineté IA</span></label>
@@ -138,7 +140,6 @@
             <div class="modal-body">
                 <p data-i18n="modal_text_1">Les données collectées via le Master Diagnostic Form sont strictement confidentielles.</p>
                 <p data-i18n="modal_text_2">e-META LABS s'engage à une protection "Zéro Défaut" de vos informations stratégiques.</p>
-                <!-- Contenu dynamique via i18n -->
             </div>
             <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close">Fermer</button>
         </div>
