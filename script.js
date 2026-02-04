@@ -1,27 +1,19 @@
 /* 
  * PROJET : e-META LABS — Moteur IA Stratégique
- * FICHIER : script.js
- * OBJECTIF : Logique de navigation, Validation & Envoi Webhook
+ * FICHIER : script.js (Version LIVE DISPLAY)
  */
 
 // --- CONFIGURATION ---
-const WEBHOOK_URL = "https://hook.eu2.make.com/ystjpva4873gc4m59aud0v6qxo7zu8we"; 
+// Assurez-vous que cette URL est celle de votre Webhook Make
+const WEBHOOK_URL = "https://hook.eu1.make.com/VOTRE_CODE_ICI"; 
 
 // --- NAVIGATION ---
 function nextStep(targetStep) {
-    // 1. Validation de l'étape actuelle avant d'avancer
     if (targetStep === 2 && !validateStep1()) return;
     if (targetStep === 3 && !validateStep2()) return;
 
-    // 2. Masquer toutes les étapes
-    document.querySelectorAll('.form-step').forEach(step => {
-        step.classList.remove('active');
-    });
-
-    // 3. Afficher l'étape cible
+    document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
     document.getElementById(`step-${targetStep}`).classList.add('active');
-    
-    // 4. Scroll smooth
     document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -29,110 +21,95 @@ function nextStep(targetStep) {
 function validateStep1() {
     const company = document.getElementById('company').value;
     const email = document.getElementById('email').value;
-    
-    if (!company || !email) {
-        alert("Veuillez renseigner votre Société et votre Email pour continuer.");
-        return false;
-    }
-    if (!email.includes('@')) {
-        alert("Format d'email invalide.");
-        return false;
-    }
+    if (!company || !email) { alert("Champs requis manquants."); return false; }
+    if (!email.includes('@')) { alert("Email invalide."); return false; }
     return true;
 }
 
 function validateStep2() {
-    // Vérifier Secteur
     const sector = document.querySelector('input[name="sector"]:checked');
-    // Vérifier Zone Géo
     const geo = document.getElementById('geo-zone').value;
-
-    if (!sector) {
-        alert("Veuillez sélectionner un Secteur Clé.");
-        return false;
-    }
-    if (!geo) {
-        alert("Veuillez sélectionner une Zone Géographique.");
-        return false;
-    }
+    if (!sector) { alert("Sélectionnez un Secteur."); return false; }
+    if (!geo) { alert("Sélectionnez une Zone Géographique."); return false; }
     return true;
 }
 
-// --- GESTION DE LA MODAL ---
+// --- GESTION DES MODALS (Privacy & Result) ---
 document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('privacyOverlay');
-    const openBtn = document.getElementById('openPrivacy');
-    const closeBtn = document.querySelector('.close-modal');
-    const closeBtnBottom = document.querySelector('.close-modal-btn');
-
-    openBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        modal.style.display = 'flex';
+    // Privacy Modal
+    const privacyModal = document.getElementById('privacyOverlay');
+    document.getElementById('openPrivacy').addEventListener('click', (e) => {
+        e.preventDefault(); privacyModal.style.display = 'flex';
     });
+    document.querySelector('.close-modal').addEventListener('click', () => privacyModal.style.display = 'none');
+    document.querySelector('.close-modal-btn').addEventListener('click', () => privacyModal.style.display = 'none');
 
-    const closeModal = () => { modal.style.display = 'none'; };
-    closeBtn.addEventListener('click', closeModal);
-    closeBtnBottom.addEventListener('click', closeModal);
+    // Result Modal (Fermeture uniquement)
+    const resultModal = document.getElementById('resultModal');
+    document.querySelector('.close-result').addEventListener('click', () => resultModal.style.display = 'none');
 
+    // Fermeture globale au clic dehors
     window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeModal();
-        }
+        if (e.target === privacyModal) privacyModal.style.display = 'none';
+        if (e.target === resultModal) resultModal.style.display = 'none';
     });
 });
 
-// --- SOUMISSION DU FORMULAIRE ---
+// --- SOUMISSION & AFFICHAGE LIVE ---
 document.getElementById('diagnosticForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
     if (!document.getElementById('consent').checked) {
-        alert("Vous devez accepter la Politique de Confidentialité.");
+        alert("Veuillez accepter la Politique de Confidentialité.");
         return;
     }
 
     const submitBtn = document.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerText;
-    submitBtn.innerText = "Traitement...";
+    
+    // Animation de chargement
+    submitBtn.innerText = "Analyse IA en cours...";
     submitBtn.disabled = true;
+    submitBtn.style.opacity = "0.7";
 
-    // Collecte des données
+    // Collecte
     const formData = {
         timestamp: new Date().toISOString(),
         company: document.getElementById('company').value,
         email: document.getElementById('email').value,
         sector: document.querySelector('input[name="sector"]:checked')?.value || "Non spécifié",
-        geoZone: document.getElementById('geo-zone').value, // NOUVEAU CHAMP
+        geoZone: document.getElementById('geo-zone').value,
         expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked')).map(cb => cb.value),
         context: document.getElementById('context').value,
         lang: document.documentElement.lang || 'fr'
     };
 
-    // Simulation ou Envoi Réel
-    if (WEBHOOK_URL.includes("VOTRE_ID")) {
-        console.log("SIMULATION ENVOI (Test) :", formData);
-        setTimeout(() => {
-            alert("Simulation : Données envoyées avec succès !\n(Données capturées incluant la zone : " + formData.geoZone + ")");
-            submitBtn.innerText = "Terminé";
-        }, 1500);
-    } else {
-        fetch(WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        })
-        .then(response => {
-            if (response.ok) {
-                alert("Analyse lancée. Rapport en cours de génération.");
-                submitBtn.innerText = "Envoyé";
-            } else {
-                throw new Error('Erreur réseau');
-            }
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-            alert("Erreur de connexion.");
-            submitBtn.innerText = originalText;
-            submitBtn.disabled = false;
-        });
-    }
+    // Envoi & Réception Live
+    fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+    })
+    .then(async response => {
+        if (response.ok) {
+            // Récupération de la réponse textuelle de Make (Gemini)
+            const aiResponse = await response.text();
+            
+            // Affichage dans la Modal Résultat
+            document.getElementById('resultBody').innerHTML = aiResponse;
+            document.getElementById('resultModal').style.display = 'flex';
+            
+            // Reset du bouton
+            submitBtn.innerText = "Analyse Terminée";
+        } else {
+            throw new Error('Erreur serveur');
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        alert("Succès : Les données ont été envoyées, mais l'affichage en direct a pris trop de temps. Vérifiez vos emails.");
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = "1";
+    });
 });
