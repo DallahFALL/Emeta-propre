@@ -6,14 +6,14 @@
 
 const translations = {
     fr: {
-        // --- STEP 1 ---
+        // STEP 1
         step1_title: "01. Identification",
         lbl_company: "Société / Entité",
         ph_company: "ex: Groupe Alpha...",
         lbl_email: "Email Professionnel",
         ph_email: "contact@domaine.com",
         
-        // --- STEP 2 ---
+        // STEP 2
         step2_title: "02. Matrice Stratégique",
         lbl_sector: "Secteur Clé",
         sec_green: "Énergies Vertes",
@@ -22,6 +22,10 @@ const translations = {
         sec_agro: "Agrobusiness",
         sec_log: "Logistique",
         
+        // NOUVEAU : GEO
+        lbl_geo: "Zone d'Intervention",
+        opt_geo_def: "Sélectionner une zone cible...",
+
         lbl_expertise: "Expertise Requise",
         exp_sov: "Souveraineté IA",
         exp_esg: "Ingénierie ESG",
@@ -29,7 +33,7 @@ const translations = {
         exp_ohada: "Optimisation OHADA",
         exp_cyber: "Crise Cyber",
         
-        // --- STEP 3 ---
+        // STEP 3
         step3_title: "03. Analyse & Envoi",
         lbl_context: "Contexte Opérationnel",
         ph_context: "Décrivez vos enjeux stratégiques (ex: entrée marché, conformité, crise...)",
@@ -37,11 +41,11 @@ const translations = {
         link_privacy: "Politique de Confidentialité",
         btn_submit: "Lancer l'Analyse IA",
         
-        // --- NAVIGATION ---
+        // NAV
         btn_next: "Suivant",
         btn_prev: "Retour",
         
-        // --- FOOTER & MODAL ---
+        // FOOTER
         footer_rights: "Tous droits réservés.",
         modal_title: "Politique de Confidentialité & RGPD",
         modal_text_1: "Les données collectées via le Master Diagnostic Form sont strictement confidentielles.",
@@ -63,6 +67,9 @@ const translations = {
         sec_agro: "Agrobusiness",
         sec_log: "Logistics",
         
+        lbl_geo: "Target Geography",
+        opt_geo_def: "Select target zone...",
+
         lbl_expertise: "Required Expertise",
         exp_sov: "AI Sovereignty",
         exp_esg: "ESG Engineering",
@@ -72,7 +79,7 @@ const translations = {
         
         step3_title: "03. Analysis & Submit",
         lbl_context: "Operational Context",
-        ph_context: "Describe your strategic challenges (e.g., market entry, compliance, crisis...)",
+        ph_context: "Describe your strategic challenges...",
         legal_consent: "I accept the",
         link_privacy: "Privacy Policy",
         btn_submit: "Launch AI Analysis",
@@ -82,8 +89,8 @@ const translations = {
         
         footer_rights: "All Rights Reserved.",
         modal_title: "Privacy Policy & GDPR",
-        modal_text_1: "Data collected via the Master Diagnostic Form is strictly confidential.",
-        modal_text_2: "e-META LABS is committed to 'Zero Defect' protection of your strategic information.",
+        modal_text_1: "Data collected is strictly confidential.",
+        modal_text_2: "e-META LABS is committed to 'Zero Defect' protection.",
         btn_close: "Close"
     },
     es: {
@@ -101,6 +108,9 @@ const translations = {
         sec_agro: "Agrobusiness",
         sec_log: "Logística",
         
+        lbl_geo: "Zona de Intervención",
+        opt_geo_def: "Seleccionar zona...",
+
         lbl_expertise: "Experiencia Requerida",
         exp_sov: "Soberanía IA",
         exp_esg: "Ingeniería ESG",
@@ -120,8 +130,8 @@ const translations = {
         
         footer_rights: "Todos los derechos reservados.",
         modal_title: "Política de Privacidad y RGPD",
-        modal_text_1: "Los datos recopilados son estrictamente confidenciales.",
-        modal_text_2: "e-META LABS se compromete a una protección 'Cero Defectos' de su información.",
+        modal_text_1: "Los datos recopilados son confidenciales.",
+        modal_text_2: "e-META LABS se compromete a una protección total.",
         btn_close: "Cerrar"
     },
     ar: {
@@ -139,6 +149,9 @@ const translations = {
         sec_agro: "الأعمال الزراعية",
         sec_log: "اللوجستيات",
         
+        lbl_geo: "منطقة التدخل",
+        opt_geo_def: "...اختر المنطقة",
+
         lbl_expertise: "الخبرة المطلوبة",
         exp_sov: "سيادة الذكاء الاصطناعي",
         exp_esg: "هندسة ESG",
@@ -166,18 +179,12 @@ const translations = {
 
 document.addEventListener('DOMContentLoaded', () => {
     const langButtons = document.querySelectorAll('.lang-switch button');
-    
-    // Default language
     setLanguage('fr');
 
     langButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remove active class from all
             langButtons.forEach(b => b.classList.remove('active'));
-            // Add active to clicked
             btn.classList.add('active');
-            
-            // Set language
             const lang = btn.getAttribute('data-lang');
             setLanguage(lang);
         });
@@ -185,7 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function setLanguage(lang) {
-    // 1. Update Direction (RTL for Arabic)
     if (lang === 'ar') {
         document.documentElement.setAttribute('dir', 'rtl');
         document.body.style.textAlign = 'right';
@@ -194,7 +200,6 @@ function setLanguage(lang) {
         document.body.style.textAlign = 'left';
     }
 
-    // 2. Update Text Content
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -203,7 +208,6 @@ function setLanguage(lang) {
         }
     });
 
-    // 3. Update Placeholders (Specific Logic)
     updatePlaceholder('company', translations[lang].ph_company);
     updatePlaceholder('email', translations[lang].ph_email);
     updatePlaceholder('context', translations[lang].ph_context);
