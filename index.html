@@ -1,160 +1,136 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="meta.title">e-META LABS — Strategic AI Engine</title>
+    <title>e-META LABS | Strategic AI Engine</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Styles -->
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<header class="site-header">
-    <div class="container header-inner">
-        <a href="index.html" class="logo-brand">
-            <img src="01_Logo_Sources/eMETA-official-logo.png" alt="e-META" class="brand-icon">
-            <span class="brand-name-full">e-META LABS</span>
-        </a>
-        <div class="header-right">
-            <nav class="main-nav">
-                <a href="#hero" data-i18n="nav.home">Vision</a>
-                <a href="#form" class="nav-cta" data-i18n="nav.form">Lancer l'Analyse</a>
-            </nav>
-            <select id="uiLangSelect" class="lang-select">
-                <option value="fr">FR</option>
-                <option value="en">EN</option>
-                <option value="es">ES</option>
-                <option value="ar">AR</option>
-            </select>
-        </div>
-    </div>
-</header>
-
-<main>
-    <section id="hero" class="hero-premium">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title" data-i18n="hero.title">L’Excellence Stratégique à la portée de chaque Décision.</h1>
-                <p class="hero-subtitle" data-i18n="hero.subtitle">Station de pilotage décisionnelle de niveau Cabinet Conseil.</p>
+    <!-- HEADER PRESTIGE -->
+    <header class="header">
+        <div class="logo-container">
+            <!-- SVG Logo : e-META Abstract Symbol -->
+            <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 5 L95 25 V75 L50 95 L5 75 V25 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+                <path d="M50 20 L80 35 V65 L50 80 L20 65 V35 Z" stroke="#d4af37" stroke-width="1" fill="rgba(212, 175, 55, 0.1)"/>
+                <circle cx="50" cy="50" r="10" fill="#d4af37"/>
+            </svg>
+            <div class="brand-text">
+                <h1>e-META LABS</h1>
+                <span class="subtitle">Strategic AI Engine</span>
             </div>
         </div>
-    </section>
+        <div class="lang-switch">
+            <button data-lang="fr" class="active">FR</button>
+            <button data-lang="en">EN</button>
+            <button data-lang="es">ES</button>
+            <button data-lang="ar">AR</button>
+        </div>
+    </header>
 
-    <section id="form" class="engine-section">
-        <div class="container">
-            <div class="decision-card">
-                <div class="card-header">
-                    <h2 data-i18n="form.title">Expertise Decision Engine</h2>
-                    <div class="engine-status">
-                        <span class="status-dot"></span> 
-                        <span data-i18n="engine.status">SYSTÈME PRÊT</span>
+    <!-- MAIN DASHBOARD -->
+    <main class="main-container">
+        <div class="glass-card">
+            <h2 id="form-title">Master Diagnostic 2026</h2>
+            <p id="form-desc">Souveraineté IA & Ingénierie Stratégique</p>
+
+            <form id="diagnosticForm">
+                <!-- STEP 01: IDENTIFICATION -->
+                <div class="form-step active" id="step-1">
+                    <h3 data-i18n="step1_title">01. Identification</h3>
+                    <div class="input-group">
+                        <label for="company" data-i18n="lbl_company">Société / Entité</label>
+                        <input type="text" id="company" required placeholder="ex: Groupe Alpha...">
+                    </div>
+                    <div class="input-group">
+                        <label for="email" data-i18n="lbl_email">Email Professionnel</label>
+                        <input type="email" id="email" required placeholder="contact@domain.com">
+                    </div>
+                    <div class="btn-container right">
+                        <button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
                     </div>
                 </div>
 
-                <form id="emetaMasterForm">
-                    <div class="form-step">
-                        <h3 class="step-title"><span data-i18n="group.general">01 Périmètre & Expertise</span></h3>
-                        <div class="input-grid">
-                            <div class="input-group">
-                                <label data-i18n="field.projectTitle.label">Titre de la Décision</label>
-                                <input type="text" name="projectTitle" data-i18n-placeholder="field.projectTitle.placeholder">
-                            </div>
-                            <div class="input-group">
-                                <label data-i18n="field.domain.label">Expertise Requise</label>
-                                <select name="domain">
-                                    <option value="ai" data-i18n="domain.ai">Souveraineté IA</option>
-                                    <option value="esg" data-i18n="domain.finance">Ingénierie ESG</option>
-                                    <option value="ma" data-i18n="domain.ma">M&A</option>
-                                    <option value="legal" data-i18n="domain.legal">Optimisation OHADA</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="input-grid">
-                            <div class="input-group">
-                                <label data-i18n="field.industry.label">Secteur d'Activité</label>
-                                <select name="industry">
-                                    <option value="energy" data-i18n="industry.energy">Énergies Vertes</option>
-                                    <option value="health" data-i18n="industry.health">HealthTech</option>
-                                    <option value="agri" data-i18n="industry.agri">Agribusiness</option>
-                                    <option value="logistics" data-i18n="industry.logistics">Logistique</option>
-                                </select>
-                            </div>
-                            <div class="input-group">
-                                <label data-i18n="field.geography.label">Zone d'Impact</label>
-                                <input type="text" name="geography" data-i18n-placeholder="field.geography.placeholder">
-                            </div>
-                        </div>
+                <!-- STEP 02: SECTEURS & EXPERTISES -->
+                <div class="form-step" id="step-2">
+                    <h3 data-i18n="step2_title">02. Matrice Stratégique</h3>
+                    
+                    <label class="section-label" data-i18n="lbl_sector">Secteur Clé</label>
+                    <div class="grid-options">
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="GreenEnergy"> <span data-i18n="sec_green">Énergies Vertes</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="BlueEconomy"> <span data-i18n="sec_blue">Blue Economy</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="HealthTech"> <span data-i18n="sec_health">HealthTech</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Agrobusiness"> <span data-i18n="sec_agro">Agrobusiness</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Logistics"> <span data-i18n="sec_log">Logistique</span></label>
                     </div>
 
-                    <div class="form-step">
-                        <h3 class="step-title"><span data-i18n="group.analysis">02 Analyse de Contexte</span></h3>
-                        <div class="input-group">
-                            <label data-i18n="field.problem.label">Problématique & Enjeux</label>
-                            <textarea name="problem" rows="4" data-i18n-placeholder="field.problem.placeholder"></textarea>
-                        </div>
-                        <div class="input-group">
-                            <label data-i18n="field.fileLink.label">Audit de Document (Lien Cloud)</label>
-                            <input type="url" name="fileLink" data-i18n-placeholder="field.fileLink.placeholder">
-                        </div>
+                    <label class="section-label mt-2" data-i18n="lbl_expertise">Expertise Requise</label>
+                    <div class="grid-options">
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="SouveraineteIA"> <span data-i18n="exp_sov">Souveraineté IA</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="ESG"> <span data-i18n="exp_esg">Ingénierie ESG</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="MA"> <span data-i18n="exp_ma">M&A</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="OHADA"> <span data-i18n="exp_ohada">Optimisation OHADA</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Cyber"> <span data-i18n="exp_cyber">Crise Cyber</span></label>
                     </div>
 
-                    <div class="form-step">
-                        <h3 class="step-title"><span data-i18n="group.output">03 Canaux de Restitution</span></h3>
-                        <div class="input-grid">
-                            <div class="input-group">
-                                <label data-i18n="field.email.label">Email de Direction</label>
-                                <input type="email" name="email" placeholder="admin@votre-sasu.com">
-                            </div>
-                            <div class="input-group">
-                                <label data-i18n="field.whatsapp.label">Ligne WhatsApp Expert</label>
-                                <input type="tel" name="whatsapp" placeholder="+221...">
-                            </div>
-                        </div>
-                        <div class="delivery-container">
-                            <label class="delivery-label" data-i18n="field.outputMode.label">Mode de livraison</label>
-                            <div class="delivery-grid">
-                                <label class="deliv-card"><input type="checkbox" name="wa" checked> <span>WhatsApp</span></label>
-                                <label class="deliv-card"><input type="checkbox" name="mail" checked> <span>Email & PDF</span></label>
-                                <label class="deliv-card"><input type="checkbox" name="web"> <span data-i18n="field.outputMode.display">Affichage Direct</span></label>
-                            </div>
-                        </div>
+                    <div class="btn-container split">
+                        <button type="button" class="btn-outline" onclick="nextStep(1)" data-i18n="btn_prev">Retour</button>
+                        <button type="button" class="btn-gold" onclick="nextStep(3)" data-i18n="btn_next">Suivant</button>
+                    </div>
+                </div>
+
+                <!-- STEP 03: CONTEXTE & SUBMISSION -->
+                <div class="form-step" id="step-3">
+                    <h3 data-i18n="step3_title">03. Analyse & Envoi</h3>
+                    <div class="input-group">
+                        <label for="context" data-i18n="lbl_context">Contexte Opérationnel</label>
+                        <textarea id="context" rows="4" placeholder="Décrivez vos enjeux stratégiques..."></textarea>
+                    </div>
+                    
+                    <div class="legal-check">
+                        <input type="checkbox" id="consent" required>
+                        <label for="consent">
+                            <span data-i18n="legal_consent">J'accepte la</span> 
+                            <a href="#" id="openPrivacy" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité</a>.
+                        </label>
                     </div>
 
-                    <div class="form-footer">
-                        <p class="security-note">
-                            <span data-i18n="hero.trust">🔒 Souveraineté & Certification Blockchain</span>
-                        </p>
-                        <button type="submit" class="btn-engine" id="submitBtn">
-                            <span data-i18n="form.submit">Générer l'Expertise e-META</span>
-                        </button>
+                    <div class="btn-container split">
+                        <button type="button" class="btn-outline" onclick="nextStep(2)" data-i18n="btn_prev">Retour</button>
+                        <button type="submit" class="btn-gold glow" data-i18n="btn_submit">Lancer l'Analyse IA</button>
                     </div>
-                </form>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- FOOTER SASU -->
+    <footer class="footer">
+        <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">All Rights Reserved.</span></p>
+        <p class="tiny">Strategic Intelligence Unit • Dakar - Paris - Dubai</p>
+    </footer>
+
+    <!-- MODAL PRIVACY -->
+    <div id="privacyOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 data-i18n="modal_title">Politique de Confidentialité & RGPD</h2>
+            <div class="modal-body">
+                <p data-i18n="modal_text_1">Les données collectées via le Master Diagnostic Form sont strictement confidentielles.</p>
+                <p data-i18n="modal_text_2">e-META LABS s'engage à une protection "Zéro Défaut" de vos informations stratégiques.</p>
+                <!-- Contenu dynamique via i18n -->
             </div>
+            <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close">Fermer</button>
         </div>
-    </section>
-</main>
-
-<footer class="site-footer">
-    <div class="container">
-        <h4 class="company-name">e-META LABS <span class="legal-tag">(SASU)</span></h4>
-        <p class="social-object" data-i18n="footer.object">Conception et exploitation de solutions d'IA dédiées à l'aide à la décision.</p>
-        <div class="legal-box">
-            <button class="btn-privacy-trigger" id="openPrivacy" data-i18n="nav.privacy">Politique de Confidentialité</button>
-        </div>
-        <p class="credits">© 2026 e-META LABS | Senegal • Worldwide</p>
     </div>
-</footer>
 
-<div id="privacyModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2 data-i18n="nav.privacy">Politique de Confidentialité</h2>
-        <div id="modalBody" class="modal-body"></div>
-    </div>
-</div>
-
-<script src="i18n.js"></script>
-<script src="script.js"></script>
+    <!-- Scripts -->
+    <script src="i18n.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
