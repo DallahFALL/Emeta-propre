@@ -1,137 +1,217 @@
-const resources = {
+/* 
+ * PROJET : e-META LABS — Moteur IA Stratégique
+ * FICHIER : i18n.js
+ * OBJECTIF : Gestionnaire de traduction (FR/EN/ES/AR) + Support RTL
+ */
+
+const translations = {
     fr: {
-        "meta.title": "e-META LABS — Moteur IA Stratégique",
-        "header.tagline": "L'intelligence stratégique au service de vos décisions.",
-        "nav.home": "Vision", "nav.form": "Lancer l'Analyse", "nav.privacy": "Politique de Confidentialité",
-        "hero.title": "L’Excellence Stratégique à la portée de chaque Décision.",
-        "hero.subtitle": "Station de pilotage décisionnelle de niveau Cabinet Conseil pour entrepreneurs et dirigeants.",
-        "form.title": "Expertise Decision Engine", "engine.status": "SYSTÈME PRÊT",
-        "group.general": "01 Périmètre & Expertise", "group.analysis": "02 Analyse de Contexte", "group.output": "03 Canaux de Restitution",
-        "field.projectTitle.label": "Titre de la Décision",
-        "field.projectTitle.placeholder": "Ex: Expansion hôtelière ou Audit IA...",
-        "field.domain.label": "Expertise Requise",
-        "domain.ai": "Souveraineté IA & Transformation",
-        "domain.finance": "Ingénierie ESG & Finance Durable",
-        "domain.ma": "M&A (Fusions-Acquisitions)",
-        "domain.legal": "Optimisation Fiscale OHADA",
-        "domain.crisis": "Gestion de Crise Cyber",
-        "field.industry.label": "Secteur d'Activité",
-        "industry.energy": "Énergies Vertes & Transition",
-        "industry.blue": "Blue Economy & Maritime",
-        "industry.health": "HealthTech & Pharma",
-        "industry.agri": "Agribusiness Intelligent",
-        "industry.logistics": "Logistique Globale",
-        "field.geography.label": "Zone d'Impact",
-        "field.geography.placeholder": "Sénégal, Europe, USA...",
-        "field.problem.label": "Problématique & Enjeux",
-        "field.problem.placeholder": "Décrivez les enjeux critiques de votre situation...",
-        "field.fileLink.label": "Audit Documentaire (Lien Cloud)",
-        "field.fileLink.placeholder": "Lien vers Business Plan, Contrat ou Bilan",
-        "field.email.label": "Email de Direction",
-        "field.whatsapp.label": "Ligne WhatsApp Expert",
-        "field.outputMode.label": "Mode de livraison souhaité",
-        "field.outputMode.display": "Affichage Direct",
-        "form.submit": "GÉNÉRER L'EXPERTISE E-META",
-        "hero.trust": "🔒 Souveraineté des données & Certification Blockchain",
-        "footer.object": "Conception, développement et exploitation de solutions d'IA dédiées à l'aide à la décision.",
-        "privacy.body": "POLITIQUE DE CONFIDENTIALITÉ e-META LABS\n\n1. SOUVERAINETÉ DES DONNÉES\nVos données stratégiques et confidentielles ne sont jamais partagées avec des tiers ni utilisées pour l'entraînement de modèles d'IA publics.\n\n2. CERTIFICATION BLOCKCHAIN\nChaque diagnostic est horodaté via la technologie Blockchain Bitcoin (Woleet), garantissant l'antériorité et l'intégrité de vos réflexions.\n\n3. CADRE RÉGLEMENTÉ\ne-META est un outil d'aide à la décision. Il ne constitue pas un conseil juridique, fiscal ou comptable et ne remplace pas les professions réglementées."
+        // --- STEP 1 ---
+        step1_title: "01. Identification",
+        lbl_company: "Société / Entité",
+        ph_company: "ex: Groupe Alpha...",
+        lbl_email: "Email Professionnel",
+        ph_email: "contact@domaine.com",
+        
+        // --- STEP 2 ---
+        step2_title: "02. Matrice Stratégique",
+        lbl_sector: "Secteur Clé",
+        sec_green: "Énergies Vertes",
+        sec_blue: "Blue Economy",
+        sec_health: "HealthTech",
+        sec_agro: "Agrobusiness",
+        sec_log: "Logistique",
+        
+        lbl_expertise: "Expertise Requise",
+        exp_sov: "Souveraineté IA",
+        exp_esg: "Ingénierie ESG",
+        exp_ma: "M&A",
+        exp_ohada: "Optimisation OHADA",
+        exp_cyber: "Crise Cyber",
+        
+        // --- STEP 3 ---
+        step3_title: "03. Analyse & Envoi",
+        lbl_context: "Contexte Opérationnel",
+        ph_context: "Décrivez vos enjeux stratégiques (ex: entrée marché, conformité, crise...)",
+        legal_consent: "J'accepte la",
+        link_privacy: "Politique de Confidentialité",
+        btn_submit: "Lancer l'Analyse IA",
+        
+        // --- NAVIGATION ---
+        btn_next: "Suivant",
+        btn_prev: "Retour",
+        
+        // --- FOOTER & MODAL ---
+        footer_rights: "Tous droits réservés.",
+        modal_title: "Politique de Confidentialité & RGPD",
+        modal_text_1: "Les données collectées via le Master Diagnostic Form sont strictement confidentielles.",
+        modal_text_2: "e-META LABS s'engage à une protection 'Zéro Défaut' de vos informations stratégiques.",
+        btn_close: "Fermer"
     },
     en: {
-        "meta.title": "e-META LABS — Strategic AI Engine",
-        "nav.home": "Vision", "nav.form": "Start Analysis", "nav.privacy": "Privacy Policy",
-        "hero.title": "Strategic Excellence for Every Decision.",
-        "hero.subtitle": "Management Consulting-grade decision station for leaders.",
-        "engine.status": "SYSTEM READY",
-        "group.general": "01 Scope & Expertise",
-        "field.projectTitle.placeholder": "e.g. Hotel expansion or AI Audit...",
-        "domain.ai": "AI Sovereignty & Transformation",
-        "domain.finance": "ESG & Sustainable Finance",
-        "domain.ma": "M&A (Mergers & Acquisitions)",
-        "domain.legal": "OHADA Tax Optimization",
-        "domain.crisis": "Cyber Crisis Management",
-        "field.industry.label": "Industry Sector",
-        "industry.energy": "Green Energy & Transition",
-        "industry.blue": "Blue Economy & Maritime",
-        "industry.health": "HealthTech & Pharma",
-        "industry.agri": "Smart Agribusiness",
-        "industry.logistics": "Global Logistics",
-        "field.problem.placeholder": "Describe the critical challenges of your situation...",
-        "form.submit": "GENERATE E-META EXPERTISE",
-        "footer.object": "Design and operation of AI solutions for strategic decision support.",
-        "privacy.body": "PRIVACY POLICY e-META LABS\n\n1. DATA SOVEREIGNTY\nYour strategic and confidential data is never shared with third parties nor used for training public AI models.\n\n2. BLOCKCHAIN CERTIFICATION\nEach diagnostic is timestamped via Bitcoin Blockchain technology (Woleet), ensuring the priority and integrity of your strategic insights.\n\n3. REGULATED FRAMEWORK\ne-META is a decision-support tool. It does not constitute legal, tax, or accounting advice and does not replace regulated professions."
+        step1_title: "01. Identification",
+        lbl_company: "Company / Entity",
+        ph_company: "ex: Alpha Group...",
+        lbl_email: "Business Email",
+        ph_email: "contact@domain.com",
+        
+        step2_title: "02. Strategic Matrix",
+        lbl_sector: "Key Sector",
+        sec_green: "Green Energy",
+        sec_blue: "Blue Economy",
+        sec_health: "HealthTech",
+        sec_agro: "Agrobusiness",
+        sec_log: "Logistics",
+        
+        lbl_expertise: "Required Expertise",
+        exp_sov: "AI Sovereignty",
+        exp_esg: "ESG Engineering",
+        exp_ma: "M&A",
+        exp_ohada: "OHADA Optimization",
+        exp_cyber: "Cyber Crisis",
+        
+        step3_title: "03. Analysis & Submit",
+        lbl_context: "Operational Context",
+        ph_context: "Describe your strategic challenges (e.g., market entry, compliance, crisis...)",
+        legal_consent: "I accept the",
+        link_privacy: "Privacy Policy",
+        btn_submit: "Launch AI Analysis",
+        
+        btn_next: "Next",
+        btn_prev: "Back",
+        
+        footer_rights: "All Rights Reserved.",
+        modal_title: "Privacy Policy & GDPR",
+        modal_text_1: "Data collected via the Master Diagnostic Form is strictly confidential.",
+        modal_text_2: "e-META LABS is committed to 'Zero Defect' protection of your strategic information.",
+        btn_close: "Close"
     },
     es: {
-        "meta.title": "e-META LABS — IA Estratégica",
-        "nav.home": "Visión", "nav.form": "Iniciar Análisis", "nav.privacy": "Privacidad",
-        "hero.title": "Excelencia Estratégica para cada Decisión.",
-        "hero.subtitle": "Estación de decisión de nivel consultoría estratégica.",
-        "engine.status": "SISTEMA LISTO",
-        "group.general": "01 Alcance y Especialización",
-        "domain.ai": "Soberanía de IA",
-        "domain.finance": "Finanzas ESG",
-        "domain.ma": "M&A",
-        "domain.legal": "Optimización Fiscal",
-        "domain.crisis": "Gestión de Crisis Cyber",
-        "industry.energy": "Energía Verde",
-        "industry.blue": "Economía Azul",
-        "industry.health": "Salud y Pharma",
-        "industry.agri": "Agroindustria",
-        "industry.logistics": "Logística Global",
-        "form.submit": "GENERAR EXPERIENCIA E-META",
-        "privacy.body": "POLÍTICA DE PRIVACIDAD e-META LABS\n\n1. SOBERANÍA DE DATOS\nSus datos nunca se comparten ni se usan para entrenar IA pública.\n\n2. CERTIFICACIÓN BLOCKCHAIN\nCertificado por Woleet.\n\n3. MARCO LEGAL\ne-META es una herramienta de apoyo, no un consejo regulado."
+        step1_title: "01. Identificación",
+        lbl_company: "Empresa / Entidad",
+        ph_company: "ej: Grupo Alpha...",
+        lbl_email: "Correo Corporativo",
+        ph_email: "contacto@dominio.com",
+        
+        step2_title: "02. Matriz Estratégica",
+        lbl_sector: "Sector Clave",
+        sec_green: "Energías Verdes",
+        sec_blue: "Economía Azul",
+        sec_health: "HealthTech",
+        sec_agro: "Agrobusiness",
+        sec_log: "Logística",
+        
+        lbl_expertise: "Experiencia Requerida",
+        exp_sov: "Soberanía IA",
+        exp_esg: "Ingeniería ESG",
+        exp_ma: "Fusiones y Adquisiciones",
+        exp_ohada: "Optimización OHADA",
+        exp_cyber: "Crisis Cibernética",
+        
+        step3_title: "03. Análisis y Envío",
+        lbl_context: "Contexto Operativo",
+        ph_context: "Describa sus desafíos estratégicos...",
+        legal_consent: "Acepto la",
+        link_privacy: "Política de Privacidad",
+        btn_submit: "Iniciar Análisis IA",
+        
+        btn_next: "Siguiente",
+        btn_prev: "Atrás",
+        
+        footer_rights: "Todos los derechos reservados.",
+        modal_title: "Política de Privacidad y RGPD",
+        modal_text_1: "Los datos recopilados son estrictamente confidenciales.",
+        modal_text_2: "e-META LABS se compromete a una protección 'Cero Defectos' de su información.",
+        btn_close: "Cerrar"
     },
     ar: {
-        "meta.title": "e-META LABS — الذكاء الاستراتيجي",
-        "nav.home": "الرؤية", "nav.form": "بدء التحليل", "nav.privacy": "سياسة الخصوصية",
-        "hero.title": "التميز الاستراتيجي في متناول كل قرار.",
-        "hero.subtitle": "منصة توجيه القرار بمستوى استشاري عالمي.",
-        "engine.status": "النظام جاهز",
-        "group.general": "01 النطاق والخبرة",
-        "domain.ai": "السيادة في الذكاء الاصطناعي",
-        "domain.finance": "الهندسة المالية ESG",
-        "domain.ma": "الاندماج والاستحواذ",
-        "domain.legal": "التحسين الضريبي",
-        "domain.crisis": "إدارة الأزمات السيبرانية",
-        "industry.energy": "الطاقة الخضراء",
-        "industry.blue": "الاقتصاد الأزرق",
-        "industry.health": "تقنية الصحة",
-        "industry.agri": "الأعمال الزراعية",
-        "industry.logistics": "الخدمات اللوجستية",
-        "form.submit": "إنشاء خبرة e-META",
-        "privacy.body": "سياسة الخصوصية e-META LABS\n\n1. سيادة البيانات\nبياناتك الاستراتيجية لا يتم مشاركتها أبداً.\n\n2. توثيق البلوكشين\nكل تقرير موثق عبر تقنية Woleet.\n\n3. الإطار القانوني\ne-META هي أداة لدعم القرار وليست استشارة مهنية منظمة."
+        step1_title: "01. الهوية",
+        lbl_company: "الشركة / الهيئة",
+        ph_company: "مثال: مجموعة ألفا...",
+        lbl_email: "البريد المهني",
+        ph_email: "contact@domain.com",
+        
+        step2_title: "02. المصفوفة الاستراتيجية",
+        lbl_sector: "القطاع الرئيسي",
+        sec_green: "الطاقة الخضراء",
+        sec_blue: "الاقتصاد الأزرق",
+        sec_health: "التكنولوجيا الصحية",
+        sec_agro: "الأعمال الزراعية",
+        sec_log: "اللوجستيات",
+        
+        lbl_expertise: "الخبرة المطلوبة",
+        exp_sov: "سيادة الذكاء الاصطناعي",
+        exp_esg: "هندسة ESG",
+        exp_ma: "الاندماج والاستحواذ",
+        exp_ohada: "تحسين OHADA",
+        exp_cyber: "الأزمات السيبرانية",
+        
+        step3_title: "03. التحليل والإرسال",
+        lbl_context: "السياق التشغيلي",
+        ph_context: "صف التحديات الاستراتيجية الخاصة بك...",
+        legal_consent: "أوافق على",
+        link_privacy: "سياسة الخصوصية",
+        btn_submit: "بدء تحليل الذكاء الاصطناعي",
+        
+        btn_next: "التالي",
+        btn_prev: "سابق",
+        
+        footer_rights: "جميع الحقوق محفوظة.",
+        modal_title: "سياسة الخصوصية وحماية البيانات",
+        modal_text_1: "البيانات التي تم جمعها سرية للغاية.",
+        modal_text_2: "تلتزم e-META LABS بحماية معلوماتك الاستراتيجية.",
+        btn_close: "إغلاق"
     }
 };
 
-function updateContent(lang) {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (resources[lang] && resources[lang][key]) el.innerHTML = resources[lang][key];
-    });
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        const key = el.getAttribute('data-i18n-placeholder');
-        if (resources[lang] && resources[lang][key]) el.setAttribute('placeholder', resources[lang][key]);
-    });
-    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-    document.documentElement.lang = lang;
-    document.title = resources[lang]["meta.title"];
-    
-    const modalBody = document.getElementById('modalBody');
-    if(modalBody) modalBody.innerText = resources[lang]["privacy.body"];
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-    const selector = document.getElementById('uiLangSelect');
-    if (selector) {
-        updateContent(selector.value);
-        selector.addEventListener('change', (e) => updateContent(e.target.value));
+    const langButtons = document.querySelectorAll('.lang-switch button');
+    
+    // Default language
+    setLanguage('fr');
+
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all
+            langButtons.forEach(b => b.classList.remove('active'));
+            // Add active to clicked
+            btn.classList.add('active');
+            
+            // Set language
+            const lang = btn.getAttribute('data-lang');
+            setLanguage(lang);
+        });
+    });
+});
+
+function setLanguage(lang) {
+    // 1. Update Direction (RTL for Arabic)
+    if (lang === 'ar') {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.body.style.textAlign = 'right';
+    } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.body.style.textAlign = 'left';
     }
 
-    // Modal Logic
-    const modal = document.getElementById("privacyModal");
-    const btn = document.getElementById("openPrivacy");
-    const span = document.getElementsByClassName("close-modal")[0];
+    // 2. Update Text Content
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+            el.textContent = translations[lang][key];
+        }
+    });
 
-    if(btn) btn.onclick = () => modal.style.display = "block";
-    if(span) span.onclick = () => modal.style.display = "none";
-    window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
-});
+    // 3. Update Placeholders (Specific Logic)
+    updatePlaceholder('company', translations[lang].ph_company);
+    updatePlaceholder('email', translations[lang].ph_email);
+    updatePlaceholder('context', translations[lang].ph_context);
+}
+
+function updatePlaceholder(id, text) {
+    const element = document.getElementById(id);
+    if (element) {
+        element.placeholder = text;
+    }
+}
