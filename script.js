@@ -5,7 +5,6 @@
  */
 
 // --- CONFIGURATION ---
-// Remplacez ceci par votre URL de Webhook Make.com (une fois créée)
 const WEBHOOK_URL = "https://hook.eu1.make.com/VOTRE_ID_WEBHOOK_ICI"; 
 
 // --- NAVIGATION ---
@@ -22,7 +21,7 @@ function nextStep(targetStep) {
     // 3. Afficher l'étape cible
     document.getElementById(`step-${targetStep}`).classList.add('active');
     
-    // 4. Scroll smooth vers le haut du formulaire
+    // 4. Scroll smooth
     document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -43,34 +42,38 @@ function validateStep1() {
 }
 
 function validateStep2() {
-    // Vérifier si un secteur (radio) est coché
+    // Vérifier Secteur
     const sector = document.querySelector('input[name="sector"]:checked');
+    // Vérifier Zone Géo
+    const geo = document.getElementById('geo-zone').value;
+
     if (!sector) {
         alert("Veuillez sélectionner un Secteur Clé.");
+        return false;
+    }
+    if (!geo) {
+        alert("Veuillez sélectionner une Zone Géographique.");
         return false;
     }
     return true;
 }
 
-// --- GESTION DE LA MODAL (Privacy Policy) ---
+// --- GESTION DE LA MODAL ---
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('privacyOverlay');
     const openBtn = document.getElementById('openPrivacy');
     const closeBtn = document.querySelector('.close-modal');
     const closeBtnBottom = document.querySelector('.close-modal-btn');
 
-    // Ouvrir
     openBtn.addEventListener('click', (e) => {
         e.preventDefault();
         modal.style.display = 'flex';
     });
 
-    // Fermer (Croix & Bouton)
     const closeModal = () => { modal.style.display = 'none'; };
     closeBtn.addEventListener('click', closeModal);
     closeBtnBottom.addEventListener('click', closeModal);
 
-    // Fermer en cliquant en dehors
     window.addEventListener('click', (e) => {
         if (e.target === modal) {
             closeModal();
@@ -78,11 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// --- SOUMISSION DU FORMULAIRE (Envoi Make) ---
+// --- SOUMISSION DU FORMULAIRE ---
 document.getElementById('diagnosticForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // 1. Vérifier le consentement
     if (!document.getElementById('consent').checked) {
         alert("Vous devez accepter la Politique de Confidentialité.");
         return;
@@ -90,29 +92,29 @@ document.getElementById('diagnosticForm').addEventListener('submit', function(e)
 
     const submitBtn = document.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerText;
-    submitBtn.innerText = "Traitement en cours...";
+    submitBtn.innerText = "Traitement...";
     submitBtn.disabled = true;
 
-    // 2. Collecte des données
+    // Collecte des données
     const formData = {
         timestamp: new Date().toISOString(),
         company: document.getElementById('company').value,
         email: document.getElementById('email').value,
         sector: document.querySelector('input[name="sector"]:checked')?.value || "Non spécifié",
+        geoZone: document.getElementById('geo-zone').value, // NOUVEAU CHAMP
         expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked')).map(cb => cb.value),
         context: document.getElementById('context').value,
         lang: document.documentElement.lang || 'fr'
     };
 
-    // 3. Envoi au Webhook (Simulation si pas d'URL)
+    // Simulation ou Envoi Réel
     if (WEBHOOK_URL.includes("VOTRE_ID")) {
-        console.log("DONNÉES PRÊTES À L'ENVOI (Mode Test) :", formData);
+        console.log("SIMULATION ENVOI (Test) :", formData);
         setTimeout(() => {
-            alert("Simulation : Données envoyées avec succès !\n(Configurez le Webhook pour le mode réel)");
-            submitBtn.innerText = "Envoyé";
+            alert("Simulation : Données envoyées avec succès !\n(Données capturées incluant la zone : " + formData.geoZone + ")");
+            submitBtn.innerText = "Terminé";
         }, 1500);
     } else {
-        // Envoi Réel
         fetch(WEBHOOK_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -120,15 +122,15 @@ document.getElementById('diagnosticForm').addEventListener('submit', function(e)
         })
         .then(response => {
             if (response.ok) {
-                alert("Analyse lancée. Vous recevrez le rapport sous peu.");
-                submitBtn.innerText = "Terminé";
+                alert("Analyse lancée. Rapport en cours de génération.");
+                submitBtn.innerText = "Envoyé";
             } else {
                 throw new Error('Erreur réseau');
             }
         })
         .catch(error => {
             console.error('Erreur:', error);
-            alert("Erreur de connexion au serveur IA.");
+            alert("Erreur de connexion.");
             submitBtn.innerText = originalText;
             submitBtn.disabled = false;
         });
