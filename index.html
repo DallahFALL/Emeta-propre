@@ -12,141 +12,139 @@
 <body>
 
     <!-- HEADER PRESTIGE -->
-    <header class="header">
-        <div class="logo-container">
-            <!-- SVG Logo : e-META Abstract Symbol -->
-            <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 5 L95 25 V75 L50 95 L5 75 V25 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
-                <path d="M50 20 L80 35 V65 L50 80 L20 65 V35 Z" stroke="#d4af37" stroke-width="1" fill="rgba(212, 175, 55, 0.1)"/>
-                <circle cx="50" cy="50" r="10" fill="#d4af37"/>
-            </svg>
-            <div class="brand-text">
-                <h1>e-META LABS</h1>
-                <span class="subtitle">Strategic AI Engine</span>
-            </div>
-        </div>
-        <div class="lang-switch">
-            <button data-lang="fr" class="active">FR</button>
-            <button data-lang="en">EN</button>
-            <button data-lang="es">ES</button>
-            <button data-lang="ar">AR</button>
-        </div>
-    </header>
-
-    <!-- MAIN DASHBOARD -->
-    <main class="main-container">
-        <div class="glass-card">
-            <h2 id="form-title">Master Diagnostic 2026</h2>
-            <p id="form-desc">Souveraineté IA & Ingénierie Stratégique</p>
-
-            <form id="diagnosticForm">
-                <!-- STEP 01: IDENTIFICATION -->
-                <div class="form-step active" id="step-1">
-                    <h3 data-i18n="step1_title">01. Identification</h3>
-                    <div class="input-group">
-                        <label for="company" data-i18n="lbl_company">Société / Entité</label>
-                        <input type="text" id="company" required placeholder="ex: Groupe Alpha...">
-                    </div>
-                    <div class="input-group">
-                        <label for="email" data-i18n="lbl_email">Email Professionnel</label>
-                        <input type="email" id="email" required placeholder="contact@domain.com">
-                    </div>
-                    <div class="btn-container right">
-                        <button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
-                    </div>
-                </div>
-
-                <!-- STEP 02: SECTEURS & GEOGRAPHIE -->
-                <div class="form-step" id="step-2">
-                    <h3 data-i18n="step2_title">02. Matrice Stratégique</h3>
-                    
-                    <!-- Secteur -->
-                    <label class="section-label" data-i18n="lbl_sector">Secteur Clé</label>
-                    <div class="grid-options">
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="GreenEnergy"> <span data-i18n="sec_green">Énergies Vertes</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="BlueEconomy"> <span data-i18n="sec_blue">Blue Economy</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="HealthTech"> <span data-i18n="sec_health">HealthTech</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Agrobusiness"> <span data-i18n="sec_agro">Agrobusiness</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Logistics"> <span data-i18n="sec_log">Logistique</span></label>
-                    </div>
-
-                    <!-- NOUVEAU : Zone Géographique -->
-                    <label class="section-label mt-2" data-i18n="lbl_geo">Zone Géographique</label>
-                    <div class="input-group">
-                        <select id="geo-zone" required>
-                            <option value="" disabled selected data-i18n="opt_geo_def">Sélectionner une zone...</option>
-                            <option value="Senegal">Sénégal (Dakar Hub)</option>
-                            <option value="CotedIvoire">Côte d'Ivoire (Abidjan Hub)</option>
-                            <option value="Nigeria">Nigeria (Lagos)</option>
-                            <option value="Maroc">Maroc (Casablanca)</option>
-                            <option value="UAE">UAE (Dubai - Middle East)</option>
-                            <option value="France">France (Europe)</option>
-                            <option value="Global">International / Global</option>
-                        </select>
-                    </div>
-
-                    <!-- Expertise -->
-                    <label class="section-label mt-2" data-i18n="lbl_expertise">Expertise Requise</label>
-                    <div class="grid-options">
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="SouveraineteIA"> <span data-i18n="exp_sov">Souveraineté IA</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="ESG"> <span data-i18n="exp_esg">Ingénierie ESG</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="MA"> <span data-i18n="exp_ma">M&A</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="OHADA"> <span data-i18n="exp_ohada">Optimisation OHADA</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Cyber"> <span data-i18n="exp_cyber">Crise Cyber</span></label>
-                    </div>
-
-                    <div class="btn-container split">
-                        <button type="button" class="btn-outline" onclick="nextStep(1)" data-i18n="btn_prev">Retour</button>
-                        <button type="button" class="btn-gold" onclick="nextStep(3)" data-i18n="btn_next">Suivant</button>
-                    </div>
-                </div>
-
-                <!-- STEP 03: CONTEXTE & SUBMISSION -->
-                <div class="form-step" id="step-3">
-                    <h3 data-i18n="step3_title">03. Analyse & Envoi</h3>
-                    <div class="input-group">
-                        <label for="context" data-i18n="lbl_context">Contexte Opérationnel</label>
-                        <textarea id="context" rows="4" placeholder="Décrivez vos enjeux stratégiques..."></textarea>
-                    </div>
-                    
-                    <div class="legal-check">
-                        <input type="checkbox" id="consent" required>
-                        <label for="consent">
-                            <span data-i18n="legal_consent">J'accepte la</span> 
-                            <a href="#" id="openPrivacy" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité</a>.
-                        </label>
-                    </div>
-
-                    <div class="btn-container split">
-                        <button type="button" class="btn-outline" onclick="nextStep(2)" data-i18n="btn_prev">Retour</button>
-                        <button type="submit" class="btn-gold glow" data-i18n="btn_submit">Lancer l'Analyse IA</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </main>
-
-    <!-- FOOTER SASU -->
-    <footer class="footer">
-        <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">All Rights Reserved.</span></p>
-        <p class="tiny">Strategic Intelligence Unit • Dakar - Paris - Dubai</p>
-    </footer>
-
-    <!-- MODAL PRIVACY -->
-    <div id="privacyOverlay" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 data-i18n="modal_title">Politique de Confidentialité & RGPD</h2>
-            <div class="modal-body">
-                <p data-i18n="modal_text_1">Les données collectées via le Master Diagnostic Form sont strictement confidentielles.</p>
-                <p data-i18n="modal_text_2">e-META LABS s'engage à une protection "Zéro Défaut" de vos informations stratégiques.</p>
-            </div>
-            <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close">Fermer</button>
+<header class="header">
+    <div class="logo-container">
+        <!-- SVG Logo : e-META Abstract Symbol -->
+        <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 5 L95 25 V75 L50 95 L5 75 V25 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+            <path d="M50 20 L80 35 V65 L50 80 L20 65 V35 Z" stroke="#d4af37" stroke-width="1" fill="rgba(212, 175, 55, 0.1)"/>
+            <circle cx="50" cy="50" r="10" fill="#d4af37"/>
+        </svg>
+        <div class="brand-text">
+            <h1>e-META LABS</h1>
+            <span class="subtitle">Strategic AI Engine</span>
         </div>
     </div>
+    <div class="lang-switch">
+        <button data-lang="fr" class="active">FR</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="es">ES</button>
+        <button data-lang="ar">AR</button>
+    </div>
+</header>
 
-    <!-- Scripts -->
-    <script src="i18n.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+<!-- MAIN DASHBOARD -->
+<main class="main-container">
+    <div class="glass-card">
+        <h2 id="form-title">Master Diagnostic 2026</h2>
+        <p id="form-desc">Souveraineté IA & Ingénierie Stratégique</p>
+
+        <form id="diagnosticForm">
+            <!-- STEP 01: IDENTIFICATION -->
+            <div class="form-step active" id="step-1">
+                <h3 data-i18n="step1_title">01. Identification</h3>
+                <div class="input-group">
+                    <label for="company" data-i18n="lbl_company">Société / Entité</label>
+                    <input type="text" id="company" required placeholder="ex: Groupe Alpha...">
+                </div>
+                <div class="input-group">
+                    <label for="email" data-i18n="lbl_email">Email Professionnel</label>
+                    <input type="email" id="email" required placeholder="contact@domain.com">
+                </div>
+                <div class="btn-container right">
+                    <button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
+                </div>
+            </div>
+
+            <!-- STEP 02: SECTEURS & GEOGRAPHIE -->
+            <div class="form-step" id="step-2">
+                <h3 data-i18n="step2_title">02. Matrice Stratégique</h3>
+                
+                <!-- Secteur -->
+                <label class="section-label" data-i18n="lbl_sector">Secteur Clé</label>
+                <div class="grid-options">
+                    <label class="checkbox-btn"><input type="radio" name="sector" value="GreenEnergy"> <span data-i18n="sec_green">Énergies Vertes</span></label>
+                    <label class="checkbox-btn"><input type="radio" name="sector" value="BlueEconomy"> <span data-i18n="sec_blue">Blue Economy</span></label>
+                    <label class="checkbox-btn"><input type="radio" name="sector" value="HealthTech"> <span data-i18n="sec_health">HealthTech</span></label>
+                    <label class="checkbox-btn"><input type="radio" name="sector" value="Agrobusiness"> <span data-i18n="sec_agro">Agrobusiness</span></label>
+                    <label class="checkbox-btn"><input type="radio" name="sector" value="Logistics"> <span data-i18n="sec_log">Logistique</span></label>
+                </div>
+
+                <!-- NOUVEAU : Zone Géographique -->
+                <label class="section-label mt-2" data-i18n="lbl_geo">Zone Géographique</label>
+                <div class="input-group">
+                    <select id="geo-zone" required>
+                        <option value="" disabled selected data-i18n="opt_geo_def">Sélectionner une zone...</option>
+                        <option value="Senegal">Sénégal (Dakar Hub)</option>
+                        <option value="CotedIvoire">Côte d'Ivoire (Abidjan Hub)</option>
+                        <option value="Nigeria">Nigeria (Lagos)</option>
+                        <option value="Maroc">Maroc (Casablanca)</option>
+                        <option value="UAE">UAE (Dubai - Middle East)</option>
+                        <option value="France">France (Europe)</option>
+                        <option value="Global">International / Global</option>
+                    </select>
+                </div>
+
+                <!-- Expertise -->
+                <label class="section-label mt-2" data-i18n="lbl_expertise">Expertise Requise</label>
+                <div class="grid-options">
+                    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="SouveraineteIA"> <span data-i18n="exp_sov">Souveraineté IA</span></label>
+                    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="ESG"> <span data-i18n="exp_esg">Ingénierie ESG</span></label>
+                    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="MA"> <span data-i18n="exp_ma">M&A</span></label>
+                    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="OHADA"> <span data-i18n="exp_ohada">Optimisation OHADA</span></label>
+                    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Cyber"> <span data-i18n="exp_cyber">Crise Cyber</span></label>
+                </div>
+
+                <div class="btn-container split">
+                    <button type="button" class="btn-outline" onclick="nextStep(1)" data-i18n="btn_prev">Retour</button>
+                    <button type="button" class="btn-gold" onclick="nextStep(3)" data-i18n="btn_next">Suivant</button>
+                </div>
+            </div>
+
+            <!-- STEP 03: CONTEXTE & SUBMISSION -->
+            <div class="form-step" id="step-3">
+                <h3 data-i18n="step3_title">03. Analyse & Envoi</h3>
+                <div class="input-group">
+                    <label for="context" data-i18n="lbl_context">Contexte Opérationnel</label>
+                    <textarea id="context" rows="4" placeholder="Décrivez vos enjeux stratégiques..."></textarea>
+                </div>
+                
+                <div class="legal-check">
+                    <input type="checkbox" id="consent" required>
+                    <label for="consent">
+                        <span data-i18n="legal_consent">J'accepte la</span> 
+                        <a href="#" id="openPrivacy" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité</a>.
+                    </label>
+                </div>
+
+                <div class="btn-container split">
+                    <button type="button" class="btn-outline" onclick="nextStep(2)" data-i18n="btn_prev">Retour</button>
+                    <button type="submit" class="btn-gold glow" data-i18n="btn_submit">Lancer l'Analyse IA</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+
+<!-- FOOTER SASU -->
+<footer class="footer">
+    <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">All Rights Reserved.</span></p>
+    <p class="tiny">Strategic Intelligence Unit • Dakar - Paris - Dubai</p>
+</footer>
+
+<!-- MODAL PRIVACY -->
+<div id="privacyOverlay" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 data-i18n="modal_title">Politique de Confidentialité & RGPD</h2>
+        <div class="modal-body">
+            <p data-i18n="modal_text_1">Les données collectées via le Master Diagnostic Form sont strictement confidentielles.</p>
+            <p data-i18n="modal_text_2">e-META LABS s'engage à une protection "Zéro Défaut" de vos informations stratégiques.</p>
+        </div>
+        <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close">Fermer</button>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="i18n.js"></script>
+<script src="script.js"></script>
