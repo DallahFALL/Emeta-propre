@@ -134,14 +134,19 @@
                         </label>
                     </div>
 
+                    <!-- BOUTONS DE NAVIGATION ÉTAPE 2 -->
                     <div class="btn-container split">
-                        <button type="button" class="btn-outline" onclick="nextStep(2)" data-i18n="btn_prev">Retour</button>
-                        <button type="submit" class="btn-gold glow" data-i18n="btn_submit">Lancer l'Analyse IA</button>
+                        <button type="button" class="btn-outline" onclick="nextStep(1)" data-i18n="btn_prev">Retour</button>
+                        
+                        <!-- CORRECTION : BOUTON OUVRIR MATRICE -->
+                        <button type="button" class="btn-gold" onclick="nextStep(3)" data-i18n="btn_next_matrice">Ouvrir Matrice Analyse</button>
                     </div>
                 </div>
-            </form>
-        </div>
-    </main>
+
+                <!-- STEP 03: MATRICE ANALYSE & RESTITUTION -->
+                <div class="form-step" id="step-3">
+                    <!-- Le titre sera mis à jour via i18n -->
+                    <h3 data-i18n="step3_title">03. Matrice Analyse & Restitution</h3>
 
     <!-- FOOTER SASU -->
     <footer class="footer">
