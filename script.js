@@ -130,3 +130,34 @@ document.getElementById('diagnosticForm').addEventListener('submit', function(e)
         submitBtn.style.opacity = "1";
     });
 });
+// --- TRADUCTION DES MESSAGES D'ERREUR NAVIGATEUR ---
+function setCustomMessage(input) {
+    // Récupérer la langue actuelle
+    const lang = document.documentElement.lang || 'fr';
+    
+    // Dictionnaire simple des erreurs
+    const errors = {
+        fr: "Veuillez remplir ce champ obligatoire.",
+        en: "Please fill out this required field.",
+        es: "Por favor complete este campo obligatorio.",
+        ar: "يرجى ملء هذا الحقل المطلوب."
+    };
+
+    if (input.value === '') {
+        input.setCustomValidity(errors[lang]);
+    } else {
+        // Validation email spécifique
+        if(input.type === 'email' && !input.value.includes('@')) {
+             const emailErr = {
+                fr: "Veuillez entrer une adresse email valide.",
+                en: "Please enter a valid email address.",
+                es: "Introduzca una dirección de correo electrónico válida.",
+                ar: "الرجاء إدخال عنوان بريد إلكتروني صالح."
+            };
+            input.setCustomValidity(emailErr[lang]);
+        } else {
+            input.setCustomValidity(''); // Valide
+        }
+    }
+    return true;
+}
