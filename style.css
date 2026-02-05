@@ -65,7 +65,26 @@ body {
     align-items: center;
     gap: 15px;
 }
+/* AJOUT POUR LE SLOGAN HEADER */
+.header-slogan {
+    color: var(--gold);
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
 
+/* Sur mobile, on cache le slogan du header pour éviter les chevauchements */
+@media (max-width: 768px) {
+    .header-slogan {
+        display: none;
+    }
+}
 /* Reset Button */
 .btn-reset {
     background: transparent;
