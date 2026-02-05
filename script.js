@@ -28,7 +28,15 @@ function resetForm() {
         document.getElementById('diagnosticForm').reset();
         document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
         document.getElementById('step-1').classList.add('active');
-        document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth' });
+        window.scrollTo({
+         top: document.querySelector('.main-container').offsetTop - 80,
+         behavior: 'smooth'
+            setTimeout(() => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}, 100);
+
+});
+
     }
 }
 
