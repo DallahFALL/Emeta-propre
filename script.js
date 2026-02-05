@@ -1,11 +1,11 @@
 /* 
  * PROJET : e-META LABS — Moteur IA Stratégique
- * FICHIER : script.js (Version LIVE DISPLAY)
+ * FICHIER : script.js (Version FINAL PRO)
  */
 
 // --- CONFIGURATION ---
-// Assurez-vous que cette URL est celle de votre Webhook Make
-const WEBHOOK_URL = "https://hook.eu2.make.com/13p2ha74y3ojikdan9xhkl5ebygcr7a4"; 
+// ATTENTION : Remettez votre URL Webhook Make ici !
+const WEBHOOK_URL = "https://hook.eu1.make.com/xxxxxxxxxxxxxxxxxxxxxx"; 
 
 // --- NAVIGATION ---
 function nextStep(targetStep) {
@@ -17,20 +17,30 @@ function nextStep(targetStep) {
     document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth' });
 }
 
+// --- RESET (Réinitialiser) ---
+function resetForm() {
+    if(confirm("Voulez-vous vraiment effacer le formulaire et recommencer ?")) {
+        document.getElementById('diagnosticForm').reset();
+        document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+        document.getElementById('step-1').classList.add('active');
+        document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
 // --- VALIDATION ---
 function validateStep1() {
     const company = document.getElementById('company').value;
     const email = document.getElementById('email').value;
-    if (!company || !email) { alert("Champs requis manquants."); return false; }
-    if (!email.includes('@')) { alert("Email invalide."); return false; }
+    if (!company || !email) { alert("Champs requis manquants (Société/Email)."); return false; }
+    if (!email.includes('@')) { alert("Format d'email invalide."); return false; }
     return true;
 }
 
 function validateStep2() {
     const sector = document.querySelector('input[name="sector"]:checked');
     const geo = document.getElementById('geo-zone').value;
-    if (!sector) { alert("Sélectionnez un Secteur."); return false; }
-    if (!geo) { alert("Sélectionnez une Zone Géographique."); return false; }
+    if (!sector) { alert("Veuillez sélectionner un Secteur Stratégique."); return false; }
+    if (!geo) { alert("Veuillez sélectionner une Zone d'Intervention."); return false; }
     return true;
 }
 
@@ -41,17 +51,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('openPrivacy').addEventListener('click', (e) => {
         e.preventDefault(); privacyModal.style.display = 'flex';
     });
-    document.querySelector('.close-modal').addEventListener('click', () => privacyModal.style.display = 'none');
-    document.querySelector('.close-modal-btn').addEventListener('click', () => privacyModal.style.display = 'none');
-
-    // Result Modal (Fermeture uniquement)
-    const resultModal = document.getElementById('resultModal');
-    document.querySelector('.close-result').addEventListener('click', () => resultModal.style.display = 'none');
+    
+    // Boutons de fermeture
+    document.querySelectorAll('.close-modal, .close-modal-btn, .close-result').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.getElementById('privacyOverlay').style.display = 'none';
+            document.getElementById('resultModal').style.display = 'none';
+        });
+    });
 
     // Fermeture globale au clic dehors
     window.addEventListener('click', (e) => {
         if (e.target === privacyModal) privacyModal.style.display = 'none';
-        if (e.target === resultModal) resultModal.style.display = 'none';
+        if (e.target === document.getElementById('resultModal')) document.getElementById('resultModal').style.display = 'none';
     });
 });
 
@@ -60,7 +72,7 @@ document.getElementById('diagnosticForm').addEventListener('submit', function(e)
     e.preventDefault();
 
     if (!document.getElementById('consent').checked) {
-        alert("Veuillez accepter la Politique de Confidentialité.");
+        alert("Veuillez accepter la Politique de Confidentialité pour traitement RGPD.");
         return;
     }
 
@@ -68,11 +80,11 @@ document.getElementById('diagnosticForm').addEventListener('submit', function(e)
     const originalText = submitBtn.innerText;
     
     // Animation de chargement
-    submitBtn.innerText = "Analyse IA en cours...";
+    submitBtn.innerText = "Analyse IA Stratégique en cours...";
     submitBtn.disabled = true;
     submitBtn.style.opacity = "0.7";
 
-    // Collecte
+    // Collecte des données
     const formData = {
         timestamp: new Date().toISOString(),
         company: document.getElementById('company').value,
@@ -92,7 +104,6 @@ document.getElementById('diagnosticForm').addEventListener('submit', function(e)
     })
     .then(async response => {
         if (response.ok) {
-            // Récupération de la réponse textuelle de Make (Gemini)
             const aiResponse = await response.text();
             
             // Affichage dans la Modal Résultat
@@ -107,7 +118,8 @@ document.getElementById('diagnosticForm').addEventListener('submit', function(e)
     })
     .catch(error => {
         console.error('Erreur:', error);
-        alert("Succès : Les données ont été envoyées, mais l'affichage en direct a pris trop de temps. Vérifiez vos emails.");
+        // Fallback si le Live échoue mais que l'email est parti
+        alert("Demande traitée. Si l'affichage direct ne fonctionne pas, veuillez vérifier vos emails.");
         submitBtn.innerText = originalText;
         submitBtn.disabled = false;
         submitBtn.style.opacity = "1";
