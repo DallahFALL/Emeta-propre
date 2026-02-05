@@ -29,8 +29,10 @@
             </div>
         </div>
         <div class="header-actions">
-            <button type="button" class="btn-reset" onclick="resetForm()" title="Réinitialiser le diagnostic">↻ Reset</button>
+            <!-- Ajout de data-i18n pour la traduction -->
+            <button type="button" class="btn-reset" onclick="resetForm()" data-i18n="btn_reset">↻ Reset</button>
             <div class="lang-switch">
+                <!-- ... -->
                 <button data-lang="fr" class="active">FR</button>
                 <button data-lang="en">EN</button>
                 <button data-lang="es">ES</button>
@@ -43,7 +45,8 @@
     <main class="main-container">
         <div class="glass-card">
             <h2 id="form-title">Master Diagnostic 2026</h2>
-            <p id="form-desc">Souveraineté IA & Ingénierie Stratégique</p>
+            <!-- Ajout de data-i18n pour la traduction -->
+            <p id="form-desc" data-i18n="subtitle">Souveraineté IA & Ingénierie Stratégique</p>
 
             <form id="diagnosticForm">
                 <!-- STEP 01: IDENTIFICATION -->
@@ -69,11 +72,18 @@
                     <!-- Secteurs : Global Trends 2026 -->
                     <label class="section-label" data-i18n="lbl_sector">Secteur Stratégique</label>
                     <div class="grid-options">
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="GenAI_Robotics"> <span>GenAI & Robotics</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="GreenTech_ESG"> <span>GreenTech & ESG</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="FinTech_Blockchain"> <span>FinTech & Blockchain</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="BioTech_MedTech"> <span>BioTech & Health</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Smart_Infra_Logistics"> <span>Smart Infra & Logistics</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="GenAI_Robotics"> <span data-i18n="sec_genai">GenAI & Robotics</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="GreenTech_Energy"> <span data-i18n="sec_green">Énergies & GreenTech</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="FinTech"> <span data-i18n="sec_fintech">FinTech & Banque</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Health_BioTech"> <span data-i18n="sec_health">Santé & BioTech</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Logistics_Infra"> <span data-i18n="sec_log">Logistique & Infra</span></label>
+                        
+                        <!-- NOUVEAUX SECTEURS -->
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Mining_OilGas"> <span data-i18n="sec_mine">Mines, Pétrole & Gaz</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="RealEstate_BTP"> <span data-i18n="sec_btp">Immobilier & BTP</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Retail_FMCG"> <span data-i18n="sec_retail">Commerce & Retail</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Public_Gov"> <span data-i18n="sec_public">Secteur Public</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Education_EdTech"> <span data-i18n="sec_edu">Éducation & EdTech</span></label>
                     </div>
 
                     <!-- Zone Géographique -->
