@@ -17,9 +17,14 @@ function nextStep(targetStep) {
     document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth' });
 }
 
-// --- RESET (Réinitialiser) ---
+// --- RESET (Traduit) ---
 function resetForm() {
-    if(confirm("Voulez-vous vraiment effacer le formulaire et recommencer ?")) {
+    // Récupérer la langue actuelle
+    const currentLang = document.documentElement.lang || 'fr';
+    // Récupérer le message dans le dictionnaire (via i18n.js qui expose 'translations')
+    const msg = translations[currentLang].msg_reset_confirm;
+
+    if(confirm(msg)) {
         document.getElementById('diagnosticForm').reset();
         document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
         document.getElementById('step-1').classList.add('active');
