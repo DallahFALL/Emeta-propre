@@ -47,23 +47,31 @@
             <form id="diagnosticForm">
                 <!-- STEP 01 -->
                 <div class="form-step active" id="step-1">
-                    <h3 data-i18n="step1_title">01. Identification</h3>
-                    <div class="input-group">
-                        <label for="company" data-i18n="lbl_company">Société / Entité</label>
-                        <input type="text" id="company" required placeholder="ex: Groupe Alpha..." oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
-                    </div>
-                    <div class="input-group">
-                        <label for="email" data-i18n="lbl_email">Email Professionnel</label>
-                        <input type="email" id="email" required placeholder="contact@domain.com" oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
-                    </div>
-                    <div style="display:none;">
-    <label>Si vous êtes humain, laissez ce champ vide :</label>
-    <input type="text" id="honeypot" name="honeypot" tabindex="-1" autocomplete="off">
+    <h3 data-i18n="step1_title">01. Identification</h3>
+    
+    <div style="display:none;">
+        <input type="text" id="honeypot" name="honeypot" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="input-group">
+        <label for="company" data-i18n="lbl_company">Société / Entité</label>
+        <input type="text" id="company" required placeholder="ex: Groupe Alpha..." oninput="setCustomMessage(this)">
+    </div>
+    
+    <div class="input-group">
+        <label for="email" data-i18n="lbl_email">Email Professionnel</label>
+        <input type="email" id="email" required placeholder="contact@domain.com" oninput="setCustomMessage(this)">
+    </div>
+
+    <div class="input-group">
+        <label for="phone">Numéro WhatsApp (Optionnel)</label>
+        <input type="tel" id="phone" placeholder="+221 ... / +33 ...">
+    </div>
+
+    <div class="btn-container right">
+        <button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
+    </div>
 </div>
-                    <div class="btn-container right">
-                        <button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
-                    </div>
-                </div>
 
                 <!-- STEP 02 -->
                 <div class="form-step" id="step-2">
