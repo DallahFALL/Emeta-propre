@@ -300,3 +300,30 @@ button.btn-outline:hover { border-color: var(--white); color: var(--white); }
     color: var(--slate);
 }
 .tiny { font-size: 0.7rem; margin-top: 0.5rem; opacity: 0.7; }
+
+.header-slogan {
+    color: var(--gold);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    letter-spacing: 3px; /* Espacement large pour faire "Luxe/Tech" */
+    text-transform: uppercase;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); /* Légère lueur */
+}
+
+/* Sur mobile, on le met sous le logo au lieu de le cacher */
+@media (max-width: 768px) {
+    .header-slogan {
+        position: static;
+        transform: none;
+        display: block;
+        font-size: 0.6rem;
+        margin-top: 10px;
+        white-space: normal;
+    }
+}
