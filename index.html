@@ -56,6 +56,10 @@
                         <label for="email" data-i18n="lbl_email">Email Professionnel</label>
                         <input type="email" id="email" required placeholder="contact@domain.com" oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                     </div>
+                    <div style="display:none;">
+    <label>Si vous êtes humain, laissez ce champ vide :</label>
+    <input type="text" id="honeypot" name="honeypot" tabindex="-1" autocomplete="off">
+</div>
                     <div class="btn-container right">
                         <button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
                     </div>
