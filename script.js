@@ -130,18 +130,48 @@ document.getElementById('diagnosticForm').addEventListener('submit', function(e)
         submitBtn.style.opacity = "1";
     });
 });
-// --- TRADUCTION DES MESSAGES D'ERREUR NAVIGATEUR ---
+// --- TRADUCTION DES MESSAGES D'ERREUR (Version Checkbox) ---
 function setCustomMessage(input) {
-    // Récupérer la langue actuelle
     const lang = document.documentElement.lang || 'fr';
     
-    // Dictionnaire simple des erreurs
-    const errors = {
+    // Message pour les champs texte (email, société)
+    const textErrors = {
         fr: "Veuillez remplir ce champ obligatoire.",
         en: "Please fill out this required field.",
         es: "Por favor complete este campo obligatorio.",
         ar: "يرجى ملء هذا الحقل المطلوب."
     };
+
+    // Message spécifique pour la Checkbox (Consentement)
+    const checkboxErrors = {
+        fr: "Veuillez cocher cette case pour continuer.",
+        en: "Please check this box to proceed.",
+        es: "Marque esta casilla para continuar.",
+        ar: "يرجى تحديد هذا المربع للمتابعة."
+    };
+
+    const emailErrors = {
+        fr: "Veuillez entrer une adresse email valide.",
+        en: "Please enter a valid email address.",
+        es: "Introduzca una dirección válida.",
+        ar: "أدخل عنوان بريد إلكتروني صالح."
+    };
+
+    // Logique de validation
+    if (input.validity.valueMissing) {
+        if (input.type === 'checkbox') {
+            input.setCustomValidity(checkboxErrors[lang]);
+        } else {
+            input.setCustomValidity(textErrors[lang]);
+        }
+    } else if (input.type === 'email' && input.validity.typeMismatch) {
+        input.setCustomValidity(emailErrors[lang]);
+    } else {
+        input.setCustomValidity(''); // Tout est bon
+    }
+    
+    return true;
+}
 
     if (input.value === '') {
         input.setCustomValidity(errors[lang]);
