@@ -181,21 +181,43 @@ function setCustomMessage(input) {
     return true;
 }
 
-    if (input.value === '') {
-        input.setCustomValidity(errors[lang]);
+    function setCustomMessage(input) {
+  const lang = document.documentElement.lang || 'fr';
+
+  const textErrors = {
+    fr: "Veuillez remplir ce champ obligatoire.",
+    en: "Please fill out this required field.",
+    es: "Por favor complete este campo obligatorio.",
+    ar: "يرجى ملء هذا الحقل المطلوب."
+  };
+
+  const checkboxErrors = {
+    fr: "Veuillez accepter pour continuer.",
+    en: "Please accept to continue.",
+    es: "Por favor acepte para continuar.",
+    ar: "يرجى الموافقة للمتابعة."
+  };
+
+  const emailErrors = {
+    fr: "Veuillez entrer une adresse email valide.",
+    en: "Please enter a valid email address.",
+    es: "Introduzca una dirección de correo electrónico válida.",
+    ar: "يرجى إدخال بريد إلكتروني صالح."
+  };
+
+  if (input.validity.valueMissing) {
+    if (input.type === "checkbox") {
+      input.setCustomValidity(checkboxErrors[lang]);
     } else {
-        // Validation email spécifique
-        if(input.type === 'email' && !input.value.includes('@')) {
-             const emailErr = {
-                fr: "Veuillez entrer une adresse email valide.",
-                en: "Please enter a valid email address.",
-                es: "Introduzca una dirección de correo electrónico válida.",
-                ar: "الرجاء إدخال عنوان بريد إلكتروني صالح."
-            };
-            input.setCustomValidity(emailErr[lang]);
-        } else {
-            input.setCustomValidity(''); // Valide
-        }
+      input.setCustomValidity(textErrors[lang]);
     }
-    return true;
+  } 
+  else if (input.type === "email" && input.validity.typeMismatch) {
+    input.setCustomValidity(emailErrors[lang]);
+  } 
+  else {
+    input.setCustomValidity("");
+  }
+
+  return true;
 }
