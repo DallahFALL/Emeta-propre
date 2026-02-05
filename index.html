@@ -23,9 +23,8 @@
             </div>
         </div>
 
-        <!-- NOUVEAU : SLOGAN DANS LE HEADER -->
         <div class="header-slogan" data-i18n="subtitle">
-            L'Excellence Stratégique & Souveraineté IA
+            Excellence Stratégique & Haute Précision IA
         </div>
 
         <div class="header-actions">
@@ -43,8 +42,7 @@
     <main class="main-container">
         <div class="glass-card">
             <h2 id="form-title">Master Diagnostic 2026</h2>
-            <!-- Le slogan est aussi ici pour le mobile ou le style -->
-            <p id="form-desc" data-i18n="subtitle" style="opacity:0.7; font-size:0.8rem;">L'Excellence Stratégique & Souveraineté IA</p>
+            <p id="form-desc" data-i18n="subtitle" style="opacity:0.7; font-size:0.8rem;">Excellence Stratégique & Haute Précision IA</p>
 
             <form id="diagnosticForm">
                 <!-- STEP 01 -->
@@ -52,7 +50,6 @@
                     <h3 data-i18n="step1_title">01. Identification</h3>
                     <div class="input-group">
                         <label for="company" data-i18n="lbl_company">Société / Entité</label>
-                        <!-- Ajout de oninvalid pour gérer la traduction du message d'erreur -->
                         <input type="text" id="company" required placeholder="ex: Groupe Alpha..." oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                     </div>
                     <div class="input-group">
@@ -60,9 +57,8 @@
                         <input type="email" id="email" required placeholder="contact@domain.com" oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                     </div>
                     <div class="btn-container right">
-         <!-- Ajout de data-i18n="btn_next" -->
-         <button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
-    </div>
+                        <button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
+                    </div>
                 </div>
 
                 <!-- STEP 02 -->
@@ -124,6 +120,7 @@
                     </div>
                     
                     <div class="legal-check">
+                        <!-- AJOUT IMPORTANT : oninvalid et oninput sur la checkbox -->
                         <input type="checkbox" id="consent" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                         <label for="consent">
                             <span data-i18n="legal_consent">J'accepte la</span> 
@@ -146,47 +143,46 @@
     </footer>
 
     <!-- MODALS -->
+    <!-- MODAL POLITIQUE DE CONFIDENTIALITÉ MISE À JOUR -->
     <div id="privacyOverlay" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <h2 data-i18n="modal_title">Politique de Confidentialité & RGPD</h2>
-            <div class="modal-body">
-                <p><strong>1. Collecte :</strong> Données à usage exclusif d'analyse.</p>
-                <p><strong>2. Sécurité :</strong> Chiffrement bancaire.</p>
-                <p><strong>3. Droits :</strong> Accès et suppression sur demande.</p>
+            <!-- Les attributs data-i18n sont ici pour le titre et les contenus -->
+            <h2 data-i18n="modal_title" style="margin-bottom: 20px; border-bottom: 1px solid #d4af37; padding-bottom: 10px;">Politique de Confidentialité</h2>
+            
+            <div class="modal-body" style="max-height: 60vh; overflow-y: auto; text-align: left; padding-right:10px;">
+                <!-- Chapitre 1 -->
+                <h4 data-i18n="priv_t1" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">1. Identité</h4>
+                <p data-i18n="priv_c1" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">Chargement...</p>
+
+                <!-- Chapitre 2 -->
+                <h4 data-i18n="priv_t2" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">2. Souveraineté</h4>
+                <p data-i18n="priv_c2" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">Chargement...</p>
+
+                <!-- Chapitre 3 -->
+                <h4 data-i18n="priv_t3" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">3. Certification</h4>
+                <p data-i18n="priv_c3" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">Chargement...</p>
+
+                <!-- Chapitre 4 -->
+                <h4 data-i18n="priv_t4" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">4. Non-Substitution</h4>
+                <p data-i18n="priv_c4" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">Chargement...</p>
             </div>
-            <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close">Fermer</button>
+            
+            <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close" style="margin-top:20px;">Fermer</button>
         </div>
     </div>
 
-<!-- MODAL PRIVACY & RGPD (VERSION CONNECTÉE AU I18N) -->
-    <div id="privacyOverlay" class="modal-overlay">
+    <!-- MODAL RÉSULTAT IA -->
+    <div id="resultModal" class="modal-overlay">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <!-- Titre connecté -->
-            <h2 data-i18n="modal_title" style="border-bottom: 1px solid #d4af37; padding-bottom: 10px; margin-bottom: 20px;">Politique de Confidentialité</h2>
-            
-            <!-- Corps du texte avec défilement si trop long -->
-            <div class="modal-body" style="text-align: left; max-height: 60vh; overflow-y: auto; padding-right: 10px;">
-                
-                <!-- Chapitre 1 -->
-                <h4 data-i18n="priv_t1" style="color: #d4af37; margin-top: 15px; margin-bottom: 5px; font-family: 'Cinzel', serif;">1. Identité</h4>
-                <p data-i18n="priv_c1" style="font-size: 0.9rem; line-height: 1.5; color: #e6f1ff; opacity: 0.9;">Chargement...</p>
-
-                <!-- Chapitre 2 -->
-                <h4 data-i18n="priv_t2" style="color: #d4af37; margin-top: 15px; margin-bottom: 5px; font-family: 'Cinzel', serif;">2. Souveraineté</h4>
-                <p data-i18n="priv_c2" style="font-size: 0.9rem; line-height: 1.5; color: #e6f1ff; opacity: 0.9;">Chargement...</p>
-
-                <!-- Chapitre 3 -->
-                <h4 data-i18n="priv_t3" style="color: #d4af37; margin-top: 15px; margin-bottom: 5px; font-family: 'Cinzel', serif;">3. Certification Blockchain</h4>
-                <p data-i18n="priv_c3" style="font-size: 0.9rem; line-height: 1.5; color: #e6f1ff; opacity: 0.9;">Chargement...</p>
-
-                <!-- Chapitre 4 -->
-                <h4 data-i18n="priv_t4" style="color: #d4af37; margin-top: 15px; margin-bottom: 5px; font-family: 'Cinzel', serif;">4. Non-Substitution</h4>
-                <p data-i18n="priv_c4" style="font-size: 0.9rem; line-height: 1.5; color: #e6f1ff; opacity: 0.9;">Chargement...</p>
+            <span class="close-result" style="position: absolute; top: 10px; right: 20px; font-size: 2rem; cursor: pointer; color: #8892b0;">&times;</span>
+            <h2 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px;">Diagnostic Stratégique</h2>
+            <div id="resultBody" class="modal-body" style="max-height: 60vh; overflow-y: auto; color: #e6f1ff; font-size: 0.95rem; line-height: 1.6;">
+                <p>Initialisation...</p>
             </div>
-            
-            <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close" style="margin-top: 20px;">Fermer</button>
+            <div class="btn-container">
+                <button class="btn-gold full-width" onclick="location.reload()">Nouvelle Analyse</button>
+            </div>
         </div>
     </div>
 
