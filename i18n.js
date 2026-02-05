@@ -1,28 +1,27 @@
 /* 
  * PROJET : e-META LABS — Moteur IA Stratégique
- * FICHIER : i18n.js (Version MASTER - Zéro Défaut)
- * OBJECTIF : Gestionnaire de traduction complet (FR/EN/ES/AR)
+ * FICHIER : i18n.js (Version FINAL - PRIVACY UPDATE)
  */
 
 const translations = {
     fr: {
-        // --- GENERAL & HEADER ---
-        subtitle: "L'Excellence Stratégique & Souveraineté IA",
+        // GENERAL & HEADER
+        // NOUVEAU SLOGAN HIGH TECH
+        subtitle: "Excellence Stratégique & Haute Précision IA",
         btn_reset: "↻ Réinitialiser",
         msg_reset_confirm: "Voulez-vous vraiment effacer le formulaire et recommencer ?",
         
-        // --- STEP 1 : IDENTIFICATION ---
+        // STEP 1
         step1_title: "01. Identification",
         lbl_company: "Société / Entité",
         ph_company: "ex: Groupe Alpha...",
         lbl_email: "Email Professionnel",
         ph_email: "contact@domaine.com",
         
-        // --- STEP 2 : SECTEURS & MATRICE ---
+        // STEP 2
         step2_title: "02. Matrice Stratégique",
         lbl_sector: "Secteur Stratégique",
         
-        // Liste des Secteurs (Global Trends 2026)
         sec_genai: "GenAI & Robotics",
         sec_green: "Énergies & GreenTech",
         sec_fintech: "Banque, Finance & Fintech",
@@ -34,11 +33,9 @@ const translations = {
         sec_public: "Secteur Public & Gouvernement",
         sec_edu: "Éducation & EdTech",
 
-        // Zone Géographique
         lbl_geo: "Zone d'Intervention",
         opt_geo_def: "Sélectionner une zone...",
         
-        // Expertises (Liste Enrichie)
         lbl_expertise: "Expertise Requise",
         exp_sov: "Souveraineté IA",
         exp_digital: "Transformation Digitale",
@@ -49,25 +46,34 @@ const translations = {
         exp_supply: "Supply Chain & Ops",
         exp_pubaff: "Affaires Publiques & Lobbying",
 
-        // Navigation Spécifique
+        // NAVIGATION
+        btn_next: "Suivant", // Le bouton manquant
         btn_prev: "Retour",
-        btn_next_matrice: "Ouvrir Matrice Analyse", // CORRECTION IMPORTANTE
+        btn_next_matrice: "Ouvrir Matrice Analyse",
         
-        // --- STEP 3 : ANALYSE ---
-        step3_title: "03. Matrice Analyse & Restitution", // CORRECTION IMPORTANTE
+        // STEP 3
+        step3_title: "03. Matrice Analyse & Restitution",
         lbl_context: "Contexte Opérationnel",
         ph_context: "Décrivez vos enjeux stratégiques (ex: entrée marché, conformité, crise...)",
         legal_consent: "J'accepte la",
         link_privacy: "Politique de Confidentialité",
         btn_submit: "Lancer l'Analyse IA",
         
-        // --- FOOTER & MODALS ---
-        footer_rights: "Tous droits réservés.",
-        modal_title: "Politique de Confidentialité",
+        // --- POLITIQUE DE CONFIDENTIALITÉ (NOUVEAU CONTENU) ---
+        modal_title: "Politique de Confidentialité & Certification",
+        priv_t1: "1. Identité de la Structure",
+        priv_c1: "e-META LABS (SASU), basée au Sénégal, conçoit des solutions d'intelligence artificielle souveraines pour l'aide à la décision stratégique.",
+        priv_t2: "2. Philosophie de Souveraineté",
+        priv_c2: "Nous garantissons la souveraineté totale de vos données. Vos problématiques stratégiques ne sont jamais revendues ni utilisées pour entraîner des modèles d'IA publics.",
+        priv_t3: "3. Certification Blockchain",
+        priv_c3: "Chaque rapport généré est certifié par horodatage blockchain via Woleet, garantissant l'intégrité, l'antériorité et la traçabilité de vos réflexions stratégiques.",
+        priv_t4: "4. Non-Substitution de Conseil",
+        priv_c4: "Les services e-META constituent une aide technologique à la décision. Ils ne remplacent pas les services de professions réglementées (Avocats, Experts-comptables).",
+        
         btn_close: "Fermer"
     },
     en: {
-        subtitle: "Strategic Excellence & AI Sovereignty",
+        subtitle: "Strategic Excellence & High Precision AI",
         btn_reset: "↻ Reset",
         msg_reset_confirm: "Do you really want to clear the form and restart?",
         
@@ -104,6 +110,7 @@ const translations = {
         exp_supply: "Supply Chain & Ops",
         exp_pubaff: "Public Affairs & Lobbying",
 
+        btn_next: "Next",
         btn_prev: "Back",
         btn_next_matrice: "Open Analysis Matrix",
         
@@ -114,12 +121,21 @@ const translations = {
         link_privacy: "Privacy Policy",
         btn_submit: "Launch AI Analysis",
         
-        footer_rights: "All Rights Reserved.",
-        modal_title: "Privacy Policy",
+        // PRIVACY EN
+        modal_title: "Privacy Policy & Certification",
+        priv_t1: "1. Corporate Identity",
+        priv_c1: "e-META LABS (SASU), based in Senegal, designs sovereign AI solutions for strategic decision-making support.",
+        priv_t2: "2. Sovereignty Philosophy",
+        priv_c2: "We guarantee total data sovereignty. Your strategic issues are never resold nor used to train public AI models.",
+        priv_t3: "3. Blockchain Certification",
+        priv_c3: "Each report is certified via Woleet blockchain timestamping, guaranteeing the integrity and anteriority of your strategic insights.",
+        priv_t4: "4. Non-Substitution Disclaimer",
+        priv_c4: "e-META services are technological decision aids. They do not replace the services of regulated professions (Lawyers, Accountants).",
+        
         btn_close: "Close"
     },
     es: {
-        subtitle: "Excelencia Estratégica y Soberanía IA",
+        subtitle: "Excelencia Estratégica y Alta Precisión IA",
         btn_reset: "↻ Reiniciar",
         msg_reset_confirm: "¿Realmente desea borrar el formulario y reiniciar?",
         
@@ -156,6 +172,7 @@ const translations = {
         exp_supply: "Cadena de Suministro",
         exp_pubaff: "Asuntos Públicos",
 
+        btn_next: "Siguiente",
         btn_prev: "Atrás",
         btn_next_matrice: "Abrir Matriz de Análisis",
         
@@ -166,12 +183,21 @@ const translations = {
         link_privacy: "Política de Privacidad",
         btn_submit: "Iniciar Análisis IA",
         
-        footer_rights: "Todos los derechos reservados.",
-        modal_title: "Política de Privacidad",
+        // PRIVACY ES
+        modal_title: "Política de Privacidad y Certificación",
+        priv_t1: "1. Identidad Corporativa",
+        priv_c1: "e-META LABS (SASU), con sede en Senegal, diseña soluciones de IA soberana para el apoyo a la toma de decisiones.",
+        priv_t2: "2. Filosofía de Soberanía",
+        priv_c2: "Garantizamos la soberanía total de sus datos. Sus problemas estratégicos nunca se revenden ni se utilizan para entrenar modelos públicos.",
+        priv_t3: "3. Certificación Blockchain",
+        priv_c3: "Cada informe está certificado mediante sellado de tiempo blockchain Woleet, garantizando integridad y anterioridad.",
+        priv_t4: "4. Aviso de No Sustitución",
+        priv_c4: "Los servicios e-META son ayudas tecnológicas. No sustituyen los servicios de profesiones reguladas (Abogados, Contables).",
+        
         btn_close: "Cerrar"
     },
     ar: {
-        subtitle: "التميز الاستراتيجي وسيادة الذكاء الاصطناعي",
+        subtitle: "التميز الاستراتيجي والدقة العالية في الذكاء الاصطناعي",
         btn_reset: "↻ إعادة تعيين",
         msg_reset_confirm: "هل تريد حقًا مسح النموذج والبدء من جديد؟",
         
@@ -208,6 +234,7 @@ const translations = {
         exp_supply: "سلسلة التوريد",
         exp_pubaff: "الشؤون العامة",
 
+        btn_next: "التالي",
         btn_prev: "سابق",
         btn_next_matrice: "فتح مصفوفة التحليل",
         
@@ -218,16 +245,23 @@ const translations = {
         link_privacy: "سياسة الخصوصية",
         btn_submit: "بدء تحليل الذكاء الاصطناعي",
         
-        footer_rights: "جميع الحقوق محفوظة.",
-        modal_title: "سياسة الخصوصية",
+        // PRIVACY AR
+        modal_title: "سياسة الخصوصية والشهادة",
+        priv_t1: "1. هوية الهيكل",
+        priv_c1: "تقوم e-META LABS (SASU) ، ومقرها السنغال ، بتصميم حلول الذكاء الاصطناعي السيادية لدعم القرار الاستراتيجي.",
+        priv_t2: "2. فلسفة السيادة",
+        priv_c2: "نحن نضمن السيادة الكاملة لبياناتك. لا يتم إعادة بيع مشاكلك الاستراتيجية أبدًا أو استخدامها لتدريب النماذج العامة.",
+        priv_t3: "3. شهادة Blockchain",
+        priv_c3: "يتم اعتماد كل تقرير عبر ختم زمني Woleet blockchain ، مما يضمن نزاهة وأسبقية أفكارك الاستراتيجية.",
+        priv_t4: "4. عدم استبدال المشورة",
+        priv_c4: "خدمات e-META هي مساعدات تكنولوجية للقرار. إنها لا تحل محل خدمات المهن الخاضعة للتنظيم (المحامون ، المحاسبون).",
+        
         btn_close: "إغلاق"
     }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
     const langButtons = document.querySelectorAll('.lang-switch button');
-    
-    // Langue par défaut
     setLanguage('fr'); 
 
     langButtons.forEach(btn => {
@@ -241,10 +275,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function setLanguage(lang) {
-    // 1. CORRECTION DU BUG : Mise à jour de l'attribut HTML pour le script Reset
     document.documentElement.lang = lang; 
 
-    // 2. Direction (RTL/LTR)
     if (lang === 'ar') {
         document.documentElement.setAttribute('dir', 'rtl');
         document.body.style.textAlign = 'right';
@@ -253,7 +285,6 @@ function setLanguage(lang) {
         document.body.style.textAlign = 'left';
     }
 
-    // 3. Textes
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -262,7 +293,6 @@ function setLanguage(lang) {
         }
     });
 
-    // 4. Placeholders
     updatePlaceholder('company', translations[lang].ph_company);
     updatePlaceholder('email', translations[lang].ph_email);
     updatePlaceholder('context', translations[lang].ph_context);
