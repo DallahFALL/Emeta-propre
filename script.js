@@ -42,12 +42,23 @@ function resetForm() {
 
 // --- VALIDATION ---
 function validateStep1() {
-    const company = document.getElementById('company').value;
-    const email = document.getElementById('email').value;
-    if (!company || !email) { alert("Champs requis manquants (Société/Email)."); return false; }
-    if (!email.includes('@')) { alert("Format d'email invalide."); return false; }
-    return true;
+  const company = document.getElementById('company');
+  const email = document.getElementById('email');
+
+  // Déclenche la validation HTML + messages traduits
+  if (!company.checkValidity()) {
+    company.reportValidity();
+    return false;
+  }
+
+  if (!email.checkValidity()) {
+    email.reportValidity();
+    return false;
+  }
+
+  return true;
 }
+
 
 function validateStep2() {
     const sector = document.querySelector('input[name="sector"]:checked');
