@@ -1,6 +1,6 @@
 /* 
  * PROJET : e-META LABS — Moteur IA Stratégique
- * FICHIER : i18n.js (Version EXTENDED)
+ * FICHIER : i18n.js (Version MASTER)
  */
 
 const translations = {
@@ -21,7 +21,6 @@ const translations = {
         step2_title: "02. Matrice Stratégique",
         lbl_sector: "Secteur Stratégique",
         
-        // Liste étendue
         sec_genai: "GenAI & Robotics",
         sec_green: "Énergies & GreenTech",
         sec_fintech: "Banque, Finance & Fintech",
@@ -37,13 +36,16 @@ const translations = {
         lbl_geo: "Zone d'Intervention",
         opt_geo_def: "Sélectionner une zone...",
         
-        // EXPERTISE
+        // EXPERTISES (Liste Enrichie)
         lbl_expertise: "Expertise Requise",
         exp_sov: "Souveraineté IA",
-        exp_esg: "Ingénierie ESG",
-        exp_ma: "M&A & Croissance",
-        exp_ohada: "Juridique & OHADA",
-        exp_cyber: "Cybersécurité",
+        exp_esg: "Ingénierie ESG & RSE",
+        exp_ma: "M&A & Levée de Fonds",
+        exp_ohada: "Conformité OHADA / Tax",
+        exp_cyber: "Cybersécurité & Risques",
+        exp_digital: "Transformation Digitale",
+        exp_supply: "Supply Chain & Ops",
+        exp_pubaff: "Affaires Publiques & Lobbying",
         
         // STEP 3
         step3_title: "03. Analyse & Envoi",
@@ -92,10 +94,13 @@ const translations = {
         
         lbl_expertise: "Required Expertise",
         exp_sov: "AI Sovereignty",
-        exp_esg: "ESG Engineering",
-        exp_ma: "M&A & Growth",
-        exp_ohada: "Legal & OHADA",
-        exp_cyber: "Cybersecurity",
+        exp_esg: "ESG & CSR Engineering",
+        exp_ma: "M&A & Fundraising",
+        exp_ohada: "Legal OHADA / Tax",
+        exp_cyber: "Cybersecurity & Risk",
+        exp_digital: "Digital Transformation",
+        exp_supply: "Supply Chain & Ops",
+        exp_pubaff: "Public Affairs & Lobbying",
         
         step3_title: "03. Analysis & Submit",
         lbl_context: "Operational Context",
@@ -142,9 +147,12 @@ const translations = {
         lbl_expertise: "Experiencia Requerida",
         exp_sov: "Soberanía IA",
         exp_esg: "Ingeniería ESG",
-        exp_ma: "M&A y Crecimiento",
-        exp_ohada: "Legal y OHADA",
-        exp_cyber: "Ciberseguridad",
+        exp_ma: "M&A y Recaudación",
+        exp_ohada: "Legal OHADA / Fiscal",
+        exp_cyber: "Ciberseguridad y Riesgo",
+        exp_digital: "Transformación Digital",
+        exp_supply: "Cadena de Suministro",
+        exp_pubaff: "Asuntos Públicos",
         
         step3_title: "03. Análisis y Envío",
         lbl_context: "Contexto Operativo",
@@ -194,6 +202,9 @@ const translations = {
         exp_ma: "الاندماج والاستحواذ",
         exp_ohada: "القانون و OHADA",
         exp_cyber: "الأمن السيبراني",
+        exp_digital: "التحول الرقمي",
+        exp_supply: "سلسلة التوريد",
+        exp_pubaff: "الشؤون العامة",
         
         step3_title: "03. التحليل والإرسال",
         lbl_context: "السياق التشغيلي",
@@ -213,7 +224,7 @@ const translations = {
 
 document.addEventListener('DOMContentLoaded', () => {
     const langButtons = document.querySelectorAll('.lang-switch button');
-    setLanguage('fr'); // Langue par défaut
+    setLanguage('fr'); 
 
     langButtons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -226,7 +237,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function setLanguage(lang) {
-    // 1. Direction (RTL/LTR)
+    // 1. CORRECTION DU BUG : Mise à jour de l'attribut HTML pour le script
+    document.documentElement.lang = lang; 
+
+    // 2. Direction (RTL/LTR)
     if (lang === 'ar') {
         document.documentElement.setAttribute('dir', 'rtl');
         document.body.style.textAlign = 'right';
@@ -235,7 +249,7 @@ function setLanguage(lang) {
         document.body.style.textAlign = 'left';
     }
 
-    // 2. Textes standards
+    // 3. Textes
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -244,7 +258,7 @@ function setLanguage(lang) {
         }
     });
 
-    // 3. Placeholders
+    // 4. Placeholders
     updatePlaceholder('company', translations[lang].ph_company);
     updatePlaceholder('email', translations[lang].ph_email);
     updatePlaceholder('context', translations[lang].ph_context);
