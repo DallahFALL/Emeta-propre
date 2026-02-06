@@ -105,11 +105,9 @@ function setCustomMessage(input) {
 // --- GESTION DES MODALS (Privacy & Résultats) ---
 document.addEventListener('DOMContentLoaded', () => {
     const privacyModal = document.getElementById('privacyOverlay');
-    const resultModal = document.getElementById('resultModal');
-
-    // Ouverture Privacy
     const openPrivacyBtn = document.getElementById('openPrivacy');
-    if(openPrivacyBtn) {
+
+    if (openPrivacyBtn && privacyModal) {
         openPrivacyBtn.addEventListener('click', (e) => {
             e.preventDefault(); 
             privacyModal.style.display = 'flex';
