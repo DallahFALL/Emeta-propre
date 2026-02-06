@@ -54,12 +54,26 @@ function validateStep2() {
     }
     return true;
 }
-// Fonction pour télécharger le diagnostic en PDF
+// Fonction pour télécharger le diagnostic et monitorer l'action
 function downloadPDF() {
     const element = document.getElementById('resultBody');
     const companyName = document.getElementById('company').value || "e-META-LABS";
-    
-    // Création d'une fenêtre temporaire pour l'impression propre
+    const emailClient = document.getElementById('email').value;
+
+    // --- LOGIQUE DE MONITORING ---
+    // Envoi d'un signal silencieux au Webhook pour enregistrer le téléchargement
+    fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            action: "PDF_DOWNLOAD",
+            company: companyName,
+            email: emailClient,
+            timestamp: new Date().toISOString()
+        })
+    }).catch(err => console.error("Erreur Monitoring:", err));
+
+    // --- LOGIQUE D'IMPRESSION ---
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
         <html>
@@ -67,17 +81,20 @@ function downloadPDF() {
                 <title>Diagnostic e-META LABS - ${companyName}</title>
                 <style>
                     body { font-family: 'Inter', sans-serif; padding: 40px; color: #0a192f; }
-                    h3 { color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 5px; }
-                    .header { text-align: center; margin-bottom: 30px; }
+                    h3 { color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 5px; margin-top: 20px; }
+                    .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #d4af37; padding-bottom: 20px; }
+                    .footer { margin-top: 50px; font-size: 0.8rem; border-top: 1px solid #ccc; padding-top: 10px; opacity: 0.7; }
                 </style>
             </head>
             <body>
                 <div class="header">
-                    <h1>e-META LABS</h1>
-                    <p>Intelligence Stratégique Souveraine</p>
+                    <h1 style="margin:0; color:#0a192f; font-family:'Cinzel', serif;">e-META LABS</h1>
+                    <p style="text-transform:uppercase; letter-spacing:2px; color:#d4af37;">Intelligence Stratégique Souveraine</p>
                 </div>
                 ${element.innerHTML}
-                <p style="margin-top: 50px; font-size: 0.8rem;">Certifié par horodatage Blockchain 2026</p>
+                <div class="footer">
+                    <p>Document généré par e-META LABS Engine v2026. Certifié par horodatage Blockchain via Woleet.</p>
+                </div>
             </body>
         </html>
     `);
