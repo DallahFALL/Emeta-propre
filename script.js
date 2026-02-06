@@ -54,7 +54,36 @@ function validateStep2() {
     }
     return true;
 }
-
+// Fonction pour télécharger le diagnostic en PDF
+function downloadPDF() {
+    const element = document.getElementById('resultBody');
+    const companyName = document.getElementById('company').value || "e-META-LABS";
+    
+    // Création d'une fenêtre temporaire pour l'impression propre
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+        <html>
+            <head>
+                <title>Diagnostic e-META LABS - ${companyName}</title>
+                <style>
+                    body { font-family: 'Inter', sans-serif; padding: 40px; color: #0a192f; }
+                    h3 { color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 5px; }
+                    .header { text-align: center; margin-bottom: 30px; }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <h1>e-META LABS</h1>
+                    <p>Intelligence Stratégique Souveraine</p>
+                </div>
+                ${element.innerHTML}
+                <p style="margin-top: 50px; font-size: 0.8rem;">Certifié par horodatage Blockchain 2026</p>
+            </body>
+        </html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
+}
 // --- GESTION DES MESSAGES D'ERREUR NATIFS ---
 function setCustomMessage(input) {
     const lang = document.documentElement.lang || 'fr';
