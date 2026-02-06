@@ -10,7 +10,6 @@
 </head>
 <body>
 
-    <!-- HEADER -->
     <header class="header">
         <div class="logo-container">
             <svg width="50" height="50" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -38,42 +37,39 @@
         </div>
     </header>
 
-    <!-- MAIN DASHBOARD -->
     <main class="main-container">
         <div class="glass-card">
             <h2 id="form-title">Master Diagnostic 2026</h2>
             <p id="form-desc" data-i18n="subtitle" style="opacity:0.7; font-size:0.8rem;">Excellence Stratégique & Haute Précision IA</p>
 
             <form id="diagnosticForm">
-                <!-- STEP 01 -->
                 <div class="form-step active" id="step-1">
-    <h3 data-i18n="step1_title">01. Identification</h3>
-    
-    <div style="display:none;">
-        <input type="text" id="honeypot" name="honeypot" tabindex="-1" autocomplete="off">
-    </div>
+                    <h3 data-i18n="step1_title">01. Identification</h3>
+                    
+                    <div style="display:none;">
+                        <input type="text" id="honeypot" name="honeypot" tabindex="-1" autocomplete="off">
+                    </div>
 
-    <div class="input-group">
-        <label for="company" data-i18n="lbl_company">Société / Entité</label>
-        <input type="text" id="company" required placeholder="ex: Groupe Alpha..." oninput="setCustomMessage(this)">
-    </div>
-    
-    <div class="input-group">
-        <label for="email" data-i18n="lbl_email">Email Professionnel</label>
-        <input type="email" id="email" required placeholder="contact@domain.com" oninput="setCustomMessage(this)">
-    </div>
+                    <div class="input-group">
+                        <label for="company" data-i18n="lbl_company">Société / Entité</label>
+                        <input type="text" id="company" required placeholder="ex: Groupe Alpha..." oninput="setCustomMessage(this)">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="email" data-i18n="lbl_email">Email Professionnel</label>
+                        <input type="email" id="email" required placeholder="contact@domain.com" oninput="setCustomMessage(this)">
+                    </div>
 
-    <div class="input-group">
-    <label for="phone" data-i18n="lbl_phone">Numéro WhatsApp (Optionnel)</label>
-    <input type="tel" id="phone" placeholder="+221 ... / +33 ...">
-</div>
+                    <div class="input-group">
+                        <label for="phone" data-i18n="lbl_phone">Numéro WhatsApp (Optionnel)</label>
+                        <input type="tel" id="phone" placeholder="+221 ... / +33 ...">
+                    </div>
 
-    <div class="btn-container right">
-        <button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
-    </div>
-</div>
+                    <div class="btn-container right">
+                        <button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
+                    </div>
+                </div>
 
-                <!-- STEP 02 -->
                 <div class="form-step" id="step-2">
                     <h3 data-i18n="step2_title">02. Matrice Stratégique</h3>
                     
@@ -123,7 +119,6 @@
                     </div>
                 </div>
 
-                <!-- STEP 03 -->
                 <div class="form-step" id="step-3">
                     <h3 data-i18n="step3_title">03. Matrice Analyse & Restitution</h3>
                     <div class="input-group">
@@ -132,7 +127,6 @@
                     </div>
                     
                     <div class="legal-check">
-                        <!-- AJOUT IMPORTANT : oninvalid et oninput sur la checkbox -->
                         <input type="checkbox" id="consent" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                         <label for="consent">
                             <span data-i18n="legal_consent">J'accepte la</span> 
@@ -147,6 +141,24 @@
                 </div>
             </form>
         </div>
+
+        <div id="stats-widget" class="stats-card">
+            <div class="stats-header">
+                <span class="pulse-icon"></span>
+                <h4 data-i18n="stats_live">Live Intelligence</h4>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Analyses IA</span>
+                    <span id="count-analyses" class="stat-value">--</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">PDF Certifiés</span>
+                    <span id="count-pdf" class="stat-value">--</span>
+                </div>
+            </div>
+            <p class="stat-footer">Dernière mise à jour : <span id="last-update">--:--</span></p>
+        </div>
     </main>
 
     <footer class="footer">
@@ -154,50 +166,40 @@
         <p class="tiny">Strategic Intelligence Unit • Dakar - Paris - Dubai</p>
     </footer>
 
-    <!-- MODALS -->
-    <!-- MODAL POLITIQUE DE CONFIDENTIALITÉ MISE À JOUR -->
     <div id="privacyOverlay" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <!-- Les attributs data-i18n sont ici pour le titre et les contenus -->
             <h2 data-i18n="modal_title" style="margin-bottom: 20px; border-bottom: 1px solid #d4af37; padding-bottom: 10px;">Politique de Confidentialité</h2>
-            
             <div class="modal-body" style="max-height: 60vh; overflow-y: auto; text-align: left; padding-right:10px;">
-                <!-- Chapitre 1 -->
                 <h4 data-i18n="priv_t1" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">1. Identité</h4>
                 <p data-i18n="priv_c1" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">Chargement...</p>
 
-                <!-- Chapitre 2 -->
                 <h4 data-i18n="priv_t2" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">2. Souveraineté</h4>
                 <p data-i18n="priv_c2" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">Chargement...</p>
 
-                <!-- Chapitre 3 -->
                 <h4 data-i18n="priv_t3" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">3. Certification</h4>
                 <p data-i18n="priv_c3" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">Chargement...</p>
 
-                <!-- Chapitre 4 -->
                 <h4 data-i18n="priv_t4" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">4. Non-Substitution</h4>
                 <p data-i18n="priv_c4" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">Chargement...</p>
             </div>
-            
             <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close" style="margin-top:20px;">Fermer</button>
         </div>
     </div>
 
-    <!-- MODAL RÉSULTAT IA -->
     <div id="resultModal" class="modal-overlay">
-    <div class="modal-content">
-        <span class="close-result">&times;</span>
-        <h2 style="color: #d4af37;" data-i18n="result_title">Diagnostic Stratégique</h2>
-        <div id="resultBody" class="modal-body">
-            <p>Initialisation...</p>
+        <div class="modal-content">
+            <span class="close-result">&times;</span>
+            <h2 style="color: #d4af37;" data-i18n="result_title">Diagnostic Stratégique</h2>
+            <div id="resultBody" class="modal-body">
+                <p>Initialisation...</p>
+            </div>
+            <div class="btn-container">
+                <button class="btn-gold" onclick="downloadPDF()" data-i18n="btn_pdf">TÉLÉCHARGER PDF</button>
+                <button class="btn-gold btn-outline-gold" onclick="location.reload()" data-i18n="btn_new">NOUVELLE ANALYSE</button>
+            </div>
         </div>
-        <div class="btn-container">
-    <button class="btn-gold" onclick="downloadPDF()" data-i18n="btn_pdf">TÉLÉCHARGER PDF</button>
-    <button class="btn-gold btn-outline-gold" onclick="location.reload()" data-i18n="btn_new">NOUVELLE ANALYSE</button>
-</div>
     </div>
-</div>
 
     <script src="i18n.js"></script>
     <script src="script.js"></script>
