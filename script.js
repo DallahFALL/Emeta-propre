@@ -1,44 +1,36 @@
 /* * PROJET : e-META LABS — Moteur IA Stratégique
- * FICHIER : script.js (Version Auditée - Intégration WhatsApp & Sécurité)
+ * FICHIER : script.js (Version Master - Monitoring & Sécurité)
  */
 
 // --- CONFIGURATION ---
-// IMPORTANT : Remplacez par votre URL Webhook Make réelle
 const WEBHOOK_URL = "https://hook.eu2.make.com/5414bbls1n5au1ebf0qhlx6htdeitaxp"; 
+const STATS_URL = "https://hook.eu2.make.com/votre_webhook_de_lecture_stats"; // À remplacer par votre URL de lecture
 
 // --- NAVIGATION ENTRE LES ÉTAPES ---
 function nextStep(targetStep) {
-    // Validation avant de passer à l'étape suivante
     if (targetStep === 2 && !validateStep1()) return;
     if (targetStep === 3 && !validateStep2()) return;
 
     document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
     document.getElementById(`step-${targetStep}`).classList.add('active');
-    
-    // Retour en haut de la carte pour le confort visuel
     document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth' });
 }
 
-// --- RÉINITIALISATION DU FORMULAIRE ---
+// --- RÉINITIALISATION ---
 function resetForm() {
-    const currentLang = document.documentElement.lang || 'fr';
-    const msg = translations[currentLang].msg_reset_confirm;
-
-    if(confirm(msg)) {
+    const lang = document.documentElement.lang || 'fr';
+    if(confirm(lang === 'fr' ? "Réinitialiser le diagnostic ?" : "Reset diagnosis?")) {
         document.getElementById('diagnosticForm').reset();
-        document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
-        document.getElementById('step-1').classList.add('active');
-        document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth' });
+        nextStep(1);
     }
 }
 
-// --- LOGIQUE DE VALIDATION ---
+// --- VALIDATIONS ---
 function validateStep1() {
     const company = document.getElementById('company').value;
     const email = document.getElementById('email').value;
     if (!company || !email) { 
-        const lang = document.documentElement.lang || 'fr';
-        alert(lang === 'fr' ? "Veuillez remplir les champs obligatoires." : "Please fill in required fields."); 
+        alert(document.documentElement.lang === 'fr' ? "Champs obligatoires manquants." : "Required fields missing."); 
         return false; 
     }
     return true;
@@ -48,20 +40,35 @@ function validateStep2() {
     const sector = document.querySelector('input[name="sector"]:checked');
     const geo = document.getElementById('geo-zone').value;
     if (!sector || !geo) { 
-        const lang = document.documentElement.lang || 'fr';
-        alert(lang === 'fr' ? "Veuillez compléter la matrice stratégique." : "Please complete the strategic matrix."); 
+        alert(document.documentElement.lang === 'fr' ? "Veuillez compléter la matrice." : "Please complete the matrix."); 
         return false; 
     }
     return true;
 }
-// Fonction pour télécharger le diagnostic et monitorer l'action
+
+// --- MONITORING LIVE (WIDGET) ---
+function updateLiveStats() {
+    fetch(STATS_URL)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('count-analyses').innerText = data.totalAnalyses || "--";
+            document.getElementById('count-pdf').innerText = data.totalPDF || "--";
+            
+            const now = new Date();
+            document.getElementById('last-update').innerText = 
+                now.getHours().toString().padStart(2, '0') + ":" + 
+                now.getMinutes().toString().padStart(2, '0');
+        })
+        .catch(() => console.warn("Widget Stats en attente de données..."));
+}
+
+// --- TÉLÉCHARGEMENT PDF SÉCURISÉ & MONITORING ---
 function downloadPDF() {
     const element = document.getElementById('resultBody');
     const companyName = document.getElementById('company').value || "e-META-LABS";
     const emailClient = document.getElementById('email').value;
 
-    // --- LOGIQUE DE MONITORING ---
-    // Envoi d'un signal silencieux au Webhook pour enregistrer le téléchargement
+    // SIGNAL DE MONITORING (Silencieux)
     fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -71,9 +78,9 @@ function downloadPDF() {
             email: emailClient,
             timestamp: new Date().toISOString()
         })
-    }).catch(err => console.error("Erreur Monitoring:", err));
+    }).catch(err => console.error("Erreur Monitoring PDF"));
 
-    // --- LOGIQUE D'IMPRESSION ---
+    // GÉNÉRATION DU DOCUMENT
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
         <html>
@@ -81,112 +88,83 @@ function downloadPDF() {
                 <title>Diagnostic e-META LABS - ${companyName}</title>
                 <style>
                     body { font-family: 'Inter', sans-serif; padding: 40px; color: #0a192f; }
-                    h3 { color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 5px; margin-top: 20px; }
-                    .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #d4af37; padding-bottom: 20px; }
+                    h1 { font-family: 'Cinzel', serif; color: #0a192f; text-align: center; border-bottom: 2px solid #d4af37; padding-bottom: 10px; }
                     .footer { margin-top: 50px; font-size: 0.8rem; border-top: 1px solid #ccc; padding-top: 10px; opacity: 0.7; }
                 </style>
             </head>
             <body>
-                <div class="header">
-                    <h1 style="margin:0; color:#0a192f; font-family:'Cinzel', serif;">e-META LABS</h1>
-                    <p style="text-transform:uppercase; letter-spacing:2px; color:#d4af37;">Intelligence Stratégique Souveraine</p>
-                </div>
+                <h1>e-META LABS</h1>
+                <p style="text-align:center; text-transform:uppercase; color:#d4af37;">Intelligence Stratégique Souveraine</p>
                 ${element.innerHTML}
-                <div class="footer">
-                    <p>Document généré par e-META LABS Engine v2026. Certifié par horodatage Blockchain via Woleet.</p>
-                </div>
+                <div class="footer"><p>Document certifié par horodatage Blockchain 2026 via Woleet.</p></div>
             </body>
         </html>
     `);
     printWindow.document.close();
     printWindow.print();
 }
-// --- GESTION DES MESSAGES D'ERREUR NATIFS ---
+
+// --- GESTION DES MESSAGES D'ERREUR ---
 function setCustomMessage(input) {
     const lang = document.documentElement.lang || 'fr';
     const errors = {
         text: { fr: "Ce champ est obligatoire.", en: "This field is required.", es: "Este campo es obligatorio.", ar: "هذا الحقل مطلوب." },
-        email: { fr: "Adresse email invalide.", en: "Invalid email address.", es: "Correo no válido.", ar: "عنوان غير صالح." },
-        check: { fr: "Veuillez accepter les conditions.", en: "Please accept the terms.", es: "Acepte las condiciones.", ar: "يرجى قبول الشروط." }
+        email: { fr: "Adresse email invalide.", en: "Invalid email address.", es: "Correo no válido.", ar: "عنوان غير صالح." }
     };
-
     input.setCustomValidity(''); 
-
     if (input.validity.valueMissing) {
-        input.setCustomValidity(input.type === 'checkbox' ? errors.check[lang] : errors.text[lang]);
+        input.setCustomValidity(errors.text[lang]);
     } else if (input.type === 'email' && input.validity.typeMismatch) {
         input.setCustomValidity(errors.email[lang]);
     }
 }
 
-// --- GESTION DES MODALS (Privacy & Résultats) ---
+// --- INITIALISATION & MODALS ---
 document.addEventListener('DOMContentLoaded', () => {
+    updateLiveStats();
+    setInterval(updateLiveStats, 60000); // MaJ toutes les minutes
+
     const privacyModal = document.getElementById('privacyOverlay');
-    const openPrivacyBtn = document.getElementById('openPrivacy');
+    const resultModal = document.getElementById('resultModal');
 
-    if (openPrivacyBtn && privacyModal) {
-        openPrivacyBtn.addEventListener('click', (e) => {
-            e.preventDefault(); 
-            privacyModal.style.display = 'flex';
-        });
-    }
-    
-    // Boutons de fermeture
+    document.getElementById('openPrivacy').onclick = (e) => {
+        e.preventDefault();
+        privacyModal.style.display = 'flex';
+    };
+
     document.querySelectorAll('.close-modal, .close-modal-btn, .close-result').forEach(btn => {
-        btn.addEventListener('click', () => {
-            if(privacyModal) privacyModal.style.display = 'none';
-            if(resultModal) resultModal.style.display = 'none';
-        });
-    });
-
-    // Fermeture au clic extérieur
-    window.addEventListener('click', (e) => {
-        if (e.target === privacyModal) privacyModal.style.display = 'none';
-        if (e.target === resultModal) resultModal.style.display = 'none';
+        btn.onclick = () => {
+            privacyModal.style.display = 'none';
+            resultModal.style.display = 'none';
+        };
     });
 });
 
-// --- ENVOI DES DONNÉES & IA ---
+// --- ENVOI FORMULAIRE & MOTEUR IA ---
 document.getElementById('diagnosticForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // SÉCURITÉ : Vérification Honeypot
-    const honey = document.getElementById('honeypot').value;
-    if (honey !== "") {
-        console.warn("Spam détecté.");
-        return; 
-    }
-
-    // RGPD : Vérification consentement
-    if (!document.getElementById('consent').checked) {
-        const lang = document.documentElement.lang || 'fr';
-        alert(lang === 'fr' ? "Veuillez accepter la politique de confidentialité." : "Please accept the privacy policy.");
-        return;
-    }
+    // SÉCURITÉ
+    if (document.getElementById('honeypot').value !== "") return;
+    if (!document.getElementById('consent').checked) return;
 
     const submitBtn = document.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerText;
-    const currentLang = document.documentElement.lang || 'fr';
+    const lang = document.documentElement.lang || 'fr';
     
-    // UI : État de chargement
-    submitBtn.innerText = currentLang === 'fr' ? "Analyse IA en cours..." : "AI Analysis in progress...";
+    submitBtn.innerText = lang === 'fr' ? "Analyse IA en cours..." : "AI Analysis in progress...";
     submitBtn.disabled = true;
-    submitBtn.style.opacity = "0.7";
 
-    // Collecte des données (incluant WhatsApp)
     const formData = {
-        timestamp: new Date().toISOString(),
         company: document.getElementById('company').value,
         email: document.getElementById('email').value,
-        phone: document.getElementById('phone') ? document.getElementById('phone').value : "Non renseigné",
-        sector: document.querySelector('input[name="sector"]:checked')?.value || "N/A",
+        phone: document.getElementById('phone').value || "N/A",
+        sector: document.querySelector('input[name="sector"]:checked')?.value,
         geoZone: document.getElementById('geo-zone').value,
         expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked')).map(cb => cb.value),
         context: document.getElementById('context').value,
-        lang: currentLang
+        lang: lang
     };
 
-    // Appel au Webhook Make
     fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -194,22 +172,16 @@ document.getElementById('diagnosticForm').addEventListener('submit', function(e)
     })
     .then(async response => {
         if (response.ok) {
-            const aiResponse = await response.text();
-            
-            // Affichage dans la modal de résultat
-            document.getElementById('resultBody').innerHTML = aiResponse;
+            document.getElementById('resultBody').innerHTML = await response.text();
             document.getElementById('resultModal').style.display = 'flex';
-            
-            submitBtn.innerText = currentLang === 'fr' ? "Succès" : "Success";
+            submitBtn.innerText = lang === 'fr' ? "Succès" : "Success";
         } else {
-            throw new Error('Server Error');
+            throw new Error();
         }
     })
-    .catch(error => {
-        console.error('Erreur:', error);
-        alert(currentLang === 'fr' ? "Erreur de connexion au moteur IA." : "Connection error to AI engine.");
-        submitBtn.innerText = originalText;
+    .catch(() => {
+        alert(lang === 'fr' ? "Erreur de connexion au moteur IA." : "Connection error.");
+        submitBtn.innerText = "Lancer l'Analyse IA";
         submitBtn.disabled = false;
-        submitBtn.style.opacity = "1";
     });
 });
