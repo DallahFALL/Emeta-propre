@@ -65,11 +65,11 @@ body {
     text-transform: uppercase;
     text-align: center;
     font-weight: 700;
-    flex: 1; 
+    flex: 1;
     text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
-/* --- ACTIONS DU HEADER (UNIFIÉES) --- */
+/* --- STRUCTURE ACTIONS HEADER --- */
 .header-actions {
     display: flex;
     align-items: center;
@@ -79,17 +79,18 @@ body {
 .action-group {
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.05); /* Fond léger pour l'unité visuelle */
     padding: 4px 8px;
     border: 1px solid rgba(212, 175, 55, 0.2);
     border-radius: 4px;
     gap: 12px;
 }
 
+/* Bouton Réinitialiser */
 .btn-reset {
     background: transparent;
     border: none;
-    border-right: 1px solid rgba(136, 146, 176, 0.3);
+    border-right: 1px solid rgba(136, 146, 176, 0.3); /* Séparateur vertical */
     color: var(--slate);
     padding-right: 12px;
     font-size: 0.7rem;
@@ -99,9 +100,15 @@ body {
     font-weight: 600;
 }
 
-.btn-reset:hover { color: #ff6b6b; }
+.btn-reset:hover {
+    color: #ff6b6b;
+}
 
-.lang-switch { display: flex; gap: 4px; }
+/* Commutateur de Langues */
+.lang-switch {
+    display: flex;
+    gap: 4px;
+}
 
 .lang-switch button {
     background: transparent;
@@ -282,7 +289,7 @@ button.btn-outline {
 
 .footer { text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; color: var(--slate); }
 
-/* --- RESPONSIVE MOBILE --- */
+/* --- RESPONSIVE HEADER --- */
 @media (max-width: 768px) {
     .header { padding: 0.8rem 1rem; justify-content: space-between; }
     
@@ -294,11 +301,18 @@ button.btn-outline {
     }
 
     .logo-container { order: 1; }
-    .header-actions { order: 2; width: auto; }
     
-    .action-group { gap: 8px; padding: 4px; }
-    .btn-reset { padding-right: 8px; font-size: 0.6rem; }
-    .lang-switch button { padding: 4px 6px; font-size: 0.6rem; }
+    .header-actions {
+        order: 2;
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    
+    .action-group {
+        width: 100%;
+        justify-content: space-between;
+    }
 
     .stats-card {
         position: relative; bottom: 0; right: 0; width: 100%;
