@@ -6,23 +6,17 @@
     <title>e-META LABS | Strategic AI Engine</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L95 25 V75 L50 95 L5 75 V25 Z' stroke='%23d4af37' stroke-width='4' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
 </head>
 <body>
-
     <header class="header">
         <div class="logo-container">
             <svg width="50" height="50" viewBox="0 0 100 100">
                 <path d="M50 5 L95 25 V75 L50 95 L5 75 V25 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
                 <circle cx="50" cy="50" r="8" fill="#d4af37"/>
             </svg>
-            <div class="brand-text">
-                <h1>e-META LABS</h1>
-            </div>
+            <div class="brand-text"><h1>e-META LABS</h1></div>
         </div>
-
         <div class="header-slogan" data-i18n="subtitle">Excellence Stratégique & Haute Précision IA</div>
-
         <div class="header-actions">
             <button type="button" class="btn-reset" onclick="resetForm()" data-i18n="btn_reset">↻ Reset</button>
             <div class="lang-switch">
@@ -36,13 +30,12 @@
 
     <main class="main-container">
         <div class="glass-card">
-            <h2 id="form-title" data-i18n="step1_title">Master Diagnostic 2026</h2>
             <form id="diagnosticForm">
                 <div class="form-step active" id="step-1">
                     <h3 data-i18n="step1_title">01. Identification</h3>
                     <div style="display:none;"><input type="text" id="honeypot" tabindex="-1"></div>
                     <div class="input-group">
-                        <label data-i18n="lbl_company">Société / Entité</label>
+                        <label data-i18n="lbl_company">Société</label>
                         <input type="text" id="company" required oninput="setCustomMessage(this)">
                     </div>
                     <div class="input-group">
@@ -53,17 +46,15 @@
                         <label data-i18n="lbl_phone">Numéro WhatsApp (Optionnel)</label>
                         <input type="tel" id="phone" placeholder="+221...">
                     </div>
-                    <div class="btn-container right">
-                        <button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
-                    </div>
+                    <div class="btn-container right"><button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button></div>
                 </div>
 
                 <div class="form-step" id="step-2">
                     <h3 data-i18n="step2_title">02. Matrice Stratégique</h3>
                     <label class="section-label" data-i18n="lbl_sector">Secteur</label>
                     <div class="grid-options">
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="sec_genai"> <span data-i18n="sec_genai">GenAI</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="sec_mine"> <span data-i18n="sec_mine">Mines</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="sec_genai"><span data-i18n="sec_genai">GenAI</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="sec_mine"><span data-i18n="sec_mine">Mines</span></label>
                     </div>
                     <label class="section-label" data-i18n="lbl_geo">Zone</label>
                     <select id="geo-zone" required oninput="setCustomMessage(this)">
@@ -89,7 +80,7 @@
                     </div>
                     <div class="btn-container split">
                         <button type="button" class="btn-outline" onclick="nextStep(2)" data-i18n="btn_prev">Retour</button>
-                        <button type="submit" class="btn-gold glow" data-i18n="btn_submit">Lancer</button>
+                        <button type="submit" class="btn-gold glow" data-i18n="btn_submit">Lancer l'Analyse</button>
                     </div>
                 </div>
             </form>
@@ -107,10 +98,10 @@
     <div id="resultModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-result">&times;</span>
-            <h2 style="color: #d4af37;" data-i18n="result_title">Diagnostic</h2>
+            <h2 data-i18n="result_title" style="color:#d4af37">Diagnostic</h2>
             <div id="resultBody" class="modal-body"><p>Initialisation...</p></div>
             <div class="btn-container">
-                <button class="btn-gold" onclick="downloadPDF()" data-i18n="btn_pdf">PDF</button>
+                <button class="btn-gold" onclick="downloadPDF()" data-i18n="btn_pdf">Télécharger PDF</button>
                 <button class="btn-gold btn-outline-gold" onclick="location.reload()" data-i18n="btn_new">Nouvelle Analyse</button>
             </div>
         </div>
@@ -120,11 +111,9 @@
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <h2 data-i18n="modal_title">Confidentialité</h2>
-            <div class="modal-body" style="max-height:60vh; overflow-y:auto;">
-                <h4 data-i18n="priv_t1">1. Identité</h4><p data-i18n="priv_c1">Chargement...</p>
-                <h4 data-i18n="priv_t2">2. Souveraineté</h4><p data-i18n="priv_c2">Chargement...</p>
-                <h4 data-i18n="priv_t3">3. Blockchain</h4><p data-i18n="priv_c3">Chargement...</p>
-                <h4 data-i18n="priv_t4">4. Conseil</h4><p data-i18n="priv_c4">Chargement...</p>
+            <div class="modal-body">
+                <h4 data-i18n="priv_t1">Identité</h4><p data-i18n="priv_c1">Chargement...</p>
+                <h4 data-i18n="priv_t2">Souveraineté</h4><p data-i18n="priv_c2">Chargement...</p>
             </div>
             <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close">Fermer</button>
         </div>
