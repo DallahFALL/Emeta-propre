@@ -4,7 +4,7 @@
 
 // --- CONFIGURATION ---
 const WEBHOOK_URL = "https://hook.eu2.make.com/5414bbls1n5au1ebf0qhlx6htdeitaxp"; 
-const STATS_URL = "https://hook.eu2.make.com/votre_webhook_de_lecture_stats"; // À remplacer par votre URL de lecture
+const STATS_URL = "https://hook.eu2.make.com/kp9aein4tkgkmntdkf6dhhqmxhxm9057"; // À remplacer par votre URL de lecture
 
 // --- NAVIGATION ENTRE LES ÉTAPES ---
 function nextStep(targetStep) {
