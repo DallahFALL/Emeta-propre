@@ -155,16 +155,17 @@ document.getElementById('diagnosticForm').addEventListener('submit', function(e)
     submitBtn.disabled = true;
 
     const formData = {
-        company: document.getElementById('company').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value || "N/A",
-        sector: document.querySelector('input[name="sector"]:checked')?.value,
-        geoZone: document.getElementById('geo-zone').value,
-        expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked')).map(cb => cb.value),
-        context: document.getElementById('context').value,
-        lang: lang
-    };
-
+    timestamp: new Date().toISOString(), // Ajouté pour le suivi temporel
+    company: document.getElementById('company').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone')?.value || "Non renseigné",
+    admin_contact: "support@e-metalabs.com", // Destinataire des logs d'erreurs dans Make
+    sector: document.querySelector('input[name="sector"]:checked')?.value || "N/A",
+    geoZone: document.getElementById('geo-zone').value,
+    expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked')).map(cb => cb.value),
+    context: document.getElementById('context').value,
+    lang: document.documentElement.lang || 'fr'
+};
     fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
