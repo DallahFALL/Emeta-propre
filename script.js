@@ -3,7 +3,7 @@
  */
 
 // --- CONFIGURATION ---
-const WEBHOOK_URL = "https://hook.eu2.make.com/2jyux763s2783c4xedizfowquaq7wl55"; 
+const WEBHOOK_URL = "https://hook.eu2.make.com/6k3c9210xkbz4ovjkiijs5xx7r1rtarl"; 
 const STATS_URL = "https://hook.eu2.make.com/1jeaje7c3r1chg5oz7wruxohz6e8a8bg"; // À remplacer par votre URL de lecture
 
 // --- NAVIGATION ENTRE LES ÉTAPES ---
