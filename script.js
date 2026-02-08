@@ -4,7 +4,7 @@
 
 // --- CONFIGURATION ---
 const WEBHOOK_URL = "https://hook.eu2.make.com/2aq4sxsbs6pj7cqmx7i2tvjvhwwdrvf2"; 
-const STATS_URL = "https://hook.eu2.make.com/1jeaje7c3r1chg5oz7wruxohz6e8a8bg"; // À remplacer par votre URL de lecture
+const STATS_URL = "https://hook.eu2.make.com/1jeaje7c3r1chg5oz7wruxohz6e8a8bg"; 
 
 // --- NAVIGATION ENTRE LES ÉTAPES ---
 function nextStep(targetStep) {
@@ -154,18 +154,24 @@ document.getElementById('diagnosticForm').addEventListener('submit', function(e)
     submitBtn.innerText = lang === 'fr' ? "Analyse IA en cours..." : "AI Analysis in progress...";
     submitBtn.disabled = true;
 
+    // --- BLOC FORM DATA CORRIGÉ ---
     const formData = {
-    timestamp: new Date().toISOString(), // Ajouté pour le suivi temporel
-    company: document.getElementById('company').value,
-    email: document.getElementById('email').value,
-    phone: document.getElementById('phone')?.value || "Non renseigné",
-    admin_contact: "support@e-metalabs.com", // Destinataire des logs d'erreurs dans Make
-    sector: document.querySelector('input[name="sector"]:checked')?.value || "N/A",
-    geoZone: document.getElementById('geo-zone').value,
-    expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked')).map(cb => cb.value),
-    context: document.getElementById('context').value,
-    lang: document.documentElement.lang || 'fr'
-};
+        action: "diagnostic", // CRUCIAL pour le Router
+        timestamp: new Date().toISOString(), 
+        company: document.getElementById('company').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone')?.value || "Non renseigné",
+        admin_contact: "support@e-metalabs.com", 
+        sector: document.querySelector('input[name="sector"]:checked')?.value || "N/A",
+        geoZone: document.getElementById('geo-zone').value,
+        // Correction IMLError : Transforme le tableau en texte
+        expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked'))
+                         .map(cb => cb.value)
+                         .join(', '),
+        context: document.getElementById('context').value,
+        lang: document.documentElement.lang || 'fr'
+    };
+
     fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
