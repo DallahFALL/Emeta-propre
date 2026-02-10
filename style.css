@@ -1,13 +1,11 @@
-/* * PROJET : e-META LABS — Restauration Design Fidèle
- * FICHIER : style.css (Version Stabilisée - Zéro déformation)
+/* * PROJET : e-META LABS — Moteur IA Stratégique
+ * FICHIER : style.css (Version Identité Réelle - 2026)
  */
 
 :root {
-    --navy-bg: #0a192f;        /* Bleu nuit profond du fond */
-    --navy-card: #0d1b33;      /* Bleu légèrement plus clair pour le cadre */
-    --gold: #d4af37;           /* Or e-META */
-    --white: #ffffff;          /* Blanc pour les champs de saisie */
-    --text-main: #e6f1ff;      /* Blanc bleuté pour le texte */
+    --navy-bg: #0a192f;        /* Fond bleu nuit profond */
+    --gold: #d4af37;           /* Or pur e-META */
+    --white: #ffffff;          /* Blanc pur pour les inputs */
     --font-heading: 'Cinzel', serif;
     --font-body: 'Inter', sans-serif;
 }
@@ -16,157 +14,147 @@
 
 body {
     background-color: var(--navy-bg);
-    color: var(--text-main);
+    color: #ffffff;
     font-family: var(--font-body);
-    min-height: 100vh;
 }
 
-/* --- HEADER (Capture image_2a4742) --- */
+/* --- HEADER (image_2aa998.png) --- */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 5%;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 20px 5%;
     background-color: var(--navy-bg);
 }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
+.logo-container svg { width: 50px; height: 50px; }
 
 .brand-text h1 {
     color: var(--gold);
     font-family: var(--font-heading);
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     letter-spacing: 2px;
 }
 
 .header-slogan {
     color: var(--gold);
     font-family: var(--font-heading);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-weight: bold;
 }
 
-/* --- ACTIONS HEADER (Reset & Langues) --- */
-.header-actions { display: flex; align-items: center; gap: 10px; }
 .action-group {
     display: flex;
-    align-items: center;
+    gap: 10px;
     border: 1px solid var(--gold);
-    padding: 5px;
-    border-radius: 4px;
+    padding: 5px 10px;
 }
-.btn-reset {
-    background: transparent;
-    border: none;
-    color: var(--text-main);
-    cursor: pointer;
-    font-size: 0.8rem;
-    padding-right: 10px;
-}
-.lang-switch button {
-    background: transparent;
-    border: none;
-    color: var(--slate, #8892b0);
-    padding: 0 5px;
-    cursor: pointer;
-}
-.lang-switch button.active { color: var(--gold); }
 
-/* --- CADRE CENTRAL (Capture image_2a4f7c) --- */
+.btn-reset, .lang-btn {
+    background: transparent;
+    border: none;
+    color: var(--gold);
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+
+/* --- CONTAINER CENTRAL (image_2aa998.png) --- */
 .main-container {
     display: flex;
     justify-content: center;
-    padding: 40px 20px;
+    padding: 50px 20px;
 }
 
 .glass-card {
     width: 100%;
-    max-width: 700px;
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    max-width: 750px;
+    border: 1px solid #1a2a4a; /* Bordure discrète */
     padding: 40px;
 }
 
+/* --- TITRES ET LABELS D'ÉTAPES (image_2aa998.png) --- */
 h2, h3 { 
-    color: var(--text-main); 
+    color: #ffffff; 
     font-family: var(--font-heading); 
-    margin-bottom: 20px;
+    margin-bottom: 20px; 
+    text-transform: uppercase;
 }
 
-/* --- CHAMPS DE SAISIE BLANCS (Capture image_2a4f7c) --- */
-.input-group { margin-bottom: 20px; }
-.input-group label {
+label, .section-label {
     display: block;
     color: var(--gold);
-    margin-bottom: 8px;
-    font-size: 0.9rem;
     font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
 }
 
-input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+/* --- INPUTS BLANCS MASSIFS (image_2aa998.png) --- */
+input[type="text"], 
+input[type="email"], 
+input[type="tel"], 
+select, 
+textarea {
     width: 100%;
-    padding: 12px;
-    background-color: var(--white); /* Rétablissement du blanc */
-    border: 1px solid #ccc;
-    color: #333;                   /* Texte sombre pour lisibilité */
-    font-family: var(--font-body);
+    padding: 15px;
+    background-color: var(--white) !important; /* Blanc forcé */
+    border: none;
+    color: #000000; /* Texte noir sur fond blanc */
+    font-size: 1rem;
+    margin-bottom: 25px;
 }
 
-/* --- OPTIONS MATRICE (Capture image_2a4f7c) --- */
-.section-label { color: var(--gold); font-weight: bold; margin-bottom: 15px; display: block; }
+/* --- GRID OPTIONS (image_2aac5d.png) --- */
 .grid-options {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .checkbox-btn {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 0.9rem;
-    color: var(--text-main);
+    gap: 10px;
+    font-size: 0.85rem;
 }
 
-/* --- BOUTON DORÉ --- */
+/* --- BOUTONS D'ACTION (image_2aac5d.png) --- */
 .btn-gold {
     background-color: var(--gold);
-    color: var(--navy-bg);
+    color: #000000;
     border: none;
-    padding: 12px 30px;
+    padding: 15px 30px;
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
 }
 
-/* --- WIDGET STATS (image_2a4f7c) --- */
+.btn-outline {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+/* --- WIDGET STATS (image_2aa998.png) --- */
 .stats-card {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 40px;
+    right: 40px;
     border: 1px solid var(--gold);
     padding: 20px;
-    width: 250px;
-    background: transparent;
+    width: 280px;
+    background-color: var(--navy-bg);
 }
-.stat-label { color: var(--text-main); font-size: 0.8rem; }
-.stat-value { color: var(--text-main); font-weight: bold; }
 
-/* --- MODALS (image_2a5227) --- */
+/* --- MODALS (image_2a5227.png) --- */
 .modal-overlay {
     display: none;
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--navy-bg);
-    z-index: 1000;
-    padding: 50px;
+    background-color: var(--navy-bg);
+    z-index: 2000;
+    padding: 5%;
     overflow-y: auto;
 }
-.modal-content h2 { border-bottom: 1px solid var(--gold); padding-bottom: 10px; }
