@@ -32,8 +32,11 @@ const translations = {
         geo_ci: "Côte d'Ivoire (Abidjan Hub)",
         geo_ng: "Nigeria (Lagos)",
         geo_ma: "Maroc (Casablanca)",
+        geo_ke: "Kenya (Nairobi Hub)",
         geo_uae: "UAE (Dubai - Middle East)",
         geo_fr: "France (Europe)",
+        geo_usa: "USA (Silicon Valley)",
+        geo_cn: "Chine / Asie (Hong Kong Hub)",
         geo_global: "International / Global",
         lbl_expertise: "Expertise Requise",
         exp_sov: "Souveraineté IA",
@@ -103,8 +106,11 @@ const translations = {
         geo_ci: "Ivory Coast (Abidjan Hub)",
         geo_ng: "Nigeria (Lagos)",
         geo_ma: "Morocco (Casablanca)",
+        geo_ke: "Kenya (Nairobi Hub)",
         geo_uae: "UAE (Dubai - Middle East)",
         geo_fr: "France (Europe)",
+        geo_usa: "USA (Silicon Valley)",
+        geo_cn: "China / Asia (Hong Kong Hub)",
         geo_global: "International / Global",
         lbl_expertise: "Required Expertise",
         exp_sov: "AI Sovereignty",
@@ -156,7 +162,7 @@ const translations = {
         ph_email: "contacto@dominio.com",
         lbl_phone: "Número de WhatsApp (Opcional)",
         ph_phone: "+221 ... / +33 ...",
-        step2_title: "02. Matriz Estratégica",
+        step2_title: "02. Matrice Estratégica",
         lbl_sector: "Sector Clave",
         sec_genai: "GenAI y Robótica",
         sec_green: "Energía y GreenTech",
@@ -174,8 +180,11 @@ const translations = {
         geo_ci: "Costa de Marfil (Abidjan Hub)",
         geo_ng: "Nigeria (Lagos)",
         geo_ma: "Marruecos (Casablanca)",
+        geo_ke: "Kenia (Nairobi Hub)",
         geo_uae: "EAU (Dubai - Oriente Medio)",
         geo_fr: "Francia (Europa)",
+        geo_usa: "EE. UU. (Silicon Valley)",
+        geo_cn: "China / Asia (Hong Kong)",
         geo_global: "Internacional / Global",
         lbl_expertise: "Experiencia Requerida",
         exp_sov: "Soberanía IA",
@@ -199,7 +208,7 @@ const translations = {
         btn_pdf: "Descargar PDF",
         btn_new: "Nuevo Análisis",
         btn_close: "Cerrar",
-        stats_live: "Live Intelligence",
+        stats_live: "Inteligencia en Vivo",
         stat_ai: "Análisis IA",
         stat_pdf: "PDF Certificados",
         stat_last: "Última actualización:",
@@ -208,7 +217,7 @@ const translations = {
         footer_help: "¿Necesita ayuda?",
         modal_title: "Política de Privacidad y Certificación",
         priv_t1: "1. Identidad Corporativa",
-        priv_c1: "e-META LABS (SASU). Contacto legal: contact@e-metalabs.com",
+        priv_c1: "e-META LABS (SASU). contacto: contact@e-metalabs.com",
         priv_t2: "2. Filosofía de Soberanía",
         priv_c2: "Garantizamos la soberanía total de sus datos.",
         priv_t3: "3. Certificación Blockchain",
@@ -245,8 +254,11 @@ const translations = {
         geo_ci: "كوت ديفوار (أبيدجان)",
         geo_ng: "نيجيريا (لاغوس)",
         geo_ma: "المغرب (الدار البيضاء)",
+        geo_ke: "كينيا (نيروبي)",
         geo_uae: "الإمارات (دبي)",
         geo_fr: "فرنسا (أوروبا)",
+        geo_usa: "أمريكا (سيليكون فالي)",
+        geo_cn: "الصين / آسيا (هونج كونج)",
         geo_global: "دولي / عالمي",
         lbl_expertise: "الخبرة المطلوبة",
         exp_sov: "سيادة الذكاء الاصطناعي",
@@ -291,8 +303,11 @@ const translations = {
 
 /* --- LOGIQUE DE TRADUCTION AMÉLIORÉE --- */
 document.addEventListener('DOMContentLoaded', () => {
-    const langButtons = document.querySelectorAll('.lang-switch button');
-    setLanguage('fr'); 
+    const langButtons = document.querySelectorAll('.lang-btn'); // Utilisation de la classe .lang-btn de l'index
+    
+    // Détection de la langue actuelle ou français par défaut
+    const currentLang = document.documentElement.lang || 'fr';
+    setLanguage(currentLang);
 
     langButtons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -307,13 +322,13 @@ document.addEventListener('DOMContentLoaded', () => {
 function setLanguage(lang) {
     document.documentElement.lang = lang; 
 
-    // Gestion RTL pour l'arabe
+    // Gestion de l'orientation pour l'arabe
     if (lang === 'ar') {
         document.documentElement.setAttribute('dir', 'rtl');
-        document.body.style.textAlign = 'right';
+        document.body.classList.add('rtl-mode');
     } else {
         document.documentElement.setAttribute('dir', 'ltr');
-        document.body.style.textAlign = 'left';
+        document.body.classList.remove('rtl-mode');
     }
 
     // Traduction de tous les éléments avec [data-i18n]
@@ -329,14 +344,19 @@ function setLanguage(lang) {
     const geoSelect = document.getElementById('geo-zone');
     if (geoSelect) {
         const options = geoSelect.options;
-        options[0].text = translations[lang].opt_geo_def; // Placeholder par défaut
-        options[1].text = translations[lang].geo_sn;
-        options[2].text = translations[lang].geo_ci;
-        options[3].text = translations[lang].geo_ng;
-        options[4].text = translations[lang].geo_ma;
-        options[5].text = translations[lang].geo_uae;
-        options[6].text = translations[lang].geo_fr;
-        options[7].text = translations[lang].geo_global;
+        if (options.length >= 11) { // Vérification de la longueur pour les nouvelles zones
+            options[0].text = translations[lang].opt_geo_def;
+            options[1].text = translations[lang].geo_sn;
+            options[2].text = translations[lang].geo_ma;
+            options[3].text = translations[lang].geo_ci;
+            options[4].text = translations[lang].geo_ng;
+            options[5].text = translations[lang].geo_ke;
+            options[6].text = translations[lang].geo_uae;
+            options[7].text = translations[lang].geo_fr;
+            options[8].text = translations[lang].geo_usa;
+            options[9].text = translations[lang].geo_cn;
+            options[10].text = translations[lang].geo_global;
+        }
     }
 
     // Mise à jour des placeholders dynamiques
