@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS — Moteur IA Stratégique
- * FICHIER : script.js (Version Master - Performance & Interactivité)
+ * FICHIER : script.js (Version Master 2026)
  */
 
 // --- CONFIGURATION ---
@@ -13,34 +13,16 @@ function nextStep(targetStep) {
 
     document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
     document.getElementById(`step-${targetStep}`).classList.add('active');
-    // Amélioration : Scroll fluide ciblé
+    
+    // Amélioration : Scroll fluide vers le haut du formulaire
     const card = document.querySelector('.glass-card');
     if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // --- RÉINITIALISATION COMPLÈTE ---
 function resetForm() {
-    const lang = document.documentElement.lang || 'fr';
-    const msg = lang === 'fr' ? "Réinitialiser le diagnostic ?" : "Reset diagnosis?";
-    
-    if(confirm(msg)) {
-        const form = document.getElementById('diagnosticForm');
-        if (form) form.reset();
-        
-        // Fermer la modal si elle est ouverte
-        const resultModal = document.getElementById('resultModal');
-        if (resultModal) resultModal.style.display = 'none';
-        
-        // Retour étape 1
-        nextStep(1);
-        
-        // Reset bouton submit
-        const submitBtn = document.querySelector('button[type="submit"]');
-        if (submitBtn) {
-            submitBtn.innerText = lang === 'fr' ? "Lancer l'Analyse IA" : "Start AI Analysis";
-            submitBtn.disabled = false;
-        }
-    }
+    // Utilisation de reload pour garantir un moteur IA "propre" à chaque nouveau diagnostic
+    window.location.reload();
 }
 
 // --- VALIDATIONS ---
@@ -70,13 +52,14 @@ function validateStep2() {
 async function updateLiveStats() {
     try {
         const response = await fetch(STATS_URL);
+        if (!response.ok) return;
         const data = await response.json();
         
         const countAnalyses = document.getElementById('count-analyses');
         const countPDF = document.getElementById('count-pdf');
         
-        if (countAnalyses) countAnalyses.innerText = data.totalAnalyses || "--";
-        if (countPDF) countPDF.innerText = data.totalPDF || "--";
+        if (countAnalyses) countAnalyses.innerText = data.totalAnalyses || "0";
+        if (countPDF) countPDF.innerText = data.totalPDF || "0";
         
         const lastUpdate = document.getElementById('last-update');
         if (lastUpdate) {
@@ -85,7 +68,7 @@ async function updateLiveStats() {
                                   now.getMinutes().toString().padStart(2, '0');
         }
     } catch (err) {
-        console.warn("Widget Stats en attente...");
+        console.warn("Widget Intelligence en attente de données...");
     }
 }
 
@@ -95,9 +78,9 @@ function downloadPDF() {
     const companyName = document.getElementById('company').value || "e-META-LABS";
     const emailClient = document.getElementById('email').value;
 
-    if (!element || element.innerText.trim() === "") return;
+    if (!element || element.innerText.trim() === "" || element.innerText.includes("Initialisation")) return;
 
-    // SIGNAL DE MONITORING (Asynchrone)
+    // SIGNAL DE MONITORING VERS MAKE (Asynchrone)
     fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -109,7 +92,7 @@ function downloadPDF() {
         })
     }).catch(() => {});
 
-    // GÉNÉRATION
+    // GÉNÉRATION DE LA FENÊTRE D'IMPRESSION
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
         <html>
@@ -135,9 +118,18 @@ function downloadPDF() {
 
 // --- INITIALISATION GÉNÉRALE ---
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Charger les stats immédiatement
     updateLiveStats();
     setInterval(updateLiveStats, 60000);
+
+    // 1. Ouverture de la modal Confidentialité
+    const openPrivacy = document.getElementById('openPrivacy');
+    if (openPrivacy) {
+        openPrivacy.addEventListener('click', (e) => {
+            e.preventDefault();
+            const overlay = document.getElementById('privacyOverlay');
+            if (overlay) overlay.style.display = 'flex';
+        });
+    }
 
     // 2. Gestion des Modals (Fermeture)
     document.querySelectorAll('.close-modal, .close-modal-btn, .close-result').forEach(btn => {
@@ -150,8 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Liaison des boutons statiques de la Modal de Résultat
-    // On utilise addEventListener pour garantir que l'action est liée
+    // 3. Liaison des boutons de la Modal de Résultat
     const btnDownload = document.querySelector('.btn-download'); 
     if (btnDownload) {
         btnDownload.addEventListener('click', downloadPDF);
@@ -205,6 +196,7 @@ if (diagForm) {
                 const resultModal = document.getElementById('resultModal');
 
                 if (resultBody && resultModal) {
+                    // Injecte le texte pur reçu de Gemini (Make Webhook Response)
                     resultBody.innerHTML = diagnosticText;
                     resultModal.style.display = 'flex';
                 }
