@@ -2,41 +2,90 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confidentialité | e-META LABS</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .privacy-content { padding: 80px 0; max-width: 800px; margin: 0 auto; color: var(--navy); }
-        h1 { font-family: var(--serif-font); margin-bottom: 30px; border-bottom: 2px solid var(--gold); padding-bottom: 10px; }
-        h2 { margin-top: 30px; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; color: var(--navy); }
-        p { margin-bottom: 15px; font-size: 0.95rem; opacity: 0.8; }
-        .back-container { margin-top: 40px; }
+        /* Styles spécifiques pour le respect de la charte graphique e-META */
+        body { 
+            background-color: var(--navy-dark, #0a192f); 
+            margin: 0; 
+            padding: 0;
+        }
+        .privacy-content { 
+            padding: 80px 20px; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            color: var(--navy, #ffffff); 
+        }
+        h1 { 
+            font-family: var(--serif-font, 'Cinzel', serif); 
+            color: var(--gold, #d4af37);
+            margin-bottom: 30px; 
+            border-bottom: 2px solid var(--gold, #d4af37); 
+            padding-bottom: 10px; 
+        }
+        h2 { 
+            margin-top: 40px; 
+            font-size: 1.2rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            color: var(--gold, #d4af37);
+        }
+        p, li { 
+            margin-bottom: 15px; 
+            font-size: 0.95rem; 
+            line-height: 1.6;
+            opacity: 0.85; 
+        }
+        ul { padding-left: 20px; }
+        .back-container { margin-top: 60px; text-align: center; }
+        .nav-cta {
+            color: var(--gold, #d4af37);
+            text-decoration: none;
+            border: 1px solid var(--gold, #d4af37);
+            padding: 10px 25px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        .nav-cta:hover {
+            background: var(--gold, #d4af37);
+            color: var(--navy-dark, #0a192f);
+        }
     </style>
 </head>
 <body>
     <div class="container privacy-content">
         <h1>Politique de Confidentialité</h1>
-        <p>Dernière mise à jour : 10 Février 2026</p>
+        <p><strong>Dernière mise à jour :</strong> 10 Février 2026</p>
         
         <h2>1. Identité de la Structure</h2>
-        <p>e-META LABS (SASU), basée au Sénégal, conçoit des solutions d'intelligence artificielle pour l'aide à la décision stratégique.</p>
+        <p>e-META LABS (SASU), entité basée au Sénégal, conçoit des solutions d'intelligence artificielle de haute précision dédiées à l'aide à la décision stratégique.</p>
         
-        <h2>2. Philosophie de Souveraineté</h2>
-        <p>Nous garantissons la souveraineté totale de vos données. Vos problématiques stratégiques ne sont jamais revendues ni utilisées pour entraîner des modèles d'IA publics.</p>
+        <h2>2. Philosophie de Souveraineté Numérique</h2>
+        <p>Conformément à nos engagements d'excellence, nous garantissons la souveraineté totale de vos données. Vos problématiques et diagnostics ne sont jamais revendus, ni utilisés pour l'entraînement de modèles d'IA publics tiers.</p>
         
         <h2>3. Données Collectées</h2>
-        <p>Pour générer vos diagnostics, nous collectons : le nom de votre entité, votre secteur d'activité, votre zone géographique et votre adresse email. Ces données sont strictement réservées à l'usage du moteur e-META.</p>
+        <p>Pour le bon fonctionnement du moteur IA e-META, nous traitons les données suivantes saisies via notre interface :</p>
+        <ul>
+            <li><strong>Identification :</strong> Nom de la société / entité et adresse email professionnelle.</li>
+            <li><strong>Matrice Stratégique :</strong> Secteur d'activité, zone géographique et expertises requises.</li>
+            <li><strong>Contenu :</strong> Contexte opérationnel et enjeux stratégiques décrits.</li>
+        </ul>
 
-        <h2>4. Certification Blockchain</h2>
-        <p>Chaque rapport généré est certifié par horodatage blockchain via Woleet. Une empreinte numérique unique (hash) est créée pour garantir l'intégrité et l'antériorité de vos analyses.</p>
+        <h2>4. Certification Blockchain & Intégrité</h2>
+        <p>Chaque diagnostic généré par le moteur e-META LABS fait l'objet d'un ancrage cryptographique (hash) sur la Blockchain via le protocole Woleet. Cette procédure garantit l'immuabilité, l'intégrité et l'antériorité de vos réflexions stratégiques sans compromettre la confidentialité du contenu textuel.</p>
         
         <h2>5. Non-Substitution de Conseil</h2>
-        <p>Les services e-META constituent une aide technologique. Ils ne remplacent pas les services de professions réglementées. e-META LABS décline toute responsabilité quant aux décisions prises sur la base de ses analyses.</p>
+        <p>Les analyses produites constituent une aide technologique à la décision. Elles ne se substituent en aucun cas aux services de professions réglementées (conseil juridique, fiscal ou financier). e-META LABS décline toute responsabilité quant aux décisions opérationnelles prises sur la base de ses diagnostics automatisés.</p>
         
-        <h2>6. Contact & Support</h2>
-        <p>Pour toute question concernant vos données ou pour demander leur suppression, contactez notre équipe technique à l'adresse suivante : <strong>support@e-metalabs.com</strong></p>
+        <h2>6. Vos Droits et Contact Support</h2>
+        <p>Vous disposez d'un droit d'accès, de rectification et de suppression de vos données personnelles. Pour toute question technique ou demande relative à vos données, notre unité de support est à votre disposition :</p>
+        <p style="color: var(--gold, #d4af37); font-weight: bold;">support@e-metalabs.com</p>
 
         <div class="back-container">
-            <a href="index.html" class="nav-cta">Retour à l'accueil</a>
+            <a href="index.html" class="nav-cta">Retour au Moteur de Diagnostic</a>
         </div>
     </div>
 </body>
