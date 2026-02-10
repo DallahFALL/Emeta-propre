@@ -318,3 +318,37 @@ button.btn-outline {
         max-width: 350px; margin: 20px auto; box-shadow: none;
     }
 }
+/* --- GESTION DE LA SUPERPOSITION DES MODALS --- */
+
+/* La modal de diagnostic reste en dessous (z-index 1000) */
+#resultModal {
+    z-index: 1000;
+}
+
+/* La modal de confidentialité passe au-dessus (z-index 2000) */
+#privacyOverlay {
+    z-index: 2000;
+    background: rgba(10, 25, 47, 0.85); /* Fond semi-transparent pour voir le diagnostic derrière */
+    backdrop-filter: blur(8px); /* Effet de flou artistique sur le diagnostic en arrière-plan */
+}
+
+/* Ajustement de la profondeur pour éviter les conflits avec le header */
+.header {
+    z-index: 500; /* Le header passe sous les fenêtres de résultat */
+}
+
+/* Style du lien dans le diagnostic pour qu'il ressemble à un bouton discret */
+.link-privacy-result {
+    display: inline-block;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    transition: var(--transition);
+}
+
+.link-privacy-result:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: var(--gold);
+}
