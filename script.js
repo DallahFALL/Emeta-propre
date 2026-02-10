@@ -121,37 +121,34 @@ document.addEventListener('DOMContentLoaded', () => {
     updateLiveStats();
     setInterval(updateLiveStats, 60000);
 
-    // 1. Ouverture de la modal Confidentialité
-    const openPrivacy = document.getElementById('openPrivacy');
-    if (openPrivacy) {
-        openPrivacy.addEventListener('click', (e) => {
-            e.preventDefault();
+    // OUVERTURE DE LA POLITIQUE DEPUIS LE DIAGNOSTIC (SANS BASCULER)
+    const privacyLinks = document.querySelectorAll('[data-i18n="link_privacy"], #openPrivacy');
+    privacyLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault(); // Empêche la redirection vers une autre page
             const overlay = document.getElementById('privacyOverlay');
-            if (overlay) overlay.style.display = 'flex';
+            if (overlay) overlay.style.display = 'flex'; // Affiche la modal par-dessus le diagnostic
         });
-    }
+    });
 
-    // 2. Gestion des Modals (Fermeture)
+    // FERMETURE DES MODALS
     document.querySelectorAll('.close-modal, .close-modal-btn, .close-result').forEach(btn => {
         btn.addEventListener('click', () => {
             const modals = ['privacyOverlay', 'resultModal'];
             modals.forEach(id => {
                 const m = document.getElementById(id);
-                if (m) m.style.display = 'none';
+                // On ne ferme que la modal de confidentialité si on est sur un diagnostic
+                if (m && id === 'privacyOverlay') m.style.display = 'none';
             });
         });
     });
 
-    // 3. Liaison des boutons de la Modal de Résultat
+    // BOUTONS DU DIAGNOSTIC
     const btnDownload = document.querySelector('.btn-download'); 
-    if (btnDownload) {
-        btnDownload.addEventListener('click', downloadPDF);
-    }
+    if (btnDownload) btnDownload.addEventListener('click', downloadPDF);
 
     const btnNewAnalysis = document.querySelector('.btn-new');
-    if (btnNewAnalysis) {
-        btnNewAnalysis.addEventListener('click', resetForm);
-    }
+    if (btnNewAnalysis) btnNewAnalysis.addEventListener('click', resetForm);
 });
 
 // --- ENVOI FORMULAIRE & MOTEUR IA ---
