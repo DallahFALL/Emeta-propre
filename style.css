@@ -7,7 +7,6 @@
     --navy-deep: #0a192f;
     --navy-light: #112240;
     --gold: #d4af37;
-    --gold-dim: #aa8c2c;
     --white: #e6f1ff;
     --slate: #8892b0;
     --font-heading: 'Cinzel', serif;
@@ -25,7 +24,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden; /* Empêche le scroll horizontal sur mobile */
+    overflow-x: hidden;
 }
 
 /* --- HEADER STABILISÉ --- */
@@ -39,11 +38,11 @@ body {
     border-bottom: 1px solid rgba(212, 175, 55, 0.3);
     position: sticky;
     top: 0;
-    z-index: 500; /* Sous les modals mais sur le contenu */
+    z-index: 500;
     gap: 15px;
 }
 
-.logo-container { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.logo-container { display: flex; align-items: center; gap: 10px; }
 .logo-container svg { height: 40px; width: auto; }
 
 .header-slogan {
@@ -99,7 +98,7 @@ body {
 }
 
 .checkbox-btn { cursor: pointer; display: block; }
-.checkbox-btn input { display: none; } /* Cache le bouton radio/check original */
+.checkbox-btn input { display: none; }
 
 .checkbox-btn span {
     display: flex;
@@ -122,38 +121,10 @@ body {
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
-/* --- CHAMPS & BOUTONS --- */
-.input-group { margin-bottom: 1.5rem; }
-label { display: block; margin-bottom: 0.5rem; color: var(--white); font-size: 0.9rem; }
-
-input, textarea, select {
-    width: 100%;
-    padding: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(136, 146, 176, 0.3);
-    color: var(--white);
-    border-radius: 4px;
-    font-family: var(--font-body);
-}
-
-button.btn-gold {
-    background: var(--gold);
-    color: var(--navy-deep);
-    border: none;
-    padding: 12px 30px;
-    font-weight: 800;
-    text-transform: uppercase;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-button.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
-
 /* --- LOADER IA (Correction image_c68572) --- */
 #loadingOverlay {
     display: none;
-    position: absolute; /* Reste à l'intérieur de la glass-card */
+    position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(10, 25, 47, 0.95);
     z-index: 100;
@@ -172,27 +143,11 @@ button.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* --- MODALS (Z-INDEX FIX) --- */
-.modal-overlay {
-    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(10, 25, 47, 0.98); z-index: 1000;
-}
-
-#privacyOverlay { z-index: 2000; backdrop-filter: blur(10px); }
-
-.modal-content {
-    background: var(--navy-light); border: 1px solid var(--gold);
-    padding: 2rem; max-width: 650px; width: 92%; border-radius: 8px;
-    max-height: 85vh; overflow-y: auto;
-}
-
 /* --- RESPONSIVITÉ SMARTPHONE --- */
 @media (max-width: 768px) {
     .header { padding: 0.8rem 1rem; }
     .header-slogan { order: 3; width: 100%; font-size: 0.65rem; padding-top: 10px; border-top: 1px solid rgba(212,175,55,0.1); }
-    .logo-container { order: 1; }
-    .header-actions { order: 2; }
-    .grid-options { grid-template-columns: 1fr 1fr; } /* Force 2 colonnes sur mobile */
+    .grid-options { grid-template-columns: 1fr 1fr; }
     .glass-card { padding: 1.5rem; }
     .stats-card { position: static; width: 100%; margin-top: 2rem; }
 }
