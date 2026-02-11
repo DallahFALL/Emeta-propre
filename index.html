@@ -17,9 +17,15 @@
                 <path d="M50 20 L80 35 V65 L50 80 L20 65 V35 Z" stroke="#d4af37" stroke-width="1" fill="rgba(212, 175, 55, 0.1)"/>
                 <circle cx="50" cy="50" r="8" fill="#d4af37"/>
             </svg>
-            <div class="brand-text"><h1>e-META LABS</h1></div>
+            <div class="brand-text">
+                <h1>e-META LABS</h1>
+            </div>
         </div>
-        <div class="header-slogan" data-i18n="subtitle">Excellence Stratégique & Haute Précision IA</div>
+
+        <div class="header-slogan" data-i18n="subtitle">
+            Excellence Stratégique & Haute Précision IA
+        </div>
+
         <div class="header-actions">
             <div class="action-group">
                 <button type="button" class="btn-reset" onclick="resetForm()" data-i18n="btn_reset">↻ Réinitialiser</button>
@@ -44,18 +50,20 @@
                 <div class="form-step active" id="step-1">
                     <h3 data-i18n="step1_title">01. Identification</h3>
                     <div style="display:none;"><input type="text" id="honeypot" tabindex="-1"></div>
+                    
                     <div class="input-group">
                         <label for="company" data-i18n="lbl_company">Société / Entité</label>
-                        <input type="text" id="company" required placeholder="ex: Groupe MetaStrat...">
+                        <input type="text" id="company" required placeholder="ex: Groupe Alpha...">
                     </div>
                     <div class="input-group">
                         <label for="email" data-i18n="lbl_email">Email Professionnel</label>
-                        <input type="email" id="email" required placeholder="directeur@entite.com">
+                        <input type="email" id="email" required placeholder="contact@entite.com">
                     </div>
                     <div class="input-group">
                         <label for="phone" data-i18n="lbl_phone">Numéro WhatsApp (Optionnel)</label>
                         <input type="tel" id="phone" placeholder="+221... / +33...">
                     </div>
+
                     <div class="btn-container right">
                         <button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
                     </div>
@@ -68,34 +76,39 @@
                     <div class="grid-options">
                         <label class="checkbox-btn"><input type="radio" name="sector" value="GenAI_Robotics" checked> <span data-i18n="sec_genai">GenAI & Tech</span></label>
                         <label class="checkbox-btn"><input type="radio" name="sector" value="FinTech"> <span data-i18n="sec_fintech">FinTech & Web3</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Energy_Green"> <span data-i18n="sec_green">Énergie & Mines</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Public_Gov"> <span data-i18n="sec_public">Secteur Public</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="GreenTech"> <span data-i18n="sec_green">GreenTech</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Health"> <span data-i18n="sec_health">Health & BioTech</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Public"> <span data-i18n="sec_public">Secteur Public</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="SupplyChain"> <span data-i18n="sec_log">Logistique</span></label>
                     </div>
 
-                    <label class="section-label mt-2" data-i18n="lbl_geo">Zone d'Intervention (Hubs Internationaux)</label>
+                    <label class="section-label mt-2" data-i18n="lbl_geo">Zone d'Intervention (Hubs Hubs)</label>
                     <div class="input-group">
                         <select id="geo-zone" required>
-                            <option value="" disabled selected data-i18n="opt_geo_def">Sélectionner une zone...</option>
+                            <option value="" disabled selected data-i18n="opt_geo_def">Choisir une zone...</option>
                             <option value="Senegal">Sénégal (Dakar Hub)</option>
                             <option value="UAE">UAE (Dubai - Middle East)</option>
                             <option value="Maroc">Maroc (Casablanca Hub)</option>
                             <option value="France">France (Europe - Paris)</option>
                             <option value="USA">USA (Silicon Valley)</option>
+                            <option value="China">Chine (Hong Kong Hub)</option>
                             <option value="Global">International / Global</option>
                         </select>
                     </div>
 
-                    <label class="section-label mt-2" data-i18n="lbl_expertise">Expertise Requise</label>
+                    <label class="section-label mt-2" data-i18n="lbl_expertise">Expertises Requises</label>
                     <div class="grid-options">
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="SouveraineteIA"> <span data-i18n="exp_sov">Souveraineté IA</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Digital_Transfo"> <span data-i18n="exp_digital">Transfo. Digitale</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Legal_OHADA"> <span data-i18n="exp_ohada">Conformité OHADA</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="TransformationDigitale"> <span data-i18n="exp_digital">Transfo. Digitale</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Finance_MA"> <span data-i18n="exp_ma">Finance & M&A</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Legal_OHADA"> <span data-i18n="exp_ohada">Droit OHADA</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Cybersecurity"> <span data-i18n="exp_cyber">Cybersécurité</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="SupplyChain"> <span data-i18n="exp_supply">Supply Chain</span></label>
                     </div>
 
                     <div class="btn-container split">
                         <button type="button" class="btn-outline" onclick="nextStep(1)" data-i18n="btn_prev">Retour</button>
-                        <button type="button" class="btn-gold" onclick="nextStep(3)" data-i18n="btn_next_matrice">Ouvrir Matrice Analyse</button>
+                        <button type="button" class="btn-gold" onclick="nextStep(3)" data-i18n="btn_next_matrice">Suivant</button>
                     </div>
                 </div>
 
@@ -103,7 +116,7 @@
                     <h3 data-i18n="step3_title">03. Matrice Analyse & Restitution</h3>
                     <div class="input-group">
                         <label for="context" data-i18n="lbl_context">Contexte Opérationnel</label>
-                        <textarea id="context" rows="4" placeholder="Décrivez vos enjeux..."></textarea>
+                        <textarea id="context" rows="4" placeholder="Décrivez vos enjeux stratégiques..."></textarea>
                     </div>
                     <div class="legal-check">
                         <input type="checkbox" id="consent" required>
@@ -116,10 +129,27 @@
                 </div>
             </form>
         </div>
+
+        <div id="stats-widget" class="stats-card">
+            <div class="stats-header">
+                <span class="pulse-icon"></span>
+                <h4 data-i18n="stats_live">Live Intelligence</h4>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Analyses IA</span>
+                    <span id="count-analyses" class="stat-value">--</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">PDF Certifiés</span>
+                    <span id="count-pdf" class="stat-value">--</span>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer class="footer">
-        <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
+        <p>&copy; 2026 e-META LABS SASU. Tous droits réservés.</p>
         <p class="tiny">Strategic Intelligence Unit • Dakar - Paris - Dubai</p>
     </footer>
 
@@ -127,8 +157,8 @@
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <h2 data-i18n="modal_title">Politique de Confidentialité</h2>
-            <div class="modal-body">Chargement...</div>
-            <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close">Fermer</button>
+            <div class="modal-body">Contenu de la politique en cours...</div>
+            <button class="btn-gold full-width close-modal-btn">Fermer</button>
         </div>
     </div>
 
