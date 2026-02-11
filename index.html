@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,25 +17,17 @@
                 <path d="M50 20 L80 35 V65 L50 80 L20 65 V35 Z" stroke="#d4af37" stroke-width="1" fill="rgba(212, 175, 55, 0.1)"/>
                 <circle cx="50" cy="50" r="8" fill="#d4af37"/>
             </svg>
-            <div class="brand-text">
-                <h1>e-META LABS</h1>
-            </div>
+            <div class="brand-text"><h1>e-META LABS</h1></div>
         </div>
-
-        <div class="header-slogan" data-i18n="subtitle">
-            Excellence Stratégique & Haute Précision IA
-        </div>
-
+        <div class="header-slogan" data-i18n="subtitle">Excellence Stratégique & Haute Précision IA</div>
         <div class="header-actions">
             <div class="action-group">
-                <button type="button" class="btn-reset" onclick="resetForm()" data-i18n="btn_reset">
-                    ↻ Réinitialiser
-                </button>
+                <button type="button" class="btn-reset" onclick="resetForm()" data-i18n="btn_reset">↻ Réinitialiser</button>
                 <div class="lang-switch">
-                    <button class="lang-btn active" data-lang="fr">FR</button>
-                    <button class="lang-btn" data-lang="en">EN</button>
-                    <button class="lang-btn" data-lang="es">ES</button>
-                    <button class="lang-btn" data-lang="ar">AR</button>
+                    <button class="lang-btn active" onclick="setLanguage('fr')">FR</button>
+                    <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+                    <button class="lang-btn" onclick="setLanguage('es')">ES</button>
+                    <button class="lang-btn" onclick="setLanguage('ar')">AR</button>
                 </div>
             </div>
         </div>
@@ -51,21 +43,20 @@
             <form id="diagnosticForm">
                 <div class="form-step active" id="step-1">
                     <h3 data-i18n="step1_title">01. Identification</h3>
-                    <div style="display:none;"><input type="text" id="honeypot" name="honeypot" tabindex="-1"></div>
+                    <div style="display:none;"><input type="text" id="honeypot" tabindex="-1"></div>
                     
                     <div class="input-group">
                         <label for="company" data-i18n="lbl_company">Société / Entité</label>
-                        <input type="text" id="company" required placeholder="ex: Groupe MetaStrat...">
+                        <input type="text" id="company" required placeholder="...">
                     </div>
                     <div class="input-group">
                         <label for="email" data-i18n="lbl_email">Email Professionnel</label>
-                        <input type="email" id="email" required placeholder="contact@domaine.com">
+                        <input type="email" id="email" required placeholder="...">
                     </div>
                     <div class="input-group">
                         <label for="phone" data-i18n="lbl_phone">Numéro WhatsApp (Recommandé)</label>
-                        <input type="tel" id="phone" placeholder="+Code Pays...">
+                        <input type="tel" id="phone" placeholder="+221... / +33...">
                     </div>
-
                     <div class="btn-container right">
                         <button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
                     </div>
@@ -74,54 +65,50 @@
                 <div class="form-step" id="step-2">
                     <h3 data-i18n="step2_title">02. Matrice Stratégique</h3>
                     
-                    <label class="section-label" data-i18n="lbl_sector">Secteur Stratégique (International)</label>
+                    <label class="section-label" data-i18n="lbl_sector">Secteur Stratégique</label>
                     <div class="grid-options">
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="GenAI_Robotics" checked> <span>GenAI & Robotics</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="FinTech_DeFi"> <span>FinTech & DeFi</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="GreenTech_Energy"> <span>GreenTech & Énergie</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Mining_OilGas"> <span>Mines, Pétrole & Gaz</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="AgriTech_Food"> <span>AgriTech & FoodSecurity</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Health_BioTech"> <span>Santé & BioTech</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Logistics_Infra"> <span>Smart Infra & Logistique</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="GovTech_Public"> <span>GovTech & Secteur Public</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="EduTech_Knowledge"> <span>EduTech & Savoir</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="RealEstate_SmartCity"> <span>Immo & Smart City</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="GenAI_Robotics" checked> <span data-i18n="sec_genai">GenAI & Robotics</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="FinTech_DeFi"> <span data-i18n="sec_fintech">FinTech & DeFi</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="GreenTech_Energy"> <span data-i18n="sec_green">GreenTech & Énergie</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Mining_OilGas"> <span data-i18n="sec_mine">Mines & Hydrocarbures</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="AgriTech_Food"> <span data-i18n="sec_agri">AgriTech & FoodSec</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Health_BioTech"> <span data-i18n="sec_health">Santé & BioTech</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Smart_Infra"> <span data-i18n="sec_infra">Smart Infra & Logistique</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="GovTech"> <span data-i18n="sec_gov">GovTech & Public</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="RealEstate"> <span data-i18n="sec_immo">Immo & Smart City</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="EduTech"> <span data-i18n="sec_edu">EduTech & Savoir</span></label>
                     </div>
 
-                    <label class="section-label mt-2" data-i18n="lbl_geo">Hub Stratégique d'Intervention</label>
+                    <label class="section-label mt-2" data-i18n="lbl_geo">Hub Stratégique</label>
                     <div class="input-group">
                         <select id="geo-zone" required>
-                            <option value="" disabled selected data-i18n="opt_geo_def">-- Sélectionner une zone --</option>
-                            <optgroup label="Afrique (Strategic Hubs)">
-                                <option value="Senegal">Sénégal (Dakar Hub)</option>
-                                <option value="Maroc">Maroc (Casablanca Finance City)</option>
-                                <option value="CoteIvoire">Côte d'Ivoire (Abidjan)</option>
-                                <option value="Nigeria">Nigeria (Lagos)</option>
-                                <option value="Kenya">Kenya (Silicon Savannah)</option>
-                                <option value="Rwanda">Rwanda (Kigali)</option>
+                            <option value="" disabled selected data-i18n="opt_geo_def">-- Sélectionner --</option>
+                            <optgroup label="Afrique / MENA">
+                                <option value="Senegal">Dakar Hub (Sénégal)</option>
+                                <option value="Maroc">Casablanca Finance City</option>
+                                <option value="UAE">Dubai (Middle East)</option>
+                                <option value="Nigeria">Lagos Hub</option>
+                                <option value="Kenya">Nairobi (Silicon Savannah)</option>
                             </optgroup>
-                            <optgroup label="International / Global">
-                                <option value="UAE">UAE (Dubai - Middle East)</option>
-                                <option value="France">France (Paris - Europe)</option>
-                                <option value="USA">USA (New York / Silicon Valley)</option>
-                                <option value="UK">Royaume-Uni (London)</option>
-                                <option value="China">Chine (Hong Kong / Shanghai)</option>
-                                <option value="Singapore">Singapour (Asia Hub)</option>
+                            <optgroup label="International">
+                                <option value="France">Paris (Europe)</option>
+                                <option value="USA">Silicon Valley / NY</option>
+                                <option value="Singapore">Singapour (Asia)</option>
+                                <option value="Global">Global / Multi-sites</option>
                             </optgroup>
-                            <option value="Multi_Jurisdiction">Multi-Juridictions / Global</option>
                         </select>
                     </div>
 
-                    <label class="section-label mt-2" data-i18n="lbl_expertise">Expertises Requises (Multi-Secteurs)</label>
+                    <label class="section-label mt-2" data-i18n="lbl_expertise">Expertises Requises</label>
                     <div class="grid-options" style="grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));">
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="IA_Souveraine"> <span>IA Souveraine</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Cybersecurite"> <span>Cybersécurité</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Finance_MA"> <span>M&A / Levée</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Compliance_Legal"> <span>Légal & OHADA</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Transfo_Digitale"> <span>Transfo. Digitale</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="ESG_Impact"> <span>ESG & Impact</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Affaires_Publiques"> <span>Lobbying & PA</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Supply_Chain"> <span>Supply Chain</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="IA_Souveraine"> <span data-i18n="exp_sov">IA Souveraine</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Cybersecurite"> <span data-i18n="exp_cyber">Cybersécurité</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Finance_MA"> <span data-i18n="exp_ma">M&A / Levée</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Compliance"> <span data-i18n="exp_legal">Légal / OHADA</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Transfo_Digitale"> <span data-i18n="exp_digital">Transfo. Digitale</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="ESG"> <span data-i18n="exp_esg">ESG & Impact</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Lobbying"> <span data-i18n="exp_lobby">Affaires Publiques</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="SupplyChain"> <span data-i18n="exp_supply">Supply Chain</span></label>
                     </div>
 
                     <div class="btn-container split">
@@ -131,20 +118,15 @@
                 </div>
 
                 <div class="form-step" id="step-3">
-                    <h3 data-i18n="step3_title">03. Matrice Analyse & Restitution</h3>
+                    <h3 data-i18n="step3_title">03. Matrice Analyse</h3>
                     <div class="input-group">
                         <label for="context" data-i18n="lbl_context">Contexte Opérationnel</label>
-                        <textarea id="context" rows="4" placeholder="Décrivez vos enjeux stratégiques, cibles ou blocages actuels..."></textarea>
+                        <textarea id="context" rows="4"></textarea>
                     </div>
-                    
                     <div class="legal-check">
                         <input type="checkbox" id="consent" required>
-                        <label for="consent">
-                            <span data-i18n="legal_consent">J'accepte la</span> 
-                            <a href="#" id="openPrivacy" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité</a>.
-                        </label>
+                        <label for="consent"><span data-i18n="legal_consent">J'accepte la</span> <a href="#" id="openPrivacy" class="gold-link" data-i18n="link_privacy">Politique</a>.</label>
                     </div>
-
                     <div class="btn-container split">
                         <button type="button" class="btn-outline" onclick="nextStep(2)" data-i18n="btn_prev">Retour</button>
                         <button type="submit" class="btn-gold glow" data-i18n="btn_submit">Lancer l'Analyse IA</button>
@@ -154,39 +136,24 @@
         </div>
 
         <div id="stats-widget" class="stats-card">
-            <div class="stats-header">
-                <span class="pulse-icon"></span>
-                <h4 data-i18n="stats_live">Live Intelligence</h4>
-            </div>
+            <div class="stats-header"><span class="pulse-icon"></span><h4 data-i18n="stats_live">Live Intelligence</h4></div>
             <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-label" data-i18n="stat_ai">Analyses IA</span>
-                    <span id="count-analyses" class="stat-value">--</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label" data-i18n="stat_pdf">PDF Certifiés</span>
-                    <span id="count-pdf" class="stat-value">--</span>
-                </div>
+                <div class="stat-item"><span class="stat-label" data-i18n="stat_ai">Analyses IA</span><span id="count-analyses" class="stat-value">--</span></div>
+                <div class="stat-item"><span class="stat-label" data-i18n="stat_pdf">PDF Certifiés</span><span id="count-pdf" class="stat-value">--</span></div>
             </div>
-            <p class="stat-footer"><span data-i18n="stat_last">Mise à jour :</span> <span id="last-update">--:--</span></p>
+            <p class="stat-footer"><span id="last-update">--:--</span></p>
         </div>
     </main>
 
     <footer class="footer">
-        <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
-        <p class="tiny">Strategic Intelligence Unit • Dakar - Paris - Dubai</p>
+        <p>&copy; 2026 e-META LABS. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
     </footer>
 
     <div id="privacyOverlay" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <h2 data-i18n="modal_title">Politique de Confidentialité</h2>
-            <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
-                <h4 data-i18n="priv_t1">1. Souveraineté des Données</h4>
-                <p data-i18n="priv_c1">Vos données sont traitées via un protocole IA sécurisé.</p>
-                <h4 data-i18n="priv_t2">2. Confidentialité</h4>
-                <p data-i18n="priv_c2">L'analyse générée est strictement confidentielle et certifiée par e-META LABS.</p>
-            </div>
+            <h2 data-i18n="modal_title">Politique</h2>
+            <div class="modal-body" data-i18n="priv_content">Chargement...</div>
             <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close">Fermer</button>
         </div>
     </div>
@@ -194,13 +161,11 @@
     <div id="resultModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-result">&times;</span>
-            <h2 style="color: #d4af37;" data-i18n="result_title">Diagnostic Stratégique</h2>
-            <div id="resultBody" class="modal-body">
-                <p>Initialisation du moteur IA...</p>
-            </div>
+            <h2 style="color: #d4af37;" data-i18n="result_title">Diagnostic</h2>
+            <div id="resultBody" class="modal-body"><p>Initialisation...</p></div>
             <div class="btn-container">
-                <button class="btn-gold btn-download" data-i18n="btn_pdf">TÉLÉCHARGER PDF</button>
-                <button class="btn-gold btn-outline-gold btn-new" data-i18n="btn_new">NOUVELLE ANALYSE</button>
+                <button class="btn-gold btn-download" data-i18n="btn_pdf">PDF</button>
+                <button class="btn-gold btn-outline-gold btn-new" data-i18n="btn_new">NOUVEAU</button>
             </div>
         </div>
     </div>
