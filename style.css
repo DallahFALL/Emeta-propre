@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS — Moteur IA Stratégique
- * FICHIER : style.css (Version RESTAURÉE & PREMIUM 2026)
+ * FICHIER : style.css (Version STABILISÉE FINALE 2026)
  */
 
 /* --- VARIABLES & RESET --- */
@@ -7,12 +7,11 @@
     --navy-deep: #0a192f;
     --navy-light: #112240;
     --gold: #d4af37;
-    --gold-bright: #f2d06b;
     --white: #e6f1ff;
     --slate: #8892b0;
     --font-heading: 'Cinzel', serif;
     --font-body: 'Inter', sans-serif;
-    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: all 0.3s ease-in-out;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,13 +24,11 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
 }
 
-/* --- HEADER FIXE (Évite le chevauchement avec le formulaire) --- */
+/* --- HEADER FIXE (Évite le chevauchement image_c53e60) --- */
 .header {
     display: flex;
-    flex-wrap: nowrap; 
     justify-content: space-between;
     align-items: center;
     padding: 1rem 5%;
@@ -40,29 +37,17 @@ body {
     position: sticky;
     top: 0;
     z-index: 500;
-    height: 80px;
 }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+.logo-container { display: flex; align-items: center; gap: 12px; }
+.brand-text h1 { color: var(--white); font-family: var(--font-heading); font-size: 1.3rem; letter-spacing: 2px; }
 
-.brand-text h1 {
-    color: var(--white);
-    font-family: var(--font-heading);
-    font-size: 1.3rem;
-    letter-spacing: 2px;
-    white-space: nowrap;
-}
-
-/* --- STRUCTURE DES 3 ÉTAPES (GLASS-CARD) --- */
+/* --- FORMULAIRE EN 3 BLOCS (STABILISATION image_c61f57) --- */
 .main-container {
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Aligne en haut pour éviter de flotter au milieu */
+    align-items: flex-start;
     padding: 40px 20px;
 }
 
@@ -71,104 +56,71 @@ body {
     width: 100%;
     max-width: 700px;
     padding: 2.5rem;
-    border-radius: 12px;
+    border-radius: 8px;
     border: 1px solid rgba(212, 175, 55, 0.15);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    position: relative;
-    min-height: 450px;
+    position: relative; /* Indispensable pour le loader */
+    overflow: hidden;
 }
 
-/* IMPORTANT : Gestion des blocs d'étapes */
+/* Verrouillage des étapes pour éviter la superposition */
 .form-step { 
-    display: none; /* Masqué par défaut */
+    display: none !important; 
 }
 
 .form-step.active { 
-    display: block; /* Affiche uniquement l'étape active */
-    animation: fadeIn 0.5s ease;
+    display: block !important; 
+    animation: fadeIn 0.4s ease;
 }
 
-@keyframes fadeIn { 
-    from { opacity: 0; transform: translateY(10px); } 
-    to { opacity: 1; transform: translateY(0); } 
-}
-
-/* --- CHAMPS TENDANCE --- */
-.input-group { margin-bottom: 1.5rem; }
-label { display: block; margin-bottom: 0.5rem; color: var(--white); font-weight: 500; }
-
-input[type="text"], input[type="email"], input[type="tel"], textarea, select {
-    width: 100%;
-    padding: 14px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(136, 146, 176, 0.3);
-    color: var(--white);
-    border-radius: 8px;
-    transition: var(--transition);
-}
-
-input:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
-    outline: none;
-}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* --- TUILES INTERACTIVES (Expertises & Secteurs) --- */
 .grid-options {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .checkbox-btn { cursor: pointer; }
-.checkbox-btn input { display: none; } /* Cache le bouton radio/check original */
+.checkbox-btn input { display: none; }
 
 .checkbox-btn span {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
     padding: 12px;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(136, 146, 176, 0.2);
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 0.8rem;
-    color: var(--slate);
     transition: var(--transition);
     height: 100%;
+    text-align: center;
 }
 
 .checkbox-btn input:checked + span {
-    background: rgba(212, 175, 55, 0.1);
+    background: rgba(212, 175, 55, 0.15);
     border-color: var(--gold);
-    color: var(--gold);
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
+    color: var(--white);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
-/* --- BOUTONS PRO AVEC EFFET GLOW --- */
+/* --- BOUTONS --- */
 button.btn-gold {
-    background: linear-gradient(135deg, #d4af37 0%, #f2d06b 100%);
+    background: var(--gold);
     color: var(--navy-deep);
     border: none;
-    padding: 14px 30px;
+    padding: 12px 25px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: var(--transition);
-    width: auto;
 }
 
-button.btn-gold:hover {
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
-    transform: translateY(-2px);
-}
-
-/* --- ANIMATION DE CHARGEMENT IA --- */
+/* --- LOADER IA (Correction du rectangle bleu image_c623f0) --- */
 #loadingOverlay {
-    display: none; /* Géré par JS */
+    display: none; /* Masqué par défaut */
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(10, 25, 47, 0.95);
@@ -176,12 +128,11 @@ button.btn-gold:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 12px;
 }
 
 .ai-loader {
     width: 50px; height: 50px;
-    border: 3px solid transparent;
+    border: 3px solid rgba(212, 175, 55, 0.2);
     border-top-color: var(--gold);
     border-radius: 50%;
     animation: spin 1s linear infinite;
@@ -189,10 +140,15 @@ button.btn-gold:hover {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* --- RESPONSIVE MOBILE --- */
-@media (max-width: 768px) {
-    .header { padding: 0.5rem 1rem; }
-    .brand-text h1 { font-size: 1rem; }
-    .glass-card { padding: 1.5rem; }
-    .grid-options { grid-template-columns: 1fr 1fr; }
+/* --- MODALS (Z-INDEX FIX image_c626a1) --- */
+.modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(10, 25, 47, 0.98); z-index: 1000;
+}
+
+#privacyOverlay { z-index: 2000; backdrop-filter: blur(8px); }
+
+.modal-content {
+    background: var(--navy-light); border: 1px solid var(--gold);
+    padding: 2rem; max-width: 650px; width: 95%; border-radius: 8px;
 }
