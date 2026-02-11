@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS — Moteur IA Stratégique
- * FICHIER : script.js (Version Master 2026)
+ * FICHIER : script.js (Version Master 2026 - Final Optimized)
  */
 
 // --- CONFIGURATION ---
@@ -125,9 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const privacyLinks = document.querySelectorAll('[data-i18n="link_privacy"], #openPrivacy');
     privacyLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault(); // Empêche la redirection vers une autre page
+            e.preventDefault();
             const overlay = document.getElementById('privacyOverlay');
-            if (overlay) overlay.style.display = 'flex'; // Affiche la modal par-dessus le diagnostic
+            if (overlay) overlay.style.display = 'flex';
         });
     });
 
@@ -137,8 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const modals = ['privacyOverlay', 'resultModal'];
             modals.forEach(id => {
                 const m = document.getElementById(id);
-                // On ne ferme que la modal de confidentialité si on est sur un diagnostic
                 if (m && id === 'privacyOverlay') m.style.display = 'none';
+                if (m && id === 'resultModal' && btn.classList.contains('close-result')) m.style.display = 'none';
             });
         });
     });
@@ -151,21 +151,27 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnNewAnalysis) btnNewAnalysis.addEventListener('click', resetForm);
 });
 
-// --- ENVOI FORMULAIRE & MOTEUR IA ---
+// --- ENVOI FORMULAIRE & MOTEUR IA (FONCTION ASYNC COMPLÈTE) ---
 const diagForm = document.getElementById('diagnosticForm');
 if (diagForm) {
-    diagForm.addEventListener('submit', function(e) {
+    diagForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
+        // Sécurité anti-spam
         if (document.getElementById('honeypot')?.value !== "") return;
         if (!document.getElementById('consent')?.checked) return;
 
+        const loader = document.getElementById('loadingOverlay');
+        const formContent = document.querySelector('.glass-card');
         const submitBtn = document.querySelector('button[type="submit"]');
         const lang = document.documentElement.lang || 'fr';
-        
-        submitBtn.innerText = lang === 'fr' ? "Analyse IA en cours..." : "AI Analysis in progress...";
+
+        // 1. Affichage du chargement & verrouillage
+        if (loader) loader.style.display = 'flex';
+        if (formContent) formContent.style.opacity = '0.5';
         submitBtn.disabled = true;
 
+        // Préparation des données
         const formData = {
             action: "diagnostic",
             timestamp: new Date().toISOString(), 
@@ -181,31 +187,41 @@ if (diagForm) {
             lang: lang
         };
 
-        fetch(WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        })
-        .then(async response => {
-            if (response.ok) {
-                const diagnosticText = await response.text();
-                const resultBody = document.getElementById('resultBody');
-                const resultModal = document.getElementById('resultModal');
+        try {
+            const response = await fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
 
-                if (resultBody && resultModal) {
-                    // Injecte le texte pur reçu de Gemini (Make Webhook Response)
-                    resultBody.innerHTML = diagnosticText;
-                    resultModal.style.display = 'flex';
-                }
-                submitBtn.innerText = lang === 'fr' ? "Analyse Terminée" : "Analysis Complete";
-            } else {
-                throw new Error();
+            if (!response.ok) throw new Error("Network response was not ok");
+
+            const diagnosticText = await response.text();
+            
+            // 2. Masquage du chargement
+            if (loader) loader.style.display = 'none';
+            if (formContent) formContent.style.opacity = '1';
+
+            // 3. Affichage du résultat dans la modal
+            const resultBody = document.getElementById('resultBody');
+            const resultModal = document.getElementById('resultModal');
+
+            if (resultBody && resultModal) {
+                resultBody.innerHTML = diagnosticText;
+                resultModal.style.display = 'flex';
+                resultModal.scrollIntoView({ behavior: 'smooth' });
             }
-        })
-        .catch(() => {
+
+            submitBtn.innerText = lang === 'fr' ? "Analyse Terminée" : "Analysis Complete";
+
+        } catch (error) {
+            // Gestion d'erreur
+            if (loader) loader.style.display = 'none';
+            if (formContent) formContent.style.opacity = '1';
+            
             alert(lang === 'fr' ? "Erreur de connexion au moteur e-META." : "e-META connection error.");
-            submitBtn.innerText = "Lancer l'Analyse IA";
+            submitBtn.innerText = lang === 'fr' ? "Lancer l'Analyse IA" : "Launch AI Analysis";
             submitBtn.disabled = false;
-        });
+        }
     });
 }
