@@ -29,42 +29,63 @@ body {
 }
 
 /* --- SUPPORT RTL (ARABE) --- */
-[dir="rtl"] {
-    text-align: right;
-}
+[dir="rtl"] { text-align: right; }
 [dir="rtl"] .btn-container.right { justify-content: flex-start; }
 [dir="rtl"] .btn-reset { border-right: none; border-left: 1px solid rgba(136, 146, 176, 0.3); padding-right: 0; padding-left: 12px; }
 
-/* --- CORRECTION LOGO RESPONSIVE --- */
+/* --- HEADER STABILISÉ & LOGO RESPONSIVE --- */
+.header {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 5%;
+    background: rgba(10, 25, 47, 0.98);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 500; /* Sous les modals mais sur le contenu */
+    gap: 10px;
+}
+
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 12px;
-    flex-shrink: 1; /* Permet au container de réduire si besoin */
-    min-width: 0;   /* Évite les débordements Flexbox */
+    gap: 10px;
+    flex-shrink: 1; /* Permet la réduction sur mobile */
+    min-width: 0;   
 }
 
-.logo-container svg {
-    max-width: 100%; /* Le logo ne dépassera jamais son parent */
-    height: auto;    /* Garde les proportions */
-    width: 45px;     /* Taille fixe idéale sur mobile */
-}
-
-@media (min-width: 768px) {
-    .logo-container svg {
-        width: 60px; /* Plus grand sur ordinateur */
-    }
+.logo-container svg, .logo-container img {
+    max-width: 35px; /* Taille optimisée mobile */
+    height: auto;
+    flex-shrink: 0;
 }
 
 .brand-text h1 {
-    white-space: nowrap; /* Évite que le nom e-META LABS ne passe sur deux lignes */
-    font-size: 1.1rem;   /* Taille ajustée pour mobile */
+    color: var(--white);
+    font-family: var(--font-heading);
+    white-space: nowrap;
+    font-size: 1rem; /* Taille mobile */
+    letter-spacing: 1px;
+}
+
+.header-slogan {
+    color: var(--gold);
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    flex: 1;
+    text-align: right;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 @media (min-width: 768px) {
-    .brand-text h1 {
-        font-size: 1.4rem;
-    }
+    .header { padding: 1rem 5%; gap: 20px; }
+    .logo-container svg, .logo-container img { max-width: 55px; }
+    .brand-text h1 { font-size: 1.4rem; letter-spacing: 2px; }
+    .header-slogan { font-size: 0.85rem; text-align: center; }
 }
 
 /* --- STRUCTURE ACTIONS HEADER --- */
@@ -98,7 +119,6 @@ body {
 }
 
 .btn-reset:hover { color: #ff6b6b; }
-
 .lang-switch { display: flex; gap: 4px; }
 
 .lang-btn {
@@ -108,7 +128,6 @@ body {
     padding: 4px 8px;
     font-size: 0.7rem;
     cursor: pointer;
-    transition: var(--transition);
 }
 
 .lang-btn.active {
@@ -117,7 +136,7 @@ body {
     background: rgba(212, 175, 55, 0.1);
 }
 
-/* --- MAIN DASHBOARD --- */
+/* --- MAIN DASHBOARD & CARDS --- */
 .main-container {
     flex: 1;
     display: flex;
@@ -137,15 +156,7 @@ body {
     box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
 }
 
-h2 { color: var(--white); font-family: var(--font-heading); text-align: center; margin-bottom: 0.5rem; }
-
-/* --- FORMULAIRE --- */
-.form-step { display: none; animation: fadeIn 0.5s ease; }
-.form-step.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-h3 { color: var(--white); margin-bottom: 1.5rem; border-bottom: 1px solid var(--slate); padding-bottom: 0.5rem; font-family: var(--font-heading); }
-
+/* --- FORMULAIRE & INPUTS --- */
 .input-group { margin-bottom: 1.5rem; }
 label { display: block; margin-bottom: 0.5rem; color: var(--white); font-size: 0.9rem; }
 
@@ -156,8 +167,6 @@ input[type="text"], input[type="email"], input[type="tel"], textarea, select {
     border: 1px solid var(--slate);
     color: var(--white);
     border-radius: 2px;
-    font-family: var(--font-body);
-    transition: var(--transition);
 }
 
 input:focus, textarea:focus, select:focus {
@@ -166,35 +175,9 @@ input:focus, textarea:focus, select:focus {
     background: rgba(255, 255, 255, 0.1);
 }
 
-.section-label { color: var(--gold); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 0.8rem; display: block; font-weight: bold; }
-.grid-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 10px;
-    margin-bottom: 1.5rem;
-}
-
-.checkbox-btn { display: block; cursor: pointer; position: relative; }
-.checkbox-btn input { position: absolute; opacity: 0; }
-.checkbox-btn span {
-    display: block;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--slate);
-    text-align: center;
-    font-size: 0.8rem;
-    transition: var(--transition);
-}
-.checkbox-btn input:checked + span {
-    background: rgba(212, 175, 55, 0.2);
-    border-color: var(--gold);
-    color: var(--white);
-}
-
 /* --- BOUTONS --- */
 .btn-container { margin-top: 2rem; display: flex; gap: 1rem; }
 .btn-container.right { justify-content: flex-end; }
-.btn-container.split { justify-content: space-between; }
 
 button.btn-gold {
     background: var(--gold);
@@ -203,33 +186,58 @@ button.btn-gold {
     padding: 12px 30px;
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 1px;
     cursor: pointer;
     transition: var(--transition);
 }
 button.btn-gold:hover { background: #eec853; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
 
-button.btn-outline {
-    background: transparent;
-    border: 1px solid var(--slate);
-    color: var(--slate);
-    padding: 12px 30px;
-    cursor: pointer;
+/* --- GESTION DES MODALS (DIAGNOSTIC & CONFIDENTIALITÉ) --- */
+.modal-overlay {
+    display: none; 
+    position: fixed; 
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(10, 25, 47, 0.95); 
 }
 
-/* --- BOUTONS MODAL RÉSULTAT --- */
-#resultModal .btn-container { display: flex; gap: 8px; margin-top: 1.5rem; }
-#resultModal .btn-gold {
-    flex: 1; padding: 10px 5px; font-size: 0.75rem; letter-spacing: 0.5px;
-    text-align: center; white-space: nowrap; display: flex;
-    justify-content: center; align-items: center; min-height: 40px;
+/* Résultat (Z-index 1000) */
+#resultModal { z-index: 1000; }
+
+/* Politique de Confidentialité (Z-index 2000 + Flou) */
+#privacyOverlay {
+    z-index: 2000;
+    background: rgba(10, 25, 47, 0.85);
+    backdrop-filter: blur(8px); 
+    display: none; 
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
-.btn-outline-gold {
-    background: transparent !important;
-    border: 1px solid var(--gold) !important;
-    color: var(--gold) !important;
+.modal-content {
+    background: var(--navy-light); 
+    border: 1px solid var(--gold);
+    padding: 2rem; 
+    max-width: 600px; 
+    width: 90%; 
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
 }
+
+/* Bouton Politique dans le résultat IA */
+.link-privacy-result {
+    display: inline-block;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 8px 15px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    margin-top: 15px;
+    transition: var(--transition);
+}
+
+.link-privacy-result:hover { background: rgba(212, 175, 55, 0.1); border-color: var(--gold); }
 
 /* --- WIDGET MONITORING --- */
 .stats-card {
@@ -241,16 +249,12 @@ button.btn-outline {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 1000;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 900;
 }
-
-.stats-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-.stats-header h4 { color: var(--gold); font-family: var(--font-heading); font-size: 0.8rem; margin: 0; letter-spacing: 1px; }
 
 .pulse-icon {
     width: 8px; height: 8px; background: var(--gold); border-radius: 50%;
-    box-shadow: 0 0 0 rgba(212, 175, 55, 0.4); animation: pulse-gold 2s infinite;
+    animation: pulse-gold 2s infinite;
 }
 
 @keyframes pulse-gold {
@@ -259,87 +263,17 @@ button.btn-outline {
     100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
 }
 
-.stats-grid { display: flex; flex-direction: column; gap: 8px; }
-.stat-item { display: flex; justify-content: space-between; align-items: center; }
-.stat-label { color: var(--slate); font-size: 0.7rem; text-transform: uppercase; }
-.stat-value { color: var(--white); font-weight: bold; font-size: 0.9rem; }
-.stat-footer { font-size: 0.6rem; color: var(--slate); margin-top: 10px; opacity: 0.6; text-align: right; }
-
-/* --- MODALS --- */
-.modal-overlay {
-    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(10, 25, 47, 0.95); backdrop-filter: blur(5px);
-    z-index: 1000; justify-content: center; align-items: center;
-}
-
-.modal-content {
-    background: var(--navy-light); border: 1px solid var(--gold);
-    padding: 2rem; max-width: 600px; width: 95%; position: relative;
-}
-
-.footer { text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; color: var(--slate); }
-
-/* --- RESPONSIVE HEADER --- */
+/* --- RESPONSIVE MOBILE FINAL --- */
 @media (max-width: 768px) {
-    .header { padding: 0.8rem 1rem; justify-content: space-between; }
-    
+    .header { padding: 0.6rem 1rem; }
+    .header-actions { margin-left: auto; }
     .header-slogan {
-        display: block; width: 100%; order: 3;
-        font-size: 0.65rem; margin-top: 10px; padding-top: 10px;
+        width: 100%;
+        text-align: center;
+        order: 3;
+        font-size: 0.6rem;
         border-top: 1px solid rgba(212, 175, 55, 0.1);
-        letter-spacing: 1px; white-space: normal;
+        padding-top: 5px;
     }
-
-    .logo-container { order: 1; }
-    
-    .header-actions {
-        order: 2;
-        width: 100%;
-        justify-content: center;
-        margin-top: 10px;
-    }
-    
-    .action-group {
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    .stats-card {
-        position: relative; bottom: 0; right: 0; width: 100%;
-        max-width: 350px; margin: 20px auto; box-shadow: none;
-    }
-}
-/* --- GESTION DE LA SUPERPOSITION DES MODALS --- */
-
-/* La modal de diagnostic reste en dessous (z-index 1000) */
-#resultModal {
-    z-index: 1000;
-}
-
-/* La modal de confidentialité passe au-dessus (z-index 2000) */
-#privacyOverlay {
-    z-index: 2000;
-    background: rgba(10, 25, 47, 0.85); /* Fond semi-transparent pour voir le diagnostic derrière */
-    backdrop-filter: blur(8px); /* Effet de flou artistique sur le diagnostic en arrière-plan */
-}
-
-/* Ajustement de la profondeur pour éviter les conflits avec le header */
-.header {
-    z-index: 500; /* Le header passe sous les fenêtres de résultat */
-}
-
-/* Style du lien dans le diagnostic pour qu'il ressemble à un bouton discret */
-.link-privacy-result {
-    display: inline-block;
-    color: var(--gold);
-    text-decoration: none;
-    font-size: 0.8rem;
-    padding: 5px 10px;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    transition: var(--transition);
-}
-
-.link-privacy-result:hover {
-    background: rgba(212, 175, 55, 0.1);
-    border-color: var(--gold);
+    .stats-card { position: static; width: 90%; margin: 10px auto; }
 }
