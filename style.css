@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS — Moteur IA Stratégique
- * FICHIER : style.css (Version STABILISÉE FINALE 2026)
+ * FICHIER : style.css (Version Master 2026 - Mise en cohérence)
  */
 
 /* --- VARIABLES & RESET --- */
@@ -11,7 +11,7 @@
     --slate: #8892b0;
     --font-heading: 'Cinzel', serif;
     --font-body: 'Inter', sans-serif;
-    --transition: all 0.3s ease-in-out;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,9 +26,10 @@ body {
     flex-direction: column;
 }
 
-/* --- HEADER FIXE (Évite le chevauchement image_c53e60) --- */
+/* --- HEADER STABILISÉ (Fixe & Responsive) --- */
 .header {
     display: flex;
+    flex-wrap: wrap; 
     justify-content: space-between;
     align-items: center;
     padding: 1rem 5%;
@@ -37,18 +38,32 @@ body {
     position: sticky;
     top: 0;
     z-index: 500;
+    gap: 15px;
 }
 
-.logo-container { display: flex; align-items: center; gap: 12px; }
-.brand-text h1 { color: var(--white); font-family: var(--font-heading); font-size: 1.3rem; letter-spacing: 2px; }
+.logo-container { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.logo-container svg { height: 45px; width: auto; }
+.brand-text h1 { color: var(--gold); font-family: var(--font-heading); font-size: 1.3rem; letter-spacing: 2px; }
 
-/* --- FORMULAIRE EN 3 BLOCS (STABILISATION image_c61f57) --- */
+.header-slogan {
+    color: var(--gold);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+    flex: 1;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+/* --- STRUCTURE DES 3 ÉTAPES (Verrouillage Superposition) --- */
 .main-container {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 40px 20px;
+    padding: 3rem 1.5rem;
 }
 
 .glass-card {
@@ -58,69 +73,91 @@ body {
     padding: 2.5rem;
     border-radius: 8px;
     border: 1px solid rgba(212, 175, 55, 0.15);
-    position: relative; /* Indispensable pour le loader */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    position: relative;
     overflow: hidden;
 }
 
-/* Verrouillage des étapes pour éviter la superposition */
+/* Correction image_c61f57 : Un seul bloc visible à la fois */
 .form-step { 
     display: none !important; 
 }
 
 .form-step.active { 
     display: block !important; 
-    animation: fadeIn 0.4s ease;
+    animation: fadeIn 0.4s ease-out;
 }
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 /* --- TUILES INTERACTIVES (Expertises & Secteurs) --- */
 .grid-options {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
     margin-top: 15px;
+    margin-bottom: 1.5rem;
 }
 
-.checkbox-btn { cursor: pointer; }
+.checkbox-btn { cursor: pointer; display: block; }
 .checkbox-btn input { display: none; }
 
 .checkbox-btn span {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;
+    padding: 14px;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(136, 146, 176, 0.2);
-    border-radius: 6px;
-    font-size: 0.8rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: var(--slate);
     transition: var(--transition);
     height: 100%;
     text-align: center;
 }
 
 .checkbox-btn input:checked + span {
-    background: rgba(212, 175, 55, 0.15);
+    background: rgba(212, 175, 55, 0.12);
     border-color: var(--gold);
     color: var(--white);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
 }
 
-/* --- BOUTONS --- */
+/* --- CHAMPS & BOUTONS PREMIUM --- */
+.input-group { margin-bottom: 1.5rem; }
+label { display: block; margin-bottom: 0.5rem; color: var(--white); font-weight: 500; font-size: 0.9rem; }
+
+input, textarea, select {
+    width: 100%;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(136, 146, 176, 0.3);
+    color: var(--white);
+    border-radius: 6px;
+    transition: var(--transition);
+}
+
+input:focus { border-color: var(--gold); outline: none; background: rgba(255, 255, 255, 0.08); }
+
 button.btn-gold {
-    background: var(--gold);
+    background: linear-gradient(135deg, #d4af37 0%, #f2d06b 100%);
     color: var(--navy-deep);
     border: none;
-    padding: 12px 25px;
+    padding: 14px 30px;
     font-weight: 800;
     text-transform: uppercase;
-    border-radius: 4px;
+    letter-spacing: 1px;
+    border-radius: 6px;
     cursor: pointer;
+    transition: var(--transition);
 }
 
-/* --- LOADER IA (Correction du rectangle bleu image_c623f0) --- */
+button.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+
+/* --- LOADER IA (Correction image_c623f0) --- */
 #loadingOverlay {
-    display: none; /* Masqué par défaut */
+    display: none;
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(10, 25, 47, 0.95);
@@ -131,8 +168,8 @@ button.btn-gold {
 }
 
 .ai-loader {
-    width: 50px; height: 50px;
-    border: 3px solid rgba(212, 175, 55, 0.2);
+    width: 60px; height: 60px;
+    border: 4px solid rgba(212, 175, 55, 0.1);
     border-top-color: var(--gold);
     border-radius: 50%;
     animation: spin 1s linear infinite;
@@ -140,15 +177,25 @@ button.btn-gold {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* --- MODALS (Z-INDEX FIX image_c626a1) --- */
+/* --- MODALS & SUPERPOSITION (Privacy image_c626a1) --- */
 .modal-overlay {
     display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(10, 25, 47, 0.98); z-index: 1000;
+    justify-content: center; align-items: center;
 }
 
-#privacyOverlay { z-index: 2000; backdrop-filter: blur(8px); }
+#privacyOverlay { z-index: 2000; backdrop-filter: blur(10px); }
 
 .modal-content {
     background: var(--navy-light); border: 1px solid var(--gold);
-    padding: 2rem; max-width: 650px; width: 95%; border-radius: 8px;
+    padding: 2.5rem; max-width: 650px; width: 92%; border-radius: 12px;
+    max-height: 85vh; overflow-y: auto;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .header { padding: 0.8rem 1rem; }
+    .header-slogan { order: 3; width: 100%; font-size: 0.65rem; padding-top: 10px; border-top: 1px solid rgba(212,175,55,0.1); }
+    .grid-options { grid-template-columns: 1fr 1fr; }
+    .glass-card { padding: 1.5rem; }
 }
