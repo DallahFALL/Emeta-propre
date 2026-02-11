@@ -1,80 +1,298 @@
-/* --- VARIABLES & RESET --- */
+/* * PROJET : e-META LABS — Moteur IA Stratégique
+ * FICHIER : style.css (Version MASTER 2026 - RESPONSIVE & STABLE)
+ */
+
+/* --- 1. VARIABLES & RESET --- */
 :root {
     --navy-deep: #0a192f;
     --navy-light: #112240;
     --gold: #d4af37;
+    --gold-dim: #aa8c2c;
     --white: #e6f1ff;
     --slate: #8892b0;
     --font-heading: 'Cinzel', serif;
     --font-body: 'Inter', sans-serif;
-    --transition: all 0.3s ease-in-out;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     background-color: var(--navy-deep);
-    color: var(--white);
+    color: var(--slate);
     font-family: var(--font-body);
-    overflow-x: hidden;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Empêche le scroll horizontal accidentel */
 }
 
-/* --- HEADER FIXE --- */
+/* --- 2. HEADER STABILISÉ --- */
 .header {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1rem 5%; background: rgba(10, 25, 47, 0.98);
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background: rgba(10, 25, 47, 0.98);
     border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-    position: sticky; top: 0; z-index: 500;
+    position: sticky;
+    top: 0;
+    z-index: 500; /* Niveau intermédiaire */
+    gap: 15px;
 }
 
+.logo-container {
+    display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+}
 .logo-container svg { height: 45px; width: auto; }
-.brand-text h1 { color: var(--gold); font-family: var(--font-heading); font-size: 1.2rem; }
 
-/* --- STRUCTURE DES 3 ÉTAPES (ANTI-DÉFORMATION) --- */
-.main-container { padding: 2rem 1rem; display: flex; justify-content: center; }
+.brand-text h1 {
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+}
+
+.header-slogan {
+    color: var(--gold);
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+    flex: 1;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+/* Actions Header (Reset / Langues) */
+.header-actions { display: flex; align-items: center; flex-shrink: 0; }
+
+.action-group {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 5px 10px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 4px;
+}
+
+.btn-reset {
+    background: transparent; border: none;
+    border-right: 1px solid rgba(136, 146, 176, 0.3);
+    color: var(--slate); padding-right: 10px;
+    font-size: 0.7rem; cursor: pointer; text-transform: uppercase;
+}
+.btn-reset:hover { color: #ff6b6b; }
+
+.lang-switch { display: flex; gap: 5px; }
+.lang-btn {
+    background: transparent; border: 1px solid transparent;
+    color: var(--slate); padding: 2px 5px;
+    font-size: 0.7rem; cursor: pointer;
+}
+.lang-btn.active {
+    color: var(--gold); border-color: var(--gold);
+    background: rgba(212, 175, 55, 0.1);
+}
+
+/* --- 3. CONTENEUR PRINCIPAL & CARTE --- */
+.main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Aligne en haut pour éviter de flotter */
+    align-items: center;
+    padding: 3rem 1.5rem;
+}
 
 .glass-card {
-    background: var(--navy-light); width: 100%; max-width: 700px;
-    padding: 2.5rem; border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.15);
-    position: relative; overflow: hidden; /* Fixe le loader image_c68572 */
+    background: var(--navy-light);
+    width: 100%;
+    max-width: 750px;
+    padding: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    position: relative; /* INDISPENSABLE POUR LE LOADER */
+    overflow: hidden;   /* Empêche le contenu de déborder */
+    backdrop-filter: blur(10px);
 }
 
-/* Verrouillage strict de visibilité image_c61f57 */
-.form-step { display: none !important; }
-.form-step.active { display: block !important; animation: fadeIn 0.4s ease; }
+/* --- 4. GESTION DES ÉTAPES (ANTI-SUPERPOSITION) --- */
+.form-step { 
+    display: none !important; /* Cache tout par défaut */
+}
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.form-step.active { 
+    display: block !important; /* Affiche uniquement l'actif */
+    animation: fadeIn 0.5s ease-out;
+}
 
-/* --- TUILES RESPONSIVES --- */
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+/* --- 5. CHAMPS & TYPOGRAPHIE --- */
+h3 {
+    color: var(--white); margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--slate); padding-bottom: 0.5rem;
+    font-family: var(--font-heading);
+}
+
+.input-group { margin-bottom: 1.5rem; }
+label { display: block; margin-bottom: 0.5rem; color: var(--white); font-size: 0.9rem; font-weight: 500; }
+
+input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+    width: 100%; padding: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(136, 146, 176, 0.3);
+    color: var(--white); border-radius: 6px;
+    font-family: var(--font-body); transition: var(--transition);
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--gold); outline: none;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
+.section-label {
+    color: var(--gold); font-size: 0.8rem; text-transform: uppercase;
+    margin-bottom: 0.8rem; display: block; font-weight: bold; letter-spacing: 1px;
+}
+
+/* --- 6. TUILES INTERACTIVES (GRID RESPONSIVE) --- */
 .grid-options {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px; margin-top: 15px;
+    display: grid;
+    /* Grid intelligent : s'adapte à la largeur dispo */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 1.5rem;
 }
 
-.checkbox-btn input { display: none; }
+.checkbox-btn { cursor: pointer; display: block; height: 100%; }
+.checkbox-btn input { display: none; } /* On cache la case moche */
+
 .checkbox-btn span {
     display: flex; align-items: center; justify-content: center;
-    padding: 14px; background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(136, 146, 176, 0.2); border-radius: 8px;
-    font-size: 0.85rem; text-align: center; height: 100%; cursor: pointer;
+    padding: 12px; height: 100%;
+    background: rgba(17, 34, 64, 0.6);
+    border: 1px solid rgba(136, 146, 176, 0.2);
+    border-radius: 8px;
+    text-align: center; font-size: 0.8rem; color: var(--slate);
+    transition: var(--transition);
 }
 
 .checkbox-btn input:checked + span {
-    background: rgba(212, 175, 55, 0.12); border-color: var(--gold); color: var(--gold);
+    background: rgba(212, 175, 55, 0.15);
+    border-color: var(--gold);
+    color: var(--white);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
-/* --- LOADER IA FIXE --- */
+/* --- 7. BOUTONS --- */
+.btn-container { margin-top: 2rem; display: flex; gap: 1rem; }
+.btn-container.right { justify-content: flex-end; }
+.btn-container.split { justify-content: space-between; }
+
+button.btn-gold {
+    background: linear-gradient(135deg, #d4af37 0%, #f2d06b 100%);
+    color: var(--navy-deep); border: none; padding: 14px 30px;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+    border-radius: 6px; cursor: pointer; transition: var(--transition);
+}
+button.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4); }
+
+button.btn-outline {
+    background: transparent; border: 1px solid var(--slate);
+    color: var(--slate); padding: 14px 30px; border-radius: 6px; cursor: pointer;
+}
+
+/* --- 8. LOADER IA (FIXE & CENTRÉ) --- */
 #loadingOverlay {
-    display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(10, 25, 47, 0.95); z-index: 100;
+    display: none; /* JS le passe en flex */
+    position: absolute; /* Ancré à la glass-card */
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(10, 25, 47, 0.96); /* Fond opaque pour masquer le formulaire */
+    z-index: 100; /* Au-dessus du formulaire */
     flex-direction: column; justify-content: center; align-items: center;
+    border-radius: 12px;
 }
 
-/* --- RESPONSIVITÉ MOBILE --- */
-@media (max-width: 768px) {
-    .header { flex-direction: column; gap: 10px; text-align: center; }
-    .grid-options { grid-template-columns: 1fr 1fr; }
-    .glass-card { padding: 1.5rem; }
-    .btn-container { flex-direction: column; gap: 10px; }
-    button { width: 100%; }
+.ai-loader {
+    width: 60px; height: 60px;
+    border: 3px solid rgba(212, 175, 55, 0.2);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
 }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loading-text {
+    margin-top: 20px; color: var(--gold);
+    font-family: var(--font-heading); font-size: 0.9rem; letter-spacing: 1px;
+    animation: pulse-text 1.5s infinite;
+}
+@keyframes pulse-text { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+/* --- 9. MODALS (Privacy & Result) --- */
+.modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(10, 25, 47, 0.98); 
+    z-index: 2000; /* Toujours tout au-dessus */
+    justify-content: center; align-items: center;
+}
+
+.modal-content {
+    background: var(--navy-light); border: 1px solid var(--gold);
+    padding: 2.5rem; max-width: 650px; width: 92%; border-radius: 12px;
+    max-height: 85vh; overflow-y: auto;
+    position: relative;
+    box-shadow: 0 0 50px rgba(0,0,0,0.7);
+}
+
+.close-modal, .close-result {
+    position: absolute; top: 15px; right: 20px;
+    font-size: 1.5rem; color: var(--slate); cursor: pointer;
+}
+
+/* --- 10. WIDGET STATS --- */
+.stats-card {
+    background: rgba(17, 34, 64, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 15px; border-radius: 8px;
+    width: 220px; margin-top: 20px;
+}
+.stats-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.pulse-icon { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; }
+.stats-grid { display: flex; justify-content: space-between; font-size: 0.8rem; }
+.stat-value { font-weight: bold; color: var(--white); }
+.stat-footer { font-size: 0.6rem; color: var(--slate); margin-top: 8px; text-align: right; }
+
+/* --- 11. RESPONSIVITÉ MOBILE --- */
+@media (max-width: 768px) {
+    .header { padding: 0.8rem 1rem; flex-direction: column; gap: 10px; }
+    
+    .header-slogan { 
+        width: 100%; order: 3; font-size: 0.65rem; 
+        padding-top: 8px; border-top: 1px solid rgba(212, 175, 55, 0.1); 
+    }
+    .logo-container { order: 1; }
+    .header-actions { order: 2; width: 100%; justify-content: center; }
+    
+    .glass-card { padding: 1.5rem; }
+    
+    /* Force 2 colonnes pour les boutons/tuiles sur mobile */
+    .grid-options { grid-template-columns: 1fr 1fr; gap: 8px; }
+    
+    .btn-container { flex-direction: column; gap: 10px; }
+    .btn-container button { width: 100%; }
+    
+    .stats-card { width: 100%; max-width: 700px; }
+}
+
+.footer { text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; color: var(--slate); margin-top: auto; }
+.gold-link { color: var(--gold); text-decoration: none; border-bottom: 1px dotted var(--gold); }
