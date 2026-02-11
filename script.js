@@ -1,211 +1,153 @@
 /* * PROJET : e-META LABS — Moteur IA Stratégique
- * FICHIER : script.js (Version Master 2026)
+ * FICHIER : script.js (Version MASTER 2026 - UX & DATA)
  */
 
 // --- CONFIGURATION ---
 const WEBHOOK_URL = "https://hook.eu2.make.com/2aq4sxsbs6pj7cqmx7i2tvjvhwwdrvf2"; 
 const STATS_URL = "https://hook.eu2.make.com/1jeaje7c3r1chg5oz7wruxohz6e8a8bg"; 
 
-// --- NAVIGATION ENTRE LES ÉTAPES ---
+// --- NAVIGATION ---
 function nextStep(targetStep) {
-    if (targetStep === 2 && !validateStep1()) return;
-    if (targetStep === 3 && !validateStep2()) return;
-
+    // Validations simplifiées (à renforcer si besoin)
+    if (targetStep === 2) {
+        const comp = document.getElementById('company').value;
+        const mail = document.getElementById('email').value;
+        if (!comp || !mail) return alert("Veuillez remplir Société et Email.");
+    }
+    
+    // Bascule des étapes
     document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
     document.getElementById(`step-${targetStep}`).classList.add('active');
     
-    // Amélioration : Scroll fluide vers le haut du formulaire
+    // Scroll fluide vers le haut du formulaire
     const card = document.querySelector('.glass-card');
     if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// --- RÉINITIALISATION COMPLÈTE ---
+// --- UX : RESET PROPRE ---
 function resetForm() {
-    // Utilisation de reload pour garantir un moteur IA "propre" à chaque nouveau diagnostic
-    window.location.reload();
+    window.location.reload(); // Rechargement complet pour nettoyer le cache et les variables
 }
 
-// --- VALIDATIONS ---
-function validateStep1() {
-    const company = document.getElementById('company').value;
-    const email = document.getElementById('email').value;
-    if (!company || !email) { 
-        const lang = document.documentElement.lang || 'fr';
-        alert(lang === 'fr' ? "Champs obligatoires : Société et Email." : "Required: Company and Email."); 
-        return false; 
-    }
-    return true;
-}
-
-function validateStep2() {
-    const sector = document.querySelector('input[name="sector"]:checked');
-    const geo = document.getElementById('geo-zone').value;
-    if (!sector || !geo) { 
-        const lang = document.documentElement.lang || 'fr';
-        alert(lang === 'fr' ? "Veuillez compléter la matrice de secteur." : "Please complete the sector matrix."); 
-        return false; 
-    }
-    return true;
-}
-
-// --- MONITORING LIVE (WIDGET) ---
+// --- LIVE MONITORING ---
 async function updateLiveStats() {
     try {
         const response = await fetch(STATS_URL);
-        if (!response.ok) return;
-        const data = await response.json();
-        
-        const countAnalyses = document.getElementById('count-analyses');
-        const countPDF = document.getElementById('count-pdf');
-        
-        if (countAnalyses) countAnalyses.innerText = data.totalAnalyses || "0";
-        if (countPDF) countPDF.innerText = data.totalPDF || "0";
-        
-        const lastUpdate = document.getElementById('last-update');
-        if (lastUpdate) {
+        if (response.ok) {
+            const data = await response.json();
+            document.getElementById('count-analyses').innerText = data.totalAnalyses || "0";
+            document.getElementById('count-pdf').innerText = data.totalPDF || "0";
+            
             const now = new Date();
-            lastUpdate.innerText = now.getHours().toString().padStart(2, '0') + ":" + 
-                                  now.getMinutes().toString().padStart(2, '0');
+            document.getElementById('last-update').innerText = 
+                now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
         }
-    } catch (err) {
-        console.warn("Widget Intelligence en attente de données...");
-    }
+    } catch (err) { console.warn("Widget Stats en attente..."); }
 }
 
-// --- TÉLÉCHARGEMENT PDF SÉCURISÉ ---
+// --- TÉLÉCHARGEMENT PDF ---
 function downloadPDF() {
-    const element = document.getElementById('resultBody');
-    const companyName = document.getElementById('company').value || "e-META-LABS";
-    const emailClient = document.getElementById('email').value;
-
-    if (!element || element.innerText.trim() === "" || element.innerText.includes("Initialisation")) return;
-
-    // SIGNAL DE MONITORING VERS MAKE (Asynchrone)
+    const content = document.getElementById('resultBody').innerHTML;
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+        <html><head><title>Diagnostic e-META LABS</title></head>
+        <body style="font-family:sans-serif; padding:40px;">
+            <h1 style="color:#d4af37; text-align:center;">e-META LABS</h1>
+            <hr>
+            ${content}
+            <div style="margin-top:50px; font-size:0.8em; color:#666; text-align:center;">Document Certifié - e-meta.app</div>
+        </body></html>
+    `);
+    printWindow.document.close();
+    setTimeout(() => printWindow.print(), 500);
+    
+    // Signalement téléchargement à Make
     fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            action: "PDF_DOWNLOAD",
-            company: companyName,
-            email: emailClient,
-            timestamp: new Date().toISOString()
-        })
-    }).catch(() => {});
-
-    // GÉNÉRATION DE LA FENÊTRE D'IMPRESSION
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write(`
-        <html>
-            <head>
-                <title>Diagnostic e-META LABS - ${companyName}</title>
-                <style>
-                    body { font-family: 'Helvetica', sans-serif; padding: 50px; line-height: 1.6; color: #0a192f; }
-                    h1 { color: #0a192f; text-align: center; border-bottom: 2px solid #d4af37; padding-bottom: 10px; }
-                    .footer { margin-top: 50px; font-size: 0.8rem; border-top: 1px solid #ccc; padding-top: 10px; opacity: 0.7; }
-                </style>
-            </head>
-            <body>
-                <h1>e-META LABS</h1>
-                <p style="text-align:center; text-transform:uppercase; color:#d4af37; font-weight:bold;">Intelligence Stratégique Souveraine</p>
-                <div style="margin-top:30px;">${element.innerHTML}</div>
-                <div class="footer"><p>Document certifié Blockchain via protocole e-META LABS 2026.</p></div>
-            </body>
-        </html>
-    `);
-    printWindow.document.close();
-    setTimeout(() => { printWindow.print(); }, 500);
+        body: JSON.stringify({ action: "PDF_DOWNLOAD", timestamp: new Date().toISOString() })
+    }).catch(()=>{});
 }
 
-// --- INITIALISATION GÉNÉRALE ---
+// --- INITIALISATION ---
 document.addEventListener('DOMContentLoaded', () => {
     updateLiveStats();
-    setInterval(updateLiveStats, 60000);
+    setInterval(updateLiveStats, 60000); // Mise à jour auto chaque minute
 
-    // OUVERTURE DE LA POLITIQUE DEPUIS LE DIAGNOSTIC (SANS BASCULER)
-    const privacyLinks = document.querySelectorAll('[data-i18n="link_privacy"], #openPrivacy');
-    privacyLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault(); // Empêche la redirection vers une autre page
-            const overlay = document.getElementById('privacyOverlay');
-            if (overlay) overlay.style.display = 'flex'; // Affiche la modal par-dessus le diagnostic
-        });
-    });
-
-    // FERMETURE DES MODALS
-    document.querySelectorAll('.close-modal, .close-modal-btn, .close-result').forEach(btn => {
+    // Gestion Modals
+    document.querySelectorAll('.close-modal, .close-result, .close-modal-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            const modals = ['privacyOverlay', 'resultModal'];
-            modals.forEach(id => {
-                const m = document.getElementById(id);
-                // On ne ferme que la modal de confidentialité si on est sur un diagnostic
-                if (m && id === 'privacyOverlay') m.style.display = 'none';
-            });
+            document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
         });
     });
+    
+    document.querySelector('#openPrivacy').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('privacyOverlay').style.display = 'flex';
+    });
 
-    // BOUTONS DU DIAGNOSTIC
-    const btnDownload = document.querySelector('.btn-download'); 
-    if (btnDownload) btnDownload.addEventListener('click', downloadPDF);
-
-    const btnNewAnalysis = document.querySelector('.btn-new');
-    if (btnNewAnalysis) btnNewAnalysis.addEventListener('click', resetForm);
+    // Boutons Diagnostic
+    const btnDown = document.querySelector('.btn-download');
+    if(btnDown) btnDown.addEventListener('click', downloadPDF);
+    
+    const btnNew = document.querySelector('.btn-new');
+    if(btnNew) btnNew.addEventListener('click', resetForm);
 });
 
-// --- ENVOI FORMULAIRE & MOTEUR IA ---
+// --- SOUMISSION & CONNEXION IA ---
 const diagForm = document.getElementById('diagnosticForm');
 if (diagForm) {
-    diagForm.addEventListener('submit', function(e) {
+    diagForm.addEventListener('submit', async function(e) {
         e.preventDefault();
+        if (document.getElementById('honeypot').value !== "") return; // Anti-bot
 
-        if (document.getElementById('honeypot')?.value !== "") return;
-        if (!document.getElementById('consent')?.checked) return;
-
+        // 1. UI : Activation du Loader & Verrouillage
+        const loader = document.getElementById('loadingOverlay');
         const submitBtn = document.querySelector('button[type="submit"]');
-        const lang = document.documentElement.lang || 'fr';
-        
-        submitBtn.innerText = lang === 'fr' ? "Analyse IA en cours..." : "AI Analysis in progress...";
+        loader.style.display = 'flex';
         submitBtn.disabled = true;
 
+        // 2. DATA : Collecte & Souveraineté
         const formData = {
             action: "diagnostic",
-            timestamp: new Date().toISOString(), 
+            timestamp: new Date().toISOString(),
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, // Donnée souveraine
+            lang: navigator.language || 'fr', // Donnée souveraine
             company: document.getElementById('company').value,
             email: document.getElementById('email').value,
-            phone: document.getElementById('phone')?.value || "Non renseigné",
-            sector: document.querySelector('input[name="sector"]:checked')?.value || "N/A",
+            phone: document.getElementById('phone').value,
+            sector: document.querySelector('input[name="sector"]:checked')?.value || "Non spécifié",
             geoZone: document.getElementById('geo-zone').value,
+            // Collecte des expertises multiples
             expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked'))
-                             .map(cb => cb.value)
-                             .join(', '),
-            context: document.getElementById('context').value,
-            lang: lang
+                             .map(cb => cb.value).join(', '),
+            context: document.getElementById('context').value
         };
 
-        fetch(WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        })
-        .then(async response => {
-            if (response.ok) {
-                const diagnosticText = await response.text();
-                const resultBody = document.getElementById('resultBody');
-                const resultModal = document.getElementById('resultModal');
+        try {
+            // 3. ENVOI VERS MAKE
+            const response = await fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
 
-                if (resultBody && resultModal) {
-                    // Injecte le texte pur reçu de Gemini (Make Webhook Response)
-                    resultBody.innerHTML = diagnosticText;
-                    resultModal.style.display = 'flex';
-                }
-                submitBtn.innerText = lang === 'fr' ? "Analyse Terminée" : "Analysis Complete";
-            } else {
-                throw new Error();
-            }
-        })
-        .catch(() => {
-            alert(lang === 'fr' ? "Erreur de connexion au moteur e-META." : "e-META connection error.");
-            submitBtn.innerText = "Lancer l'Analyse IA";
+            if (!response.ok) throw new Error("Erreur Réseau");
+
+            // 4. RÉCEPTION DU TEXTE BRUT GEMINI
+            const resultText = await response.text();
+
+            // 5. AFFICHAGE RÉSULTAT
+            loader.style.display = 'none';
+            document.getElementById('resultBody').innerHTML = resultText;
+            document.getElementById('resultModal').style.display = 'flex';
+            
+            submitBtn.innerText = "Analyse Terminée";
+
+        } catch (error) {
+            loader.style.display = 'none';
+            alert("Erreur de connexion au moteur IA. Veuillez réessayer.");
             submitBtn.disabled = false;
-        });
+        }
     });
 }
