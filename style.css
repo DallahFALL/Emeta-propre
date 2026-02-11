@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS — Moteur IA Stratégique
- * FICHIER : style.css (Version MASTER 2026 - RESPONSIVE & STABLE)
+ * FICHIER : style.css (Version MASTER 2026 - OPTIMISÉE)
  */
 
 /* --- 1. VARIABLES & RESET --- */
@@ -25,7 +25,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden; /* Empêche le scroll horizontal accidentel */
+    overflow-x: hidden;
 }
 
 /* --- 2. HEADER STABILISÉ --- */
@@ -39,7 +39,7 @@ body {
     border-bottom: 1px solid rgba(212, 175, 55, 0.3);
     position: sticky;
     top: 0;
-    z-index: 500; /* Niveau intermédiaire */
+    z-index: 500;
     gap: 15px;
 }
 
@@ -67,7 +67,6 @@ body {
     text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
-/* Actions Header (Reset / Langues) */
 .header-actions { display: flex; align-items: center; flex-shrink: 0; }
 
 .action-group {
@@ -102,7 +101,7 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Aligne en haut pour éviter de flotter */
+    justify-content: flex-start;
     align-items: center;
     padding: 3rem 1.5rem;
 }
@@ -115,18 +114,18 @@ body {
     border-radius: 12px;
     border: 1px solid rgba(212, 175, 55, 0.15);
     box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    position: relative; /* INDISPENSABLE POUR LE LOADER */
-    overflow: hidden;   /* Empêche le contenu de déborder */
+    position: relative; /* Indispensable pour le loader */
+    overflow: hidden;   
     backdrop-filter: blur(10px);
 }
 
 /* --- 4. GESTION DES ÉTAPES (ANTI-SUPERPOSITION) --- */
 .form-step { 
-    display: none !important; /* Cache tout par défaut */
+    display: none !important; 
 }
 
 .form-step.active { 
-    display: block !important; /* Affiche uniquement l'actif */
+    display: block !important; 
     animation: fadeIn 0.5s ease-out;
 }
 
@@ -135,7 +134,7 @@ body {
     to { opacity: 1; transform: translateY(0); } 
 }
 
-/* --- 5. CHAMPS & TYPOGRAPHIE --- */
+/* --- 5. CHAMPS DE FORMULAIRE --- */
 h3 {
     color: var(--white); margin-bottom: 1.5rem;
     border-bottom: 1px solid var(--slate); padding-bottom: 0.5rem;
@@ -145,7 +144,8 @@ h3 {
 .input-group { margin-bottom: 1.5rem; }
 label { display: block; margin-bottom: 0.5rem; color: var(--white); font-size: 0.9rem; font-weight: 500; }
 
-input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+/* Style général des inputs et textarea */
+input[type="text"], input[type="email"], input[type="tel"], textarea {
     width: 100%; padding: 14px;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(136, 146, 176, 0.3);
@@ -153,10 +153,48 @@ input[type="text"], input[type="email"], input[type="tel"], textarea, select {
     font-family: var(--font-body); transition: var(--transition);
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus, textarea:focus {
     border-color: var(--gold); outline: none;
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
+/* --- DESIGN LISTE DÉROULANTE (SELECT PRO) --- */
+select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid rgba(136, 146, 176, 0.3);
+    border-radius: 6px;
+    font-family: var(--font-body);
+    color: var(--white);
+    
+    appearance: none; /* Supprime la flèche système */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    background-color: rgba(255, 255, 255, 0.05);
+    /* Flèche dorée SVG encodée */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    padding-right: 2.5rem !important;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+select:focus {
+    background-color: rgba(10, 25, 47, 0.95);
+    border-color: var(--gold);
+    outline: none;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
+/* Style des options (Fond sombre forcé pour éviter le blanc par défaut) */
+option {
+    background-color: var(--navy-deep);
+    color: var(--white);
+    padding: 10px;
 }
 
 .section-label {
@@ -167,14 +205,13 @@ input:focus, textarea:focus, select:focus {
 /* --- 6. TUILES INTERACTIVES (GRID RESPONSIVE) --- */
 .grid-options {
     display: grid;
-    /* Grid intelligent : s'adapte à la largeur dispo */
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 12px;
     margin-bottom: 1.5rem;
 }
 
 .checkbox-btn { cursor: pointer; display: block; height: 100%; }
-.checkbox-btn input { display: none; } /* On cache la case moche */
+.checkbox-btn input { display: none; }
 
 .checkbox-btn span {
     display: flex; align-items: center; justify-content: center;
@@ -213,11 +250,11 @@ button.btn-outline {
 
 /* --- 8. LOADER IA (FIXE & CENTRÉ) --- */
 #loadingOverlay {
-    display: none; /* JS le passe en flex */
-    position: absolute; /* Ancré à la glass-card */
+    display: none;
+    position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(10, 25, 47, 0.96); /* Fond opaque pour masquer le formulaire */
-    z-index: 100; /* Au-dessus du formulaire */
+    background: rgba(10, 25, 47, 0.96);
+    z-index: 100;
     flex-direction: column; justify-content: center; align-items: center;
     border-radius: 12px;
 }
@@ -238,11 +275,11 @@ button.btn-outline {
 }
 @keyframes pulse-text { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
-/* --- 9. MODALS (Privacy & Result) --- */
+/* --- 9. MODALS --- */
 .modal-overlay {
     display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(10, 25, 47, 0.98); 
-    z-index: 2000; /* Toujours tout au-dessus */
+    z-index: 2000;
     justify-content: center; align-items: center;
 }
 
@@ -285,7 +322,6 @@ button.btn-outline {
     
     .glass-card { padding: 1.5rem; }
     
-    /* Force 2 colonnes pour les boutons/tuiles sur mobile */
     .grid-options { grid-template-columns: 1fr 1fr; gap: 8px; }
     
     .btn-container { flex-direction: column; gap: 10px; }
