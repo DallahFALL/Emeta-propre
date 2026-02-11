@@ -74,14 +74,18 @@
                 <div class="form-step" id="step-2">
                     <h3 data-i18n="step2_title">02. Matrice Stratégique</h3>
                     
-                    <label class="section-label" data-i18n="lbl_sector">Secteur d'Activité</label>
+                    <label class="section-label" data-i18n="lbl_sector">Secteur Stratégique (International)</label>
                     <div class="grid-options">
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="GenAI_Tech" checked> <span>GenAI & Tech</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Finance_Bank"> <span>Finance & Banque</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Energy_Mining"> <span>Énergie & Mines</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Agri_Food"> <span>AgriTech & Food</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Gov_Public"> <span>Gouvernement</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="RealEstate_Infra"> <span>Immobilier & Infra</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="GenAI_Robotics" checked> <span>GenAI & Robotics</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="FinTech_DeFi"> <span>FinTech & DeFi</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="GreenTech_Energy"> <span>GreenTech & Énergie</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Mining_OilGas"> <span>Mines, Pétrole & Gaz</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="AgriTech_Food"> <span>AgriTech & FoodSecurity</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Health_BioTech"> <span>Santé & BioTech</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Logistics_Infra"> <span>Smart Infra & Logistique</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="GovTech_Public"> <span>GovTech & Secteur Public</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="EduTech_Knowledge"> <span>EduTech & Savoir</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="RealEstate_SmartCity"> <span>Immo & Smart City</span></label>
                     </div>
 
                     <label class="section-label mt-2" data-i18n="lbl_geo">Hub Stratégique d'Intervention</label>
@@ -108,17 +112,16 @@
                         </select>
                     </div>
 
-                    <label class="section-label mt-2" data-i18n="lbl_expertise">Expertises Requises</label>
-                    <div class="grid-options" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
+                    <label class="section-label mt-2" data-i18n="lbl_expertise">Expertises Requises (Multi-Secteurs)</label>
+                    <div class="grid-options" style="grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));">
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="IA_Souveraine"> <span>IA Souveraine</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Cybersecurite"> <span>Cybersécurité</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Finance_MA"> <span>M&A / Levée</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Compliance_Legal"> <span>Légal & OHADA</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Transfo_Digitale"> <span>Transfo. Digitale</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="ESG_RSE"> <span>ESG & Impact</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Affaires_Publiques"> <span>Affaires Publiques</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="ESG_Impact"> <span>ESG & Impact</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Affaires_Publiques"> <span>Lobbying & PA</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Supply_Chain"> <span>Supply Chain</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Formation_Talents"> <span>Formation</span></label>
                     </div>
 
                     <div class="btn-container split">
@@ -178,7 +181,12 @@
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <h2 data-i18n="modal_title">Politique de Confidentialité</h2>
-            <div class="modal-body">Contenu de la politique en cours...</div>
+            <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
+                <h4 data-i18n="priv_t1">1. Souveraineté des Données</h4>
+                <p data-i18n="priv_c1">Vos données sont traitées via un protocole IA sécurisé.</p>
+                <h4 data-i18n="priv_t2">2. Confidentialité</h4>
+                <p data-i18n="priv_c2">L'analyse générée est strictement confidentielle et certifiée par e-META LABS.</p>
+            </div>
             <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close">Fermer</button>
         </div>
     </div>
@@ -187,7 +195,9 @@
         <div class="modal-content">
             <span class="close-result">&times;</span>
             <h2 style="color: #d4af37;" data-i18n="result_title">Diagnostic Stratégique</h2>
-            <div id="resultBody" class="modal-body"><p>Initialisation du moteur IA...</p></div>
+            <div id="resultBody" class="modal-body">
+                <p>Initialisation du moteur IA...</p>
+            </div>
             <div class="btn-container">
                 <button class="btn-gold btn-download" data-i18n="btn_pdf">TÉLÉCHARGER PDF</button>
                 <button class="btn-gold btn-outline-gold btn-new" data-i18n="btn_new">NOUVELLE ANALYSE</button>
