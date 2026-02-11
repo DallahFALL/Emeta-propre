@@ -3,90 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confidentialité | e-META LABS</title>
+    <title>Politique de Confidentialité | e-META LABS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L95 25 V75 L50 95 L5 75 V25 Z' stroke='%23d4af37' stroke-width='4' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
+    
     <style>
-        /* Styles spécifiques pour le respect de la charte graphique e-META */
-        body { 
-            background-color: var(--navy-dark, #0a192f); 
-            margin: 0; 
-            padding: 0;
+        /* Ajustements spécifiques pour la page de texte */
+        .privacy-container {
+            max-width: 900px !important; /* Plus large pour la lecture */
+            text-align: left;
         }
-        .privacy-content { 
-            padding: 80px 20px; 
-            max-width: 800px; 
-            margin: 0 auto; 
-            color: var(--navy, #ffffff); 
+        .privacy-content h2 {
+            color: var(--gold);
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 10px;
         }
-        h1 { 
-            font-family: var(--serif-font, 'Cinzel', serif); 
-            color: var(--gold, #d4af37);
-            margin-bottom: 30px; 
-            border-bottom: 2px solid var(--gold, #d4af37); 
-            padding-bottom: 10px; 
+        .privacy-content p, .privacy-content li {
+            color: var(--white);
+            opacity: 0.9;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
         }
-        h2 { 
-            margin-top: 40px; 
-            font-size: 1.2rem; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-            color: var(--gold, #d4af37);
+        .privacy-content ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
         }
-        p, li { 
-            margin-bottom: 15px; 
-            font-size: 0.95rem; 
-            line-height: 1.6;
-            opacity: 0.85; 
+        .privacy-content li {
+            list-style-type: square;
+            color: var(--slate);
         }
-        ul { padding-left: 20px; }
-        .back-container { margin-top: 60px; text-align: center; }
-        .nav-cta {
-            color: var(--gold, #d4af37);
-            text-decoration: none;
-            border: 1px solid var(--gold, #d4af37);
-            padding: 10px 25px;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-        }
-        .nav-cta:hover {
-            background: var(--gold, #d4af37);
-            color: var(--navy-dark, #0a192f);
+        .privacy-content strong {
+            color: var(--gold);
         }
     </style>
 </head>
 <body>
-    <div class="container privacy-content">
-        <h1>Politique de Confidentialité</h1>
-        <p><strong>Dernière mise à jour :</strong> 10 Février 2026</p>
-        
-        <h2>1. Identité de la Structure</h2>
-        <p>e-META LABS (SASU), entité basée au Sénégal, conçoit des solutions d'intelligence artificielle de haute précision dédiées à l'aide à la décision stratégique.</p>
-        
-        <h2>2. Philosophie de Souveraineté Numérique</h2>
-        <p>Conformément à nos engagements d'excellence, nous garantissons la souveraineté totale de vos données. Vos problématiques et diagnostics ne sont jamais revendus, ni utilisés pour l'entraînement de modèles d'IA publics tiers.</p>
-        
-        <h2>3. Données Collectées</h2>
-        <p>Pour le bon fonctionnement du moteur IA e-META, nous traitons les données suivantes saisies via notre interface :</p>
-        <ul>
-            <li><strong>Identification :</strong> Nom de la société / entité et adresse email professionnelle.</li>
-            <li><strong>Matrice Stratégique :</strong> Secteur d'activité, zone géographique et expertises requises.</li>
-            <li><strong>Contenu :</strong> Contexte opérationnel et enjeux stratégiques décrits.</li>
-        </ul>
 
-        <h2>4. Certification Blockchain & Intégrité</h2>
-        <p>Chaque diagnostic généré par le moteur e-META LABS fait l'objet d'un ancrage cryptographique (hash) sur la Blockchain via le protocole Woleet. Cette procédure garantit l'immuabilité, l'intégrité et l'antériorité de vos réflexions stratégiques sans compromettre la confidentialité du contenu textuel.</p>
-        
-        <h2>5. Non-Substitution de Conseil</h2>
-        <p>Les analyses produites constituent une aide technologique à la décision. Elles ne se substituent en aucun cas aux services de professions réglementées (conseil juridique, fiscal ou financier). e-META LABS décline toute responsabilité quant aux décisions opérationnelles prises sur la base de ses diagnostics automatisés.</p>
-        
-        <h2>6. Vos Droits et Contact Support</h2>
-        <p>Vous disposez d'un droit d'accès, de rectification et de suppression de vos données personnelles. Pour toute question technique ou demande relative à vos données, notre unité de support est à votre disposition :</p>
-        <p style="color: var(--gold, #d4af37); font-weight: bold;">support@e-metalabs.com</p>
-
-        <div class="back-container">
-            <a href="index.html" class="nav-cta">Retour au Moteur de Diagnostic</a>
+    <header class="header">
+        <div class="logo-container">
+            <svg width="180" height="60" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 5 L95 25 V75 L50 95 L5 75 V25 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+                <path d="M50 20 L80 35 V65 L50 80 L20 65 V35 Z" stroke="#d4af37" stroke-width="1" fill="rgba(212, 175, 55, 0.1)"/>
+                <circle cx="50" cy="50" r="8" fill="#d4af37"/>
+            </svg>
+            <div class="brand-text">
+                <h1>e-META LABS</h1>
+            </div>
         </div>
-    </div>
+        <div class="header-actions">
+            <a href="index.html" class="btn-reset" style="text-decoration: none; border: 1px solid var(--gold); padding: 8px 15px; border-radius: 4px;">Retour au Diagnostic</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="glass-card privacy-container">
+            <h1 style="text-align: center; color: var(--gold); margin-bottom: 10px;">Politique de Confidentialité</h1>
+            <p style="text-align: center; color: var(--slate); font-size: 0.8rem; margin-bottom: 40px;">Dernière mise à jour : 10 Février 2026</p>
+
+            <div class="privacy-content">
+                <h2>1. Identité de la Structure</h2>
+                <p><strong>e-META LABS (SASU)</strong>, entité basée au Sénégal, conçoit des solutions d'intelligence artificielle de haute précision dédiées à l'aide à la décision stratégique pour les acteurs internationaux.</p>
+
+                <h2>2. Philosophie de Souveraineté Numérique</h2>
+                <p>Conformément à nos engagements d'excellence, nous garantissons la souveraineté totale de vos données. Vos problématiques et diagnostics ne sont <strong>jamais revendus</strong>, ni utilisés pour l'entraînement de modèles d'IA publics tiers. Le traitement est isolé et éphémère.</p>
+
+                <h2>3. Données Collectées</h2>
+                <p>Pour le bon fonctionnement du moteur IA e-META, nous traitons uniquement les données saisies volontairement via notre interface :</p>
+                <ul>
+                    <li><strong>Identification :</strong> Nom de la société / entité et adresse email professionnelle.</li>
+                    <li><strong>Matrice Stratégique :</strong> Secteur d'activité, zone géographique (Hubs) et expertises requises.</li>
+                    <li><strong>Contenu Opérationnel :</strong> Contexte, enjeux et objectifs décrits dans le formulaire.</li>
+                    <li><strong>Métadonnées Techniques :</strong> Langue du navigateur et fuseau horaire (pour la contextualisation de l'analyse).</li>
+                </ul>
+
+                <h2>4. Certification Blockchain & Intégrité</h2>
+                <p>Chaque diagnostic généré par le moteur e-META LABS peut faire l'objet d'un ancrage cryptographique (hash) sur la Blockchain via le protocole Woleet. Cette procédure garantit l'immuabilité, l'intégrité et l'antériorité de vos réflexions stratégiques sans compromettre la confidentialité du contenu textuel.</p>
+
+                <h2>5. Non-Substitution de Conseil</h2>
+                <p>Les analyses produites constituent une aide technologique avancée à la décision. Elles ne se substituent en aucun cas aux services de professions réglementées (conseil juridique, fiscal ou financier). e-META LABS décline toute responsabilité quant aux décisions opérationnelles prises exclusivement sur la base de ses diagnostics automatisés.</p>
+
+                <h2>6. Vos Droits et Contact Support</h2>
+                <p>Conformément aux réglementations internationales, vous disposez d'un droit d'accès, de rectification et de suppression de vos données personnelles. Pour toute question technique ou demande relative à vos données, notre unité de support est à votre disposition :</p>
+                <p style="text-align: center; margin-top: 20px;">
+                    <a href="mailto:support@e-metalabs.com" class="gold-link" style="font-size: 1.1rem; font-weight: bold;">support@e-metalabs.com</a>
+                </p>
+            </div>
+
+            <div class="btn-container" style="justify-content: center; margin-top: 50px;">
+                <a href="index.html" style="text-decoration: none;">
+                    <button class="btn-gold">Retourner au Moteur IA</button>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 e-META LABS SASU. Tous droits réservés.</p>
+        <p class="tiny">Strategic Intelligence Unit • Dakar - Paris - Dubai</p>
+    </footer>
+
 </body>
 </html>
