@@ -35,45 +35,36 @@ body {
 [dir="rtl"] .btn-container.right { justify-content: flex-start; }
 [dir="rtl"] .btn-reset { border-right: none; border-left: 1px solid rgba(136, 146, 176, 0.3); padding-right: 0; padding-left: 12px; }
 
-/* --- HEADER STABILISÉ --- */
-.header {
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 5%;
-    background: rgba(10, 25, 47, 0.98);
-    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    gap: 15px;
-}
-
+/* --- CORRECTION LOGO RESPONSIVE --- */
 .logo-container {
     display: flex;
     align-items: center;
     gap: 12px;
-    flex-shrink: 0;
+    flex-shrink: 1; /* Permet au container de réduire si besoin */
+    min-width: 0;   /* Évite les débordements Flexbox */
+}
+
+.logo-container svg {
+    max-width: 100%; /* Le logo ne dépassera jamais son parent */
+    height: auto;    /* Garde les proportions */
+    width: 45px;     /* Taille fixe idéale sur mobile */
+}
+
+@media (min-width: 768px) {
+    .logo-container svg {
+        width: 60px; /* Plus grand sur ordinateur */
+    }
 }
 
 .brand-text h1 {
-    color: var(--white);
-    font-family: var(--font-heading);
-    font-size: 1.3rem;
-    letter-spacing: 2px;
+    white-space: nowrap; /* Évite que le nom e-META LABS ne passe sur deux lignes */
+    font-size: 1.1rem;   /* Taille ajustée pour mobile */
 }
 
-.header-slogan {
-    color: var(--gold);
-    font-family: var(--font-heading);
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: 700;
-    flex: 1;
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+@media (min-width: 768px) {
+    .brand-text h1 {
+        font-size: 1.4rem;
+    }
 }
 
 /* --- STRUCTURE ACTIONS HEADER --- */
