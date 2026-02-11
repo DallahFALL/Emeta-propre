@@ -42,129 +42,109 @@
     </header>
 
     <main class="main-container">
-        <div class="glass-card">
-            <div id="loadingOverlay">
-                <div class="ai-loader"></div>
-                <p class="loading-text" data-i18n="ai_calculating">Intelligence Stratégique en Cours...</p>
-            </div>
+    <div class="glass-card">
+        <div id="loadingOverlay">
+            <div class="ai-loader"></div>
+            <p class="loading-text" data-i18n="ai_calculating">Intelligence Stratégique en Cours...</p>
+        </div>
 
-            <form id="diagnosticForm">
-                <div class="form-step active" id="step-1">
-                    <h3 data-i18n="step1_title">01. Identification</h3>
-                    
-                    <div style="display:none;">
-                        <input type="text" id="honeypot" name="honeypot" tabindex="-1" autocomplete="off">
-                    </div>
-
-                    <div class="input-group">
-                        <label for="company" data-i18n="lbl_company">Société / Entité</label>
-                        <input type="text" id="company" required placeholder="ex: Groupe MetaStrat...">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="email" data-i18n="lbl_email">Email Professionnel</label>
-                        <input type="email" id="email" required placeholder="contact@domaine.com">
-                    </div>
-
-                    <div class="input-group">
-                        <label for="phone" data-i18n="lbl_phone">Numéro WhatsApp (Optionnel)</label>
-                        <input type="tel" id="phone" placeholder="+221... / +33... / +971...">
-                    </div>
-
-                    <div class="btn-container right">
-                        <button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
-                    </div>
+        <form id="diagnosticForm">
+            <div class="form-step active" id="step-1">
+                <h3 data-i18n="step1_title">01. Identification</h3>
+                <div style="display:none;"><input type="text" id="honeypot" tabindex="-1"></div>
+                
+                <div class="input-group">
+                    <label for="company" data-i18n="lbl_company">Société / Entité</label>
+                    <input type="text" id="company" required placeholder="ex: Groupe MetaStrat...">
+                </div>
+                <div class="input-group">
+                    <label for="email" data-i18n="lbl_email">Email Professionnel</label>
+                    <input type="email" id="email" required placeholder="contact@domaine.com">
+                </div>
+                <div class="input-group">
+                    <label for="phone" data-i18n="lbl_phone">Numéro WhatsApp (Recommandé)</label>
+                    <input type="tel" id="phone" placeholder="+Code Pays...">
                 </div>
 
-                <div class="form-step" id="step-2">
-                    <h3 data-i18n="step2_title">02. Matrice Stratégique</h3>
-                    
-                    <label class="section-label" data-i18n="lbl_sector">Secteur Stratégique</label>
-                    <div class="grid-options">
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="GenAI_Robotics" checked> <span data-i18n="sec_genai">GenAI & Tech</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="GreenTech_Energy"> <span data-i18n="sec_green">Énergies & Mines</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="FinTech"> <span data-i18n="sec_fintech">FinTech & Banque</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="AgriTech"> <span data-i18n="sec_agri">AgriTech & Food</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Public_Gov"> <span data-i18n="sec_public">Secteur Public</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="RealEstate"> <span data-i18n="sec_btp">Immobilier & BTP</span></label>
-                    </div>
+                <div class="btn-container right">
+                    <button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
+                </div>
+            </div>
 
-                    <label class="section-label mt-2" data-i18n="lbl_geo">Zone d'Intervention (Hubs Internationaux)</label>
-                    <div class="input-group">
-                        <select id="geo-zone" required>
-                            <option value="" disabled selected data-i18n="opt_geo_def">Sélectionner une zone...</option>
+            <div class="form-step" id="step-2">
+                <h3 data-i18n="step2_title">02. Matrice Stratégique</h3>
+                
+                <label class="section-label" data-i18n="lbl_sector">Secteur d'Activité</label>
+                <div class="grid-options">
+                    <label class="checkbox-btn"><input type="radio" name="sector" value="GenAI_Tech" checked> <span>GenAI & Tech</span></label>
+                    <label class="checkbox-btn"><input type="radio" name="sector" value="Finance_Bank"> <span>Finance & Banque</span></label>
+                    <label class="checkbox-btn"><input type="radio" name="sector" value="Energy_Mining"> <span>Énergie & Mines</span></label>
+                    <label class="checkbox-btn"><input type="radio" name="sector" value="Agri_Food"> <span>AgriTech & Food</span></label>
+                    <label class="checkbox-btn"><input type="radio" name="sector" value="Gov_Public"> <span>Gouvernement</span></label>
+                    <label class="checkbox-btn"><input type="radio" name="sector" value="RealEstate_Infra"> <span>Immobilier & Infra</span></label>
+                </div>
+
+                <label class="section-label mt-2" data-i18n="lbl_geo">Hub Stratégique d'Intervention</label>
+                <div class="input-group">
+                    <select id="geo-zone" required>
+                        <option value="" disabled selected>-- Sélectionner une zone --</option>
+                        <optgroup label="Afrique (Strategic Hubs)">
                             <option value="Senegal">Sénégal (Dakar Hub)</option>
                             <option value="Maroc">Maroc (Casablanca Finance City)</option>
-                            <option value="CoteIvoire">Côte d'Ivoire (Abidjan Hub)</option>
+                            <option value="CoteIvoire">Côte d'Ivoire (Abidjan)</option>
                             <option value="Nigeria">Nigeria (Lagos)</option>
-                            <option value="Kenya">Kenya (Nairobi Hub)</option>
+                            <option value="Kenya">Kenya (Silicon Savannah)</option>
+                            <option value="Rwanda">Rwanda (Kigali)</option>
+                        </optgroup>
+                        <optgroup label="International / Global">
                             <option value="UAE">UAE (Dubai - Middle East)</option>
-                            <option value="France">France (Europe - Paris)</option>
-                            <option value="USA">USA (Silicon Valley)</option>
-                            <option value="China">Chine / Asie (Hong Kong Hub)</option>
-                            <option value="Global">International / Global</option>
-                        </select>
-                    </div>
-
-                    <label class="section-label mt-2" data-i18n="lbl_expertise">Expertise Requise</label>
-                    <div class="grid-options">
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="SouveraineteIA"> <span data-i18n="exp_sov">Souveraineté IA</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="TransformationDigitale"> <span data-i18n="exp_digital">Transfo. Digitale</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Finance_MA"> <span data-i18n="exp_ma">M&A & Levée</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Conformite_OHADA"> <span data-i18n="exp_ohada">Conformité OHADA</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Ingenierie_ESG"> <span data-i18n="exp_esg">Ingénierie ESG</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Cybersecurite"> <span data-i18n="exp_cyber">Cybersécurité</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="SupplyChain"> <span data-i18n="exp_supply">Supply Chain & Ops</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="AffairesPubliques"> <span data-i18n="exp_pubaff">Affaires Publiques</span></label>
-                    </div>
-
-                    <div class="btn-container split">
-                        <button type="button" class="btn-outline" onclick="nextStep(1)" data-i18n="btn_prev">Retour</button>
-                        <button type="button" class="btn-gold" onclick="nextStep(3)" data-i18n="btn_next_matrice">Ouvrir Matrice Analyse</button>
-                    </div>
+                            <option value="France">France (Paris - Europe)</option>
+                            <option value="USA">USA (New York / Silicon Valley)</option>
+                            <option value="UK">Royaume-Uni (London)</option>
+                            <option value="China">Chine (Hong Kong / Shanghai)</option>
+                            <option value="Singapore">Singapour (Asia Hub)</option>
+                        </optgroup>
+                        <option value="Multi_Jurisdiction">Multi-Juridictions / Global</option>
+                    </select>
                 </div>
 
-                <div class="form-step" id="step-3">
-                    <h3 data-i18n="step3_title">03. Matrice Analyse & Restitution</h3>
-                    <div class="input-group">
-                        <label for="context" data-i18n="lbl_context">Contexte Opérationnel (Enjeux & Objectifs)</label>
-                        <textarea id="context" rows="4" placeholder="Décrivez vos enjeux stratégiques..."></textarea>
-                    </div>
-                    
-                    <div class="legal-check">
-                        <input type="checkbox" id="consent" required>
-                        <label for="consent">
-                            <span data-i18n="legal_consent">J'accepte la</span> 
-                            <a href="#" id="openPrivacy" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité</a>.
-                        </label>
-                    </div>
-
-                    <div class="btn-container split">
-                        <button type="button" class="btn-outline" onclick="nextStep(2)" data-i18n="btn_prev">Retour</button>
-                        <button type="submit" class="btn-gold glow" data-i18n="btn_submit">Lancer l'Analyse IA</button>
-                    </div>
+                <label class="section-label mt-2" data-i18n="lbl_expertise">Expertises Requises</label>
+                <div class="grid-options" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
+                    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="IA_Souveraine"> <span>IA Souveraine</span></label>
+                    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Cybersecurite"> <span>Cybersécurité</span></label>
+                    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Finance_MA"> <span>M&A / Levée</span></label>
+                    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Compliance_Legal"> <span>Légal & OHADA</span></label>
+                    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Transfo_Digitale"> <span>Transfo. Digitale</span></label>
+                    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="ESG_RSE"> <span>ESG & Impact</span></label>
+                    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Affaires_Publiques"> <span>Affaires Publiques</span></label>
+                    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Supply_Chain"> <span>Supply Chain</span></label>
+                    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Formation_Talents"> <span>Formation</span></label>
                 </div>
-            </form>
-        </div>
 
-        <div id="stats-widget" class="stats-card">
-            <div class="stats-header">
-                <span class="pulse-icon"></span>
-                <h4 data-i18n="stats_live">Live Intelligence</h4>
-            </div>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-label" data-i18n="stat_ai">Analyses IA</span>
-                    <span id="count-analyses" class="stat-value">--</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label" data-i18n="stat_pdf">PDF Certifiés</span>
-                    <span id="count-pdf" class="stat-value">--</span>
+                <div class="btn-container split">
+                    <button type="button" class="btn-outline" onclick="nextStep(1)" data-i18n="btn_prev">Retour</button>
+                    <button type="button" class="btn-gold" onclick="nextStep(3)" data-i18n="btn_next_matrice">Suivant</button>
                 </div>
             </div>
-            <p class="stat-footer"><span data-i18n="stat_last">Mise à jour :</span> <span id="last-update">--:--</span></p>
-        </div>
-    </main>
+
+            <div class="form-step" id="step-3">
+                <h3 data-i18n="step3_title">03. Analyse & Restitution</h3>
+                <div class="input-group">
+                    <label for="context" data-i18n="lbl_context">Contexte Opérationnel</label>
+                    <textarea id="context" rows="4" placeholder="Décrivez vos enjeux stratégiques, cibles ou blocages actuels..."></textarea>
+                </div>
+                <div class="legal-check">
+                    <input type="checkbox" id="consent" required>
+                    <label for="consent"><span data-i18n="legal_consent">J'accepte la</span> <a href="#" id="openPrivacy" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité</a></label>
+                </div>
+                <div class="btn-container split">
+                    <button type="button" class="btn-outline" onclick="nextStep(2)" data-i18n="btn_prev">Retour</button>
+                    <button type="submit" class="btn-gold glow" data-i18n="btn_submit">Lancer l'Analyse IA</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
 
     <footer class="footer">
         <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
