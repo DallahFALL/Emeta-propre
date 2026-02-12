@@ -182,3 +182,59 @@ button.btn-outline:hover { background: rgba(212, 175, 55, 0.1); }
     button { width: 100%; }
     .stats-card { position: static; width: 100%; max-width: 700px; margin-top: 2rem; }
 }
+/* --- FOOTER CONTACTS OPTIMISÉ --- */
+.footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(10, 25, 47, 0.95);
+    margin-top: auto;
+}
+
+.footer-contacts {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.contact-item {
+    font-size: 0.85rem;
+    color: var(--slate);
+}
+
+.contact-item span {
+    display: inline-block;
+    margin-right: 5px;
+    opacity: 0.8;
+}
+
+.gold-link {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(212, 175, 55, 0.5);
+    transition: all 0.3s ease;
+}
+
+.gold-link:hover {
+    color: #fff;
+    border-bottom-color: #fff;
+}
+
+.unit-loc {
+    margin-top: 15px;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    opacity: 0.6;
+    color: var(--slate);
+    text-transform: uppercase;
+}
+
+/* Ajustement Mobile */
+@media (max-width: 768px) {
+    .footer-contacts {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
