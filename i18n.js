@@ -41,6 +41,7 @@ const translations = {
         // ÉTAPE 3
         step3_title: "03. Analyse & Restitution",
         lbl_context: "Contexte Opérationnel",
+        ph_context: "Décrivez vos enjeux stratégiques (ex: entrée marché, conformité, crise, levée de fonds)...",
         legal_consent: "J'accepte la",
         link_privacy: "Politique de Confidentialité",
         btn_submit: "Lancer l'Analyse IA",
@@ -51,21 +52,23 @@ const translations = {
         footer_unit: "Strategic Intelligence Unit • Dakar - Paris - Dubai",
         footer_rights: "Tous droits réservés.",
         // MODALS & RÉSULTATS
-        modal_title: "Politique de Confidentialité & Souveraineté",
+        modal_title: "Politique de Confidentialité & Soberaineté",
         btn_close: "Fermer",
         result_title: "Diagnostic Stratégique",
         btn_pdf: "TÉLÉCHARGER PDF",
         btn_new: "NOUVELLE ANALYSE",
-        // CONTENU JURIDIQUE EXPLICITE
+        // CONTENU JURIDIQUE EXPLICITE (HTML autorisé)
         priv_content: `
-            <h4>1. Souveraineté des Données</h4>
-            <p>e-META LABS garantit que les données soumises via ce moteur ne sont <strong>jamais revendues</strong> ni partagées avec des tiers non autorisés. Le traitement est effectué dans un environnement cloisonné.</p>
-            <h4>2. Non-Usage pour Entraînement</h4>
-            <p>Vos problématiques stratégiques ne sont pas utilisées pour l'entraînement des modèles publics (LLM). Votre propriété intellectuelle reste intacte.</p>
-            <h4>3. Certification Blockchain</h4>
-            <p>Chaque rapport généré fait l'objet d'un horodatage numérique garantissant son intégrité et son antériorité via le protocole Woleet.</p>
-            <h4>4. Responsabilité</h4>
-            <p>Les diagnostics fournis constituent une aide technologique à la décision et ne remplacent pas le conseil juridique ou financier réglementé.</p>
+            <div class="privacy-block">
+                <h4>1. Souveraineté des Données</h4>
+                <p>e-META LABS garantit que les données soumises ne sont <strong>jamais revendues</strong> ni partagées. Le traitement est effectué dans un environnement cloisonné.</p>
+                <h4>2. Non-Usage pour Entraînement</h4>
+                <p>Vos problématiques stratégiques ne sont <strong>pas utilisées</strong> pour l'entraînement des modèles publics (LLM).</p>
+                <h4>3. Certification Blockchain</h4>
+                <p>Chaque rapport généré fait l'objet d'un horodatage numérique garantissant son intégrité via le protocole Woleet.</p>
+                <h4>4. Responsabilité</h4>
+                <p>Les diagnostics constituent une aide technologique à la décision et ne remplacent pas le conseil juridique réglementé.</p>
+            </div>
         `
     },
     en: {
@@ -105,6 +108,7 @@ const translations = {
         btn_next_matrice: "Next",
         step3_title: "03. Analysis & Output",
         lbl_context: "Operational Context",
+        ph_context: "Describe your strategic challenges (e.g., market entry, compliance, crisis, fundraising)...",
         legal_consent: "I accept the",
         link_privacy: "Privacy Policy",
         btn_submit: "Launch AI Analysis",
@@ -119,14 +123,16 @@ const translations = {
         btn_pdf: "DOWNLOAD PDF",
         btn_new: "NEW ANALYSIS",
         priv_content: `
-            <h4>1. Data Sovereignty</h4>
-            <p>e-META LABS guarantees that data submitted via this engine is <strong>never sold</strong> nor shared with unauthorized third parties. Processing is performed in a siloed environment.</p>
-            <h4>2. No Training Usage</h4>
-            <p>Your strategic issues are not used to train public models (LLMs). Your intellectual property remains intact.</p>
-            <h4>3. Blockchain Certification</h4>
-            <p>Each generated report is digitally timestamped to ensure integrity and priority via the Woleet protocol.</p>
-            <h4>4. Liability</h4>
-            <p>Provided diagnostics constitute technological decision support and do not replace regulated legal or financial advice.</p>
+            <div class="privacy-block">
+                <h4>1. Data Sovereignty</h4>
+                <p>e-META LABS guarantees that data is <strong>never sold</strong> nor shared. Processing is performed in a siloed environment.</p>
+                <h4>2. No Training Usage</h4>
+                <p>Your strategic issues are <strong>not used</strong> to train public models (LLMs).</p>
+                <h4>3. Blockchain Certification</h4>
+                <p>Each report is digitally timestamped to ensure integrity via the Woleet protocol.</p>
+                <h4>4. Liability</h4>
+                <p>Provided diagnostics constitute technological decision support and do not replace regulated legal advice.</p>
+            </div>
         `
     },
     es: {
@@ -166,6 +172,7 @@ const translations = {
         btn_next_matrice: "Siguiente",
         step3_title: "03. Análisis y Resultados",
         lbl_context: "Contexto Operativo",
+        ph_context: "Describa sus desafíos estratégicos (ej: entrada al mercado, cumplimiento, crisis)...",
         legal_consent: "Acepto la",
         link_privacy: "Política de Privacidad",
         btn_submit: "Iniciar Análisis IA",
@@ -180,12 +187,16 @@ const translations = {
         btn_pdf: "DESCARGAR PDF",
         btn_new: "NUEVO ANÁLISIS",
         priv_content: `
-            <h4>1. Soberanía de Datos</h4>
-            <p>e-META LABS garantiza que los datos enviados nunca se venden ni comparten. El procesamiento es aislado.</p>
-            <h4>2. Sin Uso para Entrenamiento</h4>
-            <p>Sus problemas estratégicos no se utilizan para entrenar modelos públicos.</p>
-            <h4>3. Certificación Blockchain</h4>
-            <p>Cada informe está sellado digitalmente para garantizar su integridad.</p>
+            <div class="privacy-block">
+                <h4>1. Soberanía de Datos</h4>
+                <p>e-META LABS garantiza que los datos <strong>nunca se venden</strong>. El procesamiento es aislado.</p>
+                <h4>2. Sin Uso para Entrenamiento</h4>
+                <p>Sus problemas estratégicos <strong>no se utilizan</strong> para entrenar modelos públicos.</p>
+                <h4>3. Certificación Blockchain</h4>
+                <p>Cada informe está sellado digitalmente para garantizar su integridad.</p>
+                <h4>4. Responsabilidad</h4>
+                <p>Los diagnósticos no sustituyen el asesoramiento legal regulado.</p>
+            </div>
         `
     },
     ar: {
@@ -225,6 +236,7 @@ const translations = {
         btn_next_matrice: "التالي",
         step3_title: "03. التحليل والنتائج",
         lbl_context: "السياق التشغيلي",
+        ph_context: "صف تحدياتك الاستراتيجية (مثل: دخول السوق، الامتثال، الأزمات)...",
         legal_consent: "أوافق على",
         link_privacy: "سياسة الخصوصية",
         btn_submit: "بدء التحليل",
@@ -239,12 +251,16 @@ const translations = {
         btn_pdf: "تحميل PDF",
         btn_new: "تحليل جديد",
         priv_content: `
-            <h4>1. سيادة البيانات</h4>
-            <p>تضمن e-META LABS أن البيانات المقدمة لا تُباع أبدًا ولا تُمشارَك مع أطراف ثالثة. تتم المعالجة في بيئة معزولة.</p>
-            <h4>2. عدم الاستخدام للتدريب</h4>
-            <p>لا تُستخدم مشكلاتك الاستراتيجية لتدريب النماذج العامة.</p>
-            <h4>3. شهادة Blockchain</h4>
-            <p>كل تقرير يتم ختمه رقميًا لضمان نزاهته عبر بروتوكول Woleet.</p>
+            <div class="privacy-block">
+                <h4>1. سيادة البيانات</h4>
+                <p>تضمن e-META LABS أن البيانات <strong>لا تُباع أبدًا</strong>. تتم المعالجة في بيئة معزولة.</p>
+                <h4>2. عدم الاستخدام للتدريب</h4>
+                <p>لا تُستخدم مشكلاتك الاستراتيجية لتدريب النماذج العامة.</p>
+                <h4>3. شهادة Blockchain</h4>
+                <p>كل تقرير يتم ختمه رقميًا لضمان نزاهته.</p>
+                <h4>4. مسؤولية</h4>
+                <p>التشخيصات لا تحل محل المشورة القانونية المنظمة.</p>
+            </div>
         `
     }
 };
@@ -275,6 +291,12 @@ function setLanguage(lang) {
             }
         }
     });
+
+    // Injection Placeholder Contextuel
+    const contextArea = document.getElementById('context');
+    if (contextArea && translations[lang]['ph_context']) {
+        contextArea.placeholder = translations[lang]['ph_context'];
+    }
 }
 
 // Init
