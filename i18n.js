@@ -1,19 +1,24 @@
-/* * FICHIER : i18n.js (Traductions Complètes + ARABE + PRIVACY) */
+/* * PROJET : e-META LABS
+ * FICHIER : i18n.js (Moteur de Traduction & Contenu)
+ */
 
 const translations = {
     fr: {
         subtitle: "Excellence Stratégique & Haute Précision IA",
         btn_reset: "Réinitialiser",
-        ai_calculating: "Analyse Stratégique en Cours...",
-        // ÉTAPE 1
+        ai_calculating: "Intelligence Stratégique en Cours...",
+        
+        // ÉTAPE 1 : IDENTIFICATION
         step1_title: "01. Identification",
         lbl_company: "Société / Entité",
         lbl_email: "Email Professionnel",
         lbl_phone: "Numéro WhatsApp (Recommandé)",
         btn_next: "Suivant",
-        // ÉTAPE 2
+        
+        // ÉTAPE 2 : MATRICE
         step2_title: "02. Matrice Stratégique",
         lbl_sector: "Secteur d'Activité",
+        // Secteurs
         sec_genai: "GenAI & Robotics",
         sec_fintech: "FinTech & DeFi",
         sec_green: "GreenTech & Énergie",
@@ -24,8 +29,10 @@ const translations = {
         sec_gov: "GovTech & Public",
         sec_immo: "Immo & Smart City",
         sec_edu: "EduTech & Savoir",
+        // Géo
         lbl_geo: "Hub Stratégique",
         opt_geo_def: "-- Sélectionner une zone --",
+        // Expertises
         lbl_expertise: "Expertises Requises",
         exp_sov: "IA Souveraine",
         exp_cyber: "Cybersécurité",
@@ -35,29 +42,33 @@ const translations = {
         exp_esg: "ESG & Impact",
         exp_lobby: "Affaires Publiques",
         exp_supply: "Supply Chain",
-        exp_talent: "Formation & Talents",
+        // Nav
         btn_prev: "Retour",
         btn_next_matrice: "Suivant",
-        // ÉTAPE 3
+        
+        // ÉTAPE 3 : ANALYSE
         step3_title: "03. Analyse & Restitution",
         lbl_context: "Contexte Opérationnel",
         ph_context: "Décrivez vos enjeux stratégiques (ex: entrée marché, conformité, crise, levée de fonds)...",
         legal_consent: "J'accepte la",
         link_privacy: "Politique de Confidentialité",
         btn_submit: "Lancer l'Analyse IA",
+        
         // WIDGET & FOOTER
         stats_live: "Live Intelligence",
         stat_ai: "Analyses IA",
         stat_pdf: "PDF Certifiés",
         footer_unit: "Strategic Intelligence Unit • Dakar - Paris - Dubai",
         footer_rights: "Tous droits réservés.",
+        
         // MODALS & RÉSULTATS
-        modal_title: "Politique de Confidentialité & Soberaineté",
+        modal_title: "Politique de Confidentialité & Souveraineté",
         btn_close: "Fermer",
         result_title: "Diagnostic Stratégique",
         btn_pdf: "TÉLÉCHARGER PDF",
         btn_new: "NOUVELLE ANALYSE",
-        // CONTENU JURIDIQUE EXPLICITE (HTML autorisé)
+        
+        // CONTENU JURIDIQUE (HTML pour le style CSS .privacy-block h4)
         priv_content: `
             <div class="privacy-block">
                 <h4>1. Souveraineté des Données</h4>
@@ -103,7 +114,6 @@ const translations = {
         exp_esg: "ESG & Impact",
         exp_lobby: "Public Affairs",
         exp_supply: "Supply Chain",
-        exp_talent: "Training & Talents",
         btn_prev: "Back",
         btn_next_matrice: "Next",
         step3_title: "03. Analysis & Output",
@@ -167,7 +177,6 @@ const translations = {
         exp_esg: "ESG e Impacto",
         exp_lobby: "Asuntos Públicos",
         exp_supply: "Cadena de Suministro",
-        exp_talent: "Formación y Talentos",
         btn_prev: "Atrás",
         btn_next_matrice: "Siguiente",
         step3_title: "03. Análisis y Resultados",
@@ -231,7 +240,6 @@ const translations = {
         exp_esg: "الحوكمة البيئية والاجتماعية",
         exp_lobby: "الشؤون العامة",
         exp_supply: "سلسلة التوريد",
-        exp_talent: "التدريب والمواهب",
         btn_prev: "سابق",
         btn_next_matrice: "التالي",
         step3_title: "03. التحليل والنتائج",
@@ -257,7 +265,7 @@ const translations = {
                 <h4>2. عدم الاستخدام للتدريب</h4>
                 <p>لا تُستخدم مشكلاتك الاستراتيجية لتدريب النماذج العامة.</p>
                 <h4>3. شهادة Blockchain</h4>
-                <p>كل تقرير يتم ختمه رقميًا لضمان نزاهته.</p>
+                <p>كل تقرير يتم ختمه رقميًا لضمان نزاهته عبر بروتوكول Woleet.</p>
                 <h4>4. مسؤولية</h4>
                 <p>التشخيصات لا تحل محل المشورة القانونية المنظمة.</p>
             </div>
@@ -267,23 +275,25 @@ const translations = {
 
 function setLanguage(lang) {
     document.documentElement.lang = lang;
-    // Gestion RTL pour l'Arabe
+    
+    // Gestion RTL (Right-to-Left) pour l'Arabe
     if (lang === 'ar') {
         document.documentElement.setAttribute('dir', 'rtl');
     } else {
         document.documentElement.setAttribute('dir', 'ltr');
     }
     
-    // Mise à jour boutons
+    // Mise à jour de l'état des boutons
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.innerText.toLowerCase() === lang);
     });
 
-    // Injection textes
+    // Injection des textes
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         if (translations[lang] && translations[lang][key]) {
-            // Utilisation de innerHTML pour le contenu riche (Privacy)
+            // Si c'est le contenu de la politique, on utilise innerHTML (pour les balises)
+            // Sinon, on utilise innerText pour la sécurité
             if (key === 'priv_content') {
                 element.innerHTML = translations[lang][key];
             } else {
@@ -292,12 +302,12 @@ function setLanguage(lang) {
         }
     });
 
-    // Injection Placeholder Contextuel
+    // Mise à jour du Placeholder
     const contextArea = document.getElementById('context');
     if (contextArea && translations[lang]['ph_context']) {
         contextArea.placeholder = translations[lang]['ph_context'];
     }
 }
 
-// Init
+// Initialisation au chargement
 document.addEventListener('DOMContentLoaded', () => setLanguage('fr'));
