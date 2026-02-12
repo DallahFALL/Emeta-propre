@@ -1,18 +1,16 @@
-* * FICHIER : i18n.js (Version Ultimate - Contacts Officiels) */
+/* * FICHIER : i18n.js (Version Ultimate 2026) */
 
 const translations = {
     fr: {
         subtitle: "Excellence Stratégique & Haute Précision IA",
         btn_reset: "Réinitialiser",
         ai_calculating: "Intelligence Stratégique en Cours...",
-        
-        // --- FORMULAIRE ---
+        // Formulaire
         step1_title: "01. Identification",
         lbl_company: "Société / Entité",
         lbl_email: "Email Professionnel",
         lbl_phone: "Numéro WhatsApp (Recommandé)",
         btn_next: "Suivant",
-        
         step2_title: "02. Matrice Stratégique",
         lbl_sector: "Secteur d'Activité",
         sec_genai: "GenAI & Robotics",
@@ -25,10 +23,8 @@ const translations = {
         sec_gov: "GovTech & Public",
         sec_immo: "Immo & Smart City",
         sec_edu: "EduTech & Savoir",
-        
         lbl_geo: "Hub Stratégique",
         opt_geo_def: "-- Sélectionner une zone --",
-        
         lbl_expertise: "Expertises Requises",
         exp_sov: "IA Souveraine",
         exp_cyber: "Cybersécurité",
@@ -38,46 +34,39 @@ const translations = {
         exp_esg: "ESG & Impact",
         exp_lobby: "Affaires Publiques",
         exp_supply: "Supply Chain",
-        
         btn_prev: "Retour",
         btn_next_matrice: "Suivant",
-        
         step3_title: "03. Analyse & Restitution",
         lbl_context: "Contexte Opérationnel",
         ph_context: "Décrivez vos enjeux stratégiques (ex: entrée marché, conformité, crise, levée de fonds)...",
         legal_consent: "J'accepte la",
         link_privacy: "Politique de Confidentialité",
         btn_submit: "Lancer l'Analyse IA",
-        
-        // --- WIDGET & FOOTER ---
+        // Footer & Widget
         stats_live: "Live Intelligence",
         stat_ai: "Analyses IA",
         stat_pdf: "PDF Certifiés",
-        
-        // NOUVEAUX CHAMPS FOOTER
         lbl_support: "Support Technique :",
         lbl_commercial: "Commercial :",
         footer_unit: "Strategic Intelligence Unit • Dakar - Paris - Dubai",
         footer_rights: "Tous droits réservés.",
-        
-        // --- MODALS ---
+        // Modals
         modal_title: "Politique de Confidentialité & Souveraineté",
         btn_close: "Fermer",
         result_title: "Diagnostic Stratégique",
         btn_pdf: "TÉLÉCHARGER PDF",
         btn_new: "NOUVELLE ANALYSE",
-        
-        // --- CONTENU JURIDIQUE ---
+        // Contenu Juridique (4 points)
         priv_content: `
             <div class="privacy-block">
                 <h4>1. Souveraineté des Données</h4>
-                <p>e-META LABS garantit que les données soumises ne sont <strong>jamais revendues</strong>. Le traitement est effectué dans un environnement cloisonné.</p>
+                <p>e-META LABS garantit que les données soumises ne sont <strong>jamais revendues</strong> ni partagées. Le traitement est effectué dans un environnement cloisonné.</p>
                 <h4>2. Non-Usage pour Entraînement</h4>
                 <p>Vos problématiques stratégiques ne sont <strong>pas utilisées</strong> pour l'entraînement des modèles publics (LLM).</p>
                 <h4>3. Certification Blockchain</h4>
                 <p>Chaque rapport généré fait l'objet d'un horodatage numérique garantissant son intégrité via le protocole Woleet.</p>
-                <h4>4. Responsabilité & Support</h4>
-                <p>Les diagnostics constituent une aide à la décision. Pour toute question relative à vos données : <br><strong>support@e-metalabs.com</strong></p>
+                <h4>4. Responsabilité</h4>
+                <p>Les diagnostics constituent une aide technologique à la décision.</p>
             </div>
         `
     },
@@ -85,6 +74,7 @@ const translations = {
         subtitle: "Strategic Excellence & High Precision AI",
         btn_reset: "Reset",
         ai_calculating: "Strategic Analysis in Progress...",
+        // ... (Autres traductions EN raccourcies pour l'exemple, à remplir comme FR)
         step1_title: "01. Identification",
         lbl_company: "Company / Entity",
         lbl_email: "Professional Email",
@@ -92,29 +82,8 @@ const translations = {
         btn_next: "Next",
         step2_title: "02. Strategic Matrix",
         lbl_sector: "Industry Sector",
-        sec_genai: "GenAI & Robotics",
-        sec_fintech: "FinTech & DeFi",
-        sec_green: "GreenTech & Energy",
-        sec_mine: "Mining & Oil/Gas",
-        sec_agri: "AgriTech & FoodSec",
-        sec_health: "Health & BioTech",
-        sec_infra: "Smart Infra & Logistics",
-        sec_gov: "GovTech & Public",
-        sec_immo: "Real Estate & Smart City",
-        sec_edu: "EduTech & Knowledge",
         lbl_geo: "Strategic Hub",
-        opt_geo_def: "-- Select Zone --",
         lbl_expertise: "Required Expertise",
-        exp_sov: "Sovereign AI",
-        exp_cyber: "Cybersecurity",
-        exp_ma: "M&A / Fundraising",
-        exp_legal: "Legal / OHADA",
-        exp_digital: "Digital Transfo.",
-        exp_esg: "ESG & Impact",
-        exp_lobby: "Public Affairs",
-        exp_supply: "Supply Chain",
-        btn_prev: "Back",
-        btn_next_matrice: "Next",
         step3_title: "03. Analysis & Output",
         lbl_context: "Operational Context",
         ph_context: "Describe your strategic challenges...",
@@ -124,57 +93,107 @@ const translations = {
         stats_live: "Live Intelligence",
         stat_ai: "AI Analyses",
         stat_pdf: "Certified PDFs",
-        
         lbl_support: "Tech Support:",
         lbl_commercial: "Commercial:",
         footer_unit: "Strategic Intelligence Unit • Dakar - Paris - Dubai",
         footer_rights: "All rights reserved.",
-        
         modal_title: "Privacy Policy & Sovereignty",
         btn_close: "Close",
         result_title: "Strategic Diagnostic",
         btn_pdf: "DOWNLOAD PDF",
         btn_new: "NEW ANALYSIS",
-        
         priv_content: `
             <div class="privacy-block">
                 <h4>1. Data Sovereignty</h4>
-                <p>e-META LABS guarantees that data is <strong>never sold</strong>. Processing is siloed.</p>
+                <p>Data submitted is <strong>never sold</strong>. Processing is siloed.</p>
                 <h4>2. No Training Usage</h4>
                 <p>Your inputs are <strong>not used</strong> to train public models.</p>
                 <h4>3. Blockchain Certification</h4>
                 <p>Reports are timestamped via Woleet.</p>
-                <h4>4. Liability & Support</h4>
-                <p>For any data-related questions: <br><strong>support@e-metalabs.com</strong></p>
+                <h4>4. Liability</h4>
+                <p>Technological support only, not legal advice.</p>
             </div>
         `
     },
-    // (Conservez ES et AR avec la même logique de traduction pour les nouveaux champs)
     es: {
-        // ... (Traductions existantes) ...
-        lbl_support: "Soporte Técnico:",
+        subtitle: "Excelencia Estratégica e IA de Alta Precisión",
+        btn_reset: "Reiniciar",
+        ai_calculating: "Análisis Estratégico en Curso...",
+        step1_title: "01. Identificación",
+        lbl_company: "Empresa",
+        lbl_email: "Correo",
+        lbl_phone: "WhatsApp",
+        btn_next: "Siguiente",
+        step2_title: "02. Matriz Estratégica",
+        lbl_sector: "Sector",
+        lbl_geo: "Hub Estratégico",
+        lbl_expertise: "Experiencia",
+        step3_title: "03. Análisis",
+        lbl_context: "Contexto",
+        ph_context: "Describa sus desafíos...",
+        legal_consent: "Acepto la",
+        link_privacy: "Política de Privacidad",
+        btn_submit: "Iniciar",
+        lbl_support: "Soporte:",
         lbl_commercial: "Comercial:",
-        // ...
+        footer_unit: "Unidad de Inteligencia • Dakar - París - Dubái",
+        footer_rights: "Derechos reservados.",
+        modal_title: "Privacidad",
+        btn_close: "Cerrar",
+        result_title: "Diagnóstico",
+        btn_pdf: "DESCARGAR PDF",
+        btn_new: "NUEVO",
         priv_content: `
             <div class="privacy-block">
                 <h4>1. Soberanía de Datos</h4>
                 <p>Garantizamos que los datos nunca se venden.</p>
-                <h4>4. Responsabilidad y Soporte</h4>
-                <p>Contacto de datos: <strong>support@e-metalabs.com</strong></p>
+                <h4>2. Sin Entrenamiento</h4>
+                <p>No se usan para entrenar IA públicas.</p>
+                <h4>3. Blockchain</h4>
+                <p>Informes certificados digitalmente.</p>
+                <h4>4. Responsabilidad</h4>
+                <p>Soporte tecnológico a la decisión.</p>
             </div>
         `
     },
     ar: {
-        // ... (Traductions existantes) ...
-        lbl_support: "الدعم الفني:",
-        lbl_commercial: "التواصل التجاري:",
-        // ...
+        subtitle: "التميز الاستراتيجي والذكاء الاصطناعي عالي الدقة",
+        btn_reset: "إعادة تعيين",
+        ai_calculating: "جارٍ التحليل...",
+        step1_title: "01. الهوية",
+        lbl_company: "الشركة",
+        lbl_email: "البريد الإلكتروني",
+        lbl_phone: "واتساب",
+        btn_next: "التالي",
+        step2_title: "02. المصفوفة",
+        lbl_sector: "القطاع",
+        lbl_geo: "المحور",
+        lbl_expertise: "الخبرات",
+        step3_title: "03. التحليل",
+        lbl_context: "السياق",
+        ph_context: "صف تحدياتك...",
+        legal_consent: "أوافق على",
+        link_privacy: "الخصوصية",
+        btn_submit: "بدء التحليل",
+        lbl_support: "الدعم:",
+        lbl_commercial: "التواصل:",
+        footer_unit: "وحدة الاستخبارات • داكار - باريس - دبي",
+        footer_rights: "الحقوق محفوظة.",
+        modal_title: "سياسة الخصوصية",
+        btn_close: "إغلاق",
+        result_title: "التشخيص",
+        btn_pdf: "تحميل PDF",
+        btn_new: "جديد",
         priv_content: `
             <div class="privacy-block">
                 <h4>1. سيادة البيانات</h4>
-                <p>تضمن e-META LABS أن البيانات لا تباع أبداً.</p>
-                <h4>4. المسؤولية والدعم</h4>
-                <p>للاستفسارات حول البيانات: <strong>support@e-metalabs.com</strong></p>
+                <p>البيانات لا تباع أبداً.</p>
+                <h4>2. عدم التدريب</h4>
+                <p>لا تستخدم لتدريب النماذج العامة.</p>
+                <h4>3. شهادة Blockchain</h4>
+                <p>تقارير موثقة رقمياً.</p>
+                <h4>4. المسؤولية</h4>
+                <p>دعم تقني للقرار.</p>
             </div>
         `
     }
@@ -204,63 +223,3 @@ function setLanguage(lang) {
 }
 
 document.addEventListener('DOMContentLoaded', () => setLanguage('fr'));
-3. Fichier style.css (Mise en forme des Contacts Footer)
-Ajoutez ceci à la fin de votre CSS pour que les emails s'affichent proprement (alignés et avec la couleur Or).
-
-CSS
-/* --- FOOTER CONTACTS OPTIMISÉ --- */
-.footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    background: rgba(10, 25, 47, 0.95);
-    margin-top: auto;
-}
-
-.footer-contacts {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin: 15px 0;
-    flex-wrap: wrap;
-}
-
-.contact-item {
-    font-size: 0.85rem;
-    color: var(--slate);
-}
-
-.contact-item span {
-    display: inline-block;
-    margin-right: 5px;
-    opacity: 0.8;
-}
-
-.gold-link {
-    color: var(--gold);
-    text-decoration: none;
-    border-bottom: 1px dotted rgba(212, 175, 55, 0.5);
-    transition: all 0.3s ease;
-}
-
-.gold-link:hover {
-    color: #fff;
-    border-bottom-color: #fff;
-}
-
-.unit-loc {
-    margin-top: 15px;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
-    opacity: 0.6;
-    color: var(--slate);
-    text-transform: uppercase;
-}
-
-/* Ajustement Mobile */
-@media (max-width: 768px) {
-    .footer-contacts {
-        flex-direction: column;
-        gap: 10px;
-    }
-}
