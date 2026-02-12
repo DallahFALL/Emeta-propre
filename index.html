@@ -119,11 +119,11 @@
                     <h3 data-i18n="step3_title">03. Matrice Analyse</h3>
                     <div class="input-group">
                         <label for="context" data-i18n="lbl_context">Contexte Opérationnel</label>
-                        <textarea id="context" rows="4"></textarea>
+                        <textarea id="context" rows="4" placeholder="Décrivez vos enjeux stratégiques (ex: entrée marché, conformité)..."></textarea>
                     </div>
                     <div class="legal-check">
                         <input type="checkbox" id="consent" required>
-                        <label for="consent"><span data-i18n="legal_consent">J'accepte la</span> <a href="#" id="openPrivacy" class="gold-link" data-i18n="link_privacy">Politique</a>.</label>
+                        <label for="consent"><span data-i18n="legal_consent">J'accepte la</span> <a href="#" id="openPrivacyLink" class="gold-link" data-i18n="link_privacy">Politique</a>.</label>
                     </div>
                     <div class="btn-container split">
                         <button type="button" class="btn-outline" onclick="nextStep(2)" data-i18n="btn_prev">Retour</button>
@@ -143,22 +143,16 @@
         </div>
     </main>
 
-<footer class="footer">
+    <footer class="footer">
         <div class="footer-content">
-            <p class="copyright">&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
-            
-            <div class="footer-contacts">
-                <div class="contact-item">
-                    <span data-i18n="lbl_support">Support :</span> 
-                    <a href="mailto:support@e-metalabs.com" class="gold-link">support@e-metalabs.com</a>
-                </div>
-                <div class="contact-item">
-                    <span data-i18n="lbl_commercial">Infos & Contact :</span> 
-                    <a href="mailto:contact@e-metalabs.com" class="gold-link">contact@e-metalabs.com</a>
-                </div>
+            <div class="footer-contacts" style="margin-bottom: 15px;">
+                <span class="contact-item"><span data-i18n="lbl_support">Support :</span> <a href="mailto:support@e-metalabs.com" class="gold-link">support@e-metalabs.com</a></span>
+                <span class="contact-item" style="margin-left:15px; margin-right:15px;">|</span>
+                <span class="contact-item"><span data-i18n="lbl_commercial">Infos :</span> <a href="mailto:contact@e-metalabs.com" class="gold-link">contact@e-metalabs.com</a></span>
             </div>
-
-            <p class="tiny unit-loc" data-i18n="footer_unit">Strategic Intelligence Unit • Dakar - Paris - Dubai</p>
+            <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
+            <p class="tiny" data-i18n="footer_unit">Strategic Intelligence Unit • Dakar - Paris - Dubai</p>
+            <p class="tiny" style="margin-top:5px;"><a href="#" id="openPrivacyFooter" style="color:var(--slate); text-decoration:none; font-size:0.75rem;" data-i18n="link_privacy">Politique de Confidentialité</a></p>
         </div>
     </footer>
 
@@ -177,8 +171,8 @@
             <h2 style="color: #d4af37;" data-i18n="result_title">Diagnostic</h2>
             <div id="resultBody" class="modal-body"><p>Initialisation...</p></div>
             <div class="btn-container">
-                <button class="btn-gold btn-download" data-i18n="btn_pdf">TÉLÉCHARGER PDF</button>
-                <button class="btn-outline btn-new" data-i18n="btn_new">NOUVELLE ANALYSE</button>
+                <button class="btn-gold btn-download" data-i18n="btn_pdf">PDF</button>
+                <button class="btn-outline btn-new" data-i18n="btn_new">NOUVEAU</button>
             </div>
         </div>
     </div>
