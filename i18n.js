@@ -283,16 +283,19 @@ const translations = {
     }
 };
 
-function setLanguage(lang) {
+// ... (Gardez tout l'objet const translations = { ... } tel quel) ...
+
+// FONCTION ATTACHÉE À WINDOW (Pour être accessible par les boutons)
+window.setLanguage = function(lang) {
     document.documentElement.lang = lang;
     document.dir = (lang === 'ar') ? 'rtl' : 'ltr';
     
-    // Boutons de langue
+    // Boutons actifs
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.innerText.toLowerCase() === lang);
     });
 
-    // 1. TRADUCTION TEXTES (innerHTML pour permettre les balises dans Privacy)
+    // Traductions Textes
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         if (translations[lang] && translations[lang][key]) {
@@ -301,20 +304,28 @@ function setLanguage(lang) {
         }
     });
 
-    // 2. TRADUCTION PLACEHOLDERS (Champs de saisie)
+    // Traductions Optgroups (Listes déroulantes)
+    document.querySelectorAll('[data-i18n-label]').forEach(element => {
+        const key = element.getAttribute('data-i18n-label');
+        if (translations[lang] && translations[lang][key]) {
+            element.label = translations[lang][key];
+        }
+    });
+
+    // Traductions Placeholders
     const mapPlaceholders = {
         'company': 'ph_company',
         'email': 'ph_email',
         'phone': 'ph_phone',
         'context': 'ph_context'
     };
-
     for (const [id, key] of Object.entries(mapPlaceholders)) {
         const input = document.getElementById(id);
         if (input && translations[lang][key]) {
             input.placeholder = translations[lang][key];
         }
     }
-}
+};
 
-document.addEventListener('DOMContentLoaded', () => setLanguage('fr'));
+// Initialisation au chargement
+document.addEventListener('DOMContentLoaded', () => window.setLanguage('fr'));
