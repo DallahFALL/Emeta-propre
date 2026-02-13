@@ -1,172 +1,140 @@
-/* * PROJET : e-META LABS — Moteur IA Stratégique
- * FICHIER : script.js (Version PROD - Sécurisée & Optimisée)
+/* * PROJET : e-META LABS
+ * FICHIER : script.js (Version DÉBLOQUÉE & EXPLICITE)
  */
 
 const WEBHOOK_URL = "https://hook.eu2.make.com/2aq4sxsbs6pj7cqmx7i2tvjvhwwdrvf2"; 
 const STATS_URL = "https://hook.eu2.make.com/1jeaje7c3r1chg5oz7wruxohz6e8a8bg"; 
 
-// --- GESTION NAVIGATION (UX Fluide) ---
-function nextStep(targetStep) {
-    // Validation intermédiaire (Étape 1 -> 2)
+// --- 1. FONCTIONS DE NAVIGATION (Attachées à la fenêtre globale) ---
+
+window.nextStep = function(targetStep) {
+    // Validation Étape 1 vers 2
     if (targetStep === 2) {
         const comp = document.getElementById('company').value;
         const mail = document.getElementById('email').value;
         
-        // Validation discrète : Bordure rouge temporaire
         if (!comp || !mail) {
+            // Effet visuel d'erreur
             if(!comp) document.getElementById('company').style.borderColor = '#ff4d4d';
             if(!mail) document.getElementById('email').style.borderColor = '#ff4d4d';
-            
             setTimeout(() => {
                 document.getElementById('company').style.borderColor = '';
                 document.getElementById('email').style.borderColor = '';
             }, 2000);
-            return; // Bloque la navigation
+            return; // Stop
         }
     }
     
-    // Transition des étapes
+    // Changement d'étape
     document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
     document.getElementById(`step-${targetStep}`).classList.add('active');
     
-    // Scroll automatique vers le haut de la carte
-    document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+    // Scroll haut
+    const card = document.querySelector('.glass-card');
+    if(card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 
-// --- RESET COMPLET (Nettoyage Session) ---
-function resetForm() { 
+window.resetForm = function() { 
     window.location.reload(); 
-}
+};
 
-// --- LIVE STATS (Preuve Sociale) ---
+// --- 2. LIVE STATS ---
 async function updateLiveStats() {
     try {
         const response = await fetch(STATS_URL);
         if (response.ok) {
             const data = await response.json();
-            // Mise à jour du DOM uniquement si les données existent
-            if(data.totalAnalyses) document.getElementById('count-analyses').innerText = data.totalAnalyses;
-            if(data.totalPDF) document.getElementById('count-pdf').innerText = data.totalPDF;
+            if(document.getElementById('count-analyses')) document.getElementById('count-analyses').innerText = data.totalAnalyses || "--";
+            if(document.getElementById('count-pdf')) document.getElementById('count-pdf').innerText = data.totalPDF || "--";
             
-            // Horodatage local
             const now = new Date();
-            document.getElementById('last-update').innerText = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+            if(document.getElementById('last-update')) document.getElementById('last-update').innerText = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
         }
-    } catch (e) { 
-        // Échec silencieux : Le widget garde ses valeurs par défaut "--"
-    }
+    } catch (e) { /* Silence */ }
 }
 
-// --- INITIALISATION & ÉVÉNEMENTS ---
+// --- 3. INITIALISATION ---
 document.addEventListener('DOMContentLoaded', () => {
+    // Lancement Stats
     updateLiveStats();
-    setInterval(updateLiveStats, 60000); // Rafraîchissement discret toutes les minutes
+    setInterval(updateLiveStats, 60000);
     
-    // GESTION CENTRALISÉE DES CLICS (Performance & Délégation)
+    // Écouteur global pour les clics (Modals & Actions)
     document.addEventListener('click', (e) => {
-        // 1. Fermeture des Modals (Croix ou Bouton)
+        // Fermer Modals
         if (e.target.closest('.close-modal') || e.target.closest('.close-result') || e.target.closest('.close-modal-btn')) {
             document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
         }
         
-        // 2. Ouverture Politique de Confidentialité (Depuis Formulaire ou Footer)
+        // Ouvrir Privacy
         if (e.target.closest('#openPrivacyLink') || e.target.closest('#openPrivacyFooter') || e.target.closest('#openPrivacyResult')) {
             e.preventDefault();
             const modal = document.getElementById('privacyOverlay');
             if(modal) modal.style.display = 'flex';
         }
         
-        // 3. Action : Télécharger PDF
+        // Télécharger PDF
         if (e.target.closest('.btn-download')) {
-            window.print(); // Déclenche l'impression native
-            // Signalement asynchrone à Make (Fire & Forget)
-            fetch(WEBHOOK_URL, { 
-                method: 'POST', 
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ action: "PDF_DOWNLOAD", timestamp: new Date().toISOString() }) 
-            }).catch(()=>{});
+            window.print();
+            fetch(WEBHOOK_URL, { method: 'POST', body: JSON.stringify({ action: "PDF_DOWNLOAD" }) }).catch(()=>{});
         }
         
-        // 4. Action : Nouvelle Analyse
+        // Nouvelle Analyse
         if (e.target.closest('.btn-new')) {
-            resetForm();
+            window.resetForm();
         }
     });
-});
 
-// --- SOUMISSION & CONNEXION "CŒUR RÉACTEUR" ---
-const form = document.getElementById('diagnosticForm');
-if (form) {
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault(); // Empêche le rechargement standard
-
-        // SÉCURITÉ HONEYPOT (Anti-Bot Silencieux)
-        // Si le champ caché est rempli, on arrête tout immédiatement.
-        if (document.getElementById('honeypot').value !== "") return;
-
-        // UI : Verrouillage immédiat
-        const btn = document.querySelector('button[type="submit"]');
-        const overlay = document.getElementById('loadingOverlay');
-        const lang = document.documentElement.lang || 'fr';
-        
-        overlay.style.display = 'flex'; // Affiche le Loader "Intelligence en cours..."
-        btn.disabled = true; // Empêche le double-clic
-
-        // CONSTRUCTION DU PAYLOAD (Données structurées)
-        const data = {
-            action: "diagnostic",
-            timestamp: new Date().toISOString(),
-            // Données de souveraineté technique
-            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-            lang: lang,
-            // Données utilisateur
-            company: document.getElementById('company').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-            // Récupération des codes techniques (values) et non des labels traduits
-            sector: document.querySelector('input[name="sector"]:checked')?.value || "N/A",
-            geoZone: document.getElementById('geo-zone').value,
-            expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked'))
-                             .map(cb => cb.value).join(', '), // Liste CSV propre
-            context: document.getElementById('context').value
-        };
-
-        try {
-            // ENVOI SÉCURISÉ VERS MAKE
-            const response = await fetch(WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
+    // --- 4. SOUMISSION DU FORMULAIRE ---
+    const form = document.getElementById('diagnosticForm');
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            if (response.ok) {
-                // Réception directe du flux HTML généré par l'IA
-                const text = await response.text();
+            // Honeypot Sécurité
+            if (document.getElementById('honeypot').value !== "") return;
+
+            const btn = document.querySelector('button[type="submit"]');
+            const overlay = document.getElementById('loadingOverlay');
+            const lang = document.documentElement.lang || 'fr';
+            
+            overlay.style.display = 'flex';
+            btn.disabled = true;
+
+            const data = {
+                action: "diagnostic",
+                timestamp: new Date().toISOString(),
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                lang: lang,
+                company: document.getElementById('company').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                sector: document.querySelector('input[name="sector"]:checked')?.value || "N/A",
+                geoZone: document.getElementById('geo-zone').value,
+                expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked')).map(cb => cb.value).join(', '),
+                context: document.getElementById('context').value
+            };
+
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
                 
-                // Injection et Affichage
-                document.getElementById('resultBody').innerHTML = text;
+                if (response.ok) {
+                    const text = await response.text();
+                    document.getElementById('resultBody').innerHTML = text;
+                    overlay.style.display = 'none';
+                    document.getElementById('resultModal').style.display = 'flex';
+                    btn.innerText = (lang === 'fr') ? "Terminé" : "Done";
+                } else { throw new Error(); }
+            } catch (err) {
                 overlay.style.display = 'none';
-                document.getElementById('resultModal').style.display = 'flex';
-                
-                // Feedback Bouton
-                btn.innerText = (lang === 'fr' || lang === 'ar') ? "Terminé" : "Done";
-            } else { 
-                throw new Error("Server Response Error"); 
+                btn.disabled = false;
+                btn.style.backgroundColor = '#ff4d4d';
+                setTimeout(() => btn.style.backgroundColor = '', 3000);
             }
-        } catch (err) {
-            // GESTION D'ERREUR DISCRÈTE (UX Pro)
-            overlay.style.display = 'none';
-            btn.disabled = false;
-            
-            // Le bouton devient rouge brièvement pour signaler l'erreur sans pop-up agressif
-            const originalColor = btn.style.backgroundColor;
-            btn.style.backgroundColor = '#ff4d4d'; // Rouge erreur
-            btn.innerText = (lang === 'fr') ? "Erreur Connexion" : "Connection Error";
-            
-            setTimeout(() => { 
-                btn.style.backgroundColor = originalColor; 
-                btn.innerText = document.querySelector('button[type="submit"]').getAttribute('data-i18n') || "Lancer l'Analyse IA";
-            }, 3000);
-        }
-    });
-}
+        });
+    }
+});
