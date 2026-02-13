@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://hook.eu2.make.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;">
+    
     <title>e-META LABS | Strategic AI Engine</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -81,18 +83,18 @@
                     <div class="input-group">
                         <select id="geo-zone" required>
                             <option value="" disabled selected data-i18n="opt_geo_def">-- Sélectionner --</option>
-                            <optgroup label="Afrique / MENA">
-                                <option value="Senegal">Dakar Hub (Sénégal)</option>
-                                <option value="Maroc">Casablanca Finance City</option>
-                                <option value="UAE">Dubai (Middle East)</option>
-                                <option value="Nigeria">Lagos Hub</option>
-                                <option value="Kenya">Nairobi (Silicon Savannah)</option>
+                            <optgroup label="Afrique / MENA" data-i18n-label="grp_africa">
+                                <option value="Senegal" data-i18n="opt_dakar">Dakar Hub (Sénégal)</option>
+                                <option value="Maroc" data-i18n="opt_casa">Casablanca Finance City</option>
+                                <option value="UAE" data-i18n="opt_dubai">Dubai (Middle East)</option>
+                                <option value="Nigeria" data-i18n="opt_lagos">Lagos Hub</option>
+                                <option value="Kenya" data-i18n="opt_nairobi">Nairobi (Silicon Savannah)</option>
                             </optgroup>
-                            <optgroup label="International">
-                                <option value="France">Paris (Europe)</option>
-                                <option value="USA">Silicon Valley / NY</option>
-                                <option value="Singapore">Singapour (Asia)</option>
-                                <option value="Global">Global / Multi-sites</option>
+                            <optgroup label="International" data-i18n-label="grp_intl">
+                                <option value="France" data-i18n="opt_paris">Paris (Europe)</option>
+                                <option value="USA" data-i18n="opt_usa">Silicon Valley / NY</option>
+                                <option value="Singapore" data-i18n="opt_singapore">Singapour (Asia)</option>
+                                <option value="Global" data-i18n="opt_global">Global / Multi-sites</option>
                             </optgroup>
                         </select>
                     </div>
@@ -119,7 +121,7 @@
                     <h3 data-i18n="step3_title">03. Matrice Analyse</h3>
                     <div class="input-group">
                         <label for="context" data-i18n="lbl_context">Contexte Opérationnel</label>
-                        <textarea id="context" rows="4" placeholder="Décrivez vos enjeux stratégiques (ex: entrée marché, conformité)..."></textarea>
+                        <textarea id="context" rows="4" placeholder="Décrivez vos enjeux stratégiques..."></textarea>
                     </div>
                     <div class="legal-check">
                         <input type="checkbox" id="consent" required>
@@ -171,8 +173,8 @@
             <h2 style="color: #d4af37;" data-i18n="result_title">Diagnostic</h2>
             <div id="resultBody" class="modal-body"><p>Initialisation...</p></div>
             <div class="btn-container">
-                <button class="btn-gold btn-download" data-i18n="btn_pdf">PDF</button>
-                <button class="btn-outline btn-new" data-i18n="btn_new">NOUVEAU</button>
+                <button class="btn-gold btn-download" data-i18n="btn_pdf">TÉLÉCHARGER PDF</button>
+                <button class="btn-outline btn-new" data-i18n="btn_new">NOUVELLE ANALYSE</button>
             </div>
         </div>
     </div>
