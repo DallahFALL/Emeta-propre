@@ -234,7 +234,7 @@ const translations = {
         lbl_phone: "واتساب",
         btn_next: "التالي",
         ph_company: "مثال: مجموعة ميتا...",
-        ph_email: "contact@domain.com",
+        ph_email: "contact@sharikati.com",
         ph_phone: "+971...",
         step2_title: "02. المصفوفة",
         lbl_sector: "القطاع",
