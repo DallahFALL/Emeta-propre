@@ -2,7 +2,7 @@
  * FICHIER : script.js (Version DÉBLOQUÉE & EXPLICITE)
  */
 
-const WEBHOOK_URL = "https://hook.eu2.make.com/2aq4sxsbs6pj7cqmx7i2tvjvhwwdrvf2"; 
+const WEBHOOK_URL = "https://hook.eu2.make.com/moupzawutk6h7ab6f5ap2li1qaypzh2f"; 
 const STATS_URL = "https://hook.eu2.make.com/1jeaje7c3r1chg5oz7wruxohz6e8a8bg"; 
 
 // --- 1. FONCTIONS DE NAVIGATION (Attachées à la fenêtre globale) ---
