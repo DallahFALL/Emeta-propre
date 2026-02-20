@@ -1,8 +1,3 @@
-/* * FICHIER : i18n.js 
- * PROJET : e-META LABS — Master SN-2026
- * DESCRIPTION : Traduction intégrale (4 langues) avec gestion dynamique de la souveraineté.
- */
-
 const translations = {
     fr: {
         subtitle: "Excellence Stratégique & Haute Précision IA",
@@ -29,7 +24,7 @@ const translations = {
         sec_immo: "Immo & Smart City",
         sec_edu: "EduTech & Savoir",
         lbl_geo: "Hub Stratégique",
-        opt_geo_def: "-- Sélectionner une zone --",
+        opt_geo_def: "-- Sélectionner --",
         grp_africa: "Afrique / MENA",
         grp_intl: "International",
         opt_dakar: "Dakar Hub (Sénégal)",
@@ -54,7 +49,7 @@ const translations = {
         btn_next_matrice: "Suivant",
         step3_title: "03. Analyse & Restitution",
         lbl_context: "Contexte Opérationnel",
-        ph_context: "Décrivez vos enjeux stratégiques (marché, conformité, crise)...",
+        ph_context: "Décrivez vos enjeux stratégiques...",
         legal_consent: "J'accepte la",
         link_privacy: "Politique de Confidentialité",
         btn_submit: "Lancer l'Analyse IA",
@@ -73,12 +68,12 @@ const translations = {
         priv_content: `
             <div class="privacy-block">
                 <h4>1. Souveraineté des Données</h4>
-                <p>e-META LABS garantit que vos données stratégiques ne sont <strong>jamais revendues</strong> ni exploitées par des tiers.</p>
+                <p>e-META LABS garantit que vos données ne sont <strong>jamais revendues</strong>.</p>
                 <h4>2. Intelligence Souveraine Partagée</h4>
-                <p>Vos problématiques ne servent pas à l'entraînement de modèles d'IA publics. Le traitement est isolé, sécurisé et éphémère.</p>
+                <p>Vos problématiques ne servent pas à l'entraînement de modèles d'IA publics.</p>
                 <h4>3. Certification Blockchain</h4>
-                <p>Chaque diagnostic fait l'objet d'un ancrage cryptographique garantissant l'intégrité et l'antériorité de vos analyses.</p>
-                <h4>4. Contact Unité de Support</h4>
+                <p>Chaque diagnostic fait l'objet d'un ancrage cryptographique.</p>
+                <h4>4. Contact Support</h4>
                 <p>Pour toute question : <strong>support@e-metalabs.com</strong></p>
             </div>`
     },
@@ -107,7 +102,7 @@ const translations = {
         sec_immo: "Real Estate & Smart City",
         sec_edu: "EduTech & Knowledge",
         lbl_geo: "Strategic Hub",
-        opt_geo_def: "-- Select a zone --",
+        opt_geo_def: "-- Select Zone --",
         grp_africa: "Africa / MENA",
         grp_intl: "International",
         opt_dakar: "Dakar Hub (Senegal)",
@@ -132,7 +127,7 @@ const translations = {
         btn_next_matrice: "Next",
         step3_title: "03. Analysis & Output",
         lbl_context: "Operational Context",
-        ph_context: "Describe your strategic challenges (market, compliance, crisis)...",
+        ph_context: "Describe your strategic challenges...",
         legal_consent: "I accept the",
         link_privacy: "Privacy Policy",
         btn_submit: "Launch AI Analysis",
@@ -140,7 +135,7 @@ const translations = {
         stat_ai: "AI Analyses",
         stat_pdf: "Certified PDFs",
         lbl_support: "Tech Support:",
-        lbl_commercial: "Inquiries:",
+        lbl_commercial: "Inquiry:",
         footer_unit: "Strategic Intelligence Unit • Dakar - Paris - Dubai",
         footer_rights: "All rights reserved.",
         modal_title: "Privacy & Data Sovereignty",
@@ -151,12 +146,12 @@ const translations = {
         priv_content: `
             <div class="privacy-block">
                 <h4>1. Data Sovereignty</h4>
-                <p>e-META LABS ensures your strategic data is <strong>never sold</strong> or exploited by third parties.</p>
+                <p>Data is <strong>never sold</strong> or exploited by third parties.</p>
                 <h4>2. Sovereign Shared Intelligence</h4>
-                <p>Your inputs are not used to train public AI models. Processing is isolated, secure, and transient.</p>
+                <p>Your inputs are not used to train public AI models.</p>
                 <h4>3. Blockchain Certification</h4>
-                <p>Every diagnostic is cryptographically anchored to ensure the integrity of your strategic analysis.</p>
-                <h4>4. Support Unit Contact</h4>
+                <p>Every diagnostic is cryptographically anchored.</p>
+                <h4>4. Support Unit</h4>
                 <p>Questions? <strong>support@e-metalabs.com</strong></p>
             </div>`
     },
@@ -191,6 +186,12 @@ const translations = {
         opt_dakar: "Dakar Hub (Senegal)",
         opt_casa: "Casablanca Finance City",
         opt_dubai: "Dubai (Middle East)",
+        opt_lagos: "Lagos Hub",
+        opt_nairobi: "Nairobi",
+        opt_paris: "Paris (Europe)",
+        opt_usa: "Silicon Valley / NY",
+        opt_singapore: "Singapur",
+        opt_global: "Global",
         lbl_expertise: "Experiencia Requerida",
         exp_sov: "IA Soberana",
         exp_cyber: "Ciberseguridad",
@@ -204,7 +205,7 @@ const translations = {
         btn_next_matrice: "Siguiente",
         step3_title: "03. Análisis y Resultado",
         lbl_context: "Contexto Operativo",
-        ph_context: "Describa sus desafíos estratégicos...",
+        ph_context: "Describa sus desafíos...",
         legal_consent: "Acepto la",
         link_privacy: "Política de Privacidad",
         btn_submit: "Iniciar Análisis IA",
@@ -214,31 +215,28 @@ const translations = {
         lbl_support: "Soporte Técnico:",
         lbl_commercial: "Información:",
         footer_unit: "Unidad de Inteligencia • Dakar - París - Dubái",
-        footer_rights: "Todos los derechos reservados.",
-        modal_title: "Privacidad y Soberanía de Datos",
+        footer_rights: "Derechos reservados.",
+        modal_title: "Privacidad y Soberanía",
         btn_close: "Cerrar",
         result_title: "Diagnóstico Estratégico",
         btn_pdf: "DESCARGAR PDF",
         btn_new: "NUEVO ANÁLISIS",
         priv_content: `
-            priv_content: `
-    <div class="privacy-block">
-        <h4>1. Soberanía de Datos</h4>
-        <p>e-META LABS garantiza que sus datos estratégicos <strong>nunca se venden</strong>.</p>
-        <h4>2. Inteligencia Soberana Compartida</h4>
-        <p>Sus datos no se utilizan para entrenar modelos de IA públicos. El procesamiento es aislado y seguro.</p>
-        <h4>3. Certificación Blockchain</h4>
-        <p>Informes anclados mediante protocolo Woleet para garantizar la integridad.</p>
-        <h4>4. Contacto Unidad de Soporte</h4>
-        <p>Para cualquier duda: <strong>support@e-metalabs.com</strong></p>
-    </div>`
+            <div class="privacy-block">
+                <h4>1. Soberanía de Datos</h4>
+                <p>e-META LABS garantiza que sus datos <strong>nunca se venden</strong>.</p>
+                <h4>2. Inteligencia Soberana Compartida</h4>
+                <p>Sus datos no se utilizan para entrenar modelos de IA públicos.</p>
+                <h4>3. Certificación Blockchain</h4>
+                <p>Informes anclados mediante protocolo Woleet.</p>
+                <h4>4. Contacto de Soporte</h4>
+                <p>Para dudas: <strong>support@e-metalabs.com</strong></p>
+            </div>`
     },
-   ar: {
+    ar: {
         subtitle: "التميز الاستراتيجي والذكاء الاصطناعي عالي الدقة",
         btn_reset: "إعادة تعيين",
         ai_calculating: "جارٍ التحليل الاستراتيجي...",
-        
-        // ÉTAPE 1
         step1_title: "01. الهوية",
         lbl_company: "الشركة / الكيان",
         lbl_email: "البريد الإلكتروني المهني",
@@ -247,8 +245,6 @@ const translations = {
         ph_company: "مثال: مجموعة ميتا سترات...",
         ph_email: "contact@domain.com",
         ph_phone: "+221...",
-        
-        // ÉTAPE 2
         step2_title: "02. المصفوفة الاستراتيجية",
         lbl_sector: "قطاع النشاط",
         sec_genai: "الذكاء الاصطناعي التوليدي والروبوتات",
@@ -261,23 +257,19 @@ const translations = {
         sec_gov: "التكنولوجيا الحكومية",
         sec_immo: "العقارات والمدن الذكية",
         sec_edu: "تكنولوجيا التعليم",
-        
-        // HUB GÉOGRAPHIQUE (CORRIGÉ & COMPLET)
         lbl_geo: "المحور الاستراتيجي",
         opt_geo_def: "-- اختر المنطقة --",
         grp_africa: "أفريقيا / الشرق الأوسط",
         opt_dakar: "محور داكار (السنغال)",
         opt_casa: "الدار البيضاء (قطب مالي)",
         opt_dubai: "دبي (الشرق الأوسط)",
-        opt_lagos: "محور لاغوس (نيجيريا)",
-        opt_nairobi: "نيروبي (سافانا السيليكون)",
-        
+        opt_lagos: "محور لاغوس",
+        opt_nairobi: "نيروبي",
         grp_intl: "دولي",
-        opt_paris: "باريس (أوروبا)",
-        opt_usa: "وادي السيليكون / نيويورك",
-        opt_singapore: "سنغافورة (آسيا)",
-        opt_global: "عالمي / مواقع متعددة",
-        
+        opt_paris: "باريس",
+        opt_usa: "وادي السيليكون",
+        opt_singapore: "سنغافورة",
+        opt_global: "عالمي",
         lbl_expertise: "الخبرات المطلوبة",
         exp_sov: "الذكاء الاصطناعي السيادي",
         exp_cyber: "الأمن السيبراني",
@@ -287,76 +279,56 @@ const translations = {
         exp_esg: "الحوكمة والبيئة",
         exp_lobby: "الشؤون العامة",
         exp_supply: "سلاسل التوريد",
-        
         btn_prev: "رجوع",
         btn_next_matrice: "التالي",
-        
-        // ÉTAPE 3
         step3_title: "03. التحليل والنتائج",
         lbl_context: "السياق العملياتي",
         ph_context: "صف تحدياتك الاستراتيجية...",
         legal_consent: "أوافق على",
         link_privacy: "سياسة الخصوصية",
         btn_submit: "بدء تحليل الذكاء الاصطناعي",
-        
-        // STATS & FOOTER
         stats_live: "ذكاء مباشر",
         stat_ai: "تحليلات الذكاء الاصطناعي",
-        stat_pdf: "ملفات PDF معتمدة",
+        stat_pdf: "PDF معتمدة",
         lbl_support: "الدعم الفني:",
         lbl_commercial: "المعلومات:",
         footer_unit: "وحدة الاستخبارات الاستراتيجية • داكار - باريس - دبي",
         footer_rights: "جميع الحقوق محفوظة.",
-        
-        // MODALS
         modal_title: "سياسة الخصوصية وسيادة البيانات",
         btn_close: "إغلاق",
         result_title: "التشخيص الاستراتيجي",
         btn_pdf: "تحميل PDF",
         btn_new: "تحليل جديد",
-        
         priv_content: `
             <div class="privacy-block">
-              priv_content: `
-    <div class="privacy-block">
-        <h4>1. سيادة البيانات</h4>
-        <p>تضمن e-META LABS <strong>عدم بيع</strong> بياناتكم الاستراتيجية أبدًا.</p>
-        <h4>2. الذكاء السيادي المشترك</h4>
-        <p>لا تُستخدم مدخلاتكم لتدريب نماذج الذكاء الاصطناعي العامة. المعالجة معزولة وآمنة.</p>
-        <h4>3. توثيق البلوكشين</h4>
-        <p>كل تشخيص موثق لضمان سلامة تحليلاتكم.</p>
-        <h4>4. الاتصال بوحدة الدعم</h4>
-        <p>لأي استفسار: <strong>support@e-metalabs.com</strong></p>
-    </div>`  
+                <h4>1. سيادة البيانات</h4>
+                <p>تضمن e-META LABS <strong>عدم بيع</strong> بياناتكم أبدًا.</p>
+                <h4>2. الذكاء السيادي المشترك</h4>
+                <p>لا تُستخدم مدخلاتكم لتدريب نماذج الذكاء الاصطناعي العامة.</p>
+                <h4>3. توثيق البلوكشين</h4>
+                <p>كل تشخيص موثق لضمان سلامة تحليلاتكم.</p>
+                <h4>4. الاتصال بوحدة الدعم</h4>
+                <p>لأي استفسار: <strong>support@e-metalabs.com</strong></p>
+            </div>`
     }
 };
 
-/* --- LOGIQUE DU MOTEUR DE TRADUCTION --- */
-
 window.setLanguage = function(lang) {
-    // 1. Mise à jour des attributs HTML
     document.documentElement.lang = lang;
     document.dir = (lang === 'ar') ? 'rtl' : 'ltr';
     
-    // 2. Gestion visuelle des boutons de langue
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.innerText.toLowerCase() === lang);
     });
 
-    // 3. Traduction des éléments avec l'attribut data-i18n
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         if (translations[lang] && translations[lang][key]) {
-            // Utilisation de innerHTML pour le contenu de la modal (politique)
-            if (key === 'priv_content') {
-                element.innerHTML = translations[lang][key];
-            } else {
-                element.innerText = translations[lang][key];
-            }
+            if (key === 'priv_content') element.innerHTML = translations[lang][key];
+            else element.innerText = translations[lang][key];
         }
     });
 
-    // 4. Traduction des étiquettes de groupes (Optgroups)
     document.querySelectorAll('[data-i18n-label]').forEach(element => {
         const key = element.getAttribute('data-i18n-label');
         if (translations[lang] && translations[lang][key]) {
@@ -364,27 +336,18 @@ window.setLanguage = function(lang) {
         }
     });
 
-    // 5. Mise à jour des Placeholders des champs
     const mapPlaceholders = {
         'company': 'ph_company',
         'email': 'ph_email',
         'phone': 'ph_phone',
         'context': 'ph_context'
     };
-    
     for (const [id, key] of Object.entries(mapPlaceholders)) {
         const input = document.getElementById(id);
         if (input && translations[lang][key]) {
             input.placeholder = translations[lang][key];
         }
     }
-    
-    // 6. Sauvegarde de la préférence (optionnel)
-    localStorage.setItem('preferredLang', lang);
 };
 
-// Initialisation au chargement de la page
-document.addEventListener('DOMContentLoaded', () => {
-    const savedLang = localStorage.getItem('preferredLang') || 'fr';
-    window.setLanguage(savedLang);
-});
+document.addEventListener('DOMContentLoaded', () => window.setLanguage('fr'));
