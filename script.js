@@ -1,139 +1,197 @@
 /* * PROJET : e-META LABS
- * FICHIER : script.js (Version DÉBLOQUÉE & EXPLICITE)
+ * FICHIER : script.js (Version Optimisée, Souveraine & Multilingue)
+ * MAJ : 2026 - Intégration Dynamique
  */
 
 const WEBHOOK_URL = "https://hook.eu2.make.com/moupzawutk6h7ab6f5ap2li1qaypzh2f"; 
 const STATS_URL = "https://hook.eu2.make.com/1jeaje7c3r1chg5oz7wruxohz6e8a8bg"; 
 
-// --- 1. FONCTIONS DE NAVIGATION (Attachées à la fenêtre globale) ---
+// --- 1. GESTION DE LA NAVIGATION ---
 
 window.nextStep = function(targetStep) {
-    // Validation Étape 1 vers 2
+    // Validation stricte Étape 1 vers 2
     if (targetStep === 2) {
-        const comp = document.getElementById('company').value;
-        const mail = document.getElementById('email').value;
+        const comp = document.getElementById('company');
+        const mail = document.getElementById('email');
         
-        if (!comp || !mail) {
-            // Effet visuel d'erreur
-            if(!comp) document.getElementById('company').style.borderColor = '#ff4d4d';
-            if(!mail) document.getElementById('email').style.borderColor = '#ff4d4d';
+        if (!comp.value || !mail.value || !mail.checkValidity()) {
+            [comp, mail].forEach(el => {
+                if(!el.value || (el.type === 'email' && !el.checkValidity())) {
+                    el.style.borderColor = '#ff4d4d';
+                    el.classList.add('shake'); // Animation d'erreur
+                }
+            });
+            
             setTimeout(() => {
-                document.getElementById('company').style.borderColor = '';
-                document.getElementById('email').style.borderColor = '';
+                [comp, mail].forEach(el => {
+                    el.style.borderColor = '';
+                    el.classList.remove('shake');
+                });
             }, 2000);
-            return; // Stop
+            return; 
         }
     }
     
-    // Changement d'étape
-    document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
-    document.getElementById(`step-${targetStep}`).classList.add('active');
+    // Transition d'étape
+    document.querySelectorAll('.form-step').forEach(step => {
+        step.classList.remove('active');
+        step.style.display = 'none';
+    });
     
-    // Scroll haut
+    const next = document.getElementById(`step-${targetStep}`);
+    if (next) {
+        next.style.display = 'block';
+        setTimeout(() => next.classList.add('active'), 10);
+    }
+    
+    // Scroll fluide vers le haut du formulaire
     const card = document.querySelector('.glass-card');
     if(card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
 window.resetForm = function() { 
-    window.location.reload(); 
+    if(confirm("Réinitialiser le diagnostic ?")) window.location.reload(); 
 };
 
-// --- 2. LIVE STATS ---
+// --- 2. STATISTIQUES EN TEMPS RÉEL ---
+
 async function updateLiveStats() {
     try {
         const response = await fetch(STATS_URL);
         if (response.ok) {
             const data = await response.json();
-            if(document.getElementById('count-analyses')) document.getElementById('count-analyses').innerText = data.totalAnalyses || "--";
-            if(document.getElementById('count-pdf')) document.getElementById('count-pdf').innerText = data.totalPDF || "--";
-            
-            const now = new Date();
-            if(document.getElementById('last-update')) document.getElementById('last-update').innerText = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+            const countAnalyse = document.getElementById('count-analyses');
+            const countPdf = document.getElementById('count-pdf');
+            const lastUpdate = document.getElementById('last-update');
+
+            if(countAnalyse) countAnalyse.innerText = data.totalAnalyses || "0";
+            if(countPdf) countPdf.innerText = data.totalPDF || "0";
+            if(lastUpdate) {
+                const now = new Date();
+                lastUpdate.innerText = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            }
         }
-    } catch (e) { /* Silence */ }
+    } catch (e) { console.warn("Stats indisponibles"); }
 }
 
-// --- 3. INITIALISATION ---
+// --- 3. INITIALISATION & ÉCOUTEURS ---
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Lancement Stats
+    // Lancement des stats
     updateLiveStats();
     setInterval(updateLiveStats, 60000);
-    
-    // Écouteur global pour les clics (Modals & Actions)
+
+    // --- GESTION DYNAMIQUE DES LANGUES ---
+    const langSelectors = document.querySelectorAll('.lang-btn'); // Ajustez la classe selon votre HTML
+    langSelectors.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const newLang = btn.getAttribute('data-lang');
+            document.documentElement.lang = newLang;
+            
+            // Mise à jour visuelle des boutons de langue
+            langSelectors.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Optionnel: Stockage local
+            localStorage.setItem('e-meta-lang', newLang);
+        });
+    });
+
+    // --- DÉLÉGATION D'ÉVÉNEMENTS (CLICS) ---
     document.addEventListener('click', (e) => {
-        // Fermer Modals
-        if (e.target.closest('.close-modal') || e.target.closest('.close-result') || e.target.closest('.close-modal-btn')) {
-            document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
+        // Fermeture Modals
+        if (e.target.closest('.close-modal, .close-result, .close-modal-btn, .modal-overlay')) {
+            if (e.target === e.currentTarget || !e.target.closest('.modal-content')) {
+                document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
+            }
         }
         
-        // Ouvrir Privacy
-        if (e.target.closest('#openPrivacyLink') || e.target.closest('#openPrivacyFooter') || e.target.closest('#openPrivacyResult')) {
+        // Liens Confidentialité
+        if (e.target.closest('#openPrivacyLink, #openPrivacyFooter, #openPrivacyResult')) {
             e.preventDefault();
             const modal = document.getElementById('privacyOverlay');
             if(modal) modal.style.display = 'flex';
         }
         
-        // Télécharger PDF
+        // Impression / PDF
         if (e.target.closest('.btn-download')) {
             window.print();
-            fetch(WEBHOOK_URL, { method: 'POST', body: JSON.stringify({ action: "PDF_DOWNLOAD" }) }).catch(()=>{});
+            fetch(WEBHOOK_URL, { 
+                method: 'POST', 
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ action: "PDF_DOWNLOAD", timestamp: new Date() }) 
+            }).catch(()=>{});
         }
         
-        // Nouvelle Analyse
-        if (e.target.closest('.btn-new')) {
-            window.resetForm();
-        }
+        // Relancer
+        if (e.target.closest('.btn-new')) window.resetForm();
     });
 
-    // --- 4. SOUMISSION DU FORMULAIRE ---
+    // --- 4. ENVOI DU DIAGNOSTIC ---
     const form = document.getElementById('diagnosticForm');
     if (form) {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Honeypot Sécurité
-            if (document.getElementById('honeypot').value !== "") return;
+            // Sécurité Honeypot
+            if (document.getElementById('honeypot')?.value !== "") return;
 
-            const btn = document.querySelector('button[type="submit"]');
+            const btn = form.querySelector('button[type="submit"]');
             const overlay = document.getElementById('loadingOverlay');
-            const lang = document.documentElement.lang || 'fr';
+            const currentLang = document.documentElement.lang || 'fr';
             
             overlay.style.display = 'flex';
             btn.disabled = true;
 
-            const data = {
+            const formData = {
                 action: "diagnostic",
-                timestamp: new Date().toISOString(),
-                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-                lang: lang,
-                company: document.getElementById('company').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                sector: document.querySelector('input[name="sector"]:checked')?.value || "N/A",
-                geoZone: document.getElementById('geo-zone').value,
-                expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked')).map(cb => cb.value).join(', '),
-                context: document.getElementById('context').value
+                meta: {
+                    source: "e-META LABS Web App",
+                    version: "2.0",
+                    timestamp: new Date().toISOString(),
+                    lang: currentLang
+                },
+                user: {
+                    company: document.getElementById('company').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value || "Non renseigné",
+                    geoZone: document.getElementById('geo-zone').value
+                },
+                project: {
+                    sector: document.querySelector('input[name="sector"]:checked')?.value || "N/A",
+                    expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked')).map(cb => cb.value),
+                    context: document.getElementById('context').value
+                }
             };
 
             try {
                 const response = await fetch(WEBHOOK_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(formData)
                 });
                 
                 if (response.ok) {
-                    const text = await response.text();
-                    document.getElementById('resultBody').innerHTML = text;
-                    overlay.style.display = 'none';
-                    document.getElementById('resultModal').style.display = 'flex';
-                    btn.innerText = (lang === 'fr') ? "Terminé" : "Done";
-                } else { throw new Error(); }
+                    const htmlResponse = await response.text();
+                    const resultBody = document.getElementById('resultBody');
+                    
+                    if (resultBody) {
+                        resultBody.innerHTML = htmlResponse;
+                        overlay.style.display = 'none';
+                        document.getElementById('resultModal').style.display = 'flex';
+                        btn.innerText = (currentLang === 'fr') ? "Analyse Terminée" : "Analysis Complete";
+                    }
+                } else { throw new Error("Erreur de réponse serveur"); }
             } catch (err) {
+                console.error("Erreur e-META LABS:", err);
                 overlay.style.display = 'none';
                 btn.disabled = false;
                 btn.style.backgroundColor = '#ff4d4d';
-                setTimeout(() => btn.style.backgroundColor = '', 3000);
+                btn.innerText = (currentLang === 'fr') ? "Échec - Réessayer" : "Failed - Try Again";
+                setTimeout(() => {
+                    btn.style.backgroundColor = '';
+                    btn.innerText = (currentLang === 'fr') ? "Lancer le diagnostic" : "Start Diagnostic";
+                }, 3000);
             }
         });
     }
