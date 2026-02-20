@@ -230,10 +230,12 @@ const translations = {
                 <p>Informes anclados mediante protocolo Woleet.</p>
             </div>`
     },
-    ar: {
+   ar: {
         subtitle: "التميز الاستراتيجي والذكاء الاصطناعي عالي الدقة",
         btn_reset: "إعادة تعيين",
         ai_calculating: "جارٍ التحليل الاستراتيجي...",
+        
+        // ÉTAPE 1
         step1_title: "01. الهوية",
         lbl_company: "الشركة / الكيان",
         lbl_email: "البريد الإلكتروني المهني",
@@ -242,6 +244,8 @@ const translations = {
         ph_company: "مثال: مجموعة ميتا سترات...",
         ph_email: "contact@domain.com",
         ph_phone: "+221...",
+        
+        // ÉTAPE 2
         step2_title: "02. المصفوفة الاستراتيجية",
         lbl_sector: "قطاع النشاط",
         sec_genai: "الذكاء الاصطناعي التوليدي والروبوتات",
@@ -254,13 +258,23 @@ const translations = {
         sec_gov: "التكنولوجيا الحكومية",
         sec_immo: "العقارات والمدن الذكية",
         sec_edu: "تكنولوجيا التعليم",
+        
+        // HUB GÉOGRAPHIQUE (CORRIGÉ & COMPLET)
         lbl_geo: "المحور الاستراتيجي",
         opt_geo_def: "-- اختر المنطقة --",
         grp_africa: "أفريقيا / الشرق الأوسط",
-        grp_intl: "دولي",
         opt_dakar: "محور داكار (السنغال)",
         opt_casa: "الدار البيضاء (قطب مالي)",
         opt_dubai: "دبي (الشرق الأوسط)",
+        opt_lagos: "محور لاغوس (نيجيريا)",
+        opt_nairobi: "نيروبي (سافانا السيليكون)",
+        
+        grp_intl: "دولي",
+        opt_paris: "باريس (أوروبا)",
+        opt_usa: "وادي السيليكون / نيويورك",
+        opt_singapore: "سنغافورة (آسيا)",
+        opt_global: "عالمي / مواقع متعددة",
+        
         lbl_expertise: "الخبرات المطلوبة",
         exp_sov: "الذكاء الاصطناعي السيادي",
         exp_cyber: "الأمن السيبراني",
@@ -270,14 +284,19 @@ const translations = {
         exp_esg: "الحوكمة والبيئة",
         exp_lobby: "الشؤون العامة",
         exp_supply: "سلاسل التوريد",
+        
         btn_prev: "رجوع",
         btn_next_matrice: "التالي",
+        
+        // ÉTAPE 3
         step3_title: "03. التحليل والنتائج",
         lbl_context: "السياق العملياتي",
         ph_context: "صف تحدياتك الاستراتيجية...",
         legal_consent: "أوافق على",
         link_privacy: "سياسة الخصوصية",
         btn_submit: "بدء تحليل الذكاء الاصطناعي",
+        
+        // STATS & FOOTER
         stats_live: "ذكاء مباشر",
         stat_ai: "تحليلات الذكاء الاصطناعي",
         stat_pdf: "ملفات PDF معتمدة",
@@ -285,11 +304,14 @@ const translations = {
         lbl_commercial: "المعلومات:",
         footer_unit: "وحدة الاستخبارات الاستراتيجية • داكار - باريس - دبي",
         footer_rights: "جميع الحقوق محفوظة.",
+        
+        // MODALS
         modal_title: "سياسة الخصوصية وسيادة البيانات",
         btn_close: "إغلاق",
         result_title: "التشخيص الاستراتيجي",
         btn_pdf: "تحميل PDF",
         btn_new: "تحليل جديد",
+        
         priv_content: `
             <div class="privacy-block">
                 <h4>1. سيادة البيانات</h4>
