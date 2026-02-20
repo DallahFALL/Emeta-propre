@@ -78,27 +78,27 @@
                         <label class="checkbox-btn"><input type="radio" name="sector" value="RealEstate"> <span data-i18n="sec_immo">Immo & Smart City</span></label>
                         <label class="checkbox-btn"><input type="radio" name="sector" value="EduTech"> <span data-i18n="sec_edu">EduTech & Savoir</span></label>
                     </div>
+<div class="input-group">
+    <label for="geo-zone" data-i18n="lbl_geo">Hub Stratégique</label>
+    <select id="geo-zone" required>
+        <option value="" disabled selected data-i18n="opt_geo_def">-- Sélectionner une zone --</option>
+        
+        <optgroup label="Afrique / MENA" data-i18n-label="grp_africa">
+            <option value="Senegal" data-i18n="opt_dakar">Dakar Hub (Sénégal)</option>
+            <option value="Maroc" data-i18n="opt_casa">Casablanca Finance City</option>
+            <option value="UAE" data-i18n="opt_dubai">Dubai (Middle East)</option>
+            <option value="Nigeria" data-i18n="opt_lagos">Lagos Hub</option>
+            <option value="Kenya" data-i18n="opt_nairobi">Nairobi (Silicon Savannah)</option>
+        </optgroup>
 
-                    <label class="section-label mt-2" data-i18n="lbl_geo">Hub Stratégique</label>
-                    <div class="input-group">
-                        <select id="geo-zone" required>
-                            <option value="" disabled selected data-i18n="opt_geo_def">-- Sélectionner --</option>
-                            <optgroup label="Afrique / MENA" data-i18n-label="grp_africa">
-                                <option value="Senegal" data-i18n="opt_dakar">Dakar Hub (Sénégal)</option>
-                                <option value="Maroc" data-i18n="opt_casa">Casablanca Finance City</option>
-                                <option value="UAE" data-i18n="opt_dubai">Dubai (Middle East)</option>
-                                <option value="Nigeria" data-i18n="opt_lagos">Lagos Hub</option>
-                                <option value="Kenya" data-i18n="opt_nairobi">Nairobi (Silicon Savannah)</option>
-                            </optgroup>
-                            <optgroup label="International" data-i18n-label="grp_intl">
-                                <option value="France" data-i18n="opt_paris">Paris (Europe)</option>
-                                <option value="USA" data-i18n="opt_usa">Silicon Valley / NY</option>
-                                <option value="Singapore" data-i18n="opt_singapore">Singapour (Asia)</option>
-                                <option value="Global" data-i18n="opt_global">Global / Multi-sites</option>
-                            </optgroup>
-                        </select>
-                    </div>
-
+        <optgroup label="International" data-i18n-label="grp_intl">
+            <option value="France" data-i18n="opt_paris">Paris (Europe)</option>
+            <option value="USA" data-i18n="opt_usa">Silicon Valley / NY</option>
+            <option value="Singapore" data-i18n="opt_singapore">Singapour (Asia)</option>
+            <option value="Global" data-i18n="opt_global">Global / Multi-sites</option>
+        </optgroup>
+    </select>
+</div>
                     <label class="section-label mt-2" data-i18n="lbl_expertise">Expertises Requises</label>
                     <div class="grid-options" style="grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));">
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="IA_Souveraine"> <span data-i18n="exp_sov">IA Souveraine</span></label>
