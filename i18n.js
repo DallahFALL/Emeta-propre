@@ -221,14 +221,17 @@ const translations = {
         btn_pdf: "DESCARGAR PDF",
         btn_new: "NUEVO ANÁLISIS",
         priv_content: `
-            <div class="privacy-block">
-                <h4>1. Soberanía de Datos</h4>
-                <p>e-META LABS garantiza que sus datos <strong>nunca se venden</strong>.</p>
-                <h4>2. Inteligencia Soberana</h4>
-                <p>Sus datos no se utilizan para entrenar modelos de IA públicos.</p>
-                <h4>3. Certificación Blockchain</h4>
-                <p>Informes anclados mediante protocolo Woleet.</p>
-            </div>`
+            priv_content: `
+    <div class="privacy-block">
+        <h4>1. Soberanía de Datos</h4>
+        <p>e-META LABS garantiza que sus datos estratégicos <strong>nunca se venden</strong>.</p>
+        <h4>2. Inteligencia Soberana Compartida</h4>
+        <p>Sus datos no se utilizan para entrenar modelos de IA públicos. El procesamiento es aislado y seguro.</p>
+        <h4>3. Certificación Blockchain</h4>
+        <p>Informes anclados mediante protocolo Woleet para garantizar la integridad.</p>
+        <h4>4. Contacto Unidad de Soporte</h4>
+        <p>Para cualquier duda: <strong>support@e-metalabs.com</strong></p>
+    </div>`
     },
    ar: {
         subtitle: "التميز الاستراتيجي والذكاء الاصطناعي عالي الدقة",
@@ -314,13 +317,17 @@ const translations = {
         
         priv_content: `
             <div class="privacy-block">
-                <h4>1. سيادة البيانات</h4>
-                <p>تضمن e-META LABS <strong>عدم بيع</strong> بياناتكم الاستراتيجية أبدًا.</p>
-                <h4>2. الذكاء السيادي المشترك</h4>
-                <p>لا تُستخدم مدخلاتكم لتدريب نماذج الذكاء الاصطناعي العامة.</p>
-                <h4>3. توثيق البلوكشين</h4>
-                <p>كل تشخيص موثق لضمان سلامة تحليلاتكم.</p>
-            </div>`
+              priv_content: `
+    <div class="privacy-block">
+        <h4>1. سيادة البيانات</h4>
+        <p>تضمن e-META LABS <strong>عدم بيع</strong> بياناتكم الاستراتيجية أبدًا.</p>
+        <h4>2. الذكاء السيادي المشترك</h4>
+        <p>لا تُستخدم مدخلاتكم لتدريب نماذج الذكاء الاصطناعي العامة. المعالجة معزولة وآمنة.</p>
+        <h4>3. توثيق البلوكشين</h4>
+        <p>كل تشخيص موثق لضمان سلامة تحليلاتكم.</p>
+        <h4>4. الاتصال بوحدة الدعم</h4>
+        <p>لأي استفسار: <strong>support@e-metalabs.com</strong></p>
+    </div>`  
     }
 };
 
