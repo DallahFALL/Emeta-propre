@@ -1,6 +1,6 @@
 /* * PROJET : e-META LABS
  * FICHIER : script.js (Version Optimisée, Souveraine & Multilingue)
- * MAJ : 2026 - Intégration Dynamique
+ * MAJ : 2026 - Intégration Dynamique & Correctif Boutons
  */
 
 const WEBHOOK_URL = "https://hook.eu2.make.com/moupzawutk6h7ab6f5ap2li1qaypzh2f"; 
@@ -9,7 +9,6 @@ const STATS_URL = "https://hook.eu2.make.com/1jeaje7c3r1chg5oz7wruxohz6e8a8bg";
 // --- 1. GESTION DE LA NAVIGATION ---
 
 window.nextStep = function(targetStep) {
-    // Validation stricte Étape 1 vers 2
     if (targetStep === 2) {
         const comp = document.getElementById('company');
         const mail = document.getElementById('email');
@@ -18,7 +17,7 @@ window.nextStep = function(targetStep) {
             [comp, mail].forEach(el => {
                 if(!el.value || (el.type === 'email' && !el.checkValidity())) {
                     el.style.borderColor = '#ff4d4d';
-                    el.classList.add('shake'); // Animation d'erreur
+                    el.classList.add('shake');
                 }
             });
             
@@ -32,7 +31,6 @@ window.nextStep = function(targetStep) {
         }
     }
     
-    // Transition d'étape
     document.querySelectorAll('.form-step').forEach(step => {
         step.classList.remove('active');
         step.style.display = 'none';
@@ -44,7 +42,6 @@ window.nextStep = function(targetStep) {
         setTimeout(() => next.classList.add('active'), 10);
     }
     
-    // Scroll fluide vers le haut du formulaire
     const card = document.querySelector('.glass-card');
     if(card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
@@ -77,43 +74,45 @@ async function updateLiveStats() {
 // --- 3. INITIALISATION & ÉCOUTEURS ---
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Lancement des stats
     updateLiveStats();
     setInterval(updateLiveStats, 60000);
 
     // --- GESTION DYNAMIQUE DES LANGUES ---
-    const langSelectors = document.querySelectorAll('.lang-btn'); // Ajustez la classe selon votre HTML
+    const langSelectors = document.querySelectorAll('.lang-btn');
     langSelectors.forEach(btn => {
         btn.addEventListener('click', (e) => {
             const newLang = btn.getAttribute('data-lang');
             document.documentElement.lang = newLang;
-            
-            // Mise à jour visuelle des boutons de langue
             langSelectors.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            
-            // Optionnel: Stockage local
             localStorage.setItem('e-meta-lang', newLang);
         });
     });
 
     // --- DÉLÉGATION D'ÉVÉNEMENTS (CLICS) ---
     document.addEventListener('click', (e) => {
-        // Fermeture Modals
-        if (e.target.closest('.close-modal, .close-result, .close-modal-btn, .modal-overlay')) {
-            if (e.target === e.currentTarget || !e.target.closest('.modal-content')) {
-                document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
+        // 1. Fermeture des Modals (Croix, Bouton Fermer, ou Overlay)
+        if (
+            e.target.closest('.close-modal') || 
+            e.target.closest('.close-result') || 
+            e.target.closest('.close-modal-btn') || 
+            e.target.closest('.modal-overlay') ||
+            (e.target.tagName === 'BUTTON' && e.target.innerText.includes('إغلاق'))
+        ) {
+            // Fermeture si clic sur un élément de fermeture ou l'overlay sombre
+            if (e.target.classList.contains('modal-overlay') || e.target.closest('button') || e.target.closest('.close-modal') || e.target.closest('.close-result')) {
+                 document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
             }
         }
         
-        // Liens Confidentialité
+        // 2. Liens Confidentialité
         if (e.target.closest('#openPrivacyLink, #openPrivacyFooter, #openPrivacyResult')) {
             e.preventDefault();
             const modal = document.getElementById('privacyOverlay');
             if(modal) modal.style.display = 'flex';
         }
         
-        // Impression / PDF
+        // 3. Impression / PDF
         if (e.target.closest('.btn-download')) {
             window.print();
             fetch(WEBHOOK_URL, { 
@@ -123,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }).catch(()=>{});
         }
         
-        // Relancer
+        // 4. Nouvelle Analyse
         if (e.target.closest('.btn-new')) window.resetForm();
     });
 
@@ -132,8 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (form) {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            // Sécurité Honeypot
             if (document.getElementById('honeypot')?.value !== "") return;
 
             const btn = form.querySelector('button[type="submit"]');
@@ -145,11 +142,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const formData = {
                 action: "diagnostic",
-                meta: {
-                    source: "e-META LABS Web App",
-                    version: "2.0",
-                    timestamp: new Date().toISOString(),
-                    lang: currentLang
+                meta: { 
+                    source: "e-META LABS Web App", 
+                    version: "2.0", 
+                    timestamp: new Date().toISOString(), 
+                    lang: currentLang 
                 },
                 user: {
                     company: document.getElementById('company').value,
@@ -174,20 +171,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     const htmlResponse = await response.text();
                     const resultBody = document.getElementById('resultBody');
-                    
                     if (resultBody) {
                         resultBody.innerHTML = htmlResponse;
                         overlay.style.display = 'none';
                         document.getElementById('resultModal').style.display = 'flex';
                         btn.innerText = (currentLang === 'fr') ? "Analyse Terminée" : "Analysis Complete";
                     }
-                } else { throw new Error("Erreur de réponse serveur"); }
+                } else { throw new Error("Erreur serveur"); }
             } catch (err) {
                 console.error("Erreur e-META LABS:", err);
                 overlay.style.display = 'none';
                 btn.disabled = false;
                 btn.style.backgroundColor = '#ff4d4d';
-                btn.innerText = (currentLang === 'fr') ? "Échec - Réessayer" : "Failed - Try Again";
                 setTimeout(() => {
                     btn.style.backgroundColor = '';
                     btn.innerText = (currentLang === 'fr') ? "Lancer le diagnostic" : "Start Diagnostic";
