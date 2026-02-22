@@ -117,22 +117,28 @@
                     </div>
                 </div>
 
-                <div class="form-step" id="step-3">
-                    <h3 data-i18n="step3_title">03. Matrice Analyse</h3>
-                    <div class="input-group">
-                        <label for="context" data-i18n="lbl_context">Contexte Opérationnel</label>
-                        <textarea id="context" rows="4" placeholder="Décrivez vos enjeux stratégiques..."></textarea>
-                    </div>
-                    <div class="opt-in-container" style="margin-bottom: 15px; font-size: 0.9em; color: white;">
-  <input type="checkbox" id="whatsapp-consent" required>
-  <label for="whatsapp-consent">
-    J'accepte de recevoir mon analyse stratégique par WhatsApp.
-  </label>
-</div>
+               <div class="form-step" id="step-3">
+    <h3 data-i18n="step3_title">03. Matrice Analyse</h3>
+    
+    <div class="input-group">
+        <label for="context" data-i18n="lbl_context">Contexte Opérationnel</label>
+        <textarea id="context" rows="4" placeholder="Décrivez vos enjeux stratégiques..."></textarea>
+    </div>
 
-<div class="btn-container split">
-    <button type="button" ...>Retour</button>
-    <button type="submit" ...>Lancer l'Analyse IA</button>
+    <div class="opt-in-container" style="margin: 20px 0; padding: 10px; border-left: 3px solid #00d4ff; background: rgba(255,255,255,0.05);">
+        <div style="display: flex; align-items: flex-start; gap: 10px;">
+            <input type="checkbox" id="whatsapp-consent" style="margin-top: 5px; cursor: pointer;" required>
+            <label for="whatsapp-consent" style="font-size: 0.85em; color: #e0e0e0; cursor: pointer; line-height: 1.4;">
+                <strong style="color: #00d4ff;">Opt-in WhatsApp :</strong> 
+                J'accepte de recevoir mon analyse stratégique et les notifications de support via WhatsApp. 
+                Je peux retirer mon consentement à tout moment en répondant "STOP".
+            </label>
+        </div>
+    </div>
+    <div class="btn-container split">
+        <button type="button" class="btn-secondary" onclick="prevStep()">Retour</button>
+        <button type="submit" class="btn-primary" id="submitBtn">Lancer l'Analyse IA</button>
+    </div>
 </div>
                     <div class="legal-check">
                         <input type="checkbox" id="consent" required>
