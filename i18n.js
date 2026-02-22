@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS
- * FICHIER : i18n.js (Dictionnaire Multilingue Complet)
+ * FICHIER : i18n.js (Dictionnaire Multilingue Intégral)
  */
 
 const translations = {
@@ -8,8 +8,11 @@ const translations = {
         btn_reset: "↻ Réinitialiser",
         step1_title: "01. Identification",
         lbl_company: "Société / Entité",
+        ph_company: "ex: Groupe MetaStrat SN...",
         lbl_email: "Email Professionnel",
+        ph_email: "contact@domaine.com",
         lbl_phone: "Numéro WhatsApp",
+        ph_phone: "+221...",
         btn_next: "Suivant",
         step2_title: "02. Matrice Stratégique",
         lbl_sector: "Secteur Stratégique",
@@ -38,8 +41,10 @@ const translations = {
         btn_next_matrice: "Suivant",
         step3_title: "03. Analyse & Restitution",
         lbl_context: "Contexte Opérationnel",
+        ph_context: "Décrivez vos enjeux stratégiques...",
         legal_consent: "J'accepte la",
         link_privacy: "Politique de Confidentialité",
+        optin_whatsapp: "J'accepte de recevoir mon analyse stratégique par <strong style='color:#25D366;'>WhatsApp</strong>.",
         btn_submit: "Lancer l'Analyse IA",
         stats_live: "LIVE INTELLIGENCE",
         stat_ai: "Analyses IA",
@@ -47,15 +52,21 @@ const translations = {
         stat_footer: "Mise à jour :",
         footer_rights: "Tous droits réservés.",
         footer_support: "Support Technique :",
-        footer_contact: "Informations :"
+        footer_contact: "Informations :",
+        modal_title: "Politique de Confidentialité",
+        btn_close: "Fermer",
+        loading_text: "Analyse IA en cours..."
     },
     en: {
         subtitle: "STRATEGIC EXCELLENCE & HIGH PRECISION AI",
         btn_reset: "↻ Reset",
         step1_title: "01. Identification",
         lbl_company: "Company / Entity",
+        ph_company: "e.g. MetaStrat Group...",
         lbl_email: "Professional Email",
+        ph_email: "contact@domain.com",
         lbl_phone: "WhatsApp Number",
+        ph_phone: "+221...",
         btn_next: "Next",
         step2_title: "02. Strategic Matrix",
         lbl_sector: "Strategic Sector",
@@ -84,24 +95,32 @@ const translations = {
         btn_next_matrice: "Next",
         step3_title: "03. Analysis & Restitution",
         lbl_context: "Operational Context",
+        ph_context: "Describe your strategic challenges...",
         legal_consent: "I accept the",
         link_privacy: "Privacy Policy",
+        optin_whatsapp: "I agree to receive my strategic analysis via <strong style='color:#25D366;'>WhatsApp</strong>.",
         btn_submit: "Launch AI Analysis",
         stats_live: "LIVE INTELLIGENCE",
         stat_ai: "AI Analyses",
         stat_pdf: "Certified PDFs",
-        stat_footer: "Last update:",
+        stat_footer: "Last update :",
         footer_rights: "All rights reserved.",
         footer_support: "Technical Support :",
-        footer_contact: "Information :"
+        footer_contact: "Information :",
+        modal_title: "Privacy Policy",
+        btn_close: "Close",
+        loading_text: "AI Analysis in progress..."
     },
     es: {
         subtitle: "EXCELENCIA ESTRATÉGICA Y ALTA PRECISIÓN IA",
         btn_reset: "↻ Reiniciar",
         step1_title: "01. Identificación",
         lbl_company: "Empresa / Entidad",
+        ph_company: "ej: Grupo MetaStrat...",
         lbl_email: "Correo Profesional",
+        ph_email: "contacto@dominio.com",
         lbl_phone: "Número de WhatsApp",
+        ph_phone: "+221...",
         btn_next: "Siguiente",
         step2_title: "02. Matriz Estratégica",
         lbl_sector: "Sector Estratégico",
@@ -130,24 +149,32 @@ const translations = {
         btn_next_matrice: "Siguiente",
         step3_title: "03. Análisis y Restitución",
         lbl_context: "Contexto Operacional",
+        ph_context: "Describa sus desafíos estratégicos...",
         legal_consent: "Acepto la",
         link_privacy: "Política de Privacidad",
+        optin_whatsapp: "Acepto recibir mi análisis estratégico por <strong style='color:#25D366;'>WhatsApp</strong>.",
         btn_submit: "Iniciar Análisis IA",
         stats_live: "INTELIGENCIA EN VIVO",
         stat_ai: "Análisis IA",
         stat_pdf: "PDF Certificados",
-        stat_footer: "Última actualización:",
+        stat_footer: "Última actualización :",
         footer_rights: "Todos los derechos reservados.",
         footer_support: "Soporte Técnico :",
-        footer_contact: "Información :"
+        footer_contact: "Información :",
+        modal_title: "Política de Privacidad",
+        btn_close: "Cerrar",
+        loading_text: "Análisis IA en curso..."
     },
     ar: {
         subtitle: "التميز الاستراتيجي والذكاء الاصطناعي عالي الدقة",
         btn_reset: "↻ إعادة ضبط",
         step1_title: "01. تحديد الهوية",
         lbl_company: "الشركة / الكيان",
+        ph_company: "مثال: مجموعة ميتا سترات...",
         lbl_email: "البريد المهني",
+        ph_email: "contact@domain.com",
         lbl_phone: "رقم واتساب",
+        ph_phone: "+221...",
         btn_next: "التالي",
         step2_title: "02. المصفوفة الاستراتيجية",
         lbl_sector: "القطاع الاستراتيجي",
@@ -166,7 +193,7 @@ const translations = {
         lbl_expertise: "الخبرة المطلوبة",
         exp_sov: "سيادة الذكاء الاصطناعي",
         exp_digital: "التحول الرقمي",
-        exp_ma: "الاندماج والاستحواذ وجمع الأموال",
+        exp_ma: "الاندماج والاستحواذ",
         exp_ohada: "الامتثال لقانون أوهادا",
         exp_esg: "هندسة الحوكمة البيئية",
         exp_cyber: "الأمن السيبراني",
@@ -176,40 +203,28 @@ const translations = {
         btn_next_matrice: "التالي",
         step3_title: "03. التحليل والاسترداد",
         lbl_context: "السياق التشغيلي",
+        ph_context: "صف التحديات الاستراتيجية الخاصة بك...",
         legal_consent: "أوافق على",
         link_privacy: "سياسة الخصوصية",
+        optin_whatsapp: "أوافق على تلقي تحليلي الاستراتيجي عبر <strong style='color:#25D366;'>واتساب</strong>.",
         btn_submit: "بدء تحليل الذكاء الاصطناعي",
         stats_live: "الذكاء المباشر",
         stat_ai: "تحليلات الذكاء الاصطناعي",
         stat_pdf: "ملفات PDF المعتمدة",
-        stat_footer: "آخر تحديث:",
+        stat_footer: "آخر تحديث :",
         footer_rights: "كل الحقوق محفوظة.",
         footer_support: "الدعم الفني :",
-        footer_contact: "معلومات :"
+        footer_contact: "معلومات :",
+        modal_title: "سياسة الخصوصية",
+        btn_close: "إغلاق",
+        loading_text: "جاري تحليل الذكاء الاصطناعي..."
     }
 };
 
 window.changeLanguage = function(lang) {
     document.documentElement.lang = lang;
     
-    // Modification des textes selon le data-i18n
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key]) {
-            el.innerHTML = translations[lang][key];
-        }
-    });
-
-    // Modification du texte statique (Placeholders)
-    const contextTextarea = document.getElementById('context');
-    if (contextTextarea) {
-        contextTextarea.placeholder = (lang === 'en') ? "Describe your strategic challenges..." : 
-                                      (lang === 'es') ? "Describa sus desafíos estratégicos..." : 
-                                      (lang === 'ar') ? "صف التحديات الاستراتيجية الخاصة بك..." : 
-                                      "Décrivez vos enjeux stratégiques...";
-    }
-
-    // Changement de direction pour l'arabe
+    // Inversion pour l'Arabe
     if (lang === 'ar') {
         document.body.style.direction = 'rtl';
         document.body.style.textAlign = 'right';
@@ -218,7 +233,29 @@ window.changeLanguage = function(lang) {
         document.body.style.textAlign = 'left';
     }
 
-    // Gestion de la classe 'active' sur les boutons de langue
+    // Traduction des textes (HTML)
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            el.innerHTML = translations[lang][key];
+        }
+    });
+
+    // Traduction des Placeholders (Champs de saisie)
+    const mapPlaceholders = {
+        'company': 'ph_company',
+        'email': 'ph_email',
+        'phone': 'ph_phone',
+        'context': 'ph_context'
+    };
+    for (const [id, key] of Object.entries(mapPlaceholders)) {
+        const input = document.getElementById(id);
+        if (input && translations[lang][key]) {
+            input.placeholder = translations[lang][key];
+        }
+    }
+
+    // Gestion visuelle des boutons de langue
     document.querySelectorAll('.lang-switch button').forEach(btn => {
         btn.classList.remove('active');
         if (btn.getAttribute('data-lang') === lang) {
@@ -227,7 +264,7 @@ window.changeLanguage = function(lang) {
     });
 };
 
-// Initialisation au chargement de la page
+// Application du Français par défaut au chargement
 document.addEventListener('DOMContentLoaded', () => {
     window.changeLanguage('fr');
 });
