@@ -29,10 +29,10 @@
         <div class="header-actions">
             <button type="button" class="btn-reset" onclick="resetForm()" data-i18n="btn_reset">↻ Réinitialiser</button>
             <div class="lang-switch">
-                <button data-lang="fr" class="active">FR</button>
-                <button data-lang="en">EN</button>
-                <button data-lang="es">ES</button>
-                <button data-lang="ar">AR</button>
+                <button data-lang="fr" class="active" onclick="if(typeof changeLanguage === 'function') changeLanguage('fr')">FR</button>
+                <button data-lang="en" onclick="if(typeof changeLanguage === 'function') changeLanguage('en')">EN</button>
+                <button data-lang="es" onclick="if(typeof changeLanguage === 'function') changeLanguage('es')">ES</button>
+                <button data-lang="ar" onclick="if(typeof changeLanguage === 'function') changeLanguage('ar')">AR</button>
             </div>
         </div>
     </header>
@@ -130,7 +130,7 @@
                         <input type="checkbox" id="consent" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                         <label for="consent">
                             <span data-i18n="legal_consent">J'accepte la</span> 
-                            <a href="#" id="openPrivacy" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité</a>.
+                            <a href="#" id="openPrivacyLink" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité</a>.
                         </label>
                     </div>
 
@@ -170,9 +170,25 @@
         </div>
     </main>
 
-    <footer class="footer">
-        <p>&copy; 2026 E-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
-        <p class="tiny">Strategic Intelligence Unit • Dakar - Paris - Dubai</p>
+    <footer class="footer" style="margin-top: 40px; text-align: center; padding-bottom: 20px;">
+        <div style="margin-bottom: 15px;">
+            <a href="#" id="openPrivacyFooter" class="gold-link" data-i18n="link_privacy" style="font-size: 0.9rem; text-decoration: underline;">Politique de Confidentialité</a>
+        </div>
+        
+        <div style="margin-bottom: 15px; font-size: 0.85rem; color: #a0aec0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+            <div>
+                <span data-i18n="footer_support">Support Technique :</span> 
+                <a href="mailto:support@e-metalabs.com" style="color: #d4af37; text-decoration: none; font-weight: bold;">support@e-metalabs.com</a>
+            </div>
+            <div style="color: #4a5568;">|</div>
+            <div>
+                <span data-i18n="footer_contact">Informations :</span> 
+                <a href="mailto:contact@e-metalabs.com" style="color: #d4af37; text-decoration: none; font-weight: bold;">contact@e-metalabs.com</a>
+            </div>
+        </div>
+
+        <p style="color: #a0aec0; font-size: 0.8rem;">&copy; 2026 E-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
+        <p class="tiny" style="color: #718096; font-size: 0.75rem; margin-top: 5px;">Strategic Intelligence Unit • Dakar - Paris - Dubai</p>
     </footer>
 
     <div id="loadingOverlay" class="modal-overlay" style="display:none; flex-direction: column; justify-content: center; align-items: center;">
