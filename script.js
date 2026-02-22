@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS
- * FICHIER : script.js (Version Complète, Sécurisée & Modales/Langues Actifs)
+ * FICHIER : script.js (Version DÉBLOQUÉE & EXPLICITE)
  */
 
 const WEBHOOK_URL = "https://hook.eu2.make.com/moupzawutk6h7ab6f5ap2li1qaypzh2f"; 
@@ -13,7 +13,7 @@ window.nextStep = function(targetStep) {
         const phone = document.getElementById('phone').value;
         
         if (!comp || !mail || !phone) {
-            alert("Veuillez remplir les champs obligatoires (Société, Email, WhatsApp) pour continuer.");
+            alert("Veuillez remplir les champs obligatoires pour continuer.");
             return;
         }
     }
@@ -45,7 +45,7 @@ window.setCustomMessage = function(input) {
     }
 };
 
-// --- 2. GESTION DU LIVE STATS ---
+// --- 2. LIVE STATS ---
 async function updateLiveStats() {
     try {
         const response = await fetch(STATS_URL);
@@ -57,51 +57,49 @@ async function updateLiveStats() {
             const now = new Date();
             if(document.getElementById('last-update')) document.getElementById('last-update').innerText = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
         }
-    } catch (e) { /* Erreur silencieuse */ }
+    } catch (e) { /* Silence */ }
 }
 
-// --- 3. GESTION DES MODALES ET ÉVÉNEMENTS GLOBAUX ---
+// --- 3. INITIALISATION ET MODALES ---
 document.addEventListener('DOMContentLoaded', () => {
     updateLiveStats();
     setInterval(updateLiveStats, 60000);
     
     document.addEventListener('click', (e) => {
-        // OUVRIR : Politique de confidentialité
-        if (e.target.closest('#openPrivacy')) {
+        // OUVERTURE DE LA POLITIQUE DE CONFIDENTIALITÉ (RÉPARÉ)
+        if (e.target.closest('#openPrivacyLink') || e.target.closest('#openPrivacyFooter')) {
             e.preventDefault();
-            document.getElementById('privacyOverlay').style.display = 'flex';
+            const modal = document.getElementById('privacyOverlay');
+            if(modal) modal.style.display = 'flex';
         }
         
-        // FERMER : Tous les modals
+        // FERMETURE DE TOUS LES MODALS (Incluant la Politique)
         if (e.target.closest('.close-modal') || e.target.closest('.close-result') || e.target.closest('.close-modal-btn')) {
             document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
         }
     });
 
-    // --- 4. SOUMISSION DU FORMULAIRE ET WEBHOOK ---
+    // --- 4. SOUMISSION DU FORMULAIRE ---
     const form = document.getElementById('diagnosticForm');
     if (form) {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
+            // CONFORMITÉ META : Blocage si WhatsApp n'est pas coché
             const whatsappConsent = document.getElementById('whatsapp-consent');
             if (whatsappConsent && !whatsappConsent.checked) {
-                alert("Veuillez accepter l'Opt-in WhatsApp pour recevoir vos résultats stratégiques.");
+                alert("Veuillez accepter l'Opt-in WhatsApp pour recevoir vos résultats.");
                 return;
             }
 
-            const honeypot = document.getElementById('honeypot');
-            if (honeypot && honeypot.value !== "") return;
+            if (document.getElementById('honeypot') && document.getElementById('honeypot').value !== "") return;
 
             const btn = document.getElementById('submitBtn');
             const overlay = document.getElementById('loadingOverlay');
             const lang = document.documentElement.lang || 'fr';
             
             if (overlay) overlay.style.display = 'flex';
-            if (btn) {
-                btn.disabled = true;
-                btn.innerText = "Analyse en cours...";
-            }
+            if (btn) btn.disabled = true;
 
             const data = {
                 action: "diagnostic",
@@ -135,41 +133,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById('resultBody').innerHTML = text;
                     if (overlay) overlay.style.display = 'none';
                     document.getElementById('resultModal').style.display = 'flex';
-                    if (btn) btn.innerText = "Analyse Terminée";
                 } else { 
                     throw new Error("Serveur injoignable"); 
                 }
             } catch (err) {
-                console.error("Erreur d'envoi", err);
                 if (overlay) overlay.style.display = 'none';
                 if (btn) {
                     btn.disabled = false;
                     btn.style.backgroundColor = '#ff4d4d';
-                    btn.innerText = "Échec réseau - Réessayer";
-                    setTimeout(() => {
-                        btn.style.backgroundColor = '';
-                        btn.innerText = "Lancer l'Analyse IA";
-                    }, 4000);
+                    setTimeout(() => btn.style.backgroundColor = '', 3000);
                 }
             }
         });
     }
-
-    // --- 5. GESTION DES BOUTONS DE LANGUE (UI) ---
-    const langButtons = document.querySelectorAll('.lang-switch button');
-    langButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            // Mise à jour visuelle du bouton cliqué
-            langButtons.forEach(b => b.classList.remove('active'));
-            e.target.classList.add('active');
-            
-            const selectedLang = e.target.getAttribute('data-lang');
-            document.documentElement.lang = selectedLang;
-            
-            // Appelle la fonction de i18n.js si elle existe
-            if(typeof changeLanguage === 'function') {
-                changeLanguage(selectedLang);
-            }
-        });
-    });
 });
