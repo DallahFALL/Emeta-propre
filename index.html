@@ -77,8 +77,12 @@
                         <label class="checkbox-btn"><input type="radio" name="sector" value="GreenTech_Energy"> <span data-i18n="sec_green">Énergies & GreenTech</span></label>
                         <label class="checkbox-btn"><input type="radio" name="sector" value="FinTech"> <span data-i18n="sec_fintech">FinTech & Banque</span></label>
                         <label class="checkbox-btn"><input type="radio" name="sector" value="Health_BioTech"> <span data-i18n="sec_health">Santé & BioTech</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Logistics_Infra"> <span data-i18n="sec_log">Logistique & Infra</span></label>
                         <label class="checkbox-btn"><input type="radio" name="sector" value="Mining_OilGas"> <span data-i18n="sec_mine">Mines, Pétrole & Gaz</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="RealEstate_BTP"> <span data-i18n="sec_btp">Immobilier & BTP</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Retail_FMCG"> <span data-i18n="sec_retail">Commerce & Retail</span></label>
                         <label class="checkbox-btn"><input type="radio" name="sector" value="Public_Gov"> <span data-i18n="sec_public">Secteur Public</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Education_EdTech"> <span data-i18n="sec_edu">Éducation & EdTech</span></label>
                     </div>
 
                     <label class="section-label mt-2" data-i18n="lbl_geo">Zone d'Intervention / Statut</label>
@@ -103,10 +107,12 @@
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="OHADA_Tax"> <span data-i18n="exp_ohada">Conformité OHADA</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="ESG_CSR"> <span data-i18n="exp_esg">Ingénierie ESG</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Cybersecurity"> <span data-i18n="exp_cyber">Cybersécurité</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="SupplyChain"> <span data-i18n="exp_supply">Supply Chain & Ops</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="PublicAffairs"> <span data-i18n="exp_pubaff">Affaires Publiques</span></label>
                     </div>
 
                     <div class="btn-container split">
-                        <button type="button" class="btn-outline" onclick="nextStep(1)" data-i18n="btn_prev">Retour</button>
+                        <button type="button" class="btn-outline" onclick="prevStep()" data-i18n="btn_prev">Retour</button>
                         <button type="button" class="btn-gold" onclick="nextStep(3)" data-i18n="btn_next_matrice">Suivant</button>
                     </div>
                 </div>
@@ -136,7 +142,7 @@
                     </div>
 
                     <div class="btn-container split">
-                        <button type="button" class="btn-outline" onclick="nextStep(2)" data-i18n="btn_prev">Retour</button>
+                        <button type="button" class="btn-outline" onclick="prevStep()" data-i18n="btn_prev">Retour</button>
                         <button type="submit" class="btn-gold glow" id="submitBtn" data-i18n="btn_submit">Lancer l'Analyse IA</button>
                     </div>
                 </div>
