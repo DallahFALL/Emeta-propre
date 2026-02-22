@@ -135,72 +135,94 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 4. ENVOI DU DIAGNOSTIC ---
-    const form = document.getElementById('diagnosticForm');
-    if (form) {
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            // Sécurité Honeypot
-            if (document.getElementById('honeypot')?.value !== "") return;
-
-            const btn = form.querySelector('button[type="submit"]');
-            const overlay = document.getElementById('loadingOverlay');
+const form = document.getElementById('diagnosticForm');
+if (form) {
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // 1. VÉRIFICATION DU CONSENTEMENT WHATSAPP (CONFORMITÉ META)
+        const whatsappConsent = document.getElementById('whatsapp-consent');
+        if (whatsappConsent && !whatsappConsent.checked) {
             const currentLang = document.documentElement.lang || 'fr';
-            
-            overlay.style.display = 'flex';
-            btn.disabled = true;
+            const alertMsg = (currentLang === 'ar') ? "يرجى الموافقة على تلقي النتائج عبر WhatsApp." :
+                             (currentLang === 'en') ? "Please agree to receive results via WhatsApp." :
+                             (currentLang === 'es') ? "Por favor, acepte recibir los resultados por WhatsApp." :
+                             "Veuillez accepter de recevoir les résultats par WhatsApp pour continuer.";
+            alert(alertMsg);
+            return; // On arrête l'envoi ici
+        }
 
-            const formData = {
-                action: "diagnostic",
-                meta: {
-                    source: "e-META LABS Web App",
-                    version: "2.0",
-                    timestamp: new Date().toISOString(),
-                    lang: currentLang
-                },
-                user: {
-                    company: document.getElementById('company').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value || "Non renseigné",
-                    geoZone: document.getElementById('geo-zone').value
-                },
-                project: {
-                    sector: document.querySelector('input[name="sector"]:checked')?.value || "N/A",
-                    expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked')).map(cb => cb.value),
-                    context: document.getElementById('context').value
-                }
-            };
+        // 2. SÉCURITÉ HONEYPOT
+        if (document.getElementById('honeypot')?.value !== "") return;
 
-            try {
-                const response = await fetch(WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                });
-                
-                if (response.ok) {
-                    const htmlResponse = await response.text();
-                    const resultBody = document.getElementById('resultBody');
-                    
-                    if (resultBody) {
-                        resultBody.innerHTML = htmlResponse;
-                        overlay.style.display = 'none';
-                        document.getElementById('resultModal').style.display = 'flex';
-                        btn.innerText = (currentLang === 'fr') ? "Analyse Terminée" : "Analysis Complete";
-                    }
-                } else { throw new Error("Erreur de réponse serveur"); }
-            } catch (err) {
-                console.error("Erreur e-META LABS:", err);
-                overlay.style.display = 'none';
-                btn.disabled = false;
-                btn.style.backgroundColor = '#ff4d4d';
-                btn.innerText = (currentLang === 'fr') ? "Échec - Réessayer" : "Failed - Try Again";
-                setTimeout(() => {
-                    btn.style.backgroundColor = '';
-                    btn.innerText = (currentLang === 'fr') ? "Lancer le diagnostic" : "Start Diagnostic";
-                    checkStep3Validity();
-                }, 3000);
+        // 3. PRÉPARATION DE L'INTERFACE
+        const btn = form.querySelector('button[type="submit"]');
+        const overlay = document.getElementById('loadingOverlay');
+        const currentLang = document.documentElement.lang || 'fr';
+        
+        overlay.style.display = 'flex';
+        btn.disabled = true;
+
+        // 4. CONSTRUCTION DES DONNÉES
+        const formData = {
+            action: "diagnostic",
+            meta: {
+                source: "e-META LABS Web App",
+                version: "2.0",
+                timestamp: new Date().toISOString(),
+                lang: currentLang
+            },
+            user: {
+                company: document.getElementById('company').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value || "Non renseigné",
+                geoZone: document.getElementById('geo-zone').value
+            },
+            project: {
+                sector: document.querySelector('input[name="sector"]:checked')?.value || "N/A",
+                expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked')).map(cb => cb.value),
+                context: document.getElementById('context').value
             }
-        });
-    }
-});
+        };
+
+        // 5. ENVOI VERS LE WEBHOOK (MAKE.COM)
+        try {
+            const response = await fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            
+            if (response.ok) {
+                const htmlResponse = await response.text();
+                const resultBody = document.getElementById('resultBody');
+                
+                if (resultBody) {
+                    resultBody.innerHTML = htmlResponse;
+                    overlay.style.display = 'none';
+                    document.getElementById('resultModal').style.display = 'flex';
+                    
+                    // Mise à jour du bouton selon la langue
+                    btn.innerText = (currentLang === 'fr') ? "Analyse Terminée" : 
+                                    (currentLang === 'ar') ? "كتمل التحليل" : "Analysis Complete";
+                }
+            } else { 
+                throw new Error("Erreur de réponse serveur"); 
+            }
+        } catch (err) {
+            console.error("Erreur e-META LABS:", err);
+            overlay.style.display = 'none';
+            btn.disabled = false;
+            btn.style.backgroundColor = '#ff4d4d';
+            
+            btn.innerText = (currentLang === 'fr') ? "Échec - Réessayer" : "Failed - Try Again";
+            
+            setTimeout(() => {
+                btn.style.backgroundColor = '';
+                btn.innerText = (currentLang === 'fr') ? "Lancer le diagnostic" : "Start Diagnostic";
+                // On s'assure que la fonction de validation est appelée si elle existe
+                if (typeof checkStep3Validity === "function") checkStep3Validity();
+            }, 3000);
+        }
+    });
+}
