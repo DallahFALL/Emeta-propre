@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS
- * FICHIER : script.js (Version DÉBLOQUÉE & EXPLICITE)
+ * FICHIER : script.js (Intégration du Choix de Restitution & Alertes Traduites)
  */
 
 const WEBHOOK_URL = "https://hook.eu2.make.com/moupzawutk6h7ab6f5ap2li1qaypzh2f"; 
@@ -7,13 +7,16 @@ const STATS_URL = "https://hook.eu2.make.com/1jeaje7c3r1chg5oz7wruxohz6e8a8bg";
 
 // --- 1. FONCTIONS DE NAVIGATION ---
 window.nextStep = function(targetStep) {
+    const lang = document.documentElement.lang || 'fr';
+    
     if (targetStep === 2) {
         const comp = document.getElementById('company').value;
         const mail = document.getElementById('email').value;
         const phone = document.getElementById('phone').value;
         
         if (!comp || !mail || !phone) {
-            alert("Veuillez remplir les champs obligatoires pour continuer.");
+            // L'alerte s'affiche dans la langue choisie
+            alert(translations[lang].alert_empty);
             return;
         }
     }
@@ -33,17 +36,7 @@ window.prevStep = function() {
     }
 };
 
-window.resetForm = function() { 
-    window.location.reload(); 
-};
-
-window.setCustomMessage = function(input) {
-    if (input.value === '') {
-        input.setCustomValidity("Ce champ est obligatoire.");
-    } else {
-        input.setCustomValidity('');
-    }
-};
+window.resetForm = function() { window.location.reload(); };
 
 // --- 2. LIVE STATS ---
 async function updateLiveStats() {
@@ -57,7 +50,7 @@ async function updateLiveStats() {
             const now = new Date();
             if(document.getElementById('last-update')) document.getElementById('last-update').innerText = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
         }
-    } catch (e) { /* Silence */ }
+    } catch (e) {}
 }
 
 // --- 3. INITIALISATION ET MODALES ---
@@ -66,14 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateLiveStats, 60000);
     
     document.addEventListener('click', (e) => {
-        // OUVERTURE DE LA POLITIQUE DE CONFIDENTIALITÉ (RÉPARÉ)
+        // OUVERTURE DE LA POLITIQUE DE CONFIDENTIALITÉ
         if (e.target.closest('#openPrivacyLink') || e.target.closest('#openPrivacyFooter')) {
             e.preventDefault();
             const modal = document.getElementById('privacyOverlay');
             if(modal) modal.style.display = 'flex';
         }
         
-        // FERMETURE DE TOUS LES MODALS (Incluant la Politique)
+        // FERMETURE
         if (e.target.closest('.close-modal') || e.target.closest('.close-result') || e.target.closest('.close-modal-btn')) {
             document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
         }
@@ -85,10 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // CONFORMITÉ META : Blocage si WhatsApp n'est pas coché
+            const lang = document.documentElement.lang || 'fr';
+            const deliveryMethod = document.getElementById('delivery_method').value;
             const whatsappConsent = document.getElementById('whatsapp-consent');
-            if (whatsappConsent && !whatsappConsent.checked) {
-                alert("Veuillez accepter l'Opt-in WhatsApp pour recevoir vos résultats.");
+
+            // VÉRIFICATION DYNAMIQUE DU CHOIX WHATSAPP
+            if (deliveryMethod === 'whatsapp' && whatsappConsent && !whatsappConsent.checked) {
+                alert(translations[lang].alert_wa);
                 return;
             }
 
@@ -96,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const btn = document.getElementById('submitBtn');
             const overlay = document.getElementById('loadingOverlay');
-            const lang = document.documentElement.lang || 'fr';
             
             if (overlay) overlay.style.display = 'flex';
             if (btn) btn.disabled = true;
@@ -112,7 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     company: document.getElementById('company').value,
                     email: document.getElementById('email').value,
                     phone: document.getElementById('phone').value,
-                    geoZone: document.getElementById('geo-zone').value
+                    geoZone: document.getElementById('geo-zone').value,
+                    delivery_method: deliveryMethod // Make.com saura quoi faire !
                 },
                 project: {
                     sector: document.querySelector('input[name="sector"]:checked')?.value || "N/A",
@@ -133,14 +129,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById('resultBody').innerHTML = text;
                     if (overlay) overlay.style.display = 'none';
                     document.getElementById('resultModal').style.display = 'flex';
-                } else { 
-                    throw new Error("Serveur injoignable"); 
-                }
+                } else { throw new Error(); }
             } catch (err) {
                 if (overlay) overlay.style.display = 'none';
                 if (btn) {
                     btn.disabled = false;
                     btn.style.backgroundColor = '#ff4d4d';
+                    alert(translations[lang].alert_error);
                     setTimeout(() => btn.style.backgroundColor = '', 3000);
                 }
             }
