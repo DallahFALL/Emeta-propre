@@ -29,10 +29,10 @@
         <div class="header-actions">
             <button type="button" class="btn-reset" onclick="resetForm()" data-i18n="btn_reset">↻ Réinitialiser</button>
             <div class="lang-switch">
-                <button data-lang="fr" class="active" onclick="if(typeof changeLanguage === 'function') changeLanguage('fr')">FR</button>
-                <button data-lang="en" onclick="if(typeof changeLanguage === 'function') changeLanguage('en')">EN</button>
-                <button data-lang="es" onclick="if(typeof changeLanguage === 'function') changeLanguage('es')">ES</button>
-                <button data-lang="ar" onclick="if(typeof changeLanguage === 'function') changeLanguage('ar')">AR</button>
+                <button data-lang="fr" class="active" onclick="changeLanguage('fr')">FR</button>
+                <button data-lang="en" onclick="changeLanguage('en')">EN</button>
+                <button data-lang="es" onclick="changeLanguage('es')">ES</button>
+                <button data-lang="ar" onclick="changeLanguage('ar')">AR</button>
             </div>
         </div>
     </header>
@@ -47,7 +47,7 @@
                     
                     <div class="input-group">
                         <label for="company" data-i18n="lbl_company">Société / Entité</label>
-                        <input type="text" id="company" required placeholder="ex: Groupe Alpha..." oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
+                        <input type="text" id="company" required placeholder="ex: Groupe MetaStrat SN..." oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                     </div>
                     
                     <div class="input-group">
@@ -136,8 +136,8 @@
 
                     <div class="opt-in-container legal-check" style="margin-top: 10px; margin-bottom: 20px; text-align: center;">
                         <input type="checkbox" id="whatsapp-consent" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
-                        <label for="whatsapp-consent">
-                            J'accepte de recevoir mon analyse stratégique par <strong style="color:#25D366;">WhatsApp</strong>.
+                        <label for="whatsapp-consent" data-i18n="optin_whatsapp">
+                            J'accepte de recevoir mon analyse stratégique por WhatsApp.
                         </label>
                     </div>
 
@@ -195,7 +195,7 @@
         <svg width="80" height="80" viewBox="0 0 100 100" class="spinner" style="animation: spin 2s linear infinite;">
             <circle cx="50" cy="50" r="40" stroke="#d4af37" stroke-width="4" fill="none" stroke-dasharray="160" stroke-dashoffset="40"/>
         </svg>
-        <p style="color: #d4af37; margin-top: 20px; font-family: 'Cinzel', serif; letter-spacing: 2px;">Analyse IA en cours...</p>
+        <p data-i18n="loading_text" style="color: #d4af37; margin-top: 20px; font-family: 'Cinzel', serif; letter-spacing: 2px;">Analyse IA en cours...</p>
     </div>
 
     <div id="privacyOverlay" class="modal-overlay" style="display:none;">
@@ -212,7 +212,7 @@
                 <h4 style="color:#d4af37; margin-top: 15px;">3. Hébergement Souverain</h4>
                 <p style="font-size:0.9rem; line-height: 1.6; color: #e6f1ff;">Notre infrastructure e-meta.app est sécurisée par certificat SSL/TLS 256-bits. Données cryptées de bout en bout.</p>
             </div>
-            <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close" style="margin-top:20px;">Fermer</button>
+            <button type="button" class="btn-gold full-width close-modal-btn" data-i18n="btn_close" style="margin-top:20px;">Fermer</button>
         </div>
     </div>
 
@@ -224,7 +224,7 @@
                 <p>Initialisation...</p>
             </div>
             <div class="btn-container" style="margin-top:20px;">
-                <button class="btn-gold full-width" onclick="location.reload()">Nouvelle Analyse</button>
+                <button type="button" class="btn-gold full-width" onclick="location.reload()">Nouvelle Analyse</button>
             </div>
         </div>
     </div>
