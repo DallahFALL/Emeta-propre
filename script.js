@@ -1,228 +1,208 @@
-/* * PROJET : e-META LABS
- * FICHIER : script.js (Version Optimisée, Souveraine & Multilingue)
- * MAJ : 2026 - Intégration Dynamique Finale
+/* 
+ * PROJET : e-META LABS — Moteur IA Stratégique
+ * FICHIER : script.js (Version WHATSAPP OPT-IN)
  */
 
+// --- 1. CONFIGURATION ---
 const WEBHOOK_URL = "https://hook.eu2.make.com/moupzawutk6h7ab6f5ap2li1qaypzh2f"; 
-const STATS_URL = "https://hook.eu2.make.com/1jeaje7c3r1chg5oz7wruxohz6e8a8bg"; 
 
-// --- 1. GESTION DE LA NAVIGATION ---
+// --- 2. TRADUCTION DES MESSAGES D'ERREUR ---
+function setCustomMessage(input) {
+    const lang = document.documentElement.lang || 'fr';
 
-window.nextStep = function(targetStep) {
-    // Validation stricte Étape 1 vers 2
-    if (targetStep === 2) {
-        const comp = document.getElementById('company');
-        const mail = document.getElementById('email');
-        
-        if (!comp.value || !mail.value || !mail.checkValidity()) {
-            [comp, mail].forEach(el => {
-                if(!el.value || (el.type === 'email' && !el.checkValidity())) {
-                    el.style.borderColor = '#ff4d4d';
-                    el.classList.add('shake'); 
-                }
-            });
-            
-            setTimeout(() => {
-                [comp, mail].forEach(el => {
-                    el.style.borderColor = '';
-                    el.classList.remove('shake');
-                });
-            }, 2000);
-            return; 
+    const messages = {
+        fr: {
+            required: "Veuillez remplir ce champ obligatoire.",
+            email: "Veuillez entrer une adresse email valide.",
+            checkbox: "Veuillez cocher cette case pour continuer.",
+            whatsapp: "Veuillez accepter la réception par WhatsApp."
+        },
+        en: {
+            required: "Please fill out this required field.",
+            email: "Please enter a valid email address.",
+            checkbox: "Please check this box to proceed.",
+            whatsapp: "Please accept receiving via WhatsApp."
+        },
+        es: {
+            required: "Por favor complete este campo obligatorio.",
+            email: "Introduzca una dirección de correo electrónico válida.",
+            checkbox: "Marque esta casilla para continuar.",
+            whatsapp: "Por favor acepte recibir por WhatsApp."
+        },
+        ar: {
+            required: "يرجى ملء هذا الحقل المطلوب.",
+            email: "الرجاء إدخال عنوان بريد إلكتروني صالح.",
+            checkbox: "يرجى تحديد هذا المربع للمتابعة.",
+            whatsapp: "يرجى الموافقة على الاستلام عبر WhatsApp."
         }
-    }
-    
-    // Transition d'étape fluide
-    document.querySelectorAll('.form-step').forEach(step => {
-        step.classList.remove('active');
-        step.style.display = 'none';
-    });
-    
-    const next = document.getElementById(`step-${targetStep}`);
-    if (next) {
-        next.style.display = 'block';
-        setTimeout(() => next.classList.add('active'), 10);
-    }
-    
-    // Scroll fluide vers le haut du formulaire
-    const card = document.querySelector('.glass-card');
-    if(card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-};
+    };
 
-window.resetForm = function() { 
-    if(confirm("Réinitialiser le diagnostic ?")) window.location.reload(); 
-};
+    input.setCustomValidity('');
 
-// --- 2. STATISTIQUES EN TEMPS RÉEL ---
-
-async function updateLiveStats() {
-    try {
-        const response = await fetch(STATS_URL);
-        if (response.ok) {
-            const data = await response.json();
-            const countAnalyse = document.getElementById('count-analyses');
-            const countPdf = document.getElementById('count-pdf');
-            const lastUpdate = document.getElementById('last-update');
-
-            if(countAnalyse) countAnalyse.innerText = data.totalAnalyses || "0";
-            if(countPdf) countPdf.innerText = data.totalPDF || "0";
-            if(lastUpdate) {
-                const now = new Date();
-                lastUpdate.innerText = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    if (!input.validity.valid) {
+        if (input.validity.valueMissing) {
+            if (input.id === 'whatsapp-consent') {
+                input.setCustomValidity(messages[lang].whatsapp);
+            } else if (input.type === 'checkbox') {
+                input.setCustomValidity(messages[lang].checkbox);
+            } else {
+                input.setCustomValidity(messages[lang].required);
             }
         }
-    } catch (e) { console.warn("Stats e-META indisponibles"); }
+        else if (input.validity.typeMismatch && input.type === 'email') {
+            input.setCustomValidity(messages[lang].email);
+        }
+    }
+    return true;
 }
 
-// --- 3. INITIALISATION & ÉCOUTEURS ---
+// --- 3. NAVIGATION ---
+function nextStep(targetStep) {
+    if (targetStep === 2 && !validateStep1()) return;
+    if (targetStep === 3 && !validateStep2()) return;
 
-document.addEventListener('DOMContentLoaded', () => {
-    updateLiveStats();
-    setInterval(updateLiveStats, 60000);
-
-    // --- GESTION DYNAMIQUE DU BOUTON ANALYSE (ÉTAPE 3) ---
-    const contextField = document.getElementById('context');
-    const consentBox = document.getElementById('consent');
-    const submitBtn = document.querySelector('button[type="submit"]');
-
-    function checkStep3Validity() {
-        if (!contextField || !consentBox || !submitBtn) return;
-        // Condition : Texte > 5 caractères ET case cochée
-        const isReady = contextField.value.trim().length > 5 && consentBox.checked;
-        
-        submitBtn.disabled = !isReady;
-        submitBtn.style.opacity = isReady ? "1" : "0.5";
-        submitBtn.style.cursor = isReady ? "pointer" : "not-allowed";
-        
-        if (isReady) submitBtn.classList.add('glow'); 
-        else submitBtn.classList.remove('glow');
-    }
-
-    if (contextField && consentBox) {
-        contextField.addEventListener('input', checkStep3Validity);
-        consentBox.addEventListener('change', checkStep3Validity);
-        checkStep3Validity(); // État initial
-    }
-
-    // --- DÉLÉGATION D'ÉVÉNEMENTS (CLICS) ---
-    document.addEventListener('click', (e) => {
-        // Fermeture Modals
-        if (e.target.closest('.close-modal, .close-result, .close-modal-btn, .modal-overlay')) {
-            if (e.target.classList.contains('modal-overlay') || e.target.closest('.close-modal, .close-result, .close-modal-btn')) {
-                document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
-            }
-        }
-        
-        // Liens Confidentialité
-        if (e.target.closest('#openPrivacyLink, #openPrivacyFooter, #openPrivacyResult')) {
-            e.preventDefault();
-            const modal = document.getElementById('privacyOverlay');
-            if(modal) modal.style.display = 'flex';
-        }
-        
-        // Impression / PDF
-        if (e.target.closest('.btn-download')) {
-            window.print();
-            fetch(WEBHOOK_URL, { 
-                method: 'POST', 
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ action: "PDF_DOWNLOAD", timestamp: new Date() }) 
-            }).catch(()=>{});
-        }
-        
-        // Relancer
-        if (e.target.closest('.btn-new')) window.resetForm();
+    document.querySelectorAll('.form-step').forEach(step => {
+        step.classList.remove('active');
     });
+    document.getElementById(`step-${targetStep}`).classList.add('active');
+    document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth' });
+}
 
-    // --- 4. ENVOI DU DIAGNOSTIC ---
+// --- 4. VALIDATIONS ---
+function validateStep1() {
+    const company = document.getElementById('company');
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
+    
+    if (!company.checkValidity()) { company.reportValidity(); return false; }
+    if (!email.checkValidity()) { email.reportValidity(); return false; }
+    if (!phone.checkValidity()) { phone.reportValidity(); return false; }
+    return true;
+}
+
+function validateStep2() {
+    const sector = document.querySelector('input[name="sector"]:checked');
+    const geo = document.getElementById('geo-zone');
+
+    if (!sector) {
+        alert("Veuillez sélectionner un Secteur Stratégique.");
+        return false;
+    }
+    if (geo.value === "") {
+        geo.setCustomValidity("Veuillez sélectionner une zone.");
+        geo.reportValidity();
+        return false;
+    }
+    return true;
+}
+
+// --- 5. RESET ---
+function resetForm() {
+    const lang = document.documentElement.lang || 'fr';
+    let msg = "Voulez-vous vraiment recommencer ?";
+    if (typeof translations !== 'undefined' && translations[lang]) {
+        msg = translations[lang].msg_reset_confirm;
+    }
+    if(confirm(msg)) {
+        document.getElementById('diagnosticForm').reset();
+        document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+        document.getElementById('step-1').classList.add('active');
+        document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+// --- 6. DOM & MODALS ---
+document.addEventListener('DOMContentLoaded', () => {
+    const privacyModal = document.getElementById('privacyOverlay');
+    const openPrivacyBtn = document.getElementById('openPrivacy');
+    const resultModal = document.getElementById('resultModal');
+    
+    if (openPrivacyBtn && privacyModal) {
+        openPrivacyBtn.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            privacyModal.style.display = 'flex';
+        });
+        document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
+            btn.addEventListener('click', () => { privacyModal.style.display = 'none'; });
+        });
+    }
+
+    if (resultModal) {
+        document.querySelector('.close-result').addEventListener('click', () => {
+            resultModal.style.display = 'none';
+        });
+    }
+
+    window.addEventListener('click', (e) => {
+        if (e.target === privacyModal) privacyModal.style.display = 'none';
+        if (e.target === resultModal) resultModal.style.display = 'none';
+    });
+});
+
+// --- 7. ENVOI FINAL (MAKE) ---
 const form = document.getElementById('diagnosticForm');
 if (form) {
-    form.addEventListener('submit', async function(e) {
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        // 1. VÉRIFICATION DU CONSENTEMENT WHATSAPP (CONFORMITÉ META)
+
+        // VALIDATION WHATSAPP STRICTE
         const whatsappConsent = document.getElementById('whatsapp-consent');
-        if (whatsappConsent && !whatsappConsent.checked) {
-            const currentLang = document.documentElement.lang || 'fr';
-            const alertMsg = (currentLang === 'ar') ? "يرجى الموافقة على تلقي النتائج عبر WhatsApp." :
-                             (currentLang === 'en') ? "Please agree to receive results via WhatsApp." :
-                             (currentLang === 'es') ? "Por favor, acepte recibir los resultados por WhatsApp." :
-                             "Veuillez accepter de recevoir les résultats par WhatsApp pour continuer.";
-            alert(alertMsg);
-            return; // On arrête l'envoi ici
+        if (!whatsappConsent.checked) {
+            setCustomMessage(whatsappConsent);
+            whatsappConsent.reportValidity();
+            return; // Bloque l'envoi
         }
 
-        // 2. SÉCURITÉ HONEYPOT
-        if (document.getElementById('honeypot')?.value !== "") return;
+        // VALIDATION PRIVACY
+        const consent = document.getElementById('consent');
+        if (!consent.checked) {
+            setCustomMessage(consent);
+            consent.reportValidity();
+            return;
+        }
 
-        // 3. PRÉPARATION DE L'INTERFACE
-        const btn = form.querySelector('button[type="submit"]');
-        const overlay = document.getElementById('loadingOverlay');
-        const currentLang = document.documentElement.lang || 'fr';
-        
-        overlay.style.display = 'flex';
-        btn.disabled = true;
+        const submitBtn = document.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerText;
+        submitBtn.innerText = "Analyse IA en cours...";
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = "0.7";
 
-        // 4. CONSTRUCTION DES DONNÉES
+        // Collecte des données incluant WhatsApp
         const formData = {
-            action: "diagnostic",
-            meta: {
-                source: "e-META LABS Web App",
-                version: "2.0",
-                timestamp: new Date().toISOString(),
-                lang: currentLang
-            },
-            user: {
-                company: document.getElementById('company').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value || "Non renseigné",
-                geoZone: document.getElementById('geo-zone').value
-            },
-            project: {
-                sector: document.querySelector('input[name="sector"]:checked')?.value || "N/A",
-                expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked')).map(cb => cb.value),
-                context: document.getElementById('context').value
-            }
+            timestamp: new Date().toISOString(),
+            company: document.getElementById('company').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value, // Numéro envoyé à Make
+            whatsapp_optin: true, // Confirmation du consentement
+            sector: document.querySelector('input[name="sector"]:checked')?.value || "Non spécifié",
+            geoZone: document.getElementById('geo-zone').value,
+            expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked')).map(cb => cb.value),
+            context: document.getElementById('context').value,
+            lang: document.documentElement.lang || 'fr'
         };
 
-        // 5. ENVOI VERS LE WEBHOOK (MAKE.COM)
-        try {
-            const response = await fetch(WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
-            
+        // Envoi vers Make
+        fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        })
+        .then(async response => {
             if (response.ok) {
-                const htmlResponse = await response.text();
-                const resultBody = document.getElementById('resultBody');
-                
-                if (resultBody) {
-                    resultBody.innerHTML = htmlResponse;
-                    overlay.style.display = 'none';
-                    document.getElementById('resultModal').style.display = 'flex';
-                    
-                    // Mise à jour du bouton selon la langue
-                    btn.innerText = (currentLang === 'fr') ? "Analyse Terminée" : 
-                                    (currentLang === 'ar') ? "كتمل التحليل" : "Analysis Complete";
-                }
-            } else { 
-                throw new Error("Erreur de réponse serveur"); 
+                const aiResponse = await response.text();
+                document.getElementById('resultBody').innerHTML = aiResponse;
+                document.getElementById('resultModal').style.display = 'flex';
+                submitBtn.innerText = "Analyse Terminée";
+            } else {
+                throw new Error('Erreur serveur');
             }
-        } catch (err) {
-            console.error("Erreur e-META LABS:", err);
-            overlay.style.display = 'none';
-            btn.disabled = false;
-            btn.style.backgroundColor = '#ff4d4d';
-            
-            btn.innerText = (currentLang === 'fr') ? "Échec - Réessayer" : "Failed - Try Again";
-            
-            setTimeout(() => {
-                btn.style.backgroundColor = '';
-                btn.innerText = (currentLang === 'fr') ? "Lancer le diagnostic" : "Start Diagnostic";
-                // On s'assure que la fonction de validation est appelée si elle existe
-                if (typeof checkStep3Validity === "function") checkStep3Validity();
-            }, 3000);
-        }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            alert("Erreur de connexion. Veuillez réessayer.");
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = "1";
+        });
     });
 }
