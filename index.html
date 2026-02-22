@@ -47,17 +47,17 @@
                     
                     <div class="input-group">
                         <label for="company" data-i18n="lbl_company">Société / Entité</label>
-                        <input type="text" id="company" required placeholder="ex: Groupe MetaStrat SN..." oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
+                        <input type="text" id="company" required>
                     </div>
                     
                     <div class="input-group">
                         <label for="email" data-i18n="lbl_email">Email Professionnel</label>
-                        <input type="email" id="email" required placeholder="contact@domain.com" oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
+                        <input type="email" id="email" required>
                     </div>
                     
                     <div class="input-group">
                         <label for="phone" data-i18n="lbl_phone">Numéro WhatsApp</label>
-                        <input type="tel" id="phone" required placeholder="+221..." oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
+                        <input type="tel" id="phone" required>
                     </div>
                     
                     <div style="display:none;"><input type="text" id="honeypot" tabindex="-1"></div>
@@ -87,15 +87,15 @@
 
                     <label class="section-label mt-2" data-i18n="lbl_geo">Zone d'Intervention / Statut</label>
                     <div class="input-group">
-                        <select id="geo-zone" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
+                        <select id="geo-zone" required>
                             <option value="" disabled selected data-i18n="opt_geo_def">Sélectionner une zone...</option>
-                            <option value="Senegal">Sénégal (Dakar Hub)</option>
-                            <option value="CotedIvoire">Côte d'Ivoire (Abidjan Hub)</option>
-                            <option value="Nigeria">Nigeria (Lagos)</option>
-                            <option value="Maroc">Maroc (Casablanca)</option>
-                            <option value="UAE">UAE (Dubai - Middle East)</option>
-                            <option value="France">France (Europe)</option>
-                            <option value="Global">Statut International / Global</option>
+                            <option value="Senegal" data-i18n="opt_dakar">Sénégal (Dakar Hub)</option>
+                            <option value="CotedIvoire" data-i18n="opt_abidjan">Côte d'Ivoire (Abidjan Hub)</option>
+                            <option value="Nigeria" data-i18n="opt_lagos">Nigeria (Lagos)</option>
+                            <option value="Maroc" data-i18n="opt_casa">Maroc (Casablanca)</option>
+                            <option value="UAE" data-i18n="opt_dubai">UAE (Dubai - Middle East)</option>
+                            <option value="France" data-i18n="opt_paris">France (Europe)</option>
+                            <option value="Global" data-i18n="opt_global">Statut International / Global</option>
                         </select>
                     </div>
 
@@ -123,11 +123,19 @@
                     
                     <div class="input-group">
                         <label for="context" data-i18n="lbl_context">Contexte Opérationnel</label>
-                        <textarea id="context" rows="4" placeholder="Décrivez vos enjeux stratégiques..."></textarea>
+                        <textarea id="context" rows="4"></textarea>
+                    </div>
+
+                    <div class="input-group" style="margin-top: 15px;">
+                        <label for="delivery_method" data-i18n="lbl_delivery" style="color: #d4af37;">Mode de réception souhaité</label>
+                        <select id="delivery_method" required style="border-color: #d4af37;">
+                            <option value="whatsapp" data-i18n="opt_del_wa" selected>WhatsApp (Recommandé & Rapide)</option>
+                            <option value="email" data-i18n="opt_del_email">Email / Affichage PDF direct</option>
+                        </select>
                     </div>
                     
                     <div class="legal-check" style="margin-top: 15px; text-align: center;">
-                        <input type="checkbox" id="consent" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
+                        <input type="checkbox" id="consent" required>
                         <label for="consent">
                             <span data-i18n="legal_consent">J'accepte la</span> 
                             <a href="#" id="openPrivacyLink" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité</a>.
@@ -135,9 +143,9 @@
                     </div>
 
                     <div class="opt-in-container legal-check" style="margin-top: 10px; margin-bottom: 20px; text-align: center;">
-                        <input type="checkbox" id="whatsapp-consent" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
+                        <input type="checkbox" id="whatsapp-consent">
                         <label for="whatsapp-consent" data-i18n="optin_whatsapp">
-                            J'accepte de recevoir mon analyse stratégique por WhatsApp.
+                            J'accepte de recevoir mon analyse par WhatsApp.
                         </label>
                     </div>
 
@@ -202,15 +210,7 @@
         <div class="modal-content">
             <span class="close-modal" style="position: absolute; right: 20px; top: 15px; font-size: 2rem; cursor: pointer; color: #d4af37;">&times;</span>
             <h2 data-i18n="modal_title" style="border-bottom: 1px solid #d4af37; padding-bottom: 10px; color: #d4af37;">Politique de Confidentialité</h2>
-            <div class="modal-body" style="max-height: 60vh; overflow-y: auto; text-align: left; margin-top: 20px; padding-right: 15px;">
-                <h4 style="color:#d4af37;">1. Identité & RGPD</h4>
-                <p style="font-size:0.9rem; line-height: 1.6; color: #e6f1ff;">E-META LABS SASU s'engage à protéger vos données. Les informations collectées servent uniquement à l'analyse stratégique demandée et ne sont jamais revendues.</p>
-                
-                <h4 style="color:#d4af37; margin-top: 15px;">2. Communication WhatsApp (Meta)</h4>
-                <p style="font-size:0.9rem; line-height: 1.6; color: #e6f1ff;">En cochant la case d'Opt-in, vous acceptez explicitement de recevoir votre rapport via WhatsApp. Vous pouvez cesser toute communication en répondant "STOP" à tout moment.</p>
-                
-                <h4 style="color:#d4af37; margin-top: 15px;">3. Hébergement Souverain</h4>
-                <p style="font-size:0.9rem; line-height: 1.6; color: #e6f1ff;">Notre infrastructure e-meta.app est sécurisée par certificat SSL/TLS 256-bits. Données cryptées de bout en bout.</p>
+            <div class="modal-body" data-i18n="priv_content" style="max-height: 60vh; overflow-y: auto; text-align: left; margin-top: 20px; padding-right: 15px;">
             </div>
             <button type="button" class="btn-gold full-width close-modal-btn" data-i18n="btn_close" style="margin-top:20px;">Fermer</button>
         </div>
@@ -224,7 +224,7 @@
                 <p>Initialisation...</p>
             </div>
             <div class="btn-container" style="margin-top:20px;">
-                <button type="button" class="btn-gold full-width" onclick="location.reload()">Nouvelle Analyse</button>
+                <button type="button" class="btn-gold full-width" onclick="location.reload()" data-i18n="btn_reset">Réinitialiser</button>
             </div>
         </div>
     </div>
