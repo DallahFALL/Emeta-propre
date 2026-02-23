@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS
- * FICHIER : script.js (Intégration du Choix de Restitution & Alertes Traduites)
+ * FICHIER : script.js (Vérification intelligente sans bulle système)
  */
 
 const WEBHOOK_URL = "https://hook.eu2.make.com/moupzawutk6h7ab6f5ap2li1qaypzh2f"; 
@@ -15,8 +15,7 @@ window.nextStep = function(targetStep) {
         const phone = document.getElementById('phone').value;
         
         if (!comp || !mail || !phone) {
-            // L'alerte s'affiche dans la langue choisie
-            alert(translations[lang].alert_empty);
+            alert(translations[lang].alert_empty); // Alerte traduite !
             return;
         }
     }
@@ -37,6 +36,11 @@ window.prevStep = function() {
 };
 
 window.resetForm = function() { window.location.reload(); };
+
+// Remplace la vérification native du navigateur qui causait le texte en français
+window.setCustomMessage = function(input) {
+    input.setCustomValidity(''); 
+};
 
 // --- 2. LIVE STATS ---
 async function updateLiveStats() {
@@ -66,25 +70,33 @@ document.addEventListener('DOMContentLoaded', () => {
             if(modal) modal.style.display = 'flex';
         }
         
-        // FERMETURE
+        // FERMETURE DES MODALES
         if (e.target.closest('.close-modal') || e.target.closest('.close-result') || e.target.closest('.close-modal-btn')) {
             document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
         }
     });
 
-    // --- 4. SOUMISSION DU FORMULAIRE ---
+    // --- 4. SOUMISSION DU FORMULAIRE ET SÉCURITÉ ---
     const form = document.getElementById('diagnosticForm');
     if (form) {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const lang = document.documentElement.lang || 'fr';
+            
+            // 1. VÉRIFICATION DE LA POLITIQUE DE CONFIDENTIALITÉ
+            const consent = document.getElementById('consent');
+            if (consent && !consent.checked) {
+                alert(translations[lang].alert_consent); // Alerte traduite !
+                return;
+            }
+
+            // 2. VÉRIFICATION DE WHATSAPP (SEULEMENT SI CHOISI)
             const deliveryMethod = document.getElementById('delivery_method').value;
             const whatsappConsent = document.getElementById('whatsapp-consent');
 
-            // VÉRIFICATION DYNAMIQUE DU CHOIX WHATSAPP
             if (deliveryMethod === 'whatsapp' && whatsappConsent && !whatsappConsent.checked) {
-                alert(translations[lang].alert_wa);
+                alert(translations[lang].alert_wa); // Alerte traduite !
                 return;
             }
 
@@ -108,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     email: document.getElementById('email').value,
                     phone: document.getElementById('phone').value,
                     geoZone: document.getElementById('geo-zone').value,
-                    delivery_method: deliveryMethod // Make.com saura quoi faire !
+                    delivery_method: deliveryMethod
                 },
                 project: {
                     sector: document.querySelector('input[name="sector"]:checked')?.value || "N/A",
