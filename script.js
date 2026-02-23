@@ -110,17 +110,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const data = {
                 action: "diagnostic",
-                meta: {
-                    source: "e-META LABS Web App",
-                    timestamp: new Date().toISOString(),
-                    lang: lang
-                },
-                user: {
-                    company: document.getElementById('company').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    geoZone: document.getElementById('geo-zone').value,
-                    delivery_method: deliveryMethod
+                timestamp: new Date().toISOString(),
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                lang: lang,
+                company: document.getElementById('company').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                sector: document.querySelector('input[name="sector"]:checked')?.value || "N/A",
+                geoZone: document.getElementById('geo-zone').value,
+                expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked')).map(cb => cb.value).join(', '),
+                context: document.getElementById('context').value,
+                
+                // --- LIGNE AJOUTÉE POUR MAKE.COM ---
+                delivery_method: document.getElementById('delivery_method') ? document.getElementById('delivery_method').value : "whatsapp"
+            };
                 },
                 project: {
                     sector: document.querySelector('input[name="sector"]:checked')?.value || "N/A",
