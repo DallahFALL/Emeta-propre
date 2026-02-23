@@ -47,17 +47,17 @@
                     
                     <div class="input-group">
                         <label for="company" data-i18n="lbl_company">Société / Entité</label>
-                        <input type="text" id="company" required>
+                        <input type="text" id="company" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                     </div>
                     
                     <div class="input-group">
                         <label for="email" data-i18n="lbl_email">Email Professionnel</label>
-                        <input type="email" id="email" required>
+                        <input type="email" id="email" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                     </div>
                     
                     <div class="input-group">
                         <label for="phone" data-i18n="lbl_phone">Numéro WhatsApp</label>
-                        <input type="tel" id="phone" required>
+                        <input type="tel" id="phone" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                     </div>
                     
                     <div style="display:none;"><input type="text" id="honeypot" tabindex="-1"></div>
@@ -87,7 +87,7 @@
 
                     <label class="section-label mt-2" data-i18n="lbl_geo">Zone d'Intervention / Statut</label>
                     <div class="input-group">
-                        <select id="geo-zone" required>
+                        <select id="geo-zone" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                             <option value="" disabled selected data-i18n="opt_geo_def">Sélectionner une zone...</option>
                             <option value="Senegal" data-i18n="opt_dakar">Sénégal (Dakar Hub)</option>
                             <option value="CotedIvoire" data-i18n="opt_abidjan">Côte d'Ivoire (Abidjan Hub)</option>
@@ -128,14 +128,14 @@
 
                     <div class="input-group" style="margin-top: 15px;">
                         <label for="delivery_method" data-i18n="lbl_delivery" style="color: #d4af37;">Mode de réception souhaité</label>
-                        <select id="delivery_method" required style="border-color: #d4af37;">
+                        <select id="delivery_method" style="border-color: #d4af37;">
                             <option value="whatsapp" data-i18n="opt_del_wa" selected>WhatsApp (Recommandé & Rapide)</option>
                             <option value="email" data-i18n="opt_del_email">Email / Affichage PDF direct</option>
                         </select>
                     </div>
                     
                     <div class="legal-check" style="margin-top: 15px; text-align: center;">
-                        <input type="checkbox" id="consent" required>
+                        <input type="checkbox" id="consent">
                         <label for="consent">
                             <span data-i18n="legal_consent">J'accepte la</span> 
                             <a href="#" id="openPrivacyLink" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité</a>.
