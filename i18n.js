@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS
- * FICHIER : i18n.js (Dictionnaire Multilingue Intégral & Alertes)
+ * FICHIER : i18n.js (Dictionnaire Multilingue avec Alertes et Modale)
  */
 
 const translations = {
@@ -67,6 +67,7 @@ const translations = {
         btn_close: "Fermer",
         loading_text: "Analyse IA en cours...",
         alert_empty: "Veuillez remplir les champs obligatoires (Société, Email, Téléphone) pour continuer.",
+        alert_consent: "Veuillez accepter la Politique de Confidentialité pour continuer.",
         alert_wa: "Veuillez accepter l'Opt-in WhatsApp ou choisir la réception par Email.",
         alert_error: "Erreur réseau. Veuillez réessayer.",
         priv_content: `
@@ -141,6 +142,7 @@ const translations = {
         btn_close: "Close",
         loading_text: "AI Analysis in progress...",
         alert_empty: "Please fill in the required fields (Company, Email, Phone) to continue.",
+        alert_consent: "Please accept the Privacy Policy to continue.",
         alert_wa: "Please accept the WhatsApp Opt-in or choose Email delivery.",
         alert_error: "Network error. Please try again.",
         priv_content: `
@@ -215,6 +217,7 @@ const translations = {
         btn_close: "Cerrar",
         loading_text: "Análisis IA en curso...",
         alert_empty: "Por favor, complete los campos obligatorios (Empresa, Email, Teléfono) para continuar.",
+        alert_consent: "Por favor, acepte la Política de Privacidad para continuar.",
         alert_wa: "Acepte el Opt-in de WhatsApp o elija la entrega por Email.",
         alert_error: "Error de red. Inténtalo de nuevo.",
         priv_content: `
@@ -289,6 +292,7 @@ const translations = {
         btn_close: "إغلاق",
         loading_text: "جاري تحليل الذكاء الاصطناعي...",
         alert_empty: "يرجى ملء الحقول المطلوبة (الشركة، البريد، الهاتف) للمتابعة.",
+        alert_consent: "يرجى قبول سياسة الخصوصية للمتابعة.",
         alert_wa: "يرجى قبول خيار واتساب أو اختيار الاستلام عبر البريد الإلكتروني.",
         alert_error: "خطأ في الشبكة. يرجى المحاولة مرة أخرى.",
         priv_content: `
