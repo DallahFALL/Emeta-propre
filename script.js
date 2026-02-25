@@ -4,20 +4,18 @@
 
 const WEBHOOK_URL = "https://hook.eu2.make.com/moupzawutk6h7ab6f5ap2li1qaypzh2f"; 
 
-// --- Animation du Compteur ---
 window.addEventListener('load', () => {
     const counterElement = document.getElementById('live-counter');
     if (counterElement) {
         let currentCount = 1380;
-        const targetCount = 1423; // Chiffre final psychologique
+        const targetCount = 1423; 
         const interval = setInterval(() => {
             currentCount++;
-            // Formatage avec virgule pour les milliers (1,423)
             counterElement.innerText = currentCount.toLocaleString();
             if (currentCount >= targetCount) {
                 clearInterval(interval);
             }
-        }, 30); // Vitesse de l'animation
+        }, 30); 
     }
 });
 
@@ -103,13 +101,45 @@ function resetForm() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Gestion du nom de fichier
+    const fileInput = document.getElementById('clientFile');
+    const fileNameDisplay = document.getElementById('fileNameDisplay');
+    if (fileInput && fileNameDisplay) {
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                fileNameDisplay.textContent = this.files[0].name;
+                fileNameDisplay.style.color = '#d4af37';
+            } else {
+                const lang = document.documentElement.lang || 'fr';
+                const defaultTexts = { fr: "Aucun fichier sélectionné", en: "No file selected", es: "Ningún archivo seleccionado", ar: "لم يتم تحديد أي ملف" };
+                fileNameDisplay.textContent = defaultTexts[lang] || defaultTexts.fr;
+                fileNameDisplay.style.color = '#8892b0';
+            }
+        });
+    }
+
+    // Gestion de la Politique de Confidentialité (Modal)
+    const privacyModal = document.getElementById('privacyOverlay');
+    const openPrivacyBtn = document.getElementById('openPrivacy');
+    if (openPrivacyBtn && privacyModal) {
+        openPrivacyBtn.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            privacyModal.style.display = 'flex';
+        });
+        document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
+            btn.addEventListener('click', () => { privacyModal.style.display = 'none'; });
+        });
+    }
+
     const resultModal = document.getElementById('resultModal');
     if (resultModal) {
         document.querySelector('.close-result').addEventListener('click', () => {
             resultModal.style.display = 'none';
         });
     }
+    
     window.addEventListener('click', (e) => {
+        if (e.target === privacyModal) privacyModal.style.display = 'none';
         if (e.target === resultModal) resultModal.style.display = 'none';
     });
 });
