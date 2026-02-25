@@ -48,7 +48,7 @@
                     <h3 data-i18n="step1_title">01. Identification</h3>
                     <div class="input-group">
                         <label for="company" data-i18n="lbl_company">Société / Entité</label>
-                        <input type="text" id="company" required placeholder="ex: Groupe Alpha..." oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
+                        <input type="text" id="company" required placeholder="ex: Groupe Alpha..." data-i18n="ph_company" oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                     </div>
                     <div class="input-group">
                         <label for="email" data-i18n="lbl_email">Email Professionnel</label>
@@ -86,37 +86,37 @@
                     <div class="input-group">
                         <select id="geo-zone" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                             <option value="" disabled selected data-i18n="opt_geo_def">Sélectionner une zone d'intervention...</option>
-                            <optgroup label="Afrique">
-                                <option value="Senegal">Sénégal (Dakar Hub)</option>
-                                <option value="CotedIvoire">Côte d'Ivoire (Abidjan Hub)</option>
-                                <option value="Nigeria">Nigeria (Lagos Hub)</option>
-                                <option value="Maroc">Maroc (Casablanca Hub)</option>
-                                <option value="SouthAfrica">Afrique du Sud (Johannesburg)</option>
+                            <optgroup label="Afrique" data-i18n="grp_africa">
+                                <option value="Senegal" data-i18n="geo_sn">Sénégal (Dakar Hub)</option>
+                                <option value="CotedIvoire" data-i18n="geo_ci">Côte d'Ivoire (Abidjan Hub)</option>
+                                <option value="Nigeria" data-i18n="geo_ng">Nigeria (Lagos Hub)</option>
+                                <option value="Maroc" data-i18n="geo_ma">Maroc (Casablanca Hub)</option>
+                                <option value="SouthAfrica" data-i18n="geo_za">Afrique du Sud (Johannesburg)</option>
                             </optgroup>
-                            <optgroup label="Amérique du Nord">
-                                <option value="USA">États-Unis (USA)</option>
-                                <option value="Canada">Canada (Toronto / Montréal)</option>
+                            <optgroup label="Amérique du Nord" data-i18n="grp_na">
+                                <option value="USA" data-i18n="geo_us">États-Unis (USA)</option>
+                                <option value="Canada" data-i18n="geo_ca">Canada (Toronto / Montréal)</option>
                             </optgroup>
-                            <optgroup label="Amérique Latine & Caraïbes">
-                                <option value="LatAm_Brazil">Brésil (São Paulo)</option>
-                                <option value="LatAm_General">Amérique Latine (Mexique, Colombie...)</option>
+                            <optgroup label="Amérique Latine" data-i18n="grp_latam">
+                                <option value="LatAm_Brazil" data-i18n="geo_br">Brésil (São Paulo)</option>
+                                <option value="LatAm_General" data-i18n="geo_latam">Amérique Latine (Mexique, Colombie...)</option>
                             </optgroup>
-                            <optgroup label="Asie-Pacifique (APAC)">
-                                <option value="China">Chine (Shanghai / Beijing)</option>
-                                <option value="Singapore">Singapour (Hub APAC)</option>
-                                <option value="India">Inde (Mumbai / Bangalore)</option>
+                            <optgroup label="Asie-Pacifique (APAC)" data-i18n="grp_apac">
+                                <option value="China" data-i18n="geo_cn">Chine (Shanghai / Beijing)</option>
+                                <option value="Singapore" data-i18n="geo_sg">Singapour (Hub APAC)</option>
+                                <option value="India" data-i18n="geo_in">Inde (Mumbai / Bangalore)</option>
                             </optgroup>
-                            <optgroup label="Europe">
-                                <option value="France">France (Paris Hub)</option>
-                                <option value="UK">Royaume-Uni (Londres)</option>
-                                <option value="EU_General">Union Européenne (Allemagne, Espagne...)</option>
+                            <optgroup label="Europe" data-i18n="grp_eu">
+                                <option value="France" data-i18n="geo_fr">France (Paris Hub)</option>
+                                <option value="UK" data-i18n="geo_uk">Royaume-Uni (Londres)</option>
+                                <option value="EU_General" data-i18n="geo_eu">Union Européenne (Allemagne, Espagne...)</option>
                             </optgroup>
-                            <optgroup label="Moyen-Orient (MENA)">
-                                <option value="UAE">Émirats Arabes Unis (Dubai Hub)</option>
-                                <option value="SaudiArabia">Arabie Saoudite (Riyadh)</option>
+                            <optgroup label="Moyen-Orient (MENA)" data-i18n="grp_mena">
+                                <option value="UAE" data-i18n="geo_ae">Émirats Arabes Unis (Dubai Hub)</option>
+                                <option value="SaudiArabia" data-i18n="geo_sa">Arabie Saoudite (Riyadh)</option>
                             </optgroup>
-                            <optgroup label="Global">
-                                <option value="Global">International / Multi-Zones</option>
+                            <optgroup label="Global" data-i18n="grp_global">
+                                <option value="Global" data-i18n="geo_global">International / Multi-Zones</option>
                             </optgroup>
                         </select>
                     </div>
@@ -144,11 +144,11 @@
                     
                     <div class="input-group">
                         <label for="context" data-i18n="lbl_context">Contexte Opérationnel</label>
-                        <textarea id="context" rows="4" placeholder="Décrivez vos enjeux stratégiques..."></textarea>
+                        <textarea id="context" rows="4" data-i18n="ph_context" placeholder="Décrivez brièvement votre situation actuelle, vos objectifs stratégiques à 1-3 ans, et les défis majeurs (ex: concurrence, besoin de financement, transition digitale...). Plus vous serez précis, plus l'IA sera pertinente."></textarea>
                     </div>
                     
                     <div class="input-group" style="background: rgba(255,255,255,0.02); padding: 15px; border-radius: 5px; border: 1px dashed rgba(212, 175, 55, 0.4); margin-bottom: 20px;">
-                        <label for="clientFile" style="color:#d4af37;">📄 Joindre un Document Stratégique (Optionnel)</label>
+                        <label for="clientFile" style="color:#d4af37;" data-i18n="lbl_file_upload">📄 Joindre un Document Stratégique (Optionnel)</label>
                         <input type="file" id="clientFile" accept=".pdf,.doc,.docx,.txt" style="margin-top: 10px; font-size: 0.85rem; color: #e6f1ff;">
                         <div style="font-size: 0.75rem; color: #8892b0; margin-top: 5px; display: flex; align-items: center; gap: 5px;">
                             <span style="color:#25D366;">🛡️</span> 
@@ -160,7 +160,7 @@
                         <input type="checkbox" id="consent" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                         <label for="consent">
                             <span data-i18n="legal_consent">J'accepte la</span> 
-                            <a href="https://share.google/t8hO4SZmR5Fxs92Oi" target="_blank" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité Officielle</a>.
+                            <a href="#" id="openPrivacy" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité Officielle</a>.
                         </label>
                     </div>
 
@@ -183,8 +183,34 @@
     <footer class="footer">
         <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
         <p class="tiny">Strategic Intelligence Unit • Dakar - Paris - Dubai - Shanghai - New York</p>
-        <p style="margin-top:10px;"><a href="https://share.google/t8hO4SZmR5Fxs92Oi" target="_blank" style="color:#d4af37; text-decoration:none; font-size:0.8rem; border-bottom: 1px solid #d4af37;" data-i18n="link_privacy_footer">Consulter notre Politique de Souveraineté & Confidentialité (Certifiée Woleet)</a></p>
     </footer>
+
+    <div id="privacyOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 data-i18n="modal_title" style="margin-bottom: 20px; border-bottom: 1px solid #d4af37; padding-bottom: 10px;">Politique de Confidentialité</h2>
+            
+            <div class="modal-body" style="max-height: 50vh; overflow-y: auto; text-align: left; padding-right:10px;">
+                <h4 data-i18n="priv_t1" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">1. Identité et Opérations</h4>
+                <p data-i18n="priv_c1" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">...</p>
+
+                <h4 data-i18n="priv_t2" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">2. Souveraineté des Données</h4>
+                <p data-i18n="priv_c2" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">...</p>
+
+                <h4 data-i18n="priv_t3" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">3. Certification Blockchain</h4>
+                <p data-i18n="priv_c3" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">...</p>
+
+                <h4 data-i18n="priv_t4" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">4. Non-Substitution</h4>
+                <p data-i18n="priv_c4" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">...</p>
+                
+                <div style="text-align: center; margin-top: 25px;">
+                    <a href="https://share.google/t8hO4SZmR5Fxs92Oi" target="_blank" class="gold-link" style="display: inline-block; padding: 10px 15px; border: 1px solid #d4af37; border-radius: 4px; text-decoration: none;" data-i18n="btn_full_policy">📑 Consulter le Document Officiel Complet (PDF)</a>
+                </div>
+            </div>
+            
+            <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close" style="margin-top:20px;">Fermer</button>
+        </div>
+    </div>
 
     <div id="resultModal" class="modal-overlay">
         <div class="modal-content">
