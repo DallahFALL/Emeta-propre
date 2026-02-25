@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-META LABS | Strategic AI Engine</title>
+    <title>e-META LABS | Strategic AI Engine</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L95 25 V75 L50 95 L5 75 V25 Z' stroke='%23d4af37' stroke-width='4' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
@@ -18,220 +18,152 @@
                 <circle cx="50" cy="50" r="8" fill="#d4af37"/>
             </svg>
             <div class="brand-text">
-                <h1>E-META LABS</h1>
+                <h1>e-META LABS</h1>
             </div>
         </div>
-
-        <div class="header-slogan" data-i18n="subtitle">
-            EXCELLENCE STRATÉGIQUE & HAUTE PRÉCISION IA
-        </div>
-
+        <div class="header-slogan" data-i18n="subtitle">Excellence Stratégique & Haute Précision IA</div>
         <div class="header-actions">
-            <button type="button" class="btn-reset" onclick="resetForm()" data-i18n="btn_reset">↻ Réinitialiser</button>
+            <button type="button" class="btn-reset" onclick="resetForm()" data-i18n="btn_reset">↻ Reset</button>
             <div class="lang-switch">
-                <button data-lang="fr" class="active" onclick="changeLanguage('fr')">FR</button>
-                <button data-lang="en" onclick="changeLanguage('en')">EN</button>
-                <button data-lang="es" onclick="changeLanguage('es')">ES</button>
-                <button data-lang="ar" onclick="changeLanguage('ar')">AR</button>
+                <button data-lang="fr" class="active">FR</button>
+                <button data-lang="en">EN</button>
+                <button data-lang="es">ES</button>
+                <button data-lang="ar">AR</button>
             </div>
         </div>
     </header>
 
     <main class="main-container">
         <div class="glass-card">
+            <h2 id="form-title">Master Diagnostic 2026</h2>
+            <p id="form-desc" data-i18n="subtitle" style="opacity:0.7; font-size:0.8rem;">Excellence Stratégique & Haute Précision IA</p>
+
             <form id="diagnosticForm">
-                
                 <div class="form-step active" id="step-1">
                     <h3 data-i18n="step1_title">01. Identification</h3>
-                    <hr style="border-color: rgba(212, 175, 55, 0.2); margin-bottom: 20px;">
-                    
                     <div class="input-group">
                         <label for="company" data-i18n="lbl_company">Société / Entité</label>
-                        <input type="text" id="company" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
+                        <input type="text" id="company" required placeholder="ex: Groupe Alpha..." oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                     </div>
-                    
                     <div class="input-group">
                         <label for="email" data-i18n="lbl_email">Email Professionnel</label>
-                        <input type="email" id="email" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
+                        <input type="email" id="email" required placeholder="contact@domain.com" oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                     </div>
-                    
                     <div class="input-group">
                         <label for="phone" data-i18n="lbl_phone">Numéro WhatsApp</label>
-                        <input type="tel" id="phone" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
+                        <input type="tel" id="phone" required placeholder="+221..." oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                     </div>
-                    
-                    <div style="display:none;"><input type="text" id="honeypot" tabindex="-1"></div>
-
                     <div class="btn-container right">
-                        <button type="button" class="btn-gold full-width" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
+                        <button type="button" class="btn-gold" onclick="nextStep(2)" data-i18n="btn_next">Suivant</button>
                     </div>
                 </div>
 
                 <div class="form-step" id="step-2">
                     <h3 data-i18n="step2_title">02. Matrice Stratégique</h3>
-                    <hr style="border-color: rgba(212, 175, 55, 0.2); margin-bottom: 20px;">
                     
                     <label class="section-label" data-i18n="lbl_sector">Secteur Stratégique</label>
                     <div class="grid-options">
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="GenAI_Robotics"> <span data-i18n="sec_genai">GenAI & Robotics</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="GreenTech_Energy"> <span data-i18n="sec_green">Énergies & GreenTech</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="FinTech"> <span data-i18n="sec_fintech">FinTech & Banque</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="FinTech_DeFi"> <span data-i18n="sec_fintech">FinTech & DeFi</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="AgriTech_FoodSec"> <span data-i18n="sec_agri">AgriTech & Food Security</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="GreenTech_Energy"> <span data-i18n="sec_green">GreenTech & Énergies</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="GovTech_SmartCities"> <span data-i18n="sec_gov">GovTech & Smart Cities</span></label>
                         <label class="checkbox-btn"><input type="radio" name="sector" value="Health_BioTech"> <span data-i18n="sec_health">Santé & BioTech</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Logistics_Infra"> <span data-i18n="sec_log">Logistique & Infra</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Logistics_SupplyChain"> <span data-i18n="sec_log">Logistique & Supply Chain</span></label>
                         <label class="checkbox-btn"><input type="radio" name="sector" value="Mining_OilGas"> <span data-i18n="sec_mine">Mines, Pétrole & Gaz</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="RealEstate_BTP"> <span data-i18n="sec_btp">Immobilier & BTP</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Retail_FMCG"> <span data-i18n="sec_retail">Commerce & Retail</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Public_Gov"> <span data-i18n="sec_public">Secteur Public</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="Education_EdTech"> <span data-i18n="sec_edu">Éducation & EdTech</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="RealEstate_PropTech"> <span data-i18n="sec_btp">Immobilier & PropTech</span></label>
                     </div>
 
-                    <label class="section-label mt-2" data-i18n="lbl_geo">Zone d'Intervention / Statut</label>
+                    <label class="section-label mt-2" data-i18n="lbl_geo">Zone d'Intervention</label>
                     <div class="input-group">
                         <select id="geo-zone" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                             <option value="" disabled selected data-i18n="opt_geo_def">Sélectionner une zone...</option>
-                            <option value="Senegal" data-i18n="opt_dakar">Sénégal (Dakar Hub)</option>
-                            <option value="CotedIvoire" data-i18n="opt_abidjan">Côte d'Ivoire (Abidjan Hub)</option>
-                            <option value="Nigeria" data-i18n="opt_lagos">Nigeria (Lagos)</option>
-                            <option value="Maroc" data-i18n="opt_casa">Maroc (Casablanca)</option>
-                            <option value="UAE" data-i18n="opt_dubai">UAE (Dubai - Middle East)</option>
-                            <option value="France" data-i18n="opt_paris">France (Europe)</option>
-                            <option value="Global" data-i18n="opt_global">Statut International / Global</option>
+                            <option value="Senegal">Sénégal (Dakar Hub)</option>
+                            <option value="CotedIvoire">Côte d'Ivoire (Abidjan Hub)</option>
+                            <option value="Nigeria">Nigeria (Lagos)</option>
+                            <option value="Maroc">Maroc (Casablanca)</option>
+                            <option value="UAE">UAE (Dubai - Middle East)</option>
+                            <option value="France">France (Europe)</option>
+                            <option value="Global">International / Global</option>
                         </select>
                     </div>
 
                     <label class="section-label mt-2" data-i18n="lbl_expertise">Expertise Requise</label>
                     <div class="grid-options">
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="SouveraineteIA"> <span data-i18n="exp_sov">Souveraineté IA</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Digital_Transfo"> <span data-i18n="exp_digital">Transformation Digitale</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="GenAI_DataScience"> <span data-i18n="exp_ai">GenAI & Data Science</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Cyber_Resilience"> <span data-i18n="exp_cyber">Cybersécurité & Résilience</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="ESG_Climate"> <span data-i18n="exp_esg">Ingénierie ESG & Climat</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="MA_Finance"> <span data-i18n="exp_ma">M&A & Levée de Fonds</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="OHADA_Tax"> <span data-i18n="exp_ohada">Conformité OHADA</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="ESG_CSR"> <span data-i18n="exp_esg">Ingénierie ESG</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Cybersecurity"> <span data-i18n="exp_cyber">Cybersécurité</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="SupplyChain"> <span data-i18n="exp_supply">Supply Chain & Ops</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Web3_Blockchain"> <span data-i18n="exp_web3">Web3 & Blockchain (Woleet)</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Digital_Sovereignty"> <span data-i18n="exp_sov">Souveraineté Numérique</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="OHADA_Compliance"> <span data-i18n="exp_ohada">Conformité OHADA</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="PublicAffairs"> <span data-i18n="exp_pubaff">Affaires Publiques</span></label>
                     </div>
 
                     <div class="btn-container split">
-                        <button type="button" class="btn-outline" onclick="prevStep()" data-i18n="btn_prev">Retour</button>
-                        <button type="button" class="btn-gold" onclick="nextStep(3)" data-i18n="btn_next_matrice">Suivant</button>
+                        <button type="button" class="btn-outline" onclick="nextStep(1)" data-i18n="btn_prev">Retour</button>
+                        <button type="button" class="btn-gold" onclick="nextStep(3)" data-i18n="btn_next_matrice">Ouvrir Matrice Analyse</button>
                     </div>
                 </div>
 
                 <div class="form-step" id="step-3">
-                    <h3 data-i18n="step3_title">03. Analyse & Restitution</h3>
-                    <hr style="border-color: rgba(212, 175, 55, 0.2); margin-bottom: 20px;">
+                    <h3 data-i18n="step3_title">03. Matrice Analyse & Restitution</h3>
                     
                     <div class="input-group">
                         <label for="context" data-i18n="lbl_context">Contexte Opérationnel</label>
-                        <textarea id="context" rows="4"></textarea>
-                    </div>
-
-                    <div class="input-group" style="margin-top: 15px;">
-                        <label for="delivery_method" data-i18n="lbl_delivery" style="color: #d4af37;">Mode de réception souhaité</label>
-                        <select id="delivery_method" style="border-color: #d4af37;">
-                            <option value="whatsapp" data-i18n="opt_del_wa" selected>WhatsApp (Recommandé & Rapide)</option>
-                            <option value="email" data-i18n="opt_del_email">Email / Affichage PDF direct</option>
-                        </select>
+                        <textarea id="context" rows="4" placeholder="Décrivez vos enjeux stratégiques..."></textarea>
                     </div>
                     
-                    <div class="legal-check" style="margin-top: 15px; text-align: center;">
-                        <input type="checkbox" id="consent">
+                    <div class="input-group" style="background: rgba(255,255,255,0.02); padding: 15px; border-radius: 5px; border: 1px dashed rgba(212, 175, 55, 0.4); margin-bottom: 20px;">
+                        <label for="clientFile" style="color:#d4af37;">📄 Joindre un Document Stratégique (Optionnel)</label>
+                        <input type="file" id="clientFile" accept=".pdf,.doc,.docx,.txt" style="margin-top: 10px; font-size: 0.85rem; color: #e6f1ff;">
+                        <div style="font-size: 0.75rem; color: #8892b0; margin-top: 5px; display: flex; align-items: center; gap: 5px;">
+                            <span style="color:#25D366;">🛡️</span> 
+                            <em>Propriété Intellectuelle garantie : Votre fichier sera scellé et protégé par ancrage Blockchain (Woleet).</em>
+                        </div>
+                    </div>
+
+                    <div class="legal-check">
+                        <input type="checkbox" id="consent" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                         <label for="consent">
                             <span data-i18n="legal_consent">J'accepte la</span> 
-                            <a href="#" id="openPrivacyLink" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité</a>.
+                            <a href="#" id="openPrivacy" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité</a>.
                         </label>
                     </div>
 
-                    <div class="opt-in-container legal-check" style="margin-top: 10px; margin-bottom: 20px; text-align: center;">
-                        <input type="checkbox" id="whatsapp-consent">
-                        <label for="whatsapp-consent" data-i18n="optin_whatsapp">
-                            J'accepte de recevoir mon analyse par WhatsApp.
+                    <div class="opt-in-container" style="margin-bottom: 20px; font-size: 0.9em; color: var(--white); background: rgba(255,255,255,0.05); padding: 10px; border-radius: 4px; border: 1px solid rgba(212, 175, 55, 0.2);">
+                        <input type="checkbox" id="whatsapp-consent" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
+                        <label for="whatsapp-consent" style="display:inline; margin-left: 5px;">
+                            J'accepte de recevoir mon analyse stratégique par <strong style="color:#25D366;">WhatsApp</strong>.
                         </label>
                     </div>
 
                     <div class="btn-container split">
-                        <button type="button" class="btn-outline" onclick="prevStep()" data-i18n="btn_prev">Retour</button>
-                        <button type="submit" class="btn-gold glow" id="submitBtn" data-i18n="btn_submit">Lancer l'Analyse IA</button>
+                        <button type="button" class="btn-outline" onclick="nextStep(2)" data-i18n="btn_prev">Retour</button>
+                        <button type="submit" class="btn-gold glow" data-i18n="btn_submit">Lancer l'Analyse IA</button>
                     </div>
                 </div>
             </form>
         </div>
-
-        <div id="stats-widget" class="stats-card">
-            <div class="stats-header">
-                <span class="pulse-icon"></span>
-                <h4 data-i18n="stats_live">LIVE INTELLIGENCE</h4>
-            </div>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-label" data-i18n="stat_ai">Analyses IA</span>
-                    <span id="count-analyses" class="stat-value">--</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label" data-i18n="stat_pdf">PDF Certifiés</span>
-                    <span id="count-pdf" class="stat-value">--</span>
-                </div>
-            </div>
-            <div style="text-align: right; margin-top: 5px; font-size: 0.7rem; color: #8892b0;">
-                <span data-i18n="stat_footer">Mise à jour :</span> <span id="last-update">--:--</span>
-            </div>
-        </div>
     </main>
 
-    <footer class="footer" style="margin-top: 40px; text-align: center; padding-bottom: 20px;">
-        <div style="margin-bottom: 15px;">
-            <a href="#" id="openPrivacyFooter" class="gold-link" data-i18n="link_privacy" style="font-size: 0.9rem; text-decoration: underline;">Politique de Confidentialité</a>
-        </div>
-        
-        <div style="margin-bottom: 15px; font-size: 0.85rem; color: #a0aec0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-            <div>
-                <span data-i18n="footer_support">Support Technique :</span> 
-                <a href="mailto:support@e-metalabs.com" style="color: #d4af37; text-decoration: none; font-weight: bold;">support@e-metalabs.com</a>
-            </div>
-            <div style="color: #4a5568;">|</div>
-            <div>
-                <span data-i18n="footer_contact">Informations :</span> 
-                <a href="mailto:contact@e-metalabs.com" style="color: #d4af37; text-decoration: none; font-weight: bold;">contact@e-metalabs.com</a>
-            </div>
-        </div>
-
-        <p style="color: #a0aec0; font-size: 0.8rem;">&copy; 2026 E-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
-        <p class="tiny" style="color: #718096; font-size: 0.75rem; margin-top: 5px;">Strategic Intelligence Unit • Dakar - Paris - Dubai</p>
+    <footer class="footer">
+        <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">All Rights Reserved.</span></p>
+        <p class="tiny">Strategic Intelligence Unit • Dakar - Paris - Dubai</p>
     </footer>
 
-    <div id="loadingOverlay" class="modal-overlay" style="display:none; flex-direction: column; justify-content: center; align-items: center;">
-        <svg width="80" height="80" viewBox="0 0 100 100" class="spinner" style="animation: spin 2s linear infinite;">
-            <circle cx="50" cy="50" r="40" stroke="#d4af37" stroke-width="4" fill="none" stroke-dasharray="160" stroke-dashoffset="40"/>
-        </svg>
-        <p data-i18n="loading_text" style="color: #d4af37; margin-top: 20px; font-family: 'Cinzel', serif; letter-spacing: 2px;">Analyse IA en cours...</p>
-    </div>
-
-    <div id="privacyOverlay" class="modal-overlay" style="display:none;">
+    <div id="privacyOverlay" class="modal-overlay">...</div>
+    <div id="resultModal" class="modal-overlay">
         <div class="modal-content">
-            <span class="close-modal" style="position: absolute; right: 20px; top: 15px; font-size: 2rem; cursor: pointer; color: #d4af37;">&times;</span>
-            <h2 data-i18n="modal_title" style="border-bottom: 1px solid #d4af37; padding-bottom: 10px; color: #d4af37;">Politique de Confidentialité</h2>
-            <div class="modal-body" data-i18n="priv_content" style="max-height: 60vh; overflow-y: auto; text-align: left; margin-top: 20px; padding-right: 15px;">
-            </div>
-            <button type="button" class="btn-gold full-width close-modal-btn" data-i18n="btn_close" style="margin-top:20px;">Fermer</button>
-        </div>
-    </div>
-
-    <div id="resultModal" class="modal-overlay" style="display:none;">
-        <div class="modal-content">
-            <span class="close-result" style="position: absolute; right: 20px; top: 15px; font-size: 2rem; cursor: pointer; color: #d4af37;">&times;</span>
+            <span class="close-result" style="position: absolute; top: 10px; right: 20px; font-size: 2rem; cursor: pointer; color: #8892b0;">&times;</span>
             <h2 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px;">Diagnostic Stratégique</h2>
-            <div id="resultBody" class="modal-body" style="max-height: 60vh; overflow-y: auto; color: #e6f1ff; margin-top: 20px; text-align: left;">
+            <div id="resultBody" class="modal-body" style="max-height: 60vh; overflow-y: auto; color: #e6f1ff; font-size: 0.95rem; line-height: 1.6;">
                 <p>Initialisation...</p>
             </div>
-            <div class="btn-container" style="margin-top:20px;">
-                <button type="button" class="btn-gold full-width" onclick="location.reload()" data-i18n="btn_reset">Réinitialiser</button>
+            <div class="btn-container">
+                <button class="btn-gold full-width" onclick="location.reload()">Nouvelle Analyse</button>
             </div>
         </div>
     </div>
-
-    <style>
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-    </style>
 
     <script src="i18n.js"></script>
     <script src="script.js"></script>
