@@ -144,13 +144,20 @@
                     
                     <div class="input-group">
                         <label for="context" data-i18n="lbl_context">Contexte Opérationnel</label>
-                        <textarea id="context" rows="4" data-i18n="ph_context" placeholder="Décrivez brièvement votre situation actuelle, vos objectifs stratégiques à 1-3 ans, et les défis majeurs (ex: concurrence, besoin de financement, transition digitale...). Plus vous serez précis, plus l'IA sera pertinente."></textarea>
+                        <textarea id="context" rows="4" data-i18n="ph_context" placeholder="Décrivez brièvement votre situation actuelle, vos objectifs stratégiques à 1-3 ans, et les principaux défis (ex: concurrence, réglementation, besoin de financement, transition digitale...). Plus vous serez précis, plus l'IA sera pertinente."></textarea>
                     </div>
                     
                     <div class="input-group" style="background: rgba(255,255,255,0.02); padding: 15px; border-radius: 5px; border: 1px dashed rgba(212, 175, 55, 0.4); margin-bottom: 20px;">
-                        <label for="clientFile" style="color:#d4af37;" data-i18n="lbl_file_upload">📄 Joindre un Document Stratégique (Optionnel)</label>
-                        <input type="file" id="clientFile" accept=".pdf,.doc,.docx,.txt" style="margin-top: 10px; font-size: 0.85rem; color: #e6f1ff;">
-                        <div style="font-size: 0.75rem; color: #8892b0; margin-top: 5px; display: flex; align-items: center; gap: 5px;">
+                        <label style="color:#d4af37;" data-i18n="lbl_file_upload">📄 Joindre un Document Stratégique (Optionnel)</label>
+                        
+                        <input type="file" id="clientFile" accept=".pdf,.doc,.docx,.txt" style="display: none;">
+                        
+                        <div style="margin-top: 10px; display: flex; align-items: center; gap: 10px;">
+                            <label for="clientFile" style="cursor: pointer; background: rgba(212, 175, 55, 0.1); border: 1px solid #d4af37; padding: 8px 15px; border-radius: 4px; color: #d4af37; font-size: 0.85rem; display: inline-block; transition: 0.3s;" data-i18n="btn_browse">Parcourir...</label>
+                            <span id="fileNameDisplay" style="color: #8892b0; font-size: 0.85rem;" data-i18n="lbl_no_file">Aucun fichier sélectionné</span>
+                        </div>
+
+                        <div style="font-size: 0.75rem; color: #8892b0; margin-top: 10px; display: flex; align-items: center; gap: 5px;">
                             <span style="color:#25D366;">🛡️</span> 
                             <em data-i18n="lbl_file_desc">Propriété Intellectuelle garantie : Votre fichier sera scellé et protégé par ancrage Blockchain (Woleet).</em>
                         </div>
@@ -183,6 +190,12 @@
     <footer class="footer">
         <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
         <p class="tiny">Strategic Intelligence Unit • Dakar - Paris - Dubai - Shanghai - New York</p>
+        
+        <div style="margin-top: 15px; font-size: 0.8rem; color: #8892b0;">
+            <a href="mailto:contact@e-metalabs.com" style="color: #8892b0; text-decoration: none; margin-right: 15px;">✉️ contact@e-metalabs.com</a>
+            <a href="mailto:support@e-metalabs.com" style="color: #8892b0; text-decoration: none;">🛠️ support@e-metalabs.com</a>
+        </div>
+
     </footer>
 
     <div id="privacyOverlay" class="modal-overlay">
