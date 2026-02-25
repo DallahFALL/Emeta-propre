@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS
- * FICHIER : i18n.js (Gestion Multilingue Anti-Bug)
+ * FICHIER : i18n.js (Traduction Intégrale & Anti-Bug)
  */
 
 const translations = {
@@ -9,6 +9,7 @@ const translations = {
         lbl_counter: "Diagnostics Sécurisés & Ancrés",
         step1_title: "01. Identification",
         lbl_company: "Société / Entité",
+        ph_company: "ex: Groupe Alpha, Ministère...",
         lbl_email: "Email Professionnel",
         lbl_phone: "Numéro WhatsApp",
         btn_next: "Suivant",
@@ -30,6 +31,31 @@ const translations = {
         
         lbl_geo: "Zone d'Intervention",
         opt_geo_def: "Sélectionner une zone d'intervention...",
+        grp_africa: "Afrique",
+        geo_sn: "Sénégal (Dakar Hub)",
+        geo_ci: "Côte d'Ivoire (Abidjan Hub)",
+        geo_ng: "Nigeria (Lagos Hub)",
+        geo_ma: "Maroc (Casablanca Hub)",
+        geo_za: "Afrique du Sud (Johannesburg)",
+        grp_na: "Amérique du Nord",
+        geo_us: "États-Unis (USA)",
+        geo_ca: "Canada (Toronto / Montréal)",
+        grp_latam: "Amérique Latine",
+        geo_br: "Brésil (São Paulo)",
+        geo_latam: "Amérique Latine (Mexique, Colombie...)",
+        grp_apac: "Asie-Pacifique (APAC)",
+        geo_cn: "Chine (Shanghai / Beijing)",
+        geo_sg: "Singapour (Hub APAC)",
+        geo_in: "Inde (Mumbai / Bangalore)",
+        grp_eu: "Europe",
+        geo_fr: "France (Paris Hub)",
+        geo_uk: "Royaume-Uni (Londres)",
+        geo_eu: "Union Européenne (Allemagne, Espagne...)",
+        grp_mena: "Moyen-Orient (MENA)",
+        geo_ae: "Émirats Arabes Unis (Dubai Hub)",
+        geo_sa: "Arabie Saoudite (Riyadh)",
+        grp_global: "Global",
+        geo_global: "International / Multi-Zones",
         
         lbl_expertise: "Expertise Requise",
         exp_ai: "GenAI & Data Science",
@@ -46,6 +72,8 @@ const translations = {
         
         step3_title: "03. Matrice Analyse & Restitution",
         lbl_context: "Contexte Opérationnel",
+        ph_context: "Décrivez brièvement votre situation actuelle, vos objectifs stratégiques à 1-3 ans, et les principaux défis (ex: concurrence, réglementation, besoin de financement, transition digitale...). Plus vous serez précis, plus l'IA sera pertinente.",
+        lbl_file_upload: "📄 Joindre un Document Stratégique (Optionnel)",
         lbl_file_desc: "Propriété Intellectuelle garantie : Votre fichier sera scellé et protégé par ancrage Blockchain (Woleet).",
         legal_consent: "J'accepte la",
         link_privacy: "Politique de Confidentialité Officielle",
@@ -53,10 +81,21 @@ const translations = {
         btn_submit: "Lancer l'Analyse IA",
         
         footer_rights: "Tous droits réservés.",
-        link_privacy_footer: "Consulter notre Politique de Souveraineté & Confidentialité (Certifiée Woleet)",
         modal_res_title: "Diagnostic Stratégique",
         btn_new_analysis: "Nouvelle Analyse",
-        msg_reset_confirm: "Voulez-vous vraiment recommencer ?"
+        msg_reset_confirm: "Voulez-vous vraiment recommencer ?",
+        
+        modal_title: "Politique de Confidentialité & Mentions Légales",
+        priv_t1: "1. Identité et Opérations",
+        priv_c1: "e-META LABS SASU est une unité d'intelligence stratégique opérant depuis ses hubs (Dakar, Paris, Dubai). Les données collectées sont strictement limitées au périmètre du diagnostic B2B.",
+        priv_t2: "2. Souveraineté des Données",
+        priv_c2: "Les informations soumises à notre moteur IA (Google Gemini Pro/Flash) sont traitées de manière éphémère. Aucun modèle d'apprentissage public n'est entraîné avec vos données stratégiques.",
+        priv_t3: "3. Certification Blockchain",
+        priv_c3: "Tout fichier téléversé est instantanément haché (SHA-256) et ancré sur la blockchain Bitcoin via l'API Woleet. Cela vous garantit une preuve d'antériorité et protège votre propriété intellectuelle sans que nous ne stockions le fichier d'origine à long terme.",
+        priv_t4: "4. Non-Substitution",
+        priv_c4: "Les rapports générés par l'IA d'e-META LABS constituent un outil d'aide à la décision stratégique de haut niveau. Ils ne se substituent pas à une consultation juridique ou financière certifiée.",
+        btn_full_policy: "📑 Consulter le Document Officiel Complet (PDF)",
+        btn_close: "Fermer"
     },
     en: {
         subtitle: "Strategic Excellence & High Precision AI",
@@ -64,6 +103,7 @@ const translations = {
         lbl_counter: "Secured & Anchored Diagnostics",
         step1_title: "01. Identification",
         lbl_company: "Company / Entity",
+        ph_company: "e.g., Alpha Group, Ministry...",
         lbl_email: "Corporate Email",
         lbl_phone: "WhatsApp Number",
         btn_next: "Next",
@@ -85,6 +125,31 @@ const translations = {
         
         lbl_geo: "Area of Operation",
         opt_geo_def: "Select an area of operation...",
+        grp_africa: "Africa",
+        geo_sn: "Senegal (Dakar Hub)",
+        geo_ci: "Ivory Coast (Abidjan Hub)",
+        geo_ng: "Nigeria (Lagos Hub)",
+        geo_ma: "Morocco (Casablanca Hub)",
+        geo_za: "South Africa (Johannesburg)",
+        grp_na: "North America",
+        geo_us: "United States (USA)",
+        geo_ca: "Canada (Toronto / Montreal)",
+        grp_latam: "Latin America",
+        geo_br: "Brazil (São Paulo)",
+        geo_latam: "Latin America (Mexico, Colombia...)",
+        grp_apac: "Asia-Pacific (APAC)",
+        geo_cn: "China (Shanghai / Beijing)",
+        geo_sg: "Singapore (APAC Hub)",
+        geo_in: "India (Mumbai / Bangalore)",
+        grp_eu: "Europe",
+        geo_fr: "France (Paris Hub)",
+        geo_uk: "United Kingdom (London)",
+        geo_eu: "European Union (Germany, Spain...)",
+        grp_mena: "Middle East (MENA)",
+        geo_ae: "United Arab Emirates (Dubai Hub)",
+        geo_sa: "Saudi Arabia (Riyadh)",
+        grp_global: "Global",
+        geo_global: "International / Multi-Zones",
         
         lbl_expertise: "Required Expertise",
         exp_ai: "GenAI & Data Science",
@@ -101,6 +166,8 @@ const translations = {
         
         step3_title: "03. Analysis & Delivery Matrix",
         lbl_context: "Operational Context",
+        ph_context: "Briefly describe your current situation, 1-3 year strategic goals, and main challenges (e.g., competition, regulation, funding needs, digital transition...). The more precise you are, the more relevant the AI will be.",
+        lbl_file_upload: "📄 Attach a Strategic Document (Optional)",
         lbl_file_desc: "IP Guaranteed: Your file will be sealed and protected by Blockchain anchoring (Woleet).",
         legal_consent: "I accept the",
         link_privacy: "Official Privacy Policy",
@@ -108,10 +175,21 @@ const translations = {
         btn_submit: "Launch AI Analysis",
         
         footer_rights: "All Rights Reserved.",
-        link_privacy_footer: "Consult our Sovereignty & Privacy Policy (Woleet Certified)",
         modal_res_title: "Strategic Diagnostic",
         btn_new_analysis: "New Analysis",
-        msg_reset_confirm: "Do you really want to restart?"
+        msg_reset_confirm: "Do you really want to restart?",
+        
+        modal_title: "Privacy Policy & Legal Notice",
+        priv_t1: "1. Identity and Operations",
+        priv_c1: "e-META LABS SASU is a strategic intelligence unit operating from its hubs (Dakar, Paris, Dubai). Data collected is strictly limited to the scope of B2B diagnostics.",
+        priv_t2: "2. Data Sovereignty",
+        priv_c2: "Information submitted to our AI engine (Google Gemini) is processed ephemerally. No public learning models are trained using your strategic data.",
+        priv_t3: "3. Blockchain Certification",
+        priv_c3: "Any uploaded file is instantly hashed (SHA-256) and anchored on the Bitcoin blockchain via the Woleet API. This guarantees proof of existence and protects your IP.",
+        priv_t4: "4. Non-Substitution",
+        priv_c4: "Reports generated by e-META LABS AI are high-level strategic decision-support tools. They do not replace certified legal or financial consultations.",
+        btn_full_policy: "📑 Read the Full Official Document (PDF)",
+        btn_close: "Close"
     },
     es: {
         subtitle: "Excelencia Estratégica y Alta Precisión IA",
@@ -119,6 +197,7 @@ const translations = {
         lbl_counter: "Diagnósticos Asegurados y Anclados",
         step1_title: "01. Identificación",
         lbl_company: "Empresa / Entidad",
+        ph_company: "ej. Grupo Alfa, Ministerio...",
         lbl_email: "Correo Profesional",
         lbl_phone: "Número WhatsApp",
         btn_next: "Siguiente",
@@ -140,6 +219,31 @@ const translations = {
         
         lbl_geo: "Zona de Intervención",
         opt_geo_def: "Seleccione una zona de intervención...",
+        grp_africa: "África",
+        geo_sn: "Senegal (Hub Dakar)",
+        geo_ci: "Costa de Marfil (Hub Abiyán)",
+        geo_ng: "Nigeria (Hub Lagos)",
+        geo_ma: "Marruecos (Hub Casablanca)",
+        geo_za: "Sudáfrica (Johannesburgo)",
+        grp_na: "América del Norte",
+        geo_us: "Estados Unidos (EE.UU.)",
+        geo_ca: "Canadá (Toronto / Montreal)",
+        grp_latam: "América Latina",
+        geo_br: "Brasil (São Paulo)",
+        geo_latam: "América Latina (México, Colombia...)",
+        grp_apac: "Asia-Pacífico (APAC)",
+        geo_cn: "China (Shanghái / Pekín)",
+        geo_sg: "Singapur (Hub APAC)",
+        geo_in: "India (Bombay / Bangalore)",
+        grp_eu: "Europa",
+        geo_fr: "Francia (Hub París)",
+        geo_uk: "Reino Unido (Londres)",
+        geo_eu: "Unión Europea (Alemania, España...)",
+        grp_mena: "Oriente Medio (MENA)",
+        geo_ae: "Emiratos Árabes Unidos (Hub Dubái)",
+        geo_sa: "Arabia Saudita (Riad)",
+        grp_global: "Global",
+        geo_global: "Internacional / Multizonas",
         
         lbl_expertise: "Experiencia Requerida",
         exp_ai: "GenAI y Data Science",
@@ -156,6 +260,8 @@ const translations = {
         
         step3_title: "03. Matriz de Análisis y Entrega",
         lbl_context: "Contexto Operativo",
+        ph_context: "Describa brevemente su situación actual, objetivos estratégicos a 1-3 años y los principales desafíos (ej. competencia, regulación, financiamiento, transición digital...). Cuanto más preciso sea, más relevante será la IA.",
+        lbl_file_upload: "📄 Adjuntar un Documento Estratégico (Opcional)",
         lbl_file_desc: "Propiedad Intelectual garantizada: Su archivo será sellado y protegido por anclaje Blockchain (Woleet).",
         legal_consent: "Acepto la",
         link_privacy: "Política de Privacidad Oficial",
@@ -163,10 +269,21 @@ const translations = {
         btn_submit: "Lanzar Análisis IA",
         
         footer_rights: "Todos los derechos reservados.",
-        link_privacy_footer: "Consulte nuestra Política de Soberanía y Privacidad (Certificada Woleet)",
         modal_res_title: "Diagnóstico Estratégico",
         btn_new_analysis: "Nuevo Análisis",
-        msg_reset_confirm: "¿Estás seguro de que deseas reiniciar?"
+        msg_reset_confirm: "¿Estás seguro de que deseas reiniciar?",
+        
+        modal_title: "Política de Privacidad y Aviso Legal",
+        priv_t1: "1. Identidad",
+        priv_c1: "e-META LABS SASU opera a nivel global. Sus datos B2B se utilizan estrictamente para diagnósticos estratégicos.",
+        priv_t2: "2. Soberanía de Datos",
+        priv_c2: "Sus datos no entrenan modelos de IA públicos. El procesamiento es confidencial y efímero.",
+        priv_t3: "3. Certificación Blockchain",
+        priv_c3: "Cualquier archivo adjunto se protege mediante hash y se ancla en la blockchain a través de Woleet para garantizar su propiedad intelectual.",
+        priv_t4: "4. No Sustitución",
+        priv_c4: "La IA proporciona apoyo en la toma de decisiones estratégicas, no asesoramiento legal o financiero certificado.",
+        btn_full_policy: "📑 Leer el Documento Oficial Completo (PDF)",
+        btn_close: "Cerrar"
     },
     ar: {
         subtitle: "التميز الاستراتيجي والذكاء الاصطناعي عالي الدقة",
@@ -174,6 +291,7 @@ const translations = {
         lbl_counter: "تشخيصات آمنة وموثقة",
         step1_title: "01. تحديد الهوية",
         lbl_company: "الشركة / المؤسسة",
+        ph_company: "مثال: مجموعة ألفا، وزارة...",
         lbl_email: "البريد الإلكتروني المهني",
         lbl_phone: "رقم الواتساب",
         btn_next: "التالي",
@@ -195,6 +313,31 @@ const translations = {
         
         lbl_geo: "منطقة التدخل",
         opt_geo_def: "اختر منطقة التدخل...",
+        grp_africa: "أفريقيا",
+        geo_sn: "السنغال (مركز داكار)",
+        geo_ci: "ساحل العاج (مركز أبيدجان)",
+        geo_ng: "نيجيريا (مركز لاغوس)",
+        geo_ma: "المغرب (مركز الدار البيضاء)",
+        geo_za: "جنوب أفريقيا (جوهانسبرغ)",
+        grp_na: "أمريكا الشمالية",
+        geo_us: "الولايات المتحدة (USA)",
+        geo_ca: "كندا (تورونتو / مونتريال)",
+        grp_latam: "أمريكا اللاتينية",
+        geo_br: "البرازيل (ساو باولو)",
+        geo_latam: "أمريكا اللاتينية (المكسيك، كولومبيا...)",
+        grp_apac: "آسيا والمحيط الهادئ",
+        geo_cn: "الصين (شنغهاي / بكين)",
+        geo_sg: "سنغافورة (مركز APAC)",
+        geo_in: "الهند (مومباي / بنغالور)",
+        grp_eu: "أوروبا",
+        geo_fr: "فرنسا (مركز باريس)",
+        geo_uk: "المملكة المتحدة (لندن)",
+        geo_eu: "الاتحاد الأوروبي (ألمانيا، إسبانيا...)",
+        grp_mena: "الشرق الأوسط (MENA)",
+        geo_ae: "الإمارات العربية المتحدة (مركز دبي)",
+        geo_sa: "المملكة العربية السعودية (الرياض)",
+        grp_global: "عالمي",
+        geo_global: "دولي / مناطق متعددة",
         
         lbl_expertise: "الخبرة المطلوبة",
         exp_ai: "الذكاء الاصطناعي التوليدي وعلوم البيانات",
@@ -211,6 +354,8 @@ const translations = {
         
         step3_title: "03. مصفوفة التحليل والتسليم",
         lbl_context: "السياق التشغيلي",
+        ph_context: "صف باختصار وضعك الحالي، وأهدافك الاستراتيجية لمدة 1-3 سنوات، والتحديات الرئيسية (مثل المنافسة، التنظيم، احتياجات التمويل، التحول الرقمي...). كلما كنت أكثر دقة، كان الذكاء الاصطناعي أكثر صلة.",
+        lbl_file_upload: "📄 إرفاق مستند استراتيجي (اختياري)",
         lbl_file_desc: "ضمان الملكية الفكرية: سيتم ختم ملفك وحمايته بواسطة توثيق البلوكشين (Woleet).",
         legal_consent: "أوافق على",
         link_privacy: "سياسة الخصوصية الرسمية",
@@ -218,10 +363,21 @@ const translations = {
         btn_submit: "بدء تحليل الذكاء الاصطناعي",
         
         footer_rights: "جميع الحقوق محفوظة.",
-        link_privacy_footer: "استشر سياسة السيادة والخصوصية لدينا (معتمدة من Woleet)",
         modal_res_title: "التشخيص الاستراتيجي",
         btn_new_analysis: "تحليل جديد",
-        msg_reset_confirm: "هل تريد حقًا البدء من جديد؟"
+        msg_reset_confirm: "هل تريد حقًا البدء من جديد؟",
+        
+        modal_title: "سياسة الخصوصية والإشعار القانوني",
+        priv_t1: "1. الهوية والعمليات",
+        priv_c1: "تعمل e-META LABS SASU على مستوى عالمي. تستخدم بيانات عملائك بشكل صارم للتشخيص الاستراتيجي.",
+        priv_t2: "2. سيادة البيانات",
+        priv_c2: "لا تدرب بياناتك نماذج الذكاء الاصطناعي العامة. المعالجة سرية ومؤقتة.",
+        priv_t3: "3. شهادة البلوكشين",
+        priv_c3: "تتم حماية ملفاتك المرفقة باستخدام تقنية Hash وتوثيقها على البلوكشين عبر Woleet لضمان ملكيتك الفكرية.",
+        priv_t4: "4. عدم الاستبدال",
+        priv_c4: "يوفر الذكاء الاصطناعي دعمًا لاتخاذ القرار الاستراتيجي، وليس استشارة قانونية أو مالية معتمدة.",
+        btn_full_policy: "📑 اقرأ المستند الرسمي الكامل (PDF)",
+        btn_close: "إغلاق"
     }
 };
 
@@ -237,17 +393,19 @@ function setLanguage(lang) {
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (translations[lang] && translations[lang][key]) {
-            // Check if it's an input/textarea placeholder or regular text
+            // Gestion intelligente selon le type de balise
             if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
                 el.placeholder = translations[lang][key];
+            } else if (el.tagName === 'OPTGROUP') {
+                el.label = translations[lang][key]; // Pour les titres de continents
             } else {
-                el.innerHTML = translations[lang][key];
+                el.innerHTML = translations[lang][key]; // Pour le texte standard et les pays
             }
         }
     });
 }
 
-// Initialisation blindée (s'assure que le DOM est prêt)
+// Initialisation blindée
 window.addEventListener('load', () => {
     const langButtons = document.querySelectorAll('.lang-switch button');
     langButtons.forEach(btn => {
