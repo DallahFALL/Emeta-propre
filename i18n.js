@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS
- * FICHIER : i18n.js (Traduction Intégrale & Anti-Bug)
+ * FICHIER : i18n.js (Traduction Intégrale)
  */
 
 const translations = {
@@ -74,6 +74,8 @@ const translations = {
         lbl_context: "Contexte Opérationnel",
         ph_context: "Décrivez brièvement votre situation actuelle, vos objectifs stratégiques à 1-3 ans, et les principaux défis (ex: concurrence, réglementation, besoin de financement, transition digitale...). Plus vous serez précis, plus l'IA sera pertinente.",
         lbl_file_upload: "📄 Joindre un Document Stratégique (Optionnel)",
+        btn_browse: "Parcourir...",
+        lbl_no_file: "Aucun fichier sélectionné",
         lbl_file_desc: "Propriété Intellectuelle garantie : Votre fichier sera scellé et protégé par ancrage Blockchain (Woleet).",
         legal_consent: "J'accepte la",
         link_privacy: "Politique de Confidentialité Officielle",
@@ -89,7 +91,7 @@ const translations = {
         priv_t1: "1. Identité et Opérations",
         priv_c1: "e-META LABS SASU est une unité d'intelligence stratégique opérant depuis ses hubs (Dakar, Paris, Dubai). Les données collectées sont strictement limitées au périmètre du diagnostic B2B.",
         priv_t2: "2. Souveraineté des Données",
-        priv_c2: "Les informations soumises à notre moteur IA (Google Gemini Pro/Flash) sont traitées de manière éphémère. Aucun modèle d'apprentissage public n'est entraîné avec vos données stratégiques.",
+        priv_c2: "Les informations soumises à notre moteur IA (Google Gemini) sont traitées de manière éphémère. Aucun modèle d'apprentissage public n'est entraîné avec vos données stratégiques.",
         priv_t3: "3. Certification Blockchain",
         priv_c3: "Tout fichier téléversé est instantanément haché (SHA-256) et ancré sur la blockchain Bitcoin via l'API Woleet. Cela vous garantit une preuve d'antériorité et protège votre propriété intellectuelle sans que nous ne stockions le fichier d'origine à long terme.",
         priv_t4: "4. Non-Substitution",
@@ -168,6 +170,8 @@ const translations = {
         lbl_context: "Operational Context",
         ph_context: "Briefly describe your current situation, 1-3 year strategic goals, and main challenges (e.g., competition, regulation, funding needs, digital transition...). The more precise you are, the more relevant the AI will be.",
         lbl_file_upload: "📄 Attach a Strategic Document (Optional)",
+        btn_browse: "Browse...",
+        lbl_no_file: "No file selected",
         lbl_file_desc: "IP Guaranteed: Your file will be sealed and protected by Blockchain anchoring (Woleet).",
         legal_consent: "I accept the",
         link_privacy: "Official Privacy Policy",
@@ -262,6 +266,8 @@ const translations = {
         lbl_context: "Contexto Operativo",
         ph_context: "Describa brevemente su situación actual, objetivos estratégicos a 1-3 años y los principales desafíos (ej. competencia, regulación, financiamiento, transición digital...). Cuanto más preciso sea, más relevante será la IA.",
         lbl_file_upload: "📄 Adjuntar un Documento Estratégico (Opcional)",
+        btn_browse: "Explorar...",
+        lbl_no_file: "Ningún archivo seleccionado",
         lbl_file_desc: "Propiedad Intelectual garantizada: Su archivo será sellado y protegido por anclaje Blockchain (Woleet).",
         legal_consent: "Acepto la",
         link_privacy: "Política de Privacidad Oficial",
@@ -356,6 +362,8 @@ const translations = {
         lbl_context: "السياق التشغيلي",
         ph_context: "صف باختصار وضعك الحالي، وأهدافك الاستراتيجية لمدة 1-3 سنوات، والتحديات الرئيسية (مثل المنافسة، التنظيم، احتياجات التمويل، التحول الرقمي...). كلما كنت أكثر دقة، كان الذكاء الاصطناعي أكثر صلة.",
         lbl_file_upload: "📄 إرفاق مستند استراتيجي (اختياري)",
+        btn_browse: "تصفح...",
+        lbl_no_file: "لم يتم تحديد أي ملف",
         lbl_file_desc: "ضمان الملكية الفكرية: سيتم ختم ملفك وحمايته بواسطة توثيق البلوكشين (Woleet).",
         legal_consent: "أوافق على",
         link_privacy: "سياسة الخصوصية الرسمية",
@@ -393,19 +401,17 @@ function setLanguage(lang) {
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (translations[lang] && translations[lang][key]) {
-            // Gestion intelligente selon le type de balise
             if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
                 el.placeholder = translations[lang][key];
             } else if (el.tagName === 'OPTGROUP') {
-                el.label = translations[lang][key]; // Pour les titres de continents
+                el.label = translations[lang][key];
             } else {
-                el.innerHTML = translations[lang][key]; // Pour le texte standard et les pays
+                el.innerHTML = translations[lang][key];
             }
         }
     });
 }
 
-// Initialisation blindée
 window.addEventListener('load', () => {
     const langButtons = document.querySelectorAll('.lang-switch button');
     langButtons.forEach(btn => {
@@ -414,7 +420,5 @@ window.addEventListener('load', () => {
             setLanguage(selectedLang);
         });
     });
-
-    // Forcer le français par défaut au démarrage
     setLanguage('fr');
 });
