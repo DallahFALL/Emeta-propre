@@ -25,7 +25,9 @@ function setCustomMessage(input) {
             checkbox: "Veuillez cocher cette case pour continuer.",
             whatsapp: "Veuillez accepter la réception par WhatsApp."
         },
-        en: { required: "Please fill out this required field.", email: "Please enter a valid email address.", checkbox: "Please check this box to proceed.", whatsapp: "Please accept receiving via WhatsApp." }
+        en: { required: "Please fill out this required field.", email: "Please enter a valid email address.", checkbox: "Please check this box to proceed.", whatsapp: "Please accept receiving via WhatsApp." },
+        es: { required: "Por favor complete este campo obligatorio.", email: "Introduzca una dirección válida.", checkbox: "Marque esta casilla para continuar.", whatsapp: "Por favor acepte recibir por WhatsApp." },
+        ar: { required: "يرجى ملء هذا الحقل المطلوب.", email: "الرجاء إدخال عنوان بريد إلكتروني صالح.", checkbox: "يرجى تحديد هذا المربع للمتابعة.", whatsapp: "يرجى الموافقة على الاستلام عبر WhatsApp." }
     };
 
     input.setCustomValidity('');
@@ -84,7 +86,10 @@ function validateStep2() {
 }
 
 function resetForm() {
-    if(confirm("Voulez-vous vraiment recommencer ?")) {
+    const lang = document.documentElement.lang || 'fr';
+    const msg = (lang === 'fr') ? "Voulez-vous vraiment recommencer ?" : "Do you really want to restart?";
+    
+    if(confirm(msg)) {
         document.getElementById('diagnosticForm').reset();
         document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
         document.getElementById('step-1').classList.add('active');
@@ -199,7 +204,7 @@ if (form) {
         })
         .catch(error => {
             console.error('Erreur:', error);
-            alert("Erreur de connexion. Veuillez réessayer.");
+            alert("Erreur de connexion avec le serveur IA. Veuillez réessayer.");
             submitBtn.innerText = originalText;
             submitBtn.disabled = false;
             submitBtn.style.opacity = "1";
