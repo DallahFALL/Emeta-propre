@@ -33,6 +33,11 @@
         </div>
     </header>
 
+    <div class="counter-container" style="text-align: center; padding: 15px 0; background: rgba(10, 25, 47, 0.8); border-bottom: 1px solid rgba(212, 175, 55, 0.2);">
+        <span style="font-family: 'Cinzel', serif; color: #d4af37; font-size: 1.5rem; font-weight: bold;" id="live-counter">1,420</span>
+        <span style="color: #8892b0; font-size: 0.9rem; margin-left: 10px; text-transform: uppercase; letter-spacing: 1px;" data-i18n="lbl_counter">Diagnostics Sécurisés & Ancrés</span>
+    </div>
+
     <main class="main-container">
         <div class="glass-card">
             <h2 id="form-title">Master Diagnostic 2026</h2>
@@ -64,20 +69,23 @@
                     <label class="section-label" data-i18n="lbl_sector">Secteur Stratégique</label>
                     <div class="grid-options">
                         <label class="checkbox-btn"><input type="radio" name="sector" value="FinTech_DeFi"> <span data-i18n="sec_fintech">FinTech & DeFi</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="AgriTech_FoodSec"> <span data-i18n="sec_agri">AgriTech & Food Security</span></label>
-                        <label class="checkbox-btn"><input type="radio" name="sector" value="GreenTech_Energy"> <span data-i18n="sec_green">GreenTech & Énergies</span></label>
                         <label class="checkbox-btn"><input type="radio" name="sector" value="GovTech_SmartCities"> <span data-i18n="sec_gov">GovTech & Smart Cities</span></label>
                         <label class="checkbox-btn"><input type="radio" name="sector" value="Health_BioTech"> <span data-i18n="sec_health">Santé & BioTech</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="GreenTech_Energy"> <span data-i18n="sec_green">GreenTech & Énergies</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="AgriTech_FoodSec"> <span data-i18n="sec_agri">AgriTech & Food Security</span></label>
                         <label class="checkbox-btn"><input type="radio" name="sector" value="Logistics_SupplyChain"> <span data-i18n="sec_log">Logistique & Supply Chain</span></label>
                         <label class="checkbox-btn"><input type="radio" name="sector" value="Mining_OilGas"> <span data-i18n="sec_mine">Mines, Pétrole & Gaz</span></label>
                         <label class="checkbox-btn"><input type="radio" name="sector" value="RealEstate_PropTech"> <span data-i18n="sec_btp">Immobilier & PropTech</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Ecommerce_Retail"> <span data-i18n="sec_retail">E-commerce & Retail</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Education_EdTech"> <span data-i18n="sec_edu">Éducation & EdTech</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Tourism_Hospitality"> <span data-i18n="sec_tour">Tourisme & Hôtellerie</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Creative_Media"> <span data-i18n="sec_media">Industries Créatives & Médias</span></label>
                     </div>
 
                     <label class="section-label mt-2" data-i18n="lbl_geo">Zone d'Intervention</label>
                     <div class="input-group">
                         <select id="geo-zone" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                             <option value="" disabled selected data-i18n="opt_geo_def">Sélectionner une zone d'intervention...</option>
-                            
                             <optgroup label="Afrique">
                                 <option value="Senegal">Sénégal (Dakar Hub)</option>
                                 <option value="CotedIvoire">Côte d'Ivoire (Abidjan Hub)</option>
@@ -85,34 +93,28 @@
                                 <option value="Maroc">Maroc (Casablanca Hub)</option>
                                 <option value="SouthAfrica">Afrique du Sud (Johannesburg)</option>
                             </optgroup>
-                            
                             <optgroup label="Amérique du Nord">
                                 <option value="USA">États-Unis (USA)</option>
                                 <option value="Canada">Canada (Toronto / Montréal)</option>
                             </optgroup>
-                            
                             <optgroup label="Amérique Latine & Caraïbes">
                                 <option value="LatAm_Brazil">Brésil (São Paulo)</option>
                                 <option value="LatAm_General">Amérique Latine (Mexique, Colombie...)</option>
                             </optgroup>
-                            
                             <optgroup label="Asie-Pacifique (APAC)">
                                 <option value="China">Chine (Shanghai / Beijing)</option>
                                 <option value="Singapore">Singapour (Hub APAC)</option>
                                 <option value="India">Inde (Mumbai / Bangalore)</option>
                             </optgroup>
-                            
                             <optgroup label="Europe">
                                 <option value="France">France (Paris Hub)</option>
                                 <option value="UK">Royaume-Uni (Londres)</option>
                                 <option value="EU_General">Union Européenne (Allemagne, Espagne...)</option>
                             </optgroup>
-                            
                             <optgroup label="Moyen-Orient (MENA)">
                                 <option value="UAE">Émirats Arabes Unis (Dubai Hub)</option>
                                 <option value="SaudiArabia">Arabie Saoudite (Riyadh)</option>
                             </optgroup>
-                            
                             <optgroup label="Global">
                                 <option value="Global">International / Multi-Zones</option>
                             </optgroup>
@@ -124,11 +126,11 @@
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="GenAI_DataScience"> <span data-i18n="exp_ai">GenAI & Data Science</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Cyber_Resilience"> <span data-i18n="exp_cyber">Cybersécurité & Résilience</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="ESG_Climate"> <span data-i18n="exp_esg">Ingénierie ESG & Climat</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="MA_Finance"> <span data-i18n="exp_ma">M&A & Levée de Fonds</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Web3_Blockchain"> <span data-i18n="exp_web3">Web3 & Blockchain (Woleet)</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Digital_Sovereignty"> <span data-i18n="exp_sov">Souveraineté Numérique</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="OHADA_Compliance"> <span data-i18n="exp_ohada">Conformité (OHADA / Int.)</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="PublicAffairs"> <span data-i18n="exp_pubaff">Affaires Publiques</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Digital_Marketing"> <span data-i18n="exp_mkt">Marketing Digital & SEO</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Process_Optimization"> <span data-i18n="exp_proc">Optimisation des Processus</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="HR_Talent"> <span data-i18n="exp_hr">Gestion des Talents (RH)</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Design_Thinking"> <span data-i18n="exp_design">Design Thinking & UX</span></label>
                     </div>
 
                     <div class="btn-container split">
@@ -150,21 +152,21 @@
                         <input type="file" id="clientFile" accept=".pdf,.doc,.docx,.txt" style="margin-top: 10px; font-size: 0.85rem; color: #e6f1ff;">
                         <div style="font-size: 0.75rem; color: #8892b0; margin-top: 5px; display: flex; align-items: center; gap: 5px;">
                             <span style="color:#25D366;">🛡️</span> 
-                            <em>Propriété Intellectuelle garantie : Votre fichier sera scellé et protégé par ancrage Blockchain (Woleet).</em>
+                            <em data-i18n="lbl_file_desc">Propriété Intellectuelle garantie : Votre fichier sera scellé et protégé par ancrage Blockchain (Woleet).</em>
                         </div>
                     </div>
 
-                    <div class="legal-check">
+                    <div class="legal-check" style="margin-bottom: 10px;">
                         <input type="checkbox" id="consent" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
                         <label for="consent">
                             <span data-i18n="legal_consent">J'accepte la</span> 
-                            <a href="#" id="openPrivacy" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité</a>.
+                            <a href="https://share.google/t8hO4SZmR5Fxs92Oi" target="_blank" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité Officielle</a>.
                         </label>
                     </div>
 
                     <div class="opt-in-container" style="margin-bottom: 20px; font-size: 0.9em; color: var(--white); background: rgba(255,255,255,0.05); padding: 10px; border-radius: 4px; border: 1px solid rgba(212, 175, 55, 0.2);">
                         <input type="checkbox" id="whatsapp-consent" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
-                        <label for="whatsapp-consent" style="display:inline; margin-left: 5px;">
+                        <label for="whatsapp-consent" style="display:inline; margin-left: 5px;" data-i18n="lbl_wa_optin">
                             J'accepte de recevoir mon analyse stratégique par <strong style="color:#25D366;">WhatsApp</strong>.
                         </label>
                     </div>
@@ -179,42 +181,20 @@
     </main>
 
     <footer class="footer">
-        <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">All Rights Reserved.</span></p>
+        <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
         <p class="tiny">Strategic Intelligence Unit • Dakar - Paris - Dubai - Shanghai - New York</p>
+        <p style="margin-top:10px;"><a href="https://share.google/t8hO4SZmR5Fxs92Oi" target="_blank" style="color:#d4af37; text-decoration:none; font-size:0.8rem; border-bottom: 1px solid #d4af37;" data-i18n="link_privacy_footer">Consulter notre Politique de Souveraineté & Confidentialité (Certifiée Woleet)</a></p>
     </footer>
-
-    <div id="privacyOverlay" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 data-i18n="modal_title" style="margin-bottom: 20px; border-bottom: 1px solid #d4af37; padding-bottom: 10px;">Politique de Confidentialité</h2>
-            
-            <div class="modal-body" style="max-height: 60vh; overflow-y: auto; text-align: left; padding-right:10px;">
-                <h4 data-i18n="priv_t1" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">1. Identité</h4>
-                <p data-i18n="priv_c1" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">Chargement...</p>
-
-                <h4 data-i18n="priv_t2" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">2. Souveraineté</h4>
-                <p data-i18n="priv_c2" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">Chargement...</p>
-
-                <h4 data-i18n="priv_t3" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">3. Certification</h4>
-                <p data-i18n="priv_c3" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">Chargement...</p>
-
-                <h4 data-i18n="priv_t4" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">4. Non-Substitution</h4>
-                <p data-i18n="priv_c4" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">Chargement...</p>
-            </div>
-            
-            <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close" style="margin-top:20px;">Fermer</button>
-        </div>
-    </div>
 
     <div id="resultModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-result" style="position: absolute; top: 10px; right: 20px; font-size: 2rem; cursor: pointer; color: #8892b0;">&times;</span>
-            <h2 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px;">Diagnostic Stratégique</h2>
+            <h2 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px;" data-i18n="modal_res_title">Diagnostic Stratégique</h2>
             <div id="resultBody" class="modal-body" style="max-height: 60vh; overflow-y: auto; color: #e6f1ff; font-size: 0.95rem; line-height: 1.6;">
                 <p>Initialisation...</p>
             </div>
             <div class="btn-container">
-                <button class="btn-gold full-width" onclick="location.reload()">Nouvelle Analyse</button>
+                <button class="btn-gold full-width" onclick="location.reload()" data-i18n="btn_new_analysis">Nouvelle Analyse</button>
             </div>
         </div>
     </div>
