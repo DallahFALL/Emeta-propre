@@ -76,14 +76,46 @@
                     <label class="section-label mt-2" data-i18n="lbl_geo">Zone d'Intervention</label>
                     <div class="input-group">
                         <select id="geo-zone" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
-                            <option value="" disabled selected data-i18n="opt_geo_def">Sélectionner une zone...</option>
-                            <option value="Senegal">Sénégal (Dakar Hub)</option>
-                            <option value="CotedIvoire">Côte d'Ivoire (Abidjan Hub)</option>
-                            <option value="Nigeria">Nigeria (Lagos)</option>
-                            <option value="Maroc">Maroc (Casablanca)</option>
-                            <option value="UAE">UAE (Dubai - Middle East)</option>
-                            <option value="France">France (Europe)</option>
-                            <option value="Global">International / Global</option>
+                            <option value="" disabled selected data-i18n="opt_geo_def">Sélectionner une zone d'intervention...</option>
+                            
+                            <optgroup label="Afrique">
+                                <option value="Senegal">Sénégal (Dakar Hub)</option>
+                                <option value="CotedIvoire">Côte d'Ivoire (Abidjan Hub)</option>
+                                <option value="Nigeria">Nigeria (Lagos Hub)</option>
+                                <option value="Maroc">Maroc (Casablanca Hub)</option>
+                                <option value="SouthAfrica">Afrique du Sud (Johannesburg)</option>
+                            </optgroup>
+                            
+                            <optgroup label="Amérique du Nord">
+                                <option value="USA">États-Unis (USA)</option>
+                                <option value="Canada">Canada (Toronto / Montréal)</option>
+                            </optgroup>
+                            
+                            <optgroup label="Amérique Latine & Caraïbes">
+                                <option value="LatAm_Brazil">Brésil (São Paulo)</option>
+                                <option value="LatAm_General">Amérique Latine (Mexique, Colombie...)</option>
+                            </optgroup>
+                            
+                            <optgroup label="Asie-Pacifique (APAC)">
+                                <option value="China">Chine (Shanghai / Beijing)</option>
+                                <option value="Singapore">Singapour (Hub APAC)</option>
+                                <option value="India">Inde (Mumbai / Bangalore)</option>
+                            </optgroup>
+                            
+                            <optgroup label="Europe">
+                                <option value="France">France (Paris Hub)</option>
+                                <option value="UK">Royaume-Uni (Londres)</option>
+                                <option value="EU_General">Union Européenne (Allemagne, Espagne...)</option>
+                            </optgroup>
+                            
+                            <optgroup label="Moyen-Orient (MENA)">
+                                <option value="UAE">Émirats Arabes Unis (Dubai Hub)</option>
+                                <option value="SaudiArabia">Arabie Saoudite (Riyadh)</option>
+                            </optgroup>
+                            
+                            <optgroup label="Global">
+                                <option value="Global">International / Multi-Zones</option>
+                            </optgroup>
                         </select>
                     </div>
 
@@ -95,7 +127,7 @@
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="MA_Finance"> <span data-i18n="exp_ma">M&A & Levée de Fonds</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Web3_Blockchain"> <span data-i18n="exp_web3">Web3 & Blockchain (Woleet)</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Digital_Sovereignty"> <span data-i18n="exp_sov">Souveraineté Numérique</span></label>
-                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="OHADA_Compliance"> <span data-i18n="exp_ohada">Conformité OHADA</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="OHADA_Compliance"> <span data-i18n="exp_ohada">Conformité (OHADA / Int.)</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="PublicAffairs"> <span data-i18n="exp_pubaff">Affaires Publiques</span></label>
                     </div>
 
@@ -148,10 +180,32 @@
 
     <footer class="footer">
         <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">All Rights Reserved.</span></p>
-        <p class="tiny">Strategic Intelligence Unit • Dakar - Paris - Dubai</p>
+        <p class="tiny">Strategic Intelligence Unit • Dakar - Paris - Dubai - Shanghai - New York</p>
     </footer>
 
-    <div id="privacyOverlay" class="modal-overlay">...</div>
+    <div id="privacyOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 data-i18n="modal_title" style="margin-bottom: 20px; border-bottom: 1px solid #d4af37; padding-bottom: 10px;">Politique de Confidentialité</h2>
+            
+            <div class="modal-body" style="max-height: 60vh; overflow-y: auto; text-align: left; padding-right:10px;">
+                <h4 data-i18n="priv_t1" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">1. Identité</h4>
+                <p data-i18n="priv_c1" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">Chargement...</p>
+
+                <h4 data-i18n="priv_t2" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">2. Souveraineté</h4>
+                <p data-i18n="priv_c2" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">Chargement...</p>
+
+                <h4 data-i18n="priv_t3" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">3. Certification</h4>
+                <p data-i18n="priv_c3" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">Chargement...</p>
+
+                <h4 data-i18n="priv_t4" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">4. Non-Substitution</h4>
+                <p data-i18n="priv_c4" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">Chargement...</p>
+            </div>
+            
+            <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close" style="margin-top:20px;">Fermer</button>
+        </div>
+    </div>
+
     <div id="resultModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-result" style="position: absolute; top: 10px; right: 20px; font-size: 2rem; cursor: pointer; color: #8892b0;">&times;</span>
