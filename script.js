@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS
- * FICHIER : script.js
+ * FICHIER : script.js (Engine Make & Validations)
  */
 
 const WEBHOOK_URL = "https://hook.eu2.make.com/moupzawutk6h7ab6f5ap2li1qaypzh2f"; 
@@ -31,10 +31,10 @@ function getBase64(file) {
 function setCustomMessage(input) {
     const lang = document.documentElement.lang || 'fr';
     const messages = {
-        fr: { required: "Veuillez remplir ce champ obligatoire.", email: "Veuillez entrer une adresse email valide.", checkbox: "Veuillez cocher cette case pour continuer.", whatsapp: "Veuillez accepter la réception par WhatsApp." },
-        en: { required: "Please fill out this required field.", email: "Please enter a valid email address.", checkbox: "Please check this box to proceed.", whatsapp: "Please accept receiving via WhatsApp." },
-        es: { required: "Por favor complete este campo obligatorio.", email: "Introduzca una dirección válida.", checkbox: "Marque esta casilla para continuar.", whatsapp: "Por favor acepte recibir por WhatsApp." },
-        ar: { required: "يرجى ملء هذا الحقل المطلوب.", email: "الرجاء إدخال عنوان بريد إلكتروني صالح.", checkbox: "يرجى تحديد هذا المربع للمتابعة.", whatsapp: "يرجى الموافقة على الاستلام عبر WhatsApp." }
+        fr: { required: "Veuillez remplir ce champ.", email: "Email invalide.", checkbox: "Veuillez cocher.", whatsapp: "Validation WhatsApp requise." },
+        en: { required: "Please fill this out.", email: "Invalid email.", checkbox: "Please check this.", whatsapp: "WhatsApp consent required." },
+        es: { required: "Por favor complete este campo.", email: "Email inválido.", checkbox: "Por favor marque esta casilla.", whatsapp: "Consentimiento WhatsApp requerido." },
+        ar: { required: "يرجى ملء هذا الحقل.", email: "بريد غير صالح.", checkbox: "يرجى تحديد هذا المربع.", whatsapp: "موافقة الواتساب مطلوبة." }
     };
 
     input.setCustomValidity('');
@@ -101,7 +101,6 @@ function resetForm() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Gestion du nom de fichier
     const fileInput = document.getElementById('clientFile');
     const fileNameDisplay = document.getElementById('fileNameDisplay');
     if (fileInput && fileNameDisplay) {
@@ -118,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Gestion de la Politique de Confidentialité (Modal)
     const privacyModal = document.getElementById('privacyOverlay');
     const openPrivacyBtn = document.getElementById('openPrivacy');
     if (openPrivacyBtn && privacyModal) {
