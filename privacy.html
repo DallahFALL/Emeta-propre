@@ -3,112 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politique de Confidentialité | E-META LABS</title>
+    <title>Politique de Confidentialité | e-META LABS</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L95 25 V75 L50 95 L5 75 V25 Z' stroke='%23d4af37' stroke-width='4' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
-    
     <style>
         .privacy-container {
-            max-width: 900px !important; 
-            text-align: left;
-            margin-top: 20px;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 50px;
+            background: rgba(10, 25, 47, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
         }
-        .privacy-content h2 {
+        .privacy-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(10, 25, 47, 0.95);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .privacy-content h4 {
             color: #d4af37;
             font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            padding-bottom: 10px;
-        }
-        .privacy-content p, .privacy-content li {
-            color: #e6f1ff;
-            opacity: 0.9;
-            font-size: 0.95rem;
-            line-height: 1.8;
+            margin-top: 35px;
             margin-bottom: 15px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 8px;
+            font-size: 1.2rem;
         }
-        .privacy-content ul {
-            padding-left: 20px;
-            margin-bottom: 20px;
+        .privacy-content p {
+            color: #e6f1ff;
+            line-height: 1.8;
+            font-size: 1rem;
+            opacity: 0.9;
         }
-        .privacy-content li {
-            list-style-type: square;
-            color: #a0aec0;
-        }
-        .privacy-content strong {
+        /* Style spécial pour le bouton de retour */
+        .btn-return {
+            background: transparent;
             color: #d4af37;
+            border: 1px solid #d4af37;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .btn-return:hover {
+            background: rgba(212, 175, 55, 0.1);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
     </style>
 </head>
 <body>
 
-    <header class="header">
+    <header class="privacy-header">
         <div class="logo-container">
-            <svg width="50" height="50" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path d="M50 5 L95 25 V75 L50 95 L5 75 V25 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
-                <path d="M50 20 L80 35 V65 L50 80 L20 65 V35 Z" stroke="#d4af37" stroke-width="1" fill="rgba(212, 175, 55, 0.1)"/>
                 <circle cx="50" cy="50" r="8" fill="#d4af37"/>
             </svg>
             <div class="brand-text">
-                <h1>E-META LABS</h1>
+                <h1 style="font-size: 1.2rem;">e-META LABS</h1>
             </div>
         </div>
-        <div class="header-actions">
-            <a href="index.html" class="btn-outline" style="text-decoration: none; padding: 8px 15px;">Retour au Diagnostic</a>
-        </div>
+        <a href="index.html" id="backBtn" class="btn-return" data-i18n="btn_return">Retour au Moteur IA</a>
     </header>
 
-    <main class="main-container">
-        <div class="glass-card privacy-container">
-            <h1 style="text-align: center; color: #d4af37; margin-bottom: 10px; font-family: 'Cinzel', serif;">Politique de Confidentialité</h1>
-            <p style="text-align: center; color: #8892b0; font-size: 0.85rem; margin-bottom: 40px;">Dernière mise à jour : Février 2026</p>
+    <main>
+        <div class="privacy-container">
+            <h2 style="text-align: center; color: #d4af37; font-family: 'Cinzel', serif; margin-bottom: 5px; font-size: 2rem;" data-i18n="modal_title">Politique de Confidentialité</h2>
+            <p style="text-align: center; color: #8892b0; font-size: 0.9rem; margin-bottom: 50px;" data-i18n="priv_date">Dernière mise à jour : Février 2026</p>
 
             <div class="privacy-content">
-                <h2>1. Identité de la Structure</h2>
-                <p><strong>E-META LABS (SASU)</strong>, entité basée au Sénégal, conçoit des solutions d'intelligence artificielle de haute précision dédiées à l'aide à la décision stratégique pour les acteurs internationaux.</p>
+                <h4 data-i18n="priv_t1">1. Identité et Opérations</h4>
+                <p data-i18n="priv_c1">...</p>
 
-                <h2>2. Philosophie de Souveraineté Numérique</h2>
-                <p>Conformément à nos engagements d'excellence, nous garantissons la souveraineté totale de vos données. Vos problématiques et diagnostics ne sont <strong>jamais revendus</strong>, ni utilisés pour l'entraînement de modèles d'IA publics tiers. Le traitement est isolé et éphémère.</p>
+                <h4 data-i18n="priv_t2">2. Souveraineté des Données</h4>
+                <p data-i18n="priv_c2">...</p>
 
-                <h2>3. Données Collectées</h2>
-                <p>Pour le bon fonctionnement du moteur IA e-META, nous traitons uniquement les données saisies volontairement via notre interface :</p>
-                <ul>
-                    <li><strong>Identification :</strong> Nom de la société / entité et adresse email professionnelle.</li>
-                    <li><strong>Matrice Stratégique :</strong> Secteur d'activité, zone géographique (Hubs) et expertises requises.</li>
-                    <li><strong>Contenu Opérationnel :</strong> Contexte, enjeux et objectifs décrits dans le formulaire.</li>
-                    <li><strong>Métadonnées Techniques :</strong> Langue du navigateur et fuseau horaire.</li>
-                </ul>
+                <h4 data-i18n="priv_t3">3. Certification Blockchain</h4>
+                <p data-i18n="priv_c3">...</p>
 
-                <h2>4. Communications via WhatsApp (Politique Meta)</h2>
-                <p>En cochant l'option d'Opt-in WhatsApp lors du diagnostic, l'utilisateur accepte explicitement de recevoir son rapport d'analyse sécurisé via l'API officielle WhatsApp Business. <strong>E-META LABS s'engage à ne pratiquer aucun démarchage abusif (spam).</strong> L'utilisateur peut révoquer ce consentement à tout moment en répondant simplement "STOP" dans la conversation.</p>
-
-                <h2>5. Certification Blockchain & Intégrité</h2>
-                <p>Chaque diagnostic généré par le moteur peut faire l'objet d'un ancrage cryptographique (hash) sur la Blockchain. Cette procédure garantit l'immuabilité, l'intégrité et l'antériorité de vos réflexions stratégiques sans compromettre la confidentialité du contenu textuel.</p>
-
-                <h2>6. Non-Substitution de Conseil</h2>
-                <p>Les analyses produites constituent une aide technologique avancée à la décision. Elles ne se substituent en aucun cas aux services de professions réglementées (conseil juridique, fiscal ou financier). E-META LABS décline toute responsabilité quant aux décisions opérationnelles prises exclusivement sur la base de ses diagnostics automatisés.</p>
-
-                <h2>7. Vos Droits et Contact Support</h2>
-                <p>Conformément aux réglementations internationales (RGPD, lois locales sur la protection des données), vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour toute demande, notre unité de support est à votre disposition :</p>
-                <p style="text-align: center; margin-top: 20px;">
-                    <a href="mailto:support@e-metalabs.com" style="color: #d4af37; font-size: 1.1rem; font-weight: bold; text-decoration: none;">support@e-metalabs.com</a>
-                </p>
-            </div>
-
-            <div class="btn-container" style="justify-content: center; margin-top: 50px;">
-                <a href="index.html" style="text-decoration: none; width: 100%; max-width: 300px;">
-                    <button class="btn-gold full-width">Retourner au Moteur IA</button>
-                </a>
+                <h4 data-i18n="priv_t4">4. Non-Substitution</h4>
+                <p data-i18n="priv_c4">...</p>
+                
+                <h4 data-i18n="priv_t5">5. Contact & Droits RGPD</h4>
+                <p data-i18n="priv_c5">Pour toute demande relative à vos données (accès, suppression, portabilité), veuillez contacter notre pôle conformité : contact@e-metalabs.com.</p>
             </div>
         </div>
     </main>
 
-    <footer class="footer" style="margin-top: 40px; text-align: center; padding-bottom: 20px;">
-        <p style="color: #a0aec0; font-size: 0.8rem;">&copy; 2026 E-META LABS SASU. Tous droits réservés.</p>
-        <p class="tiny" style="color: #718096; font-size: 0.75rem; margin-top: 5px;">Strategic Intelligence Unit • Dakar - Paris - Dubai</p>
+    <footer class="footer" style="margin-top: 50px;">
+        <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
     </footer>
+
+    <script src="i18n.js"></script>
+    
 </body>
 </html>
