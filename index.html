@@ -66,7 +66,11 @@
                 <div class="form-step" id="step-2">
                     <h3 data-i18n="step2_title">02. Matrice Stratégique</h3>
                     
-                    <label class="section-label" data-i18n="lbl_sector">Secteur Stratégique</label>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                        <label class="section-label" data-i18n="lbl_sector">Secteur Stratégique</label>
+                        <a href="#" id="openGuide" class="gold-link" style="font-size: 0.8rem; text-decoration: none;" data-i18n="btn_guide">📖 Guide des Expertises</a>
+                    </div>
+                    
                     <div class="grid-options">
                         <label class="checkbox-btn"><input type="radio" name="sector" value="FinTech_DeFi"> <span data-i18n="sec_fintech">FinTech & DeFi</span></label>
                         <label class="checkbox-btn"><input type="radio" name="sector" value="GovTech_SmartCities"> <span data-i18n="sec_gov">GovTech & Smart Cities</span></label>
@@ -197,19 +201,35 @@
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <h2 data-i18n="modal_title" style="margin-bottom: 20px; border-bottom: 1px solid #d4af37; padding-bottom: 10px;">Politique de Confidentialité</h2>
-            
             <div class="modal-body" style="max-height: 50vh; overflow-y: auto; text-align: left; padding-right:10px;">
                 <h4 data-i18n="priv_t1" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">1. Identité et Opérations</h4>
-                <p data-i18n="priv_c1" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">...</p>
+                <p data-i18n="priv_c1">...</p>
                 <h4 data-i18n="priv_t2" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">2. Souveraineté des Données</h4>
-                <p data-i18n="priv_c2" style="font-size:0.9rem; opacity:0.9; line-height:1.5;">...</p>
-                
+                <p data-i18n="priv_c2">...</p>
                 <div style="text-align: center; margin-top: 25px;">
                     <a href="privacy.html" id="policy_link" class="gold-link" style="display: inline-block; padding: 10px 15px; border: 1px solid #d4af37; border-radius: 4px; text-decoration: none;" data-i18n="btn_full_policy">📑 Consulter la Charte Complète</a>
                 </div>
             </div>
-            
             <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close" style="margin-top:20px;">Fermer</button>
+        </div>
+    </div>
+
+    <div id="guideOverlay" class="modal-overlay">
+        <div class="modal-content" style="max-width: 600px;">
+            <span class="close-guide" style="position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #8892b0;">&times;</span>
+            <h2 data-i18n="guide_title" style="margin-bottom: 20px; border-bottom: 1px solid #d4af37; padding-bottom: 10px; color: #d4af37;">Lexique Stratégique</h2>
+            
+            <div class="modal-body" style="max-height: 60vh; overflow-y: auto; text-align: left; padding-right:15px; color: #e6f1ff; font-size: 0.9rem; line-height: 1.6;">
+                <h4 data-i18n="guide_sec_title" style="color:#d4af37; font-family:'Cinzel', serif; margin-bottom: 10px;">Secteurs Stratégiques</h4>
+                <div data-i18n="guide_sec_desc" style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                    </div>
+
+                <h4 data-i18n="guide_exp_title" style="color:#d4af37; font-family:'Cinzel', serif; margin-bottom: 10px;">Expertises Requises</h4>
+                <div data-i18n="guide_exp_desc" style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 5px;">
+                    </div>
+            </div>
+            
+            <button class="btn-gold full-width close-guide-btn" data-i18n="btn_close" style="margin-top:20px;">Fermer</button>
         </div>
     </div>
 
