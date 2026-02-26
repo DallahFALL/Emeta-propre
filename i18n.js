@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS
- * FICHIER : i18n.js (Traduction Intégrale + Synchronisation URL)
+ * FICHIER : i18n.js (Traduction Intégrale + Guide Lexique)
  */
 
 const translations = {
@@ -15,6 +15,7 @@ const translations = {
         btn_next: "Suivant",
         
         step2_title: "02. Matrice Stratégique",
+        btn_guide: "📖 Guide des Expertises",
         lbl_sector: "Secteur Stratégique",
         sec_fintech: "FinTech & DeFi",
         sec_agri: "AgriTech & Food Security",
@@ -30,7 +31,7 @@ const translations = {
         sec_media: "Industries Créatives & Médias",
         
         lbl_geo: "Zone d'Intervention",
-        opt_geo_def: "Sélectionner une zone d'intervention...",
+        opt_geo_def: "Sélectionner une zone...",
         grp_africa: "Afrique",
         geo_sn: "Sénégal (Dakar Hub)",
         geo_ci: "Côte d'Ivoire (Abidjan Hub)",
@@ -68,18 +69,18 @@ const translations = {
         exp_design: "Design Thinking & UX",
         
         btn_prev: "Retour",
-        btn_next_matrice: "Ouvrir Matrice Analyse",
+        btn_next_matrice: "Ouvrir Matrice",
         
-        step3_title: "03. Matrice Analyse & Restitution",
+        step3_title: "03. Matrice Analyse",
         lbl_context: "Contexte Opérationnel",
-        ph_context: "Décrivez brièvement votre situation actuelle, vos objectifs stratégiques à 1-3 ans, et les principaux défis...",
-        lbl_file_upload: "📄 Joindre un Document Stratégique (Optionnel)",
+        ph_context: "Décrivez vos objectifs stratégiques à 1-3 ans, et les principaux défis...",
+        lbl_file_upload: "📄 Joindre un Document (Optionnel)",
         btn_browse: "Parcourir...",
-        lbl_no_file: "Aucun fichier sélectionné",
-        lbl_file_desc: "Propriété Intellectuelle garantie : Votre fichier sera scellé et protégé par ancrage Blockchain (Woleet).",
+        lbl_no_file: "Aucun fichier",
+        lbl_file_desc: "Propriété Intellectuelle garantie : Votre fichier sera scellé (Woleet).",
         legal_consent: "J'accepte la",
         link_privacy: "Politique de Confidentialité Officielle",
-        lbl_wa_optin: "J'accepte de recevoir mon analyse stratégique par WhatsApp.",
+        lbl_wa_optin: "J'accepte de recevoir mon analyse par WhatsApp.",
         btn_submit: "Lancer l'Analyse IA",
         
         footer_rights: "Tous droits réservés.",
@@ -87,25 +88,22 @@ const translations = {
         btn_new_analysis: "Nouvelle Analyse",
         msg_reset_confirm: "Voulez-vous vraiment recommencer ?",
         
-        // --- PAGE PRIVACY ---
-        modal_title: "Politique de Confidentialité & Mentions Légales",
-        priv_date: "Dernière mise à jour : Février 2026",
+        modal_title: "Mentions Légales",
         priv_t1: "1. Identité et Opérations",
-        priv_c1: "e-META LABS SASU est une unité d'intelligence stratégique opérant depuis ses hubs (Dakar, Paris, Dubai). Les données collectées sont strictement limitées au périmètre du diagnostic B2B.",
+        priv_c1: "e-META LABS opère pour les diagnostics B2B.",
         priv_t2: "2. Souveraineté des Données",
-        priv_c2: "Les informations soumises à notre moteur IA (Google Gemini) sont traitées de manière éphémère. Aucun modèle d'apprentissage public n'est entraîné avec vos données stratégiques.",
-        priv_t3: "3. Certification Blockchain",
-        priv_c3: "Tout fichier téléversé est instantanément haché (SHA-256) et ancré sur la blockchain Bitcoin via l'API Woleet. Cela vous garantit une preuve d'antériorité et protège votre propriété intellectuelle sans que nous ne stockions le fichier d'origine à long terme.",
-        priv_t4: "4. Non-Substitution",
-        priv_c4: "Les rapports générés par l'IA d'e-META LABS constituent un outil d'aide à la décision stratégique de haut niveau. Ils ne se substituent pas à une consultation juridique ou financière certifiée.",
-        priv_t5: "5. Contact & Droits",
-        priv_c5: "Pour toute demande relative à vos données (accès, suppression, portabilité), veuillez contacter notre pôle conformité : contact@e-metalabs.com.",
-        
-        // --- LIENS & BOUTONS DYNAMIQUES ---
+        priv_c2: "Aucun modèle d'apprentissage public n'est entraîné avec vos données.",
         btn_full_policy: "📑 Consulter la Charte Complète",
         url_policy: "privacy.html?lang=fr",
         btn_return: "Retour au Moteur IA",
-        btn_close: "Fermer"
+        btn_close: "Fermer",
+
+        // --- NOUVEAU : GUIDE LEXIQUE ---
+        guide_title: "Lexique Stratégique",
+        guide_sec_title: "1. Secteurs Stratégiques",
+        guide_sec_desc: "<strong style='color:#d4af37;'>• FinTech / DeFi :</strong> Finance numérique, systèmes de paiement, décentralisation.<br><strong style='color:#d4af37;'>• GovTech :</strong> Modernisation de l'État et numérisation des services publics.<br><strong style='color:#d4af37;'>• GreenTech :</strong> Transition écologique, décarbonation et énergies renouvelables.<br><strong style='color:#d4af37;'>• PropTech :</strong> Innovation dans l'immobilier, gestion de bâtiments intelligents.",
+        guide_exp_title: "2. Expertises Technologiques",
+        guide_exp_desc: "<strong style='color:#d4af37;'>• GenAI & Data :</strong> Intégration de l'Intelligence Artificielle pour l'analyse prédictive et l'automatisation.<br><strong style='color:#d4af37;'>• Cybersécurité :</strong> Protection des infrastructures critiques et audit de résilience.<br><strong style='color:#d4af37;'>• Web3 & Blockchain :</strong> Tokenisation d'actifs, traçabilité absolue et ancrage numérique (Woleet).<br><strong style='color:#d4af37;'>• Ingénierie ESG :</strong> Stratégie environnementale, sociale et de gouvernance d'entreprise."
     },
     en: {
         subtitle: "Strategic Excellence & High Precision AI",
@@ -113,12 +111,13 @@ const translations = {
         lbl_counter: "Secured & Anchored Diagnostics",
         step1_title: "01. Identification",
         lbl_company: "Company / Entity",
-        ph_company: "e.g., Alpha Group, Ministry...",
+        ph_company: "e.g., Alpha Group...",
         lbl_email: "Corporate Email",
         lbl_phone: "WhatsApp Number",
         btn_next: "Next",
         
         step2_title: "02. Strategic Matrix",
+        btn_guide: "📖 Expertise Guide",
         lbl_sector: "Strategic Sector",
         sec_fintech: "FinTech & DeFi",
         sec_agri: "AgriTech & Food Security",
@@ -134,7 +133,7 @@ const translations = {
         sec_media: "Creative Industries & Media",
         
         lbl_geo: "Area of Operation",
-        opt_geo_def: "Select an area of operation...",
+        opt_geo_def: "Select an area...",
         grp_africa: "Africa",
         geo_sn: "Senegal (Dakar Hub)",
         geo_ci: "Ivory Coast (Abidjan Hub)",
@@ -172,55 +171,55 @@ const translations = {
         exp_design: "Design Thinking & UX",
         
         btn_prev: "Back",
-        btn_next_matrice: "Open Analysis Matrix",
+        btn_next_matrice: "Open Matrix",
         
-        step3_title: "03. Analysis & Delivery Matrix",
+        step3_title: "03. Analysis Matrix",
         lbl_context: "Operational Context",
-        ph_context: "Briefly describe your current situation, 1-3 year strategic goals, and main challenges...",
-        lbl_file_upload: "📄 Attach a Strategic Document (Optional)",
+        ph_context: "Describe your strategic goals and main challenges...",
+        lbl_file_upload: "📄 Attach Document (Optional)",
         btn_browse: "Browse...",
         lbl_no_file: "No file selected",
-        lbl_file_desc: "IP Guaranteed: Your file will be sealed and protected by Blockchain anchoring (Woleet).",
+        lbl_file_desc: "IP Guaranteed: File protected by Blockchain anchoring.",
         legal_consent: "I accept the",
         link_privacy: "Official Privacy Policy",
-        lbl_wa_optin: "I agree to receive my strategic analysis via WhatsApp.",
+        lbl_wa_optin: "I agree to receive my analysis via WhatsApp.",
         btn_submit: "Launch AI Analysis",
         
         footer_rights: "All Rights Reserved.",
         modal_res_title: "Strategic Diagnostic",
         btn_new_analysis: "New Analysis",
-        msg_reset_confirm: "Do you really want to restart?",
+        msg_reset_confirm: "Restart the form?",
         
-        modal_title: "Privacy Policy & Legal Notice",
-        priv_date: "Last updated: February 2026",
-        priv_t1: "1. Identity and Operations",
-        priv_c1: "e-META LABS SASU is a strategic intelligence unit operating from its hubs (Dakar, Paris, Dubai). Data collected is strictly limited to the scope of B2B diagnostics.",
-        priv_t2: "2. Data Sovereignty",
-        priv_c2: "Information submitted to our AI engine (Google Gemini) is processed ephemerally. No public learning models are trained using your strategic data.",
-        priv_t3: "3. Blockchain Certification",
-        priv_c3: "Any uploaded file is instantly hashed (SHA-256) and anchored on the Bitcoin blockchain via the Woleet API. This guarantees proof of existence and protects your IP.",
-        priv_t4: "4. Non-Substitution",
-        priv_c4: "Reports generated by e-META LABS AI are high-level strategic decision-support tools. They do not replace certified legal or financial consultations.",
-        priv_t5: "5. Contact & Rights",
-        priv_c5: "For any requests regarding your data (access, deletion, portability), please contact our compliance team: contact@e-metalabs.com.",
-        
-        btn_full_policy: "📑 Read Full Privacy Policy",
+        modal_title: "Legal Notice",
+        priv_t1: "1. Operations",
+        priv_c1: "e-META LABS processes B2B diagnostics.",
+        priv_t2: "2. Sovereignty",
+        priv_c2: "No public learning models are trained using your data.",
+        btn_full_policy: "📑 Read Full Policy",
         url_policy: "privacy.html?lang=en",
         btn_return: "Return to AI Engine",
-        btn_close: "Close"
+        btn_close: "Close",
+
+        // --- NOUVEAU : GUIDE LEXIQUE ---
+        guide_title: "Strategic Glossary",
+        guide_sec_title: "1. Strategic Sectors",
+        guide_sec_desc: "<strong style='color:#d4af37;'>• FinTech / DeFi:</strong> Digital finance, payment systems, decentralization.<br><strong style='color:#d4af37;'>• GovTech:</strong> State modernization and public service digitization.<br><strong style='color:#d4af37;'>• GreenTech:</strong> Ecological transition, decarbonization, and renewable energy.<br><strong style='color:#d4af37;'>• PropTech:</strong> Real estate innovation, smart building management.",
+        guide_exp_title: "2. Technological Expertise",
+        guide_exp_desc: "<strong style='color:#d4af37;'>• GenAI & Data:</strong> AI integration for predictive analysis and automation.<br><strong style='color:#d4af37;'>• Cybersecurity:</strong> Protection of critical infrastructure and resilience audits.<br><strong style='color:#d4af37;'>• Web3 & Blockchain:</strong> Asset tokenization, traceability, and digital anchoring (Woleet).<br><strong style='color:#d4af37;'>• ESG Engineering:</strong> Environmental, Social, and Corporate Governance strategy."
     },
     es: {
         subtitle: "Excelencia Estratégica y Alta Precisión IA",
         btn_reset: "↻ Reiniciar",
-        lbl_counter: "Diagnósticos Asegurados y Anclados",
+        lbl_counter: "Diagnósticos Asegurados",
         step1_title: "01. Identificación",
         lbl_company: "Empresa / Entidad",
-        ph_company: "ej. Grupo Alfa, Ministerio...",
+        ph_company: "ej. Grupo Alfa...",
         lbl_email: "Correo Profesional",
         lbl_phone: "Número WhatsApp",
         btn_next: "Siguiente",
         
         step2_title: "02. Matriz Estratégica",
+        btn_guide: "📖 Guía de Especialidades",
         lbl_sector: "Sector Estratégico",
         sec_fintech: "FinTech y DeFi",
         sec_agri: "AgriTech y Seguridad Alimentaria",
@@ -236,7 +235,7 @@ const translations = {
         sec_media: "Industrias Creativas y Medios",
         
         lbl_geo: "Zona de Intervención",
-        opt_geo_def: "Seleccione una zona de intervención...",
+        opt_geo_def: "Seleccione una zona...",
         grp_africa: "África",
         geo_sn: "Senegal (Hub Dakar)",
         geo_ci: "Costa de Marfil (Hub Abiyán)",
@@ -267,75 +266,75 @@ const translations = {
         exp_ai: "GenAI y Data Science",
         exp_cyber: "Ciberseguridad y Resiliencia",
         exp_esg: "Ingeniería ESG y Clima",
-        exp_web3: "Web3 y Blockchain (Woleet)",
+        exp_web3: "Web3 y Blockchain",
         exp_mkt: "Marketing Digital y SEO",
         exp_proc: "Optimización de Procesos",
         exp_hr: "Gestión de Talento (RRHH)",
         exp_design: "Design Thinking y UX",
         
         btn_prev: "Volver",
-        btn_next_matrice: "Abrir Matriz de Análisis",
+        btn_next_matrice: "Abrir Matriz",
         
-        step3_title: "03. Matriz de Análisis y Entrega",
+        step3_title: "03. Matriz de Análisis",
         lbl_context: "Contexto Operativo",
-        ph_context: "Describa brevemente su situación actual, objetivos estratégicos a 1-3 años y los principales desafíos...",
-        lbl_file_upload: "📄 Adjuntar un Documento Estratégico (Opcional)",
+        ph_context: "Describa brevemente su situación actual y desafíos...",
+        lbl_file_upload: "📄 Adjuntar Documento",
         btn_browse: "Explorar...",
-        lbl_no_file: "Ningún archivo seleccionado",
-        lbl_file_desc: "Propiedad Intelectual garantizada: Su archivo será sellado y protegido por anclaje Blockchain (Woleet).",
+        lbl_no_file: "Ningún archivo",
+        lbl_file_desc: "Su archivo será sellado y protegido por anclaje Blockchain.",
         legal_consent: "Acepto la",
         link_privacy: "Política de Privacidad Oficial",
-        lbl_wa_optin: "Acepto recibir mi análisis estratégico a través de WhatsApp.",
+        lbl_wa_optin: "Acepto recibir mi análisis a través de WhatsApp.",
         btn_submit: "Lanzar Análisis IA",
         
         footer_rights: "Todos los derechos reservados.",
         modal_res_title: "Diagnóstico Estratégico",
         btn_new_analysis: "Nuevo Análisis",
-        msg_reset_confirm: "¿Estás seguro de que deseas reiniciar?",
+        msg_reset_confirm: "¿Deseas reiniciar?",
         
-        modal_title: "Política de Privacidad y Aviso Legal",
-        priv_date: "Última actualización: Febrero 2026",
-        priv_t1: "1. Identidad",
-        priv_c1: "e-META LABS SASU opera a nivel global. Sus datos B2B se utilizan estrictamente para diagnósticos estratégicos.",
+        modal_title: "Aviso Legal",
+        priv_t1: "1. Operaciones",
+        priv_c1: "e-META LABS se utiliza estrictamente para diagnósticos estratégicos.",
         priv_t2: "2. Soberanía de Datos",
-        priv_c2: "Sus datos no entrenan modelos de IA públicos. El procesamiento es confidencial y efímero.",
-        priv_t3: "3. Certificación Blockchain",
-        priv_c3: "Cualquier archivo adjunto se protege mediante hash y se ancla en la blockchain a través de Woleet para garantizar su propiedad intelectual.",
-        priv_t4: "4. No Sustitución",
-        priv_c4: "La IA proporciona apoyo en la toma de decisiones estratégicas, no asesoramiento legal o financiero certificado.",
-        priv_t5: "5. Contacto y Derechos",
-        priv_c5: "Para cualquier solicitud relacionada con sus datos, contacte a nuestro equipo de cumplimiento en: contact@e-metalabs.com.",
-        
+        priv_c2: "Sus datos no entrenan modelos de IA públicos.",
         btn_full_policy: "📑 Leer la Política Completa",
         url_policy: "privacy.html?lang=es",
         btn_return: "Volver al Motor IA",
-        btn_close: "Cerrar"
+        btn_close: "Cerrar",
+
+        // --- NOUVEAU : GUIDE LEXIQUE ---
+        guide_title: "Glosario Estratégico",
+        guide_sec_title: "1. Sectores Estratégicos",
+        guide_sec_desc: "<strong style='color:#d4af37;'>• FinTech / DeFi:</strong> Finanzas digitales, sistemas de pago, descentralización.<br><strong style='color:#d4af37;'>• GovTech:</strong> Modernización del Estado y digitalización de servicios públicos.<br><strong style='color:#d4af37;'>• GreenTech:</strong> Transición ecológica, descarbonización y energías renovables.<br><strong style='color:#d4af37;'>• PropTech:</strong> Innovación inmobiliaria, gestión de edificios inteligentes.",
+        guide_exp_title: "2. Experiencia Tecnológica",
+        guide_exp_desc: "<strong style='color:#d4af37;'>• GenAI & Data:</strong> Integración de IA para análisis predictivo y automatización.<br><strong style='color:#d4af37;'>• Ciberseguridad:</strong> Protección de infraestructuras críticas y auditorías de resiliencia.<br><strong style='color:#d4af37;'>• Web3 & Blockchain:</strong> Tokenización de activos, trazabilidad y anclaje digital (Woleet).<br><strong style='color:#d4af37;'>• Ingeniería ESG:</strong> Estrategia Ambiental, Social y de Gobernanza Corporativa."
     },
     ar: {
         subtitle: "التميز الاستراتيجي والذكاء الاصطناعي عالي الدقة",
         btn_reset: "↻ إعادة تعيين",
-        lbl_counter: "تشخيصات آمنة وموثقة",
+        lbl_counter: "تشخيصات آمنة",
         step1_title: "01. تحديد الهوية",
         lbl_company: "الشركة / المؤسسة",
-        ph_company: "مثال: مجموعة ألفا، وزارة...",
+        ph_company: "مثال: مجموعة ألفا...",
         lbl_email: "البريد الإلكتروني المهني",
         lbl_phone: "رقم الواتساب",
         btn_next: "التالي",
         
         step2_title: "02. المصفوفة الاستراتيجية",
+        btn_guide: "📖 دليل الخبرات",
         lbl_sector: "القطاع الاستراتيجي",
-        sec_fintech: "التكنولوجيا المالية والتمويل اللامركزي",
-        sec_agri: "التكنولوجيا الزراعية والأمن الغذائي",
-        sec_green: "التكنولوجيا الخضراء والطاقة",
-        sec_gov: "تكنولوجيا الحكومة والمدن الذكية",
+        sec_fintech: "التكنولوجيا المالية",
+        sec_agri: "التكنولوجيا الزراعية",
+        sec_green: "التكنولوجيا الخضراء",
+        sec_gov: "تكنولوجيا الحكومة",
         sec_health: "الصحة والتكنولوجيا الحيوية",
-        sec_log: "الخدمات اللوجستية وسلسلة التوريد",
-        sec_mine: "التعدين والنفط والغاز",
-        sec_btp: "العقارات وتكنولوجيا العقارات",
-        sec_retail: "التجارة الإلكترونية والتجزئة",
-        sec_edu: "التعليم وتكنولوجيا التعليم",
+        sec_log: "سلسلة التوريد",
+        sec_mine: "التعدين والغاز",
+        sec_btp: "تكنولوجيا العقارات",
+        sec_retail: "التجارة الإلكترونية",
+        sec_edu: "تكنولوجيا التعليم",
         sec_tour: "السياحة والضيافة",
-        sec_media: "الصناعات الإبداعية والإعلام",
+        sec_media: "الإعلام الإبداعي",
         
         lbl_geo: "منطقة التدخل",
         opt_geo_def: "اختر منطقة التدخل...",
@@ -360,34 +359,34 @@ const translations = {
         geo_uk: "المملكة المتحدة (لندن)",
         geo_eu: "الاتحاد الأوروبي (ألمانيا، إسبانيا...)",
         grp_mena: "الشرق الأوسط (MENA)",
-        geo_ae: "الإمارات العربية المتحدة (مركز دبي)",
-        geo_sa: "المملكة العربية السعودية (الرياض)",
+        geo_ae: "الإمارات (مركز دبي)",
+        geo_sa: "السعودية (الرياض)",
         grp_global: "عالمي",
         geo_global: "دولي / مناطق متعددة",
         
         lbl_expertise: "الخبرة المطلوبة",
-        exp_ai: "الذكاء الاصطناعي التوليدي وعلوم البيانات",
-        exp_cyber: "الأمن السيبراني والمرونة",
-        exp_esg: "الهندسة البيئية والاجتماعية والمناخ",
-        exp_web3: "الويب 3 والبلوكشين (Woleet)",
-        exp_mkt: "التسويق الرقمي وتحسين محركات البحث",
+        exp_ai: "الذكاء الاصطناعي التوليدي",
+        exp_cyber: "الأمن السيبراني",
+        exp_esg: "الهندسة البيئية",
+        exp_web3: "البلوكشين (Woleet)",
+        exp_mkt: "التسويق الرقمي",
         exp_proc: "تحسين العمليات",
-        exp_hr: "إدارة المواهب (الموارد البشرية)",
-        exp_design: "التفكير التصميمي وتجربة المستخدم",
+        exp_hr: "الموارد البشرية",
+        exp_design: "تجربة المستخدم",
         
         btn_prev: "رجوع",
         btn_next_matrice: "فتح مصفوفة التحليل",
         
-        step3_title: "03. مصفوفة التحليل والتسليم",
+        step3_title: "03. مصفوفة التحليل",
         lbl_context: "السياق التشغيلي",
-        ph_context: "صف باختصار وضعك الحالي، وأهدافك الاستراتيجية لمدة 1-3 سنوات، والتحديات الرئيسية...",
-        lbl_file_upload: "📄 إرفاق مستند استراتيجي (اختياري)",
+        ph_context: "صف باختصار وضعك الحالي وأهدافك الاستراتيجية...",
+        lbl_file_upload: "📄 إرفاق مستند (اختياري)",
         btn_browse: "تصفح...",
         lbl_no_file: "لم يتم تحديد أي ملف",
-        lbl_file_desc: "ضمان الملكية الفكرية: سيتم ختم ملفك وحمايته بواسطة توثيق البلوكشين (Woleet).",
+        lbl_file_desc: "ضمان الملكية الفكرية: محمي بواسطة البلوكشين.",
         legal_consent: "أوافق على",
         link_privacy: "سياسة الخصوصية الرسمية",
-        lbl_wa_optin: "أوافق على تلقي تحليلي الاستراتيجي عبر تطبيق واتساب.",
+        lbl_wa_optin: "أوافق على تلقي تحليلي عبر واتساب.",
         btn_submit: "بدء تحليل الذكاء الاصطناعي",
         
         footer_rights: "جميع الحقوق محفوظة.",
@@ -395,23 +394,22 @@ const translations = {
         btn_new_analysis: "تحليل جديد",
         msg_reset_confirm: "هل تريد حقًا البدء من جديد؟",
         
-        modal_title: "سياسة الخصوصية والإشعار القانوني",
-        priv_date: "آخر تحديث: فبراير 2026",
-        priv_t1: "1. الهوية والعمليات",
-        priv_c1: "تعمل e-META LABS SASU على مستوى عالمي. تستخدم بيانات عملائك بشكل صارم للتشخيص الاستراتيجي.",
+        modal_title: "الإشعار القانوني",
+        priv_t1: "1. العمليات",
+        priv_c1: "تستخدم بياناتك للتشخيص الاستراتيجي.",
         priv_t2: "2. سيادة البيانات",
-        priv_c2: "لا تدرب بياناتك نماذج الذكاء الاصطناعي العامة. المعالجة سرية ومؤقتة.",
-        priv_t3: "3. شهادة البلوكشين",
-        priv_c3: "تتم حماية ملفاتك المرفقة باستخدام تقنية Hash وتوثيقها على البلوكشين عبر Woleet لضمان ملكيتك الفكرية.",
-        priv_t4: "4. عدم الاستبدال",
-        priv_c4: "يوفر الذكاء الاصطناعي دعمًا لاتخاذ القرار الاستراتيجي، وليس استشارة قانونية أو مالية معتمدة.",
-        priv_t5: "5. الاتصال والحقوق",
-        priv_c5: "لأي طلبات تتعلق ببياناتك (الوصول، الحذف، النقل)، يرجى الاتصال بفريق الامتثال لدينا على: contact@e-metalabs.com.",
-        
+        priv_c2: "لا تدرب بياناتك نماذج الذكاء الاصطناعي العامة.",
         btn_full_policy: "📑 اقرأ السياسة كاملة",
         url_policy: "privacy.html?lang=ar",
-        btn_return: "العودة إلى محرك الذكاء الاصطناعي",
-        btn_close: "إغلاق"
+        btn_return: "العودة إلى المحرك",
+        btn_close: "إغلاق",
+
+        // --- NOUVEAU : GUIDE LEXIQUE ---
+        guide_title: "المعجم الاستراتيجي",
+        guide_sec_title: "1. القطاعات الاستراتيجية",
+        guide_sec_desc: "<strong style='color:#d4af37;'>• التكنولوجيا المالية:</strong> التمويل الرقمي، أنظمة الدفع، اللامركزية.<br><strong style='color:#d4af37;'>• تكنولوجيا الحكومة:</strong> تحديث الدولة ورقمنة الخدمات العامة.<br><strong style='color:#d4af37;'>• التكنولوجيا الخضراء:</strong> التحول البيئي، إزالة الكربون والطاقة المتجددة.<br><strong style='color:#d4af37;'>• تكنولوجيا العقارات:</strong> الابتكار العقاري، إدارة المباني الذكية.",
+        guide_exp_title: "2. الخبرات التكنولوجية",
+        guide_exp_desc: "<strong style='color:#d4af37;'>• الذكاء الاصطناعي التوليدي:</strong> دمج الذكاء الاصطناعي للتحليل التنبؤي والأتمتة.<br><strong style='color:#d4af37;'>• الأمن السيبراني:</strong> حماية البنية التحتية الحيوية وتدقيق المرونة.<br><strong style='color:#d4af37;'>• الويب 3 والبلوكشين:</strong> تحويل الأصول إلى رموز، التتبع والتوثيق الرقمي.<br><strong style='color:#d4af37;'>• الهندسة البيئية (ESG):</strong> الاستراتيجية البيئية والاجتماعية وحوكمة الشركات."
     }
 };
 
@@ -437,37 +435,30 @@ function setLanguage(lang) {
         }
     });
 
-    // Mise à jour du lien vers la page Privacy (pour index.html)
     const policyLinkBtn = document.getElementById('policy_link');
     if (policyLinkBtn && translations[lang] && translations[lang]['url_policy']) {
         policyLinkBtn.href = translations[lang]['url_policy'];
     }
 
-    // Mise à jour du bouton "Retour" (pour privacy.html)
     const backBtn = document.getElementById('backBtn');
     if (backBtn) {
         backBtn.href = `index.html?lang=${lang}`;
     }
 }
 
-// L'intelligence de la lecture de l'URL
 window.addEventListener('load', () => {
-    // On regarde si une langue est forcée dans l'URL (ex: e-meta.app?lang=ar)
     const urlParams = new URLSearchParams(window.location.search);
     const langFromUrl = urlParams.get('lang');
     
-    // Si oui on l'utilise, sinon on met Français par défaut
     const activeLang = langFromUrl || 'fr';
     setLanguage(activeLang);
 
-    // On branche les clics sur les boutons FR EN ES AR
     const langButtons = document.querySelectorAll('.lang-switch button');
     langButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
             const selectedLang = e.target.getAttribute('data-lang');
             setLanguage(selectedLang);
             
-            // On met à jour l'URL discrètement pour que le rafraichissement garde la langue
             const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?lang=' + selectedLang;
             window.history.pushState({path:newUrl}, '', newUrl);
         });
