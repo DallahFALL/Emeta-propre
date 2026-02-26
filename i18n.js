@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS
- * FICHIER : i18n.js (Traduction Intégrale + Guide Lexique)
+ * FICHIER : i18n.js (Traduction Intégrale Exhaustive)
  */
 
 const translations = {
@@ -88,22 +88,33 @@ const translations = {
         btn_new_analysis: "Nouvelle Analyse",
         msg_reset_confirm: "Voulez-vous vraiment recommencer ?",
         
-        modal_title: "Mentions Légales",
-        priv_t1: "1. Identité et Opérations",
-        priv_c1: "e-META LABS opère pour les diagnostics B2B.",
-        priv_t2: "2. Souveraineté des Données",
-        priv_c2: "Aucun modèle d'apprentissage public n'est entraîné avec vos données.",
-        btn_full_policy: "📑 Consulter la Charte Complète",
-        url_policy: "privacy.html?lang=fr",
-        btn_return: "Retour au Moteur IA",
-        btn_close: "Fermer",
-
-        // --- NOUVEAU : GUIDE LEXIQUE ---
+        // --- GUIDE LEXIQUE ---
         guide_title: "Lexique Stratégique",
         guide_sec_title: "1. Secteurs Stratégiques",
         guide_sec_desc: "<strong style='color:#d4af37;'>• FinTech / DeFi :</strong> Finance numérique, systèmes de paiement, décentralisation.<br><strong style='color:#d4af37;'>• GovTech :</strong> Modernisation de l'État et numérisation des services publics.<br><strong style='color:#d4af37;'>• GreenTech :</strong> Transition écologique, décarbonation et énergies renouvelables.<br><strong style='color:#d4af37;'>• PropTech :</strong> Innovation dans l'immobilier, gestion de bâtiments intelligents.",
         guide_exp_title: "2. Expertises Technologiques",
-        guide_exp_desc: "<strong style='color:#d4af37;'>• GenAI & Data :</strong> Intégration de l'Intelligence Artificielle pour l'analyse prédictive et l'automatisation.<br><strong style='color:#d4af37;'>• Cybersécurité :</strong> Protection des infrastructures critiques et audit de résilience.<br><strong style='color:#d4af37;'>• Web3 & Blockchain :</strong> Tokenisation d'actifs, traçabilité absolue et ancrage numérique (Woleet).<br><strong style='color:#d4af37;'>• Ingénierie ESG :</strong> Stratégie environnementale, sociale et de gouvernance d'entreprise."
+        guide_exp_desc: "<strong style='color:#d4af37;'>• GenAI & Data :</strong> Intégration de l'Intelligence Artificielle pour l'analyse prédictive et l'automatisation.<br><strong style='color:#d4af37;'>• Cybersécurité :</strong> Protection des infrastructures critiques et audit de résilience.<br><strong style='color:#d4af37;'>• Web3 & Blockchain :</strong> Tokenisation d'actifs, traçabilité absolue et ancrage numérique (Woleet).<br><strong style='color:#d4af37;'>• Ingénierie ESG :</strong> Stratégie environnementale, sociale et de gouvernance d'entreprise.",
+
+        // --- CHARTE JURIDIQUE EXHAUSTIVE ---
+        modal_title: "Politique de Souveraineté & Confidentialité",
+        priv_date: "Dernière mise à jour : Février 2026",
+        priv_t1: "1. Identité et Opérations",
+        priv_c1: "e-META LABS SASU opère en tant qu'unité d'intelligence stratégique internationale depuis ses différents hubs (Dakar, Paris, Dubaï). Les données collectées via notre plateforme B2B sont strictement limitées au périmètre de la réalisation de diagnostics stratégiques assistés par Intelligence Artificielle.",
+        priv_t2: "2. Collecte et Traitement des Données",
+        priv_c2: "Nous collectons uniquement les informations nécessaires à l'analyse : nom de l'entité, contacts professionnels, contexte opérationnel, et documents stratégiques fournis volontairement. La transmission de l'analyse finale peut s'effectuer de manière chiffrée de bout en bout via l'API WhatsApp Business, sous réserve du consentement explicite (Opt-in) du client.",
+        priv_t3: "3. Souveraineté et Intelligence Artificielle",
+        priv_c3: "La confidentialité de vos stratégies est notre priorité absolue. Les informations soumises à notre moteur IA (Google Gemini Pro/Flash) sont traitées de manière éphémère via des API sécurisées. Aucun modèle d'apprentissage (Machine Learning) public ou privé n'est entraîné en utilisant vos données opérationnelles. Le traitement est isolé et détruit après génération du rapport.",
+        priv_t4: "4. Ancrage Blockchain et Propriété Intellectuelle",
+        priv_c4: "Pour garantir la protection absolue de vos idées et concepts, tout document téléversé sur notre plateforme est instantanément haché cryptographiquement (algorithme SHA-256). Cette empreinte numérique unique est ancrée sur la blockchain publique via la technologie Woleet. Cela vous octroie une preuve d'antériorité numérique irréfutable (Proof of Existence) à valeur légale internationale, sans que nous n'ayons besoin de stocker le fichier d'origine sur nos serveurs à long terme.",
+        priv_t5: "5. Clause de Non-Substitution",
+        priv_c5: "Les rapports, audits et matrices générés par le moteur d'Intelligence Artificielle d'e-META LABS constituent des outils d'aide à la décision stratégique de très haut niveau. Ils sont fournis à titre consultatif et ne se substituent en aucun cas à une consultation juridique, fiscale, ou financière certifiée par des professionnels dûment agréés par les autorités compétentes.",
+        priv_t6: "6. Contact & Droits Internationaux",
+        priv_c6: "Conformément aux réglementations internationales sur la protection des données (RGPD européen, lois locales en vigueur), vous disposez d'un droit d'accès, de rectification, de portabilité et de suppression de vos informations. Pour exercer ces droits ou pour toute question relative à notre conformité, veuillez contacter notre direction juridique à l'adresse : contact@e-metalabs.com.",
+        
+        btn_full_policy: "📑 Consulter la Charte Complète",
+        url_policy: "privacy.html?lang=fr",
+        btn_return: "Retour au Moteur IA",
+        btn_close: "Fermer"
     },
     en: {
         subtitle: "Strategic Excellence & High Precision AI",
@@ -190,22 +201,33 @@ const translations = {
         btn_new_analysis: "New Analysis",
         msg_reset_confirm: "Restart the form?",
         
-        modal_title: "Legal Notice",
-        priv_t1: "1. Operations",
-        priv_c1: "e-META LABS processes B2B diagnostics.",
-        priv_t2: "2. Sovereignty",
-        priv_c2: "No public learning models are trained using your data.",
-        btn_full_policy: "📑 Read Full Policy",
-        url_policy: "privacy.html?lang=en",
-        btn_return: "Return to AI Engine",
-        btn_close: "Close",
-
-        // --- NOUVEAU : GUIDE LEXIQUE ---
+        // --- GUIDE LEXIQUE ---
         guide_title: "Strategic Glossary",
         guide_sec_title: "1. Strategic Sectors",
         guide_sec_desc: "<strong style='color:#d4af37;'>• FinTech / DeFi:</strong> Digital finance, payment systems, decentralization.<br><strong style='color:#d4af37;'>• GovTech:</strong> State modernization and public service digitization.<br><strong style='color:#d4af37;'>• GreenTech:</strong> Ecological transition, decarbonization, and renewable energy.<br><strong style='color:#d4af37;'>• PropTech:</strong> Real estate innovation, smart building management.",
         guide_exp_title: "2. Technological Expertise",
-        guide_exp_desc: "<strong style='color:#d4af37;'>• GenAI & Data:</strong> AI integration for predictive analysis and automation.<br><strong style='color:#d4af37;'>• Cybersecurity:</strong> Protection of critical infrastructure and resilience audits.<br><strong style='color:#d4af37;'>• Web3 & Blockchain:</strong> Asset tokenization, traceability, and digital anchoring (Woleet).<br><strong style='color:#d4af37;'>• ESG Engineering:</strong> Environmental, Social, and Corporate Governance strategy."
+        guide_exp_desc: "<strong style='color:#d4af37;'>• GenAI & Data:</strong> AI integration for predictive analysis and automation.<br><strong style='color:#d4af37;'>• Cybersecurity:</strong> Protection of critical infrastructure and resilience audits.<br><strong style='color:#d4af37;'>• Web3 & Blockchain:</strong> Asset tokenization, traceability, and digital anchoring (Woleet).<br><strong style='color:#d4af37;'>• ESG Engineering:</strong> Environmental, Social, and Corporate Governance strategy.",
+
+        // --- CHARTE JURIDIQUE EXHAUSTIVE ---
+        modal_title: "Sovereignty & Privacy Policy",
+        priv_date: "Last updated: February 2026",
+        priv_t1: "1. Identity and Operations",
+        priv_c1: "e-META LABS SASU operates as an international strategic intelligence unit from its various hubs (Dakar, Paris, Dubai). The data collected via our B2B platform is strictly limited to the scope of conducting AI-assisted strategic diagnostics.",
+        priv_t2: "2. Data Collection and Processing",
+        priv_c2: "We only collect information necessary for the analysis: entity name, professional contacts, operational context, and voluntarily provided strategic documents. The delivery of the final analysis can be done via end-to-end encrypted WhatsApp Business API, subject to the client's explicit consent (Opt-in).",
+        priv_t3: "3. Sovereignty and Artificial Intelligence",
+        priv_c3: "The confidentiality of your strategies is our absolute priority. Information submitted to our AI engine (Google Gemini Pro/Flash) is processed ephemerally via secure APIs. No public or private machine learning models are trained using your operational data. The processing is isolated and destroyed after the report is generated.",
+        priv_t4: "4. Blockchain Anchoring and Intellectual Property",
+        priv_c4: "To guarantee the absolute protection of your ideas and concepts, any document uploaded to our platform is instantly cryptographically hashed (SHA-256 algorithm). This unique digital fingerprint is anchored on the public blockchain via Woleet technology. This grants you irrefutable digital proof of existence with international legal value, without us needing to store the original file on our servers long-term.",
+        priv_t5: "5. Non-Substitution Clause",
+        priv_c5: "The reports, audits, and matrices generated by the e-META LABS Artificial Intelligence engine constitute high-level strategic decision-support tools. They are provided for advisory purposes and under no circumstances replace legal, tax, or financial consultations certified by professionals duly licensed by competent authorities.",
+        priv_t6: "6. Contact & International Rights",
+        priv_c6: "In accordance with international data protection regulations (European GDPR, applicable local laws), you have the right to access, rectify, port, and delete your information. To exercise these rights or for any questions regarding our compliance, please contact our legal department at: contact@e-metalabs.com.",
+        
+        btn_full_policy: "📑 Read Full Privacy Policy",
+        url_policy: "privacy.html?lang=en",
+        btn_return: "Return to AI Engine",
+        btn_close: "Close"
     },
     es: {
         subtitle: "Excelencia Estratégica y Alta Precisión IA",
@@ -292,27 +314,38 @@ const translations = {
         btn_new_analysis: "Nuevo Análisis",
         msg_reset_confirm: "¿Deseas reiniciar?",
         
-        modal_title: "Aviso Legal",
-        priv_t1: "1. Operaciones",
-        priv_c1: "e-META LABS se utiliza estrictamente para diagnósticos estratégicos.",
-        priv_t2: "2. Soberanía de Datos",
-        priv_c2: "Sus datos no entrenan modelos de IA públicos.",
-        btn_full_policy: "📑 Leer la Política Completa",
-        url_policy: "privacy.html?lang=es",
-        btn_return: "Volver al Motor IA",
-        btn_close: "Cerrar",
-
-        // --- NOUVEAU : GUIDE LEXIQUE ---
+        // --- GUIDE LEXIQUE ---
         guide_title: "Glosario Estratégico",
         guide_sec_title: "1. Sectores Estratégicos",
         guide_sec_desc: "<strong style='color:#d4af37;'>• FinTech / DeFi:</strong> Finanzas digitales, sistemas de pago, descentralización.<br><strong style='color:#d4af37;'>• GovTech:</strong> Modernización del Estado y digitalización de servicios públicos.<br><strong style='color:#d4af37;'>• GreenTech:</strong> Transición ecológica, descarbonización y energías renovables.<br><strong style='color:#d4af37;'>• PropTech:</strong> Innovación inmobiliaria, gestión de edificios inteligentes.",
         guide_exp_title: "2. Experiencia Tecnológica",
-        guide_exp_desc: "<strong style='color:#d4af37;'>• GenAI & Data:</strong> Integración de IA para análisis predictivo y automatización.<br><strong style='color:#d4af37;'>• Ciberseguridad:</strong> Protección de infraestructuras críticas y auditorías de resiliencia.<br><strong style='color:#d4af37;'>• Web3 & Blockchain:</strong> Tokenización de activos, trazabilidad y anclaje digital (Woleet).<br><strong style='color:#d4af37;'>• Ingeniería ESG:</strong> Estrategia Ambiental, Social y de Gobernanza Corporativa."
+        guide_exp_desc: "<strong style='color:#d4af37;'>• GenAI & Data:</strong> Integración de IA para análisis predictivo y automatización.<br><strong style='color:#d4af37;'>• Ciberseguridad:</strong> Protección de infraestructuras críticas y auditorías de resiliencia.<br><strong style='color:#d4af37;'>• Web3 & Blockchain:</strong> Tokenización de activos, trazabilidad y anclaje digital (Woleet).<br><strong style='color:#d4af37;'>• Ingeniería ESG:</strong> Estrategia Ambiental, Social y de Gobernanza Corporativa.",
+
+        // --- CHARTE JURIDIQUE EXHAUSTIVE ---
+        modal_title: "Política de Soberanía y Privacidad",
+        priv_date: "Última actualización: Febrero 2026",
+        priv_t1: "1. Identidad y Operaciones",
+        priv_c1: "e-META LABS SASU opera como una unidad internacional de inteligencia estratégica desde sus diversos hubs (Dakar, París, Dubái). Los datos recopilados a través de nuestra plataforma B2B se limitan estrictamente al ámbito de la realización de diagnósticos estratégicos asistidos por Inteligencia Artificial.",
+        priv_t2: "2. Recopilación y Tratamiento de Datos",
+        priv_c2: "Solo recopilamos la información necesaria para el análisis: nombre de la entidad, contactos profesionales, contexto operativo y documentos estratégicos proporcionados voluntariamente. La entrega del análisis final puede realizarse mediante cifrado de extremo a extremo a través de la API de WhatsApp Business, sujeto al consentimiento explícito (Opt-in) del cliente.",
+        priv_t3: "3. Soberanía e Inteligencia Artificial",
+        priv_c3: "La confidencialidad de sus estrategias es nuestra máxima prioridad. La información enviada a nuestro motor de IA (Google Gemini Pro/Flash) se procesa de forma efímera a través de API seguras. Ningún modelo de aprendizaje automático (Machine Learning), público o privado, se entrena con sus datos operativos. El procesamiento se aísla y se destruye tras la generación del informe.",
+        priv_t4: "4. Anclaje Blockchain y Propiedad Intelectual",
+        priv_c4: "Para garantizar la protección absoluta de sus ideas y conceptos, cualquier documento subido a nuestra plataforma se convierte instantáneamente en un hash criptográfico (algoritmo SHA-256). Esta huella digital única se ancla en la cadena de bloques pública (blockchain) a través de la tecnología Woleet. Esto le otorga una prueba digital de existencia irrefutable (Proof of Existence) con valor legal internacional, sin que necesitemos almacenar el archivo original en nuestros servidores a largo plazo.",
+        priv_t5: "5. Cláusula de No Sustitución",
+        priv_c5: "Los informes, auditorías y matrices generados por el motor de Inteligencia Artificial de e-META LABS constituyen herramientas de apoyo a la toma de decisiones estratégicas de muy alto nivel. Se proporcionan con fines consultivos y en ningún caso sustituyen a una consulta legal, fiscal o financiera certificada por profesionales debidamente autorizados por las autoridades competentes.",
+        priv_t6: "6. Contacto y Derechos Internacionales",
+        priv_c6: "De acuerdo con las normativas internacionales de protección de datos (RGPD europeo, leyes locales vigentes), usted tiene derecho a acceder, rectificar, portar y eliminar su información. Para ejercer estos derechos o para cualquier pregunta relacionada con nuestro cumplimiento, comuníquese con nuestro departamento legal en: contact@e-metalabs.com.",
+        
+        btn_full_policy: "📑 Leer la Política Completa",
+        url_policy: "privacy.html?lang=es",
+        btn_return: "Volver al Motor IA",
+        btn_close: "Cerrar"
     },
     ar: {
         subtitle: "التميز الاستراتيجي والذكاء الاصطناعي عالي الدقة",
         btn_reset: "↻ إعادة تعيين",
-        lbl_counter: "تشخيصات آمنة",
+        lbl_counter: "تشخيصات آمنة وموثقة",
         step1_title: "01. تحديد الهوية",
         lbl_company: "الشركة / المؤسسة",
         ph_company: "مثال: مجموعة ألفا...",
@@ -394,22 +427,33 @@ const translations = {
         btn_new_analysis: "تحليل جديد",
         msg_reset_confirm: "هل تريد حقًا البدء من جديد؟",
         
-        modal_title: "الإشعار القانوني",
-        priv_t1: "1. العمليات",
-        priv_c1: "تستخدم بياناتك للتشخيص الاستراتيجي.",
-        priv_t2: "2. سيادة البيانات",
-        priv_c2: "لا تدرب بياناتك نماذج الذكاء الاصطناعي العامة.",
-        btn_full_policy: "📑 اقرأ السياسة كاملة",
-        url_policy: "privacy.html?lang=ar",
-        btn_return: "العودة إلى المحرك",
-        btn_close: "إغلاق",
-
-        // --- NOUVEAU : GUIDE LEXIQUE ---
+        // --- GUIDE LEXIQUE ---
         guide_title: "المعجم الاستراتيجي",
         guide_sec_title: "1. القطاعات الاستراتيجية",
         guide_sec_desc: "<strong style='color:#d4af37;'>• التكنولوجيا المالية:</strong> التمويل الرقمي، أنظمة الدفع، اللامركزية.<br><strong style='color:#d4af37;'>• تكنولوجيا الحكومة:</strong> تحديث الدولة ورقمنة الخدمات العامة.<br><strong style='color:#d4af37;'>• التكنولوجيا الخضراء:</strong> التحول البيئي، إزالة الكربون والطاقة المتجددة.<br><strong style='color:#d4af37;'>• تكنولوجيا العقارات:</strong> الابتكار العقاري، إدارة المباني الذكية.",
         guide_exp_title: "2. الخبرات التكنولوجية",
-        guide_exp_desc: "<strong style='color:#d4af37;'>• الذكاء الاصطناعي التوليدي:</strong> دمج الذكاء الاصطناعي للتحليل التنبؤي والأتمتة.<br><strong style='color:#d4af37;'>• الأمن السيبراني:</strong> حماية البنية التحتية الحيوية وتدقيق المرونة.<br><strong style='color:#d4af37;'>• الويب 3 والبلوكشين:</strong> تحويل الأصول إلى رموز، التتبع والتوثيق الرقمي.<br><strong style='color:#d4af37;'>• الهندسة البيئية (ESG):</strong> الاستراتيجية البيئية والاجتماعية وحوكمة الشركات."
+        guide_exp_desc: "<strong style='color:#d4af37;'>• الذكاء الاصطناعي التوليدي:</strong> دمج الذكاء الاصطناعي للتحليل التنبؤي والأتمتة.<br><strong style='color:#d4af37;'>• الأمن السيبراني:</strong> حماية البنية التحتية الحيوية وتدقيق المرونة.<br><strong style='color:#d4af37;'>• الويب 3 والبلوكشين:</strong> تحويل الأصول إلى رموز، التتبع والتوثيق الرقمي.<br><strong style='color:#d4af37;'>• الهندسة البيئية (ESG):</strong> الاستراتيجية البيئية والاجتماعية وحوكمة الشركات.",
+
+        // --- CHARTE JURIDIQUE EXHAUSTIVE ---
+        modal_title: "سياسة السيادة والخصوصية",
+        priv_date: "آخر تحديث: فبراير 2026",
+        priv_t1: "1. الهوية والعمليات",
+        priv_c1: "تعمل e-META LABS SASU كوحدة استخبارات استراتيجية دولية من مراكزها المختلفة (داكار، باريس، دبي). تقتصر البيانات التي يتم جمعها عبر منصتنا (B2B) بشكل صارم على نطاق إجراء التشخيصات الاستراتيجية بمساعدة الذكاء الاصطناعي.",
+        priv_t2: "2. جمع البيانات ومعالجتها",
+        priv_c2: "نحن نجمع فقط المعلومات الضرورية للتحليل: اسم الكيان، جهات الاتصال المهنية، السياق التشغيلي، والوثائق الاستراتيجية المقدمة طواعية. يمكن تسليم التحليل النهائي عبر تشفير شامل من طرف إلى طرف باستخدام واجهة برمجة تطبيقات WhatsApp Business، رهناً بالموافقة الصريحة للعميل.",
+        priv_t3: "3. السيادة والذكاء الاصطناعي",
+        priv_c3: "سرية استراتيجياتك هي أولويتنا القصوى. تتم معالجة المعلومات المقدمة لمحرك الذكاء الاصطناعي الخاص بنا (Google Gemini Pro/Flash) بشكل مؤقت عبر واجهات برمجة تطبيقات آمنة. لا يتم تدريب أي نماذج تعلم آلي عامة أو خاصة باستخدام بياناتك التشغيلية. يتم عزل المعالجة وإتلافها بعد إنشاء التقرير.",
+        priv_t4: "4. توثيق البلوكشين والملكية الفكرية",
+        priv_c4: "لضمان الحماية المطلقة لأفكارك ومفاهيمك، يتم تشفير أي مستند يتم تحميله على منصتنا فورًا (بخوارزمية SHA-256). يتم تثبيت هذه البصمة الرقمية الفريدة على تقنية البلوكشين العامة عبر واجهة Woleet. يمنحك هذا دليلاً رقميًا قاطعًا على إثبات الوجود بقيمة قانونية دولية، دون الحاجة إلى تخزين الملف الأصلي على خوادمنا على المدى الطويل.",
+        priv_t5: "5. شرط عدم الاستبدال",
+        priv_c5: "تشكل التقارير والتدقيقات والمصفوفات التي تم إنشاؤها بواسطة محرك الذكاء الاصطناعي التابع لـ e-META LABS أدوات دعم اتخاذ القرار الاستراتيجي عالية المستوى. يتم توفيرها لأغراض استشارية ولا تحل بأي حال من الأحوال محل الاستشارات القانونية أو الضريبية أو المالية المعتمدة من قبل المتخصصين المرخصين حسب الأصول من قبل السلطات المختصة.",
+        priv_t6: "6. الاتصال والحقوق الدولية",
+        priv_c6: "وفقًا للوائح حماية البيانات الدولية (GDPR الأوروبي، القوانين المحلية المعمول بها)، يحق لك الوصول إلى معلوماتك وتصحيحها ونقلها وحذفها. لممارسة هذه الحقوق أو لأي أسئلة تتعلق بامتثالنا، يرجى الاتصال بالقسم القانوني لدينا على: contact@e-metalabs.com.",
+        
+        btn_full_policy: "📑 اقرأ السياسة كاملة",
+        url_policy: "privacy.html?lang=ar",
+        btn_return: "العودة إلى محرك الذكاء الاصطناعي",
+        btn_close: "إغلاق"
     }
 };
 
