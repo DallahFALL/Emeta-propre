@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS
- * FICHIER : script.js (Engine Make & Validations)
+ * FICHIER : script.js
  */
 
 const WEBHOOK_URL = "https://hook.eu2.make.com/moupzawutk6h7ab6f5ap2li1qaypzh2f"; 
@@ -101,6 +101,7 @@ function resetForm() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Nom de Fichier
     const fileInput = document.getElementById('clientFile');
     const fileNameDisplay = document.getElementById('fileNameDisplay');
     if (fileInput && fileNameDisplay) {
@@ -117,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 2. Gestion de la Politique de Confidentialité (Modal)
     const privacyModal = document.getElementById('privacyOverlay');
     const openPrivacyBtn = document.getElementById('openPrivacy');
     if (openPrivacyBtn && privacyModal) {
@@ -129,6 +131,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 3. Gestion du Guide des Expertises (Modal)
+    const guideModal = document.getElementById('guideOverlay');
+    const openGuideBtn = document.getElementById('openGuide');
+    if (openGuideBtn && guideModal) {
+        openGuideBtn.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            guideModal.style.display = 'flex';
+        });
+        document.querySelectorAll('.close-guide, .close-guide-btn').forEach(btn => {
+            btn.addEventListener('click', () => { guideModal.style.display = 'none'; });
+        });
+    }
+
+    // 4. Modal Résultat IA
     const resultModal = document.getElementById('resultModal');
     if (resultModal) {
         document.querySelector('.close-result').addEventListener('click', () => {
@@ -136,8 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
+    // Fermeture des modaux au clic extérieur
     window.addEventListener('click', (e) => {
         if (e.target === privacyModal) privacyModal.style.display = 'none';
+        if (e.target === guideModal) guideModal.style.display = 'none';
         if (e.target === resultModal) resultModal.style.display = 'none';
     });
 });
