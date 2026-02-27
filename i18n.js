@@ -73,7 +73,7 @@ const translations = {
         
         step3_title: "03. Matrice Analyse",
         lbl_context: "Contexte Opérationnel",
-        ph_context: "Décrivez vos objectifs stratégiques à 1-3 ans, et les principaux défis...",
+        ph_context: "Décrivez votre situation actuelle, vos objectifs à 1-3 ans et vos défis majeurs (concurrence, financement, transition digitale...). Plus vous fournirez de détails, plus les recommandations de l'IA seront chirurgicales.",
         lbl_file_upload: "📄 Joindre un Document (Optionnel)",
         btn_browse: "Parcourir...",
         lbl_no_file: "Aucun fichier",
@@ -187,7 +187,7 @@ const translations = {
         
         step3_title: "03. Analysis Matrix",
         lbl_context: "Operational Context",
-        ph_context: "Describe your strategic goals and main challenges...",
+        ph_context: "Describe your current situation, 1-3 year goals, and major challenges (competition, funding, digital transition...). The more details you provide, the more precise the AI recommendations will be.",
         lbl_file_upload: "📄 Attach Document (Optional)",
         btn_browse: "Browse...",
         lbl_no_file: "No file selected",
@@ -301,7 +301,7 @@ const translations = {
         
         step3_title: "03. Matriz de Análisis",
         lbl_context: "Contexto Operativo",
-        ph_context: "Describa brevemente su situación actual y desafíos...",
+        ph_context: "Describa su situación actual, objetivos a 1-3 años y desafíos principales (competencia, financiamiento, transición digital...). Cuantos más detalles proporcione, más precisas serán las recomendaciones de la IA.",
         lbl_file_upload: "📄 Adjuntar Documento",
         btn_browse: "Explorar...",
         lbl_no_file: "Ningún archivo",
@@ -415,7 +415,7 @@ const translations = {
         
         step3_title: "03. مصفوفة التحليل",
         lbl_context: "السياق التشغيلي",
-        ph_context: "صف باختصار وضعك الحالي وأهدافك الاستراتيجية...",
+        ph_context: "صف وضعك الحالي وأهدافك لمدة 1-3 سنوات والتحديات الرئيسية (المنافسة، التمويل، التحول الرقمي...). كلما قدمت تفاصيل أكثر، كانت توصيات الذكاء الاصطناعي أكثر دقة.",
         lbl_file_upload: "📄 إرفاق مستند (اختياري)",
         btn_browse: "تصفح...",
         lbl_no_file: "لم يتم تحديد أي ملف",
