@@ -180,20 +180,42 @@ if (form) {
         }
 
         const submitBtn = document.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerText;
-        submitBtn.innerText = "Analyse & Ancrage Blockchain en cours...";
         submitBtn.disabled = true;
-        submitBtn.style.opacity = "0.7";
+        
+        // 1. Déclencher l'effet Wow
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const loadingText = document.getElementById('loadingText');
+        loadingOverlay.style.display = 'flex';
 
+        // Textes d'attente psychologiques (Effet "Hacker/Luxe")
+        const loadingSteps = [
+            "Analyse sémantique du contexte...",
+            "Corrélation avec les données sectorielles mondiales...",
+            "Génération des matrices stratégiques Gemini...",
+            "Cryptographie SHA-256 en cours...",
+            "Ancrage sur la Blockchain (Woleet)...",
+            "Mise en page du rapport PDF confidentiel...",
+            "Finalisation sécurisée..."
+        ];
+        
+        let stepIndex = 0;
+        const textInterval = setInterval(() => {
+            if (stepIndex < loadingSteps.length) {
+                loadingText.innerText = loadingSteps[stepIndex];
+                stepIndex++;
+            }
+        }, 1800); // Change de phrase toutes les 1.8 secondes
+
+        // Préparation du fichier (Base64)
         let fileData = null;
         let fileName = null;
         const fileInput = document.getElementById('clientFile');
         if (fileInput.files.length > 0) {
-            if (fileInput.files[0].size > 5 * 1024 * 1024) {
-                alert("Le fichier est trop volumineux (Maximum 5 Mo).");
-                submitBtn.innerText = originalText;
+            if (fileInput.files[0].size > 2.5 * 1024 * 1024) {
+                alert("Pour garantir une analyse IA ultra-rapide, le fichier ne doit pas dépasser 2.5 Mo.");
                 submitBtn.disabled = false;
-                submitBtn.style.opacity = "1";
+                loadingOverlay.style.display = 'none';
+                clearInterval(textInterval);
                 return;
             }
             try {
@@ -219,15 +241,25 @@ if (form) {
             attachedFileBase64: fileData 
         };
 
+        // Envoi à Make.com
         fetch(WEBHOOK_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         })
         .then(async response => {
+            clearInterval(textInterval); // Stopper le défilement
+            loadingOverlay.style.display = 'none'; // Cacher l'écran de chargement
+
             if (response.ok) {
                 const aiResponse = await response.text();
-                document.getElementById('resultBody').innerHTML = aiResponse;
+                // Afficher le résultat avec un message de félicitations
+                document.getElementById('resultBody').innerHTML = 
+                    `<div style="text-align:center; margin-bottom: 20px;">
+                        <span style="font-size: 3rem;">✅</span>
+                        <h3 style="color:#25D366; margin-top: 10px;">Audit Généré & Sécurisé</h3>
+                        <p style="font-size: 0.9rem; color:#8892b0;">Un exemplaire PDF certifié a été expédié à votre adresse email.</p>
+                     </div>` + aiResponse;
                 document.getElementById('resultModal').style.display = 'flex';
                 submitBtn.innerText = "Analyse Terminée";
             } else {
@@ -235,11 +267,9 @@ if (form) {
             }
         })
         .catch(error => {
+            clearInterval(textInterval);
+            loadingOverlay.style.display = 'none';
             console.error('Erreur:', error);
             alert("Erreur de connexion avec le serveur IA. Veuillez réessayer.");
-            submitBtn.innerText = originalText;
             submitBtn.disabled = false;
-            submitBtn.style.opacity = "1";
         });
-    });
-}
