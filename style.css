@@ -238,3 +238,12 @@ button.btn-outline:hover { background: rgba(212, 175, 55, 0.1); }
         gap: 10px;
     }
 }
+.loader-spinner {
+    width: 70px;
+    height: 70px;
+    border: 3px solid rgba(212, 175, 55, 0.1);
+    border-top: 3px solid #d4af37;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
