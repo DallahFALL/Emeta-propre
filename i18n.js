@@ -1,10 +1,15 @@
 /* * PROJET : e-META LABS
- * FICHIER : i18n.js (Traduction Intégrale Exhaustive)
+ * FICHIER : i18n.js (Traduction Intégrale Exhaustive + Vision Sublime)
  */
 
 const translations = {
     fr: {
-        subtitle: "Excellence Stratégique & Haute Précision IA",
+        // --- VISION SUBLIME ---
+        hero_label: "MASTER DIAGNOSTIC 2026",
+        hero_slogan_1: "Excellence Stratégique",
+        hero_slogan_2: "& Haute Précision IA",
+        subtitle: "Excellence Stratégique & Haute Précision IA", // Conservé par sécurité
+        
         btn_reset: "↻ Reset",
         lbl_counter: "Diagnostics Sécurisés & Ancrés",
         step1_title: "01. Identification",
@@ -118,7 +123,12 @@ const translations = {
         btn_close: "Fermer"
     },
     en: {
+        // --- VISION SUBLIME ---
+        hero_label: "MASTER DIAGNOSTIC 2026",
+        hero_slogan_1: "Strategic Excellence",
+        hero_slogan_2: "& High Precision AI",
         subtitle: "Strategic Excellence & High Precision AI",
+        
         btn_reset: "↻ Reset",
         lbl_counter: "Secured & Anchored Diagnostics",
         step1_title: "01. Identification",
@@ -232,7 +242,12 @@ const translations = {
         btn_close: "Close"
     },
     es: {
+        // --- VISION SUBLIME ---
+        hero_label: "DIAGNÓSTICO MAESTRO 2026",
+        hero_slogan_1: "Excelencia Estratégica",
+        hero_slogan_2: "& Alta Precisión IA",
         subtitle: "Excelencia Estratégica y Alta Precisión IA",
+        
         btn_reset: "↻ Reiniciar",
         lbl_counter: "Diagnósticos Asegurados",
         step1_title: "01. Identificación",
@@ -346,7 +361,12 @@ const translations = {
         btn_close: "Cerrar"
     },
     ar: {
+        // --- VISION SUBLIME ---
+        hero_label: "التشخيص الرئيسي 2026",
+        hero_slogan_1: "التميز الاستراتيجي",
+        hero_slogan_2: "والذكاء الاصطناعي عالي الدقة",
         subtitle: "التميز الاستراتيجي والذكاء الاصطناعي عالي الدقة",
+        
         btn_reset: "↻ إعادة تعيين",
         lbl_counter: "تشخيصات آمنة وموثقة",
         step1_title: "01. تحديد الهوية",
@@ -437,6 +457,7 @@ const translations = {
         
         guide_exp_title: "2. الخبرات التكنولوجية",
         guide_exp_desc: "<strong style='color:#d4af37;'>• الذكاء الاصطناعي التوليدي:</strong> دمج الذكاء الاصطناعي للتحليل التنبؤي والأتمتة.<br><strong style='color:#d4af37;'>• الأمن السيبراني:</strong> حماية البنية التحتية الحيوية وتدقيق المرونة.<br><strong style='color:#d4af37;'>• الهندسة البيئية (ESG):</strong> الاستراتيجية البيئية والاجتماعية وحوكمة الشركات.<br><strong style='color:#d4af37;'>• الويب 3 والبلوكشين:</strong> تحويل الأصول إلى رموز، التتبع والتوثيق الرقمي (Woleet).<br><strong style='color:#d4af37;'>• التسويق الرقمي:</strong> استراتيجية الاستحواذ وتحسين محركات البحث.<br><strong style='color:#d4af37;'>• تحسين العمليات:</strong> التميز التشغيلي وخفض التكاليف.<br><strong style='color:#d4af37;'>• إدارة المواهب:</strong> التوظيف والاحتفاظ والتدريب.<br><strong style='color:#d4af37;'>• التفكير التصميمي:</strong> تجربة المستخدم (UX) وابتكار المنتجات.",
+        
         // --- CHARTE JURIDIQUE EXHAUSTIVE ---
         modal_title: "سياسة السيادة والخصوصية",
         priv_date: "آخر تحديث: فبراير 2026",
@@ -459,6 +480,10 @@ const translations = {
         btn_close: "إغلاق"
     }
 };
+
+// ==========================================
+// MOTEUR D'APPLICATION DES LANGUES (INTOUCHÉ)
+// ==========================================
 
 function setLanguage(lang) {
     document.documentElement.lang = lang;
