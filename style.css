@@ -247,3 +247,69 @@ button.btn-outline:hover { background: rgba(212, 175, 55, 0.1); }
     animation: spin 1s linear infinite;
 }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+/* --- Vision Sublime e-META LABS --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;800&display=swap');
+
+:root {
+    --deep-black: #050505;
+    --gold-excellence: #d4af37;
+    --electric-blue: #aeefff;
+    --white-pure: #ffffff;
+}
+
+.hero-sublime {
+    background: radial-gradient(circle at center, #0a1118 0%, var(--deep-black) 100%);
+    color: var(--white-pure);
+    padding: 80px 20px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+
+.label-gold {
+    color: var(--gold-excellence);
+    letter-spacing: 5px;
+    font-size: 0.85rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.slogan-ia {
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 40px;
+}
+
+.precision-text {
+    background: linear-gradient(90deg, #fff, var(--electric-blue), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px rgba(174, 239, 255, 0.3));
+}
+
+.gauge-glow {
+    border: 2px solid var(--gold-excellence);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+}
+
+.count {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--white-pure);
+}
+
+.description {
+    font-weight: 300;
+    opacity: 0.8;
+    line-height: 1.6;
+    letter-spacing: 1px;
+}
