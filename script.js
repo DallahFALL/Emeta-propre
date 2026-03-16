@@ -1,5 +1,5 @@
 /* * PROJET : e-META LABS
- * FICHIER : script.js (Engine Make & Validations + Wow Effect Multilingue)
+ * FICHIER : script.js (Engine Make & Validations + Wow Effect Multilingue + UX Premium)
  */
 
 const WEBHOOK_URL = "https://hook.eu2.make.com/moupzawutk6h7ab6f5ap2li1qaypzh2f"; 
@@ -165,6 +165,7 @@ if (form) {
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
 
+        // Validations finales
         const whatsappConsent = document.getElementById('whatsapp-consent');
         if (!whatsappConsent.checked) {
             setCustomMessage(whatsappConsent);
@@ -183,10 +184,20 @@ if (form) {
         const originalText = submitBtn.innerText;
         submitBtn.disabled = true;
         
-        // 1. Déclencher l'effet Wow
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        const loadingText = document.getElementById('loadingText');
-        if (loadingOverlay) loadingOverlay.style.display = 'flex';
+        // ==========================================
+        // DÉBUT DE L'EFFET WOW (UX/UI DYNAMIQUE)
+        // ==========================================
+        
+        // 1. Cacher le formulaire pour faire place au loader
+        form.style.display = 'none';
+        
+        // 2. Afficher l'écran de chargement
+        const wowLoader = document.getElementById('emeta-loader');
+        const statusText = document.getElementById('emeta-status');
+        const oldLoadingOverlay = document.getElementById('loadingOverlay'); // Fallback
+        
+        if (wowLoader) wowLoader.style.display = 'block';
+        else if (oldLoadingOverlay) oldLoadingOverlay.style.display = 'flex';
 
         // Détection de la langue pour l'animation
         const currentLang = document.documentElement.lang || 'fr';
@@ -234,14 +245,22 @@ if (form) {
         const loadingSteps = allLoadingSteps[currentLang] || allLoadingSteps['fr'];
         let stepIndex = 0;
         
+        // Animation du texte
         const textInterval = setInterval(() => {
-            if (stepIndex < loadingSteps.length && loadingText) {
-                loadingText.innerText = loadingSteps[stepIndex];
+            if (stepIndex < loadingSteps.length) {
+                if (statusText) statusText.innerText = loadingSteps[stepIndex];
+                else {
+                    const oldText = document.getElementById('loadingText');
+                    if(oldText) oldText.innerText = loadingSteps[stepIndex];
+                }
                 stepIndex++;
             }
-        }, 1800); // Change de phrase toutes les 1.8 secondes
+        }, 1800); 
 
-        // Préparation du fichier (Base64) avec limite de 2.5 Mo
+        // ==========================================
+        // PRÉPARATION DES DONNÉES ET ENVOI API
+        // ==========================================
+
         let fileData = null;
         let fileName = null;
         const fileInput = document.getElementById('clientFile');
@@ -249,7 +268,11 @@ if (form) {
             if (fileInput.files[0].size > 2.5 * 1024 * 1024) {
                 alert("Pour garantir une analyse IA ultra-rapide, le fichier ne doit pas dépasser 2.5 Mo.");
                 submitBtn.disabled = false;
-                if(loadingOverlay) loadingOverlay.style.display = 'none';
+                
+                // RESTAURATION SI ERREUR DE TAILLE
+                form.style.display = 'block'; 
+                if(wowLoader) wowLoader.style.display = 'none';
+                if(oldLoadingOverlay) oldLoadingOverlay.style.display = 'none';
                 clearInterval(textInterval);
                 return;
             }
@@ -282,32 +305,99 @@ if (form) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         })
-        .then(async response => {
-            clearInterval(textInterval); // Stopper le défilement
-            if(loadingOverlay) loadingOverlay.style.display = 'none'; // Cacher l'écran de chargement
+  .then(async response => {
+            clearInterval(textInterval); // Stopper le défilement des phrases
 
             if (response.ok) {
-                const aiResponse = await response.text();
-                // Afficher le résultat avec un message de félicitations
+                // Récupération de la réponse envoyée par Make.com
+                const aiResponse = await response.text(); 
+                
+                // On vérifie si Make.com a fait un TimeOut (réponse "Accepted")
+                const isTimeout = aiResponse.trim() === "Accepted";
+                const pdfUrl = isTimeout ? "#" : aiResponse;
+                
+                // ⚠️ REMPLACEZ L'URL CI-DESSOUS PAR VOTRE VRAI LIEN CALENDLY COMPLET ⚠️
+                const calendlyUrl = "https://calendly.com/e-metalabs/30min"
+                
+                // 1. TRANSFORMATION DU LOADER EN ÉCRAN DE SUCCÈS
+                if (wowLoader) {
+                    wowLoader.innerHTML = `
+                        <div style="font-size: 50px; margin-bottom: 15px; text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);">✅</div>
+                        <h3 style="color: #d4af37; font-family: 'Cinzel', serif; font-weight: bold;">Audit Généré & Sécurisé</h3>
+                        <p style="font-size: 16px; color: #8892b0; margin-bottom: 25px;">Le sceau cryptographique a été appliqué. L'analyse est terminée.</p>
+                        <button onclick="location.reload()" class="btn-outline" style="padding: 10px 20px;">Nouvelle analyse</button>
+                    `;
+                }
+
+                // 2. GESTION DU BOUTON PDF (TÉLÉCHARGEMENT DIRECT OU ENVOI EMAIL)
+                let pdfHtmlContent = "";
+                if (isTimeout) {
+                    // Si l'IA a pris plus de 40 secondes
+                    pdfHtmlContent = `
+                        <div style="background: rgba(212, 175, 55, 0.05); border: 1px dashed #d4af37; padding: 15px; border-radius: 4px; margin-bottom: 30px;">
+                            <p style="color: #d4af37; font-size: 0.95rem; margin: 0;">
+                                ⏳ <strong>Analyse Complexe Terminée.</strong><br>
+                                Votre matrice stratégique est en cours d'ancrage. Le rapport PDF certifié va arriver <strong>directement dans votre boîte email</strong> d'ici 1 à 2 minutes.
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    // Si l'IA a répondu vite
+                    pdfHtmlContent = `
+                        <a href="${pdfUrl}" target="_blank" style="display: block; width: 100%; background: #d4af37; color: #0a192f; font-weight: bold; text-align: center; text-decoration: none; margin-bottom: 30px; padding: 15px; font-size: 1.1rem; border-radius: 4px; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); box-sizing: border-box;">
+                            📄 TÉLÉCHARGER L'AUDIT (PDF)
+                        </a>
+                    `;
+                }
+
+                // 3. OUVERTURE DU POPUP PREMIUM
                 const resultBody = document.getElementById('resultBody');
                 if(resultBody) {
-                    resultBody.innerHTML = 
-                        `<div style="text-align:center; margin-bottom: 20px;">
-                            <span style="font-size: 3rem;">✅</span>
-                            <h3 style="color:#25D366; margin-top: 10px;">Audit Généré & Sécurisé</h3>
-                            <p style="font-size: 0.9rem; color:#8892b0;">Un exemplaire PDF certifié a été expédié à votre adresse email.</p>
-                         </div>` + aiResponse;
+                    resultBody.innerHTML = `
+                        <div style="text-align: center; margin-top: 10px;">
+                            <p style="color: #8892b0; font-size: 0.95rem; margin-bottom: 25px;">
+                                Les algorithmes e-META LABS ont finalisé le traitement de vos données.
+                            </p>
+
+                            ${pdfHtmlContent}
+
+                            <div style="border-top: 1px solid rgba(212, 175, 55, 0.2); margin: 30px 0 25px 0; position: relative;">
+                                <span style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #0a192f; padding: 0 15px; color: #d4af37; font-family: 'Cinzel', serif; font-size: 0.9rem;">
+                                    NEXT STEP
+                                </span>
+                            </div>
+
+                            <h4 style="color: #e6f1ff; font-family: 'Cinzel', serif; margin-bottom: 10px; font-size: 1.2rem;">
+                                Débriefing Exécutif
+                            </h4>
+                            <p style="font-size: 0.85rem; color: #8892b0; margin-bottom: 20px;">
+                                L'IA a posé les fondations analytiques. Passez à l'exécution avec un Senior Partner e-META LABS.
+                            </p>
+
+                            <a href="${calendlyUrl}" target="_blank" style="display: block; width: 100%; background: transparent; border: 2px solid #25D366; color: #25D366; padding: 12px; text-decoration: none; border-radius: 4px; font-weight: bold; text-transform: uppercase; transition: 0.3s; box-shadow: 0 0 15px rgba(37, 211, 102, 0.15); box-sizing: border-box; text-align: center;">
+                                📅 RÉSERVER MON DÉBRIEFING (45 MIN)
+                            </a>
+                        </div>
+                    `;
                 }
                 const resModal = document.getElementById('resultModal');
-                if(resModal) resModal.style.display = 'flex';
+                if(resModal) {
+                    setTimeout(() => { resModal.style.display = 'flex'; }, 1000);
+                }
+                
                 submitBtn.innerText = "Analyse Terminée";
             } else {
                 throw new Error('Erreur serveur');
             }
         })
         .catch(error => {
+// LE RESTE DE VOTRE CODE (CATCH) RESTE LE MÊME 
+            // RESTAURATION DU FORMULAIRE EN CAS D'ÉCHEC
             clearInterval(textInterval);
-            if(loadingOverlay) loadingOverlay.style.display = 'none';
+            form.style.display = 'block';
+            if(wowLoader) wowLoader.style.display = 'none';
+            if(oldLoadingOverlay) oldLoadingOverlay.style.display = 'none';
+            
             console.error('Erreur:', error);
             alert("Erreur de connexion avec le serveur IA. Veuillez réessayer.");
             submitBtn.disabled = false;
