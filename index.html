@@ -1,62 +1,97 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+<head>                
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>e-META LABS | Strategic AI Engine</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L95 25 V75 L50 95 L5 75 V25 Z' stroke='%23d4af37' stroke-width='4' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
+    <meta name="robots" content="noindex, nofollow">
     
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L95 25 V75 L50 95 L5 75 V25 Z' stroke='%23d4af37' stroke-width='4' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
+      
     <style>
-        /* Pulse lumineux sur le conteneur principal */
+        body { margin: 0; background-color: #0a192f; color: #e6f1ff; font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
+        
         .glass-card {
             box-shadow: 0 0 30px rgba(212, 175, 55, 0.15), inset 0 0 20px rgba(212, 175, 55, 0.05);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            transition: box-shadow 0.4s ease-in-out;
+            border: 1px solid rgba(212, 175, 55, 0.4); background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px); border-radius: 12px; padding: 40px; max-width: 850px;
+            margin: 40px auto; transition: box-shadow 0.4s ease-in-out;
         }
         .glass-card:hover {
             box-shadow: 0 0 50px rgba(212, 175, 55, 0.3), inset 0 0 30px rgba(212, 175, 55, 0.1);
             border: 1px solid rgba(212, 175, 55, 0.7);
         }
 
-        /* Illumination des champs de saisie au focus */
-        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-            border-color: #d4af37 !important;
-            outline: none;
-        }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; border-bottom: 1px solid rgba(212, 175, 55, 0.2); background: rgba(10, 25, 47, 0.9); position: sticky; top: 0; z-index: 100; }
+        .logo-container { display: flex; align-items: center; gap: 15px; }
+        .brand-text h1 { font-family: 'Cinzel', serif; color: #d4af37; margin: 0; font-size: 1.5rem; }
+        .header-slogan { font-size: 0.9rem; color: #8892b0; display: none; }
+        @media(min-width: 768px) { .header-slogan { display: block; } }
+        
+        .btn-reset { background: transparent; border: 1px solid #8892b0; color: #8892b0; padding: 5px 10px; border-radius: 4px; cursor: pointer; margin-right: 10px; }
+        .lang-switch button { background: transparent; border: none; color: #8892b0; cursor: pointer; font-weight: bold; padding: 5px; }
+        .lang-switch button.active { color: #d4af37; border-bottom: 1px solid #d4af37; }
 
-        /* Effet Wow sur les boutons sélectionnés (Secteurs/Expertises) */
-        .checkbox-btn input:checked + span {
-            background: rgba(212, 175, 55, 0.15) !important;
-            border-color: #d4af37 !important;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6), inset 0 0 10px rgba(212, 175, 55, 0.3) !important;
-            color: #fff !important;
-            text-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
-        }
+        .counter-container { text-align: center; padding: 15px 0; background: rgba(10, 25, 47, 0.8); border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
+        .hero-sublime { text-align: center; padding: 50px 20px; }
+        .label-gold { color: #d4af37; font-family: 'Cinzel', serif; letter-spacing: 2px; font-size: 0.85rem; margin-bottom: 10px; }
+        .slogan-ia { font-family: 'Cinzel', serif; font-size: 2.2rem; margin: 15px 0; }
+        .precision-text { color: #d4af37; }
 
-        /* Bouton Lancer Analyse Ultra-Lumineux */
-        .btn-gold.glow {
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-            animation: pulse-gold 2s infinite;
-        }
-        @keyframes pulse-gold {
-            0% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.9), 0 0 10px #fff; }
-            100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
-        }
+        .form-step { display: none; animation: fadeIn 0.5s; }
+        .form-step.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Espacement esthétique pour le lexique */
-        .lexique-item {
-            margin-bottom: 8px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; color: #d4af37; font-size: 0.9rem; font-family: 'Cinzel', serif; }
+        .input-group input, .input-group select, .input-group textarea { width: 100%; padding: 12px; background: rgba(10, 25, 47, 0.5); border: 1px solid rgba(212, 175, 55, 0.4); color: #fff; border-radius: 4px; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: 0.3s; }
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus { box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); border-color: #d4af37 !important; outline: none; }
+
+        .grid-options { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-bottom: 20px; }
+        .checkbox-btn input { display: none; }
+        .checkbox-btn span { display: block; padding: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; cursor: pointer; font-size: 0.85rem; transition: 0.3s; }
+        .checkbox-btn input:checked + span { background: rgba(212, 175, 55, 0.15) !important; border-color: #d4af37 !important; box-shadow: 0 0 20px rgba(212, 175, 55, 0.6); color: #fff !important; }
+
+        .btn-gold { background: #d4af37; color: #0a192f; border: none; padding: 12px 25px; border-radius: 4px; font-weight: bold; font-family: 'Cinzel', serif; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 0 20px #d4af37; }
+        .btn-outline { background: transparent; border: 1px solid #d4af37; color: #d4af37; padding: 12px 25px; border-radius: 4px; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-family: 'Cinzel', serif; }
+        .btn-container { display: flex; justify-content: flex-end; margin-top: 20px; }
+        .btn-container.split { justify-content: space-between; }
+        
+        .gold-link { color: #d4af37; text-decoration: underline; cursor: pointer; transition: 0.3s; }
+        .gold-link:hover { color: #fff; }
+        
+        .btn-gold.glow { box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); animation: pulse-gold 2s infinite; }
+        @keyframes pulse-gold { 0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); } 50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.9); } }
+
+        /* Modals & One-Page Overlays */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(10, 25, 47, 0.95); display: none; justify-content: center; align-items: center; z-index: 20000; backdrop-filter: blur(8px); }
+        .modal-content { background: #0a192f; border: 1px solid #d4af37; padding: 35px; border-radius: 8px; max-width: 800px; width: 90%; position: relative; max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        .modal-body { overflow-y: auto; padding-right: 15px; }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: #8892b0; transition: 0.3s; }
+        .close-btn:hover { color: #d4af37; }
+        
+        .lexique-item { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .privacy-title { color: #d4af37; font-family: 'Cinzel', serif; font-size: 1.1rem; margin-top: 25px; margin-bottom: 10px; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 5px; }
+        
+        /* Payment Gateway Buttons */
+        .gateway-btn { display: block; width: 100%; padding: 20px; margin-bottom: 15px; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; text-align: center; text-decoration: none; border: 2px solid transparent; }
+        .gateway-paydunya { background: rgba(13, 110, 253, 0.1); border-color: #0d6efd; color: #66b0ff; }
+        .gateway-paydunya:hover { background: #0d6efd; color: #fff; box-shadow: 0 0 20px rgba(13, 110, 253, 0.4); }
+        .gateway-lemon { background: rgba(212, 175, 55, 0.1); border-color: #d4af37; color: #d4af37; }
+        .gateway-lemon:hover { background: #d4af37; color: #0a192f; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .footer { text-align: center; padding: 40px; font-size: 0.8rem; color: #8892b0; border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 40px; }
+
+        [dir="rtl"] { text-align: right; }
+        [dir="rtl"] .logo-container { flex-direction: row-reverse; }
+        [dir="rtl"] .btn-container { flex-direction: row-reverse; }
     </style>
 </head>
-<body>
+<body id="main-body">
 
     <header class="header">
         <div class="logo-container">
@@ -65,9 +100,7 @@
                 <path d="M50 20 L80 35 V65 L50 80 L20 65 V35 Z" stroke="#d4af37" stroke-width="1" fill="rgba(212, 175, 55, 0.1)"/>
                 <circle cx="50" cy="50" r="8" fill="#d4af37"/>
             </svg>
-            <div class="brand-text">
-                <h1>e-META LABS</h1>
-            </div>
+            <div class="brand-text"><h1>e-META LABS</h1></div>
         </div>
         <div class="header-slogan" data-i18n="subtitle">Excellence Stratégique & Haute Précision IA</div>
         <div class="header-actions">
@@ -81,35 +114,79 @@
         </div>
     </header>
 
-    <div class="counter-container" style="text-align: center; padding: 15px 0; background: rgba(10, 25, 47, 0.8); border-bottom: 1px solid rgba(212, 175, 55, 0.2);">
+    <div class="counter-container">
         <span style="font-family: 'Cinzel', serif; color: #d4af37; font-size: 1.5rem; font-weight: bold;" id="live-counter-top">1,420</span>
         <span style="color: #8892b0; font-size: 0.9rem; margin-left: 10px; text-transform: uppercase; letter-spacing: 1px;" data-i18n="lbl_counter">Diagnostics Sécurisés & Ancrés</span>
     </div>
 
     <section class="hero-sublime">
-    <div class="container">
-        <p class="label-gold" data-i18n="hero_label">MASTER DIAGNOSTIC 2026</p>
-        
-        <h1 class="slogan-ia">
-            <span data-i18n="hero_slogan_1">Excellence Stratégique</span> <br>
-            <span class="precision-text" data-i18n="hero_slogan_2">& Haute Précision IA</span>
-        </h1>
-        
-        <div class="status-container">
-            <div class="gauge-glow">
-                <span class="count" id="live-counter">1,420</span>
-            </div>
-            <p class="description" data-i18n="lbl_counter">
-                Diagnostics Sécurisés & Ancrés
+        <div class="container">
+            <p class="label-gold" data-i18n="hero_label">MASTER DIAGNOSTIC 2026</p>
+            <h1 class="slogan-ia">
+                <span data-i18n="hero_slogan_1">Excellence Stratégique</span> <br>
+                <span class="precision-text" data-i18n="hero_slogan_2">& Haute Précision IA</span>
+            </h1>
+            <p style="color: #25D366; font-family: 'Inter', sans-serif; font-size: 1rem; margin-top: 15px; letter-spacing: 1px; text-transform: uppercase; text-shadow: 0 0 10px rgba(37, 211, 102, 0.3);" data-i18n="slogan_sniper">
+                Conçu pour la Tech. Bâti pour l'absolu.
             </p>
         </div>
-    </div>
-</section>
+    </section>
 
-<main class="main-container">
-    <div class="glass-card">
-        <form id="diagnosticForm">
-            <div class="form-step active" id="step-1">
+    <section id="pricing" style="font-family: Arial, sans-serif; padding: 20px 10px; background-color: rgba(0,0,0,0.2); text-align: center;">
+        <div style="max-width: 1100px; margin: 0 auto;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+                
+                <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 20px; width: 280px; text-align: left; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                    <h3 data-i18n="pricing_starter_name" style="font-size: 18px; color: #fff; margin-top: 0; font-family: 'Cinzel', serif;">STARTER</h3>
+                    <p data-i18n="pricing_starter_desc" style="font-size: 13px; color: #8892b0; min-height: 35px; margin-bottom: 10px;">Pour tester la puissance analytique d'e-META LABS.</p>
+                    <div style="font-size: 24px; font-weight: bold; color: #d4af37; margin: 10px 0;"><span data-i18n="pricing_starter_price">0 FCFA</span></div>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 20px; font-size: 13px; color: #ccc; line-height: 1.5;">
+                        <li data-i18n="pricing_starter_feat1">✓ 2 Diagnostics foudroyants</li>
+                        <li data-i18n="pricing_starter_feat2">✓ Identification du risque majeur</li>
+                        <li data-i18n="pricing_starter_feat3">✓ Format texte (Email)</li>
+                        <li data-i18n="pricing_starter_feat4" style="color: #d9534f; font-weight: bold; margin-top: 8px;">⚠️ Plan d'action non inclus</li>
+                    </ul>
+                    <a href="#diagnosticForm" onclick="document.getElementById('plan_choisi').value='starter';" data-i18n="pricing_starter_btn" style="display: block; text-align: center; background: rgba(255,255,255,0.1); color: #fff; text-decoration: none; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 14px;">Tester gratuitement</a>
+                </div>
+
+                <div class="pricing-card card-pro" style="background-color: rgba(13, 27, 42, 0.9); border-radius: 8px; padding: 20px; width: 280px; text-align: left; border: 2px solid #d4af37; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; transform: scale(1.05); z-index: 10;">
+                    <div data-i18n="pricing_pro_badge" style="background: #d4af37; color: #000; font-size: 11px; font-weight: bold; text-align: center; padding: 4px; border-radius: 3px; margin-bottom: 10px; width: fit-content; text-transform: uppercase;">LE PLUS POPULAIRE</div>
+                    <h3 data-i18n="pricing_pro_name" style="font-size: 18px; color: #d4af37; margin-top: 0; font-family: 'Cinzel', serif;">PRO (PACK 3)</h3>
+                    <p data-i18n="pricing_pro_desc" style="font-size: 13px; color: #8892b0; min-height: 35px; margin-bottom: 10px;">Un pack de <strong>3 audits stratégiques</strong> complets et sans concession.</p>
+                    <div style="font-size: 24px; font-weight: bold; color: #d4af37; margin: 10px 0;"><span data-i18n="pricing_pro_price">14 900 FCFA</span></div>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 20px; font-size: 13px; color: #ccc; line-height: 1.5;">
+                        <li data-i18n="pricing_pro_feat1"><strong style="color: #d4af37;">✓</strong> <strong>3 Rapports</strong> complets</li>
+                        <li data-i18n="pricing_pro_feat2"><strong style="color: #d4af37;">✓</strong> Diagnostic financier & KPI</li>
+                        <li data-i18n="pricing_pro_feat3"><strong style="color: #d4af37;">✓</strong> Stratégies de disruption</li>
+                        <li data-i18n="pricing_pro_feat4"><strong style="color: #d4af37;">✓</strong> Rapports PDF Premium</li>
+                    </ul>
+                    <a href="#diagnosticForm" onclick="document.getElementById('plan_choisi').value='pro';" data-i18n="pricing_pro_btn" style="display: block; text-align: center; background: #d4af37; color: #0a192f; text-decoration: none; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 14px; text-transform: uppercase;">Acheter le Pack</a>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid #333; border-radius: 8px; padding: 20px; width: 280px; text-align: left; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                    <h3 data-i18n="pricing_expert_name" style="font-size: 18px; color: #fff; margin-top: 0; font-family: 'Cinzel', serif;">EXPERT</h3>
+                    <p data-i18n="pricing_expert_desc" style="font-size: 13px; color: #8892b0; min-height: 35px; margin-bottom: 10px;">Votre cellule prospective 24/7.</p>
+                    <div style="font-size: 24px; font-weight: bold; color: #d4af37; margin: 10px 0;"><span data-i18n="pricing_expert_price">29 000 FCFA</span></div>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 20px; font-size: 13px; color: #ccc; line-height: 1.5;">
+                        <li data-i18n="pricing_expert_feat1">✓ Jusqu'à 10 Audits / mois</li>
+                        <li data-i18n="pricing_expert_feat2">✓ <b>Veille Data en temps réel</b></li>
+                        <li data-i18n="pricing_expert_feat3">✓ Protocole d'action sur 7 jours</li>
+                        <li data-i18n="pricing_expert_feat4">✓ Livraison VIP (WhatsApp)</li>
+                    </ul>
+                    <a href="#diagnosticForm" onclick="document.getElementById('plan_choisi').value='expert';" data-i18n="pricing_expert_btn" style="display: block; text-align: center; background: #d4af37; color: #111; text-decoration: none; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 14px;">S'abonner</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <main class="main-container">
+        <div class="glass-card">
+            
+            <form id="diagnosticForm">
+                <input type="hidden" id="plan_choisi" value="starter">   
+                
+                <div class="form-step active" id="step-1">
                     <h3 data-i18n="step1_title">01. Identification</h3>
                     <div class="input-group">
                         <label for="company" data-i18n="lbl_company">Société / Entité</label>
@@ -131,82 +208,127 @@
                 <div class="form-step" id="step-2">
                     <h3 data-i18n="step2_title">02. Matrice Stratégique</h3>
                     
+                    <div style="background: rgba(212, 175, 55, 0.05); border-left: 3px solid #d4af37; padding: 12px 15px; margin-bottom: 20px; border-radius: 0 4px 4px 0;">
+                        <span style="display: block; color: #d4af37; font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 5px; font-weight: bold;" data-i18n="agnostic_title">INTELLIGENCE AGNOSTIQUE 🧠</span>
+                        <span style="color: #8892b0; font-size: 0.85rem; line-height: 1.4; display: block;" data-i18n="agnostic_desc">
+                            De l'ingénierie financière aux litiges internationaux les plus complexes, notre moteur polymorphe s'adapte à votre industrie. Cochez l'<strong>Auto-Détection IA</strong> si votre enjeu dépasse les cadres traditionnels.
+                        </span>
+                    </div>
+
                     <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                        <label class="section-label" data-i18n="lbl_sector">Secteur Stratégique</label>
-                        <a href="#" id="openGuide" class="gold-link" style="font-size: 0.8rem; text-decoration: none; text-shadow: 0 0 5px rgba(212,175,55,0.5);" data-i18n="btn_guide">📖 Guide des Expertises</a>
+                        <label class="section-label" data-i18n="lbl_sector" style="color: #d4af37; font-family: 'Cinzel', serif; font-size: 0.9rem;">Secteur Stratégique</label>
+                        <a href="javascript:void(0)" onclick="openModal('guideOverlay')" class="gold-link" style="font-size: 0.8rem;" data-i18n="btn_guide">📖 Guide des Expertises</a>
                     </div>
                     
-                  <div class="grid-options">
-    <label class="checkbox-btn"><input type="radio" name="sector" value="FinTech_DeFi"> <span data-i18n="sec_fintech">FinTech & DeFi</span></label>
-    <label class="checkbox-btn"><input type="radio" name="sector" value="GovTech_SmartCities"> <span data-i18n="sec_gov">GovTech & Smart Cities</span></label>
-    <label class="checkbox-btn"><input type="radio" name="sector" value="Health_BioTech"> <span data-i18n="sec_health">Santé & BioTech</span></label>
-    <label class="checkbox-btn"><input type="radio" name="sector" value="GreenTech_Energy"> <span data-i18n="sec_green">GreenTech & Énergies</span></label>
-    <label class="checkbox-btn"><input type="radio" name="sector" value="AgriTech_FoodSec"> <span data-i18n="sec_agri">AgriTech & Food Security</span></label>
-    <label class="checkbox-btn"><input type="radio" name="sector" value="Logistics_SupplyChain"> <span data-i18n="sec_log">Logistique & Supply Chain</span></label>
-    <label class="checkbox-btn"><input type="radio" name="sector" value="Mining_OilGas"> <span data-i18n="sec_mine">Mines, Pétrole & Gaz</span></label>
-    <label class="checkbox-btn"><input type="radio" name="sector" value="RealEstate_PropTech"> <span data-i18n="sec_btp">Immobilier & PropTech</span></label>
-    <label class="checkbox-btn"><input type="radio" name="sector" value="Ecommerce_Retail"> <span data-i18n="sec_retail">E-commerce & Retail</span></label>
-    <label class="checkbox-btn"><input type="radio" name="sector" value="Education_EdTech"> <span data-i18n="sec_edu">Éducation & EdTech</span></label>
-    <label class="checkbox-btn"><input type="radio" name="sector" value="Tourism_Hospitality"> <span data-i18n="sec_tour">Tourisme & Hôtellerie</span></label>
-    <label class="checkbox-btn"><input type="radio" name="sector" value="Creative_Media"> <span data-i18n="sec_media">Industries Créatives & Médias</span></label>
-    
-    <label class="checkbox-btn"><input type="radio" name="sector" value="Consulting_B2B"> <span data-i18n="sec_consulting">Conseil & Services B2B</span></label>
-    <label class="checkbox-btn"><input type="radio" name="sector" value="SaaS_Software"> <span data-i18n="sec_saas">SaaS & Éditeurs Logiciels</span></label>
-    <label class="checkbox-btn"><input type="radio" name="sector" value="Telecom_Infra"> <span data-i18n="sec_telecom">Télécoms & Infrastructures</span></label>
-</div>
+                    <div class="grid-options">
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="FinTech_DeFi"> <span data-i18n="sec_fintech">FinTech & DeFi</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="GovTech_SmartCities"> <span data-i18n="sec_gov">GovTech & Smart Cities</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Health_BioTech"> <span data-i18n="sec_health">Santé & BioTech</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="GreenTech_Energy"> <span data-i18n="sec_green">GreenTech & Énergies</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="AgriTech_FoodSec"> <span data-i18n="sec_agri">AgriTech & Food Security</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Logistics_SupplyChain"> <span data-i18n="sec_log">Logistique & Supply Chain</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Mining_OilGas"> <span data-i18n="sec_mine">Mines, Pétrole & Gaz</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="RealEstate_PropTech"> <span data-i18n="sec_btp">Immobilier & PropTech</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Ecommerce_Retail"> <span data-i18n="sec_retail">E-commerce & Retail</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Education_EdTech"> <span data-i18n="sec_edu">Éducation & EdTech</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Tourism_Hospitality"> <span data-i18n="sec_tour">Tourisme & Hôtellerie</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Creative_Media"> <span data-i18n="sec_media">Industries Créatives & Médias</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Consulting_B2B"> <span data-i18n="sec_consulting">Conseil & Services B2B</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="SaaS_Software"> <span data-i18n="sec_saas">SaaS & Éditeurs Logiciels</span></label>
+                        <label class="checkbox-btn"><input type="radio" name="sector" value="Telecom_Infra"> <span data-i18n="sec_telecom">Télécoms & Infrastructures</span></label>
+                        
+                        <label class="checkbox-btn">
+                            <input type="radio" name="sector" value="other" id="sector-other">
+                            <span style="border-color: #d4af37;">
+                                <span style="font-size: 20px; display: block; margin-bottom: 5px;">💡</span>
+                                <span id="txt-autre-text" data-i18n="sec_other">Autre / Sur-mesure</span>
+                            </span>
+                        </label>
+                    </div>
 
-<label class="section-label mt-2" data-i18n="lbl_geo">Zone d'Intervention</label>
-<div class="input-group">
-    <select id="geo-zone" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
-        <option value="" disabled selected data-i18n="opt_geo_def">Sélectionner une zone d'intervention...</option>
-        <optgroup label="Afrique" data-i18n="grp_africa">
-            <option value="Senegal" data-i18n="geo_sn">Sénégal (Dakar Hub)</option>
-            <option value="CotedIvoire" data-i18n="geo_ci">Côte d'Ivoire (Abidjan Hub)</option>
-            <option value="Nigeria" data-i18n="geo_ng">Nigeria (Lagos Hub)</option>
-            <option value="Maroc" data-i18n="geo_ma">Maroc (Casablanca Hub)</option>
-            <option value="SouthAfrica" data-i18n="geo_za">Afrique du Sud (Johannesburg)</option>
-        </optgroup>
-        <optgroup label="Amérique du Nord" data-i18n="grp_na">
-            <option value="USA" data-i18n="geo_us">États-Unis (USA)</option>
-            <option value="Canada" data-i18n="geo_ca">Canada (Toronto / Montréal)</option>
-        </optgroup>
-        <optgroup label="Amérique Latine" data-i18n="grp_latam">
-            <option value="LatAm_Brazil" data-i18n="geo_br">Brésil (São Paulo)</option>
-            <option value="LatAm_General" data-i18n="geo_latam">Amérique Latine (Mexique, Colombie...)</option>
-        </optgroup>
-        <optgroup label="Asie-Pacifique (APAC)" data-i18n="grp_apac">
-            <option value="China" data-i18n="geo_cn">Chine (Shanghai / Beijing)</option>
-            <option value="Singapore" data-i18n="geo_sg">Singapour (Hub APAC)</option>
-            <option value="India" data-i18n="geo_in">Inde (Mumbai / Bangalore)</option>
-        </optgroup>
-        <optgroup label="Europe" data-i18n="grp_eu">
-            <option value="France" data-i18n="geo_fr">France (Paris Hub)</option>
-            <option value="UK" data-i18n="geo_uk">Royaume-Uni (Londres)</option>
-            <option value="EU_General" data-i18n="geo_eu">Union Européenne (Allemagne, Espagne...)</option>
-        </optgroup>
-        <optgroup label="Moyen-Orient (MENA)" data-i18n="grp_mena">
-            <option value="UAE" data-i18n="geo_ae">Émirats Arabes Unis (Dubai Hub)</option>
-            <option value="SaudiArabia" data-i18n="geo_sa">Arabie Saoudite (Riyadh)</option>
-        </optgroup>
-        <optgroup label="Global" data-i18n="grp_global">
-            <option value="Global" data-i18n="geo_global">International / Multi-Zones</option>
-        </optgroup>
-    </select>
-</div>
+                    <div id="custom-sector-container" style="display: none; margin-top: 20px; margin-bottom: 20px; animation: fadeIn 0.5s;">
+                        <label id="txt-custom-sector-label" data-i18n="lbl_custom_sector" style="color: #d4af37; font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 8px; display: block; text-transform: uppercase;">Précisez votre industrie :</label>
+                        <input type="text" id="custom-sector-input" data-i18n="ph_custom_sector" placeholder="Ex: Sport Professionnel, Aérospatial, Industrie Navale..." style="width: 100%; padding: 15px; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 4px; background: rgba(10, 25, 47, 0.5); color: #e6f1ff; font-family: 'Inter', sans-serif; font-size: 1rem; outline: none; transition: 0.3s; box-sizing: border-box;" onfocus="this.style.borderColor='#d4af37'; this.style.boxShadow='0 0 10px rgba(212, 175, 55, 0.2)';" onblur="this.style.borderColor='rgba(212, 175, 55, 0.4)'; this.style.boxShadow='none';">
+                    </div>
 
-<label class="section-label mt-2" data-i18n="lbl_expertise">Expertise Requise</label>
-<div class="grid-options">
-    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="GenAI_DataScience"> <span data-i18n="exp_ai">GenAI & Data Science</span></label>
-    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Cyber_Resilience"> <span data-i18n="exp_cyber">Cybersécurité & Résilience</span></label>
-    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="ESG_Climate"> <span data-i18n="exp_esg">Ingénierie ESG & Climat</span></label>
-    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Web3_Blockchain"> <span data-i18n="exp_web3">Web3 & Blockchain (Woleet)</span></label>
-    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Digital_Marketing"> <span data-i18n="exp_mkt">Marketing Digital & SEO</span></label>
-    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Process_Optimization"> <span data-i18n="exp_proc">Optimisation des Processus</span></label>
-    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="HR_Talent"> <span data-i18n="exp_hr">Gestion des Talents (RH)</span></label>
-    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Design_Thinking"> <span data-i18n="exp_design">Design Thinking & UX</span></label>
-    
-    <label class="checkbox-btn"><input type="checkbox" name="expertise" value="GoToMarket_Growth"> <span data-i18n="exp_gtm">Go-to-Market & Growth Strategy</span></label>
-</div>
+                    <label class="section-label mt-2" data-i18n="lbl_geo" style="color: #d4af37; font-family: 'Cinzel', serif; font-size: 0.9rem;">Zone d'Intervention</label>
+                    <div class="input-group">
+                        <select id="geo-zone" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)" style="max-height: 250px; overflow-y: auto;">
+    <option value="" disabled selected data-i18n="opt_geo_def">Sélectionner votre pays exact...</option>
+    <option value="Afrique du Sud" data-i18n="c_za">Afrique du Sud</option>
+    <option value="Algérie" data-i18n="c_dz">Algérie</option>
+    <option value="Allemagne" data-i18n="c_de">Allemagne</option>
+    <option value="Arabie Saoudite" data-i18n="c_sa">Arabie Saoudite</option>
+    <option value="Argentine" data-i18n="c_ar">Argentine</option>
+    <option value="Australie" data-i18n="c_au">Australie</option>
+    <option value="Belgique" data-i18n="c_be">Belgique</option>
+    <option value="Bénin" data-i18n="c_bj">Bénin</option>
+    <option value="Brésil" data-i18n="c_br">Brésil</option>
+    <option value="Burkina Faso" data-i18n="c_bf">Burkina Faso</option>
+    <option value="Burundi" data-i18n="c_bi">Burundi</option>
+    <option value="Cameroun" data-i18n="c_cm">Cameroun</option>
+    <option value="Canada" data-i18n="c_ca">Canada</option>
+    <option value="Cap-Vert" data-i18n="c_cv">Cap-Vert</option>
+    <option value="Centrafrique" data-i18n="c_cf">Centrafrique</option>
+    <option value="Chili" data-i18n="c_cl">Chili</option>
+    <option value="Chine" data-i18n="c_cn">Chine</option>
+    <option value="Colombie" data-i18n="c_co">Colombie</option>
+    <option value="Congo" data-i18n="c_cg">Congo</option>
+    <option value="RD Congo" data-i18n="c_cd">RD Congo</option>
+    <option value="Corée du Sud" data-i18n="c_kr">Corée du Sud</option>
+    <option value="Côte d'Ivoire" data-i18n="c_ci">Côte d'Ivoire</option>
+    <option value="Djibouti" data-i18n="c_dj">Djibouti</option>
+    <option value="Égypte" data-i18n="c_eg">Égypte</option>
+    <option value="Émirats Arabes Unis" data-i18n="c_ae">Émirats Arabes Unis</option>
+    <option value="Espagne" data-i18n="c_es">Espagne</option>
+    <option value="États-Unis" data-i18n="c_us">États-Unis</option>
+    <option value="Éthiopie" data-i18n="c_et">Éthiopie</option>
+    <option value="France" data-i18n="c_fr">France</option>
+    <option value="Gabon" data-i18n="c_ga">Gabon</option>
+    <option value="Guinée" data-i18n="c_gn">Guinée</option>
+    <option value="Guinée équatoriale" data-i18n="c_gq">Guinée équatoriale</option>
+    <option value="Inde" data-i18n="c_in">Inde</option>
+    <option value="Italie" data-i18n="c_it">Italie</option>
+    <option value="Japon" data-i18n="c_jp">Japon</option>
+    <option value="Kenya" data-i18n="c_ke">Kenya</option>
+    <option value="Madagascar" data-i18n="c_mg">Madagascar</option>
+    <option value="Mali" data-i18n="c_ml">Mali</option>
+    <option value="Maroc" data-i18n="c_ma">Maroc</option>
+    <option value="Maurice" data-i18n="c_mu">Maurice</option>
+    <option value="Mauritanie" data-i18n="c_mr">Mauritanie</option>
+    <option value="Mexique" data-i18n="c_mx">Mexique</option>
+    <option value="Niger" data-i18n="c_ne">Niger</option>
+    <option value="Nigeria" data-i18n="c_ng">Nigeria</option>
+    <option value="Ouganda" data-i18n="c_ug">Ouganda</option>
+    <option value="Royaume-Uni" data-i18n="c_uk">Royaume-Uni</option>
+    <option value="Rwanda" data-i18n="c_rw">Rwanda</option>
+    <option value="Sénégal" data-i18n="c_sn">Sénégal</option>
+    <option value="Suisse" data-i18n="c_ch">Suisse</option>
+    <option value="Tchad" data-i18n="c_td">Tchad</option>
+    <option value="Togo" data-i18n="c_tg">Togo</option>
+    <option value="Tunisie" data-i18n="c_tn">Tunisie</option>
+    <option value="Autre Pays" data-i18n="c_other">Autre pays...</option>
+</select>
+                    </div>
+
+                    <label class="section-label mt-2" data-i18n="lbl_expertise" style="color: #d4af37; font-family: 'Cinzel', serif; font-size: 0.9rem;">Expertise Requise</label>
+                    <div class="grid-options">
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="GenAI_DataScience"> <span data-i18n="exp_ai">GenAI & Data Science</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Cyber_Resilience"> <span data-i18n="exp_cyber">Cybersécurité & Résilience</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="ESG_Climate"> <span data-i18n="exp_esg">Ingénierie ESG & Climat</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Web3_Blockchain"> <span data-i18n="exp_web3">Web3 & Blockchain (Woleet)</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Digital_Marketing"> <span data-i18n="exp_mkt">Marketing Digital & SEO</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Process_Optimization"> <span data-i18n="exp_proc">Optimisation des Processus</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="HR_Talent"> <span data-i18n="exp_hr">Gestion des Talents (RH)</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Design_Thinking"> <span data-i18n="exp_design">Design Thinking & UX</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" name="expertise" value="GoToMarket_Growth"> <span data-i18n="exp_gtm">Go-to-Market & Growth Strategy</span></label>
+                        <label class="checkbox-btn" style="grid-column: 1 / -1;">
+                            <input type="checkbox" name="expertise" value="Auto-Détection IA (Sur-mesure)">
+                            <span style="border: 1px solid #25D366; color: #25D366; box-shadow: 0 0 10px rgba(37, 211, 102, 0.1);">
+                                🧠 <span data-i18n="exp_auto">Auto-Détection par l'IA</span>
+                            </span>
+                        </label>
+                    </div>
 
                     <div class="btn-container split">
                         <button type="button" class="btn-outline" onclick="nextStep(1)" data-i18n="btn_prev">Retour</button>
@@ -216,7 +338,9 @@
 
                 <div class="form-step" id="step-3">
                     <h3 data-i18n="step3_title">03. Matrice Analyse & Restitution</h3>
-                    
+                    <div style="text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <i style="color: #8892b0; font-size: 0.95rem; font-family: 'Cinzel', serif;" data-i18n="elite_hook">"Au-delà des algorithmes, la résolution de l'insoluble."</i>
+                    </div>
                     <div class="input-group">
                         <label for="context" data-i18n="lbl_context">Contexte Opérationnel</label>
                         <textarea id="context" rows="4" data-i18n="ph_context" placeholder="Décrivez brièvement votre situation..."></textarea>
@@ -235,70 +359,91 @@
                         </div>
                     </div>
 
-                    <div class="legal-check" style="margin-bottom: 10px;">
-                        <input type="checkbox" id="consent" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
-                        <label for="consent">
-                            <span data-i18n="legal_consent">J'accepte la</span> 
-                            <a href="#" id="openPrivacy" class="gold-link" data-i18n="link_privacy">Politique de Confidentialité Officielle</a>.
-                        </label>
-                    </div>
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 6px; padding: 15px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 12px;">
+                        <div class="legal-check" style="display: flex; align-items: flex-start; gap: 10px;">
+                            <input type="checkbox" id="consent" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)" style="margin-top: 3px; transform: scale(1.1); cursor: pointer;">
+                            <label for="consent" style="color: #ccc; font-size: 0.9rem; cursor: pointer; line-height: 1.4;">
+                                <span data-i18n="legal_consent" id="txt-legal-consent">J'accepte la</span> 
+                                <a href="javascript:void(0)" onclick="openModal('privacyOverlay')" class="gold-link" id="txt-link-privacy">Charte de Souveraineté et de Confidentialité Officielle</a>.
+                            </label>
+                        </div>
 
-                    <div class="opt-in-container" style="margin-bottom: 20px; font-size: 0.9em; color: var(--white); background: rgba(255,255,255,0.05); padding: 10px; border-radius: 4px; border: 1px solid rgba(212, 175, 55, 0.2);">
-                        <input type="checkbox" id="whatsapp-consent" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)">
-                        <label for="whatsapp-consent" style="display:inline; margin-left: 5px;" data-i18n="lbl_wa_optin">
-                            J'accepte de recevoir mon analyse stratégique par <strong style="color:#25D366; text-shadow: 0 0 5px rgba(37, 211, 102, 0.4);">WhatsApp</strong>.
-                        </label>
+                        <div class="opt-in-container" style="display: flex; align-items: flex-start; gap: 10px;">
+                            <input type="checkbox" id="whatsapp-consent" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)" style="margin-top: 3px; transform: scale(1.1); cursor: pointer;">
+                            <label for="whatsapp-consent" style="color: #ccc; font-size: 0.9rem; cursor: pointer; line-height: 1.4;" id="txt-wa-optin">
+                                J'accepte de recevoir mon analyse stratégique par <strong style="color:#25D366; text-shadow: 0 0 5px rgba(37, 211, 102, 0.4);">WhatsApp</strong>.
+                            </label>
+                        </div>
                     </div>
 
                     <div class="btn-container split">
                         <button type="button" class="btn-outline" onclick="nextStep(2)" data-i18n="btn_prev">Retour</button>
-                        <button type="submit" class="btn-gold glow" data-i18n="btn_submit">Lancer l'Analyse IA</button>
+                        <button type="submit" class="btn-gold glow" id="btnFinalSubmit" data-i18n="btn_submit">Lancer l'Analyse IA</button>
                     </div>
                 </div>
             </form>
-        <div id="emeta-loader" style="display: none; text-align: center; padding: 50px 20px; background: #0a192f; border-radius: 12px; border: 1px solid #d4af37; margin-top: 20px; box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);">
-    
-    <div style="width: 50px; height: 50px; border: 4px solid rgba(212, 175, 55, 0.2); border-top: 4px solid #d4af37; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 25px;"></div>
-    
-    <h3 style="color: #d4af37; font-family: 'Cinzel', serif; font-weight: bold; margin-bottom: 10px; text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);">Moteur e-META LABS activé</h3>
-    <p id="emeta-status" style="font-size: 16px; color: #8892b0; font-family: 'Inter', sans-serif;">Initialisation de la connexion sécurisée...</p>
-</div>
+
+            <div id="emeta-loader" style="display: none; text-align: center; padding: 50px 20px; background: #0a192f; border-radius: 12px; border: 1px solid #d4af37; margin-top: 20px; box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);">
+                <div style="width: 50px; height: 50px; border: 4px solid rgba(212, 175, 55, 0.2); border-top: 4px solid #d4af37; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 25px;"></div>
+                <h3 id="loader-title" style="color: #d4af37; font-family: 'Cinzel', serif; font-weight: bold; margin-bottom: 10px; text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);">Moteur e-META LABS activé</h3>
+                <p id="emeta-status" style="font-size: 16px; color: #8892b0; font-family: 'Inter', sans-serif;">Initialisation de la connexion sécurisée...</p>
+            </div>
         </div>
     </main>
 
     <footer class="footer">
-        <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
-        <p class="tiny">Strategic Intelligence Unit • Dakar - Paris - Dubai - Shanghai - New York</p>
+        <div style="margin-bottom: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 20px;">
+            <a href="mentions-legales.html" class="gold-link" style="margin: 0 15px; font-size: 0.85rem; text-decoration: none;" data-i18n="link_mentions">Mentions Légales</a>
+            <a href="cgv.html" class="gold-link" style="margin: 0 15px; font-size: 0.85rem; text-decoration: none;" data-i18n="link_cgv">CGV</a>
+            <a href="confidentialite.html" class="gold-link" style="margin: 0 15px; font-size: 0.85rem; text-decoration: none;" data-i18n="link_confidentialite">Confidentialité</a>
+            <a href="remboursement.html" class="gold-link" style="margin: 0 15px; font-size: 0.85rem; text-decoration: none;" data-i18n="link_remboursement">Remboursement</a>
+        </div>
+        <p>&copy; 2026 E-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
+        <p class="tiny">Strategic Intelligence Unit • Rosso - Dakar - Paris - Dubai - Shanghai - New York</p>
         <div style="margin-top: 15px; font-size: 0.8rem; color: #8892b0;">
             <a href="mailto:contact@e-metalabs.com" style="color: #8892b0; text-decoration: none; margin-right: 15px;">✉️ contact@e-metalabs.com</a>
             <a href="mailto:support@e-metalabs.com" style="color: #8892b0; text-decoration: none;">🛠️ support@e-metalabs.com</a>
         </div>
     </footer>
 
-    <div id="privacyOverlay" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 data-i18n="modal_title" style="margin-bottom: 20px; border-bottom: 1px solid #d4af37; padding-bottom: 10px; color: #d4af37; font-family: 'Cinzel', serif;">Politique de Confidentialité</h2>
-            <div class="modal-body" style="max-height: 50vh; overflow-y: auto; text-align: left; padding-right:10px;">
-                <h4 data-i18n="priv_t1" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">1. Identité et Opérations</h4>
-                <p data-i18n="priv_c1">...</p>
-                <h4 data-i18n="priv_t2" style="color:#d4af37; margin-top:15px; margin-bottom:5px; font-family:'Cinzel', serif;">2. Souveraineté des Données</h4>
-                <p data-i18n="priv_c2">...</p>
-                <div style="text-align: center; margin-top: 25px;">
-    <a href="privacy.html" id="policy_link" target="_blank" class="gold-link" style="display: inline-block; padding: 10px 15px; border: 1px solid #d4af37; border-radius: 4px; text-decoration: none;" data-i18n="btn_full_policy">📑 Consulter la Charte Complète</a>
-</div>
-            </div>
-            <button class="btn-gold full-width close-modal-btn" data-i18n="btn_close" style="margin-top:20px;">Fermer</button>
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 500px; text-align: center; padding: 40px;">
+            <span class="close-btn" onclick="closeModal('paymentModal')">&times;</span>
+            <h2 style="color: #d4af37; font-family: 'Cinzel', serif; margin-top: 0;">Validation Sécurisée</h2>
+            <p style="color: #e6f1ff; font-size: 0.95rem; margin-bottom: 30px;">Vos données ont été ancrées. Choisissez votre méthode pour déclencher l'Intelligence Artificielle :</p>
+            
+            <a href="#" id="linkPaytech" class="gateway-btn gateway-paydunya">
+                🌍 Wave / Orange Money / Free
+                <div style="font-size: 0.75rem; font-weight: normal; margin-top: 5px;">Via PayTech (Sénégal & UEMOA)</div>
+            </a>
+            
+            <a href="#" id="linkPaddle" class="gateway-btn gateway-lemon">
+                💳 Carte Bancaire / PayPal
+                <div style="font-size: 0.75rem; font-weight: normal; margin-top: 5px;">Via Paddle (International)</div>
+            </a>
+            
+            <p style="font-size: 0.8rem; color: #8892b0; margin-top: 20px;">Transactions chiffrées de bout en bout.</p>
         </div>
     </div>
 
-<div id="guideOverlay" class="modal-overlay">
+    <div id="privacyOverlay" class="modal-overlay">
+        <div class="modal-content" style="max-width: 850px; width: 95%;">
+            <span class="close-btn" onclick="closeModal('privacyOverlay')">&times;</span>
+            <h2 id="txt-priv-title" style="margin-top:0; margin-bottom: 20px; border-bottom: 1px solid #d4af37; padding-bottom: 10px; color: #d4af37; font-family: 'Cinzel', serif; text-align: center;">Politique de Souveraineté & Confidentialité</h2>
+            <div class="modal-body" id="privacy-content-body" style="text-align: left; padding-right:15px; font-size:0.95rem; color:#e6f1ff; line-height: 1.8;">
+                </div>
+            <div style="text-align:center; margin-top:20px;">
+                <button class="btn-gold full-width" onclick="closeModal('privacyOverlay')" id="txt-priv-close" style="width: 100%;">Accepter & Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="guideOverlay" class="modal-overlay">
         <div class="modal-content" style="max-width: 600px;">
-            <span class="close-guide" style="position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #8892b0;">&times;</span>
+            <span class="close-btn" onclick="closeModal('guideOverlay')">&times;</span>
             <h2 data-i18n="guide_title" style="margin-bottom: 20px; border-bottom: 1px solid #d4af37; padding-bottom: 10px; color: #d4af37; font-family: 'Cinzel', serif;">Lexique Stratégique</h2>
             
-            <div class="modal-body" style="max-height: 60vh; overflow-y: auto; text-align: left; padding-right:15px; color: #e6f1ff; font-size: 0.9rem; line-height: 1.6;">
-                
+            <div class="modal-body" style="text-align: left; padding-right:15px; color: #e6f1ff; font-size: 0.9rem; line-height: 1.6;">
                 <h4 data-i18n="guide_sec_title" style="color:#d4af37; font-family:'Cinzel', serif; margin-bottom: 10px;">Secteurs Stratégiques</h4>
                 <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 5px; margin-bottom: 20px;">
                     <p class="lexique-item" data-i18n="lex_sec_fintech"><strong>• FinTech & DeFi :</strong> Finance numérique, paiements et décentralisation.</p>
@@ -309,7 +454,7 @@
                     <p class="lexique-item" data-i18n="lex_sec_log"><strong>• Logistique & Supply :</strong> Optimisation de la chaîne logistique et traçabilité globale.</p>
                     <p class="lexique-item" data-i18n="lex_sec_mine"><strong>• Mines, Pétrole & Gaz :</strong> Extraction intelligente, sécurité et conformité.</p>
                     <p class="lexique-item" data-i18n="lex_sec_btp"><strong>• Immobilier & PropTech:</strong> Innovation immobilière et gestion de bâtiments intelligents.</p>
-                    <p class="lexique-item" data-i18n="lex_sec_retail"><strong>• E-commerce & Retail :</strong> Retail digital, expérience client et transactions.</p>
+                    <p class="lexique-item" data-i18n="lex_sec_retail"><strong>• E-commerce & Retail :</strong> Retail digital, experience client et transactions.</p>
                     <p class="lexique-item" data-i18n="lex_sec_edu"><strong>• Éducation (EdTech) :</strong> Plateformes d'apprentissage et transmission du savoir.</p>
                     <p class="lexique-item" data-i18n="lex_sec_tour"><strong>• Tourisme & Hôtellerie:</strong> Digitalisation de l'hôtellerie et gestion des flux.</p>
                     <p class="lexique-item" data-i18n="lex_sec_media"><strong>• Industries Créatives :</strong> Médias, divertissement et propriété intellectuelle.</p>
@@ -327,37 +472,399 @@
                     <p class="lexique-item" data-i18n="lex_exp_mkt"><strong>• Marketing Digital :</strong> Stratégie d'acquisition, visibilité en ligne et conversion.</p>
                     <p class="lexique-item" data-i18n="lex_exp_proc"><strong>• Opti. des Processus :</strong> Excellence opérationnelle et réduction des coûts (RPA).</p>
                     <p class="lexique-item" data-i18n="lex_exp_hr"><strong>• Gestion des Talents :</strong> Recrutement prédictif, rétention et formation 2.0.</p>
-                    <p class="lexique-item" data-i18n="lex_exp_design"><strong>• Design Thinking :</strong> Expérience utilisateur et innovation produit.</p>
-                    <p class="lexique-item" data-i18n="lex_exp_gtm" style="border-bottom: none;"><strong>• Go-to-Market & Growth:</strong> Stratégie de pénétration de marché, distribution et acquisition client asymétrique.</p>
+                    <p class="lexique-item" data-i18n="lex_exp_design"><strong>• Design Thinking :</strong> Expérience utilisateur et innovation producto.</p>
+                    <p class="lexique-item" data-i18n="lex_exp_gtm" style="border-bottom: none;"><strong>• Go-to-Market & Growth:</strong> Stratégie de pénétration de mercado, distribution et acquisition client asymétrique.</p>
                 </div>
             </div>
             
-            <button class="btn-gold full-width close-guide-btn" data-i18n="btn_close" style="margin-top:20px;">Fermer</button>
-        </div>
-    </div>
-
-    <div id="loadingOverlay" class="modal-overlay" style="display: none; z-index: 9999; backdrop-filter: blur(15px); background: rgba(10, 25, 47, 0.9);">
-        <div class="loading-content" style="text-align: center; padding: 40px; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 8px; box-shadow: 0 0 40px rgba(212, 175, 55, 0.4); background: #0a192f;">
-            <div class="loader-spinner" style="margin: 0 auto 20px;"></div>
-            <h3 data-i18n="loading_title" style="color: #d4af37; font-family: 'Cinzel', serif; font-size: 1.5rem; margin-bottom: 15px; letter-spacing: 2px;">MOTEUR IA EN ACTION</h3>
-            <p id="loadingText" data-i18n="loading_init" style="color: #25D366; font-family: monospace; font-size: 1.1rem; letter-spacing: 1px;">Initialisation des protocoles...</p>
+            <button class="btn-gold full-width" onclick="closeModal('guideOverlay')" style="margin-top:20px;">Fermer</button>
         </div>
     </div>
 
     <div id="resultModal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-result" style="position: absolute; top: 10px; right: 20px; font-size: 2rem; cursor: pointer; color: #8892b0;">&times;</span>
-            <h2 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px;" data-i18n="modal_res_title">Diagnostic Stratégique</h2>
-            <div id="resultBody" class="modal-body" style="max-height: 60vh; overflow-y: auto; color: #e6f1ff; font-size: 0.95rem; line-height: 1.6;">
-                <p>Initialisation...</p>
+        <div class="modal-content" style="text-align: center;">
+            <div style="font-size: 50px; margin-bottom: 15px; text-shadow: 0 0 20px rgba(212,175,55,0.5);">✅</div>
+            <h2 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px;" id="txt-modal-res-title">Diagnostic Sécurisé</h2>
+            <div class="modal-body" style="color: #e6f1ff; font-size: 0.95rem; line-height: 1.6;">
+                <p id="resultText">Vos données ont été traitées avec succès par le Moteur e-META LABS. L'audit vous parviendra dans les 5 prochaines minutes.</p>
             </div>
             <div class="btn-container">
-                <button class="btn-gold full-width" onclick="location.reload()" data-i18n="btn_new_analysis">Nouvelle Analyse</button>
+                <button class="btn-gold full-width" onclick="window.location.href='index.html'" id="txt-btn-new-analysis">Nouvelle Analyse</button>
             </div>
         </div>
     </div>
 
     <script src="i18n.js"></script>
-    <script src="script.js"></script>
+
+    <script>
+        const WEBHOOK_URL = "https://hook.eu2.make.com/moupzawutk6h7ab6f5ap2li1qaypzh2f";
+
+        // === SECTION MODIFIÉE : VOS LIENS DE PAIEMENT (PADDLE ET PAYTECH) ===
+        // Remplacez ces liens par ceux générés dans vos tableaux de bord respectifs.
+        const LINKS = {
+            pro: {
+                paytech: "https://paytech.sn/votre-lien-pro",
+                paddle: "https://checkout.paddle.com/votre-id-pro"
+            },
+            expert: {
+                paytech: "https://paytech.sn/votre-lien-expert",
+                paddle: "https://checkout.paddle.com/votre-id-expert"
+            }
+        };
+
+        // --- DICTIONNAIRE MULTILINGUE INTÉGRAL (COMPLET) ---
+        const uiDict = {
+            fr: {
+                loaderTitle: "MOTEUR e-META LABS ACTIVÉ", loadInit: "Initialisation de la connexion sécurisée...", loadSuccess: "Données sécurisées. Redirection...",
+                load1: "Analyse sémantique du contexte...", load2: "Corrélation avec les données sectorielles...", load3: "Génération des matrices stratégiques...", load4: "Transmission cryptée vers l'IA...",
+                errFile: "Pour garantir une analyse ultra-rapide, le fichier ne doit pas dépasser 2.5 Mo.", errNet: "Impossible de joindre le serveur e-META LABS. Veuillez vérifier votre connexion.",
+                lblReq: "Ce champ est obligatoire.", lblEmail: "Veuillez entrer un email valide.", lblCheck: "Vous devez accepter cette condition pour continuer.",
+                alertSec: "Veuillez sélectionner un Secteur Stratégique.", alertCus: "Veuillez préciser votre industrie sur-mesure.", alertGeo: "Veuillez sélectionner une zone.",
+                resTitle: "Analyse Validée", resFree: "Votre diagnostic STARTER a été transmis à l'IA. Il vous sera envoyé par email/WhatsApp d'ici 5 minutes.",
+                resPaid: "Paiement validé avec succès. L'IA génère actuellement votre audit premium. Vous le recevrez par email et WhatsApp d'ici quelques minutes.", resBtn: "Nouvelle Analyse",
+                consent: "J'accepte la", linkPrivacy: "Charte de Souveraineté et de Confidentialité Officielle", waOptin: "J'accepte de recevoir mon analyse stratégique par <strong style='color:#25D366; text-shadow: 0 0 5px rgba(37, 211, 102, 0.4);'>WhatsApp</strong>.",
+                privTitle: "Charte de Souveraineté & Confidentialité", privClose: "Accepter & Fermer",
+                privContent: `
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">1. Identité et Opérations</h4>
+                    <p style="margin-bottom:20px;">e-META LABS SASU opère en tant qu'unité d'intelligence stratégique internationale, dont le siège et les hubs technologiques assurent la maintenance du moteur IA. Nos opérations consistent à fournir des diagnostics de haute précision pour les décideurs, en utilisant des algorithmes polymorphes capables de traiter des enjeux multisectoriels. L'accès au domaine <strong>e-meta.app</strong> est strictement réservé aux phases de laboratoire restreint, tandis que <strong>e-metalabs.com</strong> constitue l'interface publique de déploiement.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">2. Collecte et Traitement des Données</h4>
+                    <p style="margin-bottom:20px;">Le Moteur e-META collecte exclusivement les données nécessaires à la calibration du diagnostic : identité de l'entité, coordonnées professionnelles, contexte opérationnel et documents stratégiques versés volontairement.<br><strong>Finalité :</strong> Génération d'audits, de rapports de risques et de stratégies de pivot.<br><strong>Consentement :</strong> En validant le formulaire, l'utilisateur accepte la transmission de ses données vers notre infrastructure sécurisée pour traitement immédiat.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">3. Souveraineté et Intelligence Artificielle</h4>
+                    <p style="margin-bottom:20px;">Nous garantissons une étanchéité totale entre vos données et les bases d'entraînement publiques.<br><strong>Isolation :</strong> Les données transmises aux API sont traitées via des sessions éphémères.<br><strong>Non-Apprentissage :</strong> Aucune donnée client n'est utilisée pour entraîner ou améliorer les modèles d'IA globaux. Votre avantage compétitif est préservé par une architecture de "Zero-Data Retention" au niveau des modèles tiers.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">4. Ancrage Blockchain et Propriété Intellectuelle</h4>
+                    <p style="margin-bottom:20px;">Chaque audit généré par e-META LABS fait l'objet d'un marquage temporel.<br><strong>Propriété :</strong> Le client est l'unique propriétaire du rapport final et des conclusions stratégiques.<br><strong>Certification :</strong> Pour garantir l'intégrité et l'antériorité de l'analyse, les métadonnées du rapport peuvent être scellées par ancrage Blockchain, rendant le document infalsifiable.<br><strong>Purge :</strong> Les fichiers sources sont automatiquement purgés de nos serveurs 24 heures après la livraison de l'audit.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">5. Clause de Non-Substitution</h4>
+                    <p style="margin-bottom:20px;">Les résultats produits par le Moteur e-META LABS constituent des outils d'aide à la décision stratégique basés sur l'analyse de probabilités et de données sémantiques. Ils ne constituent en aucun cas des conseils juridiques, fiscaux, médicaux ou financiers certifiés. e-META LABS décline toute responsabilité quant aux décisions opérationnelles prises par le client sur la base des diagnostics fournis.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">6. Contact et Droits Internationaux</h4>
+                    <p style="margin-bottom:20px;">Conformément au Règlement Général sur la Protection des Données (RGPD) et aux législations nationales, tout utilisateur dispose d'un droit d'accès, de rectification et de suppression immédiate de ses données.<br><strong>DPO (Data Protection Officer) :</strong> support@e-metalabs.com</p>`
+            },
+            en: {
+                loaderTitle: "e-META LABS ENGINE ACTIVATED", loadInit: "Initializing secure connection...", loadSuccess: "Data secured. Redirecting...",
+                load1: "Semantic context analysis...", load2: "Sectoral data correlation...", load3: "Generating strategic matrices...", load4: "Encrypted transmission to AI...",
+                errFile: "To ensure ultra-fast analysis, the file must not exceed 2.5 MB.", errNet: "Unable to reach e-META LABS server. Please check your connection.",
+                lblReq: "This field is required.", lblEmail: "Please enter a valid email.", lblCheck: "You must accept this condition to continue.",
+                alertSec: "Please select a Strategic Sector.", alertCus: "Please specify your custom industry.", alertGeo: "Please select a zone.",
+                resTitle: "Analysis Validated", resFree: "Your STARTER diagnostic has been sent to the AI. It will be delivered via email/WhatsApp within 5 minutes.",
+                resPaid: "Payment successfully validated. The AI is generating your premium audit. You will receive it by email and WhatsApp shortly.", resBtn: "New Analysis",
+                consent: "I accept the", linkPrivacy: "Official Sovereignty & Confidentiality Policy", waOptin: "I agree to receive my strategic analysis via <strong style='color:#25D366; text-shadow: 0 0 5px rgba(37, 211, 102, 0.4);'>WhatsApp</strong>.",
+                privTitle: "Sovereignty & Confidentiality Policy", privClose: "Accept & Close",
+                privContent: `
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">1. Identity and Operations</h4>
+                    <p style="margin-bottom:20px;">e-META LABS SASU operates as an international strategic intelligence unit. Access to the <strong>e-meta.app</strong> domain is strictly reserved for restricted laboratory phases, while <strong>e-metalabs.com</strong> constitutes the public deployment interface.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">2. Data Collection and Processing</h4>
+                    <p style="margin-bottom:20px;">The e-META Engine exclusively collects data necessary for diagnostic calibration.<br><strong>Purpose:</strong> Generation of audits, risk reports, and pivot strategies.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">3. Sovereignty and Artificial Intelligence</h4>
+                    <p style="margin-bottom:20px;">We guarantee total isolation between your data and public training databases.<br><strong>Non-Learning:</strong> No client data is used to train or improve global AI models.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">4. Blockchain Anchoring and Intellectual Property</h4>
+                    <p style="margin-bottom:20px;">Each audit generated by e-META LABS is timestamped.<br><strong>Ownership:</strong> The client is the sole owner of the final report.<br><strong>Certification:</strong> The report metadata can be sealed by Blockchain anchoring.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">5. Non-Substitution Clause</h4>
+                    <p style="margin-bottom:20px;">The results produced by the e-META LABS Engine do not constitute certified legal, tax, medical, or financial advice.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">6. Contact and International Rights</h4>
+                    <p style="margin-bottom:20px;"><strong>DPO (Data Protection Officer) :</strong> support@e-metalabs.com</p>`
+            },
+            es: {
+                loaderTitle: "MOTOR e-META LABS ACTIVADO", loadInit: "Inicializando conexión segura...", loadSuccess: "Datos asegurados. Redirigiendo...",
+                load1: "Análisis semántico del contexto...", load2: "Correlación con datos sectoriales...", load3: "Generación de matrices estratégicas...", load4: "Transmisión cifrada a la IA...",
+                errFile: "Para garantizar un análisis ultrarrápido, el archivo no debe superar los 2.5 MB.", errNet: "Imposible conectar con el servidor e-META LABS. Compruebe su conexión.",
+                lblReq: "Este campo es obligatorio.", lblEmail: "Por favor ingrese un correo válido.", lblCheck: "Debe aceptar esta condición para continuar.",
+                alertSec: "Seleccione un Sector Estratégico.", alertCus: "Especifique su industria a medida.", alertGeo: "Seleccione una zona.",
+                resTitle: "Análisis Validado", resFree: "Su diagnóstico STARTER ha sido enviado a la IA. Lo recibirá por correo/WhatsApp en 5 minutos.",
+                resPaid: "Pago validado con éxito. La IA está generando su auditoría premium. La recibirá por correo y WhatsApp en unos minutos.", resBtn: "Nuevo Análisis",
+                consent: "Acepto la", linkPrivacy: "Política Oficial de Soberanía y Confidencialidad", waOptin: "Acepto recibir mi análisis estratégico por <strong style='color:#25D366; text-shadow: 0 0 5px rgba(37, 211, 102, 0.4);'>WhatsApp</strong>.",
+                privTitle: "Política de Soberanía y Confidencialidad", privClose: "Aceptar y Cerrar",
+                privContent: `
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">1. Identidad y Operaciones</h4>
+                    <p style="margin-bottom:20px;">e-META LABS SASU opera como una unidad de inteligencia estratégica internacional. El acceso al dominio <strong>e-meta.app</strong> está estrictamente reservado, mientras que <strong>e-metalabs.com</strong> constituye la interfaz pública.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">2. Recopilación y Tratamiento de Datos</h4>
+                    <p style="margin-bottom:20px;">El Motor e-META recopila exclusivamente los datos necesarios para la calibración del diagnóstico.<br><strong>Finalidad:</strong> Generación de auditorías y estrategias de pivote.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">3. Soberanía e Inteligencia Artificial</h4>
+                    <p style="margin-bottom:20px;">Garantizamos una estanqueidad total entre sus datos y las bases de datos de entrenamiento público.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">4. Anclaje Blockchain y Propiedad Intelectual</h4>
+                    <p style="margin-bottom:20px;">Cada auditoría generada por e-META LABS tiene una marca de tiempo mediante anclaje Blockchain.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">5. Cláusula de No Sustitución</h4>
+                    <p style="margin-bottom:20px;">Los resultados no constituyen asesoramiento legal, fiscal, médico o financiero certificado.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">6. Contacto y Derechos Internacionales</h4>
+                    <p style="margin-bottom:20px;"><strong>DPO :</strong> support@e-metalabs.com</p>`
+            },
+            ar: {
+                loaderTitle: "تم تنشيط محرك e-META LABS", loadInit: "جاري تهيئة الاتصال الآمن...", loadSuccess: "بيانات آمنة. جاري التوجيه...",
+                load1: "التحليل الدلالي للسياق...", load2: "الارتباط بالبيانات القطاعية...", load3: "توليد المصفوفات الاستراتيجية...", load4: "نقل مشفر إلى الذكاء الاصطناعي...",
+                errFile: "لضمان تحليل فائق السرعة، يجب ألا يتجاوز الملف 2.5 ميجابايت.", errNet: "تعذر الاتصال بخادم e-META LABS. يرجى التحقق من اتصالك.",
+                lblReq: "هذا الحقل مطلوب.", lblEmail: "يرجى إدخال بريد إلكتروني صحيح.", lblCheck: "يجب قبول هذا الشرط للمتابعة.",
+                alertSec: "يرجى تحديد قطاع استراتيجي.", alertCus: "يرجى تحديد صناعتك المخصصة.", alertGeo: "يرجى تحديد منطقة.",
+                resTitle: "تم تأكيد التحليل", resFree: "تم إرسال تشخيص STARTER الخاص بك إلى الذكاء الاصطناعي. ستتلقاه عبر البريد الإلكتروني/واتساب في غضون 5 دقائق.",
+                resPaid: "تم تأكيد الدفع بنجاح. يقوم الذكاء الاصطناعي بإنشاء التدقيق المتميز الخاص بك. ستتلقاه عبر البريد الإلكتروني والواتساب قريبًا.", resBtn: "تحليل جديد",
+                consent: "أنا أقبل", linkPrivacy: "ميثاق السيادة والسرية الرسمي", waOptin: "أوافق على تلقي تحليلي الاستراتيجي عبر <strong style='color:#25D366; text-shadow: 0 0 5px rgba(37, 211, 102, 0.4);'>WhatsApp</strong>.",
+                privTitle: "ميثاق السيادة والسرية", privClose: "قبول وإغلاق",
+                privContent: `
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">1. الهوية والعمليات</h4>
+                    <p style="margin-bottom:20px;">تعمل e-META LABS SASU كوحدة استخبارات استراتيجية دولية.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">2. جمع البيانات ومعالجتها</h4>
+                    <p style="margin-bottom:20px;">يجمع محرك e-META حصريًا البيانات اللازمة لمعايرة التشخيص.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">3. السيادة والذكاء الاصطناعي</h4>
+                    <p style="margin-bottom:20px;">نحن نضمن العزل التام بين بياناتك وقواعد بيانات التدريب العامة.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">4. توثيق البلوكشين والملكية الفكرية</h4>
+                    <p style="margin-bottom:20px;">يمكن ختم البيانات الوصفية للتقرير عبر ربط البلوكشين.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">5. بند عدم الاستبدال</h4>
+                    <p style="margin-bottom:20px;">لا تشكل هذه التقارير مشورة قانونية أو ضريبية أو طبية أو مالية معتمدة.</p>
+                    <h4 style="color:#d4af37; font-family:'Cinzel', serif; border-bottom:1px solid rgba(212, 175, 55, 0.2); padding-bottom:5px;">6. الاتصال والحقوق الدولية</h4>
+                    <p style="margin-bottom:20px;"><strong>DPO :</strong> support@e-metalabs.com</p>`
+            }
+        };
+
+        function updateInternalUI(lang) {
+            const t = uiDict[lang] || uiDict.fr;
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+            
+            const privTitle = document.getElementById('txt-priv-title');
+            if (privTitle) privTitle.innerText = t.privTitle;
+            const privBody = document.getElementById('privacy-content-body');
+            if (privBody) privBody.innerHTML = t.privContent;
+            const privClose = document.getElementById('txt-priv-close');
+            if (privClose) privClose.innerText = t.privClose;
+            
+            const txtConsent = document.getElementById('txt-legal-consent');
+            if (txtConsent) txtConsent.innerText = t.consent;
+            const txtLink = document.getElementById('txt-link-privacy');
+            if (txtLink) txtLink.innerText = t.linkPrivacy;
+            const txtWa = document.getElementById('txt-wa-optin');
+            if (txtWa) txtWa.innerHTML = t.waOptin;
+
+            const loaderTitle = document.getElementById('loader-title');
+            if (loaderTitle) loaderTitle.innerText = t.loaderTitle;
+            const modalResTitle = document.getElementById('txt-modal-res-title');
+            if (modalResTitle) modalResTitle.innerText = t.resTitle;
+            const btnNewAn = document.getElementById('txt-btn-new-analysis');
+            if (btnNewAn) btnNewAn.innerText = t.resBtn;
+        }
+
+        window.addEventListener('load', () => updateInternalUI(document.documentElement.lang || 'fr'));
+
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('payment') === 'success') {
+                const lang = document.documentElement.lang || 'fr';
+                const t = uiDict[lang] || uiDict.fr;
+                document.getElementById('resultText').innerText = t.resPaid;
+                document.getElementById('resultModal').style.display = 'flex';
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        });
+
+        window.addEventListener('load', () => {
+            const counterElement = document.getElementById('live-counter-top');
+            if (counterElement) {
+                let currentCount = 1380; const targetCount = 1423; 
+                const interval = setInterval(() => {
+                    currentCount++; counterElement.innerText = currentCount.toLocaleString();
+                    if (currentCount >= targetCount) clearInterval(interval);
+                }, 30); 
+            }
+        });
+
+        function getBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader(); reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result); reader.onerror = error => reject(error);
+            });
+        }
+
+        function setCustomMessage(input) {
+            const lang = document.documentElement.lang || 'fr';
+            const t = uiDict[lang] || uiDict.fr;
+            input.setCustomValidity('');
+            if (!input.validity.valid) {
+                if (input.validity.valueMissing) input.setCustomValidity((input.type === 'checkbox') ? t.lblCheck : t.lblReq);
+                else if (input.validity.typeMismatch && input.type === 'email') input.setCustomValidity(t.lblEmail);
+            }
+            return true;
+        }
+
+        const fileInput = document.getElementById('clientFile');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+        if (fileInput && fileNameDisplay) {
+            fileInput.addEventListener('change', function() {
+                if (this.files && this.files.length > 0) {
+                    fileNameDisplay.textContent = this.files[0].name; fileNameDisplay.style.color = '#d4af37';
+                } else {
+                    fileNameDisplay.textContent = "Aucun fichier sélectionné"; fileNameDisplay.style.color = '#8892b0';
+                }
+            });
+        }
+
+        function openModal(modalId) { document.getElementById(modalId).style.display = 'flex'; }
+        function closeModal(modalId) { document.getElementById(modalId).style.display = 'none'; }
+        
+        // --- SECTION MODIFIÉE : FONCTION D'AFFICAHGE DE LA MODAL DE PAIEMENT ---
+        function showPaymentGateway(plan) {
+            const btnPaytech = document.getElementById('linkPaytech');
+            const btnPaddle = document.getElementById('linkPaddle');
+            btnPaytech.href = LINKS[plan].paytech;
+            btnPaddle.href = LINKS[plan].paddle;
+            openModal('paymentModal');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.lang-switch button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.lang-switch button').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const lang = this.getAttribute('data-lang');
+                    document.documentElement.lang = lang;
+                    updateInternalUI(lang);
+                    if (typeof window.dispatchEvent === 'function') {
+                        window.dispatchEvent(new CustomEvent('langChanged', { detail: { lang: lang } }));
+                    }
+                });
+            });
+
+            document.querySelectorAll('input[name="sector"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    const customContainer = document.getElementById('custom-sector-container');
+                    if (e.target.value === 'other') {
+                        customContainer.style.display = 'block';
+                        document.getElementById('custom-sector-input').focus();
+                    } else {
+                        customContainer.style.display = 'none';
+                        document.getElementById('custom-sector-input').value = '';
+                    }
+                });
+            });
+        });
+
+        function resetForm() {
+            if(confirm("Voulez-vous réinitialiser le formulaire ?")) {
+                document.getElementById('diagnosticForm').reset();
+                document.getElementById('custom-sector-container').style.display = 'none';
+                document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+                document.getElementById('step-1').classList.add('active');
+                document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function nextStep(targetStep) {
+            const lang = document.documentElement.lang || 'fr';
+            const t = uiDict[lang] || uiDict.fr;
+
+            if (targetStep === 2) {
+                const c = document.getElementById('company'), e = document.getElementById('email'), p = document.getElementById('phone');
+                if (!c.checkValidity()) { c.reportValidity(); return; }
+                if (!e.checkValidity()) { e.reportValidity(); return; }
+                if (!p.checkValidity()) { p.reportValidity(); return; }
+            }
+            if (targetStep === 3) {
+                const sector = document.querySelector('input[name="sector"]:checked');
+                const geo = document.getElementById('geo-zone');
+                if (!sector) { alert(t.alertSec); return; }
+                if (sector.value === 'other') {
+                    const custom = document.getElementById('custom-sector-input');
+                    if (!custom.value.trim()) { alert(t.alertCus); custom.focus(); return; }
+                }
+                if (geo.value === "") { geo.setCustomValidity(t.alertGeo); geo.reportValidity(); return; }
+            }
+            document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+            document.getElementById(`step-${targetStep}`).classList.add('active');
+            document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        const form = document.getElementById('diagnosticForm');
+        if (form) {
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const lang = document.documentElement.lang || 'fr';
+                const t = uiDict[lang] || uiDict.fr;
+
+                const whatsappConsent = document.getElementById('whatsapp-consent');
+                if (!whatsappConsent.checked) { setCustomMessage(whatsappConsent); whatsappConsent.reportValidity(); return; }
+                const consent = document.getElementById('consent');
+                if (!consent.checked) { setCustomMessage(consent); consent.reportValidity(); return; }
+
+                const submitBtn = document.getElementById('btnFinalSubmit');
+                const originalText = submitBtn.innerText;
+                submitBtn.disabled = true;
+                
+                form.style.display = 'none';
+                const wowLoader = document.getElementById('emeta-loader');
+                const statusText = document.getElementById('emeta-status');
+                
+                if (statusText) statusText.innerText = t.loadInit;
+                if (wowLoader) wowLoader.style.display = 'block';
+
+                const loadingSteps = [t.load1, t.load2, t.load3, t.load4];
+                let stepIndex = 0;
+                const textInterval = setInterval(() => {
+                    if (stepIndex < loadingSteps.length) {
+                        if (statusText) statusText.innerText = loadingSteps[stepIndex];
+                        stepIndex++;
+                    }
+                }, 1200); 
+
+                let fileData = null; let fileName = null;
+                if (fileInput && fileInput.files.length > 0) {
+                    if (fileInput.files[0].size > 2.5 * 1024 * 1024) {
+                        alert(t.errFile);
+                        submitBtn.disabled = false; form.style.display = 'block'; 
+                        if(wowLoader) wowLoader.style.display = 'none'; clearInterval(textInterval); return;
+                    }
+                    try { fileData = await getBase64(fileInput.files[0]); fileName = fileInput.files[0].name; } 
+                    catch (error) { console.error("Erreur fichier", error); }
+                }
+
+                let finalSector = document.querySelector('input[name="sector"]:checked')?.value || "Non spécifié";
+                if (finalSector === 'other') {
+                    const customInput = document.getElementById('custom-sector-input');
+                    finalSector = customInput ? customInput.value.trim() : "Sur-mesure";
+                }
+
+                const planChoisi = document.getElementById('plan_choisi').value;
+                const formData = {
+                    plan: planChoisi,
+                    timestamp: new Date().toISOString(),
+                    company: document.getElementById('company').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    whatsapp_optin: true,
+                    sector: finalSector, 
+                    geoZone: document.getElementById('geo-zone').value,
+                    expertises: Array.from(document.querySelectorAll('input[name="expertise"]:checked')).map(cb => cb.value),
+                    context: document.getElementById('context').value,
+                    lang: lang,
+                    attachedFileName: fileName,
+                    attachedFileBase64: fileData 
+                };
+
+                fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => {
+                    clearInterval(textInterval); 
+                    if (response.ok) {
+                        if (statusText) statusText.innerText = t.loadSuccess;
+                        
+                        setTimeout(() => {
+                            if (wowLoader) wowLoader.style.display = 'none';
+                            if (planChoisi === 'pro' || planChoisi === 'expert') {
+                                showPaymentGateway(planChoisi);
+                            } else {
+                                document.getElementById('resultText').innerText = t.resFree;
+                                openModal('resultModal');
+                            }
+                        }, 1500);
+                    } else { throw new Error('Erreur Webhook'); }
+                })
+                .catch(error => {
+                    clearInterval(textInterval);
+                    form.style.display = 'block';
+                    if(wowLoader) wowLoader.style.display = 'none';
+                    console.error('Erreur Transmission:', error);
+                    alert(t.errNet);
+                    submitBtn.disabled = false; submitBtn.innerText = originalText;
+                });
+            });
+        }
+    </script>
 </body>
 </html>
