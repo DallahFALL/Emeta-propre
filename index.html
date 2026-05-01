@@ -487,15 +487,16 @@
         </div>
     </div>
 
-    <div id="resultModal" class="modal-overlay">
-        <div class="modal-content" style="text-align: center;">
-            <div style="font-size: 50px; margin-bottom: 15px; text-shadow: 0 0 20px rgba(212,175,55,0.5);">✅</div>
-            <h2 style="color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 10px;" id="txt-modal-res-title">Diagnostic Sécurisé</h2>
-            <div class="modal-body" style="color: #e6f1ff; font-size: 0.95rem; line-height: 1.6;">
-                <p id="resultText">Vos données ont été traitées avec succès par le Moteur e-META LABS. L'audit vous parviendra dans les 5 prochaines minutes.</p>
+    <div id="privacyOverlay" class="modal-overlay">
+        <div class="modal-content" style="max-width: 850px; width: 95%;">
+            <span class="close-btn" onclick="closeModal('privacyOverlay')">&times;</span>
+            
+            <!-- C'est l'attribut data-i18n qui aspire le texte depuis i18n.js -->
+            <div class="modal-body" id="privacy-content-body" data-i18n="content_confidentialite" style="text-align: left; padding-right:15px; font-size:0.95rem; color:#e6f1ff; line-height: 1.8;">
             </div>
-            <div class="btn-container">
-                <button class="btn-gold full-width" onclick="window.location.href='index.html'" id="txt-btn-new-analysis">Nouvelle Analyse</button>
+            
+            <div style="text-align:center; margin-top:20px;">
+                <button class="btn-gold full-width" onclick="closeModal('privacyOverlay')" style="width: 100%;">Accepter & Fermer</button>
             </div>
         </div>
     </div>
