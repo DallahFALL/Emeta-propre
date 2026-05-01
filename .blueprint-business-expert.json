@@ -1,26 +1,41 @@
 {
-    "name": "e-meta-orchestrator-v1",
-    "description": "Système nerveux e-meta : Tally -> IA Expert -> WhatsApp/PDF",
+    "name": "e-meta-orchestrator-v2",
+    "description": "Système nerveux e-meta : Webhook HTML -> IA Expert -> Google Docs (PDF) -> WhatsApp (Client) & Alerte Concierge",
     "flow": [
         {
             "id": 1,
             "module": "gateway:webhook",
-            "metadata": { "label": "Réception Formulaire Tally" }
+            "metadata": { "label": "Réception Formulaire Sécurisé & Paiement" }
         },
         {
             "id": 2,
-            "module": "openai:gpt-4",
-            "metadata": { "label": "Analyse Agent Expert Cabinet" }
+            "module": "openai:chat-completion",
+            "metadata": { "label": "Analyse Agent Expert (System Prompt)" }
         },
         {
             "id": 3,
-            "module": "router:main",
-            "metadata": { "label": "Distribution Omnicanale" }
+            "module": "google-docs:create-document",
+            "metadata": { "label": "Création du Rapport Premium" }
         },
         {
             "id": 4,
-            "module": "whatsapp:send-message",
-            "metadata": { "label": "Restitution Mobile" }
+            "module": "google-drive:download-file",
+            "metadata": { "label": "Export au format PDF" }
+        },
+        {
+            "id": 5,
+            "module": "router:main",
+            "metadata": { "label": "Distribution & Matching" }
+        },
+        {
+            "id": 6,
+            "module": "whatsapp:send-template",
+            "metadata": { "label": "Livraison Client (PDF + Message Concierge)" }
+        },
+        {
+            "id": 7,
+            "module": "email:send-email",
+            "metadata": { "label": "Alerte État-Major (Matching Executive LinkedIn)" }
         }
     ],
     "author": "e-meta.app"
