@@ -13,4 +13,4 @@ Transformer chaque interaction en une consultation d'expert personnalisée, disp
 - **Restitution (Output) :** Omnicanal (WhatsApp, PDF, Email, Web)
 
 ## 🛡 Propriété Intellectuelle
-Le concept, l'architecture d'orchestration et les bibliothèques de prompts sont protégés par horodatage blockchain (Woleet).
+Le concept global et l'architecture d'orchestration de la plateforme sont protégés par horodatage blockchain.
