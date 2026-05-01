@@ -370,7 +370,7 @@
                             <input type="checkbox" id="consent" required oninvalid="setCustomMessage(this)" oninput="setCustomMessage(this)" style="margin-top: 3px; transform: scale(1.1); cursor: pointer;">
                             <label for="consent" style="color: #ccc; font-size: 0.9rem; cursor: pointer; line-height: 1.4;">
                                 <span data-i18n="legal_consent" id="txt-legal-consent">J'accepte la</span> 
-                                <a href="javascript:void(0)" onclick="openModal('privacyOverlay')" class="gold-link" id="txt-link-privacy">Charte de Souveraineté et de Confidentialité Officielle</a>.
+                                <a href="javascript:void(0)" onclick="openModal('privacyArchive')" class="gold-link" id="txt-link-privacy">Charte de Souveraineté et de Confidentialité Officielle</a>.
                             </label>
                         </div>
 
@@ -487,16 +487,17 @@
         </div>
     </div>
 
-    <div id="privacyOverlay" class="modal-overlay">
+    <!-- Identifiant unique pour éviter les conflits de doublons -->
+    <div id="privacyArchive" class="modal-overlay">
         <div class="modal-content" style="max-width: 850px; width: 95%;">
-            <span class="close-btn" onclick="closeModal('privacyOverlay')">&times;</span>
+            <span class="close-btn" onclick="closeModal('privacyArchive')">&times;</span>
             
-            <!-- Le bloc unique et corrigé avec le data-i18n -->
+            <!-- data-i18n va injecter le contenu ET le titre depuis i18n.js -->
             <div class="modal-body" data-i18n="content_confidentialite" style="text-align: left; padding-right:15px; font-size:0.95rem; color:#e6f1ff; line-height: 1.8;">
             </div>
             
             <div style="text-align:center; margin-top:20px;">
-                <button class="btn-gold full-width" onclick="closeModal('privacyOverlay')" style="width: 100%;">Accepter & Fermer</button>
+                <button class="btn-gold full-width" onclick="closeModal('privacyArchive')" style="width: 100%;">Accepter & Fermer</button>
             </div>
         </div>
     </div>
