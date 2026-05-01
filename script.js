@@ -2,6 +2,7 @@
  * FICHIER : script.js (Engine Make & Validations + Wow Effect Multilingue + UX Premium + Smart Sector)
  */
 
+// ⚠️ LIGNE 6 : REMPLACEZ CECI PAR L'URL DE VOTRE SCÉNARIO A (L'AVANT-POSTE)
 const WEBHOOK_URL = "https://hook.eu2.make.com/moupzawutk6h7ab6f5ap2li1qaypzh2f"; 
 
 window.addEventListener('load', () => {
@@ -83,7 +84,6 @@ function validateStep2() {
         return false;
     }
     
-    // Vérification de sécurité pour le champ Sur-Mesure
     if (sector.value === 'other') {
         const customInput = document.getElementById('custom-sector-input');
         if (!customInput || !customInput.value.trim()) {
@@ -101,7 +101,6 @@ function validateStep2() {
     return true;
 }
 
-// Fonction de réinitialisation du formulaire (Ajoutée pour corriger le bouton Reset)
 function resetForm() {
     const lang = document.documentElement.lang || 'fr';
     const msg = (lang === 'fr') ? "Voulez-vous vraiment recommencer ?" : "Do you really want to restart?";
@@ -109,7 +108,6 @@ function resetForm() {
         const form = document.getElementById('diagnosticForm');
         if (form) form.reset();
         
-        // Cacher le champ sur-mesure si ouvert
         const customSectorContainer = document.getElementById('custom-sector-container');
         if (customSectorContainer) customSectorContainer.style.display = 'none';
 
@@ -140,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Gestion des Modaux (Confidentialité, Guide, Résultat)
+    // 2. Gestion des Modaux
     const privacyModal = document.getElementById('privacyOverlay');
     const openPrivacyBtn = document.getElementById('openPrivacy');
     if (openPrivacyBtn && privacyModal) {
@@ -170,9 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === resultModal) resultModal.style.display = 'none';
     });
 
-    // ==========================================
-    // 3. MAGIE DU BOUTON "SUR-MESURE" (Affichage)
-    // ==========================================
+    // 3. MAGIE DU BOUTON "SUR-MESURE"
     const sectorRadios = document.querySelectorAll('input[name="sector"]');
     const customSectorContainer = document.getElementById('custom-sector-container');
     const customSectorInput = document.getElementById('custom-sector-input');
@@ -184,7 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     customSectorContainer.style.display = 'block';
                     customSectorInput.focus();
                     
-                    // Ajustement RTL si la langue en cours est Arabe
                     const docLang = document.documentElement.lang || 'fr';
                     if (docLang === 'ar') {
                         customSectorInput.style.textAlign = 'right';
@@ -207,7 +202,6 @@ if (form) {
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        // Validations finales
         const whatsappConsent = document.getElementById('whatsapp-consent');
         if (!whatsappConsent.checked) {
             setCustomMessage(whatsappConsent);
@@ -226,10 +220,7 @@ if (form) {
         const originalText = submitBtn.innerText;
         submitBtn.disabled = true;
         
-        // ==========================================
-        // DÉBUT DE L'EFFET WOW (UX/UI DYNAMIQUE)
-        // ==========================================
-        
+        // DÉBUT DE L'EFFET WOW
         form.style.display = 'none';
         
         const wowLoader = document.getElementById('emeta-loader');
@@ -241,7 +232,6 @@ if (form) {
 
         const currentLang = document.documentElement.lang || 'fr';
 
-        // TRADUCTION DU TITRE DU LOADER
         const loaderTitle = document.getElementById('loader-title');
         if (loaderTitle) {
             const titles = {
@@ -256,23 +246,23 @@ if (form) {
         const allLoadingSteps = {
             fr: [
                 "Analyse sémantique du contexte...", "Corrélation avec les données sectorielles...",
-                "Génération des matrices stratégiques Gemini...", "Cryptographie SHA-256 en cours...",
-                "Ancrage sur la Blockchain (Woleet)...", "Mise en page du rapport PDF confidentiel...", "Finalisation sécurisée..."
+                "Génération des matrices stratégiques IA...", "Cryptographie de sécurité en cours...",
+                "Ancrage et scellé de vos données...", "Mise en page du rapport PDF confidentiel...", "Finalisation sécurisée..."
             ],
             en: [
                 "Semantic context analysis...", "Correlation with sectoral data...",
-                "Generating Gemini strategic matrices...", "SHA-256 cryptography in progress...",
-                "Anchoring on the Blockchain (Woleet)...", "Formatting confidential PDF report...", "Secure finalization..."
+                "Generating AI strategic matrices...", "Security cryptography in progress...",
+                "Anchoring and sealing your data...", "Formatting confidential PDF report...", "Secure finalization..."
             ],
             es: [
                 "Análisis semántico del contexto...", "Correlación con datos sectoriales...",
-                "Generando matrices estratégicas Gemini...", "Criptografía SHA-256 en curso...",
-                "Anclaje en la Blockchain (Woleet)...", "Formateando el informe PDF confidencial...", "Finalización segura..."
+                "Generando matrices estratégicas de IA...", "Criptografía de seguridad en curso...",
+                "Anclaje y sellado de sus datos...", "Formateando el informe PDF confidencial...", "Finalización segura..."
             ],
             ar: [
                 "التحليل الدلالي للسياق...", "الارتباط بالبيانات القطاعية...",
-                "إنشاء المصفوفات الاستراتيجية للذكاء الاصطناعي...", "تشفير SHA-256 قيد التقدم...",
-                "التوثيق على البلوكشين (Woleet)...", "تنسيق تقرير PDF السري...", "الانتهاء الآمن..."
+                "إنشاء المصفوفات الاستراتيجية للذكاء الاصطناعي...", "تشفير الأمان قيد التقدم...",
+                "توثيق وختم بياناتك...", "تنسيق تقرير PDF السري...", "الانتهاء الآمن..."
             ]
         };
         
@@ -289,10 +279,6 @@ if (form) {
                 stepIndex++;
             }
         }, 1800); 
-
-        // ==========================================
-        // PRÉPARATION DES DONNÉES ET ENVOI API
-        // ==========================================
 
         let fileData = null;
         let fileName = null;
@@ -315,7 +301,6 @@ if (form) {
             }
         }
 
-        // Récupération intelligente du secteur
         let finalSector = document.querySelector('input[name="sector"]:checked')?.value || "Non spécifié";
         if (finalSector === 'other') {
             const customInput = document.getElementById('custom-sector-input');
@@ -350,8 +335,9 @@ if (form) {
                 const isTimeout = aiResponse.trim() === "Accepted";
                 const pdfUrl = isTimeout ? "#" : aiResponse;
                 
-                // ⚠️ LIEN CALENDLY (VOTRE AGENDA)
-                const calendlyUrl = "https://calendly.com/e-metalabs/30min";
+                // ⚠️ LIEN CONCIERGE WHATSAPP (Remplace Calendly)
+                // Remplacez les "X" par le numéro officiel de l'entreprise
+                const whatsappUrl = "https://wa.me/221XXXXXXXXX?text=Bonjour,%20je%20souhaite%20activer%20mon%20Service%20Concierge%20pour%20l'analyse%20stratégique.";
                 
                 const uiTexts = {
                     fr: {
@@ -359,32 +345,32 @@ if (form) {
                         newAnalysis: "Nouvelle analyse", popupSubtitle: "Les algorithmes e-META LABS ont finalisé le traitement de vos données.",
                         timeoutWarning: "⏳ <strong>Analyse Complexe Terminée.</strong><br>Votre matrice stratégique est en cours d'ancrage. Le rapport PDF certifié va arriver <strong>directement dans votre boîte email</strong> d'ici 1 à 2 minutes.",
                         downloadBtn: "📄 TÉLÉCHARGER L'AUDIT (PDF)", nextStep: "NEXT STEP",
-                        debriefingTitle: "Débriefing Exécutif", debriefingDesc: "L'IA a posé les fondations analytiques. Passez à l'exécution avec un Senior Partner e-META LABS.",
-                        calendlyBtn: "📅 RÉSERVER MON DÉBRIEFING (45 MIN)"
+                        conciergeTitle: "Service Concierge VIP", conciergeDesc: "Passez à l'exécution. Votre Executive Partner e-META LABS vous attend sur notre canal sécurisé pour le matching.",
+                        whatsappBtn: "📱 ACTIVER MON CONCIERGE (WHATSAPP)"
                     },
                     en: {
                         successTitle: "Audit Generated & Secured", successDesc: "The cryptographic seal has been applied. The analysis is complete.",
                         newAnalysis: "New Analysis", popupSubtitle: "e-META LABS algorithms have finalized your data processing.",
                         timeoutWarning: "⏳ <strong>Complex Analysis Completed.</strong><br>Your strategic matrix is being anchored. The certified PDF report will arrive <strong>directly in your inbox</strong> in 1 to 2 minutes.",
                         downloadBtn: "📄 DOWNLOAD AUDIT (PDF)", nextStep: "NEXT STEP",
-                        debriefingTitle: "Executive Debriefing", debriefingDesc: "AI has laid the analytical foundations. Move to execution with an e-META LABS Senior Partner.",
-                        calendlyBtn: "📅 BOOK MY DEBRIEFING (45 MIN)"
+                        conciergeTitle: "VIP Concierge Service", conciergeDesc: "Move to execution. Your e-META LABS Executive Partner is waiting on our secure channel for matching.",
+                        whatsappBtn: "📱 ACTIVATE MY CONCIERGE (WHATSAPP)"
                     },
                     es: {
                         successTitle: "Auditoría Generada y Asegurada", successDesc: "El sello criptográfico ha sido aplicado. El análisis ha finalizado.",
                         newAnalysis: "Nuevo Análisis", popupSubtitle: "Los algoritmos de e-META LABS han finalizado el procesamiento de sus datos.",
                         timeoutWarning: "⏳ <strong>Análisis Complejo Completado.</strong><br>Su matriz estratégica está siendo anclada. El informe PDF certificado llegará <strong>directamente a su correo electrónico</strong> en 1 o 2 minutos.",
                         downloadBtn: "📄 DESCARGAR AUDITORÍA (PDF)", nextStep: "NEXT STEP",
-                        debriefingTitle: "Debriefing Ejecutivo", debriefingDesc: "La IA ha sentado las bases analíticas. Pase a la ejecución con un Senior Partner de e-META LABS.",
-                        calendlyBtn: "📅 RESERVAR MI DEBRIEFING (45 MIN)"
+                        conciergeTitle: "Servicio VIP de Conserjería", conciergeDesc: "Pase a la ejecución. Su Executive Partner de e-META LABS le espera en nuestro canal seguro para el matching.",
+                        whatsappBtn: "📱 ACTIVAR MI CONSERJE (WHATSAPP)"
                     },
                     ar: {
                         successTitle: "تم إنشاء التدقيق وتأمينه", successDesc: "تم تطبيق الختم المشفر. اكتمل التحليل.",
                         newAnalysis: "تحليل جديد", popupSubtitle: "لقد أنهت خوارزميات e-META LABS معالجة بياناتك.",
                         timeoutWarning: "⏳ <strong>اكتمل التحليل المعقد.</strong><br>يتم الآن تثبيت مصفوفتك الاستراتيجية. سيصل تقرير PDF المعتمد <strong>مباشرة إلى بريدك الإلكتروني</strong> في غضون دقيقة إلى دقيقتين.",
                         downloadBtn: "📄 تحميل التدقيق (PDF)", nextStep: "الخطوة التالية",
-                        debriefingTitle: "استخلاص المعلومات التنفيذية", debriefingDesc: "لقد وضع الذكاء الاصطناعي الأسس التحليلية. انتقل إلى التنفيذ مع شريك رئيسي من e-META LABS.",
-                        calendlyBtn: "📅 حجز جلستي (45 دقيقة)"
+                        conciergeTitle: "خدمة كونسيرج VIP", conciergeDesc: "انتقل إلى التنفيذ. شريك e-META LABS التنفيذي في انتظارك على قناتنا الآمنة.",
+                        whatsappBtn: "📱 تفعيل الكونسيرج (واتساب)"
                     }
                 };
 
@@ -425,10 +411,10 @@ if (form) {
                                     ${t.nextStep}
                                 </span>
                             </div>
-                            <h4 style="color: #e6f1ff; font-family: 'Cinzel', serif; margin-bottom: 10px; font-size: 1.2rem;">${t.debriefingTitle}</h4>
-                            <p style="font-size: 0.85rem; color: #8892b0; margin-bottom: 20px;">${t.debriefingDesc}</p>
-                            <a href="${calendlyUrl}" target="_blank" style="display: block; width: 100%; background: transparent; border: 2px solid #25D366; color: #25D366; padding: 12px; text-decoration: none; border-radius: 4px; font-weight: bold; text-transform: uppercase; transition: 0.3s; box-shadow: 0 0 15px rgba(37, 211, 102, 0.15); box-sizing: border-box; text-align: center;">
-                                ${t.calendlyBtn}
+                            <h4 style="color: #e6f1ff; font-family: 'Cinzel', serif; margin-bottom: 10px; font-size: 1.2rem;">${t.conciergeTitle}</h4>
+                            <p style="font-size: 0.85rem; color: #8892b0; margin-bottom: 20px;">${t.conciergeDesc}</p>
+                            <a href="${whatsappUrl}" target="_blank" style="display: block; width: 100%; background: transparent; border: 2px solid #25D366; color: #25D366; padding: 12px; text-decoration: none; border-radius: 4px; font-weight: bold; text-transform: uppercase; transition: 0.3s; box-shadow: 0 0 15px rgba(37, 211, 102, 0.15); box-sizing: border-box; text-align: center;">
+                                ${t.whatsappBtn}
                             </a>
                         </div>
                     `;
