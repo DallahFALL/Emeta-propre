@@ -3,7 +3,7 @@
  */
 
 // ⚠️ LIGNE 6 : REMPLACEZ CECI PAR L'URL DE VOTRE SCÉNARIO A (L'AVANT-POSTE)
-const WEBHOOK_URL = "https://hook.eu2.make.com/ucuuu7je03kjlpvld9qplnh2gihmykki"; 
+const WEBHOOK_URL = "https://hook.eu2.make.com/pfdcjapv96km8k8slsx1q1jcmt0a4kyn"; 
 
 window.addEventListener('load', () => {
     const counterElement = document.getElementById('live-counter');
