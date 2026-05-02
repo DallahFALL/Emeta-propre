@@ -307,7 +307,20 @@ if (form) {
             finalSector = customInput ? customInput.value.trim() : "Sur-mesure non précisé";
         }
 
+        // On récupère le plan caché et le lien LinkedIn
+        const planChoisi = document.getElementById('plan_choisi') ? document.getElementById('plan_choisi').value : "starter";
+        const linkedinInput = document.getElementById('linkedin') ? document.getElementById('linkedin').value : "";
+
+        let finalSector = document.querySelector('input[name="sector"]:checked')?.value || "Non spécifié";
+        if (finalSector === 'other') {
+            const customInput = document.getElementById('custom-sector-input');
+            finalSector = customInput ? customInput.value.trim() : "Sur-mesure non précisé";
+        }
+
+        // LE FAMEUX PAYLOAD (Charge utile)
         const formData = {
+            plan: planChoisi,            // <--- C'EST CETTE LIGNE QUI MANQUAIT
+            linkedin: linkedinInput,     // <--- CELLE-CI AUSSI
             timestamp: new Date().toISOString(),
             company: document.getElementById('company').value,
             email: document.getElementById('email').value,
