@@ -393,7 +393,7 @@ if (form) {
                 if (planChoisi === 'starter') {
                     
                     // --- 1. LOGIQUE PLAN GRATUIT (STARTER) ---
-                    const whatsappUrl = "https://wa.me/221XXXXXXXXX?text=Bonjour,%20je%20souhaite%20activer%20mon%20Service%20Concierge%20pour%20l'analyse%20stratégique.";
+                    const whatsappUrl = "https://wa.me/221772404130?text=Bonjour,%20je%20souhaite%20activer%20mon%20Service%20Concierge%20pour%20l'analyse%20stratégique.";
                     
                     const uiTexts = {
                         fr: {
