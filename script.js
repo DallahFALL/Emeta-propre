@@ -454,3 +454,32 @@ if (form) {
         });
     });
 }
+// ==========================================
+// MODULE DE PAIEMENT (PAYTECH & PADDLE)
+// ==========================================
+
+const PAYMENT_LINKS = {
+    pro: {
+        paytech: "METTEZ_VOTRE_LIEN_PAYTECH_PRO_ICI",
+        paddle: "METTEZ_VOTRE_LIEN_PADDLE_PRO_ICI"
+    },
+    expert: {
+        paytech: "METTEZ_VOTRE_LIEN_PAYTECH_EXPERT_ICI",
+        paddle: "METTEZ_VOTRE_LIEN_PADDLE_EXPERT_ICI"
+    }
+};
+
+function triggerPayment(planChoisi) {
+    const paytechBtn = document.getElementById('linkPaytech');
+    const paddleBtn = document.getElementById('linkPaddle');
+    const paymentModal = document.getElementById('paymentModal');
+
+    // On met à jour les liens des boutons selon le plan choisi
+    if (PAYMENT_LINKS[planChoisi]) {
+        if(paytechBtn) paytechBtn.href = PAYMENT_LINKS[planChoisi].paytech;
+        if(paddleBtn) paddleBtn.href = PAYMENT_LINKS[planChoisi].paddle;
+    }
+
+    // On affiche la fenêtre de paiement
+    if(paymentModal) paymentModal.style.display = 'flex';
+}
