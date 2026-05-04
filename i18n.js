@@ -14,7 +14,14 @@ const translations = {
         btn_next: "Suivant",
         
         // --- MATRICE & EXPERTISES ---
-        step2_title: "02. Matrice Stratégique", btn_guide: "📖 Guide des Expertises", lbl_sector: "Secteur Stratégique",
+        step2_title: "02. Matrice Stratégique", lbl_sector: "Secteur Stratégique",
+        
+        // NOUVEAU BLINDAGE : Guide des Expertises
+        btn_guide: "📖 Guide des Expertises", // Ancienne clé (au cas où)
+        lienGuide: "Guide des Expertises",
+        titreGuide: "Guide des Expertises",
+        descGuide: "Contenu de votre guide ici...",
+
         agnostic_title: "INTELLIGENCE AGNOSTIQUE 🧠",
         agnostic_desc: "De l'ingénierie financière aux litiges internationaux les plus complexes, notre moteur polymorphe s'adapte à votre industrie. Cochez l'<strong>Auto-Détection IA</strong> si votre enjeu dépasse les cadres traditionnels.",
         sec_fintech: "FinTech & DeFi", sec_agri: "AgriTech & Food Security", sec_green: "GreenTech & Énergies",
@@ -107,7 +114,14 @@ const translations = {
         lbl_linkedin: "LinkedIn Profile (Optional)", ph_linkedin: "https://linkedin.com/in/your-name",
         btn_next: "Next",
         
-        step2_title: "02. Strategic Matrix", btn_guide: "📖 Expertise Guide", lbl_sector: "Strategic Sector",
+        step2_title: "02. Strategic Matrix", lbl_sector: "Strategic Sector",
+        
+        // NOUVEAU BLINDAGE : Guide des Expertises
+        btn_guide: "📖 Expertise Guide",
+        lienGuide: "Expertise Guide",
+        titreGuide: "Expertise Guide",
+        descGuide: "Content of your guide here...",
+
         agnostic_title: "AGNOSTIC INTELLIGENCE 🧠",
         agnostic_desc: "From financial engineering to the most complex international disputes, our polymorphic engine adapts to your industry. Select <strong>AI Auto-Detection</strong> if your challenge transcends traditional boundaries.",
         sec_fintech: "FinTech & DeFi", sec_agri: "AgriTech & Food Security", sec_green: "GreenTech & Energy",
@@ -195,7 +209,14 @@ const translations = {
         lbl_linkedin: "Perfil de LinkedIn (Opcional)", ph_linkedin: "https://linkedin.com/in/tu-nombre",
         btn_next: "Siguiente",
         
-        step2_title: "02. Matriz Estratégica", btn_guide: "📖 Guía de Especialidades", lbl_sector: "Sector Estratégico",
+        step2_title: "02. Matriz Estratégica", lbl_sector: "Sector Estratégico",
+
+        // NOUVEAU BLINDAGE : Guide des Expertises
+        btn_guide: "📖 Guía de Especialidades",
+        lienGuide: "Guía de Especialidades",
+        titreGuide: "Guía de Especialidades",
+        descGuide: "Contenido de su guía aquí...",
+        
         agnostic_title: "INTELIGENCIA AGNÓSTICA 🧠",
         agnostic_desc: "Desde la ingeniería financiera hasta los litigios internacionales más complejos, nuestro motor polimorfo se adapta a su industria. Seleccione <strong>Auto-Detección por IA</strong> si su desafío supera los marcos tradicionales.",
         sec_fintech: "FinTech y DeFi", sec_agri: "AgriTech y Seguridad Alimentaria", sec_green: "GreenTech y Energía",
@@ -283,7 +304,14 @@ const translations = {
         lbl_linkedin: "ملف LinkedIn (اختياري)", ph_linkedin: "https://linkedin.com/in/اسمك",
         btn_next: "التالي",
         
-        step2_title: "02. المصفوفة الاستراتيجية", btn_guide: "📖 دليل الخبرات", lbl_sector: "القطاع الاستراتيجي",
+        step2_title: "02. المصفوفة الاستراتيجية", lbl_sector: "القطاع الاستراتيجي",
+
+        // NOUVEAU BLINDAGE : Guide des Expertises
+        btn_guide: "📖 دليل الخبرات",
+        lienGuide: "دليل الخبرات",
+        titreGuide: "دليل الخبرات",
+        descGuide: "محتوى الدليل الخاص بك هنا...",
+        
         agnostic_title: "ذكاء شامل ومتكيف 🧠",
         agnostic_desc: "من الهندسة المالية إلى النزاعات الدولية الأكثر تعقيدًا، يتكيف محركنا متعدد الأشكال مع مجالك. اختر <strong>الاكتشاف التلقائي بالذكاء الاصطناعي</strong> إذا كان التحدي الذي تواجهه يتجاوز الأطر التقليدية.",
         sec_fintech: "التكنولوجيا المالية", sec_agri: "التكنولوجيا الزراعية", sec_green: "التكنولوجيا الخضراء",
