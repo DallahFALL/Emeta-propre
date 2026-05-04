@@ -174,16 +174,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 2. Gestion des Modaux
-    const privacyModal = document.getElementById('privacyArchive'); // Correspond à l'ID corrigé de l'index.html
+    const privacyModal = document.getElementById('privacyArchive'); 
     const openPrivacyBtn = document.getElementById('txt-link-privacy');
     if (openPrivacyBtn && privacyModal) {
         openPrivacyBtn.addEventListener('click', (e) => { e.preventDefault(); privacyModal.style.display = 'flex'; });
     }
 
-    const guideModal = document.getElementById('guideOverlay');
-    if (guideModal) {
-        document.querySelectorAll('.close-guide, .close-guide-btn').forEach(btn => {
-            btn.addEventListener('click', () => { guideModal.style.display = 'none'; });
+    // NOUVEAU BLINDAGE : Guide des expertises
+    const btnOpenGuide = document.getElementById('btnOpenGuide') || document.querySelector('[onclick="openModal(\'guideOverlay\')"]');
+    const guideModal = document.getElementById('guideExpertisesModal') || document.getElementById('guideOverlay');
+    const btnCloseGuide = document.getElementById('btnCloseGuide') || document.querySelector('.close-guide, .close-guide-btn');
+
+    if (btnOpenGuide && guideModal) {
+        // Nettoyage de l'ancien onclick s'il existe toujours en HTML pour éviter les conflits
+        if (btnOpenGuide.hasAttribute('onclick')) {
+            btnOpenGuide.removeAttribute('onclick');
+        }
+        
+        btnOpenGuide.addEventListener('click', function(e) {
+            e.preventDefault(); 
+            guideModal.style.display = "flex"; // Ou "block" selon votre CSS
+        });
+    }
+
+    if (btnCloseGuide && guideModal) {
+        btnCloseGuide.addEventListener('click', function() {
+            guideModal.style.display = "none"; 
         });
     }
 
@@ -200,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Fermeture des modaux en cliquant à l'extérieur
+    // Fermeture unifiée des modaux en cliquant à l'extérieur
     window.addEventListener('click', (e) => {
         if (e.target === privacyModal) privacyModal.style.display = 'none';
         if (e.target === guideModal) guideModal.style.display = 'none';
