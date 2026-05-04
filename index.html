@@ -214,18 +214,20 @@
                 <div class="form-step" id="step-2">
                     <h3 data-i18n="step2_title">02. Matrice Stratégique</h3>
                     
-                    <div style="background: rgba(212, 175, 55, 0.05); border-left: 3px solid #d4af37; padding: 12px 15px; margin-bottom: 20px; border-radius: 0 4px 4px 0;">
-                        <span style="display: block; color: #d4af37; font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 5px; font-weight: bold;" data-i18n="agnostic_title">INTELLIGENCE AGNOSTIQUE 🧠</span>
-                        <span style="color: #8892b0; font-size: 0.85rem; line-height: 1.4; display: block;" data-i18n="agnostic_desc">
-                            De l'ingénierie financière aux litiges internationaux les plus complexes, notre moteur polymorphe s'adapte à votre industrie. Cochez l'<strong>Auto-Détection IA</strong> si votre enjeu dépasse les cadres traditionnels.
-                        </span>
-                    </div>
+<div style="background: rgba(212, 175, 55, 0.05); border-left: 3px solid #d4af37; padding: 12px 15px; margin-bottom: 20px; border-radius: 0 4px 4px 0;">
+    <span style="display: block; color: #d4af37; font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 5px; font-weight: bold;" data-i18n="agnostic_title">INTELLIGENCE AGNOSTIQUE 🧠</span>
+    <span style="color: #8892b0; font-size: 0.85rem; line-height: 1.4; display: block;" data-i18n="agnostic_desc">
+        De l'ingénierie financière aux litiges internationaux les plus complexes, notre moteur polymorphe s'adapte à votre industrie. Cochez l'<strong>Auto-Détection IA</strong> si votre enjeu dépasse les cadres traditionnels.
+    </span>
+</div>
 
-                    <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                        <label class="section-label" data-i18n="lbl_sector" style="color: #d4af37; font-family: 'Cinzel', serif; font-size: 0.9rem;">Secteur Stratégique</label>
-                        <a href="javascript:void(0)" onclick="openModal('guideOverlay')" class="gold-link" style="font-size: 0.8rem;" data-i18n="btn_guide">📖 Guide des Expertises</a>
-                    </div>
-                    
+<div style="display: flex; justify-content: space-between; align-items: baseline;">
+    <label class="section-label" data-i18n="lbl_sector" style="color: #d4af37; font-family: 'Cinzel', serif; font-size: 0.9rem;">Secteur Stratégique</label>
+    <!-- CORRECTION ICI : Le data-i18n est déplacé dans un <span> -->
+    <a href="javascript:void(0)" onclick="openModal('guideOverlay')" class="gold-link" style="font-size: 0.8rem;">
+        📖 <span data-i18n="btn_guide">Guide des Expertises</span>
+    </a>
+</div> 
                     <div class="grid-options">
                         <label class="checkbox-btn"><input type="radio" name="sector" value="FinTech_DeFi"> <span data-i18n="sec_fintech">FinTech & DeFi</span></label>
                         <label class="checkbox-btn"><input type="radio" name="sector" value="GovTech_SmartCities"> <span data-i18n="sec_gov">GovTech & Smart Cities</span></label>
