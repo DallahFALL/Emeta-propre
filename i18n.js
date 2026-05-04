@@ -49,6 +49,7 @@ const translations = {
         exp_hr: "Gestion des Talents (RH)", exp_design: "Design Thinking & UX", exp_gtm: "Go-to-Market & Growth Strategy", exp_auto: "Auto-Détection par l'IA",
         
         btn_prev: "Retour", btn_next_matrice: "Ouvrir Matrice",
+        btn_close: "FERMER",
         
         // --- ETAPE 3 ---
         step3_title: "03. Matrice Analyse", 
@@ -148,6 +149,7 @@ const translations = {
         exp_hr: "Talent Management (HR)", exp_design: "Design Thinking & UX", exp_gtm: "Go-to-Market & Growth Strategy", exp_auto: "AI Auto-Detection",
         
         btn_prev: "Back", btn_next_matrice: "Open Matrix",
+        btn_close: "CLOSE",
         
         step3_title: "03. Analysis Matrix", 
         elite_hook: "\"Beyond algorithms, resolving the unsolvable.\"",
@@ -243,6 +245,7 @@ const translations = {
         exp_hr: "Gestión de Talento (RRHH)", exp_design: "Design Thinking y UX", exp_gtm: "Go-to-Market y Crecimiento", exp_auto: "Auto-Detección por IA",
         
         btn_prev: "Volver", btn_next_matrice: "Abrir Matriz",
+        btn_close: "CERRAR",
         
         step3_title: "03. Matriz de Análisis", 
         elite_hook: "\"Más allá de los algoritmos, la resolución de lo irresoluble.\"",
@@ -338,6 +341,7 @@ const translations = {
         exp_hr: "الموارد البشرية", exp_design: "تجربة المستخدم", exp_gtm: "استراتيجية الوصول للسوق والنمو", exp_auto: "اكتشاف تلقائي بالذكاء الاصطناعي",
         
         btn_prev: "رجوع", btn_next_matrice: "فتح مصفوفة التحليل",
+        btn_close: "إغلاق",
         
         step3_title: "03. مصفوفة التحليل", 
         elite_hook: "\"ما وراء الخوارزميات، حل ما لا يمكن حله.\"",
