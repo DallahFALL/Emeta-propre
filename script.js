@@ -3,7 +3,7 @@
  */
 
 // ⚠️ LIGNE 6 : REMPLACEZ CECI PAR L'URL DE VOTRE SCÉNARIO A (L'AVANT-POSTE)
-const WEBHOOK_URL = "https://hook.eu2.make.com/pfdcjapv96km8k8slsx1q1jcmt0a4kyn"; 
+const WEBHOOK_URL = "https://hook.eu2.make.com/moupzawutk6h7ab6f5ap2li1qaypzh2f"; 
 
 // ==========================================
 // MODULE DE PAIEMENT (PAYTECH & PADDLE)
