@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>                
+<head>                  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>e-META LABS | Strategic AI Engine</title>
@@ -183,7 +183,7 @@
     <main class="main-container">
         <div class="glass-card">
             
-            <form id="diagnosticForm"
+            <form id="diagnosticForm">
                 <input type="hidden" id="plan_choisi" value="starter">   
                 
                 <div class="form-step active" id="step-1">
@@ -226,7 +226,6 @@
 
 <div style="display: flex; justify-content: space-between; align-items: baseline;">
     <label class="section-label" data-i18n="lbl_sector" style="color: #d4af37; font-family: 'Cinzel', serif; font-size: 0.9rem;">Secteur Stratégique</label>
-    <!-- CORRECTION ICI : Le data-i18n est déplacé dans un <span> -->
     <a href="javascript:void(0)" onclick="openModal('guideOverlay')" class="gold-link" style="font-size: 0.8rem;">
         📖 <span data-i18n="btn_guide">Guide des Expertises</span>
     </a>
@@ -333,12 +332,13 @@
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="HR_Talent"> <span data-i18n="exp_hr">Gestion des Talents (RH)</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="Design_Thinking"> <span data-i18n="exp_design">Design Thinking & UX</span></label>
                         <label class="checkbox-btn"><input type="checkbox" name="expertise" value="GoToMarket_Growth"> <span data-i18n="exp_gtm">Go-to-Market & Growth Strategy</span></label>
-                        <label class="checkbox-btn" style="grid-column: 1 / -1;">
-                            <input type="checkbox" name="expertise" value="Auto-Détection IA (Sur-mesure)">
-                            <span style="border: 1px solid #25D366; color: #25D366; box-shadow: 0 0 10px rgba(37, 211, 102, 0.1);">
-                                🧠 <span data-i18n="exp_auto">Auto-Détection par l'IA</span>
+                        
+                        <button type="button" onclick="openAutoDetectModal()" style="grid-column: 1 / -1; background: transparent; cursor: pointer; padding:0; border:none; width: 100%;">
+                            <span style="display:block; padding: 12px; text-align: center; border-radius: 4px; border: 1px solid #25D366; color: #25D366; box-shadow: 0 0 15px rgba(37, 211, 102, 0.2); font-size: 0.9rem; font-weight: bold; transition: 0.3s;" onmouseover="this.style.background='rgba(37, 211, 102, 0.1)'" onmouseout="this.style.background='transparent'">
+                                🧠 <span data-i18n="exp_auto">AUTO-DÉTECTION PAR L'IA (FRACTIONNEMENT DIRECT)</span>
                             </span>
-                        </label>
+                        </button>
+                        
                     </div>
 
                     <div class="btn-container split">
@@ -437,12 +437,10 @@
         </div>
     </div>
 
-    <!-- Identifiant unique pour éviter les conflits de doublons -->
     <div id="privacyArchive" class="modal-overlay">
         <div class="modal-content" style="max-width: 850px; width: 95%;">
             <span class="close-btn" onclick="closeModal('privacyArchive')">&times;</span>
             
-            <!-- data-i18n va injecter le contenu ET le titre depuis i18n.js -->
             <div class="modal-body" data-i18n="content_confidentialite" style="text-align: left; padding-right:15px; font-size:0.95rem; color:#e6f1ff; line-height: 1.8;">
             </div>
             
@@ -492,21 +490,46 @@
             </div>
             
             <button onclick="document.getElementById('guideOverlay').style.display='none'" data-i18n="btn_close" style="width: 100%; padding: 12px; background-color: #d4af37; color: #0a192f; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; font-family: 'Cinzel', serif; text-transform: uppercase; transition: 0.3s;">FERMER</button>
+        </div>
     </div>
 
     <div id="resultModal" class="modal-overlay">
         <div class="modal-content" style="max-width: 600px; padding: 40px;">
-            <span class="close-btn close-result" style="top: 15px; right: 20px;">&times;</span>
-            <div id="resultBody" style="width: 100%;">
-                <!-- Le contenu de réussite et le lien WhatsApp seront injectés ici par le script externe -->
+            <span class="close-btn close-result" onclick="closeModal('resultModal')" style="top: 15px; right: 20px;">&times;</span>
+            <div id="resultBody" style="width: 100%; text-align: center;">
+                <p id="resultText" style="color: #e6f1ff; font-size: 1.1rem; line-height: 1.6;"></p>
             </div>
         </div>
     </div>
 
-    <!-- Injection des traductions -->
+    <div id="autoDetectModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 450px; text-align: center; padding: 35px; border-color: #25D366; box-shadow: 0 10px 40px rgba(37, 211, 102, 0.2);">
+            <span class="close-btn" onclick="closeModal('autoDetectModal')" style="color: #25D366;">&times;</span>
+            <div style="font-size: 40px; margin-bottom: 15px;">🧠</div>
+            <h2 style="color: #25D366; font-family: 'Cinzel', serif; margin-top: 0; font-size: 1.4rem;">Connexion à l'Agent e-META</h2>
+            <p style="color: #e6f1ff; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.5;">
+                Où devons-nous envoyer votre rapport stratégique confidentiel ?
+            </p>
+            
+            <div class="input-group" style="text-align: left;">
+                <label style="color: #25D366;">Email Professionnel</label>
+                <input type="email" id="auto-email" placeholder="contact@domain.com" style="border-color: rgba(37, 211, 102, 0.4); background: rgba(10, 25, 47, 0.8);">
+            </div>
+            
+            <div class="input-group" style="text-align: left;">
+                <label style="color: #25D366;">Numéro WhatsApp</label>
+                <input type="tel" id="auto-phone" placeholder="+221..." style="border-color: rgba(37, 211, 102, 0.4); background: rgba(10, 25, 47, 0.8);">
+            </div>
+
+            <button type="button" id="btn-fire-ia" onclick="fireAutoDetection()" style="width: 100%; padding: 15px; background: #25D366; color: #0a192f; border: none; border-radius: 4px; font-weight: bold; font-family: 'Cinzel', serif; cursor: pointer; font-size: 1rem; text-transform: uppercase; margin-top: 10px; box-shadow: 0 0 15px rgba(37, 211, 102, 0.4); transition: 0.3s;">
+                Déclencher l'Analyse
+            </button>
+            <p style="font-size: 0.75rem; color: #8892b0; margin-top: 15px;">Transmission cryptée vers le serveur souverain e-META</p>
+        </div>
+    </div>
+
     <script src="i18n.js"></script>
 
-    <!-- Connexion au Cerveau Principal (Fichier externe) -->
     <script src="script.js"></script>
 
 </body>
