@@ -2,7 +2,7 @@
 // CONFIGURATION GLOBALE
 // ==========================================
 // ⚠️ REMPLACEZ CETTE URL PAR VOTRE TEST URL n8n !
-const WEBHOOK_N8N_URL = "https://automation.e-metalabs.com/webhook-test/matrice-auto-detection"; 
+const WEBHOOK_N8N_URL = "https://localhost:5678/webhook-test/matrice-auto-detection"; 
 
 // ==========================================
 // DICTIONNAIRE MULTILINGUE (UI)
