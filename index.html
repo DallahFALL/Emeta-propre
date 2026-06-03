@@ -8,7 +8,8 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L95 25 V75 L50 95 L5 75 V25 Z' stroke='%23d4af37' stroke-width='4' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
+    <!-- Nouveau Logo Hexagonal e-META (Favicon) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,25 95,75 50,95 5,75 5,25' stroke='%23d4af37' stroke-width='4' fill='none'/><circle cx='50' cy='50' r='10' fill='%23d4af37'/><circle cx='65' cy='45' r='3' fill='%23ffffff'/><circle cx='75' cy='80' r='3' fill='%23ffffff'/></svg>">
       
     <style>
         body { margin: 0; background-color: #0a192f; color: #e6f1ff; font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
@@ -45,6 +46,7 @@
 
         .modal-overlay { position: fixed; inset: 0; background: rgba(10, 25, 47, 0.95); display: none; justify-content: center; align-items: center; z-index: 20000; backdrop-filter: blur(8px); }
         .modal-content { background: #0a192f; border: 1px solid #d4af37; padding: 35px; border-radius: 8px; max-width: 800px; width: 90%; position: relative; max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        .modal-body { overflow-y: auto; padding-right: 15px; }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: #8892b0; transition: 0.3s; }
         .close-btn:hover { color: #d4af37; }
         
@@ -55,37 +57,46 @@
         
         .footer { text-align: center; padding: 40px; font-size: 0.8rem; color: #8892b0; border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; }
         .gold-link { color: #d4af37; text-decoration: underline; cursor: pointer; transition: 0.3s; }
+        .lexique-item { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+        [dir="rtl"] { text-align: right; }
+        [dir="rtl"] .logo-container { flex-direction: row-reverse; }
     </style>
 </head>
 <body>
 
     <header class="header">
         <div class="logo-container">
+            <!-- Nouveau Logo Hexagonal e-META (SVG Inline) -->
             <svg width="50" height="50" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 5 L95 25 V75 L50 95 L5 75 V25 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
-                <circle cx="50" cy="50" r="8" fill="#d4af37"/>
+                <polygon points="50,5 95,25 95,75 50,95 5,75 5,25" stroke="#d4af37" stroke-width="4" fill="none"/>
+                <circle cx="50" cy="50" r="12" fill="#d4af37"/>
+                <circle cx="65" cy="45" r="3" fill="#ffffff"/>
+                <circle cx="75" cy="80" r="3" fill="#ffffff"/>
             </svg>
             <div class="brand-text"><h1>e-META LABS</h1></div>
         </div>
         <div class="lang-switch">
-            <button data-lang="fr" class="active">FR</button>
-            <button data-lang="en">EN</button>
+            <button data-lang="fr" class="active" onclick="switchLang('fr')">FR</button>
+            <button data-lang="en" onclick="switchLang('en')">EN</button>
+            <button data-lang="es" onclick="switchLang('es')">ES</button>
+            <button data-lang="ar" onclick="switchLang('ar')">AR</button>
         </div>
     </header>
 
     <div class="counter-container">
         <span style="font-family: 'Cinzel', serif; color: #d4af37; font-size: 1.5rem; font-weight: bold;" id="live-counter-top">1,420</span>
-        <span style="color: #8892b0; font-size: 0.9rem; margin-left: 10px; text-transform: uppercase; letter-spacing: 1px;">Diagnostics Sécurisés & Ancrés</span>
+        <span id="ui-lbl-counter" style="color: #8892b0; font-size: 0.9rem; margin-left: 10px; text-transform: uppercase; letter-spacing: 1px;">Diagnostics Sécurisés & Ancrés</span>
     </div>
 
     <section class="hero-sublime">
         <div class="container">
             <p class="label-gold">MASTER DIAGNOSTIC 2026</p>
             <h1 class="slogan-ia">
-                <span>Excellence Stratégique</span> <br>
-                <span class="precision-text">& Haute Précision IA</span>
+                <span id="ui-hero-1">Excellence Stratégique</span> <br>
+                <span class="precision-text" id="ui-hero-2">& Haute Précision IA</span>
             </h1>
-            <p style="color: #25D366; font-family: 'Inter', sans-serif; font-size: 1rem; margin-top: 15px; letter-spacing: 1px; text-transform: uppercase; text-shadow: 0 0 10px rgba(37, 211, 102, 0.3);">
+            <p id="ui-slogan-tech" style="color: #25D366; font-family: 'Inter', sans-serif; font-size: 1rem; margin-top: 15px; letter-spacing: 1px; text-transform: uppercase; text-shadow: 0 0 10px rgba(37, 211, 102, 0.3);">
                 Conçu pour la Tech. Bâti pour l'absolu.
             </p>
         </div>
@@ -96,47 +107,88 @@
         <div class="glass-card" style="text-align: center; border-color: rgba(37, 211, 102, 0.4);">
             <div class="terminal-header">
                 <span style="font-size: 32px;">🧠</span>
-                <h2 style="color: #25D366; font-family: 'Cinzel', serif; margin: 0;">TERMINAL DE DÉTECTION IA</h2>
+                <h2 id="ui-terminal-title" style="color: #25D366; font-family: 'Cinzel', serif; margin: 0;">TERMINAL DE DÉTECTION IA</h2>
             </div>
             
-            <p style="color: #e6f1ff; font-size: 1.1rem; margin-bottom: 20px; line-height: 1.6;">
+            <p id="ui-terminal-desc" style="color: #e6f1ff; font-size: 1.1rem; margin-bottom: 20px; line-height: 1.6;">
                 Oubliez les formulaires statiques. Exposez simplement votre problématique stratégique ou technologique brute. L'Agent e-META analysera votre contexte et générera l'audit approprié.
             </p>
 
             <textarea id="user-raw-prompt" rows="5" placeholder="Ex : Nous souhaitons automatiser notre processus culinaire traditionnel via une machine connectée, mais nous bloquons sur l'étude de faisabilité et la structure d'investissement..." style="width: 100%; background: rgba(10, 25, 47, 0.8); border: 1px solid rgba(212, 175, 55, 0.5); color: #fff; padding: 20px; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 1rem; resize: vertical; box-sizing: border-box; margin-bottom: 25px; line-height: 1.5;"></textarea>
             
-            <button onclick="triggerSniperCapture()" class="btn-gold glow" style="width: 100%; background: #25D366; color: #0a192f; border: none; font-size: 1.1rem; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);">
+            <button id="ui-btn-analyse" onclick="triggerSniperCapture()" class="btn-gold glow" style="width: 100%; background: #25D366; color: #0a192f; border: none; font-size: 1.1rem; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);">
                 LANCER L'ANALYSE SÉMANTIQUE
             </button>
             
             <div style="margin-top: 20px; font-size: 0.85rem; color: #8892b0;">
-                <a href="javascript:void(0)" onclick="openModal('guideOverlay')" class="gold-link">Consulter la matrice de nos 20 expertises sectorielles couvertes par l'IA</a>
+                <a href="javascript:void(0)" onclick="openModal('guideOverlay')" class="gold-link" id="ui-link-matrice">Consulter la matrice de nos 20 expertises sectorielles couvertes par l'IA</a>
             </div>
         </div>
     </main>
 
-    <!-- SECTION PRICING (Conservée pour la transparence) -->
+    <!-- SECTION PRICING (Format Intégral : 3 Offres) -->
     <section id="pricing" style="font-family: Arial, sans-serif; padding: 40px 10px; text-align: center;">
-        <h3 style="color: #d4af37; font-family: 'Cinzel', serif; margin-bottom: 30px;">ARCHITECTURE TARIFAIRE</h3>
         <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-            <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 20px; width: 280px; text-align: left;">
+            
+            <!-- STARTER -->
+            <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 20px; width: 280px; text-align: left; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
                 <h3 style="font-size: 18px; color: #fff; margin-top: 0; font-family: 'Cinzel', serif;">STARTER</h3>
+                <p style="font-size: 13px; color: #8892b0; min-height: 35px; margin-bottom: 10px;">Pour tester la puissance analytique d'e-META LABS.</p>
                 <div style="font-size: 24px; font-weight: bold; color: #d4af37; margin: 10px 0;">0 FCFA</div>
-                <p style="font-size: 13px; color: #8892b0;">Diagnostic de faisabilité préliminaire. Format WhatsApp.</p>
+                <ul style="list-style: none; padding: 0; margin-bottom: 20px; font-size: 13px; color: #ccc; line-height: 1.5;">
+                    <li>✓ 2 Diagnostics foudroyants</li>
+                    <li>✓ Identification du risque majeur</li>
+                    <li>✓ Format texte (Email)</li>
+                    <li style="color: #d9534f; font-weight: bold; margin-top: 8px;">⚠️ Plan d'action stratégique non inclus</li>
+                </ul>
+                <a href="#" onclick="document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth' });" style="display: block; text-align: center; background: rgba(255,255,255,0.1); color: #fff; text-decoration: none; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 14px;">Tester gratuitement</a>
             </div>
-            <div style="background-color: rgba(13, 27, 42, 0.9); border-radius: 8px; padding: 20px; width: 280px; text-align: left; border: 2px solid #d4af37; transform: scale(1.05);">
-                <div style="background: #d4af37; color: #000; font-size: 11px; font-weight: bold; padding: 4px; border-radius: 3px; margin-bottom: 10px; width: fit-content;">LE PLUS POPULAIRE</div>
+
+            <!-- PRO -->
+            <div style="background-color: rgba(13, 27, 42, 0.9); border-radius: 8px; padding: 20px; width: 280px; text-align: left; border: 2px solid #d4af37; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; transform: scale(1.05); z-index: 10;">
+                <div style="background: #d4af37; color: #000; font-size: 11px; font-weight: bold; padding: 4px; border-radius: 3px; margin-bottom: 10px; width: fit-content; text-transform: uppercase;">LE PLUS POPULAIRE</div>
                 <h3 style="font-size: 18px; color: #d4af37; margin-top: 0; font-family: 'Cinzel', serif;">PRO (PACK 3)</h3>
+                <p style="font-size: 13px; color: #8892b0; min-height: 35px; margin-bottom: 10px;">Un pack de <strong>3 audits stratégiques</strong> complets et sans concession.</p>
                 <div style="font-size: 24px; font-weight: bold; color: #d4af37; margin: 10px 0;">14 900 FCFA</div>
-                <p style="font-size: 13px; color: #8892b0;">3 Audits stratégiques complets avec plan d'action PDF.</p>
+                <ul style="list-style: none; padding: 0; margin-bottom: 20px; font-size: 13px; color: #ccc; line-height: 1.5;">
+                    <li><strong style="color: #d4af37;">✓ 3 Rapports</strong> complets</li>
+                    <li>✓ Diagnostic financier & KPI</li>
+                    <li>✓ Stratégies de disruption</li>
+                    <li>✓ Rapports PDF Premium</li>
+                </ul>
+                <a href="#" onclick="document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth' });" style="display: block; text-align: center; background: #d4af37; color: #0a192f; text-decoration: none; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 14px; text-transform: uppercase;">Acheter le Pack</a>
             </div>
+
+            <!-- EXPERT -->
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid #333; border-radius: 8px; padding: 20px; width: 280px; text-align: left; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                <h3 style="font-size: 18px; color: #fff; margin-top: 0; font-family: 'Cinzel', serif;">EXPERT</h3>
+                <p style="font-size: 13px; color: #8892b0; min-height: 35px; margin-bottom: 10px;">Votre cellule de prospective disponible 24/7.</p>
+                <div style="font-size: 24px; font-weight: bold; color: #d4af37; margin: 10px 0;">29 000 FCFA</div>
+                <ul style="list-style: none; padding: 0; margin-bottom: 20px; font-size: 13px; color: #ccc; line-height: 1.5;">
+                    <li>✓ Jusqu'à 10 Audits / mois</li>
+                    <li>✓ Veille Data en temps réel</li>
+                    <li>✓ Protocole d'action sur 7 jours</li>
+                    <li>✓ Livraison VIP (WhatsApp)</li>
+                </ul>
+                <a href="#" onclick="document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth' });" style="display: block; text-align: center; background: #d4af37; color: #111; text-decoration: none; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 14px;">S'abonner</a>
+            </div>
+
         </div>
     </section>
 
+    <!-- FOOTER EXACT -->
     <footer class="footer">
-        <p>&copy; 2026 E-META LABS SASU. Unité d'Intelligence Stratégique.</p>
+        <div style="margin-bottom: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 20px;">
+            <a href="mentions-legales.html" class="gold-link" style="margin: 0 15px; font-size: 0.85rem; text-decoration: none;" id="ui-link-mentions">Mentions Légales</a>
+            <a href="cgv.html" class="gold-link" style="margin: 0 15px; font-size: 0.85rem; text-decoration: none;">CGV</a>
+            <a href="confidentialite.html" class="gold-link" style="margin: 0 15px; font-size: 0.85rem; text-decoration: none;" id="ui-link-conf">Confidentialité</a>
+            <a href="remboursement.html" class="gold-link" style="margin: 0 15px; font-size: 0.85rem; text-decoration: none;" id="ui-link-remb">Remboursement</a>
+        </div>
+        <p>&copy; 2026 E-META LABS SASU. Tous droits réservés.</p>
+        <p class="tiny">Strategic Intelligence Unit • Rosso - Dakar - Paris - Dubai - Shanghai - New York</p>
         <div style="margin-top: 15px; font-size: 0.8rem; color: #8892b0;">
-            <a href="mailto:contact@e-metalabs.com" style="color: #8892b0; text-decoration: none;">✉️ contact@e-metalabs.com</a>
+            <a href="mailto:contact@e-metalabs.com" style="color: #8892b0; text-decoration: none; margin-right: 15px;">✉️ contact@e-metalabs.com</a>
+            <a href="mailto:support@e-metalabs.com" style="color: #8892b0; text-decoration: none;">🛠️ support@e-metalabs.com</a>
         </div>
     </footer>
 
@@ -145,18 +197,18 @@
         <div class="modal-content" style="max-width: 450px; text-align: center; padding: 35px; border-color: #25D366; box-shadow: 0 10px 40px rgba(37, 211, 102, 0.2);">
             <span class="close-btn" onclick="closeModal('autoDetectModal')" style="color: #25D366;">&times;</span>
             <div style="font-size: 40px; margin-bottom: 15px;">🔒</div>
-            <h2 style="color: #25D366; font-family: 'Cinzel', serif; margin-top: 0; font-size: 1.4rem;">Canal Sécurisé Requis</h2>
-            <p style="color: #e6f1ff; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.5;">
+            <h2 id="ui-modal-secure-title" style="color: #25D366; font-family: 'Cinzel', serif; margin-top: 0; font-size: 1.4rem;">Canal Sécurisé Requis</h2>
+            <p id="ui-modal-secure-desc" style="color: #e6f1ff; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.5;">
                 Où l'Agent e-META doit-il vous transmettre les résultats de son analyse sectorielle ?
             </p>
             
             <div class="input-group">
-                <label style="color: #25D366;">Votre Email (Pour le rapport PDF)</label>
+                <label id="ui-lbl-email" style="color: #25D366;">Votre Email (Pour le rapport PDF)</label>
                 <input type="email" id="auto-email" placeholder="contact@domain.com" style="border-color: rgba(37, 211, 102, 0.4);">
             </div>
             
             <div class="input-group">
-                <label style="color: #25D366;">Votre Numéro WhatsApp (Pour l'échange en direct)</label>
+                <label id="ui-lbl-phone" style="color: #25D366;">Votre Numéro WhatsApp (Pour l'échange en direct)</label>
                 <input type="tel" id="auto-phone" placeholder="+221..." style="border-color: rgba(37, 211, 102, 0.4);">
             </div>
 
@@ -167,12 +219,39 @@
         </div>
     </div>
 
-    <!-- MODAL LEXIQUE (Gardé pour référence) -->
+    <!-- MODAL LEXIQUE (RESTAURÉ INTÉGRALEMENT) -->
     <div id="guideOverlay" class="modal-overlay">
-        <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-content" style="max-width: 650px;">
             <span class="close-btn" onclick="closeModal('guideOverlay')">&times;</span>    
-            <h2 style="margin-bottom: 20px; border-bottom: 1px solid #d4af37; padding-bottom: 10px; color: #d4af37; font-family: 'Cinzel', serif;">Matrice des Expertises IA</h2>
-            <p style="color: #e6f1ff; font-size: 0.9rem; line-height: 1.6;">L'Agent e-META est entraîné à reconnaître et analyser les enjeux dans plus de 20 secteurs (SaaS, AgriTech, FinTech, IA, Immobilier...) de manière totalement agnostique.</p>
+            <h2 id="ui-matrice-title" style="margin-bottom: 20px; border-bottom: 1px solid #d4af37; padding-bottom: 10px; color: #d4af37; font-family: 'Cinzel', serif;">Matrice des Expertises IA</h2>
+            <p id="ui-matrice-desc" style="color: #e6f1ff; font-size: 0.9rem; line-height: 1.6;">L'Agent e-META est entraîné à reconnaître et analyser les enjeux dans plus de 20 secteurs de manière totalement agnostique.</p>
+            
+            <div class="modal-body" style="text-align: left; color: #e6f1ff; font-size: 0.9rem; line-height: 1.6; margin-top: 15px;">
+                <h4 style="color:#d4af37; font-family:'Cinzel', serif; margin-bottom: 10px;">Secteurs Stratégiques Couverts</h4>
+                <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                    <p class="lexique-item"><strong>• FinTech & DeFi :</strong> Finance numérique, paiements et décentralisation.</p>
+                    <p class="lexique-item"><strong>• GovTech & Smart Cities :</strong> Modernisation de l'État et numérisation des services publics.</p>
+                    <p class="lexique-item"><strong>• Santé & BioTech :</strong> Innovations médicales et gestion des données de santé.</p>
+                    <p class="lexique-item"><strong>• GreenTech & Énergies :</strong> Transition écologique, décarbonation et énergies renouvelables.</p>
+                    <p class="lexique-item"><strong>• AgriTech & Food Sec. :</strong> Sécurité alimentaire et optimisation technologique agricole.</p>
+                    <p class="lexique-item"><strong>• Logistique & Supply :</strong> Optimisation de la chaîne logistique et traçabilité globale.</p>
+                    <p class="lexique-item"><strong>• Mines, Pétrole & Gaz :</strong> Extraction intelligente, sécurité et conformité.</p>
+                    <p class="lexique-item"><strong>• Immobilier & PropTech:</strong> Innovation immobilière et gestion de bâtiments intelligents.</p>
+                    <p class="lexique-item"><strong>• E-commerce & Retail :</strong> Retail digital, experience client et transactions.</p>
+                    <p class="lexique-item" style="border-bottom: none;"><strong>• SaaS & Éditeurs :</strong> Développement de solutions cloud, scalabilité et modèles d'abonnement.</p>
+                </div>
+
+                <h4 style="color:#d4af37; font-family:'Cinzel', serif; margin-bottom: 10px;">Expertises Transversales de l'IA</h4>
+                <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 5px;">
+                    <p class="lexique-item"><strong>• GenAI & Data Science :</strong> Intégration de l'IA pour l'analyse prédictive et l'automatisation.</p>
+                    <p class="lexique-item"><strong>• Cybersécurité :</strong> Protection des infrastructures critiques et audit de résilience.</p>
+                    <p class="lexique-item"><strong>• Web3 & Blockchain :</strong> Tokenisation, traçabilité et ancrage numérique (Woleet).</p>
+                    <p class="lexique-item"><strong>• Opti. des Processus :</strong> Excellence opérationnelle et réduction des coûts (RPA).</p>
+                    <p class="lexique-item" style="border-bottom: none;"><strong>• Go-to-Market & Growth:</strong> Stratégie de pénétration de marché et acquisition asymétrique.</p>
+                </div>
+            </div>
+            
+            <button onclick="closeModal('guideOverlay')" style="width: 100%; padding: 12px; margin-top: 20px; background-color: #d4af37; color: #0a192f; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; font-family: 'Cinzel', serif; text-transform: uppercase;">FERMER</button>
         </div>
     </div>
 
