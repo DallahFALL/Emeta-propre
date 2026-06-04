@@ -157,7 +157,6 @@ const uiDict = {
         title01: "01. حدد مستوى الاعتماد الخاص بك",
         title02: "02. تقديم البيانات",
         
-        // Cible validée : Passage des tarifs en dollars pour l'arabe
         priceStarter: "<span dir='ltr'>$0</span>",
         pricePro: "<span dir='ltr'>$25</span>",
         priceExpert: "<span dir='ltr'>$49</span>",
@@ -213,7 +212,7 @@ const uiDict = {
 let currentLang = 'fr';
 let activePricingPlan = "Non sélectionné";
 
-// FONCTIONS "FAIL-SAFE" (Anti-Plantage et interprétation HTML)
+// FONCTIONS "FAIL-SAFE"
 function safeText(id, text, isHTML = false) {
     const el = document.getElementById(id);
     if (el) {
@@ -228,6 +227,11 @@ function safePlaceholder(id, text) {
 
 function switchLang(lang) {
     currentLang = lang;
+    
+    // MÉMOIRE PERSISTANTE : Sauvegarde le choix pour la navigation
+    localStorage.setItem('emeta_lang', lang);
+    const urlSuffix = `?lang=${lang}`;
+
     const t = uiDict[lang];
     document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
     document.documentElement.lang = lang;
@@ -241,12 +245,12 @@ function switchLang(lang) {
     safeText('ui-title-01', t.title01);
     safeText('ui-title-02', t.title02);
     
-    // Devises Dynamiques (Passées en "true" pour interpréter le HTML <span dir="ltr">)
+    // Devises Dynamiques
     safeText('ui-price-starter', t.priceStarter, true);
     safeText('ui-price-pro', t.pricePro, true);
     safeText('ui-price-expert', t.priceExpert, true);
 
-    // Pricing Texts (Passés en "true" pour interpréter les balises de correction Bidi)
+    // Pricing Texts
     safeText('ui-starter-desc', t.stDesc);
     safeText('ui-st-1', t.st1, true);
     safeText('ui-st-2', t.st2, true);
@@ -284,16 +288,25 @@ function switchLang(lang) {
     safeText('ui-lbl-phone', t.lblPhone);
     safeText('btn-fire-ia', t.btnFire);
 
-    // Footer - Traduction des titres de boutons
+    // Footer - Transmission de la langue dans l'URL
     safeText('ui-link-mentions', t.linkMentions);
+    const linkMentionsEl = document.getElementById('ui-link-mentions');
+    if(linkMentionsEl) linkMentionsEl.href = `mentions-legales.html${urlSuffix}`;
+
     safeText('ui-link-cgv', t.linkCgv);
+    const linkCgvEl = document.getElementById('ui-link-cgv');
+    if(linkCgvEl) linkCgvEl.href = `cgv.html${urlSuffix}`;
+
     safeText('ui-link-conf', t.linkConf);
+    const linkConfEl = document.getElementById('ui-link-conf');
+    if(linkConfEl) linkConfEl.href = `confidentialite.html${urlSuffix}`;
+
     safeText('ui-link-remb', t.linkRemb);
+    const linkRembEl = document.getElementById('ui-link-remb');
+    if(linkRembEl) linkRembEl.href = `remboursement.html${urlSuffix}`;
+
     safeText('ui-footer-rights', t.footerRights, true);
     safeText('ui-footer-unit', t.footerUnit);
-
-    // Les liens d'URL ont été retirés ici pour pointer fixement vers les versions françaises
-    // et éviter les pages 404 (Erreur serveur) sur les marchés internationaux.
 
     // Activation CSS des boutons
     document.querySelectorAll('.lang-switch button').forEach(btn => btn.classList.remove('active'));
@@ -301,7 +314,7 @@ function switchLang(lang) {
 }
 
 // ==========================================
-// LOGIQUE DU FUNNEL (VERROUILLAGE / DÉVERROUILLAGE)
+// LOGIQUE DU FUNNEL
 // ==========================================
 function unlockTerminal(planName) {
     activePricingPlan = planName;
@@ -313,18 +326,15 @@ function unlockTerminal(planName) {
         overlay.style.opacity = '0';
         setTimeout(() => overlay.style.display = 'none', 500);
     }
-    
     if (container) {
         container.style.borderColor = 'rgba(37, 211, 102, 0.5)';
         container.style.boxShadow = '0 0 40px rgba(37, 211, 102, 0.15)';
         container.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-    
     if (badge) {
         badge.innerText = "MODE " + planName;
         badge.style.display = 'inline-block';
     }
-    
     setTimeout(() => {
         const promptEl = document.getElementById('user-raw-prompt');
         if (promptEl) promptEl.focus();
@@ -351,14 +361,8 @@ function resetTerminal() {
         const container = document.getElementById('terminal-container');
         const badge = document.getElementById('badge-plan-selected');
         
-        if (overlay) {
-            overlay.style.display = 'flex';
-            overlay.style.opacity = '1';
-        }
-        if (container) {
-            container.style.borderColor = 'rgba(136, 146, 176, 0.2)';
-            container.style.boxShadow = 'none';
-        }
+        if (overlay) { overlay.style.display = 'flex'; overlay.style.opacity = '1'; }
+        if (container) { container.style.borderColor = 'rgba(136, 146, 176, 0.2)'; container.style.boxShadow = 'none'; }
         if (badge) badge.style.display = 'none';
         
         const hero = document.querySelector('.hero-sublime');
@@ -367,32 +371,24 @@ function resetTerminal() {
 }
 
 // ==========================================
-// FONCTIONS DE LA MODALE
+// FONCTIONS DE LA MODALE & FETCH
 // ==========================================
 function openModal(modalId) { 
     const m = document.getElementById(modalId);
     if (m) m.style.display = 'flex'; 
 }
-
 function closeModal(modalId) { 
     const m = document.getElementById(modalId);
     if (m) m.style.display = 'none'; 
 }
 
-// ==========================================
-// LOGIQUE DU WEB CHAT SNIPER (TIR FETCH)
-// ==========================================
 function triggerSniperCapture() {
     const promptEl = document.getElementById('user-raw-prompt');
     if (!promptEl) return;
-    
     const rawPrompt = promptEl.value.trim();
     const t = uiDict[currentLang];
     
-    if(!rawPrompt || rawPrompt.length < 15) {
-        alert(t.alertEmpty);
-        return;
-    }
+    if(!rawPrompt || rawPrompt.length < 15) { alert(t.alertEmpty); return; }
     openModal('autoDetectModal');
 }
 
@@ -408,10 +404,7 @@ function fireAutoDetection() {
     const rawPrompt = promptEl.value.trim();
     const t = uiDict[currentLang];
 
-    if(!email || !phone) {
-        alert(t.alertMiss);
-        return;
-    }
+    if(!email || !phone) { alert(t.alertMiss); return; }
 
     const payload = {
         "source": "Web Chat Sniper",
@@ -431,21 +424,15 @@ function fireAutoDetection() {
     }
 
     fetch(WEBHOOK_N8N_URL, {
-        method: 'POST',
-        mode: 'cors',
+        method: 'POST', mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     })
     .then(response => {
         if (!response.ok) throw new Error("Erreur serveur n8n");
         closeModal('autoDetectModal');
-        
         promptEl.value = '';
-        if (btn) {
-            btn.innerHTML = t.btnFire;
-            btn.style.opacity = "1";
-            btn.disabled = false;
-        }
+        if (btn) { btn.innerHTML = t.btnFire; btn.style.opacity = "1"; btn.disabled = false; }
         
         activePricingPlan = "Non sélectionné";
         const overlay = document.getElementById('terminal-lock-overlay');
@@ -461,19 +448,22 @@ function fireAutoDetection() {
     .catch(error => {
         console.error("Erreur de transmission:", error);
         alert(t.alertError);
-        if (btn) {
-            btn.innerHTML = t.btnFire;
-            btn.style.opacity = "1";
-            btn.disabled = false;
-        }
+        if (btn) { btn.innerHTML = t.btnFire; btn.style.opacity = "1"; btn.disabled = false; }
     });
 }
 
 // ==========================================
-// INITIALISATION
+// INITIALISATION INTELLIGENTE
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-    switchLang('fr');
+    // Le script lit l'URL ou la mémoire, sinon il force le Français.
+    const urlParams = new URLSearchParams(window.location.search);
+    let savedLang = urlParams.get('lang') || localStorage.getItem('emeta_lang') || 'fr';
+    
+    // Sécurité au cas où la valeur serait corrompue
+    if (!['fr', 'en', 'es', 'ar'].includes(savedLang)) savedLang = 'fr';
+    
+    switchLang(savedLang);
     
     const counterElement = document.getElementById('live-counter-top');
     if (counterElement) {
