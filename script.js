@@ -157,17 +157,34 @@ const uiDict = {
         title01: "01. حدد مستوى الاعتماد الخاص بك",
         title02: "02. تقديم البيانات",
         
-        priceStarter: "0 FCFA",
-        pricePro: "14 900 FCFA",
-        priceExpert: "29 000 FCFA",
+        // Correction BIDI: Isolation des prix pour éviter le retournement
+        priceStarter: "<span dir='ltr'>0 FCFA</span>",
+        pricePro: "<span dir='ltr'>14 900 FCFA</span>",
+        priceExpert: "<span dir='ltr'>29 000 FCFA</span>",
+        
         stDesc: "لاختبار القوة التحليلية لـ e-META LABS.",
-        st1: "✓ 2 تشخيصات سريعة", st2: "✓ تحديد المخاطر الرئيسية", st3: "✓ تنسيق النص", st4: "⚠️ خطة العمل غير مشمولة",
+        
+        // Correction BIDI: Marqueur RTL (&#x200F;) forcé devant chaque coche
+        st1: "&#x200F;✓ 2 تشخيصات سريعة", 
+        st2: "&#x200F;✓ تحديد المخاطر الرئيسية", 
+        st3: "&#x200F;✓ تنسيق النص (البريد الإلكتروني)", 
+        st4: "&#x200F;⚠️ خطة العمل غير مشمولة",
+        
         btnAct: "تفعيل هذه الخطة",
         proBadge: "الأكثر شعبية",
         proDesc: "مجموعة من <strong>3 عمليات تدقيق استراتيجية كاملة</strong>.",
-        pr1: "<strong style='color: #d4af37;'>✓ 3 تقارير كاملة</strong>", pr2: "✓ التشخيص المالي", pr3: "✓ استراتيجيات الابتكار", pr4: "✓ تقارير PDF مميزة",
+        
+        pr1: "<strong style='color: #d4af37;'>&#x200F;✓ 3 تقارير كاملة</strong>", 
+        pr2: "&#x200F;✓ التشخيص المالي ومؤشرات الأداء", 
+        pr3: "&#x200F;✓ استراتيجيات الابتكار", 
+        pr4: "&#x200F;✓ تقارير PDF مميزة",
+        
         exDesc: "وحدة الاستشراف الخاصة بك متاحة 24/7.",
-        ex1: "✓ حتى 10 تدقيقات / شهر", ex2: "✓ مراقبة البيانات", ex3: "✓ بروتوكول عمل لمدة 7 أيام", ex4: "✓ تسليم VIP (واتساب)",
+        
+        ex1: "&#x200F;✓ حتى 10 تدقيقات / شهر", 
+        ex2: "&#x200F;✓ مراقبة البيانات في الوقت الفعلي", 
+        ex3: "&#x200F;✓ بروتوكول عمل لمدة 7 أيام", 
+        ex4: "&#x200F;✓ تسليم VIP (واتساب)",
 
         lockTitle: "المحطة في وضع الانتظار",
         lockDesc: "يرجى تحديد خطة أعلاه لفتح وكيل e-META.",
@@ -200,7 +217,7 @@ const uiDict = {
 let currentLang = 'fr';
 let activePricingPlan = "Non sélectionné";
 
-// FONCTIONS "FAIL-SAFE" (Anti-Plantage)
+// FONCTIONS "FAIL-SAFE" (Anti-Plantage et interprétation HTML)
 function safeText(id, text, isHTML = false) {
     const el = document.getElementById(id);
     if (el) {
@@ -228,32 +245,32 @@ function switchLang(lang) {
     safeText('ui-title-01', t.title01);
     safeText('ui-title-02', t.title02);
     
-    // Devises Dynamiques
-    safeText('ui-price-starter', t.priceStarter);
-    safeText('ui-price-pro', t.pricePro);
-    safeText('ui-price-expert', t.priceExpert);
+    // Devises Dynamiques (Passées en "true" pour interpréter le HTML <span dir="ltr">)
+    safeText('ui-price-starter', t.priceStarter, true);
+    safeText('ui-price-pro', t.pricePro, true);
+    safeText('ui-price-expert', t.priceExpert, true);
 
-    // Pricing
+    // Pricing Texts (Passés en "true" pour interpréter les balises de correction Bidi)
     safeText('ui-starter-desc', t.stDesc);
-    safeText('ui-st-1', t.st1);
-    safeText('ui-st-2', t.st2);
-    safeText('ui-st-3', t.st3);
-    safeText('ui-st-4', t.st4);
+    safeText('ui-st-1', t.st1, true);
+    safeText('ui-st-2', t.st2, true);
+    safeText('ui-st-3', t.st3, true);
+    safeText('ui-st-4', t.st4, true);
     safeText('ui-btn-starter', t.btnAct);
 
     safeText('ui-pro-badge', t.proBadge);
     safeText('ui-pro-desc', t.proDesc, true);
     safeText('ui-pr-1', t.pr1, true);
-    safeText('ui-pr-2', t.pr2);
-    safeText('ui-pr-3', t.pr3);
-    safeText('ui-pr-4', t.pr4);
+    safeText('ui-pr-2', t.pr2, true);
+    safeText('ui-pr-3', t.pr3, true);
+    safeText('ui-pr-4', t.pr4, true);
     safeText('ui-btn-pro', t.btnAct);
 
     safeText('ui-expert-desc', t.exDesc);
-    safeText('ui-ex-1', t.ex1);
-    safeText('ui-ex-2', t.ex2);
-    safeText('ui-ex-3', t.ex3);
-    safeText('ui-ex-4', t.ex4);
+    safeText('ui-ex-1', t.ex1, true);
+    safeText('ui-ex-2', t.ex2, true);
+    safeText('ui-ex-3', t.ex3, true);
+    safeText('ui-ex-4', t.ex4, true);
     safeText('ui-btn-expert', t.btnAct);
 
     // Terminal & Modal
@@ -271,13 +288,28 @@ function switchLang(lang) {
     safeText('ui-lbl-phone', t.lblPhone);
     safeText('btn-fire-ia', t.btnFire);
 
-    // Footer Infaillible
+    // Routage Dynamique des Pages Légales
     safeText('ui-link-mentions', t.linkMentions);
     safeText('ui-link-cgv', t.linkCgv);
     safeText('ui-link-conf', t.linkConf);
     safeText('ui-link-remb', t.linkRemb);
     safeText('ui-footer-rights', t.footerRights, true);
     safeText('ui-footer-unit', t.footerUnit);
+
+    // Construction du suffixe d'URL (ex: "-en", "-ar", ou "" pour le français par défaut)
+    const urlSuffix = (lang === 'fr') ? "" : `-${lang}`;
+    
+    const linkMentionsEl = document.getElementById('ui-link-mentions');
+    if(linkMentionsEl) linkMentionsEl.href = `mentions-legales${urlSuffix}.html`;
+
+    const linkCgvEl = document.getElementById('ui-link-cgv');
+    if(linkCgvEl) linkCgvEl.href = `cgv${urlSuffix}.html`;
+
+    const linkConfEl = document.getElementById('ui-link-conf');
+    if(linkConfEl) linkConfEl.href = `confidentialite${urlSuffix}.html`;
+
+    const linkRembEl = document.getElementById('ui-link-remb');
+    if(linkRembEl) linkRembEl.href = `remboursement${urlSuffix}.html`;
 
     // Activation CSS des boutons
     document.querySelectorAll('.lang-switch button').forEach(btn => btn.classList.remove('active'));
