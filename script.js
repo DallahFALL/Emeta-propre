@@ -157,14 +157,12 @@ const uiDict = {
         title01: "01. حدد مستوى الاعتماد الخاص بك",
         title02: "02. تقديم البيانات",
         
-        // Correction BIDI: Isolation des prix pour éviter le retournement
-        priceStarter: "<span dir='ltr'>0 FCFA</span>",
-        pricePro: "<span dir='ltr'>14 900 FCFA</span>",
-        priceExpert: "<span dir='ltr'>29 000 FCFA</span>",
+        // Cible validée : Passage des tarifs en dollars pour l'arabe
+        priceStarter: "<span dir='ltr'>$0</span>",
+        pricePro: "<span dir='ltr'>$25</span>",
+        priceExpert: "<span dir='ltr'>$49</span>",
         
         stDesc: "لاختبار القوة التحليلية لـ e-META LABS.",
-        
-        // Correction BIDI: Marqueur RTL (&#x200F;) forcé devant chaque coche
         st1: "&#x200F;✓ 2 تشخيصات سريعة", 
         st2: "&#x200F;✓ تحديد المخاطر الرئيسية", 
         st3: "&#x200F;✓ تنسيق النص (البريد الإلكتروني)", 
@@ -173,14 +171,12 @@ const uiDict = {
         btnAct: "تفعيل هذه الخطة",
         proBadge: "الأكثر شعبية",
         proDesc: "مجموعة من <strong>3 عمليات تدقيق استراتيجية كاملة</strong>.",
-        
         pr1: "<strong style='color: #d4af37;'>&#x200F;✓ 3 تقارير كاملة</strong>", 
         pr2: "&#x200F;✓ التشخيص المالي ومؤشرات الأداء", 
         pr3: "&#x200F;✓ استراتيجيات الابتكار", 
         pr4: "&#x200F;✓ تقارير PDF مميزة",
         
         exDesc: "وحدة الاستشراف الخاصة بك متاحة 24/7.",
-        
         ex1: "&#x200F;✓ حتى 10 تدقيقات / شهر", 
         ex2: "&#x200F;✓ مراقبة البيانات في الوقت الفعلي", 
         ex3: "&#x200F;✓ بروتوكول عمل لمدة 7 أيام", 
@@ -288,7 +284,7 @@ function switchLang(lang) {
     safeText('ui-lbl-phone', t.lblPhone);
     safeText('btn-fire-ia', t.btnFire);
 
-    // Routage Dynamique des Pages Légales
+    // Footer - Traduction des titres de boutons
     safeText('ui-link-mentions', t.linkMentions);
     safeText('ui-link-cgv', t.linkCgv);
     safeText('ui-link-conf', t.linkConf);
@@ -296,20 +292,8 @@ function switchLang(lang) {
     safeText('ui-footer-rights', t.footerRights, true);
     safeText('ui-footer-unit', t.footerUnit);
 
-    // Construction du suffixe d'URL (ex: "-en", "-ar", ou "" pour le français par défaut)
-    const urlSuffix = (lang === 'fr') ? "" : `-${lang}`;
-    
-    const linkMentionsEl = document.getElementById('ui-link-mentions');
-    if(linkMentionsEl) linkMentionsEl.href = `mentions-legales${urlSuffix}.html`;
-
-    const linkCgvEl = document.getElementById('ui-link-cgv');
-    if(linkCgvEl) linkCgvEl.href = `cgv${urlSuffix}.html`;
-
-    const linkConfEl = document.getElementById('ui-link-conf');
-    if(linkConfEl) linkConfEl.href = `confidentialite${urlSuffix}.html`;
-
-    const linkRembEl = document.getElementById('ui-link-remb');
-    if(linkRembEl) linkRembEl.href = `remboursement${urlSuffix}.html`;
+    // Les liens d'URL ont été retirés ici pour pointer fixement vers les versions françaises
+    // et éviter les pages 404 (Erreur serveur) sur les marchés internationaux.
 
     // Activation CSS des boutons
     document.querySelectorAll('.lang-switch button').forEach(btn => btn.classList.remove('active'));
