@@ -131,6 +131,42 @@ function closeModal(modalId) {
 }
 
 // ==========================================
+// LOGIQUE DU FUNNEL (VERROUILLAGE / DÉVERROUILLAGE)
+// ==========================================
+
+// Variable globale pour stocker le plan choisi
+let activePricingPlan = "Non sélectionné";
+
+function unlockTerminal(planName) {
+    activePricingPlan = planName;
+    
+    const container = document.getElementById('terminal-container');
+    const overlay = document.getElementById('terminal-lock-overlay');
+    const badge = document.getElementById('badge-plan-selected');
+    
+    // Animation de déverrouillage
+    overlay.style.opacity = '0';
+    setTimeout(() => {
+        overlay.style.display = 'none';
+    }, 500);
+
+    // Changement cosmétique du terminal (Passe du gris au Vert/Or)
+    container.style.borderColor = 'rgba(37, 211, 102, 0.5)';
+    container.style.boxShadow = '0 0 40px rgba(37, 211, 102, 0.15)';
+    
+    // Mise à jour du badge
+    badge.innerText = "MODE " + planName;
+    badge.style.display = 'inline-block';
+    
+    // Scrolling fluide vers le terminal pour guider l'oeil du client
+    container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    
+    // Focus automatique sur la zone de texte
+    setTimeout(() => {
+        document.getElementById('user-raw-prompt').focus();
+    }, 800);
+}
+// ==========================================
 // LOGIQUE DU WEB CHAT SNIPER (TIR FETCH)
 // ==========================================
 
@@ -156,13 +192,14 @@ function fireAutoDetection() {
         return;
     }
 
-    const payload = {
+   const payload = {
         "source": "Web Chat Sniper",
         "date": new Date().toISOString(),
         "email_client": email,
         "telephone_client": phone,
         "problematique_brute": rawPrompt,
-        "langue": currentLang
+        "langue": currentLang,
+        "plan_choisi": activePricingPlan // Ajout crucial de la donnée
     };
 
     const btn = document.getElementById('btn-fire-ia');
