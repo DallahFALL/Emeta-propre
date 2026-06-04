@@ -8,8 +8,8 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
-    <!-- Nouveau Logo Hexagonal e-META (Favicon) -->
-    <link rel="icon" href="data:image/svg+xml,<img src="e-meta-logo-master.svg" alt="Logo e-META LABS" style="width: 55px; height: auto;">
+    <!-- Favicon e-META -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,25 95,75 50,95 5,75 5,25' stroke='%23d4af37' stroke-width='4' fill='none'/><circle cx='50' cy='50' r='10' fill='%23d4af37'/><circle cx='65' cy='45' r='3' fill='%23ffffff'/><circle cx='75' cy='80' r='3' fill='%23ffffff'/></svg>">
       
     <style>
         body { margin: 0; background-color: #0a192f; color: #e6f1ff; font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
@@ -18,11 +18,11 @@
             box-shadow: 0 0 30px rgba(212, 175, 55, 0.15), inset 0 0 20px rgba(212, 175, 55, 0.05);
             border: 1px solid rgba(212, 175, 55, 0.4); background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(10px); border-radius: 12px; padding: 40px; max-width: 800px;
-            margin: 40px auto; transition: box-shadow 0.4s ease-in-out;
+            margin: 0 auto; transition: box-shadow 0.4s ease-in-out;
         }
         
         .terminal-header {
-            display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 25px; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 20px;
+            display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 25px; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 20px; flex-wrap: wrap;
         }
 
         .header { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; border-bottom: 1px solid rgba(212, 175, 55, 0.2); background: rgba(10, 25, 47, 0.9); position: sticky; top: 0; z-index: 100; }
@@ -43,6 +43,9 @@
         .btn-gold { background: #d4af37; color: #0a192f; border: none; padding: 15px 30px; border-radius: 4px; font-weight: bold; font-family: 'Cinzel', serif; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
         .btn-gold.glow { box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); animation: pulse-gold 2s infinite; }
         @keyframes pulse-gold { 0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); } 50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.9); } }
+        
+        .btn-outline { background: transparent; border: 1px solid #d4af37; color: #d4af37; padding: 12px 25px; border-radius: 4px; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-family: 'Cinzel', serif; font-weight: bold; }
+        .btn-outline:hover { background: rgba(212, 175, 55, 0.1); }
 
         .modal-overlay { position: fixed; inset: 0; background: rgba(10, 25, 47, 0.95); display: none; justify-content: center; align-items: center; z-index: 20000; backdrop-filter: blur(8px); }
         .modal-content { background: #0a192f; border: 1px solid #d4af37; padding: 35px; border-radius: 8px; max-width: 800px; width: 90%; position: relative; max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
@@ -61,29 +64,30 @@
 
         [dir="rtl"] { text-align: right; }
         [dir="rtl"] .logo-container { flex-direction: row-reverse; }
+        [dir="rtl"] .header-actions { flex-direction: row-reverse; }
     </style>
 </head>
 <body>
 
     <header class="header">
         <div class="logo-container">
-            <!-- Nouveau Logo Hexagonal e-META (SVG Inline) -->
+            <!-- Vrai Logo e-META LABS (Hexagone Or Transparent) -->
             <svg width="50" height="50" viewBox="-5 -5 110 110" xmlns="http://www.w3.org/2000/svg">
-    <path fill="none" stroke="#d4af37" stroke-width="4" d="m50 5 45 20v50L50 95 5 75V25Z"/>
-    <path fill="rgba(212, 175, 55, 0.1)" stroke="#d4af37" stroke-width="2" d="m50 20 30 15v30L50 80 20 65V35Z"/>
-    <circle cx="50" cy="50" r="8" fill="#d4af37"/>
-</svg>
+                <path fill="none" stroke="#d4af37" stroke-width="4" d="m50 5 45 20v50L50 95 5 75V25Z"/>
+                <path fill="rgba(212, 175, 55, 0.1)" stroke="#d4af37" stroke-width="2" d="m50 20 30 15v30L50 80 20 65V35Z"/>
+                <circle cx="50" cy="50" r="8" fill="#d4af37"/>
+            </svg>
             <div class="brand-text"><h1>e-META LABS</h1></div>
         </div>
         <div class="header-actions" style="display: flex; align-items: center; gap: 15px;">
-    <button type="button" class="btn-reset" onclick="resetTerminal()" style="background: transparent; border: 1px solid #8892b0; color: #8892b0; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.85rem; transition: 0.3s;" onmouseover="this.style.color='#d4af37'; this.style.borderColor='#d4af37';" onmouseout="this.style.color='#8892b0'; this.style.borderColor='#8892b0';">↻ Reset</button>
-    <div class="lang-switch">
-        <button data-lang="fr" class="active" onclick="switchLang('fr')">FR</button>
-        <button data-lang="en" onclick="switchLang('en')">EN</button>
-        <button data-lang="es" onclick="switchLang('es')">ES</button>
-        <button data-lang="ar" onclick="switchLang('ar')">AR</button>
-    </div>
-</div>
+            <button type="button" class="btn-reset" onclick="resetTerminal()" style="background: transparent; border: 1px solid #8892b0; color: #8892b0; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.85rem; transition: 0.3s;" onmouseover="this.style.color='#d4af37'; this.style.borderColor='#d4af37';" onmouseout="this.style.color='#8892b0'; this.style.borderColor='#8892b0';">↻ Reset</button>
+            <div class="lang-switch">
+                <button data-lang="fr" class="active" onclick="switchLang('fr')">FR</button>
+                <button data-lang="en" onclick="switchLang('en')">EN</button>
+                <button data-lang="es" onclick="switchLang('es')">ES</button>
+                <button data-lang="ar" onclick="switchLang('ar')">AR</button>
+            </div>
+        </div>
     </header>
 
     <div class="counter-container">
@@ -98,77 +102,89 @@
                 <span id="ui-hero-1">Excellence Stratégique</span> <br>
                 <span class="precision-text" id="ui-hero-2">& Haute Précision IA</span>
             </h1>
+            <p id="ui-slogan-tech" style="color: #25D366; font-family: 'Inter', sans-serif; font-size: 1rem; margin-top: 15px; letter-spacing: 1px; text-transform: uppercase; text-shadow: 0 0 10px rgba(37, 211, 102, 0.3);">
+                Conçu pour la Tech. Bâti pour l'absolu.
+            </p>
             
+            <!-- BANNIÈRE OPENTIMESTAMPS (Responsive Mobile) -->
             <div style="display: inline-flex; max-width: 95%; background: rgba(37, 211, 102, 0.05); border: 1px solid rgba(37, 211, 102, 0.3); border-radius: 12px; padding: 12px 20px; margin-top: 20px; backdrop-filter: blur(5px); box-sizing: border-box; justify-content: center;">
-    <span id="ui-banner-ots" style="color: #25D366; font-size: 0.85rem; letter-spacing: 0.5px; font-family: 'Inter', sans-serif; text-align: center; line-height: 1.5;">
-        🛡️ <strong style="font-weight: 600;">Souveraineté Absolue :</strong> Vos requêtes sont cryptées et ancrées sur la Blockchain (Proof of Existence) via <em style="text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);">OpenTimestamps.org</em>
-    </span>
-</div>
+                <span id="ui-banner-ots" style="color: #25D366; font-size: 0.85rem; letter-spacing: 0.5px; font-family: 'Inter', sans-serif; text-align: center; line-height: 1.5;">
+                    🛡️ <strong style="font-weight: 600;">Souveraineté Absolue :</strong> Vos requêtes sont cryptées et ancrées sur la Blockchain (Proof of Existence) via <em style="text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);">OpenTimestamps.org</em>
+                </span>
+            </div>
+        </div>
     </section>
 
+    <!-- ÉTAPE 1 : SECTION PRICING (L'Accréditation) -->
     <section id="pricing" style="font-family: 'Inter', sans-serif; padding: 40px 10px; text-align: center;">
-        <h3 style="color: #8892b0; font-family: 'Cinzel', serif; font-size: 1.2rem; margin-bottom: 40px; letter-spacing: 2px;">01. SÉLECTIONNEZ VOTRE NIVEAU D'ACCRÉDITATION</h3>
+        <h3 id="ui-title-01" style="color: #8892b0; font-family: 'Cinzel', serif; font-size: 1.2rem; margin-bottom: 40px; letter-spacing: 2px;">01. SÉLECTIONNEZ VOTRE NIVEAU D'ACCRÉDITATION</h3>
         
         <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
             
+            <!-- STARTER -->
             <div class="pricing-card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 8px; padding: 30px 20px; width: 280px; text-align: left; transition: 0.3s;">
                 <h3 style="font-size: 18px; color: #fff; margin-top: 0; font-family: 'Cinzel', serif;">STARTER</h3>
-                <p style="font-size: 13px; color: #8892b0; min-height: 35px; margin-bottom: 10px;">Pour tester la puissance analytique d'e-META LABS.</p>
+                <p id="ui-starter-desc" style="font-size: 13px; color: #8892b0; min-height: 35px; margin-bottom: 10px;">Pour tester la puissance analytique d'e-META LABS.</p>
                 <div style="font-size: 24px; font-weight: bold; color: #d4af37; margin: 10px 0;">0 FCFA</div>
                 <ul style="list-style: none; padding: 0; margin-bottom: 25px; font-size: 13px; color: #ccc; line-height: 1.6;">
-                    <li>✓ 2 Diagnostics foudroyants</li>
-                    <li>✓ Identification du risque majeur</li>
-                    <li>✓ Format texte (Email)</li>
-                    <li style="color: #d9534f; margin-top: 8px;">⚠️ Plan d'action non inclus</li>
+                    <li id="ui-st-1">✓ 2 Diagnostics foudroyants</li>
+                    <li id="ui-st-2">✓ Identification du risque majeur</li>
+                    <li id="ui-st-3">✓ Format texte (Email)</li>
+                    <li id="ui-st-4" style="color: #d9534f; margin-top: 8px; font-weight: bold;">⚠️ Plan d'action non inclus</li>
                 </ul>
-                <button onclick="unlockTerminal('STARTER')" class="btn-outline" style="width: 100%; padding: 12px; font-size: 0.9rem;">Activer ce plan</button>
+                <button onclick="unlockTerminal('STARTER')" id="ui-btn-starter" class="btn-outline" style="width: 100%; padding: 12px; font-size: 0.9rem;">ACTIVER CE PLAN</button>
             </div>
 
+            <!-- PRO -->
             <div class="pricing-card" style="background: rgba(13, 27, 42, 0.9); border-radius: 8px; padding: 30px 20px; width: 300px; text-align: left; border: 2px solid #d4af37; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15); transform: scale(1.05); position: relative; z-index: 10; transition: 0.3s;">
-                <div style="background: #d4af37; color: #000; font-size: 11px; font-weight: bold; padding: 5px 10px; border-radius: 3px; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); text-transform: uppercase;">LE PLUS POPULAIRE</div>
+                <div id="ui-pro-badge" style="background: #d4af37; color: #000; font-size: 11px; font-weight: bold; padding: 5px 10px; border-radius: 3px; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); text-transform: uppercase;">LE PLUS POPULAIRE</div>
                 <h3 style="font-size: 20px; color: #d4af37; margin-top: 10px; font-family: 'Cinzel', serif;">PRO (PACK 3)</h3>
-                <p style="font-size: 13px; color: #8892b0; min-height: 35px; margin-bottom: 10px;">Un pack de <strong>3 audits stratégiques</strong> complets et sans concession.</p>
+                <p id="ui-pro-desc" style="font-size: 13px; color: #8892b0; min-height: 35px; margin-bottom: 10px;">Un pack de <strong>3 audits stratégiques</strong> complets et sans concession.</p>
                 <div style="font-size: 28px; font-weight: bold; color: #d4af37; margin: 10px 0;">14 900 FCFA</div>
                 <ul style="list-style: none; padding: 0; margin-bottom: 25px; font-size: 13px; color: #e6f1ff; line-height: 1.6;">
-                    <li><strong style="color: #d4af37;">✓ 3 Rapports complets</strong></li>
-                    <li>✓ Diagnostic financier & KPI</li>
-                    <li>✓ Stratégies de disruption</li>
-                    <li>✓ Rapports PDF Premium + Ancrage</li>
+                    <li id="ui-pr-1"><strong style="color: #d4af37;">✓ 3 Rapports complets</strong></li>
+                    <li id="ui-pr-2">✓ Diagnostic financier & KPI</li>
+                    <li id="ui-pr-3">✓ Stratégies de disruption</li>
+                    <li id="ui-pr-4">✓ Rapports PDF Premium + Ancrage</li>
                 </ul>
-                <button onclick="unlockTerminal('PRO')" class="btn-gold glow" style="width: 100%; padding: 15px; font-size: 1rem;">Activer ce plan</button>
+                <button onclick="unlockTerminal('PRO')" id="ui-btn-pro" class="btn-gold glow" style="width: 100%; padding: 15px; font-size: 1rem;">ACTIVER CE PLAN</button>
             </div>
 
+            <!-- EXPERT -->
             <div class="pricing-card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 8px; padding: 30px 20px; width: 280px; text-align: left; transition: 0.3s;">
                 <h3 style="font-size: 18px; color: #fff; margin-top: 0; font-family: 'Cinzel', serif;">EXPERT</h3>
-                <p style="font-size: 13px; color: #8892b0; min-height: 35px; margin-bottom: 10px;">Votre cellule de prospective disponible 24/7.</p>
+                <p id="ui-expert-desc" style="font-size: 13px; color: #8892b0; min-height: 35px; margin-bottom: 10px;">Votre cellule de prospective disponible 24/7.</p>
                 <div style="font-size: 24px; font-weight: bold; color: #d4af37; margin: 10px 0;">29 000 FCFA</div>
                 <ul style="list-style: none; padding: 0; margin-bottom: 25px; font-size: 13px; color: #ccc; line-height: 1.6;">
-                    <li>✓ Jusqu'à 10 Audits / mois</li>
-                    <li>✓ Veille Data en temps réel</li>
-                    <li>✓ Protocole d'action sur 7 jours</li>
-                    <li>✓ Livraison VIP (WhatsApp)</li>
+                    <li id="ui-ex-1">✓ Jusqu'à 10 Audits / mois</li>
+                    <li id="ui-ex-2">✓ Veille Data en temps réel</li>
+                    <li id="ui-ex-3">✓ Protocole d'action sur 7 jours</li>
+                    <li id="ui-ex-4">✓ Livraison VIP (WhatsApp)</li>
                 </ul>
-                <button onclick="unlockTerminal('EXPERT')" class="btn-outline" style="width: 100%; padding: 12px; font-size: 0.9rem;">Activer ce plan</button>
+                <button onclick="unlockTerminal('EXPERT')" id="ui-btn-expert" class="btn-outline" style="width: 100%; padding: 12px; font-size: 0.9rem;">ACTIVER CE PLAN</button>
             </div>
 
         </div>
     </section>
 
+    <!-- ÉTAPE 2 : LE TERMINAL SNIPER (Verrouillé par défaut) -->
     <main style="padding: 20px; margin-top: 40px; margin-bottom: 60px;">
-        <h3 style="color: #8892b0; font-family: 'Cinzel', serif; font-size: 1.2rem; margin-bottom: 20px; letter-spacing: 2px; text-align: center;">02. SOUMISSION DES DONNÉES</h3>
+        <h3 id="ui-title-02" style="color: #8892b0; font-family: 'Cinzel', serif; font-size: 1.2rem; margin-bottom: 20px; letter-spacing: 2px; text-align: center;">02. SOUMISSION DES DONNÉES</h3>
         
+        <!-- Le conteneur du Terminal avec l'effet de flou initial -->
         <div id="terminal-container" class="glass-card" style="text-align: center; border-color: rgba(136, 146, 176, 0.2); position: relative; overflow: hidden; transition: all 0.8s ease;">
             
+            <!-- L'Overlay de verrouillage -->
             <div id="terminal-lock-overlay" style="position: absolute; inset: 0; background: rgba(10, 25, 47, 0.85); backdrop-filter: blur(8px); z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease;">
                 <div style="font-size: 40px; margin-bottom: 15px;">🔒</div>
-                <h3 style="color: #d4af37; font-family: 'Cinzel', serif; margin: 0;">TERMINAL EN ATTENTE</h3>
-                <p style="color: #8892b0; font-size: 0.9rem; margin-top: 10px;">Veuillez sélectionner un plan ci-dessus pour déverrouiller l'Agent e-META.</p>
+                <h3 id="ui-lock-title" style="color: #d4af37; font-family: 'Cinzel', serif; margin: 0;">TERMINAL EN ATTENTE</h3>
+                <p id="ui-lock-desc" style="color: #8892b0; font-size: 0.9rem; margin-top: 10px;">Veuillez sélectionner un plan ci-dessus pour déverrouiller l'Agent e-META.</p>
             </div>
 
             <div class="terminal-header">
                 <span style="font-size: 32px;">🧠</span>
                 <h2 id="ui-terminal-title" style="color: #25D366; font-family: 'Cinzel', serif; margin: 0;">TERMINAL DE DÉTECTION IA</h2>
-                <span id="badge-plan-selected" style="display: none; background: #d4af37; color: #0a192f; font-size: 0.7rem; font-weight: bold; padding: 3px 8px; border-radius: 20px; margin-left: 10px;">PLAN PRO</span>
+                <span id="badge-plan-selected" style="display: none; background: #d4af37; color: #0a192f; font-size: 0.7rem; font-weight: bold; padding: 3px 8px; border-radius: 20px; margin-left: 10px;">MODE</span>
             </div>
             
             <p id="ui-terminal-desc" style="color: #e6f1ff; font-size: 1.1rem; margin-bottom: 20px; line-height: 1.6;">
@@ -187,13 +203,12 @@
         </div>
     </main>
 
-    <!-- FOOTER EXACT -->
     <footer class="footer">
         <div style="margin-bottom: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 20px;">
-            <a href="mentions-legales.html" class="gold-link" style="margin: 0 15px; font-size: 0.85rem; text-decoration: none;" id="ui-link-mentions">Mentions Légales</a>
+            <a href="mentions-legales.html" class="gold-link" style="margin: 0 15px; font-size: 0.85rem; text-decoration: none;">Mentions Légales</a>
             <a href="cgv.html" class="gold-link" style="margin: 0 15px; font-size: 0.85rem; text-decoration: none;">CGV</a>
-            <a href="confidentialite.html" class="gold-link" style="margin: 0 15px; font-size: 0.85rem; text-decoration: none;" id="ui-link-conf">Confidentialité</a>
-            <a href="remboursement.html" class="gold-link" style="margin: 0 15px; font-size: 0.85rem; text-decoration: none;" id="ui-link-remb">Remboursement</a>
+            <a href="confidentialite.html" class="gold-link" style="margin: 0 15px; font-size: 0.85rem; text-decoration: none;">Confidentialité</a>
+            <a href="remboursement.html" class="gold-link" style="margin: 0 15px; font-size: 0.85rem; text-decoration: none;">Remboursement</a>
         </div>
         <p>&copy; 2026 E-META LABS SASU. Tous droits réservés.</p>
         <p class="tiny">Strategic Intelligence Unit • Rosso - Dakar - Paris - Dubai - Shanghai - New York</p>
@@ -230,7 +245,7 @@
         </div>
     </div>
 
-    <!-- MODAL LEXIQUE (RESTAURÉ INTÉGRALEMENT) -->
+    <!-- MODAL LEXIQUE -->
     <div id="guideOverlay" class="modal-overlay">
         <div class="modal-content" style="max-width: 650px;">
             <span class="close-btn" onclick="closeModal('guideOverlay')">&times;</span>    
@@ -240,25 +255,16 @@
             <div class="modal-body" style="text-align: left; color: #e6f1ff; font-size: 0.9rem; line-height: 1.6; margin-top: 15px;">
                 <h4 style="color:#d4af37; font-family:'Cinzel', serif; margin-bottom: 10px;">Secteurs Stratégiques Couverts</h4>
                 <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-                    <p class="lexique-item"><strong>• FinTech & DeFi :</strong> Finance numérique, paiements et décentralisation.</p>
-                    <p class="lexique-item"><strong>• GovTech & Smart Cities :</strong> Modernisation de l'État et numérisation des services publics.</p>
-                    <p class="lexique-item"><strong>• Santé & BioTech :</strong> Innovations médicales et gestion des données de santé.</p>
-                    <p class="lexique-item"><strong>• GreenTech & Énergies :</strong> Transition écologique, décarbonation et énergies renouvelables.</p>
-                    <p class="lexique-item"><strong>• AgriTech & Food Sec. :</strong> Sécurité alimentaire et optimisation technologique agricole.</p>
-                    <p class="lexique-item"><strong>• Logistique & Supply :</strong> Optimisation de la chaîne logistique et traçabilité globale.</p>
-                    <p class="lexique-item"><strong>• Mines, Pétrole & Gaz :</strong> Extraction intelligente, sécurité et conformité.</p>
-                    <p class="lexique-item"><strong>• Immobilier & PropTech:</strong> Innovation immobilière et gestion de bâtiments intelligents.</p>
-                    <p class="lexique-item"><strong>• E-commerce & Retail :</strong> Retail digital, experience client et transactions.</p>
-                    <p class="lexique-item" style="border-bottom: none;"><strong>• SaaS & Éditeurs :</strong> Développement de solutions cloud, scalabilité et modèles d'abonnement.</p>
-                </div>
-
-                <h4 style="color:#d4af37; font-family:'Cinzel', serif; margin-bottom: 10px;">Expertises Transversales de l'IA</h4>
-                <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 5px;">
-                    <p class="lexique-item"><strong>• GenAI & Data Science :</strong> Intégration de l'IA pour l'analyse prédictive et l'automatisation.</p>
-                    <p class="lexique-item"><strong>• Cybersécurité :</strong> Protection des infrastructures critiques et audit de résilience.</p>
-                    <p class="lexique-item"><strong>• Web3 & Blockchain :</strong> Tokenisation, traçabilité et ancrage numérique (Woleet).</p>
-                    <p class="lexique-item"><strong>• Opti. des Processus :</strong> Excellence opérationnelle et réduction des coûts (RPA).</p>
-                    <p class="lexique-item" style="border-bottom: none;"><strong>• Go-to-Market & Growth:</strong> Stratégie de pénétration de marché et acquisition asymétrique.</p>
+                    <p class="lexique-item"><strong>• FinTech & DeFi</strong></p>
+                    <p class="lexique-item"><strong>• GovTech & Smart Cities</strong></p>
+                    <p class="lexique-item"><strong>• Santé & BioTech</strong></p>
+                    <p class="lexique-item"><strong>• GreenTech & Énergies</strong></p>
+                    <p class="lexique-item"><strong>• AgriTech & Food Sec.</strong></p>
+                    <p class="lexique-item"><strong>• Logistique & Supply</strong></p>
+                    <p class="lexique-item"><strong>• Mines, Pétrole & Gaz</strong></p>
+                    <p class="lexique-item"><strong>• Immobilier & PropTech</strong></p>
+                    <p class="lexique-item"><strong>• E-commerce & Retail</strong></p>
+                    <p class="lexique-item" style="border-bottom: none;"><strong>• SaaS & Éditeurs</strong></p>
                 </div>
             </div>
             
