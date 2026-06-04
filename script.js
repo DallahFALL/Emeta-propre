@@ -1,7 +1,6 @@
 // ==========================================
 // CONFIGURATION GLOBALE
 // ==========================================
-// URL DE PRODUCTION N8N
 const WEBHOOK_N8N_URL = "https://automation.e-metalabs.com/webhook/matrice-auto-detection"; 
 
 // ==========================================
@@ -17,7 +16,9 @@ const uiDict = {
         title01: "01. SÉLECTIONNEZ VOTRE NIVEAU D'ACCRÉDITATION",
         title02: "02. SOUMISSION DES DONNÉES",
         
-        // Pricing Texts
+        priceStarter: "0 FCFA",
+        pricePro: "14 900 FCFA",
+        priceExpert: "29 000 FCFA",
         stDesc: "Pour tester la puissance analytique d'e-META LABS.",
         st1: "✓ 2 Diagnostics foudroyants", st2: "✓ Identification du risque majeur", st3: "✓ Format texte (Email)", st4: "⚠️ Plan d'action non inclus",
         btnAct: "ACTIVER CE PLAN",
@@ -46,7 +47,6 @@ const uiDict = {
         alertSuccess: "✅ Données sécurisées reçues. L'Agent e-META est en train d'analyser votre contexte. Surveillez votre application WhatsApp !",
         alertError: "❌ Une erreur de connexion au serveur souverain est survenue.",
 
-        // Footer Texts
         linkMentions: "Mentions Légales",
         linkCgv: "CGV",
         linkConf: "Confidentialité",
@@ -63,6 +63,9 @@ const uiDict = {
         title01: "01. SELECT YOUR ACCREDITATION LEVEL",
         title02: "02. DATA SUBMISSION",
         
+        priceStarter: "$0",
+        pricePro: "$25",
+        priceExpert: "$49",
         stDesc: "To test the analytical power of e-META LABS.",
         st1: "✓ 2 Lightning Diagnostics", st2: "✓ Major risk identification", st3: "✓ Text format (Email)", st4: "⚠️ Action plan not included",
         btnAct: "ACTIVATE THIS PLAN",
@@ -107,6 +110,9 @@ const uiDict = {
         title01: "01. SELECCIONE SU NIVEL DE ACREDITACIÓN",
         title02: "02. ENVÍO DE DATOS",
         
+        priceStarter: "$0",
+        pricePro: "$25",
+        priceExpert: "$49",
         stDesc: "Para probar el poder analítico de e-META LABS.",
         st1: "✓ 2 Diagnósticos relámpago", st2: "✓ Identificación de riesgo principal", st3: "✓ Formato texto (Email)", st4: "⚠️ Plan de acción no incluido",
         btnAct: "ACTIVAR ESTE PLAN",
@@ -151,6 +157,9 @@ const uiDict = {
         title01: "01. حدد مستوى الاعتماد الخاص بك",
         title02: "02. تقديم البيانات",
         
+        priceStarter: "0 FCFA",
+        pricePro: "14 900 FCFA",
+        priceExpert: "29 000 FCFA",
         stDesc: "لاختبار القوة التحليلية لـ e-META LABS.",
         st1: "✓ 2 تشخيصات سريعة", st2: "✓ تحديد المخاطر الرئيسية", st3: "✓ تنسيق النص", st4: "⚠️ خطة العمل غير مشمولة",
         btnAct: "تفعيل هذه الخطة",
@@ -191,78 +200,86 @@ const uiDict = {
 let currentLang = 'fr';
 let activePricingPlan = "Non sélectionné";
 
+// FONCTIONS "FAIL-SAFE" (Anti-Plantage)
+function safeText(id, text, isHTML = false) {
+    const el = document.getElementById(id);
+    if (el) {
+        if (isHTML) el.innerHTML = text;
+        else el.innerText = text;
+    }
+}
+function safePlaceholder(id, text) {
+    const el = document.getElementById(id);
+    if (el) el.placeholder = text;
+}
+
 function switchLang(lang) {
     currentLang = lang;
     const t = uiDict[lang];
     document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
     document.documentElement.lang = lang;
 
-    // Mise à jour de l'UI
-    document.getElementById('ui-lbl-counter').innerText = t.counter;
-    document.getElementById('ui-hero-1').innerText = t.hero1;
-    document.getElementById('ui-hero-2').innerText = t.hero2;
-    document.getElementById('ui-slogan-tech').innerText = t.sloganTech;
-    document.getElementById('ui-banner-ots').innerHTML = t.bannerOts; 
-    document.getElementById('ui-title-01').innerText = t.title01;
-    document.getElementById('ui-title-02').innerText = t.title02;
+    // UI Globale
+    safeText('ui-lbl-counter', t.counter);
+    safeText('ui-hero-1', t.hero1);
+    safeText('ui-hero-2', t.hero2);
+    safeText('ui-slogan-tech', t.sloganTech);
+    safeText('ui-banner-ots', t.bannerOts, true);
+    safeText('ui-title-01', t.title01);
+    safeText('ui-title-02', t.title02);
     
-    document.getElementById('ui-starter-desc').innerText = t.stDesc;
-    document.getElementById('ui-st-1').innerText = t.st1;
-    document.getElementById('ui-st-2').innerText = t.st2;
-    document.getElementById('ui-st-3').innerText = t.st3;
-    document.getElementById('ui-st-4').innerText = t.st4;
-    document.getElementById('ui-btn-starter').innerText = t.btnAct;
+    // Devises Dynamiques
+    safeText('ui-price-starter', t.priceStarter);
+    safeText('ui-price-pro', t.pricePro);
+    safeText('ui-price-expert', t.priceExpert);
 
-    const proBadge = document.getElementById('ui-pro-badge');
-    if(proBadge) proBadge.innerText = t.proBadge;
-    document.getElementById('ui-pro-desc').innerHTML = t.proDesc;
-    document.getElementById('ui-pr-1').innerHTML = t.pr1;
-    document.getElementById('ui-pr-2').innerText = t.pr2;
-    document.getElementById('ui-pr-3').innerText = t.pr3;
-    document.getElementById('ui-pr-4').innerText = t.pr4;
-    document.getElementById('ui-btn-pro').innerText = t.btnAct;
+    // Pricing
+    safeText('ui-starter-desc', t.stDesc);
+    safeText('ui-st-1', t.st1);
+    safeText('ui-st-2', t.st2);
+    safeText('ui-st-3', t.st3);
+    safeText('ui-st-4', t.st4);
+    safeText('ui-btn-starter', t.btnAct);
 
-    document.getElementById('ui-expert-desc').innerText = t.exDesc;
-    document.getElementById('ui-ex-1').innerText = t.ex1;
-    document.getElementById('ui-ex-2').innerText = t.ex2;
-    document.getElementById('ui-ex-3').innerText = t.ex3;
-    document.getElementById('ui-ex-4').innerText = t.ex4;
-    document.getElementById('ui-btn-expert').innerText = t.btnAct;
+    safeText('ui-pro-badge', t.proBadge);
+    safeText('ui-pro-desc', t.proDesc, true);
+    safeText('ui-pr-1', t.pr1, true);
+    safeText('ui-pr-2', t.pr2);
+    safeText('ui-pr-3', t.pr3);
+    safeText('ui-pr-4', t.pr4);
+    safeText('ui-btn-pro', t.btnAct);
 
-    document.getElementById('ui-lock-title').innerText = t.lockTitle;
-    document.getElementById('ui-lock-desc').innerText = t.lockDesc;
-    document.getElementById('ui-terminal-title').innerText = t.termTitle;
-    document.getElementById('ui-terminal-desc').innerText = t.termDesc;
-    document.getElementById('user-raw-prompt').placeholder = t.promptPh;
-    document.getElementById('ui-btn-analyse').innerText = t.btnAnalyse;
-    document.getElementById('ui-link-matrice').innerText = t.linkMatrice;
-    
-    document.getElementById('ui-modal-secure-title').innerText = t.modalSecTitle;
-    document.getElementById('ui-modal-secure-desc').innerText = t.modalSecDesc;
-    document.getElementById('ui-lbl-email').innerText = t.lblEmail;
-    document.getElementById('ui-lbl-phone').innerText = t.lblPhone;
-    document.getElementById('btn-fire-ia').innerText = t.btnFire;
+    safeText('ui-expert-desc', t.exDesc);
+    safeText('ui-ex-1', t.ex1);
+    safeText('ui-ex-2', t.ex2);
+    safeText('ui-ex-3', t.ex3);
+    safeText('ui-ex-4', t.ex4);
+    safeText('ui-btn-expert', t.btnAct);
 
-    // Traduction du Footer
-    const linkMentions = document.getElementById('ui-link-mentions');
-    if(linkMentions) linkMentions.innerText = t.linkMentions;
+    // Terminal & Modal
+    safeText('ui-lock-title', t.lockTitle);
+    safeText('ui-lock-desc', t.lockDesc);
+    safeText('ui-terminal-title', t.termTitle);
+    safeText('ui-terminal-desc', t.termDesc);
+    safePlaceholder('user-raw-prompt', t.promptPh);
+    safeText('ui-btn-analyse', t.btnAnalyse);
+    safeText('ui-link-matrice', t.linkMatrice);
     
-    const linkCgv = document.getElementById('ui-link-cgv');
-    if(linkCgv) linkCgv.innerText = t.linkCgv;
-    
-    const linkConf = document.getElementById('ui-link-conf');
-    if(linkConf) linkConf.innerText = t.linkConf;
-    
-    const linkRemb = document.getElementById('ui-link-remb');
-    if(linkRemb) linkRemb.innerText = t.linkRemb;
-    
-    const footerRights = document.getElementById('ui-footer-rights');
-    if(footerRights) footerRights.innerHTML = t.footerRights;
-    
-    const footerUnit = document.getElementById('ui-footer-unit');
-    if(footerUnit) footerUnit.innerText = t.footerUnit;
+    safeText('ui-modal-secure-title', t.modalSecTitle);
+    safeText('ui-modal-secure-desc', t.modalSecDesc);
+    safeText('ui-lbl-email', t.lblEmail);
+    safeText('ui-lbl-phone', t.lblPhone);
+    safeText('btn-fire-ia', t.btnFire);
 
-    // Mise à jour du style des boutons de langue
+    // Footer Infaillible
+    safeText('ui-link-mentions', t.linkMentions);
+    safeText('ui-link-cgv', t.linkCgv);
+    safeText('ui-link-conf', t.linkConf);
+    safeText('ui-link-remb', t.linkRemb);
+    safeText('ui-footer-rights', t.footerRights, true);
+    safeText('ui-footer-unit', t.footerUnit);
+
+    // Activation CSS des boutons
     document.querySelectorAll('.lang-switch button').forEach(btn => btn.classList.remove('active'));
     document.querySelector(`.lang-switch button[data-lang="${lang}"]`).classList.add('active');
 }
@@ -270,34 +287,31 @@ function switchLang(lang) {
 // ==========================================
 // LOGIQUE DU FUNNEL (VERROUILLAGE / DÉVERROUILLAGE)
 // ==========================================
-
 function unlockTerminal(planName) {
     activePricingPlan = planName;
-    
     const container = document.getElementById('terminal-container');
     const overlay = document.getElementById('terminal-lock-overlay');
     const badge = document.getElementById('badge-plan-selected');
     
-    // Animation de déverrouillage
-    overlay.style.opacity = '0';
+    if (overlay) {
+        overlay.style.opacity = '0';
+        setTimeout(() => overlay.style.display = 'none', 500);
+    }
+    
+    if (container) {
+        container.style.borderColor = 'rgba(37, 211, 102, 0.5)';
+        container.style.boxShadow = '0 0 40px rgba(37, 211, 102, 0.15)';
+        container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    if (badge) {
+        badge.innerText = "MODE " + planName;
+        badge.style.display = 'inline-block';
+    }
+    
     setTimeout(() => {
-        overlay.style.display = 'none';
-    }, 500);
-
-    // Changement cosmétique du terminal (Passe du gris au Vert)
-    container.style.borderColor = 'rgba(37, 211, 102, 0.5)';
-    container.style.boxShadow = '0 0 40px rgba(37, 211, 102, 0.15)';
-    
-    // Mise à jour du badge
-    badge.innerText = "MODE " + planName;
-    badge.style.display = 'inline-block';
-    
-    // Scrolling fluide vers le terminal
-    container.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    
-    // Focus automatique
-    setTimeout(() => {
-        document.getElementById('user-raw-prompt').focus();
+        const promptEl = document.getElementById('user-raw-prompt');
+        if (promptEl) promptEl.focus();
     }, 800);
 }
 
@@ -307,40 +321,56 @@ function resetTerminal() {
                        currentLang === 'es' ? "¿Restablecer el terminal?" : "إعادة ضبط المحطة؟";
                        
     if(confirm(confirmMsg)) {
-        document.getElementById('user-raw-prompt').value = '';
-        document.getElementById('auto-email').value = '';
-        document.getElementById('auto-phone').value = '';
+        const promptEl = document.getElementById('user-raw-prompt');
+        const emailEl = document.getElementById('auto-email');
+        const phoneEl = document.getElementById('auto-phone');
         
-        // Revérouillage
+        if (promptEl) promptEl.value = '';
+        if (emailEl) emailEl.value = '';
+        if (phoneEl) phoneEl.value = '';
+        
         activePricingPlan = "Non sélectionné";
-        document.getElementById('terminal-lock-overlay').style.display = 'flex';
-        document.getElementById('terminal-lock-overlay').style.opacity = '1';
-        document.getElementById('terminal-container').style.borderColor = 'rgba(136, 146, 176, 0.2)';
-        document.getElementById('terminal-container').style.boxShadow = 'none';
-        document.getElementById('badge-plan-selected').style.display = 'none';
         
-        document.querySelector('.hero-sublime').scrollIntoView({ behavior: 'smooth' });
+        const overlay = document.getElementById('terminal-lock-overlay');
+        const container = document.getElementById('terminal-container');
+        const badge = document.getElementById('badge-plan-selected');
+        
+        if (overlay) {
+            overlay.style.display = 'flex';
+            overlay.style.opacity = '1';
+        }
+        if (container) {
+            container.style.borderColor = 'rgba(136, 146, 176, 0.2)';
+            container.style.boxShadow = 'none';
+        }
+        if (badge) badge.style.display = 'none';
+        
+        const hero = document.querySelector('.hero-sublime');
+        if (hero) hero.scrollIntoView({ behavior: 'smooth' });
     }
 }
 
 // ==========================================
 // FONCTIONS DE LA MODALE
 // ==========================================
-
 function openModal(modalId) { 
-    document.getElementById(modalId).style.display = 'flex'; 
+    const m = document.getElementById(modalId);
+    if (m) m.style.display = 'flex'; 
 }
 
 function closeModal(modalId) { 
-    document.getElementById(modalId).style.display = 'none'; 
+    const m = document.getElementById(modalId);
+    if (m) m.style.display = 'none'; 
 }
 
 // ==========================================
 // LOGIQUE DU WEB CHAT SNIPER (TIR FETCH)
 // ==========================================
-
 function triggerSniperCapture() {
-    const rawPrompt = document.getElementById('user-raw-prompt').value.trim();
+    const promptEl = document.getElementById('user-raw-prompt');
+    if (!promptEl) return;
+    
+    const rawPrompt = promptEl.value.trim();
     const t = uiDict[currentLang];
     
     if(!rawPrompt || rawPrompt.length < 15) {
@@ -351,9 +381,15 @@ function triggerSniperCapture() {
 }
 
 function fireAutoDetection() {
-    const email = document.getElementById('auto-email').value.trim();
-    const phone = document.getElementById('auto-phone').value.trim();
-    const rawPrompt = document.getElementById('user-raw-prompt').value.trim();
+    const emailEl = document.getElementById('auto-email');
+    const phoneEl = document.getElementById('auto-phone');
+    const promptEl = document.getElementById('user-raw-prompt');
+    
+    if (!emailEl || !phoneEl || !promptEl) return;
+    
+    const email = emailEl.value.trim();
+    const phone = phoneEl.value.trim();
+    const rawPrompt = promptEl.value.trim();
     const t = uiDict[currentLang];
 
     if(!email || !phone) {
@@ -368,15 +404,16 @@ function fireAutoDetection() {
         "telephone_client": phone,
         "problematique_brute": rawPrompt,
         "langue": currentLang,
-        "plan_choisi": activePricingPlan // On envoie le plan choisi à l'IA !
+        "plan_choisi": activePricingPlan
     };
 
     const btn = document.getElementById('btn-fire-ia');
-    btn.innerHTML = "Transmission... ⏳";
-    btn.style.opacity = "0.7";
-    btn.disabled = true;
+    if (btn) {
+        btn.innerHTML = "Transmission... ⏳";
+        btn.style.opacity = "0.7";
+        btn.disabled = true;
+    }
 
-    // LE TIR VERS N8N
     fetch(WEBHOOK_N8N_URL, {
         method: 'POST',
         mode: 'cors',
@@ -387,28 +424,32 @@ function fireAutoDetection() {
         if (!response.ok) throw new Error("Erreur serveur n8n");
         closeModal('autoDetectModal');
         
-        // Nettoyage et reset
-        document.getElementById('user-raw-prompt').value = '';
-        btn.innerHTML = t.btnFire;
-        btn.style.opacity = "1";
-        btn.disabled = false;
+        promptEl.value = '';
+        if (btn) {
+            btn.innerHTML = t.btnFire;
+            btn.style.opacity = "1";
+            btn.disabled = false;
+        }
         
-        // Re-verrouiller le terminal pour la prochaine session
         activePricingPlan = "Non sélectionné";
-        document.getElementById('terminal-lock-overlay').style.display = 'flex';
-        document.getElementById('terminal-lock-overlay').style.opacity = '1';
-        document.getElementById('terminal-container').style.borderColor = 'rgba(136, 146, 176, 0.2)';
-        document.getElementById('terminal-container').style.boxShadow = 'none';
-        document.getElementById('badge-plan-selected').style.display = 'none';
+        const overlay = document.getElementById('terminal-lock-overlay');
+        const container = document.getElementById('terminal-container');
+        const badge = document.getElementById('badge-plan-selected');
+        
+        if (overlay) { overlay.style.display = 'flex'; overlay.style.opacity = '1'; }
+        if (container) { container.style.borderColor = 'rgba(136, 146, 176, 0.2)'; container.style.boxShadow = 'none'; }
+        if (badge) badge.style.display = 'none';
 
         alert(t.alertSuccess);
     })
     .catch(error => {
         console.error("Erreur de transmission:", error);
         alert(t.alertError);
-        btn.innerHTML = t.btnFire;
-        btn.style.opacity = "1";
-        btn.disabled = false;
+        if (btn) {
+            btn.innerHTML = t.btnFire;
+            btn.style.opacity = "1";
+            btn.disabled = false;
+        }
     });
 }
 
@@ -416,10 +457,8 @@ function fireAutoDetection() {
 // INITIALISATION
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Forcer la langue initiale
     switchLang('fr');
     
-    // Compteur Live
     const counterElement = document.getElementById('live-counter-top');
     if (counterElement) {
         let currentCount = 1380; const targetCount = 1423; 
