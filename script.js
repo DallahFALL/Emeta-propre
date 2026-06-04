@@ -220,3 +220,14 @@ function resetTerminal() {
         document.getElementById('user-raw-prompt').value = '';
     }
 }
+// Fonction pour le bouton Reset du Terminal
+function resetTerminal() {
+    const t = uiDict[currentLang];
+    const confirmMsg = currentLang === 'fr' ? "Voulez-vous effacer le terminal ?" : 
+                       currentLang === 'en' ? "Clear the terminal?" : 
+                       currentLang === 'es' ? "¿Borrar el terminal?" : "مسح المحطة؟";
+                       
+    if(confirm(confirmMsg)) {
+        document.getElementById('user-raw-prompt').value = '';
+    }
+}
