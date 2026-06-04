@@ -44,7 +44,15 @@ const uiDict = {
         alertEmpty: "⚠️ Veuillez détailler un peu plus votre problématique pour permettre à l'IA d'effectuer une analyse pertinente.",
         alertMiss: "Veuillez renseigner votre email et numéro WhatsApp pour sécuriser le canal.",
         alertSuccess: "✅ Données sécurisées reçues. L'Agent e-META est en train d'analyser votre contexte. Surveillez votre application WhatsApp !",
-        alertError: "❌ Une erreur de connexion au serveur souverain est survenue."
+        alertError: "❌ Une erreur de connexion au serveur souverain est survenue.",
+
+        // Footer Texts
+        linkMentions: "Mentions Légales",
+        linkCgv: "CGV",
+        linkConf: "Confidentialité",
+        linkRemb: "Remboursement",
+        footerRights: "&copy; 2026 E-META LABS SASU. Tous droits réservés.",
+        footerUnit: "Strategic Intelligence Unit • Rosso - Dakar - Paris - Dubai - Shanghai - New York"
     },
     en: {
         counter: "Secured & Anchored Diagnostics",
@@ -81,7 +89,14 @@ const uiDict = {
         alertEmpty: "⚠️ Please detail your problem a bit more.",
         alertMiss: "Please provide your email and WhatsApp number.",
         alertSuccess: "✅ Secured data received. The e-META Agent is analyzing your context. Monitor your WhatsApp!",
-        alertError: "❌ A connection error occurred."
+        alertError: "❌ A connection error occurred.",
+
+        linkMentions: "Legal Notice",
+        linkCgv: "Terms of Service",
+        linkConf: "Privacy Policy",
+        linkRemb: "Refund Policy",
+        footerRights: "&copy; 2026 E-META LABS SASU. All rights reserved.",
+        footerUnit: "Strategic Intelligence Unit • Rosso - Dakar - Paris - Dubai - Shanghai - New York"
     },
     es: {
         counter: "Diagnósticos Seguros y Anclados",
@@ -118,7 +133,14 @@ const uiDict = {
         alertEmpty: "⚠️ Detalle un poco más su problema.",
         alertMiss: "Proporcione su correo y número de WhatsApp.",
         alertSuccess: "✅ Datos seguros recibidos. ¡Revise su WhatsApp!",
-        alertError: "❌ Ocurrió un error de conexión."
+        alertError: "❌ Ocurrió un error de conexión.",
+
+        linkMentions: "Aviso Legal",
+        linkCgv: "Términos y Condiciones",
+        linkConf: "Política de Privacidad",
+        linkRemb: "Política de Reembolso",
+        footerRights: "&copy; 2026 E-META LABS SASU. Todos los derechos reservados.",
+        footerUnit: "Strategic Intelligence Unit • Rosso - Dakar - Paris - Dubai - Shanghai - New York"
     },
     ar: {
         counter: "التشخيصات الآمنة والمثبتة",
@@ -155,7 +177,14 @@ const uiDict = {
         alertEmpty: "⚠️ يرجى تفصيل مشكلتك أكثر قليلاً.",
         alertMiss: "يرجى تقديم بريدك الإلكتروني ورقم الواتساب.",
         alertSuccess: "✅ تم استلام البيانات الآمنة. راقب تطبيق الواتساب الخاص بك!",
-        alertError: "❌ حدث خطأ في الاتصال."
+        alertError: "❌ حدث خطأ في الاتصال.",
+
+        linkMentions: "إشعار قانوني",
+        linkCgv: "شروط الخدمة",
+        linkConf: "سياسة الخصوصية",
+        linkRemb: "سياسة الاسترداد",
+        footerRights: "&copy; 2026 E-META LABS SASU. كل الحقوق محفوظة.",
+        footerUnit: "وحدة الاستخبارات الاستراتيجية • روسو - داكار - باريس - دبي - شنغهاي - نيويورك"
     }
 };
 
@@ -213,6 +242,25 @@ function switchLang(lang) {
     document.getElementById('ui-lbl-email').innerText = t.lblEmail;
     document.getElementById('ui-lbl-phone').innerText = t.lblPhone;
     document.getElementById('btn-fire-ia').innerText = t.btnFire;
+
+    // Traduction du Footer
+    const linkMentions = document.getElementById('ui-link-mentions');
+    if(linkMentions) linkMentions.innerText = t.linkMentions;
+    
+    const linkCgv = document.getElementById('ui-link-cgv');
+    if(linkCgv) linkCgv.innerText = t.linkCgv;
+    
+    const linkConf = document.getElementById('ui-link-conf');
+    if(linkConf) linkConf.innerText = t.linkConf;
+    
+    const linkRemb = document.getElementById('ui-link-remb');
+    if(linkRemb) linkRemb.innerText = t.linkRemb;
+    
+    const footerRights = document.getElementById('ui-footer-rights');
+    if(footerRights) footerRights.innerHTML = t.footerRights;
+    
+    const footerUnit = document.getElementById('ui-footer-unit');
+    if(footerUnit) footerUnit.innerText = t.footerUnit;
 
     // Mise à jour du style des boutons de langue
     document.querySelectorAll('.lang-switch button').forEach(btn => btn.classList.remove('active'));
