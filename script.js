@@ -16,9 +16,9 @@ const uiDict = {
         title01: "01. SÉLECTIONNEZ VOTRE NIVEAU D'ACCRÉDITATION",
         title02: "02. SOUMISSION DES DONNÉES",
         
-        priceStarter: "0 FCFA",
-        pricePro: "14 900 FCFA",
-        priceExpert: "29 000 FCFA",
+        priceStarter: "0 €",
+        pricePro: "25 €",
+        priceExpert: "49 €",
         stDesc: "Pour tester la puissance analytique d'e-META LABS.",
         st1: "✓ 2 Diagnostics foudroyants", st2: "✓ Identification du risque majeur", st3: "✓ Format texte (Email)", st4: "⚠️ Plan d'action non inclus",
         btnAct: "ACTIVER CE PLAN",
