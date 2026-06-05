@@ -68,7 +68,63 @@
     </style>
 </head>
 <body>
+<!-- ========================================== -->
+    <!-- PROTOCOLE DE VERROUILLAGE (MODE LABORATOIRE) -->
+    <!-- ========================================== -->
+    <div id="lab-lock-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #0a192f; z-index: 999999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; font-family: 'Inter', sans-serif;">
+        <!-- Logo e-META -->
+        <svg width="80" height="80" viewBox="-5 -5 110 110" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 20px;">
+            <path fill="none" stroke="#d4af37" stroke-width="4" d="m50 5 45 20v50L50 95 5 75V25Z"/>
+            <path fill="rgba(212, 175, 55, 0.1)" stroke="#d4af37" stroke-width="2" d="m50 20 30 15v30L50 80 20 65V35Z"/>
+            <circle cx="50" cy="50" r="8" fill="#d4af37"/>
+        </svg>
+        
+        <h1 style="color: #d4af37; font-family: 'Cinzel', serif; letter-spacing: 3px; font-size: 2rem; margin-bottom: 10px;">PROJET e-META</h1>
+        <p style="color: #8892b0; margin-bottom: 30px; max-width: 450px; font-size: 0.9rem; line-height: 1.6;">Le complexe stratégique est actuellement en phase de développement (Blackout). Accès restreint au personnel habilité.</p>
+        
+        <input type="password" id="lab-password" placeholder="Code d'habilitation..." style="padding: 12px 20px; border: 1px solid rgba(212, 175, 55, 0.4); background: rgba(10, 25, 47, 0.8); color: #fff; border-radius: 4px; text-align: center; letter-spacing: 2px; font-size: 1rem; outline: none; margin-bottom: 15px; width: 250px; font-family: 'Inter', sans-serif;" onkeypress="if(event.key === 'Enter') unlockLab()">
+        
+        <button onclick="unlockLab()" style="background: #d4af37; color: #0a192f; border: none; padding: 12px 30px; font-family: 'Cinzel', serif; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px;" onmouseover="this.style.boxShadow='0 0 20px rgba(212, 175, 55, 0.5)'" onmouseout="this.style.boxShadow='none'">DÉVERROUILLER LE TERMINAL</button>
+        
+        <p id="lab-error" style="color: #d9534f; font-size: 0.85rem; margin-top: 15px; display: none;">Accès refusé. Code de sécurité incorrect.</p>
+    </div>
 
+    <script>
+        // 🔒 DÉFINISSEZ VOTRE MOT DE PASSE ICI
+        const LAB_SECRET_CODE = "CORTEX2026"; 
+
+        // Le système vérifie si vous vous êtes déjà connecté récemment pour ne pas vous redemander le code à chaque clic
+        if (localStorage.getItem('lab_unlocked') === 'true') {
+            document.getElementById('lab-lock-screen').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        } else {
+            document.body.style.overflow = 'hidden'; // Bloque le défilement tant que le site est verrouillé
+        }
+
+        function unlockLab() {
+            const input = document.getElementById('lab-password').value;
+            if (input === LAB_SECRET_CODE) {
+                // Code correct : on sauvegarde dans la mémoire du navigateur et on masque le bouclier
+                localStorage.setItem('lab_unlocked', 'true');
+                document.body.style.overflow = 'auto';
+                
+                const lockScreen = document.getElementById('lab-lock-screen');
+                lockScreen.style.transition = "opacity 0.6s ease";
+                lockScreen.style.opacity = "0";
+                
+                setTimeout(() => {
+                    lockScreen.style.display = 'none';
+                }, 600);
+            } else {
+                // Code incorrect
+                document.getElementById('lab-error').style.display = 'block';
+                document.getElementById('lab-password').value = '';
+            }
+        }
+    </script>
+    <!-- ========================================== -->
+    <!-- FIN DU PROTOCOLE DE VERROUILLAGE -->
+    <!-- ========================================== -->
     <header class="header">
         <div class="logo-container">
             <svg width="50" height="50" viewBox="-5 -5 110 110" xmlns="http://www.w3.org/2000/svg">
