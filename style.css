@@ -247,6 +247,7 @@ button.btn-outline:hover { background: rgba(212, 175, 55, 0.1); }
     animation: spin 1s linear infinite;
 }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
 /* --- Vision Sublime e-META LABS --- */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;800&display=swap');
 
@@ -313,13 +314,14 @@ button.btn-outline:hover { background: rgba(212, 175, 55, 0.1); }
     line-height: 1.6;
     letter-spacing: 1px;
 }
+
 /* =========================================
    ANIMATION RADAR : BADGE EARLY ADOPTER
    ========================================= */
 #ui-badge-beta {
     display: inline-block;
     font-weight: bold;
-    color: #d4af37; /* Couleur or/premium, à ajuster selon votre charte */
+    color: #d4af37; /* Couleur or/premium */
     animation: pulseAlpha 2s infinite ease-in-out;
 }
 
