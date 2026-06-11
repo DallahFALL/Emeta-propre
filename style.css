@@ -313,3 +313,31 @@ button.btn-outline:hover { background: rgba(212, 175, 55, 0.1); }
     line-height: 1.6;
     letter-spacing: 1px;
 }
+/* =========================================
+   ANIMATION RADAR : BADGE EARLY ADOPTER
+   ========================================= */
+#ui-badge-beta {
+    display: inline-block;
+    font-weight: bold;
+    color: #d4af37; /* Couleur or/premium, à ajuster selon votre charte */
+    animation: pulseAlpha 2s infinite ease-in-out;
+}
+
+/* La mécanique de la pulsation */
+@keyframes pulseAlpha {
+    0% { 
+        opacity: 1; 
+        transform: scale(1); 
+        text-shadow: 0 0 0px rgba(212, 175, 55, 0);
+    }
+    50% { 
+        opacity: 0.5; 
+        transform: scale(1.02); 
+        text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); /* Effet de halo lumineux */
+    }
+    100% { 
+        opacity: 1; 
+        transform: scale(1); 
+        text-shadow: 0 0 0px rgba(212, 175, 55, 0);
+    }
+}
