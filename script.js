@@ -16,6 +16,7 @@ const uiDict = {
         title01: "01. SÉLECTIONNEZ VOTRE NIVEAU D'ACCRÉDITATION",
         title02: "02. SOUMISSION DES DONNÉES",
         
+        badgeBeta: "🚀 Tarifs Early Adopter - Phase Beta",
         priceStarter: "0 €",
         pricePro: "25 €",
         priceExpert: "49 €",
@@ -63,6 +64,7 @@ const uiDict = {
         title01: "01. SELECT YOUR ACCREDITATION LEVEL",
         title02: "02. DATA SUBMISSION",
         
+        badgeBeta: "🚀 Early Adopter Pricing - Beta Phase",
         priceStarter: "$0",
         pricePro: "$25",
         priceExpert: "$49",
@@ -110,6 +112,7 @@ const uiDict = {
         title01: "01. SELECCIONE SU NIVEL DE ACREDITACIÓN",
         title02: "02. ENVÍO DE DATOS",
         
+        badgeBeta: "🚀 Precios Early Adopter - Fase Beta",
         priceStarter: "$0",
         pricePro: "$25",
         priceExpert: "$49",
@@ -157,6 +160,7 @@ const uiDict = {
         title01: "01. حدد مستوى الاعتماد الخاص بك",
         title02: "02. تقديم البيانات",
         
+        badgeBeta: "🚀 أسعار المتبنين الأوائل - المرحلة التجريبية",
         priceStarter: "<span dir='ltr'>$0</span>",
         pricePro: "<span dir='ltr'>$25</span>",
         priceExpert: "<span dir='ltr'>$49</span>",
@@ -244,6 +248,8 @@ function switchLang(lang) {
     safeText('ui-banner-ots', t.bannerOts, true);
     safeText('ui-title-01', t.title01);
     safeText('ui-title-02', t.title02);
+    
+    safeText('ui-badge-beta', t.badgeBeta); // <-- Intégration du Badge Beta
     
     // Devises Dynamiques
     safeText('ui-price-starter', t.priceStarter, true);
