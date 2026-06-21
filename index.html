@@ -40,6 +40,10 @@
 
         textarea:focus { box-shadow: 0 0 20px rgba(37, 211, 102, 0.2); border-color: #25D366 !important; outline: none; }
         
+        /* Styles pour l'input file */
+        input[type="file"]::file-selector-button { background: rgba(37, 211, 102, 0.1); border: 1px solid #25D366; color: #25D366; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: bold; margin-right: 15px; transition: 0.3s; }
+        input[type="file"]::file-selector-button:hover { background: rgba(37, 211, 102, 0.2); }
+
         .btn-gold { background: #d4af37; color: #0a192f; border: none; padding: 15px 30px; border-radius: 4px; font-weight: bold; font-family: 'Cinzel', serif; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
         .btn-gold.glow { box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); animation: pulse-gold 2s infinite; }
         @keyframes pulse-gold { 0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); } 50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.9); } }
@@ -248,7 +252,14 @@
                 Exposez simplement votre problématique stratégique ou technologique brute. L'Agent e-META analysera votre contexte et générera l'audit approprié.
             </p>
 
-            <textarea id="user-raw-prompt" rows="5" placeholder="Ex : Nous souhaitons automatiser notre processus culinaire traditionnel via une machine connectée..." style="width: 100%; background: rgba(10, 25, 47, 0.8); border: 1px solid rgba(37, 211, 102, 0.3); color: #fff; padding: 20px; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 1rem; resize: vertical; box-sizing: border-box; margin-bottom: 25px; line-height: 1.5;"></textarea>
+            <textarea id="user-raw-prompt" rows="5" placeholder="Ex : Nous souhaitons automatiser notre processus culinaire traditionnel via une machine connectée..." style="width: 100%; background: rgba(10, 25, 47, 0.8); border: 1px solid rgba(37, 211, 102, 0.3); color: #fff; padding: 20px; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 1rem; resize: vertical; box-sizing: border-box; margin-bottom: 15px; line-height: 1.5;"></textarea>
+            
+            <!-- CHAMP POUR L'ENVOI DE FICHIER INTÉGRÉ ICI -->
+            <div style="margin-bottom: 25px; text-align: left;">
+                <label id="ui-lbl-file" for="user-file" style="display: block; color: #8892b0; margin-bottom: 8px; font-size: 0.9rem;">Joindre un document de référence (Optionnel - PDF, DOCX, PNG, JPG)</label>
+                <input type="file" id="user-file" accept=".pdf, .doc, .docx, .png, .jpg, .jpeg" style="width: 100%; background: rgba(10, 25, 47, 0.8); border: 1px dashed rgba(37, 211, 102, 0.4); color: #fff; padding: 12px; border-radius: 8px; font-family: 'Inter', sans-serif; cursor: pointer; box-sizing: border-box; transition: 0.3s;">
+            </div>
+            <!-- FIN DU CHAMP FICHIER -->
             
             <button id="ui-btn-analyse" onclick="triggerSniperCapture()" class="btn-gold glow" style="width: 100%; background: #25D366; color: #0a192f; border: none; font-size: 1.1rem; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);">
                 LANCER L'ANALYSE ET L'ANCRAGE OPENTIMESTAMPS
@@ -305,7 +316,7 @@
     <!-- MODAL LEXIQUE -->
     <div id="guideOverlay" class="modal-overlay">
         <div class="modal-content" style="max-width: 650px;">
-            <span class="close-btn" onclick="closeModal('guideOverlay')">&times;</span>    
+            <span class="close-btn" onclick="closeModal('guideOverlay')">&times;</span>   
             <h2 id="ui-matrice-title" style="margin-bottom: 20px; border-bottom: 1px solid #d4af37; padding-bottom: 10px; color: #d4af37; font-family: 'Cinzel', serif;">Matrice des Expertises IA</h2>
             <p id="ui-matrice-desc" style="color: #e6f1ff; font-size: 0.9rem; line-height: 1.6;">L'Agent e-META est entraîné à reconnaître et analyser les enjeux dans plus de 20 secteurs de manière totalement agnostique.</p>
             
