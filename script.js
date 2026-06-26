@@ -1,7 +1,7 @@
 // ==========================================
 // CONFIGURATION GLOBALE
 // ==========================================
-const WEBHOOK_N8N_URL = "https://automation.e-metalabs.com/webhook/matrice-auto-detection"; 
+const WEBHOOK_N8N_URL = "https://automation.e-metalabs.com/webhook/reception-emeta"; 
 
 // ==========================================
 // DICTIONNAIRE MULTILINGUE (UI)
