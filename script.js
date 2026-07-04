@@ -478,4 +478,4 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentCount >= targetCount) clearInterval(interval);
         }, 30); 
     }
-});
+}); 
