@@ -34,11 +34,12 @@ const uiDict = {
         termTitle: "TERMINAL DE DÉTECTION IA",
         termDesc: "Définissez le cadre de votre mission et exposez votre problématique brute. L'Agent e-META analysera votre contexte pour générer l'audit approprié.",
         
+        // UX e-META : Directif et Exigeant
         lblMission: "NOM DE LA MISSION OU SECTEUR D'ACTIVITÉ",
-        lblContexte: "PROBLÉMATIQUE ET CONTEXTE BRUT",
+        lblContexte: "PROBLÉMATIQUE ET CONTEXTE BRUT (Précisez : Quels sont vos outils actuels ? Où se situe la perte de marge ?)",
         lblFile: "Joindre un document de référence (Optionnel - PDF, DOCX, PNG, JPG)",
         phMission: "Ex : Transformation Agro-industrielle, Automatisation SaaS...",
-        phContexte: "Ex : Nous souhaitons automatiser notre processus de conservation des récoltes mais nous faisons face à une friction sur les flux d'informations...",
+        phContexte: "Ex : Nous déployons des unités de stockage agro-industriel dans la Vallée du Fleuve, mais l'absence de synchronisation en temps réel sur le contrôle thermique et la chaîne logistique crée une friction de 15% sur nos rendements...",
         
         btnAnalyse: "LANCER L'ANALYSE ET L'ANCRAGE OPENTIMESTAMPS",
         linkMatrice: "Consulter la matrice de nos 20 expertises sectorielles couvertes par l'IA",
@@ -49,7 +50,7 @@ const uiDict = {
         lblPhone: "Votre Numéro WhatsApp (Pour l'échange en direct)",
         btnFire: "CONFIRMER ET TRANSMETTRE",
         
-        alertEmpty: "⚠️ Veuillez détailler les deux champs (Mission et Contexte) pour permettre à l'IA d'effectuer une analyse pertinente.",
+        alertEmpty: "⚠️ EXIGENCE E-META : La rigueur de l'Agent IA nécessite un contexte détaillé (minimum 150 caractères). Veuillez décrire précisément vos points de friction pour obtenir un audit sur-mesure.",
         alertMiss: "Veuillez renseigner votre email et numéro WhatsApp pour sécuriser le canal.",
         alertSuccess: "✅ Données sécurisées reçues. L'Agent e-META est en train d'analyser votre contexte. Surveillez votre application WhatsApp !",
         alertError: "❌ Une erreur de transmission vers notre serveur souverain est survenue.",
@@ -88,11 +89,12 @@ const uiDict = {
         termTitle: "AI DETECTION TERMINAL",
         termDesc: "Define the scope of your mission and expose your raw problem. The e-META Agent will analyze your context.",
         
+        // UX e-META : Directif et Exigeant
         lblMission: "MISSION NAME OR BUSINESS SECTOR",
-        lblContexte: "RAW PROBLEM & CONTEXT",
+        lblContexte: "RAW PROBLEM & CONTEXT (Specify: What are your current tools? Where is the margin loss?)",
         lblFile: "Attach a reference document (Optional - PDF, DOCX, PNG, JPG)",
         phMission: "Ex: Agro-industrial Transformation, SaaS Automation...",
-        phContexte: "Ex: We want to automate our crop preservation process but we are facing friction in information flows...",
+        phContexte: "Ex: We are deploying agro-industrial storage units in the River Valley, but the lack of real-time synchronization on thermal control and supply chain creates a 15% operational friction on our yields...",
         
         btnAnalyse: "LAUNCH ANALYSIS AND OPENTIMESTAMPS ANCHORING",
         linkMatrice: "Consult the matrix of our 20 AI-covered sector expertises",
@@ -103,7 +105,7 @@ const uiDict = {
         lblPhone: "Your WhatsApp Number (For direct exchange)",
         btnFire: "CONFIRM AND TRANSMIT",
         
-        alertEmpty: "⚠️ Please fill in both fields (Mission and Context) with enough details.",
+        alertEmpty: "⚠️ E-META REQUIREMENT: The rigor of the AI Agent requires a detailed context (minimum 150 characters). Please precisely describe your friction points to obtain a custom audit.",
         alertMiss: "Please provide your email and WhatsApp number.",
         alertSuccess: "✅ Secured data received. The e-META Agent is analyzing your context. Monitor your WhatsApp!",
         alertError: "❌ A connection error occurred.",
@@ -142,11 +144,12 @@ const uiDict = {
         termTitle: "TERMINAL DE DETECCIÓN IA",
         termDesc: "Defina el alcance de su misión y exponga su problemática bruta. El Agente e-META analizará su contexto.",
         
+        // UX e-META : Directif et Exigeant
         lblMission: "NOMBRE DE LA MISIÓN O SECTOR DE ACTIVIDAD",
-        lblContexte: "PROBLEMÁTICA Y CONTEXTO BRUTO",
+        lblContexte: "PROBLEMÁTICA Y CONTEXTO BRUTO (Especifique: ¿Cuáles son sus herramientas actuales? ¿Dónde está la pérdida de margen?)",
         lblFile: "Adjuntar un documento de referencia (Opcional - PDF, DOCX, PNG, JPG)",
         phMission: "Ej: Transformación Agroindustrial, Automatización SaaS...",
-        phContexte: "Ej: Queremos automatizar nuestro proceso de conservación de cosechas pero enfrentamos fricción en los flujos de información...",
+        phContexte: "Ej: Desplegamos unidades de almacenamiento agroindustrial en el Valle del Río, pero la falta de sincronización en tiempo real sobre el control térmico crea una fricción del 15% en nuestros rendimientos...",
         
         btnAnalyse: "LANZAR ANÁLISIS Y ANCLAJE OPENTIMESTAMPS",
         linkMatrice: "Consulte la matriz de nuestras 20 experiencias sectoriales",
@@ -157,7 +160,7 @@ const uiDict = {
         lblPhone: "Su Número de WhatsApp (Para intercambio directo)",
         btnFire: "CONFIRMAR Y TRANSMITIR",
         
-        alertEmpty: "⚠️ Detalle ambos campos (Misión y Contexto) para permitir un buen análisis.",
+        alertEmpty: "⚠️ EXIGENCIA E-META: El rigor del Agente IA requiere un contexto detallado (mínimo 150 caracteres). Describa con precisión sus puntos de fricción para obtener una auditoría a medida.",
         alertMiss: "Proporcione su correo y número de WhatsApp.",
         alertSuccess: "✅ Datos seguros recibidos. ¡Revise su WhatsApp!",
         alertError: "❌ Ocurrió un error de conexión.",
@@ -208,11 +211,12 @@ const uiDict = {
         termTitle: "محطة الكشف بالذكاء الاصطناعي",
         termDesc: "حدد نطاق مهمتك واعرض مشكلتك الاستراتيجية. سيقوم وكيل e-META بتحليل السياق.",
         
+        // UX e-META : Directif et Exigeant
         lblMission: "اسم المهمة أو قطاع النشاط",
-        lblContexte: "الإشكالية والسياق الأساسي",
+        lblContexte: "الإشكالية والسياق الأساسي (حدد: ما هي أدواتك الحالية؟ أين يقع فقدان الهامش؟)",
         lblFile: "إرفاق مستند مرجعي (اختياري - PDF, DOCX, PNG, JPG)",
         phMission: "مثال: التحول في الصناعات الزراعية، أتمتة البرمجيات كخدمة...",
-        phContexte: "مثال: نرغب في أتمتة عملية حفظ المحاصيل لدينا ولكننا نواجه احتكاكاً في تدفق المعلومات...",
+        phContexte: "مثال: ننشر وحدات تخزين صناعية زراعية في وادي النهر، لكن الافتقار إلى المزامنة في الوقت الفعلي للتحكم الحراري وسلسلة التوريد يخلق احتكاكاً تشغيلياً بنسبة 15٪ في عائداتنا...",
         
         btnAnalyse: "إطلاق التحليل وتثبيت OPENTIMESTAMPS",
         linkMatrice: "استشر مصفوفة خبراتنا القطاعية العشرين",
@@ -223,7 +227,7 @@ const uiDict = {
         lblPhone: "رقم الواتساب الخاص بك (للتبادل المباشر)",
         btnFire: "تأكيد وإرسال",
         
-        alertEmpty: "⚠️ يرجى تفصيل كلا الحقلين (المهمة والسياق) للسماح بإجراء تحليل دقيق.",
+        alertEmpty: "⚠️ متطلبات E-META: تتطلب صرامة وكيل الذكاء الاصطناعي سياقاً مفصلاً (150 حرفاً كحد أدنى). يرجى وصف نقاط الاحتكاك بدقة للحصول على تدقيق مخصص.",
         alertMiss: "يرجى تقديم بريدك الإلكتروني ورقم الواتساب.",
         alertSuccess: "✅ تم استلام البيانات الآمنة. راقب تطبيق الواتساب الخاص بك!",
         alertError: "❌ حدث خطأ في الاتصال الخادم.",
@@ -309,9 +313,7 @@ function switchLang(lang) {
     safeText('ui-terminal-title', t.termTitle);
     safeText('ui-terminal-desc', t.termDesc);
     
-    // ------------------------------------------------------------
-    // CORRECTION BLINDÉE : Cible les labels même sans ID
-    // ------------------------------------------------------------
+    // Labels et Placeholders
     let lblMissionEl = document.getElementById('ui-lbl-mission') || document.querySelector('label[for="mission_nom"]');
     if (lblMissionEl) lblMissionEl.innerText = t.lblMission;
 
@@ -320,7 +322,6 @@ function switchLang(lang) {
 
     let lblFileEl = document.getElementById('ui-lbl-file') || document.querySelector('label[for="user-file"]');
     if (lblFileEl) lblFileEl.innerText = t.lblFile;
-    // ------------------------------------------------------------
 
     safePlaceholder('mission_nom', t.phMission);
     safePlaceholder('mission_contexte', t.phContexte);
@@ -382,7 +383,6 @@ function unlockTerminal(planName) {
         badge.style.display = 'inline-block';
     }
     setTimeout(() => {
-        // Focus sur le nouveau premier champ
         const missionEl = document.getElementById('mission_nom');
         if (missionEl) missionEl.focus();
     }, 800);
@@ -394,7 +394,6 @@ function resetTerminal() {
                        currentLang === 'es' ? "¿Restablecer el terminal?" : "إعادة ضبط المحطة؟";
                        
     if(confirm(confirmMsg)) {
-        // Purge des nouveaux champs
         const missionNomEl = document.getElementById('mission_nom');
         const missionContexteEl = document.getElementById('mission_contexte');
         const fileEl = document.getElementById('user-file');
@@ -444,8 +443,8 @@ function triggerSniperCapture() {
     const contexteMission = missionContexteEl.value.trim();
     const t = uiDict[currentLang];
     
-    // Sécurité anti-spam et vérification de pertinence
-    if(!nomMission || !contexteMission || contexteMission.length < 15) { 
+    // VERROUILLAGE TECHNIQUE DE LA QUALITÉ (150 caractères min)
+    if(!nomMission || !contexteMission || contexteMission.length < 150) { 
         alert(t.alertEmpty); 
         return; 
     }
@@ -469,7 +468,6 @@ function fireAutoDetection() {
 
     if(!email || !phone) { alert(t.alertMiss); return; }
 
-    // Payload mis à jour avec les deux nouvelles variables structurées
     const payload = {
         "source": "Web Chat Sniper",
         "date": new Date().toISOString(),
@@ -497,7 +495,6 @@ function fireAutoDetection() {
         if (!response.ok) throw new Error("Erreur serveur n8n");
         closeModal('autoDetectModal');
         
-        // Purge après transmission
         missionNomEl.value = '';
         missionContexteEl.value = '';
         const fileEl = document.getElementById('user-file');
@@ -527,11 +524,9 @@ function fireAutoDetection() {
 // INITIALISATION INTELLIGENTE
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Le script lit l'URL ou la mémoire, sinon il force le Français.
     const urlParams = new URLSearchParams(window.location.search);
     let savedLang = urlParams.get('lang') || localStorage.getItem('emeta_lang') || 'fr';
     
-    // Sécurité au cas où la valeur serait corrompue
     if (!['fr', 'en', 'es', 'ar'].includes(savedLang)) savedLang = 'fr';
     
     switchLang(savedLang);
