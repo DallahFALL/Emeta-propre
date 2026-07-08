@@ -34,7 +34,6 @@ const uiDict = {
         termTitle: "TERMINAL DE DÉTECTION IA",
         termDesc: "Définissez le cadre de votre mission et exposez votre problématique brute. L'Agent e-META analysera votre contexte pour générer l'audit approprié.",
         
-        // Nouveaux champs formulaires
         lblMission: "NOM DE LA MISSION OU SECTEUR D'ACTIVITÉ",
         lblContexte: "PROBLÉMATIQUE ET CONTEXTE BRUT",
         lblFile: "Joindre un document de référence (Optionnel - PDF, DOCX, PNG, JPG)",
@@ -89,7 +88,6 @@ const uiDict = {
         termTitle: "AI DETECTION TERMINAL",
         termDesc: "Define the scope of your mission and expose your raw problem. The e-META Agent will analyze your context.",
         
-        // Nouveaux champs formulaires
         lblMission: "MISSION NAME OR BUSINESS SECTOR",
         lblContexte: "RAW PROBLEM & CONTEXT",
         lblFile: "Attach a reference document (Optional - PDF, DOCX, PNG, JPG)",
@@ -144,7 +142,6 @@ const uiDict = {
         termTitle: "TERMINAL DE DETECCIÓN IA",
         termDesc: "Defina el alcance de su misión y exponga su problemática bruta. El Agente e-META analizará su contexto.",
         
-        // Nouveaux champs formulaires
         lblMission: "NOMBRE DE LA MISIÓN O SECTOR DE ACTIVIDAD",
         lblContexte: "PROBLEMÁTICA Y CONTEXTO BRUTO",
         lblFile: "Adjuntar un documento de referencia (Opcional - PDF, DOCX, PNG, JPG)",
@@ -211,7 +208,6 @@ const uiDict = {
         termTitle: "محطة الكشف بالذكاء الاصطناعي",
         termDesc: "حدد نطاق مهمتك واعرض مشكلتك الاستراتيجية. سيقوم وكيل e-META بتحليل السياق.",
         
-        // Nouveaux champs formulaires
         lblMission: "اسم المهمة أو قطاع النشاط",
         lblContexte: "الإشكالية والسياق الأساسي",
         lblFile: "إرفاق مستند مرجعي (اختياري - PDF, DOCX, PNG, JPG)",
@@ -313,10 +309,19 @@ function switchLang(lang) {
     safeText('ui-terminal-title', t.termTitle);
     safeText('ui-terminal-desc', t.termDesc);
     
-    // Nouveaux champs
-    safeText('ui-lbl-mission', t.lblMission);
-    safeText('ui-lbl-contexte', t.lblContexte);
-    safeText('ui-lbl-file', t.lblFile);
+    // ------------------------------------------------------------
+    // CORRECTION BLINDÉE : Cible les labels même sans ID
+    // ------------------------------------------------------------
+    let lblMissionEl = document.getElementById('ui-lbl-mission') || document.querySelector('label[for="mission_nom"]');
+    if (lblMissionEl) lblMissionEl.innerText = t.lblMission;
+
+    let lblContexteEl = document.getElementById('ui-lbl-contexte') || document.querySelector('label[for="mission_contexte"]');
+    if (lblContexteEl) lblContexteEl.innerText = t.lblContexte;
+
+    let lblFileEl = document.getElementById('ui-lbl-file') || document.querySelector('label[for="user-file"]');
+    if (lblFileEl) lblFileEl.innerText = t.lblFile;
+    // ------------------------------------------------------------
+
     safePlaceholder('mission_nom', t.phMission);
     safePlaceholder('mission_contexte', t.phContexte);
     
@@ -329,7 +334,7 @@ function switchLang(lang) {
     safeText('ui-lbl-phone', t.lblPhone);
     safeText('btn-fire-ia', t.btnFire);
 
-    // Footer - Transmission de la langue dans l'URL
+    // Footer
     safeText('ui-link-mentions', t.linkMentions);
     const linkMentionsEl = document.getElementById('ui-link-mentions');
     if(linkMentionsEl) linkMentionsEl.href = `mentions-legales.html${urlSuffix}`;
