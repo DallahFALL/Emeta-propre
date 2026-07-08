@@ -2,6 +2,7 @@
 // CONFIGURATION ROUTAGE CORTEX
 // =========================================================
 const WEBHOOK_N8N_URL = "https://automation.e-metalabs.com/webhook/482700d1-501d-4237-b5a7-fc6ee6afdf45";
+
 // ==========================================
 // DICTIONNAIRE MULTILINGUE (UI)
 // ==========================================
@@ -16,9 +17,9 @@ const uiDict = {
         title02: "02. SOUMISSION DES DONNÉES",
         
         badgeBeta: "🚀 Tarifs Early Adopter - Phase Beta",
-        priceStarter: "0 €",
-        pricePro: "25 €",
-        priceExpert: "49 €",
+        priceStarter: "0 FCFA",
+        pricePro: "14 900 FCFA",
+        priceExpert: "29 000 FCFA",
         stDesc: "Pour tester la puissance analytique d'e-META LABS.",
         st1: "✓ 2 Diagnostics foudroyants", st2: "✓ Identification du risque majeur", st3: "✓ Format texte (Email)", st4: "⚠️ Plan d'action non inclus",
         btnAct: "ACTIVER CE PLAN",
@@ -31,8 +32,15 @@ const uiDict = {
         lockTitle: "TERMINAL EN ATTENTE",
         lockDesc: "Veuillez sélectionner un plan ci-dessus pour déverrouiller l'Agent e-META.",
         termTitle: "TERMINAL DE DÉTECTION IA",
-        termDesc: "Exposez simplement votre problématique stratégique ou technologique brute. L'Agent e-META analysera votre contexte et générera l'audit approprié.",
-        promptPh: "Ex : Nous souhaitons automatiser notre processus culinaire traditionnel via une machine connectée...",
+        termDesc: "Définissez le cadre de votre mission et exposez votre problématique brute. L'Agent e-META analysera votre contexte pour générer l'audit approprié.",
+        
+        // Nouveaux champs formulaires
+        lblMission: "NOM DE LA MISSION OU SECTEUR D'ACTIVITÉ",
+        lblContexte: "PROBLÉMATIQUE ET CONTEXTE BRUT",
+        lblFile: "Joindre un document de référence (Optionnel - PDF, DOCX, PNG, JPG)",
+        phMission: "Ex : Transformation Agro-industrielle, Automatisation SaaS...",
+        phContexte: "Ex : Nous souhaitons automatiser notre processus de conservation des récoltes mais nous faisons face à une friction sur les flux d'informations...",
+        
         btnAnalyse: "LANCER L'ANALYSE ET L'ANCRAGE OPENTIMESTAMPS",
         linkMatrice: "Consulter la matrice de nos 20 expertises sectorielles couvertes par l'IA",
         
@@ -42,10 +50,10 @@ const uiDict = {
         lblPhone: "Votre Numéro WhatsApp (Pour l'échange en direct)",
         btnFire: "CONFIRMER ET TRANSMETTRE",
         
-        alertEmpty: "⚠️ Veuillez détailler un peu plus votre problématique pour permettre à l'IA d'effectuer une analyse pertinente.",
+        alertEmpty: "⚠️ Veuillez détailler les deux champs (Mission et Contexte) pour permettre à l'IA d'effectuer une analyse pertinente.",
         alertMiss: "Veuillez renseigner votre email et numéro WhatsApp pour sécuriser le canal.",
         alertSuccess: "✅ Données sécurisées reçues. L'Agent e-META est en train d'analyser votre contexte. Surveillez votre application WhatsApp !",
-        alertError: "❌ Une erreur de connexion au serveur souverain est survenue.",
+        alertError: "❌ Une erreur de transmission vers notre serveur souverain est survenue.",
 
         linkMentions: "Mentions Légales",
         linkCgv: "CGV",
@@ -79,8 +87,15 @@ const uiDict = {
         lockTitle: "TERMINAL ON STANDBY",
         lockDesc: "Please select a plan above to unlock the e-META Agent.",
         termTitle: "AI DETECTION TERMINAL",
-        termDesc: "Simply expose your raw strategic or technological problem. The e-META Agent will analyze your context.",
-        promptPh: "Ex: We want to automate our traditional culinary process via a connected machine...",
+        termDesc: "Define the scope of your mission and expose your raw problem. The e-META Agent will analyze your context.",
+        
+        // Nouveaux champs formulaires
+        lblMission: "MISSION NAME OR BUSINESS SECTOR",
+        lblContexte: "RAW PROBLEM & CONTEXT",
+        lblFile: "Attach a reference document (Optional - PDF, DOCX, PNG, JPG)",
+        phMission: "Ex: Agro-industrial Transformation, SaaS Automation...",
+        phContexte: "Ex: We want to automate our crop preservation process but we are facing friction in information flows...",
+        
         btnAnalyse: "LAUNCH ANALYSIS AND OPENTIMESTAMPS ANCHORING",
         linkMatrice: "Consult the matrix of our 20 AI-covered sector expertises",
         
@@ -90,7 +105,7 @@ const uiDict = {
         lblPhone: "Your WhatsApp Number (For direct exchange)",
         btnFire: "CONFIRM AND TRANSMIT",
         
-        alertEmpty: "⚠️ Please detail your problem a bit more.",
+        alertEmpty: "⚠️ Please fill in both fields (Mission and Context) with enough details.",
         alertMiss: "Please provide your email and WhatsApp number.",
         alertSuccess: "✅ Secured data received. The e-META Agent is analyzing your context. Monitor your WhatsApp!",
         alertError: "❌ A connection error occurred.",
@@ -127,8 +142,15 @@ const uiDict = {
         lockTitle: "TERMINAL EN ESPERA",
         lockDesc: "Seleccione un plan arriba para desbloquear el Agente e-META.",
         termTitle: "TERMINAL DE DETECCIÓN IA",
-        termDesc: "Simplemente exponga su problema estratégico bruto. El Agente e-META analizará su contexto.",
-        promptPh: "Ej: Queremos automatizar nuestro proceso culinario tradicional...",
+        termDesc: "Defina el alcance de su misión y exponga su problemática bruta. El Agente e-META analizará su contexto.",
+        
+        // Nouveaux champs formulaires
+        lblMission: "NOMBRE DE LA MISIÓN O SECTOR DE ACTIVIDAD",
+        lblContexte: "PROBLEMÁTICA Y CONTEXTO BRUTO",
+        lblFile: "Adjuntar un documento de referencia (Opcional - PDF, DOCX, PNG, JPG)",
+        phMission: "Ej: Transformación Agroindustrial, Automatización SaaS...",
+        phContexte: "Ej: Queremos automatizar nuestro proceso de conservación de cosechas pero enfrentamos fricción en los flujos de información...",
+        
         btnAnalyse: "LANZAR ANÁLISIS Y ANCLAJE OPENTIMESTAMPS",
         linkMatrice: "Consulte la matriz de nuestras 20 experiencias sectoriales",
         
@@ -138,7 +160,7 @@ const uiDict = {
         lblPhone: "Su Número de WhatsApp (Para intercambio directo)",
         btnFire: "CONFIRMAR Y TRANSMITIR",
         
-        alertEmpty: "⚠️ Detalle un poco más su problema.",
+        alertEmpty: "⚠️ Detalle ambos campos (Misión y Contexto) para permitir un buen análisis.",
         alertMiss: "Proporcione su correo y número de WhatsApp.",
         alertSuccess: "✅ Datos seguros recibidos. ¡Revise su WhatsApp!",
         alertError: "❌ Ocurrió un error de conexión.",
@@ -187,8 +209,15 @@ const uiDict = {
         lockTitle: "المحطة في وضع الانتظار",
         lockDesc: "يرجى تحديد خطة أعلاه لفتح وكيل e-META.",
         termTitle: "محطة الكشف بالذكاء الاصطناعي",
-        termDesc: "ما عليك سوى عرض مشكلتك الاستراتيجية. سيقوم وكيل e-META بتحليل السياق.",
-        promptPh: "مثال: نريد أتمتة عملية الطهي التقليدية لدينا...",
+        termDesc: "حدد نطاق مهمتك واعرض مشكلتك الاستراتيجية. سيقوم وكيل e-META بتحليل السياق.",
+        
+        // Nouveaux champs formulaires
+        lblMission: "اسم المهمة أو قطاع النشاط",
+        lblContexte: "الإشكالية والسياق الأساسي",
+        lblFile: "إرفاق مستند مرجعي (اختياري - PDF, DOCX, PNG, JPG)",
+        phMission: "مثال: التحول في الصناعات الزراعية، أتمتة البرمجيات كخدمة...",
+        phContexte: "مثال: نرغب في أتمتة عملية حفظ المحاصيل لدينا ولكننا نواجه احتكاكاً في تدفق المعلومات...",
+        
         btnAnalyse: "إطلاق التحليل وتثبيت OPENTIMESTAMPS",
         linkMatrice: "استشر مصفوفة خبراتنا القطاعية العشرين",
         
@@ -198,10 +227,10 @@ const uiDict = {
         lblPhone: "رقم الواتساب الخاص بك (للتبادل المباشر)",
         btnFire: "تأكيد وإرسال",
         
-        alertEmpty: "⚠️ يرجى تفصيل مشكلتك أكثر قليلاً.",
+        alertEmpty: "⚠️ يرجى تفصيل كلا الحقلين (المهمة والسياق) للسماح بإجراء تحليل دقيق.",
         alertMiss: "يرجى تقديم بريدك الإلكتروني ورقم الواتساب.",
         alertSuccess: "✅ تم استلام البيانات الآمنة. راقب تطبيق الواتساب الخاص بك!",
-        alertError: "❌ حدث خطأ في الاتصال.",
+        alertError: "❌ حدث خطأ في الاتصال الخادم.",
 
         linkMentions: "إشعار قانوني",
         linkCgv: "شروط الخدمة",
@@ -248,7 +277,7 @@ function switchLang(lang) {
     safeText('ui-title-01', t.title01);
     safeText('ui-title-02', t.title02);
     
-    safeText('ui-badge-beta', t.badgeBeta); // <-- Intégration du Badge Beta
+    safeText('ui-badge-beta', t.badgeBeta);
     
     // Devises Dynamiques
     safeText('ui-price-starter', t.priceStarter, true);
@@ -283,7 +312,14 @@ function switchLang(lang) {
     safeText('ui-lock-desc', t.lockDesc);
     safeText('ui-terminal-title', t.termTitle);
     safeText('ui-terminal-desc', t.termDesc);
-    safePlaceholder('user-raw-prompt', t.promptPh);
+    
+    // Nouveaux champs
+    safeText('ui-lbl-mission', t.lblMission);
+    safeText('ui-lbl-contexte', t.lblContexte);
+    safeText('ui-lbl-file', t.lblFile);
+    safePlaceholder('mission_nom', t.phMission);
+    safePlaceholder('mission_contexte', t.phContexte);
+    
     safeText('ui-btn-analyse', t.btnAnalyse);
     safeText('ui-link-matrice', t.linkMatrice);
     
@@ -341,8 +377,9 @@ function unlockTerminal(planName) {
         badge.style.display = 'inline-block';
     }
     setTimeout(() => {
-        const promptEl = document.getElementById('user-raw-prompt');
-        if (promptEl) promptEl.focus();
+        // Focus sur le nouveau premier champ
+        const missionEl = document.getElementById('mission_nom');
+        if (missionEl) missionEl.focus();
     }, 800);
 }
 
@@ -352,11 +389,16 @@ function resetTerminal() {
                        currentLang === 'es' ? "¿Restablecer el terminal?" : "إعادة ضبط المحطة؟";
                        
     if(confirm(confirmMsg)) {
-        const promptEl = document.getElementById('user-raw-prompt');
+        // Purge des nouveaux champs
+        const missionNomEl = document.getElementById('mission_nom');
+        const missionContexteEl = document.getElementById('mission_contexte');
+        const fileEl = document.getElementById('user-file');
         const emailEl = document.getElementById('auto-email');
         const phoneEl = document.getElementById('auto-phone');
         
-        if (promptEl) promptEl.value = '';
+        if (missionNomEl) missionNomEl.value = '';
+        if (missionContexteEl) missionContexteEl.value = '';
+        if (fileEl) fileEl.value = '';
         if (emailEl) emailEl.value = '';
         if (phoneEl) phoneEl.value = '';
         
@@ -388,35 +430,48 @@ function closeModal(modalId) {
 }
 
 function triggerSniperCapture() {
-    const promptEl = document.getElementById('user-raw-prompt');
-    if (!promptEl) return;
-    const rawPrompt = promptEl.value.trim();
+    const missionNomEl = document.getElementById('mission_nom');
+    const missionContexteEl = document.getElementById('mission_contexte');
+    
+    if (!missionNomEl || !missionContexteEl) return;
+    
+    const nomMission = missionNomEl.value.trim();
+    const contexteMission = missionContexteEl.value.trim();
     const t = uiDict[currentLang];
     
-    if(!rawPrompt || rawPrompt.length < 15) { alert(t.alertEmpty); return; }
+    // Sécurité anti-spam et vérification de pertinence
+    if(!nomMission || !contexteMission || contexteMission.length < 15) { 
+        alert(t.alertEmpty); 
+        return; 
+    }
+    
     openModal('autoDetectModal');
 }
 
 function fireAutoDetection() {
     const emailEl = document.getElementById('auto-email');
     const phoneEl = document.getElementById('auto-phone');
-    const promptEl = document.getElementById('user-raw-prompt');
+    const missionNomEl = document.getElementById('mission_nom');
+    const missionContexteEl = document.getElementById('mission_contexte');
     
-    if (!emailEl || !phoneEl || !promptEl) return;
+    if (!emailEl || !phoneEl || !missionNomEl || !missionContexteEl) return;
     
     const email = emailEl.value.trim();
     const phone = phoneEl.value.trim();
-    const rawPrompt = promptEl.value.trim();
+    const nomMission = missionNomEl.value.trim();
+    const contexteMission = missionContexteEl.value.trim();
     const t = uiDict[currentLang];
 
     if(!email || !phone) { alert(t.alertMiss); return; }
 
+    // Payload mis à jour avec les deux nouvelles variables structurées
     const payload = {
         "source": "Web Chat Sniper",
         "date": new Date().toISOString(),
         "email_client": email,
         "telephone_client": phone,
-        "problematique_brute": rawPrompt,
+        "mission_nom": nomMission,
+        "mission_contexte": contexteMission,
         "langue": currentLang,
         "plan_choisi": activePricingPlan
     };
@@ -436,7 +491,13 @@ function fireAutoDetection() {
     .then(response => {
         if (!response.ok) throw new Error("Erreur serveur n8n");
         closeModal('autoDetectModal');
-        promptEl.value = '';
+        
+        // Purge après transmission
+        missionNomEl.value = '';
+        missionContexteEl.value = '';
+        const fileEl = document.getElementById('user-file');
+        if (fileEl) fileEl.value = '';
+        
         if (btn) { btn.innerHTML = t.btnFire; btn.style.opacity = "1"; btn.disabled = false; }
         
         activePricingPlan = "Non sélectionné";
@@ -478,4 +539,4 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentCount >= targetCount) clearInterval(interval);
         }, 30); 
     }
-}); 
+});
