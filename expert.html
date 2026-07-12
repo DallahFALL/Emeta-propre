@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desk Exécutif | Onboarding Expert e-META LABS</title>
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --secondary-color: #3b82f6;
+            --bg-color: #f8fafc;
+            --text-color: #334155;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            max-width: 500px;
+            width: 90%;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            margin: 20px 0;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: var(--border-radius);
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 25px;
+            margin-bottom: 30px;
+            background-color: #f1f5f9;
+            padding: 15px;
+            border-radius: var(--border-radius);
+        }
+
+        .checkbox-group input {
+            margin-top: 4px;
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            font-weight: 400;
+            font-size: 0.85rem;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .checkbox-group a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            width: 100%;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2563eb;
+        }
+
+        .status-message {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-success {
+            background-color: #dcfce7;
+            color: #166534;
+            display: block;
+        }
+
+        .status-error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Desk Exécutif</h1>
+            <p>Portail d'intégration pour les partenaires et experts e-META LABS. Complétez votre profil pour recevoir des leads qualifiés.</p>
+        </div>
+
+        <form id="expertForm">
+            <div class="form-group">
+                <label for="fullName">Nom et Prénom</label>
+                <input type="text" id="fullName" placeholder="Ex: Dallah FALL" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Adresse E-mail Professionnelle</label>
+                <input type="email" id="email" placeholder="contact@votre-entreprise.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="whatsapp">Numéro WhatsApp (avec indicatif)</label>
+                <input type="tel" id="whatsapp" placeholder="Ex: +221 77 000 00 00" required>
+            </div>
+
+            <div class="form-group">
+                <label for="specialty">Domaine d'Expertise Principal</label>
+                <select id="specialty" required>
+                    <option value="" disabled selected>Sélectionnez une spécialité...</option>
+                    <option value="Transformation Digitale">Transformation Digitale & IT</option>
+                    <option value="Agro-industrie">Agro-industrie & Conservation</option>
+                    <option value="Marketing Digital">Acquisition & Marketing Digital</option>
+                    <option value="Conseil Juridique">Conseil Stratégique & Juridique</option>
+                </select>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="cgu" required>
+                <label for="cgu">
+                    J'accepte le <a href="/privacy.html" target="_blank">Protocole d'Apport d'Affaires</a> et les conditions de collaboration e-META LABS.
+                </label>
+            </div>
+
+            <button type="submit" id="submitBtn">Soumettre ma candidature</button>
+            <div id="formStatus" class="status-message"></div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('expertForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêche la page de se recharger
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const statusDiv = document.getElementById('formStatus');
+            
+            // État de chargement
+            submitBtn.textContent = 'Transmission en cours...';
+            submitBtn.disabled = true;
+            statusDiv.className = 'status-message';
+
+            // 1. Récupération des données du formulaire
+            const formData = {
+                nom: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                specialite: document.getElementById('specialty').value,
+                date_inscription: new Date().toISOString()
+            };
+
+            // 2. URL du Webhook n8n (À REMPLACER LORS DE LA PROCHAINE ÉTAPE)
+            const webhookUrl = 'VOTRE_URL_WEBHOOK_N8N_ICI';
+
+            // 3. Envoi des données vers n8n
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if(response.ok) {
+                    statusDiv.textContent = '✅ Profil enregistré avec succès. Notre équipe va valider votre accès.';
+                    statusDiv.className = 'status-message status-success';
+                    document.getElementById('expertForm').reset();
+                } else {
+                    throw new Error('Erreur réseau');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                statusDiv.textContent = '❌ Une erreur est survenue lors de la transmission. Veuillez réessayer.';
+                statusDiv.className = 'status-message status-error';
+            })
+            .finally(() => {
+                submitBtn.textContent = 'Soumettre ma candidature';
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
+
+</body>
+</html>
