@@ -8,6 +8,7 @@ const WEBHOOK_N8N_URL = "https://automation.e-metalabs.com/webhook/482700d1-501d
 // ==========================================
 const uiDict = {
     fr: {
+        btnDesk: "Desk Exécutif",
         counter: "Diagnostics Sécurisés & Ancrés",
         hero1: "Excellence Stratégique",
         hero2: "& Haute Précision IA",
@@ -63,6 +64,7 @@ const uiDict = {
         footerUnit: "Strategic Intelligence Unit • Rosso - Dakar - Paris - Dubai - Shanghai - New York"
     },
     en: {
+        btnDesk: "Expert Desk",
         counter: "Secured & Anchored Diagnostics",
         hero1: "Strategic Excellence",
         hero2: "& High Precision AI",
@@ -118,6 +120,7 @@ const uiDict = {
         footerUnit: "Strategic Intelligence Unit • Rosso - Dakar - Paris - Dubai - Shanghai - New York"
     },
     es: {
+        btnDesk: "Portal de Expertos",
         counter: "Diagnósticos Seguros y Anclados",
         hero1: "Excelencia Estratégica",
         hero2: "& Alta Precisión de IA",
@@ -173,6 +176,7 @@ const uiDict = {
         footerUnit: "Strategic Intelligence Unit • Rosso - Dakar - Paris - Dubai - Shanghai - New York"
     },
     ar: {
+        btnDesk: "بوابة الخبراء",
         counter: "التشخيصات الآمنة والمثبتة",
         hero1: "التميز الاستراتيجي",
         hero2: "ودقة الذكاء الاصطناعي العالية",
@@ -278,6 +282,9 @@ function switchLang(lang) {
     safeText('ui-title-02', t.title02);
     
     safeText('ui-badge-beta', t.badgeBeta);
+    
+    // Traduction du nouveau bouton Desk
+    safeText('ui-btn-desk', t.btnDesk);
     
     // Devises Dynamiques
     safeText('ui-price-starter', t.priceStarter, true);
