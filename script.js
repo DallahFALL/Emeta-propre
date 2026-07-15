@@ -1,7 +1,7 @@
 // =========================================================
 // CONFIGURATION ROUTAGE CORTEX
 // =========================================================
-const WEBHOOK_N8N_URL = "https://automation.e-metalabs.com/webhook-test/onboarding-experts";
+const WEBHOOK_N8N_URL = "https://automation.e-metalabs.com/webhook/Inscription-Expert";
 
 // ==========================================
 // DICTIONNAIRE MULTILINGUE (UI)
