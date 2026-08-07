@@ -161,30 +161,30 @@
 
     <div class="container">
         <div class="header">
-            <h1>Desk Exécutif</h1>
-            <p>Portail d'intégration pour les partenaires et experts e-META LABS. Complétez votre profil pour recevoir des leads qualifiés.</p>
+            <h1 data-i18n="exp_title">Desk Exécutif</h1>
+            <p data-i18n="exp_subtitle">Portail d'intégration pour les partenaires et experts e-META LABS.<br>Complétez votre profil pour recevoir des leads qualifiés.</p>
         </div>
 
         <form id="expertForm">
             <div class="form-group">
-                <label for="fullName">Nom et Prénom</label>
-                <input type="text" id="fullName" placeholder="Ex: Dallah FALL" required>
+                <label for="fullName" data-i18n="exp_lbl_name">Nom et Prénom</label>
+                <input type="text" id="fullName" data-i18n="exp_ph_name" placeholder="Ex: Dallah FALL" required>
             </div>
 
             <div class="form-group">
-                <label for="email">Adresse E-mail Professionnelle</label>
-                <input type="email" id="email" placeholder="contact@votre-entreprise.com" required>
+                <label for="email" data-i18n="exp_lbl_email">Adresse E-mail Professionnelle</label>
+                <input type="email" id="email" data-i18n="exp_ph_email" placeholder="contact@votre-entreprise.com" required>
             </div>
 
             <div class="form-group">
-                <label for="whatsapp">Numéro WhatsApp (avec indicatif)</label>
-                <input type="tel" id="whatsapp" placeholder="Ex: +221 77 000 00 00" required>
+                <label for="whatsapp" data-i18n="exp_lbl_wa">Numéro WhatsApp (avec indicatif)</label>
+                <input type="tel" id="whatsapp" data-i18n="exp_ph_wa" placeholder="Ex: +221 77 000 00 00" required>
             </div>
 
             <div class="form-group">
-                <label for="specialty">Domaine d'Expertise Principal</label>
+                <label for="specialty" data-i18n="exp_lbl_domain">Domaine d'Expertise Principal</label>
                 <select id="specialty" required>
-                    <option value="" disabled selected>Sélectionnez une spécialité...</option>
+                    <option value="" disabled selected data-i18n="exp_opt_def">Sélectionnez une spécialité...</option>
                     <option value="Transformation Digitale">Transformation Digitale & IT</option>
                     <option value="Agro-industrie">Agro-industrie & Conservation</option>
                     <option value="Marketing Digital">Acquisition & Marketing Digital</option>
@@ -194,15 +194,20 @@
 
             <div class="checkbox-group">
                 <label>
-  <input type="checkbox" id="accept-protocol" required>
-  J'accepte le <a href="https://e-metalabs.com/protocole-apport-affaires.html" target="_blank" rel="noopener noreferrer">Protocole d'Apport d'Affaires</a> et les conditions de collaboration e-META LABS.
-</label>
+                  <input type="checkbox" id="accept-protocol" required>
+                  <span data-i18n="exp_lbl_consent">J'accepte le</span> 
+                  <a href="https://e-metalabs.com/protocole-apport-affaires.html" target="_blank" rel="noopener noreferrer" data-i18n="link_protocol">Protocole d'Apport d'Affaires</a> 
+                  <span data-i18n="exp_lbl_collab">et les conditions de collaboration e-META LABS.</span>
+                </label>
             </div>
 
-            <button type="submit" id="submitBtn">Soumettre ma candidature</button>
+            <button type="submit" id="submitBtn" data-i18n="exp_btn_submit">Soumettre ma candidature</button>
             <div id="formStatus" class="status-message"></div>
         </form>
     </div>
+
+    <!-- INCLUSION DU MOTEUR DE LANGUE -->
+    <script src="i18n.js"></script>
 
     <script>
         document.getElementById('expertForm').addEventListener('submit', function(event) {
