@@ -6,9 +6,12 @@
 const translations = {
     fr: {
         // --- VISION SUBLIME & UI ---
-        hero_label: "MASTER DIAGNOSTIC 2026", hero_slogan_1: "Excellence Stratégique", hero_slogan_2: "& Haute Précision IA",
-        subtitle: "Excellence Stratégique & Haute Précision IA", btn_reset: "↻ Reset", lbl_counter: "Diagnostics Sécurisés & Ancrés",
-        slogan_sniper: "Conçu pour la Tech. Bâti pour l'absolu.",
+        hero_label: "MASTER DIAGNOSTIC 2026", 
+        hero_slogan_1: "Le Diagnostic de l'Agent IA", 
+        hero_slogan_2: "& L'Exécution de l'Expert Humain",
+        subtitle: "De l'analyse algorithmique à l'action sur le terrain.", 
+        btn_reset: "↻ Reset", lbl_counter: "Diagnostics Sécurisés & Ancrés",
+        slogan_sniper: "L'alliance absolue de la Data et du Terrain. L'IA e-META identifie vos failles, nos experts exécutifs déploient les solutions.",
         step1_title: "01. Identification", lbl_company: "Société / Entité", ph_company: "ex: Groupe Alpha, Ministère...",
         lbl_email: "Email Professionnel", lbl_phone: "Numéro WhatsApp", 
         lbl_linkedin: "Profil LinkedIn (Optionnel)", ph_linkedin: "https://linkedin.com/in/votre-nom",
@@ -101,9 +104,9 @@ const translations = {
         btn_return_site: "← Retour au Moteur IA",
         link_mentions: "Mentions Légales", link_cgv: "CGV", link_confidentialite: "Confidentialité", link_remboursement: "Remboursement",
 
-        content_mentions: `<h1>Mentions Légales</h1><h2>1. Éditeur du site</h2><p>Le site <strong>e-metalabs.com</strong> (et e-meta.app) est édité par la société <strong>E-META LABS</strong>.<br><strong>Forme juridique :</strong> SASU au capital social de 500 000 FCFA.<br><strong>Siège social :</strong> Face Débarcadère, Rosso, Sénégal.<br><strong>RCCM :</strong> SN STL 2026 B768<br><strong>NINEA :</strong> 012887553<br><strong>Directeur de la publication :</strong> Abdoulaye Fall<br><strong>Contact :</strong> support@e-metalabs.com</p><h2>2. Hébergement</h2><p>L'infrastructure front-end est hébergée via GitHub Pages et nos serveurs cloud sont gérés par <strong>OVH Groupe SAS</strong>.<br><strong>Siège social OVH :</strong> 2 rue Kellermann, 59100 Roubaix, France.</p><h2>3. Propriété Intellectuelle</h2><p>L'ensemble des éléments figurant sur cette plateforme (textos, algorithmes, architecture, logos) est protégé par les dispositions du Code de la Propriété Intellectuelle. Toute reproduction ou tentative d'ingénierie inverse est strictement interdite sans l'accord écrit de E-META LABS.</p>`,
+        content_mentions: `<h1>Mentions Légales</h1><h2>1. Éditeur du site</h2><p>Le site <strong>e-metalabs.com</strong> (et e-meta.app) est édité par la société <strong>E-META LABS</strong>.<br><strong>Forme juridique :</strong> SASU au capital social de 500 000 FCFA.<br><strong>Siège social :</strong> Face Débarcadère, Rosso, Sénégal.<br><strong>RCCM :</strong> SN STL 2026 B768<br><strong>NINEA :</strong> 012887553<br><strong>Directeur de la publication :</strong> Abdoulaye Fall<br><strong>Contact :</strong> support@e-metalabs.com</p><h2>2. Hébergement</h2><p>L'infrastructure front-end est hébergée via GitHub Pages et nos serveurs cloud sont gérés par <strong>OVH Groupe SAS</strong>.<br><strong>Siège social OVH :</strong> 2 rue Kellermann, 59100 Roubaix, France.</p><h2>3. Propriété Intellectuelle</h2><p>L'ensemble des éléments figurant sur cette plateforme (textes, algorithmes, architecture, logos) est protégé par les dispositions du Code de la Propriété Intellectuelle. Toute reproduction ou tentative d'ingénierie inverse est strictement interdite sans l'accord écrit de E-META LABS.</p>`,
         content_cgv: `<h1>Conditions Générales de Vente (CGV)</h1><h2>1. Objet</h2><p>Les présentes CGV régissent la vente des services d'audit stratégique automatisé par Intelligence Artificielle fournis par E-META LABS (SASU, NINEA 012887553, Rosso Sénégal).</p><h2>2. Processus et Livraison</h2><p>Après validation du paiement, le rapport d'audit est généré et expédié exclusivement sous format numérique (PDF). La livraison s'effectue de manière asynchrone via l'application WhatsApp au numéro indiqué par le client, ou par courrier électronique.</p><h2>3. Tarification et Revendeurs (Merchant of Record)</h2><p>Les prix sont indiqués sur le site en FCFA ou devises équivalentes (EUR/USD). Les paiements sont sécurisés par nos partenaires financiers :</p><ul><li><strong>Transactions Internationales (Paddle) :</strong> Notre processus de commande est géré par Paddle.com. Paddle.com Market Ltd est le revendeur légal pour ces commandes.</li><li><strong>Transactions UEMOA (PayTech) :</strong> Les paiements par Mobile Money sont traités et sécurisés par l'infrastructure PayTech au Sénégal.</li></ul><h2>4. Responsabilité Opérationnelle</h2><p>Les diagnostics fournis par E-META LABS sont générés par une IA. Ils constituent un outil d'aide à la décision mais ne peuvent se substituer à une consultation juridique, fiscale ou médicale certifiée. E-META LABS décline toute responsabilité quant aux décisions prises sur la base exclusive de ces rapports.</p>`,
-        content_confidentialite: `<h1>Politique de Confidentialité (RGPD & CDP)</h1><h2>1. Collecte des données stratégiques</h2><p>Le Moteur E-META LABS collecte : le Nom de l'entité, l'Email professionnel, le Numéro WhatsApp, le Profil LinkedIn (Optionnel), le Secteur d'activité, ainsi que les données de contexte et documents fournis volontairement.</p><h2>2. Finalité et Sécurité (Zero-Data Retention)</h2><p>Vos données servent uniquement à calibrer et générer l'audit via notre Moteur IA, puis à vous l'expédier. Nous appliquons une politique stricte de "Zero-Data Retention" au niveau des modèles de langage (LLM) tiers : vos données industrielles ne sont <strong>jamais</strong> utilisées pour entraîner algorithmes publics. Votre secret professionnel est garanti.</p><h2>3. Partage aux sous-traitants accrédités</h2><p>Pour assurer le service, vos données transitent de manière cryptée (SSL/TLS) via nos partenaires : OpenAI/Google Cloud (Traitement IA), Meta (API WhatsApp Business), et Paddle/PayTech (Facturation). E-META LABS ne revend aucune donnée.</p><h2>4. Exercice de vos Droits</h2><p>Conformément au RGPD européen et à la CDP (Sénégal), vous disposez d'un droit absolu d'accès, de rectification et d'effacement de vos données. Pour l'exercer, contactez notre DPO : <strong>support@e-metalabs.com</strong>.</p>`,
+        content_confidentialite: `<h1>Politique de Confidentialité (RGPD & CDP)</h1><h2>1. Collecte des données stratégiques</h2><p>Le Moteur E-META LABS collecte : le Nom de l'entité, l'Email professionnel, le Numéro WhatsApp, le Profil LinkedIn (Optionnel), le Secteur d'activité, ainsi que les données de contexte et documents fournis volontairement.</p><h2>2. Finalité et Sécurité (Zero-Data Retention)</h2><p>Vos données servent uniquement à calibrer et générer l'audit via notre Moteur IA, puis à vous l'expédier. Nous appliquons une politique stricte de "Zero-Data Retention" au niveau des modèles de langage (LLM) tiers : vos données industrielles ne sont <strong>jamais</strong> utilisées pour entraîner des algorithmes publics. Votre secret professionnel est garanti.</p><h2>3. Partage aux sous-traitants accrédités</h2><p>Pour assurer le service, vos données transitent de manière cryptée (SSL/TLS) via nos partenaires : OpenAI/Google Cloud (Traitement IA), Meta (API WhatsApp Business), et Paddle/PayTech (Facturation). E-META LABS ne revend aucune donnée.</p><h2>4. Exercice de vos Droits</h2><p>Conformément au RGPD européen et à la CDP (Sénégal), vous disposez d'un droit absolu d'accès, de rectification et d'effacement de vos données. Pour l'exercer, contactez notre DPO : <strong>support@e-metalabs.com</strong>.</p>`,
         content_remboursement: `<h1>Politique de Remboursement et Rétractation</h1><h2>1. Nature du produit numérique</h2><p>Les services proposés par E-META LABS constituent des prestations de génération immédiate de contenus numériques hautement personnalisés (Audits Stratégiques PDF).</p><h2>2. Renoncement au droit de rétractation</h2><p>En cochant la case d'acceptation lors de la commande, <strong>le Client accepte expressément que l'exécution du service (ingestion des données par l'IA) commence immédiatement après le succès du paiement.</strong> Conformément aux lois internationales sur la consommation de biens numériques immatériels, le Client renonce par conséquent à son droit de rétractation de 14 jours dès lors que la génération a démarré et que le rapport a été expédié.</p><h2>3. Conditions exceptionnelles de remboursement</h2><p>E-META LABS accordera un remboursement intégral et immédiat <strong>uniquement</strong> dans les cas suivants :</p><ul><li>Échec technique avéré de notre serveur empêchant la génération ou la livraison finale du rapport.</li><li>Double facturation accidentelle due à une erreur de la passerelle de paiement (PayTech ou Paddle).</li></ul><h2>4. Procédure de réclamation</h2><p>Toute demande technique ou de remboursement doit être adressée dans un délai maximum de 14 jours à notre cellule de support : <strong>support@e-metalabs.com</strong>.</p>`,
 
         btn_close: "Fermer et retourner au formulaire",
@@ -128,6 +131,7 @@ const translations = {
         proto_c8: "Soumis au droit sénégalais. Tout litige sera de la compétence exclusive du Tribunal de Commerce de Dakar.",
 
         // --- DESK EXECUTIF (FORMULAIRE) ---
+        exp_btn_return: "← Retour au Moteur IA",
         exp_title: "Desk Exécutif",
         exp_subtitle: "Portail d'intégration pour les partenaires et experts e-META LABS.<br>Complétez votre profil pour recevoir des leads qualifiés.",
         exp_lbl_name: "Nom et Prénom", exp_ph_name: "Ex: Dallah FALL",
@@ -139,9 +143,13 @@ const translations = {
         link_protocol: "Protocole d'Apport d'Affaires"
     },
     en: {
-        hero_label: "MASTER DIAGNOSTIC 2026", hero_slogan_1: "Strategic Excellence", hero_slogan_2: "& High Precision AI",
-        subtitle: "Strategic Excellence & High Precision AI", btn_reset: "↻ Reset", lbl_counter: "Secured & Anchored Diagnostics",
-        slogan_sniper: "Built for Tech. Engineered for the Absolute.",
+        // --- VISION SUBLIME & UI ---
+        hero_label: "MASTER DIAGNOSTIC 2026", 
+        hero_slogan_1: "AI Agent Diagnosis", 
+        hero_slogan_2: "& Human Expert Execution",
+        subtitle: "From algorithmic analysis to on-the-ground action.", 
+        btn_reset: "↻ Reset", lbl_counter: "Secured & Anchored Diagnostics",
+        slogan_sniper: "The absolute alliance of Data and Fieldwork. e-META AI identifies your gaps, our executive experts deploy the solutions.",
         step1_title: "01. Identification", lbl_company: "Company / Entity", ph_company: "e.g., Alpha Group...",
         lbl_email: "Corporate Email", lbl_phone: "WhatsApp Number", 
         lbl_linkedin: "LinkedIn Profile (Optional)", ph_linkedin: "https://linkedin.com/in/your-name",
@@ -254,6 +262,7 @@ const translations = {
         proto_c8: "Subject to Senegalese law. Any dispute shall fall under the exclusive jurisdiction of the Commercial Court of Dakar.",
 
         // --- DESK EXECUTIF (FORMULAIRE) ---
+        exp_btn_return: "← Return to AI Engine",
         exp_title: "Executive Desk",
         exp_subtitle: "Onboarding portal for e-META LABS partners and experts.<br>Complete your profile to receive qualified leads.",
         exp_lbl_name: "Full Name", exp_ph_name: "Ex: Dallah FALL",
@@ -265,9 +274,13 @@ const translations = {
         link_protocol: "Business Referral Agreement"
     },
     es: {
-        hero_label: "DIAGNÓSTICO MAESTRO 2026", hero_slogan_1: "Excelencia Estratégica", hero_slogan_2: "& Alta Precisión IA",
-        subtitle: "Excelencia Estratégica y Alta Precisión IA", btn_reset: "↻ Reiniciar", lbl_counter: "Diagnósticos Asegurados",
-        slogan_sniper: "Diseñado para la Tech. Construido para lo absoluto.",
+        // --- VISION SUBLIME & UI ---
+        hero_label: "DIAGNÓSTICO MAESTRO 2026", 
+        hero_slogan_1: "El Diagnóstico del Agente IA", 
+        hero_slogan_2: "& La Ejecución del Experto Humano",
+        subtitle: "Del análisis algorítmico a la acción en el terreno.", 
+        btn_reset: "↻ Reiniciar", lbl_counter: "Diagnósticos Asegurados",
+        slogan_sniper: "La alianza absoluta de los Datos y el Terreno. La IA e-META identifica sus brechas, nuestros expertos ejecutivos despliegan las soluciones.",
         step1_title: "01. Identificación", lbl_company: "Empresa / Entidad", ph_company: "ej. Grupo Alfa...",
         lbl_email: "Correo Profesional", lbl_phone: "Número WhatsApp", 
         lbl_linkedin: "Perfil de LinkedIn (Opcional)", ph_linkedin: "https://linkedin.com/in/tu-nombre",
@@ -381,6 +394,7 @@ const translations = {
         proto_c8: "Sujeto al derecho senegalés. Todo litigio será competencia exclusiva del Tribunal de Comercio de Dakar.",
 
         // --- DESK EXECUTIF (FORMULAIRE) ---
+        exp_btn_return: "← Volver al Motor IA",
         exp_title: "Desk Ejecutivo",
         exp_subtitle: "Portal de integración para socios y expertos de e-META LABS.<br>Complete su perfil para recibir leads cualificados.",
         exp_lbl_name: "Nombre y Apellidos", exp_ph_name: "Ej: Dallah FALL",
@@ -392,9 +406,13 @@ const translations = {
         link_protocol: "Protocolo de Aporte de Negocios"
     },
     ar: {
-        hero_label: "التشخيص الرئيسي 2026", hero_slogan_1: "التميز الاستراتيجي", hero_slogan_2: "والذكاء الاصطناعي عالي الدقة",
-        subtitle: "التميز الاستراتيجي والذكاء الاصطناعي عالي الدقة", btn_reset: "↻ إعادة تعيين", lbl_counter: "تشخيصات آمنة وموثقة",
-        slogan_sniper: "صُمم للتكنولوجيا. بُني من أجل المطلق.",
+        // --- VISION SUBLIME & UI ---
+        hero_label: "التشخيص الرئيسي 2026", 
+        hero_slogan_1: "تشخيص وكيل الذكاء الاصطناعي", 
+        hero_slogan_2: "وتنفيذ الخبير البشري",
+        subtitle: "من التحليل الخوارزمي إلى العمل على أرض الواقع.", 
+        btn_reset: "↻ إعادة تعيين", lbl_counter: "تشخيصات آمنة وموثقة",
+        slogan_sniper: "التحالف المطلق بين البيانات والميدان. يحدد الذكاء الاصطناعي الثغرات، وينشر خبراؤنا التنفيذيون الحلول.",
         step1_title: "01. تحديد الهوية", lbl_company: "الشركة / المؤسسة", ph_company: "مثال: مجموعة ألفا...",
         lbl_email: "البريد الإلكتروني المهني", lbl_phone: "رقم الواتساب", 
         lbl_linkedin: "ملف LinkedIn (اختياري)", ph_linkedin: "https://linkedin.com/in/اسمك",
@@ -508,6 +526,7 @@ const translations = {
         proto_c8: "يخضع للقانون السنغالي. أي نزاع سيكون من الاختصاص الحصري للمحكمة التجارية في داكار.",
 
         // --- DESK EXECUTIF (FORMULAIRE) ---
+        exp_btn_return: "← العودة إلى محرك الذكاء الاصطناعي",
         exp_title: "المكتب التنفيذي",
         exp_subtitle: "بوابة الانضمام لشركاء وخبراء إي-ميتا لابز.<br>أكمل ملفك الشخصي لتلقي فرص عمل مؤهلة.",
         exp_lbl_name: "الاسم واللقب", exp_ph_name: "مثال: عبد الله فال",
