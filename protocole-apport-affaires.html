@@ -3,121 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protocole d'Apport d'Affaires | E-META LABS</title>
-    
-    <!-- Lien vers votre CSS principal -->
+    <title>Protocole d'Apport d'Affaires | e-META LABS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
-    <!-- Sécurité design e-META LABS -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L95 25 V75 L50 95 L5 75 V25 Z' stroke='%23d4af37' stroke-width='4' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
     <style>
-        body {
-            background-color: #061224; /* Bleu nuit e-META */
-            color: #ffffff;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            padding: 40px 20px;
-            margin: 0;
+        .privacy-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 50px;
+            background: rgba(10, 25, 47, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
         }
-        .legal-container {
-            max-width: 800px;
-            margin: 0 auto;
+        .privacy-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(10, 25, 47, 0.95);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
-        h1, h3 {
-            color: #E2B938; /* Or e-META */
+        .privacy-content h4 {
+            color: #d4af37;
+            font-family: 'Cinzel', serif;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 8px;
+            font-size: 1.2rem;
         }
-        h1 {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 2em;
+        .privacy-content p, .privacy-content ul {
+            color: #e6f1ff;
+            line-height: 1.8;
+            font-size: 1rem;
+            opacity: 0.9;
         }
-        h3 {
-            margin-top: 40px;
-            border-bottom: 1px solid #E2B938;
-            padding-bottom: 10px;
+        .privacy-content li {
+            margin-bottom: 10px;
         }
-        p, li {
-            color: #e0e0e0;
-        }
-        .btn-retour {
-            display: inline-block;
-            color: #E2B938;
-            text-decoration: none;
-            border: 1px solid #E2B938;
-            padding: 8px 16px;
+        .btn-return {
+            background: transparent;
+            color: #d4af37;
+            border: 1px solid #d4af37;
+            padding: 10px 20px;
             border-radius: 4px;
-            margin-bottom: 30px;
-            font-size: 0.9em;
-            transition: all 0.3s ease;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: 0.3s;
         }
-        .btn-retour:hover {
-            background-color: #E2B938;
-            color: #061224;
+        .btn-return:hover {
+            background: rgba(212, 175, 55, 0.1);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
     </style>
 </head>
 <body>
 
-<div class="legal-container">
+    <header class="privacy-header">
+        <div class="logo-container">
+            <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 5 L95 25 V75 L50 95 L5 75 V25 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
+                <circle cx="50" cy="50" r="8" fill="#d4af37"/>
+            </svg>
+            <div class="brand-text">
+                <h1 style="font-size: 1.2rem;">e-META LABS</h1>
+            </div>
+        </div>
+        <!-- Ferme l'onglet proprement pour ramener l'expert à son formulaire -->
+        <a href="#" onclick="window.close(); return false;" class="btn-return" data-i18n="btn_close">Fermer et retourner au formulaire</a>
+    </header>
+
+    <main>
+        <div class="privacy-container">
+            <h2 style="text-align: center; color: #d4af37; font-family: 'Cinzel', serif; margin-bottom: 5px; font-size: 2rem;" data-i18n="proto_main_title">PROTOCOLE D'APPORT D'AFFAIRES – DESK EXÉCUTIF</h2>
+            <p style="text-align: center; color: #8892b0; font-size: 0.9rem; margin-bottom: 50px;" data-i18n="proto_date">Dernière mise à jour : Août 2026</p>
+
+            <div class="privacy-content">
+                <p data-i18n="proto_parties">
+                    <strong>ENTRE LES SOUSSIGNÉS :</strong><br><br>
+                    <strong>E-META LABS</strong>, Société par Actions Simplifiée Unipersonnelle (SASU) au capital social de 500 000 FCFA, dont le siège social est situé à Face Débarcadère, Rosso, Sénégal, immatriculée au Registre du Commerce et du Crédit Mobilier sous le numéro SN STL 2026 B768, NINEA : 012887553, représentée par M. Abdoulaye Fall, en sa qualité de Président,<br>
+                    Ci-après dénommée "L'Apporteur" ou "e-META LABS",<br><br>
+                    <strong>ET</strong><br><br>
+                    <strong>L'EXPERT INDÉPENDANT</strong>, personne physique ou morale, s'inscrivant sur le portail Desk Exécutif de e-META LABS et acceptant les présentes conditions par voie électronique,<br>
+                    Ci-après dénommé "Le Partenaire" ou "L'Expert",<br><br>
+                    Ci-après désignées conjointement "Les Parties" et individuellement "Une Partie".
+                </p>
+
+                <h4 data-i18n="proto_t1">1. Objet du protocole</h4>
+                <p data-i18n="proto_c1">Le présent protocole a pour objet de définir les conditions et modalités selon lesquelles l'Apporteur s'engage à présenter au Partenaire des clients potentiels (ci-après les "Prospects") ayant exprimé un besoin correspondant à son domaine d'expertise, en vue de la conclusion d'un contrat de prestation de services directement entre le Partenaire et le Prospect. L'Apporteur n'agit qu'en qualité d'intermédiaire qualifié et de facilitateur.</p>
+
+                <h4 data-i18n="proto_t2">2. Indépendance des parties</h4>
+                <p data-i18n="proto_c2">Les Parties déclarent expressément qu'elles sont et demeureront, pendant toute la durée du présent protocole, des professionnels indépendants. Le présent accord ne crée aucun lien de subordination, mandat d'intérêt commun, ni société en participation entre e-META LABS et l'Expert. Le Partenaire est seul responsable de l'exécution technique, juridique et fiscale des missions qu'il contracte avec les Prospects présentés par l'Apporteur.</p>
+
+                <h4 data-i18n="proto_t3">3. Rémunération et Commission</h4>
+                <p data-i18n="proto_c3">
+                    En contrepartie de la mise en relation aboutissant à la signature d'un contrat ou à l'acceptation d'un devis par le Prospect, le Partenaire s'engage à verser à l'Apporteur une commission d'apport d'affaires.<br><br>
+                    <strong>Assiette de la commission :</strong> La commission est calculée sur le montant total Hors Taxes (HT) effectivement facturé et encaissé par le Partenaire auprès du Prospect.<br>
+                    <strong>Taux applicable :</strong> Le taux de la commission est fixé à <strong>15 % HT</strong> du montant de la prestation.<br>
+                    <strong>Étendue :</strong> Cette commission s'applique sur le contrat initial, ainsi que sur tout avenant, renouvellement ou nouveau contrat conclu entre le Partenaire et ce même Prospect pendant une durée de 24 mois suivant la date de la première mise en relation.
+                </p>
+
+                <h4 data-i18n="proto_t4">4. Transparence et modalités de paiement</h4>
+                <p data-i18n="proto_c4">
+                    Pour permettre l'application de l'Article 3, le Partenaire s'engage contractuellement à une transparence absolue envers e-META LABS :<br><br>
+                    <strong>Notification de signature :</strong> Le Partenaire doit informer l'Apporteur par écrit (e-mail) dans un délai de soixante-douze (72) heures de la signature de tout accord ou devis avec un Prospect, en précisant le montant et les échéances prévues, et en fournissant une copie du document.<br>
+                    <strong>Notification d'encaissement :</strong> Le Partenaire informe l'Apporteur dès l'encaissement effectif des fonds versés par le client.<br>
+                    <strong>Facturation e-META :</strong> Dès réception de cette notification, l'Apporteur émettra sa facture de commission. Le Partenaire s'engage à régler cette facture dans un délai de 15 jours à compter de sa date d'émission.
+                </p>
+
+                <h4 data-i18n="proto_t5">5. Clause de non-contournement et de loyauté</h4>
+                <p data-i18n="proto_c5">
+                    C'est la condition essentielle et déterminante du présent accord. Le Partenaire s'interdit formellement et strictement :<br>
+                    - De contracter, directement ou indirectement (via une autre structure, un associé ou un sous-traitant), avec un Prospect présenté par e-META LABS, sans en informer l'Apporteur et sans lui verser la commission due.<br>
+                    - De masquer, minorer ou dissimuler la nature ou le montant des transactions financières conclues avec ledit Prospect.<br><br>
+                    <strong>Clause Pénale :</strong> En cas de violation avérée de cette clause de non-contournement, le Partenaire sera redevable de plein droit, sans mise en demeure préalable, d'une indemnité forfaitaire fixée à 5 000 Euros (ou équivalent FCFA), ou d'un montant équivalent à trois (3) fois la commission qui aurait dû être perçue par e-META LABS sur le contrat dissimulé, le montant le plus élevé étant retenu, sans préjudice des dommages et intérêts supplémentaires qui pourraient être réclamés.
+                </p>
+
+                <h4 data-i18n="proto_t6">6. Confidentialité</h4>
+                <p data-i18n="proto_c6">Les informations, méthodes, documents et données (y compris l'identité et les coordonnées des Prospects) transmis par e-META LABS au Partenaire sont strictement confidentiels. Le Partenaire s'engage à ne les utiliser qu'aux seules fins de l'exécution du présent protocole et s'interdit de les divulguer à des tiers sans l'accord préalable écrit de l'Apporteur.</p>
+
+                <h4 data-i18n="proto_t7">7. Durée et Résiliation</h4>
+                <p data-i18n="proto_c7">Le présent protocole entre en vigueur au moment de l'acceptation numérique par le Partenaire (cochage de la case dédiée sur le portail Desk Exécutif). Il est conclu pour une durée indéterminée. Chaque Partie peut y mettre fin à tout moment, par notification écrite moyennant un préavis de trente (30) jours. La résiliation du présent accord ne remet pas en cause le droit à commission de l'Apporteur pour toute affaire conclue ou initiée avant la date effective de résiliation.</p>
+
+                <h4 data-i18n="proto_t8">8. Juridiction Compétente</h4>
+                <p data-i18n="proto_c8">Le présent protocole est soumis au droit sénégalais. À défaut de résolution amiable dans un délai de trente (30) jours, tout litige relatif à l'interprétation, l'exécution ou la rupture du présent accord sera de la compétence exclusive du Tribunal de Commerce de Dakar, nonobstant pluralité de défendeurs ou appel en garantie.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" style="margin-top: 50px;">
+        <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
+    </footer>
+
+    <script src="i18n.js"></script>
     
-    <!-- Bouton retour au formulaire -->
-    <a href="expert.html" class="btn-retour">← Retour au Formulaire Expert</a>
-
-    <h1>PROTOCOLE D'APPORT D'AFFAIRES – DESK EXÉCUTIF</h1>
-
-    <h3>ENTRE LES SOUSSIGNÉS :</h3>
-    <p><strong>E-META LABS</strong>, Société par Actions Simplifiée Unipersonnelle (SASU), dont le siège social est situé à Face Débarcadère, Rosso, Sénégal, immatriculée au Registre du Commerce et du Crédit Mobilier sous le numéro SN STL 2026 B768, représentée par Abdoulaye Fall, en sa qualité de Président,<br>
-    Ci-après dénommée "L'Apporteur" ou "e-META LABS",</p>
-
-    <p><strong>ET</strong></p>
-    <p><strong>L'EXPERT INDÉPENDANT</strong>, personne physique ou morale, s'inscrivant sur le portail Desk Exécutif de e-META LABS et acceptant les présentes conditions par voie électronique,<br>
-    Ci-après dénommé "Le Partenaire" ou "L'Expert",</p>
-
-    <p>Ci-après désignées conjointement "Les Parties" et individuellement "Une Partie".</p>
-
-    <h3>ARTICLE 1 – OBJET DU PROTOCOLE</h3>
-    <p>Le présent protocole a pour objet de définir les conditions et modalités selon lesquelles l'Apporteur s'engage à présenter au Partenaire des clients potentiels (ci-après les "Prospects") ayant exprimé un besoin correspondant à son domaine d'expertise, en vue de la conclusion d'un contrat de prestation de services directement entre le Partenaire et le Prospect.</p>
-    <p>L'Apporteur n'agit qu'en qualité d'intermédiaire qualifié et de facilitateur.</p>
-
-    <h3>ARTICLE 2 – INDÉPENDANCE DES PARTIES</h3>
-    <p>Les Parties déclarent expressément qu'elles sont et demeureront, pendant toute la durée du présent protocole, des professionnels indépendants.</p>
-    <p>Le présent accord ne crée aucun lien de subordination, mandat d'intérêt commun, ni société en participation entre e-META LABS et l'Expert. Le Partenaire est seul responsable de l'exécution technique, juridique et fiscale des missions qu'il contracte avec les Prospects présentés par l'Apporteur.</p>
-
-    <h3>ARTICLE 3 – RÉMUNÉRATION ET COMMISSION</h3>
-    <p>En contrepartie de la mise en relation aboutissant à la signature d'un contrat ou à l'acceptation d'un devis par le Prospect, le Partenaire s'engage à verser à l'Apporteur une commission d'apport d'affaires.</p>
-    <ul>
-        <li><strong>Assiette de la commission :</strong> La commission est calculée sur le montant total Hors Taxes (HT) effectivement facturé et encaissé par le Partenaire auprès du Prospect.</li>
-        <li><strong>Taux applicable :</strong> Le taux de la commission est fixé à <strong>15 % HT</strong> du montant de la prestation.</li>
-        <li><strong>Étendue :</strong> Cette commission s'applique sur le contrat initial, ainsi que sur tout avenant, renouvellement ou nouveau contrat conclu entre le Partenaire et ce même Prospect pendant une durée de <strong>24 mois</strong> suivant la date de la première mise en relation.</li>
-    </ul>
-
-    <h3>ARTICLE 4 – OBLIGATION DE TRANSPARENCE ET MODALITÉS DE PAIEMENT</h3>
-    <p>Pour permettre l'application de l'Article 3, le Partenaire s'engage contractuellement à une transparence absolue envers e-META LABS :</p>
-    <ul>
-        <li><strong>Notification de signature :</strong> Le Partenaire doit informer l'Apporteur par écrit (e-mail) dans un délai de soixante-douze (72) heures de la signature de tout accord ou devis avec un Prospect, en précisant le montant et les échéances prévues, et en fournissant une copie du document.</li>
-        <li><strong>Notification d'encaissement :</strong> Le Partenaire informe l'Apporteur dès l'encaissement effectif des fonds versés par le client.</li>
-        <li><strong>Facturation e-META :</strong> Dès réception de cette notification, l'Apporteur émettra sa facture de commission. Le Partenaire s'engage à régler cette facture dans un délai de <strong>15 jours</strong> à compter de sa date d'émission.</li>
-    </ul>
-
-    <h3>ARTICLE 5 – CLAUSE DE NON-CONTOURNEMENT ET DE LOYAUTÉ</h3>
-    <p>C'est la condition essentielle et déterminante du présent accord. Le Partenaire s'interdit formellement et strictement :</p>
-    <ul>
-        <li>De contracter, directement ou indirectement (via une autre structure, un associé ou un sous-traitant), avec un Prospect présenté par e-META LABS, sans en informer l'Apporteur et sans lui verser la commission due au titre de l'Article 3.</li>
-        <li>De masquer, minorer ou dissimuler la nature ou le montant des transactions financières conclues avec ledit Prospect.</li>
-    </ul>
-    <p><strong>Clause Pénale :</strong> En cas de violation avérée de cette clause de non-contournement, le Partenaire sera redevable de plein droit, sans mise en demeure préalable, d'une indemnité forfaitaire fixée à <strong>5 000 Euros</strong> (ou équivalent FCFA), ou d'un montant équivalent à trois (3) fois la commission qui aurait dû être perçue par e-META LABS sur le contrat dissimulé, le montant le plus élevé étant retenu, sans préjudice des dommages et intérêts supplémentaires qui pourraient être réclamés.</p>
-
-    <h3>ARTICLE 6 – CONFIDENTIALITÉ</h3>
-    <p>Les informations, méthodes, documents et données (y compris l'identité et les coordonnées des Prospects) transmis par e-META LABS au Partenaire sont strictement confidentiels. Le Partenaire s'engage à ne les utiliser qu'aux seules fins de l'exécution du présent protocole et s'interdit de les divulguer à des tiers sans l'accord préalable écrit de l'Apporteur.</p>
-
-    <h3>ARTICLE 7 – DURÉE ET RÉSILIATION</h3>
-    <p>Le présent protocole entre en vigueur au moment de l'acceptation numérique par le Partenaire (cochage de la case dédiée sur le portail Desk Exécutif). Il est conclu pour une durée indéterminée.</p>
-    <p>Chaque Partie peut y mettre fin à tout moment, par notification écrite moyennant un préavis de trente (30) jours. La résiliation du présent accord ne remet pas en cause le droit à commission de l'Apporteur pour toute affaire conclue ou initiée (mise en relation effectuée) avant la date effective de résiliation. L'Article 5 (Non-contournement) survivra à la résiliation pour la durée qui y est stipulée.</p>
-
-    <h3>ARTICLE 8 – DROIT APPLICABLE ET JURIDICTION COMPÉTENTE</h3>
-    <p>Le présent protocole est soumis au droit sénégalais.</p>
-    <p>À défaut de résolution amiable dans un délai de trente (30) jours, tout litige relatif à l'interprétation, l'exécution ou la rupture du présent accord sera de la compétence exclusive du Tribunal de Commerce de Dakar, nonobstant pluralité de défendeurs ou appel en garantie.</p>
-
-</div>
-
 </body>
 </html>
