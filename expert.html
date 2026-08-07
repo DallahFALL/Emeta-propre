@@ -34,6 +34,21 @@
             border-radius: var(--border-radius);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
             margin: 20px 0;
+            position: relative;
+        }
+
+        /* NOUVEAU BOUTON RETOUR */
+        .btn-return-home {
+            display: inline-block;
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+            transition: color 0.3s;
+        }
+        .btn-return-home:hover {
+            color: var(--secondary-color);
         }
 
         .header {
@@ -160,6 +175,9 @@
 <body>
 
     <div class="container">
+        <!-- BOUTON RETOUR INTÉGRÉ -->
+        <a href="index.html" class="btn-return-home" id="backBtn" data-i18n="exp_btn_return">← Retour au Moteur IA</a>
+
         <div class="header">
             <h1 data-i18n="exp_title">Desk Exécutif</h1>
             <p data-i18n="exp_subtitle">Portail d'intégration pour les partenaires et experts e-META LABS.<br>Complétez votre profil pour recevoir des leads qualifiés.</p>
@@ -181,14 +199,20 @@
                 <input type="tel" id="whatsapp" data-i18n="exp_ph_wa" placeholder="Ex: +221 77 000 00 00" required>
             </div>
 
+            <!-- HARMONISATION DES EXPERTISES : Les options appellent les traductions de la matrice -->
             <div class="form-group">
                 <label for="specialty" data-i18n="exp_lbl_domain">Domaine d'Expertise Principal</label>
                 <select id="specialty" required>
                     <option value="" disabled selected data-i18n="exp_opt_def">Sélectionnez une spécialité...</option>
-                    <option value="Transformation Digitale">Transformation Digitale & IT</option>
-                    <option value="Agro-industrie">Agro-industrie & Conservation</option>
-                    <option value="Marketing Digital">Acquisition & Marketing Digital</option>
-                    <option value="Conseil Juridique">Conseil Stratégique & Juridique</option>
+                    <option value="GenAI & Data Science" data-i18n="exp_ai">GenAI & Data Science</option>
+                    <option value="Cybersécurité & Résilience" data-i18n="exp_cyber">Cybersécurité & Résilience</option>
+                    <option value="Ingénierie ESG & Climat" data-i18n="exp_esg">Ingénierie ESG & Climat</option>
+                    <option value="Web3 & Blockchain" data-i18n="exp_web3">Web3 & Blockchain</option>
+                    <option value="Marketing Digital & SEO" data-i18n="exp_mkt">Marketing Digital & SEO</option>
+                    <option value="Optimisation des Processus" data-i18n="exp_proc">Optimisation des Processus</option>
+                    <option value="Gestion des Talents (RH)" data-i18n="exp_hr">Gestion des Talents (RH)</option>
+                    <option value="Design Thinking & UX" data-i18n="exp_design">Design Thinking & UX</option>
+                    <option value="Go-to-Market & Growth Strategy" data-i18n="exp_gtm">Go-to-Market & Growth Strategy</option>
                 </select>
             </div>
 
@@ -211,17 +235,15 @@
 
     <script>
         document.getElementById('expertForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Empêche la page de se recharger
+            event.preventDefault();
             
             const submitBtn = document.getElementById('submitBtn');
             const statusDiv = document.getElementById('formStatus');
             
-            // État de chargement
             submitBtn.textContent = 'Transmission en cours...';
             submitBtn.disabled = true;
             statusDiv.className = 'status-message';
 
-            // 1. Récupération des données du formulaire
             const formData = {
                 nom: document.getElementById('fullName').value,
                 email: document.getElementById('email').value,
@@ -230,10 +252,8 @@
                 date_inscription: new Date().toISOString()
             };
 
-            // 2. URL du Webhook n8n (À REMPLACER LORS DE LA PROCHAINE ÉTAPE)
             const webhookUrl = 'https://automation.e-metalabs.com/webhook/Inscription-Expert';
 
-            // 3. Envoi des données vers n8n
             fetch(webhookUrl, {
                 method: 'POST',
                 headers: {
