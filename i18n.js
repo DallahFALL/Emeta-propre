@@ -101,7 +101,7 @@ const translations = {
         btn_return_site: "← Retour au Moteur IA",
         link_mentions: "Mentions Légales", link_cgv: "CGV", link_confidentialite: "Confidentialité", link_remboursement: "Remboursement",
 
-        content_mentions: `<h1>Mentions Légales</h1><h2>1. Éditeur du site</h2><p>Le site <strong>e-metalabs.com</strong> (et e-meta.app) est édité par la société <strong>E-META LABS</strong>.<br><strong>Forme juridique :</strong> SASU au capital social de 500 000 FCFA.<br><strong>Siège social :</strong> Face Débarcadère, Rosso, Sénégal.<br><strong>RCCM :</strong> SN STL 2026 B768<br><strong>NINEA :</strong> 012887553<br><strong>Directeur de la publication :</strong> Abdoulaye Fall<br><strong>Contact :</strong> support@e-metalabs.com</p><h2>2. Hébergement</h2><p>L'infrastructure front-end est hébergée via GitHub Pages et nos serveurs cloud sont gérés par <strong>OVH Groupe SAS</strong>.<br><strong>Siège social OVH :</strong> 2 rue Kellermann, 59100 Roubaix, France.</p><h2>3. Propriété Intellectuelle</h2><p>L'ensemble des éléments figurant sur cette plateforme (textes, algorithmes, architecture, logos) est protégé par les dispositions du Code de la Propriété Intellectuelle. Toute reproduction ou tentative d'ingénierie inverse est strictement interdite sans l'accord écrit de E-META LABS.</p>`,
+        content_mentions: `<h1>Mentions Légales</h1><h2>1. Éditeur du site</h2><p>Le site <strong>e-metalabs.com</strong> (et e-meta.app) est édité par la société <strong>E-META LABS</strong>.<br><strong>Forme juridique :</strong> SASU au capital social de 500 000 FCFA.<br><strong>Siège social :</strong> Face Débarcadère, Rosso, Sénégal.<br><strong>RCCM :</strong> SN STL 2026 B768<br><strong>NINEA :</strong> 012887553<br><strong>Directeur de la publication :</strong> Abdoulaye Fall<br><strong>Contact :</strong> support@e-metalabs.com</p><h2>2. Hébergement</h2><p>L'infrastructure front-end est hébergée via GitHub Pages et nos serveurs cloud sont gérés par <strong>OVH Groupe SAS</strong>.<br><strong>Siège social OVH :</strong> 2 rue Kellermann, 59100 Roubaix, France.</p><h2>3. Propriété Intellectuelle</h2><p>L'ensemble des éléments figurant sur cette plateforme (textos, algorithmes, architecture, logos) est protégé par les dispositions du Code de la Propriété Intellectuelle. Toute reproduction ou tentative d'ingénierie inverse est strictement interdite sans l'accord écrit de E-META LABS.</p>`,
         content_cgv: `<h1>Conditions Générales de Vente (CGV)</h1><h2>1. Objet</h2><p>Les présentes CGV régissent la vente des services d'audit stratégique automatisé par Intelligence Artificielle fournis par E-META LABS (SASU, NINEA 012887553, Rosso Sénégal).</p><h2>2. Processus et Livraison</h2><p>Après validation du paiement, le rapport d'audit est généré et expédié exclusivement sous format numérique (PDF). La livraison s'effectue de manière asynchrone via l'application WhatsApp au numéro indiqué par le client, ou par courrier électronique.</p><h2>3. Tarification et Revendeurs (Merchant of Record)</h2><p>Les prix sont indiqués sur le site en FCFA ou devises équivalentes (EUR/USD). Les paiements sont sécurisés par nos partenaires financiers :</p><ul><li><strong>Transactions Internationales (Paddle) :</strong> Notre processus de commande est géré par Paddle.com. Paddle.com Market Ltd est le revendeur légal pour ces commandes.</li><li><strong>Transactions UEMOA (PayTech) :</strong> Les paiements par Mobile Money sont traités et sécurisés par l'infrastructure PayTech au Sénégal.</li></ul><h2>4. Responsabilité Opérationnelle</h2><p>Les diagnostics fournis par E-META LABS sont générés par une IA. Ils constituent un outil d'aide à la décision mais ne peuvent se substituer à une consultation juridique, fiscale ou médicale certifiée. E-META LABS décline toute responsabilité quant aux décisions prises sur la base exclusive de ces rapports.</p>`,
         content_confidentialite: `<h1>Politique de Confidentialité (RGPD & CDP)</h1><h2>1. Collecte des données stratégiques</h2><p>Le Moteur E-META LABS collecte : le Nom de l'entité, l'Email professionnel, le Numéro WhatsApp, le Profil LinkedIn (Optionnel), le Secteur d'activité, ainsi que les données de contexte et documents fournis volontairement.</p><h2>2. Finalité et Sécurité (Zero-Data Retention)</h2><p>Vos données servent uniquement à calibrer et générer l'audit via notre Moteur IA, puis à vous l'expédier. Nous appliquons une politique stricte de "Zero-Data Retention" au niveau des modèles de langage (LLM) tiers : vos données industrielles ne sont <strong>jamais</strong> utilisées pour entraîner algorithmes publics. Votre secret professionnel est garanti.</p><h2>3. Partage aux sous-traitants accrédités</h2><p>Pour assurer le service, vos données transitent de manière cryptée (SSL/TLS) via nos partenaires : OpenAI/Google Cloud (Traitement IA), Meta (API WhatsApp Business), et Paddle/PayTech (Facturation). E-META LABS ne revend aucune donnée.</p><h2>4. Exercice de vos Droits</h2><p>Conformément au RGPD européen et à la CDP (Sénégal), vous disposez d'un droit absolu d'accès, de rectification et d'effacement de vos données. Pour l'exercer, contactez notre DPO : <strong>support@e-metalabs.com</strong>.</p>`,
         content_remboursement: `<h1>Politique de Remboursement et Rétractation</h1><h2>1. Nature du produit numérique</h2><p>Les services proposés par E-META LABS constituent des prestations de génération immédiate de contenus numériques hautement personnalisés (Audits Stratégiques PDF).</p><h2>2. Renoncement au droit de rétractation</h2><p>En cochant la case d'acceptation lors de la commande, <strong>le Client accepte expressément que l'exécution du service (ingestion des données par l'IA) commence immédiatement après le succès du paiement.</strong> Conformément aux lois internationales sur la consommation de biens numériques immatériels, le Client renonce par conséquent à son droit de rétractation de 14 jours dès lors que la génération a démarré et que le rapport a été expédié.</p><h2>3. Conditions exceptionnelles de remboursement</h2><p>E-META LABS accordera un remboursement intégral et immédiat <strong>uniquement</strong> dans les cas suivants :</p><ul><li>Échec technique avéré de notre serveur empêchant la génération ou la livraison finale du rapport.</li><li>Double facturation accidentelle due à une erreur de la passerelle de paiement (PayTech ou Paddle).</li></ul><h2>4. Procédure de réclamation</h2><p>Toute demande technique ou de remboursement doit être adressée dans un délai maximum de 14 jours à notre cellule de support : <strong>support@e-metalabs.com</strong>.</p>`,
@@ -125,7 +125,18 @@ const translations = {
         proto_t7: "7. Durée et Résiliation",
         proto_c7: "Conclu pour une durée indéterminée, résiliable avec 30 jours de préavis. La résiliation ne remet pas en cause le droit à commission pour les affaires déjà initiées.",
         proto_t8: "8. Juridiction Compétente",
-        proto_c8: "Soumis au droit sénégalais. Tout litige sera de la compétence exclusive du Tribunal de Commerce de Dakar."
+        proto_c8: "Soumis au droit sénégalais. Tout litige sera de la compétence exclusive du Tribunal de Commerce de Dakar.",
+
+        // --- DESK EXECUTIF (FORMULAIRE) ---
+        exp_title: "Desk Exécutif",
+        exp_subtitle: "Portail d'intégration pour les partenaires et experts e-META LABS.<br>Complétez votre profil pour recevoir des leads qualifiés.",
+        exp_lbl_name: "Nom et Prénom", exp_ph_name: "Ex: Dallah FALL",
+        exp_lbl_email: "Adresse E-mail Professionnelle", exp_ph_email: "contact@votre-entreprise.com",
+        exp_lbl_wa: "Numéro WhatsApp (avec indicatif)", exp_ph_wa: "Ex: +221 77 000 00 00",
+        exp_lbl_domain: "Domaine d'Expertise Principal", exp_opt_def: "Sélectionnez une spécialité...",
+        exp_lbl_consent: "J'accepte le", exp_lbl_collab: "et les conditions de collaboration e-META LABS.",
+        exp_btn_submit: "Soumettre ma candidature",
+        link_protocol: "Protocole d'Apport d'Affaires"
     },
     en: {
         hero_label: "MASTER DIAGNOSTIC 2026", hero_slogan_1: "Strategic Excellence", hero_slogan_2: "& High Precision AI",
@@ -240,7 +251,18 @@ const translations = {
         proto_t7: "7. Term and Termination",
         proto_c7: "Concluded for an indefinite period, terminable with 30 days' notice. Termination does not affect the right to commission for business already initiated.",
         proto_t8: "8. Governing Law",
-        proto_c8: "Subject to Senegalese law. Any dispute shall fall under the exclusive jurisdiction of the Commercial Court of Dakar."
+        proto_c8: "Subject to Senegalese law. Any dispute shall fall under the exclusive jurisdiction of the Commercial Court of Dakar.",
+
+        // --- DESK EXECUTIF (FORMULAIRE) ---
+        exp_title: "Executive Desk",
+        exp_subtitle: "Onboarding portal for e-META LABS partners and experts.<br>Complete your profile to receive qualified leads.",
+        exp_lbl_name: "Full Name", exp_ph_name: "Ex: Dallah FALL",
+        exp_lbl_email: "Corporate Email Address", exp_ph_email: "contact@your-company.com",
+        exp_lbl_wa: "WhatsApp Number (with country code)", exp_ph_wa: "Ex: +1 234 567 8900",
+        exp_lbl_domain: "Main Area of Expertise", exp_opt_def: "Select a specialty...",
+        exp_lbl_consent: "I accept the", exp_lbl_collab: "and the e-META LABS collaboration terms.",
+        exp_btn_submit: "Submit my application",
+        link_protocol: "Business Referral Agreement"
     },
     es: {
         hero_label: "DIAGNÓSTICO MAESTRO 2026", hero_slogan_1: "Excelencia Estratégica", hero_slogan_2: "& Alta Precisión IA",
@@ -356,7 +378,18 @@ const translations = {
         proto_t7: "7. Duración y Terminación",
         proto_c7: "Celebrado por tiempo indefinido, rescindible con 30 días de preaviso. La rescisión no afecta el derecho a comisión por negocios ya iniciados.",
         proto_t8: "8. Jurisdicción Competente",
-        proto_c8: "Sujeto al derecho senegalés. Todo litigio será competencia exclusiva del Tribunal de Comercio de Dakar."
+        proto_c8: "Sujeto al derecho senegalés. Todo litigio será competencia exclusiva del Tribunal de Comercio de Dakar.",
+
+        // --- DESK EXECUTIF (FORMULAIRE) ---
+        exp_title: "Desk Ejecutivo",
+        exp_subtitle: "Portal de integración para socios y expertos de e-META LABS.<br>Complete su perfil para recibir leads cualificados.",
+        exp_lbl_name: "Nombre y Apellidos", exp_ph_name: "Ej: Dallah FALL",
+        exp_lbl_email: "Correo Electrónico Profesional", exp_ph_email: "contacto@su-empresa.com",
+        exp_lbl_wa: "Número de WhatsApp (con prefijo)", exp_ph_wa: "Ej: +34 600 000 000",
+        exp_lbl_domain: "Área Principal de Experiencia", exp_opt_def: "Seleccione una especialidad...",
+        exp_lbl_consent: "Acepto el", exp_lbl_collab: "y las condiciones de colaboración de e-META LABS.",
+        exp_btn_submit: "Enviar mi candidatura",
+        link_protocol: "Protocolo de Aporte de Negocios"
     },
     ar: {
         hero_label: "التشخيص الرئيسي 2026", hero_slogan_1: "التميز الاستراتيجي", hero_slogan_2: "والذكاء الاصطناعي عالي الدقة",
@@ -472,7 +505,18 @@ const translations = {
         proto_t7: "7. المدة والإنهاء",
         proto_c7: "مُبرم لمدة غير محددة، ويمكن إنهاؤه بإشعار مدته 30 يومًا. الإنهاء لا يؤثر على الحق في العمولة للأعمال التي بدأت بالفعل.",
         proto_t8: "8. المحكمة المختصة",
-        proto_c8: "يخضع للقانون السنغالي. أي نزاع سيكون من الاختصاص الحصري للمحكمة التجارية في داكار."
+        proto_c8: "يخضع للقانون السنغالي. أي نزاع سيكون من الاختصاص الحصري للمحكمة التجارية في داكار.",
+
+        // --- DESK EXECUTIF (FORMULAIRE) ---
+        exp_title: "المكتب التنفيذي",
+        exp_subtitle: "بوابة الانضمام لشركاء وخبراء إي-ميتا لابز.<br>أكمل ملفك الشخصي لتلقي فرص عمل مؤهلة.",
+        exp_lbl_name: "الاسم واللقب", exp_ph_name: "مثال: عبد الله فال",
+        exp_lbl_email: "البريد الإلكتروني المهني", exp_ph_email: "contact@your-company.com",
+        exp_lbl_wa: "رقم الواتساب (مع رمز البلد)", exp_ph_wa: "مثال: +221 77 000 00 00",
+        exp_lbl_domain: "مجال الخبرة الرئيسي", exp_opt_def: "اختر التخصص...",
+        exp_lbl_consent: "أوافق على", exp_lbl_collab: "وشروط التعاون مع e-META LABS.",
+        exp_btn_submit: "إرسال طلبي",
+        link_protocol: "بروتوكول جلب الأعمال"
     }
 };
 
@@ -505,8 +549,8 @@ function setLanguage(lang) {
         }
     });
 
-    // Forçage de la langue dans les URL du footer
-    document.querySelectorAll('.footer a.gold-link').forEach(link => {
+    // Forçage de la langue dans les URL du footer ET du Header (Expert Desk)
+    document.querySelectorAll('.footer a.gold-link, a[href^="expert.html"], a[href^="protocole-apport-affaires.html"]').forEach(link => {
         if (link.getAttribute('href')) { 
             let baseHref = link.getAttribute('href').split('?')[0]; 
             link.href = baseHref + '?lang=' + lang;
