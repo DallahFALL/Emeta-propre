@@ -2,7 +2,7 @@
 // CONFIGURATION ROUTAGE CORTEX
 // =========================================================
 // URL du Webhook CORTEX_01 (Test) - Pensez à enlever "-test" pour la production
-const WEBHOOK_N8N_URL = "https://automation.e-metalabs.com/webhook-test/bcfcec30-7e3f-4a4f-88a9-5f47d7cc28d8";
+const WEBHOOK_N8N_URL = "https://automation.e-metalabs.com/webhook/bcfcec30";
 
 // ==========================================
 // DICTIONNAIRE MULTILINGUE (UI)
