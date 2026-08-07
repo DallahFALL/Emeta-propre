@@ -1,7 +1,8 @@
 // =========================================================
 // CONFIGURATION ROUTAGE CORTEX
 // =========================================================
-const WEBHOOK_N8N_URL = "https://automation.e-metalabs.com/webhook/Inscription-Expert";
+// URL du Webhook CORTEX_01 (Test) - Pensez à enlever "-test" pour la production
+const WEBHOOK_N8N_URL = "https://automation.e-metalabs.com/webhook-test/bcfcec30-7e3f-4a4f-88a9-5f47d7cc28d8";
 
 // ==========================================
 // DICTIONNAIRE MULTILINGUE (UI)
@@ -10,9 +11,9 @@ const uiDict = {
     fr: {
         btnDesk: "Desk Exécutif",
         counter: "Diagnostics Sécurisés & Ancrés",
-        hero1: "Excellence Stratégique",
-        hero2: "& Haute Précision IA",
-        sloganTech: "Conçu pour la Tech. Bâti pour l'absolu.",
+        hero1: "Le Diagnostic de l'Agent IA",
+        hero2: "& L'Exécution de l'Expert Humain",
+        sloganTech: "L'alliance absolue de la Data et du Terrain. L'IA e-META identifie vos failles, nos experts exécutifs déploient les solutions.",
         bannerOts: "🛡️ <strong style='font-weight: 600;'>Souveraineté Absolue :</strong> Vos requêtes sont cryptées et ancrées sur la Blockchain (Proof of Existence) via <em style='text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);'>OpenTimestamps.org</em>",
         title01: "01. SÉLECTIONNEZ VOTRE NIVEAU D'ACCRÉDITATION",
         title02: "02. SOUMISSION DES DONNÉES",
@@ -66,9 +67,9 @@ const uiDict = {
     en: {
         btnDesk: "Expert Desk",
         counter: "Secured & Anchored Diagnostics",
-        hero1: "Strategic Excellence",
-        hero2: "& High Precision AI",
-        sloganTech: "Built for Tech. Forged for the Absolute.",
+        hero1: "AI Agent Diagnosis",
+        hero2: "& Human Expert Execution",
+        sloganTech: "The absolute alliance of Data and Fieldwork. e-META AI identifies your gaps, our executive experts deploy the solutions.",
         bannerOts: "🛡️ <strong style='font-weight: 600;'>Absolute Sovereignty:</strong> Your requests are encrypted and anchored on the Blockchain (Proof of Existence) via <em style='text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);'>OpenTimestamps.org</em>",
         title01: "01. SELECT YOUR ACCREDITATION LEVEL",
         title02: "02. DATA SUBMISSION",
@@ -122,9 +123,9 @@ const uiDict = {
     es: {
         btnDesk: "Portal de Expertos",
         counter: "Diagnósticos Seguros y Anclados",
-        hero1: "Excelencia Estratégica",
-        hero2: "& Alta Precisión de IA",
-        sloganTech: "Diseñado para la Tecnología. Forjado para lo Absoluto.",
+        hero1: "El Diagnóstico del Agente IA",
+        hero2: "& La Ejecución del Experto Humano",
+        sloganTech: "La alianza absoluta de los Datos y el Terreno. La IA e-META identifica sus brechas, nuestros expertos ejecutivos despliegan las soluciones.",
         bannerOts: "🛡️ <strong style='font-weight: 600;'>Soberanía Absoluta:</strong> Sus solicitudes están encriptadas y ancladas en la Blockchain a través de <em style='text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);'>OpenTimestamps.org</em>",
         title01: "01. SELECCIONE SU NIVEL DE ACREDITACIÓN",
         title02: "02. ENVÍO DE DATOS",
@@ -178,9 +179,9 @@ const uiDict = {
     ar: {
         btnDesk: "بوابة الخبراء",
         counter: "التشخيصات الآمنة والمثبتة",
-        hero1: "التميز الاستراتيجي",
-        hero2: "ودقة الذكاء الاصطناعي العالية",
-        sloganTech: "مصمم للتكنولوجيا. مبني للمطلق.",
+        hero1: "تشخيص وكيل الذكاء الاصطناعي",
+        hero2: "وتنفيذ الخبير البشري",
+        sloganTech: "التحالف المطلق بين البيانات والميدان. يحدد الذكاء الاصطناعي الثغرات، وينشر خبراؤنا التنفيذيون الحلول.",
         bannerOts: "🛡️ <strong style='font-weight: 600;'>السيادة المطلقة:</strong> طلباتك مشفرة ومثبتة على البلوكشين عبر <em style='text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);'>OpenTimestamps.org</em>",
         title01: "01. حدد مستوى الاعتماد الخاص بك",
         title02: "02. تقديم البيانات",
@@ -493,6 +494,7 @@ function fireAutoDetection() {
         btn.disabled = true;
     }
 
+    // ENVOI AU CORTEX_01 (WEBHOOK TEST)
     fetch(WEBHOOK_N8N_URL, {
         method: 'POST', mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
