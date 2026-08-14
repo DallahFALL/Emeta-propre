@@ -245,12 +245,15 @@
             statusDiv.className = 'status-message';
 
             const formData = {
-                nom: document.getElementById('fullName').value,
-                email: document.getElementById('email').value,
-                whatsapp: document.getElementById('whatsapp').value,
-                specialite: document.getElementById('specialty').value,
-                date_inscription: new Date().toISOString()
-            };
+    nom: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    whatsapp: document.getElementById('whatsapp').value,
+    specialite: document.getElementById('specialty').value,
+    annees_experience: document.getElementById('experience').value,
+    linkedin: document.getElementById('linkedin').value,
+    bio: document.getElementById('bio').value,
+    // ...
+};
 
             const webhookUrl = 'https://automation.e-metalabs.com/webhook/expert-valide';
             
