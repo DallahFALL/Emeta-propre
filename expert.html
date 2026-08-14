@@ -33,11 +33,10 @@
             padding: 40px;
             border-radius: var(--border-radius);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            margin: 20px 0;
+            margin: 40px 0;
             position: relative;
         }
 
-        /* NOUVEAU BOUTON RETOUR */
         .btn-return-home {
             display: inline-block;
             color: #64748b;
@@ -82,6 +81,9 @@
         input[type="text"],
         input[type="email"],
         input[type="tel"],
+        input[type="number"],
+        input[type="url"],
+        textarea,
         select {
             width: 100%;
             padding: 12px;
@@ -90,9 +92,11 @@
             box-sizing: border-box;
             font-size: 1rem;
             transition: border-color 0.3s;
+            font-family: inherit;
         }
 
         input:focus,
+        textarea:focus,
         select:focus {
             outline: none;
             border-color: var(--secondary-color);
@@ -148,6 +152,11 @@
         button:hover {
             background-color: #2563eb;
         }
+        
+        button:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+        }
 
         .status-message {
             display: none;
@@ -175,7 +184,6 @@
 <body>
 
     <div class="container">
-        <!-- BOUTON RETOUR INTÉGRÉ -->
         <a href="index.html" class="btn-return-home" id="backBtn" data-i18n="exp_btn_return">← Retour au Moteur IA</a>
 
         <div class="header">
@@ -184,24 +192,27 @@
         </div>
 
         <form id="expertForm">
+            <!-- 1. NOM (Harmonisé avec l'ID 'name') -->
             <div class="form-group">
-                <label for="fullName" data-i18n="exp_lbl_name">Nom et Prénom</label>
-                <input type="text" id="fullName" data-i18n="exp_ph_name" placeholder="Ex: Dallah FALL" required>
+                <label for="name" data-i18n="exp_lbl_name">Nom et Prénom *</label>
+                <input type="text" id="name" data-i18n="exp_ph_name" placeholder="Ex: Dallah FALL" required>
             </div>
 
+            <!-- 2. EMAIL -->
             <div class="form-group">
-                <label for="email" data-i18n="exp_lbl_email">Adresse E-mail Professionnelle</label>
+                <label for="email" data-i18n="exp_lbl_email">Adresse E-mail Professionnelle *</label>
                 <input type="email" id="email" data-i18n="exp_ph_email" placeholder="contact@votre-entreprise.com" required>
             </div>
 
+            <!-- 3. WHATSAPP -->
             <div class="form-group">
-                <label for="whatsapp" data-i18n="exp_lbl_wa">Numéro WhatsApp (avec indicatif)</label>
+                <label for="whatsapp" data-i18n="exp_lbl_wa">Numéro WhatsApp (avec indicatif) *</label>
                 <input type="tel" id="whatsapp" data-i18n="exp_ph_wa" placeholder="Ex: +221 77 000 00 00" required>
             </div>
 
-            <!-- HARMONISATION DES EXPERTISES : Les options appellent les traductions de la matrice -->
+            <!-- 4. SPÉCIALITÉ -->
             <div class="form-group">
-                <label for="specialty" data-i18n="exp_lbl_domain">Domaine d'Expertise Principal</label>
+                <label for="specialty" data-i18n="exp_lbl_domain">Domaine d'Expertise Principal *</label>
                 <select id="specialty" required>
                     <option value="" disabled selected data-i18n="exp_opt_def">Sélectionnez une spécialité...</option>
                     <option value="GenAI & Data Science" data-i18n="exp_ai">GenAI & Data Science</option>
@@ -214,6 +225,24 @@
                     <option value="Design Thinking & UX" data-i18n="exp_design">Design Thinking & UX</option>
                     <option value="Go-to-Market & Growth Strategy" data-i18n="exp_gtm">Go-to-Market & Growth Strategy</option>
                 </select>
+            </div>
+
+            <!-- 5. ANNÉES D'EXPÉRIENCE (Nouveau) -->
+            <div class="form-group">
+                <label for="experience" data-i18n="exp_lbl_exp">Années d'Expérience *</label>
+                <input type="number" id="experience" data-i18n="exp_ph_exp" min="1" placeholder="Ex: 5" required>
+            </div>
+
+            <!-- 6. LINKEDIN (Nouveau) -->
+            <div class="form-group">
+                <label for="linkedin" data-i18n="exp_lbl_linkedin">Lien Profil LinkedIn *</label>
+                <input type="url" id="linkedin" data-i18n="exp_ph_linkedin" placeholder="https://linkedin.com/in/votre-profil" required>
+            </div>
+
+            <!-- 7. BIO (Nouveau) -->
+            <div class="form-group">
+                <label for="bio" data-i18n="exp_lbl_bio">Courte Biographie (Missions, réalisations) *</label>
+                <textarea id="bio" data-i18n="exp_ph_bio" rows="4" placeholder="Décrivez votre parcours et vos réussites majeures..." required></textarea>
             </div>
 
             <div class="checkbox-group">
@@ -240,22 +269,23 @@
             const submitBtn = document.getElementById('submitBtn');
             const statusDiv = document.getElementById('formStatus');
             
-            submitBtn.textContent = 'Transmission en cours...';
+            submitBtn.textContent = 'Transmission cryptée en cours...';
             submitBtn.disabled = true;
             statusDiv.className = 'status-message';
 
+            // Récupération parfaite des 7 champs
             const formData = {
-    nom: document.getElementById('name').value,
-    email: document.getElementById('email').value,
-    whatsapp: document.getElementById('whatsapp').value,
-    specialite: document.getElementById('specialty').value,
-    annees_experience: document.getElementById('experience').value,
-    linkedin: document.getElementById('linkedin').value,
-    bio: document.getElementById('bio').value,
-    // ...
-};
+                nom: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                specialite: document.getElementById('specialty').value,
+                annees_experience: document.getElementById('experience').value,
+                linkedin: document.getElementById('linkedin').value,
+                bio: document.getElementById('bio').value
+            };
 
-            const webhookUrl = 'https://automation.e-metalabs.com/webhook/482700d1-501d-4237-b5a7-fc6ee6afdf45';
+            // URL de production (expert-valide) pour éviter que le bouton ne bloque
+            const webhookUrl = 'https://automation.e-metalabs.com/webhook/expert-valide';
             
             fetch(webhookUrl, {
                 method: 'POST',
@@ -266,7 +296,7 @@
             })
             .then(response => {
                 if(response.ok) {
-                    statusDiv.textContent = '✅ Profil enregistré avec succès. Notre équipe va valider votre accès.';
+                    statusDiv.innerHTML = '✅ <strong>Dossier transmis avec succès.</strong><br>Notre Board évalue actuellement votre profil. Une réponse vous sera apportée sous 48h.';
                     statusDiv.className = 'status-message status-success';
                     document.getElementById('expertForm').reset();
                 } else {
@@ -275,7 +305,7 @@
             })
             .catch(error => {
                 console.error('Erreur:', error);
-                statusDiv.textContent = '❌ Une erreur est survenue lors de la transmission. Veuillez réessayer.';
+                statusDiv.textContent = '❌ Une erreur est survenue lors de la transmission au serveur souverain. Veuillez réessayer.';
                 statusDiv.className = 'status-message status-error';
             })
             .finally(() => {
