@@ -1,0 +1,25 @@
+<!-- Formulaire d'Habilitation e-META LABS -->
+<form id="habilitationForm">
+    <h3>Dossier d'Habilitation - Desk Exécutif</h3>
+    
+    <!-- On redemande l'email pour faire le lien avec le contact de l'étape 1 -->
+    <label>Email de contact *</label>
+    <input type="email" id="email_expert" required>
+
+    <label>Nom et Prénom *</label>
+    <input type="text" id="nom_expert" required>
+
+    <label>Domaine d'Expertise (Spécialité) *</label>
+    <input type="text" id="specialite_expert" required>
+
+    <label>Années d'Expérience *</label>
+    <input type="number" id="experience_expert" min="1" required>
+
+    <label>Lien Profil LinkedIn *</label>
+    <input type="url" id="linkedin_expert" placeholder="https://linkedin.com/in/..." required>
+
+    <label>Courte Biographie (Missions marquantes, réalisations) *</label>
+    <textarea id="bio_expert" rows="4" required></textarea>
+
+    <button type="submit" id="submitBtn">SOUMETTRE AU BOARD</button>
+</form>
