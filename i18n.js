@@ -140,7 +140,13 @@ const translations = {
         exp_lbl_domain: "Domaine d'Expertise Principal", exp_opt_def: "Sélectionnez une spécialité...",
         exp_lbl_consent: "J'accepte le", exp_lbl_collab: "et les conditions de collaboration e-META LABS.",
         exp_btn_submit: "Soumettre ma candidature",
-        link_protocol: "Protocole d'Apport d'Affaires"
+        link_protocol: "Protocole d'Apport d'Affaires",
+        exp_lbl_exp: "Années d'Expérience *",
+        exp_ph_exp: "Ex: 5",
+        exp_lbl_linkedin: "Lien Profil LinkedIn *",
+        exp_ph_linkedin: "https://linkedin.com/in/votre-profil",
+        exp_lbl_bio: "Courte Biographie (Missions, réalisations) *",
+        exp_ph_bio: "Décrivez votre parcours et vos réussites majeures..."
     },
     en: {
         // --- VISION SUBLIME & UI ---
@@ -271,7 +277,13 @@ const translations = {
         exp_lbl_domain: "Main Area of Expertise", exp_opt_def: "Select a specialty...",
         exp_lbl_consent: "I accept the", exp_lbl_collab: "and the e-META LABS collaboration terms.",
         exp_btn_submit: "Submit my application",
-        link_protocol: "Business Referral Agreement"
+        link_protocol: "Business Referral Agreement",
+        exp_lbl_exp: "Years of Experience *",
+        exp_ph_exp: "E.g.: 5",
+        exp_lbl_linkedin: "LinkedIn Profile Link *",
+        exp_ph_linkedin: "https://linkedin.com/in/your-profile",
+        exp_lbl_bio: "Short Biography (Missions, achievements) *",
+        exp_ph_bio: "Describe your background and major achievements..."
     },
     es: {
         // --- VISION SUBLIME & UI ---
@@ -403,7 +415,13 @@ const translations = {
         exp_lbl_domain: "Área Principal de Experiencia", exp_opt_def: "Seleccione una especialidad...",
         exp_lbl_consent: "Acepto el", exp_lbl_collab: "y las condiciones de colaboración de e-META LABS.",
         exp_btn_submit: "Enviar mi candidatura",
-        link_protocol: "Protocolo de Aporte de Negocios"
+        link_protocol: "Protocolo de Aporte de Negocios",
+        exp_lbl_exp: "Años de Experiencia *",
+        exp_ph_exp: "Ej: 5",
+        exp_lbl_linkedin: "Enlace del Perfil de LinkedIn *",
+        exp_ph_linkedin: "https://linkedin.com/in/tu-perfil",
+        exp_lbl_bio: "Breve Biografía (Misiones, logros) *",
+        exp_ph_bio: "Describa su trayectoria y principales logros..."
     },
     ar: {
         // --- VISION SUBLIME & UI ---
@@ -535,7 +553,13 @@ const translations = {
         exp_lbl_domain: "مجال الخبرة الرئيسي", exp_opt_def: "اختر التخصص...",
         exp_lbl_consent: "أوافق على", exp_lbl_collab: "وشروط التعاون مع e-META LABS.",
         exp_btn_submit: "إرسال طلبي",
-        link_protocol: "بروتوكول جلب الأعمال"
+        link_protocol: "بروتوكول جلب الأعمال",
+        exp_lbl_exp: "سنوات الخبرة *",
+        exp_ph_exp: "مثال: 5",
+        exp_lbl_linkedin: "رابط ملف لينكد إن *",
+        exp_ph_linkedin: "https://linkedin.com/in/your-profile",
+        exp_lbl_bio: "نبذة مختصرة (المهام، الإنجازات) *",
+        exp_ph_bio: "صف مسيرتك المهنية وإنجازاتك الرئيسية..."
     }
 };
 
