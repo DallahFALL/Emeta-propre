@@ -1,25 +1,79 @@
-<!-- Formulaire d'Habilitation e-META LABS -->
-<form id="habilitationForm">
-    <h3>Dossier d'Habilitation - Desk Exécutif</h3>
-    
-    <!-- On redemande l'email pour faire le lien avec le contact de l'étape 1 -->
-    <label>Email de contact *</label>
-    <input type="email" id="email_expert" required>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossier d'Habilitation - e-META LABS</title>
+    <!-- Vous pourrez ajouter ici le lien vers votre fichier CSS pour styliser la page -->
+</head>
+<body>
 
-    <label>Nom et Prénom *</label>
-    <input type="text" id="nom_expert" required>
+    <!-- 1. LA STRUCTURE DU FORMULAIRE -->
+    <form id="habilitationForm">
+        <h3>Dossier d'Habilitation - Desk Exécutif</h3>
+        
+        <label>Email de contact *</label>
+        <input type="email" id="email_expert" required>
 
-    <label>Domaine d'Expertise (Spécialité) *</label>
-    <input type="text" id="specialite_expert" required>
+        <label>Nom et Prénom *</label>
+        <input type="text" id="nom_expert" required>
 
-    <label>Années d'Expérience *</label>
-    <input type="number" id="experience_expert" min="1" required>
+        <label>Domaine d'Expertise (Spécialité) *</label>
+        <input type="text" id="specialite_expert" required>
 
-    <label>Lien Profil LinkedIn *</label>
-    <input type="url" id="linkedin_expert" placeholder="https://linkedin.com/in/..." required>
+        <label>Années d'Expérience *</label>
+        <input type="number" id="experience_expert" min="1" required>
 
-    <label>Courte Biographie (Missions marquantes, réalisations) *</label>
-    <textarea id="bio_expert" rows="4" required></textarea>
+        <label>Lien Profil LinkedIn *</label>
+        <input type="url" id="linkedin_expert" placeholder="https://linkedin.com/in/..." required>
 
-    <button type="submit" id="submitBtn">SOUMETTRE AU BOARD</button>
-</form>
+        <label>Courte Biographie (Missions marquantes, réalisations) *</label>
+        <textarea id="bio_expert" rows="4" required></textarea>
+
+        <button type="submit" id="submitBtn">SOUMETTRE AU BOARD</button>
+    </form>
+
+    <!-- 2. LE SCRIPT JAVASCRIPT (Juste avant la fermeture du body) -->
+    <script>
+    document.getElementById('habilitationForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Empêche la page de se recharger brutalement
+        
+        // On change le texte du bouton pour rassurer l'utilisateur
+        document.getElementById('submitBtn').innerText = "TRANSMISSION CRYPTÉE EN COURS...";
+
+        // On prépare le paquet de données
+        const expertData = {
+            email: document.getElementById('email_expert').value,
+            nom: document.getElementById('nom_expert').value,
+            specialite: document.getElementById('specialite_expert').value,
+            annees_experience: document.getElementById('experience_expert').value,
+            linkedin: document.getElementById('linkedin_expert').value,
+            bio: document.getElementById('bio_expert').value
+        };
+
+        // Envoi silencieux au serveur n8n
+        fetch('https://automation.e-metalabs.com/webhook/VOTRE_WEBHOOK_CORTEX_06', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(expertData)
+        })
+        .then(response => {
+            if(response.ok) {
+                // Succès : on affiche le message de confirmation premium
+                document.getElementById('habilitationForm').innerHTML = "<h4>Dossier transmis avec succès.</h4><p>Notre Board évalue actuellement votre profil. Une réponse vous sera apportée sous 48h.</p>";
+            } else {
+                alert("Une erreur est survenue lors de la transmission.");
+                document.getElementById('submitBtn').innerText = "RÉESSAYER";
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            alert("Erreur de connexion au serveur souverain.");
+        });
+    });
+    </script>
+
+</body>
+</html>
