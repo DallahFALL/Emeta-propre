@@ -143,7 +143,7 @@
   async function loadMissionData() {
     try {
       const res = await fetch(`https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mflt58hd329r4sf/records?where=(Reference_Paiement,eq,${ref})`, {
-        headers: { 'xc-token': 'YOUR_READONLY_TOKEN' }
+        headers: { 'xc-token': 'nc_pat_fid6OJJJ3oQbzY2-0DpyKsKAvaMnWisB6zeai6lC' }
       });
       const data = await res.json();
       if(data.list && data.list.length > 0) {
