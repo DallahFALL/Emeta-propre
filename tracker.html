@@ -141,21 +141,40 @@
   document.getElementById('mission-ref').innerText = ref;
 
   async function loadMissionData() {
-    try {
-      const res = await fetch(`https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mflt58hd329r4sf/records?where=(Reference_Paiement,eq,${ref})`, {
-        headers: { 'xc-token': 'nc_pat_fid6OJJJ3oQbzY2-0DpyKsKAvaMnWisB6zeai6lC' }
-      });
-      const data = await res.json();
-      if(data.list && data.list.length > 0) {
-        const row = data.list[0];
-        document.getElementById('mission-status').innerText = row.Statut || 'En cours';
-        document.getElementById('sha-hash').innerText = row.Hash_SHA256 || 'Non scellé';
-        document.getElementById('mission-sector').innerText = row.Nom_Complet || '';
+  try {
+    // Requête NocoDB sur la colonne Mission ou Reference_Paiement
+    const res = await fetch(`https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mflt58hd329r4sf/records?where=(Mission,eq,${ref})~or(Reference_Paiement,eq,${ref})`, {
+      headers: { 
+        'xc-token': 'nc_pat_fid6OJJJoQbzY2-0DpyKsKAvaMnWisB6zeai61C' 
       }
-    } catch (e) {
-      console.error(e);
+    });
+    const data = await res.json();
+    
+    if (data.list && data.list.length > 0) {
+      const row = data.list[0];
+      
+      // Mise à jour du statut
+      if (row.Statut) {
+        document.getElementById('mission-status').innerText = row.Statut;
+      }
+      
+      // Injection de l'empreinte SHA-256 scellée
+      if (row.Hash_SHA256) {
+        document.getElementById('sha-hash').innerText = row.Hash_SHA256;
+      } else {
+        document.getElementById('sha-hash').innerText = 'Enregistrement actif — Ancrage en attente d’émission';
+      }
+      
+      // Nom du client / Expert
+      const sectorElem = document.getElementById('mission-sector');
+      if (sectorElem && row.Nom_Complet) {
+        sectorElem.innerText = `Client / Bénéficiaire : ${row.Nom_Complet}`;
+      }
     }
+  } catch (e) {
+    console.error('Erreur NocoDB API:', e);
   }
+}
   loadMissionData();
 
   function validerJalon() {
