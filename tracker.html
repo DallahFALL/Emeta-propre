@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-META LABS | Suivi de Mission & Audit</title>
+  <style>
+    :root {
+      --bg: #09131e;
+      --card-bg: #0f1f30;
+      --gold: #d4af37;
+      --green: #10b981;
+      --text: #e2e8f0;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+    }
+    .tracker-card {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .header-tracker {
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding-bottom: 20px;
+      margin-bottom: 25px;
+    }
+    .badge {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--green);
+      border: 1px solid var(--green);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      display: inline-block;
+    }
+    .step-list {
+      display: flex;
+      justify-content: space-between;
+      margin: 35px 0;
+      position: relative;
+    }
+    .step {
+      text-align: center;
+      flex: 1;
+      font-size: 0.85rem;
+    }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      background: #1a2c3f;
+      border: 2px solid #334e68;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 8px;
+      font-weight: bold;
+    }
+    .step.active .step-num {
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    }
+    .step.completed .step-num {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+    .hash-box {
+      background: #060d15;
+      padding: 15px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.8rem;
+      word-break: break-all;
+      border-left: 3px solid var(--gold);
+    }
+    .btn-action {
+      background: var(--green);
+      color: #000;
+      font-weight: bold;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tracker-card">
+  <div class="header-tracker">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h2 style="color: var(--gold); margin: 0;">MISSION : <span id="mission-ref">CHARGEMENT...</span></h2>
+      <span class="badge" id="mission-status">En Cours d'Exécution</span>
+    </div>
+    <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 8px;" id="mission-sector"></p>
+  </div>
+
+  <div class="step-list">
+    <div class="step completed">
+      <div class="step-num">✓</div>
+      <span>Diagnostic IA</span>
+    </div>
+    <div class="step completed">
+      <div class="step-num">✓</div>
+      <span>Scellement Légal</span>
+    </div>
+    <div class="step active">
+      <div class="step-num">3</div>
+      <span>Déploiement Expert</span>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <span>Recette & Clôture</span>
+    </div>
+  </div>
+
+  <div>
+    <h4 style="color: var(--gold); margin-bottom: 8px;">EMPREINTE PROBATOIRE (SHA-256)</h4>
+    <div class="hash-box" id="sha-hash">Calcul et ancrage OpenTimestamps en cours...</div>
+  </div>
+
+  <button class="btn-action" onclick="validerJalon()">VALIDER LE JALON ACTUEL (RECETTE)</button>
+</div>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const ref = urlParams.get('ref') || 'MIS-2026-001';
+  document.getElementById('mission-ref').innerText = ref;
+
+  async function loadMissionData() {
+    try {
+      const res = await fetch(`https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mflt58hd329r4sf/records?where=(Reference_Paiement,eq,${ref})`, {
+        headers: { 'xc-token': 'YOUR_READONLY_TOKEN' }
+      });
+      const data = await res.json();
+      if(data.list && data.list.length > 0) {
+        const row = data.list[0];
+        document.getElementById('mission-status').innerText = row.Statut || 'En cours';
+        document.getElementById('sha-hash').innerText = row.Hash_SHA256 || 'Non scellé';
+        document.getElementById('mission-sector').innerText = row.Nom_Complet || '';
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  loadMissionData();
+
+  function validerJalon() {
+    fetch('https://automation.e-metalabs.com/webhook/validation-jalon-client', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ ref: ref, action: 'recette_validee', timestamp: new Date().toISOString() })
+    }).then(() => alert('Jalon validé avec succès par le client. Notification transmise à l’équipe.'));
+  }
+</script>
+</body>
+</html>
