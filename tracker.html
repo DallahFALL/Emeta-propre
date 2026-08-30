@@ -160,7 +160,7 @@
       
       // Injection de l'empreinte SHA-256 scellée
       if (row.Hash_SHA256) {
-        document.getElementById('sha-hash').innerText = row.Hash_SHA256;
+        document.getElementById('sha-hash').innerText = row.Recu_Hash || row.Hash_SHA256 || 'Non scellé';
       } else {
         document.getElementById('sha-hash').innerText = 'Enregistrement actif — Ancrage en attente d’émission';
       }
