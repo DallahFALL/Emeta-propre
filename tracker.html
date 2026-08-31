@@ -142,7 +142,7 @@
 
   async function loadMissionData() {
     try {
-      const res = await fetch(`https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mflt58hd329r4sf/records?where=(Mission,eq,${ref})~or(Reference_Paiement,eq,${ref})`, {
+      const res = await fetch(`https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mflt58hd329r4sf/records?where=(Reference_Paiement,eq,${ref})~or(Title,eq,${ref})`, {
         headers: {
           'xc-token': 'nc_pat__GqKbk1rqNrsr_9SG04Rp-ZXSbZEkeyRqtxivtcs'
         }
@@ -152,22 +152,27 @@
       if (data.list && data.list.length > 0) {
         const row = data.list[0];
 
-        // Statut
-        if (row.Statut || row.Statut_Paiement) {
-          document.getElementById('mission-status').innerText = row.Statut || row.Statut_Paiement;
+        // 1. Mise à jour de l'Empreinte SHA-256
+        const hashElem = document.getElementById('sha-hash') || document.querySelector('.proof-box') || document.querySelector('pre');
+        if (row.Recu_Hash) {
+          if (hashElem) hashElem.innerText = row.Recu_Hash;
         }
 
-        // Empreinte SHA-256
-        if (row.Recu_Hash || row.Hash_SHA256) {
-          document.getElementById('sha-hash').innerText = row.Recu_Hash || row.Hash_SHA256;
-        } else {
-          document.getElementById('sha-hash').innerText = 'Enregistrement actif — Ancrage en attente d’émission';
+        // 2. Mise à jour du Statut
+        const statusElem = document.getElementById('mission-status') || document.querySelector('.status-badge');
+        const statutActuel = row.Statut_Paiement || row.Statut || 'En cours';
+        if (statusElem) {
+          statusElem.innerText = statutActuel;
         }
 
-        // Nom
-        const sectorElem = document.getElementById('mission-sector');
-        if (sectorElem && (row.Nom_Complet || row.Title)) {
-          sectorElem.innerText = `Client / Bénéficiaire : ${row.Nom_Complet || row.Title}`;
+        // 3. Mise à jour dynamique du bouton et des jalons si Payé / Clôturé
+        const validerBtn = document.querySelector('button.btn-validate') || document.querySelector('button');
+        if (statutActuel.toLowerCase().includes('payé') || statutActuel.toLowerCase().includes('valid')) {
+          if (validerBtn) {
+            validerBtn.innerText = 'MISSION RECETTÉE & CLÔTURÉE ✓';
+            validerBtn.style.backgroundColor = '#059669';
+            validerBtn.disabled = true;
+          }
         }
       }
     } catch (e) {
@@ -181,8 +186,17 @@
     fetch('https://automation.e-metalabs.com/webhook/validation-jalon-client', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ref: ref, action: 'recette_validee', timestamp: new Date().toISOString() })
-    }).then(() => alert('Jalon validé avec succès par le client. Notification transmise à l’équipe.'));
+      body: JSON.stringify({ 
+        ref: ref, 
+        action: 'recette_validee', 
+        timestamp: new Date().toISOString() 
+      })
+    })
+    .then(() => {
+      alert('Jalon validé avec succès par le client. Notification transmise à l’équipe.');
+      loadMissionData();
+    })
+    .catch(err => console.error('Erreur Webhook:', err));
   }
 </script>
 </body>
