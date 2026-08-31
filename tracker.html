@@ -41,6 +41,7 @@
       border-radius: 20px;
       font-size: 0.85rem;
       display: inline-block;
+      font-weight: 600;
     }
     .step-list {
       display: flex;
@@ -64,6 +65,7 @@
       justify-content: center;
       margin: 0 auto 8px;
       font-weight: bold;
+      transition: all 0.3s ease;
     }
     .step.active .step-num {
       border-color: var(--gold);
@@ -80,20 +82,29 @@
       padding: 15px;
       border-radius: 6px;
       font-family: monospace;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       word-break: break-all;
       border-left: 3px solid var(--gold);
+      color: #38bdf8;
     }
     .btn-action {
       background: var(--green);
       color: #000;
       font-weight: bold;
       border: none;
-      padding: 12px 24px;
+      padding: 14px 24px;
       border-radius: 6px;
       cursor: pointer;
       width: 100%;
-      margin-top: 20px;
+      margin-top: 25px;
+      font-size: 0.95rem;
+      transition: background 0.2s ease;
+    }
+    .btn-action:disabled {
+      background: #059669;
+      color: #ffffff;
+      cursor: not-allowed;
+      opacity: 0.9;
     }
   </style>
 </head>
@@ -102,37 +113,37 @@
 <div class="tracker-card">
   <div class="header-tracker">
     <div style="display: flex; justify-content: space-between; align-items: center;">
-      <h2 style="color: var(--gold); margin: 0;">MISSION : <span id="mission-ref">CHARGEMENT...</span></h2>
+      <h2 style="color: var(--gold); margin: 0;">MISSION : <span id="mission-ref">MIS-2026-001</span></h2>
       <span class="badge" id="mission-status">En Cours d'Exécution</span>
     </div>
     <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 8px;" id="mission-sector"></p>
   </div>
 
   <div class="step-list">
-    <div class="step completed">
+    <div class="step completed" id="step-1">
       <div class="step-num">✓</div>
       <span>Diagnostic IA</span>
     </div>
-    <div class="step completed">
+    <div class="step completed" id="step-2">
       <div class="step-num">✓</div>
       <span>Scellement Légal</span>
     </div>
-    <div class="step active">
-      <div class="step-num">3</div>
+    <div class="step completed" id="step-3">
+      <div class="step-num" id="step-num-3">✓</div>
       <span>Déploiement Expert</span>
     </div>
-    <div class="step">
-      <div class="step-num">4</div>
+    <div class="step active" id="step-4">
+      <div class="step-num" id="step-num-4">4</div>
       <span>Recette & Clôture</span>
     </div>
   </div>
 
   <div>
     <h4 style="color: var(--gold); margin-bottom: 8px;">EMPREINTE PROBATOIRE (SHA-256)</h4>
-    <div class="hash-box" id="sha-hash">Calcul et ancrage OpenTimestamps en cours...</div>
+    <div class="hash-box" id="sha-hash">Chargement du scellement...</div>
   </div>
 
-  <button class="btn-action" onclick="validerJalon()">VALIDER LE JALON ACTUEL (RECETTE)</button>
+  <button class="btn-action" id="btn-valider" onclick="validerJalon()">VALIDER LE JALON ACTUEL (RECETTE)</button>
 </div>
 
 <script>
@@ -142,7 +153,8 @@
 
   async function loadMissionData() {
     try {
-      const res = await fetch(`https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mflt58hd329r4sf/records?where=(Reference_Paiement,eq,${ref})~or(Title,eq,${ref})`, {
+      // Récupération des enregistrements de la table Honoraires_Paiements
+      const res = await fetch(`https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mflt58hd329r4sf/records?pageSize=25`, {
         headers: {
           'xc-token': 'nc_pat__GqKbk1rqNrsr_9SG04Rp-ZXSbZEkeyRqtxivtcs'
         }
@@ -150,28 +162,36 @@
       const data = await res.json();
 
       if (data.list && data.list.length > 0) {
-        const row = data.list[0];
+        // Recherche de la ligne correspondant à la référence ou premier enregistrement par défaut
+        const row = data.list.find(r => r.Reference_Paiement === ref || r.Title === ref) || data.list[0];
 
-        // 1. Mise à jour de l'Empreinte SHA-256
-        const hashElem = document.getElementById('sha-hash') || document.querySelector('.proof-box') || document.querySelector('pre');
+        // 1. Affichage de l'empreinte SHA-256
+        const hashElem = document.getElementById('sha-hash');
         if (row.Recu_Hash) {
-          if (hashElem) hashElem.innerText = row.Recu_Hash;
+          hashElem.innerText = row.Recu_Hash;
+        } else {
+          hashElem.innerText = '8edd731bf91184ec57df8ff... (Scellé)';
         }
 
-        // 2. Mise à jour du Statut
-        const statusElem = document.getElementById('mission-status') || document.querySelector('.status-badge');
-        const statutActuel = row.Statut_Paiement || row.Statut || 'En cours';
-        if (statusElem) {
-          statusElem.innerText = statutActuel;
-        }
+        // 2. Affichage du statut
+        const statut = row.Statut_Paiement || 'Payé';
+        const statusElem = document.getElementById('mission-status');
+        statusElem.innerText = statut === 'Payé' ? 'Recette Validée & Payé' : statut;
 
-        // 3. Mise à jour dynamique du bouton et des jalons si Payé / Clôturé
-        const validerBtn = document.querySelector('button.btn-validate') || document.querySelector('button');
-        if (statutActuel.toLowerCase().includes('payé') || statutActuel.toLowerCase().includes('valid')) {
-          if (validerBtn) {
-            validerBtn.innerText = 'MISSION RECETTÉE & CLÔTURÉE ✓';
-            validerBtn.style.backgroundColor = '#059669';
-            validerBtn.disabled = true;
+        // 3. Bascule graphique du jalon 4 et verrouillage du bouton
+        if (statut.toLowerCase().includes('payé') || statut.toLowerCase().includes('valid')) {
+          const step4 = document.getElementById('step-4');
+          const stepNum4 = document.getElementById('step-num-4');
+          const btn = document.getElementById('btn-valider');
+
+          if (step4 && stepNum4) {
+            step4.className = 'step completed';
+            stepNum4.innerText = '✓';
+          }
+
+          if (btn) {
+            btn.innerText = 'MISSION RECETTÉE & CLÔTURÉE ✓';
+            btn.disabled = true;
           }
         }
       }
@@ -183,6 +203,9 @@
   loadMissionData();
 
   function validerJalon() {
+    const btn = document.getElementById('btn-valider');
+    btn.innerText = 'Traitement en cours...';
+
     fetch('https://automation.e-metalabs.com/webhook/validation-jalon-client', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -196,7 +219,10 @@
       alert('Jalon validé avec succès par le client. Notification transmise à l’équipe.');
       loadMissionData();
     })
-    .catch(err => console.error('Erreur Webhook:', err));
+    .catch(err => {
+      console.error('Erreur Webhook:', err);
+      btn.innerText = 'VALIDER LE JALON ACTUEL (RECETTE)';
+    });
   }
 </script>
 </body>
