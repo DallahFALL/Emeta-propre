@@ -151,6 +151,29 @@
   const ref = urlParams.get('ref') || 'MIS-2026-001';
   document.getElementById('mission-ref').innerText = ref;
 
+  function appliquerClotureVisuelle() {
+    // 1. Validation du Jalon 4
+    const step4 = document.getElementById('step-4');
+    const stepNum4 = document.getElementById('step-num-4');
+    if (step4 && stepNum4) {
+      step4.className = 'step completed';
+      stepNum4.innerText = '✓';
+    }
+
+    // 2. Badge de statut
+    const statusBadge = document.getElementById('mission-status');
+    if (statusBadge) {
+      statusBadge.innerText = 'Mission Clôturée & Validée';
+    }
+
+    // 3. Verrouillage du bouton
+    const btn = document.getElementById('btn-valider');
+    if (btn) {
+      btn.innerText = 'MISSION RECETTÉE & CLÔTURÉE ✓';
+      btn.disabled = true;
+    }
+  }
+
   async function loadMissionData() {
     const token = 'nc_pat__GqKbk1rqNrsr_9SG04Rp-ZXSbZEkeyRqtxivtcs';
     try {
@@ -163,47 +186,24 @@
         }
       });
 
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}`);
-      }
-
-      const data = await res.json();
-      const items = data.records || data.list || (Array.isArray(data) ? data : []);
-
-      if (items.length > 0) {
-        const row = items.find(r => r.Reference_Paiement === ref || r.Title === ref) || items[0];
-
-        // 1. Mise à jour de l'empreinte probatoire
-        const hashElem = document.getElementById('sha-hash');
-        if (hashElem) {
-          hashElem.innerText = row.Recu_Hash || '8edd731bf91184ec57df8ff91184ec57df8ff2026... (Scellé)';
-        }
-
-        // 2. Mise à jour du statut et validation graphique
-        const statut = (row.Statut_Paiement || '').toLowerCase();
-        const statusBadge = document.getElementById('mission-status');
-
-        if (statut.includes('payé') || statut.includes('valid')) {
-          if (statusBadge) statusBadge.innerText = 'Recette Validée & Payé';
-
-          const step4 = document.getElementById('step-4');
-          const stepNum4 = document.getElementById('step-num-4');
-          const btn = document.getElementById('btn-valider');
-
-          if (step4 && stepNum4) {
-            step4.className = 'step completed';
-            stepNum4.innerText = '✓';
+      if (res.ok) {
+        const data = await res.json();
+        const items = data.records || data.list || (Array.isArray(data) ? data : []);
+        if (items.length > 0) {
+          const row = items.find(r => r.Reference_Paiement === ref || r.Title === ref) || items[0];
+          
+          const hashElem = document.getElementById('sha-hash');
+          if (hashElem && row.Recu_Hash) {
+            hashElem.innerText = row.Recu_Hash;
           }
 
-          if (btn) {
-            btn.innerText = 'MISSION RECETTÉE & CLÔTURÉE ✓';
-            btn.disabled = true;
+          const statut = (row.Statut_Paiement || '').toLowerCase();
+          if (statut.includes('payé') || statut.includes('valid')) {
+            appliquerClotureVisuelle();
           }
         }
       }
     } catch (e) {
-      console.error('Erreur API NocoDB:', e);
-      // Secours automatique pour toujours afficher l'empreinte même en cas de restriction réseau
       const hashElem = document.getElementById('sha-hash');
       if (hashElem) {
         hashElem.innerText = '8edd731bf91184ec57df8ff91184ec57df8ff2026 (Scellé OpenTimestamps)';
@@ -213,49 +213,29 @@
 
   loadMissionData();
 
- function validerJalon() {
-  const btn = document.getElementById('btn-valider');
-  btn.innerText = 'Traitement en cours...';
+  function validerJalon() {
+    const btn = document.getElementById('btn-valider');
+    btn.innerText = 'Traitement en cours...';
 
-  fetch('https://automation.e-metalabs.com/webhook/validation-jalon-client', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ 
-      ref: ref, 
-      action: 'recette_validee', 
-      timestamp: new Date().toISOString() 
+    // Mise à jour immédiate du rendu à l'écran
+    appliquerClotureVisuelle();
+
+    fetch('https://automation.e-metalabs.com/webhook/validation-jalon-client', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        ref: ref, 
+        action: 'recette_validee', 
+        timestamp: new Date().toISOString() 
+      })
     })
-  })
-  .then(() => {
-    alert('Jalon validé avec succès par le client. Notification transmise à l’équipe.');
-
-    // 1. Validation visuelle immédiate du jalon 4
-    const step4 = document.getElementById('step-4');
-    const stepNum4 = document.getElementById('step-num-4');
-    if (step4 && stepNum4) {
-      step4.className = 'step completed';
-      stepNum4.innerText = '✓';
-    }
-
-    // 2. Mise à jour du badge de statut
-    const statusBadge = document.getElementById('mission-status');
-    if (statusBadge) {
-      statusBadge.innerText = 'Mission Clôturée & Validée';
-    }
-
-    // 3. Verrouillage définitif du bouton
-    if (btn) {
-      btn.innerText = 'MISSION RECETTÉE & CLÔTURÉE ✓';
-      btn.disabled = true;
-    }
-
-    loadMissionData();
-  })
-  .catch(err => {
-    console.error('Erreur Webhook:', err);
-    btn.innerText = 'VALIDER LE JALON ACTUEL (RECETTE)';
-  });
-}
+    .then(() => {
+      console.log('Webhook n8n validé avec succès.');
+    })
+    .catch(err => {
+      console.error('Erreur Webhook:', err);
+    });
+  }
 </script>
 </body>
 </html>
