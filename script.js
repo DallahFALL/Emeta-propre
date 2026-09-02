@@ -494,14 +494,16 @@ function fireAutoDetection() {
         btn.disabled = true;
     }
 
-    // ENVOI AU CORTEX_01 (WEBHOOK TEST)
+    // ENVOI AU CORTEX_01 (WEBHOOK TEST/PROD)
     fetch(WEBHOOK_N8N_URL, {
         method: 'POST', mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     })
-    .then(response => {
+    .then(async response => {
         if (!response.ok) throw new Error("Erreur serveur n8n");
+        const data = await response.json().catch(() => ({}));
+        
         closeModal('autoDetectModal');
         
         missionNomEl.value = '';
@@ -521,6 +523,12 @@ function fireAutoDetection() {
         if (badge) badge.style.display = 'none';
 
         alert(t.alertSuccess);
+
+        // ==========================================
+        // REDIRECTION AUTOMATIQUE VERS LE TRACKER
+        // ==========================================
+        const missionRef = data.reference || data.ref || 'MIS-2026-001';
+        window.location.href = `https://e-metalabs.com/tracker.html?ref=${encodeURIComponent(missionRef)}`;
     })
     .catch(error => {
         console.error("Erreur de transmission:", error);
