@@ -129,6 +129,16 @@
       cursor: not-allowed;
       opacity: 0.9;
     }
+
+    [dir="rtl"] .top-bar-nav,
+    [dir="rtl"] .header-tracker > div {
+      flex-direction: row-reverse;
+    }
+    [dir="rtl"] .hash-box {
+      border-left: none;
+      border-right: 3px solid var(--gold);
+      text-align: right;
+    }
   </style>
 </head>
 <body>
@@ -136,8 +146,8 @@
 <div class="tracker-card">
   <!-- Barre Supérieure de Navigation avec Logo et Renvois -->
   <div class="top-bar-nav">
-    <a href="index.html" class="nav-link">
-      <span>←</span> Retour au Moteur IA
+    <a href="index.html" class="nav-link" id="link-return-home">
+      <span id="arrow-return">←</span> <span id="ui-trk-return">Retour au Moteur IA</span>
     </a>
 
     <div style="display: flex; align-items: center; gap: 8px;">
@@ -148,14 +158,14 @@
       <span style="color: var(--gold); font-size: 0.85rem; font-weight: bold; letter-spacing: 1px;">E-META LABS</span>
     </div>
 
-    <a href="expert.html" class="nav-link">
-      Desk Exécutif <span>→</span>
+    <a href="expert.html" class="nav-link" id="link-desk">
+      <span id="ui-trk-desk">Desk Exécutif</span> <span id="arrow-desk">→</span>
     </a>
   </div>
 
   <div class="header-tracker">
     <div style="display: flex; justify-content: space-between; align-items: center;">
-      <h2 style="color: var(--gold); margin: 0;">MISSION : <span id="mission-ref">MIS-2026-001</span></h2>
+      <h2 style="color: var(--gold); margin: 0;"><span id="ui-trk-lbl-mission">MISSION</span> : <span id="mission-ref">MIS-2026-001</span></h2>
       <span class="badge" id="mission-status">En Cours d'Exécution</span>
     </div>
     <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 8px;" id="mission-sector"></p>
@@ -164,24 +174,24 @@
   <div class="step-list">
     <div class="step completed" id="step-1">
       <div class="step-num">✓</div>
-      <span>Diagnostic IA</span>
+      <span id="ui-step-1">Diagnostic IA</span>
     </div>
     <div class="step completed" id="step-2">
       <div class="step-num">✓</div>
-      <span>Scellement Légal</span>
+      <span id="ui-step-2">Scellement Légal</span>
     </div>
     <div class="step completed" id="step-3">
       <div class="step-num" id="step-num-3">✓</div>
-      <span>Déploiement Expert</span>
+      <span id="ui-step-3">Déploiement Expert</span>
     </div>
     <div class="step active" id="step-4">
       <div class="step-num" id="step-num-4">4</div>
-      <span>Recette & Clôture</span>
+      <span id="ui-step-4">Recette & Clôture</span>
     </div>
   </div>
 
   <div>
-    <h4 style="color: var(--gold); margin-bottom: 8px;">EMPREINTE PROBATOIRE (SHA-256)</h4>
+    <h4 style="color: var(--gold); margin-bottom: 8px;" id="ui-trk-lbl-hash">EMPREINTE PROBATOIRE (SHA-256)</h4>
     <div class="hash-box" id="sha-hash">8edd731bf91184ec57df8ff91184ec57df8ff2026 (Scellé OpenTimestamps)</div>
   </div>
 
@@ -189,11 +199,121 @@
 </div>
 
 <script>
+  // ==========================================
+  // 1. DICTIONNAIRE MULTILINGUE TRACKER
+  // ==========================================
+  const trkDict = {
+    fr: {
+      returnHome: "Retour au Moteur IA",
+      desk: "Desk Exécutif",
+      lblMission: "MISSION",
+      statusRunning: "En Cours d'Exécution",
+      statusClosed: "Mission Clôturée & Validée",
+      step1: "Diagnostic IA",
+      step2: "Scellement Légal",
+      step3: "Déploiement Expert",
+      step4: "Recette & Clôture",
+      lblHash: "EMPREINTE PROBATOIRE (SHA-256)",
+      btnAction: "VALIDER LE JALON ACTUEL (RECETTE)",
+      btnClosed: "MISSION RECETTÉE & CLÔTURÉE ✓",
+      alertValidated: "Jalon validé avec succès par le client. Notification transmise à l’équipe."
+    },
+    en: {
+      returnHome: "Back to AI Engine",
+      desk: "Expert Desk",
+      lblMission: "MISSION",
+      statusRunning: "In Progress",
+      statusClosed: "Mission Closed & Certified",
+      step1: "AI Diagnostic",
+      step2: "Legal Sealing",
+      step3: "Expert Deployment",
+      step4: "Acceptance & Closing",
+      lblHash: "PROBATORY FINGERPRINT (SHA-256)",
+      btnAction: "VALIDATE CURRENT MILESTONE (ACCEPTANCE)",
+      btnClosed: "MISSION ACCEPTED & CLOSED ✓",
+      alertValidated: "Milestone successfully validated. Team notified."
+    },
+    es: {
+      returnHome: "Volver al Motor IA",
+      desk: "Portal de Expertos",
+      lblMission: "MISIÓN",
+      statusRunning: "En Curso de Ejecución",
+      statusClosed: "Misión Cerrada y Validada",
+      step1: "Diagnóstico IA",
+      step2: "Sellado Legal",
+      step3: "Despliegue Experto",
+      step4: "Recepción y Cierre",
+      lblHash: "HUELLA PROBATORIA (SHA-256)",
+      btnAction: "VALIDAR HITO ACTUAL (RECEPCIÓN)",
+      btnClosed: "MISIÓN ACEPTADA Y CERRADA ✓",
+      alertValidated: "Hito validado con éxito. Notificación enviada al equipo."
+    },
+    ar: {
+      returnHome: "العودة إلى محرك الذكاء الاصطناعي",
+      desk: "بوابة الخبراء",
+      lblMission: "المهمة",
+      statusRunning: "قيد التنفيذ",
+      statusClosed: "تمت مراجعة المهمة وإغلاقها",
+      step1: "تشخيص الذكاء الاصطناعي",
+      step2: "التوثيق القانوني",
+      step3: "نشر الخبراء",
+      step4: "الاستلام والإغلاق",
+      lblHash: "البصمة الإثباتية (SHA-256)",
+      btnAction: "اعتماد المرحلة الحالية (الاستلام)",
+      btnClosed: "تم اعتماد المهمة وإغلاقها ✓",
+      alertValidated: "تم اعتماد المرحلة بنجاح. تم إرسال الإشعار للفريق."
+    }
+  };
+
+  // ==========================================
+  // 2. DÉTECTION ET APPLICATION DE LA LANGUE
+  // ==========================================
   const urlParams = new URLSearchParams(window.location.search);
   const ref = urlParams.get('ref') || 'MIS-2026-001';
   document.getElementById('mission-ref').innerText = ref;
 
+  let currentLang = urlParams.get('lang') || localStorage.getItem('emeta_lang') || 'fr';
+  if (!['fr', 'en', 'es', 'ar'].includes(currentLang)) currentLang = 'fr';
+
+  function applyTrackerLang(lang) {
+    const t = trkDict[lang];
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+    document.getElementById('ui-trk-return').innerText = t.returnHome;
+    document.getElementById('ui-trk-desk').innerText = t.desk;
+    document.getElementById('ui-trk-lbl-mission').innerText = t.lblMission;
+    document.getElementById('ui-step-1').innerText = t.step1;
+    document.getElementById('ui-step-2').innerText = t.step2;
+    document.getElementById('ui-step-3').innerText = t.step3;
+    document.getElementById('ui-step-4').innerText = t.step4;
+    document.getElementById('ui-trk-lbl-hash').innerText = t.lblHash;
+    
+    // Liens avec maintien de la langue
+    document.getElementById('link-return-home').href = `index.html?lang=${lang}`;
+    document.getElementById('link-desk').href = `expert.html?lang=${lang}`;
+
+    if (lang === 'ar') {
+      document.getElementById('arrow-return').innerText = '→';
+      document.getElementById('arrow-desk').innerText = '←';
+    } else {
+      document.getElementById('arrow-return').innerText = '←';
+      document.getElementById('arrow-desk').innerText = '→';
+    }
+
+    const btn = document.getElementById('btn-valider');
+    if (btn && !btn.disabled) {
+      btn.innerText = t.btnAction;
+    }
+  }
+
+  applyTrackerLang(currentLang);
+
+  // ==========================================
+  // 3. LOGIQUE DYNAMIQUE & CLÔTURE
+  // ==========================================
   function appliquerClotureVisuelle() {
+    const t = trkDict[currentLang];
     const step4 = document.getElementById('step-4');
     const stepNum4 = document.getElementById('step-num-4');
     if (step4 && stepNum4) {
@@ -203,12 +323,12 @@
 
     const statusBadge = document.getElementById('mission-status');
     if (statusBadge) {
-      statusBadge.innerText = 'Mission Clôturée & Validée';
+      statusBadge.innerText = t.statusClosed;
     }
 
     const btn = document.getElementById('btn-valider');
     if (btn) {
-      btn.innerText = 'MISSION RECETTÉE & CLÔTURÉE ✓';
+      btn.innerText = t.btnClosed;
       btn.disabled = true;
     }
   }
@@ -237,8 +357,11 @@
           }
 
           const statut = (row.Statut_Paiement || '').toLowerCase();
-          if (statut.includes('payé') || statut.includes('valid')) {
+          if (statut.includes('payé') || statut.includes('valid') || statut.includes('cerrada') || statut.includes('closed')) {
             appliquerClotureVisuelle();
+          } else {
+            const statusBadge = document.getElementById('mission-status');
+            if (statusBadge) statusBadge.innerText = trkDict[currentLang].statusRunning;
           }
         }
       }
@@ -254,7 +377,7 @@
 
   function validerJalon() {
     const btn = document.getElementById('btn-valider');
-    btn.innerText = 'Traitement en cours...';
+    btn.innerText = '...';
 
     appliquerClotureVisuelle();
 
@@ -263,6 +386,7 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 
         ref: ref, 
+        langue: currentLang,
         action: 'recette_validee', 
         timestamp: new Date().toISOString() 
       })
