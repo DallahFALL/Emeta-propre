@@ -9,6 +9,7 @@ const WEBHOOK_N8N_URL = "https://automation.e-metalabs.com/webhook/482700d1-501d
 // ==========================================
 const uiDict = {
     fr: {
+        btnTracker: "Suivi Mission 🛡️",
         btnDesk: "Desk Exécutif",
         counter: "Diagnostics Sécurisés & Ancrés",
         hero1: "Le Diagnostic de l'Agent IA",
@@ -65,6 +66,7 @@ const uiDict = {
         footerUnit: "Strategic Intelligence Unit • Rosso - Dakar - Paris - Dubai - Shanghai - New York"
     },
     en: {
+        btnTracker: "Mission Tracker 🛡️",
         btnDesk: "Expert Desk",
         counter: "Secured & Anchored Diagnostics",
         hero1: "AI Agent Diagnosis",
@@ -121,6 +123,7 @@ const uiDict = {
         footerUnit: "Strategic Intelligence Unit • Rosso - Dakar - Paris - Dubai - Shanghai - New York"
     },
     es: {
+        btnTracker: "Seguimiento Misión 🛡️",
         btnDesk: "Portal de Expertos",
         counter: "Diagnósticos Seguros y Anclados",
         hero1: "El Diagnóstico del Agente IA",
@@ -177,6 +180,7 @@ const uiDict = {
         footerUnit: "Strategic Intelligence Unit • Rosso - Dakar - Paris - Dubai - Shanghai - New York"
     },
     ar: {
+        btnTracker: "متابعة المهمة 🛡️",
         btnDesk: "بوابة الخبراء",
         counter: "التشخيصات الآمنة والمثبتة",
         hero1: "تشخيص وكيل الذكاء الاصطناعي",
@@ -284,7 +288,8 @@ function switchLang(lang) {
     
     safeText('ui-badge-beta', t.badgeBeta);
     
-    // Traduction du nouveau bouton Desk
+    // Boutons de la barre supérieure
+    safeText('ui-btn-tracker', t.btnTracker);
     safeText('ui-btn-desk', t.btnDesk);
     
     // Devises Dynamiques
@@ -494,7 +499,7 @@ function fireAutoDetection() {
         btn.disabled = true;
     }
 
-    // ENVOI AU CORTEX_01 (WEBHOOK TEST/PROD)
+    // ENVOI AU WEBHOOK DE PRODUCTION
     fetch(WEBHOOK_N8N_URL, {
         method: 'POST', mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
