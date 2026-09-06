@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>E-META LABS | Suivi de Mission & Audit</title>
+  <!-- Favicon Officiel Hexagonal e-META LABS -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 90,25 90,75 50,95 10,75 10,25' fill='%2309131e' stroke='%23d4af37' stroke-width='7'/><circle cx='50' cy='50' r='10' fill='%23d4af37'/></svg>">
   <style>
     :root {
       --bg: #09131e;
@@ -27,6 +29,27 @@
       border-radius: 12px;
       padding: 30px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .top-bar-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .nav-link {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover {
+      color: var(--gold);
     }
     .header-tracker {
       border-bottom: 1px solid rgba(212, 175, 55, 0.2);
@@ -111,6 +134,25 @@
 <body>
 
 <div class="tracker-card">
+  <!-- Barre Supérieure de Navigation avec Logo et Renvois -->
+  <div class="top-bar-nav">
+    <a href="index.html" class="nav-link">
+      <span>←</span> Retour au Moteur IA
+    </a>
+
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <svg width="22" height="22" viewBox="0 0 100 100">
+        <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="#09131e" stroke="#d4af37" stroke-width="8"/>
+        <circle cx="50" cy="50" r="12" fill="#d4af37"/>
+      </svg>
+      <span style="color: var(--gold); font-size: 0.85rem; font-weight: bold; letter-spacing: 1px;">E-META LABS</span>
+    </div>
+
+    <a href="expert.html" class="nav-link">
+      Desk Exécutif <span>→</span>
+    </a>
+  </div>
+
   <div class="header-tracker">
     <div style="display: flex; justify-content: space-between; align-items: center;">
       <h2 style="color: var(--gold); margin: 0;">MISSION : <span id="mission-ref">MIS-2026-001</span></h2>
@@ -138,11 +180,10 @@
     </div>
   </div>
 
-  <!-- APRÈS -->
-<div>
-  <h4 style="color: var(--gold); margin-bottom: 8px;">EMPREINTE PROBATOIRE (SHA-256)</h4>
-  <div class="hash-box" id="sha-hash">8edd731bf91184ec57df8ff91184ec57df8ff2026 (Scellé OpenTimestamps)</div>
-</div>
+  <div>
+    <h4 style="color: var(--gold); margin-bottom: 8px;">EMPREINTE PROBATOIRE (SHA-256)</h4>
+    <div class="hash-box" id="sha-hash">8edd731bf91184ec57df8ff91184ec57df8ff2026 (Scellé OpenTimestamps)</div>
+  </div>
 
   <button class="btn-action" id="btn-valider" onclick="validerJalon()">VALIDER LE JALON ACTUEL (RECETTE)</button>
 </div>
@@ -153,7 +194,6 @@
   document.getElementById('mission-ref').innerText = ref;
 
   function appliquerClotureVisuelle() {
-    // 1. Validation du Jalon 4
     const step4 = document.getElementById('step-4');
     const stepNum4 = document.getElementById('step-num-4');
     if (step4 && stepNum4) {
@@ -161,13 +201,11 @@
       stepNum4.innerText = '✓';
     }
 
-    // 2. Badge de statut
     const statusBadge = document.getElementById('mission-status');
     if (statusBadge) {
       statusBadge.innerText = 'Mission Clôturée & Validée';
     }
 
-    // 3. Verrouillage du bouton
     const btn = document.getElementById('btn-valider');
     if (btn) {
       btn.innerText = 'MISSION RECETTÉE & CLÔTURÉE ✓';
@@ -218,7 +256,6 @@
     const btn = document.getElementById('btn-valider');
     btn.innerText = 'Traitement en cours...';
 
-    // Mise à jour immédiate du rendu à l'écran
     appliquerClotureVisuelle();
 
     fetch('https://automation.e-metalabs.com/webhook/validation-jalon-client', {
