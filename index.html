@@ -8,6 +8,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
+    <!-- Favicon Officiel Hexagonal e-META LABS -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 90,25 90,75 50,95 10,75 10,25' fill='%2309131e' stroke='%23d4af37' stroke-width='7'/><circle cx='50' cy='50' r='10' fill='%23d4af37'/></svg>">
       
     <style>
@@ -89,21 +90,18 @@
     </div>
 
     <script>
-        // 🔒 DÉFINISSEZ VOTRE MOT DE PASSE ICI
         const LAB_SECRET_CODE = "CORTEX2026"; 
 
-        // Le système vérifie si vous vous êtes déjà connecté récemment pour ne pas vous redemander le code à chaque clic
         if (localStorage.getItem('lab_unlocked') === 'true') {
             document.getElementById('lab-lock-screen').style.display = 'none';
             document.body.style.overflow = 'auto';
         } else {
-            document.body.style.overflow = 'hidden'; // Bloque le défilement tant que le site est verrouillé
+            document.body.style.overflow = 'hidden';
         }
 
         function unlockLab() {
             const input = document.getElementById('lab-password').value;
             if (input === LAB_SECRET_CODE) {
-                // Code correct : on sauvegarde dans la mémoire du navigateur et on masque le bouclier
                 localStorage.setItem('lab_unlocked', 'true');
                 document.body.style.overflow = 'auto';
                 
@@ -115,7 +113,6 @@
                     lockScreen.style.display = 'none';
                 }, 600);
             } else {
-                // Code incorrect
                 document.getElementById('lab-error').style.display = 'block';
                 document.getElementById('lab-password').value = '';
             }
@@ -131,8 +128,13 @@
             <div class="brand-text"><h1>e-META LABS</h1></div>
         </div>
         <div class="header-actions" style="display: flex; align-items: center; gap: 15px;">
-            <!-- BOUTON DESK EXECUTIF -->
-            <a href="expert.html" id="ui-btn-desk" class="btn-desk" style="text-decoration: none; color: #d4af37;">
+            <!-- BOUTON SUIVI MISSION / TRACKER -->
+            <a href="tracker.html" id="ui-btn-tracker" style="text-decoration: none; color: #d4af37; border: 1px solid rgba(212, 175, 55, 0.4); padding: 5px 12px; border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; transition: all 0.3s;" onmouseover="this.style.background='rgba(212, 175, 55, 0.1)'; this.style.borderColor='#d4af37';" onmouseout="this.style.background='transparent'; this.style.borderColor='rgba(212, 175, 55, 0.4)';">
+                Suivi Mission 🛡️
+            </a>
+
+            <!-- BOUTON DESK EXÉCUTIF -->
+            <a href="expert.html" id="ui-btn-desk" class="btn-desk" style="text-decoration: none; color: #d4af37; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600;">
                 Desk Exécutif
             </a>
             
