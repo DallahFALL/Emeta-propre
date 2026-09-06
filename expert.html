@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desk Exécutif | Onboarding Expert e-META LABS</title>
+    <!-- Favicon Officiel Hexagonal e-META LABS -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 90,25 90,75 50,95 10,75 10,25' fill='%2309131e' stroke='%23d4af37' stroke-width='7'/><circle cx='50' cy='50' r='10' fill='%23d4af37'/></svg>">
     <style>
         :root {
             --primary-color: #0f172a;
             --secondary-color: #3b82f6;
+            --gold: #d4af37;
             --bg-color: #f8fafc;
             --text-color: #334155;
             --border-radius: 8px;
@@ -37,13 +40,21 @@
             position: relative;
         }
 
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
         .btn-return-home {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             color: #64748b;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.85rem;
-            margin-bottom: 25px;
             transition: color 0.3s;
         }
         .btn-return-home:hover {
@@ -184,7 +195,16 @@
 <body>
 
     <div class="container">
-        <a href="index.html" class="btn-return-home" id="backBtn" data-i18n="exp_btn_return">← Retour au Moteur IA</a>
+        <div class="top-nav">
+            <a href="index.html" class="btn-return-home" id="backBtn" data-i18n="exp_btn_return">← Retour au Moteur IA</a>
+            <div style="display: flex; align-items: center; gap: 6px;">
+                <svg width="18" height="18" viewBox="0 0 100 100">
+                    <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="#09131e" stroke="#d4af37" stroke-width="8"/>
+                    <circle cx="50" cy="50" r="10" fill="#d4af37"/>
+                </svg>
+                <span style="color: #0f172a; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.5px;">E-META LABS</span>
+            </div>
+        </div>
 
         <div class="header">
             <h1 data-i18n="exp_title">Desk Exécutif</h1>
@@ -192,7 +212,7 @@
         </div>
 
         <form id="expertForm">
-            <!-- 1. NOM (Harmonisé avec l'ID 'name') -->
+            <!-- 1. NOM -->
             <div class="form-group">
                 <label for="name" data-i18n="exp_lbl_name">Nom et Prénom *</label>
                 <input type="text" id="name" data-i18n="exp_ph_name" placeholder="Ex: Dallah FALL" required>
@@ -227,19 +247,19 @@
                 </select>
             </div>
 
-            <!-- 5. ANNÉES D'EXPÉRIENCE (Nouveau) -->
+            <!-- 5. ANNÉES D'EXPÉRIENCE -->
             <div class="form-group">
                 <label for="experience" data-i18n="exp_lbl_exp">Années d'Expérience *</label>
                 <input type="number" id="experience" data-i18n="exp_ph_exp" min="1" placeholder="Ex: 5" required>
             </div>
 
-            <!-- 6. LINKEDIN (Nouveau) -->
+            <!-- 6. LINKEDIN -->
             <div class="form-group">
                 <label for="linkedin" data-i18n="exp_lbl_linkedin">Lien Profil LinkedIn *</label>
                 <input type="url" id="linkedin" data-i18n="exp_ph_linkedin" placeholder="https://linkedin.com/in/votre-profil" required>
             </div>
 
-            <!-- 7. BIO (Nouveau) -->
+            <!-- 7. BIO -->
             <div class="form-group">
                 <label for="bio" data-i18n="exp_lbl_bio">Courte Biographie (Missions, réalisations) *</label>
                 <textarea id="bio" data-i18n="exp_ph_bio" rows="4" placeholder="Décrivez votre parcours et vos réussites majeures..." required></textarea>
@@ -259,9 +279,7 @@
         </form>
     </div>
 
-    <!-- INCLUSION DU MOTEUR DE LANGUE -->
     <script src="i18n.js"></script>
-
     <script>
         document.getElementById('expertForm').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -273,7 +291,6 @@
             submitBtn.disabled = true;
             statusDiv.className = 'status-message';
 
-            // Récupération parfaite des 7 champs
             const formData = {
                 nom: document.getElementById('name').value,
                 email: document.getElementById('email').value,
@@ -284,7 +301,6 @@
                 bio: document.getElementById('bio').value
             };
 
-            // URL de production (expert-valide) pour éviter que le bouton ne bloque
             const webhookUrl = 'https://automation.e-metalabs.com/webhook/expert-valide';
             
             fetch(webhookUrl, {
@@ -314,6 +330,5 @@
             });
         });
     </script>
-
 </body>
 </html>
