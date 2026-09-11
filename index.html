@@ -69,6 +69,67 @@
         [dir="rtl"] { text-align: right; }
         [dir="rtl"] .logo-container { flex-direction: row-reverse; }
         [dir="rtl"] .header-actions { flex-direction: row-reverse; }
+        /* ==========================================
+   CORRECTION RESPONSIVE MOBILE (HEADER & TYPO)
+   ========================================== */
+@media screen and (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 10px;
+    }
+
+    .logo-container {
+        justify-content: center;
+    }
+
+    .logo-container svg {
+        width: 38px;
+        height: 38px;
+    }
+
+    .brand-text h1 {
+        font-size: 1.25rem;
+    }
+
+    .header-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px !important;
+        width: 100%;
+    }
+
+    #ui-btn-tracker,
+    #ui-btn-desk,
+    .btn-reset {
+        font-size: 0.75rem !important;
+        padding: 4px 8px !important;
+    }
+
+    .lang-switch {
+        display: flex;
+        gap: 4px;
+    }
+
+    .lang-switch button {
+        padding: 3px 6px;
+        font-size: 0.75rem;
+    }
+
+    .slogan-ia {
+        font-size: 1.4rem !important;
+        line-height: 1.3;
+    }
+
+    .counter-container {
+        padding: 10px 5px;
+    }
+
+    .counter-container span {
+        font-size: 1.1rem !important;
+    }
+}
     </style>
 </head>
 <body>
@@ -78,7 +139,7 @@
             <path fill="rgba(212, 175, 55, 0.1)" stroke="#d4af37" stroke-width="2" d="m50 20 30 15v30L50 80 20 65V35Z"/>
             <circle cx="50" cy="50" r="8" fill="#d4af37"/>
         </svg>
-        
+           
         <h1 style="color: #d4af37; font-family: 'Cinzel', serif; letter-spacing: 3px; font-size: 2rem; margin-bottom: 10px;">PROJET e-META</h1>
         <p style="color: #8892b0; margin-bottom: 30px; max-width: 450px; font-size: 0.9rem; line-height: 1.6;">Le complexe stratégique est actuellement en phase de développement (Blackout). Accès restreint au personnel habilité.</p>
         
