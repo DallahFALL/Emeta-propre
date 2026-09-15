@@ -15,7 +15,7 @@ const uiDict = {
         hero1: "Le Diagnostic de l'Agent IA",
         hero2: "& L'Exécution de l'Expert Humain",
         sloganTech: "L'alliance absolue de la Data et du Terrain. L'IA e-META identifie vos failles, nos experts exécutifs déploient les solutions.",
-        bannerOts: "🛡️ <strong style='font-weight: 600;'>Souveraineté Absolue :</strong> Vos requêtes sont cryptées et ancrées sur la Blockchain (Proof of Existence) via <em style='text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);'>OpenTimestamps.org</em>",
+        bannerOts: "🛡️ <strong style='font-weight: 600;'>Souveraineté & Secret des Affaires :</strong> Vos requêtes sont cryptées de bout en bout, hébergées sur infrastructure dédiée et purgées après audit. Empreinte immuable scellée sur Bitcoin via <em style='text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);'>OpenTimestamps.org</em>",
         title01: "01. SÉLECTIONNEZ VOTRE NIVEAU D'ACCRÉDITATION",
         title02: "02. SOUMISSION DES DONNÉES",
         
@@ -72,7 +72,7 @@ const uiDict = {
         hero1: "AI Agent Diagnosis",
         hero2: "& Human Expert Execution",
         sloganTech: "The absolute alliance of Data and Fieldwork. e-META AI identifies your gaps, our executive experts deploy the solutions.",
-        bannerOts: "🛡️ <strong style='font-weight: 600;'>Absolute Sovereignty:</strong> Your requests are encrypted and anchored on the Blockchain (Proof of Existence) via <em style='text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);'>OpenTimestamps.org</em>",
+        bannerOts: "🛡️ <strong style='font-weight: 600;'>Sovereignty & Business Secrecy:</strong> Your inputs are end-to-end encrypted, processed on dedicated infrastructure and purged post-audit. Immutable timestamp anchored on Bitcoin via <em style='text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);'>OpenTimestamps.org</em>",
         title01: "01. SELECT YOUR ACCREDITATION LEVEL",
         title02: "02. DATA SUBMISSION",
         
@@ -129,7 +129,7 @@ const uiDict = {
         hero1: "El Diagnóstico del Agente IA",
         hero2: "& La Ejecución del Experto Humano",
         sloganTech: "La alianza absoluta de los Datos y el Terreno. La IA e-META identifica sus brechas, nuestros expertos ejecutivos despliegan las soluciones.",
-        bannerOts: "🛡️ <strong style='font-weight: 600;'>Soberanía Absoluta:</strong> Sus solicitudes están encriptadas y ancladas en la Blockchain a través de <em style='text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);'>OpenTimestamps.org</em>",
+        bannerOts: "🛡️ <strong style='font-weight: 600;'>Soberanía y Secreto Comercial:</strong> Sus datos están cifrados de extremo a extremo y purgados tras el diagnóstico. Huella inmutable anclada en Bitcoin a través de <em style='text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);'>OpenTimestamps.org</em>",
         title01: "01. SELECCIONE SU NIVEL DE ACREDITACIÓN",
         title02: "02. ENVÍO DE DATOS",
         
@@ -186,7 +186,7 @@ const uiDict = {
         hero1: "تشخيص وكيل الذكاء الاصطناعي",
         hero2: "وتنفيذ الخبير البشري",
         sloganTech: "التحالف المطلق بين البيانات والميدان. يحدد الذكاء الاصطناعي الثغرات، وينشر خبراؤنا التنفيذيون الحلول.",
-        bannerOts: "🛡️ <strong style='font-weight: 600;'>السيادة المطلقة:</strong> طلباتك مشفرة ومثبتة على البلوكشين عبر <em style='text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);'>OpenTimestamps.org</em>",
+        bannerOts: "🛡️ <strong style='font-weight: 600;'>السيادة والسرية المهنية:</strong> بياناتك مشفرة بالكامل ومعالجة عبر خوادم مخصصة. بصمة غير قابلة للتغيير مثبتة على البلوكشين عبر <em style='text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);'>OpenTimestamps.org</em>",
         title01: "01. حدد مستوى الاعتماد الخاص بك",
         title02: "02. تقديم البيانات",
         
