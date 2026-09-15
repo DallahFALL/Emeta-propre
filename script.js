@@ -37,7 +37,6 @@ const uiDict = {
         termTitle: "TERMINAL DE DÉTECTION IA",
         termDesc: "Définissez le cadre de votre mission et exposez votre problématique brute. L'Agent e-META analysera votre contexte pour générer l'audit approprié.",
         
-        // UX e-META : Directif et Exigeant
         lblMission: "NOM DE LA MISSION OU SECTEUR D'ACTIVITÉ",
         lblContexte: "PROBLÉMATIQUE ET CONTEXTE BRUT (Précisez : Quels sont vos outils actuels ? Où se situe la perte de marge ?)",
         lblFile: "Joindre un document de référence (Optionnel - PDF, DOCX, PNG, JPG)",
@@ -94,7 +93,6 @@ const uiDict = {
         termTitle: "AI DETECTION TERMINAL",
         termDesc: "Define the scope of your mission and expose your raw problem. The e-META Agent will analyze your context.",
         
-        // UX e-META : Directif et Exigeant
         lblMission: "MISSION NAME OR BUSINESS SECTOR",
         lblContexte: "RAW PROBLEM & CONTEXT (Specify: What are your current tools? Where is the margin loss?)",
         lblFile: "Attach a reference document (Optional - PDF, DOCX, PNG, JPG)",
@@ -151,7 +149,6 @@ const uiDict = {
         termTitle: "TERMINAL DE DETECCIÓN IA",
         termDesc: "Defina el alcance de su misión y exponga su problemática bruta. El Agente e-META analizará su contexto.",
         
-        // UX e-META : Directif et Exigeant
         lblMission: "NOMBRE DE LA MISIÓN O SECTOR DE ACTIVIDAD",
         lblContexte: "PROBLEMÁTICA Y CONTEXTO BRUTO (Especifique: ¿Cuáles son sus herramientas actuales? ¿Dónde está la pérdida de margen?)",
         lblFile: "Adjuntar un documento de referencia (Opcional - PDF, DOCX, PNG, JPG)",
@@ -175,7 +172,7 @@ const uiDict = {
         linkMentions: "Aviso Legal",
         linkCgv: "Términos y Condiciones",
         linkConf: "Política de Privacidad",
-        linkRemb: "Política de Reembolso",
+        linkRemb: "Refund Policy",
         footerRights: "&copy; 2026 E-META LABS SASU. Todos los derechos reservados.",
         footerUnit: "Strategic Intelligence Unit • Rosso - Dakar - Paris - Dubai - Shanghai - New York"
     },
@@ -220,7 +217,6 @@ const uiDict = {
         termTitle: "محطة الكشف بالذكاء الاصطناعي",
         termDesc: "حدد نطاق مهمتك واعرض مشكلتك الاستراتيجية. سيقوم وكيل e-META بتحليل السياق.",
         
-        // UX e-META : Directif et Exigeant
         lblMission: "اسم المهمة أو قطاع النشاط",
         lblContexte: "الإشكالية والسياق الأساسي (حدد: ما هي أدواتك الحالية؟ أين يقع فقدان الهامش؟)",
         lblFile: "إرفاق مستند مرجعي (اختياري - PDF, DOCX, PNG, JPG)",
