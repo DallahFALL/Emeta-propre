@@ -1,333 +1,342 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desk Exécutif | Onboarding Expert e-META LABS</title>
-    <!-- Favicon Officiel Hexagonal e-META LABS -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 90,25 90,75 50,95 10,75 10,25' fill='%2309131e' stroke='%23d4af37' stroke-width='7'/><circle cx='50' cy='50' r='10' fill='%23d4af37'/></svg>">
+    <meta name="theme-color" content="#050a12">
+    <meta name="description" content="Portail d'accréditation du Collège d'Expertise Exécutive e-META LABS." data-i18n-content="page.expert.description">
+    <title data-i18n="page.expert.title">Desk Exécutif | e-META LABS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="i18n.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,5 90,25 90,75 50,95 10,75 10,25' fill='%23050a12' stroke='%23d4af37' stroke-width='7'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23d4af37'/%3E%3C/svg%3E">
     <style>
         :root {
-            --primary-color: #0f172a;
-            --secondary-color: #3b82f6;
+            color-scheme: dark;
+            --black: #050a12;
+            --navy: #0a192f;
             --gold: #d4af37;
-            --bg-color: #f8fafc;
-            --text-color: #334155;
-            --border-radius: 8px;
+            --gold-light: #fceaa7;
+            --green: #25d366;
+            --white: #edf2f8;
+            --muted: #9aa8bb;
+            --line: rgba(212, 175, 55, 0.3);
+            --heading: "Cinzel", Georgia, serif;
+            --body: "Inter", "Segoe UI", sans-serif;
         }
-
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            min-width: 320px;
             min-height: 100vh;
+            margin: 0;
+            background:
+                radial-gradient(ellipse at 15% 0%, rgba(24, 55, 88, 0.38), transparent 38rem),
+                radial-gradient(ellipse at 88% 42%, rgba(212, 175, 55, 0.07), transparent 35rem),
+                var(--black);
+            color: var(--white);
+            font-family: var(--body);
+            line-height: 1.65;
         }
-
-        .container {
-            background: #ffffff;
-            max-width: 500px;
-            width: 90%;
-            padding: 40px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            margin: 40px 0;
-            position: relative;
+        a { color: inherit; text-decoration: none; }
+        button, input, select, textarea { font: inherit; }
+        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+            outline: 2px solid var(--gold-light);
+            outline-offset: 3px;
         }
-
-        .top-nav {
+        .page-shell { width: min(980px, calc(100% - 36px)); margin: 38px auto; }
+        .site-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 24px;
+            padding: 0 5px;
         }
-
-        .btn-return-home {
+        .brand { display: inline-flex; align-items: center; gap: 11px; }
+        .brand-logo { width: 42px; height: 42px; filter: drop-shadow(0 0 15px rgba(212, 175, 55, .24)); }
+        .brand-name { color: var(--white); font-family: var(--heading); font-size: .91rem; font-weight: 700; letter-spacing: .095em; white-space: nowrap; }
+        .header-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px 24px; }
+        .header-link { color: #d3dbe5; font-size: .76rem; font-weight: 650; transition: color 180ms ease; }
+        .header-link:hover { color: var(--gold-light); }
+        .lang-switch { display: inline-flex; align-items: center; gap: 4px; }
+        .lang-switch button { padding: 5px 4px; border: 0; background: transparent; color: #aab4c2; cursor: pointer; font-size: .66rem; }
+        .lang-switch button.active, .lang-switch button:hover { color: var(--gold-light); }
+        .glass-panel {
+            position: relative;
+            overflow: hidden;
+            padding: clamp(26px, 5.5vw, 58px);
+            border: 1px solid var(--line);
+            background: linear-gradient(145deg, rgba(17, 34, 64, .72), rgba(5, 10, 18, .86));
+            box-shadow: 0 26px 80px rgba(0, 0, 0, .42), inset 0 1px rgba(252, 234, 167, .05);
+            backdrop-filter: blur(18px);
+        }
+        .glass-panel::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(transparent, var(--gold), transparent);
+            content: "";
+        }
+        .page-heading { max-width: 770px; margin: 0 auto 34px; text-align: center; }
+        .badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            color: #64748b;
-            text-decoration: none;
+            min-height: 30px;
+            padding: 6px 12px;
+            border: 1px solid rgba(212, 175, 55, .48);
+            background: rgba(212, 175, 55, .09);
+            color: var(--gold-light);
+            font-size: .62rem;
+            font-weight: 800;
+            letter-spacing: .13em;
+        }
+        h1 {
+            margin: 18px 0 12px;
+            color: var(--gold-light);
+            font-family: var(--heading);
+            font-size: clamp(1.75rem, 4.5vw, 2.8rem);
             font-weight: 600;
-            font-size: 0.85rem;
-            transition: color 0.3s;
+            line-height: 1.25;
         }
-        .btn-return-home:hover {
-            color: var(--secondary-color);
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            color: #64748b;
-            font-size: 0.95rem;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--primary-color);
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="number"],
-        input[type="url"],
-        textarea,
-        select {
+        .page-heading p { margin: 0; color: #b1bdcc; font-size: .88rem; line-height: 1.8; }
+        .protocol-intro { margin-top: 13px !important; }
+        .protocol-intro a, .protocol-commitment a { color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px; }
+        .protocol-commitment { margin: 10px 2px 0; color: #b1bdcc; font-size: .76rem; line-height: 1.7; }
+        .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 19px 18px; }
+        .form-field { display: grid; gap: 7px; min-width: 0; }
+        .form-field-wide { grid-column: 1 / -1; }
+        .form-field label { color: #d7dfeb; font-size: .73rem; font-weight: 750; letter-spacing: .035em; }
+        .form-field input, .form-field select, .form-field textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: var(--border-radius);
-            box-sizing: border-box;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-            font-family: inherit;
+            min-height: 48px;
+            padding: 12px 14px;
+            border: 1px solid rgba(154, 168, 187, .3);
+            border-radius: 2px;
+            background: rgba(5, 10, 18, .78);
+            color: var(--white);
+            transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
         }
-
-        input:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        .form-field textarea { min-height: 124px; resize: vertical; }
+        .form-field select { color-scheme: dark; }
+        .form-field input::placeholder, .form-field textarea::placeholder { color: #718096; }
+        .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+            border-color: var(--gold);
+            outline: 0;
+            background: rgba(5, 10, 18, .96);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, .12), 0 0 20px rgba(212, 175, 55, .08);
         }
-
-        .checkbox-group {
+        .consent {
             display: flex;
             align-items: flex-start;
-            margin-top: 25px;
-            margin-bottom: 30px;
-            background-color: #f1f5f9;
-            padding: 15px;
-            border-radius: var(--border-radius);
+            gap: 12px;
+            margin-top: 24px;
+            padding: 15px 16px;
+            border: 1px solid rgba(212, 175, 55, .19);
+            background: rgba(212, 175, 55, .035);
+            color: #c4cedb;
+            font-size: .76rem;
+            line-height: 1.6;
         }
-
-        .checkbox-group input {
-            margin-top: 4px;
-            margin-right: 12px;
-            cursor: pointer;
-        }
-
-        .checkbox-group label {
-            font-weight: 400;
-            font-size: 0.85rem;
-            margin-bottom: 0;
-            cursor: pointer;
-        }
-
-        .checkbox-group a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .checkbox-group a:hover {
-            text-decoration: underline;
-        }
-
-        button {
+        .consent input { flex: 0 0 auto; width: 17px; height: 17px; margin: 2px 0 0; accent-color: var(--gold); }
+        .submit-button {
+            display: flex;
             width: 100%;
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 14px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: var(--border-radius);
+            min-height: 54px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 22px;
+            padding: 14px 20px;
+            border: 1px solid var(--gold);
+            background: linear-gradient(135deg, var(--gold), #aa8620);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, .18);
+            color: var(--black);
             cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #2563eb;
-        }
-        
-        button:disabled {
-            background-color: #94a3b8;
-            cursor: not-allowed;
-        }
-
-        .status-message {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: var(--border-radius);
+            font-size: .7rem;
+            font-weight: 800;
+            letter-spacing: .075em;
             text-align: center;
-            font-weight: 600;
-            font-size: 0.9rem;
+            transition: transform 180ms ease, box-shadow 180ms ease;
         }
-
-        .status-success {
-            background-color: #dcfce7;
-            color: #166534;
-            display: block;
+        .submit-button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(212, 175, 55, .34), 0 0 20px rgba(212, 175, 55, .13); }
+        .submit-button:disabled { cursor: wait; opacity: .68; }
+        .form-status { margin: 16px 0 0; padding: 12px 14px; border: 1px solid transparent; font-size: .8rem; }
+        .form-status:empty { display: none; }
+        .form-status[data-state="success"] { border-color: rgba(37, 211, 102, .35); background: rgba(37, 211, 102, .08); color: #9be8b5; }
+        .form-status[data-state="error"] { border-color: rgba(255, 141, 131, .35); background: rgba(255, 85, 75, .08); color: #ffaaa2; }
+        .site-footer {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px 24px;
+            margin-top: 22px;
+            padding: 17px 5px 0;
+            border-top: 1px solid rgba(212, 175, 55, .18);
+            color: #8996a8;
+            font-size: .66rem;
         }
-
-        .status-error {
-            background-color: #fee2e2;
-            color: #991b1b;
-            display: block;
+        .footer-links, .footer-contact { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+        .site-footer a:hover { color: var(--gold-light); }
+        @media (max-width: 640px) {
+            .page-shell { width: min(100% - 24px, 980px); margin: 18px auto 24px; }
+            .site-header { align-items: flex-start; flex-direction: column; }
+            .header-links { justify-content: flex-start; }
+            .form-grid { grid-template-columns: 1fr; gap: 16px; }
+            .form-field-wide { grid-column: auto; }
+            .site-footer { align-items: flex-start; flex-direction: column; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
         }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <div class="top-nav">
-            <a href="index.html" class="btn-return-home" id="backBtn" data-i18n="exp_btn_return">← Retour au Moteur IA</a>
-            <div style="display: flex; align-items: center; gap: 6px;">
-                <svg width="18" height="18" viewBox="0 0 100 100">
-                    <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="#09131e" stroke="#d4af37" stroke-width="8"/>
-                    <circle cx="50" cy="50" r="10" fill="#d4af37"/>
+    <div class="page-shell">
+        <header class="site-header">
+            <a class="brand" href="index.html" aria-label="e-META LABS, retour au Cockpit" data-i18n-aria-label="brand.home" data-lang-link>
+                <svg class="brand-logo" viewBox="0 0 100 100" aria-hidden="true">
+                    <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="none" stroke="#d4af37" stroke-width="6"></polygon>
+                    <circle cx="50" cy="50" r="10" fill="#d4af37"></circle>
                 </svg>
-                <span style="color: #0f172a; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.5px;">E-META LABS</span>
-            </div>
-        </div>
+                <span class="brand-name">e-META LABS</span>
+            </a>
+            <nav class="header-links" aria-label="Navigation institutionnelle" data-i18n-aria-label="navigation.institutional.aria">
+                <a class="header-link" href="index.html" data-i18n="expert.nav.home" data-lang-link>← Retour au Cockpit</a>
+                <a class="header-link" href="tracker.html" data-i18n="expert.nav.tracker" data-lang-link>Suivi Mission →</a>
+                <span class="lang-switch" aria-label="Sélecteur de langue" data-i18n-aria-label="language.aria">
+                    <button type="button" data-lang="fr" onclick="setLanguage('fr')">FR</button>
+                    <button type="button" data-lang="en" onclick="setLanguage('en')">EN</button>
+                    <button type="button" data-lang="es" onclick="setLanguage('es')">ES</button>
+                    <button type="button" data-lang="ar" onclick="setLanguage('ar')">AR</button>
+                </span>
+            </nav>
+        </header>
 
-        <div class="header">
-            <h1 data-i18n="exp_title">Desk Exécutif</h1>
-            <p data-i18n="exp_subtitle">Portail d'intégration pour les partenaires et experts e-META LABS.<br>Complétez votre profil pour recevoir des leads qualifiés.</p>
-        </div>
+        <main class="glass-panel">
+            <header class="page-heading">
+                <span class="badge" data-i18n="expert.badge">COLLÈGE D'EXPERTISE EXÉCUTIVE</span>
+                <h1 data-i18n="expert.title">Desk Exécutif &amp; Arbitrage Terrain</h1>
+                <p data-i18n="expert.subtitle">Portail d'accréditation pour consultants seniors, directeurs techniques et auditeurs d'élite. Participez à l'évaluation, au contreseing et au déploiement des mandats stratégiques e-META LABS (15 à 25 pages) auprès de Comités de Direction et Ministères.</p>
+                <p class="protocol-intro" data-i18n="expert.protocol.intro">Consultez les termes officiels du <a href="protocole-apport-affaires.html" data-lang-link>Protocole d'Apport d'Affaires – Desk Exécutif</a>.</p>
+            </header>
 
-        <form id="expertForm">
-            <!-- 1. NOM -->
-            <div class="form-group">
-                <label for="name" data-i18n="exp_lbl_name">Nom et Prénom *</label>
-                <input type="text" id="name" data-i18n="exp_ph_name" placeholder="Ex: Dallah FALL" required>
-            </div>
-
-            <!-- 2. EMAIL -->
-            <div class="form-group">
-                <label for="email" data-i18n="exp_lbl_email">Adresse E-mail Professionnelle *</label>
-                <input type="email" id="email" data-i18n="exp_ph_email" placeholder="contact@votre-entreprise.com" required>
-            </div>
-
-            <!-- 3. WHATSAPP -->
-            <div class="form-group">
-                <label for="whatsapp" data-i18n="exp_lbl_wa">Numéro WhatsApp (avec indicatif) *</label>
-                <input type="tel" id="whatsapp" data-i18n="exp_ph_wa" placeholder="Ex: +221 77 000 00 00" required>
-            </div>
-
-            <!-- 4. SPÉCIALITÉ -->
-            <div class="form-group">
-                <label for="specialty" data-i18n="exp_lbl_domain">Domaine d'Expertise Principal *</label>
-                <select id="specialty" required>
-                    <option value="" disabled selected data-i18n="exp_opt_def">Sélectionnez une spécialité...</option>
-                    <option value="GenAI & Data Science" data-i18n="exp_ai">GenAI & Data Science</option>
-                    <option value="Cybersécurité & Résilience" data-i18n="exp_cyber">Cybersécurité & Résilience</option>
-                    <option value="Ingénierie ESG & Climat" data-i18n="exp_esg">Ingénierie ESG & Climat</option>
-                    <option value="Web3 & Blockchain" data-i18n="exp_web3">Web3 & Blockchain</option>
-                    <option value="Marketing Digital & SEO" data-i18n="exp_mkt">Marketing Digital & SEO</option>
-                    <option value="Optimisation des Processus" data-i18n="exp_proc">Optimisation des Processus</option>
-                    <option value="Gestion des Talents (RH)" data-i18n="exp_hr">Gestion des Talents (RH)</option>
-                    <option value="Design Thinking & UX" data-i18n="exp_design">Design Thinking & UX</option>
-                    <option value="Go-to-Market & Growth Strategy" data-i18n="exp_gtm">Go-to-Market & Growth Strategy</option>
-                </select>
-            </div>
-
-            <!-- 5. ANNÉES D'EXPÉRIENCE -->
-            <div class="form-group">
-                <label for="experience" data-i18n="exp_lbl_exp">Années d'Expérience *</label>
-                <input type="number" id="experience" data-i18n="exp_ph_exp" min="1" placeholder="Ex: 5" required>
-            </div>
-
-            <!-- 6. LINKEDIN -->
-            <div class="form-group">
-                <label for="linkedin" data-i18n="exp_lbl_linkedin">Lien Profil LinkedIn *</label>
-                <input type="url" id="linkedin" data-i18n="exp_ph_linkedin" placeholder="https://linkedin.com/in/votre-profil" required>
-            </div>
-
-            <!-- 7. BIO -->
-            <div class="form-group">
-                <label for="bio" data-i18n="exp_lbl_bio">Courte Biographie (Missions, réalisations) *</label>
-                <textarea id="bio" data-i18n="exp_ph_bio" rows="4" placeholder="Décrivez votre parcours et vos réussites majeures..." required></textarea>
-            </div>
-
-            <div class="checkbox-group">
-                <label>
-                  <input type="checkbox" id="accept-protocol" required>
-                  <span data-i18n="exp_lbl_consent">J'accepte le</span> 
-                  <a href="https://e-metalabs.com/protocole-apport-affaires.html" target="_blank" rel="noopener noreferrer" data-i18n="link_protocol">Protocole d'Apport d'Affaires</a> 
-                  <span data-i18n="exp_lbl_collab">et les conditions de collaboration e-META LABS.</span>
+            <form id="expertForm" action="https://automation.e-metalabs.com/webhook/expert-valide" method="post">
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="name" data-i18n="expert.name">Nom &amp; Prénom <span aria-hidden="true">*</span></label>
+                        <input type="text" id="name" name="name" autocomplete="name" placeholder="Ex. Dallah FALL" data-i18n-placeholder="expert.placeholder.name" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="email" data-i18n="expert.email">Email Professionnel / Institutionnel <span aria-hidden="true">*</span></label>
+                        <input type="email" id="email" name="email" autocomplete="email" placeholder="nom@organisation.com" data-i18n-placeholder="expert.placeholder.email" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="whatsapp" data-i18n="expert.whatsapp">Ligne WhatsApp Directe (avec indicatif) <span aria-hidden="true">*</span></label>
+                        <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" placeholder="Ex. +221 77 000 00 00" data-i18n-placeholder="expert.placeholder.whatsapp" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="organization" data-i18n="expert.organization">Organisation / Fonction Actuelle <span aria-hidden="true">*</span></label>
+                        <input type="text" id="organization" name="organization" autocomplete="organization-title" placeholder="Organisation et fonction" data-i18n-placeholder="expert.placeholder.organization" required>
+                    </div>
+                    <div class="form-field form-field-wide">
+                        <label for="specialty" data-i18n="expert.sector">Domaine d'Excellence Sectoriel <span aria-hidden="true">*</span></label>
+                        <select id="specialty" name="specialty" required>
+                            <option value="" disabled selected data-i18n="expert.select">Sélectionnez votre domaine d'excellence...</option>
+                            <option value="Agro-industrie &amp; Souveraineté Alimentaire" data-i18n="sector.agro">Agro-industrie &amp; Souveraineté Alimentaire</option>
+                            <option value="Énergie, Mines &amp; Transition" data-i18n="sector.energy">Énergie, Mines &amp; Transition</option>
+                            <option value="Banque, FinTech &amp; Assurance" data-i18n="sector.banking">Banque, FinTech &amp; Assurance</option>
+                            <option value="Logistique, Ports &amp; Supply Chain" data-i18n="sector.logistics">Logistique, Ports &amp; Supply Chain</option>
+                            <option value="Santé, Pharma &amp; Biotechnologies" data-i18n="sector.health">Santé, Pharma &amp; Biotechnologies</option>
+                            <option value="Télécoms, Cloud &amp; Infrastructures" data-i18n="sector.telecom">Télécoms, Cloud &amp; Infrastructures</option>
+                            <option value="Immobilier, BTP &amp; Grands Travaux" data-i18n="sector.property">Immobilier, BTP &amp; Grands Travaux</option>
+                            <option value="Industrie Manufacturière &amp; Transformation" data-i18n="sector.manufacturing">Industrie Manufacturière &amp; Transformation</option>
+                            <option value="Secteur Public &amp; Para-public" data-i18n="sector.public">Secteur Public &amp; Para-public</option>
+                            <option value="Distribution, Retail &amp; Négoce" data-i18n="sector.retail">Distribution, Retail &amp; Négoce</option>
+                        </select>
+                    </div>
+                    <div class="form-field form-field-wide">
+                        <label for="bio" data-i18n="expert.bio">Notice Biographique ou Lien Profil (LinkedIn / Références) <span aria-hidden="true">*</span></label>
+                        <textarea id="bio" name="bio" autocomplete="off" placeholder="Présentez votre parcours, vos réalisations majeures et vos références professionnelles." data-i18n-placeholder="expert.placeholder.bio" required></textarea>
+                    </div>
+                </div>
+                <label class="consent" for="accept-protocol">
+                    <input type="checkbox" id="accept-protocol" name="secret_professional_commitment" value="true" required>
+                    <span data-i18n="expert.consent">J'atteste exercer sous secret professionnel et m'engage au respect strict des protocoles de souveraineté e-META LABS.</span>
                 </label>
-            </div>
+                <p class="protocol-commitment" data-i18n="expert.protocol.note">Les missions contresignées et prescrites relèvent du cadre contractuel défini par le <a href="protocole-apport-affaires.html" target="_blank" rel="noopener noreferrer" style="color: #d4af37; text-decoration: underline;">Protocole d'Apport d'Affaires e-META LABS</a>.</p>
+                <button class="submit-button" type="submit" id="submitBtn" data-i18n="expert.submit">SOUMETTRE MA CANDIDATURE D'ACCRÉDITATION</button>
+                <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+            </form>
+        </main>
 
-            <button type="submit" id="submitBtn" data-i18n="exp_btn_submit">Soumettre ma candidature</button>
-            <div id="formStatus" class="status-message"></div>
-        </form>
+        <footer class="site-footer">
+            <div class="footer-links" aria-label="Informations légales" data-i18n-aria-label="footer.legal.aria">
+                <a href="mentions-legales.html" data-i18n="footer.legal">Mentions légales</a>
+                <a href="cgv.html" data-i18n="footer.terms">CGV</a>
+                <a href="confidentialite.html" data-i18n="footer.privacy">Confidentialité</a>
+                <a href="protocole-apport-affaires.html" data-i18n="footer.legal.business_protocol" data-lang-link>Protocole d'Apport d'Affaires</a>
+            </div>
+            <div class="footer-contact">
+                <a href="mailto:contact@e-metalabs.com">contact@e-metalabs.com</a>
+                <a href="mailto:support@e-metalabs.com">support@e-metalabs.com</a>
+            </div>
+        </footer>
     </div>
 
-    <script src="i18n.js"></script>
     <script>
-        document.getElementById('expertForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const submitBtn = document.getElementById('submitBtn');
-            const statusDiv = document.getElementById('formStatus');
-            
-            submitBtn.textContent = 'Transmission cryptée en cours...';
-            submitBtn.disabled = true;
-            statusDiv.className = 'status-message';
+        const expertForm = document.getElementById("expertForm");
+        const submitButton = document.getElementById("submitBtn");
+        const formStatus = document.getElementById("formStatus");
+        let submitLabel = submitButton.textContent;
+        let currentLanguage = "fr";
 
-            const formData = {
-                nom: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                whatsapp: document.getElementById('whatsapp').value,
-                specialite: document.getElementById('specialty').value,
-                annees_experience: document.getElementById('experience').value,
-                linkedin: document.getElementById('linkedin').value,
-                bio: document.getElementById('bio').value
+        window.addEventListener("emeta:languagechange", (event) => {
+            currentLanguage = event.detail.lang;
+            submitLabel = window.EMETA_I18N.resolveTranslation(currentLanguage, "expert.submit");
+        });
+
+        expertForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            if (!expertForm.reportValidity()) return;
+
+            submitButton.disabled = true;
+            submitButton.textContent = window.EMETA_I18N.resolveTranslation(currentLanguage, "expert.sending");
+            formStatus.textContent = "";
+            formStatus.removeAttribute("data-state");
+
+            const formData = new FormData(expertForm);
+            const payload = {
+                nom: formData.get("name"),
+                email: formData.get("email"),
+                whatsapp: formData.get("whatsapp"),
+                organisation_fonction: formData.get("organization"),
+                specialite: formData.get("specialty"),
+                bio: formData.get("bio"),
+                secret_professionnel_accepte: formData.get("secret_professional_commitment") === "true"
             };
 
-            const webhookUrl = 'https://automation.e-metalabs.com/webhook/expert-valide';
-            
-            fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => {
-                if(response.ok) {
-                    statusDiv.innerHTML = '✅ <strong>Dossier transmis avec succès.</strong><br>Notre Board évalue actuellement votre profil. Une réponse vous sera apportée sous 48h.';
-                    statusDiv.className = 'status-message status-success';
-                    document.getElementById('expertForm').reset();
-                } else {
-                    throw new Error('Erreur réseau');
-                }
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-                statusDiv.textContent = '❌ Une erreur est survenue lors de la transmission au serveur souverain. Veuillez réessayer.';
-                statusDiv.className = 'status-message status-error';
-            })
-            .finally(() => {
-                submitBtn.textContent = 'Soumettre ma candidature';
-                submitBtn.disabled = false;
-            });
+            try {
+                const response = await fetch(expertForm.action, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) throw new Error(`Le serveur a répondu avec le statut ${response.status}.`);
+
+                expertForm.reset();
+                formStatus.dataset.state = "success";
+                formStatus.textContent = window.EMETA_I18N.resolveTranslation(currentLanguage, "expert.success");
+            } catch (error) {
+                console.error("Échec de transmission de la candidature :", error);
+                formStatus.dataset.state = "error";
+                formStatus.textContent = window.EMETA_I18N.resolveTranslation(currentLanguage, "expert.error");
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = submitLabel;
+            }
         });
     </script>
 </body>

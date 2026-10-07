@@ -1,403 +1,436 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E-META LABS | Suivi de Mission & Audit</title>
-  <!-- Favicon Officiel Hexagonal e-META LABS -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 90,25 90,75 50,95 10,75 10,25' fill='%2309131e' stroke='%23d4af37' stroke-width='7'/><circle cx='50' cy='50' r='10' fill='%23d4af37'/></svg>">
-  <style>
-    :root {
-      --bg: #09131e;
-      --card-bg: #0f1f30;
-      --gold: #d4af37;
-      --green: #10b981;
-      --text: #e2e8f0;
-    }
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      margin: 0;
-      padding: 40px 20px;
-    }
-    .tracker-card {
-      max-width: 800px;
-      margin: 0 auto;
-      background: var(--card-bg);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      border-radius: 12px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-    .top-bar-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 25px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    }
-    .nav-link {
-      color: #94a3b8;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.2s ease;
-    }
-    .nav-link:hover {
-      color: var(--gold);
-    }
-    .header-tracker {
-      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-      padding-bottom: 20px;
-      margin-bottom: 25px;
-    }
-    .badge {
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--green);
-      border: 1px solid var(--green);
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      display: inline-block;
-      font-weight: 600;
-    }
-    .step-list {
-      display: flex;
-      justify-content: space-between;
-      margin: 35px 0;
-      position: relative;
-    }
-    .step {
-      text-align: center;
-      flex: 1;
-      font-size: 0.85rem;
-    }
-    .step-num {
-      width: 36px;
-      height: 36px;
-      background: #1a2c3f;
-      border: 2px solid #334e68;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 8px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-    .step.active .step-num {
-      border-color: var(--gold);
-      color: var(--gold);
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
-    }
-    .step.completed .step-num {
-      background: var(--green);
-      border-color: var(--green);
-      color: #fff;
-    }
-    .hash-box {
-      background: #060d15;
-      padding: 15px;
-      border-radius: 6px;
-      font-family: monospace;
-      font-size: 0.85rem;
-      word-break: break-all;
-      border-left: 3px solid var(--gold);
-      color: #38bdf8;
-    }
-    .btn-action {
-      background: var(--green);
-      color: #000;
-      font-weight: bold;
-      border: none;
-      padding: 14px 24px;
-      border-radius: 6px;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 25px;
-      font-size: 0.95rem;
-      transition: background 0.2s ease;
-    }
-    .btn-action:disabled {
-      background: #059669;
-      color: #ffffff;
-      cursor: not-allowed;
-      opacity: 0.9;
-    }
-
-    [dir="rtl"] .top-bar-nav,
-    [dir="rtl"] .header-tracker > div {
-      flex-direction: row-reverse;
-    }
-    [dir="rtl"] .hash-box {
-      border-left: none;
-      border-right: 3px solid var(--gold);
-      text-align: right;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050a12">
+    <meta name="description" content="Suivi probatoire des jalons de mission e-META LABS." data-i18n-content="page.tracker.description">
+    <title data-i18n="page.tracker.title">Suivi Mission | e-META LABS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="i18n.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,5 90,25 90,75 50,95 10,75 10,25' fill='%23050a12' stroke='%23d4af37' stroke-width='7'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23d4af37'/%3E%3C/svg%3E">
+    <style>
+        :root {
+            color-scheme: dark;
+            --black: #050a12;
+            --navy: #0a192f;
+            --gold: #d4af37;
+            --gold-light: #fceaa7;
+            --green: #25d366;
+            --white: #edf2f8;
+            --muted: #9aa8bb;
+            --line: rgba(212, 175, 55, .24);
+            --heading: "Cinzel", Georgia, serif;
+            --body: "Inter", "Segoe UI", sans-serif;
+        }
+        * { box-sizing: border-box; }
+        body {
+            min-width: 320px;
+            min-height: 100vh;
+            margin: 0;
+            background:
+                radial-gradient(ellipse at 15% 0%, rgba(24, 55, 88, .38), transparent 38rem),
+                radial-gradient(ellipse at 88% 45%, rgba(212, 175, 55, .065), transparent 35rem),
+                var(--black);
+            color: var(--white);
+            font-family: var(--body);
+            line-height: 1.65;
+        }
+        a { color: inherit; text-decoration: none; }
+        button { font: inherit; }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; }
+        .page-shell { width: min(1000px, calc(100% - 36px)); margin: 38px auto 28px; }
+        .site-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 24px; padding: 0 5px; }
+        .brand { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 11px; }
+        .brand-logo { width: 42px; height: 42px; filter: drop-shadow(0 0 15px rgba(212, 175, 55, .24)); }
+        .brand-name { color: var(--white); font-family: var(--heading); font-size: .91rem; font-weight: 700; letter-spacing: .095em; white-space: nowrap; }
+        .header-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px 24px; }
+        .header-link { color: #d3dbe5; font-size: .76rem; font-weight: 650; transition: color 180ms ease; }
+        .header-link:hover, .footer-links a:hover { color: var(--gold-light); }
+        .lang-switch { display: inline-flex; align-items: center; gap: 4px; }
+        .lang-switch button { padding: 5px 4px; border: 0; background: transparent; color: #aab4c2; cursor: pointer; font-size: .66rem; }
+        .lang-switch button.active, .lang-switch button:hover { color: var(--gold-light); }
+        .glass-panel {
+            position: relative;
+            overflow: hidden;
+            padding: clamp(25px, 5vw, 50px);
+            border: 1px solid rgba(212, 175, 55, .3);
+            background: linear-gradient(145deg, rgba(17, 34, 64, .69), rgba(5, 10, 18, .86));
+            box-shadow: 0 26px 80px rgba(0, 0, 0, .42), inset 0 1px rgba(252, 234, 167, .05);
+            backdrop-filter: blur(18px);
+        }
+        .glass-panel::before { position: absolute; top: 0; left: 0; width: 2px; height: 100%; background: linear-gradient(transparent, var(--gold), transparent); content: ""; }
+        .mission-heading { padding-bottom: 23px; border-bottom: 1px solid var(--line); }
+        .mission-topline { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 15px; }
+        .mission-kicker { margin: 0 0 7px; color: #8795a8; font-size: .62rem; font-weight: 800; letter-spacing: .16em; }
+        .mission-ref { margin: 0; color: var(--gold-light); font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: clamp(1.15rem, 3vw, 1.7rem); font-weight: 700; letter-spacing: .035em; }
+        .status-pill { display: inline-flex; align-items: center; gap: 9px; min-height: 34px; padding: 7px 12px; border: 1px solid rgba(37, 211, 102, .35); background: rgba(37, 211, 102, .075); color: #9ce7b6; font-size: .64rem; font-weight: 800; letter-spacing: .075em; }
+        .status-dot { width: 8px; height: 8px; flex: 0 0 auto; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px rgba(37, 211, 102, .75); animation: status-pulse 1.8s ease-in-out infinite; }
+        @keyframes status-pulse { 50% { opacity: .38; box-shadow: 0 0 3px rgba(37, 211, 102, .25); } }
+        .mission-meta { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 14px 0 0; color: var(--muted); font-size: .71rem; }
+        .mission-meta strong { color: #d2d9e2; font-weight: 600; }
+        .mission-meta time { color: #d2d9e2; font-variant-numeric: tabular-nums; }
+        .section-heading { margin: 25px 0 0; color: var(--gold-light); font-family: var(--heading); font-size: .95rem; font-weight: 600; }
+        .timeline { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 28px 0 34px; }
+        .timeline::before { position: absolute; top: 18px; right: 11%; left: 11%; height: 1px; background: linear-gradient(90deg, rgba(37, 211, 102, .65), rgba(37, 211, 102, .65) 66%, rgba(212, 175, 55, .7)); content: ""; }
+        .step { position: relative; z-index: 1; display: flex; min-width: 0; flex-direction: column; align-items: center; gap: 10px; color: #c0cad6; font-size: .7rem; text-align: center; }
+        .step-label { max-width: 160px; }
+        .step-node { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid rgba(37, 211, 102, .7); border-radius: 50%; background: #0b1d27; color: var(--green); font-size: 1rem; font-weight: 800; box-shadow: 0 0 16px rgba(37, 211, 102, .13); }
+        .step.active .step-node { border: 2px solid var(--gold); background: rgba(212, 175, 55, .1); color: var(--gold-light); box-shadow: 0 0 0 5px rgba(212, 175, 55, .08), 0 0 21px rgba(212, 175, 55, .35); animation: gold-pulse 1.8s ease-in-out infinite; }
+        @keyframes gold-pulse { 50% { box-shadow: 0 0 0 8px rgba(212, 175, 55, .035), 0 0 9px rgba(212, 175, 55, .2); } }
+        .step.completed .step-label { color: #aee7bd; }
+        .step.active .step-label { color: var(--gold-light); font-weight: 700; }
+        .proof-card { padding: 19px; border: 1px solid rgba(212, 175, 55, .2); background: rgba(5, 10, 18, .53); }
+        .proof-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+        .proof-header h2 { margin: 0; color: var(--gold-light); font-family: var(--heading); font-size: .86rem; font-weight: 600; }
+        .proof-type { color: #8996a8; font-size: .58rem; font-weight: 700; letter-spacing: .11em; }
+        .hash-terminal { display: flex; min-height: 60px; align-items: center; gap: 12px; padding: 13px 15px; border: 1px solid rgba(212, 175, 55, .14); border-left: 2px solid var(--gold); background: #060d15; }
+        .terminal-cursor { color: var(--green); font-family: monospace; }
+        .hash-value { overflow-wrap: anywhere; color: #dfe7f1; font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: .75rem; line-height: 1.7; }
+        .proof-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 18px; margin-top: 13px; }
+        .copy-button { min-height: 36px; padding: 8px 12px; border: 1px solid rgba(212, 175, 55, .38); background: rgba(212, 175, 55, .06); color: var(--gold-light); cursor: pointer; font-size: .67rem; font-weight: 700; transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease; }
+        .copy-button:hover { border-color: var(--gold); background: rgba(212, 175, 55, .12); box-shadow: 0 0 15px rgba(212, 175, 55, .1); }
+        .ots-badge { display: inline-flex; align-items: center; gap: 7px; color: #c4cedb; font-size: .64rem; }
+        .ots-badge > span:first-child { color: var(--gold); }
+        .ots-badge.is-verified { color: #a9e9bd; }
+        .ots-badge.is-verified > span:first-child { color: var(--green); }
+        .proof-link { display: inline-flex; margin-top: 12px; color: #c3d1df; font-size: .68rem; text-decoration: underline; text-decoration-color: rgba(212, 175, 55, .5); text-underline-offset: 4px; }
+        .proof-link:hover { color: var(--gold-light); }
+        .action-status { min-height: 1.4em; margin: 9px 0 0; color: var(--muted); font-size: .72rem; }
+        .action-status[data-state="error"] { color: #ffaaa2; }
+        .action-status[data-state="success"] { color: #9ce7b6; }
+        .validate-button {
+            display: flex;
+            width: 100%;
+            min-height: 54px;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 18px;
+            padding: 13px 18px;
+            border: 1px solid rgba(37, 211, 102, .8);
+            background: linear-gradient(135deg, #25d366, #149447);
+            box-shadow: 0 8px 24px rgba(37, 211, 102, .13);
+            color: #04110a;
+            cursor: pointer;
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .055em;
+            text-align: center;
+            transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+        }
+        .validate-button:hover:not(:disabled) { transform: translateY(-2px); background: linear-gradient(135deg, #54f08a, #25d366); box-shadow: 0 10px 32px rgba(37, 211, 102, .32), 0 0 20px rgba(37, 211, 102, .2); }
+        .validate-button:disabled { cursor: not-allowed; opacity: .65; }
+        .site-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; margin-top: 22px; padding: 17px 5px 0; border-top: 1px solid rgba(212, 175, 55, .18); color: #8996a8; font-size: .66rem; }
+        .footer-links, .footer-contact { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+        .site-footer a:hover { color: var(--gold-light); }
+        [dir="rtl"] .hash-terminal { border-right: 2px solid var(--gold); border-left: 1px solid rgba(212, 175, 55, .14); }
+        @media (max-width: 640px) {
+            .page-shell { width: min(100% - 24px, 1000px); margin: 18px auto 24px; }
+            .site-header { align-items: flex-start; flex-direction: column; }
+            .header-links { justify-content: flex-start; }
+            .mission-topline { align-items: flex-start; flex-direction: column-reverse; }
+            .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 10px; }
+            .timeline::before { display: none; }
+            .site-footer { align-items: flex-start; flex-direction: column; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+        }
+    </style>
 </head>
 <body>
+    <div class="page-shell">
+        <header class="site-header">
+            <a class="brand" href="index.html" id="link-return-home" aria-label="e-META LABS, retour au Cockpit" data-i18n-aria-label="brand.home" data-lang-link>
+                <svg class="brand-logo" viewBox="0 0 100 100" aria-hidden="true">
+                    <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="none" stroke="#d4af37" stroke-width="6"></polygon>
+                    <circle cx="50" cy="50" r="10" fill="#d4af37"></circle>
+                </svg>
+                <span class="brand-name">e-META LABS</span>
+            </a>
+            <nav class="header-links" aria-label="Navigation institutionnelle" data-i18n-aria-label="navigation.institutional.aria">
+                <a class="header-link" href="index.html" id="ui-trk-return" data-i18n="tracker.nav.home" data-lang-link>← Retour au Cockpit</a>
+                <a class="header-link" href="expert.html" id="link-desk" data-lang-link><span id="ui-trk-desk" data-i18n="tracker.nav.expert">Desk Exécutif</span> →</a>
+                <span class="lang-switch" aria-label="Sélecteur de langue" data-i18n-aria-label="language.aria">
+                    <button type="button" data-lang="fr" onclick="setLanguage('fr')">FR</button>
+                    <button type="button" data-lang="en" onclick="setLanguage('en')">EN</button>
+                    <button type="button" data-lang="es" onclick="setLanguage('es')">ES</button>
+                    <button type="button" data-lang="ar" onclick="setLanguage('ar')">AR</button>
+                </span>
+            </nav>
+        </header>
 
-<div class="tracker-card">
-  <!-- Barre Supérieure de Navigation avec Logo et Renvois -->
-  <div class="top-bar-nav">
-    <a href="index.html" class="nav-link" id="link-return-home">
-      <span id="arrow-return">←</span> <span id="ui-trk-return">Retour au Moteur IA</span>
-    </a>
+        <main class="glass-panel">
+            <section class="mission-heading" aria-labelledby="mission-ref">
+                <div class="mission-topline">
+                    <div>
+                        <p class="mission-kicker" data-i18n="tracker.kicker">SUIVI PROBATOIRE DE MISSION</p>
+                        <h1 class="mission-ref"><span id="ui-trk-lbl-mission" data-i18n="tracker.mission">MISSION</span> : <span id="mission-ref">MIS-2026-001</span></h1>
+                    </div>
+                    <span class="status-pill" id="mission-status"><span class="status-dot" aria-hidden="true"></span><span id="status-label" data-i18n="tracker.running">EN COURS D'EXÉCUTION</span></span>
+                </div>
+                <p class="mission-meta">
+                    <span><strong data-i18n="tracker.anchor">Date d'ancrage :</strong> <time id="anchor-date"></time></span>
+                    <span><strong data-i18n="tracker.clock">Horodatage temps réel :</strong> <time id="live-time" aria-live="off"></time></span>
+                </p>
+            </section>
 
-    <div style="display: flex; align-items: center; gap: 8px;">
-      <svg width="22" height="22" viewBox="0 0 100 100">
-        <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="#09131e" stroke="#d4af37" stroke-width="8"/>
-        <circle cx="50" cy="50" r="12" fill="#d4af37"/>
-      </svg>
-      <span style="color: var(--gold); font-size: 0.85rem; font-weight: bold; letter-spacing: 1px;">E-META LABS</span>
+            <section aria-labelledby="timeline-heading">
+                <h2 class="section-heading" id="timeline-heading" data-i18n="tracker.timeline">Chronologie de la mission</h2>
+                <div class="timeline" aria-label="Quatre jalons de mission" data-i18n-aria-label="tracker.timeline.aria">
+                    <div class="step completed" id="step-1">
+                        <span class="step-node" aria-label="Validé" data-i18n-aria-label="tracker.step.validated">✓</span>
+                        <span class="step-label" id="ui-step-1" data-i18n="tracker.step.1">Diagnostic IA</span>
+                    </div>
+                    <div class="step completed" id="step-2">
+                        <span class="step-node" aria-label="Validé" data-i18n-aria-label="tracker.step.validated">✓</span>
+                        <span class="step-label" id="ui-step-2" data-i18n="tracker.step.2">Scellement Légal OTS</span>
+                    </div>
+                    <div class="step completed" id="step-3">
+                        <span class="step-node" aria-label="Validé" data-i18n-aria-label="tracker.step.validated">✓</span>
+                        <span class="step-label" id="ui-step-3" data-i18n="tracker.step.3">Déploiement Expert</span>
+                    </div>
+                    <div class="step active" id="step-4">
+                        <span class="step-node" id="step-num-4" aria-label="En cours" data-i18n-aria-label="tracker.step.running">4</span>
+                        <span class="step-label" id="ui-step-4" data-i18n="tracker.step.4">Recette &amp; Clôture</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="proof-card" aria-labelledby="ui-trk-lbl-hash">
+                <div class="proof-header">
+                    <h2 id="ui-trk-lbl-hash" data-i18n="tracker.hash">Empreinte Probatoire (SHA-256)</h2>
+                    <span class="proof-type" data-i18n="tracker.proof.type">TERMINAL CRYPTOGRAPHIQUE</span>
+                </div>
+                <div class="hash-terminal" aria-live="polite">
+                    <span class="terminal-cursor" aria-hidden="true">&gt;_</span>
+                    <code class="hash-value" id="sha-hash" data-i18n="tracker.hash.pending">Empreinte en attente de synchronisation du registre sécurisé.</code>
+                </div>
+                <div class="proof-actions">
+                    <button class="copy-button" type="button" id="copy-hash" data-i18n="tracker.copy">Copier l'empreinte</button>
+                    <span class="ots-badge" id="ots-badge"><span aria-hidden="true">◆</span><span id="ots-badge-label" data-i18n="tracker.ots">Scellement OpenTimestamps — preuve à synchroniser</span></span>
+                </div>
+                <a class="proof-link" href="https://opentimestamps.org/" target="_blank" rel="noopener noreferrer" data-i18n="tracker.verify">Vérifier la preuve d'existence sur OpenTimestamps.org ↗</a>
+                <p class="action-status" id="copy-status" role="status" aria-live="polite"></p>
+            </section>
+
+            <button class="validate-button" id="btn-valider" type="button">
+                <span aria-hidden="true">✓</span>
+                <span id="validation-label" data-i18n="tracker.validate">VALIDER LE JALON ACTUEL (RECETTE)</span>
+            </button>
+            <p class="action-status" id="validation-status" role="status" aria-live="polite"></p>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-links" aria-label="Informations légales" data-i18n-aria-label="footer.legal.aria">
+                <a href="mentions-legales.html" data-i18n="footer.legal">Mentions légales</a>
+                <a href="cgv.html" data-i18n="footer.terms">CGV</a>
+                <a href="confidentialite.html" data-i18n="footer.privacy">Confidentialité</a>
+            </div>
+            <div class="footer-contact">
+                <a href="mailto:contact@e-metalabs.com">contact@e-metalabs.com</a>
+                <a href="mailto:support@e-metalabs.com">support@e-metalabs.com</a>
+            </div>
+        </footer>
     </div>
 
-    <a href="expert.html" class="nav-link" id="link-desk">
-      <span id="ui-trk-desk">Desk Exécutif</span> <span id="arrow-desk">→</span>
-    </a>
-  </div>
+    <script>
+        const translations = {
+            fr: {
+                returnHome: "← Retour au Cockpit", desk: "Desk Exécutif", mission: "MISSION",
+                running: "EN COURS D'EXÉCUTION", closed: "MISSION CLÔTURÉE & VALIDÉE",
+                steps: ["Diagnostic IA", "Scellement Légal OTS", "Déploiement Expert", "Recette & Clôture"],
+                validate: "VALIDER LE JALON ACTUEL (RECETTE)", validated: "MISSION RECETTÉE & CLÔTURÉE ✓",
+                hashCopied: "Empreinte copiée dans le presse-papiers.", hashMissing: "Aucune empreinte SHA-256 n'est synchronisée pour cette mission.",
+                validationSuccess: "Jalon validé. La notification a été transmise à l'équipe.",
+                validationError: "La validation n'a pas pu être transmise. Réessayez ou contactez support@e-metalabs.com."
+            },
+            en: {
+                returnHome: "← Back to Cockpit", desk: "Executive Desk", mission: "MISSION",
+                running: "IN PROGRESS", closed: "MISSION CLOSED & VALIDATED",
+                steps: ["AI Diagnostic", "Legal OTS Sealing", "Expert Deployment", "Acceptance & Closing"],
+                validate: "VALIDATE CURRENT MILESTONE (ACCEPTANCE)", validated: "MISSION ACCEPTED & CLOSED ✓",
+                hashCopied: "Fingerprint copied to clipboard.", hashMissing: "No SHA-256 fingerprint is synchronized for this mission.",
+                validationSuccess: "Milestone validated. The team has been notified.",
+                validationError: "Validation could not be sent. Please retry or contact support@e-metalabs.com."
+            },
+            es: {
+                returnHome: "← Volver al Cockpit", desk: "Desk Ejecutivo", mission: "MISIÓN",
+                running: "EN CURSO DE EJECUCIÓN", closed: "MISIÓN CERRADA Y VALIDADA",
+                steps: ["Diagnóstico IA", "Sellado Legal OTS", "Despliegue Experto", "Recepción y Cierre"],
+                validate: "VALIDAR EL HITO ACTUAL (RECEPCIÓN)", validated: "MISIÓN ACEPTADA Y CERRADA ✓",
+                hashCopied: "Huella copiada al portapapeles.", hashMissing: "No hay una huella SHA-256 sincronizada para esta misión.",
+                validationSuccess: "Hito validado. Se ha notificado al equipo.",
+                validationError: "No se pudo enviar la validación. Inténtelo de nuevo o contacte con support@e-metalabs.com."
+            },
+            ar: {
+                returnHome: "العودة إلى لوحة التحكم ←", desk: "المكتب التنفيذي", mission: "المهمة",
+                running: "قيد التنفيذ", closed: "أُغلقت المهمة وتم اعتمادها",
+                steps: ["تشخيص الذكاء الاصطناعي", "الختم القانوني OTS", "نشر الخبراء", "الاستلام والإغلاق"],
+                validate: "اعتماد المرحلة الحالية (الاستلام)", validated: "تم اعتماد المهمة وإغلاقها ✓",
+                hashCopied: "تم نسخ البصمة إلى الحافظة.", hashMissing: "لا توجد بصمة SHA-256 متزامنة لهذه المهمة.",
+                validationSuccess: "تم اعتماد المرحلة وإخطار الفريق.",
+                validationError: "تعذر إرسال الاعتماد. حاول مرة أخرى أو تواصل مع support@e-metalabs.com."
+            }
+        };
 
-  <div class="header-tracker">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <h2 style="color: var(--gold); margin: 0;"><span id="ui-trk-lbl-mission">MISSION</span> : <span id="mission-ref">MIS-2026-001</span></h2>
-      <span class="badge" id="mission-status">En Cours d'Exécution</span>
-    </div>
-    <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 8px;" id="mission-sector"></p>
-  </div>
-
-  <div class="step-list">
-    <div class="step completed" id="step-1">
-      <div class="step-num">✓</div>
-      <span id="ui-step-1">Diagnostic IA</span>
-    </div>
-    <div class="step completed" id="step-2">
-      <div class="step-num">✓</div>
-      <span id="ui-step-2">Scellement Légal</span>
-    </div>
-    <div class="step completed" id="step-3">
-      <div class="step-num" id="step-num-3">✓</div>
-      <span id="ui-step-3">Déploiement Expert</span>
-    </div>
-    <div class="step active" id="step-4">
-      <div class="step-num" id="step-num-4">4</div>
-      <span id="ui-step-4">Recette & Clôture</span>
-    </div>
-  </div>
-
-  <div>
-    <h4 style="color: var(--gold); margin-bottom: 8px;" id="ui-trk-lbl-hash">EMPREINTE PROBATOIRE (SHA-256)</h4>
-    <div class="hash-box" id="sha-hash">8edd731bf91184ec57df8ff91184ec57df8ff2026 (Scellé OpenTimestamps)</div>
-  </div>
-
-  <button class="btn-action" id="btn-valider" onclick="validerJalon()">VALIDER LE JALON ACTUEL (RECETTE)</button>
-</div>
-
-<script>
-  // ==========================================
-  // 1. DICTIONNAIRE MULTILINGUE TRACKER
-  // ==========================================
-  const trkDict = {
-    fr: {
-      returnHome: "Retour au Moteur IA",
-      desk: "Desk Exécutif",
-      lblMission: "MISSION",
-      statusRunning: "En Cours d'Exécution",
-      statusClosed: "Mission Clôturée & Validée",
-      step1: "Diagnostic IA",
-      step2: "Scellement Légal",
-      step3: "Déploiement Expert",
-      step4: "Recette & Clôture",
-      lblHash: "EMPREINTE PROBATOIRE (SHA-256)",
-      btnAction: "VALIDER LE JALON ACTUEL (RECETTE)",
-      btnClosed: "MISSION RECETTÉE & CLÔTURÉE ✓",
-      alertValidated: "Jalon validé avec succès par le client. Notification transmise à l’équipe."
-    },
-    en: {
-      returnHome: "Back to AI Engine",
-      desk: "Expert Desk",
-      lblMission: "MISSION",
-      statusRunning: "In Progress",
-      statusClosed: "Mission Closed & Certified",
-      step1: "AI Diagnostic",
-      step2: "Legal Sealing",
-      step3: "Expert Deployment",
-      step4: "Acceptance & Closing",
-      lblHash: "PROBATORY FINGERPRINT (SHA-256)",
-      btnAction: "VALIDATE CURRENT MILESTONE (ACCEPTANCE)",
-      btnClosed: "MISSION ACCEPTED & CLOSED ✓",
-      alertValidated: "Milestone successfully validated. Team notified."
-    },
-    es: {
-      returnHome: "Volver al Motor IA",
-      desk: "Portal de Expertos",
-      lblMission: "MISIÓN",
-      statusRunning: "En Curso de Ejecución",
-      statusClosed: "Misión Cerrada y Validada",
-      step1: "Diagnóstico IA",
-      step2: "Sellado Legal",
-      step3: "Despliegue Experto",
-      step4: "Recepción y Cierre",
-      lblHash: "HUELLA PROBATORIA (SHA-256)",
-      btnAction: "VALIDAR HITO ACTUAL (RECEPCIÓN)",
-      btnClosed: "MISIÓN ACEPTADA Y CERRADA ✓",
-      alertValidated: "Hito validado con éxito. Notificación enviada al equipo."
-    },
-    ar: {
-      returnHome: "العودة إلى محرك الذكاء الاصطناعي",
-      desk: "بوابة الخبراء",
-      lblMission: "المهمة",
-      statusRunning: "قيد التنفيذ",
-      statusClosed: "تمت مراجعة المهمة وإغلاقها",
-      step1: "تشخيص الذكاء الاصطناعي",
-      step2: "التوثيق القانوني",
-      step3: "نشر الخبراء",
-      step4: "الاستلام والإغلاق",
-      lblHash: "البصمة الإثباتية (SHA-256)",
-      btnAction: "اعتماد المرحلة الحالية (الاستلام)",
-      btnClosed: "تم اعتماد المهمة وإغلاقها ✓",
-      alertValidated: "تم اعتماد المرحلة بنجاح. تم إرسال الإشعار للفريق."
-    }
-  };
-
-  // ==========================================
-  // 2. DÉTECTION ET APPLICATION DE LA LANGUE
-  // ==========================================
-  const urlParams = new URLSearchParams(window.location.search);
-  const ref = urlParams.get('ref') || 'MIS-2026-001';
-  document.getElementById('mission-ref').innerText = ref;
-
-  let currentLang = urlParams.get('lang') || localStorage.getItem('emeta_lang') || 'fr';
-  if (!['fr', 'en', 'es', 'ar'].includes(currentLang)) currentLang = 'fr';
-
-  function applyTrackerLang(lang) {
-    const t = trkDict[lang];
-    document.documentElement.lang = lang;
-    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-
-    document.getElementById('ui-trk-return').innerText = t.returnHome;
-    document.getElementById('ui-trk-desk').innerText = t.desk;
-    document.getElementById('ui-trk-lbl-mission').innerText = t.lblMission;
-    document.getElementById('ui-step-1').innerText = t.step1;
-    document.getElementById('ui-step-2').innerText = t.step2;
-    document.getElementById('ui-step-3').innerText = t.step3;
-    document.getElementById('ui-step-4').innerText = t.step4;
-    document.getElementById('ui-trk-lbl-hash').innerText = t.lblHash;
-    
-    // Liens avec maintien de la langue
-    document.getElementById('link-return-home').href = `index.html?lang=${lang}`;
-    document.getElementById('link-desk').href = `expert.html?lang=${lang}`;
-
-    if (lang === 'ar') {
-      document.getElementById('arrow-return').innerText = '→';
-      document.getElementById('arrow-desk').innerText = '←';
-    } else {
-      document.getElementById('arrow-return').innerText = '←';
-      document.getElementById('arrow-desk').innerText = '→';
-    }
-
-    const btn = document.getElementById('btn-valider');
-    if (btn && !btn.disabled) {
-      btn.innerText = t.btnAction;
-    }
-  }
-
-  applyTrackerLang(currentLang);
-
-  // ==========================================
-  // 3. LOGIQUE DYNAMIQUE & CLÔTURE
-  // ==========================================
-  function appliquerClotureVisuelle() {
-    const t = trkDict[currentLang];
-    const step4 = document.getElementById('step-4');
-    const stepNum4 = document.getElementById('step-num-4');
-    if (step4 && stepNum4) {
-      step4.className = 'step completed';
-      stepNum4.innerText = '✓';
-    }
-
-    const statusBadge = document.getElementById('mission-status');
-    if (statusBadge) {
-      statusBadge.innerText = t.statusClosed;
-    }
-
-    const btn = document.getElementById('btn-valider');
-    if (btn) {
-      btn.innerText = t.btnClosed;
-      btn.disabled = true;
-    }
-  }
-
-  async function loadMissionData() {
-    const token = 'nc_pat__GqKbk1rqNrsr_9SG04Rp-ZXSbZEkeyRqtxivtcs';
-    try {
-      const res = await fetch(`https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mflt58hd329r4sf/records?pageSize=25`, {
-        method: 'GET',
-        headers: {
-          'xc-token': token,
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+        const urlParams = new URLSearchParams(window.location.search);
+        const reference = urlParams.get("ref") || "MIS-2026-001";
+        let preferredLang = "fr";
+        try {
+            preferredLang = urlParams.get("lang") || localStorage.getItem("emeta_lang") || "fr";
+        } catch (error) {
+            console.warn("La langue mémorisée est inaccessible ; le français est utilisé.", error);
         }
-      });
+        const langParam = preferredLang;
+        let currentLang = Object.hasOwn(translations, langParam) ? langParam : "fr";
+        let text = translations[currentLang];
+        let missionClosed = false;
+        const missionHash = urlParams.get("hash") || "";
+        const hashIsValid = /^[a-f\d]{64}$/i.test(missionHash);
 
-      if (res.ok) {
-        const data = await res.json();
-        const items = data.records || data.list || (Array.isArray(data) ? data : []);
-        if (items.length > 0) {
-          const row = items.find(r => r.Reference_Paiement === ref || r.Title === ref) || items[0];
-          
-          const hashElem = document.getElementById('sha-hash');
-          if (hashElem && row.Recu_Hash) {
-            hashElem.innerText = row.Recu_Hash;
-          }
+        document.documentElement.lang = currentLang;
+        document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+        document.getElementById("mission-ref").textContent = reference;
+        document.getElementById("ui-trk-lbl-mission").textContent = text.mission;
+        document.getElementById("ui-trk-return").textContent = text.returnHome;
+        document.getElementById("ui-trk-desk").textContent = text.desk;
+        text.steps.forEach((label, index) => {
+            document.getElementById(`ui-step-${index + 1}`).textContent = label;
+        });
+        document.getElementById("validation-label").textContent = text.validate;
 
-          const statut = (row.Statut_Paiement || '').toLowerCase();
-          if (statut.includes('payé') || statut.includes('valid') || statut.includes('cerrada') || statut.includes('closed')) {
-            appliquerClotureVisuelle();
-          } else {
-            const statusBadge = document.getElementById('mission-status');
-            if (statusBadge) statusBadge.innerText = trkDict[currentLang].statusRunning;
-          }
+        const returnLink = document.getElementById("link-return-home");
+        const deskLink = document.getElementById("link-desk");
+        returnLink.href = `index.html?lang=${encodeURIComponent(currentLang)}`;
+        deskLink.href = `expert.html?lang=${encodeURIComponent(currentLang)}`;
+        deskLink.lastChild.textContent = currentLang === "ar" ? " ←" : " →";
+
+        const anchorDate = new Date();
+        const anchorDateElement = document.getElementById("anchor-date");
+        const liveTimeElement = document.getElementById("live-time");
+        function updateClock() {
+            const now = new Date();
+            anchorDateElement.dateTime = anchorDate.toISOString();
+            anchorDateElement.textContent = new Intl.DateTimeFormat(currentLang, {
+                day: "2-digit", month: "long", year: "numeric"
+            }).format(anchorDate);
+            liveTimeElement.dateTime = now.toISOString();
+            liveTimeElement.textContent = new Intl.DateTimeFormat(currentLang, {
+                hour: "2-digit", minute: "2-digit", second: "2-digit", timeZoneName: "short"
+            }).format(now);
         }
-      }
-    } catch (e) {
-      const hashElem = document.getElementById('sha-hash');
-      if (hashElem) {
-        hashElem.innerText = '8edd731bf91184ec57df8ff91184ec57df8ff2026 (Scellé OpenTimestamps)';
-      }
-    }
-  }
+        updateClock();
+        window.setInterval(updateClock, 1000);
 
-  loadMissionData();
+        const hashElement = document.getElementById("sha-hash");
+        const copyStatus = document.getElementById("copy-status");
+        if (hashIsValid) {
+            hashElement.textContent = missionHash.toLowerCase();
+            document.getElementById("ots-badge-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.ots.verified");
+            document.getElementById("ots-badge").classList.add("is-verified");
+        }
+        window.addEventListener("emeta:languagechange", (event) => {
+            currentLang = event.detail.lang;
+            text = translations[currentLang];
+            document.getElementById("ui-trk-lbl-mission").textContent = text.mission;
+            document.getElementById("ui-trk-return").textContent = text.returnHome;
+            document.getElementById("ui-trk-desk").textContent = text.desk;
+            text.steps.forEach((label, index) => {
+                document.getElementById(`ui-step-${index + 1}`).textContent = label;
+            });
+            document.getElementById("status-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.running");
+            document.getElementById("validation-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.validate");
+            document.getElementById("ui-trk-return").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.nav.home");
+            document.getElementById("ui-trk-desk").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.nav.expert");
+            document.getElementById("timeline-heading").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.timeline");
+            document.getElementById("ui-trk-lbl-hash").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.hash");
+            document.getElementById("copy-hash").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.copy");
+            document.getElementById("anchor-date").previousElementSibling.textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.anchor");
+            document.getElementById("live-time").previousElementSibling.textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.clock");
+            if (!hashIsValid) {
+                hashElement.textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.hash.pending");
+                document.getElementById("ots-badge-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.ots");
+            } else {
+                document.getElementById("ots-badge-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.ots.verified");
+            }
+            if (copyStatus.dataset.state === "success") {
+                copyStatus.textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.copy.success");
+            } else if (copyStatus.dataset.state === "error") {
+                copyStatus.textContent = window.EMETA_I18N.resolveTranslation(currentLang, hashIsValid ? "tracker.copy.fail" : "tracker.copy.missing");
+            }
+            if (validationStatus.dataset.state === "success") {
+                validationStatus.textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.validation.success");
+            } else if (validationStatus.dataset.state === "error") {
+                validationStatus.textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.validation.error");
+            }
+            if (missionClosed) {
+                document.getElementById("status-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.closed");
+                document.getElementById("validation-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.validated");
+                document.getElementById("step-num-4").setAttribute("aria-label", window.EMETA_I18N.resolveTranslation(currentLang, "tracker.step.validated"));
+            }
+            deskLink.lastChild.textContent = currentLang === "ar" ? " ←" : " →";
+            updateClock();
+        });
+        document.getElementById("copy-hash").addEventListener("click", async () => {
+            copyStatus.removeAttribute("data-state");
+            try {
+                if (!hashIsValid) throw new Error("Aucune empreinte SHA-256 valide n'est disponible.");
+                await navigator.clipboard.writeText(missionHash.toLowerCase());
+                copyStatus.dataset.state = "success";
+                copyStatus.textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.copy.success");
+            } catch (error) {
+                console.error("Impossible de copier l'empreinte :", error);
+                copyStatus.dataset.state = "error";
+                copyStatus.textContent = hashIsValid
+                    ? window.EMETA_I18N.resolveTranslation(currentLang, "tracker.copy.fail")
+                    : window.EMETA_I18N.resolveTranslation(currentLang, "tracker.copy.missing");
+            }
+        });
 
-  function validerJalon() {
-    const btn = document.getElementById('btn-valider');
-    btn.innerText = '...';
+        const validateButton = document.getElementById("btn-valider");
+        const validationStatus = document.getElementById("validation-status");
+        const validationUrl = "https://automation.e-metalabs.com/webhook/validation-jalon-client";
+        validateButton.addEventListener("click", async () => {
+            if (validateButton.disabled) return;
+            validateButton.disabled = true;
+            validationStatus.removeAttribute("data-state");
+            validationStatus.textContent = "";
+            try {
+                const response = await fetch(validationUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        ref: reference,
+                        langue: currentLang,
+                        action: "recette_validee",
+                        timestamp: new Date().toISOString()
+                    })
+                });
+                if (!response.ok) throw new Error(`Le webhook a répondu avec le statut ${response.status}.`);
 
-    appliquerClotureVisuelle();
-
-    fetch('https://automation.e-metalabs.com/webhook/validation-jalon-client', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        ref: ref, 
-        langue: currentLang,
-        action: 'recette_validee', 
-        timestamp: new Date().toISOString() 
-      })
-    })
-    .then(() => {
-      console.log('Webhook n8n validé avec succès.');
-    })
-    .catch(err => {
-      console.error('Erreur Webhook:', err);
-    });
-  }
-</script>
+                missionClosed = true;
+                document.getElementById("step-4").classList.replace("active", "completed");
+                document.getElementById("step-num-4").textContent = "✓";
+                document.getElementById("step-num-4").setAttribute("aria-label", window.EMETA_I18N.resolveTranslation(currentLang, "tracker.step.validated"));
+                document.getElementById("status-label").textContent = text.closed;
+                document.querySelector("#mission-status .status-dot").style.background = "var(--gold)";
+                document.querySelector("#mission-status .status-dot").style.boxShadow = "0 0 12px rgba(212, 175, 55, .75)";
+                document.getElementById("mission-status").style.borderColor = "rgba(212, 175, 55, .42)";
+                document.getElementById("mission-status").style.color = "var(--gold-light)";
+                document.getElementById("validation-label").textContent = text.validated;
+                validationStatus.dataset.state = "success";
+                validationStatus.textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.validation.success");
+            } catch (error) {
+                console.error("Échec de la validation du jalon :", error);
+                validateButton.disabled = false;
+                validationStatus.dataset.state = "error";
+                validationStatus.textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.validation.error");
+            }
+        });
+    </script>
 </body>
 </html>

@@ -3,54 +3,44 @@ const AUTHORIZATION_KEY = "CORTEX2026";
 const MIN_CONTEXT_LENGTH = 150;
 const sectors = {
     agro: {
-        name: "Agro-industrie & Souveraineté",
-        metrics: [["RENDEMENT", "+24%"], ["PERTES STOCKAGE", "-18%"], ["CHAÎNE DU FROID", "99,8%"]],
+        name: "Agro-industrie & Souveraineté Alimentaire",
         curve: [244, 222, 225, 183, 190, 153, 139]
     },
     energy: {
         name: "Énergie, Mines & Transition",
-        metrics: [["PRODUCTION", "+17%"], ["COÛTS OPÉRATIONNELS", "-12%"], ["DISPONIBILITÉ", "94%"]],
         curve: [252, 224, 232, 186, 171, 148, 123]
     },
     banking: {
         name: "Banque, FinTech & Assurance",
-        metrics: [["DÉCISION CRÉDIT", "+31%"], ["EXPOSITION RISQUE", "-22%"], ["CONFORMITÉ", "99,2%"]],
         curve: [249, 237, 204, 210, 157, 130, 96]
     },
     logistics: {
-        name: "Logistique & Supply Chain",
-        metrics: [["ROTATION DES FLUX", "+28%"], ["DÉLAIS PORTUAIRES", "-16%"], ["TRAÇABILITÉ", "97%"]],
+        name: "Logistique, Ports & Supply Chain",
         curve: [255, 223, 216, 188, 174, 126, 103]
     },
     health: {
-        name: "Santé & Biotechnologies",
-        metrics: [["DISPONIBILITÉ SOINS", "+19%"], ["RUPTURES DE STOCK", "-14%"], ["CONFORMITÉ", "99,5%"]],
+        name: "Santé, Pharma & Biotechnologies",
         curve: [250, 230, 208, 212, 168, 151, 118]
     },
     telecom: {
-        name: "Télécoms & Infrastructures",
-        metrics: [["DISPONIBILITÉ RÉSEAU", "+35%"], ["INCIDENTS", "-23%"], ["CONTINUITÉ", "99,99%"]],
+        name: "Télécoms, Cloud & Infrastructures",
         curve: [255, 239, 211, 187, 156, 121, 82]
     },
     property: {
-        name: "Immobilier & BTP",
-        metrics: [["MAÎTRISE DES COÛTS", "+21%"], ["DÉRIVES PLANNING", "-17%"], ["AVANCEMENT", "96%"]],
+        name: "Immobilier, BTP & Grands Travaux",
         curve: [250, 230, 236, 191, 186, 142, 112]
+    },
+    manufacturing: {
+        name: "Industrie Manufacturière & Transformation",
+        curve: [251, 230, 219, 195, 169, 140, 109]
     },
     public: {
         name: "Secteur Public & Para-public",
-        metrics: [["EFFICACITÉ SERVICE", "+26%"], ["DÉLAIS TRAITEMENT", "-20%"], ["TRAÇABILITÉ", "98%"]],
         curve: [252, 226, 221, 176, 162, 143, 101]
     },
     retail: {
-        name: "E-commerce & Retail",
-        metrics: [["CONVERSION", "+29%"], ["RUPTURES DE STOCK", "-15%"], ["MARGE SUIVIE", "96%"]],
+        name: "Distribution, Retail & Négoce",
         curve: [253, 228, 214, 192, 153, 131, 97]
-    },
-    saas: {
-        name: "SaaS & Éditeurs Cloud",
-        metrics: [["RÉTENTION CLIENT", "+33%"], ["COÛTS INFRA", "-19%"], ["DISPONIBILITÉ", "99,9%"]],
-        curve: [255, 235, 210, 194, 153, 113, 86]
     }
 };
 
@@ -240,72 +230,11 @@ function setText(id, text) {
     if (element) element.textContent = text;
 }
 
-function setHtml(id, html) {
-    const element = document.getElementById(id);
-    if (element) element.innerHTML = html;
-}
-
-function applyListTranslations(ids, values) {
-    ids.forEach((id, index) => setText(id, values[index]));
-}
-
 function switchLang(lang) {
     if (!Object.prototype.hasOwnProperty.call(uiDict, lang)) return;
     currentLang = lang;
-    try {
-        localStorage.setItem("emeta_lang", lang);
-    } catch (error) {
-        console.warn("La préférence de langue ne peut pas être mémorisée.", error);
-    }
-
-    const t = uiDict[lang];
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-    setText("ui-lbl-counter", t.counter);
-    setHtml("ui-banner-ots", `<span aria-hidden="true">🛡️</span><p>${t.sovereignty}</p>`);
-    const heroTitle = document.querySelector(".hero-title");
-    if (heroTitle) heroTitle.textContent = t.heroTitle;
-    setText("ui-hero-subtitle", t.heroSubtitle);
-    setText("ui-title-01", t.offerTitle);
-    setText("ui-offer-intro", t.offerIntro);
-    setText("ui-starter-desc", t.discovery);
-    setText("ui-pro-badge", t.recommended);
-    setText("ui-pro-desc", t.certified);
-    setText("ui-expert-desc", t.executive);
-    applyListTranslations(["ui-st-1", "ui-st-2", "ui-st-3", "ui-st-4"], t.discoveryItems);
-    applyListTranslations(["ui-pr-1", "ui-pr-2", "ui-pr-3", "ui-pr-4"], t.certifiedItems);
-    applyListTranslations(["ui-ex-1", "ui-ex-2", "ui-ex-3", "ui-ex-4"], t.executiveItems);
-    setText("ui-btn-starter", t.chooseStarter);
-    setText("ui-btn-pro", t.choosePro);
-    setText("ui-btn-expert", t.chooseExpert);
-    setText("ui-terminal-title", t.terminalTitle);
-    setText("ui-terminal-desc", t.terminalIntro);
-    setText("ui-lock-title", t.lockTitle);
-    setText("ui-lock-desc", t.lockDesc);
-    setText("ui-lbl-mission", `${t.missionLabel} *`);
-    setText("ui-lbl-contexte", `${t.contextLabel} * (MIN. ${MIN_CONTEXT_LENGTH} CARACTÈRES)`);
-    setText("ui-lbl-file", t.fileLabel);
-    const missionInput = document.getElementById("mission_nom");
-    const contextInput = document.getElementById("mission_contexte");
-    if (missionInput) missionInput.placeholder = t.placeholderMission;
-    if (contextInput) contextInput.placeholder = t.placeholderContext;
-    setText("ui-modal-secure-title", t.modalTitle);
-    setText("ui-modal-secure-desc", t.modalDescription);
-    setText("ui-lbl-email", `${t.emailLabel} *`);
-    setText("ui-lbl-phone", `${t.phoneLabel} *`);
-    setText("btn-fire-ia", t.submit);
-    setText("ui-footer-rights", lang === "fr"
-        ? "© 2026 E-META LABS SASU. Tous droits réservés."
-        : lang === "en"
-            ? "© 2026 E-META LABS SASU. All rights reserved."
-            : lang === "es"
-                ? "© 2026 E-META LABS SASU. Todos los derechos reservados."
-                : "© 2026 E-META LABS SASU. جميع الحقوق محفوظة.");
-    document.querySelectorAll(".lang-switch button").forEach((button) => {
-        const selected = button.dataset.lang === lang;
-        button.classList.toggle("active", selected);
-        button.setAttribute("aria-pressed", String(selected));
-    });
+    if (!window.setLanguage(lang)) return;
+    selectSector(activeSectorId);
     updateContextCounter();
 }
 
@@ -326,14 +255,17 @@ function selectSector(sectorId) {
     const sector = sectors[sectorId];
     if (!sector) return;
     activeSectorId = sectorId;
+    const sectorTranslation = window.EMETA_I18N?.sectors?.[sectorId];
+    const translate = (key) => window.EMETA_I18N?.resolveTranslation(currentLang, key) ?? key;
+    const localizedName = sectorTranslation ? translate(sectorTranslation.key) : sector.name;
     document.querySelectorAll(".sector-badge").forEach((button) => {
         const selected = button.dataset.sector === sectorId;
         button.classList.toggle("is-active", selected);
         button.setAttribute("aria-pressed", String(selected));
     });
 
-    sector.metrics.forEach(([label, value], index) => {
-        setText(`metric-label-${index + 1}`, label);
+    (sectorTranslation?.metrics || []).forEach(([labelKey, value], index) => {
+        setText(`metric-label-${index + 1}`, translate(labelKey));
         setText(`metric-value-${index + 1}`, value);
     });
     const { line, area } = buildSectorCurve(sector.curve);
@@ -342,13 +274,19 @@ function selectSector(sectorId) {
     if (chartLine) chartLine.setAttribute("d", line);
     if (chartArea) chartArea.setAttribute("d", area);
     const chart = document.querySelector(".performance-chart");
-    if (chart) chart.setAttribute("aria-label", `Graphique de performance — ${sector.name}`);
-    setText("chart-rise", sector.metrics[0][1]);
+    if (chart) {
+        const chartLabel = currentLang === "en" ? "Performance chart — " : currentLang === "es" ? "Gráfico de rendimiento — " : currentLang === "ar" ? "مخطط الأداء — " : "Graphique de performance — ";
+        chart.setAttribute("aria-label", `${chartLabel}${localizedName}`);
+    }
+    const firstMetric = sectorTranslation?.metrics?.[0];
+    const firstValue = firstMetric?.[1] || "+24%";
+    setText("chart-rise", firstValue);
 
     const missionInput = document.getElementById("mission_nom");
     if (missionInput) {
-        missionInput.value = sector.name;
-        missionInput.placeholder = `${sector.name} — nom de l'entité`;
+        missionInput.value = localizedName;
+        const placeholderSuffix = currentLang === "en" ? " — entity name" : currentLang === "es" ? " — nombre de la entidad" : currentLang === "ar" ? " — اسم الكيان" : " — nom de l'entité";
+        missionInput.placeholder = `${localizedName}${placeholderSuffix}`;
     }
     setStatus("terminal-status", "");
 }
@@ -364,10 +302,20 @@ function createMandateReference() {
 }
 
 function unlockTerminal(planName, price) {
-    activePricingPlan = `${planName} — ${price}`;
+    const planKeys = {
+        DÉCOUVERTE: "offers.plan.discovery",
+        "MANDAT CERTIFIÉ": "offers.plan.certified",
+        "CHAMBRE EXÉCUTIVE": "offers.plan.executive"
+    };
+    const localizedPlanName = window.EMETA_I18N?.resolveTranslation(currentLang, planKeys[planName]) || planName;
+    const localizedPrice = price
+        .replace("/ Offert", window.EMETA_I18N?.resolveTranslation(currentLang, "offers.price.free") || "/ Offert")
+        .replace("/ Mandat", window.EMETA_I18N?.resolveTranslation(currentLang, "offers.price.mandate") || "/ Mandat")
+        .replace("/ Mois", window.EMETA_I18N?.resolveTranslation(currentLang, "offers.price.month") || "/ Mois");
+    activePricingPlan = `${localizedPlanName} — ${localizedPrice}`;
     activeMandateReference = createMandateReference();
     setText("mandate-reference", activeMandateReference);
-    setText("badge-plan-selected", `${planName} · ${price}`);
+    setText("badge-plan-selected", `${localizedPlanName} · ${localizedPrice}`);
 
     const shell = document.getElementById("terminal-container");
     const overlay = document.getElementById("terminal-lock-overlay");
@@ -412,7 +360,7 @@ function resetTerminal() {
     overlay.style.opacity = "1";
     document.getElementById("terminal-container").classList.remove("is-accredited");
     document.getElementById("badge-plan-selected").hidden = true;
-    document.getElementById("mandate-reference").textContent = "À GÉNÉRER APRÈS ACCRÉDITATION";
+    setText("mandate-reference", window.EMETA_I18N?.resolveTranslation(currentLang, "terminal.reference.pending") || "À GÉNÉRER APRÈS ACCRÉDITATION");
     setText("file-name", uiDict[currentLang].fileNone);
     setStatus("terminal-status", "");
     setStatus("modal-status", "");
@@ -459,7 +407,10 @@ function updateContextCounter() {
     if (!context || !counter || !submit) return;
     const length = context.value.trim().length;
     const ready = length >= MIN_CONTEXT_LENGTH;
-    counter.textContent = `${length} / ${MIN_CONTEXT_LENGTH} ${uiDict[currentLang].characterPrompt}`;
+    const counterTemplate = window.EMETA_I18N?.resolveTranslation(currentLang, "terminal.counter.minimum");
+    counter.textContent = counterTemplate
+        ? counterTemplate.replace("{count}", String(length))
+        : `${length} / ${MIN_CONTEXT_LENGTH} ${uiDict[currentLang].characterPrompt}`;
     if (meter) meter.classList.toggle("valid", ready);
     submit.disabled = !ready || !activePricingPlan;
 }
@@ -547,7 +498,7 @@ async function fireAutoDetection() {
             mission_contexte: context,
             langue: currentLang,
             plan_choisi: activePricingPlan,
-            secteur_selectionne: sectors[activeSectorId].name,
+            secteur_selectionne: window.EMETA_I18N?.resolveTranslation(currentLang, window.EMETA_I18N.sectors[activeSectorId].key) || sectors[activeSectorId].name,
             piece_justificative: attachment
         };
         payload.empreinte_sha256 = await createMandateFingerprint(payload, attachment);

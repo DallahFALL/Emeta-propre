@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#050a12" />
-    <meta name="description" content="e-META LABS, Cabinet de Haute Décision Stratégique et Tiers de Confiance Probatoire." />
-    <title>e-META LABS | Cabinet de Haute Décision Stratégique</title>
+    <meta name="description" content="e-META LABS, Cabinet de Haute Décision Stratégique et Tiers de Confiance Probatoire." data-i18n-content="meta.description" />
+    <title data-i18n="meta.title">e-META LABS | Cabinet de Haute Décision Stratégique</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+    <script src="i18n.js" defer></script>
     <script src="script.js" defer></script>
   </head>
   <body>
@@ -19,50 +20,50 @@
           <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="none" stroke="#d4af37" stroke-width="6" />
           <circle cx="50" cy="50" r="10" fill="#d4af37" />
         </svg>
-        <p class="institution-kicker">Cabinet de Haute Décision Stratégique</p>
-        <h1 id="auth-title">PROJET e-META LABS</h1>
-        <p class="authorization-copy">Le complexe décisionnel est en exploitation surveillée. Accès réservé au personnel habilité et auditeurs accrédités.</p>
+        <p class="institution-kicker" data-i18n="auth.kicker">Cabinet de Haute Décision Stratégique</p>
+        <h1 id="auth-title" data-i18n="auth.title">PROJET e-META LABS</h1>
+        <p class="authorization-copy" data-i18n="auth.description">Le complexe décisionnel est en exploitation surveillée. Accès réservé au personnel habilité et auditeurs accrédités.</p>
         <form id="authorization-form" class="authorization-form">
-          <label for="authorization-key">Clé d'habilitation</label>
+          <label for="authorization-key" data-i18n="auth.key">Clé d'habilitation</label>
           <input id="authorization-key" name="authorization-key" type="password" autocomplete="current-password" required aria-describedby="authorization-error" />
           <p class="form-error" id="authorization-error" role="alert" aria-live="polite"></p>
-          <button class="button button-gold" type="submit">DÉVERROUILLER LE TERMINAL</button>
+          <button class="button button-gold" type="submit" data-i18n="auth.unlock">DÉVERROUILLER LE TERMINAL</button>
         </form>
-        <p class="authorization-footnote">Accès de démonstration — l'habilitation définitive doit être contrôlée côté serveur.</p>
+        <p class="authorization-footnote" data-i18n="auth.footnote">Accès de démonstration — l'habilitation définitive doit être contrôlée côté serveur.</p>
       </div>
     </section>
 
     <div id="application" class="application" hidden>
       <div class="system-status" role="status">
         <span class="system-status-dot" aria-hidden="true"></span>
-        <span>🟢 Système Connecté • Tiers de Confiance Blockchain OTS Opérationnel</span>
+        <span data-i18n="system.status">🟢 Système Connecté • Tiers de Confiance Blockchain OTS Opérationnel</span>
       </div>
       <div class="probative-counter" role="status">
         <span class="counter-seal" aria-hidden="true">◆</span>
-        <span><strong id="live-counter-top">1,420</strong> <span id="ui-lbl-counter">Diagnostics Sécurisés &amp; Scellés Cryptographiquement</span></span>
+        <span><strong id="live-counter-top">1,420</strong> <span id="ui-lbl-counter" data-i18n="counter.label">Diagnostics Sécurisés &amp; Scellés Cryptographiquement</span></span>
       </div>
 
       <header class="site-header">
         <div class="container nav">
-          <a class="brand" href="#top" aria-label="e-META LABS, accueil">
+          <a class="brand" href="#top" aria-label="e-META LABS, accueil" data-i18n-aria-label="brand.home">
             <svg class="official-logo brand-logo" viewBox="0 0 100 100" aria-hidden="true">
               <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="none" stroke="#d4af37" stroke-width="6" />
               <circle cx="50" cy="50" r="10" fill="#d4af37" />
             </svg>
             <span class="brand-name">e-META LABS</span>
           </a>
-          <nav class="header-actions" aria-label="Actions du terminal">
-            <a class="header-link" id="ui-btn-tracker" href="tracker.html">🛡️ Suivi Mission</a>
-            <a class="header-link" id="ui-btn-desk" href="expert.html">⚖️ Desk Exécutif</a>
-            <button class="header-reset" type="button" onclick="resetTerminal()">↻ Reset</button>
-            <div class="lang-switch" aria-label="Sélecteur de langues">
-              <button type="button" data-lang="fr" onclick="switchLang('fr')">FR</button>
+          <nav class="header-actions" aria-label="Actions du terminal" data-i18n-aria-label="navigation.aria">
+            <a class="header-link" id="ui-btn-tracker" href="tracker.html" data-i18n="navigation.tracker" data-lang-link>🛡️ Suivi Mission</a>
+            <a class="header-link" id="ui-btn-desk" href="expert.html" data-i18n="navigation.expert" data-lang-link>⚖️ Desk Exécutif</a>
+            <button class="header-reset" type="button" onclick="resetTerminal()" data-i18n="navigation.reset">↻ Reset</button>
+            <div class="lang-switch" aria-label="Sélecteur de langues" data-i18n-aria-label="language.aria">
+              <button type="button" data-lang="fr" onclick="switchLang('fr')" aria-pressed="true">FR</button>
               <span aria-hidden="true">|</span>
-              <button type="button" data-lang="en" onclick="switchLang('en')">EN</button>
+              <button type="button" data-lang="en" onclick="switchLang('en')" aria-pressed="false">EN</button>
               <span aria-hidden="true">|</span>
-              <button type="button" data-lang="es" onclick="switchLang('es')">ES</button>
+              <button type="button" data-lang="es" onclick="switchLang('es')" aria-pressed="false">ES</button>
               <span aria-hidden="true">|</span>
-              <button type="button" data-lang="ar" onclick="switchLang('ar')">AR</button>
+              <button type="button" data-lang="ar" onclick="switchLang('ar')" aria-pressed="false">AR</button>
             </div>
           </nav>
         </div>
@@ -72,34 +73,34 @@
         <section class="hero">
           <div class="container hero-grid">
             <div class="hero-content">
-              <p class="eyebrow">MASTER DIAGNOSTIC &amp; AUDIT 2026</p>
-              <h1 class="hero-title">L'Intelligence Algorithmique <span>&amp; L'Arbitrage de l'Expert Humain</span></h1>
-              <p class="hero-copy" id="ui-hero-subtitle">L'alliance absolue de la Data, de la Cryptographie et de l'Arbitrage Terrain.</p>
-              <div class="sovereignty-banner" id="ui-banner-ots">
+              <p class="eyebrow" data-i18n="hero.kicker">MASTER DIAGNOSTIC &amp; AUDIT 2026</p>
+              <h1 class="hero-title" data-i18n="hero.title">L'Intelligence Algorithmique <span>&amp; L'Arbitrage de l'Expert Humain</span></h1>
+              <p class="hero-copy" id="ui-hero-subtitle" data-i18n="hero.subtitle">L'alliance absolue de la Data, de la Cryptographie et de l'Arbitrage Terrain.</p>
+              <div class="sovereignty-banner" id="ui-banner-ots" data-i18n="hero.sovereignty">
                 <span aria-hidden="true">🛡️</span>
                 <p><strong>Souveraineté Absolue :</strong> Vos mandats sont scellés par preuve d'antériorité immuable via <a href="https://opentimestamps.org/" target="_blank" rel="noopener noreferrer">OpenTimestamps.org</a> et horodatés sur la Blockchain.</p>
               </div>
               <div class="hero-actions">
-                <a class="button button-gold" href="#offres">Découvrir les accréditations <span aria-hidden="true">→</span></a>
-                <a class="button button-outline" href="#terminal">Accéder au terminal</a>
+                <a class="button button-gold" href="#offres" data-i18n="hero.cta.mandate">Découvrir les accréditations <span aria-hidden="true">→</span></a>
+                <a class="button button-outline" href="#terminal" data-i18n="hero.cta.terminal">Accéder au terminal</a>
               </div>
-              <div class="stats" aria-label="Indicateurs institutionnels">
-                <div class="stat"><strong>99,4%</strong><span>Précision IA décisionnelle</span></div>
-                <div class="stat"><strong>24/7</strong><span>Veille stratégique continue</span></div>
-                <div class="stat"><strong>SHA-256</strong><span>Empreinte probatoire</span></div>
+              <div class="stats" aria-label="Indicateurs institutionnels" data-i18n-aria-label="stats.aria">
+                <div class="stat"><strong>99.4%</strong><span data-i18n="hero.metric.accuracy">Précision IA décisionnelle</span></div>
+                <div class="stat"><strong>24/7</strong><span data-i18n="hero.metric.monitoring">Veille stratégique continue</span></div>
+                <div class="stat"><strong>SHA-256</strong><span data-i18n="hero.metric.fingerprint">Empreinte probatoire</span></div>
               </div>
             </div>
 
-            <aside class="dashboard" aria-label="Dashboard de performance stratégique">
+            <aside class="dashboard" aria-label="Dashboard de performance stratégique" data-i18n-aria-label="dashboard.aria">
               <div class="dashboard-head">
-                <div><span class="dashboard-overline">TABLEAU DE BORD</span><h2>Performance stratégique</h2></div>
-                <span class="live-status"><i aria-hidden="true"></i> EN EXPLOITATION</span>
+                <div><span class="dashboard-overline" data-i18n="dashboard.kicker">TABLEAU DE BORD</span><h2 data-i18n="dashboard.title">Performance stratégique</h2></div>
+                <span class="live-status"><i aria-hidden="true"></i> <span data-i18n="dashboard.status">EN EXPLOITATION</span></span>
               </div>
               <div class="chart-wrap">
-                <div class="chart-label">INDICE D'IMPACT CONSOLIDÉ</div>
+                <div class="chart-label" data-i18n="dashboard.impact">INDICE D'IMPACT CONSOLIDÉ</div>
                 <div class="chart-period">2024 — 2026</div>
                 <div class="chart-grid" aria-hidden="true"></div>
-                <svg class="performance-chart" viewBox="0 0 600 300" preserveAspectRatio="none" role="img" aria-label="Graphique de performance ascendante">
+                <svg class="performance-chart" viewBox="0 0 600 300" preserveAspectRatio="none" aria-label="Graphique de performance ascendante" data-i18n-aria-label="dashboard.chart.aria" role="img">
                   <defs>
                     <linearGradient id="performance-stroke" x1="0" x2="1" y1="0" y2="0">
                       <stop offset="0%" stop-color="#aa8620" />
@@ -118,9 +119,9 @@
                 <span class="chart-rise" id="chart-rise">+24%</span>
               </div>
               <div class="metric-row">
-                <div class="metric-box"><span id="metric-label-1">RENDEMENT</span><strong id="metric-value-1">+24%</strong></div>
-                <div class="metric-box"><span id="metric-label-2">PERTES STOCKAGE</span><strong id="metric-value-2">-18%</strong></div>
-                <div class="metric-box"><span id="metric-label-3">CHAÎNE DU FROID</span><strong id="metric-value-3">99,8%</strong></div>
+                <div class="metric-box"><span id="metric-label-1" data-i18n="metric.agro.1">RENDEMENT</span><strong id="metric-value-1">+24%</strong></div>
+                <div class="metric-box"><span id="metric-label-2" data-i18n="metric.agro.2">PERTES STOCKAGE</span><strong id="metric-value-2">-18%</strong></div>
+                <div class="metric-box"><span id="metric-label-3" data-i18n="metric.agro.3">CHAÎNE DU FROID</span><strong id="metric-value-3">99,8%</strong></div>
               </div>
             </aside>
           </div>
@@ -129,21 +130,21 @@
         <section class="sector-cockpit" id="expertises" aria-labelledby="sector-title">
           <div class="container sector-cockpit-inner">
             <div class="sector-cockpit-heading">
-              <span class="section-number">ESPACE DÉCIDEUR</span>
-              <h2 id="sector-title">Cockpit sectoriel interactif</h2>
-              <p>Sélectionnez une expertise pour afficher ses indicateurs et préparer votre mandat.</p>
+              <span class="section-number" data-i18n="sectors.kicker">ESPACE DÉCIDEUR</span>
+              <h2 id="sector-title" data-i18n="sectors.title">Cockpit sectoriel interactif</h2>
+              <p data-i18n="sectors.description">Sélectionnez une expertise pour afficher ses indicateurs et préparer votre mandat.</p>
             </div>
-            <div class="sector-selector" role="group" aria-label="Sélectionner un secteur d'expertise">
-              <button class="sector-badge is-active" type="button" data-sector="agro" aria-pressed="true">Agro-industrie &amp; Souveraineté</button>
-              <button class="sector-badge" type="button" data-sector="energy" aria-pressed="false">Énergie, Mines &amp; Transition</button>
-              <button class="sector-badge" type="button" data-sector="banking" aria-pressed="false">Banque, FinTech &amp; Assurance</button>
-              <button class="sector-badge" type="button" data-sector="logistics" aria-pressed="false">Logistique &amp; Supply Chain</button>
-              <button class="sector-badge" type="button" data-sector="health" aria-pressed="false">Santé &amp; Biotechnologies</button>
-              <button class="sector-badge" type="button" data-sector="telecom" aria-pressed="false">Télécoms &amp; Infrastructures</button>
-              <button class="sector-badge" type="button" data-sector="property" aria-pressed="false">Immobilier &amp; BTP</button>
-              <button class="sector-badge" type="button" data-sector="public" aria-pressed="false">Secteur Public &amp; Para-public</button>
-              <button class="sector-badge" type="button" data-sector="retail" aria-pressed="false">E-commerce &amp; Retail</button>
-              <button class="sector-badge" type="button" data-sector="saas" aria-pressed="false">SaaS &amp; Éditeurs Cloud</button>
+            <div class="sector-selector" role="group" aria-label="Sélectionner un secteur d'expertise" data-i18n-aria-label="sectors.selector">
+              <button class="sector-badge is-active" type="button" data-sector="agro" data-i18n="sector.agro" aria-pressed="true">Agro-industrie &amp; Souveraineté Alimentaire</button>
+              <button class="sector-badge" type="button" data-sector="energy" data-i18n="sector.energy" aria-pressed="false">Énergie, Mines &amp; Transition</button>
+              <button class="sector-badge" type="button" data-sector="banking" data-i18n="sector.banking" aria-pressed="false">Banque, FinTech &amp; Assurance</button>
+              <button class="sector-badge" type="button" data-sector="logistics" data-i18n="sector.logistics" aria-pressed="false">Logistique, Ports &amp; Supply Chain</button>
+              <button class="sector-badge" type="button" data-sector="health" data-i18n="sector.health" aria-pressed="false">Santé, Pharma &amp; Biotechnologies</button>
+              <button class="sector-badge" type="button" data-sector="telecom" data-i18n="sector.telecom" aria-pressed="false">Télécoms, Cloud &amp; Infrastructures</button>
+              <button class="sector-badge" type="button" data-sector="property" data-i18n="sector.property" aria-pressed="false">Immobilier, BTP &amp; Grands Travaux</button>
+              <button class="sector-badge" type="button" data-sector="manufacturing" data-i18n="sector.manufacturing" aria-pressed="false">Industrie Manufacturière &amp; Transformation</button>
+              <button class="sector-badge" type="button" data-sector="public" data-i18n="sector.public" aria-pressed="false">Secteur Public &amp; Para-public</button>
+              <button class="sector-badge" type="button" data-sector="retail" data-i18n="sector.retail" aria-pressed="false">Distribution, Retail &amp; Négoce</button>
             </div>
           </div>
         </section>
@@ -151,56 +152,56 @@
         <section class="section accreditation-section" id="offres">
           <div class="container">
             <div class="section-heading">
-              <span class="section-number">SECTION 01</span>
-              <h2 id="ui-title-01">Niveaux d'accréditation</h2>
-              <p id="ui-offer-intro">Retenez un niveau de mandat pour initialiser le registre d'ingestion décisionnelle.</p>
+              <span class="section-number" data-i18n="offers.number">SECTION 01</span>
+              <h2 id="ui-title-01" data-i18n="offers.title">Niveaux d'accréditation</h2>
+              <p id="ui-offer-intro" data-i18n="offers.description">Retenez un niveau de mandat pour initialiser le registre d'ingestion décisionnelle.</p>
             </div>
             <div class="pricing-grid">
               <article class="plan-card">
-                <div class="plan-topline"><span class="plan-index">PALIER 01</span><span class="plan-mark" aria-hidden="true">◇</span></div>
-                <h3>DÉCOUVERTE</h3>
-                <p class="plan-description" id="ui-starter-desc">Diagnostic flash (3 à 5 pages) avec score de maturité sur 3 axes.</p>
-                <p class="plan-price" id="ui-price-starter">0 FCFA <span>/ Offert</span></p>
+                <div class="plan-topline"><span class="plan-index" data-i18n="offers.tier.1">PALIER 01</span><span class="plan-mark" aria-hidden="true">◇</span></div>
+                <h3 data-i18n="offers.plan.discovery">DÉCOUVERTE</h3>
+                <p class="plan-description" id="ui-starter-desc" data-i18n="offers.starter.description">Diagnostic flash (3 à 5 pages) avec score de maturité sur 3 axes.</p>
+                <p class="plan-price" id="ui-price-starter">0 FCFA <span data-i18n="offers.price.free">/ Offert</span></p>
                 <ul class="plan-features">
-                  <li id="ui-st-1">Diagnostic flash (3 à 5 pages)</li>
-                  <li id="ui-st-2">Score de maturité sur 3 axes</li>
-                  <li id="ui-st-3">Restitution par e-mail</li>
-                  <li id="ui-st-4">Rapport d'orientation synthétique</li>
-                  <li class="feature-warning">Scellement probatoire OTS non inclus</li>
+                  <li id="ui-st-1" data-i18n="offers.starter.item.1">Diagnostic flash (3 à 5 pages)</li>
+                  <li id="ui-st-2" data-i18n="offers.starter.item.2">Score de maturité sur 3 axes</li>
+                  <li id="ui-st-3" data-i18n="offers.starter.item.3">Restitution par e-mail</li>
+                  <li id="ui-st-4" data-i18n="offers.starter.item.4">Rapport d'orientation synthétique</li>
+                  <li class="feature-warning" data-i18n="offers.starter.warning">Scellement probatoire OTS non inclus</li>
                 </ul>
-                <button class="button button-outline plan-button" id="ui-btn-starter" type="button" onclick="unlockTerminal('DÉCOUVERTE', '0 FCFA / Offert')">ACTIVER CE DIAGNOSTIC</button>
+                <button class="button button-outline plan-button" id="ui-btn-starter" type="button" onclick="unlockTerminal('DÉCOUVERTE', '0 FCFA / Offert')" data-i18n="offers.starter.button">SÉLECTIONNER CE PALIER</button>
               </article>
 
               <article class="plan-card plan-featured">
-                <div class="recommended-badge" id="ui-pro-badge">RECOMMANDÉ DIRECTION</div>
-                <div class="plan-topline"><span class="plan-index">PALIER 02</span><span class="plan-mark" aria-hidden="true">✦</span></div>
-                <h3>MANDAT CERTIFIÉ</h3>
-                <p class="plan-description" id="ui-pro-desc">Investigation décisionnelle approfondie et rapport certifié de 15 à 25 pages.</p>
-                <p class="plan-price" id="ui-price-pro">185 000 FCFA <span>/ Mandat</span></p>
+                <div class="recommended-badge" id="ui-pro-badge" data-i18n="offers.pro.badge">RECOMMANDÉ DIRECTION</div>
+                <div class="plan-topline"><span class="plan-index" data-i18n="offers.tier.2">PALIER 02</span><span class="plan-mark" aria-hidden="true">✦</span></div>
+                <h3 data-i18n="offers.plan.certified">MANDAT CERTIFIÉ</h3>
+                <p class="plan-description" id="ui-pro-desc" data-i18n="offers.pro.description">Investigation décisionnelle approfondie et rapport certifié de 15 à 25 pages.</p>
+                <p class="plan-price" id="ui-price-pro">185 000 FCFA <span data-i18n="offers.price.mandate">/ Mandat</span></p>
                 <ul class="plan-features">
-                  <li id="ui-pr-1">Dossier complet (15 à 25 pages)</li>
-                  <li id="ui-pr-2">Revue &amp; contreseing de l'Expert Exécutif</li>
-                  <li id="ui-pr-3">Modélisation de stress-tests</li>
-                  <li id="ui-pr-4">Scellement SHA-256 + Bitcoin OTS</li>
-                  <li>Référence souveraine MIS-2026-XXXX</li>
-                  <li>Notification WhatsApp sécurisée</li>
+                  <li id="ui-pr-1" data-i18n="offers.pro.item.1">Dossier complet (15 à 25 pages)</li>
+                  <li id="ui-pr-2" data-i18n="offers.pro.item.2">Revue &amp; contreseing de l'Expert Exécutif</li>
+                  <li id="ui-pr-3" data-i18n="offers.pro.item.3">Modélisation de stress-tests</li>
+                  <li id="ui-pr-4" data-i18n="offers.pro.item.4">Scellement SHA-256 + Bitcoin OTS</li>
+                  <li data-i18n="offers.pro.item.5">Référence souveraine MIS-2026-XXXX</li>
+                  <li data-i18n="offers.pro.item.6">Notification WhatsApp sécurisée</li>
                 </ul>
-                <button class="button button-gold plan-button" id="ui-btn-pro" type="button" onclick="unlockTerminal('MANDAT CERTIFIÉ', '185 000 FCFA / Mandat')">ENGAGER LE MANDAT</button>
+                <button class="button button-gold plan-button" id="ui-btn-pro" type="button" onclick="unlockTerminal('MANDAT CERTIFIÉ', '185 000 FCFA / Mandat')" data-i18n="offers.pro.button">ENGAGER LE MANDAT</button>
               </article>
 
               <article class="plan-card">
-                <div class="plan-topline"><span class="plan-index">PALIER 03</span><span class="plan-mark" aria-hidden="true">⬡</span></div>
-                <h3>CHAMBRE EXÉCUTIVE</h3>
-                <p class="plan-description" id="ui-expert-desc">Due diligence stratégique globale, arbitrage filiales et comités de direction.</p>
-                <p class="plan-price" id="ui-price-expert">950 000 FCFA <span>/ Mois</span></p>
+                <div class="plan-topline"><span class="plan-index" data-i18n="offers.tier.3">PALIER 03</span><span class="plan-mark" aria-hidden="true">⬡</span></div>
+                <h3 data-i18n="offers.plan.executive">CHAMBRE EXÉCUTIVE</h3>
+                <p class="plan-description" id="ui-expert-desc" data-i18n="offers.executive.description">Due diligence stratégique globale, arbitrage filiales et comités de direction.</p>
+                <p class="plan-price" id="ui-price-expert">950 000 FCFA <span data-i18n="offers.price.month">/ Mois</span></p>
                 <ul class="plan-features">
-                  <li id="ui-ex-1">Quota illimité de diagnostics</li>
-                  <li id="ui-ex-2">Expert exécutif dédié 24/7</li>
-                  <li id="ui-ex-3">Veille prospective continue</li>
-                  <li id="ui-ex-4">Accès direct aux API CORTEX_MCP</li>
-                  <li>Registre probatoire privatif</li>
+                  <li id="ui-ex-1" data-i18n="offers.executive.item.1">Audit multidimensionnel filiales &amp; holdings</li>
+                  <li id="ui-ex-2" data-i18n="offers.executive.item.2">Modélisation prédictive des chocs exogènes</li>
+                  <li id="ui-ex-3" data-i18n="offers.executive.item.3">Ancrage cryptographique renforcé</li>
+                  <li id="ui-ex-4" data-i18n="offers.executive.item.4">Restitution privée avec le collège d'experts</li>
+                  <li data-i18n="offers.executive.item.5">Registre probatoire privatif</li>
                 </ul>
-                <button class="button button-outline plan-button" id="ui-btn-expert" type="button" onclick="unlockTerminal('CHAMBRE EXÉCUTIVE', '950 000 FCFA / Mois')">MANDATER LA CHAMBRE</button>
+                <button class="button button-outline plan-button" id="ui-btn-expert" type="button" onclick="unlockTerminal('CHAMBRE EXÉCUTIVE', '950 000 FCFA / Mois')" data-i18n="offers.executive.button">MANDATER LA CHAMBRE</button>
               </article>
             </div>
           </div>
@@ -209,45 +210,45 @@
         <section class="section terminal-section" id="terminal">
           <div class="container">
             <div class="section-heading">
-              <span class="section-number">SECTION 02</span>
-              <h2 id="ui-terminal-title">Terminal d'ingestion décisionnelle</h2>
-              <p id="ui-terminal-desc">Registre sécurisé de recevabilité des mandats et d'initialisation des audits stratégiques.</p>
+              <span class="section-number" data-i18n="terminal.number">SECTION 02</span>
+              <h2 id="ui-terminal-title" data-i18n="terminal.title">Terminal d'ingestion décisionnelle</h2>
+              <p id="ui-terminal-desc" data-i18n="terminal.description">Registre sécurisé de recevabilité des mandats et d'initialisation des audits stratégiques.</p>
             </div>
             <div class="terminal-shell" id="terminal-container">
               <div class="terminal-lock-overlay" id="terminal-lock-overlay">
                 <span class="terminal-lock-icon" aria-hidden="true">🔒</span>
-                <h3 id="ui-lock-title">TERMINAL EN ATTENTE D'ACCRÉDITATION</h3>
-                <p id="ui-lock-desc">Veuillez retenir un palier d'accréditation ci-dessus pour initialiser le registre d'ingestion.</p>
+                <h3 id="ui-lock-title" data-i18n="terminal.lock.title">TERMINAL EN ATTENTE D'ACCRÉDITATION</h3>
+                <p id="ui-lock-desc" data-i18n="terminal.lock.description">Veuillez retenir un palier d'accréditation ci-dessus pour initialiser le registre d'ingestion.</p>
               </div>
               <div class="terminal-header">
-                <div><span class="terminal-overline">REGISTRE SOUVERAIN</span><h3>INGESTION DÉCISIONNELLE</h3></div>
+                <div><span class="terminal-overline" data-i18n="terminal.register">REGISTRE SOUVERAIN</span><h3 data-i18n="terminal.ingestion">INGESTION DÉCISIONNELLE</h3></div>
                 <span class="plan-selected" id="badge-plan-selected" hidden></span>
               </div>
               <div class="terminal-content">
                 <div class="reference-row">
-                  <span>RÉFÉRENCE SOUVERAINE</span>
-                  <strong id="mandate-reference">À GÉNÉRER APRÈS ACCRÉDITATION</strong>
+                  <span data-i18n="terminal.reference.label">RÉFÉRENCE SOUVERAINE</span>
+                  <strong id="mandate-reference" data-i18n="terminal.reference.pending">À GÉNÉRER APRÈS ACCRÉDITATION</strong>
                 </div>
                 <div class="form-field">
-                  <label id="ui-lbl-mission" for="mission_nom">NOM DE L'ENTITÉ &amp; SECTEUR D'ACTIVITÉ <span>*</span></label>
-                  <input id="mission_nom" name="mission_nom" type="text" autocomplete="organization" required placeholder="Ex. : Société / groupe et domaine d'activité" />
+                  <label id="ui-lbl-mission" for="mission_nom" data-i18n="terminal.field.entity">NOM DE L'ENTITÉ &amp; SECTEUR D'ACTIVITÉ <span>*</span></label>
+                  <input id="mission_nom" name="mission_nom" type="text" autocomplete="organization" required placeholder="Ex. : Société / groupe et domaine d'activité" data-i18n-placeholder="terminal.placeholder.entity" />
                 </div>
                 <div class="form-field">
-                  <label id="ui-lbl-contexte" for="mission_contexte">PROBLÉMATIQUE, EXPOSÉ DES ENJEUX &amp; VULNÉRABILITÉS <span>*</span></label>
-                  <textarea id="mission_contexte" name="mission_contexte" required minlength="150" placeholder="Exposez le contexte, les enjeux, les outils et les vulnérabilités identifiés (150 caractères minimum)." aria-describedby="context-counter"></textarea>
+                  <label id="ui-lbl-contexte" for="mission_contexte" data-i18n="terminal.field.context">PROBLÉMATIQUE, EXPOSÉ DES ENJEUX &amp; VULNÉRABILITÉS <span>*</span></label>
+                  <textarea id="mission_contexte" name="mission_contexte" required minlength="150" placeholder="Exposez le contexte, les enjeux, les outils et les vulnérabilités identifiés (150 caractères minimum)." aria-describedby="context-counter" data-i18n-placeholder="terminal.placeholder.context"></textarea>
                   <div class="character-meter">
-                    <span id="context-counter" aria-live="polite">0 / 150 caractères minimum</span>
-                    <span>Condition formelle de recevabilité du mandat</span>
+                    <span id="context-counter" aria-live="polite" data-i18n="terminal.counter.pending">0 / 150 caractères minimum</span>
+                    <span data-i18n="terminal.counter.ready">Condition formelle de recevabilité du mandat</span>
                   </div>
                 </div>
                 <div class="form-field">
-                  <label id="ui-lbl-file" for="user-file">Joindre une pièce justificative ou trame comptable <span class="optional">(Optionnel — PDF, DOCX, PNG)</span></label>
+                  <label id="ui-lbl-file" for="user-file" data-i18n="terminal.field.file">Joindre une pièce justificative ou trame comptable <span class="optional">(Optionnel — PDF, DOCX, PNG)</span></label>
                   <input id="user-file" name="piece_justificative" type="file" accept=".pdf,.doc,.docx,.png,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/png" />
-                  <span class="field-hint" id="file-name">Aucun fichier sélectionné</span>
+                  <span class="field-hint" id="file-name" data-i18n="terminal.file.none">Aucun fichier sélectionné</span>
                 </div>
                 <div class="terminal-submit-row">
-                  <a class="matrix-link" id="ui-link-matrice" href="#matrix-modal" onclick="openModal('matrixModal'); return false;">Consulter la matrice des 10 secteurs et expertises décisionnelles couvertes <span aria-hidden="true">↗</span></a>
-                  <button class="button button-submit" id="ui-btn-analyse" type="button" onclick="triggerSniperCapture()" disabled>INITIALISER LE SCELLEMENT CRYPTOGRAPHIQUE &amp; L'ANALYSE</button>
+                  <a class="matrix-link" id="ui-link-matrice" href="#matrix-modal" onclick="openModal('matrixModal'); return false;" data-i18n="terminal.matrix.link">Consulter la matrice des 10 secteurs et expertises décisionnelles couvertes <span aria-hidden="true">↗</span></a>
+                  <button class="button button-submit" id="ui-btn-analyse" type="button" onclick="triggerSniperCapture()" disabled data-i18n="terminal.submit">INITIALISER LE SCELLEMENT CRYPTOGRAPHIQUE &amp; L'ANALYSE</button>
                 </div>
                 <p class="form-status" id="terminal-status" role="status" aria-live="polite"></p>
               </div>
@@ -260,74 +261,76 @@
         <div class="container">
           <div class="footer-grid">
             <section class="footer-column footer-identity">
-              <a class="brand" href="#top" aria-label="e-META LABS, retour en haut">
+              <a class="brand" href="#top" aria-label="e-META LABS, retour en haut" data-i18n-aria-label="brand.home">
                 <svg class="official-logo brand-logo" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="none" stroke="#d4af37" stroke-width="6" /><circle cx="50" cy="50" r="10" fill="#d4af37" /></svg>
                 <span class="brand-name">e-META LABS</span>
               </a>
-              <p>Un cockpit scientifique décisionnel au service des Comités de Direction, Ministères et Fonds d'Investissement.</p>
-              <span class="footer-health"><i aria-hidden="true"></i> Système opérationnel • Blockchain OTS</span>
+              <p data-i18n="footer.identity">Un cockpit scientifique décisionnel au service des Comités de Direction, Ministères et Fonds d'Investissement.</p>
+              <span class="footer-health"><i aria-hidden="true"></i> <span data-i18n="footer.health">Système opérationnel • Blockchain OTS</span></span>
             </section>
             <section class="footer-column">
-              <h2>Pôles Stratégiques</h2>
-              <a href="#offres">Audit &amp; accréditations</a>
-              <a href="#expertises">Cockpit sectoriel</a>
-              <a href="expert.html">Desk Exécutif</a>
-              <a href="tracker.html">Suivi Mission</a>
+              <h2 data-i18n="footer.poles">Pôles Stratégiques</h2>
+              <a href="#offres" data-i18n="footer.audit">Audit &amp; accréditations</a>
+              <a href="#expertises" data-i18n="footer.cockpit">Cockpit sectoriel</a>
+              <a href="expert.html" data-i18n="footer.desk" data-lang-link>Desk Exécutif</a>
+              <a href="tracker.html" data-i18n="footer.tracker" data-lang-link>Suivi Mission</a>
+              <a href="protocole-apport-affaires.html" data-i18n="footer.business_protocol.partners" data-lang-link>Prescripteurs &amp; partenaires d'affaires</a>
             </section>
             <section class="footer-column">
-              <h2>Gouvernance &amp; Droit des Affaires</h2>
-              <a href="mentions-legales.html">Mentions Légales</a>
-              <a href="cgv.html">Conditions Générales de Vente</a>
-              <a href="confidentialite.html">Confidentialité &amp; Secret des Affaires</a>
-              <a href="remboursement.html">Politique de Remboursement</a>
+              <h2 data-i18n="footer.governance">Gouvernance &amp; Droit des Affaires</h2>
+              <a href="mentions-legales.html" data-i18n="footer.legal">Mentions Légales</a>
+              <a href="cgv.html" data-i18n="footer.terms">Conditions Générales de Vente</a>
+              <a href="confidentialite.html" data-i18n="footer.privacy">Confidentialité &amp; Secret des Affaires</a>
+              <a href="remboursement.html" data-i18n="footer.refunds">Politique de Remboursement</a>
+              <a href="protocole-apport-affaires.html" data-i18n="footer.legal.business_protocol" data-lang-link>Protocole d'Apport d'Affaires</a>
             </section>
             <section class="footer-column footer-diplomatic">
-              <h2>Canaux Diplomatiques</h2>
+              <h2 data-i18n="footer.diplomatic">Canaux Diplomatiques</h2>
               <a href="mailto:contact@e-metalabs.com">✉️ contact@e-metalabs.com</a>
               <a href="mailto:support@e-metalabs.com">🛠️ support@e-metalabs.com</a>
-              <p>Rosso <span>•</span> Dakar <span>•</span> Paris <span>•</span> Dubaï</p>
+              <p data-i18n="footer.cities">Rosso <span>•</span> Dakar <span>•</span> Paris <span>•</span> Dubaï</p>
             </section>
           </div>
-          <div class="footer-bottom"><span id="ui-footer-rights">© 2026 E-META LABS SASU. Tous droits réservés.</span><span>Strategic Intelligence &amp; Algorithmic Audit Unit</span></div>
+          <div class="footer-bottom"><span id="ui-footer-rights" data-i18n="footer.rights">© 2026 E-META LABS SASU. Tous droits réservés.</span><span data-i18n="footer.unit">Strategic Intelligence &amp; Algorithmic Audit Unit</span></div>
         </div>
       </footer>
 
       <div class="modal-overlay" id="autoDetectModal" role="dialog" aria-modal="true" aria-labelledby="ui-modal-secure-title" aria-hidden="true">
         <div class="modal-content">
-          <button class="modal-close" type="button" aria-label="Fermer la fenêtre" onclick="closeModal('autoDetectModal')">×</button>
-          <span class="section-number">CANAL DE RESTITUTION</span>
-          <h2 id="ui-modal-secure-title">🛡️ Canal Sécurisé de Restitution</h2>
-          <p id="ui-modal-secure-desc">Indiquez les coordonnées professionnelles de réception du rapport certifié.</p>
+          <button class="modal-close" type="button" aria-label="Fermer la fenêtre" data-i18n-aria-label="modal.close" onclick="closeModal('autoDetectModal')">×</button>
+          <span class="section-number" data-i18n="modal.channel.kicker">CANAL DE RESTITUTION</span>
+          <h2 id="ui-modal-secure-title" data-i18n="modal.channel.title">🛡️ Canal Sécurisé de Restitution</h2>
+          <p id="ui-modal-secure-desc" data-i18n="modal.channel.description">Indiquez les coordonnées professionnelles de réception du rapport certifié.</p>
           <div class="form-field">
-            <label id="ui-lbl-email" for="auto-email">Email Professionnel <span>*</span></label>
-            <input id="auto-email" name="email" type="email" autocomplete="email" required placeholder="nom@organisation.com" />
+            <label id="ui-lbl-email" for="auto-email" data-i18n="modal.email">Email Professionnel <span>*</span></label>
+            <input id="auto-email" name="email" type="email" autocomplete="email" required placeholder="nom@organisation.com" data-i18n-placeholder="modal.placeholder.email" />
           </div>
           <div class="form-field">
-            <label id="ui-lbl-phone" for="auto-phone">Ligne WhatsApp Directe <span>*</span></label>
-            <input id="auto-phone" name="telephone" type="tel" autocomplete="tel" required placeholder="+221 ..." />
+            <label id="ui-lbl-phone" for="auto-phone" data-i18n="modal.phone">Ligne WhatsApp Directe <span>*</span></label>
+            <input id="auto-phone" name="telephone" type="tel" autocomplete="tel" required placeholder="+221 ..." data-i18n-placeholder="modal.placeholder.phone" />
           </div>
-          <p class="modal-assurance">Mandat garanti sous secret des affaires. L'empreinte SHA-256 est transmise au pipeline pour enregistrement dans le coffre NocoDB.</p>
+          <p class="modal-assurance" data-i18n="modal.assurance">Mandat garanti sous secret des affaires. L'empreinte SHA-256 est transmise au pipeline pour enregistrement dans le coffre NocoDB.</p>
           <p class="form-status" id="modal-status" role="status" aria-live="polite"></p>
-          <button class="button button-gold modal-submit" id="btn-fire-ia" type="button" onclick="fireAutoDetection()">SCELLER &amp; TRANSMETTRE AU PIPELINE n8n</button>
+          <button class="button button-gold modal-submit" id="btn-fire-ia" type="button" onclick="fireAutoDetection()" data-i18n="modal.submit">SCELLER &amp; TRANSMETTRE AU PIPELINE n8n</button>
         </div>
       </div>
 
       <div class="modal-overlay" id="matrixModal" role="dialog" aria-modal="true" aria-labelledby="matrix-title" aria-hidden="true">
         <div class="modal-content matrix-content">
-          <button class="modal-close" type="button" aria-label="Fermer la fenêtre" onclick="closeModal('matrixModal')">×</button>
-          <span class="section-number">RÉFÉRENTIEL SECTORIEL</span>
-          <h2 id="matrix-title">Matrice des 10 Secteurs d'Excellence</h2>
+          <button class="modal-close" type="button" aria-label="Fermer la fenêtre" data-i18n-aria-label="matrix.close" onclick="closeModal('matrixModal')">×</button>
+          <span class="section-number" data-i18n="matrix.kicker">RÉFÉRENTIEL SECTORIEL</span>
+          <h2 id="matrix-title" data-i18n="matrix.title">Matrice des 10 Secteurs d'Excellence</h2>
           <ol class="sector-matrix">
-            <li><strong>Agro-industrie &amp; souveraineté alimentaire</strong><span>Production, transformation, stockage, chaîne du froid et sécurisation des approvisionnements agricoles.</span></li>
-            <li><strong>Énergie, mines &amp; concessions</strong><span>Économie des projets, concessions, risques d'exploitation et transition énergétique.</span></li>
-            <li><strong>Banque, fintech &amp; assurance</strong><span>Risques financiers, conformité prudentielle Bâle, BCEAO et cadres UEMOA.</span></li>
-            <li><strong>Logistique, ports &amp; supply chain</strong><span>Flux, capacités portuaires, corridors, coûts et résilience des chaînes logistiques.</span></li>
-            <li><strong>Santé, pharma &amp; biotechnologies</strong><span>Établissements de santé, approvisionnement, performance clinique et référentiels DPM.</span></li>
-            <li><strong>Télécoms, cloud &amp; infrastructures</strong><span>Disponibilité des réseaux, souveraineté cloud, cybersécurité et continuité de service.</span></li>
-            <li><strong>Immobilier, BTP &amp; grands travaux</strong><span>Foncier, montage de projets, coûts, exécution et gouvernance des grands chantiers.</span></li>
-            <li><strong>Industrie manufacturière &amp; transformation</strong><span>Productivité, TRS, qualité, maintenance et optimisation des capacités industrielles.</span></li>
-            <li><strong>Secteur public &amp; para-public</strong><span>Gouvernance, politiques publiques, performance des opérateurs et services aux citoyens.</span></li>
-            <li><strong>Distribution, retail &amp; négoce</strong><span>Réseaux de vente, gestion des stocks, marges, achats et stratégie omnicanale.</span></li>
+            <li><strong data-i18n="sector.agro">Agro-industrie &amp; Souveraineté Alimentaire</strong><span data-i18n="matrix.description.1">Production, transformation, stockage, chaîne du froid et sécurisation des approvisionnements agricoles.</span></li>
+            <li><strong data-i18n="sector.energy">Énergie, Mines &amp; Transition</strong><span data-i18n="matrix.description.2">Économie des projets, concessions, risques d'exploitation et transition énergétique.</span></li>
+            <li><strong data-i18n="sector.banking">Banque, FinTech &amp; Assurance</strong><span data-i18n="matrix.description.3">Risques financiers, conformité prudentielle Bâle, BCEAO et cadres UEMOA.</span></li>
+            <li><strong data-i18n="sector.logistics">Logistique, Ports &amp; Supply Chain</strong><span data-i18n="matrix.description.4">Flux, capacités portuaires, corridors, coûts et résilience des chaînes logistiques.</span></li>
+            <li><strong data-i18n="sector.health">Santé, Pharma &amp; Biotechnologies</strong><span data-i18n="matrix.description.5">Établissements de santé, approvisionnement, performance clinique et référentiels DPM.</span></li>
+            <li><strong data-i18n="sector.telecom">Télécoms, Cloud &amp; Infrastructures</strong><span data-i18n="matrix.description.6">Disponibilité des réseaux, souveraineté cloud, cybersécurité et continuité de service.</span></li>
+            <li><strong data-i18n="sector.property">Immobilier, BTP &amp; Grands Travaux</strong><span data-i18n="matrix.description.7">Foncier, montage de projets, coûts, exécution et gouvernance des grands chantiers.</span></li>
+            <li><strong data-i18n="sector.manufacturing">Industrie Manufacturière &amp; Transformation</strong><span data-i18n="matrix.description.8">Productivité, TRS, qualité, maintenance et optimisation des capacités industrielles.</span></li>
+            <li><strong data-i18n="sector.public">Secteur Public &amp; Para-public</strong><span data-i18n="matrix.description.9">Gouvernance, politiques publiques, performance des opérateurs et services aux citoyens.</span></li>
+            <li><strong data-i18n="sector.retail">Distribution, Retail &amp; Négoce</strong><span data-i18n="matrix.description.10">Réseaux de vente, gestion des stocks, marges, achats et stratégie omnicanale.</span></li>
           </ol>
         </div>
       </div>

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050a12">
     <title>Protocole d'Apport d'Affaires | e-META LABS</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -26,6 +27,8 @@
             background: rgba(10, 25, 47, 0.95);
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
+        body { background-color: #050a12; color: #e6f1ff; }
+        .privacy-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
         .privacy-content h4 {
             color: #d4af37;
             font-family: 'Cinzel', serif;
@@ -59,6 +62,11 @@
             background: rgba(212, 175, 55, 0.1);
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
+        @media (max-width: 640px) {
+            .privacy-header { align-items: flex-start; flex-direction: column; gap: 16px; }
+            .privacy-nav { justify-content: flex-start; }
+            .privacy-container { margin: 24px 16px; padding: 28px 20px; }
+        }
     </style>
 </head>
 <body>
@@ -73,8 +81,10 @@
                 <h1 style="font-size: 1.2rem;">e-META LABS</h1>
             </div>
         </div>
-        <!-- Ferme l'onglet proprement pour ramener l'expert à son formulaire -->
-        <a href="#" onclick="window.close(); return false;" class="btn-return" data-i18n="btn_close">Fermer et retourner au formulaire</a>
+        <nav class="privacy-nav" aria-label="Navigation institutionnelle" data-i18n-aria-label="navigation.institutional.aria">
+            <a href="index.html" class="btn-return" data-i18n="protocol.nav.home" data-lang-link>← Retour au Cockpit</a>
+            <a href="expert.html" class="btn-return" data-i18n="protocol.nav.expert" data-lang-link>Espace Desk Exécutif →</a>
+        </nav>
     </header>
 
     <main>
