@@ -221,19 +221,84 @@ const uiDict = {
 
 let currentLang = "fr";
 let activePricingPlan = "";
+let activePricingTier = "";
+let activeCurrency = "EUR";
 let activeMandateReference = "";
 let activeModalId = "";
 let activeSectorId = "agro";
+
+const pricing = {
+    EUR: { DÉCOUVERTE: "0 €", "MANDAT CERTIFIÉ": "280 €", "CHAMBRE EXÉCUTIVE": "1 450 €" },
+    USD: { DÉCOUVERTE: "$0", "MANDAT CERTIFIÉ": "$300", "CHAMBRE EXÉCUTIVE": "$1 500" },
+    FCFA: { DÉCOUVERTE: "0 FCFA", "MANDAT CERTIFIÉ": "185 000 FCFA", "CHAMBRE EXÉCUTIVE": "950 000 FCFA" }
+};
 
 function setText(id, text) {
     const element = document.getElementById(id);
     if (element) element.textContent = text;
 }
 
+function localizedPrice(planName) {
+    const suffixKeys = {
+        DÉCOUVERTE: "offers.price.free",
+        "MANDAT CERTIFIÉ": "offers.price.mandate",
+        "CHAMBRE EXÉCUTIVE": "offers.price.month"
+    };
+    const amount = pricing[activeCurrency]?.[planName];
+    if (!amount) {
+        console.error(`Tarif absent pour le palier "${planName}" et la devise "${activeCurrency}".`);
+        return "";
+    }
+    const suffix = window.EMETA_I18N?.resolveTranslation(currentLang, suffixKeys[planName]);
+    return `${amount}${suffix ? ` ${suffix}` : ""}`;
+}
+
+function refreshPricing() {
+    const amountIds = {
+        DÉCOUVERTE: "price-starter",
+        "MANDAT CERTIFIÉ": "price-certified",
+        "CHAMBRE EXÉCUTIVE": "price-executive"
+    };
+    Object.entries(amountIds).forEach(([planName, id]) => {
+        setText(id, pricing[activeCurrency][planName]);
+    });
+    document.querySelectorAll("[data-currency]").forEach((button) => {
+        const selected = button.dataset.currency === activeCurrency;
+        button.classList.toggle("active", selected);
+        button.setAttribute("aria-pressed", String(selected));
+    });
+    if (activePricingTier) {
+        const planKeys = {
+            DÉCOUVERTE: "offers.plan.discovery",
+            "MANDAT CERTIFIÉ": "offers.plan.certified",
+            "CHAMBRE EXÉCUTIVE": "offers.plan.executive"
+        };
+        const localizedPlanName = window.EMETA_I18N?.resolveTranslation(currentLang, planKeys[activePricingTier]) || activePricingTier;
+        const price = localizedPrice(activePricingTier);
+        activePricingPlan = `${localizedPlanName} — ${price}`;
+        setText("badge-plan-selected", `${localizedPlanName} · ${price}`);
+    }
+}
+
+function setCurrency(currency) {
+    if (!Object.prototype.hasOwnProperty.call(pricing, currency)) {
+        console.error(`Devise non prise en charge : "${currency}".`);
+        return;
+    }
+    activeCurrency = currency;
+    try {
+        localStorage.setItem("emeta_currency", currency);
+    } catch (error) {
+        console.warn("La préférence de devise ne peut pas être mémorisée.", error);
+    }
+    refreshPricing();
+}
+
 function switchLang(lang) {
     if (!Object.prototype.hasOwnProperty.call(uiDict, lang)) return;
     currentLang = lang;
     if (!window.setLanguage(lang)) return;
+    refreshPricing();
     selectSector(activeSectorId);
     updateContextCounter();
 }
@@ -256,16 +321,21 @@ function selectSector(sectorId) {
     if (!sector) return;
     activeSectorId = sectorId;
     const sectorTranslation = window.EMETA_I18N?.sectors?.[sectorId];
+    const details = window.EMETA_I18N?.sectorDetails?.[currentLang]?.[sectorId];
+    if (!sectorTranslation || !details) {
+        console.error(`Données de traduction sectorielle manquantes pour "${sectorId}" (${currentLang}).`);
+        return;
+    }
     const translate = (key) => window.EMETA_I18N?.resolveTranslation(currentLang, key) ?? key;
-    const localizedName = sectorTranslation ? translate(sectorTranslation.key) : sector.name;
+    const localizedName = translate(sectorTranslation.key);
     document.querySelectorAll(".sector-badge").forEach((button) => {
         const selected = button.dataset.sector === sectorId;
         button.classList.toggle("is-active", selected);
         button.setAttribute("aria-pressed", String(selected));
     });
 
-    (sectorTranslation?.metrics || []).forEach(([labelKey, value], index) => {
-        setText(`metric-label-${index + 1}`, translate(labelKey));
+    details.kpis.forEach(([label, value], index) => {
+        setText(`metric-label-${index + 1}`, label);
         setText(`metric-value-${index + 1}`, value);
     });
     const { line, area } = buildSectorCurve(sector.curve);
@@ -273,22 +343,46 @@ function selectSector(sectorId) {
     const chartArea = document.getElementById("performance-area");
     if (chartLine) chartLine.setAttribute("d", line);
     if (chartArea) chartArea.setAttribute("d", area);
+    [1, 4, 6].forEach((curveIndex, index) => {
+        const point = document.getElementById(`performance-point-${index + 1}`);
+        if (point) point.setAttribute("cy", String(sector.curve[curveIndex]));
+    });
     const chart = document.querySelector(".performance-chart");
     if (chart) {
         const chartLabel = currentLang === "en" ? "Performance chart — " : currentLang === "es" ? "Gráfico de rendimiento — " : currentLang === "ar" ? "مخطط الأداء — " : "Graphique de performance — ";
         chart.setAttribute("aria-label", `${chartLabel}${localizedName}`);
     }
-    const firstMetric = sectorTranslation?.metrics?.[0];
-    const firstValue = firstMetric?.[1] || "+24%";
-    setText("chart-rise", firstValue);
+    setText("dashboard-sector-title", localizedName);
+    setText("sector-details-active-name", localizedName);
+    setText("chart-rise", details.kpis[0][1]);
+    const axes = document.getElementById("sector-details-list");
+    if (axes) {
+        axes.replaceChildren(...details.axes.map((axis) => {
+            const item = document.createElement("li");
+            item.textContent = axis;
+            return item;
+        }));
+    }
 
     const missionInput = document.getElementById("mission_nom");
     if (missionInput) {
-        missionInput.value = localizedName;
-        const placeholderSuffix = currentLang === "en" ? " — entity name" : currentLang === "es" ? " — nombre de la entidad" : currentLang === "ar" ? " — اسم الكيان" : " — nom de l'entité";
-        missionInput.placeholder = `${localizedName}${placeholderSuffix}`;
+        const placeholder = translate("terminal.placeholder.sector");
+        missionInput.placeholder = placeholder.replace("{sector}", localizedName);
     }
+    const contextInput = document.getElementById("mission_contexte");
+    if (contextInput) contextInput.placeholder = details.prompt;
+    setText("terminal-sector-name", localizedName);
+    const selectedSector = document.getElementById("selected-sector-id");
+    if (selectedSector) selectedSector.value = sectorId;
     setStatus("terminal-status", "");
+}
+
+function initializeSectorMandate() {
+    selectSector(activeSectorId);
+    document.getElementById("terminal")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (activePricingPlan) {
+        window.setTimeout(() => document.getElementById("mission_contexte")?.focus({ preventScroll: true }), 400);
+    }
 }
 
 function createMandateReference() {
@@ -301,21 +395,19 @@ function createMandateReference() {
     return `MIS-2026-${String(digits[0] % 10000).padStart(4, "0")}`;
 }
 
-function unlockTerminal(planName, price) {
+function unlockTerminal(planName) {
     const planKeys = {
         DÉCOUVERTE: "offers.plan.discovery",
         "MANDAT CERTIFIÉ": "offers.plan.certified",
         "CHAMBRE EXÉCUTIVE": "offers.plan.executive"
     };
     const localizedPlanName = window.EMETA_I18N?.resolveTranslation(currentLang, planKeys[planName]) || planName;
-    const localizedPrice = price
-        .replace("/ Offert", window.EMETA_I18N?.resolveTranslation(currentLang, "offers.price.free") || "/ Offert")
-        .replace("/ Mandat", window.EMETA_I18N?.resolveTranslation(currentLang, "offers.price.mandate") || "/ Mandat")
-        .replace("/ Mois", window.EMETA_I18N?.resolveTranslation(currentLang, "offers.price.month") || "/ Mois");
-    activePricingPlan = `${localizedPlanName} — ${localizedPrice}`;
+    activePricingTier = planName;
+    const selectedPrice = localizedPrice(planName);
+    activePricingPlan = `${localizedPlanName} — ${selectedPrice}`;
     activeMandateReference = createMandateReference();
     setText("mandate-reference", activeMandateReference);
-    setText("badge-plan-selected", `${localizedPlanName} · ${localizedPrice}`);
+    setText("badge-plan-selected", `${localizedPlanName} · ${selectedPrice}`);
 
     const shell = document.getElementById("terminal-container");
     const overlay = document.getElementById("terminal-lock-overlay");
@@ -324,6 +416,7 @@ function unlockTerminal(planName, price) {
         overlay.style.opacity = "0";
         window.setTimeout(() => { overlay.hidden = true; }, 360);
     }
+
     if (shell) {
         shell.classList.add("is-accredited");
         shell.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -351,6 +444,7 @@ function resetTerminal() {
     document.getElementById("auto-email").value = "";
     document.getElementById("auto-phone").value = "";
     activePricingPlan = "";
+    activePricingTier = "";
     activeMandateReference = "";
     activeSectorId = "agro";
     selectSector("agro");
@@ -497,6 +591,7 @@ async function fireAutoDetection() {
             mission_nom: missionName,
             mission_contexte: context,
             langue: currentLang,
+            currency: activeCurrency,
             plan_choisi: activePricingPlan,
             secteur_selectionne: window.EMETA_I18N?.resolveTranslation(currentLang, window.EMETA_I18N.sectors[activeSectorId].key) || sectors[activeSectorId].name,
             piece_justificative: attachment
@@ -561,22 +656,29 @@ function initializeTerminal() {
         modal.addEventListener("click", (event) => {
             if (event.target === modal) closeModal(modal.id);
         });
-        document.querySelectorAll(".sector-badge").forEach((button) => {
-            button.addEventListener("click", () => selectSector(button.dataset.sector));
-        });
+    });
+    document.querySelectorAll(".sector-badge").forEach((button) => {
+        button.addEventListener("click", () => selectSector(button.dataset.sector));
     });
     document.addEventListener("keydown", (event) => {
         if (event.key === "Escape" && activeModalId) closeModal(activeModalId);
     });
 
     let savedLang = "fr";
+    let savedCurrency = "EUR";
     try {
         const requestedLang = new URLSearchParams(window.location.search).get("lang");
         savedLang = requestedLang || localStorage.getItem("emeta_lang") || "fr";
+        const storedCurrency = localStorage.getItem("emeta_currency");
+        if (storedCurrency && Object.prototype.hasOwnProperty.call(pricing, storedCurrency)) {
+            savedCurrency = storedCurrency;
+        }
     } catch (error) {
-        console.warn("La langue mémorisée est inaccessible ; la langue française est utilisée.", error);
+        console.warn("Les préférences mémorisées sont inaccessibles ; les valeurs par défaut seront utilisées.", error);
     }
+    activeCurrency = savedCurrency;
     switchLang(savedLang);
+    refreshPricing();
     selectSector(activeSectorId);
     initializeAuthorization();
     updateContextCounter();

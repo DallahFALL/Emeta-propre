@@ -65,6 +65,13 @@
               <span aria-hidden="true">|</span>
               <button type="button" data-lang="ar" onclick="switchLang('ar')" aria-pressed="false">AR</button>
             </div>
+            <div class="currency-switch" role="group" aria-label="Sélecteur de devise" data-i18n-aria-label="currency.aria">
+              <button type="button" data-currency="EUR" onclick="setCurrency('EUR')" aria-pressed="true" data-i18n="currency.eur">EUR €</button>
+              <span aria-hidden="true">|</span>
+              <button type="button" data-currency="USD" onclick="setCurrency('USD')" aria-pressed="false" data-i18n="currency.usd">USD $</button>
+              <span aria-hidden="true">|</span>
+              <button type="button" data-currency="FCFA" onclick="setCurrency('FCFA')" aria-pressed="false" data-i18n="currency.fcfa">FCFA</button>
+            </div>
           </nav>
         </div>
       </header>
@@ -84,18 +91,14 @@
                 <a class="button button-gold" href="#offres" data-i18n="hero.cta.mandate">Découvrir les accréditations <span aria-hidden="true">→</span></a>
                 <a class="button button-outline" href="#terminal" data-i18n="hero.cta.terminal">Accéder au terminal</a>
               </div>
-              <div class="stats" aria-label="Indicateurs institutionnels" data-i18n-aria-label="stats.aria">
-                <div class="stat"><strong>99.4%</strong><span data-i18n="hero.metric.accuracy">Précision IA décisionnelle</span></div>
-                <div class="stat"><strong>24/7</strong><span data-i18n="hero.metric.monitoring">Veille stratégique continue</span></div>
-                <div class="stat"><strong>SHA-256</strong><span data-i18n="hero.metric.fingerprint">Empreinte probatoire</span></div>
-              </div>
             </div>
 
             <aside class="dashboard" aria-label="Dashboard de performance stratégique" data-i18n-aria-label="dashboard.aria">
               <div class="dashboard-head">
-                <div><span class="dashboard-overline" data-i18n="dashboard.kicker">TABLEAU DE BORD</span><h2 data-i18n="dashboard.title">Performance stratégique</h2></div>
+                <div><span class="dashboard-overline" data-i18n="dashboard.kicker">TABLEAU DE BORD •</span><h2 data-i18n="dashboard.title">PERFORMANCE STRATÉGIQUE</h2></div>
                 <span class="live-status"><i aria-hidden="true"></i> <span data-i18n="dashboard.status">EN EXPLOITATION</span></span>
               </div>
+              <p class="dashboard-sector-title" id="dashboard-sector-title"></p>
               <div class="chart-wrap">
                 <div class="chart-label" data-i18n="dashboard.impact">INDICE D'IMPACT CONSOLIDÉ</div>
                 <div class="chart-period">2024 — 2026</div>
@@ -114,7 +117,7 @@
                   </defs>
                   <path id="performance-area" d="M0 240 C58 228 65 196 120 207 S192 175 245 182 S310 137 365 150 S428 102 478 112 S540 56 600 44 L600 300 L0 300 Z" fill="url(#performance-fill)" />
                   <path id="performance-line" d="M0 240 C58 228 65 196 120 207 S192 175 245 182 S310 137 365 150 S428 102 478 112 S540 56 600 44" fill="none" stroke="url(#performance-stroke)" stroke-width="3" vector-effect="non-scaling-stroke" />
-                  <circle cx="120" cy="207" r="4" fill="#d4af37" /><circle cx="365" cy="150" r="4" fill="#fceaa7" /><circle cx="600" cy="44" r="5" fill="#fceaa7" />
+                  <circle id="performance-point-1" cx="100" cy="222" r="4" fill="#d4af37" /><circle id="performance-point-2" cx="400" cy="190" r="4" fill="#d4af37" /><circle id="performance-point-3" cx="600" cy="139" r="5" fill="#fceaa7" />
                 </svg>
                 <span class="chart-rise" id="chart-rise">+24%</span>
               </div>
@@ -130,8 +133,8 @@
         <section class="sector-cockpit" id="expertises" aria-labelledby="sector-title">
           <div class="container sector-cockpit-inner">
             <div class="sector-cockpit-heading">
-              <span class="section-number" data-i18n="sectors.kicker">ESPACE DÉCIDEUR</span>
-              <h2 id="sector-title" data-i18n="sectors.title">Cockpit sectoriel interactif</h2>
+              <span class="section-number" data-i18n="sectors.kicker">ESPACE DÉCIDEUR •</span>
+              <h2 id="sector-title" data-i18n="sectors.title">COCKPIT SECTORIEL INTERACTIF</h2>
               <p data-i18n="sectors.description">Sélectionnez une expertise pour afficher ses indicateurs et préparer votre mandat.</p>
             </div>
             <div class="sector-selector" role="group" aria-label="Sélectionner un secteur d'expertise" data-i18n-aria-label="sectors.selector">
@@ -146,6 +149,14 @@
               <button class="sector-badge" type="button" data-sector="public" data-i18n="sector.public" aria-pressed="false">Secteur Public &amp; Para-public</button>
               <button class="sector-badge" type="button" data-sector="retail" data-i18n="sector.retail" aria-pressed="false">Distribution, Retail &amp; Négoce</button>
             </div>
+            <section class="sector-details-panel" id="sector-details-panel" aria-labelledby="sector-details-title" aria-live="polite">
+              <div class="sector-details-copy">
+                <span class="section-number" data-i18n="sector.details.kicker">ARBITRAGE SECTORIEL</span>
+                <h3 id="sector-details-title"><span data-i18n="sector.details.title">Axes Stratégiques &amp; Stress-Tests Dédiés</span><span aria-hidden="true"> — </span><span id="sector-details-active-name"></span></h3>
+                <ol class="sector-details-list" id="sector-details-list"></ol>
+              </div>
+              <button class="button button-gold sector-details-cta" type="button" onclick="initializeSectorMandate()" data-i18n="sector.details.button">INITIALISER MON MANDAT DANS CE SECTEUR →</button>
+            </section>
           </div>
         </section>
 
@@ -161,7 +172,7 @@
                 <div class="plan-topline"><span class="plan-index" data-i18n="offers.tier.1">PALIER 01</span><span class="plan-mark" aria-hidden="true">◇</span></div>
                 <h3 data-i18n="offers.plan.discovery">DÉCOUVERTE</h3>
                 <p class="plan-description" id="ui-starter-desc" data-i18n="offers.starter.description">Diagnostic flash (3 à 5 pages) avec score de maturité sur 3 axes.</p>
-                <p class="plan-price" id="ui-price-starter">0 FCFA <span data-i18n="offers.price.free">/ Offert</span></p>
+                <p class="plan-price" id="ui-price-starter"><span class="price-amount" id="price-starter">0 €</span> <span data-i18n="offers.price.free">/ Offert</span></p>
                 <ul class="plan-features">
                   <li id="ui-st-1" data-i18n="offers.starter.item.1">Diagnostic flash (3 à 5 pages)</li>
                   <li id="ui-st-2" data-i18n="offers.starter.item.2">Score de maturité sur 3 axes</li>
@@ -169,7 +180,7 @@
                   <li id="ui-st-4" data-i18n="offers.starter.item.4">Rapport d'orientation synthétique</li>
                   <li class="feature-warning" data-i18n="offers.starter.warning">Scellement probatoire OTS non inclus</li>
                 </ul>
-                <button class="button button-outline plan-button" id="ui-btn-starter" type="button" onclick="unlockTerminal('DÉCOUVERTE', '0 FCFA / Offert')" data-i18n="offers.starter.button">SÉLECTIONNER CE PALIER</button>
+                <button class="button button-outline plan-button" id="ui-btn-starter" type="button" onclick="unlockTerminal('DÉCOUVERTE')" data-i18n="offers.starter.button">SÉLECTIONNER CE PALIER</button>
               </article>
 
               <article class="plan-card plan-featured">
@@ -177,7 +188,8 @@
                 <div class="plan-topline"><span class="plan-index" data-i18n="offers.tier.2">PALIER 02</span><span class="plan-mark" aria-hidden="true">✦</span></div>
                 <h3 data-i18n="offers.plan.certified">MANDAT CERTIFIÉ</h3>
                 <p class="plan-description" id="ui-pro-desc" data-i18n="offers.pro.description">Investigation décisionnelle approfondie et rapport certifié de 15 à 25 pages.</p>
-                <p class="plan-price" id="ui-price-pro">185 000 FCFA <span data-i18n="offers.price.mandate">/ Mandat</span></p>
+                <p class="plan-price" id="ui-price-pro"><span class="price-amount" id="price-certified">280 €</span> <span data-i18n="offers.price.mandate">/ Mandat</span></p>
+                <p class="price-equivalent" data-i18n="offers.price.equivalent.certified">Équivalent : 185 000 FCFA</p>
                 <ul class="plan-features">
                   <li id="ui-pr-1" data-i18n="offers.pro.item.1">Dossier complet (15 à 25 pages)</li>
                   <li id="ui-pr-2" data-i18n="offers.pro.item.2">Revue &amp; contreseing de l'Expert Exécutif</li>
@@ -186,14 +198,15 @@
                   <li data-i18n="offers.pro.item.5">Référence souveraine MIS-2026-XXXX</li>
                   <li data-i18n="offers.pro.item.6">Notification WhatsApp sécurisée</li>
                 </ul>
-                <button class="button button-gold plan-button" id="ui-btn-pro" type="button" onclick="unlockTerminal('MANDAT CERTIFIÉ', '185 000 FCFA / Mandat')" data-i18n="offers.pro.button">ENGAGER LE MANDAT</button>
+                <button class="button button-gold plan-button" id="ui-btn-pro" type="button" onclick="unlockTerminal('MANDAT CERTIFIÉ')" data-i18n="offers.pro.button">ENGAGER LE MANDAT</button>
               </article>
 
               <article class="plan-card">
                 <div class="plan-topline"><span class="plan-index" data-i18n="offers.tier.3">PALIER 03</span><span class="plan-mark" aria-hidden="true">⬡</span></div>
                 <h3 data-i18n="offers.plan.executive">CHAMBRE EXÉCUTIVE</h3>
                 <p class="plan-description" id="ui-expert-desc" data-i18n="offers.executive.description">Due diligence stratégique globale, arbitrage filiales et comités de direction.</p>
-                <p class="plan-price" id="ui-price-expert">950 000 FCFA <span data-i18n="offers.price.month">/ Mois</span></p>
+                <p class="plan-price" id="ui-price-expert"><span class="price-amount" id="price-executive">1 450 €</span> <span data-i18n="offers.price.month">/ Mois</span></p>
+                <p class="price-equivalent" data-i18n="offers.price.equivalent.executive">Équivalent : 950 000 FCFA</p>
                 <ul class="plan-features">
                   <li id="ui-ex-1" data-i18n="offers.executive.item.1">Audit multidimensionnel filiales &amp; holdings</li>
                   <li id="ui-ex-2" data-i18n="offers.executive.item.2">Modélisation prédictive des chocs exogènes</li>
@@ -201,7 +214,7 @@
                   <li id="ui-ex-4" data-i18n="offers.executive.item.4">Restitution privée avec le collège d'experts</li>
                   <li data-i18n="offers.executive.item.5">Registre probatoire privatif</li>
                 </ul>
-                <button class="button button-outline plan-button" id="ui-btn-expert" type="button" onclick="unlockTerminal('CHAMBRE EXÉCUTIVE', '950 000 FCFA / Mois')" data-i18n="offers.executive.button">MANDATER LA CHAMBRE</button>
+                <button class="button button-outline plan-button" id="ui-btn-expert" type="button" onclick="unlockTerminal('CHAMBRE EXÉCUTIVE')" data-i18n="offers.executive.button">MANDATER LA CHAMBRE</button>
               </article>
             </div>
           </div>
@@ -222,33 +235,39 @@
               </div>
               <div class="terminal-header">
                 <div><span class="terminal-overline" data-i18n="terminal.register">REGISTRE SOUVERAIN</span><h3 data-i18n="terminal.ingestion">INGESTION DÉCISIONNELLE</h3></div>
-                <span class="plan-selected" id="badge-plan-selected" hidden></span>
               </div>
               <div class="terminal-content">
                 <div class="reference-row">
                   <span data-i18n="terminal.reference.label">RÉFÉRENCE SOUVERAINE</span>
                   <strong id="mandate-reference" data-i18n="terminal.reference.pending">À GÉNÉRER APRÈS ACCRÉDITATION</strong>
+                  <span class="plan-selected" id="badge-plan-selected" hidden></span>
+                  <div class="selected-sector-row"><span data-i18n="terminal.sector.selected">SECTEUR DU MANDAT</span><strong id="terminal-sector-name">Agro-industrie &amp; Souveraineté Alimentaire</strong></div>
                 </div>
-                <div class="form-field">
-                  <label id="ui-lbl-mission" for="mission_nom" data-i18n="terminal.field.entity">NOM DE L'ENTITÉ &amp; SECTEUR D'ACTIVITÉ <span>*</span></label>
-                  <input id="mission_nom" name="mission_nom" type="text" autocomplete="organization" required placeholder="Ex. : Société / groupe et domaine d'activité" data-i18n-placeholder="terminal.placeholder.entity" />
-                </div>
-                <div class="form-field">
-                  <label id="ui-lbl-contexte" for="mission_contexte" data-i18n="terminal.field.context">PROBLÉMATIQUE, EXPOSÉ DES ENJEUX &amp; VULNÉRABILITÉS <span>*</span></label>
-                  <textarea id="mission_contexte" name="mission_contexte" required minlength="150" placeholder="Exposez le contexte, les enjeux, les outils et les vulnérabilités identifiés (150 caractères minimum)." aria-describedby="context-counter" data-i18n-placeholder="terminal.placeholder.context"></textarea>
-                  <div class="character-meter">
-                    <span id="context-counter" aria-live="polite" data-i18n="terminal.counter.pending">0 / 150 caractères minimum</span>
-                    <span data-i18n="terminal.counter.ready">Condition formelle de recevabilité du mandat</span>
+                <input type="hidden" id="selected-sector-id" name="secteur_selectionne" value="agro" />
+                <div class="terminal-form-grid">
+                  <div class="terminal-form-identity">
+                    <div class="form-field">
+                      <label id="ui-lbl-mission" for="mission_nom" data-i18n="terminal.field.entity">NOM DE L'ENTITÉ &amp; SECTEUR D'ACTIVITÉ <span>*</span></label>
+                      <input id="mission_nom" name="mission_nom" type="text" autocomplete="organization" required placeholder="Ex. : Société / groupe et domaine d'activité" data-i18n-placeholder="terminal.placeholder.entity" />
+                    </div>
+                    <div class="form-field">
+                      <label id="ui-lbl-file" for="user-file" data-i18n="terminal.field.file">Joindre une pièce justificative ou trame comptable <span class="optional">(Optionnel — PDF, DOCX, PNG)</span></label>
+                      <input id="user-file" name="piece_justificative" type="file" accept=".pdf,.doc,.docx,.png,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/png" />
+                      <span class="field-hint" id="file-name" data-i18n="terminal.file.none">Aucun fichier sélectionné</span>
+                    </div>
                   </div>
-                </div>
-                <div class="form-field">
-                  <label id="ui-lbl-file" for="user-file" data-i18n="terminal.field.file">Joindre une pièce justificative ou trame comptable <span class="optional">(Optionnel — PDF, DOCX, PNG)</span></label>
-                  <input id="user-file" name="piece_justificative" type="file" accept=".pdf,.doc,.docx,.png,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/png" />
-                  <span class="field-hint" id="file-name" data-i18n="terminal.file.none">Aucun fichier sélectionné</span>
-                </div>
-                <div class="terminal-submit-row">
-                  <a class="matrix-link" id="ui-link-matrice" href="#matrix-modal" onclick="openModal('matrixModal'); return false;" data-i18n="terminal.matrix.link">Consulter la matrice des 10 secteurs et expertises décisionnelles couvertes <span aria-hidden="true">↗</span></a>
-                  <button class="button button-submit" id="ui-btn-analyse" type="button" onclick="triggerSniperCapture()" disabled data-i18n="terminal.submit">INITIALISER LE SCELLEMENT CRYPTOGRAPHIQUE &amp; L'ANALYSE</button>
+                  <div class="form-field terminal-context-field">
+                    <label id="ui-lbl-contexte" for="mission_contexte" data-i18n="terminal.field.context">PROBLÉMATIQUE, EXPOSÉ DES ENJEUX &amp; VULNÉRABILITÉS <span>*</span></label>
+                    <textarea id="mission_contexte" name="mission_contexte" required minlength="150" placeholder="Exposez le contexte, les enjeux, les outils et les vulnérabilités identifiés (150 caractères minimum)." aria-describedby="context-counter" data-i18n-placeholder="terminal.placeholder.context"></textarea>
+                    <div class="character-meter">
+                      <span id="context-counter" aria-live="polite" data-i18n="terminal.counter.pending">0 / 150 caractères minimum</span>
+                      <span data-i18n="terminal.counter.ready">Condition formelle de recevabilité du mandat</span>
+                    </div>
+                  </div>
+                  <div class="terminal-submit-row">
+                    <a class="matrix-link" id="ui-link-matrice" href="#matrix-modal" onclick="openModal('matrixModal'); return false;" data-i18n="terminal.matrix.link">Consulter la matrice des 10 secteurs et expertises décisionnelles couvertes <span aria-hidden="true">↗</span></a>
+                    <button class="button button-submit" id="ui-btn-analyse" type="button" onclick="triggerSniperCapture()" disabled data-i18n="terminal.submit">INITIALISER LE SCELLEMENT CRYPTOGRAPHIQUE &amp; L'ANALYSE</button>
+                  </div>
                 </div>
                 <p class="form-status" id="terminal-status" role="status" aria-live="polite"></p>
               </div>
