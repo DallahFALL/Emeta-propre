@@ -1,0 +1,395 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "mandat-ingestion",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -528,
+        -64
+      ],
+      "id": "0a1a86da-fc84-442f-bc19-cab1874f5463",
+      "name": "Webhook",
+      "webhookId": "482700d1-501d-4237-b5a7-fc6ee6afdf45"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Tu es Senior Partner en strat\u00e9gie technologique chez e-META LABS. R\u00e9dige en fran\u00e7ais un livrable confidentiel, incisif, orient\u00e9 ROI, fond\u00e9 sur les donn\u00e9es fournies. N'invente aucun chiffre pr\u00e9sent\u00e9 comme un fait : distingue clairement les donn\u00e9es, hypoth\u00e8ses et estimations; pr\u00e9cise les informations manquantes. Adapte explicitement ratios, risques et recommandations au secteur (\u00ab {{ $('Code in JavaScript').first().json.secteur }} \u00bb) et \u00e0 ses enjeux : agro (rendement, pertes post-r\u00e9colte, cha\u00eene du froid), banque (BCEAO/UEMOA, liquidit\u00e9, cr\u00e9ances, co\u00fbt du risque), mines (co\u00fbts d'extraction, teneur, redevances, contenu local), logistique (co\u00fbt par tonne/km, d\u00e9lai, taux de service), sant\u00e9 (co\u00fbt patient, disponibilit\u00e9, cha\u00eene du froid, conformit\u00e9), t\u00e9l\u00e9coms (ARPU, churn, disponibilit\u00e9/SLA, co\u00fbt par abonn\u00e9), BTP (marge chantier, d\u00e9rive co\u00fbt/d\u00e9lai, BFR), industrie (TRS/OEE, rebuts, \u00e9nergie, maintenance), public (ex\u00e9cution budg\u00e9taire, d\u00e9lais, conformit\u00e9 des march\u00e9s), retail (rotation, d\u00e9marque, marge, BFR). N'utilise un ratio sectoriel chiffr\u00e9 que s'il est fourni ou explicitement qualifi\u00e9 d'hypoth\u00e8se \u00e0 valider.\n\nDONN\u00c9ES DU MANDAT\nR\u00e9f\u00e9rence : {{ $('Code in JavaScript').first().json.reference_mission }}\nMission : {{ $('Code in JavaScript').first().json.titre_mission }}\nClient : {{ $('Code in JavaScript').first().json.nom_client }}\nEntreprise : {{ $('Code in JavaScript').first().json.entreprise_client }}\nSecteur et diagnostic m\u00e9tier : {{ $('Code in JavaScript').first().json.secteur }} \u2014 {{ $('Code in JavaScript').first().json.guide_metier }}\nPalier : {{ $('Code in JavaScript').first().json.palier }}\nProbl\u00e9matique et contexte : {{ $('Code in JavaScript').first().json.problematique }}\n\nDIRECTIVE DE VOLUME ET DE STRUCTURE \u2014 applique exclusivement le format du palier actif, sans m\u00e9langer les formats :\n{{ $('Code in JavaScript').first().json.palier === 'decouverte' ? 'PALIER D\u00c9COUVERTE \u2014 Produis une Note de Cadrage Strat\u00e9gique Pr\u00e9liminaire de 3 \u00e0 5 pages. Structure-la avec : synth\u00e8se ex\u00e9cutive; trois failles majeures \u00e9tay\u00e9es par le contexte; scoring sectoriel argument\u00e9; recommandations imm\u00e9diates et prioris\u00e9es; hypoth\u00e8ses et donn\u00e9es \u00e0 recueillir. Reste cibl\u00e9 et actionnable.' : $('Code in JavaScript').first().json.palier === 'chambre' ? 'PALIER CHAMBRE \u2014 Produis un Audit Strat\u00e9gique d\u2019Arbitrage Souverain approfondi d\u2019au moins 25 sections num\u00e9rot\u00e9es, denses et distinctes. Couvre vision groupe et filiales, d\u00e9pendances et synergies, sc\u00e9narios de chocs macro\u00e9conomiques et g\u00e9opolitiques, r\u00e9silience, allocation du capital, gouvernance, arbitrages, risques et feuille de route ex\u00e9cutive.' : 'PALIER MANDAT \u2014 Produis un Rapport d\u2019Audit Strat\u00e9gique & d\u2019Arbitrage D\u00e9cisionnel exhaustif de 15 \u00e0 20 sections num\u00e9rot\u00e9es et denses. Couvre au minimum : manifeste ex\u00e9cutif; matrice de maturit\u00e9 sectorielle et ratios m\u00e9tiers pertinents; stress-tests de r\u00e9sistance financi\u00e8re et op\u00e9rationnelle; mod\u00e9lisation d\u2019impact sur BFR et ROI avec hypoth\u00e8ses explicites; sc\u00e9narios et risques; recommandations arbitr\u00e9es; protocole d\u2019action \u00e0 30/60/90 jours; gouvernance, indicateurs de suivi et cadre probatoire opposable.' }}\n\nR\u00e8gles communes : relie chaque conclusion aux informations du mandat, hi\u00e9rarchise impacts et actions, fournis des recommandations concr\u00e8tes adapt\u00e9es \u00e0 l\u2019entreprise et au secteur, signale limites et hypoth\u00e8ses. N'ajoute aucune introduction ou formule de politesse. N'utilise pas de syntaxe Markdown; des titres en majuscules, une num\u00e9rotation simple et des doubles sauts de ligne sont autoris\u00e9s.",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        176,
+        128
+      ],
+      "id": "69ce60f7-5926-4b6f-bc61-7216a3a34b60",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v19.0/1045757915291250/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer EAAS1ZAwTAKrEBRui65ZCicBZAK8n4aimIp2eSSHK381Kiv7osxhqX6KZC4YVjhZBp5PYgCHOLKiHED2kX3h7RVu69rcJJZCDFbZBr5BjZCHpPcPmlZBKTpR3r6TqHFkhNxLPtTRHO6yCaTn1UynLZCI33Sa6bdzkDwBuzKPaq0hlvR0qF6YSkyzWEpbWoRZA1plAQZDZD"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { messaging_product: 'whatsapp', to: $('Code in JavaScript').first().json.whatsapp, type: 'text', text: { body: 'e-META LABS | Mission ' + String($('Code in JavaScript').first().json.reference_mission).slice(0, 64) + ' scell\u00e9e. Entit\u00e9 : ' + String($('Code in JavaScript').first().json.entreprise_client).slice(0, 80) + '. Empreinte SHA-256 : ' + $('Code in JavaScript').first().json.sha256_hash + '. Dossier complet envoy\u00e9 \u00e0 ' + String($('Code in JavaScript').first().json.email).slice(0, 120) + '.' } } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        720,
+        32
+      ],
+      "id": "e481cedc-72f4-4149-b732-23c95fcdab3b",
+      "name": "WhatsApp_Meta_Notifier",
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://database.e-metalabs.com/api/v2/tables/mjavwbutvds951g/records",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "nc_pat_gz3Oe931hF8BNZBulr4JX4l1gRsTp34BaT_rQdZ0"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { Code_Mission: $('Code in JavaScript').first().json.reference_mission, Titre_Mission: $('Code in JavaScript').first().json.titre_mission, Client: $('Code in JavaScript').first().json.entreprise_client, Secteur: $('Code in JavaScript').first().json.secteur, Palier: $('Code in JavaScript').first().json.palier, Email_Client: $('Code in JavaScript').first().json.email, WhatsApp_Client: $('Code in JavaScript').first().json.whatsapp, Hash_SHA256: $('Code in JavaScript').first().json.sha256_hash, Statut_Mission: 'Audit IA Scell\u00e9 - En attente revue Desk', Google_Doc_URL: $('Share file').first().json.webViewLink || ('https://docs.google.com/document/d/' + $('Copy file').first().json.id + '/edit') } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        880,
+        32
+      ],
+      "id": "6bd77797-95b9-4d4f-8b8a-d36587b80956",
+      "name": "NocoDB_Missions_Vault"
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.documentId }}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        560,
+        -272
+      ],
+      "id": "71fe32b3-d0c3-4444-8c89-d315b6048860",
+      "name": "Share file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Mree2Z9D6c9t2pfH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "1vJ3SL010lVVmBQw2V3XqzRinTakzQeDdLzjz0B7Ubac",
+          "mode": "id"
+        },
+        "name": "=Audit Strat\u00e9gique \u2014 {{ $('Code in JavaScript').first().json.reference_mission }} \u2014 {{ $('Code in JavaScript').first().json.entreprise_client }}",
+        "sameFolder": false,
+        "folderId": {
+          "__rl": true,
+          "value": "12QDo7ophyG60bZ4J3bEM0Sw5FzmFWyUH",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        288,
+        -272
+      ],
+      "id": "50463af5-bf04-4a0c-b508-9ef0a0c98662",
+      "name": "Copy file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Mree2Z9D6c9t2pfH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $('Copy file').item.json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "{{reference_mission}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.reference_mission }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{nom_client}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.nom_client }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{entreprise_client}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.entreprise_client }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{secteur}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.secteur }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{_activite}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.secteur }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{plan_choisi}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.palier + ' (' + $('Code in JavaScript').first().json.currency + ')' }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{sha256_hash}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.sha256_hash }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{hash_sha256}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.sha256_hash }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{date_analyse_utc}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.date_analyse_utc }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{corps_audit}}",
+              "replaceText": "={{ $('Basic LLM Chain').first().json.text }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        432,
+        -272
+      ],
+      "id": "2bcbaac3-8cea-4686-87d5-aff477148ebf",
+      "name": "Updates document",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "IpjHNzZWx60S5vjg",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "e-META LABS <contact@e-metalabs.com>",
+        "toEmail": "={{ $('Code in JavaScript').first().json.email }}",
+        "subject": "=Votre Audit Strat\u00e9gique Sur-Mesure \u2014 e-META LABS",
+        "html": "=<p>Bonjour,</p>\n\n<p>Suite \u00e0 votre requ\u00eate, nos algorithmes ont termin\u00e9 l'analyse de votre contexte op\u00e9rationnel.</p>\n\n<!-- Le texte de l'audit est conserv\u00e9 avec ses retours \u00e0 la ligne -->\n{{ $('Basic LLM Chain').first().json.text.replace(/\\n/g, '<br>') }}\n\n<br>\n<hr style=\"border: 0; border-top: 1px solid #d4af37; margin: 20px 0;\">\n<br>\n\n<p style=\"text-align: center;\">\n    <strong>\n        <a href=\"https://docs.google.com/document/d/{{ $('Updates document').first().json.documentId }}/edit?usp=sharing\" style=\"background-color: #25D366; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 4px; font-family: sans-serif; display: inline-block;\">\n            CONSULTER VOTRE AUDIT STRAT\u00c9GIQUE COMPLET\n        </a>\n    </strong>\n</p>\n\n<br>\n<br>\n\n<p>Notre desk ex\u00e9cutif reste \u00e0 votre disposition pour planifier le d\u00e9ploiement technique de cette infrastructure.</p>\n\n<p>Bien cordiellement,</p>\n\n<p><strong>La Direction de l'Ing\u00e9nierie e-META LABS</strong></p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        864,
+        -272
+      ],
+      "id": "25a494cb-49b8-45e7-92d0-d78c233cfb08",
+      "name": "Send an Email1",
+      "webhookId": "7f6577e7-18f0-4587-803c-0bbff07661ba",
+      "credentials": {
+        "smtp": {
+          "id": "EYgJ1ZIwAIiqA4jl",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        -288,
+        -256
+      ],
+      "id": "fe20fa8f-e3a7-4d91-b342-28d7312d4481",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "65PIXXpn4vorh7q7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "function sha256Pure(text) {\n  const bytes = unescape(encodeURIComponent(text));\n  const bitLength = bytes.length * 8;\n  let data = bytes + '\\x80';\n  while (data.length % 64 !== 56) data += '\\x00';\n  data += String.fromCharCode(0, 0, 0, 0, (bitLength >>> 24) & 255, (bitLength >>> 16) & 255, (bitLength >>> 8) & 255, bitLength & 255);\n  const initial = [], constants = [], composites = {};\n  for (let candidate = 2, count = 0; count < 64; candidate++) {\n    if (!composites[candidate]) {\n      for (let multiple = candidate * 2; multiple < 400; multiple += candidate) composites[multiple] = true;\n      if (count < 8) initial.push((Math.sqrt(candidate) * 0x100000000) | 0);\n      constants.push((Math.cbrt(candidate) * 0x100000000) | 0);\n      count++;\n    }\n  }\n  const hash = initial.slice(), rotate = (value, bits) => (value >>> bits) | (value << (32 - bits));\n  for (let offset = 0; offset < data.length; offset += 64) {\n    const words = new Array(64);\n    for (let index = 0; index < 16; index++) {\n      const start = offset + index * 4;\n      words[index] = (data.charCodeAt(start) << 24) | (data.charCodeAt(start + 1) << 16) | (data.charCodeAt(start + 2) << 8) | data.charCodeAt(start + 3);\n    }\n    for (let index = 16; index < 64; index++) {\n      const x = words[index - 15], y = words[index - 2];\n      words[index] = (words[index - 16] + (rotate(x, 7) ^ rotate(x, 18) ^ (x >>> 3)) + words[index - 7] + (rotate(y, 17) ^ rotate(y, 19) ^ (y >>> 10))) | 0;\n    }\n    let [a, b, c, d, e, f, g, h] = hash;\n    for (let index = 0; index < 64; index++) {\n      const t1 = (h + (rotate(e, 6) ^ rotate(e, 11) ^ rotate(e, 25)) + ((e & f) ^ (~e & g)) + constants[index] + words[index]) | 0;\n      const t2 = ((rotate(a, 2) ^ rotate(a, 13) ^ rotate(a, 22)) + ((a & b) ^ (a & c) ^ (b & c))) | 0;\n      h = g; g = f; f = e; e = (d + t1) | 0; d = c; c = b; b = a; a = (t1 + t2) | 0;\n    }\n    hash[0] = (hash[0] + a) | 0; hash[1] = (hash[1] + b) | 0; hash[2] = (hash[2] + c) | 0; hash[3] = (hash[3] + d) | 0;\n    hash[4] = (hash[4] + e) | 0; hash[5] = (hash[5] + f) | 0; hash[6] = (hash[6] + g) | 0; hash[7] = (hash[7] + h) | 0;\n  }\n  return hash.map(value => (value >>> 0).toString(16).padStart(8, '0')).join('');\n}\n\nconst input = $input.item.json;\nconst raw = input.body && typeof input.body === 'object' ? input.body : input;\nconst value = item => item == null ? '' : String(item).trim();\nconst email = value(raw.email || raw.email_client).toLowerCase();\nconst domain = email.includes('@') ? email.split('@').pop().replace(/^www\\./, '') : '';\nconst entreprise_client = value(raw.entreprise_client || raw.entity) || (domain ? 'Soci\u00e9t\u00e9 via ' + domain : '');\nif (!entreprise_client) throw new Error('Entreprise absente : renseignez le nom l\u00e9gal ou un e-mail professionnel valide.');\nconst aliases = { agro: 'agro', banque: 'banque', banking: 'banque', mines: 'mines', energy: 'mines', energie: 'mines', logistique: 'logistique', logistics: 'logistique', sante: 'sante', health: 'sante', telecom: 'telecoms', telecoms: 'telecoms', btp: 'btp', property: 'btp', industrie: 'industrie', manufacturing: 'industrie', public: 'public', retail: 'retail' };\nconst sectorInput = value(raw.secteur || raw.sector || raw.secteur_selectionne).toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').replace(/[^a-z]/g, '');\nconst secteur = aliases[sectorInput];\nif (!secteur) throw new Error('Secteur absent ou non reconnu dans le contrat d\u2019interface.');\nconst palierInput = value(raw.palier).toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '');\nconst palier = /decouverte|discovery|starter/.test(palierInput) ? 'decouverte' : /chambre|executive|executif/.test(palierInput) ? 'chambre' : 'mandat';\nconst currencyInput = value(raw.currency).toUpperCase();\nconst currency = ['EUR', 'USD', 'FCFA'].includes(currencyInput) ? currencyInput : 'EUR';\nconst reference_mission = value(raw.reference_mission || raw.reference) || 'MIS-' + new Date().getUTCFullYear() + '-' + String(Math.floor(Math.random() * 10000)).padStart(4, '0');\nconst nom_client = value(raw.nom_client || raw.representant) || (email.includes('@') ? email.split('@')[0].replace(/[._-]+/g, ' ') : 'Direction requ\u00e9rante');\nconst whatsapp = value(raw.whatsapp || raw.telephone_client).replace(/\\D/g, '').replace(/^00/, '');\nconst problematique = value(raw.problematique || raw.mission_contexte || raw.problematique_brute);\nconst parsedDate = new Date(raw.date_analyse_utc || raw.date || Date.now());\nconst date_analyse_utc = Number.isNaN(parsedDate.getTime()) ? new Date().toISOString() : parsedDate.toISOString();\nconst titre_mission = 'Audit Strat\u00e9gique [' + secteur.toUpperCase() + '] \u2014 ' + entreprise_client;\nconst canonical = { reference_mission, entreprise_client, nom_client, secteur, palier, currency, problematique, email, whatsapp, date_analyse_utc, titre_mission };\nconst sha256_hash = sha256Pure(JSON.stringify(canonical));\nif (raw.sha256_hash && value(raw.sha256_hash).toLowerCase() !== sha256_hash) throw new Error('L\u2019empreinte SHA-256 transmise ne correspond pas aux m\u00e9tadonn\u00e9es canoniques.');\nconst guides = { agro: 'Rendement, pertes post-r\u00e9colte et cha\u00eene du froid.', banque: 'Liquidit\u00e9, qualit\u00e9 des actifs, co\u00fbt du risque et exigences BCEAO/UEMOA applicables.', mines: 'Co\u00fbts d\u2019extraction, teneur, redevances, contenu local et d\u00e9pendances \u00e9nerg\u00e9tiques.', logistique: 'Co\u00fbt par tonne-kilom\u00e8tre, d\u00e9lais, taux de service et continuit\u00e9 des corridors.', sante: 'Disponibilit\u00e9, cha\u00eene du froid, s\u00e9curit\u00e9 patient et conformit\u00e9 applicable.', telecoms: 'ARPU, churn, disponibilit\u00e9, SLA et co\u00fbt par abonn\u00e9.', btp: 'Marge chantier, d\u00e9rives de co\u00fbt/d\u00e9lai, BFR et documentation fonci\u00e8re.', industrie: 'TRS/OEE, rebuts, \u00e9nergie et maintenance.', public: 'Ex\u00e9cution budg\u00e9taire, d\u00e9lais, tra\u00e7abilit\u00e9 et conformit\u00e9 des march\u00e9s.', retail: 'Rotation des stocks, d\u00e9marque, marge et BFR.' };\nreturn { json: { ...canonical, guide_metier: guides[secteur], sha256_hash } };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -256,
+        384
+      ],
+      "id": "73d57a14-3d3b-462c-8c0a-08acbfd6ac34",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Copy file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copy file": {
+      "main": [
+        [
+          {
+            "node": "Updates document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Updates document": {
+      "main": [
+        [
+          {
+            "node": "Share file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Share file": {
+      "main": [
+        [
+          {
+            "node": "NocoDB_Missions_Vault",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NocoDB_Missions_Vault": {
+      "main": [
+        [
+          {
+            "node": "Send an Email1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an Email1": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp_Meta_Notifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ea8fa31aa22966a954dc961c81514f022c83fc78d659cee5ee3c2bdbd3975381"
+  }
+}

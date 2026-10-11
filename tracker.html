@@ -207,7 +207,7 @@
                 </div>
                 <div class="hash-terminal" aria-live="polite">
                     <span class="terminal-cursor" aria-hidden="true">&gt;_</span>
-                    <code class="hash-value" id="sha-hash" data-i18n="tracker.hash.pending">Empreinte en attente de synchronisation du registre sécurisé.</code>
+                    <code class="hash-value" id="sha-hash">Empreinte en attente de synchronisation du registre sécurisé.</code>
                 </div>
                 <div class="proof-actions">
                     <button class="copy-button" type="button" id="copy-hash" data-i18n="tracker.copy">Copier l'empreinte</button>
@@ -279,6 +279,8 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         const reference = urlParams.get("ref") || "MIS-2026-001";
+        const sector = urlParams.get("sec") || "";
+        const palier = urlParams.get("palier") || "";
         let preferredLang = "fr";
         try {
             preferredLang = urlParams.get("lang") || localStorage.getItem("emeta_lang") || "fr";
@@ -294,7 +296,10 @@
 
         document.documentElement.lang = currentLang;
         document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
-        document.getElementById("mission-ref").textContent = reference;
+        const missionReferenceElement = document.getElementById("mission-ref");
+        missionReferenceElement.textContent = reference;
+        missionReferenceElement.dataset.sector = sector;
+        missionReferenceElement.dataset.palier = palier;
         document.getElementById("ui-trk-lbl-mission").textContent = text.mission;
         document.getElementById("ui-trk-return").textContent = text.returnHome;
         document.getElementById("ui-trk-desk").textContent = text.desk;
@@ -330,9 +335,14 @@
         const copyStatus = document.getElementById("copy-status");
         if (hashIsValid) {
             hashElement.textContent = missionHash.toLowerCase();
-            document.getElementById("ots-badge-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.ots.verified");
-            document.getElementById("ots-badge").classList.add("is-verified");
+            document.getElementById("ots-badge-label").textContent = "Empreinte SHA-256 calculée — horodatage OpenTimestamps à confirmer";
+            document.getElementById("ots-badge").classList.remove("is-verified");
         }
+        document.addEventListener("DOMContentLoaded", () => {
+            hashElement.textContent = hashIsValid
+                ? missionHash.toLowerCase()
+                : (window.EMETA_I18N?.resolveTranslation(currentLang, "tracker.hash.pending") || "Empreinte en attente de synchronisation du registre sécurisé.");
+        });
         window.addEventListener("emeta:languagechange", (event) => {
             currentLang = event.detail.lang;
             text = translations[currentLang];
@@ -355,7 +365,8 @@
                 hashElement.textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.hash.pending");
                 document.getElementById("ots-badge-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.ots");
             } else {
-                document.getElementById("ots-badge-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.ots.verified");
+                hashElement.textContent = missionHash.toLowerCase();
+                document.getElementById("ots-badge-label").textContent = "Empreinte SHA-256 calculée — horodatage OpenTimestamps à confirmer";
             }
             if (copyStatus.dataset.state === "success") {
                 copyStatus.textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.copy.success");
