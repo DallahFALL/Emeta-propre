@@ -106,7 +106,12 @@ function getMandateRepresentative(email) {
 
 function normalizeMandatePhone(value) {
     const digits = String(value || "").replace(/\D/g, "");
-    return digits.startsWith("00") ? digits.slice(2) : digits;
+    const internationalDigits = digits.startsWith("00") ? digits.slice(2) : digits;
+    const normalized = /^7\d{8}$/.test(internationalDigits) ? `221${internationalDigits}` : internationalDigits;
+    if (!/^[1-9]\d{7,14}$/.test(normalized)) {
+        throw new Error(uiDict[currentLang].phoneError);
+    }
+    return normalized;
 }
 
 function createMandateTitle(sector, entity) {
@@ -151,6 +156,7 @@ const uiDict = {
         sending: "SCELLEMENT & TRANSMISSION EN COURS…",
         contextError: "Le nom de l'entité et un exposé d'au moins 150 caractères sont requis.",
         contactError: "Veuillez renseigner un email professionnel et une ligne WhatsApp.",
+        phoneError: "Saisissez un numéro WhatsApp international valide (8 à 15 chiffres, indicatif obligatoire). Un numéro local sénégalais à 9 chiffres commençant par 7 est accepté.",
         cryptoError: "Le scellement cryptographique nécessite un navigateur sécurisé (HTTPS) compatible Web Crypto.",
         success: "Mandat transmis au pipeline. Votre référence souveraine est ",
         transmissionError: "La transmission a échoué. Le mandat reste dans le terminal ; vérifiez votre connexion ou réessayez.",
@@ -194,6 +200,7 @@ const uiDict = {
         sending: "SEALING & TRANSMITTING…",
         contextError: "Entity name and a statement of at least 150 characters are required.",
         contactError: "Enter a professional email address and WhatsApp line.",
+        phoneError: "Enter a valid international WhatsApp number (8–15 digits, country code required). A 9-digit Senegalese local number starting with 7 is accepted.",
         cryptoError: "Cryptographic sealing requires a secure (HTTPS) browser with Web Crypto support.",
         success: "Mandate sent to the pipeline. Your sovereign reference is ",
         transmissionError: "Transmission failed. Your mandate remains in the terminal; check your connection or retry.",
@@ -237,6 +244,7 @@ const uiDict = {
         sending: "SELLANDO Y TRANSMITIENDO…",
         contextError: "Se requiere el nombre de la entidad y una descripción de al menos 150 caracteres.",
         contactError: "Introduzca un correo profesional y un número de WhatsApp.",
+        phoneError: "Introduzca un número internacional de WhatsApp válido (8–15 dígitos, con prefijo de país). Se acepta un número local senegalés de 9 dígitos que empiece por 7.",
         cryptoError: "El sellado criptográfico requiere un navegador seguro (HTTPS) compatible con Web Crypto.",
         success: "Mandato transmitido al pipeline. Su referencia soberana es ",
         transmissionError: "La transmisión falló. El mandato permanece en el terminal; compruebe la conexión o inténtelo de nuevo.",
@@ -280,6 +288,7 @@ const uiDict = {
         sending: "جارٍ الختم والإرسال…",
         contextError: "اسم الكيان ووصف لا يقل عن 150 حرفاً مطلوبان.",
         contactError: "يرجى إدخال بريد مهني ورقم واتساب.",
+        phoneError: "أدخل رقم واتساب دولياً صالحاً (من 8 إلى 15 رقماً مع رمز الدولة). يُقبل الرقم السنغالي المحلي المكوّن من 9 أرقام والبادئ بـ7.",
         cryptoError: "يتطلب الختم التشفيري متصفحاً آمناً (HTTPS) يدعم Web Crypto.",
         success: "تم إرسال التفويض إلى مسار المعالجة. المرجع السيادي هو ",
         transmissionError: "فشل الإرسال. لا يزال التفويض محفوظاً في المحطة؛ تحقق من الاتصال أو أعد المحاولة.",
@@ -645,6 +654,13 @@ async function fireAutoDetection() {
         setStatus("modal-status", t.contactError, "error");
         return;
     }
+    let whatsapp;
+    try {
+        whatsapp = normalizeMandatePhone(phone);
+    } catch (error) {
+        setStatus("modal-status", error.message, "error");
+        return;
+    }
     if (!missionName || context.length < MIN_CONTEXT_LENGTH || !activePricingPlan || !activeMandateReference) {
         closeModal("autoDetectModal");
         setStatus("terminal-status", t.contextError, "error");
@@ -670,7 +686,7 @@ async function fireAutoDetection() {
             currency: activeCurrency,
             problematique: context,
             email,
-            whatsapp: normalizeMandatePhone(phone),
+            whatsapp,
             date_analyse_utc: dateAnalyseUtc,
             titre_mission: createMandateTitle(sector, entity),
             piece_justificative: attachment
@@ -704,10 +720,10 @@ const response = await fetch(webhookUrl, {
         setStatus("terminal-status", `${t.success}${reference}`, "success");
         window.setTimeout(() => {
             const trackerParams = new URLSearchParams({
-                ref: reference,
-                sec: sector,
+                reference_mission: reference,
+                secteur: sector,
                 palier,
-                hash: payload.sha256_hash
+                sha256_hash: payload.sha256_hash
             });
             window.location.href = `tracker.html?${trackerParams.toString()}`;
         }, 1400);
@@ -785,6 +801,14 @@ async function transmettreDossierFinal() {
         alert("Veuillez renseigner votre email professionnel et votre ligne WhatsApp.");
         return;
     }
+    let whatsapp;
+    try {
+        whatsapp = normalizeMandatePhone(tel);
+    } catch (error) {
+        console.error("Le numéro WhatsApp du mandat n'est pas valide.", error);
+        alert(error.message);
+        return;
+    }
     let entity;
     try {
         entity = getVerifiedMandateEntity(email);
@@ -831,7 +855,7 @@ async function transmettreDossierFinal() {
         currency,
         problematique: problematique || "",
         email,
-        whatsapp: normalizeMandatePhone(tel),
+        whatsapp,
         date_analyse_utc: new Date().toISOString(),
         titre_mission: createMandateTitle(sector, entity)
     };
@@ -868,10 +892,10 @@ async function transmettreDossierFinal() {
         }
         alert(`Mandat scellé avec succès !\nRéférence : ${reference}\nLe Desk Exécutif a bien reçu votre demande.`);
         const trackerParams = new URLSearchParams({
-            ref: reference,
-            sec: sector,
+            reference_mission: reference,
+            secteur: sector,
             palier,
-            hash: sha256
+            sha256_hash: sha256
         });
         window.location.href = `tracker.html?${trackerParams.toString()}`;
 

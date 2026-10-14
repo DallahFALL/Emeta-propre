@@ -82,6 +82,10 @@
         @keyframes gold-pulse { 50% { box-shadow: 0 0 0 8px rgba(212, 175, 55, .035), 0 0 9px rgba(212, 175, 55, .2); } }
         .step.completed .step-label { color: #aee7bd; }
         .step.active .step-label { color: var(--gold-light); font-weight: 700; }
+        .option-b-actions { margin: -15px 0 28px; }
+        .option-b-button { display: block; width: 100%; min-height: 48px; padding: 12px 18px; border: 1px solid rgba(212, 175, 55, .72); background: linear-gradient(135deg, rgba(212, 175, 55, .18), rgba(212, 175, 55, .06)); color: var(--gold-light); cursor: pointer; font-size: .76rem; font-weight: 750; transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease; }
+        .option-b-button:hover { border-color: var(--gold-light); background: rgba(212, 175, 55, .16); box-shadow: 0 8px 24px rgba(212, 175, 55, .1); }
+        .option-b-button[hidden] { display: none; }
         .proof-card { padding: 19px; border: 1px solid rgba(212, 175, 55, .2); background: rgba(5, 10, 18, .53); }
         .proof-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
         .proof-header h2 { margin: 0; color: var(--gold-light); font-family: var(--heading); font-size: .86rem; font-weight: 600; }
@@ -153,7 +157,6 @@
             </a>
             <nav class="header-links" aria-label="Navigation institutionnelle" data-i18n-aria-label="navigation.institutional.aria">
                 <a class="header-link" href="index.html" id="ui-trk-return" data-i18n="tracker.nav.home" data-lang-link>← Retour au Cockpit</a>
-                <a class="header-link" href="expert.html" id="link-desk" data-lang-link><span id="ui-trk-desk" data-i18n="tracker.nav.expert">Desk Exécutif</span> →</a>
                 <span class="lang-switch" aria-label="Sélecteur de langue" data-i18n-aria-label="language.aria">
                     <button type="button" data-lang="fr" onclick="setLanguage('fr')">FR</button>
                     <button type="button" data-lang="en" onclick="setLanguage('en')">EN</button>
@@ -168,14 +171,17 @@
                 <div class="mission-topline">
                     <div>
                         <p class="mission-kicker" data-i18n="tracker.kicker">SUIVI PROBATOIRE DE MISSION</p>
-                        <h1 class="mission-ref"><span id="ui-trk-lbl-mission" data-i18n="tracker.mission">MISSION</span> : <span id="mission-ref">MIS-2026-001</span></h1>
+                        <h1 class="mission-ref"><span id="ui-trk-lbl-mission" data-i18n="tracker.mission">MISSION</span> : <span id="mission-ref">—</span></h1>
                     </div>
                     <span class="status-pill" id="mission-status"><span class="status-dot" aria-hidden="true"></span><span id="status-label" data-i18n="tracker.running">EN COURS D'EXÉCUTION</span></span>
                 </div>
                 <p class="mission-meta">
+                    <span><strong id="ui-trk-sector">Secteur :</strong> <span id="mission-sector">—</span></span>
+                    <span><strong id="ui-trk-tier">Palier :</strong> <span id="mission-tier">—</span></span>
                     <span><strong data-i18n="tracker.anchor">Date d'ancrage :</strong> <time id="anchor-date"></time></span>
                     <span><strong data-i18n="tracker.clock">Horodatage temps réel :</strong> <time id="live-time" aria-live="off"></time></span>
                 </p>
+                <p class="mission-meta"><span>Référentiel exécutif e-META LABS SASU — Édition Octobre 2026</span></p>
             </section>
 
             <section aria-labelledby="timeline-heading">
@@ -197,6 +203,10 @@
                         <span class="step-node" id="step-num-4" aria-label="En cours" data-i18n-aria-label="tracker.step.running">4</span>
                         <span class="step-label" id="ui-step-4" data-i18n="tracker.step.4">Recette &amp; Clôture</span>
                     </div>
+                </div>
+                <div class="option-b-actions">
+                    <button class="option-b-button" id="option-b-button" type="button">Solliciter l'Arbitrage Terrain (Option B)</button>
+                    <p class="action-status" id="option-b-status" role="status" aria-live="polite"></p>
                 </div>
             </section>
 
@@ -240,36 +250,52 @@
     <script>
         const translations = {
             fr: {
-                returnHome: "← Retour au Cockpit", desk: "Desk Exécutif", mission: "MISSION",
+                returnHome: "← Retour au Cockpit", mission: "MISSION",
+                sector: "Secteur :", tier: "Palier :",
                 running: "EN COURS D'EXÉCUTION", closed: "MISSION CLÔTURÉE & VALIDÉE",
                 steps: ["Diagnostic IA", "Scellement Légal OTS", "Déploiement Expert", "Recette & Clôture"],
+                optionB: "Solliciter l'Arbitrage Terrain (Option B)",
+                expertExecution: "En cours d'exécution par l'Expert Accrédité",
+                optionBStatusError: "Statut d'arbitrage non synchronisé. Vérifiez votre connexion ou sollicitez le Desk par WhatsApp.",
                 validate: "VALIDER LE JALON ACTUEL (RECETTE)", validated: "MISSION RECETTÉE & CLÔTURÉE ✓",
                 hashCopied: "Empreinte copiée dans le presse-papiers.", hashMissing: "Aucune empreinte SHA-256 n'est synchronisée pour cette mission.",
                 validationSuccess: "Jalon validé. La notification a été transmise à l'équipe.",
                 validationError: "La validation n'a pas pu être transmise. Réessayez ou contactez support@e-metalabs.com."
             },
             en: {
-                returnHome: "← Back to Cockpit", desk: "Executive Desk", mission: "MISSION",
+                returnHome: "← Back to Cockpit", mission: "MISSION",
+                sector: "Sector:", tier: "Tier:",
                 running: "IN PROGRESS", closed: "MISSION CLOSED & VALIDATED",
                 steps: ["AI Diagnostic", "Legal OTS Sealing", "Expert Deployment", "Acceptance & Closing"],
+                optionB: "Request Field Arbitration (Option B)",
+                expertExecution: "In progress with the Accredited Expert",
+                optionBStatusError: "Arbitration status could not be synchronized. Check your connection or contact the Desk on WhatsApp.",
                 validate: "VALIDATE CURRENT MILESTONE (ACCEPTANCE)", validated: "MISSION ACCEPTED & CLOSED ✓",
                 hashCopied: "Fingerprint copied to clipboard.", hashMissing: "No SHA-256 fingerprint is synchronized for this mission.",
                 validationSuccess: "Milestone validated. The team has been notified.",
                 validationError: "Validation could not be sent. Please retry or contact support@e-metalabs.com."
             },
             es: {
-                returnHome: "← Volver al Cockpit", desk: "Desk Ejecutivo", mission: "MISIÓN",
+                returnHome: "← Volver al Cockpit", mission: "MISIÓN",
+                sector: "Sector:", tier: "Nivel:",
                 running: "EN CURSO DE EJECUCIÓN", closed: "MISIÓN CERRADA Y VALIDADA",
                 steps: ["Diagnóstico IA", "Sellado Legal OTS", "Despliegue Experto", "Recepción y Cierre"],
+                optionB: "Solicitar arbitraje en terreno (Opción B)",
+                expertExecution: "En ejecución por el Experto Acreditado",
+                optionBStatusError: "No se pudo sincronizar el estado del arbitraje. Compruebe la conexión o contacte al Desk por WhatsApp.",
                 validate: "VALIDAR EL HITO ACTUAL (RECEPCIÓN)", validated: "MISIÓN ACEPTADA Y CERRADA ✓",
                 hashCopied: "Huella copiada al portapapeles.", hashMissing: "No hay una huella SHA-256 sincronizada para esta misión.",
                 validationSuccess: "Hito validado. Se ha notificado al equipo.",
                 validationError: "No se pudo enviar la validación. Inténtelo de nuevo o contacte con support@e-metalabs.com."
             },
             ar: {
-                returnHome: "العودة إلى لوحة التحكم ←", desk: "المكتب التنفيذي", mission: "المهمة",
+                returnHome: "العودة إلى لوحة التحكم ←", mission: "المهمة",
+                sector: "القطاع:", tier: "الفئة:",
                 running: "قيد التنفيذ", closed: "أُغلقت المهمة وتم اعتمادها",
                 steps: ["تشخيص الذكاء الاصطناعي", "الختم القانوني OTS", "نشر الخبراء", "الاستلام والإغلاق"],
+                optionB: "طلب التحكيم الميداني (الخيار ب)",
+                expertExecution: "قيد التنفيذ بواسطة الخبير المعتمد",
+                optionBStatusError: "تعذرت مزامنة حالة التحكيم. تحقق من الاتصال أو تواصل مع المكتب عبر واتساب.",
                 validate: "اعتماد المرحلة الحالية (الاستلام)", validated: "تم اعتماد المهمة وإغلاقها ✓",
                 hashCopied: "تم نسخ البصمة إلى الحافظة.", hashMissing: "لا توجد بصمة SHA-256 متزامنة لهذه المهمة.",
                 validationSuccess: "تم اعتماد المرحلة وإخطار الفريق.",
@@ -278,8 +304,29 @@
         };
 
         const urlParams = new URLSearchParams(window.location.search);
-        const reference = urlParams.get("ref") || "MIS-2026-001";
-        const sector = urlParams.get("sec") || "";
+        const reference = urlParams.get("reference_mission") || urlParams.get("ref") || "Référence indisponible";
+        const sectorAliases = {
+            agro: "agro", banque: "banque", banking: "banque", mines: "mines", energy: "mines",
+            logistique: "logistique", logistics: "logistique", sante: "sante", health: "sante",
+            telecom: "telecoms", telecoms: "telecoms", btp: "btp", property: "btp",
+            industrie: "industrie", manufacturing: "industrie", public: "public", retail: "retail"
+        };
+        const sectorLabels = {
+            agro: "Agro-industrie et souveraineté alimentaire",
+            banque: "Banque, FinTech et assurance",
+            mines: "Énergie et mines",
+            logistique: "Logistique, ports et supply chain",
+            sante: "Santé, pharmacie et biotechnologies",
+            telecoms: "Télécommunications, cloud et infrastructures numériques",
+            btp: "BTP, immobilier et foncier",
+            industrie: "Industrie manufacturière et transformation",
+            public: "Secteur public et parapublic",
+            retail: "Retail, distribution et négoce"
+        };
+        const suppliedSector = (urlParams.get("secteur") || urlParams.get("sec") || "").trim().toLowerCase()
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const sectorKey = sectorAliases[suppliedSector] || "";
+        const sector = sectorLabels[sectorKey] || "Secteur non renseigné";
         const palier = urlParams.get("palier") || "";
         let preferredLang = "fr";
         try {
@@ -291,28 +338,75 @@
         let currentLang = Object.hasOwn(translations, langParam) ? langParam : "fr";
         let text = translations[currentLang];
         let missionClosed = false;
-        const missionHash = urlParams.get("hash") || "";
+        let optionBActivated = false;
+        const missionHash = urlParams.get("sha256_hash") || urlParams.get("hash") || "";
         const hashIsValid = /^[a-f\d]{64}$/i.test(missionHash);
 
         document.documentElement.lang = currentLang;
         document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
         const missionReferenceElement = document.getElementById("mission-ref");
         missionReferenceElement.textContent = reference;
-        missionReferenceElement.dataset.sector = sector;
+        missionReferenceElement.dataset.sector = sectorKey;
         missionReferenceElement.dataset.palier = palier;
+        document.getElementById("mission-sector").textContent = sector || "—";
+        document.getElementById("mission-tier").textContent = palier || "—";
+        document.getElementById("ui-trk-sector").textContent = text.sector;
+        document.getElementById("ui-trk-tier").textContent = text.tier;
         document.getElementById("ui-trk-lbl-mission").textContent = text.mission;
         document.getElementById("ui-trk-return").textContent = text.returnHome;
-        document.getElementById("ui-trk-desk").textContent = text.desk;
         text.steps.forEach((label, index) => {
             document.getElementById(`ui-step-${index + 1}`).textContent = label;
         });
         document.getElementById("validation-label").textContent = text.validate;
 
         const returnLink = document.getElementById("link-return-home");
-        const deskLink = document.getElementById("link-desk");
         returnLink.href = `index.html?lang=${encodeURIComponent(currentLang)}`;
-        deskLink.href = `expert.html?lang=${encodeURIComponent(currentLang)}`;
-        deskLink.lastChild.textContent = currentLang === "ar" ? " ←" : " →";
+
+        const optionBButton = document.getElementById("option-b-button");
+        const optionBStatus = document.getElementById("option-b-status");
+        const missionStatusUrl = "https://automation.e-metalabs.com/webhook/cortex-04-mission-status";
+        const canonicalMissionReference = /^MIS-2026-\d{4}$/i.test(reference);
+        function renderOptionBState() {
+            optionBButton.textContent = text.optionB;
+            optionBButton.hidden = optionBActivated || !canonicalMissionReference;
+            document.getElementById("ui-step-3").textContent = optionBActivated ? text.expertExecution : text.steps[2];
+            if (optionBActivated) {
+                document.getElementById("step-3").classList.add("completed");
+                document.getElementById("step-3").classList.remove("active");
+            }
+        }
+        async function synchronizeMissionStatus() {
+            if (!canonicalMissionReference) {
+                optionBStatus.dataset.state = "error";
+                optionBStatus.textContent = text.optionBStatusError;
+                optionBButton.hidden = true;
+                return;
+            }
+            try {
+                const response = await fetch(`${missionStatusUrl}?reference=${encodeURIComponent(reference)}`, { cache: "no-store" });
+                if (!response.ok) throw new Error(`Le service de statut a répondu avec le statut ${response.status}.`);
+                const result = await response.json();
+                if (!result.found) throw new Error(`La mission ${reference} est introuvable dans le registre NocoDB.`);
+                const normalizedStatus = String(result.statut || "").trim().toLocaleLowerCase();
+                optionBActivated = normalizedStatus === "arbitrage terrain sollicité" || normalizedStatus === "expert déployé";
+                renderOptionBState();
+                optionBStatus.removeAttribute("data-state");
+                optionBStatus.textContent = "";
+            } catch (error) {
+                console.error("Impossible de synchroniser le statut d'arbitrage :", error);
+                if (!optionBActivated) optionBButton.hidden = false;
+                optionBStatus.dataset.state = "error";
+                optionBStatus.textContent = text.optionBStatusError;
+            }
+        }
+        optionBButton.textContent = text.optionB;
+        optionBButton.addEventListener("click", () => {
+            if (!canonicalMissionReference || optionBActivated) return;
+            const message = `Bonjour e-META LABS, je souhaite activer l'arbitrage terrain (Option B) pour ma mission ${reference}`;
+            window.open(`https://wa.me/221772404130?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+        });
+        synchronizeMissionStatus();
+        window.setInterval(synchronizeMissionStatus, 30000);
 
         const anchorDate = new Date();
         const anchorDateElement = document.getElementById("anchor-date");
@@ -346,16 +440,17 @@
         window.addEventListener("emeta:languagechange", (event) => {
             currentLang = event.detail.lang;
             text = translations[currentLang];
+            document.getElementById("ui-trk-sector").textContent = text.sector;
+            document.getElementById("ui-trk-tier").textContent = text.tier;
             document.getElementById("ui-trk-lbl-mission").textContent = text.mission;
             document.getElementById("ui-trk-return").textContent = text.returnHome;
-            document.getElementById("ui-trk-desk").textContent = text.desk;
             text.steps.forEach((label, index) => {
                 document.getElementById(`ui-step-${index + 1}`).textContent = label;
             });
+            renderOptionBState();
             document.getElementById("status-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.running");
             document.getElementById("validation-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.validate");
             document.getElementById("ui-trk-return").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.nav.home");
-            document.getElementById("ui-trk-desk").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.nav.expert");
             document.getElementById("timeline-heading").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.timeline");
             document.getElementById("ui-trk-lbl-hash").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.hash");
             document.getElementById("copy-hash").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.copy");
@@ -383,7 +478,9 @@
                 document.getElementById("validation-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.validated");
                 document.getElementById("step-num-4").setAttribute("aria-label", window.EMETA_I18N.resolveTranslation(currentLang, "tracker.step.validated"));
             }
-            deskLink.lastChild.textContent = currentLang === "ar" ? " ←" : " →";
+            if (optionBStatus.dataset.state === "error") {
+                optionBStatus.textContent = text.optionBStatusError;
+            }
             updateClock();
         });
         document.getElementById("copy-hash").addEventListener("click", async () => {

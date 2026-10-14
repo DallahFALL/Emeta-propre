@@ -1,0 +1,348 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "reception-emeta",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -560,
+        -16
+      ],
+      "id": "817f0b17-f353-4680-a24a-f7232599d82a",
+      "name": "Webhook",
+      "webhookId": "687552f6-34d1-4252-bea4-65a88099a02a"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "cf7efe8c-75e6-4dd1-8ff4-8af0ec1befdc",
+              "leftValue": "={{ $json.body.entry[0].changes[0].value.messages[0].id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -400,
+        -16
+      ],
+      "id": "a5f33480-4824-433f-a6e4-7af4f2f60390",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v19.0/1045757915291250/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ (() => { const message = $('If').first().json.body.entry[0].changes[0].value.messages[0]; const response = $('Message a model').first().json.content; const timestamp = Number(message.timestamp) * 1000; const now = Date.now(); const sessionOpen = Number.isFinite(timestamp) && timestamp > 0 && now >= timestamp && now - timestamp < 24 * 60 * 60 * 1000; const payload = { messaging_product: 'whatsapp', recipient_type: 'individual', to: String(message.from || '').replace(/\\D/g, ''), type: 'text', text: { body: response } }; if (!sessionOpen) { payload.type = 'template'; payload.template = { name: 'emeta_reprise_conversation', language: { code: 'fr' } }; delete payload.text; } return payload; })() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        80,
+        -64
+      ],
+      "id": "9ca1a72f-656a-4b17-812f-62c56add955a",
+      "name": "HTTP Request",
+      "continueOnFail": true,
+      "credentials": {
+        "httpMultipleHeadersAuth": {
+          "id": "D8UEaUWLS87NezFm",
+          "name": "Multiple Headers Auth account"
+        },
+        "httpHeaderAuth": {
+          "id": "IEsexaqc2aAf2dFN",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "=llama3",
+          "mode": "id"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ 'Reponds en francais en tenant compte du contexte de routage ci-dessous. Si une reference de mission est fournie, rattache la reponse a cette mission; sinon traite la demande selon le numero WhatsApp et le contenu courant. Si option_b_requested est vrai et qu’aucune reference canonique n’est fournie, demande explicitement la reference MIS-2026-XXXX et ne confirme pas l’activation du handoff. Ne pretends pas consulter un dossier non fourni.\\nContexte: ' + JSON.stringify($('Prepare Incoming Context').first().json.routing_context) + '\\nMessage entrant: ' + $('Prepare Incoming Context').first().json.contenu }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.ollama",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        -64
+      ],
+      "id": "fc18d141-ba00-4cb7-ad00-82a84069c1e7",
+      "name": "Message a model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "hUhfDKKVzIUE9aDL",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "=reception-emeta",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -368,
+        -224
+      ],
+      "id": "2253d320-7ea4-4fd6-aa64-7467b5b5af0c",
+      "name": "Webhook1",
+      "webhookId": "c869096f-6bf0-467a-a0af-9b77f2c82f16"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.query['hub.challenge'] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -160,
+        -224
+      ],
+      "id": "2e6146b7-a743-4958-a127-1077eb7d0354",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "const envelope = $json.body && typeof $json.body === 'object' ? $json.body : $json;\nconst value = envelope.entry?.[0]?.changes?.[0]?.value || {};\nconst message = Array.isArray(value.messages) ? value.messages[0] : null;\nif (!message || !message.id) throw new Error('Message WhatsApp entrant absent ou sans identifiant.');\nconst contact = Array.isArray(value.contacts) ? value.contacts[0] : null;\nconst text = message.text?.body || message.button?.text || message.interactive?.button_reply?.title || message.interactive?.list_reply?.title || message.image?.caption || message.document?.caption || '';\nconst phone = String(message.from || contact?.wa_id || '').replace(/\\D/g, '');\nconst content = String(text || '[Message non textuel]');\nconst referenceSource = String(envelope.reference_mission || envelope.reference || '') + '\\n' + content;\nconst referenceMatch = referenceSource.match(/\\bMIS-2026-\\d{4}\\b/i);\nconst optionBRequested = /\\boption\\s*b\\b|\\barbitrage\\s+terrain\\b|\\bexpert\\s+terrain\\b|\\bMIS-2026-/i.test(content);\nconst routingContext = { numero_whatsapp: phone, reference_mission: referenceMatch ? referenceMatch[0].toUpperCase() : '', option_b_requested: optionBRequested, message_id_parent: String(message.context?.id || ''), type_message: String(message.type || 'unknown') };\nreturn { json: { numero_whatsapp: phone, message_id: String(message.id), reference_mission: routingContext.reference_mission, type_message: routingContext.type_message, contenu: content, date_reception_utc: new Date(Number(message.timestamp) * 1000 || Date.now()).toISOString(), routing_context: routingContext } };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -224,
+        112
+      ],
+      "id": "cfb53b6c-2c3f-4752-8caf-73266626fc11",
+      "name": "Prepare Incoming Context"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ 'https://base.e-metalabs.com/api/v2/tables/' + $env.NOCODB_WHATSAPP_TABLE_ID + '/records' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "={{ $env.NOCODB_API_TOKEN }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { Numero_WhatsApp: $('Prepare Incoming Context').first().json.numero_whatsapp, Message_ID: $('Prepare Incoming Context').first().json.message_id, Reference_Mission: $('Prepare Incoming Context').first().json.reference_mission, Type_Message: $('Prepare Incoming Context').first().json.type_message, Contenu: $('Prepare Incoming Context').first().json.contenu, Date_Reception_UTC: $('Prepare Incoming Context').first().json.date_reception_utc, Contexte_Routage: JSON.stringify($('Prepare Incoming Context').first().json.routing_context) } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        0,
+        112
+      ],
+      "id": "5a56fc63-a084-4f97-bc70-4261d2f243a7",
+      "name": "Logs_Communications"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "92083816-3cfb-43b0-8a3f-b40cc3bf3341",
+              "leftValue": "={{ $json.routing_context.option_b_requested && Boolean($json.reference_mission) }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -32,
+        112
+      ],
+      "id": "53ff119d-7fc1-49c2-9655-df9a71e7042a",
+      "name": "Route Option B"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://automation.e-metalabs.com/webhook/cortex-04-handoff-option-b",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-handoff-key",
+              "value": "={{ $env.CORTEX_04_HANDOFF_SECRET }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { expediteur: $json.numero_whatsapp, message: $json.contenu, reference: $json.reference_mission } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        192,
+        16
+      ],
+      "id": "2a8c5730-ce75-4be7-bbc3-4c0fed18ac53",
+      "name": "CORTEX_04 Option B Handoff"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Prepare Incoming Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Incoming Context": {
+      "main": [
+        [
+          {
+            "node": "Route Option B",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route Option B": {
+      "main": [
+        [
+          {
+            "node": "CORTEX_04 Option B Handoff",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Logs_Communications",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Logs_Communications": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ea8fa31aa22966a954dc961c81514f022c83fc78d659cee5ee3c2bdbd3975381",
+    "description": "Set NOCODB_API_TOKEN and NOCODB_WHATSAPP_TABLE_ID for the dedicated Logs_Communications table. Columns: Numero_WhatsApp, Message_ID, Reference_Mission, Type_Message, Contenu, Date_Reception_UTC, Contexte_Routage. Messages that request Option B and include a valid MIS-2026-XXXX reference are routed through CORTEX_04; standard messages are logged here. Set CORTEX_04_HANDOFF_SECRET to the same private value in both n8n workflows."
+  }
+}

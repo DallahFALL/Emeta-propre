@@ -1,7 +1,7 @@
 # CADRE MÉTHODOLOGIQUE DE TRANSFORMATION
 ## Référentiel exécutif e-META LABS
 
-**Document institutionnel — Version du 10 octobre 2026**  
+**Document institutionnel — Édition Octobre 2026**  
 **Classification :** Référentiel méthodologique général  
 **Éditeur :** E-META LABS SASU — e-META LABS
 
@@ -11,7 +11,11 @@
 
 Le présent cadre expose la méthode générale employée par e-META LABS pour analyser les enjeux de transformation, structurer les constats et éclairer les décisions des organisations. Il s’adresse aux dirigeants, directions financières et opérationnelles, comités de direction, institutions et experts associés à une mission.
 
-Ce document constitue un référentiel de méthode. Il ne vaut ni offre ferme, ni devis, ni commande, ni mandat accepté, ni avis juridique, fiscal, comptable ou réglementaire. Pour chaque mission, le périmètre opposable, les destinataires, les données examinées, les livrables, les délais, les honoraires, les conditions de preuve et les éventuelles exclusions sont définis dans les documents contractuels acceptés par les parties. En cas de différence, les stipulations particulières du devis ou du mandat confirmé prévalent dans leur champ, sous réserve des règles impératives applicables.
+Ce document constitue la doctrine d'arbitrage méthodologique d'e-META LABS SASU pour ses dix secteurs clés : agro-industrie et souveraineté alimentaire ; banque, FinTech et assurance ; énergie et mines ; logistique, ports et supply chain ; santé, pharmacie et biotechnologies ; télécommunications, cloud et infrastructures numériques ; BTP, immobilier et foncier ; industrie manufacturière et transformation ; secteur public et parapublic ; retail, distribution et négoce. Il encadre la sélection des angles d'analyse, des tests et des éléments probatoires, sous réserve de l'adaptation au pays, au sous-secteur, aux faits disponibles et au périmètre de chaque mandat.
+
+Le Référentiel Exécutif est la clé de voûte institutionnelle de la production d'audit : il structure la rigueur des vingt chapitres attendus et l'application du Cadre Probatoire sectoriel. La traçabilité des sources, des hypothèses, des pièces contradictoires et des limites contribue à l'opposabilité du dossier dans son cadre contractuel et juridique applicable ; elle ne constitue pas, à elle seule, une garantie universelle de recevabilité ni un avis juridique.
+
+Ce document ne vaut ni offre ferme, ni devis, ni commande, ni mandat accepté, ni avis juridique, fiscal, comptable ou réglementaire. Pour chaque mission, le périmètre opposable, les destinataires, les données examinées, les livrables, les délais, les honoraires, les conditions de preuve et les éventuelles exclusions sont définis dans les documents contractuels acceptés par les parties. En cas de différence, les stipulations particulières du devis ou du mandat confirmé prévalent dans leur champ, sous réserve des règles impératives applicables.
 
 Les expressions « preuve », « scellement » et « opposabilité » sont employées avec leur portée technique ou contractuelle précisée dans le présent document. Une empreinte numérique ou un horodatage ne constitue pas, à lui seul, une certification de la véracité d’une information, une validation d’un rapport par un tiers, ni une garantie de recevabilité juridique dans toute juridiction.
 
@@ -53,6 +57,14 @@ Cette chaîne contribue à documenter l’intégrité et l’antériorité du co
 Le Desk Exécutif met en perspective les résultats au regard des contraintes de l’organisation : maturité des processus, responsabilités, disponibilité des ressources, dépendances techniques, calendrier, règles sectorielles et capacité réelle d’exécution. Selon le périmètre accepté, il peut contribuer à challenger les hypothèses, hiérarchiser les risques, examiner des options et formuler une feuille de route.
 
 L’intervention humaine n’est pas présumée pour tous les niveaux de service. Son contenu, son volume et ses modalités sont établis dans la commande ou le mandat. La décision finale et la mise en œuvre restent sous la responsabilité des organes habilités du client.
+
+### Cycle en deux phases — passage au contradictoire
+
+**Phase 1 — Inférence et modélisation algorithmique à distance.** CORTEX_03 organise et analyse les éléments transmis à distance, explicite les hypothèses et les limites, puis produit un livrable d’orientation. Lorsque le scellement est prévu au mandat, la version concernée est associée à une empreinte SHA-256; ce scellement atteste une correspondance technique, et non la véracité des données ni une validation humaine.
+
+**Phase 2 — Option B : arbitrage terrain et contre-expertise humaine.** Lorsqu’une vérification des conditions réelles, une levée de doute ou une conclusion contradictoire est requise, cette phase constitue le passage obligatoire du virtuel au terrain. À la demande du client, l’Option B déclenche une immersion contradictoire sur site, la levée des doutes topographiques et d’infrastructure, puis le contreseing des constats concernés par un Expert accrédité du Desk Exécutif. L’expert examine les éléments effectivement observés et consigne les réserves; il ne valide pas automatiquement l’ensemble des hypothèses ou du livrable algorithmique.
+
+L’activation de l’Option B est transmise au Desk Exécutif avec la référence canonique de mission. Le Desk assure l’assignation d’un expert du secteur et le statut de suivi est porté au registre de mission. Le parcours client du Cockpit Tracker et le parcours de recrutement ou de candidature des experts demeurent distincts.
 
 ## 1.3 Principes directeurs
 
@@ -236,6 +248,16 @@ L’expression « arbitrage permanent » décrit une modalité d’accompagnemen
 Les nombres de pages constituent des formats indicatifs définis par palier; ils ne remplacent pas le périmètre, la qualité des données ni les critères d’acceptation du mandat. La pagination peut varier avec la complexité, les annexes, les formats accessibles et la mise en page. Aucun volume ne doit être atteint en ajoutant du contenu non étayé.
 
 Les analyses sont des outils d’aide à la décision, fondés sur les informations disponibles et les hypothèses du mandat. Elles ne garantissent ni rendement, ni économie, ni conformité, ni obtention d’un financement ou d’une autorisation. Tout conseil juridique, fiscal, réglementaire, comptable ou autre activité réservée doit être confié à un professionnel habilité lorsqu’il est requis.
+
+## 3.6 Contrat technique de mission et notifications
+
+Les intégrations utilisent les clés canoniques `reference_mission`, `entreprise_client`, `nom_client`, `secteur`, `palier`, `currency`, `sha256_hash` et `date_analyse_utc`. Le nom `secteur` est la seule clé de secteur; toute variante telle que `secteur_activite` est exclue du contrat. Les numéros envoyés à l’API WhatsApp Cloud sont transmis en chiffres seuls, sans signe « + ».
+
+Les réponses libres WhatsApp ne sont utilisées que dans les 24 heures suivant le message entrant. En dehors de cette fenêtre, le modèle approuvé `emeta_reprise_conversation` est requis. Le notifier d’audit utilise le modèle `cortex_diagnostic` en français, avec trois variables de corps dans l’ordre : référence de mission, empreinte SHA-256 et lien de consultation du document (`webViewLink`). Les modèles doivent être approuvés dans WhatsApp Manager avec ces paramètres exacts. Pour l’Option B, le routage détecte `Option B`, `arbitrage terrain`, `expert terrain` ou une référence de mission `MIS-2026-XXXX`; le message doit contenir une référence canonique valide. CORTEX_02 transmet le numéro WhatsApp, le message courant et la référence à CORTEX_04 via un webhook protégé par `CORTEX_04_HANDOFF_SECRET`. Le Desk reçoit l’alerte, le client reçoit un accusé de réception, puis `Statut` est mis à jour à `Arbitrage Terrain Sollicité`. Le Cockpit Tracker lit uniquement la référence et le statut via le webhook de consultation CORTEX_04. Les candidatures d’experts restent traitées par le parcours distinct `expert.html`.
+
+Le jeton API NocoDB est injecté dans n8n depuis la variable d’environnement `NOCODB_API_TOKEN` via le header `xc-token`; il ne doit pas être conservé dans l’export du workflow. Le registre des missions de production est `https://base.e-metalabs.com/api/v2/tables/mdoy3rbli4j924l/records` pour la création des missions. Son contrat de colonnes est `Code_Mission`, `Titre_Mission`, `Client`, `Secteur`, `Palier`, `Contrat_Hash_Ref` et `Statut`; le champ `Contrat_Hash_Ref` reçoit l’empreinte SHA-256 du contrat. CORTEX_04 utilise l’endpoint Data API v3 de ce registre pour rechercher la mission par `Code_Mission` et mettre à jour `Statut`. Avant activation, ces colonnes doivent exister avec ces noms exacts dans la table.
+
+La persistance des messages WhatsApp entrants demeure dans la table dédiée `Logs_Communications`, distincte du registre des missions, afin de conserver le numéro, l’identifiant, le contenu, la date de réception et le contexte de routage. Elle utilise `NOCODB_WHATSAPP_TABLE_ID` et les colonnes `Numero_WhatsApp`, `Message_ID`, `Reference_Mission`, `Type_Message`, `Contenu`, `Date_Reception_UTC` et `Contexte_Routage`. Le même jeton `NOCODB_API_TOKEN` et le header `xc-token` sont requis. CORTEX_04 requiert également `CORTEX_04_HANDOFF_SECRET`, défini comme variable d’environnement dans les deux workflows concernés; le tracker ne reçoit aucun jeton NocoDB.
 
 ---
 
