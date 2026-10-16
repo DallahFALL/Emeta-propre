@@ -255,7 +255,8 @@
                 running: "EN COURS D'EXÉCUTION", closed: "MISSION CLÔTURÉE & VALIDÉE",
                 steps: ["Diagnostic IA", "Scellement Légal OTS", "Déploiement Expert", "Recette & Clôture"],
                 optionB: "Solliciter l'Arbitrage Terrain (Option B)",
-                expertExecution: "En cours d'exécution par l'Expert Accrédité",
+                optionBInProgress: "Cadrage Tripartite en cours d'organisation",
+                expertExecution: "Expert Terrain Accrédité Déployé",
                 optionBStatusError: "Statut d'arbitrage non synchronisé. Vérifiez votre connexion ou sollicitez le Desk par WhatsApp.",
                 validate: "VALIDER LE JALON ACTUEL (RECETTE)", validated: "MISSION RECETTÉE & CLÔTURÉE ✓",
                 hashCopied: "Empreinte copiée dans le presse-papiers.", hashMissing: "Aucune empreinte SHA-256 n'est synchronisée pour cette mission.",
@@ -268,7 +269,8 @@
                 running: "IN PROGRESS", closed: "MISSION CLOSED & VALIDATED",
                 steps: ["AI Diagnostic", "Legal OTS Sealing", "Expert Deployment", "Acceptance & Closing"],
                 optionB: "Request Field Arbitration (Option B)",
-                expertExecution: "In progress with the Accredited Expert",
+                optionBInProgress: "Tripartite scoping being organized",
+                expertExecution: "Accredited Field Expert Deployed",
                 optionBStatusError: "Arbitration status could not be synchronized. Check your connection or contact the Desk on WhatsApp.",
                 validate: "VALIDATE CURRENT MILESTONE (ACCEPTANCE)", validated: "MISSION ACCEPTED & CLOSED ✓",
                 hashCopied: "Fingerprint copied to clipboard.", hashMissing: "No SHA-256 fingerprint is synchronized for this mission.",
@@ -281,7 +283,8 @@
                 running: "EN CURSO DE EJECUCIÓN", closed: "MISIÓN CERRADA Y VALIDADA",
                 steps: ["Diagnóstico IA", "Sellado Legal OTS", "Despliegue Experto", "Recepción y Cierre"],
                 optionB: "Solicitar arbitraje en terreno (Opción B)",
-                expertExecution: "En ejecución por el Experto Acreditado",
+                optionBInProgress: "Organización del encuadre tripartito en curso",
+                expertExecution: "Experto de Campo Acreditado Desplegado",
                 optionBStatusError: "No se pudo sincronizar el estado del arbitraje. Compruebe la conexión o contacte al Desk por WhatsApp.",
                 validate: "VALIDAR EL HITO ACTUAL (RECEPCIÓN)", validated: "MISIÓN ACEPTADA Y CERRADA ✓",
                 hashCopied: "Huella copiada al portapapeles.", hashMissing: "No hay una huella SHA-256 sincronizada para esta misión.",
@@ -294,7 +297,8 @@
                 running: "قيد التنفيذ", closed: "أُغلقت المهمة وتم اعتمادها",
                 steps: ["تشخيص الذكاء الاصطناعي", "الختم القانوني OTS", "نشر الخبراء", "الاستلام والإغلاق"],
                 optionB: "طلب التحكيم الميداني (الخيار ب)",
-                expertExecution: "قيد التنفيذ بواسطة الخبير المعتمد",
+                optionBInProgress: "يجري تنظيم التأطير الثلاثي",
+                expertExecution: "تم نشر خبير ميداني معتمد",
                 optionBStatusError: "تعذرت مزامنة حالة التحكيم. تحقق من الاتصال أو تواصل مع المكتب عبر واتساب.",
                 validate: "اعتماد المرحلة الحالية (الاستلام)", validated: "تم اعتماد المهمة وإغلاقها ✓",
                 hashCopied: "تم نسخ البصمة إلى الحافظة.", hashMissing: "لا توجد بصمة SHA-256 متزامنة لهذه المهمة.",
@@ -339,6 +343,7 @@
         let text = translations[currentLang];
         let missionClosed = false;
         let optionBActivated = false;
+        let currentMissionStatus = "";
         const missionHash = urlParams.get("sha256_hash") || urlParams.get("hash") || "";
         const hashIsValid = /^[a-f\d]{64}$/i.test(missionHash);
 
@@ -367,13 +372,22 @@
         const missionStatusUrl = "https://automation.e-metalabs.com/webhook/cortex-04-mission-status";
         const canonicalMissionReference = /^MIS-2026-\d{4}$/i.test(reference);
         function renderOptionBState() {
+            const normalizedStatus = currentMissionStatus.trim().toLocaleLowerCase();
+            const optionBRequested = normalizedStatus === "arbitrage terrain sollicité";
+            const expertAssigned = normalizedStatus === "expert assigné" || normalizedStatus === "expert déployé";
+            optionBActivated = optionBRequested || expertAssigned;
             optionBButton.textContent = text.optionB;
             optionBButton.hidden = optionBActivated || !canonicalMissionReference;
-            document.getElementById("ui-step-3").textContent = optionBActivated ? text.expertExecution : text.steps[2];
-            if (optionBActivated) {
-                document.getElementById("step-3").classList.add("completed");
-                document.getElementById("step-3").classList.remove("active");
-            }
+            document.getElementById("ui-step-3").textContent = expertAssigned ? text.expertExecution : text.steps[2];
+            document.getElementById("step-3").classList.toggle("completed", expertAssigned);
+            document.getElementById("step-3").classList.toggle("active", !expertAssigned);
+            document.getElementById("status-label").textContent = missionClosed
+                ? text.closed
+                : optionBRequested
+                    ? text.optionBInProgress
+                    : expertAssigned
+                        ? text.expertExecution
+                        : text.running;
         }
         async function synchronizeMissionStatus() {
             if (!canonicalMissionReference) {
@@ -387,8 +401,7 @@
                 if (!response.ok) throw new Error(`Le service de statut a répondu avec le statut ${response.status}.`);
                 const result = await response.json();
                 if (!result.found) throw new Error(`La mission ${reference} est introuvable dans le registre NocoDB.`);
-                const normalizedStatus = String(result.statut || "").trim().toLocaleLowerCase();
-                optionBActivated = normalizedStatus === "arbitrage terrain sollicité" || normalizedStatus === "expert déployé";
+                currentMissionStatus = String(result.statut || "");
                 renderOptionBState();
                 optionBStatus.removeAttribute("data-state");
                 optionBStatus.textContent = "";
@@ -400,6 +413,7 @@
             }
         }
         optionBButton.textContent = text.optionB;
+        renderOptionBState();
         optionBButton.addEventListener("click", () => {
             if (!canonicalMissionReference || optionBActivated) return;
             const message = `Bonjour e-META LABS, je souhaite activer l'arbitrage terrain (Option B) pour ma mission ${reference}`;
@@ -448,7 +462,6 @@
                 document.getElementById(`ui-step-${index + 1}`).textContent = label;
             });
             renderOptionBState();
-            document.getElementById("status-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.running");
             document.getElementById("validation-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.validate");
             document.getElementById("ui-trk-return").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.nav.home");
             document.getElementById("timeline-heading").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.timeline");
