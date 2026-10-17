@@ -83,6 +83,8 @@
         .step.completed .step-label { color: #aee7bd; }
         .step.active .step-label { color: var(--gold-light); font-weight: 700; }
         .option-b-actions { margin: -15px 0 28px; }
+        .sync-status { font-size: .64rem; }
+        .sync-status[data-state="unavailable"] { color: #aab4c2; }
         .option-b-button { display: block; width: 100%; min-height: 48px; padding: 12px 18px; border: 1px solid rgba(212, 175, 55, .72); background: linear-gradient(135deg, rgba(212, 175, 55, .18), rgba(212, 175, 55, .06)); color: var(--gold-light); cursor: pointer; font-size: .76rem; font-weight: 750; transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease; }
         .option-b-button:hover { border-color: var(--gold-light); background: rgba(212, 175, 55, .16); box-shadow: 0 8px 24px rgba(212, 175, 55, .1); }
         .option-b-button[hidden] { display: none; }
@@ -197,8 +199,8 @@
                         <span class="step-node" aria-label="Validé" data-i18n-aria-label="tracker.step.validated">✓</span>
                         <span class="step-label" id="ui-step-2" data-i18n="tracker.step.2">Scellement Légal OTS</span>
                     </div>
-                    <div class="step completed" id="step-3">
-                        <span class="step-node" aria-label="Validé" data-i18n-aria-label="tracker.step.validated">✓</span>
+                    <div class="step active" id="step-3">
+                        <span class="step-node" aria-label="En cours" data-i18n-aria-label="tracker.step.running">3</span>
                         <span class="step-label" id="ui-step-3" data-i18n="tracker.step.3">Déploiement Expert</span>
                     </div>
                     <div class="step active" id="step-4">
@@ -209,6 +211,7 @@
                 <div class="option-b-actions">
                     <button class="option-b-button" id="option-b-button" type="button">Solliciter l'Arbitrage Terrain (Option B)</button>
                     <p class="action-status" id="option-b-status" role="status" aria-live="polite"></p>
+                    <p class="action-status sync-status" id="sync-status" role="status" aria-live="polite"></p>
                 </div>
             </section>
 
@@ -259,8 +262,11 @@
                 optionB: "Solliciter l'Arbitrage Terrain (Option B)",
                 expertExecution: "Expert Terrain Accrédité Déployé",
                 optionBAvailable: "Mission enregistrée — Arbitrage disponible sur demande",
-                optionBReceived: "Demande d'arbitrage reçue — Cadrage en cours",
-                expertDeployed: "Expert Déployé sur site",
+                optionBReceived: "Demande d'arbitrage reçue — Cadrage opérationnel par le Desk en cours",
+                expertDeployed: "Expert Terrain Accrédité Déployé sur site",
+                syncConnecting: "Synchronisation du statut…",
+                syncReady: "Statut synchronisé",
+                syncUnavailable: "Synchronisation différée — affichage des données disponibles",
                 validate: "VALIDER LE JALON ACTUEL (RECETTE)", validated: "MISSION RECETTÉE & CLÔTURÉE ✓",
                 hashCopied: "Empreinte copiée dans le presse-papiers.", hashMissing: "Aucune empreinte SHA-256 n'est synchronisée pour cette mission.",
                 validationSuccess: "Jalon validé. La notification a été transmise à l'équipe.",
@@ -274,8 +280,11 @@
                 optionB: "Request Field Arbitration (Option B)",
                 expertExecution: "Accredited Field Expert Deployed",
                 optionBAvailable: "Mission registered — arbitration available on request",
-                optionBReceived: "Arbitration request received — scoping in progress",
-                expertDeployed: "Expert deployed on site",
+                optionBReceived: "Arbitration request received — Desk operational scoping in progress",
+                expertDeployed: "Accredited Field Expert deployed on site",
+                syncConnecting: "Synchronizing status…",
+                syncReady: "Status synchronized",
+                syncUnavailable: "Synchronization delayed — displaying available data",
                 validate: "VALIDATE CURRENT MILESTONE (ACCEPTANCE)", validated: "MISSION ACCEPTED & CLOSED ✓",
                 hashCopied: "Fingerprint copied to clipboard.", hashMissing: "No SHA-256 fingerprint is synchronized for this mission.",
                 validationSuccess: "Milestone validated. The team has been notified.",
@@ -289,8 +298,11 @@
                 optionB: "Solicitar arbitraje en terreno (Opción B)",
                 expertExecution: "Experto de Campo Acreditado Desplegado",
                 optionBAvailable: "Misión registrada — arbitraje disponible bajo solicitud",
-                optionBReceived: "Solicitud de arbitraje recibida — encuadre en curso",
-                expertDeployed: "Experto desplegado en el sitio",
+                optionBReceived: "Solicitud de arbitraje recibida — encuadre operativo del Desk en curso",
+                expertDeployed: "Experto de campo acreditado desplegado en el sitio",
+                syncConnecting: "Sincronizando estado…",
+                syncReady: "Estado sincronizado",
+                syncUnavailable: "Sincronización aplazada — se muestran los datos disponibles",
                 validate: "VALIDAR EL HITO ACTUAL (RECEPCIÓN)", validated: "MISIÓN ACEPTADA Y CERRADA ✓",
                 hashCopied: "Huella copiada al portapapeles.", hashMissing: "No hay una huella SHA-256 sincronizada para esta misión.",
                 validationSuccess: "Hito validado. Se ha notificado al equipo.",
@@ -304,8 +316,11 @@
                 optionB: "طلب التحكيم الميداني (الخيار ب)",
                 expertExecution: "تم نشر خبير ميداني معتمد",
                 optionBAvailable: "تم تسجيل المهمة — التحكيم متاح عند الطلب",
-                optionBReceived: "تم استلام طلب التحكيم — التأطير قيد الإعداد",
-                expertDeployed: "تم نشر الخبير في الموقع",
+                optionBReceived: "تم استلام طلب التحكيم — يجري المكتب الإعداد التشغيلي",
+                expertDeployed: "تم نشر الخبير الميداني المعتمد في الموقع",
+                syncConnecting: "جارٍ مزامنة الحالة…",
+                syncReady: "تمت مزامنة الحالة",
+                syncUnavailable: "تأجلت المزامنة — يتم عرض البيانات المتاحة",
                 validate: "اعتماد المرحلة الحالية (الاستلام)", validated: "تم اعتماد المهمة وإغلاقها ✓",
                 hashCopied: "تم نسخ البصمة إلى الحافظة.", hashMissing: "لا توجد بصمة SHA-256 متزامنة لهذه المهمة.",
                 validationSuccess: "تم اعتماد المرحلة وإخطار الفريق.",
@@ -314,8 +329,8 @@
         };
 
         const urlParams = new URLSearchParams(window.location.search);
-        const rawReference = urlParams.get("ref") || urlParams.get("reference_mission") || "";
-        const reference = rawReference.replace(/^=/, "").trim().toUpperCase() || "Référence indisponible";
+        const rawReference = urlParams.get("ref") || urlParams.get("reference_mission") || urlParams.get("reference") || "";
+        const reference = rawReference.replace(/^=/, "").trim().toUpperCase() || "—";
         const sectorAliases = {
             agro: "agro", banque: "banque", banking: "banque", mines: "mines", energy: "mines",
             logistique: "logistique", logistics: "logistique", sante: "sante", health: "sante",
@@ -352,6 +367,7 @@
         let missionClosed = false;
         let optionBActivated = false;
         let currentMissionStatus = "";
+        let currentExpertAssigned = false;
         let missionHash = (urlParams.get("sha256_hash") || urlParams.get("hash") || "").trim();
         let hashIsValid = /^[a-f\d]{64}$/i.test(missionHash);
 
@@ -377,15 +393,18 @@
 
         const optionBButton = document.getElementById("option-b-button");
         const optionBStatus = document.getElementById("option-b-status");
+        const syncStatus = document.getElementById("sync-status");
         const missionStatusUrl = "https://automation.e-metalabs.com/webhook/statut-mission";
         const canonicalMissionReference = /^MIS-2026-\d{4}$/i.test(reference);
         function renderOptionBState() {
-            const normalizedStatus = currentMissionStatus.trim().toLowerCase();
-            const optionBRequested = normalizedStatus === "arbitrage terrain sollicité";
-            const expertAssigned = normalizedStatus === "expert assigné" || normalizedStatus === "déployé" || normalizedStatus === "expert déployé";
+            const normalizedStatus = currentMissionStatus.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const optionBRequested = normalizedStatus === "arbitrage terrain sollicite";
+            const expertAssigned = currentExpertAssigned || normalizedStatus === "deploye" ||
+                (normalizedStatus.includes("expert") && (normalizedStatus.includes("assigne") || normalizedStatus.includes("deploy")));
             optionBActivated = optionBRequested || expertAssigned;
             optionBButton.textContent = text.optionB;
             optionBButton.hidden = optionBActivated || !canonicalMissionReference;
+            optionBButton.disabled = optionBActivated || !canonicalMissionReference;
             document.getElementById("ui-step-3").textContent = expertAssigned ? text.expertExecution : text.steps[2];
             document.getElementById("step-3").classList.toggle("completed", expertAssigned);
             document.getElementById("step-3").classList.toggle("active", !expertAssigned);
@@ -407,14 +426,19 @@
                 optionBStatus.removeAttribute("data-state");
                 optionBStatus.textContent = "";
                 optionBButton.hidden = true;
+                optionBButton.disabled = true;
+                syncStatus.textContent = "";
                 return;
             }
+            syncStatus.textContent = text.syncConnecting;
+            syncStatus.dataset.state = "pending";
             try {
                 const response = await fetch(`${missionStatusUrl}?ref=${encodeURIComponent(reference)}`, { method: "GET", mode: "cors", cache: "no-store" });
                 if (!response.ok) throw new Error(`Le service de statut a répondu avec le statut ${response.status}.`);
                 const result = await response.json();
-                if (result.success === false || result.found === false) throw new Error(`La mission ${reference} est introuvable dans le registre NocoDB.`);
+                if (result.success === false) throw new Error("Le service de statut a signalé un échec.");
                 currentMissionStatus = String(result.statut || "");
+                currentExpertAssigned = Boolean(result.expert_assigne);
                 if (result.secteur) {
                     document.getElementById("mission-sector").textContent = result.secteur;
                     missionReferenceElement.dataset.sector = String(result.secteur);
@@ -439,10 +463,13 @@
                     }
                 }
                 renderOptionBState();
+                syncStatus.dataset.state = "ready";
+                syncStatus.textContent = text.syncReady;
             } catch (error) {
                 console.warn("Statut de mission indisponible ; le cockpit reste utilisable.", error);
-                currentMissionStatus = "";
                 renderOptionBState();
+                syncStatus.dataset.state = "unavailable";
+                syncStatus.textContent = text.syncUnavailable;
             }
         }
         optionBButton.textContent = text.optionB;
@@ -518,6 +545,13 @@
                 validationStatus.textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.validation.success");
             } else if (validationStatus.dataset.state === "error") {
                 validationStatus.textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.validation.error");
+            }
+            if (syncStatus.dataset.state === "pending") {
+                syncStatus.textContent = text.syncConnecting;
+            } else if (syncStatus.dataset.state === "ready") {
+                syncStatus.textContent = text.syncReady;
+            } else if (syncStatus.dataset.state === "unavailable") {
+                syncStatus.textContent = text.syncUnavailable;
             }
             if (missionClosed) {
                 document.getElementById("status-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.closed");
