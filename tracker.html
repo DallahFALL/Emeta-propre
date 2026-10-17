@@ -105,6 +105,8 @@
         .action-status { min-height: 1.4em; margin: 9px 0 0; color: var(--muted); font-size: .72rem; }
         .action-status[data-state="error"] { color: #ffaaa2; }
         .action-status[data-state="success"] { color: #9ce7b6; }
+        .action-status[data-state="pending"] { display: table; padding: 5px 10px; border: 1px solid rgba(212, 175, 55, .42); background: rgba(212, 175, 55, .08); color: #fceaa7; }
+        .action-status[data-state="deployed"] { display: table; padding: 5px 10px; border: 1px solid rgba(37, 211, 102, .42); background: rgba(37, 211, 102, .08); color: #9ce7b6; }
         .validate-button {
             display: flex;
             width: 100%;
@@ -255,9 +257,10 @@
                 running: "EN COURS D'EXÉCUTION", closed: "MISSION CLÔTURÉE & VALIDÉE",
                 steps: ["Diagnostic IA", "Scellement Légal OTS", "Déploiement Expert", "Recette & Clôture"],
                 optionB: "Solliciter l'Arbitrage Terrain (Option B)",
-                optionBInProgress: "Cadrage Tripartite en cours d'organisation",
                 expertExecution: "Expert Terrain Accrédité Déployé",
-                optionBStatusError: "Statut d'arbitrage non synchronisé. Vérifiez votre connexion ou sollicitez le Desk par WhatsApp.",
+                optionBAvailable: "Mission enregistrée — Arbitrage disponible sur demande",
+                optionBReceived: "Demande d'arbitrage reçue — Cadrage en cours",
+                expertDeployed: "Expert Déployé sur site",
                 validate: "VALIDER LE JALON ACTUEL (RECETTE)", validated: "MISSION RECETTÉE & CLÔTURÉE ✓",
                 hashCopied: "Empreinte copiée dans le presse-papiers.", hashMissing: "Aucune empreinte SHA-256 n'est synchronisée pour cette mission.",
                 validationSuccess: "Jalon validé. La notification a été transmise à l'équipe.",
@@ -269,9 +272,10 @@
                 running: "IN PROGRESS", closed: "MISSION CLOSED & VALIDATED",
                 steps: ["AI Diagnostic", "Legal OTS Sealing", "Expert Deployment", "Acceptance & Closing"],
                 optionB: "Request Field Arbitration (Option B)",
-                optionBInProgress: "Tripartite scoping being organized",
                 expertExecution: "Accredited Field Expert Deployed",
-                optionBStatusError: "Arbitration status could not be synchronized. Check your connection or contact the Desk on WhatsApp.",
+                optionBAvailable: "Mission registered — arbitration available on request",
+                optionBReceived: "Arbitration request received — scoping in progress",
+                expertDeployed: "Expert deployed on site",
                 validate: "VALIDATE CURRENT MILESTONE (ACCEPTANCE)", validated: "MISSION ACCEPTED & CLOSED ✓",
                 hashCopied: "Fingerprint copied to clipboard.", hashMissing: "No SHA-256 fingerprint is synchronized for this mission.",
                 validationSuccess: "Milestone validated. The team has been notified.",
@@ -283,9 +287,10 @@
                 running: "EN CURSO DE EJECUCIÓN", closed: "MISIÓN CERRADA Y VALIDADA",
                 steps: ["Diagnóstico IA", "Sellado Legal OTS", "Despliegue Experto", "Recepción y Cierre"],
                 optionB: "Solicitar arbitraje en terreno (Opción B)",
-                optionBInProgress: "Organización del encuadre tripartito en curso",
                 expertExecution: "Experto de Campo Acreditado Desplegado",
-                optionBStatusError: "No se pudo sincronizar el estado del arbitraje. Compruebe la conexión o contacte al Desk por WhatsApp.",
+                optionBAvailable: "Misión registrada — arbitraje disponible bajo solicitud",
+                optionBReceived: "Solicitud de arbitraje recibida — encuadre en curso",
+                expertDeployed: "Experto desplegado en el sitio",
                 validate: "VALIDAR EL HITO ACTUAL (RECEPCIÓN)", validated: "MISIÓN ACEPTADA Y CERRADA ✓",
                 hashCopied: "Huella copiada al portapapeles.", hashMissing: "No hay una huella SHA-256 sincronizada para esta misión.",
                 validationSuccess: "Hito validado. Se ha notificado al equipo.",
@@ -297,9 +302,10 @@
                 running: "قيد التنفيذ", closed: "أُغلقت المهمة وتم اعتمادها",
                 steps: ["تشخيص الذكاء الاصطناعي", "الختم القانوني OTS", "نشر الخبراء", "الاستلام والإغلاق"],
                 optionB: "طلب التحكيم الميداني (الخيار ب)",
-                optionBInProgress: "يجري تنظيم التأطير الثلاثي",
                 expertExecution: "تم نشر خبير ميداني معتمد",
-                optionBStatusError: "تعذرت مزامنة حالة التحكيم. تحقق من الاتصال أو تواصل مع المكتب عبر واتساب.",
+                optionBAvailable: "تم تسجيل المهمة — التحكيم متاح عند الطلب",
+                optionBReceived: "تم استلام طلب التحكيم — التأطير قيد الإعداد",
+                expertDeployed: "تم نشر الخبير في الموقع",
                 validate: "اعتماد المرحلة الحالية (الاستلام)", validated: "تم اعتماد المهمة وإغلاقها ✓",
                 hashCopied: "تم نسخ البصمة إلى الحافظة.", hashMissing: "لا توجد بصمة SHA-256 متزامنة لهذه المهمة.",
                 validationSuccess: "تم اعتماد المرحلة وإخطار الفريق.",
@@ -308,7 +314,8 @@
         };
 
         const urlParams = new URLSearchParams(window.location.search);
-        const reference = urlParams.get("reference_mission") || urlParams.get("ref") || "Référence indisponible";
+        const rawReference = urlParams.get("ref") || urlParams.get("reference_mission") || "";
+        const reference = rawReference.replace(/^=/, "").trim().toUpperCase() || "Référence indisponible";
         const sectorAliases = {
             agro: "agro", banque: "banque", banking: "banque", mines: "mines", energy: "mines",
             logistique: "logistique", logistics: "logistique", sante: "sante", health: "sante",
@@ -327,11 +334,12 @@
             public: "Secteur public et parapublic",
             retail: "Retail, distribution et négoce"
         };
-        const suppliedSector = (urlParams.get("secteur") || urlParams.get("sec") || "").trim().toLowerCase()
+        const suppliedSectorValue = (urlParams.get("secteur") || "").trim();
+        const suppliedSector = suppliedSectorValue.toLowerCase()
             .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         const sectorKey = sectorAliases[suppliedSector] || "";
-        const sector = sectorLabels[sectorKey] || "Secteur non renseigné";
-        const palier = urlParams.get("palier") || "";
+        const sector = sectorLabels[sectorKey] || suppliedSectorValue || "";
+        const palier = (urlParams.get("palier") || "").trim();
         let preferredLang = "fr";
         try {
             preferredLang = urlParams.get("lang") || localStorage.getItem("emeta_lang") || "fr";
@@ -344,8 +352,8 @@
         let missionClosed = false;
         let optionBActivated = false;
         let currentMissionStatus = "";
-        const missionHash = urlParams.get("sha256_hash") || urlParams.get("hash") || "";
-        const hashIsValid = /^[a-f\d]{64}$/i.test(missionHash);
+        let missionHash = (urlParams.get("sha256_hash") || urlParams.get("hash") || "").trim();
+        let hashIsValid = /^[a-f\d]{64}$/i.test(missionHash);
 
         document.documentElement.lang = currentLang;
         document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
@@ -369,47 +377,72 @@
 
         const optionBButton = document.getElementById("option-b-button");
         const optionBStatus = document.getElementById("option-b-status");
-        const missionStatusUrl = "https://automation.e-metalabs.com/webhook/cortex-04-mission-status";
+        const missionStatusUrl = "https://automation.e-metalabs.com/webhook/statut-mission";
         const canonicalMissionReference = /^MIS-2026-\d{4}$/i.test(reference);
         function renderOptionBState() {
-            const normalizedStatus = currentMissionStatus.trim().toLocaleLowerCase();
+            const normalizedStatus = currentMissionStatus.trim().toLowerCase();
             const optionBRequested = normalizedStatus === "arbitrage terrain sollicité";
-            const expertAssigned = normalizedStatus === "expert assigné" || normalizedStatus === "expert déployé";
+            const expertAssigned = normalizedStatus === "expert assigné" || normalizedStatus === "déployé" || normalizedStatus === "expert déployé";
             optionBActivated = optionBRequested || expertAssigned;
             optionBButton.textContent = text.optionB;
             optionBButton.hidden = optionBActivated || !canonicalMissionReference;
             document.getElementById("ui-step-3").textContent = expertAssigned ? text.expertExecution : text.steps[2];
             document.getElementById("step-3").classList.toggle("completed", expertAssigned);
             document.getElementById("step-3").classList.toggle("active", !expertAssigned);
-            document.getElementById("status-label").textContent = missionClosed
-                ? text.closed
-                : optionBRequested
-                    ? text.optionBInProgress
-                    : expertAssigned
-                        ? text.expertExecution
-                        : text.running;
+            document.getElementById("status-label").textContent = missionClosed ? text.closed : text.running;
+            optionBStatus.removeAttribute("data-state");
+            if (expertAssigned) {
+                optionBStatus.dataset.state = "deployed";
+                optionBStatus.textContent = text.expertDeployed;
+            } else if (optionBRequested) {
+                optionBStatus.dataset.state = "pending";
+                optionBStatus.textContent = text.optionBReceived;
+            } else {
+                optionBStatus.dataset.state = "pending";
+                optionBStatus.textContent = text.optionBAvailable;
+            }
         }
         async function synchronizeMissionStatus() {
             if (!canonicalMissionReference) {
-                optionBStatus.dataset.state = "error";
-                optionBStatus.textContent = text.optionBStatusError;
+                optionBStatus.removeAttribute("data-state");
+                optionBStatus.textContent = "";
                 optionBButton.hidden = true;
                 return;
             }
             try {
-                const response = await fetch(`${missionStatusUrl}?reference=${encodeURIComponent(reference)}`, { cache: "no-store" });
+                const response = await fetch(`${missionStatusUrl}?ref=${encodeURIComponent(reference)}`, { method: "GET", mode: "cors", cache: "no-store" });
                 if (!response.ok) throw new Error(`Le service de statut a répondu avec le statut ${response.status}.`);
                 const result = await response.json();
-                if (!result.found) throw new Error(`La mission ${reference} est introuvable dans le registre NocoDB.`);
+                if (result.success === false || result.found === false) throw new Error(`La mission ${reference} est introuvable dans le registre NocoDB.`);
                 currentMissionStatus = String(result.statut || "");
+                if (result.secteur) {
+                    document.getElementById("mission-sector").textContent = result.secteur;
+                    missionReferenceElement.dataset.sector = String(result.secteur);
+                }
+                if (result.palier) {
+                    document.getElementById("mission-tier").textContent = result.palier;
+                    missionReferenceElement.dataset.palier = String(result.palier);
+                }
+                if (result.sha256_hash) {
+                    missionHash = String(result.sha256_hash).trim();
+                    hashIsValid = /^[a-f\d]{64}$/i.test(missionHash);
+                    hashElement.textContent = missionHash;
+                    document.getElementById("ots-badge-label").textContent = "Empreinte SHA-256 calculée — horodatage OpenTimestamps à confirmer";
+                    document.getElementById("ots-badge").classList.remove("is-verified");
+                }
+                const availableDate = result.date || result.date_ancrage || result.Date_Ancrage;
+                if (availableDate) {
+                    const parsedDate = new Date(availableDate);
+                    if (!Number.isNaN(parsedDate.getTime())) {
+                        anchorDate = parsedDate;
+                        updateClock();
+                    }
+                }
                 renderOptionBState();
-                optionBStatus.removeAttribute("data-state");
-                optionBStatus.textContent = "";
             } catch (error) {
-                console.error("Impossible de synchroniser le statut d'arbitrage :", error);
-                if (!optionBActivated) optionBButton.hidden = false;
-                optionBStatus.dataset.state = "error";
-                optionBStatus.textContent = text.optionBStatusError;
+                console.warn("Statut de mission indisponible ; le cockpit reste utilisable.", error);
+                currentMissionStatus = "";
+                renderOptionBState();
             }
         }
         optionBButton.textContent = text.optionB;
@@ -422,7 +455,7 @@
         synchronizeMissionStatus();
         window.setInterval(synchronizeMissionStatus, 30000);
 
-        const anchorDate = new Date();
+        let anchorDate = new Date();
         const anchorDateElement = document.getElementById("anchor-date");
         const liveTimeElement = document.getElementById("live-time");
         function updateClock() {
@@ -441,14 +474,14 @@
 
         const hashElement = document.getElementById("sha-hash");
         const copyStatus = document.getElementById("copy-status");
-        if (hashIsValid) {
-            hashElement.textContent = missionHash.toLowerCase();
+        if (missionHash) {
+            hashElement.textContent = missionHash;
             document.getElementById("ots-badge-label").textContent = "Empreinte SHA-256 calculée — horodatage OpenTimestamps à confirmer";
             document.getElementById("ots-badge").classList.remove("is-verified");
         }
         document.addEventListener("DOMContentLoaded", () => {
-            hashElement.textContent = hashIsValid
-                ? missionHash.toLowerCase()
+            hashElement.textContent = missionHash
+                ? missionHash
                 : (window.EMETA_I18N?.resolveTranslation(currentLang, "tracker.hash.pending") || "Empreinte en attente de synchronisation du registre sécurisé.");
         });
         window.addEventListener("emeta:languagechange", (event) => {
@@ -469,11 +502,11 @@
             document.getElementById("copy-hash").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.copy");
             document.getElementById("anchor-date").previousElementSibling.textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.anchor");
             document.getElementById("live-time").previousElementSibling.textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.clock");
-            if (!hashIsValid) {
+            if (!missionHash) {
                 hashElement.textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.hash.pending");
                 document.getElementById("ots-badge-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.ots");
             } else {
-                hashElement.textContent = missionHash.toLowerCase();
+                hashElement.textContent = missionHash;
                 document.getElementById("ots-badge-label").textContent = "Empreinte SHA-256 calculée — horodatage OpenTimestamps à confirmer";
             }
             if (copyStatus.dataset.state === "success") {
@@ -490,9 +523,6 @@
                 document.getElementById("status-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.closed");
                 document.getElementById("validation-label").textContent = window.EMETA_I18N.resolveTranslation(currentLang, "tracker.validated");
                 document.getElementById("step-num-4").setAttribute("aria-label", window.EMETA_I18N.resolveTranslation(currentLang, "tracker.step.validated"));
-            }
-            if (optionBStatus.dataset.state === "error") {
-                optionBStatus.textContent = text.optionBStatusError;
             }
             updateClock();
         });
