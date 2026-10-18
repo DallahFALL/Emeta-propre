@@ -11,8 +11,8 @@
     <style>
         .privacy-container {
             max-width: 900px;
-            margin: 50px auto;
-            padding: 50px;
+            margin: 40px auto;
+            padding: 40px 50px;
             background: rgba(10, 25, 47, 0.7);
             border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 8px;
@@ -27,7 +27,7 @@
             background: rgba(10, 25, 47, 0.95);
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
-        body { background-color: #050a12; color: #e6f1ff; }
+        body { background-color: #050a12; color: #e6f1ff; margin: 0; }
         .privacy-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
         .privacy-content h4 {
             color: #d4af37;
@@ -62,23 +62,31 @@
             background: rgba(212, 175, 55, 0.1);
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
+        .protocol-footer {
+            margin-top: 45px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            text-align: center;
+            color: #8794a6;
+            font-size: 0.8rem;
+        }
         @media (max-width: 640px) {
             .privacy-header { align-items: flex-start; flex-direction: column; gap: 16px; }
             .privacy-nav { justify-content: flex-start; }
-            .privacy-container { margin: 24px 16px; padding: 28px 20px; }
+            .privacy-container { margin: 20px 14px; padding: 24px 18px; }
         }
     </style>
 </head>
 <body>
 
     <header class="privacy-header">
-        <div class="logo-container">
+        <div class="logo-container" style="display: flex; align-items: center; gap: 12px;">
             <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path d="M50 5 L95 25 V75 L50 95 L5 75 V25 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
                 <circle cx="50" cy="50" r="8" fill="#d4af37"/>
             </svg>
             <div class="brand-text">
-                <h1 style="font-size: 1.2rem;">e-META LABS</h1>
+                <h1 style="font-size: 1.2rem; margin: 0; color: #fceaa7; font-family: 'Cinzel', serif;">e-META LABS</h1>
             </div>
         </div>
         <nav class="privacy-nav" aria-label="Navigation institutionnelle" data-i18n-aria-label="navigation.institutional.aria">
@@ -142,12 +150,13 @@
                 <h4 data-i18n="proto_t8">8. Juridiction Compétente</h4>
                 <p data-i18n="proto_c8">Le présent protocole est soumis au droit sénégalais. À défaut de résolution amiable dans un délai de trente (30) jours, tout litige relatif à l'interprétation, l'exécution ou la rupture du présent accord sera de la compétence exclusive du Tribunal de Commerce de Dakar, nonobstant pluralité de défendeurs ou appel en garantie.</p>
             </div>
+
+            <!-- Pied de page intégré proprement à l'intérieur de la carte -->
+            <footer class="protocol-footer">
+                <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
+            </footer>
         </div>
     </main>
-
-    <footer class="footer" style="margin-top: 50px;">
-        <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
-    </footer>
 
     <script src="i18n.js"></script>
     
