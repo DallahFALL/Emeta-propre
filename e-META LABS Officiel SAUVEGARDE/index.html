@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="e-META LABS | Audit Décisionnel & Strategic Engine - Transformation digitale, gouvernance et décision stratégique."
+    />
+    <title>e-META LABS | Audit Décisionnel & Strategic Engine</title>
+    <style>
+      :root {
+        --bg: #07131f;
+        --panel: rgba(18, 30, 42, 0.82);
+        --panel-strong: #0f2233;
+        --card: #10263a;
+        --line: rgba(123, 170, 220, 0.2);
+        --text: #eaf3ff;
+        --muted: #a7bfd8;
+        --primary: #63d0ff;
+        --primary-2: #8a7dff;
+        --accent: #48e1c1;
+        --warning: #ffcf70;
+        --shadow: rgba(6, 19, 32, 0.5);
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(99, 208, 255, 0.12), transparent 28%),
+          radial-gradient(circle at bottom right, rgba(138, 125, 255, 0.16), transparent 32%),
+          linear-gradient(180deg, #050d16 0%, #091b2a 38%, #07131e 100%);
+        color: var(--text);
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      .container {
+        width: min(1180px, calc(100% - 2rem));
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(14px);
+        background: rgba(5, 13, 22, 0.7);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 80px;
+        gap: 1rem;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-2));
+        color: #021019;
+        font-size: 1.1rem;
+        font-weight: 900;
+        box-shadow: 0 8px 22px rgba(99, 208, 255, 0.3);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .nav-links a:hover { color: var(--text); }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid transparent;
+        border-radius: 12px;
+        padding: 0.9rem 1.4rem;
+        font-weight: 700;
+        transition: 0.2s ease;
+        cursor: pointer;
+      }
+
+      .button.primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-2));
+        color: #04151f;
+        box-shadow: 0 12px 24px rgba(99, 208, 255, 0.28);
+      }
+
+      .button.secondary {
+        background: rgba(255, 255, 255, 0.02);
+        border-color: var(--line);
+        color: var(--text);
+      }
+
+      .button:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.04);
+      }
+
+      .hero {
+        padding: 5.5rem 0 3rem;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.5rem 0.85rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(99, 208, 255, 0.04);
+        color: var(--primary);
+        font-size: 0.78rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        display: block;
+        background: var(--accent);
+        border-radius: 50%;
+        box-shadow: 0 0 14px rgba(72, 225, 193, 0.8);
+      }
+
+      h1 {
+        font-size: clamp(2.65rem, 4vw, 5rem);
+        line-height: 1.04;
+        margin: 1.3rem 0 1rem;
+        letter-spacing: -0.06em;
+      }
+
+      .gradient-text {
+        background: linear-gradient(135deg, #dff9ff 0%, var(--primary) 30%, #c8d4ff 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .hero-copy {
+        font-size: 1.08rem;
+        color: var(--muted);
+        line-height: 1.8;
+        max-width: 620px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(110px, 1fr));
+        gap: 1rem;
+        margin-top: 2.5rem;
+      }
+
+      .stat {
+        padding: 1rem 1.1rem;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: clamp(1.4rem, 2vw, 2rem);
+        margin-bottom: 0.3rem;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .dashboard {
+        position: relative;
+        padding: 1.3rem;
+        background: linear-gradient(180deg, rgba(12, 26, 36, 0.9), rgba(9, 18, 28, 0.9));
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        box-shadow: 0 30px 60px var(--shadow);
+      }
+
+      .mini-panel {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.35rem 0.65rem;
+        border-radius: 999px;
+        background: rgba(72, 225, 193, 0.1);
+        color: var(--accent);
+        border: 1px solid rgba(72, 225, 193, 0.35);
+      }
+
+      .status-pill::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        background: var(--accent);
+        border-radius: 50%;
+      }
+
+      .chart {
+        height: 280px;
+        background: linear-gradient(180deg, rgba(99, 208, 255, 0.06), rgba(138, 125, 255, 0.02));
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .chart svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .chart-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+        background-size: 22px 22px;
+        mask-image: linear-gradient(180deg, rgba(0,0,0,0.8), rgba(0,0,0,0.18));
+      }
+
+      .metric-row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .metric-box {
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 0.9rem 1rem;
+      }
+
+      .metric-box small {
+        display: block;
+        color: var(--muted);
+        margin-bottom: 0.4rem;
+      }
+
+      .metric-box strong {
+        font-size: 1.2rem;
+      }
+
+      .section {
+        padding: 2.2rem 0 1rem;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .section-header h2 {
+        margin: 0;
+        font-size: clamp(2rem, 3vw, 2.8rem);
+        letter-spacing: -0.05em;
+      }
+
+      .section-header p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 650px;
+        line-height: 1.7;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.2rem;
+      }
+
+      .feature {
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 1.5rem;
+        min-height: 220px;
+      }
+
+      .icon {
+        width: 52px;
+        height: 52px;
+        display: grid;
+        place-items: center;
+        border-radius: 14px;
+        background: linear-gradient(135deg, rgba(99, 208, 255, 0.18), rgba(138, 125, 255, 0.18));
+        color: var(--primary);
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+      }
+
+      .feature h3 {
+        margin: 0 0 0.75rem;
+        font-size: 1.35rem;
+      }
+
+      .feature p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .value-props {
+        margin-top: 2.5rem;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 1.5rem;
+      }
+
+      .callout {
+        background: linear-gradient(180deg, rgba(14, 27, 38, 0.9), rgba(9, 17, 26, 0.95));
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        padding: 1.8rem;
+      }
+
+      .check-list {
+        list-style: none;
+        padding: 0;
+        margin: 1.25rem 0 0;
+      }
+
+      .check-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.8rem;
+        color: var(--muted);
+        line-height: 1.7;
+        margin-bottom: 0.85rem;
+      }
+
+      .check-list li::before {
+        content: "✓";
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: rgba(72, 225, 193, 0.1);
+        color: var(--accent);
+        font-weight: 800;
+        flex-shrink: 0;
+      }
+
+      .score-card {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .score-box {
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 1.5rem;
+      }
+
+      .score-box > small {
+        color: var(--muted);
+      }
+
+      .score-box .big {
+        display: block;
+        font-size: clamp(2rem, 3vw, 3.2rem);
+        margin: 0.6rem 0;
+        letter-spacing: -0.06em;
+      }
+
+      .progress {
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.05);
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.04);
+      }
+
+      .progress span {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+      }
+
+      .cta {
+        padding: 3rem 0 5rem;
+      }
+
+      .cta-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        background: linear-gradient(135deg, rgba(99, 208, 255, 0.12), rgba(138, 125, 255, 0.1));
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        padding: clamp(1.3rem, 2.5vw, 2.2rem);
+      }
+
+      .cta-box h3 {
+        margin: 0 0 0.5rem;
+        font-size: clamp(1.8rem, 3vw, 2.8rem);
+        letter-spacing: -0.05em;
+      }
+
+      .cta-box p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 1.6rem 0 2.8rem;
+        color: var(--muted);
+      }
+
+      .footer-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      @media (max-width: 940px) {
+        .hero-grid,
+        .feature-grid,
+        .value-props,
+        .cta-box {
+          grid-template-columns: 1fr;
+          display: grid;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .stats {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .button {
+          width: 100%;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+        }
+
+        .section-header {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <a href="#top" class="brand" aria-label="e-META LABS">
+          <span class="brand-mark">E</span>
+          <span>e-META LABS</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Navigation principale">
+          <a href="#audit">Audit</a>
+          <a href="#solutions">Solutions</a>
+          <a href="#impact">Impact</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <a href="#contact" class="button primary">Démarrer</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <span class="eyebrow">Strategic Intelligence</span>
+            <h1>
+              <span class="gradient-text">Audit Décisionnel</span><br />
+              &amp; Strategic Engine
+            </h1>
+            <p class="hero-copy">
+              e-META LABS conçoit des systèmes d'analyse, de gouvernance et de pilotage stratégique pour transformer les données en décisions rapides, fiables et créatrices de valeur.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#solutions" class="button primary">Explorer les solutions</a>
+              <a href="#audit" class="button secondary">Voir l'audit</a>
+            </div>
+
+            <div class="stats" aria-label="Indicateurs clés">
+              <div class="stat">
+                <strong>32%</strong>
+                <span>Gain d'efficacité</span>
+              </div>
+              <div class="stat">
+                <strong>4.8/5</strong>
+                <span>Expérience client</span>
+              </div>
+              <div class="stat">
+                <strong>24/7</strong>
+                <span>Pilotage intelligent</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard" aria-label="Dashboard stratégique">
+            <div class="mini-panel">
+              <span>Performance stratégique</span>
+              <span class="status-pill">En ligne</span>
+            </div>
+
+            <div class="chart">
+              <div class="chart-grid"></div>
+              <svg viewBox="0 0 420 260" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="lineGradient" x1="0%" x2="100%" y1="0%" y2="0%">
+                    <stop offset="0%" stop-color="#63d0ff"/>
+                    <stop offset="100%" stop-color="#8a7dff"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0,180 C60,165,70,120,130,118 S220,145,260,110 S350,30,420,50 L420,260 L0,260 Z" fill="rgba(99,208,255,0.12)"></path>
+                <path d="M0,185 C60,170,70,125,130,120 S220,150,260,110 S350,32,420,52" fill="none" stroke="url(#lineGradient)" stroke-width="4" stroke-linecap="round"></path>
+                <circle cx="420" cy="52" r="6" fill="#8a7dff"></circle>
+                <circle cx="130" cy="120" r="5" fill="#63d0ff"></circle>
+              </svg>
+            </div>
+
+            <div class="metric-row">
+              <div class="metric-box">
+                <small>ROI prévu</small>
+                <strong>+148%</strong>
+              </div>
+              <div class="metric-box">
+                <small>Précision</small>
+                <strong>96.4%</strong>
+              </div>
+              <div class="metric-box">
+                <small>Temps</small>
+                <strong>-41%</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="audit">
+        <div class="container">
+          <div class="section-header">
+            <h2>Une analyse claire de la réalité business</h2>
+            <p>
+              Nous auditons l'architecture de décision, les KPI, les performances opérationnelles et la maturité numérique pour identifier les leviers précis d'amélioration.
+            </p>
+          </div>
+
+          <div class="feature-grid" id="solutions">
+            <article class="feature">
+              <div class="icon">◎</div>
+              <h3>Audit stratégique</h3>
+              <p>
+                Diagnostic complet des processus, systèmes, coûts et décisions critiques pour révéler les frictions et gains de performance.
+              </p>
+            </article>
+
+            <article class="feature">
+              <div class="icon">◈</div>
+              <h3>Gouvernance digitale</h3>
+              <p>
+                Mise en place d'indicateurs, de tableaux de bord et de mécanismes de pilotage pour sécuriser les décisions au bon niveau.
+              </p>
+            </article>
+
+            <article class="feature">
+              <div class="icon">▣</div>
+              <h3>Strategic Engine</h3>
+              <p>
+                Engine de modélisation, d'anticipation et d'optimisation pour aligner l'exécution avec la vision stratégique.
+              </p>
+            </article>
+          </div>
+
+          <div class="value-props" id="impact">
+            <div class="callout">
+              <h3>Ce que nous livrons</h3>
+              <ul class="check-list">
+                <li>Cartographie des décideurs, des processus et des points de blocage.</li>
+                <li>Indicateurs de performance orientés valeur et impact réel sur les résultats.</li>
+                <li>Roadmaps concrètes pour transformer les données en actions mesurables.</li>
+                <li>Outillage d'alignement entre direction, opération et innovation.</li>
+              </ul>
+            </div>
+
+            <div class="score-card">
+              <div class="score-box">
+                <small>Maturité digitale</small>
+                <span class="big">78%</span>
+                <div class="progress"><span style="width: 78%;"></span></div>
+              </div>
+
+              <div class="score-box">
+                <small>Prise de décision</small>
+                <span class="big">89%</span>
+                <div class="progress"><span style="width: 89%;"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" id="contact">
+        <div class="container">
+          <div class="cta-box">
+            <div>
+              <h3>Transformer l'information en avantage concurrentiel.</h3>
+              <p>Accompagnez votre organisation vers un pilotage plus intelligent et plus résilient.</p>
+            </div>
+            <a href="mailto:contact@emeta-labs.com" class="button primary">Prendre rendez-vous</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-row">
+        <div class="brand" aria-label="e-META LABS footer">
+          <span class="brand-mark">E</span>
+          <span>e-META LABS</span>
+        </div>
+        <span>Audit Décisionnel &amp; Strategic Engine</span>
+      </div>
+    </footer>
+  </body>
+</html>

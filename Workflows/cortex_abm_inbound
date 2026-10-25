@@ -1,0 +1,328 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -656,
+        -144
+      ],
+      "id": "19b8a614-03f8-4f8a-9692-43ffbe691e89",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/m2wzkkmgbtsjk4u/records",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "=nc_pat_RjtX7Cs1qXA4pEZsbhr9Xp9OGBvpcqUZyWf4q-pI"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -416,
+        -144
+      ],
+      "id": "60fa6f1d-ce57-4a77-8583-fa05c729729e",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "operation": "aiExtract",
+        "extractUrl": "={{ $json.fields.Nom_Intitution }}",
+        "extract_properties": "=company news, strategic announcements, leadership changes, partnerships"
+      },
+      "type": "n8n-nodes-scrapingant.scrapingAnt",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -144
+      ],
+      "id": "912457bf-2170-438d-8edf-6850cacde03e",
+      "name": "ScrapingAnt",
+      "credentials": {
+        "scrapingAntApi": {
+          "id": "fiSleXXdEWyK6ppV",
+          "name": "ScrapingAnt account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Agis en tant qu'analyste géostratégique senior pour e-META LABS. À partir du contenu extrait : \"{{ $json.text }}\", rédige un pré-rapport d'opportunité axé sur la souveraineté, la conformité UEMOA ou la chaîne logistique. Mets en avant 2 vulnérabilités potentielles et propose l'angle d'approche pour un \"Diagnostic Flash - Palier 01\". Sois incisif, professionnel et direct.",
+        "messages": {
+          "messageValues": []
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        208,
+        -144
+      ],
+      "id": "e750879c-c58e-45b2-841b-b706a7e4dda3",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "sendTo": "=contact@e-metalabs.com",
+        "subject": "=[e-META LABS] Pré-audit stratégique & Analyse Géostratégique",
+        "emailType": "text",
+        "message": "=Bonjour,\n\nVeuillez trouver ci-dessous le pré-rapport d'opportunité généré automatiquement par la plateforme e-META LABS.\n\n--------------------------------------------------\n{{ $('Basic LLM Chain').first().json.text }}\n--------------------------------------------------\n\nCe rapport a été enregistré dans NocoDB pour validation.\n\nCordialement,\nL'infrastructure d'acquisition e-META LABS",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1136,
+        -144
+      ],
+      "id": "c07ed99f-3f6b-4716-8242-6b3bd707fc19",
+      "name": "Send a message",
+      "webhookId": "6788c589-1202-4f65-9277-6571032c50a3",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "JBUeetkKHPeEgMGa",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        208,
+        48
+      ],
+      "id": "1b657e3b-1316-4efb-bb5d-77fae5e7150b",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "65PIXXpn4vorh7q7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extrait le tableau \"records\" de NocoDB et transforme chaque ligne en item indépendant\nconst records = $input.first().json.records || [];\nreturn records.map(record => ({ json: record }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -208,
+        -144
+      ],
+      "id": "6b4f7459-0cd1-4717-97f7-95a2d21627da",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mtfw0dbpjlylcmd/records",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "=nc_pat_RjtX7Cs1qXA4pEZsbhr9Xp9OGBvpcqUZyWf4q-pI"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"fields\": {\n    \"Titre_Rapport\": \"Pré-audit automatisé - Compte Cible\",\n    \"Contenu_IA_Brut\": {{ JSON.stringify($json.text) }},\n    \"Statut_Validation\": \"En attente de validation humaine\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        544,
+        -144
+      ],
+      "id": "a0b5a415-643b-4058-8ac0-3e1568883147",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v19.0/1045757915291250/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer EAAS1ZAwTAKrEBRui65ZCicBZAK8n4aimIp2eSSHK381Kiv7osxhqX6KZC4YVjhZBp5PYgCHOLKiHED2kX3h7RVu69rcJJZCDFbZBr5BjZCHpPcPmlZBKTpR3r6TqHFkhNxLPtTRHO6yCaTn1UynLZCI33Sa6bdzkDwBuzKPaq0hlvR0qF6YSkyzWEpbWoRZA1plAQZDZD"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"221772404130\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"🚨 [e-META LABS] Un nouveau pré-rapport géostratégique vient d'être généré.\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        752,
+        -144
+      ],
+      "id": "27571f86-0270-4e36-bc0f-676be03840ba",
+      "name": "WhatsAPP",
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "chatId": "8878273150",
+        "text": "={{ $('HTTP Request1').item.json.records[0].fields.Titre_Rapport }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        960,
+        -144
+      ],
+      "id": "145d1e4f-b53b-400a-8f9e-ed35e739db24",
+      "name": "telegram account",
+      "webhookId": "c5a2045c-2b4e-4fa3-8bca-757b1a1d005e",
+      "credentials": {
+        "telegramApi": {
+          "id": "OZEJ1H3HWx6oPSiP",
+          "name": "telegram account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ScrapingAnt": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "ScrapingAnt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "WhatsAPP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsAPP": {
+      "main": [
+        [
+          {
+            "node": "telegram account",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "telegram account": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ea8fa31aa22966a954dc961c81514f022c83fc78d659cee5ee3c2bdbd3975381"
+  }
+}
