@@ -1,12 +1,11 @@
-   const AUTHORIZATION_KEY = "CORTEX2026";
+const AUTHORIZATION_KEY = "CORTEX2026";
 const MIN_CONTEXT_LENGTH = 150;
 const sectors = {
     agro: {
         name: "Agro-industrie & Souveraineté Alimentaire",
         curve: [244, 222, 225, 183, 190, 153, 139]
     },
-    // ... reste de vos secteurs inchangé
-   energy: {
+    energy: {
         name: "Énergie, Mines & Transition",
         curve: [252, 224, 232, 186, 171, 148, 123]
     },
@@ -693,12 +692,11 @@ async function fireAutoDetection() {
         };
         payload.sha256_hash = await createMandateFingerprint(payload);
 
-        // CODE CORRIGÉ (utilise config.js avec URL de secours garantie) :
-const webhookUrl = (typeof CONFIG !== "undefined" && CONFIG.N8N_WEBHOOK_URL)
-    ? CONFIG.N8N_WEBHOOK_URL
-    : "https://automation.e-metalabs.com/webhook/mandat-ingestion";
+        const webhookUrl = (typeof CONFIG !== "undefined" && CONFIG.N8N_WEBHOOK_URL)
+            ? CONFIG.N8N_WEBHOOK_URL
+            : "https://automation.e-metalabs.com/webhook/mandat-ingestion";
 
-const response = await fetch(webhookUrl, {
+        const response = await fetch(webhookUrl, {
             method: "POST",
             mode: "cors",
             headers: { "Content-Type": "application/json" },
@@ -791,19 +789,20 @@ function initializeTerminal() {
 }
 
 document.addEventListener("DOMContentLoaded", initializeTerminal);
-// Transmission du mandat vers le webhook n8n de production
-async function transmettreDossierFinal() {
-    const email = document.getElementById("emailClient")?.value.trim().toLowerCase();
-    const tel = document.getElementById("telClient")?.value.trim();
-    const problematique = document.getElementById("problematique")?.value.trim();
 
-    if (!email || !tel) {
+// Transmission unifiée et univoque du mandat vers le webhook n8n de production (fusion propre de fireAutoDetection et transmettreDossierFinal)
+async function transmettreDossierFinal() {
+    const email = document.getElementById("auto-email")?.value.trim().toLowerCase() || document.getElementById("emailClient")?.value.trim().toLowerCase();
+    const phone = document.getElementById("auto-phone")?.value.trim() || document.getElementById("telClient")?.value.trim();
+    const problematique = document.getElementById("mission_contexte")?.value.trim() || document.getElementById("problematique")?.value.trim();
+
+    if (!email || !phone) {
         alert("Veuillez renseigner votre email professionnel et votre ligne WhatsApp.");
         return;
     }
     let whatsapp;
     try {
-        whatsapp = normalizeMandatePhone(tel);
+        whatsapp = normalizeMandatePhone(phone);
     } catch (error) {
         console.error("Le numéro WhatsApp du mandat n'est pas valide.", error);
         alert(error.message);
@@ -818,23 +817,21 @@ async function transmettreDossierFinal() {
         return;
     }
 
-    const submitBtn = document.querySelector("#modalRestitution button.btn-gold-action");
+    const submitBtn = document.getElementById("btn-fire-ia") || document.querySelector("#modalRestitution button.btn-gold-action");
     if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.innerText = "SCELLAGE CRYPTOGRAPHIQUE & TRANSMISSION...";
     }
 
-    const fileInput = document.getElementById("pieceJointe");
+    const fileInput = document.getElementById("user-file") || document.getElementById("pieceJointe");
     const file = fileInput?.files?.[0] || null;
     const reference = typeof currentRef !== "undefined" && currentRef
         ? currentRef
-        : (typeof activeMandateReference !== "undefined" && activeMandateReference
-            ? activeMandateReference
-            : createMandateReference());
+        : (activeMandateReference ? activeMandateReference : createMandateReference());
     const sector = getActiveMandateSector();
     const palier = getActiveMandatePalier(typeof currentPalier !== "undefined" ? currentPalier : activePricingTier);
-    let currency = typeof activeCurrency !== "undefined" ? activeCurrency : "";
-    let language = "fr";
+    let currency = activeCurrency || "EUR";
+    let language = currentLang || "fr";
     try {
         currency = localStorage.getItem("emeta_currency") || currency;
         language = localStorage.getItem("emeta_lang") || language;
@@ -843,9 +840,8 @@ async function transmettreDossierFinal() {
     }
     currency = ["EUR", "USD", "FCFA"].includes(String(currency).toUpperCase())
         ? String(currency).toUpperCase()
-        : (typeof CONFIG !== "undefined" && ["EUR", "USD", "FCFA"].includes(CONFIG.DEFAULT_CURRENCY)
-            ? CONFIG.DEFAULT_CURRENCY
-            : "EUR");
+        : "EUR";
+
     const hashPayload = {
         reference_mission: reference,
         entreprise_client: entity,
@@ -863,46 +859,69 @@ async function transmettreDossierFinal() {
     try {
         const attachment = await fileAsDataUrl(file);
         const sha256 = await createMandateFingerprint(hashPayload);
-        const formData = new FormData();
-        formData.append("reference_mission", reference);
-        formData.append("entreprise_client", entity);
-        formData.append("nom_client", hashPayload.nom_client);
-        formData.append("secteur", sector);
-        formData.append("palier", palier);
-        formData.append("currency", currency);
-        formData.append("problematique", problematique || "");
-        formData.append("email", email);
-        formData.append("whatsapp", hashPayload.whatsapp);
-        formData.append("date_analyse_utc", hashPayload.date_analyse_utc);
-        formData.append("titre_mission", hashPayload.titre_mission);
-        formData.append("sha256_hash", sha256);
-        formData.append("lang", language);
-        formData.append("timestamp", new Date().toISOString());
-        if (file) formData.append("file", file);
+        const payload = {
+            source: "e-META LABS — Mandat décisionnel certifié",
+            reference_mission: reference,
+            entreprise_client: entity,
+            nom_client: hashPayload.nom_client,
+            secteur: sector,
+            palier,
+            currency,
+            problematique: problematique || "",
+            email,
+            whatsapp,
+            date_analyse_utc: hashPayload.date_analyse_utc,
+            titre_mission: hashPayload.titre_mission,
+            sha256_hash: sha256,
+            lang: language,
+            timestamp: new Date().toISOString(),
+            piece_justificative: attachment
+        };
 
-        const response = await fetch(CONFIG.N8N_WEBHOOK_URL, {
+        const webhookUrl = (typeof CONFIG !== "undefined" && CONFIG.N8N_WEBHOOK_URL)
+            ? CONFIG.N8N_WEBHOOK_URL
+            : "https://automation.e-metalabs.com/webhook/mandat-ingestion";
+
+        const response = await fetch(webhookUrl, {
             method: "POST",
-            body: formData
+            mode: "cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
         });
 
         if (!response.ok) throw new Error("Erreur de liaison n8n : " + response.statusText);
 
+        let responseData = {};
+        const responseText = await response.text();
+        if (responseText) {
+            try {
+                responseData = JSON.parse(responseText);
+            } catch (error) {
+                console.warn("Réponse non JSON du pipeline.", error);
+            }
+        }
+        const resolvedRef = responseData.reference_mission || responseData.reference || responseData.ref || reference;
+
         if (typeof fermerModalRestitution === "function") {
             fermerModalRestitution();
         }
-        alert(`Mandat scellé avec succès !\nRéférence : ${reference}\nLe Desk Exécutif a bien reçu votre demande.`);
-        const trackerParams = new URLSearchParams({
-            reference_mission: reference,
-            secteur: sector,
-            palier,
-            sha256_hash: sha256
-        });
-        window.location.href = `tracker.html?${trackerParams.toString()}`;
+        closeModal("autoDetectModal");
+        setStatus("terminal-status", `${uiDict[currentLang].success}${resolvedRef}`, "success");
+        
+        window.setTimeout(() => {
+            const trackerParams = new URLSearchParams({
+                reference_mission: resolvedRef,
+                secteur: sector,
+                palier,
+                sha256_hash: sha256
+            });
+            window.location.href = `tracker.html?${trackerParams.toString()}`;
+        }, 1400);
 
     } catch (err) {
         console.error("Erreur Ingestion:", err);
+        setStatus("modal-status", err.message === uiDict[currentLang].cryptoError ? uiDict[currentLang].cryptoError : uiDict[currentLang].transmissionError, "error");
         alert("La transmission du mandat a échoué. Vérifiez votre connexion puis réessayez.");
-    } finally {
         if (submitBtn) {
             submitBtn.disabled = false;
             submitBtn.innerText = "CONFIRMER ET TRANSMETTRE AU DESK";
