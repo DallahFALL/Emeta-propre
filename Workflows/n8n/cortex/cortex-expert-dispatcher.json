@@ -1,0 +1,1562 @@
+{
+  "name": "Cortex Expert SLA Dispatcher",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1200,
+        -240
+      ],
+      "id": "eab77a6a-0000-4000-8000-2873095d9f5e",
+      "name": "Execute Workflow Trigger"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n\nconst p = $input.first().json;\nconst missionRef = String(p.mission_ref || p.mission_id || '').trim();\nconst sector = String(p.secteur || '').trim();\nconst fee = Number(p.montant_sequestre_expert_ht ?? p.expert_fee_ht);\nif (!/^MIS-\\d{4}-\\d{4,}$/.test(missionRef) || !sector || !Number.isFinite(fee) || fee < 0) {\n  throw new Error('Entrée dispatcher invalide: mission_ref, secteur et honoraires HT requis.');\n}\nreturn [{ json: { ...p, mission_ref: missionRef, secteur: sector, expert_fee_ht: fee } }];\n\n} catch (error) {\n  throw new Error(\"Normaliser mission — \" + (error?.message || String(error)));\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -960,
+        -240
+      ],
+      "id": "423095b2-0000-4000-8000-4926882c28dc",
+      "name": "Normaliser mission"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ 'https://base.e-metalabs.com/api/v3/data/' + $env.NOCODB_PROJECT_ID + '/' + $env.NOCODB_TABLE_MISSIONS + '/records' }}",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "where",
+              "value": "={{ '(Code_Mission,eq,' + $('Normaliser mission').first().json.mission_ref + ')' }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "={{ $env.NOCODB_API_TOKEN }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -720,
+        -480
+      ],
+      "id": "7de02980-0000-4000-8000-b73898e03995",
+      "name": "Lire mission avant dispatch"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n\nconst response = $input.first().json;\nconst rows = response.list || response.records || response.data || [];\nconst missionInput = $('Normaliser mission').first().json;\nconst matches = rows.map(r => r.fields ? { ...r, ...r.fields } : r)\n  .filter(row => (row.Code_Mission || row.mission_ref) === missionInput.mission_ref);\nif (matches.length !== 1) throw new Error('La mission doit exister une seule fois dans NocoDB avant dispatch.');\nconst mission = matches[0];\nif (mission.Statut_Assignation !== 'en_attente') {\n  throw new Error('Dispatch refusé: Statut_Assignation doit être en_attente.');\n}\nif ((mission.Secteur || mission.secteur) !== missionInput.secteur) {\n  throw new Error('Le secteur transmis ne correspond pas au secteur canonique de la mission.');\n}\nif (mission.Statut !== 'Paiement_Confirmé') {\n  throw new Error('Dispatch refusé: le paiement de la mission n’est pas confirmé.');\n}\nif (!mission.Descriptif_Anonymise && !mission.descriptif_anonymise && !missionInput.descriptif_anonymise) {\n  throw new Error('Descriptif_Anonymise absent; la mission ne peut pas être offerte au vivier.');\n}\nreturn [{ json: {\n  ...missionInput,\n  mission_row_id: mission.Id,\n  descriptif_anonymise: mission.Descriptif_Anonymise || mission.descriptif_anonymise || missionInput.descriptif_anonymise || '',\n} }];\n\n} catch (error) {\n  throw new Error(\"Vérifier disponibilité mission — \" + (error?.message || String(error)));\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -480,
+        -480
+      ],
+      "id": "8de030a6-0000-4000-8000-78d01c42dbc9",
+      "name": "Vérifier disponibilité mission"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO cortex_mission_claims (mission_ref, status, deadline_at)\nVALUES ($1, 'en_attente', now() + interval '2 hours')\nON CONFLICT (mission_ref) DO NOTHING\nRETURNING mission_ref, status;",
+        "options": {
+          "queryReplacement": "={{ [$json.mission_ref] }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -720,
+        -240
+      ],
+      "id": "2e72885e-0000-4000-8000-dcddc5a447f2",
+      "name": "Initialiser verrou mission"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ 'https://base.e-metalabs.com/api/v3/data/' + $env.NOCODB_PROJECT_ID + '/' + $env.NOCODB_TABLE_EXPERTS + '/records' }}",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "where",
+              "value": "={{ '(statut_accreditation,eq,valide)~and(disponibilite,eq,disponible)~and(secteur,eq,' + $('Normaliser mission').first().json.secteur + ')' }}"
+            },
+            {
+              "name": "limit",
+              "value": "100"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "={{ $env.NOCODB_API_TOKEN }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -480,
+        -240
+      ],
+      "id": "9c39ff1d-0000-4000-8000-c950ed37a2ab",
+      "name": "Interroger vivier NocoDB"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n\nconst response = $input.first().json;\nconst rows = response.list || response.records || response.data || [];\nconst mission = $('Normaliser mission').first().json;\nconst experts = rows.map(row => row.fields ? { ...row, ...row.fields } : row)\n  .filter(e => e.statut_accreditation === 'valide' && e.disponibilite === 'disponible' && e.secteur === mission.secteur)\n  .filter(e => e.expert_id && e.Id != null && e.email && e.whatsapp && e.telegram_chat_id)\n  .sort((a, b) => Number(b.note_qualification || 0) - Number(a.note_qualification || 0) || String(a.expert_id).localeCompare(String(b.expert_id)));\nif (!experts.length) throw new Error('Aucun expert accrédité, disponible et qualifié pour le secteur ' + mission.secteur);\nreturn experts.map((expert, index) => ({ json: { ...mission, expert, rang: index + 1 } }));\n\n} catch (error) {\n  throw new Error(\"Classer experts — \" + (error?.message || String(error)));\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        -240
+      ],
+      "id": "a38577a0-0000-4000-8000-663578bde966",
+      "name": "Classer experts"
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        0,
+        -240
+      ],
+      "id": "e89a5403-0000-4000-8000-6b7ca0e99633",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n\nconst item = $input.first().json;\nconst deadline = new Date(Date.now() + 2 * 60 * 60 * 1000);\nreturn [{ json: { ...item, offer_deadline: deadline.toISOString(), expert_id: String(item.expert.expert_id), expert_row_id: item.expert.Id } }];\n\n} catch (error) {\n  throw new Error(\"Préparer offre — \" + (error?.message || String(error)));\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        -240
+      ],
+      "id": "b5be1092-0000-4000-8000-7e559c1007d1",
+      "name": "Préparer offre"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE cortex_mission_claims\nSET current_expert_id = $2, current_response = 'pending', deadline_at = $3::timestamptz, updated_at = now()\nWHERE mission_ref = $1 AND status = 'en_attente'\nRETURNING mission_ref, current_expert_id, deadline_at, status;",
+        "options": {
+          "queryReplacement": "={{ [$json.mission_ref, $json.expert_id, $json.offer_deadline] }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        480,
+        -240
+      ],
+      "id": "bd462376-0000-4000-8000-9704cd7ea4fa",
+      "name": "Ouvrir fenêtre SLA"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n\nconst crypto = require('crypto');\nconst db = $input.first().json;\nconst offer = $('Préparer offre').item.json;\nconst secret = $env.CLAIM_TOKEN_SECRET;\nif (!secret || secret.length < 32) throw new Error('CLAIM_TOKEN_SECRET doit contenir au moins 32 caractères.');\nif (!db.mission_ref || db.status !== 'en_attente') throw new Error('Le verrou de mission n’est plus en attente.');\nconst exp = Math.floor(new Date(db.deadline_at).getTime() / 1000);\nconst payload = Buffer.from(JSON.stringify({ mission_ref: db.mission_ref, expert_id: offer.expert_id, exp, nonce: crypto.randomBytes(16).toString('hex') })).toString('base64url');\nconst signature = crypto.createHmac('sha256', secret).update(payload).digest('base64url');\nconst token = payload + '.' + signature;\nconst safeDescription = String(offer.descriptif_anonymise || offer.mission_description_anonymisee || offer.secteur).slice(0, 1200);\nreturn [{ json: {\n  ...offer,\n  claim_token: token,\n  claim_url: 'https://automation.e-metalabs.com/webhook/claim-mission?token=' + encodeURIComponent(token) + '&exp=' + exp,\n  offer_message: 'Offre de mission e-META LABS\\nSecteur: ' + offer.secteur + '\\nMandat: ' + safeDescription + '\\nHonoraires réservés: ' + offer.expert_fee_ht + ' ' + (offer.currency || 'XOF') + ' HT\\nAccepter sous 2 heures: https://automation.e-metalabs.com/webhook/claim-mission?token=' + encodeURIComponent(token) + '&exp=' + exp,\n} }];\n\n} catch (error) {\n  throw new Error(\"Signer lien de réclamation — \" + (error?.message || String(error)));\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        -240
+      ],
+      "id": "7fbaf9b6-0000-4000-8000-e7ade250ed76",
+      "name": "Signer lien de réclamation"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ 'https://graph.facebook.com/v20.0/' + $env.WHATSAPP_PHONE_NUMBER_ID + '/messages' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $env.WHATSAPP_ACCESS_TOKEN }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { messaging_product: 'whatsapp', to: $json.expert.whatsapp, type: 'text', text: { body: $json.offer_message } } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        960,
+        -360
+      ],
+      "id": "c9768ff8-0000-4000-8000-ab259128a631",
+      "name": "WhatsApp Expert"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $json.expert.telegram_chat_id }}",
+        "text": "={{ $json.offer_message }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        960,
+        -120
+      ],
+      "id": "00ec167e-0000-4000-8000-768fa9788f78",
+      "name": "Telegram Expert"
+    },
+    {
+      "parameters": {
+        "resume": "timeInterval",
+        "amount": 2,
+        "unit": "hours"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        960,
+        120
+      ],
+      "id": "a7407c0f-0000-4000-8000-d792d6bd6816",
+      "name": "Wait 2 heures SLA"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT mission_ref, status, current_expert_id, current_response, assigned_expert_id, deadline_at\nFROM cortex_mission_claims WHERE mission_ref = $1;",
+        "options": {
+          "queryReplacement": "={{ [$('Signer lien de réclamation').item.json.mission_ref] }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1200,
+        120
+      ],
+      "id": "66e274db-0000-4000-8000-03728a405a9e",
+      "name": "Lire verrou SLA"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n\nconst state = $input.first().json;\nconst offer = $('Signer lien de réclamation').item.json;\nconst accepted = state.status === 'attribuée' && String(state.assigned_expert_id) === offer.expert_id;\nreturn [{ json: { ...offer, accepted, claim_status: state.status || 'introuvable' } }];\n\n} catch (error) {\n  throw new Error(\"Contrôler attribution — \" + (error?.message || String(error)));\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        120
+      ],
+      "id": "71f8ccd6-0000-4000-8000-dfdef710910f",
+      "name": "Contrôler attribution"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.accepted }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1680,
+        120
+      ],
+      "id": "5c262cd6-0000-4000-8000-82a47844c625",
+      "name": "Mission attribuée ?"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ 'https://base.e-metalabs.com/api/v3/data/' + $env.NOCODB_PROJECT_ID + '/' + $env.NOCODB_TABLE_EXPERTS + '/records' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "={{ $env.NOCODB_API_TOKEN }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ [{ Id: $json.expert_row_id, disponibilite: 'indisponible', disponible_jusqu_a: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() }] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1920,
+        260
+      ],
+      "id": "241bcffd-0000-4000-8000-e272edba0ac1",
+      "name": "Rendre indisponible temporairement"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ 'https://base.e-metalabs.com/api/v3/data/' + $env.NOCODB_PROJECT_ID + '/' + $env.NOCODB_TABLE_MISSIONS + '/records' }}",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "where",
+              "value": "={{ '(Code_Mission,eq,' + $json.mission_ref + ')' }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "={{ $env.NOCODB_API_TOKEN }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1920,
+        0
+      ],
+      "id": "f993e222-0000-4000-8000-6895670c3497",
+      "name": "Lire Mission attribuée"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n\nconst data = $input.first().json;\nconst rows = data.list || data.records || data.data || [];\nconst mission = rows.map(r => r.fields ? { ...r, ...r.fields } : r).find(r => (r.Code_Mission || r.mission_ref) === $('Contrôler attribution').item.json.mission_ref);\nif (!mission || mission.Id == null) throw new Error('Mission attribuée introuvable dans NocoDB.');\nreturn [{ json: { payload: [{ Id: mission.Id, Code_Mission: mission.Code_Mission, Jalon_3: 'vert', Statut: 'Expert_Assigné', Expert_Assigne: $('Contrôler attribution').item.json.expert_id, Statut_Assignation: 'attribuée' }] } }];\n\n} catch (error) {\n  throw new Error(\"Préparer jalon 3 — \" + (error?.message || String(error)));\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2160,
+        0
+      ],
+      "id": "ea99c8aa-0000-4000-8000-eef641f12fd3",
+      "name": "Préparer jalon 3"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ 'https://base.e-metalabs.com/api/v3/data/' + $env.NOCODB_PROJECT_ID + '/' + $env.NOCODB_TABLE_MISSIONS + '/records' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "={{ $env.NOCODB_API_TOKEN }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.payload }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2400,
+        0
+      ],
+      "id": "7be52875-0000-4000-8000-df552ae468c1",
+      "name": "Clôturer dispatch NocoDB"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "claim-mission",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1200,
+        520
+      ],
+      "id": "c5ac0018-0000-4000-8000-3cd7ff892a7e",
+      "name": "Webhook claim-mission",
+      "webhookId": "61df20c7-d483-4d18-9101-9e05128f0986"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n\nconst crypto = require('crypto');\nconst request = $input.first().json;\nconst query = request.query || {};\nconst body = request.body && typeof request.body === 'object' ? request.body : {};\nconst token = String(body.token || query.token || '');\nconst action = String(body.action || 'accept');\nconst secret = $env.CLAIM_TOKEN_SECRET;\nif (!secret || secret.length < 32) throw new Error('CLAIM_TOKEN_SECRET absent ou trop court.');\nconst parts = token.split('.');\nif (parts.length !== 2) return [{ json: { valid: false, reason: 'Lien invalide.' } }];\nconst expected = crypto.createHmac('sha256', secret).update(parts[0]).digest();\nlet actual = Buffer.alloc(0);\ntry { actual = Buffer.from(parts[1], 'base64url'); } catch {}\nif (actual.length !== expected.length || !crypto.timingSafeEqual(actual, expected)) return [{ json: { valid: false, reason: 'Lien invalide.' } }];\nlet payload;\ntry { payload = JSON.parse(Buffer.from(parts[0], 'base64url').toString('utf8')); }\ncatch (error) { return [{ json: { valid: false, reason: 'Jeton illisible.' } }]; }\nif (!payload.mission_ref || !payload.expert_id || !Number.isInteger(payload.exp) || payload.exp <= Math.floor(Date.now() / 1000)) {\n  return [{ json: { valid: false, reason: 'Offre expirée ou incomplète.' } }];\n}\nif (!['accept', 'decline'].includes(action)) return [{ json: { valid: false, reason: 'Action invalide.' } }];\nreturn [{ json: { valid: true, action, mission_ref: payload.mission_ref, expert_id: String(payload.expert_id), exp: payload.exp, token_hash: crypto.createHash('sha256').update(token).digest('hex') } }];\n\n} catch (error) {\n  throw new Error(\"Vérifier jeton claim — \" + (error?.message || String(error)));\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -960,
+        520
+      ],
+      "id": "e795597c-0000-4000-8000-5fe72dacc5bd",
+      "name": "Vérifier jeton claim"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -720,
+        520
+      ],
+      "id": "a25ece5b-0000-4000-8000-9e74b0496ac8",
+      "name": "Jeton claim valide ?"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "Lien invalide ou expiré. Contactez le Desk e-META LABS.",
+        "options": {
+          "responseCode": 403,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/plain; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -480,
+        680
+      ],
+      "id": "33a4d718-0000-4000-8000-e9b20dd720b8",
+      "name": "Réponse lien invalide"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE cortex_mission_claims\nSET status = 'attribuée', current_response = 'accepted', assigned_expert_id = $2, claim_token_hash = $3,\n    claimed_at = now(), updated_at = now()\nWHERE mission_ref = $1 AND status = 'en_attente' AND current_response = 'pending'\n  AND current_expert_id = $2 AND deadline_at > now()\n  AND to_timestamp($4::double precision) > now()\nRETURNING mission_ref, assigned_expert_id, claimed_at;",
+        "options": {
+          "queryReplacement": "={{ [$json.mission_ref, $json.expert_id, $json.token_hash, $json.exp] }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -480,
+        440
+      ],
+      "id": "5cf4baa9-0000-4000-8000-11bab7b48b59",
+      "name": "Claim atomique PostgreSQL",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.action }}",
+              "rightValue": "accept",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -480,
+        260
+      ],
+      "id": "4b7e4109-0000-4000-8000-43b466e305d4",
+      "name": "Action accepter ?"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE cortex_mission_claims\nSET current_response = 'declined', updated_at = now()\nWHERE mission_ref = $1 AND status = 'en_attente' AND current_response = 'pending'\n  AND current_expert_id = $2 AND deadline_at > now()\n  AND to_timestamp($3::double precision) > now()\nRETURNING mission_ref;",
+        "options": {
+          "queryReplacement": "={{ [$json.mission_ref, $json.expert_id, $json.exp] }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -240,
+        40
+      ],
+      "id": "1e8077d0-0000-4000-8000-dac4b83b9c89",
+      "name": "Refuser offre PostgreSQL",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n\nconst rows = $input.all().filter(item => item.json.mission_ref);\nconst claim = $('Vérifier jeton claim').first().json;\nreturn [{ json: { declined: rows.length === 1, mission_ref: claim.mission_ref } }];\n\n} catch (error) {\n  throw new Error(\"Résultat du refus — \" + (error?.message || String(error)));\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        40
+      ],
+      "id": "59d47608-0000-4000-8000-f624d3d9d04b",
+      "name": "Résultat du refus"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.declined }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        240,
+        40
+      ],
+      "id": "b8c888e5-0000-4000-8000-f808937d4a3c",
+      "name": "Refus enregistré ?"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "Refus enregistré. Le dispatch poursuivra la cascade à la fin de la fenêtre SLA de 2 heures.",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/plain; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        480,
+        -40
+      ],
+      "id": "faaf0f07-0000-4000-8000-a7f579118210",
+      "name": "Réponse refus enregistré"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "Cette offre a expiré ou a déjà été traitée.",
+        "options": {
+          "responseCode": 409,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/plain; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        480,
+        120
+      ],
+      "id": "af5a43c3-0000-4000-8000-a5f0303fbf99",
+      "name": "Réponse refus trop tard"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n\nconst rows = $input.all().filter(item => item.json.mission_ref);\nconst claim = $('Vérifier jeton claim').first().json;\nreturn [{ json: {\n  claimed: rows.length === 1,\n  mission_ref: claim.mission_ref,\n  expert_id: claim.expert_id,\n  mission_row_id: rows[0]?.json.mission_ref || '',\n} }];\n\n} catch (error) {\n  throw new Error(\"Résultat du verrou — \" + (error?.message || String(error)));\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        440
+      ],
+      "id": "254578c6-0000-4000-8000-a6c1193bfb9b",
+      "name": "Résultat du verrou"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.claimed }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        440
+      ],
+      "id": "d676cce8-0000-4000-8000-0923b6965257",
+      "name": "Attribution gagnée ?"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "<!doctype html><html lang=\"fr\"><meta charset=\"utf-8\"><title>Mandat déjà pourvu</title><body><h1>Mandat déjà pourvu</h1><p>Cette mission n’est plus disponible. Merci de contacter le Desk e-META LABS.</p></body></html>",
+        "options": {
+          "responseCode": 409,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        240,
+        600
+      ],
+      "id": "cec1d6c9-0000-4000-8000-9de349ef5582",
+      "name": "Réponse mandat déjà pourvu"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "<!doctype html><html lang=\"fr\"><meta charset=\"utf-8\"><title>Mandat attribué</title><body><h1>Mandat accepté</h1><p>Votre affectation est confirmée. Votre pack de démarrage est en préparation.</p></body></html>",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        240,
+        360
+      ],
+      "id": "a5212d95-0000-4000-8000-8bdade527019",
+      "name": "Réponse attribution confirmée"
+    },
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "claim-mission",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1200,
+        880
+      ],
+      "id": "5a433392-0000-4000-8000-9e917f67b186",
+      "name": "Webhook page de confirmation claim",
+      "webhookId": "d65a979f-0c69-4f54-aa0f-b7dfa399600f"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n\nconst crypto = require('crypto');\nconst query = $input.first().json.query || {};\nconst token = String(query.token || '');\nconst secret = $env.CLAIM_TOKEN_SECRET;\nlet valid = false;\nif (!secret || secret.length < 32) throw new Error('CLAIM_TOKEN_SECRET absent ou trop court.');\nconst parts = token.split('.');\nif (parts.length === 2) {\n  const expected = crypto.createHmac('sha256', secret).update(parts[0]).digest();\n  const actual = Buffer.from(parts[1], 'base64url');\n  if (actual.length === expected.length && crypto.timingSafeEqual(actual, expected)) {\n    const payload = JSON.parse(Buffer.from(parts[0], 'base64url').toString('utf8'));\n    valid = Boolean(payload.mission_ref && payload.expert_id && Number.isInteger(payload.exp) && payload.exp > Math.floor(Date.now() / 1000));\n  }\n}\nconst escape = value => String(value).replace(/[&<>\"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[char]));\nconst html = valid\n  ? '<!doctype html><html lang=\"fr\"><meta charset=\"utf-8\"><title>Confirmer le mandat</title><body><h1>Confirmer la prise en charge</h1><p>En confirmant, vous acceptez le mandat affiché dans l’offre qui vous a été adressée.</p><form method=\"post\" action=\"/webhook/claim-mission\"><input type=\"hidden\" name=\"token\" value=\"' + escape(token) + '\"><button name=\"action\" value=\"accept\" type=\"submit\">Confirmer la prise en charge</button><button name=\"action\" value=\"decline\" type=\"submit\">Refuser l’offre</button></form></body></html>'\n  : '<!doctype html><html lang=\"fr\"><meta charset=\"utf-8\"><title>Offre expirée</title><body><h1>Offre invalide ou expirée</h1><p>Contactez le Desk e-META LABS.</p></body></html>';\nreturn [{ json: { valid, html } }];\n\n} catch (error) {\n  throw new Error(\"Préparer confirmation claim — \" + (error?.message || String(error)));\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -960,
+        880
+      ],
+      "id": "44d02475-0000-4000-8000-f22f75aa734e",
+      "name": "Préparer confirmation claim"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -720,
+        880
+      ],
+      "id": "75fe1ed7-0000-4000-8000-dc150d0b8c1c",
+      "name": "Jeton de page valide ?"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.html }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -720,
+        880
+      ],
+      "id": "ade0b3a6-0000-4000-8000-2c65067a6f5d",
+      "name": "Réponse formulaire claim"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.html }}",
+        "options": {
+          "responseCode": 403,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -480,
+        1040
+      ],
+      "id": "37789bbb-0000-4000-8000-0cd3036f57c6",
+      "name": "Réponse offre expirée"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ 'https://base.e-metalabs.com/api/v3/data/' + $env.NOCODB_PROJECT_ID + '/' + $env.NOCODB_TABLE_MISSIONS + '/records' }}",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "where",
+              "value": "={{ '(Code_Mission,eq,' + $('Résultat du verrou').first().json.mission_ref + ')' }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "={{ $env.NOCODB_API_TOKEN }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        480,
+        360
+      ],
+      "id": "c02fdd60-0000-4000-8000-5d152f9102c2",
+      "name": "Lire Mission pour pack"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n\nconst response = $input.first().json;\nconst rows = response.list || response.records || response.data || [];\nconst mission = rows.map(r => r.fields ? { ...r, ...r.fields } : r).find(r => (r.Code_Mission || r.mission_ref) === $('Résultat du verrou').first().json.mission_ref);\nif (!mission || mission.Id == null) throw new Error('Mission attribuée mais absente de NocoDB; intervention de réconciliation requise.');\nconst claim = $('Résultat du verrou').first().json;\nconst pack = [\n  'PACK DE DÉMARRAGE AUDIT — e-META LABS',\n  'Mission: ' + claim.mission_ref,\n  'Secteur: ' + (mission.Secteur || mission.secteur || 'à confirmer'),\n  'Client: ' + (mission.Client || 'anonymisé jusqu’au kick-off'),\n  'Honoraires réservés: ' + (mission.Montant_Sequestre_Expert_HT || 'voir Grand_Livre_Comptable') + ' HT',\n  'Étapes: cadrage, collecte probatoire, analyse, restitution.',\n  'Confidentialité: ne transmettre aucune pièce hors des canaux autorisés.',\n].join('\\n');\nreturn [{ json: { ...claim, mission_row_id: mission.Id, pack_demarrage: pack, statut: 'Expert_Assigné', statut_assignation: 'attribuée', expert_assigne: claim.expert_id, jalon_3: 'vert' } }];\n\n} catch (error) {\n  throw new Error(\"Générer pack de démarrage — \" + (error?.message || String(error)));\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        360
+      ],
+      "id": "82c8ea2c-0000-4000-8000-78f645aace1e",
+      "name": "Générer pack de démarrage"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ 'https://base.e-metalabs.com/api/v3/data/' + $env.NOCODB_PROJECT_ID + '/' + $env.NOCODB_TABLE_MISSIONS + '/records' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "={{ $env.NOCODB_API_TOKEN }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ [{ Id: $json.mission_row_id, Statut: $json.statut, Statut_Assignation: $json.statut_assignation, Expert_Assigne: $json.expert_assigne, Jalon_3: $json.jalon_3, Pack_Demarrage: $json.pack_demarrage }] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        960,
+        360
+      ],
+      "id": "3f1aa93b-0000-4000-8000-c52daa58d4c2",
+      "name": "Mettre à jour Mission et jalon 3"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ 'https://base.e-metalabs.com/api/v3/data/' + $env.NOCODB_PROJECT_ID + '/' + $env.NOCODB_TABLE_EXPERTS + '/records' }}",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "where",
+              "value": "={{ '(expert_id,eq,' + $('Résultat du verrou').first().json.expert_id + ')' }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "={{ $env.NOCODB_API_TOKEN }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1200,
+        360
+      ],
+      "id": "08a9dd56-0000-4000-8000-d3171fa9ed6a",
+      "name": "Lire Expert attribué"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n\nconst response = $input.first().json;\nconst rows = response.list || response.records || response.data || [];\nconst experts = rows.map(r => r.fields ? { ...r, ...r.fields } : r);\nconst expertId = $('Résultat du verrou').first().json.expert_id;\nconst expert = experts.find(row => String(row.expert_id) === String(expertId));\nif (!expert || !expert.email || !expert.telegram_chat_id) {\n  throw new Error('Canaux de remise du pack manquants pour l’expert attribué ' + expertId);\n}\nconst pack = $('Générer pack de démarrage').first().json.pack_demarrage;\nreturn [{ json: { expert_email: expert.email, telegram_chat_id: expert.telegram_chat_id, mission_ref: $('Résultat du verrou').first().json.mission_ref, pack_demarrage: pack } }];\n\n} catch (error) {\n  throw new Error(\"Préparer pack expert — \" + (error?.message || String(error)));\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        360
+      ],
+      "id": "848d103e-0000-4000-8000-70e0f6d351e6",
+      "name": "Préparer pack expert"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "={{ $json.expert_email }}",
+        "subject": "={{ 'Pack de démarrage audit · ' + $json.mission_ref }}",
+        "emailType": "text",
+        "message": "={{ $json.pack_demarrage }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1680,
+        280
+      ],
+      "id": "75590d3b-0000-4000-8000-7304739bd08c",
+      "name": "Gmail Pack Expert"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $json.telegram_chat_id }}",
+        "text": "={{ $json.pack_demarrage }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1680,
+        440
+      ],
+      "id": "b43a5fe3-0000-4000-8000-25080a24529c",
+      "name": "Telegram Pack Expert"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "={{ $env.CORTEX_REVIEW_EMAIL }}",
+        "subject": "={{ 'Escalade SLA — aucun expert restant · ' + $('Normaliser mission').first().json.mission_ref }}",
+        "emailType": "text",
+        "message": "={{ 'Aucun expert du vivier n’a accepté la mission ' + $('Normaliser mission').first().json.mission_ref + ' dans le délai de 2 heures par offre. Une affectation manuelle est requise.' }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        240,
+        -480
+      ],
+      "id": "6e7e0881-0000-4000-8000-95c6a7c0b7d5",
+      "name": "Alerte Desk — aucun expert restant"
+    }
+  ],
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Normaliser mission",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normaliser mission": {
+      "main": [
+        [
+          {
+            "node": "Lire mission avant dispatch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lire mission avant dispatch": {
+      "main": [
+        [
+          {
+            "node": "Vérifier disponibilité mission",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vérifier disponibilité mission": {
+      "main": [
+        [
+          {
+            "node": "Initialiser verrou mission",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Initialiser verrou mission": {
+      "main": [
+        [
+          {
+            "node": "Interroger vivier NocoDB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Interroger vivier NocoDB": {
+      "main": [
+        [
+          {
+            "node": "Classer experts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Classer experts": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Préparer offre",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Alerte Desk — aucun expert restant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer offre": {
+      "main": [
+        [
+          {
+            "node": "Ouvrir fenêtre SLA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ouvrir fenêtre SLA": {
+      "main": [
+        [
+          {
+            "node": "Signer lien de réclamation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Signer lien de réclamation": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp Expert",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Telegram Expert",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Wait 2 heures SLA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 2 heures SLA": {
+      "main": [
+        [
+          {
+            "node": "Lire verrou SLA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lire verrou SLA": {
+      "main": [
+        [
+          {
+            "node": "Contrôler attribution",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contrôler attribution": {
+      "main": [
+        [
+          {
+            "node": "Mission attribuée ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mission attribuée ?": {
+      "main": [
+        [
+          {
+            "node": "Lire Mission attribuée",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Rendre indisponible temporairement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rendre indisponible temporairement": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lire Mission attribuée": {
+      "main": [
+        [
+          {
+            "node": "Préparer jalon 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer jalon 3": {
+      "main": [
+        [
+          {
+            "node": "Clôturer dispatch NocoDB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook claim-mission": {
+      "main": [
+        [
+          {
+            "node": "Vérifier jeton claim",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook page de confirmation claim": {
+      "main": [
+        [
+          {
+            "node": "Préparer confirmation claim",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer confirmation claim": {
+      "main": [
+        [
+          {
+            "node": "Jeton de page valide ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Jeton de page valide ?": {
+      "main": [
+        [
+          {
+            "node": "Réponse formulaire claim",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Réponse offre expirée",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vérifier jeton claim": {
+      "main": [
+        [
+          {
+            "node": "Jeton claim valide ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Jeton claim valide ?": {
+      "main": [
+        [
+          {
+            "node": "Action accepter ?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Réponse lien invalide",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Action accepter ?": {
+      "main": [
+        [
+          {
+            "node": "Claim atomique PostgreSQL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Refuser offre PostgreSQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Refuser offre PostgreSQL": {
+      "main": [
+        [
+          {
+            "node": "Résultat du refus",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Résultat du refus": {
+      "main": [
+        [
+          {
+            "node": "Refus enregistré ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Refus enregistré ?": {
+      "main": [
+        [
+          {
+            "node": "Réponse refus enregistré",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Réponse refus trop tard",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claim atomique PostgreSQL": {
+      "main": [
+        [
+          {
+            "node": "Résultat du verrou",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Résultat du verrou": {
+      "main": [
+        [
+          {
+            "node": "Attribution gagnée ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Attribution gagnée ?": {
+      "main": [
+        [
+          {
+            "node": "Réponse attribution confirmée",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Réponse mandat déjà pourvu",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Réponse attribution confirmée": {
+      "main": [
+        [
+          {
+            "node": "Lire Mission pour pack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lire Mission pour pack": {
+      "main": [
+        [
+          {
+            "node": "Générer pack de démarrage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Générer pack de démarrage": {
+      "main": [
+        [
+          {
+            "node": "Mettre à jour Mission et jalon 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mettre à jour Mission et jalon 3": {
+      "main": [
+        [
+          {
+            "node": "Lire Expert attribué",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lire Expert attribué": {
+      "main": [
+        [
+          {
+            "node": "Préparer pack expert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer pack expert": {
+      "main": [
+        [
+          {
+            "node": "Gmail Pack Expert",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Telegram Pack Expert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataErrorExecution": "all"
+  },
+  "versionId": "18da9a3d-cdcb-4957-b400-9cf74718b4ce",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

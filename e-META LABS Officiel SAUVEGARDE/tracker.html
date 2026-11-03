@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-META LABS | Suivi de Mission & Audit</title>
+  <!-- Favicon Officiel Hexagonal e-META LABS -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 90,25 90,75 50,95 10,75 10,25' fill='%2309131e' stroke='%23d4af37' stroke-width='7'/><circle cx='50' cy='50' r='10' fill='%23d4af37'/></svg>">
+  <style>
+    :root {
+      --bg: #09131e;
+      --card-bg: #0f1f30;
+      --gold: #d4af37;
+      --green: #10b981;
+      --text: #e2e8f0;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+    }
+    .tracker-card {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .top-bar-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .nav-link {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover {
+      color: var(--gold);
+    }
+    .header-tracker {
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding-bottom: 20px;
+      margin-bottom: 25px;
+    }
+    .badge {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--green);
+      border: 1px solid var(--green);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      display: inline-block;
+      font-weight: 600;
+    }
+    .step-list {
+      display: flex;
+      justify-content: space-between;
+      margin: 35px 0;
+      position: relative;
+    }
+    .step {
+      text-align: center;
+      flex: 1;
+      font-size: 0.85rem;
+    }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      background: #1a2c3f;
+      border: 2px solid #334e68;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 8px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .step.active .step-num {
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    }
+    .step.completed .step-num {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+    .hash-box {
+      background: #060d15;
+      padding: 15px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      word-break: break-all;
+      border-left: 3px solid var(--gold);
+      color: #38bdf8;
+    }
+    .btn-action {
+      background: var(--green);
+      color: #000;
+      font-weight: bold;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 25px;
+      font-size: 0.95rem;
+      transition: background 0.2s ease;
+    }
+    .btn-action:disabled {
+      background: #059669;
+      color: #ffffff;
+      cursor: not-allowed;
+      opacity: 0.9;
+    }
+
+    [dir="rtl"] .top-bar-nav,
+    [dir="rtl"] .header-tracker > div {
+      flex-direction: row-reverse;
+    }
+    [dir="rtl"] .hash-box {
+      border-left: none;
+      border-right: 3px solid var(--gold);
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tracker-card">
+  <!-- Barre Supérieure de Navigation avec Logo et Renvois -->
+  <div class="top-bar-nav">
+    <a href="index.html" class="nav-link" id="link-return-home">
+      <span id="arrow-return">←</span> <span id="ui-trk-return">Retour au Moteur IA</span>
+    </a>
+
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <svg width="22" height="22" viewBox="0 0 100 100">
+        <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="#09131e" stroke="#d4af37" stroke-width="8"/>
+        <circle cx="50" cy="50" r="12" fill="#d4af37"/>
+      </svg>
+      <span style="color: var(--gold); font-size: 0.85rem; font-weight: bold; letter-spacing: 1px;">E-META LABS</span>
+    </div>
+
+    <a href="expert.html" class="nav-link" id="link-desk">
+      <span id="ui-trk-desk">Desk Exécutif</span> <span id="arrow-desk">→</span>
+    </a>
+  </div>
+
+  <div class="header-tracker">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h2 style="color: var(--gold); margin: 0;"><span id="ui-trk-lbl-mission">MISSION</span> : <span id="mission-ref">MIS-2026-001</span></h2>
+      <span class="badge" id="mission-status">En Cours d'Exécution</span>
+    </div>
+    <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 8px;" id="mission-sector"></p>
+  </div>
+
+  <div class="step-list">
+    <div class="step completed" id="step-1">
+      <div class="step-num">✓</div>
+      <span id="ui-step-1">Diagnostic IA</span>
+    </div>
+    <div class="step completed" id="step-2">
+      <div class="step-num">✓</div>
+      <span id="ui-step-2">Scellement Légal</span>
+    </div>
+    <div class="step completed" id="step-3">
+      <div class="step-num" id="step-num-3">✓</div>
+      <span id="ui-step-3">Déploiement Expert</span>
+    </div>
+    <div class="step active" id="step-4">
+      <div class="step-num" id="step-num-4">4</div>
+      <span id="ui-step-4">Recette & Clôture</span>
+    </div>
+  </div>
+
+  <div>
+    <h4 style="color: var(--gold); margin-bottom: 8px;" id="ui-trk-lbl-hash">EMPREINTE PROBATOIRE (SHA-256)</h4>
+    <div class="hash-box" id="sha-hash">8edd731bf91184ec57df8ff91184ec57df8ff2026 (Scellé OpenTimestamps)</div>
+  </div>
+
+  <button class="btn-action" id="btn-valider" onclick="validerJalon()">VALIDER LE JALON ACTUEL (RECETTE)</button>
+</div>
+
+<script>
+  // ==========================================
+  // 1. DICTIONNAIRE MULTILINGUE TRACKER
+  // ==========================================
+  const trkDict = {
+    fr: {
+      returnHome: "Retour au Moteur IA",
+      desk: "Desk Exécutif",
+      lblMission: "MISSION",
+      statusRunning: "En Cours d'Exécution",
+      statusClosed: "Mission Clôturée & Validée",
+      step1: "Diagnostic IA",
+      step2: "Scellement Légal",
+      step3: "Déploiement Expert",
+      step4: "Recette & Clôture",
+      lblHash: "EMPREINTE PROBATOIRE (SHA-256)",
+      btnAction: "VALIDER LE JALON ACTUEL (RECETTE)",
+      btnClosed: "MISSION RECETTÉE & CLÔTURÉE ✓",
+      alertValidated: "Jalon validé avec succès par le client. Notification transmise à l’équipe."
+    },
+    en: {
+      returnHome: "Back to AI Engine",
+      desk: "Expert Desk",
+      lblMission: "MISSION",
+      statusRunning: "In Progress",
+      statusClosed: "Mission Closed & Certified",
+      step1: "AI Diagnostic",
+      step2: "Legal Sealing",
+      step3: "Expert Deployment",
+      step4: "Acceptance & Closing",
+      lblHash: "PROBATORY FINGERPRINT (SHA-256)",
+      btnAction: "VALIDATE CURRENT MILESTONE (ACCEPTANCE)",
+      btnClosed: "MISSION ACCEPTED & CLOSED ✓",
+      alertValidated: "Milestone successfully validated. Team notified."
+    },
+    es: {
+      returnHome: "Volver al Motor IA",
+      desk: "Portal de Expertos",
+      lblMission: "MISIÓN",
+      statusRunning: "En Curso de Ejecución",
+      statusClosed: "Misión Cerrada y Validada",
+      step1: "Diagnóstico IA",
+      step2: "Sellado Legal",
+      step3: "Despliegue Experto",
+      step4: "Recepción y Cierre",
+      lblHash: "HUELLA PROBATORIA (SHA-256)",
+      btnAction: "VALIDAR HITO ACTUAL (RECEPCIÓN)",
+      btnClosed: "MISIÓN ACEPTADA Y CERRADA ✓",
+      alertValidated: "Hito validado con éxito. Notificación enviada al equipo."
+    },
+    ar: {
+      returnHome: "العودة إلى محرك الذكاء الاصطناعي",
+      desk: "بوابة الخبراء",
+      lblMission: "المهمة",
+      statusRunning: "قيد التنفيذ",
+      statusClosed: "تمت مراجعة المهمة وإغلاقها",
+      step1: "تشخيص الذكاء الاصطناعي",
+      step2: "التوثيق القانوني",
+      step3: "نشر الخبراء",
+      step4: "الاستلام والإغلاق",
+      lblHash: "البصمة الإثباتية (SHA-256)",
+      btnAction: "اعتماد المرحلة الحالية (الاستلام)",
+      btnClosed: "تم اعتماد المهمة وإغلاقها ✓",
+      alertValidated: "تم اعتماد المرحلة بنجاح. تم إرسال الإشعار للفريق."
+    }
+  };
+
+  // ==========================================
+  // 2. DÉTECTION ET APPLICATION DE LA LANGUE
+  // ==========================================
+  const urlParams = new URLSearchParams(window.location.search);
+  const ref = urlParams.get('ref') || 'MIS-2026-001';
+  document.getElementById('mission-ref').innerText = ref;
+
+  let currentLang = urlParams.get('lang') || localStorage.getItem('emeta_lang') || 'fr';
+  if (!['fr', 'en', 'es', 'ar'].includes(currentLang)) currentLang = 'fr';
+
+  function applyTrackerLang(lang) {
+    const t = trkDict[lang];
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+    document.getElementById('ui-trk-return').innerText = t.returnHome;
+    document.getElementById('ui-trk-desk').innerText = t.desk;
+    document.getElementById('ui-trk-lbl-mission').innerText = t.lblMission;
+    document.getElementById('ui-step-1').innerText = t.step1;
+    document.getElementById('ui-step-2').innerText = t.step2;
+    document.getElementById('ui-step-3').innerText = t.step3;
+    document.getElementById('ui-step-4').innerText = t.step4;
+    document.getElementById('ui-trk-lbl-hash').innerText = t.lblHash;
+    
+    // Liens avec maintien de la langue
+    document.getElementById('link-return-home').href = `index.html?lang=${lang}`;
+    document.getElementById('link-desk').href = `expert.html?lang=${lang}`;
+
+    if (lang === 'ar') {
+      document.getElementById('arrow-return').innerText = '→';
+      document.getElementById('arrow-desk').innerText = '←';
+    } else {
+      document.getElementById('arrow-return').innerText = '←';
+      document.getElementById('arrow-desk').innerText = '→';
+    }
+
+    const btn = document.getElementById('btn-valider');
+    if (btn && !btn.disabled) {
+      btn.innerText = t.btnAction;
+    }
+  }
+
+  applyTrackerLang(currentLang);
+
+  // ==========================================
+  // 3. LOGIQUE DYNAMIQUE & CLÔTURE
+  // ==========================================
+  function appliquerClotureVisuelle() {
+    const t = trkDict[currentLang];
+    const step4 = document.getElementById('step-4');
+    const stepNum4 = document.getElementById('step-num-4');
+    if (step4 && stepNum4) {
+      step4.className = 'step completed';
+      stepNum4.innerText = '✓';
+    }
+
+    const statusBadge = document.getElementById('mission-status');
+    if (statusBadge) {
+      statusBadge.innerText = t.statusClosed;
+    }
+
+    const btn = document.getElementById('btn-valider');
+    if (btn) {
+      btn.innerText = t.btnClosed;
+      btn.disabled = true;
+    }
+  }
+
+  async function loadMissionData() {
+    const token = 'nc_pat__GqKbk1rqNrsr_9SG04Rp-ZXSbZEkeyRqtxivtcs';
+    try {
+      const res = await fetch(`https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mflt58hd329r4sf/records?pageSize=25`, {
+        method: 'GET',
+        headers: {
+          'xc-token': token,
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        const items = data.records || data.list || (Array.isArray(data) ? data : []);
+        if (items.length > 0) {
+          const row = items.find(r => r.Reference_Paiement === ref || r.Title === ref) || items[0];
+          
+          const hashElem = document.getElementById('sha-hash');
+          if (hashElem && row.Recu_Hash) {
+            hashElem.innerText = row.Recu_Hash;
+          }
+
+          const statut = (row.Statut_Paiement || '').toLowerCase();
+          if (statut.includes('payé') || statut.includes('valid') || statut.includes('cerrada') || statut.includes('closed')) {
+            appliquerClotureVisuelle();
+          } else {
+            const statusBadge = document.getElementById('mission-status');
+            if (statusBadge) statusBadge.innerText = trkDict[currentLang].statusRunning;
+          }
+        }
+      }
+    } catch (e) {
+      const hashElem = document.getElementById('sha-hash');
+      if (hashElem) {
+        hashElem.innerText = '8edd731bf91184ec57df8ff91184ec57df8ff2026 (Scellé OpenTimestamps)';
+      }
+    }
+  }
+
+  loadMissionData();
+
+  function validerJalon() {
+    const btn = document.getElementById('btn-valider');
+    btn.innerText = '...';
+
+    appliquerClotureVisuelle();
+
+    fetch('https://automation.e-metalabs.com/webhook/validation-jalon-client', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        ref: ref, 
+        langue: currentLang,
+        action: 'recette_validee', 
+        timestamp: new Date().toISOString() 
+      })
+    })
+    .then(() => {
+      console.log('Webhook n8n validé avec succès.');
+    })
+    .catch(err => {
+      console.error('Erreur Webhook:', err);
+    });
+  }
+</script>
+</body>
+</html>

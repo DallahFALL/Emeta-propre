@@ -1,0 +1,444 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "mandat-ingestion",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -528,
+        -64
+      ],
+      "id": "0a1a86da-fc84-442f-bc19-cab1874f5463",
+      "name": "Webhook",
+      "webhookId": "482700d1-501d-4237-b5a7-fc6ee6afdf45"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Tu es Senior Partner en strategie technologique chez e-META LABS. Execute expressement l'analyse en conformite avec le Cadre M\u00e9thodologique de Transformation - R\u00e9f\u00e9rentiel Ex\u00e9cutif e-META LABS SASU (\u00c9dition Octobre 2026), doctrine d'arbitrage pour les dix secteurs cles. Redige en francais un livrable confidentiel, incisif, oriente ROI, fonde sur les donnees fournies. N'invente aucun chiffre presente comme un fait : distingue donnees, hypotheses et estimations; precise les informations manquantes. Adapte ratios, risques et recommandations au secteur ({{ $('Code in JavaScript').first().json.secteur }}) : agro (rendement, pertes post-recolte, chaine du froid), banque (BCEAO/UEMOA, liquidite, creances, cout du risque), mines (couts d'extraction, teneur, redevances, contenu local), logistique (cout par tonne/km, delai, taux de service), sante (cout patient, disponibilite, chaine du froid, conformite), telecoms (ARPU, churn, disponibilite/SLA, cout par abonne), BTP (marge chantier, derive cout/delai, BFR), industrie (TRS/OEE, rebuts, energie, maintenance), public (execution budgetaire, delais, conformite des marches), retail (rotation, demarque, marge, BFR). N'utilise un ratio sectoriel chiffre que s'il est fourni ou explicitement qualifie d'hypothese a valider.\n\nDONNEES DU MANDAT\nReference : {{ $('Code in JavaScript').first().json.reference_mission }}\nMission : {{ $('Code in JavaScript').first().json.titre_mission }}\nClient : {{ $('Code in JavaScript').first().json.nom_client }}\nEntreprise : {{ $('Code in JavaScript').first().json.entreprise_client }}\nSecteur et diagnostic metier : {{ $('Code in JavaScript').first().json.secteur }} - {{ $('Code in JavaScript').first().json.guide_metier }}\nPalier : {{ $('Code in JavaScript').first().json.palier }}\nProblematique et contexte : {{ $('Code in JavaScript').first().json.problematique }}\n\nMATRICE PROBATOIRE SECTORIELLE (sources candidates; confirmer juridiction, applicabilite, edition et preuves avant toute conclusion)\nReferentiels juridiques candidats : {{ $('Code in JavaScript').first().json.references_legales }}\nSources metier candidates : {{ $('Code in JavaScript').first().json.sources_metier }}\nIndice transmis par le contrat : {{ $('Code in JavaScript').first().json.indice_confiance }} / 10 (ne pas le presenter comme une mesure verifiee independamment; expliciter ses limites)\nPieces contradictoires / terrain a obtenir : {{ $('Code in JavaScript').first().json.pieces_manquantes }}\n\n\nSTRUCTURE OBLIGATOIRE : produis exactement 20 chapitres numerotes, avec un niveau de detail adapte au palier actif (Decouverte : concis; Mandat : approfondi; Chambre : exhaustif). Les chapitres 1 a 16 couvrent le diagnostic, les constats etayes, les scenarios, les arbitrages et les recommandations propres au palier.\n\nLe chapitre 17 doit s'intituler CADRE PROBATOIRE SECTORIEL & SOUVERAINETE. Cite les references juridiques et normatives candidates fournies par le contrat, en confirmant leur juridiction, edition et applicabilite. Distingue obligations, certifications volontaires et bonnes pratiques. Ne fabrique ni texte, ni clause, ni applicabilite; signale toute verification juridique necessaire.\n\nLe chapitre 18 doit s'intituler INDICE DE CONFIANCE IN\u00c9RENTIELLE (/10) et afficher la valeur de reference transmise : {{ $('Code in JavaScript').first().json.indice_confiance }} / 10. Cette valeur est une constante de parametrage (9.4), non une mesure calculee ou verifiee independamment; indique explicitement son statut et ses limites. Examine l'authenticite/provenance des pieces, leur pertinence, coherence interne, actualite et corroboration independante. N'invente aucune sous-note ni corroboration.\n\nLe chapitre 19 doit s'intituler INVENTAIRE DES PIECES CONTRADICTOIRES & EXIGENCES TERRAIN. Recense les contradictions entre donnees, pieces, declarations et hypotheses; precise les versions, leur effet et la piece contradictoire exigee de l'Expert Terrain. En l'absence de contradiction identifiee, indique ? aucune contradiction etablie a ce stade ? et liste les pieces independantes restant a obtenir.\n\nLe chapitre 20 clot le rapport par les decisions a arbitrer, les responsables et les prochaines etapes. Dans les chapitres 17 a 19, adapte les pieces, textes applicables et enjeux de souverainete au secteur; distingue faits verifies, declarations et elements a confirmer.\n\nRegles communes : relie chaque conclusion aux informations du mandat, hierarchise impacts et actions, recommande des actions concretes adaptees a l'entreprise et au secteur, signale limites et hypotheses. N'ajoute aucune formule de politesse. N'utilise pas de syntaxe Markdown; des titres en majuscules, une numerotation simple et des doubles sauts de ligne sont autorises. Le corps complet du rapport doit etre produit dans la sortie de cette chaine, destinee exclusivement au remplacement de la balise unique {{corps_audit}} du modele Google Docs; ne produis aucune autre balise de modele ni texte hors rapport.",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        176,
+        128
+      ],
+      "id": "69ce60f7-5926-4b6f-bc61-7216a3a34b60",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v19.0/1045757915291250/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer EAAS1ZAwTAKrEBRui65ZCicBZAK8n4aimIp2eSSHK381Kiv7osxhqX6KZC4YVjhZBp5PYgCHOLKiHED2kX3h7RVu69rcJJZCDFbZBr5BjZCHpPcPmlZBKTpR3r6TqHFkhNxLPtTRHO6yCaTn1UynLZCI33Sa6bdzkDwBuzKPaq0hlvR0qF6YSkyzWEpbWoRZA1plAQZDZD"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { messaging_product: 'whatsapp', recipient_type: 'individual', to: String($('Code in JavaScript').first().json.whatsapp).replace(/\\D/g, ''), type: 'template', template: { name: 'cortex_diagnostic', language: { code: 'fr' }, components: [{ type: 'body', parameters: [{ type: 'text', text: String($('Code in JavaScript').first().json.reference_mission) }, { type: 'text', text: String($('Code in JavaScript').first().json.sha256_hash) }, { type: 'text', text: String($('Share file').first().json.webViewLink || ('https://docs.google.com/document/d/' + $('Copy file').first().json.id + '/edit')) }] }] } } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        720,
+        32
+      ],
+      "id": "e481cedc-72f4-4149-b732-23c95fcdab3b",
+      "name": "WhatsApp_Meta_Notifier",
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://base.e-metalabs.com/api/v2/tables/mdoy3rbli4j924l/records",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "={{ $env.NOCODB_API_TOKEN }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { Code_Mission: $('Code in JavaScript').first().json.reference_mission, Titre_Mission: $('Code in JavaScript').first().json.titre_mission, Client: $('Code in JavaScript').first().json.entreprise_client, Secteur: $('Code in JavaScript').first().json.secteur, Palier: $('Code in JavaScript').first().json.palier, Contrat_Hash_Ref: $('Code in JavaScript').first().json.sha256_hash } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        880,
+        32
+      ],
+      "id": "6bd77797-95b9-4d4f-8b8a-d36587b80956",
+      "name": "NocoDB_Missions_Vault"
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.documentId }}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        560,
+        -272
+      ],
+      "id": "71fe32b3-d0c3-4444-8c89-d315b6048860",
+      "name": "Share file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Mree2Z9D6c9t2pfH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "1vJ3SL010lVVmBQw2V3XqzRinTakzQeDdLzjz0B7Ubac",
+          "mode": "id"
+        },
+        "name": "=Audit Strat\u00e9gique \u2014 {{ $('Code in JavaScript').first().json.reference_mission }} \u2014 {{ $('Code in JavaScript').first().json.entreprise_client }}",
+        "sameFolder": false,
+        "folderId": {
+          "__rl": true,
+          "value": "12QDo7ophyG60bZ4J3bEM0Sw5FzmFWyUH",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        288,
+        -272
+      ],
+      "id": "50463af5-bf04-4a0c-b508-9ef0a0c98662",
+      "name": "Copy file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Mree2Z9D6c9t2pfH",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $('Copy file').item.json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "{{reference_mission}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.reference_mission }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{nom_client}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.nom_client }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{entreprise_client}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.entreprise_client }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{secteur}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.secteur }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{date_analyse_utc}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.date_analyse_utc }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{palier}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.palier }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{plan_choisi}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.plan_choisi }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{sha256_hash}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.sha256_hash }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{hash_sha256}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.hash_sha256 }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{corps_audit}}",
+              "replaceText": "={{ $('Basic LLM Chain').first().json.text }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{references_legales}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.references_legales }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{sources_metier}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.sources_metier }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{indice_confiance}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.indice_confiance }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{pieces_manquantes}}",
+              "replaceText": "={{ $('Code in JavaScript').first().json.pieces_manquantes }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        432,
+        -272
+      ],
+      "id": "2bcbaac3-8cea-4686-87d5-aff477148ebf",
+      "name": "Updates document",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "IpjHNzZWx60S5vjg",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "e-META LABS <contact@e-metalabs.com>",
+        "toEmail": "={{ $('Code in JavaScript').first().json.email }}",
+        "subject": "=Votre Audit Strat\u00e9gique Sur-Mesure \u2014 e-META LABS",
+        "html": "=<p>Bonjour,</p>\n\n<p>Suite \u00e0 votre requ\u00eate, nos algorithmes ont termin\u00e9 l'analyse de votre contexte op\u00e9rationnel.</p>\n\n<!-- Le texte de l'audit est conserv\u00e9 avec ses retours \u00e0 la ligne -->\n{{ $('Basic LLM Chain').first().json.text.replace(/\\n/g, '<br>') }}\n\n<br>\n<hr style=\"border: 0; border-top: 1px solid #d4af37; margin: 20px 0;\">\n<br>\n\n<p style=\"text-align: center;\">\n    <strong>\n        <a href=\"https://docs.google.com/document/d/{{ $('Updates document').first().json.documentId }}/edit?usp=sharing\" style=\"background-color: #25D366; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 4px; font-family: sans-serif; display: inline-block;\">\n            CONSULTER VOTRE AUDIT STRAT\u00c9GIQUE COMPLET\n        </a>\n    </strong>\n</p>\n\n<br>\n<br>\n\n<p>Notre desk ex\u00e9cutif reste \u00e0 votre disposition pour planifier le d\u00e9ploiement technique de cette infrastructure.</p>\n\n<p>Bien cordiellement,</p>\n\n<p><strong>La Direction de l'Ing\u00e9nierie e-META LABS</strong></p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        864,
+        -272
+      ],
+      "id": "25a494cb-49b8-45e7-92d0-d78c233cfb08",
+      "name": "Send an Email1",
+      "webhookId": "7f6577e7-18f0-4587-803c-0bbff07661ba",
+      "credentials": {
+        "smtp": {
+          "id": "EYgJ1ZIwAIiqA4jl",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        -288,
+        -256
+      ],
+      "id": "fe20fa8f-e3a7-4d91-b342-28d7312d4481",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "65PIXXpn4vorh7q7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "function sha256Pure(text) {\n  const bytes = unescape(encodeURIComponent(text));\n  const bitLength = bytes.length * 8;\n  let data = bytes + '\\x80';\n  while (data.length % 64 !== 56) data += '\\x00';\n  data += String.fromCharCode(0, 0, 0, 0, (bitLength >>> 24) & 255, (bitLength >>> 16) & 255, (bitLength >>> 8) & 255, bitLength & 255);\n  const initial = [], constants = [], composites = {};\n  for (let candidate = 2, count = 0; count < 64; candidate++) {\n    if (!composites[candidate]) {\n      for (let multiple = candidate * 2; multiple < 400; multiple += candidate) composites[multiple] = true;\n      if (count < 8) initial.push((Math.sqrt(candidate) * 0x100000000) | 0);\n      constants.push((Math.cbrt(candidate) * 0x100000000) | 0);\n      count++;\n    }\n  }\n  const hash = initial.slice(), rotate = (value, bits) => (value >>> bits) | (value << (32 - bits));\n  for (let offset = 0; offset < data.length; offset += 64) {\n    const words = new Array(64);\n    for (let index = 0; index < 16; index++) {\n      const start = offset + index * 4;\n      words[index] = (data.charCodeAt(start) << 24) | (data.charCodeAt(start + 1) << 16) | (data.charCodeAt(start + 2) << 8) | data.charCodeAt(start + 3);\n    }\n    for (let index = 16; index < 64; index++) {\n      const x = words[index - 15], y = words[index - 2];\n      words[index] = (words[index - 16] + (rotate(x, 7) ^ rotate(x, 18) ^ (x >>> 3)) + words[index - 7] + (rotate(y, 17) ^ rotate(y, 19) ^ (y >>> 10))) | 0;\n    }\n    let [a, b, c, d, e, f, g, h] = hash;\n    for (let index = 0; index < 64; index++) {\n      const t1 = (h + (rotate(e, 6) ^ rotate(e, 11) ^ rotate(e, 25)) + ((e & f) ^ (~e & g)) + constants[index] + words[index]) | 0;\n      const t2 = ((rotate(a, 2) ^ rotate(a, 13) ^ rotate(a, 22)) + ((a & b) ^ (a & c) ^ (b & c))) | 0;\n      h = g; g = f; f = e; e = (d + t1) | 0; d = c; c = b; b = a; a = (t1 + t2) | 0;\n    }\n    hash[0] = (hash[0] + a) | 0; hash[1] = (hash[1] + b) | 0; hash[2] = (hash[2] + c) | 0; hash[3] = (hash[3] + d) | 0;\n    hash[4] = (hash[4] + e) | 0; hash[5] = (hash[5] + f) | 0; hash[6] = (hash[6] + g) | 0; hash[7] = (hash[7] + h) | 0;\n  }\n  return hash.map(value => (value >>> 0).toString(16).padStart(8, '0')).join('');\n}\n\nconst input = $input.item.json;\nconst raw = input.body && typeof input.body === 'object' ? input.body : input;\nconst value = item => item == null ? '' : String(item).trim();\nconst email = value(raw.email || raw.email_client).toLowerCase();\nconst domain = email.includes('@') ? email.split('@').pop().replace(/^www\\./, '') : '';\nconst entreprise_client = value(raw.entreprise_client || raw.entity) || (domain ? 'Soci\u00e9t\u00e9 via ' + domain : '');\nif (!entreprise_client) throw new Error('Entreprise absente : renseignez le nom l\u00e9gal ou un e-mail professionnel valide.');\nconst aliases = { agro: 'agro', banque: 'banque', finance: 'banque', banking: 'banque', financialservices: 'banque', mines: 'mines', energy: 'mines', energie: 'mines', logistique: 'logistique', logistics: 'logistique', sante: 'sante', health: 'sante', telecom: 'telecoms', telecoms: 'telecoms', btp: 'btp', property: 'btp', industrie: 'industrie', manufacturing: 'industrie', public: 'public', retail: 'retail' };\nconst sectorInput = value(raw.secteur || raw.sector || raw.secteur_selectionne).toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').replace(/[^a-z]/g, '');\nconst secteur = aliases[sectorInput];\nif (!secteur) throw new Error('Secteur absent ou non reconnu dans le contrat d\u2019interface.');\nconst palierInput = value(raw.palier).toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '');\nconst palier = /decouverte|discovery|starter/.test(palierInput) ? 'decouverte' : /chambre|executive|executif/.test(palierInput) ? 'chambre' : 'mandat';\nconst currencyInput = value(raw.currency).toUpperCase();\nconst currency = ['EUR', 'USD', 'FCFA'].includes(currencyInput) ? currencyInput : 'EUR';\nconst reference_mission = value(raw.reference_mission || raw.reference) || 'MIS-' + new Date().getUTCFullYear() + '-' + String(Math.floor(Math.random() * 10000)).padStart(4, '0');\nconst nom_client = value(raw.nom_client || raw.representant) || (email.includes('@') ? email.split('@')[0].replace(/[._-]+/g, ' ') : 'Direction requ\u00e9rante');\nconst whatsapp = value(raw.whatsapp || raw.telephone_client).replace(/\\D/g, '').replace(/^00/, '');\nconst problematique = value(raw.problematique || raw.mission_contexte || raw.problematique_brute);\nconst parsedDate = new Date(raw.date_analyse_utc || raw.date || Date.now());\nconst date_analyse_utc = Number.isNaN(parsedDate.getTime()) ? new Date().toISOString() : parsedDate.toISOString();\nconst titre_mission = 'Audit Strat\u00e9gique [' + secteur.toUpperCase() + '] \u2014 ' + entreprise_client;\nconst canonical = { reference_mission, entreprise_client, nom_client, secteur, palier, currency, problematique, email, whatsapp, date_analyse_utc, titre_mission };\nconst sha256_hash = sha256Pure(JSON.stringify(canonical));\nif (raw.sha256_hash && value(raw.sha256_hash).toLowerCase() !== sha256_hash) throw new Error('L\u2019empreinte SHA-256 transmise ne correspond pas aux m\u00e9tadonn\u00e9es canoniques.');\nconst guides = { agro: 'Rendement, pertes post-recolte et chaine du froid.', banque: 'Liquidite, qualite des actifs, cout du risque et exigences BCEAO/UEMOA applicables.', mines: 'Couts d?extraction, teneur, redevances, contenu local et dependances energetiques.', logistique: 'Cout par tonne-kilometre, delais, taux de service et continuite des corridors.', sante: 'Disponibilite, chaine du froid, securite patient et conformite applicable.', telecoms: 'ARPU, churn, disponibilite, SLA et cout par abonne.', btp: 'Marge chantier, derives de cout/delai, BFR et documentation fonciere.', industrie: 'TRS/OEE, rebuts, energie et maintenance.', public: 'Execution budgetaire, delais, tracabilite et conformite des marches.', retail: 'Rotation des stocks, demarque, marge et BFR.' };\nconst matrice_probatoire = {\n  agro: { references_legales: ['Acte uniforme OHADA relatif au droit comptable et a l?information financiere (AUDCIF/SYSCOHADA), si applicable', 'Codex Alimentarius FAO/OMS : textes pertinents a identifier selon le produit', 'Reglementations sanitaires et phytosanitaires nationales/CEDEAO applicables, a verifier'], sources_metier: ['GlobalG.A.P. IFA v6, si certification et activite concernees', 'Imagerie Sentinel-2 Copernicus, si pertinente et datee', 'Donnees agronomiques locales de la vallee du Fleuve, source a documenter'], pieces_manquantes: ['Registres de parcelles, intrants et lots', 'Releves de rendement et pesees contradictoires', 'Analyses de conformite et temperature de chaine du froid'] },\n  banque: { references_legales: ['Regles BCEAO et UMOA applicables a l?activite et a l?exercice, references precises a verifier', 'Acte uniforme OHADA relatif au droit comptable et a l?information financiere (AUDCIF/SYSCOHADA), si applicable', 'Legislation nationale sur la protection des donnees et le secret financier, a verifier'], sources_metier: ['Etats prudentiels et publications BCEAO/Commission Bancaire pertinents', 'ISO 27001, si certifiee ou adoptee par l?entite', 'Donnees de portefeuille, risque et liquidite datees et rapprochees'], pieces_manquantes: ['Balance generale et etats prudentiels rapproches', 'Echantillons de dossiers de credit contradictoires', 'Releves de liquidite, impayes et provisions avec justificatifs'] },\n  mines: { references_legales: ['Acte uniforme OHADA relatif au droit comptable et a l?information financiere, si applicable', 'Code minier et textes d?application du pays du site, references a verifier', 'Obligations nationales de contenu local, environnement et securite, a verifier'], sources_metier: ['Rapports d?exploration et d?analyses de teneur avec laboratoire identifie', 'ISO 14001 / ISO 45001, si adoptees ou certifiees', 'Donnees de production, maintenance et consommation energetique sourcees'], pieces_manquantes: ['Contre-analyses independantes des teneurs', 'Registres de production, pesees et ventes rapprochees', 'Permis, redevances et preuves de conformite environnementale'] },\n  logistique: { references_legales: ['Acte uniforme OHADA relatif au droit comptable et a l?information financiere, si applicable', 'Regles douanieres, portuaires et de transport du territoire concerne, a verifier', 'Convention de transport applicable au mode et aux pays concernes, a verifier'], sources_metier: ['ISO 28000, si adoptee ou certifiee', 'Donnees portuaires/douanieres officielles et datees', 'Journaux GPS, preuves de livraison et couts par corridor'], pieces_manquantes: ['Bons de chargement et de livraison contradictoires', 'Factures transporteurs rapproch?es aux preuves de service', 'Journaux d?incidents, retards et ruptures de charge'] },\n  sante: { references_legales: ['Reglementation sanitaire et pharmaceutique nationale, textes et autorites a verifier', 'Regles nationales de protection des donnees de sante, a verifier', 'Acte uniforme OHADA relatif au droit comptable et a l?information financiere, si applicable'], sources_metier: ['ISO 15189, si laboratoire et certification concernes', 'Guides OMS applicables au service et a la chaine du froid', 'Donnees de disponibilite, qualite et securite patient sourcees'], pieces_manquantes: ['Registres de lots, temperatures et excursions', 'Rapports d?incidents et dossiers de conformite anonymises', 'Rapprochements stocks, consommations et facturations'] },\n  telecoms: { references_legales: ['Licence et decisions de l?autorite nationale de regulation, references a verifier', 'Regles nationales de donnees personnelles et telecommunications, a verifier', 'Acte uniforme OHADA relatif au droit comptable et a l?information financiere, si applicable'], sources_metier: ['Indicateurs publies par l?autorite nationale et l?UIT, periode a preciser', 'ISO/IEC 27001, si adoptee ou certifiee', 'Mesures SLA, disponibilite, trafic et churn horodatees'], pieces_manquantes: ['Journaux d?incident reseau et calculs SLA contradictoires', 'Echantillons anonymises de facturation et churn', 'Rapports de couverture et mesures terrain independantes'] },\n  btp: { references_legales: ['Acte uniforme OHADA relatif au droit comptable et a l?information financiere, si applicable', 'Droit foncier, urbanisme, construction et marches du pays du chantier, a verifier', 'Contrats et normes techniques rendus applicables au projet, a verifier'], sources_metier: ['Devis quantitatifs, situations de travaux et plans approuves', 'ISO 9001 / ISO 45001, si adoptees ou certifiees', 'Indices de prix publics du pays, periode et source a preciser'], pieces_manquantes: ['Attachements contradictoires et proces-verbaux de chantier', 'Decomptes, avenants et factures fournisseurs rapproches', 'Titres fonciers, permis et rapports de controle technique'] },\n  industrie: { references_legales: ['Acte uniforme OHADA relatif au droit comptable et a l?information financiere, si applicable', 'Regles nationales de securite industrielle, environnement et travail, a verifier', 'Normes techniques rendues obligatoires par le secteur et le pays, a verifier'], sources_metier: ['ISO 9001 / ISO 14001 / ISO 45001, si adoptees ou certifiees', 'Journaux de production, TRS/OEE et maintenance avec provenance', 'Donnees metrologiques et de consommation energetique datees'], pieces_manquantes: ['Contre-inventaire des stocks et encours', 'Journaux machine, arr?ts et rebuts rapproches aux ordres de production', 'Rapports d?etalonnage et factures energetiques'] },\n  public: { references_legales: ['Droit national des finances publiques et de la commande publique, textes a verifier', 'Regles de controle et de comptabilite publique applicables, a verifier', 'Acte uniforme OHADA uniquement si le statut de l?entite le rend applicable'], sources_metier: ['Budgets, lois de reglement et donnees d?execution officielles', 'Rapports publics de juridictions financieres et organes de controle', 'ISO 37001, si adoptee ou certifiee'], pieces_manquantes: ['Pieces de marche et preuves de mise en concurrence', 'Engagements, liquidations, ordonnancements et paiements rapproches', 'Proces-verbaux de reception contradictoires et audits de controle'] },\n  retail: { references_legales: ['Acte uniforme OHADA relatif au droit comptable et a l?information financiere, si applicable', 'Regles nationales de consommation, concurrence et fiscalite, a verifier', 'Regles nationales de protection des donnees personnelles, si traitement concerne'], sources_metier: ['Journaux de caisse/POS et donnees de stocks datees', 'Donnees officielles de prix et d?inflation, periode et source a preciser', 'ISO 9001, si adoptee ou certifiee'], pieces_manquantes: ['Inventaire physique contradictoire par site', 'Exports POS, retours, remises et annulations rapproches', 'Factures fournisseurs, receptions et avoirs rapproches'] }\n};\nconst evidence = matrice_probatoire[secteur];\nif (!evidence) throw new Error('Matrice probatoire sectorielle absente pour le secteur : ' + secteur);\nconst indice_confiance = '9.4';\nconst references_legales = evidence.references_legales.join(' ; ');\nconst sources_metier = evidence.sources_metier.join(' ; ');\nconst pieces_manquantes = evidence.pieces_manquantes.join(' ; ');\nconst plan_choisi = palier;\nconst hash_sha256 = sha256_hash;\nreturn { json: { ...canonical, guide_metier: guides[secteur], matrice_probatoire: evidence, references_legales, sources_metier, indice_confiance, pieces_manquantes, plan_choisi, hash_sha256, sha256_hash } };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -256,
+        384
+      ],
+      "id": "73d57a14-3d3b-462c-8c0a-08acbfd6ac34",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.item.json;\nconst raw = input.body && typeof input.body === 'object' ? input.body : input;\nconst digits = String(raw.whatsapp || raw.telephone_client || '').replace(/[^0-9]/g, '').replace(/^00/, '');\nconst whatsapp = /^7[0-9]{8}$/.test(digits) ? '221' + digits : digits;\nreturn { json: input.body && typeof input.body === 'object' ? { ...input, body: { ...raw, whatsapp } } : { ...input, whatsapp } };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -400,
+        -64
+      ],
+      "id": "c49b8303-34bc-4ce2-b085-9dce0c337493",
+      "name": "Normalize WhatsApp"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Normalize WhatsApp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize WhatsApp": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Copy file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copy file": {
+      "main": [
+        [
+          {
+            "node": "Updates document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Updates document": {
+      "main": [
+        [
+          {
+            "node": "Share file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Share file": {
+      "main": [
+        [
+          {
+            "node": "NocoDB_Missions_Vault",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NocoDB_Missions_Vault": {
+      "main": [
+        [
+          {
+            "node": "Send an Email1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an Email1": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp_Meta_Notifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ea8fa31aa22966a954dc961c81514f022c83fc78d659cee5ee3c2bdbd3975381",
+    "description": "CORTEX_03 stores mission records at the production NocoDB missions table using columns Code_Mission, Titre_Mission, Client, Secteur, Palier and Contrat_Hash_Ref. Authentication uses NOCODB_API_TOKEN through the xc-token header."
+  }
+}

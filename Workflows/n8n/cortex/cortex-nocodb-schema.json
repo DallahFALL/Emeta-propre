@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "project": "Cortex ABM",
+  "tables": {
+    "Missions": {
+      "primaryKey": "Id",
+      "unique": ["Code_Mission"],
+      "fields": [
+        { "name": "Id", "type": "AutoNumber", "required": true },
+        { "name": "Code_Mission", "type": "SingleLineText", "required": true, "unique": true, "example": "MIS-2026-5468" },
+        { "name": "Titre_Mission", "type": "SingleLineText" },
+        { "name": "Client", "type": "SingleLineText" },
+        { "name": "Email_Client", "type": "Email" },
+        { "name": "WhatsApp_Client", "type": "PhoneNumber" },
+        { "name": "Secteur", "type": "SingleLineText", "required": true },
+        { "name": "Problematique", "type": "LongText" },
+        { "name": "Descriptif_Anonymise", "type": "LongText" },
+        { "name": "Statut", "type": "SingleLineText", "default": "En attente de paiement" },
+        { "name": "Statut_Assignation", "type": "SingleLineText", "default": "en_attente" },
+        { "name": "Expert_Assigne", "type": "SingleLineText" },
+        { "name": "Jalon_3", "type": "SingleLineText", "default": "gris", "allowedValues": ["gris", "vert"] },
+        { "name": "Montant_TTC", "type": "Decimal", "precision": 2 },
+        { "name": "Montant_HT", "type": "Decimal", "precision": 2 },
+        { "name": "Commission_eMETA_HT", "type": "Decimal", "precision": 2 },
+        { "name": "Montant_Sequestre_Expert_HT", "type": "Decimal", "precision": 2 },
+        { "name": "Devise", "type": "SingleLineText", "default": "XOF" },
+        { "name": "OTS_URL", "type": "URL" },
+        { "name": "Empreinte_SHA256", "type": "SingleLineText" },
+        { "name": "Pack_Demarrage", "type": "LongText" },
+        { "name": "created_at", "type": "DateTime", "system": true }
+      ],
+      "relations": [
+        { "field": "Expert_Assigne", "references": "Desk_Experts.expert_id", "cardinality": "many-to-one" },
+        { "field": "Code_Mission", "references": "Grand_Livre_Comptable.mission_ref", "cardinality": "one-to-many" }
+      ]
+    },
+    "Desk_Experts": {
+      "primaryKey": "Id",
+      "unique": ["expert_id"],
+      "fields": [
+        { "name": "Id", "type": "AutoNumber", "required": true },
+        { "name": "expert_id", "type": "SingleLineText", "required": true, "unique": true },
+        { "name": "nom", "type": "SingleLineText", "required": true },
+        { "name": "email", "type": "Email", "required": true },
+        { "name": "whatsapp", "type": "PhoneNumber", "required": true },
+        { "name": "telegram_chat_id", "type": "SingleLineText", "required": true },
+        { "name": "secteur", "type": "SingleLineText", "required": true },
+        { "name": "statut_accreditation", "type": "SingleLineText", "required": true, "allowedValues": ["valide", "en_attente", "suspendu"] },
+        { "name": "disponibilite", "type": "SingleLineText", "required": true, "allowedValues": ["disponible", "indisponible"] },
+        { "name": "disponible_jusqu_a", "type": "DateTime" },
+        { "name": "note_qualification", "type": "Decimal", "precision": 2 },
+        { "name": "missions_reussies", "type": "Integer", "default": 0 }
+      ],
+      "relations": [
+        { "field": "expert_id", "references": "Missions.Expert_Assigne", "cardinality": "one-to-many" }
+      ]
+    },
+    "Grand_Livre_Comptable": {
+      "primaryKey": "Id",
+      "unique": ["payment_id"],
+      "fields": [
+        { "name": "Id", "type": "AutoNumber", "required": true },
+        { "name": "payment_id", "type": "SingleLineText", "required": true, "unique": true },
+        { "name": "mission_ref", "type": "SingleLineText", "required": true },
+        { "name": "devise", "type": "SingleLineText", "required": true },
+        { "name": "montant_ttc", "type": "Decimal", "precision": 2, "required": true },
+        { "name": "montant_ht", "type": "Decimal", "precision": 2, "required": true },
+        { "name": "commission_emeta_ht", "type": "Decimal", "precision": 2, "required": true },
+        { "name": "montant_sequestre_expert_ht", "type": "Decimal", "precision": 2, "required": true },
+        { "name": "statut", "type": "SingleLineText", "required": true, "default": "GELÉ_EN_ATTENTE_RECETTE" },
+        { "name": "date_paiement", "type": "DateTime", "required": true }
+      ],
+      "relations": [
+        { "field": "mission_ref", "references": "Missions.Code_Mission", "cardinality": "many-to-one" }
+      ]
+    }
+  },
+  "n8nEnvironment": [
+    "NOCODB_API_TOKEN",
+    "NOCODB_PROJECT_ID",
+    "NOCODB_TABLE_MISSIONS",
+    "NOCODB_TABLE_EXPERTS",
+    "NOCODB_TABLE_GRAND_LIVRE",
+    "PAYTECH_API_SECRET",
+    "CLAIM_TOKEN_SECRET",
+    "CORTEX_EXECUTIVE_TELEGRAM_CHAT_ID",
+    "CORTEX_REVIEW_EMAIL",
+    "WHATSAPP_PHONE_NUMBER_ID",
+    "WHATSAPP_ACCESS_TOKEN",
+    "CORTEX_EXPERT_DISPATCHER_WORKFLOW_ID"
+  ]
+}

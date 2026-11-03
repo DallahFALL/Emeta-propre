@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desk Exécutif | Onboarding Expert e-META LABS</title>
+    <!-- Favicon Officiel Hexagonal e-META LABS -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 90,25 90,75 50,95 10,75 10,25' fill='%2309131e' stroke='%23d4af37' stroke-width='7'/><circle cx='50' cy='50' r='10' fill='%23d4af37'/></svg>">
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --secondary-color: #3b82f6;
+            --gold: #d4af37;
+            --bg-color: #f8fafc;
+            --text-color: #334155;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            max-width: 500px;
+            width: 90%;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .btn-return-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+        .btn-return-home:hover {
+            color: var(--secondary-color);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="url"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: var(--border-radius);
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 25px;
+            margin-bottom: 30px;
+            background-color: #f1f5f9;
+            padding: 15px;
+            border-radius: var(--border-radius);
+        }
+
+        .checkbox-group input {
+            margin-top: 4px;
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            font-weight: 400;
+            font-size: 0.85rem;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .checkbox-group a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            width: 100%;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2563eb;
+        }
+        
+        button:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .status-message {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-success {
+            background-color: #dcfce7;
+            color: #166534;
+            display: block;
+        }
+
+        .status-error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="top-nav">
+            <a href="index.html" class="btn-return-home" id="backBtn" data-i18n="exp_btn_return">← Retour au Moteur IA</a>
+            <div style="display: flex; align-items: center; gap: 6px;">
+                <svg width="18" height="18" viewBox="0 0 100 100">
+                    <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="#09131e" stroke="#d4af37" stroke-width="8"/>
+                    <circle cx="50" cy="50" r="10" fill="#d4af37"/>
+                </svg>
+                <span style="color: #0f172a; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.5px;">E-META LABS</span>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1 data-i18n="exp_title">Desk Exécutif</h1>
+            <p data-i18n="exp_subtitle">Portail d'intégration pour les partenaires et experts e-META LABS.<br>Complétez votre profil pour recevoir des leads qualifiés.</p>
+        </div>
+
+        <form id="expertForm">
+            <!-- 1. NOM -->
+            <div class="form-group">
+                <label for="name" data-i18n="exp_lbl_name">Nom et Prénom *</label>
+                <input type="text" id="name" data-i18n="exp_ph_name" placeholder="Ex: Dallah FALL" required>
+            </div>
+
+            <!-- 2. EMAIL -->
+            <div class="form-group">
+                <label for="email" data-i18n="exp_lbl_email">Adresse E-mail Professionnelle *</label>
+                <input type="email" id="email" data-i18n="exp_ph_email" placeholder="contact@votre-entreprise.com" required>
+            </div>
+
+            <!-- 3. WHATSAPP -->
+            <div class="form-group">
+                <label for="whatsapp" data-i18n="exp_lbl_wa">Numéro WhatsApp (avec indicatif) *</label>
+                <input type="tel" id="whatsapp" data-i18n="exp_ph_wa" placeholder="Ex: +221 77 000 00 00" required>
+            </div>
+
+            <!-- 4. SPÉCIALITÉ -->
+            <div class="form-group">
+                <label for="specialty" data-i18n="exp_lbl_domain">Domaine d'Expertise Principal *</label>
+                <select id="specialty" required>
+                    <option value="" disabled selected data-i18n="exp_opt_def">Sélectionnez une spécialité...</option>
+                    <option value="GenAI & Data Science" data-i18n="exp_ai">GenAI & Data Science</option>
+                    <option value="Cybersécurité & Résilience" data-i18n="exp_cyber">Cybersécurité & Résilience</option>
+                    <option value="Ingénierie ESG & Climat" data-i18n="exp_esg">Ingénierie ESG & Climat</option>
+                    <option value="Web3 & Blockchain" data-i18n="exp_web3">Web3 & Blockchain</option>
+                    <option value="Marketing Digital & SEO" data-i18n="exp_mkt">Marketing Digital & SEO</option>
+                    <option value="Optimisation des Processus" data-i18n="exp_proc">Optimisation des Processus</option>
+                    <option value="Gestion des Talents (RH)" data-i18n="exp_hr">Gestion des Talents (RH)</option>
+                    <option value="Design Thinking & UX" data-i18n="exp_design">Design Thinking & UX</option>
+                    <option value="Go-to-Market & Growth Strategy" data-i18n="exp_gtm">Go-to-Market & Growth Strategy</option>
+                </select>
+            </div>
+
+            <!-- 5. ANNÉES D'EXPÉRIENCE -->
+            <div class="form-group">
+                <label for="experience" data-i18n="exp_lbl_exp">Années d'Expérience *</label>
+                <input type="number" id="experience" data-i18n="exp_ph_exp" min="1" placeholder="Ex: 5" required>
+            </div>
+
+            <!-- 6. LINKEDIN -->
+            <div class="form-group">
+                <label for="linkedin" data-i18n="exp_lbl_linkedin">Lien Profil LinkedIn *</label>
+                <input type="url" id="linkedin" data-i18n="exp_ph_linkedin" placeholder="https://linkedin.com/in/votre-profil" required>
+            </div>
+
+            <!-- 7. BIO -->
+            <div class="form-group">
+                <label for="bio" data-i18n="exp_lbl_bio">Courte Biographie (Missions, réalisations) *</label>
+                <textarea id="bio" data-i18n="exp_ph_bio" rows="4" placeholder="Décrivez votre parcours et vos réussites majeures..." required></textarea>
+            </div>
+
+            <div class="checkbox-group">
+                <label>
+                  <input type="checkbox" id="accept-protocol" required>
+                  <span data-i18n="exp_lbl_consent">J'accepte le</span> 
+                  <a href="https://e-metalabs.com/protocole-apport-affaires.html" target="_blank" rel="noopener noreferrer" data-i18n="link_protocol">Protocole d'Apport d'Affaires</a> 
+                  <span data-i18n="exp_lbl_collab">et les conditions de collaboration e-META LABS.</span>
+                </label>
+            </div>
+
+            <button type="submit" id="submitBtn" data-i18n="exp_btn_submit">Soumettre ma candidature</button>
+            <div id="formStatus" class="status-message"></div>
+        </form>
+    </div>
+
+    <script src="i18n.js"></script>
+    <script>
+        document.getElementById('expertForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const statusDiv = document.getElementById('formStatus');
+            
+            submitBtn.textContent = 'Transmission cryptée en cours...';
+            submitBtn.disabled = true;
+            statusDiv.className = 'status-message';
+
+            const formData = {
+                nom: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                specialite: document.getElementById('specialty').value,
+                annees_experience: document.getElementById('experience').value,
+                linkedin: document.getElementById('linkedin').value,
+                bio: document.getElementById('bio').value
+            };
+
+            const webhookUrl = 'https://automation.e-metalabs.com/webhook/expert-valide';
+            
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if(response.ok) {
+                    statusDiv.innerHTML = '✅ <strong>Dossier transmis avec succès.</strong><br>Notre Board évalue actuellement votre profil. Une réponse vous sera apportée sous 48h.';
+                    statusDiv.className = 'status-message status-success';
+                    document.getElementById('expertForm').reset();
+                } else {
+                    throw new Error('Erreur réseau');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                statusDiv.textContent = '❌ Une erreur est survenue lors de la transmission au serveur souverain. Veuillez réessayer.';
+                statusDiv.className = 'status-message status-error';
+            })
+            .finally(() => {
+                submitBtn.textContent = 'Soumettre ma candidature';
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>

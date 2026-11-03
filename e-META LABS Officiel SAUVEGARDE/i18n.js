@@ -1,0 +1,627 @@
+/* 
+ * PROJET : e-META LABS
+ * FICHIER : i18n.js (Traduction Intégrale + Pages Légales + Mémoire Sécurisée + Mode Executive)
+ */
+
+const translations = {
+    fr: {
+        // --- VISION SUBLIME & UI ---
+        hero_label: "MASTER DIAGNOSTIC 2026", 
+        hero_slogan_1: "Le Diagnostic de l'Agent IA", 
+        hero_slogan_2: "& L'Exécution de l'Expert Humain",
+        subtitle: "De l'analyse algorithmique à l'action sur le terrain.", 
+        btn_reset: "↻ Reset", lbl_counter: "Diagnostics Sécurisés & Ancrés",
+        slogan_sniper: "L'alliance absolue de la Data et du Terrain. L'IA e-META identifie vos failles, nos experts exécutifs déploient les solutions.",
+        step1_title: "01. Identification", lbl_company: "Société / Entité", ph_company: "ex: Groupe Alpha, Ministère...",
+        lbl_email: "Email Professionnel", lbl_phone: "Numéro WhatsApp", 
+        lbl_linkedin: "Profil LinkedIn (Optionnel)", ph_linkedin: "https://linkedin.com/in/votre-nom",
+        btn_next: "Suivant",
+        
+        // --- MATRICE & EXPERTISES ---
+        step2_title: "02. Matrice Stratégique", lbl_sector: "Secteur Stratégique",
+        
+        // NOUVEAU BLINDAGE : Guide des Expertises
+        btn_guide: "📖 Guide des Expertises",
+        lienGuide: "Guide des Expertises",
+        titreGuide: "Guide des Expertises",
+        descGuide: "Contenu de votre guide ici...",
+
+        agnostic_title: "INTELLIGENCE AGNOSTIQUE 🧠",
+        agnostic_desc: "De l'ingénierie financière aux litiges internationaux les plus complexes, notre moteur polymorphe s'adapte à votre industrie. Cochez l'<strong>Auto-Détection IA</strong> si votre enjeu dépasse les cadres traditionnels.",
+        sec_fintech: "FinTech & DeFi", sec_agri: "AgriTech & Food Security", sec_green: "GreenTech & Énergies",
+        sec_gov: "GovTech & Smart Cities", sec_health: "Santé & BioTech", sec_log: "Logistique & Supply Chain",
+        sec_mine: "Mines, Pétrole & Gaz", sec_btp: "Immobilier & PropTech", sec_retail: "E-commerce & Retail",
+        sec_edu: "Éducation & EdTech", sec_tour: "Tourisme & Hôtellerie", sec_media: "Industries Créatives & Médias",
+        sec_consulting: "Conseil & Services B2B", sec_saas: "SaaS & Éditeurs Logiciels", sec_telecom: "Télécoms & Infrastructures",
+        sec_other: "Autre / Sur-mesure", lbl_custom_sector: "Précisez votre industrie :", ph_custom_sector: "Ex: Sport Professionnel, Aérospatial...",
+        lbl_geo: "Zone d'Intervention", opt_geo_def: "Sélectionner votre pays exact...",
+        
+        // --- LISTE DES PAYS ---
+        c_za: "Afrique du Sud", c_dz: "Algérie", c_de: "Allemagne", c_sa: "Arabie Saoudite", c_ar: "Argentine", 
+        c_au: "Australie", c_be: "Belgique", c_bj: "Bénin", c_br: "Brésil", c_bf: "Burkina Faso", c_bi: "Burundi", 
+        c_cm: "Cameroun", c_ca: "Canada", c_cv: "Cap-Vert", c_cf: "Centrafrique", c_cl: "Chili", c_cn: "Chine", 
+        c_co: "Colombie", c_cg: "Congo", c_cd: "RD Congo", c_kr: "Corée du Sud", c_ci: "Côte d'Ivoire", c_dj: "Djibouti", 
+        c_eg: "Égypte", c_ae: "Émirats Arabes Unis", c_es: "Espagne", c_us: "États-Unis", c_et: "Éthiopie", 
+        c_fr: "France", c_ga: "Gabon", c_gn: "Guinée", c_gq: "Guinée équatoriale", c_in: "Inde", c_it: "Italie", 
+        c_jp: "Japon", c_ke: "Kenya", c_mg: "Madagascar", c_ml: "Mali", c_ma: "Maroc", c_mu: "Maurice", 
+        c_mr: "Mauritanie", c_mx: "Mexique", c_ne: "Niger", c_ng: "Nigeria", c_ug: "Ouganda", c_uk: "Royaume-Uni", 
+        c_rw: "Rwanda", c_sn: "Sénégal", c_ch: "Suisse", c_td: "Tchad", c_tg: "Togo", c_tn: "Tunisie", c_other: "Autre pays...",
+        
+        lbl_expertise: "Expertise Requise",
+        exp_ai: "GenAI & Data Science", exp_cyber: "Cybersécurité & Résilience", exp_esg: "Ingénierie ESG & Climat",
+        exp_web3: "Web3 & Blockchain (Bitcoin OTS)", exp_mkt: "Marketing Digital & SEO", exp_proc: "Optimisation des Processus",
+        exp_hr: "Gestion des Talents (RH)", exp_design: "Design Thinking & UX", exp_gtm: "Go-to-Market & Growth Strategy", exp_auto: "Auto-Détection par l'IA",
+        
+        btn_prev: "Retour", btn_next_matrice: "Ouvrir Matrice",
+        
+        // --- ETAPE 3 ---
+        step3_title: "03. Matrice Analyse", 
+        elite_hook: "\"Au-delà des algorithmes, la résolution de l'insoluble.\"",
+        lbl_context: "Contexte Opérationnel", ph_context: "Décrivez votre situation actuelle, vos objectifs à 1-3 ans et vos défis majeurs. Plus vous fournirez de détails, plus les recommandations de l'IA seront chirurgicales.",
+        lbl_file_upload: "📄 Joindre un Document (Optionnel)", btn_browse: "Parcourir...", lbl_no_file: "Aucun fichier",
+        lbl_file_desc: "Propriété Intellectuelle garantie : Votre fichier sera scellé (Woleet).", legal_consent: "J'accepte la", link_privacy: "Politique de Confidentialité Officielle",
+        lbl_wa_optin: "J'accepte de recevoir mon analyse par WhatsApp.", btn_submit: "Lancer l'Analyse IA",
+        
+        footer_rights: "Tous droits réservés.", modal_res_title: "Diagnostic Stratégique", btn_new_analysis: "Nouvelle Analyse", msg_reset_confirm: "Voulez-vous vraiment recommencer ?",
+        
+        // --- GUIDE LEXIQUE ---
+        guide_title: "Lexique Stratégique", guide_sec_title: "1. Secteurs Stratégiques",
+        lex_sec_fintech: "<strong>• FinTech & DeFi :</strong> Finance numérique, paiements et décentralisation.",
+        lex_sec_gov: "<strong>• GovTech & Smart Cities :</strong> Modernisation de l'État et numérisation des services publics.",
+        lex_sec_health: "<strong>• Santé & BioTech :</strong> Innovations médicales et gestion des données de santé.",
+        lex_sec_green: "<strong>• GreenTech & Énergies :</strong> Transition écologique, décarbonation et énergies renouvelables.",
+        lex_sec_agri: "<strong>• AgriTech & Food Sec. :</strong> Sécurité alimentaire et optimisation technologique agricole.",
+        lex_sec_log: "<strong>• Logistique & Supply :</strong> Optimisation de la chaîne logistique et traçabilité globale.",
+        lex_sec_mine: "<strong>• Mines, Pétrole & Gaz :</strong> Extraction intelligente, sécurité et conformité.",
+        lex_sec_btp: "<strong>• Immobilier & PropTech:</strong> Innovation immobilière et gestion de bâtiments intelligents.",
+        lex_sec_retail: "<strong>• E-commerce & Retail :</strong> Retail digital, expérience client et transactions.",
+        lex_sec_edu: "<strong>• Éducation (EdTech) :</strong> Plateformes d'apprentissage et transmission du savoir.",
+        lex_sec_tour: "<strong>• Tourisme & Hôtellerie:</strong> Digitalisation de l'hôtellerie et gestion des flux.",
+        lex_sec_media: "<strong>• Industries Créatives :</strong> Médias, divertissement et propriété intellectuelle.",
+        lex_sec_consulting: "<strong>• Conseil & Services B2B :</strong> Stratégie d'entreprise, transformation digitale et accompagnement des dirigeants.",
+        lex_sec_saas: "<strong>• SaaS & Éditeurs :</strong> Développement de solutions cloud, scalabilité et modèles d'abonnement.",
+        lex_sec_telecom: "<strong>• Télécoms & Infra. :</strong> Connectivité à haut débit, data centers et souveraineté des réseaux.",
+
+        guide_exp_title: "2. Expertises Technologiques",
+        lex_exp_ai: "<strong>• GenAI & Data Science :</strong> Intégration de l'IA pour l'analyse prédictive et l'automatisation.",
+        lex_exp_cyber: "<strong>• Cybersécurité :</strong> Protection des infrastructures critiques et audit de résilience.",
+        lex_exp_esg: "<strong>• Ingénierie ESG :</strong> Stratégie environnementale, sociale et de gouvernance.",
+        lex_exp_web3: "<strong>• Web3 & Blockchain :</strong> Ancrage numérique certifié sur la Blockchain Bitcoin via OpenTimestamps.",
+        lex_exp_mkt: "<strong>• Marketing Digital :</strong> Stratégie d'acquisition, visibilité en ligne et conversion.",
+        lex_exp_proc: "<strong>• Opti. des Processus :</strong> Excellence opérationnelle et réduction des coûts (RPA).",
+        lex_exp_hr: "<strong>• Gestion des Talents :</strong> Recrutement prédictif, rétention et formation 2.0.",
+        lex_exp_design: "<strong>• Design Thinking :</strong> Expérience utilisateur et innovation produit.",
+        lex_exp_gtm: "<strong>• Go-to-Market & Growth:</strong> Stratégie de pénétration de marché, distribution et acquisition client asymétrique.",
+
+        // TARIFS e-META LABS
+        pricing_starter_name: "STARTER", pricing_starter_desc: "Pour tester la puissance analytique d'e-META LABS.", pricing_starter_price: "0 FCFA",
+        pricing_starter_feat1: "✓ 2 Diagnostics foudroyants", pricing_starter_feat2: "✓ Identification du risque majeur", pricing_starter_feat3: "✓ Format texte (Email)", pricing_starter_feat4: "⚠️ Plan d'action stratégique non inclus", pricing_starter_btn: "Tester gratuitement",
+        pricing_pro_badge: "LE PLUS POPULAIRE", pricing_pro_name: "PRO (PACK 3)", pricing_pro_desc: "Un pack de <strong>3 audits stratégiques</strong> complets et sans concession.", pricing_pro_price: "14 900 FCFA", pricing_pro_period: "",
+        pricing_pro_feat1: "✓ <strong>3 Rapports</strong> complets", pricing_pro_feat2: "✓ Diagnostic financier & KPI", pricing_pro_feat3: "✓ Stratégies de disruption", pricing_pro_feat4: "✓ Rapports PDF Premium", pricing_pro_btn: "Acheter le Pack",
+        pricing_expert_name: "EXECUTIVE (MATCHING)", pricing_expert_desc: "L'audit IA de pointe couplé à l'expertise humaine de haut niveau.", pricing_expert_price: "29 000 FCFA", pricing_expert_period: "/ mois",
+        pricing_expert_feat1: "✓ Jusqu'à 10 Audits Premium / mois", pricing_expert_feat2: "✓ Veille Data sectorielle en temps réel", pricing_expert_feat3: "✓ Protocole d'action sur 7 jours", pricing_expert_feat4: "✓ Mise en relation avec Expert Senior", pricing_expert_btn: "Activer le Matching",
+        
+        btn_return_site: "← Retour au Moteur IA",
+        link_mentions: "Mentions Légales", link_cgv: "CGV", link_confidentialite: "Confidentialité", link_remboursement: "Remboursement",
+
+        content_mentions: `<h1>Mentions Légales</h1><h2>1. Éditeur du site</h2><p>Le site <strong>e-metalabs.com</strong> (et e-meta.app) est édité par la société <strong>E-META LABS</strong>.<br><strong>Forme juridique :</strong> SASU au capital social de 500 000 FCFA.<br><strong>Siège social :</strong> Face Débarcadère, Rosso, Sénégal.<br><strong>RCCM :</strong> SN STL 2026 B768<br><strong>NINEA :</strong> 012887553<br><strong>Directeur de la publication :</strong> Abdoulaye Fall<br><strong>Contact :</strong> support@e-metalabs.com</p><h2>2. Hébergement</h2><p>L'infrastructure front-end est hébergée via GitHub Pages et nos serveurs cloud sont gérés par <strong>OVH Groupe SAS</strong>.<br><strong>Siège social OVH :</strong> 2 rue Kellermann, 59100 Roubaix, France.</p><h2>3. Propriété Intellectuelle</h2><p>L'ensemble des éléments figurant sur cette plateforme (textes, algorithmes, architecture, logos) est protégé par les dispositions du Code de la Propriété Intellectuelle. Toute reproduction ou tentative d'ingénierie inverse est strictement interdite sans l'accord écrit de E-META LABS.</p>`,
+        content_cgv: `<h1>Conditions Générales de Vente (CGV)</h1><h2>1. Objet</h2><p>Les présentes CGV régissent la vente des services d'audit stratégique automatisé par Intelligence Artificielle fournis par E-META LABS (SASU, NINEA 012887553, Rosso Sénégal).</p><h2>2. Processus et Livraison</h2><p>Après validation du paiement, le rapport d'audit est généré et expédié exclusivement sous format numérique (PDF). La livraison s'effectue de manière asynchrone via l'application WhatsApp au numéro indiqué par le client, ou par courrier électronique.</p><h2>3. Tarification et Revendeurs (Merchant of Record)</h2><p>Les prix sont indiqués sur le site en FCFA ou devises équivalentes (EUR/USD). Les paiements sont sécurisés par nos partenaires financiers :</p><ul><li><strong>Transactions Internationales (Paddle) :</strong> Notre processus de commande est géré par Paddle.com. Paddle.com Market Ltd est le revendeur légal pour ces commandes.</li><li><strong>Transactions UEMOA (PayTech) :</strong> Les paiements par Mobile Money sont traités et sécurisés par l'infrastructure PayTech au Sénégal.</li></ul><h2>4. Responsabilité Opérationnelle</h2><p>Les diagnostics fournis par E-META LABS sont générés par une IA. Ils constituent un outil d'aide à la décision mais ne peuvent se substituer à une consultation juridique, fiscale ou médicale certifiée. E-META LABS décline toute responsabilité quant aux décisions prises sur la base exclusive de ces rapports.</p>`,
+        content_confidentialite: `<h1>Politique de Confidentialité (RGPD & CDP)</h1><h2>1. Collecte des données stratégiques</h2><p>Le Moteur E-META LABS collecte : le Nom de l'entité, l'Email professionnel, le Numéro WhatsApp, le Profil LinkedIn (Optionnel), le Secteur d'activité, ainsi que les données de contexte et documents fournis volontairement.</p><h2>2. Finalité et Sécurité (Zero-Data Retention)</h2><p>Vos données servent uniquement à calibrer et générer l'audit via notre Moteur IA, puis à vous l'expédier. Nous appliquons une politique stricte de "Zero-Data Retention" au niveau des modèles de langage (LLM) tiers : vos données industrielles ne sont <strong>jamais</strong> utilisées pour entraîner des algorithmes publics. Votre secret professionnel est garanti.</p><h2>3. Partage aux sous-traitants accrédités</h2><p>Pour assurer le service, vos données transitent de manière cryptée (SSL/TLS) via nos partenaires : OpenAI/Google Cloud (Traitement IA), Meta (API WhatsApp Business), et Paddle/PayTech (Facturation). E-META LABS ne revend aucune donnée.</p><h2>4. Exercice de vos Droits</h2><p>Conformément au RGPD européen et à la CDP (Sénégal), vous disposez d'un droit absolu d'accès, de rectification et d'effacement de vos données. Pour l'exercer, contactez notre DPO : <strong>support@e-metalabs.com</strong>.</p>`,
+        content_remboursement: `<h1>Politique de Remboursement et Rétractation</h1><h2>1. Nature du produit numérique</h2><p>Les services proposés par E-META LABS constituent des prestations de génération immédiate de contenus numériques hautement personnalisés (Audits Stratégiques PDF).</p><h2>2. Renoncement au droit de rétractation</h2><p>En cochant la case d'acceptation lors de la commande, <strong>le Client accepte expressément que l'exécution du service (ingestion des données par l'IA) commence immédiatement après le succès du paiement.</strong> Conformément aux lois internationales sur la consommation de biens numériques immatériels, le Client renonce par conséquent à son droit de rétractation de 14 jours dès lors que la génération a démarré et que le rapport a été expédié.</p><h2>3. Conditions exceptionnelles de remboursement</h2><p>E-META LABS accordera un remboursement intégral et immédiat <strong>uniquement</strong> dans les cas suivants :</p><ul><li>Échec technique avéré de notre serveur empêchant la génération ou la livraison finale du rapport.</li><li>Double facturation accidentelle due à une erreur de la passerelle de paiement (PayTech ou Paddle).</li></ul><h2>4. Procédure de réclamation</h2><p>Toute demande technique ou de remboursement doit être adressée dans un délai maximum de 14 jours à notre cellule de support : <strong>support@e-metalabs.com</strong>.</p>`,
+
+        btn_close: "Fermer et retourner au formulaire",
+        proto_main_title: "PROTOCOLE D'APPORT D'AFFAIRES – DESK EXÉCUTIF",
+        proto_date: "Dernière mise à jour : Août 2026",
+        proto_parties: "<strong>ENTRE LES SOUSSIGNÉS :</strong><br><br><strong>E-META LABS</strong>, Société par Actions Simplifiée Unipersonnelle (SASU) au capital social de 500 000 FCFA, dont le siège social est situé à Face Débarcadère, Rosso, Sénégal, immatriculée au Registre du Commerce et du Crédit Mobilier sous le numéro SN STL 2026 B768, NINEA : 012887553, représentée par M. Abdoulaye Fall, en sa qualité de Président,<br>Ci-après dénommée \"L'Apporteur\" ou \"e-META LABS\",<br><br><strong>ET</strong><br><br><strong>L'EXPERT INDÉPENDANT</strong>, s'inscrivant sur le portail Desk Exécutif et acceptant les présentes conditions,<br>Ci-après dénommé \"Le Partenaire\".",
+        proto_t1: "1. Objet du protocole",
+        proto_c1: "Le présent protocole a pour objet de définir les conditions selon lesquelles l'Apporteur s'engage à présenter au Partenaire des clients potentiels (les \"Prospects\") en vue d'un contrat de prestation directement entre le Partenaire et le Prospect. L'Apporteur n'agit qu'en qualité d'intermédiaire.",
+        proto_t2: "2. Indépendance des parties",
+        proto_c2: "Les Parties demeurent des professionnels indépendants. L'accord ne crée aucun lien de subordination ni société en participation. Le Partenaire est seul responsable de l'exécution technique et juridique des missions.",
+        proto_t3: "3. Rémunération et Commission",
+        proto_c3: "<strong>Assiette :</strong> Calculée sur le montant total HT facturé et encaissé par le Partenaire.<br><strong>Taux :</strong> 15 % HT du montant de la prestation.<br><strong>Étendue :</strong> S'applique sur le contrat initial et tout avenant pendant 24 mois.",
+        proto_t4: "4. Transparence et modalités",
+        proto_c4: "<strong>Notification :</strong> Le Partenaire doit informer l'Apporteur sous 72h de la signature d'un devis et dès l'encaissement des fonds.<br><strong>Facturation :</strong> L'Apporteur émettra sa facture de commission payable sous 15 jours.",
+        proto_t5: "5. Clause de non-contournement",
+        proto_c5: "Le Partenaire s'interdit de contracter directement ou indirectement avec un Prospect sans verser la commission à e-META LABS. En cas de violation, une pénalité forfaitaire de 5 000 Euros ou trois fois la commission dissimulée s'appliquera.",
+        proto_t6: "6. Confidentialité",
+        proto_c6: "Les données des Prospects transmises par e-META LABS sont strictement confidentielles et ne peuvent être divulguées à des tiers.",
+        proto_t7: "7. Durée et Résiliation",
+        proto_c7: "Conclu pour une durée indéterminée, résiliable avec 30 jours de préavis. La résiliation ne remet pas en cause le droit à commission pour les affaires déjà initiées.",
+        proto_t8: "8. Juridiction Compétente",
+        proto_c8: "Soumis au droit sénégalais. Tout litige sera de la compétence exclusive du Tribunal de Commerce de Dakar.",
+
+        // --- DESK EXECUTIF (FORMULAIRE) ---
+        exp_btn_return: "← Retour au Moteur IA",
+        exp_title: "Desk Exécutif",
+        exp_subtitle: "Portail d'intégration pour les partenaires et experts e-META LABS.<br>Complétez votre profil pour recevoir des leads qualifiés.",
+        exp_lbl_name: "Nom et Prénom", exp_ph_name: "Ex: Dallah FALL",
+        exp_lbl_email: "Adresse E-mail Professionnelle", exp_ph_email: "contact@votre-entreprise.com",
+        exp_lbl_wa: "Numéro WhatsApp (avec indicatif)", exp_ph_wa: "Ex: +221 77 000 00 00",
+        exp_lbl_domain: "Domaine d'Expertise Principal", exp_opt_def: "Sélectionnez une spécialité...",
+        exp_lbl_consent: "J'accepte le", exp_lbl_collab: "et les conditions de collaboration e-META LABS.",
+        exp_btn_submit: "Soumettre ma candidature",
+        link_protocol: "Protocole d'Apport d'Affaires",
+        exp_lbl_exp: "Années d'Expérience *",
+        exp_ph_exp: "Ex: 5",
+        exp_lbl_linkedin: "Lien Profil LinkedIn *",
+        exp_ph_linkedin: "https://linkedin.com/in/votre-profil",
+        exp_lbl_bio: "Courte Biographie (Missions, réalisations) *",
+        exp_ph_bio: "Décrivez votre parcours et vos réussites majeures..."
+    },
+    en: {
+        // --- VISION SUBLIME & UI ---
+        hero_label: "MASTER DIAGNOSTIC 2026", 
+        hero_slogan_1: "AI Agent Diagnosis", 
+        hero_slogan_2: "& Human Expert Execution",
+        subtitle: "From algorithmic analysis to on-the-ground action.", 
+        btn_reset: "↻ Reset", lbl_counter: "Secured & Anchored Diagnostics",
+        slogan_sniper: "The absolute alliance of Data and Fieldwork. e-META AI identifies your gaps, our executive experts deploy the solutions.",
+        step1_title: "01. Identification", lbl_company: "Company / Entity", ph_company: "e.g., Alpha Group...",
+        lbl_email: "Corporate Email", lbl_phone: "WhatsApp Number", 
+        lbl_linkedin: "LinkedIn Profile (Optional)", ph_linkedin: "https://linkedin.com/in/your-name",
+        btn_next: "Next",
+        
+        step2_title: "02. Strategic Matrix", lbl_sector: "Strategic Sector",
+        
+        btn_guide: "📖 Expertise Guide",
+        lienGuide: "Expertise Guide",
+        titreGuide: "Expertise Guide",
+        descGuide: "Content of your guide here...",
+
+        agnostic_title: "AGNOSTIC INTELLIGENCE 🧠",
+        agnostic_desc: "From financial engineering to the most complex international disputes, our polymorphic engine adapts to your industry. Select <strong>AI Auto-Detection</strong> if your challenge transcends traditional boundaries.",
+        sec_fintech: "FinTech & DeFi", sec_agri: "AgriTech & Food Security", sec_green: "GreenTech & Energy",
+        sec_gov: "GovTech & Smart Cities", sec_health: "Healthcare & BioTech", sec_log: "Logistics & Supply Chain",
+        sec_mine: "Mining, Oil & Gas", sec_btp: "Real Estate & PropTech", sec_retail: "E-commerce & Retail",
+        sec_edu: "Education & EdTech", sec_tour: "Tourism & Hospitality", sec_media: "Creative Industries & Media",
+        sec_consulting: "Consulting & B2B Services", sec_saas: "SaaS & Software Providers", sec_telecom: "Telecom & Infrastructure",
+        sec_other: "Other / Custom", lbl_custom_sector: "Specify your industry:", ph_custom_sector: "Ex: Professional Sports, Aerospace...",
+        lbl_geo: "Area of Operation", opt_geo_def: "Select your exact country...",
+        
+        c_za: "South Africa", c_dz: "Algeria", c_de: "Germany", c_sa: "Saudi Arabia", c_ar: "Argentina", 
+        c_au: "Australia", c_be: "Belgium", c_bj: "Benin", c_br: "Brazil", c_bf: "Burkina Faso", c_bi: "Burundi", 
+        c_cm: "Cameroon", c_ca: "Canada", c_cv: "Cape Verde", c_cf: "Central African Republic", c_cl: "Chile", c_cn: "China", 
+        c_co: "Colombia", c_cg: "Congo", c_cd: "DR Congo", c_kr: "South Korea", c_ci: "Ivory Coast", c_dj: "Djibouti", 
+        c_eg: "Egypt", c_ae: "United Arab Emirates", c_es: "Spain", c_us: "United States", c_et: "Ethiopia", 
+        c_fr: "France", c_ga: "Gabon", c_gn: "Guinea", c_gq: "Equatorial Guinea", c_in: "India", c_it: "Italy", 
+        c_jp: "Japan", c_ke: "Kenya", c_mg: "Madagascar", c_ml: "Mali", c_ma: "Morocco", c_mu: "Mauritius", 
+        c_mr: "Mauritania", c_mx: "Mexico", c_ne: "Niger", c_ng: "Nigeria", c_ug: "Uganda", c_uk: "United Kingdom", 
+        c_rw: "Rwanda", c_sn: "Senegal", c_ch: "Switzerland", c_td: "Chad", c_tg: "Togo", c_tn: "Tunisia", c_other: "Other country...",
+
+        lbl_expertise: "Required Expertise",
+        exp_ai: "GenAI & Data Science", exp_cyber: "Cybersecurity & Resilience", exp_esg: "ESG Engineering & Climate",
+        exp_web3: "Web3 & Blockchain (Bitcoin OTS)", exp_mkt: "Digital Marketing & SEO", exp_proc: "Process Optimization",
+        exp_hr: "Talent Management (HR)", exp_design: "Design Thinking & UX", exp_gtm: "Go-to-Market & Growth Strategy", exp_auto: "AI Auto-Detection",
+        
+        btn_prev: "Back", btn_next_matrice: "Open Matrix",
+        
+        step3_title: "03. Analysis Matrix", 
+        elite_hook: "\"Beyond algorithms, resolving the unsolvable.\"",
+        lbl_context: "Operational Context", ph_context: "Describe your current situation, 1-3 year goals, and major challenges...",
+        lbl_file_upload: "📄 Attach Document (Optional)", btn_browse: "Browse...", lbl_no_file: "No file selected",
+        lbl_file_desc: "IP Guaranteed: File protected by Blockchain anchoring.", legal_consent: "I accept the", link_privacy: "Official Privacy Policy",
+        lbl_wa_optin: "I agree to receive my analysis via WhatsApp.", btn_submit: "Launch AI Analysis", footer_rights: "All Rights Reserved.",
+        modal_res_title: "Strategic Diagnostic", btn_new_analysis: "New Analysis", msg_reset_confirm: "Restart the form?",
+        
+        guide_title: "Strategic Glossary", guide_sec_title: "1. Strategic Sectors",
+        lex_sec_fintech: "<strong>• FinTech & DeFi:</strong> Digital finance, payments, and decentralization.",
+        lex_sec_gov: "<strong>• GovTech & Smart Cities:</strong> State modernization and public service digitization.",
+        lex_sec_health: "<strong>• Health & BioTech:</strong> Medical innovations and health data management.",
+        lex_sec_green: "<strong>• GreenTech & Energy:</strong> Ecological transition, decarbonization, and renewable energy.",
+        lex_sec_agri: "<strong>• AgriTech & Food Sec.:</strong> Food security and agricultural technological optimization.",
+        lex_sec_log: "<strong>• Logistics & Supply:</strong> Supply chain optimization and global traceability.",
+        lex_sec_mine: "<strong>• Mining, Oil & Gas:</strong> Smart extraction, safety, and compliance.",
+        lex_sec_btp: "<strong>• PropTech:</strong> Real estate innovation and smart building management.",
+        lex_sec_retail: "<strong>• E-commerce & Retail:</strong> Digital retail, customer experience, and transactions.",
+        lex_sec_edu: "<strong>• Education (EdTech):</strong> Learning platforms and knowledge transfer.",
+        lex_sec_tour: "<strong>• Tourism & Hospitality:</strong> Hospitality digitization and flow management.",
+        lex_sec_media: "<strong>• Creative Industries:</strong> Media, entertainment, and intellectual property.",
+        lex_sec_consulting: "<strong>• Consulting & B2B:</strong> Corporate strategy, digital transformation, and executive advisory.",
+        lex_sec_saas: "<strong>• SaaS & Software:</strong> Cloud solutions development, scalability, and subscription models.",
+        lex_sec_telecom: "<strong>• Telecom & Infra.:</strong> High-speed connectivity, data centers, and network sovereignty.",
+
+        guide_exp_title: "2. Technological Expertise",
+        lex_exp_ai: "<strong>• GenAI & Data:</strong> AI integration for predictive analysis and automation.",
+        lex_exp_cyber: "<strong>• Cybersecurity:</strong> Protection of critical infrastructure and resilience audits.",
+        lex_exp_esg: "<strong>• ESG Engineering:</strong> Environmental, Social, and Governance strategy.",
+        lex_exp_web3: "<strong>• Web3 & Blockchain :</strong> Certified digital anchoring on the Bitcoin Blockchain.",
+        lex_exp_mkt: "<strong>• Digital Marketing:</strong> Acquisition strategy, SEO, and online visibility.",
+        lex_exp_proc: "<strong>• Process Opti.:</strong> Operational excellence and cost reduction.",
+        lex_exp_hr: "<strong>• Talent Mgt (HR):</strong> Recruitment, retention, and 2.0 training.",
+        lex_exp_design: "<strong>• Design Thinking:</strong> User experience (UX) and product innovation.",
+        lex_exp_gtm: "<strong>• Go-to-Market & Growth:</strong> Market penetration strategy, distribution, and asymmetric client acquisition.",
+
+        pricing_starter_name: "STARTER", pricing_starter_desc: "To test the analytical power of e-META LABS.", pricing_starter_price: "$0",
+        pricing_starter_feat1: "✓ 2 Lightning-fast diagnostics", pricing_starter_feat2: "✓ Major risk identification", pricing_starter_feat3: "✓ Text format (Email)", pricing_starter_feat4: "⚠️ Strategic action plan not included", pricing_starter_btn: "Test for free",
+        pricing_pro_badge: "MOST POPULAR", pricing_pro_name: "PRO (PACK 3)", pricing_pro_desc: "A pack of <strong>3 comprehensive</strong> and uncompromising strategic audits.", pricing_pro_price: "$25", pricing_pro_period: "",
+        pricing_pro_feat1: "✓ <strong>3 Complete Reports</strong>", pricing_pro_feat2: "✓ Financial diagnosis & KPIs", pricing_pro_feat3: "✓ Disruption strategy (Pivot)", pricing_pro_feat4: "✓ Premium PDF Reports", pricing_pro_btn: "Buy the Pack",
+        pricing_expert_name: "EXECUTIVE (MATCHING)", pricing_expert_desc: "Cutting-edge AI audit combined with high-level human expertise.", pricing_expert_price: "$49", pricing_expert_period: "/ month",
+        pricing_expert_feat1: "✓ Up to 10 Premium Audits / month", pricing_expert_feat2: "✓ Real-time sectoral Data tracking", pricing_expert_feat3: "✓ 7-day action protocol", pricing_expert_feat4: "✓ Senior Expert Matchmaking", pricing_expert_btn: "Activate Matching",
+
+        btn_return_site: "← Return to AI Engine",
+        link_mentions: "Legal Notice", link_cgv: "T&C", link_confidentialite: "Privacy Policy", link_remboursement: "Refund Policy",
+
+        content_mentions: `<h1>Legal Notice</h1><h2>1. Site Publisher</h2><p>The site <strong>e-metalabs.com</strong> (and e-meta.app) is published by <strong>E-META LABS</strong>.<br><strong>Legal form:</strong> SASU with a share capital of 500,000 FCFA.<br><strong>Head office:</strong> Face Débarcadère, Rosso, Senegal.<br><strong>RCCM:</strong> SN STL 2026 B768<br><strong>NINEA:</strong> 012887553<br><strong>Director of Publication:</strong> Abdoulaye Fall<br><strong>Contact:</strong> support@e-metalabs.com</p><h2>2. Hosting</h2><p>The front-end infrastructure is hosted via GitHub Pages and our cloud servers are managed by <strong>OVH Groupe SAS</strong>.<br><strong>OVH Head Office:</strong> 2 rue Kellermann, 59100 Roubaix, France.</p><h2>3. Intellectual Property</h2><p>All elements on this platform (texts, algorithms, architecture, logos) are protected by Intellectual Property laws. Any reproduction or reverse engineering attempt is strictly prohibited without the written consent of E-META LABS.</p>`,
+        content_cgv: `<h1>Terms and Conditions of Sale (T&C)</h1><h2>1. Purpose</h2><p>These T&Cs govern the sale of automated strategic audit services powered by Artificial Intelligence provided by E-META LABS (SASU, NINEA 012887553, Rosso Senegal).</p><h2>2. Process and Delivery</h2><p>Upon payment validation, the audit report is generated and delivered exclusively in digital format (PDF). Delivery is performed asynchronously via the WhatsApp application to the number provided by the client, or via email.</p><h2>3. Pricing and Merchant of Record</h2><p>Prices are listed in FCFA or equivalent currencies (EUR/USD). Payments are secured by our financial partners:</p><ul><li><strong>International Transactions (Paddle):</strong> Our order process is conducted by our online reseller Paddle.com. Paddle.com Market Ltd is the Merchant of Record for all our orders.</li><li><strong>UEMOA Transactions (PayTech):</strong> Mobile Money payments are processed and secured end-to-end by the PayTech infrastructure in Senegal.</li></ul><h2>4. Operational Liability</h2><p>The diagnostics provided by E-META LABS are generated by AI. They constitute a highly valuable strategic decision-making tool, but cannot substitute for certified legal, tax, or medical consultation. E-META LABS declines any responsibility for decisions made solely based on these reports.</p>`,
+        content_confidentialite: `<h1>Privacy Policy (GDPR compliant)</h1><h2>1. Strategic Data Collection</h2><p>E-META LABS collects: Entity Name, Corporate Email, WhatsApp Number, LinkedIn Profile (Optional), Industry Sector, as well as context data and strategic documents voluntarily provided by the user.</p><h2>2. Purpose and Security (Zero-Data Retention)</h2><p>Your data is used solely to calibrate and generate the audit via our AI Engine, and to deliver it to you. We apply a strict "Zero-Data Retention" policy regarding third-party Large Language Models (LLMs): your industrial data is <strong>never</strong> used to train public algorithms. Your trade secrets are guaranteed.</p><h2>3. Sharing with Accredited Processors</h2><p>To provide the service, your data transits securely (SSL/TLS encrypted) via our partner infrastructures: OpenAI/Google Cloud (AI Processing), Meta (WhatsApp Business API), and Paddle/PayTech (Billing security). E-META LABS does not sell any data to third-party brokers.</p><h2>4. Exercising Your Rights</h2><p>In accordance with the European GDPR and applicable local laws, you have an absolute right to access, rectify, and erase your data. To exercise this right, contact our Data Protection Officer (DPO): <strong>support@e-metalabs.com</strong>.</p>`,
+        content_remboursement: `<h1>Refund and Cancellation Policy</h1><h2>1. Nature of the Digital Product</h2><p>The services offered by E-META LABS constitute the immediate generation of highly personalized digital content (Strategic PDF Audits).</p><h2>2. Waiver of the Right of Withdrawal</h2><p>By checking the acceptance box during the order process, <strong>the Client expressly agrees that the execution of the service (data ingestion by the AI) begins immediately after successful payment.</strong> In accordance with international consumer laws regarding intangible digital goods, the Client therefore waives their 14-day right of withdrawal once the generation process has started and the report has been dispatched.</p><h2>3. Exceptional Refund Conditions</h2><p>E-META LABS (and its Merchant of Record Paddle for international transactions) will grant a full and immediate refund <strong>only</strong> in the following cases:</p><ul><li>Proven technical failure of our server preventing the final generation or delivery of the PDF report.</li><li>Accidental double billing due to an error by the payment gateway (PayTech or Paddle).</li></ul><h2>4. Claim Procedure</h2><p>Any request for technical assistance or refund related to an operational incident must be sent within a maximum of 14 days after the transaction to our support team: <strong>support@e-metalabs.com</strong>.</p>`,
+
+        btn_close: "Close and return to the form",
+        proto_main_title: "BUSINESS REFERRAL AGREEMENT – EXECUTIVE DESK",
+        proto_date: "Last updated: August 2026",
+        proto_parties: "<strong>BETWEEN THE UNDERSIGNED:</strong><br><br><strong>E-META LABS</strong>, a Simplified Joint Stock Company (SASU) with a capital of 500,000 FCFA, headquartered at Face Débarcadère, Rosso, Senegal, registered with the RCCM under number SN STL 2026 B768, NINEA: 012887553, represented by Mr. Abdoulaye Fall, as President,<br>Hereinafter referred to as the \"Referrer\" or \"e-META LABS\",<br><br><strong>AND</strong><br><br><strong>THE INDEPENDENT EXPERT</strong>, registering on the Executive Desk portal and accepting these conditions,<br>Hereinafter referred to as the \"Partner\".",
+        proto_t1: "1. Purpose of the agreement",
+        proto_c1: "This agreement defines the conditions under which the Referrer introduces potential clients (\"Prospects\") to the Partner for a service contract directly between the Partner and the Prospect. The Referrer acts solely as an intermediary.",
+        proto_t2: "2. Independence of the parties",
+        proto_c2: "The Parties remain independent professionals. The agreement creates no relationship of subordination or joint venture. The Partner is solely responsible for the technical and legal execution of the missions.",
+        proto_t3: "3. Remuneration and Commission",
+        proto_c3: "<strong>Basis:</strong> Calculated on the total amount excl. tax invoiced and collected by the Partner.<br><strong>Rate:</strong> 15% excl. tax of the service amount.<br><strong>Scope:</strong> Applies to the initial contract and any amendments for 24 months.",
+        proto_t4: "4. Transparency and payment",
+        proto_c4: "<strong>Notification:</strong> The Partner must inform the Referrer within 72h of signing a quote and upon receipt of funds.<br><strong>Invoicing:</strong> The Referrer will issue its commission invoice payable within 15 days.",
+        proto_t5: "5. Non-circumvention clause",
+        proto_c5: "The Partner is forbidden to contract directly or indirectly with a Prospect without paying the commission to e-META LABS. In case of violation, a penalty of 5,000 Euros or three times the concealed commission will apply.",
+        proto_t6: "6. Confidentiality",
+        proto_c6: "Prospect data transmitted by e-META LABS is strictly confidential and may not be disclosed to third parties.",
+        proto_t7: "7. Term and Termination",
+        proto_c7: "Concluded for an indefinite period, terminable with 30 days' notice. Termination does not affect the right to commission for business already initiated.",
+        proto_t8: "8. Governing Law",
+        proto_c8: "Subject to Senegalese law. Any dispute shall fall under the exclusive jurisdiction of the Commercial Court of Dakar.",
+
+        // --- DESK EXECUTIF (FORMULAIRE) ---
+        exp_btn_return: "← Return to AI Engine",
+        exp_title: "Executive Desk",
+        exp_subtitle: "Onboarding portal for e-META LABS partners and experts.<br>Complete your profile to receive qualified leads.",
+        exp_lbl_name: "Full Name", exp_ph_name: "Ex: Dallah FALL",
+        exp_lbl_email: "Corporate Email Address", exp_ph_email: "contact@your-company.com",
+        exp_lbl_wa: "WhatsApp Number (with country code)", exp_ph_wa: "Ex: +1 234 567 8900",
+        exp_lbl_domain: "Main Area of Expertise", exp_opt_def: "Select a specialty...",
+        exp_lbl_consent: "I accept the", exp_lbl_collab: "and the e-META LABS collaboration terms.",
+        exp_btn_submit: "Submit my application",
+        link_protocol: "Business Referral Agreement",
+        exp_lbl_exp: "Years of Experience *",
+        exp_ph_exp: "E.g.: 5",
+        exp_lbl_linkedin: "LinkedIn Profile Link *",
+        exp_ph_linkedin: "https://linkedin.com/in/your-profile",
+        exp_lbl_bio: "Short Biography (Missions, achievements) *",
+        exp_ph_bio: "Describe your background and major achievements..."
+    },
+    es: {
+        // --- VISION SUBLIME & UI ---
+        hero_label: "DIAGNÓSTICO MAESTRO 2026", 
+        hero_slogan_1: "El Diagnóstico del Agente IA", 
+        hero_slogan_2: "& La Ejecución del Experto Humano",
+        subtitle: "Del análisis algorítmico a la acción en el terreno.", 
+        btn_reset: "↻ Reiniciar", lbl_counter: "Diagnósticos Asegurados",
+        slogan_sniper: "La alianza absoluta de los Datos y el Terreno. La IA e-META identifica sus brechas, nuestros expertos ejecutivos despliegan las soluciones.",
+        step1_title: "01. Identificación", lbl_company: "Empresa / Entidad", ph_company: "ej. Grupo Alfa...",
+        lbl_email: "Correo Profesional", lbl_phone: "Número WhatsApp", 
+        lbl_linkedin: "Perfil de LinkedIn (Opcional)", ph_linkedin: "https://linkedin.com/in/tu-nombre",
+        btn_next: "Siguiente",
+        
+        step2_title: "02. Matriz Estratégica", lbl_sector: "Sector Estratégico",
+
+        btn_guide: "📖 Guía de Especialidades",
+        lienGuide: "Guía de Especialidades",
+        titreGuide: "Guía de Especialidades",
+        descGuide: "Contenido de su guía aquí...",
+        
+        agnostic_title: "INTELIGENCIA AGNÓSTICA 🧠",
+        agnostic_desc: "Desde la ingeniería financiera hasta los litigios internacionales más complejos, nuestro motor polimorfo se adapta a su industria. Seleccione <strong>Auto-Detección por IA</strong> si su desafío supera los marcos tradicionales.",
+        sec_fintech: "FinTech y DeFi", sec_agri: "AgriTech y Seguridad Alimentaria", sec_green: "GreenTech y Energía",
+        sec_gov: "GovTech y Smart Cities", sec_health: "Salud y BioTech", sec_log: "Logística y Cadena",
+        sec_mine: "Minería, Petróleo y Gas", sec_btp: "Bienes Raíces y PropTech", sec_retail: "E-commerce y Retail",
+        sec_edu: "Educación y EdTech", sec_tour: "Turismo y Hostelería", sec_media: "Industrias Creativas",
+        sec_consulting: "Consultoría y B2B", sec_saas: "SaaS y Software", sec_telecom: "Telecomunicaciones",
+        sec_other: "Otro / A medida", lbl_custom_sector: "Especifique su industria:", ph_custom_sector: "Ej: Deporte Profesional, Aeroespacial...",
+        lbl_geo: "Zona de Intervención", opt_geo_def: "Seleccione su país exacto...",
+        
+        c_za: "Sudáfrica", c_dz: "Argelia", c_de: "Alemania", c_sa: "Arabia Saudita", c_ar: "Argentina", 
+        c_au: "Australia", c_be: "Bélgica", c_bj: "Benín", c_br: "Brasil", c_bf: "Burkina Faso", c_bi: "Burundi", 
+        c_cm: "Camerún", c_ca: "Canadá", c_cv: "Cabo Verde", c_cf: "República Centroafricana", c_cl: "Chile", c_cn: "China", 
+        c_co: "Colombia", c_cg: "Congo", c_cd: "RD Congo", c_kr: "Corea del Sur", c_ci: "Costa de Marfil", c_dj: "Yibuti", 
+        c_eg: "Egipto", c_ae: "Emiratos Árabes Unidos", c_es: "España", c_us: "Estados Unidos", c_et: "Etiopía", 
+        c_fr: "Francia", c_ga: "Gabón", c_gn: "Guinea", c_gq: "Guinea Ecuatorial", c_in: "India", c_it: "Italia", 
+        c_jp: "Japón", c_ke: "Kenia", c_mg: "Madagascar", c_ml: "Malí", c_ma: "Marruecos", c_mu: "Mauricio", 
+        c_mr: "Mauritania", c_mx: "México", c_ne: "Níger", c_ng: "Nigeria", c_ug: "Uganda", c_uk: "Reino Unido", 
+        c_rw: "Ruanda", c_sn: "Senegal", c_ch: "Suiza", c_td: "Chad", c_tg: "Togo", c_tn: "Túnez", c_other: "Otro país...",
+
+        lbl_expertise: "Experiencia Requerida",
+        exp_ai: "GenAI y Data Science", exp_cyber: "Ciberseguridad y Resiliencia", exp_esg: "Ingeniería ESG y Clima",
+        exp_web3: "Web3 y Blockchain (Bitcoin OTS)", exp_mkt: "Marketing Digital y SEO", exp_proc: "Optimización de Procesos",
+        exp_hr: "Gestión de Talento (RRHH)", exp_design: "Design Thinking y UX", exp_gtm: "Go-to-Market y Crecimiento", exp_auto: "Auto-Detección por IA",
+        
+        btn_prev: "Volver", btn_next_matrice: "Abrir Matriz",
+        btn_close: "CERRAR",
+        
+        step3_title: "03. Matriz de Análisis", 
+        elite_hook: "\"Más allá de los algoritmos, la resolución de lo irresoluble.\"",
+        lbl_context: "Contexto Operativo", ph_context: "Describa su situación actual, objetivos a 1-3 años y desafíos principales...",
+        lbl_file_upload: "📄 Adjuntar Documento (Opcional)", btn_browse: "Explorar...", lbl_no_file: "Ningún archivo",
+        lbl_file_desc: "Propiedad Intelectual garantizada: Archivo protegido por anclaje Blockchain.", legal_consent: "Acepto la", link_privacy: "Política de Privacidad Oficial",
+        lbl_wa_optin: "Acepto recibir mi análisis a través de WhatsApp.", btn_submit: "Lanzar Análisis IA", footer_rights: "Todos los derechos reservados.",
+        modal_res_title: "Diagnóstico Estratégico", btn_new_analysis: "Nuevo Análisis", msg_reset_confirm: "¿Deseas reiniciar?",
+        
+        guide_title: "Glosario Estratégico", guide_sec_title: "1. Sectores Estratégicos",
+        lex_sec_fintech: "<strong>• FinTech y DeFi:</strong> Finanzas digitales, pagos y descentralización.",
+        lex_sec_gov: "<strong>• GovTech y Smart Cities:</strong> Modernización del Estado y digitalización de servicios públicos.",
+        lex_sec_health: "<strong>• Salud y BioTech:</strong> Innovaciones médicas y gestión de datos de salud.",
+        lex_sec_green: "<strong>• GreenTech y Energía:</strong> Transición ecológica, descarbonización y energías renovables.",
+        lex_sec_agri: "<strong>• AgriTech y Alimentación:</strong> Seguridad alimentaria y optimización tecnológica agrícola.",
+        lex_sec_log: "<strong>• Logística y Cadena:</strong> Optimización de la cadena de suministro y trazabilidad.",
+        lex_sec_mine: "<strong>• Minería y Gas:</strong> Extracción inteligente, seguridad y cumplimiento.",
+        lex_sec_btp: "<strong>• PropTech:</strong> Innovación inmobiliaria y gestión de edificios inteligentes.",
+        lex_sec_retail: "<strong>• E-commerce y Retail:</strong> Retail digital, experiencia del cliente y transacciones.",
+        lex_sec_edu: "<strong>• Educación (EdTech):</strong> Plataformas de aprendizaje y transferencia de conocimiento.",
+        lex_sec_tour: "<strong>• Turismo y Hostelería:</strong> Digitalización de la hostelería y gestión de flujos.",
+        lex_sec_media: "<strong>• Industrias Creativas:</strong> Medios, entretenimiento y propiedad intelectual.",
+        lex_sec_consulting: "<strong>• Consultoría y B2B:</strong> Estrategia corporativa, transformación digital y asesoramiento ejecutivo.",
+        lex_sec_saas: "<strong>• SaaS y Software:</strong> Desarrollo de soluciones en la nube, escalabilidad y modelos de suscripción.",
+        lex_sec_telecom: "<strong>• Telecom e Infra.:</strong> Conectividad de alta velocidad, centros de datos y soberanía de redes.",
+
+        guide_exp_title: "2. Experiencia Tecnológica",
+        lex_exp_ai: "<strong>• GenAI & Data:</strong> Integración de IA para análisis predictivo y automatización.",
+        lex_exp_cyber: "<strong>• Ciberseguridad:</strong> Protección de infraestructuras críticas y auditorías de resiliencia.",
+        lex_exp_esg: "<strong>• Ingeniería ESG:</strong> Estrategia Ambiental, Social y de Gobernanza.",
+        lex_exp_web3: "<strong>• Web3 & Blockchain :</strong> Anclaje digital certificado en la Blockchain de Bitcoin.",
+        lex_exp_mkt: "<strong>• Marketing Digital:</strong> Estrategia de adquisición, SEO y visibilidad en línea.",
+        lex_exp_proc: "<strong>• Optimización de Proc.:</strong> Excelencia operativa y reducción de costos.",
+        lex_exp_hr: "<strong>• Gestión de Talento:</strong> Reclutamiento, retención y formación 2.0.",
+        lex_exp_design: "<strong>• Design Thinking:</strong> Experiencia de usuario (UX) e innovación de productos.",
+        lex_exp_gtm: "<strong>• Go-to-Market y Crecimiento:</strong> Estrategia de penetración de mercado y adquisición asimétrica.",
+
+        pricing_starter_name: "STARTER", pricing_starter_desc: "Para probar el poder analítico de e-META LABS.", pricing_starter_price: "$0",
+        pricing_starter_feat1: "✓ 2 Diagnósticos fulminantes", pricing_starter_feat2: "✓ Identificación de riesgo principal", pricing_starter_feat3: "✓ Formato texto (Email)", pricing_starter_feat4: "⚠️ Plan de acción estratégico no incluido", pricing_starter_btn: "Probar gratis",
+        pricing_pro_badge: "MÁS POPULAR", pricing_pro_name: "PRO (PACK 3)", pricing_pro_desc: "Un paquete de <strong>3 auditorías estratégicas</strong> completas y sin concesiones.", pricing_pro_price: "$25", pricing_pro_period: "",
+        pricing_pro_feat1: "✓ <strong>3 Informes completos</strong>", pricing_pro_feat2: "✓ Diagnóstico financiero y KPIs", pricing_pro_feat3: "✓ Estrategia de disrupción (Pivotar)", pricing_pro_feat4: "✓ Informes PDF Premium", pricing_pro_btn: "Comprar el Paquete",
+        pricing_expert_name: "EXECUTIVE (MATCHING)", pricing_expert_desc: "Auditoría de IA de vanguardia combinada con experiencia humana de alto nivel.", pricing_expert_price: "$49", pricing_expert_period: "/ mes",
+        pricing_expert_feat1: "✓ Hasta 10 Auditorías Premium / mes", pricing_expert_feat2: "✓ Vigilancia de datos sectoriales en tiempo real", pricing_expert_feat3: "✓ Protocolo de acción de 7 días", pricing_expert_feat4: "✓ Conexión con Expertos Senior", pricing_expert_btn: "Activar Matching",
+
+        btn_return_site: "← Volver al Motor IA",
+        link_mentions: "Aviso Legal", link_cgv: "CGV", link_confidentialite: "Privacidad", link_remboursement: "Reembolso",
+
+        content_mentions: `<h1>Aviso Legal</h1><h2>1. Editor del sitio</h2><p>El sitio <strong>e-metalabs.com</strong> (y e-meta.app) es editado por la empresa <strong>E-META LABS</strong>.<br><strong>Forma legal:</strong> SASU con un capital social de 500,000 FCFA.<br><strong>Sede social:</strong> Face Débarcadère, Rosso, Senegal.<br><strong>RCCM:</strong> SN STL 2026 B768<br><strong>NINEA:</strong> 012887553<br><strong>Director de Publicación:</strong> Abdoulaye Fall<br><strong>Contacto:</strong> support@e-metalabs.com</p><h2>2. Alojamiento</h2><p>La infraestructura front-end está alojada a través de GitHub Pages y nuestros servidores en la nube son gestionados por <strong>OVH Groupe SAS</strong>.<br><strong>Sede de OVH:</strong> 2 rue Kellermann, 59100 Roubaix, Francia.</p><h2>3. Propiedad Intelectual</h2><p>Todos los elementos de esta plataforma (textos, algoritmos, arquitectura, logotipos) están protegidos por las leyes de Propiedad Intelectual. Queda estrictamente prohibida cualquier reproducción o intento de ingeniería inversa sin el consentimiento escrito de E-META LABS.</p>`,
+        content_cgv: `<h1>Términos y Condiciones de Venta (CGV)</h1><h2>1. Objeto</h2><p>Estos T&C rigen la venta de servicios de auditoría estratégica automatizada impulsada por Inteligencia Artificial proporcionados por E-META LABS (SASU, NINEA 012887553, Rosso Senegal).</p><h2>2. Proceso y Entrega</h2><p>Tras la validación del pago, el informe de auditoría se genera y entrega exclusivamente en formato digital (PDF). La entrega se realiza de forma asincrónica a través de la aplicación WhatsApp al número proporcionado por el cliente, o por correo electrónico.</p><h2>3. Precios y Comerciante Registrado (Merchant of Record)</h2><p>Los precios se indican en FCFA o monedas equivalentes (EUR/USD). Los pagos están asegurados por nuestros socios financieros:</p><ul><li><strong>Transacciones Internacionales (Paddle):</strong> Nuestro proceso de pedido es gestionado por Paddle.com. Paddle.com Market Ltd es el Comerciante Registrado (Merchant of Record) para estos pedidos.</li><li><strong>Transacciones UEMOA (PayTech):</strong> Los pagos de Mobile Money son procesados y asegurados de extremo a extremo por la infraestructura de PayTech en Senegal.</li></ul><h2>4. Responsabilidad Operativa</h2><p>Los diagnósticos proporcionados por E-META LABS son generados por IA. Constituyen una herramienta de apoyo a la toma de decisiones estratégicas, pero no pueden sustituir a una consulta legal, fiscal o médica certificada. E-META LABS declina toda responsabilidad por las decisiones tomadas basándose exclusivamente en estos informes.</p>`,
+        content_confidentialite: `<h1>Política de Privacidad (Cumple con el RGPD)</h1><h2>1. Recopilación de Datos Estratégicos</h2><p>El Motor E-META LABS recopila: Nombre de la Entidad, Correo Profesional, Número de WhatsApp, Perfil de LinkedIn (Opcional), Sector de la Industria, así como datos de contexto y documentos estratégicos proporcionados voluntariamente por el usuario.</p><h2>2. Propósito y Seguridad (Zero-Data Retention)</h2><p>Sus datos se utilizan únicamente para calibrar y generar la auditoría a través de nuestro Motor de IA, y luego enviársela. Aplicamos una política estricta de "Retención de Datos Cero" a nivel de los Modelos de Lenguaje (LLM) de terceros: sus datos industriales <strong>nunca</strong> se utilizan para entrenar algoritmos públicos. Su secreto profesional está garantizado.</p><h2>3. Intercambio con Subcontratistas Acreditados</h2><p>Para garantizar el servicio, sus datos transitan de forma cifrada (SSL/TLS) a través de nuestras infraestructuras asociadas: OpenAI/Google Cloud (Procesamiento de IA), Meta (API de WhatsApp Business) y Paddle/PayTech (Seguridad de facturación). E-META LABS no vende ningún dato a terceros.</p><h2>4. Ejercicio de sus Derechos</h2><p>De acuerdo con el RGPD europeo y las leyes locales aplicables, usted tiene un derecho absoluto a acceder, rectificar y borrar sus datos. Para ejercerlo, póngase en contacto con nuestro Delegado de Protección de Datos (DPO): <strong>support@e-metalabs.com</strong>.</p>`,
+        content_remboursement: `<h1>Política de Reembolso y Cancelación</h1><h2>1. Naturaleza del Producto Digital</h2><p>Los servicios ofrecidos por E-META LABS constituyen la generación inmediata de contenido digital altamente personalizado (Auditorías Estratégicas PDF).</p><h2>2. Renuncia al Derecho de Desistimiento</h2><p>Al marcar la casilla de aceptación durante el pedido, <strong>el Cliente acepta expresamente que la ejecución del servicio (ingestión de datos por la IA) comience inmediatamente después del pago exitoso.</strong> De conformidad con las leyes internacionales de consumo sobre bienes digitales intangibles, el Cliente renuncia, por tanto, a su derecho de desistimiento de 14 días una vez que el proceso de generación ha comenzado y el informe ha sido enviado.</p><h2>3. Condiciones Excepcionales de Reembolso</h2><p>E-META LABS (y su Comerciante Registrado Paddle para transacciones internacionales) otorgará un reembolso total e inmediato <strong>únicamente</strong> en los siguientes casos:</p><ul><li>Fallo técnico comprobado de nuestro servidor que impida la generación o entrega final del informe PDF.</li><li>Doble facturación accidental debido a un error de la pasarela de pago (PayTech o Paddle).</li></ul><h2>4. Procedimiento de Reclamación</h2><p>Toda solicitud de asistencia técnica o reembolso relacionada con un incidente operativo debe enviarse en un plazo máximo de 14 días después de la transacción a nuestro equipo de soporte: <strong>support@e-metalabs.com</strong>.</p>`,
+
+        btn_close: "Cerrar y volver al formulario",
+        proto_main_title: "PROTOCOLO DE APORTE DE NEGOCIOS – DESK EJECUTIVO",
+        proto_date: "Última actualización: Agosto 2026",
+        proto_parties: "<strong>ENTRE LOS ABAJO FIRMANTES:</strong><br><br><strong>E-META LABS</strong>, Sociedad por Acciones Simplificada Unipersonnelle (SASU) con un capital de 500.000 FCFA, con sede en Face Débarcadère, Rosso, Senegal, inscrita en el RCCM con el número SN STL 2026 B768, NINEA: 012887553, representada por D. Abdoulaye Fall, en su calidad de Presidente,<br>En adelante el \"Aportador\" o \"e-META LABS\",<br><br><strong>Y</strong><br><br><strong>EL EXPERTO INDEPENDIENTE</strong>, que se inscribe en el portal Desk Ejecutivo y acepta estas condiciones,<br>En adelante el \"Socio\".",
+        proto_t1: "1. Objeto del protocolo",
+        proto_c1: "Este acuerdo define las condiciones por las que el Aportador presenta clientes potenciales (\"Prospectos\") al Socio para un contrato de prestación directo entre el Socio y el Prospecto. El Aportador actúa únicamente como intermediario.",
+        proto_t2: "2. Independencia de las partes",
+        proto_c2: "Las Partes siguen siendo profesionales independientes. El acuerdo no crea relación de subordinación ni sociedad en participación. El Socio es el único responsable de la ejecución técnica y legal de las misiones.",
+        proto_t3: "3. Remuneración y Comisión",
+        proto_c3: "<strong>Base:</strong> Calculada sobre el importe total sin impuestos facturado y cobrado por el Socio.<br><strong>Tasa:</strong> 15% sin impuestos del importe de la prestación.<br><strong>Alcance:</strong> Se aplica al contrato inicial y anexos durante 24 meses.",
+        proto_t4: "4. Transparencia y pago",
+        proto_c4: "<strong>Notificación:</strong> El Socio debe informar al Aportador en 72h de la firma de un presupuesto y al cobro de los fondos.<br><strong>Facturación:</strong> El Aportador emitirá su factura de comisión pagadera en 15 días.",
+        proto_t5: "5. Cláusula de no elusión",
+        proto_c5: "El Socio tiene prohibido contratar directa o indirectamente con un Prospecto sin pagar la comisión a e-META LABS. En caso de infracción, se aplicará una penalización de 5.000 Euros o tres veces la comisión ocultada.",
+        proto_t6: "6. Confidencialidad",
+        proto_c6: "Los datos de los Prospectos transmitidos por e-META LABS son estrictamente confidenciales y no pueden divulgarse a terceros.",
+        proto_t7: "7. Duración y Terminación",
+        proto_c7: "Celebrado por tiempo indefinido, rescindible con 30 días de preaviso. La rescisión no afecta el derecho a comisión por negocios ya iniciados.",
+        proto_t8: "8. Jurisdicción Competente",
+        proto_c8: "Sujeto al derecho senegalés. Todo litigio será competencia exclusiva del Tribunal de Comercio de Dakar.",
+
+        // --- DESK EXECUTIF (FORMULAIRE) ---
+        exp_btn_return: "← Volver al Motor IA",
+        exp_title: "Desk Ejecutivo",
+        exp_subtitle: "Portal de integración para socios y expertos de e-META LABS.<br>Complete su perfil para recibir leads cualificados.",
+        exp_lbl_name: "Nombre y Apellidos", exp_ph_name: "Ej: Dallah FALL",
+        exp_lbl_email: "Correo Electrónico Profesional", exp_ph_email: "contacto@su-empresa.com",
+        exp_lbl_wa: "Número de WhatsApp (con prefijo)", exp_ph_wa: "Ej: +34 600 000 000",
+        exp_lbl_domain: "Área Principal de Experiencia", exp_opt_def: "Seleccione una especialidad...",
+        exp_lbl_consent: "Acepto el", exp_lbl_collab: "y las condiciones de colaboración de e-META LABS.",
+        exp_btn_submit: "Enviar mi candidatura",
+        link_protocol: "Protocolo de Aporte de Negocios",
+        exp_lbl_exp: "Años de Experiencia *",
+        exp_ph_exp: "Ej: 5",
+        exp_lbl_linkedin: "Enlace del Perfil de LinkedIn *",
+        exp_ph_linkedin: "https://linkedin.com/in/tu-perfil",
+        exp_lbl_bio: "Breve Biografía (Misiones, logros) *",
+        exp_ph_bio: "Describa su trayectoria y principales logros..."
+    },
+    ar: {
+        // --- VISION SUBLIME & UI ---
+        hero_label: "التشخيص الرئيسي 2026", 
+        hero_slogan_1: "تشخيص وكيل الذكاء الاصطناعي", 
+        hero_slogan_2: "وتنفيذ الخبير البشري",
+        subtitle: "من التحليل الخوارزمي إلى العمل على أرض الواقع.", 
+        btn_reset: "↻ إعادة تعيين", lbl_counter: "تشخيصات آمنة وموثقة",
+        slogan_sniper: "التحالف المطلق بين البيانات والميدان. يحدد الذكاء الاصطناعي الثغرات، وينشر خبراؤنا التنفيذيون الحلول.",
+        step1_title: "01. تحديد الهوية", lbl_company: "الشركة / المؤسسة", ph_company: "مثال: مجموعة ألفا...",
+        lbl_email: "البريد الإلكتروني المهني", lbl_phone: "رقم الواتساب", 
+        lbl_linkedin: "ملف LinkedIn (اختياري)", ph_linkedin: "https://linkedin.com/in/اسمك",
+        btn_next: "التالي",
+        
+        step2_title: "02. المصفوفة الاستراتيجية", lbl_sector: "القطاع الاستراتيجي",
+
+        btn_guide: "📖 دليل الخبرات",
+        lienGuide: "دليل الخبرات",
+        titreGuide: "دليل الخبرات",
+        descGuide: "محتوى الدليل الخاص بك هنا...",
+        
+        agnostic_title: "ذكاء شامل ومتكيف 🧠",
+        agnostic_desc: "من الهندسة المالية إلى النزاعات الدولية الأكثر تعقيدًا، يتكيف محركنا متعدد الأشكال مع مجالك. اختر <strong>الاكتشاف التلقائي بالذكاء الاصطناعي</strong> إذا كان التحدي الذي تواجهه يتجاوز الأطر التقليدية.",
+        sec_fintech: "التكنولوجيا المالية", sec_agri: "التكنولوجيا الزراعية", sec_green: "التكنولوجيا الخضراء",
+        sec_gov: "تكنولوجيا الحكومة", sec_health: "الصحة والتكنولوجيا الحيوية", sec_log: "سلسلة التوريد",
+        sec_mine: "التعدين والغاز", sec_btp: "تكنولوجيا العقارات", sec_retail: "التجارة الإلكترونية",
+        sec_edu: "تكنولوجيا التعليم", sec_tour: "السياحة والضيافة", sec_media: "الإعلام الإبداعي",
+        sec_consulting: "الاستشارات وخدمات الشركات", sec_saas: "البرمجيات كخدمة وناشرو البرامج", sec_telecom: "الاتصالات والبنية التحتية",
+        sec_other: "أخرى / مخصص", lbl_custom_sector: "حدد مجال عملك :", ph_custom_sector: "مثال: الرياضة الاحترافية، الفضاء...",
+        lbl_geo: "منطقة التدخل", opt_geo_def: "حدد بلدك بالضبط...",
+        
+        c_za: "جنوب أفريقيا", c_dz: "الجزائر", c_de: "ألمانيا", c_sa: "المملكة العربية السعودية", c_ar: "الأرجنتين", 
+        c_au: "أستراليا", c_be: "بلجيكا", c_bj: "بنين", c_br: "البرازيل", c_bf: "بوركينا فاسو", c_bi: "بوروندي", 
+        c_cm: "الكاميرون", c_ca: "كندا", c_cv: "الرأس الأخضر", c_cf: "جمهورية أفريقيا الوسطى", c_cl: "تشيلي", c_cn: "الصين", 
+        c_co: "كولومبيا", c_cg: "الكونغو", c_cd: "جمهورية الكونغو الديمقراطية", c_kr: "كوريا الجنوبية", c_ci: "ساحل العاج", c_dj: "جيبوتي", 
+        c_eg: "مصر", c_ae: "الإمارات العربية المتحدة", c_es: "إسبانيا", c_us: "الولايات المتحدة", c_et: "إثيوبيا", 
+        c_fr: "فرنسا", c_ga: "الغابون", c_gn: "غينيا", c_gq: "غينيا الاستوائية", c_in: "الهند", c_it: "إيطاليا", 
+        c_jp: "اليابان", c_ke: "كينيا", c_mg: "مدغشقر", c_ml: "مالي", c_ma: "المغرب", c_mu: "موريشيوس", 
+        c_mr: "موريتانيا", c_mx: "المكسيك", c_ne: "النيجر", c_ng: "نيجيريا", c_ug: "أوغندا", c_uk: "المملكة المتحدة", 
+        c_rw: "رواندا", c_sn: "السنغال", c_ch: "سويسرا", c_td: "تشاد", c_tg: "توجو", c_tn: "تونس", c_other: "بلد آخر...",
+
+        lbl_expertise: "الخبرة المطلوبة",
+        exp_ai: "الذكاء الاصطناعي التوليدي", exp_cyber: "الأمن السيبراني", exp_esg: "الهندسة البيئية",
+        exp_web3: "Web3 وبلوكشين (Bitcoin OTS)", exp_mkt: "التسويق الرقمي", exp_proc: "تحسين العمليات",
+        exp_hr: "الموارد البشرية", exp_design: "تجربة المستخدم", exp_gtm: "استراتيجية الوصول للسوق والنمو", exp_auto: "اكتشاف تلقائي بالذكاء الاصطناعي",
+        
+        btn_prev: "رجوع", btn_next_matrice: "فتح مصفوفة التحليل",
+        btn_close: "إغلاق",
+        
+        step3_title: "03. مصفوفة التحليل", 
+        elite_hook: "\"ما وراء الخوارزميات، حل ما لا يمكن حله.\"",
+        lbl_context: "السياق التشغيلي", ph_context: "صف وضعك الحالي وأهدافك والتحديات الرئيسية...",
+        lbl_file_upload: "📄 إرفاق مستند (اختياري)", btn_browse: "تصفح...", lbl_no_file: "لم يتم تحديد أي ملف",
+        lbl_file_desc: "ضمان الملكية الفكرية: محمي بواسطة البلوكشين.", legal_consent: "أوافق على", link_privacy: "سياسة الخصوصية الرسمية",
+        lbl_wa_optin: "أوافق على تلقي تحليلي عبر واتساب.", btn_submit: "بدء تحليل الذكاء الاصطناعي", footer_rights: "جميع الحقوق محفوظة.",
+        modal_res_title: "التشخيص الاستراتيجي", btn_new_analysis: "تحليل جديد", msg_reset_confirm: "هل تريد حقًا البدء من جديد؟",
+        
+        guide_title: "المعجم الاستراتيجي", guide_sec_title: "1. القطاعات الاستراتيجية",
+        lex_sec_fintech: "<strong>• التكنولوجيا المالية:</strong> التمويل الرقمي، المدفوعات واللامركزية.",
+        lex_sec_gov: "<strong>• تكنولوجيا الحكومة:</strong> تحديث الدولة ورقمنة الخدمات العامة.",
+        lex_sec_health: "<strong>• الصحة والتكنولوجيا الحيوية:</strong> الابتكارات الطبية وإدارة البيانات الصحية.",
+        lex_sec_green: "<strong>• التكنولوجيا الخضراء:</strong> التحول البيئي وإزالة الكربون والطاقة المتجددة.",
+        lex_sec_agri: "<strong>• التكنولوجيا الزراعية:</strong> الأمن الغذائي والتحسين التكنولوجي الزراعي.",
+        lex_sec_log: "<strong>• اللوجستيات:</strong> تحسين سلسلة التوريد والتتبع العالمي.",
+        lex_sec_mine: "<strong>• التعدين والغاز:</strong> الاستخراج الذكي والسلامة والامتثال.",
+        lex_sec_btp: "<strong>• تكنولوجيا العقارات:</strong> الابتكار العقاري وإدارة المباني الذكية.",
+        lex_sec_retail: "<strong>• التجارة الإلكترونية:</strong> التجزئة الرقمية، تجربة العملاء والمعاملات.",
+        lex_sec_edu: "<strong>• تكنولوجيا التعليم:</strong> منصات التعلم ونقل المعرفة.",
+        lex_sec_tour: "<strong>• السياحة:</strong> رقمنة الضيافة وإدارة التدفقات.",
+        lex_sec_media: "<strong>• الصناعات الإبداعية:</strong> الإعلام والترفيه والملكية الفكرية.",
+        lex_sec_consulting: "<strong>• الاستشارات وخدمات B2B:</strong> استراتيجية الشركات، التحول الرقمي، والتوجيه التنفيذي.",
+        lex_sec_saas: "<strong>• البرمجيات كخدمة (SaaS):</strong> تطوير الحلول السحابية، القابلية للتوسع، ونماذج الاشتراك.",
+        lex_sec_telecom: "<strong>• الاتصالات والبنية التحتية:</strong> الاتصال عالي السرعة، مراكز البيانات، والسيادة على الشبكات.",
+
+        guide_exp_title: "2. الخبرات التكنولوجية",
+        lex_exp_ai: "<strong>• الذكاء الاصطناعي التوليدي:</strong> دمج الذكاء الاصطناعي للتحليل التنبؤي والأتمتة.",
+        lex_exp_cyber: "<strong>• الأمن السيبراني:</strong> حماية البنية التحتية الحيوية وتدقيق المرونة.",
+        lex_exp_esg: "<strong>• الهندسة البيئية (ESG):</strong> الاستراتيجية البيئية والاجتماعية وحوكمة الشركات.",
+        lex_exp_web3: "<strong>• Web3 & Blockchain :</strong> توثيق رقمي معتمد على بلوكشين البيتكوين.",
+        lex_exp_mkt: "<strong>• التسويق الرقمي:</strong> استراتيجية الاستحواذ وتحسين محركات البحث.",
+        lex_exp_proc: "<strong>• تحسين العمليات:</strong> التميز التشغيلي وخفض التكاليف.",
+        lex_exp_hr: "<strong>• إدارة المواهب:</strong> التوظيف والاحتفاظ والتدريب.",
+        lex_exp_design: "<strong>• التفكير التصميمي:</strong> تجربة المستخدم (UX) وابتكار المنتجات.",
+        lex_exp_gtm: "<strong>• استراتيجية الوصول للسوق:</strong> استراتيجية اختراق السوق، التوزيع، واكتساب العملاء بشكل غير متماثل.",
+
+        pricing_starter_name: "الأساسي (STARTER)", pricing_starter_desc: "لاختبار القوة التحليلية لـ e-META LABS.", pricing_starter_price: "مجاناً",
+        pricing_starter_feat1: "✓ تشخيصان سريعان", pricing_starter_feat2: "✓ تحديد المخاطر الرئيسية", pricing_starter_feat3: "✓ تنسيق نصي (بريد إلكتروني)", pricing_starter_feat4: "⚠️ خطة العمل الاستراتيجية غير مشمولة", pricing_starter_btn: "جرب مجاناً",
+        pricing_pro_badge: "الأكثر شعبية", pricing_pro_name: "PRO (حزمة 3)", pricing_pro_desc: "حزمة من <strong>3 عمليات تدقيق استراتيجية</strong> شاملة وصارمة.", pricing_pro_price: "$25", pricing_pro_period: "",
+        pricing_pro_feat1: "✓ <strong>3 تقارير</strong> كاملة", pricing_pro_feat2: "✓ تشخيص مالي ومؤشرات أداء (KPI)", pricing_pro_feat3: "✓ استراتيجية الابتكار المزعزع", pricing_pro_feat4: "✓ تقارير PDF فاخرة", pricing_pro_btn: "شراء الحزمة",
+        pricing_expert_name: "التنفيذي (MATCHING)", pricing_expert_desc: "تدقيق متطور بالذكاء الاصطناعي مقترن بخبرة بشرية رفيعة المستوى.", pricing_expert_price: "$49", pricing_expert_period: "/ شهرياً",
+        pricing_expert_feat1: "✓ حتى 10 تدقيقات متميزة / شهر", pricing_expert_feat2: "✓ مراقبة البيانات القطاعية في الوقت الفعلي", pricing_expert_feat3: "✓ بروتوكول عمل لمدة 7 أيام", pricing_expert_feat4: "✓ تواصل مع خبير أول", pricing_expert_btn: "تفعيل المطابقة",
+
+        btn_return_site: "← العودة إلى محرك الذكاء الاصطناعي",
+        link_mentions: "الإشعارات القانونية", link_cgv: "الشروط والأحكام", link_confidentialite: "الخصوصية", link_remboursement: "سياسة الاسترداد",
+
+        content_mentions: `<div dir="rtl"><h1>الإشعارات القانونية</h1><h2>1. ناشر الموقع</h2><p>تم نشر الموقع <strong>e-metalabs.com</strong> (و e-meta.app) بواسطة شركة <strong>E-META LABS</strong>.<br><strong>الشكل القانوني:</strong> SASU برأس مال قدره 500,000 فرنك أفريقي.<br><strong>المقر الرئيسي:</strong> Face Débarcadère، روصو، السنغال.<br><strong>السجل التجاري (RCCM):</strong> SN STL 2026 B768<br><strong>NINEA:</strong> 012887553<br><strong>مدير النشر:</strong> عبد الله فال<br><strong>الاتصال:</strong> support@e-metalabs.com</p><h2>2. الاستضافة</h2><p>تتم استضافة البنية التحتية عبر GitHub Pages وتتم إدارة خوادمنا السحابية بواسطة <strong>OVH Groupe SAS</strong>.<br><strong>المقر الرئيسي لشركة OVH:</strong> 2 rue Kellermann, 59100 Roubaix، فرنسا.</p><h2>3. الملكية الفكرية</h2><p>جميع العناصر الموجودة على هذه المنصة (النصوص والخوارزميات والهندسة المعمارية والشعارات) محمية بموجب قوانين الملكية الفكرية. يُحظر تمامًا أي استنساخ أو محاولة هندسة عكسية دون موافقة كتابية من E-META LABS.</p></div>`,
+        content_cgv: `<div dir="rtl"><h1>الشروط والأحكام العامة للبيع (CGV)</h1><h2>1. الغرض</h2><p>تحكم هذه الشروط والأحكام بيع خدمات التدقيق الاستراتيجي الآلي المدعومة بالذكاء الاصطناعي المقدمة من E-META LABS (السنغال).</p><h2>2. العملية والتسليم</h2><p>عند التحقق من الدفع، يتم إنشاء تقرير التدقيق وتسليمه حصريًا بتنسيق رقمي (PDF). يتم التسليم بشكل غير متزامن عبر تطبيق WhatsApp إلى الرقم الذي قدمه العميل، أو عبر البريد الإلكتروني.</p><h2>3. التسعير وبائع التجزئة (Merchant of Record)</h2><p>يتم تأمين المدفوعات بواسطة شركائنا الماليين:</p><ul><li><strong>المعاملات الدولية (Paddle):</strong> تتم إدارة عملية الطلب الخاصة بنا بواسطة Paddle.com، وهو البائع القانوني لهذه الطلبات.</li><li><strong>معاملات منطقة UEMOA (PayTech):</strong> تتم معالجة مدفوعات الأموال عبر الهاتف المحمول وتأمينها بواسطة البنية التحتية PayTech في السنغال.</li></ul><h2>4. المسؤولية التشغيلية</h2><p>التشخيصات التي تقدمها E-META LABS يتم إنشاؤها بواسطة الذكاء الاصطناعي. إنها تشكل أداة لدعم اتخاذ القرار الاستراتيجي، ولكنها لا يمكن أن تحل محل الاستشارة القانونية أو الضريبية أو الطبية المعتمدة. تخلي E-META LABS مسؤوليتها عن القرارات المتخذة بناءً على هذه التقارير حصريًا.</p></div>`,
+        content_confidentialite: `<div dir="rtl"><h1>سياسة الخصوصية (متوافقة مع RGPD)</h1><h2>1. جمع البيانات الاستراتيجية</h2><p>يجمع محرك E-META LABS: اسم الكيان، البريد الإلكتروني للشركة، رقم WhatsApp، ملف LinkedIn (اختياري)، قطاع الصناعة، بالإضافة إلى بيانات السياق والمستندات الاستراتيجية المقدمة طواعية من قبل المستخدم.</p><h2>2. الغرض والأمان (الاحتفاظ الصفري بالبيانات)</h2><p>تُستخدم بياناتك فقط لمعايرة وإنشاء التدقيق عبر محرك الذكاء الاصطناعي الخاص بنا، ثم إرساله إليك. نحن نطبق سياسة صارمة لـ "الاحتفاظ الصفري بالبيانات" فيما يتعلق بنماذج اللغات الكبيرة (LLMs) التابعة لجهات خارجية: <strong>لا يتم استخدام بياناتك الصناعية أبدًا</strong> لتدريب الخوارزميات العامة. أسرارك المهنية مضمونة.</p><h2>3. المشاركة مع المعالجين المعتمدين</h2><p>لتقديم الخدمة، تنتقل بياناتك بشكل آمن (مشفرة SSL/TLS) عبر البنى التحتية الشريكة لنا: OpenAI/Google Cloud و Meta و Paddle/PayTech. لا تبيع E-META LABS أي بيانات لوسطاء خارجيين.</p><h2>4. ممارسة حقوقك</h2><p>وفقًا للقانون الأوروبي العام لحماية البيانات (RGPD) والقوانين المحلية المعمول بها، يحق لك الوصول إلى بياناتك وتصحيحها ومحوها. لممارسة هذا الحق، اتصل بمسؤول حماية البيانات (DPO) لدينا: <strong>support@e-metalabs.com</strong>.</p></div>`,
+        content_remboursement: `<div dir="rtl"><h1>سياسة الاسترداد والإلغاء</h1><h2>1. طبيعة المنتج الرقمي</h2><p>تشكل الخدمات التي تقدمها E-META LABS التوليد الفوري للمحتوى الرقمي المخصص للغاية (عمليات التدقيق الاستراتيجية PDF).</p><h2>2. التنازل عن حق الانسحاب</h2><p>من خلال تحديد مربع القبول أثناء عملية الطلب، <strong>يوافق العميل صراحةً على أن تنفيذ الخدمة (استيعاب البيانات بواسطة الذكاء الاصطناعي) يبدأ فورًا بعد الدفع الناجح.</strong> وفقًا لقوانين المستهلك الدولية فيما يتعلق بالسلع الرقمية غير الملموسة، يتنازل العميل بالتالي عن حقه في الانسحاب لمدة 14 يومًا بمجرد بدء عملية الإنشاء وإرسال التقرير.</p><h2>3. شروط الاسترداد الاستثنائية</h2><p>ستمنح E-META LABS استردادًا كاملاً وفوريًا <strong>فقط</strong> في الحالات التالية:</p><ul><li>فشل فني مثبت في خادمنا يمنع الإنشاء النهائي أو تسليم تقرير PDF.</li><li>فاتورة مزدوجة عرضية بسبب خطأ من بوابة الدفع.</li></ul><h2>4. إجراءات المطالبة</h2><p>يجب إرسال أي طلب للحصول على مساعدة فنية أو استرداد يتعلق بحادث تشغيلي في غضون 14 يومًا كحد أقصى بعد المعاملة إلى فريق الدعم لدينا: <strong>support@e-metalabs.com</strong>.</p></div>`,
+
+        btn_close: "إغلاق والعودة إلى النموذج",
+        proto_main_title: "بروتوكول جلب الأعمال – المكتب التنفيذي",
+        proto_date: "آخر تحديث: أغسطس 2026",
+        proto_parties: "<strong>بين الموقعين أدناه:</strong><br><br><strong>إي-ميتا لابز (E-META LABS)</strong>، شركة مساهمة مبسطة ذات شخص واحد (SASU) برأس مال 500,000 فرنك أفريقي، المقر: Face Débarcadère, Rosso, السنغال، السجل التجاري SN STL 2026 B768، ورقم NINEA: 012887553، يمثلها السيد عبد الله فال، بصفته الرئيس،<br>ويشار إليها بـ \"الوسيط\"،<br><br><strong>و</strong><br><br><strong>الخبير المستقل</strong>، المسجل في بوابة المكتب التنفيذي والموافق على هذه الشروط،<br>ويشار إليه بـ \"الشريك\".",
+        proto_t1: "1. موضوع البروتوكول",
+        proto_c1: "تحدد هذه الاتفاقية الشروط التي يقدم بموجبها الوسيط عملاء محتملين إلى الشريك لإبرام عقد خدمات مباشرة بين الشريك والعميل. يتصرف الوسيط كصانع صفقات فقط.",
+        proto_t2: "2. استقلالية الأطراف",
+        proto_c2: "يظل الطرفان مهنيين مستقلين. لا تنشئ الاتفاقية أي علاقة تبعية أو شراكة. يتحمل الشريك وحده المسؤولية عن التنفيذ الفني والقانوني للمهام.",
+        proto_t3: "3. المكافأة والعمولة",
+        proto_c3: "<strong>الأساس:</strong> تحسب على المبلغ الإجمالي غير شامل الضرائب الذي يفوتره ويحصله الشريك.<br><strong>النسبة:</strong> 15% من مبلغ الخدمة.<br><strong>النطاق:</strong> ينطبق على العقد الأولي وأي ملاحق لمدة 24 شهرًا.",
+        proto_t4: "4. الشفافية وطرق الدفع",
+        proto_c4: "<strong>الإشعار:</strong> يجب على الشريك إبلاغ الوسيط خلال 72 ساعة من توقيع العرض وعند تحصيل الأموال.<br><strong>الفوترة:</strong> سيصدر الوسيط فاتورة العمولة الخاصة به مستحقة الدفع خلال 15 يومًا.",
+        proto_t5: "5. شرط عدم الالتفاف",
+        proto_c5: "يُحظر على الشريك التعاقد بشكل مباشر أو غير مباشر مع عميل محتمل دون دفع العمولة إلى e-META LABS. في حالة الانتهاك، تطبق غرامة قدرها 5000 يورو أو ثلاثة أضعاف العمولة المخفاة.",
+        proto_t6: "6. السرية",
+        proto_c6: "بيانات العملاء المرسلة من قبل e-META LABS سرية للغاية ولا يجوز الكشف عنها لأطراف ثالثة.",
+        proto_t7: "7. المدة والإنهاء",
+        proto_c7: "مُبرم لمدة غير محددة، ويمكن إنهاؤه بإشعار مدته 30 يومًا. الإنهاء لا يؤثر على الحق في العمولة للأعمال التي بدأت بالفعل.",
+        proto_t8: "8. المحكمة المختصة",
+        proto_c8: "يخضع للقانون السنغالي. أي نزاع سيكون من الاختصاص الحصري للمحكمة التجارية في داكار.",
+
+        // --- DESK EXECUTIF (FORMULAIRE) ---
+        exp_btn_return: "← العودة إلى محرك الذكاء الاصطناعي",
+        exp_title: "المكتب التنفيذي",
+        exp_subtitle: "بوابة الانضمام لشركاء وخبراء إي-ميتا لابز.<br>أكمل ملفك الشخصي لتلقي فرص عمل مؤهلة.",
+        exp_lbl_name: "الاسم واللقب", exp_ph_name: "مثال: عبد الله فال",
+        exp_lbl_email: "البريد الإلكتروني المهني", exp_ph_email: "contact@your-company.com",
+        exp_lbl_wa: "رقم الواتساب (مع رمز البلد)", exp_ph_wa: "مثال: +221 77 000 00 00",
+        exp_lbl_domain: "مجال الخبرة الرئيسي", exp_opt_def: "اختر التخصص...",
+        exp_lbl_consent: "أوافق على", exp_lbl_collab: "وشروط التعاون مع e-META LABS.",
+        exp_btn_submit: "إرسال طلبي",
+        link_protocol: "بروتوكول جلب الأعمال",
+        exp_lbl_exp: "سنوات الخبرة *",
+        exp_ph_exp: "مثال: 5",
+        exp_lbl_linkedin: "رابط ملف لينكد إن *",
+        exp_ph_linkedin: "https://linkedin.com/in/your-profile",
+        exp_lbl_bio: "نبذة مختصرة (المهام، الإنجازات) *",
+        exp_ph_bio: "صف مسيرتك المهنية وإنجازاتك الرئيسية..."
+    }
+};
+
+// ==========================================
+// MOTEUR D'APPLICATION DES LANGUES (MISE À JOUR)
+// ==========================================
+
+function setLanguage(lang) {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    
+    // MÉMOIRE : On sauvegarde la langue choisie
+    localStorage.setItem('emeta_lang', lang);
+
+    document.querySelectorAll('.lang-switch button').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = translations[lang][key];
+            } else if (el.tagName === 'OPTGROUP') {
+                el.label = translations[lang][key];
+            } else {
+                el.innerHTML = translations[lang][key];
+            }
+        }
+    });
+
+    // Forçage de la langue dans les URL du footer ET du Header (Expert Desk)
+    document.querySelectorAll('.footer a.gold-link, a[href^="expert.html"], a[href^="protocole-apport-affaires.html"]').forEach(link => {
+        if (link.getAttribute('href')) { 
+            let baseHref = link.getAttribute('href').split('?')[0]; 
+            link.href = baseHref + '?lang=' + lang;
+        }
+    });
+
+    // Mise à jour du lien de retour (pour les pages légales)
+    const backBtn = document.getElementById('backBtn');
+    if (backBtn) {
+        backBtn.href = `index.html?lang=${lang}`;
+    }
+}
+
+window.addEventListener('load', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // MÉMOIRE : On cherche d'abord dans l'URL, sinon dans le localStorage, sinon on force FR
+    const activeLang = urlParams.get('lang') || localStorage.getItem('emeta_lang') || 'fr';
+    setLanguage(activeLang);
+
+    const langButtons = document.querySelectorAll('.lang-switch button');
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const selectedLang = e.target.getAttribute('data-lang');
+            setLanguage(selectedLang);
+            
+            const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?lang=' + selectedLang;
+            window.history.pushState({path:newUrl}, '', newUrl);
+        });
+    });
+});

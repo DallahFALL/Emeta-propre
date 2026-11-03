@@ -1,0 +1,474 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cortex-04-handoff-option-b",
+        "authentication": "headerAuth",
+        "responseMode": "onReceived",
+        "options": {
+          "responseCode": 202
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -920,
+        0
+      ],
+      "id": "4b764a18-515c-4b80-9237-ec54db40212d",
+      "name": "Webhook Option B",
+      "webhookId": "b12bce02-74a6-4635-a521-4e34bacab4aa",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ca59c6b1-086f-4388-9e4f-e45497bcaf30",
+          "name": "CORTEX_04 Handoff Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const envelope = $json.body && typeof $json.body === 'object' ? $json.body : $json;\nconst reference = String(envelope.ref_mission || envelope.reference_mission || envelope.reference || '').replace(/[=\\s]/g, '').trim().toUpperCase();\nif (!/^MIS-2026-\\d{4}$/.test(reference)) throw new Error('Référence de mission absente ou invalide : format attendu MIS-2026-XXXX.');\nconst expediteur = String(envelope.expediteur || '').replace(/\\D/g, '');\nif (!/^\\d{7,15}$/.test(expediteur)) throw new Error('Numéro WhatsApp expéditeur absent ou invalide.');\nconst nom_expediteur = String(envelope.nom_expediteur || '').trim();\nconst message = String(envelope.texte_message || envelope.message || '').trim();\nif (!message) throw new Error('Message brut du client absent.');\nif (message.length > 4096) throw new Error('Le message client dépasse la taille maximale autorisée de 4096 caractères.');\nconst escapeHtml = value => String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\\\"/g, '&quot;').replace(/'/g, '&#39;');\nconst messageHtml = escapeHtml(message).replace(/\\r?\\n/g, '<br>');\nreturn { json: { expediteur, nom_expediteur, message, message_html: messageHtml, reference } };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -700,
+        0
+      ],
+      "id": "d80c3960-30ce-4ed5-8c76-0ca1e2a0b0ed",
+      "name": "Valider Handoff Option B"
+    },
+    {
+      "parameters": {
+        "fromEmail": "contact@e-metalabs.com",
+        "toEmail": "contact@e-metalabs.com",
+        "subject": "=🚨 DEMANDE D'ARBITRAGE TERRAIN (OPTION B) — Réf : {{ $json.reference }}",
+        "html": "<div style=\"font-family:Arial,sans-serif;color:#172033;line-height:1.6\"><h2 style=\"color:#9b1c1c\">Demande d'arbitrage terrain — Option B</h2><p>Le Desk Exécutif est informé d'une demande client et doit la prendre en charge.</p><table style=\"border-collapse:collapse\"><tr><th align=\"left\" style=\"padding:6px 12px 6px 0\">Référence</th><td>{{ $json.reference }}</td></tr><tr><th align=\"left\" style=\"padding:6px 12px 6px 0\">Contact</th><td>{{ $json.nom_expediteur }}</td></tr><tr><th align=\"left\" style=\"padding:6px 12px 6px 0\">WhatsApp</th><td>+{{ $json.expediteur }}</td></tr></table><h3>Message du client</h3><blockquote style=\"margin:0;padding:12px;border-left:3px solid #d4af37;background:#f7f7f7\">{{ $json.message_html }}</blockquote><p><a href=\"https://e-metalabs.com/tracker.html?ref={{ $json.reference }}\">Ouvrir le Cockpit Tracker</a></p><p>Dans NocoDB, ouvrir la table <strong>Experts_Desk</strong> et assigner un expert accrédité du secteur.</p><p>e-META LABS SASU — Desk Exécutif</p></div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        -440,
+        -200
+      ],
+      "id": "a7ae60a8-c612-4a62-9bea-35b139a7254e",
+      "name": "Alerte Desk Exécutif",
+      "credentials": {
+        "smtp": {
+          "id": "EYgJ1ZIwAIiqA4jl",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v19.0/1045757915291250/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { messaging_product: 'whatsapp', recipient_type: 'individual', to: $('Valider Handoff Option B').first().json.expediteur, type: 'text', text: { body: 'Bien reçu. Votre demande d’arbitrage terrain (Option B) pour la mission ' + $('Valider Handoff Option B').first().json.reference + ' a été transmise au Desk Exécutif. Un auditeur accrédité prendra attache avec votre direction sous 24h ouvrées.' } } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -440,
+        0
+      ],
+      "id": "80e53623-b3b4-4bb0-8e67-38e9e4f3a90d",
+      "name": "Confirmation Client WhatsApp",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "IEsexaqc2aAf2dFN",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mdoy3rbli4j924l/records",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "where",
+              "value": "={{ '(Code_Mission,like,%' + $('Valider Handoff Option B').first().json.reference + '%)' }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [] },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -440,
+        200
+      ],
+      "id": "fd80b781-35f6-4a70-a858-fd876ff1e638",
+      "name": "Rechercher Mission NocoDB",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "f8a7e89c-dc93-4e9d-a733-81d8bb8a6417",
+          "name": "NocoDB API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $json;\nconst reference = $('Valider Handoff Option B').first().json.reference;\nconst candidates = [response, response.data].filter(value => value && typeof value === 'object');\nlet records = [];\nfor (const candidate of candidates) {\n  if (Array.isArray(candidate)) { records = candidate; break; }\n  for (const key of ['records', 'list', 'data']) {\n    if (Array.isArray(candidate[key])) { records = candidate[key]; break; }\n  }\n  if (records.length) break;\n}\nconst normalized = records.map(record => record && record.fields && typeof record.fields === 'object' ? { ...record, ...record.fields } : record);\nconst matches = normalized.filter(record => String(record?.Code_Mission || '').replace(/[=\\s]/g, '').trim().toUpperCase() === reference);\nif (matches.length !== 1) throw new Error('La mission ' + reference + ' doit correspondre à exactement un enregistrement NocoDB ; résultats : ' + matches.length + '.');\nconst recordId = matches[0].Id ?? matches[0].id;\nif (recordId === undefined || recordId === null || recordId === '') throw new Error('Identifiant primaire absent de l’enregistrement NocoDB pour ' + reference + '.');\nreturn { json: { reference, record_id: recordId } };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -200,
+        200
+      ],
+      "id": "446d2e51-463c-476d-b00e-ce92ea552842",
+      "name": "Valider Enregistrement Mission"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const recordId = $json.record_id;\nif (recordId === undefined || recordId === null) {\n  throw new Error('record_id est manquant');\n}\nreturn { json: { payload: [{ Id: recordId, Statut: 'Arbitrage Demandé' }] } };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        40,
+        200
+      ],
+      "id": "c0b25fe8-a14d-41b0-84af-9ab0dd90d4d7",
+      "name": "Construire Payload NocoDB"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mdoy3rbli4j924l/records",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.payload }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        280,
+        200
+      ],
+      "id": "bf89550a-6927-465c-a7e0-a7e910f45278",
+      "name": "Update NocoDB Mission",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "f8a7e89c-dc93-4e9d-a733-81d8bb8a6417",
+          "name": "NocoDB API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "OPTIONS",
+        "path": "statut-mission",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -920,
+        700
+      ],
+      "id": "7d91cfc3-617d-4d4c-8c70-3f322b096513",
+      "name": "Webhook OPTIONS Statut Mission",
+      "webhookId": "0be2c99e-cf99-4ce7-9cac-304047921703"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "",
+        "options": {
+          "responseCode": 204,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Access-Control-Allow-Methods",
+                "value": "GET, OPTIONS"
+              },
+              {
+                "name": "Access-Control-Allow-Headers",
+                "value": "Content-Type, Authorization, xc-token"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -680,
+        700
+      ],
+      "id": "cb88ec4a-829b-4363-b34c-a89ff76d3d0a",
+      "name": "Répondre Préflight Statut Mission"
+    },
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "statut-mission",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -920,
+        480
+      ],
+      "id": "910d9983-b254-4cb6-9f48-b3a4d60cff05",
+      "name": "Webhook Statut Mission",
+      "webhookId": "18c855dd-9ff8-43ee-94c5-a86f4b0557c3"
+    },
+    {
+      "parameters": {
+        "jsCode": "const cleanRef = String($json.query?.ref ?? $json.query?.reference ?? '').replace(/^[=\\s]+/, '').trim().toUpperCase();\nif (!/^MIS-2026-\\d{4}$/.test(cleanRef)) throw new Error('Référence de mission absente ou invalide : format attendu MIS-2026-XXXX.');\nreturn { json: { reference: cleanRef } };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -700,
+        480
+      ],
+      "id": "63b377a2-a304-4110-9306-a045f4c99401",
+      "name": "Valider Référence Statut"
+    },
+    {
+      "parameters": {
+        "url": "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mdoy3rbli4j924l/records",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "where",
+              "value": "={{ '(Code_Mission,like,%' + $json.reference + '%)' }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [] },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -460,
+        480
+      ],
+      "id": "45e9cf5f-5f32-4c33-bad9-739aa46bcc9a",
+      "name": "Lire Statut NocoDB",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "f8a7e89c-dc93-4e9d-a733-81d8bb8a6417",
+          "name": "NocoDB API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $json;\nconst reference = $('Valider Référence Statut').first().json.reference;\nconst candidates = [response, response.data].filter(value => value && typeof value === 'object');\nlet records = [];\nfor (const candidate of candidates) {\n  if (Array.isArray(candidate)) { records = candidate; break; }\n  for (const key of ['records', 'list', 'data']) {\n    if (Array.isArray(candidate[key])) { records = candidate[key]; break; }\n  }\n  if (records.length) break;\n}\nconst normalized = records.map(record => record && record.fields && typeof record.fields === 'object' ? { ...record, ...record.fields } : record);\nconst mission = normalized.find(record => String(record?.Code_Mission || '').replace(/[=\\s]/g, '').trim().toUpperCase() === reference);\nconst date = mission ? mission.Date_Ancrage || mission.CreatedAt || mission.created_at || mission.Date_Creation || mission.Date || null : null;\nreturn { json: {\n  success: true,\n  reference,\n  found: Boolean(mission),\n  statut: mission ? String(mission.Statut || 'Diagnostic Initial') : 'Diagnostic Initial',\n  secteur: mission ? String(mission.Secteur || 'Agro-industrie et souveraineté alimentaire') : 'Agro-industrie et souveraineté alimentaire',\n  palier: mission ? String(mission.Palier || 'mandat') : 'mandat',\n  sha256_hash: mission ? String(mission.Empreinte_SHA256 || mission.Contrat_Hash_Ref || '') : '',\n  expert_assigne: mission ? mission.Expert_Assigne || null : null,\n  date: date ? String(date) : null\n} };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -220,
+        480
+      ],
+      "id": "3fa6ec46-3d53-41de-af25-59a20fa3f5e8",
+      "name": "Formater Statut Public"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { success: $json.success, reference: $json.reference, statut: $json.statut || 'Diagnostic Initial', secteur: $json.secteur || 'Agro-industrie et souveraineté alimentaire', palier: $json.palier || 'mandat', sha256_hash: $json.sha256_hash || '', expert_assigne: $json.expert_assigne || null, found: $json.found, date: $json.date || null } }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Access-Control-Allow-Methods",
+                "value": "GET, OPTIONS"
+              },
+              {
+                "name": "Access-Control-Allow-Headers",
+                "value": "Content-Type, Authorization, xc-token"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        20,
+        480
+      ],
+      "id": "8ac835de-8a81-409c-9b8d-1c05baf90029",
+      "name": "Répondre Statut Mission"
+    }
+  ],
+  "connections": {
+    "Webhook Option B": {
+      "main": [
+        [
+          {
+            "node": "Valider Handoff Option B",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Valider Handoff Option B": {
+      "main": [
+        [
+          {
+            "node": "Alerte Desk Exécutif",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Confirmation Client WhatsApp",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Rechercher Mission NocoDB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rechercher Mission NocoDB": {
+      "main": [
+        [
+          {
+            "node": "Valider Enregistrement Mission",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Valider Enregistrement Mission": {
+      "main": [
+        [
+          {
+            "node": "Construire Payload NocoDB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Construire Payload NocoDB": {
+      "main": [
+        [
+          {
+            "node": "Update NocoDB Mission",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Statut Mission": {
+      "main": [
+        [
+          {
+            "node": "Valider Référence Statut",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook OPTIONS Statut Mission": {
+      "main": [
+        [
+          {
+            "node": "Répondre Préflight Statut Mission",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Valider Référence Statut": {
+      "main": [
+        [
+          {
+            "node": "Lire Statut NocoDB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lire Statut NocoDB": {
+      "main": [
+        [
+          {
+            "node": "Formater Statut Public",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formater Statut Public": {
+      "main": [
+        [
+          {
+            "node": "Répondre Statut Mission",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ea8fa31aa22966a954dc961c81514f022c83fc78d659cee5ee3c2bdbd3975381",
+    "description": "CORTEX_04 reçoit les handoffs Option B sur cortex-04-handoff-option-b, alerte contact@e-metalabs.com, accuse réception au client, puis actualise Statut dans le registre NocoDB. Le webhook public GET statut-mission retourne les données publiques avec les en-têtes CORS requis; sa recherche utilise Code_Mission like %<référence nettoyée>% et normalise les références avec ou sans signe égal. Le webhook et l'appel sortant CORTEX_02 partagent le credential HTTP Header Auth « CORTEX_04 Handoff Auth », à configurer avec x-handoff-key. Le credential NocoDB « NocoDB API Token » fournit le header xc-token et doit contenir un token valide autorisé sur la table Missions. Aucun nœud ne dépend de $env. Les réponses WhatsApp réutilisent le credential Header Auth account et les courriels le credential SMTP account."
+  }
+}

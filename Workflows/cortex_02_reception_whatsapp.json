@@ -1,0 +1,359 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "reception-emeta",
+        "responseMode": "onReceived",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -560,
+        -16
+      ],
+      "id": "817f0b17-f353-4680-a24a-f7232599d82a",
+      "name": "Webhook",
+      "webhookId": "687552f6-34d1-4252-bea4-65a88099a02a"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "cf7efe8c-75e6-4dd1-8ff4-8af0ec1befdc",
+              "leftValue": "={{ (($json.body && typeof $json.body === 'object') ? $json.body : $json).entry?.[0]?.changes?.[0]?.value?.messages?.[0]?.id || '' }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -400,
+        -16
+      ],
+      "id": "a5f33480-4824-433f-a6e4-7af4f2f60390",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v19.0/1045757915291250/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ (() => { const message = $('If').first().json.body.entry[0].changes[0].value.messages[0]; const response = $('Message a model').first().json.content; const timestamp = Number(message.timestamp) * 1000; const now = Date.now(); const sessionOpen = Number.isFinite(timestamp) && timestamp > 0 && now >= timestamp && now - timestamp < 24 * 60 * 60 * 1000; const payload = { messaging_product: 'whatsapp', recipient_type: 'individual', to: String(message.from || '').replace(/\\D/g, ''), type: 'text', text: { body: response } }; if (!sessionOpen) { payload.type = 'template'; payload.template = { name: 'emeta_reprise_conversation', language: { code: 'fr' } }; delete payload.text; } return payload; })() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        80,
+        -64
+      ],
+      "id": "9ca1a72f-656a-4b17-812f-62c56add955a",
+      "name": "HTTP Request",
+      "continueOnFail": true,
+      "credentials": {
+        "httpMultipleHeadersAuth": {
+          "id": "D8UEaUWLS87NezFm",
+          "name": "Multiple Headers Auth account"
+        },
+        "httpHeaderAuth": {
+          "id": "IEsexaqc2aAf2dFN",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "=llama3",
+          "mode": "id"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ 'Reponds en francais en tenant compte du contexte de routage ci-dessous. Si une reference de mission est fournie, rattache la reponse a cette mission; sinon traite la demande selon le numero WhatsApp et le contenu courant. Si option_b_requested est vrai et qu’aucune reference canonique n’est fournie, demande explicitement la reference MIS-2026-XXXX et ne confirme pas l’activation du handoff. Ne pretends pas consulter un dossier non fourni.\\nContexte: ' + JSON.stringify($('Prepare Incoming Context').first().json.routing_context) + '\\nMessage entrant: ' + $('Prepare Incoming Context').first().json.contenu }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.ollama",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        -64
+      ],
+      "id": "fc18d141-ba00-4cb7-ad00-82a84069c1e7",
+      "name": "Message a model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "hUhfDKKVzIUE9aDL",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "=reception-emeta",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -368,
+        -224
+      ],
+      "id": "2253d320-7ea4-4fd6-aa64-7467b5b5af0c",
+      "name": "Webhook1",
+      "webhookId": "c869096f-6bf0-467a-a0af-9b77f2c82f16"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.query['hub.challenge'] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -160,
+        -224
+      ],
+      "id": "2e6146b7-a743-4958-a127-1077eb7d0354",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "const payload = $json.body && typeof $json.body === 'object' ? $json.body : $json;\nconst envelope = payload && typeof payload === 'object' ? payload : {};\nconst entry = Array.isArray(envelope.entry) ? envelope.entry[0] : null;\nconst changes = Array.isArray(entry?.changes) ? entry.changes : [];\nconst candidateValue = changes[0]?.value;\nconst value = candidateValue && typeof candidateValue === 'object' ? candidateValue : {};\nconst message = Array.isArray(value.messages) ? value.messages[0] : null;\nif (!message || typeof message !== 'object' || !message.id) throw new Error('Message WhatsApp entrant absent ou sans identifiant.');\nconst contact = Array.isArray(value.contacts) ? value.contacts[0] : null;\nconst textCandidates = [message.text?.body, message.button?.text, message.button?.payload, message.interactive?.button_reply?.title, message.interactive?.list_reply?.title, message.image?.caption, message.document?.caption];\nconst texte_message = String(textCandidates.find(candidate => typeof candidate === 'string' && candidate.trim()) || '[Message non textuel]');\nconst expediteur = String(message.from || contact?.wa_id || '').replace(/\\D/g, '');\nif (!/^\\d{7,15}$/.test(expediteur)) throw new Error('Numéro WhatsApp expéditeur absent ou invalide.');\nconst nom_expediteur = String(contact?.profile?.name || '');\nconst message_id = String(message.id);\nconst timestamp = String(message.timestamp || '');\nconst referenceSource = String(envelope.ref_mission || envelope.reference_mission || envelope.reference || '') + '\\n' + texte_message;\nconst referenceMatch = referenceSource.match(/=?\\s*(MIS-2026-\\d{4})/i);\nconst ref_mission = referenceMatch ? referenceMatch[1].replace(/[=\\s]/g, '').toUpperCase() : '';\nconst isOptionB = /option[\\s_-]*b|arbitrage\\s*terrain|expert\\s*terrain/i.test(texte_message);\nconst timestampSeconds = Number(timestamp);\nconst date_reception_utc = Number.isFinite(timestampSeconds) && timestampSeconds > 0 ? new Date(timestampSeconds * 1000).toISOString() : new Date().toISOString();\nconst type_message = String(message.type || 'unknown');\nconst routing_context = { numero_whatsapp: expediteur, nom_expediteur, reference_mission: ref_mission, option_b_requested: isOptionB, message_id_parent: String(message.context?.id || ''), type_message, timestamp };\nreturn { json: { expediteur, nom_expediteur, texte_message, message_id, timestamp, numero_whatsapp: expediteur, ref_mission, reference_mission: ref_mission, type_message, contenu: texte_message, date_reception_utc, isOptionB, routing_context } };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -224,
+        112
+      ],
+      "id": "cfb53b6c-2c3f-4752-8caf-73266626fc11",
+      "name": "Prepare Incoming Context"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mus18e5bqest9h3/records",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { fields: { Title: 'Message Inbound - ' + $('Prepare Incoming Context').first().json.expediteur, Canal: 'WhatsApp', Expediteur: $('Prepare Incoming Context').first().json.expediteur, Nom_Contact: $('Prepare Incoming Context').first().json.nom_expediteur, Message_Brut: $('Prepare Incoming Context').first().json.texte_message, Reference_Detectee: $('Prepare Incoming Context').first().json.ref_mission || 'N/A', Statut: 'Reçu' } } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        0,
+        112
+      ],
+      "id": "5a56fc63-a084-4f97-bc70-4261d2f243a7",
+      "name": "Journalisation NocoDB Logs_Communications",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "f8a7e89c-dc93-4e9d-a733-81d8bb8a6417",
+          "name": "NocoDB API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "92083816-3cfb-43b0-8a3f-b40cc3bf3341",
+              "leftValue": "={{ $('Prepare Incoming Context').first().json.isOptionB && Boolean($('Prepare Incoming Context').first().json.ref_mission) }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -32,
+        112
+      ],
+      "id": "53ff119d-7fc1-49c2-9655-df9a71e7042a",
+      "name": "Route Option B"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://automation.e-metalabs.com/webhook/cortex-04-handoff-option-b",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { expediteur: $('Prepare Incoming Context').first().json.expediteur, nom_expediteur: $('Prepare Incoming Context').first().json.nom_expediteur, texte_message: $('Prepare Incoming Context').first().json.texte_message, message: $('Prepare Incoming Context').first().json.texte_message, ref_mission: $('Prepare Incoming Context').first().json.ref_mission, reference_mission: $('Prepare Incoming Context').first().json.ref_mission, reference: $('Prepare Incoming Context').first().json.ref_mission } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        192,
+        16
+      ],
+      "id": "2a8c5730-ce75-4be7-bbc3-4c0fed18ac53",
+      "name": "CORTEX_04 Option B Handoff",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ca59c6b1-086f-4388-9e4f-e45497bcaf30",
+          "name": "CORTEX_04 Handoff Auth"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Prepare Incoming Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Incoming Context": {
+      "main": [
+        [
+          {
+            "node": "Journalisation NocoDB Logs_Communications",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Journalisation NocoDB Logs_Communications": {
+      "main": [
+        [
+          {
+            "node": "Route Option B",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route Option B": {
+      "main": [
+        [
+          {
+            "node": "CORTEX_04 Option B Handoff",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ea8fa31aa22966a954dc961c81514f022c83fc78d659cee5ee3c2bdbd3975381",
+    "description": "CORTEX_02 acquitte les POST Meta immédiatement, normalise les messages entrants avec des gardes null-safe, journalise les champs Title, Canal, Expediteur, Nom_Contact, Message_Brut, Reference_Detectee et Statut dans Logs_Communications, puis route les demandes Option B avec une référence MIS-2026-XXXX valide vers CORTEX_04. L'appel sortant et le webhook entrant CORTEX_04 partagent le credential HTTP Header Auth « CORTEX_04 Handoff Auth », à configurer avec le header x-handoff-key. Le credential « NocoDB API Token » fournit le header xc-token; il doit contenir un token valide autorisé sur Logs_Communications. Aucun nœud ne dépend de $env."
+  }
+}
