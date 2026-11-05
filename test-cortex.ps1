@@ -1,8 +1,21 @@
+param(
+    [string]$MissionRef = "MIS-2026-5468",
+    [string]$HandoffKey = [Environment]::GetEnvironmentVariable("CORTEX_04_HANDOFF_KEY")
+)
+
 # ==========================================
 # SCRIPT DE TEST SYNCHRONISE - CORTEX 02 & 04
 # ==========================================
 
-$missionRef = "MIS-2026-5468"
+$ErrorActionPreference = "Stop"
+$failures = [System.Collections.Generic.List[string]]::new()
+
+if ($missionRef -notmatch '^MIS-2026-\d{4}$') {
+    throw "La reference doit respecter le format MIS-2026-XXXX."
+}
+if ([string]::IsNullOrWhiteSpace($HandoffKey)) {
+    throw "Definir CORTEX_04_HANDOFF_KEY avant de lancer ce test."
+}
 
 Write-Host "--------------------------------------------------" -ForegroundColor Cyan
 Write-Host "ETAPE 1 : Simulation message entrant (CORTEX_02)..." -ForegroundColor Yellow
@@ -46,6 +59,7 @@ try {
     Write-Host "[SUCCES] Webhook CORTEX_02 atteint avec succes." -ForegroundColor Green
 } catch {
     Write-Host "[ERREUR] Echec de l'appel CORTEX_02 : $_" -ForegroundColor Red
+    $failures.Add("CORTEX_02 POST : $_")
 }
 
 Start-Sleep -Seconds 3
@@ -57,10 +71,20 @@ Write-Host "--------------------------------------------------" -ForegroundColor
 try {
     $urlGet = "https://automation.e-metalabs.com/webhook/statut-mission?ref=$missionRef"
     $response04Get = Invoke-RestMethod -Uri $urlGet -Method Get
+    if (-not $response04Get.success -or -not $response04Get.found) {
+        throw "Le registre ne retourne pas la mission $missionRef."
+    }
     Write-Host "[SUCCES] Donnees recues du registre :" -ForegroundColor Green
     $response04Get | ConvertTo-Json -Depth 5
 } catch {
     Write-Host "[ERREUR] Echec de la recuperation du statut : $_" -ForegroundColor Red
+    $failures.Add("CORTEX_04 GET : $_")
+}
+
+if ($failures.Count -gt 0) {
+    Write-Host "`nTEST EN ECHEC :" -ForegroundColor Red
+    $failures | ForEach-Object { Write-Host "- $_" -ForegroundColor Red }
+    exit 1
 }
 
 Start-Sleep -Seconds 2
@@ -73,13 +97,33 @@ $body04Post = @{
     reference  = $missionRef
     action     = "solliciter_arbitrage_terrain"
     expediteur = "221777777777"
+    texte_message = "Test de synchronisation automatique : demande d'arbitrage terrain."
 } | ConvertTo-Json
 
 try {
-    $response04Post = Invoke-RestMethod -Uri "https://automation.e-metalabs.com/webhook/cortex-04-handoff-option-b" -Method Post -ContentType "application/json" -Body $body04Post
+    $response04Post = Invoke-RestMethod -Uri "https://automation.e-metalabs.com/webhook/cortex-04-handoff-option-b" -Method Post -ContentType "application/json" -Headers @{ "x-handoff-key" = $HandoffKey } -Body $body04Post
+    $handoffConfirmed = $false
+    for ($attempt = 0; $attempt -lt 5; $attempt++) {
+        Start-Sleep -Seconds 2
+        $response04Get = Invoke-RestMethod -Uri $urlGet -Method Get
+        if ($response04Get.found -and $response04Get.statut -ceq ("Arbitrage Demand" + [char]0xE9)) {
+            $handoffConfirmed = $true
+            break
+        }
+    }
+    if (-not $handoffConfirmed) {
+        throw "Le statut NocoDB n'a pas ete actualise apres le handoff."
+    }
     Write-Host "[SUCCES] Signal d'arbitrage transmis au Desk." -ForegroundColor Green
 } catch {
     Write-Host "[ERREUR] Echec du handoff Option B : $_" -ForegroundColor Red
+    $failures.Add("CORTEX_04 POST : $_")
+}
+
+if ($failures.Count -gt 0) {
+    Write-Host "`nTEST EN ECHEC :" -ForegroundColor Red
+    $failures | ForEach-Object { Write-Host "- $_" -ForegroundColor Red }
+    exit 1
 }
 
 Write-Host "`n==================================================" -ForegroundColor Cyan
