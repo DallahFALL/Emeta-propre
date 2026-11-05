@@ -28,7 +28,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const envelope = $json.body && typeof $json.body === 'object' ? $json.body : $json;\nconst reference = String(envelope.ref_mission || envelope.reference_mission || envelope.reference || '').replace(/[=\\s]/g, '').trim().toUpperCase();\nif (!/^MIS-2026-\\d{4}$/.test(reference)) throw new Error('Référence de mission absente ou invalide : format attendu MIS-2026-XXXX.');\nconst expediteur = String(envelope.expediteur || '').replace(/\\D/g, '');\nif (!/^\\d{7,15}$/.test(expediteur)) throw new Error('Numéro WhatsApp expéditeur absent ou invalide.');\nconst nom_expediteur = String(envelope.nom_expediteur || '').trim();\nconst message = String(envelope.texte_message || envelope.message || '').trim();\nif (!message) throw new Error('Message brut du client absent.');\nif (message.length > 4096) throw new Error('Le message client dépasse la taille maximale autorisée de 4096 caractères.');\nconst escapeHtml = value => String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\\\"/g, '&quot;').replace(/'/g, '&#39;');\nconst messageHtml = escapeHtml(message).replace(/\\r?\\n/g, '<br>');\nreturn { json: { expediteur, nom_expediteur, message, message_html: messageHtml, reference } };"
+        "jsCode": "try {\nconst envelope = $json.body && typeof $json.body === 'object' ? $json.body : $json;\nconst reference = String(envelope.ref_mission || envelope.reference_mission || envelope.reference || '').replace(/[=\\s]/g, '').trim().toUpperCase();\nif (!/^MIS-2026-\\d{4}$/.test(reference)) throw new Error('Référence de mission absente ou invalide : format attendu MIS-2026-XXXX.');\nconst expediteur = String(envelope.expediteur || '').replace(/\\D/g, '');\nif (!/^\\d{7,15}$/.test(expediteur)) throw new Error('Numéro WhatsApp expéditeur absent ou invalide.');\nconst nom_expediteur = String(envelope.nom_expediteur || '').trim();\nconst message = String(envelope.texte_message || envelope.message || '').trim();\nif (!message) throw new Error('Message brut du client absent.');\nif (message.length > 4096) throw new Error('Le message client dépasse la taille maximale autorisée de 4096 caractères.');\nconst escapeHtml = value => String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\\\"/g, '&quot;').replace(/'/g, '&#39;');\nconst messageHtml = escapeHtml(message).replace(/\\r?\\n/g, '<br>');\nreturn { json: { success: true, expediteur, nom_expediteur, message, message_html: messageHtml, reference } };\n} catch (error) {\nthrow new Error('Validation du handoff Option B impossible : ' + error.message);\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -97,8 +97,8 @@
         "queryParameters": {
           "parameters": [
             {
-              "name": "where",
-              "value": "={{ '(Code_Mission,like,%' + $('Valider Handoff Option B').first().json.reference + '%)' }}"
+              "name": "limit",
+              "value": "1000"
             }
           ]
         },
@@ -123,7 +123,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const response = $json;\nconst reference = $('Valider Handoff Option B').first().json.reference;\nconst candidates = [response, response.data].filter(value => value && typeof value === 'object');\nlet records = [];\nfor (const candidate of candidates) {\n  if (Array.isArray(candidate)) { records = candidate; break; }\n  for (const key of ['records', 'list', 'data']) {\n    if (Array.isArray(candidate[key])) { records = candidate[key]; break; }\n  }\n  if (records.length) break;\n}\nconst normalized = records.map(record => record && record.fields && typeof record.fields === 'object' ? { ...record, ...record.fields } : record);\nconst matches = normalized.filter(record => String(record?.Code_Mission || '').replace(/[=\\s]/g, '').trim().toUpperCase() === reference);\nif (matches.length !== 1) throw new Error('La mission ' + reference + ' doit correspondre à exactement un enregistrement NocoDB ; résultats : ' + matches.length + '.');\nconst recordId = matches[0].Id ?? matches[0].id;\nif (recordId === undefined || recordId === null || recordId === '') throw new Error('Identifiant primaire absent de l’enregistrement NocoDB pour ' + reference + '.');\nreturn { json: { reference, record_id: recordId } };"
+        "jsCode": "try {\nconst response = $json;\nconst reference = $('Valider Handoff Option B').first().json.reference;\nconst candidates = [response, response?.data, response?.body, response?.body?.data].filter(value => value && typeof value === 'object');\nlet records = null;\nfor (const candidate of candidates) {\n  if (Array.isArray(candidate)) { records = candidate; break; }\n  for (const key of ['records', 'list']) {\n    if (Array.isArray(candidate[key])) { records = candidate[key]; break; }\n  }\n  if (records !== null) break;\n}\nif (records === null) throw new Error('Réponse NocoDB sans tableau records ou list.');\nconst normalized = records.map(row => {\n  if (!row || typeof row !== 'object') return null;\n  const f = row.fields || row;\n  const id = row.id || row.id_fields?.Id || f.Id || f.id;\n  return { ...row, ...f, id };\n}).filter(Boolean);\nconst matches = normalized.filter(row => String(row.Code_Mission || '').replace(/[=\\s]/g, '').trim().toUpperCase() === reference);\nif (matches.length !== 1) throw new Error('La mission ' + reference + ' doit correspondre à exactement un enregistrement NocoDB ; résultats : ' + matches.length + '.');\nconst recordId = Number(matches[0].id);\nif (!Number.isSafeInteger(recordId) || recordId <= 0) throw new Error('Identifiant primaire numérique absent ou invalide pour la mission ' + reference + '.');\nreturn { json: { success: true, reference, record_id: recordId } };\n} catch (error) {\nthrow new Error('Lecture ou validation de la mission NocoDB impossible : ' + error.message);\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -137,7 +137,7 @@
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "const recordId = $json.record_id;\nif (recordId === undefined || recordId === null) {\n  throw new Error('record_id est manquant');\n}\nreturn { json: { payload: [{ Id: recordId, Statut: 'Arbitrage Demandé' }] } };"
+        "jsCode": "try {\nconst recordId = Number($json.record_id);\nif (!Number.isSafeInteger(recordId) || recordId <= 0) throw new Error('record_id doit être un entier positif.');\nreturn { json: { id: recordId, fields: { Statut: 'Arbitrage Demandé' } } };\n} catch (error) {\nthrow new Error('Construction du PATCH NocoDB impossible : ' + error.message);\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -165,7 +165,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ $json.payload }}",
+        "jsonBody": "={{ $json }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -252,7 +252,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const cleanRef = String($json.query?.ref ?? $json.query?.reference ?? '').replace(/^[=\\s]+/, '').trim().toUpperCase();\nif (!/^MIS-2026-\\d{4}$/.test(cleanRef)) throw new Error('Référence de mission absente ou invalide : format attendu MIS-2026-XXXX.');\nreturn { json: { reference: cleanRef } };"
+        "jsCode": "try {\nconst cleanRef = String($json.query?.ref ?? $json.query?.reference ?? '').replace(/^[=\\s]+/, '').trim().toUpperCase();\nif (!/^MIS-2026-\\d{4}$/.test(cleanRef)) throw new Error('Référence de mission absente ou invalide : format attendu MIS-2026-XXXX.');\nreturn { json: { success: true, reference: cleanRef } };\n} catch (error) {\nthrow new Error('Validation de la référence de statut impossible : ' + error.message);\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -272,8 +272,8 @@
         "queryParameters": {
           "parameters": [
             {
-              "name": "where",
-              "value": "={{ '(Code_Mission,like,%' + $json.reference + '%)' }}"
+              "name": "limit",
+              "value": "1000"
             }
           ]
         },
@@ -298,7 +298,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const response = $json;\nconst reference = $('Valider Référence Statut').first().json.reference;\nconst candidates = [response, response.data].filter(value => value && typeof value === 'object');\nlet records = [];\nfor (const candidate of candidates) {\n  if (Array.isArray(candidate)) { records = candidate; break; }\n  for (const key of ['records', 'list', 'data']) {\n    if (Array.isArray(candidate[key])) { records = candidate[key]; break; }\n  }\n  if (records.length) break;\n}\nconst normalized = records.map(record => record && record.fields && typeof record.fields === 'object' ? { ...record, ...record.fields } : record);\nconst mission = normalized.find(record => String(record?.Code_Mission || '').replace(/[=\\s]/g, '').trim().toUpperCase() === reference);\nconst date = mission ? mission.Date_Ancrage || mission.CreatedAt || mission.created_at || mission.Date_Creation || mission.Date || null : null;\nreturn { json: {\n  success: true,\n  reference,\n  found: Boolean(mission),\n  statut: mission ? String(mission.Statut || 'Diagnostic Initial') : 'Diagnostic Initial',\n  secteur: mission ? String(mission.Secteur || 'Agro-industrie et souveraineté alimentaire') : 'Agro-industrie et souveraineté alimentaire',\n  palier: mission ? String(mission.Palier || 'mandat') : 'mandat',\n  sha256_hash: mission ? String(mission.Empreinte_SHA256 || mission.Contrat_Hash_Ref || '') : '',\n  expert_assigne: mission ? mission.Expert_Assigne || null : null,\n  date: date ? String(date) : null\n} };"
+        "jsCode": "try {\nconst response = $json;\nconst reference = $('Valider Référence Statut').first().json.reference;\nconst candidates = [response, response?.data, response?.body, response?.body?.data].filter(value => value && typeof value === 'object');\nlet records = null;\nfor (const candidate of candidates) {\n  if (Array.isArray(candidate)) { records = candidate; break; }\n  for (const key of ['records', 'list']) {\n    if (Array.isArray(candidate[key])) { records = candidate[key]; break; }\n  }\n  if (records !== null) break;\n}\nif (records === null) throw new Error('Réponse NocoDB sans tableau records ou list.');\nconst normalized = records.map(row => {\n  if (!row || typeof row !== 'object') return null;\n  const f = row.fields || row;\n  const id = row.id || row.id_fields?.Id || f.Id || f.id;\n  return { ...row, ...f, id };\n}).filter(Boolean);\nconst mission = normalized.find(row => String(row.Code_Mission || '').replace(/[=\\s]/g, '').trim().toUpperCase() === reference);\nconst date = mission ? mission.Date_Ancrage || mission.CreatedAt || mission.created_at || mission.Date_Creation || mission.Date || null : null;\nreturn { json: {\n  success: true,\n  reference,\n  found: Boolean(mission),\n  statut: mission ? String(mission.Statut || 'Diagnostic Initial') : 'Diagnostic Initial',\n  secteur: mission ? String(mission.Secteur || 'Agro-industrie et souveraineté alimentaire') : 'Agro-industrie et souveraineté alimentaire',\n  palier: mission ? String(mission.Palier || 'mandat') : 'mandat',\n  sha256_hash: mission ? String(mission.Empreinte_SHA256 || mission.Contrat_Hash_Ref || '') : '',\n  expert_assigne: mission ? mission.Expert_Assigne || null : null,\n  date: date ? String(date) : null\n} };\n} catch (error) {\nthrow new Error('Lecture du statut NocoDB impossible : ' + error.message);\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -469,6 +469,6 @@
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "ea8fa31aa22966a954dc961c81514f022c83fc78d659cee5ee3c2bdbd3975381",
-    "description": "CORTEX_04 reçoit les handoffs Option B sur cortex-04-handoff-option-b, alerte contact@e-metalabs.com, accuse réception au client, puis actualise Statut dans le registre NocoDB. Le webhook public GET statut-mission retourne les données publiques avec les en-têtes CORS requis; sa recherche utilise Code_Mission like %<référence nettoyée>% et normalise les références avec ou sans signe égal. Le webhook et l'appel sortant CORTEX_02 partagent le credential HTTP Header Auth « CORTEX_04 Handoff Auth », à configurer avec x-handoff-key. Le credential NocoDB « NocoDB API Token » fournit le header xc-token et doit contenir un token valide autorisé sur la table Missions. Aucun nœud ne dépend de $env. Les réponses WhatsApp réutilisent le credential Header Auth account et les courriels le credential SMTP account."
+    "description": "CORTEX_04 reçoit les handoffs Option B sur cortex-04-handoff-option-b, alerte contact@e-metalabs.com, accuse réception au client, puis actualise Statut dans le registre NocoDB. Le webhook public GET statut-mission retourne les données publiques avec les en-têtes CORS requis; il lit jusqu'à 1000 enregistrements via l'API v3 puis filtre Code_Mission en mémoire, en normalisant les schémas records[].fields et list[]. Les mises à jour PATCH utilisent /records et envoient { id, fields } dans le corps JSON. Le webhook et l'appel sortant CORTEX_02 partagent le credential HTTP Header Auth « CORTEX_04 Handoff Auth », à configurer avec x-handoff-key. Le credential NocoDB « NocoDB API Token » fournit xc-token sans préfixe Bearer; renseigner le token sans espace ni saut de ligne et avec les droits Missions. Aucun nœud ne dépend de $env. Les réponses WhatsApp réutilisent le credential Header Auth account et les courriels le credential SMTP account."
   }
 }
