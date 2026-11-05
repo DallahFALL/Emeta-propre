@@ -1,0 +1,436 @@
+﻿{
+  "name": "Cortex ABM Inbound",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1040,
+        0
+      ],
+      "id": "2b1e9586-0000-4000-8000-3a4f280b55c6",
+      "name": "Sub-workflow Trigger"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n\nconst input = $input.first().json;\nconst source = input.mission && typeof input.mission === 'object' ? { ...input, ...input.mission } : input;\nconst attempt = Number.isInteger(source.attempt) ? source.attempt : 0;\nconst feedback = Array.isArray(source.rejectionReasons) ? source.rejectionReasons : [];\nconst previous = String(source.previousReport || '');\nconst client = String(source.client_name || source.nom_client || source.Client || '');\nconst clientEmail = String(source.client_email || source.Email_Client || source.email || '');\nconst clientWhatsapp = String(source.client_whatsapp || source.WhatsApp_Client || source.whatsapp || '');\nconst missionRef = String(source.mission_id || source.reference_mission || source.reference || source.Code_Mission || '');\nconst context = String(source.audit_context || source.problematique || source.Problematique || source.mission_context || '');\nif (!missionRef || !context || !clientEmail || !clientWhatsapp) {\n  throw new Error('Donn├®es de mission incompl├¿tes: mission_id, contexte, e-mail et num├®ro WhatsApp client sont obligatoires.');\n}\nconst correction = feedback.length\n  ? '\\n\\nCORRECTION OBLIGATOIRE (tentative ' + attempt + ' sur 2):\\n' + feedback.map(reason => '- ' + reason).join('\\n') + '\\nCorrige le rapport pr├®c├®dent sans omettre les faits utiles:\\n' + previous\n  : '';\nreturn [{ json: {\n  ...source,\n  mission_id: missionRef,\n  client_name: client,\n  client_email: clientEmail,\n  client_whatsapp: clientWhatsapp,\n  attempt,\n  prompt: 'R├®dige en fran├ºais un m├®morandum dÔÇÖaudit strat├®gique factuel, sans inventer de donn├®es. Le corps doit d├®passer 800 caract├¿res et contenir les titres M├ëMORANDUM, OBJET et RECOMMANDATION ainsi que la signature e-META LABS.\\n\\nMission: ' + missionRef + '\\nClient: ' + client + '\\nContexte: ' + context + correction,\n} }];\n\n} catch (error) {\n  throw new Error(\"Prepare LLM Prompt ÔÇö \" + (error?.message || String(error)));\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -800,
+        0
+      ],
+      "id": "30864e54-0000-4000-8000-31ec1a531f01",
+      "name": "Prepare LLM Prompt"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.prompt }}",
+        "messages": {
+          "messageValues": []
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        -520,
+        0
+      ],
+      "id": "52a68dd7-0000-4000-8000-bc917645dc97",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        -520,
+        200
+      ],
+      "id": "06c410b9-0000-4000-8000-7b7a38935817",
+      "name": "Gemini Chat Model"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n\nconst crypto = require('crypto');\ntry {\n  const report = String($json.text ?? $json.output ?? '').trim();\n  const prompt = $('Prepare LLM Prompt').last().json;\n  const normalized = report.normalize('NFC').toLocaleUpperCase('fr-FR');\n  const checks = {\n    minLength: report.length >= 800,\n    memorandum: normalized.includes('M├ëMORANDUM'),\n    object: normalized.includes('OBJET'),\n    recommendation: normalized.includes('RECOMMANDATION'),\n    signature: normalized.includes('E-META LABS'),\n  };\n  const weights = { minLength: 20, memorandum: 20, object: 20, recommendation: 20, signature: 20 };\n  const qualityScore = Object.entries(checks).reduce((score, [key, passed]) => score + (passed ? weights[key] : 0), 0);\n  const rejectionReasons = Object.entries(checks)\n    .filter(([, passed]) => !passed)\n    .map(([key]) => ({\n      minLength: 'Le rapport doit contenir au moins 800 caract├¿res.',\n      memorandum: 'Le titre M├ëMORANDUM est obligatoire.',\n      object: 'La section OBJET est obligatoire.',\n      recommendation: 'La section RECOMMANDATION est obligatoire.',\n      signature: 'La signature e-META LABS est obligatoire.',\n    }[key]));\n  // Tous les crit├¿res sont imp├®ratifs: un score de 80 ne peut pas compenser un crit├¿re manquant.\n  const status = qualityScore >= 80 && rejectionReasons.length === 0 ? 'APPROVED' : 'MANUAL_REVIEW_REQUIRED';\n  return [{ json: {\n    ...prompt,\n    markdown_content: report,\n    qualityChecks: checks,\n    qualityScore,\n    rejectionReasons,\n    status,\n    sha256: crypto.createHash('sha256').update(report, 'utf8').digest('hex'),\n  } }];\n} catch (error) {\n  throw new Error('├ëchec du contr├┤le qualit├® du rapport: ' + error.message);\n}\n\n} catch (error) {\n  throw new Error(\"Code in JavaScript3 ÔÇö \" + (error?.message || String(error)));\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        0
+      ],
+      "id": "40c26318-0000-4000-8000-6783c995d66b",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "APPROVED",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "14bd7cdd-0000-4000-8000-35b55be2cc73",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "resume": "timeInterval",
+        "amount": 12,
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        240,
+        -100
+      ],
+      "id": "9e6d2795-0000-4000-8000-207c97d02aeb",
+      "name": "Wait 12 minutes"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://172.17.0.1:5000/generate-pdf",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { mission_id: $json.mission_id, client_name: $json.client_name, sha256: $json.sha256, markdown_content: $json.markdown_content } }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "data"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        480,
+        -100
+      ],
+      "id": "ddeb691a-0000-4000-8000-c21765ee9b25",
+      "name": "HTTP Request4"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendDocument",
+        "chatId": "={{ $env.CORTEX_EXECUTIVE_TELEGRAM_CHAT_ID }}",
+        "binaryData": true,
+        "binaryPropertyName": "data",
+        "additionalFields": {
+          "caption": "={{ 'AUDIT APPROUV├ë ┬À ' + $('Code in JavaScript3').last().json.mission_id + '\\nSHA-256: ' + $('Code in JavaScript3').last().json.sha256 + '\\nOTS: ' + ($('Code in JavaScript3').last().json.ots_url || $('Code in JavaScript3').last().json.OTS_URL || 'ancrage ├á effectuer') + '\\nCockpit: ' + ($env.NOCODB_COCKPIT_URL || 'https://base.e-metalabs.com') }}"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        760,
+        -220
+      ],
+      "id": "6448a97b-0000-4000-8000-85f5c7132bf9",
+      "name": "telegram account"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ 'https://graph.facebook.com/v20.0/' + $env.WHATSAPP_PHONE_NUMBER_ID + '/messages' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $env.WHATSAPP_ACCESS_TOKEN }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { messaging_product: 'whatsapp', to: $('Code in JavaScript3').last().json.client_whatsapp, type: 'text', text: { body: 'Votre mission ' + $('Code in JavaScript3').last().json.mission_id + ' est finalis├®e. Consultez le suivi s├®curis├®: https://e-metalabs.com/tracker.html?ref=' + encodeURIComponent($('Code in JavaScript3').last().json.mission_id) } } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        760,
+        -60
+      ],
+      "id": "551e8db8-0000-4000-8000-101a05f3b7dc",
+      "name": "WhatsApp Cloud API"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "={{ $('Code in JavaScript3').last().json.client_email }}",
+        "subject": "={{ 'Accus├® ex├®cutif ┬À ' + $('Code in JavaScript3').last().json.mission_id }}",
+        "emailType": "text",
+        "message": "={{ 'Bonjour,\\n\\nVeuillez trouver en pi├¿ce jointe le rapport officiel de la mission ' + $('Code in JavaScript3').last().json.mission_id + '.\\nEmpreinte SHA-256: ' + $('Code in JavaScript3').last().json.sha256 + '\\nSuivi s├®curis├®: https://e-metalabs.com/tracker.html?ref=' + encodeURIComponent($('Code in JavaScript3').last().json.mission_id) }}",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {
+                "property": "data"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        760,
+        100
+      ],
+      "id": "311ed1d3-0000-4000-8000-4a170286ba57",
+      "name": "Gmail API"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n\nconst result = $input.first().json;\nif (result.status !== 'MANUAL_REVIEW_REQUIRED') throw new Error('La boucle de correction a re├ºu un r├®sultat non rejet├®.');\nreturn [{ json: {\n  ...result,\n  attempt: Number(result.attempt || 0) + 1,\n  previousReport: result.markdown_content,\n  rejectionReasons: result.rejectionReasons,\n} }];\n\n} catch (error) {\n  throw new Error(\"Build correction retry ÔÇö \" + (error?.message || String(error)));\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        180
+      ],
+      "id": "2cc7a288-0000-4000-8000-5eeaa25c4074",
+      "name": "Build correction retry"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.attempt }}",
+              "rightValue": 3,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        480,
+        180
+      ],
+      "id": "48c39fd2-0000-4000-8000-74f861038864",
+      "name": "Retry Gate"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "={{ $env.CORTEX_REVIEW_EMAIL }}",
+        "subject": "={{ 'Revue manuelle requise ┬À ' + $json.mission_id }}",
+        "emailType": "text",
+        "message": "={{ 'Mission: ' + $json.mission_id + '\\nTentatives: ' + $json.attempt + '\\nScore: ' + $json.qualityScore + '/100\\nMotifs: ' + $json.rejectionReasons.join(' | ') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        760,
+        260
+      ],
+      "id": "8da55a68-0000-4000-8000-628f4c649862",
+      "name": "Manual Review Notification"
+    }
+  ],
+  "connections": {
+    "Sub-workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Prepare LLM Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare LLM Prompt": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Wait 12 minutes",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build correction retry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build correction retry": {
+      "main": [
+        [
+          {
+            "node": "Retry Gate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Retry Gate": {
+      "main": [
+        [
+          {
+            "node": "Prepare LLM Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Manual Review Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 12 minutes": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request4": {
+      "main": [
+        [
+          {
+            "node": "telegram account",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "WhatsApp Cloud API",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Gmail API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataErrorExecution": "all"
+  },
+  "versionId": "55c9e9f2-6399-410f-8c01-a7a5ff0c1525",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
