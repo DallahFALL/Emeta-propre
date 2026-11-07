@@ -1,911 +1,560 @@
-   const AUTHORIZATION_KEY = "CORTEX2026";
-const MIN_CONTEXT_LENGTH = 150;
-const sectors = {
-    agro: {
-        name: "Agro-industrie & Souveraineté Alimentaire",
-        curve: [244, 222, 225, 183, 190, 153, 139]
-    },
-    // ... reste de vos secteurs inchangé
-   energy: {
-        name: "Énergie, Mines & Transition",
-        curve: [252, 224, 232, 186, 171, 148, 123]
-    },
-    banking: {
-        name: "Banque, FinTech & Assurance",
-        curve: [249, 237, 204, 210, 157, 130, 96]
-    },
-    logistics: {
-        name: "Logistique, Ports & Supply Chain",
-        curve: [255, 223, 216, 188, 174, 126, 103]
-    },
-    health: {
-        name: "Santé, Pharma & Biotechnologies",
-        curve: [250, 230, 208, 212, 168, 151, 118]
-    },
-    telecom: {
-        name: "Télécoms, Cloud & Infrastructures",
-        curve: [255, 239, 211, 187, 156, 121, 82]
-    },
-    property: {
-        name: "Immobilier, BTP & Grands Travaux",
-        curve: [250, 230, 236, 191, 186, 142, 112]
-    },
-    manufacturing: {
-        name: "Industrie Manufacturière & Transformation",
-        curve: [251, 230, 219, 195, 169, 140, 109]
-    },
-    public: {
-        name: "Secteur Public & Para-public",
-        curve: [252, 226, 221, 176, 162, 143, 101]
-    },
-    retail: {
-        name: "Distribution, Retail & Négoce",
-        curve: [253, 228, 214, 192, 153, 131, 97]
-    }
-};
+// =========================================================
+// CONFIGURATION ROUTAGE CORTEX
+// =========================================================
+// URL du Webhook CORTEX_01 (Test) - Pensez à enlever "-test" pour la production
+const WEBHOOK_N8N_URL = "https://automation.e-metalabs.com/webhook/482700d1-501d-4237-b5a7-fc6ee6afdf45";
 
-const mandateSectorAliases = {
-    agro: "agro",
-    banque: "banque",
-    banking: "banque",
-    mines: "mines",
-    energy: "mines",
-    logistique: "logistique",
-    logistics: "logistique",
-    sante: "sante",
-    health: "sante",
-    telecoms: "telecoms",
-    telecom: "telecoms",
-    btp: "btp",
-    property: "btp",
-    industrie: "industrie",
-    manufacturing: "industrie",
-    public: "public",
-    retail: "retail"
-};
-
-function normalizeMandateSector(value) {
-    const normalized = String(value || "").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    return mandateSectorAliases[normalized] || "";
-}
-
-function getActiveMandateSector() {
-    const activeBadge = document.querySelector(".sector-badge.active, .sector-badge.is-active, .sector-badge[aria-pressed='true']");
-    const candidates = [
-        window.activeSectorKey,
-        activeBadge?.dataset.sector,
-        typeof activeSectorId !== "undefined" ? activeSectorId : "",
-        document.querySelector(".sector-badge")?.dataset.sector
-    ];
-    return candidates.map(normalizeMandateSector).find(Boolean) || "agro";
-}
-
-function getActiveMandatePalier(value = typeof activePricingTier !== "undefined" ? activePricingTier : "") {
-    const normalized = String(value || "").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    if (/decouverte|discovery|starter/.test(normalized)) return "decouverte";
-    if (/chambre|executive|executif/.test(normalized)) return "chambre";
-    return "mandat";
-}
-
-function getVerifiedMandateEntity(email) {
-    const enteredEntity = document.getElementById("entityName")?.value.trim();
-    if (enteredEntity) return enteredEntity;
-    const emailDomain = String(email || "").split("@")[1]?.trim().toLowerCase().replace(/^www\./, "");
-    if (emailDomain) return `Société via ${emailDomain}`;
-    throw new Error("Renseignez une entreprise ou une adresse e-mail professionnelle valide.");
-}
-
-function getMandateRepresentative(email) {
-    const representative = document.getElementById("nomClient")?.value.trim()
-        || document.getElementById("nom_client")?.value.trim()
-        || document.getElementById("clientName")?.value.trim();
-    if (representative) return representative;
-    const localPart = String(email || "").split("@")[0]?.trim();
-    return localPart ? localPart.replace(/[._-]+/g, " ") : "Direction requérante";
-}
-
-function normalizeMandatePhone(value) {
-    const digits = String(value || "").replace(/\D/g, "");
-    const internationalDigits = digits.startsWith("00") ? digits.slice(2) : digits;
-    const normalized = /^7\d{8}$/.test(internationalDigits) ? `221${internationalDigits}` : internationalDigits;
-    if (!/^[1-9]\d{7,14}$/.test(normalized)) {
-        throw new Error(uiDict[currentLang].phoneError);
-    }
-    return normalized;
-}
-
-function createMandateTitle(sector, entity) {
-    return `Audit Stratégique [${sector.toUpperCase()}] — ${entity}`;
-}
-
+// ==========================================
+// DICTIONNAIRE MULTILINGUE (UI)
+// ==========================================
 const uiDict = {
     fr: {
-        counter: "Diagnostics Sécurisés & Scellés Cryptographiquement",
-        heroTitle: "L'Intelligence Algorithmique & L'Arbitrage de l'Expert Humain",
-        heroSubtitle: "L'alliance absolue de la Data, de la Cryptographie et de l'Arbitrage Terrain.",
-        sovereignty: "<strong>Souveraineté Absolue :</strong> Vos mandats sont scellés par preuve d'antériorité immuable via <a href=\"https://opentimestamps.org/\" target=\"_blank\" rel=\"noopener noreferrer\">OpenTimestamps.org</a> et horodatés sur la Blockchain.",
-        offerTitle: "Niveaux d'accréditation",
-        offerIntro: "Retenez un niveau de mandat pour initialiser le registre d'ingestion décisionnelle.",
-        discovery: "Diagnostic préliminaire de maturité et d'alignement sectoriel.",
-        discoveryItems: ["Diagnostic flash préliminaire", "Score d'alignement sur 3 axes critiques", "Rapport d'orientation synthétique (3 pages)", "Horodatage serveur standard"],
-        recommended: "RECOMMANDÉ DIRECTION",
-        certified: "Investigation décisionnelle approfondie et rapport certifié de 15 à 25 pages.",
-        certifiedItems: ["Rapport d'audit exhaustif (15 à 25 pages)", "Stress-tests financiers & matrice des risques", "Scellement probatoire OpenTimestamps", "Référence souveraine type MIS-2026-xxx"],
-        executive: "Due diligence stratégique globale, arbitrage filiales et comités de direction.",
-        executiveItems: ["Audit multidimensionnel filiales & holdings", "Modélisation prédictive des chocs exogènes", "Ancrage cryptographique renforcé", "Restitution privée avec le collège d'experts"],
-        terminalTitle: "Terminal d'ingestion décisionnelle",
-        terminalIntro: "Registre sécurisé de recevabilité des mandats et d'initialisation des audits stratégiques.",
-        lockTitle: "TERMINAL EN ATTENTE D'ACCRÉDITATION",
-        lockDesc: "Veuillez retenir un palier d'accréditation ci-dessus pour initialiser le registre d'ingestion.",
-        missionLabel: "NOM DE L'ENTITÉ & SECTEUR D'ACTIVITÉ",
-        contextLabel: "PROBLÉMATIQUE, EXPOSÉ DES ENJEUX & VULNÉRABILITÉS",
-        fileLabel: "Joindre une pièce justificative ou trame comptable",
-        placeholderMission: "Ex. : Société / groupe et domaine d'activité",
-        placeholderContext: "Exposez le contexte, les enjeux, les outils et les vulnérabilités identifiés (150 caractères minimum).",
-        fileNone: "Aucun fichier sélectionné",
-        characterPrompt: "caractères minimum",
-        characterReady: "Condition formelle de recevabilité du mandat",
-        chooseStarter: "SÉLECTIONNER CE PALIER",
-        choosePro: "RETENIR CE MANDAT",
-        chooseExpert: "MANDATER LA CHAMBRE",
-        modalTitle: "🛡️ Canal Sécurisé de Restitution",
-        modalDescription: "Indiquez les coordonnées professionnelles de réception du rapport certifié.",
-        emailLabel: "Email Professionnel",
-        phoneLabel: "Ligne WhatsApp Directe",
-        submit: "SCELLER & TRANSMETTRE AU PIPELINE n8n",
-        sending: "SCELLEMENT & TRANSMISSION EN COURS…",
-        contextError: "Le nom de l'entité et un exposé d'au moins 150 caractères sont requis.",
-        contactError: "Veuillez renseigner un email professionnel et une ligne WhatsApp.",
-        phoneError: "Saisissez un numéro WhatsApp international valide (8 à 15 chiffres, indicatif obligatoire). Un numéro local sénégalais à 9 chiffres commençant par 7 est accepté.",
-        cryptoError: "Le scellement cryptographique nécessite un navigateur sécurisé (HTTPS) compatible Web Crypto.",
-        success: "Mandat transmis au pipeline. Votre référence souveraine est ",
-        transmissionError: "La transmission a échoué. Le mandat reste dans le terminal ; vérifiez votre connexion ou réessayez.",
-        resetConfirm: "Réinitialiser le terminal et fermer la session d'habilitation ?",
-        unlockError: "Clé d'habilitation invalide. Accès refusé."
+        btnTracker: "Suivi Mission 🛡️",
+        btnDesk: "Desk Exécutif",
+        counter: "Diagnostics Sécurisés & Ancrés",
+        hero1: "Le Diagnostic de l'Agent IA",
+        hero2: "& L'Exécution de l'Expert Humain",
+        sloganTech: "L'alliance absolue de la Data et du Terrain. L'IA e-META identifie vos failles, nos experts exécutifs déploient les solutions.",
+        bannerOts: "🛡️ <strong style='font-weight: 600;'>Souveraineté & Secret des Affaires :</strong> Vos requêtes sont cryptées de bout en bout, hébergées sur infrastructure dédiée et purgées après audit. Empreinte immuable scellée sur Bitcoin via <em style='text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);'>OpenTimestamps.org</em>",
+        title01: "01. SÉLECTIONNEZ VOTRE NIVEAU D'ACCRÉDITATION",
+        title02: "02. SOUMISSION DES DONNÉES",
+        
+        badgeBeta: "🚀 Tarifs Early Adopter - Phase Beta",
+        priceStarter: "0 FCFA",
+        pricePro: "14 900 FCFA",
+        priceExpert: "29 000 FCFA",
+        stDesc: "Pour tester la puissance analytique d'e-META LABS.",
+        st1: "✓ 2 Diagnostics foudroyants", st2: "✓ Identification du risque majeur", st3: "✓ Format texte (Email)", st4: "⚠️ Plan d'action non inclus",
+        btnAct: "ACTIVER CE PLAN",
+        proBadge: "LE PLUS POPULAIRE",
+        proDesc: "Un pack de <strong>3 audits stratégiques</strong> complets et sans concession.",
+        pr1: "<strong style='color: #d4af37;'>✓ 3 Rapports complets</strong>", pr2: "✓ Diagnostic financier & KPI", pr3: "✓ Stratégies de disruption", pr4: "✓ Rapports PDF Premium + Ancrage",
+        exDesc: "Votre cellule de prospective disponible 24/7.",
+        ex1: "✓ Jusqu'à 10 Audits / mois", ex2: "✓ Veille Data en temps réel", ex3: "✓ Protocole d'action sur 7 jours", ex4: "✓ Livraison VIP (WhatsApp)",
+        
+        lockTitle: "TERMINAL EN ATTENTE",
+        lockDesc: "Veuillez sélectionner un plan ci-dessus pour déverrouiller l'Agent e-META.",
+        termTitle: "TERMINAL DE DÉTECTION IA",
+        termDesc: "Définissez le cadre de votre mission et exposez votre problématique brute. L'Agent e-META analysera votre contexte pour générer l'audit approprié.",
+        
+        lblMission: "NOM DE LA MISSION OU SECTEUR D'ACTIVITÉ",
+        lblContexte: "PROBLÉMATIQUE ET CONTEXTE BRUT (Précisez : Quels sont vos outils actuels ? Où se situe la perte de marge ?)",
+        lblFile: "Joindre un document de référence (Optionnel - PDF, DOCX, PNG, JPG)",
+        phMission: "Ex : Transformation Agro-industrielle, Automatisation SaaS...",
+        phContexte: "Ex : Nous déployons des unités de stockage agro-industriel dans la Vallée du Fleuve, mais l'absence de synchronisation en temps réel sur le contrôle thermique et la chaîne logistique crée une friction de 15% sur nos rendements...",
+        
+        btnAnalyse: "LANCER L'ANALYSE ET L'ANCRAGE OPENTIMESTAMPS",
+        linkMatrice: "Consulter la matrice de nos 20 expertises sectorielles couvertes par l'IA",
+        
+        modalSecTitle: "Canal Sécurisé Requis",
+        modalSecDesc: "Où l'Agent e-META doit-il vous transmettre les résultats de son analyse sectorielle ?",
+        lblEmail: "Votre Email (Pour le rapport PDF)",
+        lblPhone: "Votre Numéro WhatsApp (Pour l'échange en direct)",
+        btnFire: "CONFIRMER ET TRANSMETTRE",
+        
+        alertEmpty: "⚠️ EXIGENCE E-META : La rigueur de l'Agent IA nécessite un contexte détaillé (minimum 150 caractères). Veuillez décrire précisément vos points de friction pour obtenir un audit sur-mesure.",
+        alertMiss: "Veuillez renseigner votre email et numéro WhatsApp pour sécuriser le canal.",
+        alertSuccess: "✅ Données sécurisées reçues. L'Agent e-META est en train d'analyser votre contexte. Surveillez votre application WhatsApp !",
+        alertError: "❌ Une erreur de transmission vers notre serveur souverain est survenue.",
+
+        linkMentions: "Mentions Légales",
+        linkCgv: "CGV",
+        linkConf: "Confidentialité",
+        linkRemb: "Remboursement",
+        footerRights: "&copy; 2026 E-META LABS SASU. Tous droits réservés.",
+        footerUnit: "Strategic Intelligence Unit • Rosso - Dakar - Paris - Dubai - Shanghai - New York"
     },
     en: {
-        counter: "Secure Diagnostics & Cryptographically Sealed",
-        heroTitle: "Algorithmic Intelligence & Human Expert Arbitration",
-        heroSubtitle: "The absolute alliance of Data, Cryptography and Field Arbitration.",
-        sovereignty: "<strong>Absolute Sovereignty:</strong> Mandates are sealed with immutable proof of existence via <a href=\"https://opentimestamps.org/\" target=\"_blank\" rel=\"noopener noreferrer\">OpenTimestamps.org</a> and timestamped on the Blockchain.",
-        offerTitle: "Accreditation levels",
-        offerIntro: "Select a mandate level to initialize the decision-ingestion register.",
-        discovery: "Preliminary maturity and sector alignment diagnostic.",
-        discoveryItems: ["Preliminary rapid diagnostic", "Alignment score across 3 critical axes", "Concise orientation report (3 pages)", "Standard server timestamp"],
-        recommended: "RECOMMENDED FOR LEADERSHIP",
-        certified: "In-depth decision investigation and certified 15–25-page report.",
-        certifiedItems: ["Comprehensive audit report (15–25 pages)", "Financial stress tests & risk matrix", "OpenTimestamps evidentiary seal", "Sovereign reference such as MIS-2026-xxx"],
-        executive: "Global strategic due diligence, subsidiary arbitration and executive committees.",
-        executiveItems: ["Multidimensional subsidiary & holding audit", "Predictive modelling of exogenous shocks", "Enhanced cryptographic anchoring", "Private presentation to the expert panel"],
-        terminalTitle: "Decision ingestion terminal",
-        terminalIntro: "Secure mandate admissibility register and strategic audit initiation.",
-        lockTitle: "TERMINAL AWAITING ACCREDITATION",
-        lockDesc: "Select an accreditation tier above to initialize the ingestion register.",
-        missionLabel: "ENTITY NAME & BUSINESS SECTOR",
-        contextLabel: "PROBLEM, KEY ISSUES & VULNERABILITIES",
-        fileLabel: "Attach supporting document or accounting records",
-        placeholderMission: "E.g. company / group and business sector",
-        placeholderContext: "Describe the context, issues, tools and identified vulnerabilities (150 characters minimum).",
-        fileNone: "No file selected",
-        characterPrompt: "characters minimum",
-        characterReady: "Formal mandate admissibility requirement",
-        chooseStarter: "SELECT THIS TIER",
-        choosePro: "RETAIN THIS MANDATE",
-        chooseExpert: "APPOINT THE CHAMBER",
-        modalTitle: "🛡️ Secure Delivery Channel",
-        modalDescription: "Provide professional contact details for delivery of the certified report.",
-        emailLabel: "Professional email",
-        phoneLabel: "Direct WhatsApp line",
-        submit: "SEAL & TRANSMIT TO n8n PIPELINE",
-        sending: "SEALING & TRANSMITTING…",
-        contextError: "Entity name and a statement of at least 150 characters are required.",
-        contactError: "Enter a professional email address and WhatsApp line.",
-        phoneError: "Enter a valid international WhatsApp number (8–15 digits, country code required). A 9-digit Senegalese local number starting with 7 is accepted.",
-        cryptoError: "Cryptographic sealing requires a secure (HTTPS) browser with Web Crypto support.",
-        success: "Mandate sent to the pipeline. Your sovereign reference is ",
-        transmissionError: "Transmission failed. Your mandate remains in the terminal; check your connection or retry.",
-        resetConfirm: "Reset the terminal and end the authorization session?",
-        unlockError: "Invalid authorization key. Access denied."
+        btnTracker: "Mission Tracker 🛡️",
+        btnDesk: "Expert Desk",
+        counter: "Secured & Anchored Diagnostics",
+        hero1: "AI Agent Diagnosis",
+        hero2: "& Human Expert Execution",
+        sloganTech: "The absolute alliance of Data and Fieldwork. e-META AI identifies your gaps, our executive experts deploy the solutions.",
+        bannerOts: "🛡️ <strong style='font-weight: 600;'>Sovereignty & Business Secrecy:</strong> Your inputs are end-to-end encrypted, processed on dedicated infrastructure and purged post-audit. Immutable timestamp anchored on Bitcoin via <em style='text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);'>OpenTimestamps.org</em>",
+        title01: "01. SELECT YOUR ACCREDITATION LEVEL",
+        title02: "02. DATA SUBMISSION",
+        
+        badgeBeta: "🚀 Early Adopter Pricing - Beta Phase",
+        priceStarter: "$0",
+        pricePro: "$25",
+        priceExpert: "$49",
+        stDesc: "To test the analytical power of e-META LABS.",
+        st1: "✓ 2 Lightning Diagnostics", st2: "✓ Major risk identification", st3: "✓ Text format (Email)", st4: "⚠️ Action plan not included",
+        btnAct: "ACTIVATE THIS PLAN",
+        proBadge: "MOST POPULAR",
+        proDesc: "A pack of <strong>3 complete strategic audits</strong> without compromise.",
+        pr1: "<strong style='color: #d4af37;'>✓ 3 Complete Reports</strong>", pr2: "✓ Financial diagnosis & KPI", pr3: "✓ Disruption strategies", pr4: "✓ Premium PDF Reports + Anchoring",
+        exDesc: "Your foresight unit available 24/7.",
+        ex1: "✓ Up to 10 Audits / month", ex2: "✓ Real-time Data Watch", ex3: "✓ 7-day Action Protocol", ex4: "✓ VIP Delivery (WhatsApp)",
+
+        lockTitle: "TERMINAL ON STANDBY",
+        lockDesc: "Please select a plan above to unlock the e-META Agent.",
+        termTitle: "AI DETECTION TERMINAL",
+        termDesc: "Define the scope of your mission and expose your raw problem. The e-META Agent will analyze your context.",
+        
+        lblMission: "MISSION NAME OR BUSINESS SECTOR",
+        lblContexte: "RAW PROBLEM & CONTEXT (Specify: What are your current tools? Where is the margin loss?)",
+        lblFile: "Attach a reference document (Optional - PDF, DOCX, PNG, JPG)",
+        phMission: "Ex: Agro-industrial Transformation, SaaS Automation...",
+        phContexte: "Ex: We are deploying agro-industrial storage units in the River Valley, but the lack of real-time synchronization on thermal control and supply chain creates a 15% operational friction on our yields...",
+        
+        btnAnalyse: "LAUNCH ANALYSIS AND OPENTIMESTAMPS ANCHORING",
+        linkMatrice: "Consult the matrix of our 20 AI-covered sector expertises",
+        
+        modalSecTitle: "Secure Channel Required",
+        modalSecDesc: "Where should the e-META Agent transmit the results of its sectoral analysis?",
+        lblEmail: "Your Email (For the PDF report)",
+        lblPhone: "Your WhatsApp Number (For direct exchange)",
+        btnFire: "CONFIRM AND TRANSMIT",
+        
+        alertEmpty: "⚠️ E-META REQUIREMENT: The rigor of the AI Agent requires a detailed context (minimum 150 characters). Please precisely describe your friction points to obtain a custom audit.",
+        alertMiss: "Please provide your email and WhatsApp number.",
+        alertSuccess: "✅ Secured data received. The e-META Agent is analyzing your context. Monitor your WhatsApp!",
+        alertError: "❌ A connection error occurred.",
+
+        linkMentions: "Legal Notice",
+        linkCgv: "Terms of Service",
+        linkConf: "Privacy Policy",
+        linkRemb: "Refund Policy",
+        footerRights: "&copy; 2026 E-META LABS SASU. All rights reserved.",
+        footerUnit: "Strategic Intelligence Unit • Rosso - Dakar - Paris - Dubai - Shanghai - New York"
     },
     es: {
-        counter: "Diagnósticos Seguros y Sellados Criptográficamente",
-        heroTitle: "Inteligencia Algorítmica y Arbitraje del Experto Humano",
-        heroSubtitle: "La alianza absoluta de Datos, Criptografía y Arbitraje sobre el Terreno.",
-        sovereignty: "<strong>Soberanía Absoluta:</strong> Los mandatos se sellan con prueba inmutable de anterioridad mediante <a href=\"https://opentimestamps.org/\" target=\"_blank\" rel=\"noopener noreferrer\">OpenTimestamps.org</a> y marca temporal en Blockchain.",
-        offerTitle: "Niveles de acreditación",
-        offerIntro: "Seleccione un nivel de mandato para iniciar el registro de ingestión decisional.",
-        discovery: "Diagnóstico preliminar de madurez y alineación sectorial.",
-        discoveryItems: ["Diagnóstico rápido preliminar", "Puntuación de alineación en 3 ejes críticos", "Informe sintético de orientación (3 páginas)", "Marca temporal estándar del servidor"],
-        recommended: "RECOMENDADO PARA DIRECCIÓN",
-        certified: "Investigación decisional exhaustiva e informe certificado de 15 a 25 páginas.",
-        certifiedItems: ["Informe de auditoría exhaustivo (15 a 25 páginas)", "Pruebas financieras de estrés y matriz de riesgos", "Sellado probatorio OpenTimestamps", "Referencia soberana tipo MIS-2026-xxx"],
-        executive: "Due diligence estratégica global, arbitraje de filiales y comités de dirección.",
-        executiveItems: ["Auditoría multidimensional de filiales y holdings", "Modelización predictiva de impactos exógenos", "Anclaje criptográfico reforzado", "Presentación privada ante el colegio de expertos"],
-        terminalTitle: "Terminal de ingestión decisional",
-        terminalIntro: "Registro seguro de admisibilidad e inicialización de auditorías estratégicas.",
-        lockTitle: "TERMINAL A LA ESPERA DE ACREDITACIÓN",
-        lockDesc: "Seleccione un nivel de acreditación para iniciar el registro de ingestión.",
-        missionLabel: "NOMBRE DE LA ENTIDAD Y SECTOR DE ACTIVIDAD",
-        contextLabel: "PROBLEMÁTICA, CUESTIONES CLAVE Y VULNERABILIDADES",
-        fileLabel: "Adjuntar justificante o documentación contable",
-        placeholderMission: "Ej.: empresa / grupo y sector de actividad",
-        placeholderContext: "Describa el contexto, los retos y las vulnerabilidades identificadas (mínimo 150 caracteres).",
-        fileNone: "Ningún archivo seleccionado",
-        characterPrompt: "caracteres mínimos",
-        characterReady: "Requisito formal de admisibilidad del mandato",
-        chooseStarter: "SELECCIONAR ESTE NIVEL",
-        choosePro: "RETENER ESTE MANDATO",
-        chooseExpert: "ENCARGAR A LA CÁMARA",
-        modalTitle: "🛡️ Canal Seguro de Entrega",
-        modalDescription: "Indique los datos profesionales para recibir el informe certificado.",
-        emailLabel: "Correo profesional",
-        phoneLabel: "Línea directa de WhatsApp",
-        submit: "SELLAR Y TRANSMITIR AL PIPELINE n8n",
-        sending: "SELLANDO Y TRANSMITIENDO…",
-        contextError: "Se requiere el nombre de la entidad y una descripción de al menos 150 caracteres.",
-        contactError: "Introduzca un correo profesional y un número de WhatsApp.",
-        phoneError: "Introduzca un número internacional de WhatsApp válido (8–15 dígitos, con prefijo de país). Se acepta un número local senegalés de 9 dígitos que empiece por 7.",
-        cryptoError: "El sellado criptográfico requiere un navegador seguro (HTTPS) compatible con Web Crypto.",
-        success: "Mandato transmitido al pipeline. Su referencia soberana es ",
-        transmissionError: "La transmisión falló. El mandato permanece en el terminal; compruebe la conexión o inténtelo de nuevo.",
-        resetConfirm: "¿Restablecer el terminal y cerrar la sesión de autorización?",
-        unlockError: "Clave de autorización no válida. Acceso denegado."
+        btnTracker: "Seguimiento Misión 🛡️",
+        btnDesk: "Portal de Expertos",
+        counter: "Diagnósticos Seguros y Anclados",
+        hero1: "El Diagnóstico del Agente IA",
+        hero2: "& La Ejecución del Experto Humano",
+        sloganTech: "La alianza absoluta de los Datos y el Terreno. La IA e-META identifica sus brechas, nuestros expertos ejecutivos despliegan las soluciones.",
+        bannerOts: "🛡️ <strong style='font-weight: 600;'>Soberanía y Secreto Comercial:</strong> Sus datos están cifrados de extremo a extremo y purgados tras el diagnóstico. Huella inmutable anclada en Bitcoin a través de <em style='text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);'>OpenTimestamps.org</em>",
+        title01: "01. SELECCIONE SU NIVEL DE ACREDITACIÓN",
+        title02: "02. ENVÍO DE DATOS",
+        
+        badgeBeta: "🚀 Precios Early Adopter - Fase Beta",
+        priceStarter: "$0",
+        pricePro: "$25",
+        priceExpert: "$49",
+        stDesc: "Para probar el poder analítico de e-META LABS.",
+        st1: "✓ 2 Diagnósticos relámpago", st2: "✓ Identificación de riesgo principal", st3: "✓ Formato texto (Email)", st4: "⚠️ Plan de acción no incluido",
+        btnAct: "ACTIVAR ESTE PLAN",
+        proBadge: "MÁS POPULAR",
+        proDesc: "Un pack de <strong>3 auditorías estratégicas completas</strong>.",
+        pr1: "<strong style='color: #d4af37;'>✓ 3 Informes completos</strong>", pr2: "✓ Diagnóstico financiero y KPI", pr3: "✓ Estrategias de disrupción", pr4: "✓ Informes PDF Premium",
+        exDesc: "Su unidad de prospectiva disponible 24/7.",
+        ex1: "✓ Hasta 10 Auditorías / mes", ex2: "✓ Vigilancia de datos en tiempo real", ex3: "✓ Protocolo de acción (7 días)", ex4: "✓ Entrega VIP (WhatsApp)",
+
+        lockTitle: "TERMINAL EN ESPERA",
+        lockDesc: "Seleccione un plan arriba para desbloquear el Agente e-META.",
+        termTitle: "TERMINAL DE DETECCIÓN IA",
+        termDesc: "Defina el alcance de su misión y exponga su problemática bruta. El Agente e-META analizará su contexto.",
+        
+        lblMission: "NOMBRE DE LA MISIÓN O SECTOR DE ACTIVIDAD",
+        lblContexte: "PROBLEMÁTICA Y CONTEXTO BRUTO (Especifique: ¿Cuáles son sus herramientas actuales? ¿Dónde está la pérdida de margen?)",
+        lblFile: "Adjuntar un documento de referencia (Opcional - PDF, DOCX, PNG, JPG)",
+        phMission: "Ej: Transformación Agroindustrial, Automatización SaaS...",
+        phContexte: "Ej: Desplegamos unidades de almacenamiento agroindustrial en el Valle del Río, pero la falta de sincronización en tiempo real sobre el control térmico crea una fricción del 15% en nuestros rendimientos...",
+        
+        btnAnalyse: "LANZAR ANÁLISIS Y ANCLAJE OPENTIMESTAMPS",
+        linkMatrice: "Consulte la matriz de nuestras 20 experiencias sectoriales",
+        
+        modalSecTitle: "Canal Seguro Requerido",
+        modalSecDesc: "¿Dónde debe el Agente e-META transmitirle los resultados?",
+        lblEmail: "Su Correo (Para el informe PDF)",
+        lblPhone: "Su Número de WhatsApp (Para intercambio directo)",
+        btnFire: "CONFIRMAR Y TRANSMITIR",
+        
+        alertEmpty: "⚠️ EXIGENCIA E-META: El rigor del Agente IA requiere un contexto detallado (mínimo 150 caracteres). Describa con precisión sus puntos de fricción para obtener una auditoría a medida.",
+        alertMiss: "Proporcione su correo y número de WhatsApp.",
+        alertSuccess: "✅ Datos seguros recibidos. ¡Revise su WhatsApp!",
+        alertError: "❌ Ocurrió un error de conexión.",
+
+        linkMentions: "Aviso Legal",
+        linkCgv: "Términos y Condiciones",
+        linkConf: "Política de Privacidad",
+        linkRemb: "Refund Policy",
+        footerRights: "&copy; 2026 E-META LABS SASU. Todos los derechos reservados.",
+        footerUnit: "Strategic Intelligence Unit • Rosso - Dakar - Paris - Dubai - Shanghai - New York"
     },
     ar: {
-        counter: "تشخيصات آمنة ومختومة تشفيرياً",
-        heroTitle: "الذكاء الخوارزمي وتحكيم الخبير البشري",
-        heroSubtitle: "تحالف البيانات والتشفير والتحكيم الميداني.",
-        sovereignty: "<strong>سيادة مطلقة:</strong> تُختم التفويضات بإثبات أسبقية غير قابل للتغيير عبر <a href=\"https://opentimestamps.org/\" target=\"_blank\" rel=\"noopener noreferrer\">OpenTimestamps.org</a> وتُؤرشف على سلسلة الكتل.",
-        offerTitle: "مستويات الاعتماد",
-        offerIntro: "اختر مستوى التفويض لبدء سجل الإدخال واتخاذ القرار.",
-        discovery: "تشخيص أولي للنضج والمواءمة القطاعية.",
-        discoveryItems: ["تشخيص أولي سريع", "درجة المواءمة عبر 3 محاور أساسية", "تقرير توجيهي موجز (3 صفحات)", "ختم زمني قياسي للخادم"],
-        recommended: "موصى به للإدارة",
-        certified: "تحقيق معمق لاتخاذ القرار وتقرير معتمد من 15 إلى 25 صفحة.",
-        certifiedItems: ["تقرير تدقيق شامل (15 إلى 25 صفحة)", "اختبارات ضغط مالية ومصفوفة مخاطر", "ختم إثبات OpenTimestamps", "مرجع سيادي من نوع MIS-2026-xxx"],
-        executive: "عناية استراتيجية شاملة وتحكيم الشركات التابعة ولجان الإدارة.",
-        executiveItems: ["تدقيق متعدد الأبعاد للشركات القابضة والتابعة", "نمذجة تنبؤية للصدمات الخارجية", "تعزيز التثبيت التشفيري", "عرض خاص أمام هيئة الخبراء"],
-        terminalTitle: "محطة الإدخال واتخاذ القرار",
-        terminalIntro: "سجل آمن لقبول التفويضات وبدء التدقيق الاستراتيجي.",
-        lockTitle: "المحطة بانتظار الاعتماد",
-        lockDesc: "يرجى اختيار مستوى اعتماد أعلاه لبدء سجل الإدخال.",
-        missionLabel: "اسم الكيان والقطاع الاقتصادي",
-        contextLabel: "المشكلة والقضايا الرئيسية ومواطن الضعف",
-        fileLabel: "إرفاق مستند داعم أو سجلات محاسبية",
-        placeholderMission: "مثال: الشركة / المجموعة والقطاع الاقتصادي",
-        placeholderContext: "اشرح السياق والقضايا ومواطن الضعف المحددة (150 حرفاً على الأقل).",
-        fileNone: "لم يتم اختيار ملف",
-        characterPrompt: "حرفاً كحد أدنى",
-        characterReady: "شرط رسمي لقبول التفويض",
-        chooseStarter: "اختيار هذا المستوى",
-        choosePro: "اعتماد هذا التفويض",
-        chooseExpert: "تكليف الغرفة",
-        modalTitle: "🛡️ قناة تسليم آمنة",
-        modalDescription: "أدخل بيانات الاتصال المهنية لتسليم التقرير المعتمد.",
-        emailLabel: "البريد الإلكتروني المهني",
-        phoneLabel: "رقم واتساب مباشر",
-        submit: "ختم وإرسال إلى مسار n8n",
-        sending: "جارٍ الختم والإرسال…",
-        contextError: "اسم الكيان ووصف لا يقل عن 150 حرفاً مطلوبان.",
-        contactError: "يرجى إدخال بريد مهني ورقم واتساب.",
-        phoneError: "أدخل رقم واتساب دولياً صالحاً (من 8 إلى 15 رقماً مع رمز الدولة). يُقبل الرقم السنغالي المحلي المكوّن من 9 أرقام والبادئ بـ7.",
-        cryptoError: "يتطلب الختم التشفيري متصفحاً آمناً (HTTPS) يدعم Web Crypto.",
-        success: "تم إرسال التفويض إلى مسار المعالجة. المرجع السيادي هو ",
-        transmissionError: "فشل الإرسال. لا يزال التفويض محفوظاً في المحطة؛ تحقق من الاتصال أو أعد المحاولة.",
-        resetConfirm: "إعادة ضبط المحطة وإنهاء جلسة الاعتماد؟",
-        unlockError: "مفتاح اعتماد غير صالح. تم رفض الوصول."
+        btnTracker: "متابعة المهمة 🛡️",
+        btnDesk: "بوابة الخبراء",
+        counter: "التشخيصات الآمنة والمثبتة",
+        hero1: "تشخيص وكيل الذكاء الاصطناعي",
+        hero2: "وتنفيذ الخبير البشري",
+        sloganTech: "التحالف المطلق بين البيانات والميدان. يحدد الذكاء الاصطناعي الثغرات، وينشر خبراؤنا التنفيذيون الحلول.",
+        bannerOts: "🛡️ <strong style='font-weight: 600;'>السيادة والسرية المهنية:</strong> بياناتك مشفرة بالكامل ومعالجة عبر خوادم مخصصة. بصمة غير قابلة للتغيير مثبتة على البلوكشين عبر <em style='text-shadow: 0 0 8px rgba(37, 211, 102, 0.5);'>OpenTimestamps.org</em>",
+        title01: "01. حدد مستوى الاعتماد الخاص بك",
+        title02: "02. تقديم البيانات",
+        
+        badgeBeta: "🚀 أسعار المتبنين الأوائل - المرحلة التجريبية",
+        priceStarter: "<span dir='ltr'>$0</span>",
+        pricePro: "<span dir='ltr'>$25</span>",
+        priceExpert: "<span dir='ltr'>$49</span>",
+        
+        stDesc: "لاختبار القوة التحليلية لـ e-META LABS.",
+        st1: "&#x200F;✓ 2 تشخيصات سريعة", 
+        st2: "&#x200F;✓ تحديد المخاطر الرئيسية", 
+        st3: "&#x200F;✓ تنسيق النص (البريد الإلكتروني)", 
+        st4: "&#x200F;⚠️ خطة العمل غير مشمولة",
+        
+        btnAct: "تفعيل هذه الخطة",
+        proBadge: "الأكثر شعبية",
+        proDesc: "مجموعة من <strong>3 عمليات تدقيق استراتيجية كاملة</strong>.",
+        pr1: "<strong style='color: #d4af37;'>&#x200F;✓ 3 تقارير كاملة</strong>", 
+        pr2: "&#x200F;✓ التشخيص المالي ومؤشرات الأداء", 
+        pr3: "&#x200F;✓ استراتيجيات الابتكار", 
+        pr4: "&#x200F;✓ تقارير PDF مميزة",
+        
+        exDesc: "وحدة الاستشراف الخاصة بك متاحة 24/7.",
+        ex1: "&#x200F;✓ حتى 10 تدقيقات / شهر", 
+        ex2: "&#x200F;✓ مراقبة البيانات في الوقت الفعلي", 
+        ex3: "&#x200F;✓ بروتوكول عمل لمدة 7 أيام", 
+        ex4: "&#x200F;✓ تسليم VIP (واتساب)",
+
+        lockTitle: "المحطة في وضع الانتظار",
+        lockDesc: "يرجى تحديد خطة أعلاه لفتح وكيل e-META.",
+        termTitle: "محطة الكشف بالذكاء الاصطناعي",
+        termDesc: "حدد نطاق مهمتك واعرض مشكلتك الاستراتيجية. سيقوم وكيل e-META بتحليل السياق.",
+        
+        lblMission: "اسم المهمة أو قطاع النشاط",
+        lblContexte: "الإشكالية والسياق الأساسي (حدد: ما هي أدواتك الحالية؟ أين يقع فقدان الهامش؟)",
+        lblFile: "إرفاق مستند مرجعي (اختياري - PDF, DOCX, PNG, JPG)",
+        phMission: "مثال: التحول في الصناعات الزراعية، أتمتة البرمجيات كخدمة...",
+        phContexte: "مثال: ننشر وحدات تخزين صناعية زراعية في وادي النهر، لكن الافتقار إلى المزامنة في الوقت الفعلي للتحكم الحراري وسلسلة التوريد يخلق احتكاكاً تشغيلياً بنسبة 15٪ في عائداتنا...",
+        
+        btnAnalyse: "إطلاق التحليل وتثبيت OPENTIMESTAMPS",
+        linkMatrice: "استشر مصفوفة خبراتنا القطاعية العشرين",
+        
+        modalSecTitle: "قناة آمنة مطلوبة",
+        modalSecDesc: "أين يجب أن ينقل وكيل e-META نتائج تحليله؟",
+        lblEmail: "بريدك الإلكتروني (لتقرير PDF)",
+        lblPhone: "رقم الواتساب الخاص بك (للتبادل المباشر)",
+        btnFire: "تأكيد وإرسال",
+        
+        alertEmpty: "⚠️ متطلبات E-META: تتطلب صرامة وكيل الذكاء الاصطناعي سياقاً مفصلاً (150 حرفاً كحد أدنى). يرجى وصف نقاط الاحتكاك بدقة للحصول على تدقيق مخصص.",
+        alertMiss: "يرجى تقديم بريدك الإلكتروني ورقم الواتساب.",
+        alertSuccess: "✅ تم استلام البيانات الآمنة. راقب تطبيق الواتساب الخاص بك!",
+        alertError: "❌ حدث خطأ في الاتصال الخادم.",
+
+        linkMentions: "إشعار قانوني",
+        linkCgv: "شروط الخدمة",
+        linkConf: "سياسة الخصوصية",
+        linkRemb: "سياسة الاسترداد",
+        footerRights: "&copy; 2026 E-META LABS SASU. كل الحقوق محفوظة.",
+        footerUnit: "وحدة الاستخبارات الاستراتيجية • روسو - داكار - باريس - دبي - شنغهاي - نيويورك"
     }
 };
 
-let currentLang = "fr";
-let activePricingPlan = "";
-let activePricingTier = "";
-let activeCurrency = "EUR";
-let activeMandateReference = "";
-let activeModalId = "";
-let activeSectorId = "agro";
+let currentLang = 'fr';
+let activePricingPlan = "Non sélectionné";
 
-const pricing = {
-    EUR: { DÉCOUVERTE: "0 €", "MANDAT CERTIFIÉ": "280 €", "CHAMBRE EXÉCUTIVE": "1 450 €" },
-    USD: { DÉCOUVERTE: "$0", "MANDAT CERTIFIÉ": "$300", "CHAMBRE EXÉCUTIVE": "$1 500" },
-    FCFA: { DÉCOUVERTE: "0 FCFA", "MANDAT CERTIFIÉ": "185 000 FCFA", "CHAMBRE EXÉCUTIVE": "950 000 FCFA" }
-};
-
-function setText(id, text) {
-    const element = document.getElementById(id);
-    if (element) element.textContent = text;
-}
-
-function localizedPrice(planName) {
-    const suffixKeys = {
-        DÉCOUVERTE: "offers.price.free",
-        "MANDAT CERTIFIÉ": "offers.price.mandate",
-        "CHAMBRE EXÉCUTIVE": "offers.price.month"
-    };
-    const amount = pricing[activeCurrency]?.[planName];
-    if (!amount) {
-        console.error(`Tarif absent pour le palier "${planName}" et la devise "${activeCurrency}".`);
-        return "";
-    }
-    const suffix = window.EMETA_I18N?.resolveTranslation(currentLang, suffixKeys[planName]);
-    return `${amount}${suffix ? ` ${suffix}` : ""}`;
-}
-
-function refreshPricing() {
-    const amountIds = {
-        DÉCOUVERTE: "price-starter",
-        "MANDAT CERTIFIÉ": "price-certified",
-        "CHAMBRE EXÉCUTIVE": "price-executive"
-    };
-    Object.entries(amountIds).forEach(([planName, id]) => {
-        setText(id, pricing[activeCurrency][planName]);
-    });
-    document.querySelectorAll("[data-currency]").forEach((button) => {
-        const selected = button.dataset.currency === activeCurrency;
-        button.classList.toggle("active", selected);
-        button.setAttribute("aria-pressed", String(selected));
-    });
-    if (activePricingTier) {
-        const planKeys = {
-            DÉCOUVERTE: "offers.plan.discovery",
-            "MANDAT CERTIFIÉ": "offers.plan.certified",
-            "CHAMBRE EXÉCUTIVE": "offers.plan.executive"
-        };
-        const localizedPlanName = window.EMETA_I18N?.resolveTranslation(currentLang, planKeys[activePricingTier]) || activePricingTier;
-        const price = localizedPrice(activePricingTier);
-        activePricingPlan = `${localizedPlanName} — ${price}`;
-        setText("badge-plan-selected", `${localizedPlanName} · ${price}`);
+// FONCTIONS "FAIL-SAFE"
+function safeText(id, text, isHTML = false) {
+    const el = document.getElementById(id);
+    if (el) {
+        if (isHTML) el.innerHTML = text;
+        else el.innerText = text;
     }
 }
-
-function setCurrency(currency) {
-    if (!Object.prototype.hasOwnProperty.call(pricing, currency)) {
-        console.error(`Devise non prise en charge : "${currency}".`);
-        return;
-    }
-    activeCurrency = currency;
-    try {
-        localStorage.setItem("emeta_currency", currency);
-    } catch (error) {
-        console.warn("La préférence de devise ne peut pas être mémorisée.", error);
-    }
-    refreshPricing();
+function safePlaceholder(id, text) {
+    const el = document.getElementById(id);
+    if (el) el.placeholder = text;
 }
 
 function switchLang(lang) {
-    if (!Object.prototype.hasOwnProperty.call(uiDict, lang)) return;
     currentLang = lang;
-    if (!window.setLanguage(lang)) return;
-    refreshPricing();
-    selectSector(activeSectorId);
-    updateContextCounter();
+    
+    // MÉMOIRE PERSISTANTE : Sauvegarde le choix pour la navigation
+    localStorage.setItem('emeta_lang', lang);
+    const urlSuffix = `?lang=${lang}`;
+
+    const t = uiDict[lang];
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang;
+
+    // UI Globale
+    safeText('ui-lbl-counter', t.counter);
+    safeText('ui-hero-1', t.hero1);
+    safeText('ui-hero-2', t.hero2);
+    safeText('ui-slogan-tech', t.sloganTech);
+    safeText('ui-banner-ots', t.bannerOts, true);
+    safeText('ui-title-01', t.title01);
+    safeText('ui-title-02', t.title02);
+    
+    safeText('ui-badge-beta', t.badgeBeta);
+    
+    // Boutons de la barre supérieure
+    safeText('ui-btn-tracker', t.btnTracker);
+    safeText('ui-btn-desk', t.btnDesk);
+    
+    // Devises Dynamiques
+    safeText('ui-price-starter', t.priceStarter, true);
+    safeText('ui-price-pro', t.pricePro, true);
+    safeText('ui-price-expert', t.priceExpert, true);
+
+    // Pricing Texts
+    safeText('ui-starter-desc', t.stDesc);
+    safeText('ui-st-1', t.st1, true);
+    safeText('ui-st-2', t.st2, true);
+    safeText('ui-st-3', t.st3, true);
+    safeText('ui-st-4', t.st4, true);
+    safeText('ui-btn-starter', t.btnAct);
+
+    safeText('ui-pro-badge', t.proBadge);
+    safeText('ui-pro-desc', t.proDesc, true);
+    safeText('ui-pr-1', t.pr1, true);
+    safeText('ui-pr-2', t.pr2, true);
+    safeText('ui-pr-3', t.pr3, true);
+    safeText('ui-pr-4', t.pr4, true);
+    safeText('ui-btn-pro', t.btnAct);
+
+    safeText('ui-expert-desc', t.exDesc);
+    safeText('ui-ex-1', t.ex1, true);
+    safeText('ui-ex-2', t.ex2, true);
+    safeText('ui-ex-3', t.ex3, true);
+    safeText('ui-ex-4', t.ex4, true);
+    safeText('ui-btn-expert', t.btnAct);
+
+    // Terminal & Modal
+    safeText('ui-lock-title', t.lockTitle);
+    safeText('ui-lock-desc', t.lockDesc);
+    safeText('ui-terminal-title', t.termTitle);
+    safeText('ui-terminal-desc', t.termDesc);
+    
+    // Labels et Placeholders
+    let lblMissionEl = document.getElementById('ui-lbl-mission') || document.querySelector('label[for="mission_nom"]');
+    if (lblMissionEl) lblMissionEl.innerText = t.lblMission;
+
+    let lblContexteEl = document.getElementById('ui-lbl-contexte') || document.querySelector('label[for="mission_contexte"]');
+    if (lblContexteEl) lblContexteEl.innerText = t.lblContexte;
+
+    let lblFileEl = document.getElementById('ui-lbl-file') || document.querySelector('label[for="user-file"]');
+    if (lblFileEl) lblFileEl.innerText = t.lblFile;
+
+    safePlaceholder('mission_nom', t.phMission);
+    safePlaceholder('mission_contexte', t.phContexte);
+    
+    safeText('ui-btn-analyse', t.btnAnalyse);
+    safeText('ui-link-matrice', t.linkMatrice);
+    
+    safeText('ui-modal-secure-title', t.modalSecTitle);
+    safeText('ui-modal-secure-desc', t.modalSecDesc);
+    safeText('ui-lbl-email', t.lblEmail);
+    safeText('ui-lbl-phone', t.lblPhone);
+    safeText('btn-fire-ia', t.btnFire);
+
+    // Footer
+    safeText('ui-link-mentions', t.linkMentions);
+    const linkMentionsEl = document.getElementById('ui-link-mentions');
+    if(linkMentionsEl) linkMentionsEl.href = `mentions-legales.html${urlSuffix}`;
+
+    safeText('ui-link-cgv', t.linkCgv);
+    const linkCgvEl = document.getElementById('ui-link-cgv');
+    if(linkCgvEl) linkCgvEl.href = `cgv.html${urlSuffix}`;
+
+    safeText('ui-link-conf', t.linkConf);
+    const linkConfEl = document.getElementById('ui-link-conf');
+    if(linkConfEl) linkConfEl.href = `confidentialite.html${urlSuffix}`;
+
+    safeText('ui-link-remb', t.linkRemb);
+    const linkRembEl = document.getElementById('ui-link-remb');
+    if(linkRembEl) linkRembEl.href = `remboursement.html${urlSuffix}`;
+
+    safeText('ui-footer-rights', t.footerRights, true);
+    safeText('ui-footer-unit', t.footerUnit);
+
+    // Activation CSS des boutons
+    document.querySelectorAll('.lang-switch button').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.lang-switch button[data-lang="${lang}"]`).classList.add('active');
 }
 
-function buildSectorCurve(values) {
-    const xStep = 600 / (values.length - 1);
-    const points = values.map((y, index) => [Math.round(index * xStep), y]);
-    let line = `M${points[0][0]} ${points[0][1]}`;
-    for (let index = 1; index < points.length; index += 1) {
-        const previous = points[index - 1];
-        const current = points[index];
-        const middleX = Math.round((previous[0] + current[0]) / 2);
-        line += ` Q${middleX} ${previous[1]} ${current[0]} ${current[1]}`;
-    }
-    return { line, area: `${line} L600 300 L0 300 Z` };
-}
-
-function selectSector(sectorId) {
-    const sector = sectors[sectorId];
-    if (!sector) return;
-    activeSectorId = sectorId;
-    window.activeSectorKey = normalizeMandateSector(sectorId);
-    const sectorTranslation = window.EMETA_I18N?.sectors?.[sectorId];
-    const details = window.EMETA_I18N?.sectorDetails?.[currentLang]?.[sectorId];
-    if (!sectorTranslation || !details) {
-        console.error(`Données de traduction sectorielle manquantes pour "${sectorId}" (${currentLang}).`);
-        return;
-    }
-    const translate = (key) => window.EMETA_I18N?.resolveTranslation(currentLang, key) ?? key;
-    const localizedName = translate(sectorTranslation.key);
-    document.querySelectorAll(".sector-badge").forEach((button) => {
-        const selected = button.dataset.sector === sectorId;
-        button.classList.toggle("is-active", selected);
-        button.setAttribute("aria-pressed", String(selected));
-    });
-
-    details.kpis.forEach(([label, value], index) => {
-        setText(`metric-label-${index + 1}`, label);
-        setText(`metric-value-${index + 1}`, value);
-    });
-    const { line, area } = buildSectorCurve(sector.curve);
-    const chartLine = document.getElementById("performance-line");
-    const chartArea = document.getElementById("performance-area");
-    if (chartLine) chartLine.setAttribute("d", line);
-    if (chartArea) chartArea.setAttribute("d", area);
-    [1, 4, 6].forEach((curveIndex, index) => {
-        const point = document.getElementById(`performance-point-${index + 1}`);
-        if (point) point.setAttribute("cy", String(sector.curve[curveIndex]));
-    });
-    const chart = document.querySelector(".performance-chart");
-    if (chart) {
-        const chartLabel = currentLang === "en" ? "Performance chart — " : currentLang === "es" ? "Gráfico de rendimiento — " : currentLang === "ar" ? "مخطط الأداء — " : "Graphique de performance — ";
-        chart.setAttribute("aria-label", `${chartLabel}${localizedName}`);
-    }
-    setText("dashboard-sector-title", localizedName);
-    setText("sector-details-active-name", localizedName);
-    setText("chart-rise", details.kpis[0][1]);
-    const axes = document.getElementById("sector-details-list");
-    if (axes) {
-        axes.replaceChildren(...details.axes.map((axis) => {
-            const item = document.createElement("li");
-            item.textContent = axis;
-            return item;
-        }));
-    }
-
-    const missionInput = document.getElementById("mission_nom");
-    if (missionInput) {
-        const placeholder = translate("terminal.placeholder.sector");
-        missionInput.placeholder = placeholder.replace("{sector}", localizedName);
-    }
-    const contextInput = document.getElementById("mission_contexte");
-    if (contextInput) contextInput.placeholder = details.prompt;
-    setText("terminal-sector-name", localizedName);
-    const selectedSector = document.getElementById("selected-sector-id");
-    if (selectedSector) selectedSector.value = sectorId;
-    setStatus("terminal-status", "");
-}
-
-function initializeSectorMandate() {
-    selectSector(activeSectorId);
-    document.getElementById("terminal")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    if (activePricingPlan) {
-        window.setTimeout(() => document.getElementById("mission_contexte")?.focus({ preventScroll: true }), 400);
-    }
-}
-
-function createMandateReference() {
-    const digits = new Uint32Array(1);
-    if (window.crypto && window.crypto.getRandomValues) {
-        window.crypto.getRandomValues(digits);
-    } else {
-        digits[0] = Math.floor(Math.random() * 10000);
-    }
-    return `MIS-2026-${String(digits[0] % 10000).padStart(4, "0")}`;
-}
-
+// ==========================================
+// LOGIQUE DU FUNNEL
+// ==========================================
 function unlockTerminal(planName) {
-    const planKeys = {
-        DÉCOUVERTE: "offers.plan.discovery",
-        "MANDAT CERTIFIÉ": "offers.plan.certified",
-        "CHAMBRE EXÉCUTIVE": "offers.plan.executive"
-    };
-    const localizedPlanName = window.EMETA_I18N?.resolveTranslation(currentLang, planKeys[planName]) || planName;
-    activePricingTier = planName;
-    const selectedPrice = localizedPrice(planName);
-    activePricingPlan = `${localizedPlanName} — ${selectedPrice}`;
-    activeMandateReference = createMandateReference();
-    setText("mandate-reference", activeMandateReference);
-    setText("badge-plan-selected", `${localizedPlanName} · ${selectedPrice}`);
-
-    const shell = document.getElementById("terminal-container");
-    const overlay = document.getElementById("terminal-lock-overlay");
-    const badge = document.getElementById("badge-plan-selected");
+    activePricingPlan = planName;
+    const container = document.getElementById('terminal-container');
+    const overlay = document.getElementById('terminal-lock-overlay');
+    const badge = document.getElementById('badge-plan-selected');
+    
     if (overlay) {
-        overlay.style.opacity = "0";
-        window.setTimeout(() => { overlay.hidden = true; }, 360);
+        overlay.style.opacity = '0';
+        setTimeout(() => overlay.style.display = 'none', 500);
     }
-
-    if (shell) {
-        shell.classList.add("is-accredited");
-        shell.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (container) {
+        container.style.borderColor = 'rgba(37, 211, 102, 0.5)';
+        container.style.boxShadow = '0 0 40px rgba(37, 211, 102, 0.15)';
+        container.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-    if (badge) badge.hidden = false;
-    updateContextCounter();
-    window.setTimeout(() => document.getElementById("mission_nom")?.focus(), 400);
-}
-
-function lockApplication() {
-    document.getElementById("application").hidden = true;
-    document.getElementById("authorization-screen").hidden = false;
-    const input = document.getElementById("authorization-key");
-    input.value = "";
-    input.focus();
-    setText("authorization-error", "");
+    if (badge) {
+        badge.innerText = "MODE " + planName;
+        badge.style.display = 'inline-block';
+    }
+    setTimeout(() => {
+        const missionEl = document.getElementById('mission_nom');
+        if (missionEl) missionEl.focus();
+    }, 800);
 }
 
 function resetTerminal() {
-    if (!window.confirm(uiDict[currentLang].resetConfirm)) return;
-    document.getElementById("authorization-form").reset();
-    document.getElementById("mission_nom").value = "";
-    document.getElementById("mission_contexte").value = "";
-    document.getElementById("user-file").value = "";
-    document.getElementById("auto-email").value = "";
-    document.getElementById("auto-phone").value = "";
-    activePricingPlan = "";
-    activePricingTier = "";
-    activeMandateReference = "";
-    activeSectorId = "agro";
-    selectSector("agro");
-    const overlay = document.getElementById("terminal-lock-overlay");
-    overlay.hidden = false;
-    overlay.style.display = "";
-    overlay.style.opacity = "1";
-    document.getElementById("terminal-container").classList.remove("is-accredited");
-    document.getElementById("badge-plan-selected").hidden = true;
-    setText("mandate-reference", window.EMETA_I18N?.resolveTranslation(currentLang, "terminal.reference.pending") || "À GÉNÉRER APRÈS ACCRÉDITATION");
-    setText("file-name", uiDict[currentLang].fileNone);
-    setStatus("terminal-status", "");
-    setStatus("modal-status", "");
-    const submitButton = document.getElementById("ui-btn-analyse");
-    if (submitButton) submitButton.disabled = true;
-    closeModal(activeModalId);
-    updateContextCounter();
-    lockApplication();
+    const confirmMsg = currentLang === 'fr' ? "Voulez-vous réinitialiser le terminal ?" : 
+                       currentLang === 'en' ? "Reset the terminal?" : 
+                       currentLang === 'es' ? "¿Restablecer el terminal?" : "إعادة ضبط المحطة؟";
+                       
+    if(confirm(confirmMsg)) {
+        const missionNomEl = document.getElementById('mission_nom');
+        const missionContexteEl = document.getElementById('mission_contexte');
+        const fileEl = document.getElementById('user-file');
+        const emailEl = document.getElementById('auto-email');
+        const phoneEl = document.getElementById('auto-phone');
+        
+        if (missionNomEl) missionNomEl.value = '';
+        if (missionContexteEl) missionContexteEl.value = '';
+        if (fileEl) fileEl.value = '';
+        if (emailEl) emailEl.value = '';
+        if (phoneEl) phoneEl.value = '';
+        
+        activePricingPlan = "Non sélectionné";
+        
+        const overlay = document.getElementById('terminal-lock-overlay');
+        const container = document.getElementById('terminal-container');
+        const badge = document.getElementById('badge-plan-selected');
+        
+        if (overlay) { overlay.style.display = 'flex'; overlay.style.opacity = '1'; }
+        if (container) { container.style.borderColor = 'rgba(136, 146, 176, 0.2)'; container.style.boxShadow = 'none'; }
+        if (badge) badge.style.display = 'none';
+        
+        const hero = document.querySelector('.hero-sublime');
+        if (hero) hero.scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
-function openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (!modal) return;
-    activeModalId = modalId;
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden", "false");
-    document.body.classList.add("modal-open");
-    const focusTarget = modal.querySelector("input, button");
-    if (focusTarget) focusTarget.focus();
+// ==========================================
+// FONCTIONS DE LA MODALE & FETCH
+// ==========================================
+function openModal(modalId) { 
+    const m = document.getElementById(modalId);
+    if (m) m.style.display = 'flex'; 
 }
-
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (!modal) return;
-    modal.classList.remove("is-open");
-    modal.setAttribute("aria-hidden", "true");
-    if (activeModalId === modalId) activeModalId = "";
-    if (!document.querySelector(".modal-overlay.is-open")) document.body.classList.remove("modal-open");
-}
-
-function setStatus(id, message, type = "") {
-    const element = document.getElementById(id);
-    if (!element) return;
-    element.textContent = message;
-    element.classList.remove("error", "success");
-    if (type) element.classList.add(type);
-}
-
-function updateContextCounter() {
-    const context = document.getElementById("mission_contexte");
-    const counter = document.getElementById("context-counter");
-    const meter = counter?.closest(".character-meter");
-    const submit = document.getElementById("ui-btn-analyse");
-    if (!context || !counter || !submit) return;
-    const length = context.value.trim().length;
-    const ready = length >= MIN_CONTEXT_LENGTH;
-    const counterTemplate = window.EMETA_I18N?.resolveTranslation(currentLang, "terminal.counter.minimum");
-    counter.textContent = counterTemplate
-        ? counterTemplate.replace("{count}", String(length))
-        : `${length} / ${MIN_CONTEXT_LENGTH} ${uiDict[currentLang].characterPrompt}`;
-    if (meter) meter.classList.toggle("valid", ready);
-    submit.disabled = !ready || !activePricingPlan;
+function closeModal(modalId) { 
+    const m = document.getElementById(modalId);
+    if (m) m.style.display = 'none'; 
 }
 
 function triggerSniperCapture() {
-    const missionName = document.getElementById("mission_nom").value.trim();
-    const context = document.getElementById("mission_contexte").value.trim();
-    if (!activePricingPlan) {
-        setStatus("terminal-status", uiDict[currentLang].lockDesc, "error");
-        return;
+    const missionNomEl = document.getElementById('mission_nom');
+    const missionContexteEl = document.getElementById('mission_contexte');
+    
+    if (!missionNomEl || !missionContexteEl) return;
+    
+    const nomMission = missionNomEl.value.trim();
+    const contexteMission = missionContexteEl.value.trim();
+    const t = uiDict[currentLang];
+    
+    // VERROUILLAGE TECHNIQUE DE LA QUALITÉ (150 caractères min)
+    if(!nomMission || !contexteMission || contexteMission.length < 150) { 
+        alert(t.alertEmpty); 
+        return; 
     }
-    if (!missionName || context.length < MIN_CONTEXT_LENGTH) {
-        setStatus("terminal-status", uiDict[currentLang].contextError, "error");
-        updateContextCounter();
-        return;
-    }
-    setStatus("terminal-status", "");
-    setStatus("modal-status", "");
-    openModal("autoDetectModal");
+    
+    openModal('autoDetectModal');
 }
 
-function fileAsDataUrl(file) {
-    if (!file) return Promise.resolve(null);
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve({
-            name: file.name,
-            type: file.type,
-            data: reader.result
-        });
-        reader.onerror = () => reject(new Error("Impossible de lire le fichier joint."));
-        reader.readAsDataURL(file);
-    });
-}
-
-async function createMandateFingerprint(payload) {
-    if (!window.crypto?.subtle || !window.TextEncoder) {
-        throw new Error(uiDict[currentLang].cryptoError);
-    }
-    const canonicalPayload = {
-        reference_mission: payload.reference_mission,
-        entreprise_client: payload.entreprise_client,
-        nom_client: payload.nom_client,
-        secteur: payload.secteur,
-        palier: payload.palier,
-        currency: payload.currency,
-        problematique: payload.problematique,
-        email: payload.email,
-        whatsapp: payload.whatsapp,
-        date_analyse_utc: payload.date_analyse_utc,
-        titre_mission: payload.titre_mission
-    };
-    const bytes = new TextEncoder().encode(JSON.stringify(canonicalPayload));
-    const digest = await window.crypto.subtle.digest("SHA-256", bytes);
-    return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
-}
-
-async function fireAutoDetection() {
-    const email = document.getElementById("auto-email").value.trim().toLowerCase();
-    const phone = document.getElementById("auto-phone").value.trim();
-    const missionName = document.getElementById("mission_nom").value.trim();
-    const context = document.getElementById("mission_contexte").value.trim();
-    const file = document.getElementById("user-file").files[0] || null;
-    const button = document.getElementById("btn-fire-ia");
+function fireAutoDetection() {
+    const emailEl = document.getElementById('auto-email');
+    const phoneEl = document.getElementById('auto-phone');
+    const missionNomEl = document.getElementById('mission_nom');
+    const missionContexteEl = document.getElementById('mission_contexte');
+    
+    if (!emailEl || !phoneEl || !missionNomEl || !missionContexteEl) return;
+    
+    const email = emailEl.value.trim();
+    const phone = phoneEl.value.trim();
+    const nomMission = missionNomEl.value.trim();
+    const contexteMission = missionContexteEl.value.trim();
     const t = uiDict[currentLang];
 
-    if (!email || !phone) {
-        setStatus("modal-status", t.contactError, "error");
-        return;
-    }
-    let whatsapp;
-    try {
-        whatsapp = normalizeMandatePhone(phone);
-    } catch (error) {
-        setStatus("modal-status", error.message, "error");
-        return;
-    }
-    if (!missionName || context.length < MIN_CONTEXT_LENGTH || !activePricingPlan || !activeMandateReference) {
-        closeModal("autoDetectModal");
-        setStatus("terminal-status", t.contextError, "error");
-        return;
-    }
+    if(!email || !phone) { alert(t.alertMiss); return; }
 
-    button.disabled = true;
-    setText("btn-fire-ia", t.sending);
-    setStatus("modal-status", "");
-    try {
-        const attachment = await fileAsDataUrl(file);
-        const sector = getActiveMandateSector();
-        const palier = getActiveMandatePalier(activePricingTier);
-        const entity = getVerifiedMandateEntity(email);
-        const dateAnalyseUtc = new Date().toISOString();
-        const payload = {
-            source: "e-META LABS — Mandat décisionnel certifié",
-            reference_mission: activeMandateReference,
-            entreprise_client: entity,
-            nom_client: getMandateRepresentative(email),
-            secteur: sector,
-            palier,
-            currency: activeCurrency,
-            problematique: context,
-            email,
-            whatsapp,
-            date_analyse_utc: dateAnalyseUtc,
-            titre_mission: createMandateTitle(sector, entity),
-            piece_justificative: attachment
-        };
-        payload.sha256_hash = await createMandateFingerprint(payload);
-
-        // CODE CORRIGÉ (utilise config.js avec URL de secours garantie) :
-const webhookUrl = (typeof CONFIG !== "undefined" && CONFIG.N8N_WEBHOOK_URL)
-    ? CONFIG.N8N_WEBHOOK_URL
-    : "https://automation.e-metalabs.com/webhook/mandat-ingestion";
-
-const response = await fetch(webhookUrl, {
-            method: "POST",
-            mode: "cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-        });
-        if (!response.ok) throw new Error(`Réponse du pipeline : ${response.status}`);
-
-        let responseData = {};
-        const responseText = await response.text();
-        if (responseText) {
-            try {
-                responseData = JSON.parse(responseText);
-            } catch (error) {
-                console.warn("Réponse non JSON du pipeline.", error);
-            }
-        }
-        const reference = responseData.reference_mission || responseData.reference || responseData.ref || activeMandateReference;
-        closeModal("autoDetectModal");
-        setStatus("terminal-status", `${t.success}${reference}`, "success");
-        window.setTimeout(() => {
-            const trackerParams = new URLSearchParams({
-                reference_mission: reference,
-                secteur: sector,
-                palier,
-                sha256_hash: payload.sha256_hash
-            });
-            window.location.href = `tracker.html?${trackerParams.toString()}`;
-        }, 1400);
-    } catch (error) {
-        console.error("Erreur de scellement ou de transmission du mandat :", error);
-        setStatus("modal-status", error.message === t.cryptoError ? t.cryptoError : t.transmissionError, "error");
-        button.disabled = false;
-        setText("btn-fire-ia", t.submit);
-    }
-}
-
-function initializeAuthorization() {
-    const form = document.getElementById("authorization-form");
-    form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const enteredKey = document.getElementById("authorization-key").value;
-        if (enteredKey !== AUTHORIZATION_KEY) {
-            setText("authorization-error", uiDict[currentLang].unlockError);
-            document.getElementById("authorization-key").select();
-            return;
-        }
-        setText("authorization-error", "");
-        document.getElementById("authorization-screen").hidden = true;
-        document.getElementById("application").hidden = false;
-        document.getElementById("mission_nom").focus({ preventScroll: true });
-    });
-}
-
-function initializeTerminal() {
-    document.getElementById("mission_contexte").addEventListener("input", updateContextCounter);
-    document.getElementById("user-file").addEventListener("change", (event) => {
-        const file = event.target.files[0];
-        setText("file-name", file ? file.name : uiDict[currentLang].fileNone);
-    });
-    document.querySelectorAll(".modal-overlay").forEach((modal) => {
-        modal.addEventListener("click", (event) => {
-            if (event.target === modal) closeModal(modal.id);
-        });
-    });
-    document.querySelectorAll(".sector-badge").forEach((button) => {
-        button.addEventListener("click", () => selectSector(button.dataset.sector));
-    });
-    document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && activeModalId) closeModal(activeModalId);
-    });
-
-    let savedLang = "fr";
-    let savedCurrency = "EUR";
-    try {
-        const requestedLang = new URLSearchParams(window.location.search).get("lang");
-        savedLang = requestedLang || localStorage.getItem("emeta_lang") || "fr";
-        const storedCurrency = localStorage.getItem("emeta_currency");
-        if (storedCurrency && Object.prototype.hasOwnProperty.call(pricing, storedCurrency)) {
-            savedCurrency = storedCurrency;
-        }
-    } catch (error) {
-        console.warn("Les préférences mémorisées sont inaccessibles ; les valeurs par défaut seront utilisées.", error);
-    }
-    activeCurrency = savedCurrency;
-    switchLang(savedLang);
-    refreshPricing();
-    selectSector(activeSectorId);
-    initializeAuthorization();
-    updateContextCounter();
-}
-
-document.addEventListener("DOMContentLoaded", initializeTerminal);
-// Transmission du mandat vers le webhook n8n de production
-async function transmettreDossierFinal() {
-    const email = document.getElementById("emailClient")?.value.trim().toLowerCase();
-    const tel = document.getElementById("telClient")?.value.trim();
-    const problematique = document.getElementById("problematique")?.value.trim();
-
-    if (!email || !tel) {
-        alert("Veuillez renseigner votre email professionnel et votre ligne WhatsApp.");
-        return;
-    }
-    let whatsapp;
-    try {
-        whatsapp = normalizeMandatePhone(tel);
-    } catch (error) {
-        console.error("Le numéro WhatsApp du mandat n'est pas valide.", error);
-        alert(error.message);
-        return;
-    }
-    let entity;
-    try {
-        entity = getVerifiedMandateEntity(email);
-    } catch (error) {
-        console.error("Les données d'entreprise du mandat sont incomplètes.", error);
-        alert(error.message);
-        return;
-    }
-
-    const submitBtn = document.querySelector("#modalRestitution button.btn-gold-action");
-    if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerText = "SCELLAGE CRYPTOGRAPHIQUE & TRANSMISSION...";
-    }
-
-    const fileInput = document.getElementById("pieceJointe");
-    const file = fileInput?.files?.[0] || null;
-    const reference = typeof currentRef !== "undefined" && currentRef
-        ? currentRef
-        : (typeof activeMandateReference !== "undefined" && activeMandateReference
-            ? activeMandateReference
-            : createMandateReference());
-    const sector = getActiveMandateSector();
-    const palier = getActiveMandatePalier(typeof currentPalier !== "undefined" ? currentPalier : activePricingTier);
-    let currency = typeof activeCurrency !== "undefined" ? activeCurrency : "";
-    let language = "fr";
-    try {
-        currency = localStorage.getItem("emeta_currency") || currency;
-        language = localStorage.getItem("emeta_lang") || language;
-    } catch (error) {
-        console.warn("Les préférences mémorisées sont inaccessibles ; les valeurs actives sont utilisées.", error);
-    }
-    currency = ["EUR", "USD", "FCFA"].includes(String(currency).toUpperCase())
-        ? String(currency).toUpperCase()
-        : (typeof CONFIG !== "undefined" && ["EUR", "USD", "FCFA"].includes(CONFIG.DEFAULT_CURRENCY)
-            ? CONFIG.DEFAULT_CURRENCY
-            : "EUR");
-    const hashPayload = {
-        reference_mission: reference,
-        entreprise_client: entity,
-        nom_client: getMandateRepresentative(email),
-        secteur: sector,
-        palier,
-        currency,
-        problematique: problematique || "",
-        email,
-        whatsapp,
-        date_analyse_utc: new Date().toISOString(),
-        titre_mission: createMandateTitle(sector, entity)
+    const payload = {
+        "source": "Web Chat Sniper",
+        "date": new Date().toISOString(),
+        "email_client": email,
+        "telephone_client": phone,
+        "mission_nom": nomMission,
+        "mission_contexte": contexteMission,
+        "langue": currentLang,
+        "plan_choisi": activePricingPlan
     };
 
-    try {
-        const attachment = await fileAsDataUrl(file);
-        const sha256 = await createMandateFingerprint(hashPayload);
-        const formData = new FormData();
-        formData.append("reference_mission", reference);
-        formData.append("entreprise_client", entity);
-        formData.append("nom_client", hashPayload.nom_client);
-        formData.append("secteur", sector);
-        formData.append("palier", palier);
-        formData.append("currency", currency);
-        formData.append("problematique", problematique || "");
-        formData.append("email", email);
-        formData.append("whatsapp", hashPayload.whatsapp);
-        formData.append("date_analyse_utc", hashPayload.date_analyse_utc);
-        formData.append("titre_mission", hashPayload.titre_mission);
-        formData.append("sha256_hash", sha256);
-        formData.append("lang", language);
-        formData.append("timestamp", new Date().toISOString());
-        if (file) formData.append("file", file);
-
-        const response = await fetch(CONFIG.N8N_WEBHOOK_URL, {
-            method: "POST",
-            body: formData
-        });
-
-        if (!response.ok) throw new Error("Erreur de liaison n8n : " + response.statusText);
-
-        if (typeof fermerModalRestitution === "function") {
-            fermerModalRestitution();
-        }
-        alert(`Mandat scellé avec succès !\nRéférence : ${reference}\nLe Desk Exécutif a bien reçu votre demande.`);
-        const trackerParams = new URLSearchParams({
-            reference_mission: reference,
-            secteur: sector,
-            palier,
-            sha256_hash: sha256
-        });
-        window.location.href = `tracker.html?${trackerParams.toString()}`;
-
-    } catch (err) {
-        console.error("Erreur Ingestion:", err);
-        alert("La transmission du mandat a échoué. Vérifiez votre connexion puis réessayez.");
-    } finally {
-        if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.innerText = "CONFIRMER ET TRANSMETTRE AU DESK";
-        }
+    const btn = document.getElementById('btn-fire-ia');
+    if (btn) {
+        btn.innerHTML = "Transmission... ⏳";
+        btn.style.opacity = "0.7";
+        btn.disabled = true;
     }
+
+    // ENVOI AU WEBHOOK DE PRODUCTION
+    fetch(WEBHOOK_N8N_URL, {
+        method: 'POST', mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    })
+    .then(async response => {
+        if (!response.ok) throw new Error("Erreur serveur n8n");
+        const data = await response.json().catch(() => ({}));
+        
+        closeModal('autoDetectModal');
+        
+        missionNomEl.value = '';
+        missionContexteEl.value = '';
+        const fileEl = document.getElementById('user-file');
+        if (fileEl) fileEl.value = '';
+        
+        if (btn) { btn.innerHTML = t.btnFire; btn.style.opacity = "1"; btn.disabled = false; }
+        
+        activePricingPlan = "Non sélectionné";
+        const overlay = document.getElementById('terminal-lock-overlay');
+        const container = document.getElementById('terminal-container');
+        const badge = document.getElementById('badge-plan-selected');
+        
+        if (overlay) { overlay.style.display = 'flex'; overlay.style.opacity = '1'; }
+        if (container) { container.style.borderColor = 'rgba(136, 146, 176, 0.2)'; container.style.boxShadow = 'none'; }
+        if (badge) badge.style.display = 'none';
+
+        alert(t.alertSuccess);
+
+        // ==========================================
+        // REDIRECTION AUTOMATIQUE VERS LE TRACKER
+        // ==========================================
+        const missionRef = data.reference || data.ref || 'MIS-2026-001';
+        window.location.href = `https://e-metalabs.com/tracker.html?ref=${encodeURIComponent(missionRef)}`;
+    })
+    .catch(error => {
+        console.error("Erreur de transmission:", error);
+        alert(t.alertError);
+        if (btn) { btn.innerHTML = t.btnFire; btn.style.opacity = "1"; btn.disabled = false; }
+    });
 }
+
+// ==========================================
+// INITIALISATION INTELLIGENTE
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    let savedLang = urlParams.get('lang') || localStorage.getItem('emeta_lang') || 'fr';
+    
+    if (!['fr', 'en', 'es', 'ar'].includes(savedLang)) savedLang = 'fr';
+    
+    switchLang(savedLang);
+    
+    const counterElement = document.getElementById('live-counter-top');
+    if (counterElement) {
+        let currentCount = 1380; const targetCount = 1423; 
+        const interval = setInterval(() => {
+            currentCount++; counterElement.innerText = currentCount.toLocaleString();
+            if (currentCount >= targetCount) clearInterval(interval);
+        }, 30); 
+    }
+});
