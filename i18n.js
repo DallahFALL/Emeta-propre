@@ -53,11 +53,11 @@ const translations = {
         pillar2_item3: "Opposabilité contractuelle",
 
         "pillar3.title": "Arbitrage Humain — Desk Exécutif",
-        "pillar3.desc": "« Au-delà de l'algorithme, la précision d'un praticien chevronné. Notre Desk Exécutif active sur demande l'expert de haut niveau idoine — qu'il s'agisse d'un expert-comptable, d'un spécialiste en finance internationale, d'un géographe, d'un juriste ou d'un conseil sectoriel — pour valider, adapter et porter la solution sur-mesure dont votre organisation a besoin. »",
+        "pillar3.desc": "« Au-delà de l'algorithme, l'expertise sur-mesure. Notre Desk Exécutif active l'expert idoine pour porter et certifier votre décision. »",
         "pillar3.item1": "Matching d'experts sur-mesure",
         "pillar3.item2": "Validation exécutive et signature",
         "pillar3.item3": "SLA de saisine garanti (2h)",
-
+        
         // --- CHAPITRE 19 ---
         "ch19.kicker": "Chapitre 19 — Le Vivier Multidisciplinaire du Desk Exécutif",
         "ch19.title": "L'Expertise Humaine sur-Mesure dans Tous les Domaines",
@@ -187,7 +187,7 @@ const translations = {
         pillar2_item3: "Contractual enforceability",
 
         "pillar3.title": "Human Judgment — Executive Desk",
-        "pillar3.desc": "\"Beyond the algorithm, the precision of a seasoned practitioner. Our Executive Desk activates on demand the ideal high-level expert—whether a certified accountant, an international finance specialist, a geographer, a legal counsel, or a sector advisor—to validate, adapt, and deliver the bespoke solution your organization requires.\"",
+        "pillar3.desc": "\"Beyond the algorithm, bespoke expertise. Our Executive Desk activates the ideal expert to carry and certify your decision.\"",
         "pillar3.item1": "Bespoke expert matching",
         "pillar3.item2": "Executive validation & signature",
         "pillar3.item3": "Guaranteed inquiry SLA (2h)",
@@ -316,7 +316,7 @@ const translations = {
         pillar2_item3: "Oponibilidad contractual",
 
         "pillar3.title": "Arbitraje Humano — Desk Ejecutivo",
-        "pillar3.desc": "\"Más allá del algoritmo, la precisión de un profesional experimentado. nuestro Desk Ejecutivo activa bajo demanda al experto de alto nivel idóneo —ya sea un auditor, un especialista en finanzas internacionales, un geógrafo, un jurista o un consultor sectorial— para validar, adaptar y desplegar la solución a medida que su organización necesita.\"",
+        "pillar3.desc": "\"Más allá del algoritmo, experiencia a medida. Nuestro Desk Ejecutivo activa al experto idóneo para respaldar y certificar su decisión.\"",
         "pillar3.item1": "Matching de expertos a medida",
         "pillar3.item2": "Validación ejecutiva y firma",
         "pillar3.item3": "SLA de respuesta garantizado (2h)",
@@ -445,7 +445,7 @@ const translations = {
         pillar2_item3: "حجية قانونية وتعاقدية معززة",
 
         "pillar3.title": "التحكيم البشري — المكتب التنفيذي",
-        "pillar3.desc": "\"تجاوز الخوارزمية، بدقة الخبير الممارس المخضرم. يقوم مكتبنا التنفيذي بتفعيل الخبير الأمثل رفيع المستوى عند الطلب -سواء كان محاسباً قانونياً، أخصائياً في المالية الدولية، جغرافياً، قانونياً، أو مستشاراً قطاعياً- للتحقق من الحل المخصص الذي تحتاجه مؤسستك وتكييفه وتنفيذه.\"",
+        "pillar3.desc": "\"تجاوز الخوارزمية، خبرة مخصصة. يقوم مكتبنا التنفيذي بتفعيل الخبير الأمثل لدعم واعتماد قرارك.\"",
         "pillar3.item1": "مطابقة الخبراء المخصصة",
         "pillar3.item2": "الاعتماد التنفيذي والتوقيع",
         "pillar3.item3": "ضمان زمن الاستجابة (ساعتان)",
