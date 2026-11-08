@@ -219,9 +219,15 @@ const translations = {
         pillar3_item2: "Senior Expert countersignature",
         pillar3_item3: "Strict 2-hour SLA claim lock",
 
-        // --- CHAPTER 19 (OPTION B) ---
+        "ch19.kicker": "Chapter 19 — Adversarial Onsite Clearance (Option B)",
+        "ch19.title": "The 5 Critical Audit Checkpoint Families",
+        "ch19.desc": "Whenever a caveat demands real-world verification, our Executive Desk deploys an accredited field specialist to confront algorithmic assumptions with physical on-ground realities.",
+        "ch19.pt1.title": "1. Soils", "ch19.pt1.sub": "Nature &amp; samplings",
+        "ch19.pt2.title": "2. Hydraulics", "ch19.pt2.sub": "Flows &amp; drainage",
+        "ch19.pt3.title": "3. Thermal", "ch19.pt3.sub": "Thresholds &amp; processes",
+        "ch19.pt4.title": "4. Cold Chain", "ch19.pt4.sub": "Storage &amp; transport",
+        "ch19.pt5.title": "5. Topography &amp; Equipment", "ch19.pt5.sub": "Accessibility &amp; critical assets",
         
-
         // --- 10 SECTORS ---
         sectors_kicker: "Sectoral Authority",
         sectors_title: "The 10 Industry Excellence Matrices",
@@ -370,14 +376,14 @@ const translations = {
         pillar3_item2: "Firma y visado de Experto Senior",
         pillar3_item3: "Bloqueo estricto SLA de 2 horas",
 
-        ch19_kicker: "Capítulo 19 — Inspección Contradictoria en Sitio (Opción B)",
-        ch19_title: "Las 5 Familias de Puntos Críticos Auditados",
-        ch19_desc: "Cuando una reserva exige verificación real, nuestro Desk Ejecutivo despliega un especialista para confrontar hipótesis con la realidad física.",
-        ch19_pt1_title: "1. Suelos", ch19_pt1_sub: "Naturaleza y muestras",
-        ch19_pt2_title: "2. Hidráulica", ch19_pt2_sub: "Flujos, drenaje y fuentes",
-        ch19_pt3_title: "3. Térmica", ch19_pt3_sub: "Umbrales y procesos",
-        ch19_pt4_title: "4. Cadena de Frío", ch19_pt4_sub: "Transporte y almacenaje",
-        ch19_pt5_title: "5. Topografía e Infraestructura", ch19_pt5_sub: "Accesos y activos críticos",
+        "ch19.kicker": "Capítulo 19 — Inspección Contradictoria en Sitio (Opción B)",
+        "ch19.title": "Las 5 Familias de Puntos Críticos Auditados",
+        "ch19.desc": "Cuando una reserva exige verificación real, nuestro Desk Ejecutivo despliega un especialista para confrontar hipótesis con la realidad física.",
+        "ch19.pt1.title": "1. Suelos", "ch19.pt1.sub": "Naturaleza y muestras",
+        "ch19.pt2.title": "2. Hidráulica", "ch19.pt2.sub": "Flujos y drenaje",
+        "ch19.pt3.title": "3. Térmica", "ch19.pt3.sub": "Umbrales y procesos",
+        "ch19.pt4.title": "4. Cadena de Frío", "ch19.pt4.sub": "Transporte y almacenaje",
+        "ch19.pt5.title": "5. Topografía &amp; Equipos", "ch19.pt5.sub": "Accesos y redes críticas",
 
         sectors_kicker: "Autoridad Sectorial",
         sectors_title: "La Matriz de los 10 Sectores de Excelencia",
