@@ -1,694 +1,1528 @@
 <!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="e-META LABS | Audit Décisionnel & Strategic Engine - Transformation digitale, gouvernance et décision stratégique."
-    />
-    <title>e-META LABS | Audit Décisionnel & Strategic Engine</title>
+<html lang="fr" dir="ltr" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0b0e">
+    <meta name="description" content="e-META LABS | Cabinet de Haute Décision Stratégique, Audit Décisionnel & Tiers de Confiance Probatoire." data-i18n-content="meta.description">
+    <title data-i18n="meta.title">e-META LABS | Audit Décisionnel & Strategic Engine</title>
+
+    <!-- Favicon Souverain Géométrique e-META LABS -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,25 95,75 50,95 5,75 5,25' stroke='%23d4af37' stroke-width='5' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        ebony: '#0a0b0e',
+                        ebonyCard: '#12141c',
+                        ebonyElevated: '#171a26',
+                        ebonyBorder: '#232634',
+                        gold: '#d4af37',
+                        goldLight: '#f3e5ab',
+                        goldDark: '#aa8c2c',
+                        goldMuted: 'rgba(212, 175, 55, 0.15)'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-      :root {
-        --bg: #07131f;
-        --panel: rgba(18, 30, 42, 0.82);
-        --panel-strong: #0f2233;
-        --card: #10263a;
-        --line: rgba(123, 170, 220, 0.2);
-        --text: #eaf3ff;
-        --muted: #a7bfd8;
-        --primary: #63d0ff;
-        --primary-2: #8a7dff;
-        --accent: #48e1c1;
-        --warning: #ffcf70;
-        --shadow: rgba(6, 19, 32, 0.5);
-      }
-
-      * { box-sizing: border-box; }
-
-      html { scroll-behavior: smooth; }
-
-      body {
-        margin: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background:
-          radial-gradient(circle at top left, rgba(99, 208, 255, 0.12), transparent 28%),
-          radial-gradient(circle at bottom right, rgba(138, 125, 255, 0.16), transparent 32%),
-          linear-gradient(180deg, #050d16 0%, #091b2a 38%, #07131e 100%);
-        color: var(--text);
-      }
-
-      a { color: inherit; text-decoration: none; }
-
-      .container {
-        width: min(1180px, calc(100% - 2rem));
-        margin: 0 auto;
-      }
-
-      header {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        backdrop-filter: blur(14px);
-        background: rgba(5, 13, 22, 0.7);
-        border-bottom: 1px solid var(--line);
-      }
-
-      .nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        min-height: 80px;
-        gap: 1rem;
-      }
-
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.8rem;
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .brand-mark {
-        width: 38px;
-        height: 38px;
-        display: grid;
-        place-items: center;
-        border-radius: 12px;
-        background: linear-gradient(135deg, var(--primary), var(--primary-2));
-        color: #021019;
-        font-size: 1.1rem;
-        font-weight: 900;
-        box-shadow: 0 8px 22px rgba(99, 208, 255, 0.3);
-      }
-
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        color: var(--muted);
-        font-size: 0.95rem;
-      }
-
-      .nav-links a:hover { color: var(--text); }
-
-      .button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid transparent;
-        border-radius: 12px;
-        padding: 0.9rem 1.4rem;
-        font-weight: 700;
-        transition: 0.2s ease;
-        cursor: pointer;
-      }
-
-      .button.primary {
-        background: linear-gradient(135deg, var(--primary), var(--primary-2));
-        color: #04151f;
-        box-shadow: 0 12px 24px rgba(99, 208, 255, 0.28);
-      }
-
-      .button.secondary {
-        background: rgba(255, 255, 255, 0.02);
-        border-color: var(--line);
-        color: var(--text);
-      }
-
-      .button:hover {
-        transform: translateY(-1px);
-        filter: brightness(1.04);
-      }
-
-      .hero {
-        padding: 5.5rem 0 3rem;
-      }
-
-      .hero-grid {
-        display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        align-items: center;
-        gap: 2rem;
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.55rem;
-        padding: 0.5rem 0.85rem;
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        background: rgba(99, 208, 255, 0.04);
-        color: var(--primary);
-        font-size: 0.78rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-      }
-
-      .eyebrow::before {
-        content: "";
-        width: 8px;
-        height: 8px;
-        display: block;
-        background: var(--accent);
-        border-radius: 50%;
-        box-shadow: 0 0 14px rgba(72, 225, 193, 0.8);
-      }
-
-      h1 {
-        font-size: clamp(2.65rem, 4vw, 5rem);
-        line-height: 1.04;
-        margin: 1.3rem 0 1rem;
-        letter-spacing: -0.06em;
-      }
-
-      .gradient-text {
-        background: linear-gradient(135deg, #dff9ff 0%, var(--primary) 30%, #c8d4ff 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-
-      .hero-copy {
-        font-size: 1.08rem;
-        color: var(--muted);
-        line-height: 1.8;
-        max-width: 620px;
-      }
-
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin-top: 2rem;
-      }
-
-      .stats {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(110px, 1fr));
-        gap: 1rem;
-        margin-top: 2.5rem;
-      }
-
-      .stat {
-        padding: 1rem 1.1rem;
-        background: rgba(255,255,255,0.02);
-        border: 1px solid var(--line);
-        border-radius: 18px;
-      }
-
-      .stat strong {
-        display: block;
-        font-size: clamp(1.4rem, 2vw, 2rem);
-        margin-bottom: 0.3rem;
-      }
-
-      .stat span {
-        color: var(--muted);
-        font-size: 0.82rem;
-      }
-
-      .dashboard {
-        position: relative;
-        padding: 1.3rem;
-        background: linear-gradient(180deg, rgba(12, 26, 36, 0.9), rgba(9, 18, 28, 0.9));
-        border: 1px solid var(--line);
-        border-radius: 30px;
-        box-shadow: 0 30px 60px var(--shadow);
-      }
-
-      .mini-panel {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1rem;
-        color: var(--muted);
-        font-size: 0.82rem;
-      }
-
-      .status-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.45rem;
-        padding: 0.35rem 0.65rem;
-        border-radius: 999px;
-        background: rgba(72, 225, 193, 0.1);
-        color: var(--accent);
-        border: 1px solid rgba(72, 225, 193, 0.35);
-      }
-
-      .status-pill::before {
-        content: "";
-        width: 7px;
-        height: 7px;
-        background: var(--accent);
-        border-radius: 50%;
-      }
-
-      .chart {
-        height: 280px;
-        background: linear-gradient(180deg, rgba(99, 208, 255, 0.06), rgba(138, 125, 255, 0.02));
-        border: 1px solid var(--line);
-        border-radius: 20px;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .chart svg {
-        width: 100%;
-        height: 100%;
-        display: block;
-      }
-
-      .chart-grid {
-        position: absolute;
-        inset: 0;
-        background-image:
-          linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-        background-size: 22px 22px;
-        mask-image: linear-gradient(180deg, rgba(0,0,0,0.8), rgba(0,0,0,0.18));
-      }
-
-      .metric-row {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1rem;
-        margin-top: 1rem;
-      }
-
-      .metric-box {
-        background: rgba(255,255,255,0.02);
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        padding: 0.9rem 1rem;
-      }
-
-      .metric-box small {
-        display: block;
-        color: var(--muted);
-        margin-bottom: 0.4rem;
-      }
-
-      .metric-box strong {
-        font-size: 1.2rem;
-      }
-
-      .section {
-        padding: 2.2rem 0 1rem;
-      }
-
-      .section-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: end;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .section-header h2 {
-        margin: 0;
-        font-size: clamp(2rem, 3vw, 2.8rem);
-        letter-spacing: -0.05em;
-      }
-
-      .section-header p {
-        margin: 0;
-        color: var(--muted);
-        max-width: 650px;
-        line-height: 1.7;
-      }
-
-      .feature-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1.2rem;
-      }
-
-      .feature {
-        background: rgba(255,255,255,0.02);
-        border: 1px solid var(--line);
-        border-radius: 22px;
-        padding: 1.5rem;
-        min-height: 220px;
-      }
-
-      .icon {
-        width: 52px;
-        height: 52px;
-        display: grid;
-        place-items: center;
-        border-radius: 14px;
-        background: linear-gradient(135deg, rgba(99, 208, 255, 0.18), rgba(138, 125, 255, 0.18));
-        color: var(--primary);
-        font-size: 1.4rem;
-        margin-bottom: 1rem;
-      }
-
-      .feature h3 {
-        margin: 0 0 0.75rem;
-        font-size: 1.35rem;
-      }
-
-      .feature p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.7;
-      }
-
-      .value-props {
-        margin-top: 2.5rem;
-        display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
-        gap: 1.5rem;
-      }
-
-      .callout {
-        background: linear-gradient(180deg, rgba(14, 27, 38, 0.9), rgba(9, 17, 26, 0.95));
-        border: 1px solid var(--line);
-        border-radius: 26px;
-        padding: 1.8rem;
-      }
-
-      .check-list {
-        list-style: none;
-        padding: 0;
-        margin: 1.25rem 0 0;
-      }
-
-      .check-list li {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.8rem;
-        color: var(--muted);
-        line-height: 1.7;
-        margin-bottom: 0.85rem;
-      }
-
-      .check-list li::before {
-        content: "✓";
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 22px;
-        height: 22px;
-        border-radius: 50%;
-        background: rgba(72, 225, 193, 0.1);
-        color: var(--accent);
-        font-weight: 800;
-        flex-shrink: 0;
-      }
-
-      .score-card {
-        display: grid;
-        gap: 1rem;
-      }
-
-      .score-box {
-        background: rgba(255,255,255,0.02);
-        border: 1px solid var(--line);
-        border-radius: 22px;
-        padding: 1.5rem;
-      }
-
-      .score-box > small {
-        color: var(--muted);
-      }
-
-      .score-box .big {
-        display: block;
-        font-size: clamp(2rem, 3vw, 3.2rem);
-        margin: 0.6rem 0;
-        letter-spacing: -0.06em;
-      }
-
-      .progress {
-        height: 10px;
-        border-radius: 999px;
-        background: rgba(255,255,255,0.05);
-        overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.04);
-      }
-
-      .progress span {
-        display: block;
-        height: 100%;
-        border-radius: inherit;
-        background: linear-gradient(90deg, var(--primary), var(--accent));
-      }
-
-      .cta {
-        padding: 3rem 0 5rem;
-      }
-
-      .cta-box {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        background: linear-gradient(135deg, rgba(99, 208, 255, 0.12), rgba(138, 125, 255, 0.1));
-        border: 1px solid var(--line);
-        border-radius: 28px;
-        padding: clamp(1.3rem, 2.5vw, 2.2rem);
-      }
-
-      .cta-box h3 {
-        margin: 0 0 0.5rem;
-        font-size: clamp(1.8rem, 3vw, 2.8rem);
-        letter-spacing: -0.05em;
-      }
-
-      .cta-box p {
-        margin: 0;
-        color: var(--muted);
-      }
-
-      footer {
-        border-top: 1px solid var(--line);
-        padding: 1.6rem 0 2.8rem;
-        color: var(--muted);
-      }
-
-      .footer-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-      }
-
-      @media (max-width: 940px) {
-        .hero-grid,
-        .feature-grid,
-        .value-props,
-        .cta-box {
-          grid-template-columns: 1fr;
-          display: grid;
+        body {
+            background-color: #0a0b0e;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
         }
-
-        .nav-links {
-          display: none;
+        .gold-gradient {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa8c2c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        .stats {
-          grid-template-columns: 1fr;
+        .gold-border-glow {
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.08);
         }
-      }
-
-      @media (max-width: 560px) {
-        .button {
-          width: 100%;
+        .gold-border-glow:hover {
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.2);
         }
-
-        .hero-actions {
-          flex-direction: column;
+        .glass-card {
+            background: rgba(18, 20, 28, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.16);
         }
-
-        .section-header {
-          display: block;
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
         }
-      }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0a0b0e;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #232634;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+        @keyframes pulse-gold {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        .pulse-gold {
+            animation: pulse-gold 3s infinite ease-in-out;
+        }
     </style>
-  </head>
-  <body>
-    <header>
-      <div class="container nav">
-        <a href="#top" class="brand" aria-label="e-META LABS">
-          <span class="brand-mark">E</span>
-          <span>e-META LABS</span>
-        </a>
+</head>
+<body class="bg-ebony text-slate-100 antialiased selection:bg-gold selection:text-ebony custom-scrollbar">
 
-        <nav class="nav-links" aria-label="Navigation principale">
-          <a href="#audit">Audit</a>
-          <a href="#solutions">Solutions</a>
-          <a href="#impact">Impact</a>
-          <a href="#contact">Contact</a>
-        </nav>
+    <!-- 1. BARRE DE STATUT SUPÉRIEURE, OTS & SÉLECTEURS LIVE -->
+    <div class="bg-gradient-to-r from-ebony via-ebonyCard to-ebony border-b border-gold/20 py-2 px-4 sm:px-8 text-xs text-slate-300 flex flex-wrap justify-between items-center z-50 sticky top-0 backdrop-blur-md gap-3">
+        <div class="flex items-center gap-3">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[11px] font-mono">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span data-i18n="system.status">Système Connecté • Blockchain OTS Opérationnel</span>
+            </span>
+            <span class="hidden xl:inline text-slate-600">|</span>
+            <span class="hidden xl:inline text-slate-400 font-mono text-[11px]">
+                <span class="counter-seal text-gold mr-1 font-bold">◆</span>
+                <strong id="live-counter-top" class="text-gold font-bold">1,420</strong>
+                <span id="ui-lbl-counter" data-i18n="counter.label">Diagnostics Sécurisés &amp; Scellés Cryptographiquement</span>
+            </span>
+        </div>
 
-        <a href="#contact" class="button primary">Démarrer</a>
-      </div>
+        <div class="flex items-center gap-4 text-xs font-mono">
+            <!-- Sélecteur de Devise Multi-marchés -->
+            <div class="currency-switch flex items-center gap-1.5 bg-ebony px-2.5 py-1 rounded-lg border border-ebonyBorder" role="group" aria-label="Sélecteur de devise" data-i18n-aria-label="a11y.currency">
+                <button type="button" data-currency="EUR" onclick="setIndexCurrency('EUR')" class="curr-btn text-gold font-bold transition" aria-pressed="true">EUR €</button>
+                <span class="text-slate-600">|</span>
+                <button type="button" data-currency="USD" onclick="setIndexCurrency('USD')" class="curr-btn text-slate-400 hover:text-gold transition font-bold" aria-pressed="false">USD $</button>
+                <span class="text-slate-600">|</span>
+                <button type="button" data-currency="FCFA" onclick="setIndexCurrency('FCFA')" class="curr-btn text-slate-400 hover:text-gold transition font-bold" aria-pressed="false">FCFA</button>
+            </div>
+
+            <!-- Sélecteur de Langue Diplomatique -->
+            <div class="lang-switch flex items-center gap-1.5 bg-ebony px-2.5 py-1 rounded-lg border border-ebonyBorder" aria-label="Sélecteur de langues" data-i18n-aria-label="a11y.language">
+                <button type="button" data-lang="fr" onclick="switchLang('fr')" class="lang-btn text-gold font-bold" aria-pressed="true">FR</button>
+                <span class="text-slate-600">|</span>
+                <button type="button" data-lang="en" onclick="switchLang('en')" class="lang-btn text-slate-400 hover:text-gold" aria-pressed="false">EN</button>
+                <span class="text-slate-600">|</span>
+                <button type="button" data-lang="es" onclick="switchLang('es')" class="lang-btn text-slate-400 hover:text-gold" aria-pressed="false">ES</button>
+                <span class="text-slate-600">|</span>
+                <button type="button" data-lang="ar" onclick="switchLang('ar')" class="lang-btn text-slate-400 hover:text-gold" aria-pressed="false">AR</button>
+            </div>
+
+            <button class="text-slate-400 hover:text-gold transition flex items-center gap-1" type="button" onclick="resetTerminal()" data-i18n="navigation.reset" title="Réinitialiser l'affichage">
+                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                <span class="hidden sm:inline" data-i18n="navigation.reset">Réinitialiser</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 2. HEADER PRINCIPAL & NAVIGATION SOUVERAINE -->
+    <header class="sticky top-[37px] z-40 bg-ebony/90 backdrop-blur-xl border-b border-ebonyCard shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#top" class="flex items-center gap-3 group">
+                <svg class="w-11 h-11 drop-shadow-lg gold-border-glow rounded-xl transition transform group-hover:scale-105" viewBox="0 0 100 100">
+                    <polygon points="50,5 95,25 95,75 50,95 5,75 5,25" stroke="#d4af37" stroke-width="4" fill="#0a192f"/>
+                    <circle cx="50" cy="50" r="12" fill="#d4af37"/>
+                </svg>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-serif text-xl sm:text-2xl font-bold tracking-wider text-white">e-META <span class="gold-gradient">LABS</span></span>
+                        <span class="text-[10px] uppercase tracking-widest px-1.5 py-0.5 rounded bg-gold/10 text-gold border border-gold/30 font-mono">SASU</span>
+                    </div>
+                    <p class="text-[10px] text-slate-400 tracking-wider font-mono" data-i18n="brand.tagline">AUDIT DÉCISIONNEL &amp; STRATEGIC ENGINE</p>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-300 font-mono text-xs">
+                <a href="#manifeste" class="hover:text-gold transition" data-i18n="nav_manifesto">Manifeste</a>
+                <a href="#piliers" class="hover:text-gold transition" data-i18n="nav_pillars">Trois Piliers</a>
+                <a href="#expertises" class="hover:text-gold transition" data-i18n="nav_sectors">10 Secteurs</a>
+                <a href="#offres" class="hover:text-gold transition" data-i18n="nav_tiers">Protocoles (3 Paliers)</a>
+                <a href="#terminal" class="hover:text-gold transition" data-i18n="nav_terminal">Terminal d'Ingestion</a>
+                <a href="#verification" class="hover:text-gold transition" data-i18n="nav_proof">Preuve SHA-256</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <a href="tracker.html" class="hidden md:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-ebonyCard border border-ebonyBorder text-xs text-slate-300 hover:text-gold hover:border-gold/40 transition font-mono" title="Accéder au Cockpit de Suivi" data-i18n-title="a11y.tracker">
+                    <i data-lucide="compass" class="w-3.5 h-3.5 text-gold"></i>
+                    <span data-i18n="nav_tracker">Cockpit Tracker</span>
+                </a>
+                <a href="expert.html" class="hidden md:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-ebonyCard border border-ebonyBorder text-xs text-slate-300 hover:text-gold hover:border-gold/40 transition font-mono" title="Portail des Experts Accrédités" data-i18n-title="a11y.experts">
+                    <i data-lucide="user-check" class="w-3.5 h-3.5 text-gold"></i>
+                    <span data-i18n="nav_desk">Desk Exécutif</span>
+                </a>
+                <button onclick="openSaisineModal()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-xs uppercase tracking-wider shadow-lg gold-glow transition transform hover:-translate-y-0.5">
+                    <i data-lucide="zap" class="w-4 h-4"></i>
+                    <span data-i18n="nav_start">Démarrer une Saisine</span>
+                </button>
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg bg-ebonyCard text-slate-300 hover:text-gold border border-ebonyBorder">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden lg:hidden bg-ebonyCard border-b border-ebonyBorder px-6 py-6 space-y-4 font-mono text-xs">
+            <a href="#manifeste" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-gold py-1" data-i18n="nav_manifesto">Manifeste Souverain</a>
+            <a href="#piliers" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-gold py-1" data-i18n="nav_pillars_full">Trois Piliers Fondamentaux</a>
+            <a href="#expertises" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-gold py-1" data-i18n="nav_sectors_full">Cockpit des 10 Secteurs</a>
+            <a href="#offres" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-gold py-1" data-i18n="nav_tiers">Protocoles en 3 Paliers</a>
+            <a href="#terminal" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-gold py-1" data-i18n="nav_terminal">Terminal d'Ingestion</a>
+            <a href="#verification" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-gold py-1" data-i18n="nav_verify">Vérification SHA-256 OTS</a>
+            <div class="pt-4 border-t border-ebonyBorder flex gap-2">
+                <a href="tracker.html" class="flex-1 py-2 rounded-xl bg-ebony text-center text-slate-300 border border-ebonyBorder hover:text-gold" data-i18n="nav_tracker">Tracker</a>
+                <a href="expert.html" class="flex-1 py-2 rounded-xl bg-ebony text-center text-slate-300 border border-ebonyBorder hover:text-gold" data-i18n="nav_desk">Desk Exécutif</a>
+            </div>
+        </div>
     </header>
 
-    <main id="top">
-      <section class="hero">
-        <div class="container hero-grid">
-          <div>
-            <span class="eyebrow">Strategic Intelligence</span>
-            <h1>
-              <span class="gradient-text">Audit Décisionnel</span><br />
-              &amp; Strategic Engine
-            </h1>
-            <p class="hero-copy">
-              e-META LABS conçoit des systèmes d'analyse, de gouvernance et de pilotage stratégique pour transformer les données en décisions rapides, fiables et créatrices de valeur.
-            </p>
+    <!-- 3. SECTION HERO & DASHBOARD STRATÉGIQUE CONSOLIDÉ -->
+    <section class="relative pt-20 pb-20 overflow-hidden" id="top">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gold/10 rounded-full blur-[150px] pointer-events-none"></div>
+        <div class="absolute top-10 right-10 w-[350px] h-[350px] bg-blue-600/5 rounded-full blur-[130px] pointer-events-none"></div>
 
-            <div class="hero-actions">
-              <a href="#solutions" class="button primary">Explorer les solutions</a>
-              <a href="#audit" class="button secondary">Voir l'audit</a>
-            </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-            <div class="stats" aria-label="Indicateurs clés">
-              <div class="stat">
-                <strong>32%</strong>
-                <span>Gain d'efficacité</span>
-              </div>
-              <div class="stat">
-                <strong>4.8/5</strong>
-                <span>Expérience client</span>
-              </div>
-              <div class="stat">
-                <strong>24/7</strong>
-                <span>Pilotage intelligent</span>
-              </div>
-            </div>
-          </div>
+                <div class="lg:col-span-7 space-y-6 text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ebonyCard border border-gold/30 text-xs text-gold uppercase tracking-widest font-mono shadow-inner">
+                        <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+                        <span data-i18n="hero.kicker">Cabinet d'Arbitrage Stratégique Augmenté • Édition 2026</span>
+                    </div>
 
-          <div class="dashboard" aria-label="Dashboard stratégique">
-            <div class="mini-panel">
-              <span>Performance stratégique</span>
-              <span class="status-pill">En ligne</span>
-            </div>
+                    <h1 class="font-serif text-4xl sm:text-6xl font-bold tracking-tight text-white leading-[1.12]">
+                        <span data-i18n="hero_title_1">Strategic Intelligence,</span><br>
+                        <span class="gold-gradient" data-i18n="hero_title_2">Audit Décisionnel &amp; Strategic Engine</span>
+                    </h1>
 
-            <div class="chart">
-              <div class="chart-grid"></div>
-              <svg viewBox="0 0 420 260" preserveAspectRatio="none" aria-hidden="true">
-                <defs>
-                  <linearGradient id="lineGradient" x1="0%" x2="100%" y1="0%" y2="0%">
-                    <stop offset="0%" stop-color="#63d0ff"/>
-                    <stop offset="100%" stop-color="#8a7dff"/>
-                  </linearGradient>
-                </defs>
-                <path d="M0,180 C60,165,70,120,130,118 S220,145,260,110 S350,30,420,50 L420,260 L0,260 Z" fill="rgba(99,208,255,0.12)"></path>
-                <path d="M0,185 C60,170,70,125,130,120 S220,150,260,110 S350,32,420,52" fill="none" stroke="url(#lineGradient)" stroke-width="4" stroke-linecap="round"></path>
-                <circle cx="420" cy="52" r="6" fill="#8a7dff"></circle>
-                <circle cx="130" cy="120" r="5" fill="#63d0ff"></circle>
-              </svg>
-            </div>
+                    <p class="text-base sm:text-lg text-slate-300 leading-relaxed font-light" id="ui-hero-subtitle" data-i18n="hero.subtitle">
+                        e-META LABS conçoit des systèmes d'analyse, de gouvernance et de pilotage stratégique pour transformer les données en décisions rapides, fiables et créatrices de valeur par l'alliance souveraine de l'intelligence algorithmique, de la cryptographie probatoire et du jugement expert de terrain.
+                    </p>
 
-            <div class="metric-row">
-              <div class="metric-box">
-                <small>ROI prévu</small>
-                <strong>+148%</strong>
-              </div>
-              <div class="metric-box">
-                <small>Précision</small>
-                <strong>96.4%</strong>
-              </div>
-              <div class="metric-box">
-                <small>Temps</small>
-                <strong>-41%</strong>
-              </div>
+                    <div class="p-4 rounded-2xl glass-card border-l-4 border-l-gold flex items-start gap-3 text-xs text-slate-300 font-mono" id="ui-banner-ots">
+                        <span class="text-gold text-lg shrink-0">🛡️</span>
+                        <p id="hero-sovereignty" data-i18n="hero.sovereignty" data-i18n-rich-text="true"><strong>Souveraineté Absolue :</strong> Vos mandats sont scellés par preuve d'antériorité immuable via <a href="https://opentimestamps.org/" target="_blank" rel="noopener noreferrer" class="text-gold underline hover:text-goldLight">OpenTimestamps.org</a> et ancrés sur la Blockchain Bitcoin dès l'instant $T+0$.</p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center gap-4 pt-2">
+                        <button onclick="openSaisineModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-sm shadow-xl gold-glow transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2" data-i18n="hero.cta.mandate">
+                            <i data-lucide="play-circle" class="w-5 h-5"></i>
+                            <span>Démarrer une Saisine</span>
+                        </button>
+                        <a href="#terminal" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-ebonyCard border border-gold/30 text-slate-200 hover:text-gold font-semibold text-sm transition flex items-center justify-center gap-2 hover:border-gold" data-i18n="hero.cta.terminal">
+                            <i data-lucide="terminal" class="w-4 h-4 text-gold"></i>
+                            <span>Accéder au Terminal</span>
+                        </a>
+                        <a href="#verification" class="w-full sm:w-auto px-6 py-4 rounded-xl bg-ebony text-slate-300 hover:text-gold font-mono text-xs border border-ebonyBorder flex items-center justify-center gap-2 hover:border-gold/40">
+                            <i data-lucide="search" class="w-4 h-4 text-gold"></i>
+                            <span data-i18n="nav_verify">Vérifier SHA-256</span>
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6">
+                        <div class="glass-card p-4 rounded-xl border border-ebonyBorder text-center hover:border-gold/40 transition">
+                            <div class="text-2xl sm:text-3xl font-extrabold text-gold font-mono">+148%</div>
+                            <div class="text-[10px] uppercase tracking-wider text-slate-400 mt-1 font-mono" data-i18n="metric_roi">ROI Projeté</div>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl border border-ebonyBorder text-center hover:border-gold/40 transition">
+                            <div class="text-2xl sm:text-3xl font-extrabold text-white font-mono">96.4%</div>
+                            <div class="text-[10px] uppercase tracking-wider text-slate-400 mt-1 font-mono" data-i18n="metric_precision">Précision Audit</div>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl border border-ebonyBorder text-center hover:border-gold/40 transition">
+                            <div class="text-2xl sm:text-3xl font-extrabold text-gold font-mono">-41%</div>
+                            <div class="text-[10px] uppercase tracking-wider text-slate-400 mt-1 font-mono" data-i18n="metric_time">Délai Décision</div>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl border border-ebonyBorder text-center hover:border-gold/40 transition">
+                            <div class="text-2xl sm:text-3xl font-extrabold text-white font-mono">32%</div>
+                            <div class="text-[10px] uppercase tracking-wider text-slate-400 mt-1 font-mono" data-i18n="metric_efficiency">Gain Efficacité</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <aside class="dashboard glass-card p-6 sm:p-8 rounded-3xl border border-gold/30 shadow-2xl relative" aria-label="Dashboard de performance stratégique" data-i18n-aria-label="a11y.dashboard">
+                        <div class="dashboard-head flex justify-between items-center pb-4 mb-4 border-b border-ebonyBorder">
+                            <div>
+                                <span class="text-[10px] font-mono text-gold tracking-widest uppercase block" data-i18n="dashboard.kicker">TABLEAU DE BORD •</span>
+                                <h2 class="font-serif text-lg font-bold text-white tracking-wide" data-i18n="dashboard.title">PERFORMANCE STRATÉGIQUE</h2>
+                            </div>
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                <span data-i18n="dashboard.status">EN EXPLOITATION</span>
+                            </span>
+                        </div>
+
+                        <p class="text-xs font-mono text-gold mb-3 flex items-center gap-1.5" id="dashboard-sector-title">
+                            <i data-lucide="target" class="w-3.5 h-3.5"></i>
+                            <span data-i18n="sector.agro">Agro-industrie &amp; Souveraineté Alimentaire</span>
+                        </p>
+
+                        <div class="chart-wrap relative bg-ebony rounded-2xl p-4 border border-ebonyBorder mb-6 overflow-hidden">
+                            <div class="flex justify-between items-center text-[10px] font-mono text-slate-400 mb-2">
+                                <span data-i18n="dashboard.impact">INDICE D'IMPACT CONSOLIDÉ</span>
+                                <span class="text-gold">2024 — 2026</span>
+                            </div>
+
+                            <svg class="w-full h-44 performance-chart" viewBox="0 0 600 300" preserveAspectRatio="none" aria-label="Graphique de performance ascendante" data-i18n-aria-label="a11y.performance" role="img">
+                                <defs>
+                                    <linearGradient id="performance-stroke" x1="0" x2="1" y1="0" y2="0">
+                                        <stop offset="0%" stop-color="#aa8620" />
+                                        <stop offset="55%" stop-color="#d4af37" />
+                                        <stop offset="100%" stop-color="#fceaa7" />
+                                    </linearGradient>
+                                    <linearGradient id="performance-fill" x1="0" x2="0" y1="0" y2="1">
+                                        <stop offset="0%" stop-color="#d4af37" stop-opacity=".28" />
+                                        <stop offset="100%" stop-color="#d4af37" stop-opacity="0" />
+                                    </linearGradient>
+                                </defs>
+                                <path id="performance-area" d="M0 240 C58 228 65 196 120 207 S192 175 245 182 S310 137 365 150 S428 102 478 112 S540 56 600 44 L600 300 L0 300 Z" fill="url(#performance-fill)" />
+                                <path id="performance-line" d="M0 240 C58 228 65 196 120 207 S192 175 245 182 S310 137 365 150 S428 102 478 112 S540 56 600 44" fill="none" stroke="url(#performance-stroke)" stroke-width="3" vector-effect="non-scaling-stroke" />
+                                <circle id="performance-point-1" cx="120" cy="207" r="5" fill="#d4af37" />
+                                <circle id="performance-point-2" cx="365" cy="150" r="5" fill="#d4af37" />
+                                <circle id="performance-point-3" cx="600" cy="44" r="6" fill="#fceaa7" class="pulse-gold" />
+                            </svg>
+                            <span class="absolute top-8 right-6 text-xl font-bold font-mono text-gold" id="chart-rise">+24%</span>
+                        </div>
+
+                        <div class="metric-row grid grid-cols-3 gap-2.5">
+                            <div class="metric-box bg-ebony p-3 rounded-xl border border-ebonyBorder text-center">
+                                <span id="metric-label-1" class="text-[10px] text-slate-400 font-mono block" data-i18n="metric.agro.1">RENDEMENT</span>
+                                <strong id="metric-value-1" class="text-sm font-bold text-gold font-mono">+24%</strong>
+                            </div>
+                            <div class="metric-box bg-ebony p-3 rounded-xl border border-ebonyBorder text-center">
+                                <span id="metric-label-2" class="text-[10px] text-slate-400 font-mono block" data-i18n="metric.agro.2">PERTES STOCK</span>
+                                <strong id="metric-value-2" class="text-sm font-bold text-emerald-400 font-mono">-18%</strong>
+                            </div>
+                            <div class="metric-box bg-ebony p-3 rounded-xl border border-ebonyBorder text-center">
+                                <span id="metric-label-3" class="text-[10px] text-slate-400 font-mono block" data-i18n="metric.agro.3">CHAÎNE FROID</span>
+                                <strong id="metric-value-3" class="text-sm font-bold text-white font-mono">99.8%</strong>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
+    </section>
 
-      <section class="section" id="audit">
-        <div class="container">
-          <div class="section-header">
-            <h2>Une analyse claire de la réalité business</h2>
-            <p>
-              Nous auditons l'architecture de décision, les KPI, les performances opérationnelles et la maturité numérique pour identifier les leviers précis d'amélioration.
-            </p>
-          </div>
-
-          <div class="feature-grid" id="solutions">
-            <article class="feature">
-              <div class="icon">◎</div>
-              <h3>Audit stratégique</h3>
-              <p>
-                Diagnostic complet des processus, systèmes, coûts et décisions critiques pour révéler les frictions et gains de performance.
-              </p>
-            </article>
-
-            <article class="feature">
-              <div class="icon">◈</div>
-              <h3>Gouvernance digitale</h3>
-              <p>
-                Mise en place d'indicateurs, de tableaux de bord et de mécanismes de pilotage pour sécuriser les décisions au bon niveau.
-              </p>
-            </article>
-
-            <article class="feature">
-              <div class="icon">▣</div>
-              <h3>Strategic Engine</h3>
-              <p>
-                Engine de modélisation, d'anticipation et d'optimisation pour aligner l'exécution avec la vision stratégique.
-              </p>
-            </article>
-          </div>
-
-          <div class="value-props" id="impact">
-            <div class="callout">
-              <h3>Ce que nous livrons</h3>
-              <ul class="check-list">
-                <li>Cartographie des décideurs, des processus et des points de blocage.</li>
-                <li>Indicateurs de performance orientés valeur et impact réel sur les résultats.</li>
-                <li>Roadmaps concrètes pour transformer les données en actions mesurables.</li>
-                <li>Outillage d'alignement entre direction, opération et innovation.</li>
-              </ul>
+    <!-- 4. MANIFESTE SOUVERAIN & LES TROIS PILIERS DE L'AUDIT -->
+    <section id="manifeste" class="py-24 bg-ebonyCard/40 border-y border-ebonyBorder relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-xs uppercase tracking-widest text-gold font-mono" data-i18n="manifesto_doctrine">Doctrine &amp; Méthode Souveraine</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white" data-i18n="manifesto_title">Le Manifeste Souverain e-META LABS</h2>
+                <p class="text-slate-400 text-sm sm:text-base leading-relaxed" data-i18n="manifesto_desc">
+                    La transformation ne se décrète pas au moyen d’un outil. Elle se conduit à partir d’une compréhension exacte du terrain, d’une analyse disciplinée des faits et d’arbitrages assumés par les personnes responsables.
+                </p>
             </div>
 
-            <div class="score-card">
-              <div class="score-box">
-                <small>Maturité digitale</small>
-                <span class="big">78%</span>
-                <div class="progress"><span style="width: 78%;"></span></div>
-              </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="piliers">
+                <div class="glass-card p-8 rounded-3xl border border-ebonyBorder hover:border-gold/50 transition duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6 group-hover:scale-110 transition">
+                        <i data-lucide="cpu" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white mb-3" data-i18n="pillar1_title">Intelligence Algorithmique (CORTEX)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6" data-i18n="pillar1_desc">
+                        Organisation et analyse à distance des éléments transmis, identification des incohérences, vectorisation Qdrant, comparaison de scénarios et préparation des pistes d'orientation.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300 font-mono">
+                        <li class="flex items-center gap-2" data-i18n="pillar1_item1"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Distinctions faits / hypothèses</li>
+                        <li class="flex items-center gap-2" data-i18n="pillar1_item2"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Modélisation de scénarios critiques</li>
+                        <li class="flex items-center gap-2" data-i18n="pillar1_item3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Traçabilité des sources documentaires</li>
+                    </ul>
+                </div>
 
-              <div class="score-box">
-                <small>Prise de décision</small>
-                <span class="big">89%</span>
-                <div class="progress"><span style="width: 89%;"></span></div>
-              </div>
+                <div class="glass-card p-8 rounded-3xl border border-ebonyBorder hover:border-gold/50 transition duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6 group-hover:scale-110 transition">
+                        <i data-lucide="lock" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white mb-3" data-i18n="pillar2_title">Cryptographie Probatoire</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6" data-i18n="pillar2_desc">
+                        Calcul d'une empreinte cryptographique SHA-256 à partir du jeu de données de la saisine, couplé à un horodatage OpenTimestamps pour attester techniquement de l'intégrité et de l'antériorité.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300 font-mono">
+                        <li class="flex items-center gap-2" data-i18n="pillar2_item1"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Empreinte SHA-256 immuable</li>
+                        <li class="flex items-center gap-2" data-i18n="pillar2_item2"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Ancrage Bitcoin OpenTimestamps</li>
+                        <li class="flex items-center gap-2" data-i18n="pillar2_item3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Opposabilité juridique contractuelle</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl border border-ebonyBorder hover:border-gold/50 transition duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6 group-hover:scale-110 transition">
+                        <i data-lucide="user-check" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white mb-3" data-i18n="pillar3_title">Arbitrage Humain — Desk Exécutif</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6" data-i18n="pillar3_desc">
+                        <strong>Option B :</strong> Immersion contradictoire sur site par un Expert accrédité pour la levée des doutes topographiques, thermiques, hydrauliques, des sols et du froid.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300 font-mono">
+                        <li class="flex items-center gap-2" data-i18n="pillar3_item1"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Vérification des 5 points critiques</li>
+                        <li class="flex items-center gap-2" data-i18n="pillar3_item2"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Contreseing par Expert Senior</li>
+                        <li class="flex items-center gap-2" data-i18n="pillar3_item3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Verrouillage de l'astreinte SLA 2h</li>
+                    </ul>
+                </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      <section class="cta" id="contact">
-        <div class="container">
-          <div class="cta-box">
-            <div>
-              <h3>Transformer l'information en avantage concurrentiel.</h3>
-              <p>Accompagnez votre organisation vers un pilotage plus intelligent et plus résilient.</p>
+            <div class="mt-16 glass-card p-8 rounded-3xl border border-gold/30 bg-gradient-to-r from-ebonyCard via-ebony to-ebonyCard">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                    <div class="space-y-3">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-gold/10 text-gold text-xs font-mono uppercase">
+                            <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> <span data-i18n="ch19_kicker">Chapitre 19 — Levée Contradictoire sur Site (Option B)</span>
+                        </div>
+                        <h4 class="font-serif text-2xl font-bold text-white" data-i18n="ch19_title">Les 5 Familles de Points Critiques Audités</h4>
+                        <p class="text-slate-400 text-sm max-w-2xl" data-i18n="ch19_desc">
+                            Dès qu'une réserve exige la vérification des conditions réelles sur le terrain, notre Desk Exécutif déploie un expert accrédité pour confronter les hypothèses aux réalités physiques de l'infrastructure.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full lg:w-auto">
+                        <div class="px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-center">
+                            <span class="text-gold font-bold block text-sm font-mono" data-i18n="ch19_pt1_title">1. Sols</span>
+                            <span class="text-[11px] text-slate-400 font-mono" data-i18n="ch19_pt1_sub">Nature &amp; prélèvements</span>
+                        </div>
+                        <div class="px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-center">
+                            <span class="text-gold font-bold block text-sm font-mono" data-i18n="ch19_pt2_title">2. Hydraulique</span>
+                            <span class="text-[11px] text-slate-400 font-mono" data-i18n="ch19_pt2_sub">Ressources &amp; drainage</span>
+                        </div>
+                        <div class="px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-center">
+                            <span class="text-gold font-bold block text-sm font-mono" data-i18n="ch19_pt3_title">3. Thermique</span>
+                            <span class="text-[11px] text-slate-400 font-mono" data-i18n="ch19_pt3_sub">Seuils &amp; procédés</span>
+                        </div>
+                        <div class="px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-center">
+                            <span class="text-gold font-bold block text-sm font-mono" data-i18n="ch19_pt4_title">4. Chaîne du Froid</span>
+                            <span class="text-[11px] text-slate-400 font-mono" data-i18n="ch19_pt4_sub">Stockage &amp; transport</span>
+                        </div>
+                        <div class="px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-center col-span-2 sm:col-span-2">
+                            <span class="text-gold font-bold block text-sm font-mono" data-i18n="ch19_pt5_title">5. Topographie &amp; Équipements</span>
+                            <span class="text-[11px] text-slate-400 font-mono" data-i18n="ch19_pt5_sub">Accessibilité &amp; réseaux critiques</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <a href="mailto:contact@emeta-labs.com" class="button primary">Prendre rendez-vous</a>
-          </div>
         </div>
-      </section>
-    </main>
+    </section>
 
-    <footer>
-      <div class="container footer-row">
-        <div class="brand" aria-label="e-META LABS footer">
-          <span class="brand-mark">E</span>
-          <span>e-META LABS</span>
+    <!-- 5. COCKPIT SECTORIEL INTERACTIF (10 SECTEURS D'EXCELLENCE) -->
+    <section class="sector-cockpit py-24 relative" id="expertises" aria-labelledby="sector-title">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+                <span class="text-xs uppercase tracking-widest text-gold font-mono" data-i18n="sectors.kicker">ESPACE DÉCIDEUR •</span>
+                <h2 id="sector-title" class="font-serif text-3xl sm:text-5xl font-bold text-white" data-i18n="sectors.title">COCKPIT SECTORIEL INTERACTIF</h2>
+                <p class="text-slate-400 text-sm sm:text-base" data-i18n="sectors.description">Sélectionnez une expertise pour charger dynamiquement ses stress-tests, ses indicateurs et préparer votre mandat.</p>
+            </div>
+
+            <div class="sector-selector flex flex-wrap justify-center gap-2 mb-10" role="group" aria-label="Sélectionner un secteur d'expertise" data-i18n-aria-label="sectors.selector">
+                <button class="sector-badge is-active px-3.5 py-2 rounded-xl text-xs font-semibold font-mono border transition bg-gold text-ebony border-gold" type="button" data-sector="agro" data-i18n="sector.agro" aria-pressed="true" onclick="selectSector('agro')">Agro-industrie &amp; Souveraineté</button>
+                <button class="sector-badge px-3.5 py-2 rounded-xl text-xs font-semibold font-mono border transition bg-ebony text-slate-300 border-ebonyBorder hover:border-gold" type="button" data-sector="energy" data-i18n="sector.energy" aria-pressed="false" onclick="selectSector('energy')">Énergie, Mines &amp; Transition</button>
+                <button class="sector-badge px-3.5 py-2 rounded-xl text-xs font-semibold font-mono border transition bg-ebony text-slate-300 border-ebonyBorder hover:border-gold" type="button" data-sector="banking" data-i18n="sector.banking" aria-pressed="false" onclick="selectSector('banking')">Banque, FinTech &amp; Assurance</button>
+                <button class="sector-badge px-3.5 py-2 rounded-xl text-xs font-semibold font-mono border transition bg-ebony text-slate-300 border-ebonyBorder hover:border-gold" type="button" data-sector="logistics" data-i18n="sector.logistics" aria-pressed="false" onclick="selectSector('logistics')">Logistique, Ports &amp; Supply Chain</button>
+                <button class="sector-badge px-3.5 py-2 rounded-xl text-xs font-semibold font-mono border transition bg-ebony text-slate-300 border-ebonyBorder hover:border-gold" type="button" data-sector="health" data-i18n="sector.health" aria-pressed="false" onclick="selectSector('health')">Santé, Pharma &amp; Bio</button>
+                <button class="sector-badge px-3.5 py-2 rounded-xl text-xs font-semibold font-mono border transition bg-ebony text-slate-300 border-ebonyBorder hover:border-gold" type="button" data-sector="telecom" data-i18n="sector.telecom" aria-pressed="false" onclick="selectSector('telecom')">Télécoms, Cloud &amp; Infra</button>
+                <button class="sector-badge px-3.5 py-2 rounded-xl text-xs font-semibold font-mono border transition bg-ebony text-slate-300 border-ebonyBorder hover:border-gold" type="button" data-sector="property" data-i18n="sector.property" aria-pressed="false" onclick="selectSector('property')">BTP, Immobilier &amp; Foncier</button>
+                <button class="sector-badge px-3.5 py-2 rounded-xl text-xs font-semibold font-mono border transition bg-ebony text-slate-300 border-ebonyBorder hover:border-gold" type="button" data-sector="manufacturing" data-i18n="sector.manufacturing" aria-pressed="false" onclick="selectSector('manufacturing')">Industrie &amp; Transformation</button>
+                <button class="sector-badge px-3.5 py-2 rounded-xl text-xs font-semibold font-mono border transition bg-ebony text-slate-300 border-ebonyBorder hover:border-gold" type="button" data-sector="public" data-i18n="sector.public" aria-pressed="false" onclick="selectSector('public')">Secteur Public &amp; Para-public</button>
+                <button class="sector-badge px-3.5 py-2 rounded-xl text-xs font-semibold font-mono border transition bg-ebony text-slate-300 border-ebonyBorder hover:border-gold" type="button" data-sector="retail" data-i18n="sector.retail" aria-pressed="false" onclick="selectSector('retail')">Distribution, Retail &amp; Négoce</button>
+            </div>
+
+            <div class="sector-details-panel glass-card p-8 rounded-3xl border border-gold/30 shadow-2xl relative" id="sector-details-panel" aria-labelledby="sector-details-title" aria-live="polite">
+                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 pb-6 border-b border-ebonyBorder mb-6">
+                    <div>
+                        <span class="text-xs font-mono text-gold tracking-widest uppercase block" data-i18n="sector.details.kicker">ARBITRAGE SECTORIEL •</span>
+                        <h3 id="sector-details-title" class="font-serif text-2xl font-bold text-white">
+                            <span data-i18n="sector.details.title">Axes Stratégiques &amp; Stress-Tests Dédiés</span>
+                            <span aria-hidden="true" class="text-gold"> — </span>
+                            <span id="sector-details-active-name" class="gold-gradient" data-i18n="sector.agro">Agro-industrie &amp; Souveraineté Alimentaire</span>
+                        </h3>
+                    </div>
+                    <button class="button button-gold px-6 py-3.5 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-xs uppercase tracking-wider shadow-lg gold-glow transition" type="button" onclick="initializeSectorMandate()" data-i18n="sector.details.button">
+                        INITIALISER MON MANDAT DANS CE SECTEUR →
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="sectorDynamicCards">
+                    <div class="p-5 rounded-2xl bg-ebony border border-ebonyBorder space-y-2">
+                        <h4 class="text-xs font-mono text-gold uppercase flex items-center gap-2"><i data-lucide="shield" class="w-4 h-4"></i><span data-i18n="sector.detail.audit">Grille d'Audit Ciblée</span></h4>
+                        <p class="text-xs text-slate-300 leading-relaxed font-light" id="activeSectorAudit" data-i18n="sector.agro.audit">Approvisionnement, saisonnalité, rendement agricole/industriel, pertes post-récolte, traçabilité des lots et chaîne du froid.</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-ebony border border-ebonyBorder space-y-2">
+                        <h4 class="text-xs font-mono text-gold uppercase flex items-center gap-2"><i data-lucide="alert-triangle" class="w-4 h-4"></i><span data-i18n="sector.detail.stress">Stress-Tests Structurés</span></h4>
+                        <p class="text-xs text-slate-300 leading-relaxed font-light" id="activeSectorStress" data-i18n="sector.agro.stress">Baisse de rendement climatique, flambée des intrants/transport, panne d'équipement critique et rupture frigorifique.</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-ebony border border-ebonyBorder space-y-2">
+                        <h4 class="text-xs font-mono text-gold uppercase flex items-center gap-2"><i data-lucide="bar-chart-3" class="w-4 h-4"></i><span data-i18n="sector.detail.indicators">Indicateurs Clés Dédiés</span></h4>
+                        <p class="text-xs text-slate-300 leading-relaxed font-light" id="activeSectorIndicators" data-i18n="sector.agro.indicators">Taux de pertes post-récolte, rendement matière unitaire, durée de stockage et BFR saisonnier calibré.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-8" id="sectorsGrid">
+            </div>
         </div>
-        <span>Audit Décisionnel &amp; Strategic Engine</span>
-      </div>
+    </section>
+
+    <!-- 6. PROTOCOLE EN 3 PALIERS (TARIFICATION MULTI-DEVISE) -->
+    <section class="section accreditation-section py-24 bg-ebonyCard/40 border-y border-ebonyBorder" id="offres">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="text-xs uppercase tracking-widest text-gold font-mono" data-i18n="offers.number">SECTION 01 • MANDATS &amp; PROTOCOLES</span>
+                <h2 id="ui-title-01" class="font-serif text-3xl sm:text-5xl font-bold text-white" data-i18n="offers.title">Le Protocole d'Audit en 3 Paliers</h2>
+                <p id="ui-offer-intro" class="text-slate-400 text-sm sm:text-base" data-i18n="offers.description">Retenez un niveau de mandat pour initialiser le registre d'ingestion et sceller les livrables opposables.</p>
+            </div>
+
+            <div class="pricing-grid grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- PALIER 01 : DÉCOUVERTE -->
+                <article class="plan-card glass-card p-8 rounded-3xl border border-ebonyBorder flex flex-col justify-between hover:border-gold/40 transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="plan-index text-xs font-mono uppercase px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700" data-i18n="offers.tier.1">PALIER 01</span>
+                            <span class="plan-mark text-gold text-lg font-mono" aria-hidden="true">◇</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white mb-3" data-i18n="offers.plan.discovery">Diagnostic Découverte</h3>
+                        <p class="plan-description text-slate-400 text-xs sm:text-sm leading-relaxed mb-6" id="ui-starter-desc" data-i18n="offers.starter.description">
+                            Orientation d'urgence et premier cadrage pour faire ressortir les sujets nécessitant une décision ou investigation complémentaire.
+                        </p>
+
+                        <p class="plan-price text-3xl font-extrabold text-white font-mono mb-6" id="ui-price-starter">
+                            <span class="price-amount text-gold" id="price-starter" data-eur="0 €" data-usd="$0" data-xof="0 FCFA">0 €</span>
+                            <span class="text-xs text-slate-400 font-normal" data-i18n="offers.price.free">/ Offert</span>
+                        </p>
+
+                        <ul class="plan-features space-y-3 text-xs sm:text-sm text-slate-300 mb-8 font-mono">
+                            <li id="ui-st-1" class="flex items-center gap-2" data-i18n="offers.starter.item.1"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Synthèse de la situation décrite (3 à 5 pages)</li>
+                            <li id="ui-st-2" class="flex items-center gap-2" data-i18n="offers.starter.item.2"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Jusqu'à 3 failles ou points de vigilance prioritaires</li>
+                            <li id="ui-st-3" class="flex items-center gap-2" data-i18n="offers.starter.item.3"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Score de maturité sectorielle préliminaire</li>
+                            <li id="ui-st-4" class="flex items-center gap-2" data-i18n="offers.starter.item.4"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Restitution par e-mail sécurisé</li>
+                            <li class="feature-warning flex items-center gap-2 text-slate-500" data-i18n="offers.starter.warning"><i data-lucide="x" class="w-4 h-4 text-rose-500 shrink-0"></i> Scellement probatoire OTS non inclus</li>
+                        </ul>
+                    </div>
+                    <button class="button button-outline plan-button w-full py-3.5 rounded-xl bg-ebonyCard border border-gold/40 text-gold font-bold text-xs uppercase tracking-wider hover:bg-gold hover:text-ebony transition font-mono" id="ui-btn-starter" type="button" onclick="selectPlan('tier1_name', 'price-starter')" data-i18n="tier1_btn">
+                        SÉLECTIONNER CE PALIER
+                    </button>
+                </article>
+
+                <!-- PALIER 02 : MANDAT CERTIFIÉ -->
+                <article class="plan-card plan-featured glass-card p-8 rounded-3xl border-2 border-gold flex flex-col justify-between shadow-2xl relative gold-border-glow">
+                    <div class="recommended-badge absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gold text-ebony text-[11px] font-extrabold uppercase tracking-widest font-mono shadow-md" id="ui-pro-badge" data-i18n="offers.pro.badge">
+                        RECOMMANDÉ DIRECTION • LE PLUS DEMANDÉ
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-6 mt-2">
+                            <span class="plan-index text-xs font-mono uppercase px-3 py-1 rounded-full bg-gold/10 text-gold border border-gold/30" data-i18n="offers.tier.2">PALIER 02</span>
+                            <span class="plan-mark text-gold text-lg font-mono">✦</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white mb-3" data-i18n="offers.plan.certified">Mandat Certifié</h3>
+                        <p class="plan-description text-slate-300 text-xs sm:text-sm leading-relaxed mb-6" id="ui-pro-desc" data-i18n="offers.pro.description">
+                            Investigation décisionnelle approfondie, modélisation de stress-tests, rapport certifié de 15 à 25 pages et scellement d'intégrité.
+                        </p>
+
+                        <p class="plan-price text-3xl font-extrabold text-gold font-mono mb-1" id="ui-price-pro">
+                            <span class="price-amount" id="price-certified" data-eur="280 €" data-usd="$305" data-xof="185 000 FCFA">280 €</span>
+                            <span class="text-xs text-slate-400 font-normal" data-i18n="offers.price.mandate">/ Mandat</span>
+                        </p>
+                        <p class="price-equivalent text-xs text-slate-400 font-mono mb-6" id="price-equivalent-certified" data-i18n="offers.price.equivalent.certified">Équivalent : 185 000 FCFA</p>
+
+                        <ul class="plan-features space-y-3 text-xs sm:text-sm text-slate-200 mb-8 font-mono">
+                            <li id="ui-pr-1" class="flex items-center gap-2" data-i18n="offers.pro.item.1"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> Dossier complet certifié (15 à 25 pages)</li>
+                            <li id="ui-pr-2" class="flex items-center gap-2" data-i18n="offers.pro.item.2"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> Revue &amp; contreseing de l'Expert Exécutif</li>
+                            <li id="ui-pr-3" class="flex items-center gap-2" data-i18n="offers.pro.item.3"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> Modélisation de stress-tests sectoriels</li>
+                            <li id="ui-pr-4" class="flex items-center gap-2" data-i18n="offers.pro.item.4"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> Scellement SHA-256 + Bitcoin OTS</li>
+                            <li class="flex items-center gap-2" data-i18n="offers.pro.item.5"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> Référence souveraine MIS-2026-XXXX</li>
+                            <li class="flex items-center gap-2" data-i18n="offers.pro.item.6"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> Notification WhatsApp sécurisée directe</li>
+                        </ul>
+                    </div>
+                    <button class="button button-gold plan-button w-full py-4 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-xs uppercase tracking-widest shadow-xl gold-glow hover:opacity-95 transition font-mono" id="ui-btn-pro" type="button" onclick="selectPlan('tier2_name', 'price-certified')" data-i18n="tier2_btn">
+                        ENGAGER LE MANDAT CERTIFIÉ
+                    </button>
+                </article>
+
+                <!-- PALIER 03 : CHAMBRE EXÉCUTIVE -->
+                <article class="plan-card glass-card p-8 rounded-3xl border border-ebonyBorder flex flex-col justify-between hover:border-gold/40 transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="plan-index text-xs font-mono uppercase px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700" data-i18n="offers.tier.3">PALIER 03</span>
+                            <span class="plan-mark text-gold text-lg font-mono">⬡</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white mb-3" data-i18n="offers.plan.executive">Chambre Exécutive</h3>
+                        <p class="plan-description text-slate-400 text-xs sm:text-sm leading-relaxed mb-6" id="ui-expert-desc" data-i18n="offers.executive.description">
+                            Accompagnement stratégique permanent ou récurrent pour les comités de direction, groupes, filiales ou institutions majeures.
+                        </p>
+
+                        <p class="plan-price text-3xl font-extrabold text-white font-mono mb-1" id="ui-price-expert">
+                            <span class="price-amount text-gold" id="price-executive" data-eur="1 450 €" data-usd="$1,580" data-xof="950 000 FCFA">1 450 €</span>
+                            <span class="text-xs text-slate-400 font-normal" data-i18n="offers.price.month">/ Mois</span>
+                        </p>
+                        <p class="price-equivalent text-xs text-slate-400 font-mono mb-6" id="price-equivalent-executive" data-i18n="offers.price.equivalent.executive">Équivalent : 950 000 FCFA</p>
+
+                        <ul class="plan-features space-y-3 text-xs sm:text-sm text-slate-300 mb-8 font-mono">
+                            <li id="ui-ex-1" class="flex items-center gap-2" data-i18n="offers.executive.item.1"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Vision consolidée groupe &amp; filiales (25 à 45+ p.)</li>
+                            <li id="ui-ex-2" class="flex items-center gap-2" data-i18n="offers.executive.item.2"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Anticipation macroéconomique &amp; géopolitique</li>
+                            <li id="ui-ex-3" class="flex items-center gap-2" data-i18n="offers.executive.item.3"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Arbitrages d'investissement &amp; allocation de capital</li>
+                            <li id="ui-ex-4" class="flex items-center gap-2" data-i18n="offers.executive.item.4"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Restitution confidentielle avec le collège d'experts</li>
+                            <li class="flex items-center gap-2" data-i18n="offers.executive.item.5"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Registre probatoire privatif &amp; revue périodique</li>
+                        </ul>
+                    </div>
+                    <button class="button button-outline plan-button w-full py-3.5 rounded-xl bg-ebonyCard border border-gold/40 text-gold font-bold text-xs uppercase tracking-wider hover:bg-gold hover:text-ebony transition font-mono" id="ui-btn-expert" type="button" onclick="selectPlan('tier3_name', 'price-executive')" data-i18n="tier3_btn">
+                        MANDATER LA CHAMBRE
+                    </button>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. TERMINAL D'INGESTION DÉCISIONNELLE (150 CARACTÈRES) -->
+    <section class="section terminal-section py-24 relative" id="terminal">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                <span class="text-xs uppercase tracking-widest text-gold font-mono" data-i18n="terminal.number">SECTION 02 • SOUVERAINETÉ OPÉRATIONNELLE</span>
+                <h2 id="ui-terminal-title" class="font-serif text-3xl sm:text-5xl font-bold text-white" data-i18n="terminal.title">Terminal d'Ingestion Décisionnelle</h2>
+                <p id="ui-terminal-desc" class="text-slate-400 text-sm sm:text-base" data-i18n="terminal.description">Registre sécurisé de recevabilité des mandats, analyse RAG et scellement d'intégrité ($T+0$).</p>
+            </div>
+
+            <div class="terminal-shell glass-card rounded-3xl border border-gold/40 shadow-2xl overflow-hidden relative" id="terminal-container">
+                <div class="terminal-header bg-ebony p-6 border-b border-ebonyBorder flex flex-wrap justify-between items-center gap-4">
+                    <div>
+                        <span class="text-[10px] font-mono text-gold tracking-widest uppercase block" data-i18n="terminal.register">REGISTRE SOUVERAIN</span>
+                        <h3 class="font-serif text-lg font-bold text-white" data-i18n="terminal.ingestion">INGESTION &amp; SCELLEMENT CORTEX</h3>
+                    </div>
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-[11px] font-mono text-gold">
+                        <span class="w-2 h-2 rounded-full bg-gold animate-ping"></span>
+                        <span data-i18n="terminal.pipeline.ready">PIPELINE n8n PRÊT</span>
+                    </span>
+                </div>
+
+                <div class="terminal-content p-6 sm:p-10 space-y-6">
+                    <div class="reference-row bg-ebony p-4 rounded-2xl border border-ebonyBorder flex flex-wrap justify-between items-center gap-4 text-xs font-mono">
+                        <div>
+                            <span class="text-slate-400 block text-[10px]" data-i18n="terminal.reference.label">RÉFÉRENCE SOUVERAINE GÉNÉRÉE</span>
+                            <strong id="mandate-reference" class="text-gold text-sm tracking-wider">MIS-2026-5468</strong>
+                            <span class="plan-selected ml-2 px-2 py-0.5 rounded bg-gold/20 text-gold text-[10px]" id="badge-plan-selected" data-i18n="offers.plan.certified">MANDAT CERTIFIÉ</span>
+                        </div>
+                        <div class="selected-sector-row">
+                            <span class="text-slate-400 block text-[10px]" data-i18n="terminal.sector.selected">SECTEUR DU MANDAT</span>
+                            <strong id="terminal-sector-name" class="text-white" data-i18n="sector.agro">Agro-industrie &amp; Souveraineté Alimentaire</strong>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="selected-sector-id" name="secteur_selectionne" value="agro" />
+
+                    <form onsubmit="handleTerminalSubmission(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="form-field space-y-1.5">
+                                <label id="ui-lbl-mission" for="mission_nom" class="block text-xs font-mono text-slate-300" data-i18n="terminal.field.entity">
+                                    NOM DE L'ENTITÉ &amp; SECTEUR D'ACTIVITÉ <span class="text-gold">*</span>
+                                </label>
+                                <input id="mission_nom" name="mission_nom" type="text" autocomplete="organization" required placeholder="Ex. : Société / groupe et domaine d'activité" data-i18n-placeholder="terminal.placeholder.entity" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold transition font-mono" />
+                            </div>
+
+                            <div class="form-field space-y-1.5">
+                                <label id="ui-lbl-file" for="user-file" class="block text-xs font-mono text-slate-300" data-i18n="terminal.field.file">
+                                    Pièce justificative ou trame comptable <span class="text-[10px] text-slate-500">(PDF, DOCX, XLSX, PNG)</span>
+                                </label>
+                                <input id="user-file" name="piece_justificative" type="file" onchange="handleFileSelect(event)" accept=".pdf,.doc,.docx,.xlsx,.xls,.png,application/pdf" class="w-full text-xs text-slate-400 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-gold file:text-ebony hover:file:bg-goldLight cursor-pointer bg-ebony border border-ebonyBorder rounded-xl p-1.5" />
+                                <span class="field-hint text-[10px] text-slate-500 font-mono block mt-1" id="file-name" data-i18n="terminal.file.empty">Aucun fichier sélectionné</span>
+                            </div>
+                        </div>
+
+                        <div class="form-field terminal-context-field space-y-1.5">
+                            <label id="ui-lbl-contexte" for="mission_contexte" class="block text-xs font-mono text-slate-300" data-i18n="terminal.field.context">
+                                PROBLÉMATIQUE, EXPOSÉ DES ENJEUX &amp; VULNÉRABILITÉS <span class="text-gold">*</span>
+                            </label>
+                            <textarea id="mission_contexte" name="mission_contexte" required minlength="150" rows="4" oninput="updateCharCounter(this)" placeholder="Exposez le contexte, les enjeux critiques, les outils en place et les vulnérabilités identifiés (150 caractères minimum exigés pour recevabilité formelle)." data-i18n-placeholder="terminal.placeholder.context" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold transition font-mono"></textarea>
+
+                            <div class="character-meter flex justify-between items-center text-[11px] font-mono text-slate-500 pt-1">
+                                <span id="context-counter" class="text-amber-400" data-i18n="terminal.counter.minimum">0 / 150 caractères minimum</span>
+                                <span class="text-gold" data-i18n="terminal.counter.ready">Condition formelle de recevabilité du mandat</span>
+                            </div>
+                        </div>
+
+                        <div class="terminal-submit-row flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-ebonyBorder">
+                            <a class="matrix-link text-xs text-gold hover:underline font-mono flex items-center gap-1.5" id="ui-link-matrice" href="#matrixModal" onclick="openModal('matrixModal'); return false;">
+                                <i data-lucide="grid" class="w-3.5 h-3.5"></i>
+                                <span data-i18n="terminal.matrix.link">Matrice des 10 secteurs et grilles d'audit ↗</span>
+                            </a>
+
+                            <button class="button button-submit w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-xs uppercase tracking-wider shadow-lg disabled:opacity-40 disabled:cursor-not-allowed font-mono transition" id="ui-btn-analyse" type="submit" disabled data-i18n="terminal.submit">
+                                INITIALISER LE SCELLEMENT CRYPTOGRAPHIQUE &amp; L'ANALYSE
+                            </button>
+                        </div>
+                    </form>
+
+                    <p class="form-status text-xs font-mono pt-2 text-center" id="terminal-status" role="status" aria-live="polite"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. VÉRIFICATEUR SHA-256 EN DIRECT & RECHERCHE NOCODB -->
+    <section id="verification" class="py-24 relative overflow-hidden bg-ebonyCard/30 border-t border-ebonyBorder">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="glass-card p-8 sm:p-12 rounded-3xl border border-gold/30 shadow-2xl">
+                <div class="text-center max-w-2xl mx-auto mb-10 space-y-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-mono uppercase">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                        <span data-i18n="verify_kicker">Registre NocoDB &amp; Cockpit Tracker</span>
+                    </div>
+                    <h2 class="font-serif text-3xl font-bold text-white" data-i18n="verify_title">Vérification de Scellement &amp; Suivi de Mission</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm" data-i18n="verify_desc" data-i18n-rich-text="true">
+                        Entrez votre référence de mission (ex: <code class="text-gold font-mono">MIS-2026-0842</code>) pour interroger en temps réel le registre d'intégrité probatoire et l'état de l'arbitrage terrain (Option B).
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto mb-6">
+                    <div class="relative flex-1">
+                        <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                        <input type="text" id="missionInput" placeholder="Ex: MIS-2026-0842 ou Hash SHA-256..." data-i18n-placeholder="verify_placeholder" class="w-full pl-11 pr-4 py-3.5 rounded-xl bg-ebony border border-ebonyBorder text-white text-xs sm:text-sm focus:outline-none focus:border-gold transition font-mono" />
+                    </div>
+                    <button onclick="simulateVerification()" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-xs uppercase tracking-wider shadow-lg hover:opacity-95 transition flex items-center justify-center gap-2 font-mono">
+                        <span data-i18n="verify_btn">Interroger</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-400 mb-8">
+                    <span data-i18n="verify_quick">Exemples enregistrés :</span>
+                    <button onclick="loadSampleMission('MIS-2026-0842')" class="px-2.5 py-1 rounded bg-ebony border border-ebonyBorder text-gold font-mono hover:border-gold">MIS-2026-0842</button>
+                    <button onclick="loadSampleMission('MIS-2026-1109')" class="px-2.5 py-1 rounded bg-ebony border border-ebonyBorder text-gold font-mono hover:border-gold">MIS-2026-1109</button>
+                    <button onclick="loadSampleMission('MIS-2026-5468')" class="px-2.5 py-1 rounded bg-ebony border border-ebonyBorder text-gold font-mono hover:border-gold">MIS-2026-5468</button>
+                </div>
+
+                <div id="simulationResult" class="hidden space-y-6 pt-6 border-t border-ebonyBorder">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-4 rounded-xl bg-ebony border border-ebonyBorder">
+                            <span class="text-xs text-slate-400 block font-mono" data-i18n="verify_lbl_status">Statut de la Mission</span>
+                            <span id="resStatus" class="text-emerald-400 font-bold text-sm flex items-center gap-1.5 mt-1 font-mono">
+                                <i data-lucide="check-circle" class="w-4 h-4"></i> <span data-i18n="verify_status_certified">Mandat Certifié Actif</span>
+                            </span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-ebony border border-ebonyBorder">
+                            <span class="text-xs text-slate-400 block font-mono" data-i18n="verify_lbl_sector">Secteur d'Excellence</span>
+                            <span id="resSecteur" class="text-white font-bold text-sm mt-1 block font-mono" data-i18n="sector.energy">Énergie &amp; Mines</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-ebony border border-ebonyBorder">
+                            <span class="text-xs text-slate-400 block font-mono" data-i18n="verify_lbl_optionb">Arbitrage Terrain (Option B)</span>
+                            <span id="resOptionB" class="text-gold font-bold text-sm mt-1 block font-mono" data-i18n="verify_result_optionb">Levée validée (5 points OK)</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-ebony border border-ebonyBorder space-y-2">
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="text-slate-400 font-mono" data-i18n="verify_lbl_hash">Empreinte Cryptographique Canonique (SHA-256)</span>
+                            <span class="text-emerald-400 flex items-center gap-1 font-mono text-[11px]"><i data-lucide="shield-check" class="w-3.5 h-3.5"></i><span data-i18n="verify_badge_ots">Ancré OpenTimestamps Bitcoin</span></span>
+                        </div>
+                        <div id="resHash" class="p-3 rounded bg-ebonyCard text-gold font-mono text-xs break-all border border-ebonyBorder">
+                            a42d4a1e98fbc149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. FOOTER DIPLOMATIQUE, GOUVERNANCE & RÉFÉRENTIEL 2026 -->
+    <footer class="bg-ebonyCard border-t border-ebonyBorder pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <div class="space-y-4 md:col-span-1">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-8 h-8 rounded-lg" viewBox="0 0 100 100">
+                            <polygon points="50,5 95,25 95,75 50,95 5,75 5,25" stroke="#d4af37" stroke-width="4" fill="#0a192f"/>
+                            <circle cx="50" cy="50" r="12" fill="#d4af37"/>
+                        </svg>
+                        <span class="font-serif text-lg font-bold text-white">e-META <span class="gold-gradient">LABS</span></span>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed" data-i18n="footer.identity">
+                        Cockpit scientifique d'aide à la décision stratégique pour Comités de Direction, Ministères, Banques et Fonds d'Investissement.
+                    </p>
+                    <div class="text-xs text-slate-400 space-y-1 font-mono">
+                        <p class="font-semibold text-slate-300" data-i18n="footer_address_title">E-META LABS SASU</p>
+                        <p data-i18n="footer_address_sub">Face Débarcadère, Rosso, Sénégal</p>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-mono">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span data-i18n="footer.health">Système opérationnel • Blockchain OTS</span>
+                    </span>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider font-mono" data-i18n="footer.poles">Pôles Stratégiques</h4>
+                    <ul class="space-y-2 text-xs text-slate-400 font-mono">
+                        <li><a href="#offres" class="hover:text-gold transition" data-i18n="footer_link_audit">Audit &amp; Accréditations</a></li>
+                        <li><a href="#expertises" class="hover:text-gold transition" data-i18n="footer_link_sectors">Cockpit Sectoriel</a></li>
+                        <li><a href="expert.html" class="hover:text-gold transition" data-i18n="footer_link_experts">Desk Exécutif (Arbitrage)</a></li>
+                        <li><a href="tracker.html" class="hover:text-gold transition" data-i18n="footer_link_tracker">Suivi Mission (Tracker)</a></li>
+                        <li><a href="protocole-apport-affaires.html" class="hover:text-gold transition" data-i18n="footer_link_partners">Prescripteurs &amp; Partenaires</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider font-mono" data-i18n="footer.governance">Gouvernance &amp; Juridique</h4>
+                    <ul class="space-y-2 text-xs text-slate-400 font-mono">
+                        <li><a href="mentions-legales.html" class="hover:text-gold transition" data-i18n="footer_link_legal">Mentions Légales</a></li>
+                        <li><a href="cgv.html" class="hover:text-gold transition" data-i18n="footer_link_terms">Conditions Générales de Vente</a></li>
+                        <li><a href="confidentialite.html" class="hover:text-gold transition" data-i18n="footer_link_privacy">Confidentialité &amp; Secret des Affaires</a></li>
+                        <li><a href="remboursement.html" class="hover:text-gold transition" data-i18n="footer_link_refunds">Politique de Remboursement</a></li>
+                        <li><a href="protocole-apport-affaires.html" class="hover:text-gold transition" data-i18n="footer_link_referral">Protocole d'Apport d'Affaires</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider font-mono" data-i18n="footer.diplomatic">Canaux Diplomatiques</h4>
+                    <ul class="space-y-2 text-xs text-slate-400 font-mono">
+                        <li class="flex items-center gap-2"><i data-lucide="mail" class="w-3.5 h-3.5 text-gold"></i> <a href="mailto:contact@e-metalabs.com" class="hover:text-gold transition">contact@e-metalabs.com</a></li>
+                        <li class="flex items-center gap-2"><i data-lucide="headphones" class="w-3.5 h-3.5 text-gold"></i> <a href="mailto:support@e-metalabs.com" class="hover:text-gold transition">support@e-metalabs.com</a></li>
+                        <li class="pt-2 text-slate-500 text-[11px]" data-i18n="footer.cities">Rosso • Dakar • Paris • Dubaï</li>
+                        <li class="pt-2">
+                            <button onclick="openSaisineModal()" class="w-full py-2.5 rounded-lg bg-gold/10 text-gold border border-gold/30 hover:bg-gold hover:text-ebony font-semibold text-xs transition">
+                                <span data-i18n="footer_direct_mandate">Ouvrir un Mandat Direct</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-ebonyBorder flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4 font-mono">
+                <p id="ui-footer-rights" data-i18n="footer.rights">© 2026 E-META LABS SASU. Tous droits réservés. Référentiel Exécutif Octobre 2026.</p>
+                <div class="flex items-center gap-4">
+                    <span class="text-gold" data-i18n="footer_verified">SHA-256 Verified</span>
+                    <span>•</span>
+                    <span class="text-emerald-400" data-i18n="footer_ots_active">Bitcoin OTS Active</span>
+                    <span>•</span>
+                    <span data-i18n="footer.unit">Strategic Intelligence Unit</span>
+                </div>
+            </div>
+        </div>
     </footer>
-  </body>
+
+    <!-- 10. MODAL SAISINE & TRANSMISSION n8n -->
+    <div id="saisineModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-card w-full max-w-lg p-8 rounded-3xl border border-gold/40 relative shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <button onclick="closeSaisineModal()" class="absolute top-6 right-6 p-2 rounded-lg bg-ebony text-slate-400 hover:text-white border border-ebonyBorder" aria-label="Fermer la fenêtre" data-i18n-aria-label="a11y.close">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="space-y-2 mb-6">
+                <span class="text-xs uppercase tracking-widest text-gold font-mono" data-i18n="modal_saisine_kicker">Saisine Exécutive</span>
+                <h3 class="font-serif text-2xl font-bold text-white" data-i18n="modal_saisine_title">Démarrer une Mission</h3>
+                <p class="text-slate-400 text-xs" data-i18n="modal_saisine_desc">Renseignez vos coordonnées, joignez vos pièces pour l'analyse RAG et initiez le scellement SHA-256 en $T+0$.</p>
+            </div>
+
+            <form onsubmit="handleSaisineSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono text-slate-300 mb-1.5" for="modalEntreprise" data-i18n="form_lbl_company">Nom de l'Entreprise / Institution *</label>
+                    <input type="text" id="modalEntreprise" required placeholder="Ex: Compagnie Minière de l'Ouest" data-i18n-placeholder="form_ph_company" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-mono text-slate-300 mb-1.5" for="modalEmail" data-i18n="form_lbl_email">Email Professionnel *</label>
+                        <input type="email" id="modalEmail" required placeholder="dirigeant@institution.com" data-i18n-placeholder="form_ph_email" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono text-slate-300 mb-1.5" for="modalWhatsapp" data-i18n="form_lbl_whatsapp">Ligne WhatsApp Directe *</label>
+                        <input type="tel" id="modalWhatsapp" required placeholder="221770000000" pattern="[0-9]{8,15}" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold font-mono" title="Chiffres seuls avec indicatif pays sans le signe +" data-i18n-title="a11y.phone">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-mono text-slate-300 mb-1.5" for="modalSectorSelect" data-i18n="form_lbl_sector">Secteur d'Excellence</label>
+                        <select id="modalSectorSelect" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold">
+                            <option value="agro" data-i18n="sec_1">Agro-industrie &amp; Souveraineté</option>
+                            <option value="energy" data-i18n="sec_3">Énergie, Mines &amp; Transition</option>
+                            <option value="banking" data-i18n="sec_2">Banque, FinTech &amp; Assurance</option>
+                            <option value="logistics" data-i18n="sec_4">Logistique, Ports &amp; Supply Chain</option>
+                            <option value="health" data-i18n="sec_5">Santé, Pharma &amp; Bio</option>
+                            <option value="telecom" data-i18n="sec_6">Télécoms, Cloud &amp; Infra</option>
+                            <option value="property" data-i18n="sec_7">BTP, Immobilier &amp; Foncier</option>
+                            <option value="manufacturing" data-i18n="sec_8">Industrie &amp; Transformation</option>
+                            <option value="public" data-i18n="sec_9">Secteur Public &amp; Parapublic</option>
+                            <option value="retail" data-i18n="sec_10">Distribution, Retail &amp; Négoce</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono text-slate-300 mb-1.5" for="modalPalierSelect" data-i18n="form_lbl_tier">Palier d'Intervention</label>
+                        <select id="modalPalierSelect" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold">
+                            <option data-i18n="modal.tier.1">Palier 1 — Diagnostic Découverte (0 €)</option>
+                            <option selected data-i18n="modal.tier.2">Palier 2 — Mandat Certifié (280 €)</option>
+                            <option data-i18n="modal.tier.3">Palier 3 — Chambre Exécutive (1 450 €)</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-mono text-slate-300 mb-1.5" for="modalDesc" data-i18n="form_lbl_decision">Problématique &amp; Arbitrage Critique *</label>
+                    <textarea id="modalDesc" rows="3" required placeholder="Décrivez succinctement les frictions ou arbitrages stratégiques attendus..." data-i18n-placeholder="form_ph_decision" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold font-mono"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-xs uppercase tracking-wider shadow-lg hover:opacity-95 transition font-mono" data-i18n="form_btn_submit">
+                    Générer la Référence &amp; Sceller la Saisine ($T+0$)
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 11. MODAL CANAL SÉCURISÉ DE RESTITUTION (AUTO-DETECT n8n) -->
+    <div class="modal-overlay fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4" id="autoDetectModal" role="dialog" aria-modal="true" aria-labelledby="ui-modal-secure-title" aria-hidden="true">
+        <div class="modal-content glass-card w-full max-w-lg p-8 rounded-3xl border border-gold/40 relative shadow-2xl">
+            <button class="modal-close absolute top-6 right-6 p-2 rounded-lg bg-ebony text-slate-400 hover:text-white border border-ebonyBorder" type="button" aria-label="Fermer la fenêtre" onclick="closeModal('autoDetectModal')">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <span class="section-number text-xs uppercase tracking-widest text-gold font-mono block mb-1" data-i18n="modal.channel.kicker">CANAL DE RESTITUTION</span>
+            <h2 id="ui-modal-secure-title" class="font-serif text-2xl font-bold text-white mb-2" data-i18n="modal.channel.title">🛡️ Canal Sécurisé de Restitution</h2>
+            <p id="ui-modal-secure-desc" class="text-slate-400 text-xs mb-6 font-light" data-i18n="modal.channel.description">Indiquez les coordonnées professionnelles de réception du rapport certifié.</p>
+
+            <div class="space-y-4">
+                <div class="form-field space-y-1.5">
+                    <label id="ui-lbl-email" for="auto-email" class="block text-xs font-mono text-slate-300" data-i18n="modal.email">Email Professionnel <span class="text-gold">*</span></label>
+                    <input id="auto-email" name="email" type="email" autocomplete="email" required placeholder="nom@organisation.com" data-i18n-placeholder="form_ph_email" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold transition font-mono" />
+                </div>
+                <div class="form-field space-y-1.5">
+                    <label id="ui-lbl-phone" for="auto-phone" class="block text-xs font-mono text-slate-300" data-i18n="modal.phone">Ligne WhatsApp Directe (chiffres sans '+') <span class="text-gold">*</span></label>
+                    <input id="auto-phone" name="telephone" type="tel" autocomplete="tel" required placeholder="221770000000" data-i18n-placeholder="form_ph_whatsapp" pattern="[0-9]{8,15}" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold transition font-mono" />
+                </div>
+
+                <p class="modal-assurance text-[11px] text-slate-500 font-mono leading-relaxed pt-2" data-i18n="modal.assurance">
+                    Mandat garanti sous secret des affaires. L'empreinte SHA-256 est transmise au pipeline pour enregistrement dans le coffre NocoDB.
+                </p>
+
+                <p class="form-status text-xs font-mono" id="modal-status" role="status" aria-live="polite"></p>
+
+                <button class="button button-gold modal-submit w-full py-4 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-xs uppercase tracking-widest shadow-xl gold-glow hover:opacity-95 transition font-mono mt-4" id="btn-fire-ia" type="button" onclick="fireAutoDetection()" data-i18n="modal.submit">
+                    SCELLER &amp; TRANSMETTRE AU PIPELINE n8n
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 12. MODAL MATRICE DÉTAILLÉE DES 10 SECTEURS -->
+    <div class="modal-overlay fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4" id="matrixModal" role="dialog" aria-modal="true" aria-labelledby="matrix-title" aria-hidden="true">
+        <div class="modal-content matrix-content glass-card w-full max-w-3xl p-8 rounded-3xl border border-gold/40 relative shadow-2xl max-h-[85vh] overflow-y-auto custom-scrollbar">
+            <button class="modal-close absolute top-6 right-6 p-2 rounded-lg bg-ebony text-slate-400 hover:text-white border border-ebonyBorder" type="button" aria-label="Fermer la fenêtre" data-i18n-aria-label="a11y.close" onclick="closeModal('matrixModal')">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <span class="section-number text-xs uppercase tracking-widest text-gold font-mono block mb-1" data-i18n="matrix.kicker">RÉFÉRENTIEL SECTORIEL</span>
+            <h2 id="matrix-title" class="font-serif text-2xl font-bold text-white mb-6" data-i18n="matrix.title">Matrice des 10 Secteurs d'Excellence</h2>
+
+            <ol class="sector-matrix space-y-3.5 text-xs font-mono" id="fullMatrixList">
+            </ol>
+        </div>
+    </div>
+
+    <!-- 13. MODAL ZOOM SECTEUR INDIVIDUEL -->
+    <div id="sectorModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-card w-full max-w-2xl p-8 rounded-3xl border border-gold/40 relative shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <button onclick="closeSectorModal()" class="absolute top-6 right-6 p-2 rounded-lg bg-ebony text-slate-400 hover:text-white border border-ebonyBorder" aria-label="Fermer la fenêtre" data-i18n-aria-label="a11y.close">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div id="sectorModalContent" class="space-y-6">
+            </div>
+        </div>
+    </div>
+
+    <!-- 14. LOGIQUE JAVASCRIPT COMPLÈTE & INTÉGRÉE -->
+    <script>
+        const sectorsDatabase = {
+            agro: {
+                id: 1,
+                code: "agro",
+                name: "Agro-industrie & Souveraineté Alimentaire",
+                nameKey: "sector.agro",
+                auditKey: "sector.agro.audit",
+                stressKey: "sector.agro.stress",
+                indicatorsKey: "sector.agro.indicators",
+                icon: "wheat",
+                audit: "Approvisionnement, saisonnalité, rendement agricole/industriel, pertes post-récolte, traçabilité des lots et chaîne du froid.",
+                stressTests: "Baisse de rendement climatique, flambée des intrants/transport, panne d'équipement critique et rupture frigorifique.",
+                indicators: "Taux de pertes post-récolte, rendement matière unitaire, durée de stockage et BFR saisonnier calibré.",
+                metrics: { label1Key: "metric.agro.1", label1: "RENDEMENT", val1: "+24%", label2Key: "metric.agro.2", label2: "PERTES STOCK", val2: "-18%", label3Key: "metric.agro.3", label3: "CHAÎNE FROID", val3: "99.8%", rise: "+24%" }
+            },
+            energy: {
+                id: 2,
+                code: "energy",
+                name: "Énergie, Mines & Transition",
+                nameKey: "sector.energy",
+                auditKey: "sector.energy.audit",
+                stressKey: "sector.energy.stress",
+                indicatorsKey: "sector.energy.indicators",
+                icon: "zap",
+                audit: "Disponibilité des actifs, coûts d'extraction, réserves documentées, intensité énergétique, sécurité HSE et maintenance critique.",
+                stressTests: "Baisse de teneur minerai, volatilité brut/matières, arrêt de corridor logistique et révision fiscale de concession.",
+                indicators: "Coût unitaire d'extraction, TRS/OEE, intensité énergétique et redevances sectorielles.",
+                metrics: { label1Key: "metric.energy.1", label1: "DISPO ACTIFS", val1: "98.2%", label2Key: "metric.energy.2", label2: "COÛT UNITAIRE", val2: "-14%", label3Key: "metric.energy.3", label3: "SÉCURITÉ HSE", val3: "100%", rise: "+31%" }
+            },
+            banking: {
+                id: 3,
+                code: "banking",
+                name: "Banque, FinTech & Assurance",
+                nameKey: "sector.banking",
+                auditKey: "sector.banking.audit",
+                stressKey: "sector.banking.stress",
+                indicatorsKey: "sector.banking.indicators",
+                icon: "landmark",
+                audit: "Gouvernance des risques, liquidité prudentielle Bâle, refinancement, fraude transactionnelle, conformité BCEAO/UEMOA.",
+                stressTests: "Retraits de dépôts concentrés, défauts de contreparties majeures, flambée du taux de refinancement et incident cyber.",
+                indicators: "Ratio de liquidité LCR, coût du risque net, taux de fraude résiduel et marge nette d'intérêt.",
+                metrics: { label1Key: "metric.banking.1", label1: "RATIO LCR", val1: "142%", label2Key: "metric.banking.2", label2: "COÛT DU RISQUE", val2: "-22%", label3Key: "metric.banking.3", label3: "DISPO PAIEMENT", val3: "99.99%", rise: "+27%" }
+            },
+            logistics: {
+                id: 4,
+                code: "logistics",
+                name: "Logistique, Ports & Supply Chain",
+                nameKey: "sector.logistics",
+                auditKey: "sector.logistics.audit",
+                stressKey: "sector.logistics.stress",
+                indicatorsKey: "sector.logistics.indicators",
+                icon: "ship",
+                audit: "Planification des flux multimodaux, cadencement portuaire, délais de transit et dédouanement, traçabilité documentaire continue.",
+                stressTests: "Congestion portuaire prolongée, grève de corridor frontalier, hausse brutale du fret et rupture de stock tampon.",
+                indicators: "Coût par tonne-kilomètre, taux de service OTIF, rotation de flotte et délai moyen de passage frontière.",
+                metrics: { label1Key: "metric.logistics.1", label1: "TAUX OTIF", val1: "96.8%", label2Key: "metric.logistics.2", label2: "DÉLAI DOUANE", val2: "-36%", label3Key: "metric.logistics.3", label3: "ROTATION FLOTTE", val3: "+19%", rise: "+22%" }
+            },
+            health: {
+                id: 5,
+                code: "health",
+                name: "Santé, Pharma & Biotechnologies",
+                nameKey: "sector.health",
+                auditKey: "sector.health.audit",
+                stressKey: "sector.health.stress",
+                indicatorsKey: "sector.health.indicators",
+                icon: "pill",
+                audit: "Continuité de dispensation, traçabilité des lots DPM, maintien strict du froid médical, sécurité des données patients et audit clinique.",
+                stressTests: "Rupture d'approvisionnement en principe actif, excursion thermique de vaccins et panne groupe de secours hospitalier.",
+                indicators: "Taux de disponibilité des essentiels, conformité réglementaire des lots et temps moyen de prise en charge.",
+                metrics: { label1Key: "metric.health.1", label1: "DISPO MÉDIC.", val1: "99.4%", label2Key: "metric.health.2", label2: "CONFORMITÉ DPM", val2: "100%", label3Key: "metric.health.3", label3: "ZÉRO EXCURSION", val3: "100%", rise: "+18%" }
+            },
+            telecom: {
+                id: 6,
+                code: "telecom",
+                name: "Télécoms, Cloud & Infrastructures",
+                nameKey: "sector.telecom",
+                auditKey: "sector.telecom.audit",
+                stressKey: "sector.telecom.stress",
+                indicatorsKey: "sector.telecom.indicators",
+                icon: "wifi",
+                audit: "Haute disponibilité réseau, redondance fibre/pylônes, latence critique, souveraineté cloud et réponse aux incidents de sécurité.",
+                stressTests: "Section de câble sous-marin, panne d'énergie sur nœud central, pic d'attaque DDoS et incident de datacenter souverain.",
+                indicators: "Disponibilité réseau SLA, délai de rétablissement MTTR, ARPU et churn rate consolidé.",
+                metrics: { label1Key: "metric.telecom.1", label1: "SLA RÉSEAU", val1: "99.995%", label2Key: "metric.telecom.2", label2: "MTTR MOYEN", val2: "18 min", label3Key: "metric.telecom.3", label3: "DDoS ABSORBÉ", val3: "100%", rise: "+35%" }
+            },
+            property: {
+                id: 7,
+                code: "property",
+                name: "Immobilier, BTP & Grands Travaux",
+                nameKey: "sector.property",
+                auditKey: "sector.property.audit",
+                stressKey: "sector.property.stress",
+                indicatorsKey: "sector.property.indicators",
+                icon: "building-2",
+                audit: "Audit des titres fonciers, autorisations d'urbanisme, pilotage des sous-traitants, respect du calendrier et analyse géotechnique.",
+                stressTests: "Flambée des coûts de l'acier/ciment, défaillance d'un lot technique majeur, intempéries exceptionnelles et litige riverains.",
+                indicators: "Dérive coût/délai prévisionnelle, marge d'achèvement, taux de levée des réserves et sinistralité chantier.",
+                metrics: { label1Key: "metric.property.1", label1: "RESPECT DÉLAI", val1: "94.5%", label2Key: "metric.property.2", label2: "DÉRIVE COÛTS", val2: "-12%", label3Key: "metric.property.3", label3: "LEVÉE RÉSERVES", val3: "98%", rise: "+20%" }
+            },
+            manufacturing: {
+                id: 8,
+                code: "manufacturing",
+                name: "Industrie Manufacturière & Transformation",
+                nameKey: "sector.manufacturing",
+                auditKey: "sector.manufacturing.audit",
+                stressKey: "sector.manufacturing.stress",
+                indicatorsKey: "sector.manufacturing.indicators",
+                icon: "factory",
+                audit: "Taux de rendement synthétique (TRS), goulots de production, disponibilité pièces de rechange, rebus et sécurité industrielle.",
+                stressTests: "Casse mécanique d'une machine critique, rupture d'emballage primaire, arrêt automatisme et rappel de lot produit.",
+                indicators: "TRS/OEE, taux de non-conformité, coût de non-qualité et temps moyen entre pannes (MTBF).",
+                metrics: { label1Key: "metric.manufacturing.1", label1: "TRS GLOBAL", val1: "88.6%", label2Key: "metric.manufacturing.2", label2: "TAUX REBUT", val2: "-2.4%", label3Key: "metric.manufacturing.3", label3: "DISPO LIGNE", val3: "97.1%", rise: "+29%" }
+            },
+            public: {
+                id: 9,
+                code: "public",
+                name: "Secteur Public & Parapublic",
+                nameKey: "sector.public",
+                auditKey: "sector.public.audit",
+                stressKey: "sector.public.stress",
+                indicatorsKey: "sector.public.indicators",
+                icon: "landmark",
+                audit: "Alignement stratégique, régularité des marchés publics, exécution budgétaire, traçabilité des décisions et qualité de service citoyen.",
+                stressTests: "Retard de décaissement bailleurs, défaillance de portail téléservice et tension d'approvisionnement en denrées stratégiques.",
+                indicators: "Taux d'engagement budgétaire, délai moyen de traitement des dossiers et coût unitaire par usager.",
+                metrics: { label1Key: "metric.public.1", label1: "EXÉCUTION BUDG.", val1: "96.1%", label2Key: "metric.public.2", label2: "DÉLAI USAGER", val2: "-45%", label3Key: "metric.public.3", label3: "CONFORMITÉ", val3: "100%", rise: "+25%" }
+            },
+            retail: {
+                id: 10,
+                code: "retail",
+                name: "Distribution, Retail & Négoce",
+                nameKey: "sector.retail",
+                auditKey: "sector.retail.audit",
+                stressKey: "sector.retail.stress",
+                indicatorsKey: "sector.retail.indicators",
+                icon: "shopping-bag",
+                audit: "Marge commerciale par famille, rotation des stocks en entrepôt, démarque inconnue, négociation fournisseurs et livraison dernier km.",
+                stressTests: "Chute brutale de la demande, surstockage de produits périssables, fluctuation des cours de change et blocage logistique.",
+                indicators: "Marge nette sur coûts variables, jours de stock (DSI), taux de rupture linéaire et valeur du panier moyen.",
+                metrics: { label1Key: "metric.retail.1", label1: "MARGE BRUTE", val1: "+16.5%", label2Key: "metric.retail.2", label2: "JOURS DE STOCK", val2: "-14 j", label3Key: "metric.retail.3", label3: "DISPO RAYON", val3: "99.1%", rise: "+21%" }
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+            setIndexCurrency(localStorage.getItem('emeta_currency') || 'EUR');
+            renderSectorsGrid();
+            renderMatrixModal();
+            updateTerminalReference();
+        });
+
+        let selectedSectorKey = 'agro';
+        let activeSectorModalKey = null;
+        let selectedPlanKey = null;
+        let selectedPlanPriceId = null;
+
+        function translate(key, values = {}) {
+            let text = window.i18n ? window.i18n.translate(key) : key;
+            Object.entries(values).forEach(([name, value]) => {
+                text = text.replaceAll(`{${name}}`, value);
+            });
+            return text;
+        }
+
+        function localizedSector(sector) {
+            return {
+                name: translate(sector.nameKey) === sector.nameKey ? sector.name : translate(sector.nameKey),
+                audit: translate(sector.auditKey) === sector.auditKey ? sector.audit : translate(sector.auditKey),
+                stressTests: translate(sector.stressKey) === sector.stressKey ? sector.stressTests : translate(sector.stressKey),
+                indicators: translate(sector.indicatorsKey) === sector.indicatorsKey ? sector.indicators : translate(sector.indicatorsKey)
+            };
+        }
+
+        function selectSector(sectorKey) {
+            const sector = sectorsDatabase[sectorKey];
+            if (!sector) return;
+            selectedSectorKey = sectorKey;
+            const copy = localizedSector(sector);
+
+            document.querySelectorAll('.sector-badge').forEach(btn => {
+                if (btn.getAttribute('data-sector') === sectorKey) {
+                    btn.classList.add('bg-gold', 'text-ebony', 'border-gold', 'is-active');
+                    btn.classList.remove('bg-ebony', 'text-slate-300', 'border-ebonyBorder');
+                    btn.setAttribute('aria-pressed', 'true');
+                } else {
+                    btn.classList.remove('bg-gold', 'text-ebony', 'border-gold', 'is-active');
+                    btn.classList.add('bg-ebony', 'text-slate-300', 'border-ebonyBorder');
+                    btn.setAttribute('aria-pressed', 'false');
+                }
+            });
+
+            document.getElementById('sector-details-active-name').dataset.i18n = sector.nameKey;
+            document.getElementById('sector-details-active-name').textContent = copy.name;
+            document.getElementById('activeSectorAudit').dataset.i18n = sector.auditKey;
+            document.getElementById('activeSectorAudit').textContent = copy.audit;
+            document.getElementById('activeSectorStress').dataset.i18n = sector.stressKey;
+            document.getElementById('activeSectorStress').textContent = copy.stressTests;
+            document.getElementById('activeSectorIndicators').dataset.i18n = sector.indicatorsKey;
+            document.getElementById('activeSectorIndicators').textContent = copy.indicators;
+
+            document.getElementById('dashboard-sector-title').innerHTML = `<i data-lucide="target" class="w-3.5 h-3.5"></i> <span data-i18n="${sector.nameKey}">${copy.name}</span>`;
+            document.getElementById('metric-label-1').dataset.i18n = sector.metrics.label1Key;
+            document.getElementById('metric-label-1').textContent = translate(sector.metrics.label1Key);
+            document.getElementById('metric-value-1').textContent = sector.metrics.val1;
+            document.getElementById('metric-label-2').dataset.i18n = sector.metrics.label2Key;
+            document.getElementById('metric-label-2').textContent = translate(sector.metrics.label2Key);
+            document.getElementById('metric-value-2').textContent = sector.metrics.val2;
+            document.getElementById('metric-label-3').dataset.i18n = sector.metrics.label3Key;
+            document.getElementById('metric-label-3').textContent = translate(sector.metrics.label3Key);
+            document.getElementById('metric-value-3').textContent = sector.metrics.val3;
+            document.getElementById('chart-rise').textContent = sector.metrics.rise;
+
+            document.getElementById('selected-sector-id').value = sector.code;
+            document.getElementById('terminal-sector-name').dataset.i18n = sector.nameKey;
+            document.getElementById('terminal-sector-name').textContent = copy.name;
+            document.getElementById('modalSectorSelect').value = sector.code;
+
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function initializeSectorMandate() {
+            const terminal = document.getElementById('terminal');
+            if (terminal) {
+                terminal.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('mission_nom').focus();
+            }
+        }
+
+        function renderSectorsGrid() {
+            const grid = document.getElementById('sectorsGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            Object.values(sectorsDatabase).forEach(s => {
+                const card = document.createElement('div');
+                card.className = 'glass-card p-5 rounded-2xl border border-ebonyBorder hover:border-gold/50 transition cursor-pointer flex flex-col justify-between group';
+                card.onclick = () => openSectorModal(s);
+                card.innerHTML = `
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-3 group-hover:scale-110 transition">
+                            <i data-lucide="${s.icon}" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="font-serif font-bold text-white text-sm mb-1.5" data-i18n="${s.nameKey}">${localizedSector(s).name}</h4>
+                        <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed font-light" data-i18n="${s.auditKey}">${localizedSector(s).audit}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-ebonyBorder flex items-center justify-between text-xs text-gold font-mono">
+                        <span data-i18n="sector.detail.card.cta">${translate('sector.detail.card.cta')}</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition"></i>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function renderMatrixModal() {
+            const list = document.getElementById('fullMatrixList');
+            if (!list) return;
+            list.innerHTML = '';
+
+            Object.values(sectorsDatabase).forEach(s => {
+                const li = document.createElement('li');
+                li.className = 'p-4 rounded-xl bg-ebony border border-ebonyBorder hover:border-gold/30 transition';
+                const copy = localizedSector(s);
+                li.innerHTML = `
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-gold font-bold">#${s.id}</span>
+                        <strong class="text-white text-sm" data-i18n="${s.nameKey}">${copy.name}</strong>
+                    </div>
+                    <p class="text-slate-400 text-xs mb-2 leading-relaxed"><strong class="text-slate-300" data-i18n="sector.detail.audit">${translate('sector.detail.audit')}</strong> <span data-i18n="${s.auditKey}">${copy.audit}</span></p>
+                    <p class="text-slate-400 text-xs leading-relaxed"><strong class="text-gold" data-i18n="sector.detail.stress">${translate('sector.detail.stress')}</strong> <span data-i18n="${s.stressKey}">${copy.stressTests}</span></p>
+                `;
+                list.appendChild(li);
+            });
+        }
+
+        function updateCharCounter(textarea) {
+            const length = (textarea.value || '').trim().length;
+            const counter = document.getElementById('context-counter');
+            const submitBtn = document.getElementById('ui-btn-analyse');
+
+            if (length >= 150) {
+                counter.dataset.i18n = 'terminal.counter.satisfied';
+                counter.textContent = translate('terminal.counter.satisfied', { count: length });
+                counter.className = 'text-emerald-400 font-bold';
+                submitBtn.removeAttribute('disabled');
+            } else {
+                counter.dataset.i18n = 'terminal.counter.minimum';
+                counter.textContent = translate('terminal.counter.minimum', { count: length });
+                counter.className = 'text-amber-400';
+                submitBtn.setAttribute('disabled', 'true');
+            }
+        }
+
+        function handleFileSelect(event) {
+            updateFileName(event.target.files[0] || null);
+        }
+
+        function updateFileName(file) {
+            const nameEl = document.getElementById('file-name');
+            if (file) {
+                nameEl.dataset.i18n = 'terminal.file.indexed';
+                nameEl.textContent = translate('terminal.file.indexed', {
+                    name: file.name,
+                    size: Math.round(file.size / 1024)
+                });
+                nameEl.className = 'text-[10px] text-emerald-400 font-mono block mt-1';
+            } else {
+                nameEl.dataset.i18n = 'terminal.file.empty';
+                nameEl.textContent = translate('terminal.file.empty');
+                nameEl.className = 'text-[10px] text-slate-500 font-mono block mt-1';
+            }
+        }
+
+        function updateTerminalReference() {
+            const randomCode = Math.floor(1000 + Math.random() * 9000);
+            const ref = `MIS-2026-${randomCode}`;
+            const refEl = document.getElementById('mandate-reference');
+            if (refEl) refEl.textContent = ref;
+        }
+
+        function selectPlan(planNameKey, priceId) {
+            const planName = translate(planNameKey);
+            const priceText = document.getElementById(priceId).textContent;
+            selectedPlanKey = planNameKey;
+            selectedPlanPriceId = priceId;
+            const badge = document.getElementById('badge-plan-selected');
+            if (badge) {
+                badge.dataset.i18n = planNameKey;
+                badge.textContent = planName;
+            }
+
+            const terminal = document.getElementById('terminal');
+            if (terminal) {
+                terminal.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('mission_nom').focus();
+            }
+            const statusEl = document.getElementById('terminal-status');
+            if (statusEl) {
+                statusEl.dataset.i18n = 'terminal.status.selected';
+                statusEl.textContent = translate('terminal.status.selected', { plan: planName, price: priceText });
+                statusEl.className = 'form-status text-xs font-mono pt-2 text-center text-gold';
+            }
+        }
+
+        function handleTerminalSubmission(e) {
+            e.preventDefault();
+            const contexte = document.getElementById('mission_contexte').value.trim();
+
+            if (contexte.length < 150) {
+                alert(translate('terminal.validation.context'));
+                return;
+            }
+            openModal('autoDetectModal');
+        }
+
+        function fireAutoDetection() {
+            const email = document.getElementById('auto-email').value.trim();
+            const phone = document.getElementById('auto-phone').value.trim();
+            const status = document.getElementById('modal-status');
+            const submitBtn = document.getElementById('btn-fire-ia');
+
+            if (!email || !phone) {
+                status.dataset.i18n = 'modal.validation.contact';
+                status.textContent = translate('modal.validation.contact');
+                status.className = "form-status text-xs font-mono text-rose-400";
+                return;
+            }
+
+            status.dataset.i18n = 'modal.status.processing';
+            status.textContent = translate('modal.status.processing');
+            status.className = "form-status text-xs font-mono text-gold animate-pulse";
+            submitBtn.setAttribute('disabled', 'true');
+
+            setTimeout(() => {
+                status.dataset.i18n = 'modal.status.success';
+                status.textContent = translate('modal.status.success');
+                status.className = "form-status text-xs font-mono text-emerald-400";
+
+                setTimeout(() => {
+                    closeModal('autoDetectModal');
+                    const ref = document.getElementById('mandate-reference').textContent;
+                    document.getElementById('missionInput').value = ref;
+                    simulateVerification();
+                    const verif = document.getElementById('verification');
+                    if (verif) verif.scrollIntoView({ behavior: 'smooth' });
+                }, 1200);
+            }, 1000);
+        }
+
+        function simulateVerification() {
+            const val = document.getElementById('missionInput').value.trim();
+            if (!val) {
+                alert(translate('verify.validation.empty'));
+                return;
+            }
+
+            const result = document.getElementById('simulationResult');
+            result.classList.remove('hidden');
+
+            if (val.includes('0842')) {
+                document.getElementById('resStatus').innerHTML = `<i data-lucide="check-circle" class="w-4 h-4"></i> <span data-i18n="verify.result.certified">${translate('verify.result.certified')}</span>`;
+                document.getElementById('resSecteur').dataset.i18n = 'sector.energy';
+                document.getElementById('resSecteur').innerText = translate('sector.energy');
+                document.getElementById('resOptionB').dataset.i18n = 'verify_result_optionb';
+                document.getElementById('resOptionB').innerText = translate('verify_result_optionb');
+                document.getElementById('resHash').innerText = 'a42d4a1e98fbc149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
+            } else if (val.includes('1109')) {
+                document.getElementById('resStatus').innerHTML = `<i data-lucide="check-circle" class="w-4 h-4"></i> <span data-i18n="verify.result.executive">${translate('verify.result.executive')}</span>`;
+                document.getElementById('resSecteur').dataset.i18n = 'sector.banking';
+                document.getElementById('resSecteur').innerText = translate('sector.banking');
+                document.getElementById('resOptionB').dataset.i18n = 'verify.result.executive.optionb';
+                document.getElementById('resOptionB').innerText = translate('verify.result.executive.optionb');
+                document.getElementById('resHash').innerText = 'f7c8996fb92427ae41e4649b934ca495991b7852b855a42d4a1e98fbc149afb';
+            } else {
+                document.getElementById('resStatus').innerHTML = `<i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i> <span data-i18n="verify.result.received">${translate('verify.result.received')}</span>`;
+                document.getElementById('resSecteur').dataset.i18n = sectorsDatabase[selectedSectorKey].nameKey;
+                document.getElementById('resSecteur').innerText = document.getElementById('terminal-sector-name').textContent;
+                document.getElementById('resOptionB').dataset.i18n = 'verify.result.scheduled';
+                document.getElementById('resOptionB').innerText = translate('verify.result.scheduled');
+                document.getElementById('resHash').innerText = 'c42b7852b8559afbf4c8996fb92427ae41e4649b934ca49599178fbc149af42d';
+            }
+
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function loadSampleMission(ref) {
+            document.getElementById('missionInput').value = ref;
+            simulateVerification();
+        }
+
+        let selectedCurrency = 'EUR';
+
+        function setIndexCurrency(curr) {
+            if (!['EUR', 'USD', 'FCFA'].includes(curr)) curr = 'EUR';
+            selectedCurrency = curr;
+            window.setCurrency(curr);
+            const eqCert = document.getElementById('price-equivalent-certified');
+            const eqExec = document.getElementById('price-equivalent-executive');
+
+            if (curr === 'EUR') {
+                if (eqCert) {
+                    eqCert.dataset.i18n = 'offers.currency.eq.xof';
+                    eqCert.textContent = translate('offers.currency.eq.xof', { amount: '185 000' });
+                }
+                if (eqExec) {
+                    eqExec.dataset.i18n = 'offers.currency.eq.xof';
+                    eqExec.textContent = translate('offers.currency.eq.xof', { amount: '950 000' });
+                }
+            } else if (curr === 'USD') {
+                if (eqCert) {
+                    eqCert.dataset.i18n = 'offers.currency.eq.approx';
+                    eqCert.textContent = translate('offers.currency.eq.approx', { amount: '280' });
+                }
+                if (eqExec) {
+                    eqExec.dataset.i18n = 'offers.currency.eq.approx';
+                    eqExec.textContent = translate('offers.currency.eq.approx', { amount: '1 450' });
+                }
+            } else if (curr === 'FCFA') {
+                if (eqCert) {
+                    eqCert.dataset.i18n = 'offers.currency.eq.official';
+                    eqCert.textContent = translate('offers.currency.eq.official', { amount: '280' });
+                }
+                if (eqExec) {
+                    eqExec.dataset.i18n = 'offers.currency.eq.official';
+                    eqExec.textContent = translate('offers.currency.eq.official', { amount: '1 450' });
+                }
+            }
+        }
+
+        function resetTerminal() {
+            document.getElementById('mission_nom').value = '';
+            document.getElementById('mission_contexte').value = '';
+            document.getElementById('user-file').value = '';
+            updateFileName(null);
+            updateCharCounter(document.getElementById('mission_contexte'));
+            updateTerminalReference();
+            selectSector('agro');
+            setIndexCurrency('EUR');
+            selectedPlanKey = null;
+            selectedPlanPriceId = null;
+            document.getElementById('badge-plan-selected').dataset.i18n = 'offers.plan.certified';
+            document.getElementById('badge-plan-selected').textContent = translate('offers.plan.certified');
+        }
+
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.remove('hidden');
+        }
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function openSectorModal(sector) {
+            activeSectorModalKey = sector.code;
+            const content = document.getElementById('sectorModalContent');
+            const copy = localizedSector(sector);
+            content.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold">
+                        <i data-lucide="${sector.icon}" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-gold font-mono" data-i18n="sector.modal.kicker">${translate('sector.modal.kicker', { id: sector.id })}</span>
+                        <h3 class="font-serif text-2xl font-bold text-white" data-i18n="${sector.nameKey}">${copy.name}</h3>
+                    </div>
+                </div>
+                <div class="space-y-4 pt-2">
+                    <div class="p-4 rounded-xl bg-ebony border border-ebonyBorder">
+                        <h5 class="text-xs font-mono uppercase text-gold mb-2 flex items-center gap-2"><i data-lucide="shield" class="w-4 h-4"></i> <span data-i18n="sector.detail.audit">${translate('sector.detail.audit')}</span></h5>
+                        <p class="text-xs text-slate-300 leading-relaxed font-light" data-i18n="${sector.auditKey}">${copy.audit}</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-ebony border border-ebonyBorder">
+                        <h5 class="text-xs font-mono uppercase text-gold mb-2 flex items-center gap-2"><i data-lucide="alert-triangle" class="w-4 h-4"></i> <span data-i18n="sector.detail.stress">${translate('sector.detail.stress')}</span></h5>
+                        <p class="text-xs text-slate-300 leading-relaxed font-light" data-i18n="${sector.stressKey}">${copy.stressTests}</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-ebony border border-ebonyBorder">
+                        <h5 class="text-xs font-mono uppercase text-gold mb-2 flex items-center gap-2"><i data-lucide="bar-chart-3" class="w-4 h-4"></i> <span data-i18n="sector.detail.indicators">${translate('sector.detail.indicators')}</span></h5>
+                        <p class="text-xs text-slate-300 leading-relaxed font-light" data-i18n="${sector.indicatorsKey}">${copy.indicators}</p>
+                    </div>
+                    <button class="w-full py-3.5 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-xs uppercase tracking-widest font-mono" onclick="selectSector('${sector.code}'); closeSectorModal(); initializeSectorMandate();">
+                        <span data-i18n="sector.modal.select">${translate('sector.modal.select')}</span>
+                    </button>
+                </div>
+            `;
+            openModal('sectorModal');
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function closeSectorModal() {
+            activeSectorModalKey = null;
+            closeModal('sectorModal');
+        }
+
+        window.addEventListener('emeta:languagechange', () => {
+            renderSectorsGrid();
+            renderMatrixModal();
+            selectSector(selectedSectorKey);
+            updateCharCounter(document.getElementById('mission_contexte'));
+            const fileInput = document.getElementById('user-file');
+            updateFileName(fileInput.files[0] || null);
+            setIndexCurrency(selectedCurrency);
+            if (activeSectorModalKey && !document.getElementById('sectorModal').classList.contains('hidden')) {
+                openSectorModal(sectorsDatabase[activeSectorModalKey]);
+            }
+            if (selectedPlanKey) {
+                const planName = translate(selectedPlanKey);
+                document.getElementById('badge-plan-selected').textContent = planName;
+                const status = document.getElementById('terminal-status');
+                if (status) {
+                    status.textContent = translate('terminal.status.selected', {
+                        plan: planName,
+                        price: document.getElementById(selectedPlanPriceId).textContent
+                    });
+                }
+            }
+            if (window.lucide) window.lucide.createIcons();
+        });
+
+        function openSaisineModal() {
+            openModal('saisineModal');
+        }
+
+        function closeSaisineModal() {
+            closeModal('saisineModal');
+        }
+
+        function handleSaisineSubmit(e) {
+            e.preventDefault();
+            const nom = document.getElementById('modalEntreprise').value;
+            const sector = document.getElementById('modalSectorSelect').value;
+            selectSector(sector);
+            document.getElementById('mission_nom').value = nom;
+            document.getElementById('mission_contexte').value = document.getElementById('modalDesc').value;
+            updateCharCounter(document.getElementById('mission_contexte'));
+            closeSaisineModal();
+            openModal('autoDetectModal');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+    </script>
+    <script src="i18n.js"></script>
+    <script src="script.js"></script>
+</body>
 </html>

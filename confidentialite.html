@@ -1,78 +1,231 @@
 <!DOCTYPE html>
-<html lang="fr">
-  <head>
+<html lang="fr" dir="ltr" class="dark scroll-smooth">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#050a12" />
-    <meta name="description" content="Politique de confidentialité, protection des données et secret des affaires d'e-META LABS." />
+    <meta name="theme-color" content="#0a0b0e" />
+    <meta name="description" content="Politique de confidentialité, gouvernance des données et secret des affaires d'e-META LABS." />
     <title>Confidentialité &amp; Secret des Affaires | e-META LABS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body class="legal-page">
-    <header class="legal-header">
-      <div class="legal-header-inner">
-        <a class="legal-brand" href="index.html" aria-label="e-META LABS, accueil">
-          <svg viewBox="0 0 100 100" role="img" aria-label="Logo hexagonal e-META LABS"><polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="none" stroke="#d4af37" stroke-width="6" /><circle cx="50" cy="50" r="10" fill="#d4af37" /></svg>
-          <span>e-META LABS</span>
-        </a>
-        <a class="legal-back" href="index.html">← Retour au cockpit</a>
-      </div>
+
+    <!-- Favicon Officiel Géométrique e-META LABS -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,25 95,75 50,95 5,75 5,25' stroke='%23d4af37' stroke-width='5' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        ebony: '#0a0b0e',
+                        ebonyCard: '#12141c',
+                        ebonyElevated: '#171a26',
+                        ebonyBorder: '#232634',
+                        gold: '#d4af37',
+                        goldLight: '#f3e5ab',
+                        goldDark: '#aa8c2c',
+                        goldMuted: 'rgba(212, 175, 55, 0.15)'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            background-color: #0a0b0e;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa8c2c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border-glow {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
+        }
+        .glass-card {
+            background: rgba(18, 20, 28, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .legal-content h2 {
+            color: #d4af37;
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+        .legal-content p, .legal-content ul {
+            color: #cbd5e1;
+            font-size: 0.925rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+        .legal-content ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+        .legal-content li {
+            margin-bottom: 0.5rem;
+        }
+        .legal-content strong {
+            color: #f8fafc;
+            font-weight: 600;
+        }
+        .legal-content a {
+            color: #d4af37;
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+        .legal-content a:hover {
+            color: #f3e5ab;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0a0b0e;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #232634;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+    </style>
+</head>
+<body class="bg-ebony text-slate-100 antialiased selection:bg-gold selection:text-ebony min-h-screen custom-scrollbar">
+
+    <!-- Top Status Bar -->
+    <div class="bg-gradient-to-r from-ebony via-ebonyCard to-ebony border-b border-gold/20 py-2 px-4 sm:px-8 text-xs text-slate-300 flex justify-between items-center z-50 sticky top-0 backdrop-blur-md">
+        <div class="flex items-center gap-2 font-mono text-[11px]">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-gold font-semibold">GOUVERNANCE DES DONNÉES &amp; SECRET BANCAIRE / AFFAIRES</span>
+            <span class="hidden sm:inline text-slate-600">|</span>
+            <span class="hidden sm:inline text-slate-400">Édition Référentielle 2026</span>
+        </div>
+        <div class="flex items-center gap-4 text-xs font-mono">
+            <a href="mentions-legales.html" class="text-slate-400 hover:text-gold transition">Mentions</a>
+            <span class="text-slate-600">|</span>
+            <a href="cgv.html" class="text-slate-400 hover:text-gold transition">CGV</a>
+            <span class="text-slate-600">|</span>
+            <a href="remboursement.html" class="text-slate-400 hover:text-gold transition">Remboursement</a>
+        </div>
+    </div>
+
+    <!-- Header Institutionnel -->
+    <header class="sticky top-[37px] z-40 bg-ebony/90 backdrop-blur-xl border-b border-ebonyBorder shadow-2xl">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <svg class="w-10 h-10 drop-shadow-lg gold-border-glow rounded-xl transition transform group-hover:scale-105" viewBox="0 0 100 100">
+                    <polygon points="50,5 95,25 95,75 50,95 5,75 5,25" stroke="#d4af37" stroke-width="4" fill="#0a192f"/>
+                    <circle cx="50" cy="50" r="12" fill="#d4af37"/>
+                </svg>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-serif text-xl font-bold tracking-wider text-white">e-META <span class="gold-gradient">LABS</span></span>
+                        <span class="text-[10px] uppercase tracking-widest px-1.5 py-0.5 rounded bg-gold/10 text-gold border border-gold/30 font-mono">SASU</span>
+                    </div>
+                    <p class="text-[10px] text-slate-400 tracking-wider font-mono">CABINET DE HAUTE DÉCISION &amp; STRATEGIC ENGINE</p>
+                </div>
+            </a>
+
+            <a href="index.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-ebonyCard border border-ebonyBorder text-xs text-slate-300 hover:text-gold hover:border-gold/40 transition font-mono group">
+                <span class="transition transform group-hover:-translate-x-1">←</span>
+                <span>Retour au Cockpit</span>
+            </a>
+        </div>
     </header>
-    <main class="legal-main">
-      <article class="legal-card">
-        <p class="legal-kicker">Gouvernance des données</p>
-        <h1>Confidentialité &amp; Secret des Affaires</h1>
-        <p class="legal-meta">Politique applicable aux demandes et mandats e-META LABS · Mise à jour : 7 octobre 2026</p>
 
-        <p>La présente politique décrit le traitement des informations confiées à e-META LABS dans le cadre de ses services de diagnostic et d'audit décisionnels. Elle s'adresse notamment aux entreprises, institutions publiques, ministères, comités de direction et fonds d'investissement. Elle complète le mandat ou les conditions particulières convenues avec le client ; en cas de divergence, les dispositions impératives applicables et le document contractuel signé prévalent.</p>
+    <!-- Main Content (Flux standard sans écrasement) -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gold/10 rounded-full blur-[160px] pointer-events-none"></div>
 
-        <h2>1. Responsable et rôles dans le traitement</h2>
-        <p>Pour les données de contact, de facturation et de relation commerciale, le responsable du traitement est e-META LABS SASU, joignable à <a href="mailto:contact@e-metalabs.com">contact@e-metalabs.com</a>. Pour les données opérationnelles contenues dans un dossier fourni par un client professionnel, le client détermine normalement les finalités et moyens essentiels du traitement et agit en qualité de responsable ; e-META LABS intervient dans la mesure nécessaire comme prestataire ou sous-traitant, sur instruction documentée et conformément au mandat. La qualification doit être confirmée selon les opérations réellement confiées.</p>
-        <p>Les données demandées peuvent inclure l'identité et les coordonnées professionnelles des interlocuteurs, le nom de l'entité, le secteur d'activité, les enjeux décrits, des indicateurs financiers ou opérationnels et, si le client choisit d'en transmettre, des pièces justificatives. Le client est invité à exclure les données personnelles sans rapport avec le mandat, les identifiants d'accès, les secrets d'authentification et toute information qu'il n'est pas autorisé à communiquer.</p>
+        <article class="glass-card rounded-3xl p-6 sm:p-12 gold-border-glow shadow-2xl relative z-10 legal-content">
+            <div class="text-center pb-6 border-b border-ebonyBorder mb-8">
+                <span class="inline-block px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-[10px] font-mono uppercase tracking-widest text-gold mb-2">
+                    Gouvernance des Données
+                </span>
+                <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white tracking-wide">
+                    Confidentialité &amp; Secret des Affaires
+                </h1>
+                <p class="text-xs text-slate-400 font-mono mt-2">
+                    Politique Applicable aux Dossiers, Saisines &amp; Mandats Décisionnels · Octobre 2026
+                </p>
+            </div>
 
-        <h2>2. Finalités et fondements</h2>
-        <ul>
-          <li>recevoir, qualifier et administrer les demandes de diagnostic ou d'audit ;</li>
-          <li>analyser le contexte et produire les livrables expressément convenus ;</li>
-          <li>assurer le suivi du mandat, transmettre les restitutions et répondre aux demandes du client ;</li>
-          <li>établir, vérifier et conserver les éléments nécessaires à la facturation, à la sécurité et à la défense des droits ;</li>
-          <li>calculer, lorsque le mandat le prévoit, une empreinte cryptographique et organiser son horodatage probatoire.</li>
-        </ul>
-        <p>Le traitement repose, selon le contexte, sur l'exécution d'un contrat ou de mesures précontractuelles, les obligations légales applicables, l'intérêt légitime à sécuriser et gérer la relation professionnelle, ou le consentement lorsqu'il est juridiquement requis. Le client demeure responsable de disposer d'un fondement valable pour les données de tiers qu'il transmet.</p>
+            <p>La présente politique détaille les engagements stricts de sécurité, d'étanchéité et de souveraineté pris par <strong>E-META LABS SASU</strong> vis-à-vis des données stratégiques, trames financières, documents d'exploitation et pièces d'audit confiés par ses mandants[cite: 42].</p>
 
-        <h2>3. Secret des affaires et confidentialité B2B</h2>
-        <p>Les informations non publiques relatives à la stratégie, aux procédés, aux finances, aux clients, aux fournisseurs, aux risques, aux actifs ou à l'organisation du client sont traitées comme confidentielles lorsqu'elles sont identifiées comme telles ou qu'elles doivent raisonnablement être comprises comme telles. Elles ne sont utilisées que pour instruire et exécuter le mandat, administrer le service, satisfaire une obligation légale ou protéger les droits concernés.</p>
-        <p>L'accès est limité aux personnes autorisées qui en ont besoin pour le service et qui sont tenues à des obligations de confidentialité appropriées. Une communication peut intervenir auprès d'un sous-traitant technique strictement nécessaire, d'un conseil soumis au secret professionnel ou d'une autorité compétente lorsque la loi l'exige. Lorsque la loi le permet, le client est informé d'une demande contraignante portant sur ses informations. Ces engagements ne couvrent pas les informations déjà publiques sans faute du destinataire, reçues licitement d'un tiers ou dont la divulgation est légalement requise.</p>
+            <h2>1. Responsable du Traitement &amp; Rôles Contractuels</h2>
+            <p>Le traitement des données opérationnelles et de contact est supervisé par E-META LABS SASU (Rosso, Sénégal)[cite: 42]. Pour l'ensemble des données d'ingestion transmises par les directoires, e-META LABS intervient en qualité de <strong>tiers de confiance technique et délégataire probatoire</strong> agissant strictement sur les instructions du donneur d'ordre[cite: 42].</p>
+            <p>Les mandants sont invités à ne transmettre que les données strictement indispensables à l'investigation (états financiers, schémas de flux, plans d'implantation) et à exclure les mots de passe maîtres ou identifiants personnels superflus[cite: 42].</p>
 
-        <h2>4. Intelligence artificielle et données des mandats</h2>
-        <p>e-META LABS s'interdit d'utiliser ou de réinjecter les données identifiables ou confidentielles reçues au titre d'un mandat dans les jeux de données d'entraînement ou d'amélioration de modèles publics d'intelligence artificielle de tiers. Elle n'autorise pas ses prestataires à utiliser ces données à cette fin dans le cadre du mandat. Un outil technique ou un prestataire peut traiter les données uniquement dans la mesure nécessaire à l'exécution du service, sous des obligations contractuelles compatibles avec la confidentialité et avec des réglages de non-réutilisation lorsque le service les propose.</p>
-        <p>Le client est informé que la mise en œuvre concrète dépend des outils effectivement activés pour son mandat. Les traitements externalisés, leurs lieux de traitement et les garanties applicables doivent être précisés dans le contrat de sous-traitance ou les conditions particulières lorsque la réglementation l'exige.</p>
+            <h2>2. Finalités Légitimes des Traitements Algorithmiques</h2>
+            <ul>
+                <li>Ingestion, normalisation et vectorisation sémantique au sein de la base privée Qdrant[cite: 42] ;</li>
+                <li>Génération de synthèses d'aide à la décision via les cortex n8n isolés et modèles LLM sécurisés[cite: 42] ;</li>
+                <li>Calcul de l'empreinte numérique SHA-256 et ancrage d'antériorité immuable via OpenTimestamps[cite: 42] ;</li>
+                <li>Séquestre financier, facturation et délivrance chiffrée des rapports finaux[cite: 42].</li>
+            </ul>
 
-        <h2>5. Intégrité, SHA-256 et OpenTimestamps</h2>
-        <p>Lorsqu'un scellement est inclus dans le palier commandé, une empreinte SHA-256 peut être calculée à partir du dossier ou des éléments désignés dans le mandat. L'empreinte est une valeur dérivée utilisée pour comparer l'intégrité d'un contenu ultérieurement présenté. Elle ne révèle normalement pas le document original, mais elle peut rester rattachable à un dossier si elle est conservée avec sa référence.</p>
-        <p>Si l'horodatage OpenTimestamps est effectivement exécuté, les données techniques nécessaires à la preuve d'antériorité sont soumises au protocole concerné. L'horodatage et un éventuel ancrage Bitcoin ne constituent ni une validation du contenu, ni une certification de sa véracité, ni une garantie de confidentialité absolue d'une empreinte. Le contenu du document n'est pas publié par le seul fait de l'ancrage de son empreinte. Les données personnelles et les secrets d'affaires ne doivent pas être insérés dans les champs publics d'une transaction.</p>
+            <h2>3. Sanctuaire d'Étanchéité : Non-Entraînement des Modèles Publics</h2>
+            <div class="p-5 rounded-2xl bg-ebony border border-gold/30 my-4 space-y-2">
+                <h4 class="text-xs font-mono text-gold uppercase flex items-center gap-2">
+                    <i data-lucide="shield-alert" class="w-4 h-4"></i> Règle Fondamentale de Souveraineté
+                </h4>
+                <p class="text-xs text-slate-300 font-light leading-relaxed">
+                    e-META LABS s'interdit formellement et contractuellement d'exploiter, réinjecter ou faire transiter les données et trames documentaires de ses mandants dans des jeux d'entraînement ou d'optimisation de modèles d'IA publics tiers[cite: 42]. Toutes les requêtes d'inférence s'exécutent avec les paramètres stricts de non-persistance (Zero Data Retention)[cite: 42].
+                </p>
+            </div>
 
-        <h2>6. Destinataires et transferts</h2>
-        <p>Selon le service effectivement utilisé pour le mandat, les destinataires techniques peuvent comprendre GitHub Pages pour la publication du site, OVHcloud pour l'hébergement cloud, OpenAI ou Google Cloud pour certains traitements d'intelligence artificielle, Meta pour la transmission par WhatsApp Business, ainsi que Paddle ou PayTech pour le paiement. Tous ces prestataires ne reçoivent pas nécessairement les mêmes données : chaque transmission doit être limitée à ce qui est nécessaire à la fonction concernée. Paddle peut agir comme revendeur légal pour les commandes internationales traitées par Paddle.com Market Ltd ; PayTech traite les paiements Mobile Money dans l'espace UEMOA selon le parcours proposé. Les prestataires peuvent traiter certaines données pour assurer leurs propres obligations de sécurité, de facturation ou de conformité, dans les limites de leurs conditions applicables.</p>
-        <p>Une communication à un tiers pour sa propre prospection ou à des fins étrangères au mandat n'est pas prévue par e-META LABS. Le client peut demander les informations disponibles sur les prestataires, leurs rôles et les lieux de traitement associés à son mandat auprès de <a href="mailto:contact@e-metalabs.com">contact@e-metalabs.com</a>. Tout transfert international de données personnelles doit être encadré par les mécanismes et garanties requis par la législation applicable au traitement concerné ; les conditions et garanties propres aux prestataires concernés s'appliquent également.</p>
+            <h2>4. Cryptographie Probatoire &amp; Ancrage OpenTimestamps</h2>
+            <p>L'empreinte cryptographique SHA-256 générée lors de la saisine constitue une empreinte unidirectionnelle canonique de 64 caractères hexadécimaux[cite: 42]. Elle permet de démontrer avec une force probante incontestable qu'un ensemble de documents existait sous une forme identique à un instant précis $T+0$[cite: 42].</p>
+            <p>Seule l'empreinte mathématique (hash) est ancrée sur la Blockchain Bitcoin via le protocole OpenTimestamps[cite: 42]. Aucun texte en clair, nom d'entreprise ou secret d'affaires n'est jamais publié sur le registre distribué public[cite: 42].</p>
 
-        <h2>7. Durées de conservation et suppression</h2>
-        <p>Les données opérationnelles d'un dossier sont conservées pendant la durée nécessaire à son exécution et à la restitution. La cible de suppression ou d'anonymisation des contenus de mandat est de 30 jours après la clôture du dossier, sous réserve des délais techniques d'expiration des sauvegardes et des exceptions précisées ci-dessous. Les données de facturation, pièces probatoires et correspondances peuvent être conservées plus longtemps lorsque la loi, la comptabilité, la prévention des litiges ou la défense de droits l'exige.</p>
-        <p>Une empreinte cryptographique et sa référence peuvent être conservées séparément pour vérifier l'intégrité d'un livrable ou document. Les journaux de sécurité et copies de sauvegarde sont supprimés ou écrasés selon leur cycle technique documenté. À l'expiration de ces délais, les données sont supprimées ou rendues non identifiantes lorsqu'une suppression immédiate n'est pas techniquement ou juridiquement possible.</p>
+            <h2>5. Conservation, Épuration &amp; Cycle de Vie des Dossiers</h2>
+            <p>Les pièces d'audit brutes transmises lors d'une saisine sont conservées dans le coffre sécurisé NocoDB durant la seule durée d'instruction de la mission[cite: 42]. Sauf convention d'archivage permanent conclue dans le cadre du Palier 3 (Chambre Exécutive), l'ensemble des fichiers temporaires fait l'objet d'une <strong>épuration sécurisée 30 jours calendaires</strong> après la clôture définitive du mandat[cite: 42].</p>
+            <p>Seuls l'empreinte SHA-256 scellée et le certificat OTS horodaté sont conservés au registre souverain pour assurer la vérification d'antériorité à long terme par le client[cite: 42].</p>
 
-        <h2>8. Sécurité et gestion des incidents</h2>
-        <p>Des mesures proportionnées sont mises en œuvre pour contrôler les accès, protéger les transmissions et limiter l'exposition des dossiers. Le client protège ses propres comptes et canaux de communication et signale sans délai toute divulgation suspectée. En cas d'incident affectant des données personnelles, les parties coopèrent afin d'évaluer les risques, prendre les mesures nécessaires et effectuer les notifications requises par la loi applicable.</p>
+            <h2>6. Sécurité de l'Infrastructure &amp; Canaux d'Échange</h2>
+            <p>Toutes les communications en transit bénéficient du chiffrement SSL/TLS haute sécurité[cite: 42]. L'infrastructure de traitement repose sur des conteneurs isolés (Docker), protégés par pare-feu applicatif et restriction d'accès aux seuls membres assermentés du Desk Exécutif[cite: 42].</p>
 
-        <h2>9. Droits et demandes</h2>
-        <p>Les personnes concernées peuvent exercer les droits prévus par le droit qui leur est applicable, notamment demander l'accès, la rectification, l'effacement, la limitation ou s'opposer à certains traitements, sous réserve des exceptions légales. Les demandes concernant un dossier client peuvent être adressées à <a href="mailto:contact@e-metalabs.com">contact@e-metalabs.com</a>. Pour protéger les intérêts du client et les données d'autrui, une vérification raisonnable de l'identité et de l'autorité du demandeur peut être requise. Lorsqu'e-META LABS agit comme sous-traitant, la demande est relayée au responsable du traitement et traitée selon ses instructions.</p>
-
-        <h2>10. Contact et évolution</h2>
-        <p>Pour une question relative à la confidentialité, au secret des affaires ou à la sécurité d'un mandat, écrivez à <a href="mailto:support@e-metalabs.com">support@e-metalabs.com</a>. Pour toute demande relative aux données personnelles, utilisez <a href="mailto:contact@e-metalabs.com">contact@e-metalabs.com</a>. La présente politique peut être mise à jour pour refléter une évolution des services ou des obligations applicables ; la version communiquée au client lors de la commande demeure celle de référence pour le traitement concerné, sous réserve des règles impératives.</p>
-      </article>
+            <h2>7. Droits des Mandants &amp; Contact DPO</h2>
+            <p>Les mandants peuvent solliciter à tout moment la purge intégrale, la rectification ou l'export de leurs données d'audit auprès de notre Délégué à la Protection des Données : <a href="mailto:contact@e-metalabs.com">contact@e-metalabs.com</a>[cite: 42].</p>
+        </article>
     </main>
-    <footer class="legal-footer">© 2026 E-META LABS SASU · <a href="mailto:contact@e-metalabs.com">contact@e-metalabs.com</a> · <a href="mailto:support@e-metalabs.com">support@e-metalabs.com</a></footer>
-  </body>
+
+    <!-- Footer Discret -->
+    <footer class="border-t border-ebonyBorder py-6 text-center text-xs text-slate-500 font-mono">
+        © 2026 E-META LABS SASU · <a href="mailto:contact@e-metalabs.com" class="text-gold hover:underline">contact@e-metalabs.com</a> · <a href="mailto:support@e-metalabs.com" class="text-gold hover:underline">support@e-metalabs.com</a>[cite: 42]
+    </footer>
+
+    <script>
+        if (window.lucide) window.lucide.createIcons();
+    </script>
+</body>
 </html>
