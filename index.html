@@ -122,13 +122,13 @@
 
             <!-- Sélecteur de Langue Diplomatique -->
             <div class="lang-switch flex items-center gap-1.5 bg-ebony px-2.5 py-1 rounded-lg border border-ebonyBorder" aria-label="Sélecteur de langues" data-i18n-aria-label="a11y.language">
-                <button type="button" data-lang="fr" onclick="switchLang('fr')" class="lang-btn text-gold font-bold" aria-pressed="true">FR</button>
+                <button type="button" data-lang="fr" onclick="switchLang('fr')" class="lang-btn text-gold font-bold" aria-pressed="true" id="langFR">FR</button>
                 <span class="text-slate-600">|</span>
-                <button type="button" data-lang="en" onclick="switchLang('en')" class="lang-btn text-slate-400 hover:text-gold" aria-pressed="false">EN</button>
+                <button type="button" data-lang="en" onclick="switchLang('en')" class="lang-btn text-slate-400 hover:text-gold" aria-pressed="false" id="langEN">EN</button>
                 <span class="text-slate-600">|</span>
-                <button type="button" data-lang="es" onclick="switchLang('es')" class="lang-btn text-slate-400 hover:text-gold" aria-pressed="false">ES</button>
+                <button type="button" data-lang="es" onclick="switchLang('es')" class="lang-btn text-slate-400 hover:text-gold" aria-pressed="false" id="langES">ES</button>
                 <span class="text-slate-600">|</span>
-                <button type="button" data-lang="ar" onclick="switchLang('ar')" class="lang-btn text-slate-400 hover:text-gold" aria-pressed="false">AR</button>
+                <button type="button" data-lang="ar" onclick="switchLang('ar')" class="lang-btn text-slate-400 hover:text-gold" aria-pressed="false" id="langAR">AR</button>
             </div>
 
             <button class="text-slate-400 hover:text-gold transition flex items-center gap-1" type="button" onclick="resetTerminal()" data-i18n="navigation.reset" title="Réinitialiser l'affichage">
@@ -336,62 +336,73 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="piliers">
-                <div class="glass-card p-8 rounded-3xl border border-ebonyBorder hover:border-gold/50 transition duration-300 group">
-                    <div class="w-14 h-14 rounded-2xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6 group-hover:scale-110 transition">
-                        <i data-lucide="cpu" class="w-7 h-7"></i>
+            <!-- Grille stable des 3 piliers avec alignement items-stretch -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch" id="piliers">
+                <!-- Pilier 1 -->
+                <div class="glass-card p-8 rounded-3xl border border-ebonyBorder hover:border-gold/50 transition duration-300 group flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6 group-hover:scale-110 transition">
+                            <i data-lucide="cpu" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white mb-3" data-i18n="pillar1_title">Intelligence Algorithmique (CORTEX)</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 font-light" data-i18n="pillar1_desc">
+                            Organisation et analyse à distance des éléments transmis, identification des incohérences, vectorisation Qdrant, comparaison de scénarios et préparation des pistes d'orientation.
+                        </p>
                     </div>
-                    <h3 class="font-serif text-xl font-bold text-white mb-3" data-i18n="pillar1_title">Intelligence Algorithmique (CORTEX)</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6" data-i18n="pillar1_desc">
-                        Organisation et analyse à distance des éléments transmis, identification des incohérences, vectorisation Qdrant, comparaison de scénarios et préparation des pistes d'orientation.
-                    </p>
-                    <ul class="space-y-2 text-xs text-slate-300 font-mono">
-                        <li class="flex items-center gap-2" data-i18n="pillar1_item1"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Distinctions faits / hypothèses</li>
-                        <li class="flex items-center gap-2" data-i18n="pillar1_item2"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Modélisation de scénarios critiques</li>
-                        <li class="flex items-center gap-2" data-i18n="pillar1_item3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Traçabilité des sources documentaires</li>
+                    <ul class="space-y-2 text-xs text-slate-300 font-mono pt-6 border-t border-ebonyBorder">
+                        <li class="flex items-center gap-2" data-i18n="pillar1_item1"><i data-lucide="check" class="w-3.5 h-3.5 text-gold shrink-0"></i> Distinctions faits / hypothèses</li>
+                        <li class="flex items-center gap-2" data-i18n="pillar1_item2"><i data-lucide="check" class="w-3.5 h-3.5 text-gold shrink-0"></i> Modélisation de scénarios critiques</li>
+                        <li class="flex items-center gap-2" data-i18n="pillar1_item3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold shrink-0"></i> Traçabilité des sources documentaires</li>
                     </ul>
                 </div>
 
-                <div class="glass-card p-8 rounded-3xl border border-ebonyBorder hover:border-gold/50 transition duration-300 group">
-                    <div class="w-14 h-14 rounded-2xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6 group-hover:scale-110 transition">
-                        <i data-lucide="lock" class="w-7 h-7"></i>
+                <!-- Pilier 2 -->
+                <div class="glass-card p-8 rounded-3xl border border-ebonyBorder hover:border-gold/50 transition duration-300 group flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6 group-hover:scale-110 transition">
+                            <i data-lucide="lock" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white mb-3" data-i18n="pillar2_title">Cryptographie Probatoire</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 font-light" data-i18n="pillar2_desc">
+                            Calcul d'une empreinte cryptographique SHA-256 à partir du jeu de données de la saisine, couplé à un horodatage OpenTimestamps pour attester techniquement de l'intégrité et de l'antériorité.
+                        </p>
                     </div>
-                    <h3 class="font-serif text-xl font-bold text-white mb-3" data-i18n="pillar2_title">Cryptographie Probatoire</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6" data-i18n="pillar2_desc">
-                        Calcul d'une empreinte cryptographique SHA-256 à partir du jeu de données de la saisine, couplé à un horodatage OpenTimestamps pour attester techniquement de l'intégrité et de l'antériorité.
-                    </p>
-                    <ul class="space-y-2 text-xs text-slate-300 font-mono">
-                        <li class="flex items-center gap-2" data-i18n="pillar2_item1"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Empreinte SHA-256 immuable</li>
-                        <li class="flex items-center gap-2" data-i18n="pillar2_item2"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Ancrage Bitcoin OpenTimestamps</li>
-                        <li class="flex items-center gap-2" data-i18n="pillar2_item3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold"></i> Opposabilité juridique contractuelle</li>
+                    <ul class="space-y-2 text-xs text-slate-300 font-mono pt-6 border-t border-ebonyBorder">
+                        <li class="flex items-center gap-2" data-i18n="pillar2_item1"><i data-lucide="check" class="w-3.5 h-3.5 text-gold shrink-0"></i> Empreinte SHA-256 immuable</li>
+                        <li class="flex items-center gap-2" data-i18n="pillar2_item2"><i data-lucide="check" class="w-3.5 h-3.5 text-gold shrink-0"></i> Ancrage Bitcoin OpenTimestamps</li>
+                        <li class="flex items-center gap-2" data-i18n="pillar2_item3"><i data-lucide="check" class="w-3.5 h-3.5 text-gold shrink-0"></i> Opposabilité juridique contractuelle</li>
                     </ul>
                 </div>
 
-             <div class="glass-card p-8 rounded-3xl border border-gold/30 hover:border-gold transition flex flex-col justify-between">
-    <div>
-        <div class="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6">
-            <i data-lucide="user-check" class="w-6 h-6"></i>
-        </div>
-        <h3 class="font-serif text-xl font-bold text-white mb-4" data-i18n="pillar3.title">Arbitrage Humain — Desk Exécutif</h3>
-        <p class="text-slate-300 text-sm leading-relaxed mb-6 font-light" data-i18n="pillar3.desc">
-            « Au-delà de l'algorithme, la précision d'un praticien chevronné. Notre Desk Exécutif active sur demande l'expert de haut niveau idoine — qu'il s'agisse d'un expert-comptable, d'un spécialiste en finance internationale, d'un géographe, d'un juriste ou d'un conseil sectoriel — pour valider, adapter et porter la solution sur-mesure dont votre organisation a besoin. »
-        </p>
-    </div>
-    <ul class="space-y-3 pt-6 border-t border-ebonyBorder text-xs font-mono text-slate-300">
-        <li class="flex items-center gap-2 text-gold">
-            <i data-lucide="check" class="w-4 h-4"></i>
-            <span data-i18n="pillar3.item1">Matching d'experts sur-mesure</span>
-        </li>
-        <li class="flex items-center gap-2 text-gold">
-            <i data-lucide="check" class="w-4 h-4"></i>
-            <span data-i18n="pillar3.item2">Validation exécutive et signature</span>
-        </li>
-        <li class="flex items-center gap-2 text-gold">
-            <i data-lucide="check" class="w-4 h-4"></i>
-            <span data-i18n="pillar3.item3">SLA de saisine garanti (2h)</span>
-        </li>
-    </ul>
-</div>
+                <!-- Pilier 3 : Arbitrage Humain (Desk Exécutif - Option 1 concise & choc) -->
+                <div class="glass-card p-8 rounded-3xl border border-gold/30 hover:border-gold transition flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6">
+                            <i data-lucide="user-check" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white mb-4" data-i18n="pillar3.title">Arbitrage Humain — Desk Exécutif</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6 font-light" data-i18n="pillar3.desc">
+                            « Au-delà de l'algorithme, l'expertise sur-mesure. Notre Desk Exécutif active l'expert idoine pour porter et certifier votre décision. »
+                        </p>
+                    </div>
+                    <ul class="space-y-3 pt-6 border-t border-ebonyBorder text-xs font-mono text-slate-300">
+                        <li class="flex items-center gap-2 text-gold">
+                            <i data-lucide="check" class="w-4 h-4 shrink-0"></i>
+                            <span data-i18n="pillar3.item1">Matching d'experts sur-mesure</span>
+                        </li>
+                        <li class="flex items-center gap-2 text-gold">
+                            <i data-lucide="check" class="w-4 h-4 shrink-0"></i>
+                            <span data-i18n="pillar3.item2">Validation exécutive et signature</span>
+                        </li>
+                        <li class="flex items-center gap-2 text-gold">
+                            <i data-lucide="check" class="w-4 h-4 shrink-0"></i>
+                            <span data-i18n="pillar3.item3">SLA de saisine garanti (2h)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Chapitre 19 — Vivier Multidisciplinaire -->
             <div class="mt-16 glass-card p-8 rounded-3xl border border-gold/30 bg-gradient-to-r from-ebonyCard via-ebony to-ebonyCard">
                 <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
                     <div class="space-y-3">
@@ -399,8 +410,8 @@
                             <i data-lucide="users" class="w-3.5 h-3.5"></i> Chapitre 19 — Le Vivier Multidisciplinaire du Desk Exécutif
                         </div>
                         <h4 class="font-serif text-2xl font-bold text-white" data-i18n="ch19.title">L'Expertise Humaine sur-Mesure dans Tous les Domaines</h4>
-                        <p class="text-slate-400 text-sm max-w-2xl" data-i18n="ch19.desc">
-                            L'IA pose le diagnostic, l'expert humain tranche et s'engage. Quel que soit votre domaine d'activité, notre Desk Exécutif mobilise sur demande le spécialiste idéal (financier, juriste, géographe, comptable, ingénieur) pour porter la responsabilité de votre décision.
+                        <p class="text-slate-400 text-sm max-w-2xl font-light" data-i18n="ch19.desc">
+                            L'IA pose le diagnostic, l'expert humain tranche et s'engage. Quel que soit votre domaine d'activité, notre Desk Exécutif mobilise sur demande le spécialiste idéal pour porter la responsabilité de votre décision.
                         </p>
                     </div>
                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full lg:w-auto font-mono text-xs">
@@ -427,6 +438,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
     <!-- 5. COCKPIT SECTORIEL INTERACTIF (10 SECTEURS D'EXCELLENCE) -->
     <section class="sector-cockpit py-24 relative" id="expertises" aria-labelledby="sector-title">
@@ -434,7 +447,7 @@
             <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
                 <span class="text-xs uppercase tracking-widest text-gold font-mono" data-i18n="sectors.kicker">ESPACE DÉCIDEUR •</span>
                 <h2 id="sector-title" class="font-serif text-3xl sm:text-5xl font-bold text-white" data-i18n="sectors.title">COCKPIT SECTORIEL INTERACTIF</h2>
-                <p class="text-slate-400 text-sm sm:text-base" data-i18n="sectors.description">Sélectionnez une expertise pour charger dynamiquement ses stress-tests, ses indicateurs et préparer votre mandat.</p>
+                <p class="text-slate-400 text-sm sm:text-base font-light" data-i18n="sectors.description">Sélectionnez une expertise pour charger dynamiquement ses stress-tests, ses indicateurs et préparer votre mandat.</p>
             </div>
 
             <div class="sector-selector flex flex-wrap justify-center gap-2 mb-10" role="group" aria-label="Sélectionner un secteur d'expertise" data-i18n-aria-label="sectors.selector">
@@ -481,7 +494,8 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-8" id="sectorsGrid">
+            <!-- Grille stable des 10 secteurs d'excellence -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-8 items-stretch" id="sectorsGrid">
             </div>
         </div>
     </section>
@@ -492,10 +506,11 @@
             <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
                 <span class="text-xs uppercase tracking-widest text-gold font-mono" data-i18n="offers.number">SECTION 01 • MANDATS &amp; PROTOCOLES</span>
                 <h2 id="ui-title-01" class="font-serif text-3xl sm:text-5xl font-bold text-white" data-i18n="offers.title">Le Protocole d'Audit en 3 Paliers</h2>
-                <p id="ui-offer-intro" class="text-slate-400 text-sm sm:text-base" data-i18n="offers.description">Retenez un niveau de mandat pour initialiser le registre d'ingestion et sceller les livrables opposables.</p>
+                <p id="ui-offer-intro" class="text-slate-400 text-sm sm:text-base font-light" data-i18n="offers.description">Retenez un niveau de mandat pour initialiser le registre d'ingestion et sceller les livrables opposables.</p>
             </div>
 
-            <div class="pricing-grid grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Grille stable alignée items-stretch pour les 3 paliers -->
+            <div class="pricing-grid grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
                 <!-- PALIER 01 : DÉCOUVERTE -->
                 <article class="plan-card glass-card p-8 rounded-3xl border border-ebonyBorder flex flex-col justify-between hover:border-gold/40 transition">
                     <div>
@@ -504,7 +519,7 @@
                             <span class="plan-mark text-gold text-lg font-mono" aria-hidden="true">◇</span>
                         </div>
                         <h3 class="font-serif text-2xl font-bold text-white mb-3" data-i18n="offers.plan.discovery">Diagnostic Découverte</h3>
-                        <p class="plan-description text-slate-400 text-xs sm:text-sm leading-relaxed mb-6" id="ui-starter-desc" data-i18n="offers.starter.description">
+                        <p class="plan-description text-slate-400 text-xs sm:text-sm leading-relaxed mb-6 font-light" id="ui-starter-desc" data-i18n="offers.starter.description">
                             Orientation d'urgence et premier cadrage pour faire ressortir les sujets nécessitant une décision ou investigation complémentaire.
                         </p>
 
@@ -528,7 +543,7 @@
 
                 <!-- PALIER 02 : MANDAT CERTIFIÉ -->
                 <article class="plan-card plan-featured glass-card p-8 rounded-3xl border-2 border-gold flex flex-col justify-between shadow-2xl relative gold-border-glow">
-                    <div class="recommended-badge absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gold text-ebony text-[11px] font-extrabold uppercase tracking-widest font-mono shadow-md" id="ui-pro-badge" data-i18n="offers.pro.badge">
+                    <div class="recommended-badge absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gold text-ebony text-[11px] font-extrabold uppercase tracking-widest font-mono shadow-md whitespace-nowrap" id="ui-pro-badge" data-i18n="offers.pro.badge">
                         RECOMMANDÉ DIRECTION • LE PLUS DEMANDÉ
                     </div>
                     <div>
@@ -537,7 +552,7 @@
                             <span class="plan-mark text-gold text-lg font-mono">✦</span>
                         </div>
                         <h3 class="font-serif text-2xl font-bold text-white mb-3" data-i18n="offers.plan.certified">Mandat Certifié</h3>
-                        <p class="plan-description text-slate-300 text-xs sm:text-sm leading-relaxed mb-6" id="ui-pro-desc" data-i18n="offers.pro.description">
+                        <p class="plan-description text-slate-300 text-xs sm:text-sm leading-relaxed mb-6 font-light" id="ui-pro-desc" data-i18n="offers.pro.description">
                             Investigation décisionnelle approfondie, modélisation de stress-tests, rapport certifié de 15 à 25 pages et scellement d'intégrité.
                         </p>
 
@@ -569,7 +584,7 @@
                             <span class="plan-mark text-gold text-lg font-mono">⬡</span>
                         </div>
                         <h3 class="font-serif text-2xl font-bold text-white mb-3" data-i18n="offers.plan.executive">Chambre Exécutive</h3>
-                        <p class="plan-description text-slate-400 text-xs sm:text-sm leading-relaxed mb-6" id="ui-expert-desc" data-i18n="offers.executive.description">
+                        <p class="plan-description text-slate-400 text-xs sm:text-sm leading-relaxed mb-6 font-light" id="ui-expert-desc" data-i18n="offers.executive.description">
                             Accompagnement stratégique permanent ou récurrent pour les comités de direction, groupes, filiales ou institutions majeures.
                         </p>
 
@@ -601,7 +616,7 @@
             <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
                 <span class="text-xs uppercase tracking-widest text-gold font-mono" data-i18n="terminal.number">SECTION 02 • SOUVERAINETÉ OPÉRATIONNELLE</span>
                 <h2 id="ui-terminal-title" class="font-serif text-3xl sm:text-5xl font-bold text-white" data-i18n="terminal.title">Terminal d'Ingestion Décisionnelle</h2>
-                <p id="ui-terminal-desc" class="text-slate-400 text-sm sm:text-base" data-i18n="terminal.description">Registre sécurisé de recevabilité des mandats, analyse RAG et scellement d'intégrité ($T+0$).</p>
+                <p id="ui-terminal-desc" class="text-slate-400 text-sm sm:text-base font-light" data-i18n="terminal.description">Registre sécurisé de recevabilité des mandats, analyse RAG et scellement d'intégrité ($T+0$).</p>
             </div>
 
             <div class="terminal-shell glass-card rounded-3xl border border-gold/40 shadow-2xl overflow-hidden relative" id="terminal-container">
@@ -689,7 +704,7 @@
                         <span data-i18n="verify_kicker">Registre NocoDB &amp; Cockpit Tracker</span>
                     </div>
                     <h2 class="font-serif text-3xl font-bold text-white" data-i18n="verify_title">Vérification de Scellement &amp; Suivi de Mission</h2>
-                    <p class="text-slate-400 text-xs sm:text-sm" data-i18n="verify_desc" data-i18n-rich-text="true">
+                    <p class="text-slate-400 text-xs sm:text-sm font-light" data-i18n="verify_desc" data-i18n-rich-text="true">
                         Entrez votre référence de mission (ex: <code class="text-gold font-mono">MIS-2026-0842</code>) pour interroger en temps réel le registre d'intégrité probatoire et l'état de l'arbitrage terrain (Option B).
                     </p>
                 </div>
@@ -705,11 +720,11 @@
                     </button>
                 </div>
 
-                <div class="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-400 mb-8">
+                <div class="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-400 mb-8 font-mono">
                     <span data-i18n="verify_quick">Exemples enregistrés :</span>
-                    <button onclick="loadSampleMission('MIS-2026-0842')" class="px-2.5 py-1 rounded bg-ebony border border-ebonyBorder text-gold font-mono hover:border-gold">MIS-2026-0842</button>
-                    <button onclick="loadSampleMission('MIS-2026-1109')" class="px-2.5 py-1 rounded bg-ebony border border-ebonyBorder text-gold font-mono hover:border-gold">MIS-2026-1109</button>
-                    <button onclick="loadSampleMission('MIS-2026-5468')" class="px-2.5 py-1 rounded bg-ebony border border-ebonyBorder text-gold font-mono hover:border-gold">MIS-2026-5468</button>
+                    <button onclick="loadSampleMission('MIS-2026-0842')" class="px-2.5 py-1 rounded bg-ebony border border-ebonyBorder text-gold hover:border-gold">MIS-2026-0842</button>
+                    <button onclick="loadSampleMission('MIS-2026-1109')" class="px-2.5 py-1 rounded bg-ebony border border-ebonyBorder text-gold hover:border-gold">MIS-2026-1109</button>
+                    <button onclick="loadSampleMission('MIS-2026-5468')" class="px-2.5 py-1 rounded bg-ebony border border-ebonyBorder text-gold hover:border-gold">MIS-2026-5468</button>
                 </div>
 
                 <div id="simulationResult" class="hidden space-y-6 pt-6 border-t border-ebonyBorder">
@@ -756,7 +771,7 @@
                         </svg>
                         <span class="font-serif text-lg font-bold text-white">e-META <span class="gold-gradient">LABS</span></span>
                     </div>
-                    <p class="text-slate-400 text-xs leading-relaxed" data-i18n="footer.identity">
+                    <p class="text-slate-400 text-xs leading-relaxed font-light" data-i18n="footer.identity">
                         Cockpit scientifique d'aide à la décision stratégique pour Comités de Direction, Ministères, Banques et Fonds d'Investissement.
                     </p>
                     <div class="text-xs text-slate-400 space-y-1 font-mono">
@@ -828,7 +843,7 @@
             <div class="space-y-2 mb-6">
                 <span class="text-xs uppercase tracking-widest text-gold font-mono" data-i18n="modal_saisine_kicker">Saisine Exécutive</span>
                 <h3 class="font-serif text-2xl font-bold text-white" data-i18n="modal_saisine_title">Démarrer une Mission</h3>
-                <p class="text-slate-400 text-xs" data-i18n="modal_saisine_desc">Renseignez vos coordonnées, joignez vos pièces pour l'analyse RAG et initiez le scellement SHA-256 en $T+0$.</p>
+                <p class="text-slate-400 text-xs font-light" data-i18n="modal_saisine_desc">Renseignez vos coordonnées, joignez vos pièces pour l'analyse RAG et initiez le scellement SHA-256 en $T+0$.</p>
             </div>
 
             <form onsubmit="handleSaisineSubmit(event)" class="space-y-4">
@@ -858,7 +873,7 @@
                             <option value="telecom" data-i18n="sec_6">Télécoms, Cloud &amp; Infra</option>
                             <option value="property" data-i18n="sec_7">BTP, Immobilier &amp; Foncier</option>
                             <option value="manufacturing" data-i18n="sec_8">Industrie &amp; Transformation</option>
-                            <option value="public" data-i18n="sec_9">Secteur Public &amp; Parapublic</option>
+                            <option value="public" data-i18n="sec_9">Secteur Public &amp; Para-public</option>
                             <option value="retail" data-i18n="sec_10">Distribution, Retail &amp; Négoce</option>
                         </select>
                     </div>
@@ -1179,7 +1194,7 @@
 
             Object.values(sectorsDatabase).forEach(s => {
                 const card = document.createElement('div');
-                card.className = 'glass-card p-5 rounded-2xl border border-ebonyBorder hover:border-gold/50 transition cursor-pointer flex flex-col justify-between group';
+                card.className = 'glass-card p-5 rounded-2xl border border-ebonyBorder hover:border-gold/50 transition cursor-pointer flex flex-col justify-between group items-stretch';
                 card.onclick = () => openSectorModal(s);
                 card.innerHTML = `
                     <div>
