@@ -58,7 +58,7 @@ const translations = {
         "pillar3.item2": "Validation exécutive et signature",
         "pillar3.item3": "SLA de saisine garanti (2h)",
 
-        // --- CHAPITRE 19 (OPTION B) ---
+        // --- CHAPITRE 19 ---
         "ch19.kicker": "Chapitre 19 — Le Vivier Multidisciplinaire du Desk Exécutif",
         "ch19.title": "L'Expertise Humaine sur-Mesure dans Tous les Domaines",
         "ch19.desc": "L'IA pose le diagnostic, l'expert humain tranche et s'engage. Quel que soit votre domaine d'activité, notre Desk Exécutif mobilise sur demande le spécialiste idéal (financier, juriste, géographe, comptable, ingénieur) pour porter la responsabilité de votre décision.",
@@ -104,7 +104,7 @@ const translations = {
         tier2_name: "Mandat Certifié",
         tier2_pages: "15 à 25 pages",
         tier2_price_eur: "350 €", tier2_price_usd: "$380", tier2_price_xof: "230 000 FCFA",
-        tier2_period: "/ Mandat",
+        tier2_period: "/ Mandate",
         tier2_desc: "Approfondissement stratégique et opérationnel avec application des grilles sectorielles, stress-tests, modélisation financière et empreinte SHA-256 incluse.",
         tier2_f1: "Manifeste exécutif & matrice de maturité",
         tier2_f2: "Scénarios de résistance financière & opérationnelle",
@@ -126,39 +126,15 @@ const translations = {
         // --- VÉRIFICATION DE SCELLEMENT SHA-256 ---
         verify_kicker: "Registre NocoDB & Cockpit Tracker",
         verify_title: "Vérification de Scellement & Suivi de Mission",
-        verify_desc: "Entrez votre référence de mission (ex: MIS-2026-0842) pour interroger en temps réel le registre d'intégrité et l'état de l'arbitrage terrain (Option B).",
+        verify_desc: "Entrez votre référence de mission (ex: MIS-2026-0842) pour interroger en temps réel le registre d'intégrité et l'état de l'arbitrage terrain.",
         verify_placeholder: "Ex: MIS-2026-0842 ou Hash SHA-256...",
         verify_btn: "Interroger",
         verify_quick: "Exemples rapides :",
         verify_lbl_status: "Statut Mission",
         verify_lbl_sector: "Secteur d'Excellence",
-        verify_lbl_optionb: "Option B (Arbitrage Terrain)",
+        verify_lbl_optionb: "Arbitrage Desk Exécutif",
         verify_lbl_hash: "Empreinte Cryptographique SHA-256",
         verify_badge_ots: "Ancré OpenTimestamps",
-
-        // --- MODALE SAISINE (« DÉMARRER UNE MISSION ») ---
-        modal_saisine_kicker: "Saisine Exécutive",
-        modal_saisine_title: "Démarrer une Mission",
-        modal_saisine_desc: "Renseignez vos coordonnées, le pays, l'email professionnel, le numéro WhatsApp (sans '+') et joignez vos documents pour l'analyse RAG et le scellement SHA-256 (T+0).",
-        form_lbl_company: "Nom de l'Entreprise / Institution",
-        form_ph_company: "Ex: Compagnie Minière de l'Ouest",
-        form_lbl_country: "Pays / Région d'Implantation",
-        form_ph_country: "Ex: Sénégal, France, Côte d'Ivoire...",
-        form_lbl_email: "Email Professionnel",
-        form_ph_email: "dirigeant@institution.com",
-        form_lbl_whatsapp: "WhatsApp (chiffres seuls sans '+')",
-        form_ph_whatsapp: "221770000000",
-        form_lbl_sector: "Secteur d'Excellence",
-        form_lbl_tier: "Palier d'Intervention",
-        form_lbl_gateway: "Passerelle de Paiement Sécurisée",
-        gw_paytech: "PayTech (Zone UEMOA / Mobile Money / Carte)",
-        gw_paydunya: "PayDunya (Passerelle Régionale & Marchands)",
-        gw_stripe: "Stripe / International (Cartes & Corporate)",
-        form_lbl_file: "Pièce jointe / Données d'audit (PDF, Excel, TXT)",
-        form_file_hint: "Sert de support pour le calcul SHA-256 initial et l'analyse RAG Qdrant.",
-        form_lbl_decision: "Décision à Éclairer ou Problématique Critique",
-        form_ph_decision: "Décrivez succinctement les frictions ou arbitrages attendus...",
-        form_btn_submit: "Générer la Référence & Sceller la Saisine (T+0)",
 
         // --- FOOTER & DROITS ---
         footer_brand_desc: "Systèmes d'analyse, de gouvernance et de pilotage stratégique. Cabinet d'arbitrage exécutif augmenté.",
@@ -171,7 +147,6 @@ const translations = {
     },
 
     en: {
-        // --- TOP BAR & NAVIGATION ---
         top_badge: "Executive Reference October 2026",
         top_subtext: "Systems of Analysis, Governance & Strategic Steering",
         nav_manifesto: "Manifesto",
@@ -184,7 +159,6 @@ const translations = {
         nav_desk: "Expert Portal",
         nav_verify: "SHA-256 Verification",
 
-        // --- HERO SECTION ---
         hero_kicker: "Augmented Strategic Arbitrage Advisory",
         hero_title_1: "Strategic Intelligence,",
         hero_title_2: "Decision Audit & Strategic Engine",
@@ -196,7 +170,6 @@ const translations = {
         metric_time: "Decision Turnaround",
         metric_efficiency: "Efficiency Gain",
 
-        // --- THE 3 PILLARS ---
         manifesto_doctrine: "Doctrine & Methodology",
         manifesto_title: "The Sovereign e-META LABS Manifesto",
         manifesto_desc: "Transformation is not decreed through a mere software tool. It is executed through rigorous factual analysis, deep field comprehension, and definitive executive arbitrations.",
@@ -219,16 +192,15 @@ const translations = {
         "pillar3.item2": "Executive validation & signature",
         "pillar3.item3": "Guaranteed inquiry SLA (2h)",
             
-        "ch19.kicker": "Chapter 19 — Adversarial Onsite Clearance (Option B)",
-        "ch19.title": "The 5 Critical Audit Checkpoint Families",
-        "ch19.desc": "Whenever a caveat demands real-world verification, our Executive Desk deploys an accredited field specialist to confront algorithmic assumptions with physical on-ground realities.",
-        "ch19.pt1.title": "1. Soils", "ch19.pt1.sub": "Nature &amp; samplings",
-        "ch19.pt2.title": "2. Hydraulics", "ch19.pt2.sub": "Flows &amp; drainage",
-        "ch19.pt3.title": "3. Thermal", "ch19.pt3.sub": "Thresholds &amp; processes",
-        "ch19.pt4.title": "4. Cold Chain", "ch19.pt4.sub": "Storage &amp; transport",
-        "ch19.pt5.title": "5. Topography &amp; Equipment", "ch19.pt5.sub": "Accessibility &amp; critical assets",
+        "ch19.kicker": "Chapter 19 — Executive Desk Multidisciplinary Pool",
+        "ch19.title": "Bespoke Human Expertise Across All Domains",
+        "ch19.desc": "AI diagnoses, the human expert decides and commits. Whatever your business sector, our Executive Desk mobilizes on demand the ideal specialist (financial, legal, geographical, accounting, engineering) to bear the responsibility of your decision.",
+        "ch19.pt1.title": "1. Finance & M&A", "ch19.pt1.sub": "Fundraising & valuations",
+        "ch19.pt2.title": "2. Law & Tax", "ch19.pt2.sub": "Compliance & contracts",
+        "ch19.pt3.title": "3. Geography & Land", "ch19.pt3.sub": "Flows & titles",
+        "ch19.pt4.title": "4. Accounting & Audit", "ch19.pt4.sub": "Balance sheets & risks",
+        "ch19.pt5.title": "5. Strategy & Governance", "ch19.pt5.sub": "Management & transformation",
         
-        // --- 10 SECTORS ---
         sectors_kicker: "Sectoral Authority",
         sectors_title: "The 10 Industry Excellence Matrices",
         sectors_desc: "Tailored methodological arbitration doctrines engineered for mission-critical industries. Select a sector to inspect its audit guidelines and stress tests.",
@@ -244,7 +216,6 @@ const translations = {
         sec_10: "Retail, Wholesale & Distribution",
         sectors_card_cta: "Inspect matrix",
 
-        // --- 3 TIERS ---
         tiers_kicker: "Engagements & Deliverables",
         tiers_title: "The 3-Tier Audit Protocol",
         tiers_desc: "From rapid flash diagnostic to permanent sovereign chamber advisory, explore calibrated intervention tiers matching your institutional risk profile.",
@@ -283,44 +254,18 @@ const translations = {
         tier3_f4: "Periodic review of decisions & risks",
         tier3_btn: "Retain Executive Chamber",
 
-        // --- VERIFICATION ---
         verify_kicker: "NocoDB Ledger & Mission Cockpit",
         verify_title: "Seal Verification & Mandate Tracker",
-        verify_desc: "Enter your canonical mission code (e.g., MIS-2026-0842) to query the cryptographic ledger and onsite Option B status in real time.",
+        verify_desc: "Enter your canonical mission code (e.g., MIS-2026-0842) to query the cryptographic ledger and Executive Desk status in real time.",
         verify_placeholder: "e.g., MIS-2026-0842 or SHA-256 digest...",
         verify_btn: "Query",
         verify_quick: "Quick samples:",
         verify_lbl_status: "Mission Status",
         verify_lbl_sector: "Excellence Sector",
-        verify_lbl_optionb: "Option B (Field Clearance)",
+        verify_lbl_optionb: "Executive Desk Arbitration",
         verify_lbl_hash: "Cryptographic SHA-256 Digest",
         verify_badge_ots: "OpenTimestamps Anchored",
 
-        // --- SAISINE MODAL ---
-        modal_saisine_kicker: "Executive Mandate Saisine",
-        modal_saisine_title: "Initiate a Mission",
-        modal_saisine_desc: "Provide your institutional details, country, corporate email, WhatsApp number (digits only), and upload audit data to initiate RAG synthesis and T+0 SHA-256 sealing.",
-        form_lbl_company: "Entity / Institution Name",
-        form_ph_company: "e.g., Western Mining Corporation",
-        form_lbl_country: "Country / Operational Region",
-        form_ph_country: "e.g., Senegal, France, Ivory Coast...",
-        form_lbl_email: "Corporate Email",
-        form_ph_email: "executive@institution.com",
-        form_lbl_whatsapp: "WhatsApp Line (digits without '+')",
-        form_ph_whatsapp: "221770000000",
-        form_lbl_sector: "Sector of Excellence",
-        form_lbl_tier: "Intervention Tier",
-        form_lbl_gateway: "Secure Payment Gateway",
-        gw_paytech: "PayTech (West Africa / Mobile Money / Cards)",
-        gw_paydunya: "PayDunya (Regional Gateway & Corporate)",
-        gw_stripe: "Stripe / International (Cards & Corporate)",
-        form_lbl_file: "Audit Attachments / Raw Datasets (PDF, Excel, TXT)",
-        form_file_hint: "Used for initial SHA-256 hash generation and Qdrant RAG processing.",
-        form_lbl_decision: "Critical Challenge / Key Decision to Clarify",
-        form_ph_decision: "Summarize existing frictions, bottleneck hypotheses, or required arbitrations...",
-        form_btn_submit: "Generate Reference & Seal Mandate (T+0)",
-
-        // --- FOOTER ---
         footer_brand_desc: "Strategic intelligence, sovereign governance and operational decision systems. Augmented executive arbitration advisory.",
         footer_address_title: "E-META LABS SASU",
         footer_address_sub: "Face Débarcadère, Rosso, Senegal",
@@ -376,14 +321,14 @@ const translations = {
         "pillar3.item2": "Validación ejecutiva y firma",
         "pillar3.item3": "SLA de respuesta garantizado (2h)",
         
-        "ch19.kicker": "Capítulo 19 — Inspección Contradictoria en Sitio (Opción B)",
-        "ch19.title": "Las 5 Familias de Puntos Críticos Auditados",
-        "ch19.desc": "Cuando una reserva exige verificación real, nuestro Desk Ejecutivo despliega un especialista para confrontar hipótesis con la realidad física.",
-        "ch19.pt1.title": "1. Suelos", "ch19.pt1.sub": "Naturaleza y muestras",
-        "ch19.pt2.title": "2. Hidráulica", "ch19.pt2.sub": "Flujos y drenaje",
-        "ch19.pt3.title": "3. Térmica", "ch19.pt3.sub": "Umbrales y procesos",
-        "ch19.pt4.title": "4. Cadena de Frío", "ch19.pt4.sub": "Transporte y almacenaje",
-        "ch19.pt5.title": "5. Topografía &amp; Equipos", "ch19.pt5.sub": "Accesos y redes críticas",
+        "ch19.kicker": "Capítulo 19 — Fondo Multidisciplinario del Desk Ejecutivo",
+        "ch19.title": "Experiencia Humana a Medida en Todos los Dominios",
+        "ch19.desc": "La IA diagnostica, el experto humano decide y se compromete. Cualquiera que sea su sector de actividad, nuestro Desk Ejecutivo moviliza bajo demanda al especialista ideal (financiero, jurídico, geógrafo, contable, ingeniero) para asumir la responsabilidad de su decisión.",
+        "ch19.pt1.title": "1. Finanzas y M&A", "ch19.pt1.sub": "Financiación y valoraciones",
+        "ch19.pt2.title": "2. Derecho y Fiscalidad", "ch19.pt2.sub": "Cumplimiento y contratos",
+        "ch19.pt3.title": "3. Geografía y Terreno", "ch19.pt3.sub": "Flujos y títulos",
+        "ch19.pt4.title": "4. Contabilidad y Auditoría", "ch19.pt4.sub": "Balances y riesgos",
+        "ch19.pt5.title": "5. Estrategia y Gobernanza", "ch19.pt5.sub": "Gestión y transformación",
 
         sectors_kicker: "Autoridad Sectorial",
         sectors_title: "La Matriz de los 10 Sectores de Excelencia",
@@ -440,38 +385,15 @@ const translations = {
 
         verify_kicker: "Registro NocoDB & Cockpit Tracker",
         verify_title: "Verificación de Sellado y Seguimiento",
-        verify_desc: "Introduzca su código de misión (ej. MIS-2026-0842) para consultar el registro criptográfico.",
+        verify_desc: "Introduzca su referencia de misión (ej. MIS-2026-0842) para consultar el registro criptográfico y el estado del Desk Ejecutivo.",
         verify_placeholder: "Ej: MIS-2026-0842 o Hash SHA-256...",
         verify_btn: "Consultar",
         verify_quick: "Ejemplos rápidos:",
         verify_lbl_status: "Estado de la Misión",
         verify_lbl_sector: "Sector de Excelencia",
-        verify_lbl_optionb: "Opción B (Inspección Terreno)",
+        verify_lbl_optionb: "Arbitraje Desk Ejecutivo",
         verify_lbl_hash: "Huella Criptográfica SHA-256",
         verify_badge_ots: "Anclado OpenTimestamps",
-
-        modal_saisine_kicker: "Saisine Ejecutiva",
-        modal_saisine_title: "Iniciar una Misión",
-        modal_saisine_desc: "Indique los datos de su entidad, país, email profesional, WhatsApp (solo números) y adjunte documentos para el análisis RAG y sellado SHA-256 en T+0.",
-        form_lbl_company: "Nombre de la Empresa o Entidad",
-        form_ph_company: "Ej: Compañía Minera del Oeste",
-        form_lbl_country: "País / Región",
-        form_ph_country: "Ej: Senegal, España, México...",
-        form_lbl_email: "Correo Profesional",
-        form_ph_email: "director@institucion.com",
-        form_lbl_whatsapp: "WhatsApp (solo números sin '+')",
-        form_ph_whatsapp: "34600000000",
-        form_lbl_sector: "Sector Estratégico",
-        form_lbl_tier: "Nivel de Intervención",
-        form_lbl_gateway: "Pasarela de Pago Segura",
-        gw_paytech: "PayTech (África UEMOA / Dinero Móvil / Tarjeta)",
-        gw_paydunya: "PayDunya (Pasarela Regional & Empresas)",
-        gw_stripe: "Stripe / Internacional (Tarjetas y Corporativo)",
-        form_lbl_file: "Documentos de Auditoría (PDF, Excel, TXT)",
-        form_file_hint: "Utilizado para el hash SHA-256 y la síntesis IA Qdrant.",
-        form_lbl_decision: "Decisión o Problemática a Resolver",
-        form_ph_decision: "Describa brevemente las fricciones o arbitrajes requeridos...",
-        form_btn_submit: "Generar Código y Sellar Misión (T+0)",
 
         footer_brand_desc: "Sistemas de análisis, gobernanza y dirección estratégica. Gabinete de arbitraje ejecutivo aumentado.",
         footer_address_title: "E-META LABS SASU",
@@ -592,38 +514,15 @@ const translations = {
 
         verify_kicker: "سجل NocoDB وقمرة التتبع",
         verify_title: "التحقق من التوثيق وتتبع المهمة",
-        verify_desc: "أدخل المرجع القانوني للمهمة (مثال: MIS-2026-0842) للتحقق المباشر من سجل التشفير وحالة المعاينة الميدانية.",
+        verify_desc: "أدخل المرجع القانوني للمهمة (مثال: MIS-2026-0842) للتحقق المباشر من سجل التشفير وحالة المكتب التنفيذي.",
         verify_placeholder: "مثال: MIS-2026-0842 أو بصمة SHA-256...",
         verify_btn: "استعلام",
         verify_quick: "أمثلة سريعة:",
         verify_lbl_status: "حالة المهمة",
         verify_lbl_sector: "القطاع الاستراتيجي",
-        verify_lbl_optionb: "الخيار ب (المعاينة الميدانية)",
+        verify_lbl_optionb: "تحكيم المكتب التنفيذي",
         verify_lbl_hash: "البصمة التشفيرية SHA-256",
         verify_badge_ots: "موثق بواسطة OpenTimestamps",
-
-        modal_saisine_kicker: "الإحالة التنفيذية",
-        modal_saisine_title: "بدء مهمة تدقيق سيادي",
-        modal_saisine_desc: "أدخل معلومات مؤسستك، البلد، البريد الإلكتروني المهني، رقم الواتساب (أرقام فقط بدون +)، وأرفق ملفات التدقيق لبدء التحليل بالذكاء الاصطناعي والتوثيق الفوري T+0.",
-        form_lbl_company: "اسم الشركة / الهيئة",
-        form_ph_company: "مثال: شركة التعدين الغربية",
-        form_lbl_country: "البلد / المنطقة",
-        form_ph_country: "مثال: السنغال، الإمارات، فرنسا...",
-        form_lbl_email: "البريد الإلكتروني المهني",
-        form_ph_email: "executive@institution.com",
-        form_lbl_whatsapp: "رقم الواتساب (أرقام فقط بدون '+')",
-        form_ph_whatsapp: "221770000000",
-        form_lbl_sector: "القطاع الاستراتيجي",
-        form_lbl_tier: "مستوى التدخل",
-        form_lbl_gateway: "بوابة الدفع الآمنة",
-        gw_paytech: "باي تيك (غرب أفريقيا / أموال الهاتف / بطاقات)",
-        gw_paydunya: "باي دونيا (بوابة إقليمية للشركات)",
-        gw_stripe: "سترايب الدولي (بطاقات دولية وحسابات كبرى)",
-        form_lbl_file: "ملفات التدقيق المرفقة (PDF, Excel, TXT)",
-        form_file_hint: "تستخدم لحساب البصمة الرقمية والتحليل المعرفي عبر محرك Qdrant.",
-        form_lbl_decision: "القرار الحرج أو المشكلة الاستراتيجية",
-        form_ph_decision: "صف بإيجاز نقاط الاختناق أو القرارات المطلوبة...",
-        form_btn_submit: "توليد المرجع وتوثيق المهمة (T+0)",
 
         footer_brand_desc: "أنظمة التحليل والحوكمة والقيادة الاستراتيجية. مكتب التحكيم الاستراتيجي المعزز.",
         footer_address_title: "E-META LABS SASU",
@@ -747,11 +646,11 @@ const indexTranslationAliases = {
     'pillar2_item2': 'pillar2_item2',
     'pillar2_item3': 'pillar2_item3',
     'pillar2_title': 'pillar2_title',
-    'pillar3_desc': 'pillar3_desc',
-    'pillar3_item1': 'pillar3_item1',
-    'pillar3_item2': 'pillar3_item2',
-    'pillar3_item3': 'pillar3_item3',
-    'pillar3_title': 'pillar3_title',
+    'pillar3_desc': 'pillar3.desc',
+    'pillar3_item1': 'pillar3.item1',
+    'pillar3_item2': 'pillar3.item2',
+    'pillar3_item3': 'pillar3.item3',
+    'pillar3_title': 'pillar3.title',
     'sec_1': 'sec_1',
     'sec_10': 'sec_10',
     'sec_2': 'sec_2',
@@ -765,19 +664,19 @@ const indexTranslationAliases = {
     'tier1_btn': 'tier1_btn',
     'tier2_btn': 'tier2_btn',
     'tier3_btn': 'tier3_btn',
-    'ch19_desc': 'ch19_desc',
-    'ch19_kicker': 'ch19_kicker',
-    'ch19_pt1_sub': 'ch19_pt1_sub',
-    'ch19_pt1_title': 'ch19_pt1_title',
-    'ch19_pt2_sub': 'ch19_pt2_sub',
-    'ch19_pt2_title': 'ch19_pt2_title',
-    'ch19_pt3_sub': 'ch19_pt3_sub',
-    'ch19_pt3_title': 'ch19_pt3_title',
-    'ch19_pt4_sub': 'ch19_pt4_sub',
-    'ch19_pt4_title': 'ch19_pt4_title',
-    'ch19_pt5_sub': 'ch19_pt5_sub',
-    'ch19_pt5_title': 'ch19_pt5_title',
-    'ch19_title': 'ch19_title'
+    'ch19_desc': 'ch19.desc',
+    'ch19_kicker': 'ch19.kicker',
+    'ch19_pt1_sub': 'ch19.pt1.sub',
+    'ch19_pt1_title': 'ch19.pt1.title',
+    'ch19_pt2_sub': 'ch19.pt2.sub',
+    'ch19_pt2_title': 'ch19.pt2.title',
+    'ch19_pt3_sub': 'ch19.pt3.sub',
+    'ch19_pt3_title': 'ch19.pt3.title',
+    'ch19_pt4_sub': 'ch19.pt4.sub',
+    'ch19_pt4_title': 'ch19.pt4.title',
+    'ch19_pt5_sub': 'ch19.pt5.sub',
+    'ch19_pt5_title': 'ch19.pt5.title',
+    'ch19_title': 'ch19.title'
 };
 
 const indexTranslations = {
@@ -854,8 +753,8 @@ const indexTranslations = {
         'terminal.register': 'REGISTRE SOUVERAIN',
         'terminal.sector.selected': 'SECTEUR DU MANDAT',
         'terminal.title': "Terminal d'ingestion décisionnelle",
-        'verify_desc': 'Entrez votre référence de mission (ex. : <code class="text-gold font-mono">MIS-2026-0842</code>) pour interroger en temps réel le registre d’intégrité probatoire et l’état de l’arbitrage de terrain (Option B).',
-        'verify_result_optionb': 'Levée validée (5 points contrôlés)',
+        'verify_desc': 'Entrez votre référence de mission (ex. : <code class="text-gold font-mono">MIS-2026-0842</code>) pour interroger en temps réel le registre d’intégrité probatoire et l’état du Desk Exécutif.',
+        'verify_result_optionb': 'Arbitrage validé (Expert affecté)',
         'verify_status_certified': 'Mandat certifié actif'
     },
     en: {
@@ -931,8 +830,8 @@ const indexTranslations = {
         'terminal.register': 'SOVEREIGN REGISTER',
         'terminal.sector.selected': 'MANDATE SECTOR',
         'terminal.title': 'Decision ingestion terminal',
-        'verify_desc': 'Enter your mission reference (e.g. <code class="text-gold font-mono">MIS-2026-0842</code>) to query the evidentiary integrity register and field arbitration status (Option B) in real time.',
-        'verify_result_optionb': 'Clearance validated (5 checkpoints passed)',
+        'verify_desc': 'Enter your mission reference (e.g. <code class="text-gold font-mono">MIS-2026-0842</code>) to query the evidentiary integrity register and Executive Desk status in real time.',
+        'verify_result_optionb': 'Executive Desk arbitration validated',
         'verify_status_certified': 'Active certified mandate'
     },
     es: {
@@ -1008,8 +907,8 @@ const indexTranslations = {
         'terminal.register': 'REGISTRO SOBERANO',
         'terminal.sector.selected': 'SECTOR DEL MANDATO',
         'terminal.title': 'Terminal de ingesta decisoria',
-        'verify_desc': 'Introduzca su referencia de misión (p. ej., <code class="text-gold font-mono">MIS-2026-0842</code>) para consultar en tiempo real el registro de integridad probatoria y el estado del arbitraje de campo (Opción B).',
-        'verify_result_optionb': 'Verificación aprobada (5 puntos)',
+        'verify_desc': 'Introduzca su referencia de misión (p. ej., <code class="text-gold font-mono">MIS-2026-0842</code>) para consultar en tiempo real el registro de integridad probatoria y el estado del Desk Ejecutivo.',
+        'verify_result_optionb': 'Arbitraje del Desk Ejecutivo validado',
         'verify_status_certified': 'Mandato certificado activo'
     },
     ar: {
@@ -1085,9 +984,9 @@ const indexTranslations = {
         'terminal.register': 'السجل السيادي',
         'terminal.sector.selected': 'قطاع المهمة',
         'terminal.title': 'منصة استقبال البيانات ودعم القرار',
-        'verify_desc': 'أدخل مرجع المهمة (مثال: <code class="text-gold font-mono">MIS-2026-0842</code>) للاستعلام فوراً عن سجل السلامة الإثباتية وحالة التحكيم الميداني (الخيار B).',
-        'verify_result_optionb': 'تم التحقق من النقاط الخمس',
-        'verify_status_certified': 'مهمة معتمدة ونشطة'
+        'verify_desc': 'أدخل مرجع المهمة (مثال: <code class="text-gold font-mono">MIS-2026-0842</code>) للاستعلام فوراً عن سجل السلامة الإثباتية وحالة المكتب التنفيذي.',
+        'verify_result_optionb': 'تم اعتماد تحكيم المكتب التنفيذي',
+        'verify_status_certified': 'مهمة معتمدة وفعّالة'
     }
 };
 
@@ -1486,10 +1385,6 @@ Object.keys(translations).forEach(lang => {
 // GESTIONNAIRE DYNAMIQUE : LANGUES, DEVISES & PERSISTANCE
 // ==============================================================================
 
-/**
- * Applique la langue sur l'ensemble des balises contenant l'attribut [data-i18n]
- * Gère le sens d'écriture (LTR / RTL pour l'Arabe) et la persistance.
- */
 function setLanguage(lang) {
     if (!Object.prototype.hasOwnProperty.call(translations, lang)) lang = 'fr';
     
@@ -1497,10 +1392,8 @@ function setLanguage(lang) {
     document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
     document.documentElement.setAttribute('translate', 'yes');
     
-    // Sauvegarde de la préférence utilisateur
     localStorage.setItem('emeta_lang', lang);
 
-    // Mise à jour de l'état actif des boutons de langue
     ['fr', 'en', 'es', 'ar'].forEach(l => {
         const btn = document.getElementById('lang' + l.toUpperCase());
         if (btn) {
@@ -1508,7 +1401,6 @@ function setLanguage(lang) {
         }
     });
 
-    // Remplacement des textes dans le DOM
     const dictionary = translations[lang];
     const elements = document.querySelectorAll(
         '[data-i18n], [data-i18n-placeholder], [data-i18n-content], [data-i18n-title], [data-i18n-aria-label]'
@@ -1551,7 +1443,6 @@ function setLanguage(lang) {
         });
     });
 
-    // Maintien du paramètre de langue dans les liens inter-pages
     document.querySelectorAll('a[href*=".html"]').forEach(link => {
         const href = link.getAttribute('href');
         if (href && /\.html(?:[?#]|$)/i.test(href) && !href.startsWith('http') && !href.startsWith('#')) {
@@ -1577,14 +1468,10 @@ window.i18n = {
     }
 };
 
-// Alias direct utilisable par les attributs onclick="setLang('en')"
 window.setLang = function(lang) {
     setLanguage(lang);
 };
 
-/**
- * Gestionnaire du convertisseur de devises (EUR, USD, XOF Frs CFA)
- */
 window.setCurrency = function(curr) {
     localStorage.setItem('emeta_currency', curr);
 
@@ -1602,17 +1489,11 @@ window.setCurrency = function(curr) {
     });
 };
 
-// ==============================================================================
-// INITIALISATION AU CHARGEMENT DE LA PAGE
-// ==============================================================================
 window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
-    
-    // Détermination de la langue active
     const activeLang = urlParams.get('lang') || localStorage.getItem('emeta_lang') || 'fr';
     setLanguage(activeLang);
 
-    // Détermination de la devise active
     const activeCurrency = localStorage.getItem('emeta_currency') || 'EUR';
     setCurrency(activeCurrency);
 });
