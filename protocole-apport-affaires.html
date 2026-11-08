@@ -1,164 +1,171 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#050a12">
+    <meta name="theme-color" content="#0a0b0e">
     <title>Protocole d'Apport d'Affaires | e-META LABS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L95 25 V75 L50 95 L5 75 V25 Z' stroke='%23d4af37' stroke-width='4' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
+
+    <!-- Favicon Souverain Géométrique e-META LABS -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,25 95,75 50,95 5,75 5,25' stroke='%23d4af37' stroke-width='5' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        ebony: '#0a0b0e',
+                        ebonyCard: '#12141c',
+                        ebonyElevated: '#171a26',
+                        ebonyBorder: '#232634',
+                        gold: '#d4af37',
+                        goldLight: '#f3e5ab',
+                        goldDark: '#aa8c2c',
+                        goldMuted: 'rgba(212, 175, 55, 0.15)'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        .privacy-container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 40px 50px;
-            background: rgba(18, 20, 28, 0.82);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 8px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-        }
-        .privacy-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background: rgba(10, 11, 14, 0.96);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        }
-        body { background-color: #0a0b0e; color: #f8fafc; margin: 0; }
-        .privacy-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
-        .privacy-content h4 {
-            color: #d4af37;
-            font-family: 'Cinzel', serif;
-            margin-top: 35px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            padding-bottom: 8px;
-            font-size: 1.2rem;
-        }
-        .privacy-content p, .privacy-content ul {
-            color: #e6f1ff;
-            line-height: 1.8;
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-        .privacy-content li {
-            margin-bottom: 10px;
-        }
-        .btn-return {
-            background: transparent;
-            color: #d4af37;
-            border: 1px solid #d4af37;
-            padding: 10px 20px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-        .btn-return:hover {
-            background: rgba(212, 175, 55, 0.1);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-        }
-        .protocol-footer {
-            margin-top: 45px;
-            padding-top: 25px;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-            text-align: center;
-            color: #8794a6;
-            font-size: 0.8rem;
-        }
-        @media (max-width: 640px) {
-            .privacy-header { align-items: flex-start; flex-direction: column; gap: 16px; }
-            .privacy-nav { justify-content: flex-start; }
-            .privacy-container { margin: 20px 14px; padding: 24px 18px; }
-        }
+        body { background-color: #0a0b0e; color: #f8fafc; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .gold-gradient { background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa8c2c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.25); box-shadow: 0 0 25px rgba(212, 175, 55, 0.08); }
+        .glass-card { background: rgba(18, 20, 28, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(212, 175, 55, 0.16); }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0a0b0e; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #232634; border-radius: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #d4af37; }
     </style>
 </head>
-<body class="custom-scrollbar">
+<body class="bg-ebony text-slate-100 antialiased selection:bg-gold selection:text-ebony custom-scrollbar">
 
-    <header class="privacy-header">
-        <div class="logo-container" style="display: flex; align-items: center; gap: 12px;">
-            <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 5 L95 25 V75 L50 95 L5 75 V25 Z" stroke="#d4af37" stroke-width="2" fill="none"/>
-                <circle cx="50" cy="50" r="8" fill="#d4af37"/>
-            </svg>
-            <div class="brand-text">
-                <h1 style="font-size: 1.2rem; margin: 0; color: #fceaa7; font-family: 'Cinzel', serif;">e-META LABS</h1>
+    <!-- Top Status Bar -->
+    <div class="bg-gradient-to-r from-ebony via-ebonyCard to-ebony border-b border-gold/20 py-2 px-4 sm:px-8 text-xs text-slate-300 flex justify-between items-center z-50 sticky top-0 backdrop-blur-md">
+        <div class="flex items-center gap-2">
+            <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-gold font-mono font-semibold">CADRE CONTRACTUEL B2B &amp; PARTENAIRES</span>
+        </div>
+        <div class="flex items-center gap-4 font-mono text-xs">
+            <a href="mentions-legales.html" class="hover:text-gold transition">Mentions</a>
+            <span class="text-slate-600">|</span>
+            <a href="cgv.html" class="hover:text-gold transition">CGV</a>
+            <span class="text-slate-600">|</span>
+            <a href="confidentialite.html" class="hover:text-gold transition">Confidentialité</a>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="sticky top-[37px] z-40 bg-ebony/90 backdrop-blur-xl border-b border-ebonyCard shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <svg class="w-10 h-10 drop-shadow-lg gold-border-glow rounded-xl" viewBox="0 0 100 100">
+                    <polygon points="50,5 95,25 95,75 50,95 5,75 5,25" stroke="#d4af37" stroke-width="4" fill="#0a192f"/>
+                    <circle cx="50" cy="50" r="12" fill="#d4af37"/>
+                </svg>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-serif text-xl font-bold tracking-wider text-white">e-META <span class="gold-gradient">LABS</span></span>
+                        <span class="text-[10px] uppercase tracking-widest px-1.5 py-0.5 rounded bg-gold/10 text-gold border border-gold/30 font-mono">SASU</span>
+                    </div>
+                    <p class="text-[10px] text-slate-400 tracking-wider">CABINET DE HAUTE DÉCISION &amp; STRATEGIC ENGINE</p>
+                </div>
+            </a>
+
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="px-5 py-2.5 rounded-xl bg-ebonyCard border border-gold/30 text-slate-200 hover:text-gold font-semibold text-xs transition flex items-center gap-2 font-mono">
+                    <i data-lucide="arrow-left" class="w-4 h-4 text-gold"></i>
+                    <span>← Retour au Cockpit</span>
+                </a>
+                <a href="expert.html" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-xs uppercase tracking-wider shadow-lg gold-glow transition font-mono">
+                    Espace Desk Exécutif →
+                </a>
             </div>
         </div>
-        <nav class="privacy-nav" aria-label="Navigation institutionnelle" data-i18n-aria-label="navigation.institutional.aria">
-            <a href="index.html" class="btn-return" data-i18n="protocol.nav.home" data-lang-link>← Retour au Cockpit</a>
-            <a href="expert.html" class="btn-return" data-i18n="protocol.nav.expert" data-lang-link>Espace Desk Exécutif →</a>
-        </nav>
     </header>
 
-    <main>
-        <div class="privacy-container">
-            <h2 style="text-align: center; color: #d4af37; font-family: 'Cinzel', serif; margin-bottom: 5px; font-size: 2rem;" data-i18n="proto_main_title">PROTOCOLE D'APPORT D'AFFAIRES – DESK EXÉCUTIF</h2>
-            <p style="text-align: center; color: #8892b0; font-size: 0.9rem; margin-bottom: 50px;" data-i18n="proto_date">Dernière mise à jour : Août 2026</p>
-
-            <div class="privacy-content">
-                <p data-i18n="proto_parties">
-                    <strong>ENTRE LES SOUSSIGNÉS :</strong><br><br>
-                    <strong>E-META LABS</strong>, Société par Actions Simplifiée Unipersonnelle (SASU) au capital social de 500 000 FCFA, dont le siège social est situé à Face Débarcadère, Rosso, Sénégal, immatriculée au Registre du Commerce et du Crédit Mobilier sous le numéro SN STL 2026 B768, NINEA : 012887553, représentée par M. Abdoulaye Fall, en sa qualité de Président,<br>
-                    Ci-après dénommée "L'Apporteur" ou "e-META LABS",<br><br>
-                    <strong>ET</strong><br><br>
-                    <strong>L'EXPERT INDÉPENDANT</strong>, personne physique ou morale, s'inscrivant sur le portail Desk Exécutif de e-META LABS et acceptant les présentes conditions par voie électronique,<br>
-                    Ci-après dénommé "Le Partenaire" ou "L'Expert",<br><br>
-                    Ci-après désignées conjointement "Les Parties" et individuellement "Une Partie".
-                </p>
-
-                <h4 data-i18n="proto_t1">1. Objet du protocole</h4>
-                <p data-i18n="proto_c1">Le présent protocole a pour objet de définir les conditions et modalités selon lesquelles l'Apporteur s'engage à présenter au Partenaire des clients potentiels (ci-après les "Prospects") ayant exprimé un besoin correspondant à son domaine d'expertise, en vue de la conclusion d'un contrat de prestation de services directement entre le Partenaire et le Prospect. L'Apporteur n'agit qu'en qualité d'intermédiaire qualifié et de facilitateur.</p>
-
-                <h4 data-i18n="proto_t2">2. Indépendance des parties</h4>
-                <p data-i18n="proto_c2">Les Parties déclarent expressément qu'elles sont et demeureront, pendant toute la durée du présent protocole, des professionnels indépendants. Le présent accord ne crée aucun lien de subordination, mandat d'intérêt commun, ni société en participation entre e-META LABS et l'Expert. Le Partenaire est seul responsable de l'exécution technique, juridique et fiscale des missions qu'il contracte avec les Prospects présentés par l'Apporteur.</p>
-
-                <h4 data-i18n="proto_t3">3. Rémunération et Commission</h4>
-                <p data-i18n="proto_c3">
-                    En contrepartie de la mise en relation aboutissant à la signature d'un contrat ou à l'acceptation d'un devis par le Prospect, le Partenaire s'engage à verser à l'Apporteur une commission d'apport d'affaires.<br><br>
-                    <strong>Assiette de la commission :</strong> La commission est calculée sur le montant total Hors Taxes (HT) effectivement facturé et encaissé par le Partenaire auprès du Prospect.<br>
-                    <strong>Taux applicable :</strong> Le taux de la commission est fixé à <strong>15 % HT</strong> du montant de la prestation.<br>
-                    <strong>Étendue :</strong> Cette commission s'applique sur le contrat initial, ainsi que sur tout avenant, renouvellement ou nouveau contrat conclu entre le Partenaire et ce même Prospect pendant une durée de 24 mois suivant la date de la première mise en relation.
-                </p>
-
-                <h4 data-i18n="proto_t4">4. Transparence et modalités de paiement</h4>
-                <p data-i18n="proto_c4">
-                    Pour permettre l'application de l'Article 3, le Partenaire s'engage contractuellement à une transparence absolue envers e-META LABS :<br><br>
-                    <strong>Notification de signature :</strong> Le Partenaire doit informer l'Apporteur par écrit (e-mail) dans un délai de soixante-douze (72) heures de la signature de tout accord ou devis avec un Prospect, en précisant le montant et les échéances prévues, et en fournissant une copie du document.<br>
-                    <strong>Notification d'encaissement :</strong> Le Partenaire informe l'Apporteur dès l'encaissement effectif des fonds versés par le client.<br>
-                    <strong>Facturation e-META :</strong> Dès réception de cette notification, l'Apporteur émettra sa facture de commission. Le Partenaire s'engage à régler cette facture dans un délai de 15 jours à compter de sa date d'émission.
-                </p>
-
-                <h4 data-i18n="proto_t5">5. Clause de non-contournement et de loyauté</h4>
-                <p data-i18n="proto_c5">
-                    C'est la condition essentielle et déterminante du présent accord. Le Partenaire s'interdit formellement et strictement :<br>
-                    - De contracter, directement ou indirectement (via une autre structure, un associé ou un sous-traitant), avec un Prospect présenté par e-META LABS, sans en informer l'Apporteur et sans lui verser la commission due.<br>
-                    - De masquer, minorer ou dissimuler la nature ou le montant des transactions financières conclues avec ledit Prospect.<br><br>
-                    <strong>Clause Pénale :</strong> En cas de violation avérée de cette clause de non-contournement, le Partenaire sera redevable de plein droit, sans mise en demeure préalable, d'une indemnité forfaitaire fixée à 5 000 Euros (ou équivalent FCFA), ou d'un montant équivalent à trois (3) fois la commission qui aurait dû être perçue par e-META LABS sur le contrat dissimulé, le montant le plus élevé étant retenu, sans préjudice des dommages et intérêts supplémentaires qui pourraient être réclamés.
-                </p>
-
-                <h4 data-i18n="proto_t6">6. Confidentialité</h4>
-                <p data-i18n="proto_c6">Les informations, méthodes, documents et données (y compris l'identité et les coordonnées des Prospects) transmis par e-META LABS au Partenaire sont strictement confidentiels. Le Partenaire s'engage à ne les utiliser qu'aux seules fins de l'exécution du présent protocole et s'interdit de les divulguer à des tiers sans l'accord préalable écrit de l'Apporteur.</p>
-
-                <h4 data-i18n="proto_t7">7. Durée et Résiliation</h4>
-                <p data-i18n="proto_c7">Le présent protocole entre en vigueur au moment de l'acceptation numérique par le Partenaire (cochage de la case dédiée sur le portail Desk Exécutif). Il est conclu pour une durée indéterminée. Chaque Partie peut y mettre fin à tout moment, par notification écrite moyennant un préavis de trente (30) jours. La résiliation du présent accord ne remet pas en cause le droit à commission de l'Apporteur pour toute affaire conclue ou initiée avant la date effective de résiliation.</p>
-
-                <h4 data-i18n="proto_t8">8. Juridiction Compétente</h4>
-                <p data-i18n="proto_c8">Le présent protocole est soumis au droit sénégalais. À défaut de résolution amiable dans un délai de trente (30) jours, tout litige relatif à l'interprétation, l'exécution ou la rupture du présent accord sera de la compétence exclusive du Tribunal de Commerce de Dakar, nonobstant pluralité de défendeurs ou appel en garantie.</p>
+    <!-- Content Section -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="glass-card p-8 sm:p-12 rounded-3xl border border-gold/30 shadow-2xl relative space-y-8">
+            
+            <div class="text-center space-y-3 pb-8 border-b border-ebonyBorder">
+                <div class="inline-block px-4 py-1 rounded-full bg-gold/10 text-gold text-xs font-mono uppercase tracking-widest border border-gold/30">
+                    CONDITIONS DE PARTENARIAT • APPORTEUR D'AFFAIRES
+                </div>
+                <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white leading-tight">
+                    PROTOCOLE D'APPORT D'AFFAIRES – DESK EXÉCUTIF
+                </h1>
+                <p class="text-xs text-slate-400 font-mono">Dernière mise à jour : Août 2026</p>
             </div>
 
-            <!-- Pied de page intégré proprement à l'intérieur de la carte -->
-            <footer class="protocol-footer">
-                <p>&copy; 2026 e-META LABS SASU. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
-            </footer>
+            <div class="prose prose-invert max-w-none space-y-6 text-sm text-slate-300 leading-relaxed font-light">
+                
+                <div class="p-4 rounded-xl bg-ebony border border-ebonyBorder text-xs font-mono text-slate-300">
+                    <strong class="text-gold block mb-1 font-bold">ENTRE LES SOUSSIGNÉS :</strong>
+                    <strong>E-META LABS</strong>, Société par Actions Simplifiée Unipersonnelle (SASU) au capital social de 500 000 FCFA, dont le siège social est situé à Face Débarcadère, Rosso, Sénégal, immatriculée au RCCM sous le numéro SN STL 2026 B768, NINEA : 012887553, représentée par M. Abdoulaye Fall, en sa qualité de Président,<br>
+                    Ci-après dénommée <em>"L'Apporteur"</em> ou <em>"e-META LABS"</em>,<br><br>
+                    <strong class="text-gold block mb-1 font-bold">ET</strong>
+                    <strong>L'EXPERT INDÉPENDANT</strong>, s'inscrivant sur le portail Desk Exécutif et acceptant les présentes conditions,<br>
+                    Ci-après dénommé <em>"Le Partenaire"</em>.
+                </div>
+
+                <h3 class="font-serif text-lg font-bold text-white pt-4">1. Objet du protocole</h3>
+                <p>Le présent protocole a pour objet de définir les conditions selon lesquelles l'Apporteur s'engage à présenter au Partenaire des clients potentiels (les "Prospects") en vue d'un contrat de prestation directement entre le Partenaire et le Prospect. L'Apporteur n'agit qu'en qualité d'intermédiaire.</p>
+
+                <h3 class="font-serif text-lg font-bold text-white pt-4">2. Indépendance des parties</h3>
+                <p>Les Parties demeurent des professionnels indépendants. L'accord ne crée aucun lien de subordination ni société en participation. Le Partenaire est seul responsable de l'exécution technique et juridique des missions.</p>
+
+                <h3 class="font-serif text-lg font-bold text-white pt-4">3. Rémunération et Commission</h3>
+                <p><strong>Assiette :</strong> Calculée sur le montant total HT facturé et encaissé par le Partenaire.<br>
+                <strong>Taux :</strong> 15 % HT du montant de la prestation.<br>
+                <strong>Étendue :</strong> S'applique sur le contrat initial et tout avenant pendant 24 mois.</p>
+
+                <h3 class="font-serif text-lg font-bold text-white pt-4">4. Transparence et modalités</h3>
+                <p><strong>Notification :</strong> Le Partenaire doit informer l'Apporteur sous 72h de la signature d'un devis et dès l'encaissement des fonds.<br>
+                <strong>Facturation :</strong> L'Apporteur émettra sa facture de commission payable sous 15 jours.</p>
+
+                <h3 class="font-serif text-lg font-bold text-white pt-4">5. Clause de non-contournement</h3>
+                <p>Le Partenaire s'interdit de contracter directement ou indirectement avec un Prospect sans verser la commission à e-META LABS. En cas de violation, une pénalité forfaitaire de 5 000 Euros ou trois fois la commission dissimulée s'appliquera.</p>
+
+                <h3 class="font-serif text-lg font-bold text-white pt-4">6. Confidentialité</h3>
+                <p>Les données des Prospects transmises par e-META LABS sont strictement confidentielles et ne peuvent être divulguées à des tiers.</p>
+
+                <h3 class="font-serif text-lg font-bold text-white pt-4">7. Durée et Résiliation</h3>
+                <p>Conclu pour une durée indéterminée, résiliable avec 30 jours de préavis. La résiliation ne remet pas en cause le droit à commission pour les affaires déjà initiées.</p>
+
+                <h3 class="font-serif text-lg font-bold text-white pt-4">8. Juridiction Compétente</h3>
+                <p>Soumis au droit sénégalais. Tout litige sera de la compétence exclusive du Tribunal de Commerce de Dakar.</p>
+
+            </div>
+
+            <div class="pt-8 border-t border-ebonyBorder flex justify-between items-center">
+                <a href="index.html" class="text-xs text-gold font-mono hover:underline">← Retour à l'accueil</a>
+                <a href="expert.html" class="text-xs text-gold font-mono hover:underline">Accéder au Desk Exécutif →</a>
+            </div>
+
         </div>
     </main>
 
-    <script src="i18n.js"></script>
-    
+    <!-- Footer -->
+    <footer class="bg-ebonyCard border-t border-ebonyBorder py-8 text-center text-xs text-slate-500 font-mono">
+        <p>© 2026 E-META LABS SASU. Tous droits réservés. Cadre Partenarial &amp; Apport d'Affaires.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) window.lucide.createIcons();
+        });
+    </script>
 </body>
 </html>
