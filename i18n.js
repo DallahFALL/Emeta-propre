@@ -59,14 +59,14 @@ const translations = {
         pillar3_item3: "Verrouillage SLA 2h",
 
         // --- CHAPITRE 19 (OPTION B) ---
-        ch19_kicker: "Chapitre 19 — Levée Contradictoire sur Site (Option B)",
-        ch19_title: "Les 5 Familles de Points Critiques Audités",
-        ch19_desc: "Dès qu'une réserve exige la vérification des conditions réelles sur le terrain, notre Desk Exécutif déploie un expert pour confronter les hypothèses aux réalités physiques de l'infrastructure.",
-        ch19_pt1_title: "1. Sols", ch19_pt1_sub: "Nature & prélèvements",
-        ch19_pt2_title: "2. Hydraulique", ch19_pt2_sub: "Ressources & drainage",
-        ch19_pt3_title: "3. Thermique", ch19_pt3_sub: "Seuils & procédés",
-        ch19_pt4_title: "4. Chaîne du Froid", ch19_pt4_sub: "Stockage & transport",
-        ch19_pt5_title: "5. Topographie & Infrastructures", ch19_pt5_sub: "Accessibilité & équipements critiques",
+        "ch19.kicker": "Chapitre 19 — Le Vivier Multidisciplinaire du Desk Exécutif",
+        "ch19.title": "L'Expertise Humaine sur-Mesure dans Tous les Domaines",
+        "ch19.desc": "L'IA pose le diagnostic, l'expert humain tranche et s'engage. Quel que soit votre domaine d'activité, notre Desk Exécutif mobilise sur demande le spécialiste idéal (financier, juriste, géographe, comptable, ingénieur) pour porter la responsabilité de votre décision.",
+        "ch19.pt1.title": "1. Finance & M&A", "ch19.pt1.sub": "Levées & valorisations",
+        "ch19.pt2.title": "2. Droit & Fiscalité", "ch19.pt2.sub": "Conformité & contrats",
+        "ch19.pt3.title": "3. Géographie & Foncier", "ch19.pt3.sub": "Flux & titres",
+        "ch19.pt4.title": "4. Comptabilité & Audit", "ch19.pt4.sub": "Bilan & risques",
+        "ch19.pt5.title": "5. Stratégie & Gouvernance", "ch19.pt5.sub": "Management & transformation",
 
         // --- MATRICE DES 10 SECTEURS D'EXCELLENCE ---
         sectors_kicker: "Expertise Sectorielle",
@@ -220,14 +220,7 @@ const translations = {
         pillar3_item3: "Strict 2-hour SLA claim lock",
 
         // --- CHAPTER 19 (OPTION B) ---
-        ch19_kicker: "Chapter 19 — Adversarial Onsite Clearance (Option B)",
-        ch19_title: "The 5 Critical Audit Checkpoint Families",
-        ch19_desc: "Whenever a caveat demands real-world verification, our Executive Desk deploys a field specialist to confront algorithmic assumptions with physical on-ground realities.",
-        ch19_pt1_title: "1. Soils", ch19_pt1_sub: "Nature & soil samplings",
-        ch19_pt2_title: "2. Hydraulics", ch19_pt2_sub: "Flows, drainage & resources",
-        ch19_pt3_title: "3. Thermal", ch19_pt3_sub: "Operating heat & tolerances",
-        ch19_pt4_title: "4. Cold Chain", ch19_pt4_sub: "Refrigerated transport & storage",
-        ch19_pt5_title: "5. Topography & Infrastructure", ch19_pt5_sub: "Site accessibility & critical assets",
+        
 
         // --- 10 SECTORS ---
         sectors_kicker: "Sectoral Authority",
@@ -529,14 +522,14 @@ const translations = {
         pillar3_item2: "توقيع ومصادقة خبير تنفيذي رفيع",
         pillar3_item3: "قفل زمني صارم لاتفاقية مستوى الخدمة (ساعتان)",
 
-        ch19_kicker: "الفصل 19 — المعاينة الميدانية التواجهية (الخيار ب)",
-        ch19_title: "عائلات الفحص الخمس للنقاط الحرجة",
-        ch19_desc: "حينما يتطلب الأمر التحقق من الشروط الواقعية، يرسل المكتب التنفيذي خبيراً معتمداً لمقارنة الفرضيات الخوارزمية بالبنية المادية.",
-        ch19_pt1_title: "1. التربة", ch19_pt1_sub: "طبيعة الأرض والعينات",
-        ch19_pt2_title: "2. الهيدروليكا", ch19_pt2_sub: "الموارد وتصريف المياه",
-        ch19_pt3_title: "3. المقاومة الحرارية", ch19_pt3_sub: "عتبات الحرارة والعمليات",
-        ch19_pt4_title: "4. سلسلة التبريد", ch19_pt4_sub: "النقل والتخزين المبرد",
-        ch19_pt5_title: "5. التضاريس والبنية", ch19_pt5_sub: "الوصول والمعدات الحيوية",
+        "ch19.kicker": "الفصل 19 — الخبراء المتعددون في المكتب التنفيذي",
+        "ch19.title": "الخبرة البشرية المخصصة في جميع المجالات",
+        "ch19.desc": "الذكاء الاصطناعي يشخص، والخبير البشري يبت ويتخذ القرار. بغض النظر عن مجال نشاطك، يوفر مكتبنا التنفيذي الخبير المثالي (مالي، قانوني، جغرافي، محاسبي) عند الطلب.",
+        "ch19.pt1.title": "1. المالية والدمج والاستحواذ", "ch19.pt1.sub": "التمويل والتقييمات",
+        "ch19.pt2.title": "2. القانون والضرائب", "ch19.pt2.sub": "الامتثال والعقود",
+        "ch19.pt3.title": "3. الجغرافيا والأراضي", "ch19.pt3.sub": "التدفقات والعقارات",
+        "ch19.pt4.title": "4. المحاسبة والتدقيق", "ch19.pt4.sub": "الميزانيات والمخاطر",
+        "ch19.pt5.title": "5. الاستراتيجية والحوكمة", "ch19.pt5.sub": "الإدارة والتحول",
 
         sectors_kicker: "الخبرة القطاعية",
         sectors_title: "مصفوفة القطاعات العشرة الاستراتيجية",
