@@ -52,11 +52,11 @@ const translations = {
         pillar2_item2: "Horodatage OpenTimestamps",
         pillar2_item3: "Opposabilité contractuelle",
 
-        pillar3_title: "Arbitrage Humain — Desk Exécutif",
-        pillar3_desc: "Option B : Immersion contradictoire sur site par un Expert accrédité pour la levée des doutes topographiques, thermiques, hydrauliques, des sols et de la logistique du froid.",
-        pillar3_item1: "Vérification des 5 points critiques",
-        pillar3_item2: "Contreseing par Expert Senior",
-        pillar3_item3: "Verrouillage SLA 2h",
+        "pillar3.title": "Arbitrage Humain — Desk Exécutif",
+        "pillar3.desc": "« Au-delà de l'algorithme, la précision d'un praticien chevronné. Notre Desk Exécutif active sur demande l'expert de haut niveau idoine — qu'il s'agisse d'un expert-comptable, d'un spécialiste en finance internationale, d'un géographe, d'un juriste ou d'un conseil sectoriel — pour valider, adapter et porter la solution sur-mesure dont votre organisation a besoin. »",
+        "pillar3.item1": "Matching d'experts sur-mesure",
+        "pillar3.item2": "Validation exécutive et signature",
+        "pillar3.item3": "SLA de saisine garanti (2h)",
 
         // --- CHAPITRE 19 (OPTION B) ---
         "ch19.kicker": "Chapitre 19 — Le Vivier Multidisciplinaire du Desk Exécutif",
@@ -213,12 +213,12 @@ const translations = {
         pillar2_item2: "Bitcoin OpenTimestamps anchoring",
         pillar2_item3: "Contractual enforceability",
 
-        pillar3_title: "Human Field Judgment — Executive Desk",
-        pillar3_desc: "Option B: Mandatory adversarial onsite deployment by an accredited Expert to clear critical uncertainties across topography, thermal thresholds, hydraulics, soils, and cold storage logistics.",
-        pillar3_item1: "Audit of the 5 critical families",
-        pillar3_item2: "Senior Expert countersignature",
-        pillar3_item3: "Strict 2-hour SLA claim lock",
-
+        "pillar3.title": "Human Judgment — Executive Desk",
+        "pillar3.desc": "\"Beyond the algorithm, the precision of a seasoned practitioner. Our Executive Desk activates on demand the ideal high-level expert—whether a certified accountant, an international finance specialist, a geographer, a legal counsel, or a sector advisor—to validate, adapt, and deliver the bespoke solution your organization requires.\"",
+        "pillar3.item1": "Bespoke expert matching",
+        "pillar3.item2": "Executive validation & signature",
+        "pillar3.item3": "Guaranteed inquiry SLA (2h)",
+            
         "ch19.kicker": "Chapter 19 — Adversarial Onsite Clearance (Option B)",
         "ch19.title": "The 5 Critical Audit Checkpoint Families",
         "ch19.desc": "Whenever a caveat demands real-world verification, our Executive Desk deploys an accredited field specialist to confront algorithmic assumptions with physical on-ground realities.",
@@ -370,12 +370,12 @@ const translations = {
         pillar2_item2: "Sellado OpenTimestamps",
         pillar2_item3: "Oponibilidad contractual",
 
-        pillar3_title: "Arbitraje Humano — Desk Ejecutivo",
-        pillar3_desc: "Opción B: Despliegue contradictorio en sitio por un Experto acreditado para despejar incertidumbres críticas en suelos, térmica, hidráulica y frío.",
-        pillar3_item1: "Inspección de los 5 puntos críticos",
-        pillar3_item2: "Firma y visado de Experto Senior",
-        pillar3_item3: "Bloqueo estricto SLA de 2 horas",
-
+        "pillar3.title": "Arbitraje Humano — Desk Ejecutivo",
+        "pillar3.desc": "\"Más allá del algoritmo, la precisión de un profesional experimentado. nuestro Desk Ejecutivo activa bajo demanda al experto de alto nivel idóneo —ya sea un auditor, un especialista en finanzas internacionales, un geógrafo, un jurista o un consultor sectorial— para validar, adaptar y desplegar la solución a medida que su organización necesita.\"",
+        "pillar3.item1": "Matching de expertos a medida",
+        "pillar3.item2": "Validación ejecutiva y firma",
+        "pillar3.item3": "SLA de respuesta garantizado (2h)",
+        
         "ch19.kicker": "Capítulo 19 — Inspección Contradictoria en Sitio (Opción B)",
         "ch19.title": "Las 5 Familias de Puntos Críticos Auditados",
         "ch19.desc": "Cuando una reserva exige verificación real, nuestro Desk Ejecutivo despliega un especialista para confrontar hipótesis con la realidad física.",
@@ -522,11 +522,11 @@ const translations = {
         pillar2_item2: "توثيق بالبلوكشين عبر OpenTimestamps",
         pillar2_item3: "حجية قانونية وتعاقدية معززة",
 
-        pillar3_title: "التحكيم البشري الميداني — المكتب التنفيذي",
-        pillar3_desc: "الخيار ب (Option B): نزول ميداني حضوري من قبل خبير معتمد لرفع الشكوك حول التضاريس والحرارة والتحمل الهيدروليكي وسلسلة التبريد.",
-        pillar3_item1: "فحص العائلات الخمس الحرجة",
-        pillar3_item2: "توقيع ومصادقة خبير تنفيذي رفيع",
-        pillar3_item3: "قفل زمني صارم لاتفاقية مستوى الخدمة (ساعتان)",
+        "pillar3.title": "التحكيم البشري — المكتب التنفيذي",
+        "pillar3.desc": "\"تجاوز الخوارزمية، بدقة الخبير الممارس المخضرم. يقوم مكتبنا التنفيذي بتفعيل الخبير الأمثل رفيع المستوى عند الطلب -سواء كان محاسباً قانونياً، أخصائياً في المالية الدولية، جغرافياً، قانونياً، أو مستشاراً قطاعياً- للتحقق من الحل المخصص الذي تحتاجه مؤسستك وتكييفه وتنفيذه.\"",
+        "pillar3.item1": "مطابقة الخبراء المخصصة",
+        "pillar3.item2": "الاعتماد التنفيذي والتوقيع",
+        "pillar3.item3": "ضمان زمن الاستجابة (ساعتان)",
 
         "ch19.kicker": "الفصل 19 — الخبراء المتعددون في المكتب التنفيذي",
         "ch19.title": "الخبرة البشرية المخصصة في جميع المجالات",
