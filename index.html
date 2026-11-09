@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0b0e">
+    <meta name="description" content="e-META LABS | Cabinet de Haute Décision Stratégique, Audit Décisionnel & Tiers de Confiance Probatoire." data-i18n-content="meta.description">
+    <title data-i18n="meta.title">e-META LABS | Accès Restreint</title>
+
+    <!-- Favicon Souverain Géométrique e-META LABS -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,25 95,75 50,95 5,75 5,25' stroke='%23d4af37' stroke-width='5' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        ebony: '#0a0b0e',
+                        ebonyCard: '#12141c',
+                        ebonyElevated: '#171a26',
+                        ebonyBorder: '#232634',
+                        gold: '#d4af37',
+                        goldLight: '#f3e5ab',
+                        goldDark: '#aa8c2c',
+                        goldMuted: 'rgba(212, 175, 55, 0.15)'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            background-color: #0a0b0e;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa8c2c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border-glow {
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.08);
+        }
+        .gold-border-glow:hover {
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.2);
+        }
+        .glass-card {
+            background: rgba(18, 20, 28, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.16);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0a0b0e;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #232634;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+    </style>
+</head>
+<body class="bg-ebony text-slate-100 antialiased flex items-center justify-center min-h-screen custom-scrollbar p-4">
+
+    <!-- Carte de Verrouillage / Clé d'habilitation -->
+    <div class="glass-card max-w-md w-full rounded-3xl p-8 sm:p-10 gold-border-glow shadow-2xl text-center space-y-6 relative">
+        
+        <!-- Logo Géométrique Central -->
+        <div class="flex justify-center">
+            <svg class="w-14 h-14 drop-shadow-lg gold-border-glow rounded-2xl p-2 bg-ebony" viewBox="0 0 100 100">
+                <polygon points="50,5 95,25 95,75 50,95 5,75 5,25" stroke="#d4af37" stroke-width="4" fill="#0a192f"/>
+                <circle cx="50" cy="50" r="12" fill="#d4af37"/>
+            </svg>
+        </div>
+
+        <div class="space-y-2">
+            <span class="inline-block px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-[10px] font-mono uppercase tracking-widest text-gold">
+                Cabinet de Haute Décision Stratégique
+            </span>
+            <h1 class="font-serif text-2xl sm:text-3xl font-bold text-white tracking-wide">
+                PROJET e-META LABS
+            </h1>
+            <p class="text-xs text-slate-400 font-light leading-relaxed">
+                Le complexe décisionnel est en exploitation surveillée. Accès réservé aux directoires habilités et auditeurs accrédités.
+            </p>
+        </div>
+
+        <!-- Formulaire de Saisie de la Clé -->
+        <form onsubmit="verifierCle(event)" class="space-y-4 pt-2">
+            <div class="text-left font-mono text-xs text-slate-300 space-y-1.5">
+                <label for="inputCle" class="block text-gold">Clé d'habilitation</label>
+                <div class="relative">
+                    <input type="password" id="inputCle" placeholder="••••••••••••" required
+                        class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-center text-white text-sm tracking-widest focus:outline-none focus:border-gold transition">
+                    <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-gold">🔒</span>
+                </div>
+            </div>
+
+            <button type="submit" 
+                class="w-full py-3.5 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-xs uppercase tracking-wider shadow-lg gold-glow transition transform hover:-translate-y-0.5">
+                Déverrouiller le Terminal
+            </button>
+        </form>
+
+        <p class="text-[10px] text-slate-500 font-mono">
+            Accès de démonstration souveraine – traçabilité cryptographique active.
+        </p>
+    </div>
+
+    <!-- Script de Vérification de la Clé d'Habilitation -->
+    <script>
+        function verifierCle(event) {
+            event.preventDefault();
+            const cle = document.getElementById('inputCle').value;
+            
+            // Clé d'habilitation temporaire de construction
+            if (cle === "EMETA-2026-SECURE") {
+                localStorage.setItem('acces_autorise', 'true');
+                window.location.href = "app.html"; // Redirige vers votre site complet (pensez à renommer votre ancien index.html en app.html)
+            } else {
+                alert("Clé d'habilitation invalide. Accès refusé.");
+                document.getElementById('inputCle').value = "";
+            }
+        }
+    </script>
+</body>
+</html>
