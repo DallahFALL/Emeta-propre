@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0a0b0e">
-    <meta name="description" content="Mentions légales d'e-META LABS, Cabinet de Haute Décision Stratégique & Tiers de Confiance Probatoire.">
     <title>Mentions Légales | e-META LABS</title>
-
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,25 95,75 50,95 5,75 5,25' stroke='%23d4af37' stroke-width='5' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -17,148 +15,98 @@
                     colors: {
                         ebony: '#0a0b0e',
                         ebonyCard: '#12141c',
-                        ebonyElevated: '#171a26',
                         ebonyBorder: '#232634',
                         gold: '#d4af37',
                         goldLight: '#f3e5ab',
-                        goldDark: '#aa8c2c',
-                        goldMuted: 'rgba(212, 175, 55, 0.15)'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'Cinzel', 'serif'],
-                        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+                        goldDark: '#aa8c2c'
                     }
                 }
             }
         }
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-
     <style>
-        body { background-color: #0a0b0e; color: #f8fafc; font-family: 'Inter', sans-serif; min-height: 100vh; overflow-x: hidden; }
+        body { background-color: #0a0b0e; color: #f8fafc; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         .gold-gradient { background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa8c2c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 0 30px rgba(212, 175, 55, 0.1); }
-        .glass-card { background: rgba(18, 20, 28, 0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(212, 175, 55, 0.18); }
-        .legal-content h2 { color: #d4af37; font-family: 'Cinzel', serif; font-size: 1.25rem; font-weight: 700; margin-top: 2rem; margin-bottom: 0.75rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 0.5rem; letter-spacing: 0.05em; }
-        .legal-content p, .legal-content ul { color: #cbd5e1; font-size: 0.925rem; line-height: 1.8; margin-bottom: 1rem; font-weight: 300; }
+        .glass-card { background: rgba(18, 20, 28, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(212, 175, 55, 0.18); }
+        .legal-content h2 { color: #d4af37; font-family: 'Cinzel', serif; font-size: 1.15rem; font-weight: 700; margin-top: 1.75rem; margin-bottom: 0.5rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 0.35rem; }
+        .legal-content p, .legal-content ul { color: #cbd5e1; font-size: 0.875rem; line-height: 1.7; margin-bottom: 0.85rem; font-weight: 300; }
         .legal-content strong { color: #f8fafc; font-weight: 600; }
-        .legal-content a { color: #d4af37; text-decoration: underline; transition: color 0.2s; }
-        .legal-content a:hover { color: #f3e5ab; }
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #0a0b0e; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #232634; border-radius: 3px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #d4af37; }
+        .legal-content a { color: #d4af37; text-decoration: underline; }
     </style>
 </head>
-<body class="bg-ebony text-slate-100 antialiased selection:bg-gold selection:text-ebony flex flex-col min-h-screen overflow-x-hidden max-w-[100vw] custom-scrollbar">
+<body class="bg-ebony text-slate-100 antialiased flex flex-col min-h-screen overflow-x-hidden max-w-[100vw]">
 
-    <!-- Top Status Bar -->
-    <div class="bg-gradient-to-r from-ebony via-ebonyCard to-ebony border-b border-gold/20 py-2 px-4 sm:px-8 text-xs text-slate-300 flex justify-between items-center z-50 sticky top-0 backdrop-blur-md">
-        <div class="flex items-center gap-2 font-mono text-[11px]">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span class="text-gold font-semibold">GOUVERNANCE JURIDIQUE &amp; INSTITUTIONNELLE</span>
-        </div>
-        <div class="flex items-center gap-3 text-xs font-mono flex-wrap">
-            <a href="protocole-apport-affaires.html" class="hover:text-gold transition">Protocole</a>
-            <span class="text-slate-600">|</span>
-            <a href="mentions-legales.html" class="text-gold hover:underline transition">Mentions</a>
-            <span class="text-slate-600">|</span>
+    <!-- Top Bar -->
+    <div class="bg-ebonyCard border-b border-gold/20 py-2 px-3 sm:px-8 text-[10px] sm:text-xs text-slate-300 flex justify-between items-center z-50 sticky top-0">
+        <span class="text-gold font-mono font-semibold truncate">GOUVERNANCE JURIDIQUE</span>
+        <div class="flex items-center gap-2 font-mono shrink-0">
             <a href="cgv.html" class="hover:text-gold transition">CGV</a>
-            <span class="text-slate-600">|</span>
+            <span>|</span>
             <a href="confidentialite.html" class="hover:text-gold transition">Confidentialité</a>
-            <span class="text-slate-600">|</span>
+            <span>|</span>
             <a href="remboursement.html" class="hover:text-gold transition">Remboursement</a>
         </div>
     </div>
 
-    <!-- Header Institutionnel -->
-    <header class="sticky top-[37px] z-40 bg-ebony/90 backdrop-blur-xl border-b border-ebonyBorder shadow-2xl">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-3 group min-w-0 overflow-hidden">
-                <svg class="w-10 h-10 shrink-0 drop-shadow-lg gold-border-glow rounded-xl transition transform group-hover:scale-105" viewBox="0 0 100 100">
+    <!-- Header -->
+    <header class="sticky top-[33px] z-40 bg-ebony/95 backdrop-blur-xl border-b border-ebonyBorder shadow-2xl">
+        <div class="max-w-5xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2">
+            <a href="index.html" class="flex items-center gap-2 group min-w-0 flex-1 overflow-hidden">
+                <svg class="w-8 h-8 shrink-0 gold-border-glow rounded-lg" viewBox="0 0 100 100">
                     <polygon points="50,5 95,25 95,75 50,95 5,75 5,25" stroke="#d4af37" stroke-width="4" fill="#0a192f"/>
                     <circle cx="50" cy="50" r="12" fill="#d4af37"/>
                 </svg>
                 <div class="min-w-0">
-                    <div class="flex items-center gap-2 flex-wrap">
-                        <span class="font-serif text-lg sm:text-xl font-bold tracking-wider text-white whitespace-nowrap">e-META <span class="gold-gradient">LABS</span></span>
-                        <span class="text-[10px] uppercase tracking-widest px-1.5 py-0.5 rounded bg-gold/10 text-gold border border-gold/30 font-mono">SASU</span>
-                    </div>
-                    <p class="text-[10px] text-slate-400 tracking-wider truncate font-mono">CABINET DE HAUTE DÉCISION &amp; STRATEGIC ENGINE</p>
+                    <span class="font-serif text-sm sm:text-lg font-bold text-white whitespace-nowrap">e-META <span class="gold-gradient">LABS</span></span>
+                    <p class="text-[9px] text-slate-400 truncate font-mono">CABINET DE HAUTE DÉCISION</p>
                 </div>
             </a>
-
-            <a href="index.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-ebonyCard border border-ebonyBorder text-xs text-slate-300 hover:text-gold hover:border-gold/40 transition font-mono group shrink-0">
-                <span class="transition transform group-hover:-translate-x-1">←</span>
-                <span class="hidden sm:inline">Retour au Cockpit</span>
+            <a href="index.html" class="px-3 py-1.5 rounded-lg bg-ebonyCard border border-ebonyBorder text-xs text-slate-300 hover:text-gold transition font-mono shrink-0">
+                ← Cockpit
             </a>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10 w-full box-border flex-1">
-        <article class="glass-card rounded-3xl p-6 sm:p-12 gold-border-glow shadow-2xl relative z-10 legal-content w-full box-border">
-            <div class="text-center pb-6 border-b border-ebonyBorder mb-8">
-                <span class="inline-block px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-[10px] font-mono uppercase tracking-widest text-gold mb-2">
+    <main class="w-full max-w-3xl mx-auto px-3 sm:px-6 py-8 flex-1 box-border">
+        <article class="glass-card rounded-2xl p-4 sm:p-10 gold-border-glow shadow-2xl legal-content w-full box-border">
+            <div class="text-center pb-5 border-b border-ebonyBorder mb-6">
+                <span class="inline-block px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-[9px] font-mono uppercase tracking-widest text-gold mb-2">
                     Informations Institutionnelles
                 </span>
-                <h1 class="font-serif text-2xl sm:text-4xl font-bold text-white tracking-wide">
+                <h1 class="font-serif text-xl sm:text-3xl font-bold text-white tracking-wide">
                     Mentions Légales
                 </h1>
-                <p class="text-xs text-slate-400 font-mono mt-2">
-                    Plateforme e-META LABS · Référentiel Officiel · Mise à jour : Octobre 2026
+                <p class="text-[10px] sm:text-xs text-slate-400 font-mono mt-1">
+                    Référentiel Officiel · Octobre 2026
                 </p>
             </div>
 
             <h2>1. Éditeur de la Plateforme</h2>
-            <p>Le site officiel <code class="text-gold font-mono">e-metalabs.com</code> et l'infrastructure décisionnelle <code class="text-gold font-mono">e-meta.app</code> sont édités sous l'enseigne e-META LABS par <strong>E-META LABS SASU</strong>, société par actions simplifiée unipersonnelle régie par les actes uniformes OHADA, au capital social de <strong>500 000 FCFA</strong>, dont le siège social est situé Face Débarcadère, Rosso, Sénégal[cite: 24].</p>
-            <div class="p-4 rounded-2xl bg-ebony border border-ebonyBorder font-mono text-xs text-slate-300 space-y-1 my-4">
-                <p><strong>Immatriculation RCCM :</strong> SN STL 2026 B768[cite: 24]</p>
+            <p>Le site officiel <code class="text-gold font-mono">e-metalabs.com</code> est édité par <strong>E-META LABS SASU</strong>, société par actions simplifiée unipersonnelle régie par les actes uniformes OHADA, au capital social de <strong>500 000 FCFA</strong>, siège social : Face Débarcadère, Rosso, Sénégal[cite: 24].</p>
+            <div class="p-3 rounded-xl bg-ebony border border-ebonyBorder font-mono text-[11px] text-slate-300 space-y-1 my-3">
+                <p><strong>RCCM :</strong> SN STL 2026 B768[cite: 24]</p>
                 <p><strong>NINEA :</strong> 012887553[cite: 24]</p>
-                <p><strong>Directeur de la publication &amp; Président :</strong> Abdoulaye Fall[cite: 24]</p>
-                <p><strong>Contact Institutionnel :</strong> <a href="mailto:contact@e-metalabs.com">contact@e-metalabs.com</a>[cite: 24]</p>
-                <p><strong>Support Opérationnel :</strong> <a href="mailto:support@e-metalabs.com">support@e-metalabs.com</a>[cite: 24]</p>
+                <p><strong>Président :</strong> Abdoulaye Fall[cite: 24]</p>
+                <p><strong>Contact :</strong> <a href="mailto:contact@e-metalabs.com">contact@e-metalabs.com</a>[cite: 24]</p>
             </div>
 
-            <h2>2. Hébergement &amp; Infrastructure Technique Souveraine</h2>
-            <p>Les interfaces applicatives et les portails statiques sont hébergés et déployés de manière distribuée. Les composants d'orchestration algorithmique (moteur n8n, base vectorielle Qdrant, NocoDB et microservices) sont déployés sur serveurs dédiés sécurisés administrés via OVH Groupe SAS (OVHcloud, 2 rue Kellermann, 59100 Roubaix, France)[cite: 24].</p>
-            <p>La mention de ces prestataires ne constitue pas une affirmation de certification ou de souveraineté exclusive dans un territoire unique sans contrat spécifique[cite: 24]. Les traitements, sous-traitants et flux de données sont strictement encadrés par la <a href="confidentialite.html">Politique de Confidentialité</a> et les conventions de mandat opposables[cite: 24].</p>
+            <h2>2. Hébergement &amp; Infrastructure</h2>
+            <p>Les composants d'orchestration algorithmique (n8n, Qdrant, NocoDB) sont déployés sur serveurs dédiés sécurisés administrés via OVH Groupe SAS (Roubaix, France)[cite: 24].</p>
 
-            <h2>3. Objet et Accès au Cockpit</h2>
-            <p>La plateforme présente le complexe décisionnel e-META LABS, ses 10 secteurs d'excellence industrielle, ses protocoles d'accréditation en 3 paliers et son terminal d'ingestion permettant de transmettre une saisine stratégique[cite: 24]. Les informations de présentation ne constituent pas, à elles seules, une offre ferme ni un avis juridique opposable[cite: 24]. Le périmètre contraignant est défini exclusivement dans le mandat formalisé et validé[cite: 24].</p>
-            <p>L'éditeur se réserve le droit de faire évoluer, d'interrompre ou de suspendre l'accès au cockpit pour des impératifs d'audit, de maintenance technique ou de sécurité cryptographique, en s'efforçant de préserver la continuité des mandats actifs[cite: 24].</p>
+            <h2>3. Propriété Intellectuelle</h2>
+            <p>L'ensemble des marques, architectures d'ingestion, méthodologies des 20 chapitres d'audit et codes sources constituent la propriété exclusive d'E-META LABS SASU[cite: 24]. Toute extraction sans autorisation est interdite.</p>
 
-            <h2>4. Propriété Intellectuelle &amp; Marques</h2>
-            <p>L'ensemble des marques, sigles, architectures d'ingestion, structures de bases vectorielles, méthodologies des 20 chapitres d'audit, codes sources et identités visuelles (notamment le sceau géométrique hexagonal) constituent la propriété intellectuelle exclusive d'E-META LABS SASU[cite: 24].</p>
-            <p>Toute extraction, rétro-ingénierie, reproduction intégrale ou partielle sans autorisation expresse écrite est strictement interdite[cite: 24]. Les références aux protocoles tiers (OpenTimestamps, Bitcoin, Qdrant, WhatsApp) demeurent la propriété de leurs titulaires respectifs et ne constituent aucune affiliation sponsorisée[cite: 24].</p>
-
-            <h2>5. Liens Externes &amp; Données de Saisine</h2>
-            <p>Les liens renvoyant vers des infrastructures tierces (ex. explorateurs Bitcoin, répertoires réglementaires) sont fournis à titre de référence probatoire[cite: 24]. e-META LABS n'exerce aucun contrôle sur les politiques externes de ces tiers[cite: 24].</p>
-            <p>L'utilisateur demeure seul responsable de la véracité et de la licéité des données et trames comptables introduites dans le terminal d'ingestion[cite: 24]. Il s'interdit d'y injecter des secrets d'authentification ou des informations protégées sans mandat habilité[cite: 24].</p>
-
-            <h2>6. Responsabilité et Signalement</h2>
-            <p>Les analyses algorithmiques produites fournissent une aide rigoureuse à l'arbitrage mais ne se substituent jamais à la décision souveraine des directoires habilités[cite: 24]. e-META LABS ne peut être tenue responsable des préjudices résultant de l'exploitation des livrables en dehors du cadre contractuel établi[cite: 24].</p>
-            <p>Pour tout signalement d'incident technique ou de sécurité, contactez sans délai le Desk de Supervision : <a href="mailto:support@e-metalabs.com">support@e-metalabs.com</a>[cite: 24].</p>
-
-            <h2>7. Preuve d'Intégrité &amp; Ancrage Cryptographique</h2>
-            <p>Lorsque le mandat stipule un scellement, une empreinte canonique SHA-256 est calculée à partir du jeu de données $T+0$ et soumise au protocole <a href="https://opentimestamps.org/" target="_blank" rel="noopener noreferrer">OpenTimestamps.org</a> pour ancrage sur la Blockchain Bitcoin[cite: 24]. Cette preuve technique atteste avec certitude de l'existence et de l'intégrité du document à la date de scellement sans en divulguer le contenu confidentiel[cite: 24].</p>
-
-            <h2>8. Droit Applicable &amp; Attribution de Juridiction</h2>
-            <p>Les présentes mentions légales sont régies par le droit sénégalais et les réglementations communautaires OHADA et UEMOA applicables[cite: 24]. En cas de différend relatif à l'interprétation ou à l'exécution de la plateforme, attribution expresse de compétence est faite aux tribunaux compétents du ressort du Tribunal de Commerce de Dakar[cite: 24].</p>
+            <h2>4. Droit Applicable</h2>
+            <p>Régie par le droit sénégalais et les règlements OHADA / UEMOA. Tribunal compétent : Tribunal de Commerce de Dakar[cite: 24].</p>
         </article>
     </main>
 
-    <!-- Footer Discret -->
-    <footer class="border-t border-ebonyBorder py-6 text-center text-xs text-slate-500 font-mono">
-        © 2026 E-META LABS SASU · <a href="mailto:contact@e-metalabs.com" class="text-gold hover:underline">contact@e-metalabs.com</a> · <a href="mailto:support@e-metalabs.com" class="text-gold hover:underline">support@e-metalabs.com</a>[cite: 24]
+    <footer class="border-t border-ebonyBorder py-4 text-center text-[10px] sm:text-xs text-slate-500 font-mono">
+        © 2026 E-META LABS SASU · <a href="mailto:contact@e-metalabs.com" class="text-gold hover:underline">contact@e-metalabs.com</a>[cite: 24]
     </footer>
-
-    <script>
-        if (window.lucide) window.lucide.createIcons();
-    </script>
 </body>
 </html>
