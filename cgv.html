@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0a0b0e">
-    <meta name="description" content="Conditions Générales de Vente des diagnostics et mandats décisionnels B2B e-META LABS.">
     <title>Conditions Générales de Vente | e-META LABS</title>
-
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,25 95,75 50,95 5,75 5,25' stroke='%23d4af37' stroke-width='5' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -17,167 +15,121 @@
                     colors: {
                         ebony: '#0a0b0e',
                         ebonyCard: '#12141c',
-                        ebonyElevated: '#171a26',
                         ebonyBorder: '#232634',
                         gold: '#d4af37',
                         goldLight: '#f3e5ab',
-                        goldDark: '#aa8c2c',
-                        goldMuted: 'rgba(212, 175, 55, 0.15)'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'Cinzel', 'serif'],
-                        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+                        goldDark: '#aa8c2c'
                     }
                 }
             }
         }
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-
     <style>
-        body { background-color: #0a0b0e; color: #f8fafc; font-family: 'Inter', sans-serif; min-height: 100vh; overflow-x: hidden; }
+        body { background-color: #0a0b0e; color: #f8fafc; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         .gold-gradient { background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa8c2c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .gold-border-glow { border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 0 30px rgba(212, 175, 55, 0.1); }
-        .glass-card { background: rgba(18, 20, 28, 0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(212, 175, 55, 0.18); }
-        .legal-content h2 { color: #d4af37; font-family: 'Cinzel', serif; font-size: 1.25rem; font-weight: 700; margin-top: 2rem; margin-bottom: 0.75rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 0.5rem; letter-spacing: 0.05em; }
-        .legal-content p, .legal-content ul { color: #cbd5e1; font-size: 0.925rem; line-height: 1.8; margin-bottom: 1rem; font-weight: 300; }
+        .glass-card { background: rgba(18, 20, 28, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(212, 175, 55, 0.18); }
+        .legal-content h2 { color: #d4af37; font-family: 'Cinzel', serif; font-size: 1.15rem; font-weight: 700; margin-top: 1.75rem; margin-bottom: 0.5rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 0.35rem; }
+        .legal-content p, .legal-content ul { color: #cbd5e1; font-size: 0.875rem; line-height: 1.7; margin-bottom: 0.85rem; font-weight: 300; }
         .legal-content strong { color: #f8fafc; font-weight: 600; }
-        .legal-content a { color: #d4af37; text-decoration: underline; transition: color 0.2s; }
-        .legal-content a:hover { color: #f3e5ab; }
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #0a0b0e; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #232634; border-radius: 3px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #d4af37; }
+        .legal-content a { color: #d4af37; text-decoration: underline; }
     </style>
 </head>
-<body class="bg-ebony text-slate-100 antialiased selection:bg-gold selection:text-ebony flex flex-col min-h-screen overflow-x-hidden max-w-[100vw] custom-scrollbar">
+<body class="bg-ebony text-slate-100 antialiased flex flex-col min-h-screen overflow-x-hidden max-w-[100vw]">
 
-    <!-- Top Status Bar -->
-    <div class="bg-gradient-to-r from-ebony via-ebonyCard to-ebony border-b border-gold/20 py-2 px-4 sm:px-8 text-xs text-slate-300 flex justify-between items-center z-50 sticky top-0 backdrop-blur-md">
-        <div class="flex items-center gap-2 font-mono text-[11px]">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span class="text-gold font-semibold">CADRE CONTRACTUEL B2B &amp; MANDATS SOUVERAINS</span>
-        </div>
-        <div class="flex items-center gap-3 text-xs font-mono flex-wrap">
-            <a href="protocole-apport-affaires.html" class="hover:text-gold transition">Protocole</a>
-            <span class="text-slate-600">|</span>
+    <!-- Top Bar -->
+    <div class="bg-ebonyCard border-b border-gold/20 py-2 px-3 sm:px-8 text-[10px] sm:text-xs text-slate-300 flex justify-between items-center z-50 sticky top-0">
+        <span class="text-gold font-mono font-semibold truncate">CGV &amp; MANDATS SOUVERAINS</span>
+        <div class="flex items-center gap-2 font-mono shrink-0">
             <a href="mentions-legales.html" class="hover:text-gold transition">Mentions</a>
-            <span class="text-slate-600">|</span>
-            <a href="cgv.html" class="text-gold hover:underline transition">CGV</a>
-            <span class="text-slate-600">|</span>
+            <span>|</span>
             <a href="confidentialite.html" class="hover:text-gold transition">Confidentialité</a>
-            <span class="text-slate-600">|</span>
+            <span>|</span>
             <a href="remboursement.html" class="hover:text-gold transition">Remboursement</a>
         </div>
     </div>
 
-    <!-- Header Institutionnel -->
-    <header class="sticky top-[37px] z-40 bg-ebony/90 backdrop-blur-xl border-b border-ebonyBorder shadow-2xl">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-3 group min-w-0 overflow-hidden">
-                <svg class="w-10 h-10 shrink-0 drop-shadow-lg gold-border-glow rounded-xl transition transform group-hover:scale-105" viewBox="0 0 100 100">
+    <!-- Header -->
+    <header class="sticky top-[33px] z-40 bg-ebony/95 backdrop-blur-xl border-b border-ebonyBorder shadow-2xl">
+        <div class="max-w-5xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2">
+            <a href="index.html" class="flex items-center gap-2 group min-w-0 flex-1 overflow-hidden">
+                <svg class="w-8 h-8 shrink-0 gold-border-glow rounded-lg" viewBox="0 0 100 100">
                     <polygon points="50,5 95,25 95,75 50,95 5,75 5,25" stroke="#d4af37" stroke-width="4" fill="#0a192f"/>
                     <circle cx="50" cy="50" r="12" fill="#d4af37"/>
                 </svg>
                 <div class="min-w-0">
-                    <div class="flex items-center gap-2 flex-wrap">
-                        <span class="font-serif text-lg sm:text-xl font-bold tracking-wider text-white whitespace-nowrap">e-META <span class="gold-gradient">LABS</span></span>
-                        <span class="text-[10px] uppercase tracking-widest px-1.5 py-0.5 rounded bg-gold/10 text-gold border border-gold/30 font-mono">SASU</span>
-                    </div>
-                    <p class="text-[10px] text-slate-400 tracking-wider truncate font-mono">CABINET DE HAUTE DÉCISION &amp; STRATEGIC ENGINE</p>
+                    <span class="font-serif text-sm sm:text-lg font-bold text-white whitespace-nowrap">e-META <span class="gold-gradient">LABS</span></span>
+                    <p class="text-[9px] text-slate-400 truncate font-mono">CABINET DE HAUTE DÉCISION</p>
                 </div>
             </a>
-
-            <a href="index.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-ebonyCard border border-ebonyBorder text-xs text-slate-300 hover:text-gold hover:border-gold/40 transition font-mono group shrink-0">
-                <span class="transition transform group-hover:-translate-x-1">←</span>
-                <span class="hidden sm:inline">Retour au Cockpit</span>
+            <a href="index.html" class="px-3 py-1.5 rounded-lg bg-ebonyCard border border-ebonyBorder text-xs text-slate-300 hover:text-gold transition font-mono shrink-0">
+                ← Cockpit
             </a>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10 w-full box-border flex-1">
-        <article class="glass-card rounded-3xl p-6 sm:p-12 gold-border-glow shadow-2xl relative z-10 legal-content w-full box-border">
-            <div class="text-center pb-6 border-b border-ebonyBorder mb-8">
-                <span class="inline-block px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-[10px] font-mono uppercase tracking-widest text-gold mb-2">
-                    Conditions Contractuelles B2B
+    <main class="w-full max-w-3xl mx-auto px-3 sm:px-6 py-8 flex-1 box-border">
+        <article class="glass-card rounded-2xl p-4 sm:p-10 gold-border-glow shadow-2xl legal-content w-full box-border">
+            <div class="text-center pb-5 border-b border-ebonyBorder mb-6">
+                <span class="inline-block px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-[9px] font-mono uppercase tracking-widest text-gold mb-2">
+                    Cadre Contractuel B2B
                 </span>
-                <h1 class="font-serif text-2xl sm:text-4xl font-bold text-white tracking-wide">
+                <h1 class="font-serif text-xl sm:text-3xl font-bold text-white tracking-wide">
                     Conditions Générales de Vente
                 </h1>
-                <p class="text-xs text-slate-400 font-mono mt-2">
-                    Diagnostics &amp; Mandats Décisionnels e-META LABS · Mise à jour : Octobre 2026
+                <p class="text-[10px] sm:text-xs text-slate-400 font-mono mt-1">
+                    Mise à jour : Octobre 2026
                 </p>
             </div>
 
-            <p>Les présentes Conditions Générales de Vente régissent l'ensemble des prestations d'ingestion décisionnelle, d'analyse par agents RAG, de modélisation de stress-tests et de scellement cryptographique opérées par <strong>E-META LABS SASU</strong>[cite: 24]. Elles s'appliquent à tous les directoires d'entreprises, institutions publiques, banques et fonds d'investissement contractualisant un mandat avec le cabinet[cite: 24].</p>
+            <p>Les présentes Conditions Générales de Vente régissent l'ensemble des prestations d'ingestion décisionnelle, d'analyse par agents RAG et de scellement cryptographique opérées par <strong>E-META LABS SASU</strong>[cite: 24].</p>
 
-            <h2>1. Nature &amp; Portée des Analyses Stratégiques</h2>
-            <p>e-META LABS fournit des systèmes d'aide à la haute décision basés sur la méthode propriétaire des vingt chapitres d'audit, la cryptographie probatoire SHA-256 et l'arbitrage contradictoire d'experts accrédités[cite: 24]. Les livrables (dossiers de diagnostic, cartographies de vulnérabilités, stress-tests sectoriels) constituent des outils d'éclairage rigoureux[cite: 24].</p>
-            <p>Ces travaux n'exonèrent aucunement le client de son devoir fiduciaire et ne constituent ni un conseil juridique réglementé, ni une certification comptable légale, sauf stipulation expresse et contreseing d'un expert accrédité assermenté dans le cadre de l'Option B[cite: 24].</p>
+            <h2>1. Nature &amp; Portée des Analyses</h2>
+            <p>e-META LABS fournit des systèmes d'aide à la haute décision basés sur la méthode propriétaire des vingt chapitres d'audit et la cryptographie SHA-256[cite: 24]. Ces travaux constituent des outils d'éclairage rigoureux sans se substituer au devoir fiduciaire du client[cite: 24].</p>
 
-            <h2>2. Paliers d'Intervention &amp; Grille Tarifaire</h2>
-            <div class="overflow-x-auto my-6 rounded-2xl border border-ebonyBorder">
-                <table class="w-full text-left text-xs font-mono">
+            <h2>2. Paliers &amp; Grille Tarifaire</h2>
+            <div class="overflow-x-auto my-4 rounded-xl border border-ebonyBorder">
+                <table class="w-full text-left text-[11px] sm:text-xs font-mono">
                     <thead class="bg-ebony border-b border-ebonyBorder text-gold uppercase">
                         <tr>
-                            <th class="p-3.5">Palier</th>
-                            <th class="p-3.5">Tarif Officiel</th>
-                            <th class="p-3.5">Livrables &amp; Spécifications</th>
+                            <th class="p-2.5">Palier</th>
+                            <th class="p-2.5">Tarif</th>
+                            <th class="p-2.5">Spécifications</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-ebonyBorder bg-ebonyCard/50">
                         <tr>
-                            <td class="p-3.5 font-bold text-white">Palier 1 : Découverte</td>
-                            <td class="p-3.5 text-gold">0 € / $0 (Offert)</td>
-                            <td class="p-3.5 text-slate-300">Diagnostic flash de 3 à 5 pages, score de maturité sur 3 axes prioritaires, restitution email[cite: 24]. (Scellement OTS non inclus)[cite: 24].</td>
+                            <td class="p-2.5 font-bold text-white">Palier 1</td>
+                            <td class="p-2.5 text-gold">0 € (Offert)</td>
+                            <td class="p-2.5 text-slate-300">Diagnostic flash, score de maturité[cite: 24].</td>
                         </tr>
                         <tr>
-                            <td class="p-3.5 font-bold text-white">Palier 2 : Mandat Certifié</td>
-                            <td class="p-3.5 text-gold">280 € / $300<br><span class="text-slate-400 text-[10px]">Équivalent : 185 000 FCFA</span></td>
-                            <td class="p-3.5 text-slate-300">Dossier décisionnel complet (15 à 25 pages), revue et contreseing de l'Expert Exécutif, modélisation de stress-tests, scellement SHA-256 &amp; Bitcoin OTS, référence MIS-2026-XXXX[cite: 24].</td>
+                            <td class="p-2.5 font-bold text-white">Palier 2</td>
+                            <td class="p-2.5 text-gold">280 € / 185k FCFA</td>
+                            <td class="p-2.5 text-slate-300">Dossier complet, revue expert, scellement OTS[cite: 24].</td>
                         </tr>
                         <tr>
-                            <td class="p-3.5 font-bold text-white">Palier 3 : Chambre Exécutive</td>
-                            <td class="p-3.5 text-gold">1 450 € / $1 500 / mois<br><span class="text-slate-400 text-[10px]">Équivalent : 950 000 FCFA</span></td>
-                            <td class="p-3.5 text-slate-300">Due diligence globale permanente (25 à 45+ pages), vision consolidée groupe &amp; filiales, collège d'experts dédié, registre probatoire privatif NocoDB et astreinte SLA 2h[cite: 24].</td>
+                            <td class="p-2.5 font-bold text-white">Palier 3</td>
+                            <td class="p-2.5 text-gold">1 450 € / mois</td>
+                            <td class="p-2.5 text-slate-300">Due diligence permanente, astreinte SLA 2h[cite: 24].</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <h2>3. Commandes, Règlements &amp; Séquestre Financier</h2>
-            <p>Les mandats sont libellés en Euros (€), en Dollars US ($) ou en Francs CFA (FCFA) selon la zone d'implantation du donneur d'ordre[cite: 24]. Le règlement s'opère par virement Swift bancaire institutionnel, carte bancaire via passerelle sécurisée internationale, ou par Mobile Money agréé (Wave, Orange Money via PayTech) pour la zone UEMOA / CEMAC[cite: 24].</p>
-            <p>Pour les mandats du Palier 2 et du Palier 3, le séquestre des honoraires est garanti via le pipeline automatisé <code>Cortex Billing &amp; Escrow</code> : les fonds sont consignés jusqu'à la levée de recette et la remise du dossier scellé au décideur.</p>
+            <h2>3. Règlements &amp; Séquestre</h2>
+            <p>Les règlements s'effectuent par virement bancaire, carte sécurisée ou Mobile Money (Wave, Orange Money via PayTech)[cite: 24]. Le séquestre des honoraires est garanti via le pipeline <code>Cortex Billing &amp; Escrow</code>.</p>
 
-            <h2>4. Formation du Mandat &amp; Recevabilité Technique</h2>
-            <p>La transmission d'une saisine via le Terminal d'Ingestion requiert un exposé circonstancié comportant au minimum <strong>150 caractères</strong> afin de permettre le calcul vectoriel dans Qdrant[cite: 24]. La commande devient définitive dès confirmation de la référence souveraine (ex. <code>MIS-2026-XXXX</code>) et validation des conditions de paiement[cite: 24].</p>
-
-            <h2>5. Délais d'Exécution &amp; Astreinte SLA</h2>
-            <p>e-META LABS s'engage sur une astreinte de prise en charge sous <strong>2 heures ouvrées (SLA 2h)</strong> pour l'attribution des dossiers du Palier 2 et du Palier 3 au vivier d'experts. Les délais de livraison des dossiers définitifs varient de 48 heures ouvrées pour le Palier 1 à 7 jours ouvrés pour le Mandat Certifié.</p>
-
-            <h2>6. Livraison &amp; Canaux Sécurisés</h2>
-            <p>Les livrables sont remis sous format numérique certifié PDF vectoriel avec certificat d'antériorité intégré. La restitution intervient au choix du décideur par courrier électronique chiffré ou via notification sécurisée sur la ligne WhatsApp Business directe transmise lors de la saisine[cite: 24].</p>
-
-            <h2>7. Secret des Affaires &amp; Confidentialité B2B</h2>
-            <p>Conformément aux plus hauts standards de discrétion diplomatique et financière, e-META LABS s'interdit formellement de divulguer l'identité de ses clients, la nature des missions ou le contenu des dossiers d'audit[cite: 24]. Aucune donnée d'ingestion client n'est réutilisée pour l'entraînement de modèles d'intelligence artificielle publics de tiers[cite: 24].</p>
-
-            <h2>8. Droit Applicable &amp; Règlement des Litiges</h2>
-            <p>Les présentes CGV sont soumises au droit sénégalais et aux conventions internationales régissant le commerce électronique et le secret des affaires[cite: 24]. Tout litige relatif à leur validité, interprétation ou exécution fera l'objet d'une tentative de conciliation amiable préalable avant toute saisine du Tribunal de Commerce de Dakar[cite: 24].</p>
+            <h2>4. Droit Applicable</h2>
+            <p>Soumis au droit sénégalais et aux actes OHADA[cite: 24]. En cas de litige, compétence exclusive est attribuée au Tribunal de Commerce de Dakar[cite: 24].</p>
         </article>
     </main>
 
-    <!-- Footer Discret -->
-    <footer class="border-t border-ebonyBorder py-6 text-center text-xs text-slate-500 font-mono">
-        © 2026 E-META LABS SASU · <a href="mailto:contact@e-metalabs.com" class="text-gold hover:underline">contact@e-metalabs.com</a> · <a href="mailto:support@e-metalabs.com" class="text-gold hover:underline">support@e-metalabs.com</a>[cite: 24]
+    <footer class="border-t border-ebonyBorder py-4 text-center text-[10px] sm:text-xs text-slate-500 font-mono">
+        © 2026 E-META LABS SASU · <a href="mailto:contact@e-metalabs.com" class="text-gold hover:underline">contact@e-metalabs.com</a>[cite: 24]
     </footer>
-
-    <script>
-        if (window.lucide) window.lucide.createIcons();
-    </script>
 </body>
 </html>
