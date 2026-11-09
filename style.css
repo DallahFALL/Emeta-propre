@@ -577,3 +577,24 @@ button.btn-outline:hover { background: rgba(212, 175, 55, 0.1); }
     flex-shrink: 0;
     padding-left: 2px;
 }
+/* Conteneur global des pages légales et de souveraineté */
+body, main, .legal-container, .content-wrapper {
+    max-width: 100vw;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/* Forcer les conteneurs de texte à respecter les bords de l'écran mobile */
+.container, article, .souverainete-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    box-sizing: border-box;
+}
+
+/* Empêcher les tableaux, pre ou blocs de code de faire sauter la page */
+table, pre, code, img {
+    max-width: 100%;
+    height: auto;
+}
