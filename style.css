@@ -557,3 +557,23 @@ button.btn-outline:hover { background: rgba(212, 175, 55, 0.1); }
     color: var(--navy-deep);
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
 }
+/* Ajustement responsive du logo e-META LABS */
+.logo-container, .brand-logo {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.brand-text {
+    font-size: clamp(1rem, 4vw, 1.5rem); /* S'adapte dynamiquement à la largeur de l'écran */
+    letter-spacing: -0.05em;
+}
+
+/* Correction spécifique pour que le 'e' initial ne soit pas coupé */
+.brand-prefix {
+    display: inline-block;
+    flex-shrink: 0;
+    padding-left: 2px;
+}
