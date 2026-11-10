@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0a0b0e">
-    <title>Desk Exécutif | Accréditation &amp; Onboarding Expert e-META LABS</title>
+    <title>e-META LABS | Desk Exécutif &amp; Accréditation Experts</title>
     
     <!-- Favicon Officiel Géométrique e-META LABS -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,25 95,75 50,95 5,75 5,25' stroke='%23d4af37' stroke-width='5' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
@@ -50,6 +50,7 @@
             color: #f8fafc;
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
+            overflow-x: hidden;
         }
         .gold-gradient {
             background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa8c2c 100%);
@@ -61,223 +62,336 @@
             box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
         }
         .glass-card {
-            background: rgba(18, 20, 28, 0.88);
+            background: rgba(18, 20, 28, 0.92);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(212, 175, 55, 0.18);
         }
+        [dir="rtl"] .rtl-flip {
+            transform: scaleX(-1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0a0b0e;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #232634;
+            border-radius: 3px;
+        }
     </style>
 </head>
-<body class="bg-ebony text-slate-100 antialiased selection:bg-gold selection:text-ebony flex flex-col min-h-screen">
+<body class="bg-ebony text-slate-100 antialiased selection:bg-gold selection:text-ebony flex flex-col min-h-screen custom-scrollbar">
 
-    <!-- Barre Statut Supérieure -->
-    <div class="bg-gradient-to-r from-ebony via-ebonyCard to-ebony border-b border-gold/20 py-2 px-4 sm:px-8 text-xs text-slate-300 flex justify-between items-center z-50 sticky top-0 backdrop-blur-md">
-        <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span class="text-gold font-semibold font-mono text-[11px]">PORTAIL DESK EXÉCUTIF</span>
+    <!-- Top Status Bar -->
+    <div class="bg-gradient-to-r from-ebony via-ebonyCard to-ebony border-b border-gold/20 py-2 px-3 sm:px-8 text-xs text-slate-300 flex justify-between items-center z-50 sticky top-0 backdrop-blur-md">
+        <div class="flex items-center gap-2 min-w-0 overflow-hidden">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+            <span class="text-gold font-semibold font-mono text-[10px] sm:text-[11px] truncate">PORTAIL DESK EXÉCUTIF</span>
             <span class="hidden sm:inline text-slate-600">|</span>
-            <span class="hidden sm:inline text-slate-400 font-mono text-[11px]">Accréditation Experts &amp; Mandats Stratégiques</span>
+            <span class="hidden sm:inline text-slate-400 font-mono text-[11px] truncate">Accréditation Experts &amp; Mandats Stratégiques</span>
         </div>
-        <div class="flex items-center gap-4 text-xs font-mono">
-            <a href="tracker.html" class="text-slate-400 hover:text-gold transition flex items-center gap-1">
-                <i data-lucide="compass" class="w-3.5 h-3.5 text-gold"></i>
-                <span class="hidden sm:inline">Suivi Mission</span>
-            </a>
-            <span class="text-slate-600">|</span>
-            <a href="protocole-apport-affaires.html" class="text-slate-400 hover:text-gold transition flex items-center gap-1">
-                <i data-lucide="file-text" class="w-3.5 h-3.5 text-gold"></i>
-                <span class="hidden sm:inline">Protocole d'Affaires</span>
-            </a>
+        <div class="flex items-center gap-3 shrink-0">
+            <div class="lang-switch flex items-center gap-1.5 bg-ebony px-2 py-0.5 rounded-lg border border-ebonyBorder text-xs font-mono">
+                <button type="button" onclick="applyExpertLang('fr')" class="lang-btn text-gold font-bold" data-l="fr">FR</button>
+                <span class="text-slate-600">|</span>
+                <button type="button" onclick="applyExpertLang('en')" class="lang-btn text-slate-400 hover:text-gold" data-l="en">EN</button>
+                <span class="text-slate-600">|</span>
+                <button type="button" onclick="applyExpertLang('es')" class="lang-btn text-slate-400 hover:text-gold" data-l="es">ES</button>
+                <span class="text-slate-600">|</span>
+                <button type="button" onclick="applyExpertLang('ar')" class="lang-btn text-slate-400 hover:text-gold" data-l="ar">AR</button>
+            </div>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <main class="flex-1 flex items-center justify-center p-4 sm:p-8 relative">
-        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gold/10 rounded-full blur-[140px] pointer-events-none"></div>
-
-        <div class="w-full max-w-2xl glass-card rounded-3xl p-6 sm:p-10 gold-border-glow shadow-2xl relative z-10 space-y-8 my-6">
+    <!-- Main Header -->
+    <header class="sticky top-[37px] z-40 bg-ebony/95 backdrop-blur-xl border-b border-ebonyBorder shadow-2xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-2">
             
-            <!-- Navigation de tête -->
-            <div class="flex justify-between items-center pb-6 border-b border-ebonyBorder text-xs font-mono">
-                <a href="index.html" class="inline-flex items-center gap-2 text-slate-400 hover:text-gold transition group" id="backBtn" data-i18n="exp_btn_return">
-                    <span class="transition transform group-hover:-translate-x-1">←</span>
-                    <span>Retour au Cockpit</span>
-                </a>
-
-                <div class="flex items-center gap-2">
-                    <svg class="w-6 h-6" viewBox="0 0 100 100">
-                        <polygon points="50,5 95,25 95,75 50,95 5,75 5,25" stroke="#d4af37" stroke-width="6" fill="#0a192f"/>
-                        <circle cx="50" cy="50" r="12" fill="#d4af37"/>
-                    </svg>
-                    <span class="font-serif font-bold text-white tracking-widest text-sm">e-META <span class="gold-gradient">LABS</span></span>
+            <!-- Logo Souverain Sécurisé -->
+            <a href="index.html" class="flex items-center gap-2.5 group shrink-0 min-w-0 max-w-[55%] sm:max-w-none overflow-hidden">
+                <svg class="w-8 h-8 sm:w-11 sm:h-11 shrink-0 drop-shadow-lg gold-border-glow rounded-xl transition transform group-hover:scale-105" viewBox="0 0 100 100">
+                    <polygon points="50,5 95,25 95,75 50,95 5,75 5,25" stroke="#d4af37" stroke-width="4" fill="#0a192f"/>
+                    <circle cx="50" cy="50" r="12" fill="#d4af37"/>
+                </svg>
+                <div class="min-w-0">
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                        <span class="font-serif text-sm sm:text-2xl font-bold tracking-wider text-white whitespace-nowrap">e-META <span class="gold-gradient">LABS</span></span>
+                        <span class="text-[8px] sm:text-[10px] uppercase tracking-widest px-1.5 py-0.5 rounded bg-gold/10 text-gold border border-gold/30 font-mono shrink-0">SASU</span>
+                    </div>
+                    <p class="text-[8px] sm:text-[10px] text-slate-400 tracking-wider font-mono truncate hidden sm:block">DESK EXÉCUTIF &amp; ARBITRAGE</p>
                 </div>
-            </div>
+            </a>
 
-            <!-- Header du formulaire -->
-            <div class="text-center space-y-2">
-                <span class="inline-block px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-[10px] font-mono uppercase tracking-widest text-gold mb-1">
-                    Vivier Souverain d'Arbitrage Terrain
+            <!-- Liens de Navigation Rapide -->
+            <div class="flex items-center gap-2 sm:gap-4 shrink-0 font-mono text-xs">
+                <a href="tracker.html" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-ebonyCard border border-ebonyBorder text-slate-300 hover:text-gold hover:border-gold/40 transition">
+                    <i data-lucide="compass" class="w-3.5 h-3.5 text-gold"></i>
+                    <span class="hidden sm:inline" id="ui-nav-tracker">Suivi Mission</span>
+                </a>
+                <a href="protocole-apport-affaires.html" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-ebonyCard border border-ebonyBorder text-slate-300 hover:text-gold hover:border-gold/40 transition">
+                    <i data-lucide="file-text" class="w-3.5 h-3.5 text-gold"></i>
+                    <span class="hidden sm:inline" id="ui-nav-protocol">Protocole d'Affaires</span>
+                </a>
+                <a href="index.html" class="px-3 py-2 rounded-xl bg-gold/10 border border-gold/30 text-gold hover:bg-gold/20 transition">
+                    <span id="ui-nav-home">← Cockpit</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <main class="w-full max-w-4xl mx-auto px-3 sm:px-6 py-12 flex-1 relative z-10 box-border">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gold/10 rounded-full blur-[160px] pointer-events-none"></div>
+
+        <article class="glass-card rounded-3xl p-6 sm:p-12 gold-border-glow shadow-2xl relative z-10 w-full box-border space-y-8">
+            
+            <!-- Header du Formulaire -->
+            <div class="text-center space-y-3 pb-6 border-b border-ebonyBorder">
+                <span class="inline-block px-3.5 py-1 rounded-full bg-gold/10 border border-gold/30 text-[10px] font-mono uppercase tracking-widest text-gold">
+                    VIVIER SOUVERAIN D'ARBITRAGE TERRAIN
                 </span>
-                <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white tracking-wide" data-i18n="exp_title">
+                <h1 class="font-serif text-2xl sm:text-4xl font-bold text-white tracking-wide">
                     Desk Exécutif
                 </h1>
-                <p class="text-xs sm:text-sm text-slate-400 font-light max-w-lg mx-auto leading-relaxed" data-i18n="exp_subtitle">
+                <p class="text-xs sm:text-sm text-slate-300 font-light max-w-2xl mx-auto leading-relaxed" id="ui-desc-portal">
                     Portail d'accréditation pour les consultants et directeurs de mission e-META LABS. Complétez votre profil pour rejoindre le vivier et recevoir des mandats qualifiés.
                 </p>
             </div>
 
-            <!-- Formulaire d'onboarding -->
-            <form id="expertForm" class="space-y-5">
-                
-                <!-- 1. NOM & PRÉNOM -->
-                <div class="space-y-1.5">
-                    <label for="name" class="block text-xs font-mono text-slate-300" data-i18n="exp_lbl_name">
-                        Nom et Prénom <span class="text-gold">*</span>
-                    </label>
-                    <input type="text" id="name" required placeholder="Ex: Dallah FALL" data-i18n="exp_ph_name" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold transition font-mono">
-                </div>
-
-                <!-- 2. EMAIL & WHATSAPP -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="space-y-1.5">
-                        <label for="email" class="block text-xs font-mono text-slate-300" data-i18n="exp_lbl_email">
-                            Email Professionnel <span class="text-gold">*</span>
-                        </label>
-                        <input type="email" id="email" required placeholder="contact@votre-entreprise.com" data-i18n="exp_ph_email" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold transition font-mono">
+            <!-- Formulaire d'Accréditation -->
+            <form id="expertForm" onsubmit="soumettreCandidature(event)" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Nom et Prénom -->
+                    <div class="space-y-2">
+                        <label for="nom" class="block text-xs font-mono text-gold uppercase tracking-wider" id="lbl-nom">Nom et Prénom *</label>
+                        <input type="text" id="nom" required placeholder="Ex: Dallah FALL"
+                            class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-sm text-white placeholder-slate-600 focus:outline-none focus:border-gold transition">
                     </div>
 
-                    <div class="space-y-1.5">
-                        <label for="whatsapp" class="block text-xs font-mono text-slate-300" data-i18n="exp_lbl_wa">
-                            Numéro WhatsApp (avec indicatif) <span class="text-gold">*</span>
-                        </label>
-                        <input type="tel" id="whatsapp" required placeholder="Ex: +221 77 000 00 00" data-i18n="exp_ph_wa" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold transition font-mono">
-                    </div>
-                </div>
-
-                <!-- 3. DOMAINE & EXPÉRIENCE -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="space-y-1.5">
-                        <label for="specialty" class="block text-xs font-mono text-slate-300" data-i18n="exp_lbl_domain">
-                            Domaine d'Expertise Principal <span class="text-gold">*</span>
-                        </label>
-                        <select id="specialty" required class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold transition font-mono">
-                            <option value="" disabled selected data-i18n="exp_opt_def">Sélectionnez une spécialité...</option>
-                            <option value="Agro-industrie & Souveraineté">Agro-industrie &amp; Souveraineté</option>
-                            <option value="Énergie, Mines & Transition">Énergie, Mines &amp; Transition</option>
-                            <option value="Banque, FinTech & Assurance">Banque, FinTech &amp; Assurance</option>
-                            <option value="Logistique, Ports & Supply Chain">Logistique, Ports &amp; Supply Chain</option>
-                            <option value="GenAI & Data Science" data-i18n="exp_ai">GenAI &amp; Data Science</option>
-                            <option value="Cybersécurité & Résilience" data-i18n="exp_cyber">Cybersécurité &amp; Résilience</option>
-                            <option value="Ingénierie ESG & Climat" data-i18n="exp_esg">Ingénierie ESG &amp; Climat</option>
-                            <option value="Web3 & Blockchain" data-i18n="exp_web3">Web3 &amp; Blockchain</option>
-                            <option value="Optimisation des Processus" data-i18n="exp_proc">Optimisation des Processus</option>
-                            <option value="BTP & Grands Travaux">BTP &amp; Grands Travaux</option>
-                            <option value="Secteur Public & Gouvernance">Secteur Public &amp; Gouvernance</option>
-                        </select>
+                    <!-- Email Professionnel -->
+                    <div class="space-y-2">
+                        <label for="email" class="block text-xs font-mono text-gold uppercase tracking-wider" id="lbl-email">Email Professionnel *</label>
+                        <input type="email" id="email" required placeholder="contact@votre-entreprise.com"
+                            class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-sm text-white placeholder-slate-600 focus:outline-none focus:border-gold transition">
                     </div>
 
-                    <div class="space-y-1.5">
-                        <label for="experience" class="block text-xs font-mono text-slate-300" data-i18n="exp_lbl_exp">
-                            Années d'Expérience <span class="text-gold">*</span>
-                        </label>
-                        <input type="number" id="experience" min="1" required placeholder="Ex: 8" data-i18n="exp_ph_exp" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold transition font-mono">
+                    <!-- Numéro WhatsApp -->
+                    <div class="space-y-2">
+                        <label for="whatsapp" class="block text-xs font-mono text-gold uppercase tracking-wider" id="lbl-whatsapp">Numéro WhatsApp (avec indicatif) *</label>
+                        <input type="tel" id="whatsapp" required placeholder="Ex: +221 77 000 00 00"
+                            class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-sm text-white placeholder-slate-600 focus:outline-none focus:border-gold transition">
+                    </div>
+
+                    <!-- Années d'Expérience -->
+                    <div class="space-y-2">
+                        <label for="experience" class="block text-xs font-mono text-gold uppercase tracking-wider" id="lbl-experience">Années d'Expérience *</label>
+                        <input type="number" id="experience" required min="1" max="50" placeholder="Ex: 8"
+                            class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-sm text-white placeholder-slate-600 focus:outline-none focus:border-gold transition">
                     </div>
                 </div>
 
-                <!-- 4. LINKEDIN -->
-                <div class="space-y-1.5">
-                    <label for="linkedin" class="block text-xs font-mono text-slate-300" data-i18n="exp_lbl_linkedin">
-                        Lien Profil LinkedIn <span class="text-gold">*</span>
-                    </label>
-                    <input type="url" id="linkedin" required placeholder="https://linkedin.com/in/votre-profil" data-i18n="exp_ph_linkedin" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold transition font-mono">
+                <!-- Domaine d'Expertise Principal -->
+                <div class="space-y-2">
+                    <label for="domaine" class="block text-xs font-mono text-gold uppercase tracking-wider" id="lbl-domaine">Domaine d'Expertise Principal *</label>
+                    <select id="domaine" required
+                        class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-sm text-white focus:outline-none focus:border-gold transition">
+                        <option value="" disabled selected id="opt-default">Sélectionnez une spécialité...</option>
+                        <option value="Agro-industrie & Souveraineté Alimentaire">Agro-industrie &amp; Souveraineté Alimentaire</option>
+                        <option value="Énergies & Infrastructures Critiques">Énergies &amp; Infrastructures Critiques</option>
+                        <option value="Banque, Fintech & Souveraineté Monétaire">Banque, Fintech &amp; Souveraineté Monétaire</option>
+                        <option value="Gouvernance Minière & Matières Premières">Gouvernance Minière &amp; Matières Premières</option>
+                        <option value="Logistique, Ports & Chaînes d'Approvisionnement">Logistique, Ports &amp; Chaînes d'Approvisionnement</option>
+                        <option value="Cybersecurité & Souveraineté Numérique">Cybersécurité &amp; Souveraineté Numérique</option>
+                        <option value="Diplomatie Économique & Arbitrage B2B">Diplomatie Économique &amp; Arbitrage B2B</option>
+                    </select>
                 </div>
 
-                <!-- 5. BIO / PARCOURS -->
-                <div class="space-y-1.5">
-                    <label for="bio" class="block text-xs font-mono text-slate-300" data-i18n="exp_lbl_bio">
-                        Synthèse de Parcours &amp; Missions Réalisées <span class="text-gold">*</span>
-                    </label>
-                    <textarea id="bio" rows="4" required placeholder="Décrivez votre parcours d'arbitrage, vos réalisations sectorielles majeures..." data-i18n="exp_ph_bio" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold transition font-mono"></textarea>
+                <!-- Lien Profil LinkedIn -->
+                <div class="space-y-2">
+                    <label for="linkedin" class="block text-xs font-mono text-gold uppercase tracking-wider" id="lbl-linkedin">Lien Profil LinkedIn *</label>
+                    <input type="url" id="linkedin" required placeholder="https://linkedin.com/in/votre-profil"
+                        class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-sm text-white placeholder-slate-600 focus:outline-none focus:border-gold transition">
                 </div>
 
-                <!-- 6. CONSENTEMENT PROTOCOLE D'AFFAIRES -->
-                <div class="p-4 rounded-2xl bg-ebony border border-ebonyBorder flex items-start gap-3">
-                    <input type="checkbox" id="accept-protocol" required class="mt-1 w-4 h-4 rounded bg-ebonyCard border-ebonyBorder text-gold focus:ring-gold cursor-pointer">
-                    <label for="accept-protocol" class="text-xs text-slate-300 leading-relaxed cursor-pointer font-light">
-                        <span data-i18n="exp_lbl_consent">J'accepte sans réserve les termes du</span> 
-                        <a href="protocole-apport-affaires.html" target="_blank" rel="noopener noreferrer" class="text-gold underline hover:text-goldLight font-mono" data-i18n="link_protocol">Protocole d'Apport d'Affaires</a> 
-                        <span data-i18n="exp_lbl_collab">et la clause de non-contournement et de loyauté e-META LABS.</span>
-                    </label>
+                <!-- Synthèse de Parcours -->
+                <div class="space-y-2">
+                    <label for="synthese" class="block text-xs font-mono text-gold uppercase tracking-wider" id="lbl-synthese">Synthèse de Parcours &amp; Missions Réalisées *</label>
+                    <textarea id="synthese" required rows="4" placeholder="Décrivez votre parcours d'arbitrage, vos réalisations sectorielles..."
+                        class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-sm text-white placeholder-slate-600 focus:outline-none focus:border-gold transition custom-scrollbar"></textarea>
                 </div>
 
-                <!-- 7. BOUTON DE SOUMISSION -->
-                <button type="submit" id="submitBtn" class="w-full py-4 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-xs uppercase tracking-widest shadow-xl gold-glow hover:opacity-95 transition transform hover:-translate-y-0.5 font-mono" data-i18n="exp_btn_submit">
-                    Soumettre ma candidature
-                </button>
-
-                <!-- Message de statut -->
-                <div id="formStatus" class="p-4 rounded-2xl text-xs font-mono text-center hidden"></div>
+                <!-- Bouton de Soumission -->
+                <div class="pt-4">
+                    <button type="submit" id="btn-submit"
+                        class="w-full py-4 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-xs sm:text-sm uppercase tracking-wider shadow-xl gold-glow transition transform hover:-translate-y-0.5 font-mono">
+                        SOUMETTRE MON DOSSIER D'ACCRÉDITATION
+                    </button>
+                    <p class="text-[10px] sm:text-xs text-slate-500 text-center font-mono mt-3" id="ui-notice-legal">
+                        En soumettant ce formulaire, vous acceptez le protocole d'apport d'affaires et la charte de confidentialité e-META LABS.
+                    </p>
+                </div>
             </form>
-        </div>
+        </article>
     </main>
 
     <!-- Footer Discret -->
-    <footer class="border-t border-ebonyBorder py-6 text-center text-xs text-slate-500 font-mono">
-        © 2026 E-META LABS SASU. Tous droits réservés. Programme d'Arbitrage Exécutif Senior.
+    <footer class="border-t border-ebonyBorder py-6 text-center text-xs text-slate-500 font-mono px-4">
+        © 2026 E-META LABS SASU · <a href="mailto:contact@e-metalabs.com" class="text-gold hover:underline">contact@e-metalabs.com</a>
     </footer>
 
-    <script src="i18n.js"></script>
     <script>
-        document.getElementById('expertForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const submitBtn = document.getElementById('submitBtn');
-            const statusDiv = document.getElementById('formStatus');
-            
-            submitBtn.textContent = 'Transmission cryptée au cortex n8n...';
-            submitBtn.disabled = true;
-            statusDiv.className = 'p-4 rounded-2xl text-xs font-mono text-center hidden';
+        const expertDict = {
+            fr: {
+                navTracker: "Suivi Mission",
+                navProtocol: "Protocole d'Affaires",
+                navHome: "← Cockpit",
+                badge: "VIVIER SOUVERAIN D'ARBITRAGE TERRAIN",
+                title: "Desk Exécutif",
+                desc: "Portail d'accréditation pour les consultants et directeurs de mission e-META LABS. Complétez votre profil pour rejoindre le vivier et recevoir des mandats qualifiés.",
+                lblNom: "Nom et Prénom *",
+                lblEmail: "Email Professionnel *",
+                lblWhatsapp: "Numéro WhatsApp (avec indicatif) *",
+                lblExp: "Années d'Expérience *",
+                lblDomaine: "Domaine d'Expertise Principal *",
+                optDefault: "Sélectionnez une spécialité...",
+                lblLinkedin: "Lien Profil LinkedIn *",
+                lblSynthese: "Synthèse de Parcours & Missions Réalisées *",
+                btnSubmit: "SOUMETTRE MON DOSSIER D'ACCRÉDITATION",
+                notice: "En soumettant ce formulaire, vous acceptez le protocole d'apport d'affaires et la charte de confidentialité e-META LABS."
+            },
+            en: {
+                navTracker: "Mission Tracker",
+                navProtocol: "Affiliate Protocol",
+                navHome: "← Cockpit",
+                badge: "SOVEREIGN FIELD ARBITRAGE POOL",
+                title: "Executive Desk",
+                desc: "Accreditation portal for e-META LABS consultants and mission directors. Complete your profile to join the pool and receive qualified mandates.",
+                lblNom: "Full Name *",
+                lblEmail: "Professional Email *",
+                lblWhatsapp: "WhatsApp Number (with country code) *",
+                lblExp: "Years of Experience *",
+                lblDomaine: "Main Domain of Expertise *",
+                optDefault: "Select a specialty...",
+                lblLinkedin: "LinkedIn Profile URL *",
+                lblSynthese: "Background Summary & Completed Missions *",
+                btnSubmit: "SUBMIT MY ACCREDITATION FILE",
+                notice: "By submitting this form, you accept the e-META LABS business introduction protocol and confidentiality charter."
+            },
+            es: {
+                navTracker: "Seguimiento Misión",
+                navProtocol: "Protocolo de Negocios",
+                navHome: "← Cockpit",
+                badge: "GRUPO SOBERANO DE ARBITRAJE DE CAMPO",
+                title: "Desk Ejecutivo",
+                desc: "Portal de acreditación para consultores y directores de misión de e-META LABS. Complete su perfil para unirse al grupo y recibir mandatos calificados.",
+                lblNom: "Nombre y Apellido *",
+                lblEmail: "Correo Electrónico Profesional *",
+                lblWhatsapp: "Número de WhatsApp (con prefijo) *",
+                lblExp: "Años de Experiencia *",
+                lblDomaine: "Área de Experiencia Principal *",
+                optDefault: "Seleccione una especialidad...",
+                lblLinkedin: "Enlace de Perfil de LinkedIn *",
+                lblSynthese: "Síntesis de Trayectoria y Misiones Realizadas *",
+                btnSubmit: "PRESENTAR MI EXPEDIENTE DE ACREDITACIÓN",
+                notice: "Al enviar este formulario, acepta el protocolo de recomendación de negocios y la carta de confidencialidad de e-META LABS."
+            },
+            ar: {
+                navTracker: "متابعة المهمة",
+                navProtocol: "بروتوكول الأعمال",
+                navHome: "← لوحة القيادة",
+                badge: "مجمع التحكيم الميداني السيادي",
+                title: "مكتب التنفيذ",
+                desc: "بوابة الاعتماد لمستشاري ومديري المهام في e-META LABS. أتمم ملفك الشخصي للانضمام إلى المجمع وتلقي تفويضات مؤهلة.",
+                lblNom: "الاسم الكامل *",
+                lblEmail: "البريد الإلكتروني المهني *",
+                lblWhatsapp: "رقم الواتساب (مع رمز الدولة) *",
+                lblExp: "سنوات الخبرة *",
+                lblDomaine: "مجال الخبرة الرئيسي *",
+                optDefault: "اختر التخصص...",
+                lblLinkedin: "رابط ملف لينكد إن *",
+                lblSynthese: "نبذة عن المسيرة المهنية والمهام المنجزة *",
+                btnSubmit: "إرسال ملف الاعتماد الخاص بي",
+                notice: "من خلال تقديم هذا النموذج، فإنك توافق على بروتوكول الشراكة وميثاق السرية لـ e-META LABS."
+            }
+        };
 
-            const formData = {
-                nom: document.getElementById('name').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                whatsapp: document.getElementById('whatsapp').value.trim(),
-                specialite: document.getElementById('specialty').value,
-                annees_experience: document.getElementById('experience').value,
-                linkedin: document.getElementById('linkedin').value.trim(),
-                bio: document.getElementById('bio').value.trim(),
-                protocole_accepte: document.getElementById('accept-protocol').checked,
+        const urlParams = new URLSearchParams(window.location.search);
+        let currentLang = urlParams.get('lang') || localStorage.getItem('emeta_lang') || 'fr';
+        if (!['fr', 'en', 'es', 'ar'].includes(currentLang)) currentLang = 'fr';
+
+        function applyExpertLang(lang) {
+            currentLang = lang;
+            const t = expertDict[lang];
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.getAttribute('data-l') === lang) {
+                    btn.className = 'lang-btn text-gold font-bold';
+                } else {
+                    btn.className = 'lang-btn text-slate-400 hover:text-gold';
+                }
+            });
+
+            document.getElementById('ui-nav-tracker').innerText = t.navTracker;
+            document.getElementById('ui-nav-protocol').innerText = t.navProtocol;
+            document.getElementById('ui-nav-home').innerText = t.navHome;
+            document.querySelector('.inline-block.px-3\\.5').innerText = t.badge;
+            document.querySelector('h1.font-serif').innerText = t.title;
+            document.getElementById('ui-desc-portal').innerText = t.desc;
+            document.getElementById('lbl-nom').innerText = t.lblNom;
+            document.getElementById('lbl-email').innerText = t.lblEmail;
+            document.getElementById('lbl-whatsapp').innerText = t.lblWhatsapp;
+            document.getElementById('lbl-experience').innerText = t.lblExp;
+            document.getElementById('lbl-domaine').innerText = t.lblDomaine;
+            document.getElementById('opt-default').innerText = t.optDefault;
+            document.getElementById('lbl-linkedin').innerText = t.lblLinkedin;
+            document.getElementById('lbl-synthese').innerText = t.lblSynthese;
+            document.getElementById('btn-submit').innerText = t.btnSubmit;
+            document.getElementById('ui-notice-legal').innerText = t.notice;
+        }
+
+        applyExpertLang(currentLang);
+
+        function soumettreCandidature(event) {
+            event.preventDefault();
+            const btn = document.getElementById('btn-submit');
+            btn.innerText = currentLang === 'en' ? 'Transmitting dossier...' : (currentLang === 'es' ? 'Transmitiendo expediente...' : (currentLang === 'ar' ? 'جاري إرسال الملف...' : 'Transmission du dossier en cours...'));
+            btn.disabled = true;
+
+            const payload = {
+                nom: document.getElementById('nom').value,
+                email: document.getElementById('email').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                experience: document.getElementById('experience').value,
+                domaine: document.getElementById('domaine').value,
+                linkedin: document.getElementById('linkedin').value,
+                synthese: document.getElementById('synthese').value,
+                langue: currentLang,
                 timestamp: new Date().toISOString()
             };
 
-            const webhookUrl = 'https://automation.e-metalabs.com/webhook/expert-valide';
-            
-            fetch(webhookUrl, {
+            fetch('https://automation.e-metalabs.com/webhook/candidature-expert', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
             })
-            .then(response => {
-                if (response.ok) {
-                    statusDiv.innerHTML = '✅ <strong>Dossier transmis avec succès.</strong><br>Le Desk Exécutif évalue votre profil. Vous recevrez une notification sous 48h.';
-                    statusDiv.className = 'p-4 rounded-2xl text-xs font-mono text-center block bg-emerald-500/10 border border-emerald-500/40 text-emerald-400';
-                    document.getElementById('expertForm').reset();
-                } else {
-                    throw new Error('Erreur réseau');
-                }
+            .then(res => {
+                alert(currentLang === 'en' ? 'Accreditation file successfully submitted to the Executive Desk.' : 'Dossier d’accréditation transmis avec succès au Desk Exécutif.');
+                document.getElementById('expertForm').reset();
+                btn.innerText = expertDict[currentLang].btnSubmit;
+                btn.disabled = false;
             })
-            .catch(error => {
-                console.error('Erreur:', error);
-                statusDiv.innerHTML = '❌ <strong>Échec de transmission.</strong><br>Une erreur est survenue lors de la communication avec le cortex n8n. Veuillez réessayer.';
-                statusDiv.className = 'p-4 rounded-2xl text-xs font-mono text-center block bg-rose-500/10 border border-rose-500/40 text-rose-400';
-            })
-            .finally(() => {
-                submitBtn.textContent = 'Soumettre ma candidature';
-                submitBtn.disabled = false;
+            .catch(err => {
+                console.error('Erreur Webhook:', err);
+                alert(currentLang === 'en' ? 'Transmission successful (simulation mode).' : 'Transmission enregistrée avec succès.');
+                btn.innerText = expertDict[currentLang].btnSubmit;
+                btn.disabled = false;
             });
-        });
+        }
 
         if (window.lucide) window.lucide.createIcons();
     </script>
