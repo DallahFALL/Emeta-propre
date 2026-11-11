@@ -265,11 +265,36 @@ Les analyses sont des outils d’aide à la décision, fondés sur les informati
 
 Les intégrations utilisent les clés canoniques `reference_mission`, `entreprise_client`, `nom_client`, `secteur`, `palier`, `currency`, `sha256_hash` et `date_analyse_utc`. Le nom `secteur` est la seule clé de secteur; toute variante telle que `secteur_activite` est exclue du contrat. Les numéros envoyés à l’API WhatsApp Cloud sont transmis en chiffres seuls, sans signe « + ».
 
-Les réponses libres WhatsApp ne sont utilisées que dans les 24 heures suivant le message entrant. En dehors de cette fenêtre, le modèle approuvé `emeta_reprise_conversation` est requis. Le notifier d’audit utilise le modèle `cortex_diagnostic` en français, avec trois variables de corps dans l’ordre : référence de mission, empreinte SHA-256 et lien de consultation du document (`webViewLink`). Les modèles doivent être approuvés dans WhatsApp Manager avec ces paramètres exacts. Pour l’Option B, CORTEX_02 détecte `Option B`, `arbitrage terrain` ou `expert terrain`; le routage vers CORTEX_04 exige également une référence canonique valide `MIS-2026-XXXX`. Chaque interaction entrante est inscrite dans `Logs_Communications` avant le routage. CORTEX_02 transmet le numéro WhatsApp, le nom du contact, le message et la référence à CORTEX_04 via un webhook protégé par le header `x-handoff-key`. Le workflow CORTEX_02 porte la valeur fixe de ce header; le credential HTTP Header Auth du webhook CORTEX_04 doit être préconfiguré avec le même nom de header et la même valeur. Le Desk reçoit l’alerte, le client reçoit un accusé de réception, puis `Statut` est mis à jour à `Arbitrage Terrain Sollicité`. Le Cockpit Tracker lit le statut de mission depuis le webhook public GET de CORTEX_04, avec les en-têtes CORS prévus; aucune clé NocoDB n’est exposée au navigateur. Les candidatures d’experts restent traitées par le parcours distinct `expert.html`.
+Les réponses libres WhatsApp ne sont utilisées que dans les 24 heures suivant le message entrant. En dehors de cette fenêtre, le modèle approuvé `emeta_reprise_conversation` est requis. Le notifier d’audit utilise le modèle `cortex_diagnostic` en français, avec trois variables de corps dans l’ordre : référence de mission, empreinte SHA-256 et lien de consultation du document (`webViewLink`). Les modèles doivent être approuvés dans WhatsApp Manager avec ces paramètres exacts. Pour l’Option B, CORTEX_02 détecte `Option B`, `arbitrage terrain` ou `expert terrain`; le routage exige aussi une référence canonique `MIS-2026-XXXX`. Les appels inter-workflows utilisent un credential n8n HTTP Header Auth nommé `CORTEX Handoff Header Auth`, avec le header `x-handoff-key`; aucune valeur de clé ne doit être intégrée aux exports JSON. Le webhook CORTEX_04 vérifie ce même credential. Le Cockpit Tracker lit le statut par le webhook public GET `/webhook/statut-mission` de CORTEX_04, avec les en-têtes CORS prévus; aucune clé NocoDB n’est exposée au navigateur. Les candidatures d’experts restent traitées par le parcours distinct `expert.html`.
 
-Les appels NocoDB utilisent le credential HTTP Header Auth `NocoDB API Token`, préconfiguré dans n8n avec le header `xc-token` et le jeton d’accès fourni par l’administrateur. Aucun nœud ne lit de variable `$env`; le jeton n’est pas intégré dans le code des workflows. Le registre des missions de production est `https://base.e-metalabs.com/api/v2/tables/mdoy3rbli4j924l/records` pour la création des missions. Son contrat de colonnes est `Code_Mission`, `Titre_Mission`, `Client`, `Secteur`, `Palier`, `Contrat_Hash_Ref` et `Statut`; le champ `Contrat_Hash_Ref` reçoit l’empreinte SHA-256 du contrat. CORTEX_04 utilise l’endpoint Data API v3 de ce registre pour rechercher la mission par `Code_Mission` et mettre à jour `Statut`. Avant activation, ces colonnes doivent exister avec ces noms exacts dans la table.
+Les cinq exports canoniques sont conservés à la racine de `cortex_workflows/`. Les appels NocoDB utilisent le credential HTTP Header Auth `NocoDB API Token` avec le header `xc-token`; aucun nœud ne lit de variable `$env` et aucun jeton n’est intégré au code. L’URL de base Data API v3 est `https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if`, suivie de l’identifiant de table puis de `/records`. Pour les PATCH, l’URL se termine uniquement par `/records` et le corps porte `{ "id": <id numérique>, "fields": { ... } }`. Les tables canoniques sont missions `mu6nj9w06yc0lep` et experts `m4705kfa0sqavqb`. Les colonnes mission comprennent `Code_Mission`, `Titre_Mission`, `Client`, `Secteur`, `Palier`, `Contrat_Hash_Ref` et `Statut`; `Code_Mission` doit être unique afin de faire échouer explicitement toute collision de référence. Le Tracker ne contacte jamais NocoDB depuis le navigateur.
 
-La persistance des messages WhatsApp entrants demeure dans la table dédiée `Logs_Communications`, distincte du registre des missions. Le workflow journalise les colonnes `Title`, `Canal`, `Expediteur`, `Nom_Contact`, `Message_Brut`, `Reference_Detectee` et `Statut`; le credential NocoDB `NocoDB API Token` ajoute le header `xc-token`. Les identifiants d’accès et la valeur du credential d’entrée `CORTEX_04 Handoff Auth` sont configurés dans les credentials n8n, jamais par expressions `$env`. Toute modification de la valeur fixe `x-handoff-key` dans CORTEX_02 doit être répercutée dans le credential du webhook CORTEX_04.
+La persistance des communications de délivrance utilise la table `Logs_Communications`, avec les colonnes `Title`, `Canal`, `Expediteur`, `Nom_Contact`, `Message_Brut`, `Reference_Detectee` et `Statut`. Son identifiant de table NocoDB doit être configuré dans le nœud correspondant avant activation. Les exports utilisent des références de credentials fictives (`CONFIGURE_*_CREDENTIAL_ID`) : après import, chaque credential doit être créé/sélectionné dans n8n avec les en-têtes requis. Les ID de téléphone WhatsApp, chat Telegram Desk, et données opérationnelles spécifiques (dont `Telegram_Chat_ID` des experts) ne sont pas fournis dans le dépôt et doivent être renseignés dans les tables/credentials, jamais comme secrets codés en dur.
+
+Le registre PostgreSQL des revendications SLA et la séquence de références doivent être initialisés avant activation :
+
+```sql
+CREATE SEQUENCE IF NOT EXISTS cortex_mission_ref_seq
+    START WITH 1 INCREMENT BY 1 MINVALUE 1 MAXVALUE 9999 NO CYCLE;
+
+CREATE TABLE IF NOT EXISTS cortex_mission_claims (
+    mission_ref TEXT PRIMARY KEY,
+    expert_ref BIGINT NOT NULL,
+    token_hash CHAR(64) NOT NULL UNIQUE,
+    statut TEXT NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    expires_at TIMESTAMPTZ NOT NULL,
+    claimed_at TIMESTAMPTZ
+);
+```
+
+Le token expert est aléatoire, valable 120 minutes, et seul son SHA-256 est stocké dans PostgreSQL. `secret_signature` reste nul dans les exports : le mécanisme de revendication utilise un token opaque aléatoire et un stockage hashé plutôt qu’une clé privée embarquée.
+
+Le mot de passe PostgreSQL du déploiement Docker est fourni par `CORTEX_POSTGRES_PASSWORD` dans l’environnement de déploiement et n’est pas stocké dans `docker-compose.yml`. Les secrets déjà publiés dans les anciennes versions doivent être renouvelés avant la mise en production.
+
+Le service PostgreSQL rejoint le réseau Docker `cortex_net`; n8n, Qdrant et `pdf_engine` doivent être raccordés au même réseau. Les appels inter-conteneurs utilisent exclusivement `postgres_db:5432`, `http://qdrant:6333` et `http://pdf_engine:5000`.
+
+Le workflow de délivrance calcule les parts d’escrow et la date de libération à J+5. Aucun fournisseur de paiement ni endpoint de transfert n’étant défini dans le dépôt, le transfert effectif des 85 % requiert encore une intégration de paiement configurée; le calcul ne doit pas être interprété comme un virement exécuté.
 
 ---
 

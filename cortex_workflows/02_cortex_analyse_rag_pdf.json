@@ -1,0 +1,393 @@
+{
+  "name": "02 - CORTEX Analyse RAG PDF",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cortex-analyse-rag-pdf",
+        "authentication": "headerAuth",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "22000000-0000-4000-8000-000000000001",
+      "name": "Webhook Analyse",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "cortex-analyse-rag-pdf",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "CONFIGURE_HANDOFF_CREDENTIAL_ID",
+          "name": "CORTEX Handoff Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return [{ json: { urls: { nocodb_base: 'https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if', desk_portal: 'https://desk.e-metalabs.com', whatsapp_api: 'https://graph.facebook.com/v20.0', pdf_engine: 'http://pdf_engine:5000/generate-pdf' }, tables: { missions: 'mu6nj9w06yc0lep', experts: 'm4705kfa0sqavqb', claims: 'cortex_mission_claims' }, sla: { delai_expiration_heures: 2, secret_signature: null }, mission: $input.first().json } }];"
+      },
+      "id": "22000000-0000-4000-8000-000000000002",
+      "name": "Initialisation standardisée",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:embedContent",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { model: 'models/gemini-embedding-001', content: { parts: [{ text: JSON.stringify($json.mission) }] } }}",
+        "options": {}
+      },
+      "id": "22000000-0000-4000-8000-000000000003",
+      "name": "Embedding Gemini",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        460,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "CONFIGURE_GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://qdrant:6333/collections/cortex_knowledge/points/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { vector: $json.embedding.values, limit: 8, with_payload: true, score_threshold: 0.35 } }}",
+        "options": {}
+      },
+      "id": "22000000-0000-4000-8000-000000000004",
+      "name": "Recherche vectorielle Qdrant",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        700,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n  const rows = $input.all();\n  const mission = $('Initialisation standardisée').first().json.mission.body || $('Initialisation standardisée').first().json.mission;\n  const contexts = rows.flatMap(row => row.json.result || []).map((hit, index) => `Source ${index + 1} (score ${hit.score}): ${JSON.stringify(hit.payload || {})}`).join('\\n');\n  const chapters = ['Synthèse exécutive','Périmètre et méthode','Contexte organisationnel','Gouvernance','Modèle opérationnel','Marché et parties prenantes','Analyse financière','Trésorerie et financement','Ressources humaines','Systèmes et données','Cybersécurité et continuité','Conformité et réglementation','Risques stratégiques','Risques opérationnels','Scénarios et sensibilités','Indicateurs de performance','Options d’arbitrage','Plan d’action priorisé','Limites et hypothèses','Sources et annexes'];\n  const prompt = `Tu es analyste e-META LABS. Rédige un audit factuel, en français, sans inventer de données. Distingue faits, hypothèses et recommandations. Signale les informations manquantes. Structure le rapport selon ces 20 chapitres, dans cet ordre : ${chapters.map((name, index) => `${index + 1}. ${name}`).join('; ')}.\\n\\nSaisine : ${JSON.stringify(mission)}\\n\\nContexte documentaire récupéré :\\n${contexts}`;\n  const optionB = /option\\s*b|arbitrage\\s*terrain|expert\\s*terrain/i.test(`${mission.action || ''} ${mission.mission_contexte || ''} ${mission.message || ''}`);\n  return [{ json: { ...mission, rag_context: contexts, audit_prompt: prompt, option_b: optionB } }];\n} catch (err) { throw new Error(`Mapping contexte RAG impossible: ${err.message}`); }"
+      },
+      "id": "22000000-0000-4000-8000-000000000005",
+      "name": "Assembler contexte et audit 20 chapitres",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        940,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.option_b }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "22000000-0000-4000-8000-000000000006",
+      "name": "Détecteur Option B",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1180,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://automation.e-metalabs.com/webhook/cortex-04-handoff-option-b",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { reference: $json.reference_mission || $json.Code_Mission, action: 'solliciter_arbitrage_terrain', expediteur: $json.telephone || '', nom_contact: $json.nom_client || '', texte_message: $json.mission_contexte || $json.message || '' } }}",
+        "options": {}
+      },
+      "id": "22000000-0000-4000-8000-000000000007",
+      "name": "Relai sécurisé Option B",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1420,
+        -120
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "CONFIGURE_HANDOFF_CREDENTIAL_ID",
+          "name": "CORTEX Handoff Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { contents: [{ parts: [{ text: $json.audit_prompt }] } }], generationConfig: { temperature: 0.2, responseMimeType: 'text/plain' } }}",
+        "options": {}
+      },
+      "id": "22000000-0000-4000-8000-000000000008",
+      "name": "Inférence Google Gemini",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1420,
+        120
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "CONFIGURE_GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Initialisation standardisée').first().json.urls.pdf_engine }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { reference_mission: $('Assembler contexte et audit 20 chapitres').first().json.reference_mission || $('Assembler contexte et audit 20 chapitres').first().json.Code_Mission, title: 'Rapport d’audit e-META LABS', markdown: $json.candidates[0].content.parts[0].text, format: 'pdf', quality: 'hd', vector: true } }}",
+        "options": {
+          "response": {
+            "responseFormat": "json"
+          }
+        }
+      },
+      "id": "22000000-0000-4000-8000-000000000009",
+      "name": "Compilation PDF vectorielle HD",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1660,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://automation.e-metalabs.com/webhook/cortex-desk-telegram-hitl",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { ...$('Assembler contexte et audit 20 chapitres').first().json, report_text: $('Inférence Google Gemini').first().json.candidates[0].content.parts[0].text, pdf_url: $json.webViewLink || $json.url, webViewLink: $json.webViewLink || $json.url } }}",
+        "options": {}
+      },
+      "id": "22000000-0000-4000-8000-000000000010",
+      "name": "Transmettre au Desk HITL",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1900,
+        120
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "CONFIGURE_HANDOFF_CREDENTIAL_ID",
+          "name": "CORTEX Handoff Header Auth"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Analyse": {
+      "main": [
+        [
+          {
+            "node": "Initialisation standardisée",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Initialisation standardisée": {
+      "main": [
+        [
+          {
+            "node": "Embedding Gemini",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embedding Gemini": {
+      "main": [
+        [
+          {
+            "node": "Recherche vectorielle Qdrant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recherche vectorielle Qdrant": {
+      "main": [
+        [
+          {
+            "node": "Assembler contexte et audit 20 chapitres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assembler contexte et audit 20 chapitres": {
+      "main": [
+        [
+          {
+            "node": "Détecteur Option B",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Détecteur Option B": {
+      "main": [
+        [
+          {
+            "node": "Relai sécurisé Option B",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Inférence Google Gemini",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Inférence Google Gemini": {
+      "main": [
+        [
+          {
+            "node": "Compilation PDF vectorielle HD",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compilation PDF vectorielle HD": {
+      "main": [
+        [
+          {
+            "node": "Transmettre au Desk HITL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "22000000-0000-4000-8000-000000000011",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

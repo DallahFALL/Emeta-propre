@@ -1,0 +1,271 @@
+{
+  "name": "01 - CORTEX Inbound Saisine",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "reception-saisine",
+        "responseMode": "onReceived",
+        "options": {
+          "binaryData": true
+        }
+      },
+      "id": "11000000-0000-4000-8000-000000000001",
+      "name": "Webhook Saisine",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "cortex-inbound-saisine"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return [{ json: { urls: { nocodb_base: 'https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if', desk_portal: 'https://desk.e-metalabs.com', whatsapp_api: 'https://graph.facebook.com/v20.0', pdf_engine: 'http://pdf_engine:5000/generate-pdf' }, tables: { missions: 'mu6nj9w06yc0lep', experts: 'm4705kfa0sqavqb', claims: 'cortex_mission_claims' }, sla: { delai_expiration_heures: 2, secret_signature: null }, mission: $input.first().json }, binary: $input.first().binary }];"
+      },
+      "id": "11000000-0000-4000-8000-000000000002",
+      "name": "Initialisation standardisée",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n  const item = $input.first();\n  const envelope = item.json.mission || item.json;\n  const mission = envelope.body || envelope;\n  const binaryParts = [];\n  for (const [key, file] of Object.entries(item.binary || {})) {\n    const data = await this.helpers.getBinaryDataBuffer(0, key);\n    binaryParts.push(`${key}:${file.fileName || ''}:${data.toString('base64')}`);\n  }\n  const canonicalPayload = JSON.stringify(mission) + binaryParts.join('\\n');\n  const digest = await globalThis.crypto.subtle.digest('SHA-256', new TextEncoder().encode(canonicalPayload));\n  const digestBytes = new Uint8Array(digest);\n  const hash = Array.from(digestBytes, byte => byte.toString(16).padStart(2, '0')).join('');\n  const otsDigest = await this.helpers.prepareBinaryData(Buffer.from(digestBytes), 'sha256.bin', 'application/octet-stream');\n  return [{ json: { ...mission, sha256_hash: hash, date_analyse_utc: mission.date_analyse_utc || new Date().toISOString(), _binary_keys: Object.keys(item.binary || {}) }, binary: { ...(item.binary || {}), ots_digest: otsDigest } }];\n} catch (err) { throw new Error(`Calcul SHA-256 de la saisine impossible: ${err.message}`); }"
+      },
+      "id": "11000000-0000-4000-8000-000000000003",
+      "name": "Empreinte SHA-256",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.pool.opentimestamps.org/digest",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/vnd.opentimestamps.ots"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "ots_digest",
+        "options": {
+          "response": {
+            "responseFormat": "file",
+            "outputPropertyName": "opentimestamps_receipt"
+          }
+        }
+      },
+      "id": "11000000-0000-4000-8000-000000000004",
+      "name": "Soumission OpenTimestamps T+0",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT nextval('cortex_mission_ref_seq') AS mission_sequence;",
+        "options": {}
+      },
+      "id": "11000000-0000-4000-8000-000000000009",
+      "name": "Allouer séquence de référence",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        720,
+        120
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "CONFIGURE_POSTGRES_CREDENTIAL_ID",
+          "name": "Cortex PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "try {\n  const sequence = Number($json.mission_sequence);\n  const source = $('Empreinte SHA-256').first();\n  if (!Number.isSafeInteger(sequence) || sequence < 1 || sequence > 9999) throw new Error('Séquence de référence invalide ou quota annuel MIS-2026 épuisé.');\n  const reference = `MIS-2026-${String(sequence).padStart(4, '0')}`;\n  return { json: { ...source.json, reference_mission: reference }, binary: source.binary };\n} catch (err) { throw new Error(`Génération de référence impossible: ${err.message}`); }"
+      },
+      "id": "11000000-0000-4000-8000-000000000005",
+      "name": "Référence canonique",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Initialisation standardisée').first().json.urls.nocodb_base + '/' + $('Initialisation standardisée').first().json.tables.missions + '/records' }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { Code_Mission: $json.reference_mission, Titre_Mission: $json.mission_contexte || $json.problematique || 'Saisine CORTEX', Client: $json.entreprise_client || $json.entreprise || $json.nom_client || '', Secteur: $json.secteur || '', Palier: $json.palier || '', Contrat_Hash_Ref: $json.sha256_hash, Statut: 'Reçue' } }}",
+        "options": {}
+      },
+      "id": "11000000-0000-4000-8000-000000000006",
+      "name": "Créer mission NocoDB v3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        980,
+        80
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "CONFIGURE_NOCODB_CREDENTIAL_ID",
+          "name": "NocoDB API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://automation.e-metalabs.com/webhook/cortex-analyse-rag-pdf",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { ...$('Référence canonique').item.json, nocodb_record: $json } }}",
+        "options": {}
+      },
+      "id": "11000000-0000-4000-8000-000000000007",
+      "name": "Transmettre à CORTEX 02",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1220,
+        80
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "CONFIGURE_HANDOFF_CREDENTIAL_ID",
+          "name": "CORTEX Handoff Header Auth"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Saisine": {
+      "main": [
+        [
+          {
+            "node": "Initialisation standardisée",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Initialisation standardisée": {
+      "main": [
+        [
+          {
+            "node": "Empreinte SHA-256",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Empreinte SHA-256": {
+      "main": [
+        [
+          {
+            "node": "Soumission OpenTimestamps T+0",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Allouer séquence de référence",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Allouer séquence de référence": {
+      "main": [
+        [
+          {
+            "node": "Référence canonique",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Référence canonique": {
+      "main": [
+        [
+          {
+            "node": "Créer mission NocoDB v3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Créer mission NocoDB v3": {
+      "main": [
+        [
+          {
+            "node": "Transmettre à CORTEX 02",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "11000000-0000-4000-8000-000000000008",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

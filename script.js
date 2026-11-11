@@ -1,5 +1,5 @@
 const CORTEX_INBOUND_WEBHOOK_URL =
-    "https://automation.e-metalabs.com/webhook/482700d1-501d-4237-b5a7-fc6ee6afdf45";
+    "https://automation.e-metalabs.com/webhook/reception-saisine";
 
 (() => {
     const supportedLanguages = ["fr", "en", "es", "ar"];

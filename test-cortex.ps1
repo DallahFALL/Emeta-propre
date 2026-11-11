@@ -14,7 +14,7 @@ if ($missionRef -notmatch '^MIS-2026-\d{4}$') {
     throw "La reference doit respecter le format MIS-2026-XXXX."
 }
 if ([string]::IsNullOrWhiteSpace($HandoffKey)) {
-    $HandoffKey = 'kX9#vL2$mQ8!pZ4@eMeta2026.'
+    throw "Le credential Handoff Auth doit être fourni explicitement pour exécuter ce test."
 }
 
 Write-Host "--------------------------------------------------" -ForegroundColor Cyan

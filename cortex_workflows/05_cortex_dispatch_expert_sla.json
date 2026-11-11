@@ -1,0 +1,596 @@
+{
+  "name": "05 - CORTEX Dispatch Expert SLA",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cortex-dispatch-expert",
+        "authentication": "headerAuth",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "55000000-0000-4000-8000-000000000001",
+      "name": "Webhook Dispatch",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "cortex-dispatch-expert",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "CONFIGURE_HANDOFF_CREDENTIAL_ID",
+          "name": "CORTEX Handoff Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "cortex-expert-claim",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "55000000-0000-4000-8000-000000000002",
+      "name": "Webhook Réclamation Expert",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        480
+      ],
+      "webhookId": "cortex-expert-claim"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return [{ json: { urls: { nocodb_base: 'https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if', desk_portal: 'https://desk.e-metalabs.com', whatsapp_api: 'https://graph.facebook.com/v20.0', pdf_engine: 'http://pdf_engine:5000/generate-pdf' }, tables: { missions: 'mu6nj9w06yc0lep', experts: 'm4705kfa0sqavqb', claims: 'cortex_mission_claims' }, sla: { delai_expiration_heures: 2, secret_signature: null }, mission: $input.first().json } }];"
+      },
+      "id": "55000000-0000-4000-8000-000000000003",
+      "name": "Initialisation standardisée",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return [{ json: { urls: { nocodb_base: 'https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if', desk_portal: 'https://desk.e-metalabs.com', whatsapp_api: 'https://graph.facebook.com/v20.0', pdf_engine: 'http://pdf_engine:5000/generate-pdf' }, tables: { missions: 'mu6nj9w06yc0lep', experts: 'm4705kfa0sqavqb', claims: 'cortex_mission_claims' }, sla: { delai_expiration_heures: 2, secret_signature: null }, mission: $input.first().json } }];"
+      },
+      "id": "55000000-0000-4000-8000-000000000004",
+      "name": "Initialisation Réclamation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.urls.nocodb_base + '/' + $json.tables.experts + '/records' }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "55000000-0000-4000-8000-000000000005",
+      "name": "Lire profils Desk_Experts",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        500,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "CONFIGURE_NOCODB_CREDENTIAL_ID",
+          "name": "NocoDB API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n  const response = $input.first().json;\n  const records = response.records || response.list || (Array.isArray(response) ? response : []);\n  const available = records.map(row => { const f = row.fields || row; const recordId = row.id || row.id_fields?.Id || f.Id || f.id; return { ...f, recordId: Number(recordId) }; }).filter(expert => Number.isSafeInteger(expert.recordId) && !/indisponible|suspendu|delai_expire/i.test(String(expert.Statut || ''))).sort((a, b) => Number(a.Priorite || a.Score || 9999) - Number(b.Priorite || b.Score || 9999));\n  if (available.length < 2) throw new Error('Deux profils experts disponibles sont requis pour la cascade SLA.');\n  if (!available[0].Telegram_Chat_ID || !available[1].Telegram_Chat_ID) throw new Error('Telegram_Chat_ID doit être renseigné pour les deux premiers profils.');\n  const mission = $('Initialisation standardisée').first().json.mission.body || $('Initialisation standardisée').first().json.mission;\n  const tokenBytes = new Uint8Array(32);\n  globalThis.crypto.getRandomValues(tokenBytes);\n  const token = Array.from(tokenBytes, byte => byte.toString(16).padStart(2, '0')).join('');\n  const digest = await globalThis.crypto.subtle.digest('SHA-256', new TextEncoder().encode(token));\n  const token_hash = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');\n  if (!/^MIS-2026-\\d{4}$/.test(mission.reference_mission || mission.reference || '')) throw new Error('Référence mission MIS-2026-XXXX invalide.');\n  return [{ json: { ...mission, reference_mission: mission.reference_mission || mission.reference, expert1: available[0], expert2: available[1], token, token_hash, expires_at: new Date(Date.now() + 120 * 60 * 1000).toISOString() } }];\n} catch (err) { throw new Error(`Sélection des experts impossible: ${err.message}`); }"
+      },
+      "id": "55000000-0000-4000-8000-000000000006",
+      "name": "Sélectionner profils et générer token",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        760,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO cortex_mission_claims (mission_ref, expert_ref, token_hash, statut, created_at, expires_at) VALUES ($1, $2, $3, 'en_attente', NOW(), NOW() + INTERVAL '2 hours') ON CONFLICT (mission_ref) DO NOTHING RETURNING mission_ref, expert_ref, statut, expires_at;",
+        "options": {
+          "queryReplacement": "={{ [$json.reference_mission, $json.expert1.recordId, $json.token_hash] }}"
+        }
+      },
+      "id": "55000000-0000-4000-8000-000000000007",
+      "name": "Verrou atomique PostgreSQL",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1020,
+        0
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "CONFIGURE_POSTGRES_CREDENTIAL_ID",
+          "name": "Cortex PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "id": "55000000-0000-4000-8000-000000000008",
+      "name": "Conserver données de dispatch",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1260,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $json.expert1.Telegram_Chat_ID }}",
+        "text": "={{ 'Nouvelle mission ' + $json.reference_mission + '. Réclamez-la dans les 120 minutes : https://automation.e-metalabs.com/webhook/cortex-expert-claim?token=' + $json.token }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "55000000-0000-4000-8000-000000000009",
+      "name": "Notifier profil expert n°1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1500,
+        0
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "CONFIGURE_TELEGRAM_CREDENTIAL_ID",
+          "name": "CORTEX Desk Telegram Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resume": "timeInterval",
+        "amount": 2,
+        "unit": "hours",
+        "options": {}
+      },
+      "id": "55000000-0000-4000-8000-000000000010",
+      "name": "Wait SLA 2 heures",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1740,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT mission_ref, expert_ref, statut, expires_at FROM cortex_mission_claims WHERE mission_ref = $1 LIMIT 1;",
+        "options": {
+          "queryReplacement": "={{ [$('Conserver données de dispatch').first().json.reference_mission] }}"
+        }
+      },
+      "id": "55000000-0000-4000-8000-000000000011",
+      "name": "Vérifier réclamation après SLA",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1980,
+        0
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "CONFIGURE_POSTGRES_CREDENTIAL_ID",
+          "name": "Cortex PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const claim = $input.first().json;\nconst dispatch = $('Conserver données de dispatch').first().json;\nreturn [{ json: { ...dispatch, claim_status: claim.statut || '', claimed: claim.statut === 'reclamee' || claim.statut === 'réclamée' } }];"
+      },
+      "id": "55000000-0000-4000-8000-000000000012",
+      "name": "Décider cascade anti-ghosting",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.claimed }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "55000000-0000-4000-8000-000000000013",
+      "name": "Mission déjà réclamée ?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2460,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $('Initialisation standardisée').first().json.urls.nocodb_base + '/' + $('Initialisation standardisée').first().json.tables.experts + '/records' }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { id: $json.expert1.recordId, fields: { Statut: 'delai_expire' } } }}",
+        "options": {}
+      },
+      "id": "55000000-0000-4000-8000-000000000014",
+      "name": "Marquer profil n°1 delai_expire",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2700,
+        120
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "CONFIGURE_NOCODB_CREDENTIAL_ID",
+          "name": "NocoDB API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const dispatch = $('Décider cascade anti-ghosting').first().json;\nconst tokenBytes = new Uint8Array(32);\nglobalThis.crypto.getRandomValues(tokenBytes);\nconst token = Array.from(tokenBytes, byte => byte.toString(16).padStart(2, '0')).join('');\nconst digest = await globalThis.crypto.subtle.digest('SHA-256', new TextEncoder().encode(token));\nconst token_hash = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');\nreturn [{ json: { ...dispatch, token, token_hash } }];"
+      },
+      "id": "55000000-0000-4000-8000-000000000015",
+      "name": "Préparer relais expert n°2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2940,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE cortex_mission_claims SET expert_ref = $2, token_hash = $3, statut = 'en_attente', created_at = NOW(), expires_at = NOW() + INTERVAL '2 hours', claimed_at = NULL WHERE mission_ref = $1 AND statut <> 'reclamee' RETURNING mission_ref, expert_ref, statut, expires_at;",
+        "options": {
+          "queryReplacement": "={{ [$json.reference_mission, $json.expert2.recordId, $json.token_hash] }}"
+        }
+      },
+      "id": "55000000-0000-4000-8000-000000000016",
+      "name": "Réassignation atomique profil n°2",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        3180,
+        120
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "CONFIGURE_POSTGRES_CREDENTIAL_ID",
+          "name": "Cortex PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $('Préparer relais expert n°2').first().json.expert2.Telegram_Chat_ID }}",
+        "text": "={{ 'Dispatch immédiat de la mission ' + $('Préparer relais expert n°2').first().json.reference_mission + '. Le profil précédent a expiré. Réclamez-la dans les 120 minutes : https://automation.e-metalabs.com/webhook/cortex-expert-claim?token=' + $('Préparer relais expert n°2').first().json.token }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "55000000-0000-4000-8000-000000000017",
+      "name": "Notifier immédiatement profil n°2",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        3420,
+        120
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "CONFIGURE_TELEGRAM_CREDENTIAL_ID",
+          "name": "CORTEX Desk Telegram Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const input = $input.first().json;\nconst request = input.mission?.body || input.mission || input.body || input;\nconst token = String(request.token || request.query?.token || '');\nif (!/^[a-f0-9]{64}$/.test(token)) throw new Error('Token de réclamation absent ou mal formé.');\nconst digest = await globalThis.crypto.subtle.digest('SHA-256', new TextEncoder().encode(token));\nconst token_hash = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');\nreturn [{ json: { token_hash } }];"
+      },
+      "id": "55000000-0000-4000-8000-000000000018",
+      "name": "Hacher le token entrant",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        500,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE cortex_mission_claims SET statut = 'reclamee', claimed_at = NOW() WHERE token_hash = $1 AND expires_at > NOW() AND statut = 'en_attente' RETURNING mission_ref, expert_ref, statut, claimed_at;",
+        "options": {
+          "queryReplacement": "={{ [$json.token_hash] }}"
+        }
+      },
+      "id": "55000000-0000-4000-8000-000000000019",
+      "name": "Valider réclamation atomiquement",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        760,
+        480
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "CONFIGURE_POSTGRES_CREDENTIAL_ID",
+          "name": "Cortex PostgreSQL"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Dispatch": {
+      "main": [
+        [
+          {
+            "node": "Initialisation standardisée",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Initialisation standardisée": {
+      "main": [
+        [
+          {
+            "node": "Lire profils Desk_Experts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lire profils Desk_Experts": {
+      "main": [
+        [
+          {
+            "node": "Sélectionner profils et générer token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sélectionner profils et générer token": {
+      "main": [
+        [
+          {
+            "node": "Conserver données de dispatch",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Verrou atomique PostgreSQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verrou atomique PostgreSQL": {
+      "main": [
+        [
+          {
+            "node": "Conserver données de dispatch",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Conserver données de dispatch": {
+      "main": [
+        [
+          {
+            "node": "Notifier profil expert n°1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notifier profil expert n°1": {
+      "main": [
+        [
+          {
+            "node": "Wait SLA 2 heures",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait SLA 2 heures": {
+      "main": [
+        [
+          {
+            "node": "Vérifier réclamation après SLA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vérifier réclamation après SLA": {
+      "main": [
+        [
+          {
+            "node": "Décider cascade anti-ghosting",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Décider cascade anti-ghosting": {
+      "main": [
+        [
+          {
+            "node": "Mission déjà réclamée ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mission déjà réclamée ?": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Marquer profil n°1 delai_expire",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Marquer profil n°1 delai_expire": {
+      "main": [
+        [
+          {
+            "node": "Préparer relais expert n°2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer relais expert n°2": {
+      "main": [
+        [
+          {
+            "node": "Réassignation atomique profil n°2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Réassignation atomique profil n°2": {
+      "main": [
+        [
+          {
+            "node": "Notifier immédiatement profil n°2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Réclamation Expert": {
+      "main": [
+        [
+          {
+            "node": "Initialisation Réclamation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Initialisation Réclamation": {
+      "main": [
+        [
+          {
+            "node": "Hacher le token entrant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hacher le token entrant": {
+      "main": [
+        [
+          {
+            "node": "Valider réclamation atomiquement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "55000000-0000-4000-8000-000000000020",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

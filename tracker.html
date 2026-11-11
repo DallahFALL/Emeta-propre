@@ -349,39 +349,30 @@
         }
 
         async function loadMissionData() {
-            const token = 'nc_pat__GqKbk1rqNrsr_9SG04Rp-ZXSbZEkeyRqtxivtcs';
             try {
-                const res = await fetch(`https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mflt58hd329r4sf/records?pageSize=25`, {
-                    method: 'GET',
-                    headers: {
-                        'xc-token': token,
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
+                const url = `https://automation.e-metalabs.com/webhook/statut-mission?ref=${encodeURIComponent(ref)}`;
+                const res = await fetch(url, { method: 'GET', headers: { 'Accept': 'application/json' } });
+                if (!res.ok) {
+                    throw new Error(`Tracker webhook returned HTTP ${res.status}`);
+                }
 
-                if (res.ok) {
-                    const data = await res.json();
-                    const items = data.records || data.list || (Array.isArray(data) ? data : []);
-                    if (items.length > 0) {
-                        const row = items.find(r => r.Reference_Paiement === ref || r.Title === ref) || items[0];
-                        
-                        const hashElem = document.getElementById('sha-hash');
-                        if (hashElem && row.Recu_Hash) {
-                            hashElem.innerText = row.Recu_Hash;
-                        }
+                const data = await res.json();
+                if (!data.found) return;
 
-                        const statut = (row.Statut_Paiement || '').toLowerCase();
-                        if (statut.includes('payé') || statut.includes('valid') || statut.includes('cerrada') || statut.includes('closed')) {
-                            appliquerClotureVisuelle();
-                        } else {
-                            const statusBadge = document.getElementById('mission-status');
-                            if (statusBadge) statusBadge.innerText = trkDict[currentLang].statusRunning;
-                        }
-                    }
+                const hashElem = document.getElementById('sha-hash');
+                if (hashElem && data.sha256_hash) {
+                    hashElem.innerText = data.sha256_hash;
+                }
+
+                const statut = String(data.statut || '').toLowerCase();
+                if (statut.includes('payé') || statut.includes('valid') || statut.includes('closed') || statut.includes('livré')) {
+                    appliquerClotureVisuelle();
+                } else {
+                    const statusBadge = document.getElementById('mission-status');
+                    if (statusBadge) statusBadge.innerText = trkDict[currentLang].statusRunning;
                 }
             } catch (e) {
-                console.log("Mode simulation registre souverain actif.");
+                console.error("Impossible de charger le statut de mission depuis le Tracker :", e);
             }
         }
 

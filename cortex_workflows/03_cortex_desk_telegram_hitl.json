@@ -1,0 +1,543 @@
+{
+  "name": "03 - CORTEX Desk Telegram HITL",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cortex-desk-telegram-hitl",
+        "authentication": "headerAuth",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "33000000-0000-4000-8000-000000000001",
+      "name": "Webhook Rapport",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "cortex-desk-telegram-hitl",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "CONFIGURE_HANDOFF_CREDENTIAL_ID",
+          "name": "CORTEX Handoff Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return [{ json: { urls: { nocodb_base: 'https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if', desk_portal: 'https://desk.e-metalabs.com', whatsapp_api: 'https://graph.facebook.com/v20.0', pdf_engine: 'http://pdf_engine:5000/generate-pdf' }, tables: { missions: 'mu6nj9w06yc0lep', experts: 'm4705kfa0sqavqb', claims: 'cortex_mission_claims' }, sla: { delai_expiration_heures: 2, secret_signature: null }, mission: $input.first().json } }];"
+      },
+      "id": "33000000-0000-4000-8000-000000000002",
+      "name": "Initialisation standardisée",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n  const mission = $json.mission.body || $json.mission;\n  const report = mission.report_text || 'Rapport disponible via le lien sécurisé.';\n  const summary = report.replace(/[#*_`>]/g, ' ').replace(/\\s+/g, ' ').trim().slice(0, 850);\n  const chatId = mission.telegram_chat_id;\n  if (!chatId) throw new Error('telegram_chat_id du Desk Exécutif manquant.');\n  if (!mission.pdf_url && !mission.webViewLink) throw new Error('URL du rapport PDF manquante.');\n  return [{ json: { ...mission, summary, pdf_url: mission.pdf_url || mission.webViewLink, telegram_chat_id: chatId } }];\n} catch (err) { throw new Error(`Préparation Desk impossible: ${err.message}`); }"
+      },
+      "id": "33000000-0000-4000-8000-000000000003",
+      "name": "Préparer synthèse Desk",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendDocument",
+        "chatId": "={{ $json.telegram_chat_id }}",
+        "file": "={{ $json.pdf_url }}",
+        "additionalFields": {
+          "caption": "={{ '📑 ' + ($json.reference_mission || $json.Code_Mission || 'Mission') + '\\n\\n' + $json.summary }}",
+          "replyMarkup": "inlineKeyboard",
+          "inlineKeyboard": {
+            "rows": [
+              {
+                "row": {
+                  "buttons": [
+                    {
+                      "text": "✅ Valider & Expédier",
+                      "additionalFields": {
+                        "url": "={{ $execution.resumeUrl }}?action=validate"
+                      }
+                    },
+                    {
+                      "text": "✍️ Demander révision",
+                      "additionalFields": {
+                        "url": "={{ $execution.resumeUrl }}?action=revise"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      },
+      "id": "33000000-0000-4000-8000-000000000004",
+      "name": "Telegram sendDocument et synthèse",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        700,
+        0
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "CONFIGURE_TELEGRAM_CREDENTIAL_ID",
+          "name": "CORTEX Desk Telegram Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n  const context = $('Préparer synthèse Desk').first().json;\n  return [{ json: { ...context, telegram_response: $input.first().json } }];\n} catch (err) { throw new Error(`Conservation du contexte HITL impossible: ${err.message}`); }"
+      },
+      "id": "33000000-0000-4000-8000-000000000013",
+      "name": "Conserver contexte initial HITL",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        820,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "httpMethod": "GET",
+        "options": {}
+      },
+      "id": "33000000-0000-4000-8000-000000000005",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        940,
+        0
+      ],
+      "webhookId": "cortex-desk-validation"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.query.action }}",
+              "rightValue": "validate",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "33000000-0000-4000-8000-000000000006",
+      "name": "Décision validation ou révision",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1180,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://automation.e-metalabs.com/webhook/cortex-04-delivrance-client",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { ...$json, action: 'validate' } }}",
+        "options": {}
+      },
+      "id": "33000000-0000-4000-8000-000000000007",
+      "name": "Transmission délivrance client",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1420,
+        -120
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "CONFIGURE_HANDOFF_CREDENTIAL_ID",
+          "name": "CORTEX Handoff Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n  const mission = $('Préparer synthèse Desk').first().json;\n  const instructions = String($json.query.instructions || $json.query.consigne || '').trim();\n  if (!instructions) throw new Error('Une consigne de révision est obligatoire.');\n  return [{ json: { ...mission, revision_instructions: instructions, audit_prompt: `Révise le rapport d’audit ci-dessous en suivant uniquement les consignes, sans inventer de faits. Préserve les 20 chapitres et indique les limites.\\n\\nConsignes : ${instructions}\\n\\nRapport : ${mission.report_text || ''}\\n\\nContexte : ${JSON.stringify(mission)}` } }];\n} catch (err) { throw new Error(`Capture des consignes impossible: ${err.message}`); }"
+      },
+      "id": "33000000-0000-4000-8000-000000000008",
+      "name": "Capturer consignes de révision",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1420,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { contents: [{ parts: [{ text: $json.audit_prompt }] }], generationConfig: { temperature: 0.2, responseMimeType: 'text/plain' } }}",
+        "options": {}
+      },
+      "id": "33000000-0000-4000-8000-000000000009",
+      "name": "Réinférence Gemini",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1660,
+        120
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "CONFIGURE_GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n  const mission = $('Capturer consignes de révision').first().json;\n  const response = $input.first().json;\n  const report = response.candidates?.[0]?.content?.parts?.[0]?.text;\n  if (!report) throw new Error('Gemini n’a retourné aucun rapport révisé.');\n  return [{ json: { ...mission, report_text: report } }];\n} catch (err) { throw new Error(`Mapping rapport révisé impossible: ${err.message}`); }"
+      },
+      "id": "33000000-0000-4000-8000-000000000014",
+      "name": "Préparer contenu révisé",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1840,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Initialisation standardisée').first().json.urls.pdf_engine }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { reference_mission: $('Préparer contenu révisé').first().json.reference_mission, title: 'Rapport d’audit e-META LABS - révisé', markdown: $('Préparer contenu révisé').first().json.report_text, format: 'pdf', quality: 'hd', vector: true } }}",
+        "options": {
+          "response": {
+            "responseFormat": "json"
+          }
+        }
+      },
+      "id": "33000000-0000-4000-8000-000000000010",
+      "name": "Recompiler PDF révisé",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2080,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n  const mission = $('Préparer contenu révisé').first().json;\n  const result = $input.first().json;\n  const link = result.webViewLink || result.url;\n  if (!link) throw new Error('Le moteur PDF n’a retourné aucun lien de consultation.');\n  const summary = mission.report_text.replace(/[#*_`>]/g, ' ').replace(/\\s+/g, ' ').trim().slice(0, 850);\n  return [{ json: { ...mission, pdf_url: link, webViewLink: link, summary } }];\n} catch (err) { throw new Error(`Mapping PDF révisé impossible: ${err.message}`); }"
+      },
+      "id": "33000000-0000-4000-8000-000000000015",
+      "name": "Préparer renvoi Telegram révisé",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2320,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendDocument",
+        "chatId": "={{ $json.telegram_chat_id }}",
+        "file": "={{ $json.pdf_url }}",
+        "additionalFields": {
+          "caption": "={{ '📑 Version révisée - ' + ($json.reference_mission || 'Mission') + '\\n\\n' + $json.summary }}",
+          "replyMarkup": "inlineKeyboard",
+          "inlineKeyboard": {
+            "rows": [
+              {
+                "row": {
+                  "buttons": [
+                    {
+                      "text": "✅ Valider & Expédier",
+                      "additionalFields": {
+                        "url": "={{ $execution.resumeUrl }}?action=validate"
+                      }
+                    },
+                    {
+                      "text": "✍️ Demander révision",
+                      "additionalFields": {
+                        "url": "={{ $execution.resumeUrl }}?action=revise"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      },
+      "id": "33000000-0000-4000-8000-000000000011",
+      "name": "Telegram renvoyer version révisée",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2140,
+        120
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "CONFIGURE_TELEGRAM_CREDENTIAL_ID",
+          "name": "CORTEX Desk Telegram Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "try {\n  const context = $('Préparer renvoi Telegram révisé').first().json;\n  return [{ json: { ...context, telegram_response: $input.first().json } }];\n} catch (err) { throw new Error(`Conservation du contexte révisé impossible: ${err.message}`); }"
+      },
+      "id": "33000000-0000-4000-8000-000000000016",
+      "name": "Conserver contexte révisé",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2580,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Rapport": {
+      "main": [
+        [
+          {
+            "node": "Initialisation standardisée",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Initialisation standardisée": {
+      "main": [
+        [
+          {
+            "node": "Préparer synthèse Desk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer synthèse Desk": {
+      "main": [
+        [
+          {
+            "node": "Telegram sendDocument et synthèse",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram sendDocument et synthèse": {
+      "main": [
+        [
+          {
+            "node": "Conserver contexte initial HITL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conserver contexte initial HITL": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Décision validation ou révision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Décision validation ou révision": {
+      "main": [
+        [
+          {
+            "node": "Transmission délivrance client",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Capturer consignes de révision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Capturer consignes de révision": {
+      "main": [
+        [
+          {
+            "node": "Réinférence Gemini",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Réinférence Gemini": {
+      "main": [
+        [
+          {
+            "node": "Préparer contenu révisé",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer contenu révisé": {
+      "main": [
+        [
+          {
+            "node": "Recompiler PDF révisé",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recompiler PDF révisé": {
+      "main": [
+        [
+          {
+            "node": "Préparer renvoi Telegram révisé",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer renvoi Telegram révisé": {
+      "main": [
+        [
+          {
+            "node": "Telegram renvoyer version révisée",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram renvoyer version révisée": {
+      "main": [
+        [
+          {
+            "node": "Conserver contexte révisé",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conserver contexte révisé": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "33000000-0000-4000-8000-000000000012",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
