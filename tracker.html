@@ -1,81 +1,47 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr" class="dark scroll-smooth">
+<html lang="fr" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0a0b0e">
-    <title>e-META LABS | Suivi de Mission &amp; Cockpit Tracker</title>
-    
-    <!-- Favicon Officiel Géométrique e-META LABS -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,25 95,75 50,95 5,75 5,25' stroke='%23d4af37' stroke-width='5' fill='%230a192f'/><circle cx='50' cy='50' r='12' fill='%23d4af37'/></svg>">
-
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        ebony: '#0a0b0e',
-                        ebonyCard: '#12141c',
-                        ebonyElevated: '#171a26',
-                        ebonyBorder: '#232634',
-                        gold: '#d4af37',
-                        goldLight: '#f3e5ab',
-                        goldDark: '#aa8c2c',
-                        goldMuted: 'rgba(212, 175, 55, 0.15)'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'Cinzel', 'serif'],
-                        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
-                    }
-                }
-            }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>e-META LABS | Suivi Souverain de Mission</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ebony: '#090B10',
+            ebonyCard: '#11141D',
+            ebonyBorder: '#1F2433',
+            gold: '#D4AF37',
+            goldLight: '#F3D06B'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
         }
-    </script>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
-
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <style>
-        body {
-            background-color: #0a0b0e;
-            color: #f8fafc;
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        .gold-gradient {
-            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa8c2c 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .gold-border-glow {
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
-        }
-        .glass-card {
-            background: rgba(18, 20, 28, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.18);
-        }
-        .step-active-glow {
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.45);
-        }
-        [dir="rtl"] .rtl-flip {
-            transform: scaleX(-1);
-        }
-    </style>
+      }
+    };
+  </script>
+  <style>
+    body {
+      background-color: #090B10;
+      color: #F1F5F9;
+    }
+    .glass-card {
+      background: linear-gradient(180deg, rgba(17, 20, 29, 0.96) 0%, rgba(11, 13, 19, 0.98) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.22);
+    }
+    .gold-border-glow {
+      box-shadow: 0 0 40px rgba(212, 175, 55, 0.08);
+    }
+  </style>
 </head>
-<body class="bg-ebony text-slate-100 antialiased selection:bg-gold selection:text-ebony flex flex-col min-h-screen">
+<body class="antialiased selection:bg-gold selection:text-ebony flex flex-col min-h-screen">
 
     <!-- Barre Statut Haute -->
     <div class="bg-gradient-to-r from-ebony via-ebonyCard to-ebony border-b border-gold/20 py-2 px-3 sm:px-8 text-xs text-slate-300 flex justify-between items-center z-50 sticky top-0 backdrop-blur-md">
@@ -97,19 +63,13 @@
             </div>
         </div>
     </div>
+  </header>
 
-    <!-- Conteneur Principal -->
-    <main class="flex-1 flex items-center justify-center p-3 sm:p-8 relative w-full max-w-[100vw] box-border">
-        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-gold/10 rounded-full blur-[140px] pointer-events-none"></div>
+  <!-- Conteneur principal -->
+  <main class="flex-1 flex items-center justify-center px-4 py-8 sm:py-12 relative overflow-hidden">
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-gold/10 rounded-full blur-[140px] pointer-events-none"></div>
 
-        <div class="w-full max-w-4xl glass-card rounded-3xl p-4 sm:p-10 gold-border-glow shadow-2xl relative z-10 space-y-6 sm:space-y-8 box-border">
-            
-            <!-- Navigation Header -->
-            <div class="flex flex-wrap justify-between items-center gap-3 pb-4 sm:pb-6 border-b border-ebonyBorder text-xs font-mono">
-                <a href="index.html" class="inline-flex items-center gap-1.5 text-slate-400 hover:text-gold transition group" id="link-return-home">
-                    <span id="arrow-return" class="transition transform group-hover:-translate-x-1 rtl-flip">←</span>
-                    <span id="ui-trk-return">Retour au Moteur IA</span>
-                </a>
+    <div class="w-full max-w-4xl glass-card rounded-3xl p-5 sm:p-10 gold-border-glow shadow-2xl relative z-10 space-y-6 sm:space-y-8 box-border">
 
                 <div class="flex items-center gap-2">
                     <svg class="w-5 h-5 sm:w-6 sm:h-6 shrink-0" viewBox="0 0 100 100">
@@ -208,12 +168,34 @@
                 </p>
             </div>
         </div>
-    </main>
+        <a href="expert.html" class="text-slate-400 hover:text-gold transition-colors" data-i18n="deskLink">Desk Exécutif →</a>
+      </div>
 
-    <!-- Footer Discret -->
-    <footer class="border-t border-ebonyBorder py-6 text-center text-xs text-slate-500 font-mono px-4">
-        © 2026 E-META LABS SASU. Système d'Analyse Probatoire &amp; Tiers de Confiance.
-    </footer>
+      <!-- Formulaire de recherche directe de référence -->
+      <form id="tracker-search-form" class="flex flex-col sm:flex-row gap-3 bg-ebony/80 border border-ebonyBorder rounded-2xl p-3">
+        <div class="flex-1 flex items-center gap-2.5 px-2">
+          <svg class="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+          <input
+            id="ref-input"
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Saisissez votre référence mission (ex : MIS-2026-1565)"
+            class="w-full bg-transparent text-sm font-mono text-white placeholder-slate-500 focus:outline-none"
+          />
+        </div>
+        <button
+          id="btn-search"
+          type="submit"
+          class="px-5 py-2.5 rounded-xl bg-gold hover:bg-goldLight text-ebony font-semibold text-xs uppercase tracking-wider transition-colors cursor-pointer shrink-0"
+          data-i18n="searchBtn"
+        >
+          Consulter le dossier
+        </button>
+      </form>
 
     <script>
         const trkDict = {
@@ -306,6 +288,11 @@
                 btnClosed: "تم اعتماد المهمة وإغلاقها ✓"
             }
         };
+        const chosen = styles[type] || styles.idle;
+        els.statusBadge.className = chosen.badge;
+        els.statusDot.className = chosen.dot;
+        els.statusText.textContent = label;
+      }
 
         const urlParams = new URLSearchParams(window.location.search);
         const ref = (urlParams.get('ref') || '').trim();
@@ -365,19 +352,13 @@
             }
         }
 
-        function applyTrackerLang(lang) {
-            currentLang = lang;
-            const t = trkDict[lang];
-            document.documentElement.lang = lang;
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      function normalizeMissionPayload(raw) {
+        let root = Array.isArray(raw) ? raw[0] : raw;
+        if (!root || typeof root !== 'object') return null;
 
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('data-l') === lang) {
-                    btn.className = 'lang-btn text-gold font-bold';
-                } else {
-                    btn.className = 'lang-btn text-slate-400 hover:text-gold';
-                }
-            });
+        if (root.json && typeof root.json === 'object') root = root.json;
+        if (root.data && typeof root.data === 'object' && !Array.isArray(root.data)) root = root.data;
+        if (root.mission && typeof root.mission === 'object') root = root.mission;
 
             document.getElementById('ui-trk-return').innerText = t.returnHome;
             document.getElementById('ui-trk-desk').innerText = t.desk;
@@ -395,13 +376,33 @@
             updateValidationButton();
         }
 
-        applyTrackerLang(currentLang);
+        const f = root.fields && typeof root.fields === 'object' ? { ...root, ...root.fields } : root;
+        const ref = f.Mission_Ref || f.reference || f.reference_mission || f.Code_Mission || f.Title || '';
+        if (!ref) return null;
 
-        function copyHash() {
-            const hashText = document.getElementById('sha-hash').innerText;
-            navigator.clipboard.writeText(hashText).then(() => {
-                alert("Empreinte SHA-256 copiée dans le presse-papier.");
-            });
+        return {
+          ref: String(ref).trim(),
+          statut: String(f.Statut_Mandat || f.statut || f.status || 'En cours').trim(),
+          secteur: String(f.Secteur_Code || f.Palier_Mandat || f.secteur || 'Diagnostic Stratégique Souverain').trim(),
+          hash: String(f.Contrat_Hash_Ref || f.sha256_hash || f.hash || 'Ancrage OTS en cours de finalisation').trim(),
+          link: String(f.webViewLink || f.Rapport_URL || f.rapport_url || '').trim()
+        };
+      }
+
+      async function loadMission(rawRef) {
+        const dict = I18N[currentLang];
+        const cleanRef = String(rawRef || '').trim().toUpperCase();
+
+        if (!cleanRef) {
+          currentMission = null;
+          els.refDisplay.textContent = '—';
+          els.sectorDisplay.textContent = '—';
+          els.hashDisplay.textContent = '—';
+          els.deliverableBox.classList.add('hidden');
+          setStatusBadge('idle', dict.promptRef);
+          setStep4State('pending');
+          setValidateButton('unavailable');
+          return;
         }
 
         function appliquerClotureVisuelle() {
@@ -445,6 +446,7 @@
             }
             return '';
         }
+      }
 
         async function loadMissionData() {
             if (!ref) {
