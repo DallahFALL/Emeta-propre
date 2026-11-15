@@ -454,15 +454,17 @@
         }
 
         const f = root.fields && typeof root.fields === 'object' ? { ...root, ...root.fields } : root;
-        const ref = f.Mission_Ref || f.reference || f.reference_mission || f.Code_Mission || f.Title || '';
+        if (f.found === false) return null;
+
+        const ref = f.Mission_Ref || f.reference || f.ref || f.mission_ref || f.reference_mission || f.Code_Mission || f.Title || '';
         if (!ref) return null;
 
         return {
           ref: String(ref).trim(),
           statut: String(f.Statut_Mandat || f.statut || f.status || 'En cours').trim(),
-          secteur: String(f.Secteur_Code || f.Palier_Mandat || f.secteur || 'Diagnostic Stratégique Souverain').trim(),
-          hash: String(f.Contrat_Hash_Ref || f.sha256_hash || f.hash || 'Ancrage OTS en cours de finalisation').trim(),
-          link: String(f.webViewLink || f.Rapport_URL || f.rapport_url || '').trim()
+          secteur: String(f.Secteur_Code || f.Palier_Mandat || f.secteur || f.sector || 'Diagnostic Stratégique Souverain').trim(),
+          hash: String(f.Contrat_Hash_Ref || f.sha256_hash || f.hash || f.ots_hash || 'Ancrage OTS en cours de finalisation').trim(),
+          link: String(f.webViewLink || f.Rapport_URL || f.rapport_url || f.url || f.link || '').trim()
         };
       }
 
