@@ -83,7 +83,7 @@
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
             <span class="text-gold font-semibold font-mono text-[10px] sm:text-[11px] truncate">COCKPIT TRACKER SOUVERAIN</span>
             <span class="hidden sm:inline text-slate-600">|</span>
-            <span class="hidden sm:inline text-slate-400 font-mono text-[11px] truncate">NocoDB &amp; OpenTimestamps</span>
+            <span class="hidden sm:inline text-slate-400 font-mono text-[11px] truncate">Webhook n8n &amp; OpenTimestamps</span>
         </div>
         <div class="flex items-center gap-3 shrink-0">
             <div class="lang-switch flex items-center gap-1.5 bg-ebony px-2 py-0.5 rounded-lg border border-ebonyBorder text-xs font-mono">
@@ -130,13 +130,13 @@
                 <div>
                     <span class="text-[9px] sm:text-[10px] font-mono text-gold tracking-widest uppercase block" id="ui-trk-lbl-mission">RÉFÉRENCE MISSION SOUVERAINE</span>
                     <h1 class="font-serif text-xl sm:text-3xl font-bold text-white tracking-wide mt-1">
-                        <span id="mission-ref" class="gold-gradient font-mono">MIS-2026-001</span>
+                        <span id="mission-ref" class="gold-gradient font-mono">—</span>
                     </h1>
-                    <p class="text-xs text-slate-400 font-mono mt-1" id="mission-sector">Agro-industrie &amp; Souveraineté Alimentaire</p>
+                    <p class="text-xs text-slate-400 font-mono mt-1" id="mission-sector">—</p>
                 </div>
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-semibold shrink-0" id="mission-status-container">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono font-semibold shrink-0" id="mission-status-container">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span id="mission-status">En Cours d'Exécution</span>
+                    <span id="mission-status">Chargement du statut…</span>
                 </div>
             </div>
 
@@ -191,7 +191,7 @@
                     <span class="text-emerald-400 text-[10px] sm:text-[11px] font-mono">Ancrage Immuable $T+0$</span>
                 </div>
                 <div class="p-3.5 rounded-2xl bg-ebony border border-ebonyBorder font-mono text-[11px] sm:text-xs text-sky-400 break-all select-all flex items-center justify-between gap-3 box-border" id="sha-hash-box">
-                    <span id="sha-hash">8edd731bf91184ec57df8ff91184ec57df8ff2026 (Scellé OpenTimestamps)</span>
+                    <span id="sha-hash">—</span>
                     <button type="button" onclick="copyHash()" class="text-slate-400 hover:text-gold transition p-1 shrink-0" title="Copier l'empreinte">
                         <i data-lucide="copy" class="w-4 h-4"></i>
                     </button>
@@ -223,6 +223,14 @@
                 lblMission: "RÉFÉRENCE MISSION SOUVERAINE",
                 statusRunning: "En Cours d'Exécution",
                 statusClosed: "Mission Clôturée & Validée ✓",
+                statusLoading: "Chargement du statut…",
+                statusMissingRef: "Référence de mission absente de l'URL.",
+                statusNotFound: "Mission introuvable.",
+                statusLoadError: "Impossible de charger le statut de la mission.",
+                btnUnavailable: "VALIDATION INDISPONIBLE",
+                btnSending: "TRANSMISSION DE LA RECETTE…",
+                stepWaiting: "En attente client",
+                stepClosed: "Clôturé",
                 step1: "Diagnostic IA",
                 step2: "Scellement Légal",
                 step3: "Déploiement Expert",
@@ -237,6 +245,14 @@
                 lblMission: "SOVEREIGN MISSION REFERENCE",
                 statusRunning: "In Progress",
                 statusClosed: "Mission Closed & Certified ✓",
+                statusLoading: "Loading mission status…",
+                statusMissingRef: "Mission reference is missing from the URL.",
+                statusNotFound: "Mission not found.",
+                statusLoadError: "Unable to load the mission status.",
+                btnUnavailable: "VALIDATION UNAVAILABLE",
+                btnSending: "SUBMITTING ACCEPTANCE…",
+                stepWaiting: "Awaiting client",
+                stepClosed: "Closed",
                 step1: "AI Diagnostic",
                 step2: "Legal Sealing",
                 step3: "Expert Deployment",
@@ -251,6 +267,14 @@
                 lblMission: "REFERENCIA DE MISIÓN SOBERANA",
                 statusRunning: "En Curso de Ejecución",
                 statusClosed: "Misión Cerrada y Validada ✓",
+                statusLoading: "Cargando estado de la misión…",
+                statusMissingRef: "Falta la referencia de misión en la URL.",
+                statusNotFound: "Misión no encontrada.",
+                statusLoadError: "No se pudo cargar el estado de la misión.",
+                btnUnavailable: "VALIDACIÓN NO DISPONIBLE",
+                btnSending: "ENVIANDO LA ACEPTACIÓN…",
+                stepWaiting: "En espera del cliente",
+                stepClosed: "Cerrado",
                 step1: "Diagnóstico IA",
                 step2: "Sellado Legal",
                 step3: "Despliegue Experto",
@@ -265,6 +289,14 @@
                 lblMission: "المرجع السيادي للمهمة",
                 statusRunning: "قيد التنفيذ",
                 statusClosed: "تمت مراجعة المهمة وإغلاقها ✓",
+                statusLoading: "جارٍ تحميل حالة المهمة…",
+                statusMissingRef: "مرجع المهمة غير موجود في عنوان URL.",
+                statusNotFound: "لم يتم العثور على المهمة.",
+                statusLoadError: "تعذر تحميل حالة المهمة.",
+                btnUnavailable: "التحقق غير متاح",
+                btnSending: "جارٍ إرسال الاعتماد…",
+                stepWaiting: "في انتظار العميل",
+                stepClosed: "مغلقة",
                 step1: "تشخيص الذكاء الاصطناعي",
                 step2: "التوثيق القانوني",
                 step3: "نشر الخبراء",
@@ -276,11 +308,62 @@
         };
 
         const urlParams = new URLSearchParams(window.location.search);
-        const ref = urlParams.get('ref') || 'MIS-2026-001';
-        document.getElementById('mission-ref').innerText = ref;
+        const ref = (urlParams.get('ref') || '').trim();
 
         let currentLang = urlParams.get('lang') || localStorage.getItem('emeta_lang') || 'fr';
         if (!['fr', 'en', 'es', 'ar'].includes(currentLang)) currentLang = 'fr';
+        let missionStateMessage = ref ? 'statusLoading' : 'statusMissingRef';
+        let missionStatusValue = '';
+        let missionAvailable = false;
+        let missionClosed = false;
+        let missionSubmitting = false;
+
+        function updateMissionStatus() {
+            const t = trkDict[currentLang];
+            const statusBadge = document.getElementById('mission-status');
+            const statusContainer = document.getElementById('mission-status-container');
+            const statusText = missionStateMessage
+                ? t[missionStateMessage]
+                : missionStatusValue || (missionClosed ? t.statusClosed : t.statusRunning);
+
+            if (statusBadge) statusBadge.innerText = statusText;
+            if (statusContainer) {
+                const isError = ['statusMissingRef', 'statusNotFound', 'statusLoadError'].includes(missionStateMessage);
+                statusContainer.className = isError
+                    ? 'inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-mono font-semibold shrink-0'
+                    : missionClosed
+                        ? 'inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-semibold shrink-0'
+                        : 'inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono font-semibold shrink-0';
+                const indicator = statusContainer.querySelector('span');
+                if (indicator) {
+                    indicator.className = `w-2 h-2 rounded-full ${isError ? 'bg-rose-400' : missionClosed ? 'bg-emerald-400' : 'bg-amber-300'} ${!isError && !missionClosed ? 'animate-pulse' : ''}`;
+                }
+            }
+        }
+
+        function updateValidationButton() {
+            const btn = document.getElementById('btn-valider');
+            if (!btn) return;
+
+            const t = trkDict[currentLang];
+            if (missionSubmitting) {
+                btn.innerText = t.btnSending;
+                btn.disabled = true;
+                btn.className = 'w-full py-3.5 sm:py-4 rounded-xl bg-slate-800 text-slate-400 border border-slate-700 font-bold text-xs sm:text-sm uppercase tracking-wider font-mono cursor-not-allowed';
+            } else if (missionClosed) {
+                btn.innerText = t.btnClosed;
+                btn.disabled = true;
+                btn.className = 'w-full py-3.5 sm:py-4 rounded-xl bg-slate-800 text-slate-400 border border-slate-700 font-bold text-xs sm:text-sm uppercase tracking-wider font-mono cursor-not-allowed';
+            } else if (!missionAvailable) {
+                btn.innerText = t.btnUnavailable;
+                btn.disabled = true;
+                btn.className = 'w-full py-3.5 sm:py-4 rounded-xl bg-slate-800 text-slate-400 border border-slate-700 font-bold text-xs sm:text-sm uppercase tracking-wider font-mono cursor-not-allowed';
+            } else {
+                btn.innerText = t.btnAction;
+                btn.disabled = false;
+                btn.className = 'w-full py-3.5 sm:py-4 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-600 text-ebony font-bold text-xs sm:text-sm uppercase tracking-wider shadow-xl hover:opacity-95 transition transform hover:-translate-y-0.5 font-mono';
+            }
+        }
 
         function applyTrackerLang(lang) {
             currentLang = lang;
@@ -308,10 +391,8 @@
             document.getElementById('link-return-home').href = `index.html?lang=${lang}`;
             document.getElementById('link-desk').href = `expert.html?lang=${lang}`;
 
-            const btn = document.getElementById('btn-valider');
-            if (btn && !btn.disabled) {
-                btn.innerText = t.btnAction;
-            }
+            updateMissionStatus();
+            updateValidationButton();
         }
 
         applyTrackerLang(currentLang);
@@ -324,7 +405,6 @@
         }
 
         function appliquerClotureVisuelle() {
-            const t = trkDict[currentLang];
             const step4 = document.getElementById('step-4');
             const stepNum4 = document.getElementById('step-num-4');
             const stepDesc4 = document.getElementById('step-desc-4');
@@ -332,23 +412,48 @@
                 step4.className = 'step-card p-3.5 rounded-2xl bg-ebony/80 border border-emerald-500/40 text-center relative';
                 stepNum4.className = 'w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 rounded-full bg-emerald-500 text-ebony font-bold flex items-center justify-center text-xs sm:text-sm font-mono';
                 stepNum4.innerText = '✓';
-                if (stepDesc4) stepDesc4.innerText = 'Clôturé';
+                if (stepDesc4) stepDesc4.innerText = trkDict[currentLang].stepClosed;
             }
+            missionClosed = true;
+            updateMissionStatus();
+            updateValidationButton();
+        }
 
-            const statusBadge = document.getElementById('mission-status');
-            if (statusBadge) {
-                statusBadge.innerText = t.statusClosed;
+        function extractMissionRecord(response) {
+            if (!response || typeof response !== 'object' || response.found === false) return null;
+            if (Array.isArray(response)) {
+                return response.length ? extractMissionRecord(response[0]) : null;
             }
+            if (Array.isArray(response.records)) {
+                return response.records.length ? extractMissionRecord(response.records[0]) : null;
+            }
+            if (response.fields && typeof response.fields === 'object') {
+                return extractMissionRecord(response.fields);
+            }
+            if (Object.prototype.hasOwnProperty.call(response, 'data')) {
+                return extractMissionRecord(response.data);
+            }
+            return response;
+        }
 
-            const btn = document.getElementById('btn-valider');
-            if (btn) {
-                btn.innerText = t.btnClosed;
-                btn.disabled = true;
-                btn.className = 'w-full py-3.5 sm:py-4 rounded-xl bg-slate-800 text-slate-400 border border-slate-700 font-bold text-xs sm:text-sm uppercase tracking-wider font-mono cursor-not-allowed';
+        function getMissionField(record, ...names) {
+            for (const name of names) {
+                const value = record[name];
+                if (value !== undefined && value !== null && String(value).trim() !== '') {
+                    return String(value).trim();
+                }
             }
+            return '';
         }
 
         async function loadMissionData() {
+            if (!ref) {
+                missionStateMessage = 'statusMissingRef';
+                updateMissionStatus();
+                updateValidationButton();
+                return;
+            }
+
             try {
                 const url = `https://automation.e-metalabs.com/webhook/statut-mission?ref=${encodeURIComponent(ref)}`;
                 const res = await fetch(url, { method: 'GET', headers: { 'Accept': 'application/json' } });
@@ -356,51 +461,80 @@
                     throw new Error(`Tracker webhook returned HTTP ${res.status}`);
                 }
 
-                const data = await res.json();
-                if (!data.found) return;
-
-                const hashElem = document.getElementById('sha-hash');
-                if (hashElem && data.sha256_hash) {
-                    hashElem.innerText = data.sha256_hash;
+                const response = await res.json();
+                const record = extractMissionRecord(response);
+                if (!record) {
+                    missionStateMessage = 'statusNotFound';
+                    updateMissionStatus();
+                    updateValidationButton();
+                    return;
                 }
 
-                const statut = String(data.statut || '').toLowerCase();
-                if (statut.includes('payé') || statut.includes('valid') || statut.includes('closed') || statut.includes('livré')) {
+                const missionRef = getMissionField(record, 'Mission_Ref', 'reference');
+                const statut = getMissionField(record, 'Statut_Mandat', 'statut');
+                const secteur = getMissionField(record, 'Secteur_Code');
+                const hash = getMissionField(record, 'Contrat_Hash_Ref', 'sha256_hash');
+                if (!missionRef && !statut && !secteur && !hash) {
+                    missionStateMessage = 'statusNotFound';
+                    updateMissionStatus();
+                    updateValidationButton();
+                    return;
+                }
+
+                document.getElementById('mission-ref').innerText = missionRef || ref;
+                document.getElementById('mission-sector').innerText = secteur || '—';
+                document.getElementById('sha-hash').innerText = hash || '—';
+                missionStatusValue = statut;
+                missionStateMessage = '';
+                missionAvailable = true;
+
+                const normalizedStatus = statut.normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase();
+                if (normalizedStatus === 'livre au client' || normalizedStatus === 'cloture') {
                     appliquerClotureVisuelle();
                 } else {
-                    const statusBadge = document.getElementById('mission-status');
-                    if (statusBadge) statusBadge.innerText = trkDict[currentLang].statusRunning;
+                    const stepDesc4 = document.getElementById('step-desc-4');
+                    if (stepDesc4) stepDesc4.innerText = trkDict[currentLang].stepWaiting;
+                    updateMissionStatus();
+                    updateValidationButton();
                 }
             } catch (e) {
                 console.error("Impossible de charger le statut de mission depuis le Tracker :", e);
+                missionStateMessage = 'statusLoadError';
+                missionAvailable = false;
+                updateMissionStatus();
+                updateValidationButton();
             }
         }
 
         loadMissionData();
 
-        function validerJalon() {
+        async function validerJalon() {
+            if (!missionAvailable || missionClosed) return;
             const btn = document.getElementById('btn-valider');
-            btn.innerText = 'Transmission de la recette...';
-            btn.disabled = true;
+            missionSubmitting = true;
+            updateValidationButton();
 
-            appliquerClotureVisuelle();
-
-            fetch('https://automation.e-metalabs.com/webhook/validation-jalon-client', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    ref: ref, 
-                    langue: currentLang,
-                    action: 'recette_validee', 
-                    timestamp: new Date().toISOString() 
-                })
-            })
-            .then(() => {
+            try {
+                const res = await fetch('https://automation.e-metalabs.com/webhook/validation-jalon-client', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        ref: ref,
+                        langue: currentLang,
+                        action: 'recette_validee',
+                        timestamp: new Date().toISOString()
+                    })
+                });
+                if (!res.ok) throw new Error(`Milestone webhook returned HTTP ${res.status}`);
+                missionSubmitting = false;
+                missionStatusValue = '';
+                appliquerClotureVisuelle();
                 console.log('Webhook n8n validé avec succès.');
-            })
-            .catch(err => {
+            } catch (err) {
                 console.error('Erreur Webhook:', err);
-            });
+                missionSubmitting = false;
+                updateValidationButton();
+            }
         }
 
         if (window.lucide) window.lucide.createIcons();
