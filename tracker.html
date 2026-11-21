@@ -95,7 +95,7 @@
             type="text"
             autocomplete="off"
             spellcheck="false"
-            placeholder="Saisissez votre référence mission (ex : MIS-2026-1565)"
+            placeholder="Saisissez votre référence mission (ex : MIS-2026-001)"
             class="w-full bg-transparent text-sm font-mono text-white placeholder-slate-500 focus:outline-none"
           />
         </div>
@@ -115,6 +115,7 @@
           <p class="text-[11px] font-mono tracking-widest text-gold uppercase mb-1" data-i18n="refLabel">RÉFÉRENCE MISSION SOUVERAINE</p>
           <h1 id="mission-ref-display" class="text-2xl sm:text-3xl font-mono font-bold text-gold tracking-tight">—</h1>
           <p id="mission-sector-display" class="text-sm text-slate-400 mt-1">—</p>
+          <p id="mission-updated-display" class="hidden text-[11px] font-mono text-slate-500 mt-1"></p>
         </div>
 
         <div id="mission-status-badge" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-300 text-xs font-mono">
@@ -125,28 +126,28 @@
 
       <!-- Stepper des 4 Jalons Exécutifs -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 py-2">
-        <div id="step-1" class="rounded-2xl border border-emerald-500/30 bg-emerald-950/15 p-5 flex flex-col items-center text-center transition-all">
-          <div id="step-1-icon" class="w-10 h-10 rounded-full bg-emerald-500 text-ebony flex items-center justify-center font-bold mb-3">✓</div>
-          <h2 class="text-sm font-semibold text-white" data-i18n="step1Title">Diagnostic IA</h2>
-          <p id="step-1-sub" class="text-xs text-emerald-400 mt-1" data-i18n="step1Sub">Exécuté</p>
+        <div id="step-1" class="rounded-2xl border border-ebonyBorder bg-ebony/60 p-5 flex flex-col items-center text-center transition-all">
+          <div id="step-1-icon" class="w-10 h-10 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-sm mb-3">1</div>
+          <h2 id="step-1-title" class="text-sm font-semibold text-slate-300" data-i18n="step1Title">Diagnostic IA</h2>
+          <p id="step-1-sub" class="text-xs text-slate-500 mt-1" data-i18n="stepPending">En attente</p>
         </div>
 
-        <div id="step-2" class="rounded-2xl border border-emerald-500/30 bg-emerald-950/15 p-5 flex flex-col items-center text-center transition-all">
-          <div id="step-2-icon" class="w-10 h-10 rounded-full bg-emerald-500 text-ebony flex items-center justify-center font-bold mb-3">✓</div>
-          <h2 class="text-sm font-semibold text-white" data-i18n="step2Title">Scellement Légal</h2>
-          <p id="step-2-sub" class="text-xs text-emerald-400 mt-1" data-i18n="step2Sub">Ancré OTS</p>
+        <div id="step-2" class="rounded-2xl border border-ebonyBorder bg-ebony/60 p-5 flex flex-col items-center text-center transition-all">
+          <div id="step-2-icon" class="w-10 h-10 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-sm mb-3">2</div>
+          <h2 id="step-2-title" class="text-sm font-semibold text-slate-300" data-i18n="step2Title">Scellement Légal</h2>
+          <p id="step-2-sub" class="text-xs text-slate-500 mt-1" data-i18n="stepPending">En attente</p>
         </div>
 
-        <div id="step-3" class="rounded-2xl border border-emerald-500/30 bg-emerald-950/15 p-5 flex flex-col items-center text-center transition-all">
-          <div id="step-3-icon" class="w-10 h-10 rounded-full bg-emerald-500 text-ebony flex items-center justify-center font-bold mb-3">✓</div>
-          <h2 class="text-sm font-semibold text-white" data-i18n="step3Title">Déploiement Expert</h2>
-          <p id="step-3-sub" class="text-xs text-emerald-400 mt-1" data-i18n="step3Sub">Arbitrage Effectué</p>
+        <div id="step-3" class="rounded-2xl border border-ebonyBorder bg-ebony/60 p-5 flex flex-col items-center text-center transition-all">
+          <div id="step-3-icon" class="w-10 h-10 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-sm mb-3">3</div>
+          <h2 id="step-3-title" class="text-sm font-semibold text-slate-300" data-i18n="step3Title">Déploiement Expert</h2>
+          <p id="step-3-sub" class="text-xs text-slate-500 mt-1" data-i18n="stepPending">En attente</p>
         </div>
 
-        <div id="step-4" class="rounded-2xl border border-gold/40 bg-gold/5 p-5 flex flex-col items-center text-center shadow-[0_0_25px_rgba(212,175,55,0.08)] transition-all">
-          <div id="step-4-icon" class="w-10 h-10 rounded-full bg-gold text-ebony flex items-center justify-center font-bold text-sm mb-3">4</div>
-          <h2 class="text-sm font-semibold text-gold" data-i18n="step4Title">Recette &amp; Clôture</h2>
-          <p id="step-4-sub" class="text-xs text-slate-300 mt-1" data-i18n="step4SubPending">En attente client</p>
+        <div id="step-4" class="rounded-2xl border border-ebonyBorder bg-ebony/60 p-5 flex flex-col items-center text-center transition-all">
+          <div id="step-4-icon" class="w-10 h-10 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-sm mb-3">4</div>
+          <h2 id="step-4-title" class="text-sm font-semibold text-slate-300" data-i18n="step4Title">Recette &amp; Clôture</h2>
+          <p id="step-4-sub" class="text-xs text-slate-500 mt-1" data-i18n="step4SubPending">En attente client</p>
         </div>
       </div>
 
@@ -159,7 +160,7 @@
             </svg>
             <span data-i18n="hashLabel">EMPREINTE PROBATOIRE (SHA-256)</span>
           </span>
-          <span class="text-emerald-400">Ancrage Immuable T+0</span>
+          <span class="text-emerald-400" data-i18n="anchorBadge">Ancrage Immuable T+0</span>
         </div>
 
         <div class="flex items-center justify-between gap-3 bg-ebony border border-ebonyBorder rounded-xl px-4 py-3 font-mono text-xs text-slate-300">
@@ -168,7 +169,8 @@
             id="btn-copy-hash"
             type="button"
             title="Copier l'empreinte"
-            class="text-slate-400 hover:text-gold transition-colors shrink-0 cursor-pointer"
+            class="text-slate-400 hover:text-gold transition-colors shrink-0 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+            disabled
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -221,23 +223,31 @@
           backHome: '← Retour au Moteur IA',
           deskLink: 'Desk Exécutif →',
           searchBtn: 'Consulter le dossier',
-          placeholder: 'Saisissez votre référence mission (ex : MIS-2026-1565)',
+          placeholder: 'Saisissez votre référence mission (ex : MIS-2026-001)',
           refLabel: 'RÉFÉRENCE MISSION SOUVERAINE',
           promptRef: 'Saisissez une référence ci-dessus pour interroger le registre.',
           loading: 'Interrogation du registre souverain n8n...',
           notFound: 'Dossier introuvable dans le registre souverain.',
+          invalidRef: 'Format de référence invalide (ex : MIS-2026-001).',
           networkError: 'Impossible de joindre le service de suivi n8n.',
+          stepPending: 'En attente',
           step1Title: 'Diagnostic IA',
-          step1Sub: 'Exécuté',
+          step1Sub: 'Exécuté & qualifié',
           step2Title: 'Scellement Légal',
           step2Sub: 'Ancré OTS',
+          step2SubActive: 'Scellement en cours',
           step3Title: 'Déploiement Expert',
-          step3Sub: 'Arbitrage Effectué',
+          step3Sub: 'Arbitrage effectué',
+          step3SubMobilized: 'Expert senior mobilisé',
+          step3SubActive: 'Mobilisation en cours (SLA 2h)',
           step4Title: 'Recette & Clôture',
           step4SubPending: 'En attente client',
           step4SubDelivered: 'Livré au client',
           step4SubClosed: 'Clôturé & Validé',
           hashLabel: 'EMPREINTE PROBATOIRE (SHA-256)',
+          anchorBadge: 'Ancrage Immuable T+0',
+          hashPending: 'Ancrage OTS en cours de finalisation',
+          updatedPrefix: 'Dernière synchronisation :',
           deliverableReady: 'Livrable exécutif certifié prêt au téléchargement',
           openReport: 'Ouvrir le rapport →',
           btnUnavailable: 'VALIDATION INDISPONIBLE',
@@ -250,23 +260,31 @@
           backHome: '← Back to AI Engine',
           deskLink: 'Executive Desk →',
           searchBtn: 'Track Mission',
-          placeholder: 'Enter your mission reference (e.g., MIS-2026-1565)',
+          placeholder: 'Enter your mission reference (e.g., MIS-2026-001)',
           refLabel: 'SOVEREIGN MISSION REFERENCE',
           promptRef: 'Enter a mission reference above to query the registry.',
           loading: 'Querying n8n sovereign registry...',
           notFound: 'Mission reference not found in registry.',
+          invalidRef: 'Invalid reference format (e.g., MIS-2026-001).',
           networkError: 'Unable to reach n8n tracking service.',
+          stepPending: 'Pending',
           step1Title: 'AI Diagnostic',
-          step1Sub: 'Completed',
+          step1Sub: 'Completed & qualified',
           step2Title: 'Legal Sealing',
           step2Sub: 'OTS Anchored',
+          step2SubActive: 'Sealing in progress',
           step3Title: 'Expert Deployment',
           step3Sub: 'Arbitration Done',
+          step3SubMobilized: 'Senior expert mobilized',
+          step3SubActive: 'Dispatch in progress (2h SLA)',
           step4Title: 'Acceptance & Closure',
           step4SubPending: 'Awaiting client',
           step4SubDelivered: 'Delivered to client',
           step4SubClosed: 'Closed & Verified',
           hashLabel: 'CRYPTOGRAPHIC PROOF (SHA-256)',
+          anchorBadge: 'Immutable T+0 Anchor',
+          hashPending: 'OTS anchoring in progress',
+          updatedPrefix: 'Last sync:',
           deliverableReady: 'Certified executive deliverable ready for download',
           openReport: 'Open report →',
           btnUnavailable: 'VALIDATION UNAVAILABLE',
@@ -279,23 +297,31 @@
           backHome: '← Volver al Motor IA',
           deskLink: 'Mesa Ejecutiva →',
           searchBtn: 'Consultar expediente',
-          placeholder: 'Ingrese su referencia de misión (ej: MIS-2026-1565)',
+          placeholder: 'Ingrese su referencia de misión (ej: MIS-2026-001)',
           refLabel: 'REFERENCIA DE MISIÓN SOBERANA',
           promptRef: 'Ingrese una referencia arriba para consultar el registro.',
           loading: 'Consultando registro soberano n8n...',
           notFound: 'Expediente no encontrado en el registro.',
+          invalidRef: 'Formato de referencia inválido (ej: MIS-2026-001).',
           networkError: 'No se pudo conectar con el servicio n8n.',
+          stepPending: 'Pendiente',
           step1Title: 'Diagnóstico IA',
-          step1Sub: 'Ejecutado',
+          step1Sub: 'Ejecutado y calificado',
           step2Title: 'Sellado Legal',
           step2Sub: 'Anclado OTS',
+          step2SubActive: 'Sellado en curso',
           step3Title: 'Despliegue Experto',
-          step3Sub: 'Arbitraje Realizado',
+          step3Sub: 'Arbitraje realizado',
+          step3SubMobilized: 'Experto senior movilizado',
+          step3SubActive: 'Movilización en curso (SLA 2h)',
           step4Title: 'Recepción y Cierre',
           step4SubPending: 'En espera del cliente',
           step4SubDelivered: 'Entregado al cliente',
           step4SubClosed: 'Cerrado y Validado',
           hashLabel: 'HUELLA PROBATORIA (SHA-256)',
+          anchorBadge: 'Anclaje Inmutable T+0',
+          hashPending: 'Anclaje OTS en finalización',
+          updatedPrefix: 'Última sincronización:',
           deliverableReady: 'Entregable ejecutivo certificado listo para descargar',
           openReport: 'Abrir informe →',
           btnUnavailable: 'VALIDACIÓN NO DISPONIBLE',
@@ -308,23 +334,31 @@
           backHome: '→ العودة إلى محرك الذكاء الاصطناعي',
           deskLink: '← المكتب التنفيذي',
           searchBtn: 'استعلام عن الملف',
-          placeholder: 'أدخل مرجع المهمة (مثال: MIS-2026-1565)',
+          placeholder: 'أدخل مرجع المهمة (مثال: MIS-2026-001)',
           refLabel: 'مرجع المهمة السيادية',
           promptRef: 'أدخل مرجع المهمة أعلاه للاستعلام من السجل.',
           loading: 'جاري الاستعلام من سجل n8n...',
           notFound: 'المهمة غير موجودة في السجل.',
+          invalidRef: 'صيغة المرجع غير صالحة (مثال: MIS-2026-001).',
           networkError: 'تعذر الاتصال بخدمة التتبع n8n.',
+          stepPending: 'قيد الانتظار',
           step1Title: 'التشخيص الذكي',
-          step1Sub: 'تم التنفيذ',
+          step1Sub: 'تم التنفيذ والتأهيل',
           step2Title: 'الختم القانوني',
           step2Sub: 'موثق OTS',
+          step2SubActive: 'جاري التوثيق',
           step3Title: 'نشر الخبراء',
           step3Sub: 'تم التحكيم',
+          step3SubMobilized: 'تم تعبئة الخبير',
+          step3SubActive: 'جاري تعبئة الخبير (SLA 2h)',
           step4Title: 'الاستلام والإغلاق',
           step4SubPending: 'بانتظار العميل',
           step4SubDelivered: 'تم التسليم للعميل',
           step4SubClosed: 'مغلق ومعتمد',
           hashLabel: 'البصمة الرقمية (SHA-256)',
+          anchorBadge: 'توثيق غير قابل للتغيير T+0',
+          hashPending: 'جاري استكمال توثيق OTS',
+          updatedPrefix: 'آخر تحديث:',
           deliverableReady: 'التقرير التنفيذي المعتمد جاهز للتحميل',
           openReport: 'فتح التقرير ←',
           btnUnavailable: 'التحقق غير متاح',
@@ -337,18 +371,24 @@
       const params = new URLSearchParams(window.location.search);
       let currentLang = I18N[params.get('lang')] ? params.get('lang') : 'fr';
       let currentMission = null;
+      let lastErrorState = null;
 
       const els = {
         form: document.getElementById('tracker-search-form'),
         input: document.getElementById('ref-input'),
         refDisplay: document.getElementById('mission-ref-display'),
         sectorDisplay: document.getElementById('mission-sector-display'),
+        updatedDisplay: document.getElementById('mission-updated-display'),
         statusBadge: document.getElementById('mission-status-badge'),
         statusDot: document.getElementById('mission-status-dot'),
         statusText: document.getElementById('mission-status'),
-        step4Card: document.getElementById('step-4'),
-        step4Icon: document.getElementById('step-4-icon'),
-        step4Sub: document.getElementById('step-4-sub'),
+        steps: [1, 2, 3, 4].map((n) => ({
+          num: String(n),
+          card: document.getElementById(`step-${n}`),
+          icon: document.getElementById(`step-${n}-icon`),
+          title: document.getElementById(`step-${n}-title`),
+          sub: document.getElementById(`step-${n}-sub`)
+        })),
         hashDisplay: document.getElementById('mission-hash'),
         copyBtn: document.getElementById('btn-copy-hash'),
         deliverableBox: document.getElementById('deliverable-box'),
@@ -356,29 +396,12 @@
         validateBtn: document.getElementById('btn-valider')
       };
 
-      function applyLanguage(lang) {
-        currentLang = I18N[lang] ? lang : 'fr';
-        const dict = I18N[currentLang];
-        document.documentElement.lang = currentLang;
-        document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-        els.input.placeholder = dict.placeholder;
-
-        document.querySelectorAll('[data-i18n]').forEach((node) => {
-          const key = node.getAttribute('data-i18n');
-          if (dict[key]) node.textContent = dict[key];
-        });
-
-        document.querySelectorAll('.lang-btn').forEach((btn) => {
-          const active = btn.getAttribute('data-lang') === currentLang;
-          btn.className = active
-            ? 'lang-btn text-gold font-semibold cursor-pointer'
-            : 'lang-btn text-slate-400 hover:text-white cursor-pointer';
-        });
-
-        if (!currentMission && !els.input.value.trim()) {
-          els.statusText.textContent = dict.promptRef;
-          els.validateBtn.textContent = dict.btnUnavailable;
-        }
+      function normalizeText(value) {
+        return String(value || '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toLowerCase()
+          .trim();
       }
 
       function setStatusBadge(type, label) {
@@ -406,21 +429,41 @@
         els.statusText.textContent = label;
       }
 
-      function setStep4State(state) {
-        const dict = I18N[currentLang];
-        if (state === 'delivered' || state === 'closed') {
-          els.step4Card.className = 'rounded-2xl border border-emerald-500/30 bg-emerald-950/15 p-5 flex flex-col items-center text-center transition-all';
-          els.step4Icon.className = 'w-10 h-10 rounded-full bg-emerald-500 text-ebony flex items-center justify-center font-bold mb-3';
-          els.step4Icon.textContent = '✓';
-          els.step4Sub.className = 'text-xs text-emerald-400 mt-1';
-          els.step4Sub.textContent = state === 'closed' ? dict.step4SubClosed : dict.step4SubDelivered;
+      function setStepVisual(stepIndex, state, subtitleText) {
+        const step = els.steps[stepIndex];
+        if (!step) return;
+
+        if (state === 'done') {
+          step.card.className = 'rounded-2xl border border-emerald-500/30 bg-emerald-950/15 p-5 flex flex-col items-center text-center transition-all';
+          step.icon.className = 'w-10 h-10 rounded-full bg-emerald-500 text-ebony flex items-center justify-center font-bold mb-3';
+          step.icon.textContent = '✓';
+          step.title.className = 'text-sm font-semibold text-white';
+          step.sub.className = 'text-xs text-emerald-400 mt-1';
+        } else if (state === 'active') {
+          step.card.className = 'rounded-2xl border border-gold/40 bg-gold/5 p-5 flex flex-col items-center text-center shadow-[0_0_25px_rgba(212,175,55,0.08)] transition-all';
+          step.icon.className = 'w-10 h-10 rounded-full bg-gold text-ebony flex items-center justify-center font-bold text-sm mb-3';
+          step.icon.textContent = step.num;
+          step.title.className = 'text-sm font-semibold text-gold';
+          step.sub.className = 'text-xs text-slate-200 mt-1';
         } else {
-          els.step4Card.className = 'rounded-2xl border border-gold/40 bg-gold/5 p-5 flex flex-col items-center text-center shadow-[0_0_25px_rgba(212,175,55,0.08)] transition-all';
-          els.step4Icon.className = 'w-10 h-10 rounded-full bg-gold text-ebony flex items-center justify-center font-bold text-sm mb-3';
-          els.step4Icon.textContent = '4';
-          els.step4Sub.className = 'text-xs text-slate-300 mt-1';
-          els.step4Sub.textContent = dict.step4SubPending;
+          step.card.className = 'rounded-2xl border border-ebonyBorder bg-ebony/60 p-5 flex flex-col items-center text-center transition-all';
+          step.icon.className = 'w-10 h-10 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-sm mb-3';
+          step.icon.textContent = step.num;
+          step.title.className = 'text-sm font-semibold text-slate-300';
+          step.sub.className = 'text-xs text-slate-500 mt-1';
         }
+
+        if (subtitleText !== undefined) {
+          step.sub.textContent = subtitleText;
+        }
+      }
+
+      function resetSteps() {
+        const dict = I18N[currentLang];
+        setStepVisual(0, 'pending', dict.stepPending);
+        setStepVisual(1, 'pending', dict.stepPending);
+        setStepVisual(2, 'pending', dict.stepPending);
+        setStepVisual(3, 'pending', dict.step4SubPending);
       }
 
       function setValidateButton(mode) {
@@ -440,6 +483,23 @@
         }
       }
 
+      function resetMissionDisplay(badgeType, badgeMessage, keepRefText) {
+        currentMission = null;
+        if (!keepRefText) {
+          els.refDisplay.textContent = '—';
+        }
+        els.sectorDisplay.textContent = '—';
+        els.updatedDisplay.classList.add('hidden');
+        els.updatedDisplay.textContent = '';
+        els.hashDisplay.textContent = '—';
+        els.copyBtn.disabled = true;
+        els.deliverableLink.href = '#';
+        els.deliverableBox.classList.add('hidden');
+        setStatusBadge(badgeType, badgeMessage);
+        resetSteps();
+        setValidateButton('unavailable');
+      }
+
       function normalizeMissionPayload(raw) {
         let root = Array.isArray(raw) ? raw[0] : raw;
         if (!root || typeof root !== 'object') return null;
@@ -454,33 +514,156 @@
         }
 
         const f = root.fields && typeof root.fields === 'object' ? { ...root, ...root.fields } : root;
-        if (f.found === false) return null;
+        if (f.found === false || f.ok === false) return null;
 
         const ref = f.Mission_Ref || f.reference || f.ref || f.mission_ref || f.reference_mission || f.Code_Mission || f.Title || '';
         if (!ref) return null;
 
+        const rawHash = f.Contrat_Hash_Ref || f.Hash_SHA256 || f.Empreinte_SHA256 || f.sha256_hash || f.hash || f.ots_hash || '';
+        const cleanHash = rawHash ? String(rawHash).trim() : '';
+
         return {
           ref: String(ref).trim(),
-          statut: String(f.Statut_Mandat || f.statut || f.status || 'En cours').trim(),
-          secteur: String(f.Secteur_Code || f.Palier_Mandat || f.secteur || f.sector || 'Diagnostic Stratégique Souverain').trim(),
-          hash: String(f.Contrat_Hash_Ref || f.sha256_hash || f.hash || f.ots_hash || 'Ancrage OTS en cours de finalisation').trim(),
-          link: String(f.webViewLink || f.Rapport_URL || f.rapport_url || f.url || f.link || '').trim()
+          statut: String(f.Statut_Mandat || f.statut || f.statut_brut || f.status || 'En cours').trim(),
+          secteur: String(f.Secteur_Code || f.secteur || f.sector || '').trim(),
+          palier: String(f.Palier_Mandat || f.palier || '').trim(),
+          hash: cleanHash,
+          link: String(f.webViewLink || f.Rapport_URL || f.Lien_Livrable || f.rapport_url || f.url || f.link || '').trim(),
+          etape: Number(f.etape_courante || 0),
+          libelleEtape: String(f.libelle_etape || '').trim(),
+          expertMobilise: Boolean(f.expert_mobilise),
+          updatedAt: String(f.mise_a_jour_utc || f.derniere_maj_utc || f.updated_at || '').trim()
         };
+      }
+
+      function formatUpdatedAt(rawDate) {
+        if (!rawDate) return '';
+        const parsed = new Date(rawDate.replace(' ', 'T'));
+        if (Number.isNaN(parsed.getTime())) return rawDate;
+        const localeMap = { fr: 'fr-FR', en: 'en-GB', es: 'es-ES', ar: 'ar-SA' };
+        return parsed.toLocaleString(localeMap[currentLang] || 'fr-FR', {
+          dateStyle: 'medium',
+          timeStyle: 'short',
+          timeZone: 'UTC'
+        }) + ' UTC';
+      }
+
+      function renderMission(mission) {
+        const dict = I18N[currentLang];
+        els.refDisplay.textContent = mission.ref;
+
+        const subtitleParts = [mission.secteur, mission.palier].filter(Boolean);
+        els.sectorDisplay.textContent = subtitleParts.length > 0
+          ? subtitleParts.join(' • ')
+          : 'Diagnostic Stratégique Souverain';
+
+        const formattedDate = formatUpdatedAt(mission.updatedAt);
+        if (formattedDate) {
+          els.updatedDisplay.textContent = `${dict.updatedPrefix} ${formattedDate}`;
+          els.updatedDisplay.classList.remove('hidden');
+        } else {
+          els.updatedDisplay.classList.add('hidden');
+        }
+
+        if (mission.hash) {
+          els.hashDisplay.textContent = mission.hash;
+          els.copyBtn.disabled = false;
+        } else {
+          els.hashDisplay.textContent = dict.hashPending;
+          els.copyBtn.disabled = true;
+        }
+
+        if (mission.link && /^https?:\/\//i.test(mission.link)) {
+          els.deliverableLink.href = mission.link;
+          els.deliverableBox.classList.remove('hidden');
+        } else {
+          els.deliverableLink.href = '#';
+          els.deliverableBox.classList.add('hidden');
+        }
+
+        const statusNorm = normalizeText(mission.statut);
+        const isClosed = /clotur|termin|archiv/.test(statusNorm) || mission.etape >= 5;
+        const isDelivered = isClosed || /livr|restitu|rapport/.test(statusNorm) || mission.etape === 4;
+        const isInAudit = isDelivered || /audit|analyse|arbitrage|production/.test(statusNorm) || mission.etape >= 3;
+        const isExpertMobilized = isInAudit || mission.expertMobilise || /mobilis|assign|en mission/.test(statusNorm);
+        const isSealed = isExpertMobilized || Boolean(mission.hash) || /scell|qualifi|dispatch|en cours|valide/.test(statusNorm) || mission.etape >= 2;
+
+        // Étape 1 : Diagnostic IA
+        setStepVisual(0, 'done', dict.step1Sub);
+
+        // Étape 2 : Scellement Légal
+        if (isSealed) {
+          setStepVisual(1, 'done', dict.step2Sub);
+        } else {
+          setStepVisual(1, 'active', dict.step2SubActive);
+        }
+
+        // Étape 3 : Déploiement Expert
+        if (isDelivered) {
+          setStepVisual(2, 'done', dict.step3Sub);
+        } else if (isExpertMobilized) {
+          setStepVisual(2, 'active', dict.step3SubMobilized);
+        } else if (isSealed) {
+          setStepVisual(2, 'active', dict.step3SubActive);
+        } else {
+          setStepVisual(2, 'pending', dict.stepPending);
+        }
+
+        // Étape 4 : Recette & Clôture + Badge global + Bouton validation
+        setStatusBadge('success', mission.statut);
+
+        if (isClosed) {
+          setStepVisual(3, 'done', dict.step4SubClosed);
+          setValidateButton('closed');
+        } else if (isDelivered) {
+          setStepVisual(3, 'active', dict.step4SubDelivered);
+          setValidateButton('confirm');
+        } else {
+          setStepVisual(3, 'pending', dict.step4SubPending);
+          setValidateButton('unavailable');
+        }
+      }
+
+      function applyLanguage(lang) {
+        currentLang = I18N[lang] ? lang : 'fr';
+        const dict = I18N[currentLang];
+        document.documentElement.lang = currentLang;
+        document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+        els.input.placeholder = dict.placeholder;
+
+        document.querySelectorAll('[data-i18n]').forEach((node) => {
+          const key = node.getAttribute('data-i18n');
+          if (dict[key]) node.textContent = dict[key];
+        });
+
+        document.querySelectorAll('.lang-btn').forEach((btn) => {
+          const active = btn.getAttribute('data-lang') === currentLang;
+          btn.className = active
+            ? 'lang-btn text-gold font-semibold cursor-pointer'
+            : 'lang-btn text-slate-400 hover:text-white cursor-pointer';
+        });
+
+        if (currentMission) {
+          renderMission(currentMission);
+        } else if (lastErrorState) {
+          const msg = lastErrorState.type === 'notFound'
+            ? dict.notFound
+            : lastErrorState.type === 'invalidRef'
+              ? dict.invalidRef
+              : `${dict.networkError}${lastErrorState.detail ? ` (${lastErrorState.detail})` : ''}`;
+          resetMissionDisplay('error', msg, Boolean(els.refDisplay.textContent && els.refDisplay.textContent !== '—'));
+        } else {
+          resetMissionDisplay('idle', dict.promptRef, false);
+        }
       }
 
       async function loadMission(rawRef) {
         const dict = I18N[currentLang];
         const cleanRef = String(rawRef || '').trim().toUpperCase();
+        lastErrorState = null;
 
         if (!cleanRef) {
-          currentMission = null;
-          els.refDisplay.textContent = '—';
-          els.sectorDisplay.textContent = '—';
-          els.hashDisplay.textContent = '—';
-          els.deliverableBox.classList.add('hidden');
-          setStatusBadge('idle', dict.promptRef);
-          setStep4State('pending');
-          setValidateButton('unavailable');
+          resetMissionDisplay('idle', dict.promptRef, false);
           return;
         }
 
@@ -490,6 +673,13 @@
         nextUrl.searchParams.set('lang', currentLang);
         window.history.replaceState({}, '', nextUrl.toString());
 
+        if (!/^MIS-20\d{2}-[A-Z0-9]{2,12}$/.test(cleanRef)) {
+          els.refDisplay.textContent = cleanRef;
+          lastErrorState = { type: 'invalidRef' };
+          resetMissionDisplay('error', dict.invalidRef, true);
+          return;
+        }
+
         setStatusBadge('loading', dict.loading);
         els.refDisplay.textContent = cleanRef;
 
@@ -498,59 +688,42 @@
             method: 'GET'
           });
 
+          if (response.status === 404) {
+            lastErrorState = { type: 'notFound' };
+            resetMissionDisplay('error', dict.notFound, true);
+            return;
+          }
+
+          if (response.status === 400) {
+            lastErrorState = { type: 'invalidRef' };
+            resetMissionDisplay('error', dict.invalidRef, true);
+            return;
+          }
+
           if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
           }
 
-          const payload = await response.json();
+          const rawText = await response.text();
+          let payload = null;
+          if (rawText && rawText.trim()) {
+            payload = JSON.parse(rawText);
+          }
+
           const mission = normalizeMissionPayload(payload);
 
           if (!mission) {
-            currentMission = null;
-            els.sectorDisplay.textContent = '—';
-            els.hashDisplay.textContent = '—';
-            els.deliverableBox.classList.add('hidden');
-            setStatusBadge('error', dict.notFound);
-            setStep4State('pending');
-            setValidateButton('unavailable');
+            lastErrorState = { type: 'notFound' };
+            resetMissionDisplay('error', dict.notFound, true);
             return;
           }
 
           currentMission = mission;
-          els.refDisplay.textContent = mission.ref;
-          els.sectorDisplay.textContent = mission.secteur;
-          els.hashDisplay.textContent = mission.hash;
-
-          if (mission.link && mission.link.startsWith('http')) {
-            els.deliverableLink.href = mission.link;
-            els.deliverableBox.classList.remove('hidden');
-          } else {
-            els.deliverableBox.classList.add('hidden');
-          }
-
-          const statusLower = mission.statut.toLowerCase();
-          const isClosed = statusLower.includes('clôtur') || statusLower.includes('clotur');
-          const isDelivered = isClosed || statusLower.includes('livr');
-
-          setStatusBadge('success', mission.statut);
-
-          if (isClosed) {
-            setStep4State('closed');
-            setValidateButton('closed');
-          } else if (isDelivered) {
-            setStep4State('delivered');
-            setValidateButton('confirm');
-          } else {
-            setStep4State('pending');
-            setValidateButton('unavailable');
-          }
+          renderMission(mission);
         } catch (err) {
           console.error('[TRACKER_FETCH_ERROR]', err);
-          currentMission = null;
-          els.deliverableBox.classList.add('hidden');
-          setStatusBadge('error', `${dict.networkError} (${err.message})`);
-          setStep4State('pending');
-          setValidateButton('unavailable');
+          lastErrorState = { type: 'network', detail: err.message };
+          resetMissionDisplay('error', `${dict.networkError} (${err.message})`, true);
         }
       }
 
@@ -566,27 +739,23 @@
           const nextUrl = new URL(window.location.href);
           nextUrl.searchParams.set('lang', currentLang);
           window.history.replaceState({}, '', nextUrl.toString());
-          if (currentMission) {
-            loadMission(currentMission.ref);
-          }
         });
       });
 
       els.copyBtn.addEventListener('click', async () => {
-        const text = els.hashDisplay.textContent.trim();
-        if (!text || text === '—') return;
+        if (!currentMission || !currentMission.hash) return;
         try {
-          await navigator.clipboard.writeText(text);
+          await navigator.clipboard.writeText(currentMission.hash);
           els.copyBtn.classList.add('text-emerald-400');
           setTimeout(() => els.copyBtn.classList.remove('text-emerald-400'), 1500);
         } catch (_) {}
       });
 
       els.validateBtn.addEventListener('click', () => {
-        if (!currentMission) return;
-        setStep4State('closed');
-        setStatusBadge('success', I18N[currentLang].step4SubClosed);
-        setValidateButton('closed');
+        if (!currentMission || els.validateBtn.disabled) return;
+        currentMission.statut = I18N[currentLang].step4SubClosed;
+        currentMission.etape = 5;
+        renderMission(currentMission);
       });
 
       applyLanguage(currentLang);
