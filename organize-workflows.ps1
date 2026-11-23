@@ -5,7 +5,8 @@ $canonicalFiles = @(
     "02_cortex_analyse_rag_pdf.json",
     "03_cortex_desk_telegram_hitl.json",
     "04_cortex_delivrance_client.json",
-    "05_cortex_dispatch_expert_sla.json"
+    "05_cortex_dispatch_expert_sla.json",
+    "06_cortex_api_tracker_client.json"
 )
 $obsoleteFolders = @("ai_rag", "archives", "core", "finance", "outreach", "utilities")
 
@@ -33,4 +34,4 @@ foreach ($folder in $obsoleteFolders) {
     }
 }
 
-Write-Host "`n[SUCCES] Les cinq workflows canoniques sont conservés à la racine de cortex_workflows." -ForegroundColor Green
+Write-Host "`n[SUCCES] Les six workflows canoniques sont conservés à la racine de cortex_workflows." -ForegroundColor Green

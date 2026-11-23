@@ -109,7 +109,6 @@
                 <span id="ui-lbl-counter" data-i18n="counter.label">Diagnostics Sécurisés &amp; Scellés Cryptographiquement</span>
             </span>
         </div>
-
         <div class="flex items-center gap-4 text-xs font-mono">
             <!-- Sélecteur de Devise Multi-marchés -->
             <div class="currency-switch flex items-center gap-1.5 bg-ebony px-2.5 py-1 rounded-lg border border-ebonyBorder" role="group" aria-label="Sélecteur de devise" data-i18n-aria-label="a11y.currency">
@@ -230,7 +229,7 @@
 
                     <div class="p-4 rounded-2xl glass-card border-l-4 border-l-gold flex items-start gap-3 text-xs text-slate-300 font-mono" id="ui-banner-ots">
                         <span class="text-gold text-lg shrink-0">🛡️</span>
-                        <p id="hero-sovereignty" data-i18n="hero.sovereignty" data-i18n-rich-text="true"><strong>Souveraineté Absolue :</strong> Vos mandats sont scellés par preuve d'antériorité immuable via <a href="https://opentimestamps.org/" target="_blank" rel="noopener noreferrer" class="text-gold underline hover:text-goldLight">OpenTimestamps.org</a> et ancrés sur la Blockchain Bitcoin dès l'instant $T+0$.</p>
+                        <p id="hero-sovereignty" data-i18n="hero.sovereignty" data-i18n-rich-text="true"><strong>Souveraineté Absolue :</strong> Vos mandats sont scellés par preuve d'antériorité immuable via <a href="https://opentimestamps.org/" target="_blank" rel="noopener noreferrer" class="text-gold underline hover:text-goldLight">OpenTimestamps.org</a> et ancrés sur la Blockchain Bitcoin dès l'instant T+0.</p>
                     </div>
 
                     <div class="flex flex-col sm:flex-row items-center gap-4 pt-2">
@@ -575,7 +574,7 @@
                             <li id="ui-pr-2" class="flex items-center gap-2" data-i18n="offers.pro.item.2"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> Revue &amp; contreseing de l'Expert Exécutif</li>
                             <li id="ui-pr-3" class="flex items-center gap-2" data-i18n="offers.pro.item.3"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> Modélisation de stress-tests sectoriels</li>
                             <li id="ui-pr-4" class="flex items-center gap-2" data-i18n="offers.pro.item.4"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> Scellement SHA-256 + Bitcoin OTS</li>
-                            <li class="flex items-center gap-2" data-i18n="offers.pro.item.5"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> Référence souveraine MIS-2026-XXXX</li>
+                            <li class="flex items-center gap-2" data-i18n="offers.pro.item.5"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> Référence de mission attribuée après scellement</li>
                             <li class="flex items-center gap-2" data-i18n="offers.pro.item.6"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> Notification WhatsApp sécurisée directe</li>
                         </ul>
                     </div>
@@ -624,7 +623,7 @@
             <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
                 <span class="text-xs uppercase tracking-widest text-gold font-mono" data-i18n="terminal.number">SECTION 02 • SOUVERAINETÉ OPÉRATIONNELLE</span>
                 <h2 id="ui-terminal-title" class="font-serif text-3xl sm:text-5xl font-bold text-white" data-i18n="terminal.title">Terminal d'Ingestion Décisionnelle</h2>
-                <p id="ui-terminal-desc" class="text-slate-400 text-sm sm:text-base font-light" data-i18n="terminal.description">Registre sécurisé de recevabilité des mandats, analyse RAG et scellement d'intégrité ($T+0$).</p>
+                <p id="ui-terminal-desc" class="text-slate-400 text-sm sm:text-base font-light" data-i18n="terminal.description">Registre sécurisé de recevabilité des mandats, analyse RAG et scellement d'intégrité (T+0).</p>
             </div>
 
             <div class="terminal-shell glass-card rounded-3xl border border-gold/40 shadow-2xl overflow-hidden relative" id="terminal-container">
@@ -635,15 +634,15 @@
                     </div>
                     <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-[11px] font-mono text-gold">
                         <span class="w-2 h-2 rounded-full bg-gold animate-ping"></span>
-                        <span data-i18n="terminal.pipeline.ready">PIPELINE n8n PRÊT</span>
+                        <span data-i18n="terminal.pipeline.ready">REGISTRE PROBATOIRE CERTIFIÉ</span>
                     </span>
                 </div>
 
                 <div class="terminal-content p-6 sm:p-10 space-y-6">
                     <div class="reference-row bg-ebony p-4 rounded-2xl border border-ebonyBorder flex flex-wrap justify-between items-center gap-4 text-xs font-mono">
                         <div>
-                            <span class="text-slate-400 block text-[10px]" data-i18n="terminal.reference.label">RÉFÉRENCE SOUVERAINE GÉNÉRÉE</span>
-                            <strong id="mandate-reference" class="text-gold text-sm tracking-wider">MIS-2026-5468</strong>
+                            <span class="text-slate-400 block text-[10px]" data-i18n="terminal.reference.label">RÉFÉRENCE DE MISSION</span>
+                            <strong id="mandate-reference" class="text-gold text-sm tracking-wider" data-i18n="terminal.reference.waiting">Attribution au scellement T+0</strong>
                             <span class="plan-selected ml-2 px-2 py-0.5 rounded bg-gold/20 text-gold text-[10px]" id="badge-plan-selected" data-i18n="offers.plan.certified">MANDAT CERTIFIÉ</span>
                         </div>
                         <div class="selected-sector-row">
@@ -709,18 +708,18 @@
                 <div class="text-center max-w-2xl mx-auto mb-10 space-y-3">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-mono uppercase">
                         <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-                        <span data-i18n="verify_kicker">Registre NocoDB &amp; Cockpit Tracker</span>
+                        <span data-i18n="verify_kicker">Registre probatoire &amp; suivi des missions</span>
                     </div>
                     <h2 class="font-serif text-3xl font-bold text-white" data-i18n="verify_title">Vérification de Scellement &amp; Suivi de Mission</h2>
                     <p class="text-slate-400 text-xs sm:text-sm font-light" data-i18n="verify_desc" data-i18n-rich-text="true">
-                        Entrez votre référence de mission (ex: <code class="text-gold font-mono">MIS-2026-0842</code>) pour interroger en temps réel le registre d'intégrité probatoire et l'état de l'arbitrage terrain (Option B).
+                        Saisissez une référence de mission attribuée pour consulter son statut, son étape et son empreinte probatoire.
                     </p>
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto mb-6">
                     <div class="relative flex-1">
                         <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
-                        <input type="text" id="missionInput" placeholder="Ex: MIS-2026-0842 ou Hash SHA-256..." data-i18n-placeholder="verify_placeholder" class="w-full pl-11 pr-4 py-3.5 rounded-xl bg-ebony border border-ebonyBorder text-white text-xs sm:text-sm focus:outline-none focus:border-gold transition font-mono" />
+                        <input type="text" id="missionInput" placeholder="Référence de mission" data-i18n-placeholder="verify_placeholder" class="w-full pl-11 pr-4 py-3.5 rounded-xl bg-ebony border border-ebonyBorder text-white text-xs sm:text-sm focus:outline-none focus:border-gold transition font-mono" />
                     </div>
                     <button onclick="simulateVerification()" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-xs uppercase tracking-wider shadow-lg hover:opacity-95 transition flex items-center justify-center gap-2 font-mono">
                         <span data-i18n="verify_btn">Interroger</span>
@@ -728,28 +727,23 @@
                     </button>
                 </div>
 
-                <div class="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-400 mb-8 font-mono">
-                    <span data-i18n="verify_quick">Exemples enregistrés :</span>
-                    <button onclick="loadSampleMission('MIS-2026-0842')" class="px-2.5 py-1 rounded bg-ebony border border-ebonyBorder text-gold hover:border-gold">MIS-2026-0842</button>
-                    <button onclick="loadSampleMission('MIS-2026-1109')" class="px-2.5 py-1 rounded bg-ebony border border-ebonyBorder text-gold hover:border-gold">MIS-2026-1109</button>
-                    <button onclick="loadSampleMission('MIS-2026-5468')" class="px-2.5 py-1 rounded bg-ebony border border-ebonyBorder text-gold hover:border-gold">MIS-2026-5468</button>
-                </div>
+                <p id="verification-status" class="text-center text-xs text-slate-400 font-mono mb-8" role="status" aria-live="polite"></p>
 
                 <div id="simulationResult" class="hidden space-y-6 pt-6 border-t border-ebonyBorder">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="p-4 rounded-xl bg-ebony border border-ebonyBorder">
                             <span class="text-xs text-slate-400 block font-mono" data-i18n="verify_lbl_status">Statut de la Mission</span>
                             <span id="resStatus" class="text-emerald-400 font-bold text-sm flex items-center gap-1.5 mt-1 font-mono">
-                                <i data-lucide="check-circle" class="w-4 h-4"></i> <span data-i18n="verify_status_certified">Mandat Certifié Actif</span>
+                                <i data-lucide="shield-check" class="w-4 h-4"></i><span>—</span>
                             </span>
                         </div>
                         <div class="p-4 rounded-xl bg-ebony border border-ebonyBorder">
                             <span class="text-xs text-slate-400 block font-mono" data-i18n="verify_lbl_sector">Secteur d'Excellence</span>
-                            <span id="resSecteur" class="text-white font-bold text-sm mt-1 block font-mono" data-i18n="sector.energy">Énergie &amp; Mines</span>
+                            <span id="resSecteur" class="text-white font-bold text-sm mt-1 block font-mono">—</span>
                         </div>
                         <div class="p-4 rounded-xl bg-ebony border border-ebonyBorder">
-                            <span class="text-xs text-slate-400 block font-mono" data-i18n="verify_lbl_optionb">Arbitrage Terrain (Option B)</span>
-                            <span id="resOptionB" class="text-gold font-bold text-sm mt-1 block font-mono" data-i18n="verify_result_optionb">Levée validée (5 points OK)</span>
+                            <span class="text-xs text-slate-400 block font-mono" data-i18n="verify_lbl_optionb">Étape du mandat / arbitrage</span>
+                            <span id="resOptionB" class="text-gold font-bold text-sm mt-1 block font-mono">—</span>
                         </div>
                     </div>
 
@@ -759,9 +753,10 @@
                             <span class="text-emerald-400 flex items-center gap-1 font-mono text-[11px]"><i data-lucide="shield-check" class="w-3.5 h-3.5"></i><span data-i18n="verify_badge_ots">Ancré OpenTimestamps Bitcoin</span></span>
                         </div>
                         <div id="resHash" class="p-3 rounded bg-ebonyCard text-gold font-mono text-xs break-all border border-ebonyBorder">
-                            a42d4a1e98fbc149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+                            —
                         </div>
                     </div>
+                    <a id="tracker-detail-link" href="tracker.html" class="hidden text-xs text-gold hover:underline font-mono" data-i18n="verify.openTracker">Ouvrir le suivi détaillé</a>
                 </div>
             </div>
         </div>
@@ -851,7 +846,7 @@
             <div class="space-y-2 mb-6">
                 <span class="text-xs uppercase tracking-widest text-gold font-mono" data-i18n="modal_saisine_kicker">Saisine Exécutive</span>
                 <h3 class="font-serif text-2xl font-bold text-white" data-i18n="modal_saisine_title">Démarrer une Mission</h3>
-                <p class="text-slate-400 text-xs font-light" data-i18n="modal_saisine_desc">Renseignez vos coordonnées, joignez vos pièces pour l'analyse RAG et initiez le scellement SHA-256 en $T+0$.</p>
+                <p class="text-slate-400 text-xs font-light" data-i18n="modal_saisine_desc">Renseignez vos coordonnées, joignez vos pièces pour l'analyse et initiez le scellement SHA-256 en T+0.</p>
             </div>
 
             <form onsubmit="handleSaisineSubmit(event)" class="space-y-4">
@@ -888,18 +883,18 @@
                     <div>
                         <label class="block text-xs font-mono text-slate-300 mb-1.5" for="modalPalierSelect" data-i18n="form_lbl_tier">Palier d'Intervention</label>
                         <select id="modalPalierSelect" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold">
-                            <option data-i18n="modal.tier.1">Palier 1 — Diagnostic Découverte (0 €)</option>
-                            <option selected data-i18n="modal.tier.2">Palier 2 — Mandat Certifié (280 €)</option>
-                            <option data-i18n="modal.tier.3">Palier 3 — Chambre Exécutive (1 450 €)</option>
+                            <option value="Palier_1_Decouverte" data-i18n="modal.tier.1">Palier 1 — Diagnostic Découverte (0 €)</option>
+                            <option value="Palier_2_Certifie" selected data-i18n="modal.tier.2">Palier 2 — Mandat Certifié (280 €)</option>
+                            <option value="Palier_3_Chambre" data-i18n="modal.tier.3">Palier 3 — Chambre Exécutive (1 450 €)</option>
                         </select>
                     </div>
                 </div>
                 <div>
                     <label class="block text-xs font-mono text-slate-300 mb-1.5" for="modalDesc" data-i18n="form_lbl_decision">Problématique &amp; Arbitrage Critique *</label>
-                    <textarea id="modalDesc" rows="3" required placeholder="Décrivez succinctement les frictions ou arbitrages stratégiques attendus..." data-i18n-placeholder="form_ph_decision" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold font-mono"></textarea>
+                    <textarea id="modalDesc" rows="3" required minlength="150" placeholder="Décrivez les frictions ou arbitrages stratégiques attendus (150 caractères minimum)..." data-i18n-placeholder="form_ph_decision" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold font-mono"></textarea>
                 </div>
                 <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-xs uppercase tracking-wider shadow-lg hover:opacity-95 transition font-mono" data-i18n="form_btn_submit">
-                    Générer la Référence &amp; Sceller la Saisine ($T+0$)
+                    Sceller et transmettre le mandat (T+0)
                 </button>
             </form>
         </div>
@@ -926,13 +921,13 @@
                 </div>
 
                 <p class="modal-assurance text-[11px] text-slate-500 font-mono leading-relaxed pt-2" data-i18n="modal.assurance">
-                    Mandat garanti sous secret des affaires. L'empreinte SHA-256 est transmise au pipeline pour enregistrement dans le coffre NocoDB.
+                    Votre mandat est protégé par le secret des affaires et inscrit au registre probatoire certifié.
                 </p>
 
                 <p class="form-status text-xs font-mono" id="modal-status" role="status" aria-live="polite"></p>
 
                 <button class="button button-gold modal-submit w-full py-4 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-xs uppercase tracking-widest shadow-xl gold-glow hover:opacity-95 transition font-mono mt-4" id="btn-fire-ia" type="button" onclick="fireAutoDetection()" data-i18n="modal.submit">
-                    SCELLER &amp; TRANSMETTRE AU PIPELINE n8n
+                    Sceller et transmettre le mandat
                 </button>
             </div>
         </div>
@@ -1118,6 +1113,9 @@
             updateTerminalReference();
         });
 
+        const CORTEX_01_INBOUND_URL = 'https://automation.e-metalabs.com/webhook/reception-saisine';
+        const CORTEX_06_TRACKER_URL = 'https://automation.e-metalabs.com/webhook/statut-mission';
+        let pendingSaisine = null;
         let selectedSectorKey = 'agro';
         let activeSectorModalKey = null;
         let selectedPlanKey = null;
@@ -1282,10 +1280,11 @@
         }
 
         function updateTerminalReference() {
-            const randomCode = Math.floor(1000 + Math.random() * 9000);
-            const ref = `MIS-2026-${randomCode}`;
             const refEl = document.getElementById('mandate-reference');
-            if (refEl) refEl.textContent = ref;
+            if (refEl) {
+                refEl.dataset.i18n = 'terminal.reference.waiting';
+                refEl.textContent = translate('terminal.reference.waiting');
+            }
         }
 
         function selectPlan(planNameKey, priceId) {
@@ -1320,82 +1319,224 @@
                 alert(translate('terminal.validation.context'));
                 return;
             }
+            pendingSaisine = null;
             openModal('autoDetectModal');
         }
 
-        function fireAutoDetection() {
+        async function fireAutoDetection() {
             const email = document.getElementById('auto-email').value.trim();
             const phone = document.getElementById('auto-phone').value.trim();
+            const missionName = document.getElementById('mission_nom').value.trim();
+            const missionContext = document.getElementById('mission_contexte').value.trim();
             const status = document.getElementById('modal-status');
             const submitBtn = document.getElementById('btn-fire-ia');
 
-            if (!email || !phone) {
+            const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            const validPhone = /^[0-9]{8,15}$/.test(phone);
+            if (!validEmail || !validPhone) {
                 status.dataset.i18n = 'modal.validation.contact';
                 status.textContent = translate('modal.validation.contact');
                 status.className = "form-status text-xs font-mono text-rose-400";
                 return;
             }
-
-            status.dataset.i18n = 'modal.status.processing';
-            status.textContent = translate('modal.status.processing');
-            status.className = "form-status text-xs font-mono text-gold animate-pulse";
-            submitBtn.setAttribute('disabled', 'true');
-
-            setTimeout(() => {
-                status.dataset.i18n = 'modal.status.success';
-                status.textContent = translate('modal.status.success');
-                status.className = "form-status text-xs font-mono text-emerald-400";
-
-                setTimeout(() => {
-                    closeModal('autoDetectModal');
-                    const ref = document.getElementById('mandate-reference').textContent;
-                    document.getElementById('missionInput').value = ref;
-                    simulateVerification();
-                    const verif = document.getElementById('verification');
-                    if (verif) verif.scrollIntoView({ behavior: 'smooth' });
-                }, 1200);
-            }, 1000);
-        }
-
-        function simulateVerification() {
-            const val = document.getElementById('missionInput').value.trim();
-            if (!val) {
-                alert(translate('verify.validation.empty'));
+            if (!missionName || missionContext.length < 150) {
+                status.dataset.i18n = 'modal.validation.mission';
+                status.textContent = translate('modal.validation.mission');
+                status.className = "form-status text-xs font-mono text-rose-400";
                 return;
             }
 
-            const result = document.getElementById('simulationResult');
-            result.classList.remove('hidden');
+            const file = document.getElementById('user-file').files[0];
+            const selectedPalier = pendingSaisine?.palier || ({
+                tier1_name: 'Palier_1_Decouverte',
+                tier3_name: 'Palier_3_Chambre'
+            }[selectedPlanKey] || 'Palier_2_Certifie');
+            const selectedSector = pendingSaisine?.secteur || selectedSectorKey;
+            const formData = new FormData();
+            formData.set('mission_nom', missionName);
+            formData.set('entreprise', pendingSaisine?.entreprise || missionName);
+            formData.set('mission_contexte', missionContext);
+            formData.set('email', email);
+            formData.set('telephone', phone);
+            formData.set('whatsapp', phone);
+            formData.set('secteur', selectedSector);
+            formData.set('secteur_selectionne', selectedSector);
+            formData.set('palier', selectedPalier);
+            formData.set('langue', document.documentElement.lang || 'fr');
+            formData.set('currency', selectedCurrency);
+            formData.set('devise', selectedCurrency);
+            formData.set('source', 'CORTEX_01');
+            if (file) formData.set('piece_justificative', file, file.name);
 
-            if (val.includes('0842')) {
-                document.getElementById('resStatus').innerHTML = `<i data-lucide="check-circle" class="w-4 h-4"></i> <span data-i18n="verify.result.certified">${translate('verify.result.certified')}</span>`;
-                document.getElementById('resSecteur').dataset.i18n = 'sector.energy';
-                document.getElementById('resSecteur').innerText = translate('sector.energy');
-                document.getElementById('resOptionB').dataset.i18n = 'verify_result_optionb';
-                document.getElementById('resOptionB').innerText = translate('verify_result_optionb');
-                document.getElementById('resHash').innerText = 'a42d4a1e98fbc149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
-            } else if (val.includes('1109')) {
-                document.getElementById('resStatus').innerHTML = `<i data-lucide="check-circle" class="w-4 h-4"></i> <span data-i18n="verify.result.executive">${translate('verify.result.executive')}</span>`;
-                document.getElementById('resSecteur').dataset.i18n = 'sector.banking';
-                document.getElementById('resSecteur').innerText = translate('sector.banking');
-                document.getElementById('resOptionB').dataset.i18n = 'verify.result.executive.optionb';
-                document.getElementById('resOptionB').innerText = translate('verify.result.executive.optionb');
-                document.getElementById('resHash').innerText = 'f7c8996fb92427ae41e4649b934ca495991b7852b855a42d4a1e98fbc149afb';
-            } else {
-                document.getElementById('resStatus').innerHTML = `<i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i> <span data-i18n="verify.result.received">${translate('verify.result.received')}</span>`;
-                document.getElementById('resSecteur').dataset.i18n = sectorsDatabase[selectedSectorKey].nameKey;
-                document.getElementById('resSecteur').innerText = document.getElementById('terminal-sector-name').textContent;
-                document.getElementById('resOptionB').dataset.i18n = 'verify.result.scheduled';
-                document.getElementById('resOptionB').innerText = translate('verify.result.scheduled');
-                document.getElementById('resHash').innerText = 'c42b7852b8559afbf4c8996fb92427ae41e4649b934ca49599178fbc149af42d';
+            status.removeAttribute('data-i18n');
+            status.dataset.i18n = 'modal.status.processing';
+            status.textContent = translate('modal.status.processing');
+            status.className = "form-status text-xs font-mono text-gold animate-pulse";
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch(CORTEX_01_INBOUND_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+                let payload;
+                try {
+                    payload = await response.json();
+                } catch (error) {
+                    if (!response.ok) {
+                        throw new Error(`${translate('modal.error.http')} ${response.status})`);
+                    }
+                    throw new Error(translate('modal.error.invalidResponse'));
+                }
+                if (!response.ok) {
+                    throw new Error(payload.error || `${translate('modal.error.http')} ${response.status})`);
+                }
+
+                const reference = typeof payload.reference_mission === 'string'
+                    ? payload.reference_mission.trim()
+                    : '';
+                if (!reference) throw new Error(translate('modal.error.invalidResponse'));
+
+                const referenceElement = document.getElementById('mandate-reference');
+                referenceElement.removeAttribute('data-i18n');
+                referenceElement.textContent = reference;
+                document.getElementById('missionInput').value = reference;
+                status.dataset.i18n = 'modal.status.success';
+                status.textContent = translate('modal.status.success');
+                status.className = "form-status text-xs font-mono text-emerald-400";
+                closeModal('autoDetectModal');
+                await simulateVerification(reference);
+                const verification = document.getElementById('verification');
+                if (verification) verification.scrollIntoView({ behavior: 'smooth' });
+                pendingSaisine = null;
+            } catch (error) {
+                console.error('CORTEX_01 transmission failed:', error);
+                status.removeAttribute('data-i18n');
+                status.textContent = error instanceof TypeError
+                    ? translate('modal.error.network')
+                    : error.message;
+                if (error instanceof TypeError) status.dataset.i18n = 'modal.error.network';
+                status.className = "form-status text-xs font-mono text-rose-400";
+            } finally {
+                submitBtn.disabled = false;
             }
-
-            if (window.lucide) window.lucide.createIcons();
         }
 
-        function loadSampleMission(ref) {
-            document.getElementById('missionInput').value = ref;
-            simulateVerification();
+        function normalizeMissionPayload(raw) {
+            let root = Array.isArray(raw) ? raw[0] : raw;
+            if (!root || typeof root !== 'object') return null;
+
+            if (root.json && typeof root.json === 'object') root = root.json;
+            if (root.data && typeof root.data === 'object' && !Array.isArray(root.data)) root = root.data;
+            if (root.mission && typeof root.mission === 'object') root = root.mission;
+
+            if (Array.isArray(root.records)) {
+                if (root.records.length === 0) return null;
+                root = root.records[0];
+            }
+
+            const f = root.fields && typeof root.fields === 'object' ? { ...root, ...root.fields } : root;
+            if (f.found === false || f.ok === false) return null;
+
+            const ref = f.Mission_Ref || f.reference || f.ref || f.mission_ref || f.reference_mission || f.Code_Mission || f.Title || '';
+            if (!ref) return null;
+
+            const rawHash = f.Contrat_Hash_Ref || f.Hash_SHA256 || f.Empreinte_SHA256 || f.sha256_hash || f.hash || f.ots_hash || '';
+            const cleanHash = rawHash ? String(rawHash).trim() : '';
+
+            return {
+                ref: String(ref).trim(),
+                statut: String(f.Statut_Mandat || f.statut || f.statut_brut || f.status || 'En cours').trim(),
+                secteur: String(f.Secteur_Code || f.secteur || f.sector || '').trim(),
+                palier: String(f.Palier_Mandat || f.palier || '').trim(),
+                hash: cleanHash,
+                link: String(f.webViewLink || f.Rapport_URL || f.Lien_Livrable || f.rapport_url || f.url || f.link || '').trim(),
+                etape: Number(f.etape_courante || 0),
+                libelleEtape: String(f.libelle_etape || '').trim(),
+                expertMobilise: Boolean(f.expert_mobilise),
+                updatedAt: String(f.mise_a_jour_utc || f.derniere_maj_utc || f.updated_at || '').trim()
+            };
+        }
+
+        async function simulateVerification(reference) {
+            const missionInput = document.getElementById('missionInput');
+            const ref = (reference || missionInput.value).trim();
+            const verificationStatus = document.getElementById('verification-status');
+            const result = document.getElementById('simulationResult');
+            const trackerLink = document.getElementById('tracker-detail-link');
+            result.classList.add('hidden');
+            trackerLink.classList.add('hidden');
+
+            if (!ref) {
+                verificationStatus.dataset.i18n = 'verify.validation.empty';
+                verificationStatus.textContent = translate('verify.validation.empty');
+                return;
+            }
+
+            verificationStatus.dataset.i18n = 'verify.loading';
+            verificationStatus.textContent = translate('verify.loading');
+            verificationStatus.className = 'text-center text-xs text-gold font-mono mb-8 animate-pulse';
+            try {
+                const response = await fetch(`${CORTEX_06_TRACKER_URL}?ref=${encodeURIComponent(ref)}`, {
+                    method: 'GET',
+                    headers: { Accept: 'application/json' }
+                });
+                let payload;
+                try {
+                    payload = await response.json();
+                } catch (error) {
+                    if (response.status === 404) {
+                        verificationStatus.dataset.i18n = 'verify.notFound';
+                        verificationStatus.textContent = translate('verify.notFound');
+                        verificationStatus.className = 'text-center text-xs text-rose-400 font-mono mb-8';
+                        return;
+                    }
+                    if (!response.ok) {
+                        throw new Error(`${translate('verify.httpError')} ${response.status})`);
+                    }
+                    throw new Error(translate('verify.invalidResponse'));
+                }
+                if (response.status === 404) {
+                    verificationStatus.dataset.i18n = 'verify.notFound';
+                    verificationStatus.textContent = translate('verify.notFound');
+                    verificationStatus.className = 'text-center text-xs text-rose-400 font-mono mb-8';
+                    return;
+                }
+                if (!response.ok) {
+                    throw new Error(payload.error || `${translate('verify.httpError')} ${response.status})`);
+                }
+
+                const mission = normalizeMissionPayload(payload);
+                if (!mission) {
+                    verificationStatus.dataset.i18n = 'verify.notFound';
+                    verificationStatus.textContent = translate('verify.notFound');
+                    verificationStatus.className = 'text-center text-xs text-rose-400 font-mono mb-8';
+                    return;
+                }
+
+                document.querySelector('#resStatus span').textContent = mission.statut || '—';
+                document.getElementById('resSecteur').textContent =
+                    [mission.secteur, mission.palier].filter(Boolean).join(' • ') || '—';
+                const stage = mission.etape > 0
+                    ? `${translate('verify.stage')} ${mission.etape}/5${mission.libelleEtape ? ` — ${mission.libelleEtape}` : ''}`
+                    : mission.libelleEtape || '—';
+                document.getElementById('resOptionB').textContent = stage;
+                document.getElementById('resHash').textContent = mission.hash || '—';
+                trackerLink.href = `tracker.html?ref=${encodeURIComponent(mission.ref)}`;
+                trackerLink.classList.remove('hidden');
+                result.classList.remove('hidden');
+                verificationStatus.removeAttribute('data-i18n');
+                verificationStatus.textContent = '';
+                if (window.lucide) window.lucide.createIcons();
+            } catch (error) {
+                console.error('CORTEX_06 verification failed:', error);
+                verificationStatus.textContent = error instanceof TypeError
+                    ? translate('verify.networkError')
+                    : error.message;
+                if (error instanceof TypeError) verificationStatus.dataset.i18n = 'verify.networkError';
+                else verificationStatus.removeAttribute('data-i18n');
+                verificationStatus.className = 'text-center text-xs text-rose-400 font-mono mb-8';
+            }
         }
 
         let selectedCurrency = 'EUR';
@@ -1537,11 +1678,18 @@
 
         function handleSaisineSubmit(e) {
             e.preventDefault();
-            const nom = document.getElementById('modalEntreprise').value;
+            const nom = document.getElementById('modalEntreprise').value.trim();
+            const email = document.getElementById('modalEmail').value.trim();
+            const whatsapp = document.getElementById('modalWhatsapp').value.trim();
             const sector = document.getElementById('modalSectorSelect').value;
+            const palier = document.getElementById('modalPalierSelect').value;
+            const contexte = document.getElementById('modalDesc').value.trim();
+            pendingSaisine = { entreprise: nom, email, whatsapp, secteur: sector, palier };
             selectSector(sector);
             document.getElementById('mission_nom').value = nom;
-            document.getElementById('mission_contexte').value = document.getElementById('modalDesc').value;
+            document.getElementById('mission_contexte').value = contexte;
+            document.getElementById('auto-email').value = email;
+            document.getElementById('auto-phone').value = whatsapp;
             updateCharCounter(document.getElementById('mission_contexte'));
             closeSaisineModal();
             openModal('autoDetectModal');
