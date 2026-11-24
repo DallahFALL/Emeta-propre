@@ -87,6 +87,34 @@
     },
     {
       "parameters": {
+        "jsCode": "const input = $input.first().json;\nconst pdfBase64 = String(input.pdf_base64 || '').trim();\nif (!pdfBase64) {\n  throw new Error('Le contenu PDF encodé en base64 est manquant.');\n}\nconst ref = String(input.reference_mission || input.reference || input.mission_ref || 'rapport').trim();\nconst token16 = Array.from({ length: 16 }, () => Math.floor(Math.random() * 16).toString(16)).join('');\nconst fileName = `${ref}-${token16}.pdf`;\nconst rapportUrl = `https://rapports.e-metalabs.com/${fileName}`;\nconst binaryData = await this.helpers.prepareBinaryData(Buffer.from(pdfBase64, 'base64'), fileName, 'application/pdf');\nconst patch = {\n  ...input.patch,\n  fields: {\n    ...input.patch?.fields,\n    Rapport_URL: rapportUrl\n  }\n};\nreturn [{\n  json: {\n    ...input,\n    rapport_file_path: `/home/node/.n8n-files/rapports/${fileName}`,\n    rapport_url: rapportUrl,\n    webViewLink: rapportUrl,\n    patch\n  },\n  binary: { pdf_file: binaryData }\n}];"
+      },
+      "id": "09e97fe4-6cb3-4ee7-986b-2e2932ae7b88",
+      "name": "Préparer fichier PDF souverain",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        768,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "={{ $json.rapport_file_path }}",
+        "dataPropertyName": "pdf_file"
+      },
+      "id": "44e1ee05-5528-468c-a30c-2ca858cf642a",
+      "name": "Écrire PDF sur VPS",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        960,
+        0
+      ]
+    },
+    {
+      "parameters": {
         "method": "PATCH",
         "url": "={{ $('Initialisation standardisée').first().json.urls.nocodb_base + '/' + $('Initialisation standardisée').first().json.tables.missions + '/records' }}",
         "authentication": "genericCredentialType",
@@ -102,7 +130,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ $json.patch }}",
+        "jsonBody": "={{ $('Préparer fichier PDF souverain').first().json.patch }}",
         "options": {}
       },
       "id": "8d8c33af-1f60-46c4-b4c9-9c603765050a",
@@ -110,7 +138,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        768,
+        1168,
         0
       ],
       "credentials": {
@@ -123,7 +151,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "={{ $('Initialisation standardisée').first().json.urls.whatsapp_api + '/' + ($('Mapper délivrance et séquestre').first().json.phone_number_id || '1045757915291250') + '/messages' }}",
+        "url": "={{ $('Initialisation standardisée').first().json.urls.whatsapp_api + '/' + ($('Préparer fichier PDF souverain').first().json.phone_number_id || '1045757915291250') + '/messages' }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
@@ -137,7 +165,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\n  {\n    messaging_product: \"whatsapp\",\n    recipient_type: \"individual\",\n    to: $('Mapper délivrance et séquestre').first().json.telephone,\n    type: \"template\",\n    template: {\n      name: \"cortex_diagnostic_delivered\",\n      language: {\n        code: \"fr\"\n      },\n      components: [\n        {\n          type: \"body\",\n          parameters: [\n            {\n              type: \"text\",\n              text: $('Mapper délivrance et séquestre').first().json.reference || 'MIS-2026-1565'\n            },\n            {\n              type: \"text\",\n              text: $('Mapper délivrance et séquestre').first().json.sha256_hash || 'ancrage-en-cours'\n            },\n            {\n              type: \"text\",\n              text: $('Mapper délivrance et séquestre').first().json.webViewLink || 'https://desk.e-metalabs.com'\n            }\n          ]\n        }\n      ]\n    }\n  }\n}}",
+        "jsonBody": "={{\n  {\n    messaging_product: \"whatsapp\",\n    recipient_type: \"individual\",\n    to: $('Préparer fichier PDF souverain').first().json.telephone,\n    type: \"template\",\n    template: {\n      name: \"cortex_diagnostic_delivered\",\n      language: {\n        code: \"fr\"\n      },\n      components: [\n        {\n          type: \"body\",\n          parameters: [\n            {\n              type: \"text\",\n              text: $('Préparer fichier PDF souverain').first().json.reference || 'N/A'\n            },\n            {\n              type: \"text\",\n              text: $('Préparer fichier PDF souverain').first().json.sha256_hash || 'ancrage-en-cours'\n            },\n            {\n              type: \"text\",\n              text: $('Préparer fichier PDF souverain').first().json.webViewLink || 'https://desk.e-metalabs.com'\n            }\n          ]\n        }\n      ]\n    }\n  }\n}}",
         "options": {}
       },
       "id": "c1de33f9-4b3c-4b7c-ad66-ee65e36aedde",
@@ -145,7 +173,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1168,
+        1568,
         0
       ],
       "credentials": {
@@ -172,7 +200,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\n  (() => {\n    const d = $('Mapper délivrance et séquestre').first().json || {};\n    const ref = String(d.reference || d.mission_ref || '').trim();\n    const link = String(d.webViewLink || d.rapport_url || '').trim();\n\n    const contenu = [\n      'Délivrance rapport ' + (ref || 'N/A'),\n      'Statut : Envoyé',\n      link ? ('Lien : ' + link) : 'Canal : WhatsApp Cloud API (template cortex_diagnostic FR)'\n    ].join(' | ');\n\n    return {\n      fields: {\n        Title: 'Délivrance client ' + ref,\n        Canal: 'WhatsApp Cloud API',\n        Contenu_Message: contenu\n      }\n    };\n  })()\n}}",
+        "jsonBody": "={{\n  (() => {\n    const d = $('Préparer fichier PDF souverain').first().json || {};\n    const ref = String(d.reference || d.mission_ref || '').trim();\n    const link = String(d.webViewLink || d.rapport_url || '').trim();\n\n    const contenu = [\n      'Délivrance rapport ' + (ref || 'N/A'),\n      'Statut : Envoyé',\n      link ? ('Lien : ' + link) : 'Canal : WhatsApp Cloud API (template cortex_diagnostic FR)'\n    ].join(' | ');\n\n    return {\n      fields: {\n        Title: 'Délivrance client ' + ref,\n        Canal: 'WhatsApp Cloud API',\n        Contenu_Message: contenu\n      }\n    };\n  })()\n}}",
         "options": {}
       },
       "id": "81f32af5-6591-4539-878c-99cc495ecaea",
@@ -180,7 +208,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        960,
+        1360,
         0
       ],
       "credentials": {
@@ -227,6 +255,28 @@
       ]
     },
     "Mapper délivrance et séquestre": {
+      "main": [
+        [
+          {
+            "node": "Préparer fichier PDF souverain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer fichier PDF souverain": {
+      "main": [
+        [
+          {
+            "node": "Écrire PDF sur VPS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Écrire PDF sur VPS": {
       "main": [
         [
           {
