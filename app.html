@@ -920,6 +920,19 @@
                     <input id="auto-phone" name="telephone" type="tel" autocomplete="tel" required placeholder="221770000000" data-i18n-placeholder="form_ph_whatsapp" pattern="[0-9]{8,15}" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold transition font-mono" />
                 </div>
 
+                <label for="auto-option-b" class="flex items-start gap-3 p-3.5 rounded-2xl bg-ebony/90 border border-gold/30 hover:border-gold transition cursor-pointer select-none">
+                    <input id="auto-option-b" name="option_b_detectee" type="checkbox" class="mt-1 h-4 w-4 rounded border-ebonyBorder bg-ebony text-gold focus:ring-gold accent-amber-400 shrink-0" />
+                    <div class="space-y-1">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="text-xs font-bold text-white font-mono" data-i18n="modal.optionb.title">Option B — Accompagnement Expert Humain</span>
+                            <span class="px-2 py-0.5 rounded-full bg-gold/15 text-gold border border-gold/30 text-[10px] font-mono uppercase" data-i18n="modal.optionb.badge">SLA 2h • Terrain &amp; Exécution</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 leading-relaxed font-light" data-i18n="modal.optionb.description">
+                            Mobiliser un expert humain certifié pour la mise en œuvre opérationnelle de votre projet ou la résolution d'un problème lié à votre activité.
+                        </p>
+                    </div>
+                </label>
+
                 <p class="modal-assurance text-[11px] text-slate-500 font-mono leading-relaxed pt-2" data-i18n="modal.assurance">
                     Votre mandat est protégé par le secret des affaires et inscrit au registre probatoire certifié.
                 </p>
@@ -1120,6 +1133,8 @@
         let activeSectorModalKey = null;
         let selectedPlanKey = null;
         let selectedPlanPriceId = null;
+            const optBCheckbox = document.getElementById('auto-option-b');
+            if (optBCheckbox) optBCheckbox.checked = false;
 
         function translate(key, values = {}) {
             let text = window.i18n ? window.i18n.translate(key) : key;
@@ -1362,6 +1377,14 @@
             formData.set('secteur', selectedSector);
             formData.set('secteur_selectionne', selectedSector);
             formData.set('palier', selectedPalier);
+            const isOptionB = Boolean(document.getElementById('auto-option-b')?.checked);
+            if (isOptionB) {
+                formData.set('option_b_detectee', 'true');
+                formData.set('option_b', 'true');
+            } else {
+                formData.delete('option_b_detectee');
+                formData.delete('option_b');
+            }
             formData.set('langue', document.documentElement.lang || 'fr');
             formData.set('currency', selectedCurrency);
             formData.set('devise', selectedCurrency);
@@ -1589,6 +1612,8 @@
             setIndexCurrency('EUR');
             selectedPlanKey = null;
             selectedPlanPriceId = null;
+            const optBCheckbox = document.getElementById('auto-option-b');
+            if (optBCheckbox) optBCheckbox.checked = false;
             document.getElementById('badge-plan-selected').dataset.i18n = 'offers.plan.certified';
             document.getElementById('badge-plan-selected').textContent = translate('offers.plan.certified');
         }
