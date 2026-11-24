@@ -22,8 +22,8 @@
                       "webhookId":  "cortex-dispatch-expert",
                       "credentials":  {
                                           "httpHeaderAuth":  {
-                                                                 "id":  "CONFIGURE_HANDOFF_CREDENTIAL_ID",
-                                                                 "name":  "CORTEX Handoff Header Auth"
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account 2"
                                                              }
                                       }
                   },
@@ -49,7 +49,7 @@
                   {
                       "parameters":  {
                                          "mode":  "runOnceForAllItems",
-                                         "jsCode":  "return [{ json: { urls: { nocodb_base: \u0027https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if\u0027, desk_portal: \u0027https://desk.e-metalabs.com\u0027, whatsapp_api: \u0027https://graph.facebook.com/v20.0\u0027, pdf_engine: \u0027http://pdf_engine:5000/generate-pdf\u0027 }, tables: { missions: \u0027mu6nj9w06yc0lep\u0027, experts: \u0027m4705kfa0sqavqb\u0027, claims: \u0027cortex_mission_claims\u0027 }, sla: { delai_expiration_heures: 2, secret_signature: null }, mission: $input.first().json } }];"
+                                         "jsCode":  "return [{ json: { urls: { nocodb_base: \u0027https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if\u0027, desk_portal: \u0027https://desk.e-metalabs.com\u0027, whatsapp_api: \u0027https://graph.facebook.com/v20.0\u0027, pdf_engine: \u0027http://pdf_engine:5000/generate-pdf\u0027 }, tables: { missions: \u0027mv1cb6xm00g6rf5\u0027, experts: \u0027m4705kfa0sqavqb\u0027, claims: \u0027cortex_mission_claims\u0027 }, sla: { delai_expiration_heures: 2, secret_signature: null }, mission: $input.first().json } }];"
                                      },
                       "id":  "55000000-0000-4000-8000-000000000003",
                       "name":  "Initialisation standardisée",
@@ -63,7 +63,7 @@
                   {
                       "parameters":  {
                                          "mode":  "runOnceForAllItems",
-                                         "jsCode":  "return [{ json: { urls: { nocodb_base: \u0027https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if\u0027, desk_portal: \u0027https://desk.e-metalabs.com\u0027, whatsapp_api: \u0027https://graph.facebook.com/v20.0\u0027, pdf_engine: \u0027http://pdf_engine:5000/generate-pdf\u0027 }, tables: { missions: \u0027mu6nj9w06yc0lep\u0027, experts: \u0027m4705kfa0sqavqb\u0027, claims: \u0027cortex_mission_claims\u0027 }, sla: { delai_expiration_heures: 2, secret_signature: null }, mission: $input.first().json } }];"
+                                         "jsCode":  "return [{ json: { urls: { nocodb_base: \u0027https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if\u0027, desk_portal: \u0027https://desk.e-metalabs.com\u0027, whatsapp_api: \u0027https://graph.facebook.com/v20.0\u0027, pdf_engine: \u0027http://pdf_engine:5000/generate-pdf\u0027 }, tables: { missions: \u0027mv1cb6xm00g6rf5\u0027, experts: \u0027m4705kfa0sqavqb\u0027, claims: \u0027cortex_mission_claims\u0027 }, sla: { delai_expiration_heures: 2, secret_signature: null }, mission: $input.first().json } }];"
                                      },
                       "id":  "55000000-0000-4000-8000-000000000004",
                       "name":  "Initialisation Réclamation",
@@ -93,8 +93,8 @@
                                    ],
                       "credentials":  {
                                           "httpHeaderAuth":  {
-                                                                 "id":  "CONFIGURE_NOCODB_CREDENTIAL_ID",
-                                                                 "name":  "NocoDB API Token"
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account 2"
                                                              }
                                       }
                   },
@@ -130,8 +130,8 @@
                                    ],
                       "credentials":  {
                                           "postgres":  {
-                                                           "id":  "CONFIGURE_POSTGRES_CREDENTIAL_ID",
-                                                           "name":  "Cortex PostgreSQL"
+                                                           "id":  "yXVlE8lNk3yeKhuj",
+                                                           "name":  "Postgres e-META Production"
                                                        }
                                       }
                   },
@@ -172,8 +172,8 @@
                                    ],
                       "credentials":  {
                                           "telegramApi":  {
-                                                              "id":  "CONFIGURE_TELEGRAM_CREDENTIAL_ID",
-                                                              "name":  "CORTEX Desk Telegram Bot"
+                                                              "id":  "OZEJ1H3HWx6oPSiP",
+                                                              "name":  "Telegram account"
                                                           }
                                       }
                   },
@@ -213,8 +213,8 @@
                                    ],
                       "credentials":  {
                                           "postgres":  {
-                                                           "id":  "CONFIGURE_POSTGRES_CREDENTIAL_ID",
-                                                           "name":  "Cortex PostgreSQL"
+                                                           "id":  "yXVlE8lNk3yeKhuj",
+                                                           "name":  "Postgres e-META Production"
                                                        }
                                       }
                   },
@@ -298,8 +298,8 @@
                                    ],
                       "credentials":  {
                                           "httpHeaderAuth":  {
-                                                                 "id":  "CONFIGURE_NOCODB_CREDENTIAL_ID",
-                                                                 "name":  "NocoDB API Token"
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account 2"
                                                              }
                                       }
                   },
@@ -335,8 +335,8 @@
                                    ],
                       "credentials":  {
                                           "postgres":  {
-                                                           "id":  "CONFIGURE_POSTGRES_CREDENTIAL_ID",
-                                                           "name":  "Cortex PostgreSQL"
+                                                           "id":  "yXVlE8lNk3yeKhuj",
+                                                           "name":  "Postgres e-META Production"
                                                        }
                                       }
                   },
@@ -360,8 +360,8 @@
                                    ],
                       "credentials":  {
                                           "telegramApi":  {
-                                                              "id":  "CONFIGURE_TELEGRAM_CREDENTIAL_ID",
-                                                              "name":  "CORTEX Desk Telegram Bot"
+                                                              "id":  "OZEJ1H3HWx6oPSiP",
+                                                              "name":  "Telegram account"
                                                           }
                                       }
                   },
@@ -397,8 +397,8 @@
                                    ],
                       "credentials":  {
                                           "postgres":  {
-                                                           "id":  "CONFIGURE_POSTGRES_CREDENTIAL_ID",
-                                                           "name":  "Cortex PostgreSQL"
+                                                           "id":  "yXVlE8lNk3yeKhuj",
+                                                           "name":  "Postgres e-META Production"
                                                        }
                                       }
                   }
