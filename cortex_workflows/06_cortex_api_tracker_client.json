@@ -1,249 +1,257 @@
 {
-  "name": "06 - CORTEX API Tracker Client",
-  "nodes": [
-    {
-      "parameters": {
-        "path": "=statut-mission",
-        "responseMode": "responseNode",
-        "options": {
-          "allowedOrigins": "https://e-metalabs.com,https://www.e-metalabs.com"
-        }
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2.1,
-      "position": [
-        -848,
-        0
-      ],
-      "id": "e923e4f8-3169-4868-815e-f03aa0cb545a",
-      "name": "Webhook GET Tracker",
-      "webhookId": "5dd26706-6cc8-4685-bf7f-58bc5d86b984"
-    },
-    {
-      "parameters": {
-        "jsCode": "const query = $input.first().json.query || {};\nconst rawRef = String(query.ref || '').trim().toUpperCase();\n\nif (!/^MIS-\\d{4}-\\d{3,6}$/.test(rawRef)) {\n  return [\n    {\n      json: {\n        valid: false,\n        httpStatus: 400,\n        error: 'Format de référence mission invalide.'\n      }\n    }\n  ];\n}\n\nreturn [\n  {\n    json: {\n      valid: true,\n      mission_ref: rawRef\n    }\n  }\n];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -608,
-        0
-      ],
-      "id": "997fac44-98fc-4f59-ac88-af4b79f7d4d5",
-      "name": "Valider Paramètre Ref"
-    },
-    {
-      "parameters": {
-        "url": "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mv1cb6xm00g6rf5/records",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "where",
-              "value": "={{ '(Mission_Ref,eq,' + $json.mission_ref + ')' }}"
-            },
-            {
-              "name": "limit",
-              "value": "1"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        -384,
-        0
-      ],
-      "id": "0c023eb2-e817-4547-bc97-02e93e807ccf",
-      "name": "Lire Mission NocoDB v3",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "AYFV4CoauevzSq4r",
-          "name": "Header Auth account 2"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "jsCode": "const ref = String($('Valider Paramètre Ref').first().json.mission_ref || '').trim().toUpperCase();\nconst inputData = $input.first().json || {};\nconst records = Array.isArray(inputData.records)\n  ? inputData.records\n  : (Array.isArray(inputData.list) ? inputData.list : []);\n\nif (records.length === 0) {\n  return [\n    {\n      json: {\n        found: false,\n        ok: false,\n        statusCode: 404,\n        payload: {\n          found: false,\n          reference: ref,\n          error: 'Dossier introuvable'\n        }\n      }\n    }\n  ];\n}\n\nconst record = records[0];\nconst f = record.fields && typeof record.fields === 'object' ? record.fields : record;\n\nconst normalizeKey = (val) =>\n  String(val || '')\n    .normalize('NFD')\n    .replace(/[\\u0300-\\u036f]/g, '')\n    .toLowerCase()\n    .trim();\n\nconst statutBrut = String(f.Statut_Mandat || f.Statut || f.Statut_Mission || 'Saisine_Recue').trim();\nconst sNorm = normalizeKey(statutBrut);\n\nconst palierBrut = String(f.Palier_Mandat || f.Palier || f.Option_Audit || '').trim();\nconst palierKey = normalizeKey(palierBrut);\nconst isDecouverte = /decouver|palier_1|option a|p1/.test(palierKey);\n\nconst rawExpert = f.Expert_Assigne ?? f.Expert_ID ?? f.Expert_Nom ?? null;\nconst hasAssignedExpert = Array.isArray(rawExpert)\n  ? rawExpert.length > 0\n  : (typeof rawExpert === 'object' && rawExpert !== null)\n    ? Object.keys(rawExpert).length > 0\n    : (typeof rawExpert === 'number'\n      ? rawExpert > 0\n      : Boolean(String(rawExpert || '').trim()));\n\nconst expertMobilise = Boolean(\n  hasAssignedExpert ||\n  f.Expert_Mobilise === true ||\n  (!isDecouverte && /affect|mobilis|assign|en mission|audit|arbitrage|livr|clotur|termin/.test(sNorm))\n);\n\nconst statutLabelMap = {\n  saisine_recue: 'Saisine reçue & scellée',\n  dispatch_en_cours: 'Dispatch expert en cours (SLA 2h)',\n  affectee: 'Expert senior mobilisé',\n  affecte: 'Expert senior mobilisé',\n  audit_en_cours: 'Audit & arbitrage en cours',\n  en_audit: 'Audit & arbitrage en cours',\n  livre: 'Livrable stratégique disponible',\n  livree: 'Livrable stratégique disponible',\n  livre_client: 'Livrable stratégique disponible',\n  cloture: 'Clôturé',\n  cloturee: 'Clôturé'\n};\n\nconst palierLabelMap = {\n  palier_1_decouverte: 'Palier 1 — Découverte',\n  palier_2_certifie: 'Mandat Certifié',\n  palier_3_chambre: 'Chambre Stratégique'\n};\n\nconst secteurBrut = String(f.Secteur_Code || f.Secteur || f.Secteur_Activite || '').trim();\nconst secteurKey = normalizeKey(secteurBrut);\nconst secteurLabelMap = {\n  agro: 'Agro-industrie & Souveraineté Alimentaire',\n  energy: 'Énergie, Mines & Transition',\n  energie: 'Énergie, Mines & Transition',\n  banking: 'Banque, FinTech & Assurance',\n  finance: 'Finance & Conformité',\n  fintech: 'Fintech & Paiements',\n  logistics: 'Logistique, Ports & Supply Chain',\n  logistique: 'Logistique & Supply Chain',\n  health: 'Santé, Pharma & Bio',\n  sante: 'Santé & Biotech',\n  telecom: 'Télécoms, Cloud & Infra',\n  property: 'BTP, Immobilier & Foncier',\n  btp: 'BTP & Aménagement',\n  manufacturing: 'Industrie & Transformation',\n  industrie: 'Industrie & Chaîne Logistique',\n  public: 'Secteur Public & Para-public',\n  retail: 'Distribution, Retail & Négoce',\n  tech: 'Tech, IA & Souveraineté Numérique',\n  ia: 'Tech, IA & Souveraineté Numérique',\n  mines: 'Mines & Ressources'\n};\n\nconst secteurAffiche = secteurKey.startsWith('code sectoriel') || !secteurBrut\n  ? 'Audit Stratégique'\n  : (secteurLabelMap[secteurKey] || secteurBrut);\n\nlet etape = 1;\nlet libelle = 'Saisine enregistrée & qualifiée';\n\nif (/clotur|termin|archiv/.test(sNorm)) {\n  etape = 5;\n  libelle = 'Mandat clôturé & certifié';\n} else if (/livr|rapport|restitu/.test(sNorm)) {\n  etape = 4;\n  libelle = 'Livrable stratégique disponible';\n} else if (/audit|analyse|arbitrage|production/.test(sNorm)) {\n  etape = 3;\n  libelle = 'Audit & arbitrage stratégique en cours';\n} else if (/affect|mobilis|assign|en mission/.test(sNorm) || expertMobilise) {\n  etape = 2;\n  libelle = 'Expert senior mobilisé';\n} else if (/dispatch/.test(sNorm)) {\n  etape = 1;\n  libelle = 'Dispatch expert en cours (SLA 2h)';\n}\n\nconst dtoPublic = {\n  reference: String(f.Mission_Ref || f.Code_Mission || ref).trim(),\n  statut: statutLabelMap[sNorm] || statutBrut,\n  statut_brut: statutBrut,\n  etape_courante: etape,\n  etape_totale: 5,\n  libelle_etape: libelle,\n  palier: palierLabelMap[palierKey] || palierBrut || 'Mandat Certifié',\n  secteur: secteurAffiche,\n  expert_mobilise: expertMobilise,\n  hash: f.Empreinte_SHA256 || f.Contrat_Hash_Ref || f.Hash_SHA256 || f.Hash_OTS || null,\n  link: f.Rapport_URL || f.Lien_Livrable || f.Livrable_URL || f.webViewLink || null,\n  mise_a_jour_utc: f.UpdatedAt || f.Updated_At || f.CreatedAt || record.updated_at || record.created_at || new Date().toISOString()\n};\n\nreturn [\n  {\n    json: {\n      found: true,\n      ok: true,\n      statusCode: 200,\n      payload: dtoPublic\n    }\n  }\n];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -192,
-        0
-      ],
-      "id": "bc5aa1aa-4d45-4bc2-a3bd-fa3c6ebfd9f4",
-      "name": "Construire DTO Public Zéro-PII"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "bcc088c0-dbb6-4c13-be7e-74bb24c9c0b9",
-              "leftValue": "={{ $json.found }}",
-              "rightValue": "",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        16,
-        0
-      ],
-      "id": "461e4b91-6985-4101-aa33-d9d6af761b79",
-      "name": "Aiguillage If"
-    },
-    {
-      "parameters": {
-        "respondWith": "json",
-        "responseBody": "={{ JSON.stringify($json.payload) }}",
-        "options": {
-          "responseCode": 200,
-          "responseHeaders": {
-            "entries": [
-              {
-                "name": "Access-Control-Allow-Origin",
-                "value": "https://e-metalabs.com"
-              },
-              {
-                "name": "Cache-Control",
-                "value": "no-store, max-age=0"
-              }
-            ]
-          }
-        }
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.5,
-      "position": [
-        224,
-        -80
-      ],
-      "id": "c661bc8b-5615-4045-8a8f-15c0e8f32a8a",
-      "name": "Réponse JSON 200 Tracker"
-    },
-    {
-      "parameters": {
-        "respondWith": "json",
-        "responseBody": "={{ JSON.stringify($json.payload) }}",
-        "options": {
-          "responseCode": 404,
-          "responseHeaders": {
-            "entries": [
-              {
-                "name": "Access-Control-Allow-Origin",
-                "value": "https://e-metalabs.com"
-              }
-            ]
-          }
-        }
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.5,
-      "position": [
-        224,
-        80
-      ],
-      "id": "04adbd80-cad7-47a5-bc8f-72fce9947f42",
-      "name": "Réponse JSON 404 Introuvable"
-    }
-  ],
-  "pinData": {},
-  "connections": {
-    "Webhook GET Tracker": {
-      "main": [
-        [
-          {
-            "node": "Valider Paramètre Ref",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Valider Paramètre Ref": {
-      "main": [
-        [
-          {
-            "node": "Lire Mission NocoDB v3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Lire Mission NocoDB v3": {
-      "main": [
-        [
-          {
-            "node": "Construire DTO Public Zéro-PII",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Construire DTO Public Zéro-PII": {
-      "main": [
-        [
-          {
-            "node": "Aiguillage If",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Aiguillage If": {
-      "main": [
-        [
-          {
-            "node": "Réponse JSON 200 Tracker",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Réponse JSON 404 Introuvable",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
-  "active": true,
-  "settings": {
-    "executionOrder": "v1",
-    "binaryMode": "separate",
-    "availableInMCP": false
-  },
-  "versionId": "8e407e57-d9a7-4043-82c6-cf266f854a75",
-  "meta": {
-    "instanceId": "ea8fa31aa22966a954dc961c81514f022c83fc78d659cee5ee3c2bdbd3975381"
-  },
-  "id": "lbvVF5XE9UjUs03b",
-  "tags": []
+    "name":  "06 - CORTEX API Tracker Client",
+    "nodes":  [
+                  {
+                      "parameters":  {
+                                         "path":  "=statut-mission",
+                                         "responseMode":  "responseNode",
+                                         "options":  {
+                                                         "allowedOrigins":  "https://e-metalabs.com,https://www.e-metalabs.com"
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.webhook",
+                      "typeVersion":  2.1,
+                      "position":  [
+                                       -848,
+                                       0
+                                   ],
+                      "id":  "e923e4f8-3169-4868-815e-f03aa0cb545a",
+                      "name":  "Webhook GET Tracker",
+                      "webhookId":  "5dd26706-6cc8-4685-bf7f-58bc5d86b984"
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "const query = $input.first().json.query || {};\nconst rawRef = String(query.ref || \u0027\u0027).trim().toUpperCase();\n\nif (!/^MIS-\\d{4}-\\d{3,6}$/.test(rawRef)) {\n  return [\n    {\n      json: {\n        valid: false,\n        httpStatus: 400,\n        error: \u0027Format de référence mission invalide.\u0027\n      }\n    }\n  ];\n}\n\nreturn [\n  {\n    json: {\n      valid: true,\n      mission_ref: rawRef\n    }\n  }\n];"
+                                     },
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       -608,
+                                       0
+                                   ],
+                      "id":  "997fac44-98fc-4f59-ac88-af4b79f7d4d5",
+                      "name":  "Valider Paramètre Ref"
+                  },
+                  {
+                      "parameters":  {
+                                         "url":  "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mv1cb6xm00g6rf5/records",
+                                         "authentication":  "genericCredentialType",
+                                         "genericAuthType":  "httpHeaderAuth",
+                                         "sendQuery":  true,
+                                         "queryParameters":  {
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "where",
+                                                                                        "value":  "={{ \u0027(Mission_Ref,eq,\u0027 + $json.mission_ref + \u0027)\u0027 }}"
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "limit",
+                                                                                        "value":  "1"
+                                                                                    }
+                                                                                ]
+                                                             },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "typeVersion":  4.4,
+                      "position":  [
+                                       -384,
+                                       0
+                                   ],
+                      "id":  "0c023eb2-e817-4547-bc97-02e93e807ccf",
+                      "name":  "Lire Mission NocoDB v3",
+                      "credentials":  {
+                                          "httpHeaderAuth":  {
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account 2"
+                                                             }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "const ref = String($(\u0027Valider Paramètre Ref\u0027).first().json.mission_ref || \u0027\u0027).trim().toUpperCase();\nconst inputData = $input.first().json || {};\nconst records = Array.isArray(inputData.records)\n  ? inputData.records\n  : (Array.isArray(inputData.list) ? inputData.list : []);\n\nif (records.length === 0) {\n  return [\n    {\n      json: {\n        found: false,\n        ok: false,\n        statusCode: 404,\n        payload: {\n          found: false,\n          reference: ref,\n          error: \u0027Dossier introuvable\u0027\n        }\n      }\n    }\n  ];\n}\n\nconst record = records[0];\nconst f = record.fields \u0026\u0026 typeof record.fields === \u0027object\u0027 ? record.fields : record;\n\nconst normalizeKey = (val) =\u003e\n  String(val || \u0027\u0027)\n    .normalize(\u0027NFD\u0027)\n    .replace(/[\\u0300-\\u036f]/g, \u0027\u0027)\n    .toLowerCase()\n    .trim();\n\nconst statutBrut = String(f.Statut_Mandat || f.Statut || f.Statut_Mission || \u0027Saisine_Recue\u0027).trim();\nconst sNorm = normalizeKey(statutBrut);\n\nconst palierBrut = String(f.Palier_Mandat || f.Palier || f.Option_Audit || \u0027\u0027).trim();\nconst palierKey = normalizeKey(palierBrut);\nconst isDecouverte = /decouver|palier_1|option a|p1/.test(palierKey);\n\nconst rawExpert = f.Expert_Assigne ?? f.Expert_ID ?? f.Expert_Nom ?? null;\nconst hasAssignedExpert = Array.isArray(rawExpert)\n  ? rawExpert.length \u003e 0\n  : (typeof rawExpert === \u0027object\u0027 \u0026\u0026 rawExpert !== null)\n    ? Object.keys(rawExpert).length \u003e 0\n    : (typeof rawExpert === \u0027number\u0027\n      ? rawExpert \u003e 0\n      : Boolean(String(rawExpert || \u0027\u0027).trim()));\n\nconst expertMobilise = Boolean(\n  hasAssignedExpert ||\n  f.Expert_Mobilise === true ||\n  (!isDecouverte \u0026\u0026 /affect|mobilis|assign|en mission|audit|arbitrage|livr|clotur|termin/.test(sNorm))\n);\n\nconst statutLabelMap = {\n  saisine_recue: \u0027Saisine reçue \u0026 scellée\u0027,\n  dispatch_en_cours: \u0027Dispatch expert en cours (SLA 2h)\u0027,\n  affectee: \u0027Expert senior mobilisé\u0027,\n  affecte: \u0027Expert senior mobilisé\u0027,\n  audit_en_cours: \u0027Audit \u0026 arbitrage en cours\u0027,\n  en_audit: \u0027Audit \u0026 arbitrage en cours\u0027,\n  livre: \u0027Livrable stratégique disponible\u0027,\n  livree: \u0027Livrable stratégique disponible\u0027,\n  livre_client: \u0027Livrable stratégique disponible\u0027,\n  cloture: \u0027Clôturé\u0027,\n  cloturee: \u0027Clôturé\u0027\n};\n\nconst palierLabelMap = {\n  palier_1_decouverte: \u0027Palier 1 — Découverte\u0027,\n  palier_2_certifie: \u0027Mandat Certifié\u0027,\n  palier_3_chambre: \u0027Chambre Stratégique\u0027\n};\n\nconst secteurBrut = String(f.Secteur_Code || f.Secteur || f.Secteur_Activite || \u0027\u0027).trim();\nconst secteurKey = normalizeKey(secteurBrut);\nconst secteurLabelMap = {\n  agro: \u0027Agro-industrie \u0026 Souveraineté Alimentaire\u0027,\n  energy: \u0027Énergie, Mines \u0026 Transition\u0027,\n  energie: \u0027Énergie, Mines \u0026 Transition\u0027,\n  banking: \u0027Banque, FinTech \u0026 Assurance\u0027,\n  finance: \u0027Finance \u0026 Conformité\u0027,\n  fintech: \u0027Fintech \u0026 Paiements\u0027,\n  logistics: \u0027Logistique, Ports \u0026 Supply Chain\u0027,\n  logistique: \u0027Logistique \u0026 Supply Chain\u0027,\n  health: \u0027Santé, Pharma \u0026 Bio\u0027,\n  sante: \u0027Santé \u0026 Biotech\u0027,\n  telecom: \u0027Télécoms, Cloud \u0026 Infra\u0027,\n  property: \u0027BTP, Immobilier \u0026 Foncier\u0027,\n  btp: \u0027BTP \u0026 Aménagement\u0027,\n  manufacturing: \u0027Industrie \u0026 Transformation\u0027,\n  industrie: \u0027Industrie \u0026 Chaîne Logistique\u0027,\n  public: \u0027Secteur Public \u0026 Para-public\u0027,\n  retail: \u0027Distribution, Retail \u0026 Négoce\u0027,\n  tech: \u0027Tech, IA \u0026 Souveraineté Numérique\u0027,\n  ia: \u0027Tech, IA \u0026 Souveraineté Numérique\u0027,\n  mines: \u0027Mines \u0026 Ressources\u0027\n};\n\nconst secteurAffiche = secteurKey.startsWith(\u0027code sectoriel\u0027) || !secteurBrut\n  ? \u0027Audit Stratégique\u0027\n  : (secteurLabelMap[secteurKey] || secteurBrut);\n\nlet etape = 1;\nlet libelle = \u0027Saisine enregistrée \u0026 qualifiée\u0027;\n\nif (/clotur|termin|archiv/.test(sNorm)) {\n  etape = 5;\n  libelle = \u0027Mandat clôturé \u0026 certifié\u0027;\n} else if (/livr|rapport|restitu/.test(sNorm)) {\n  etape = 4;\n  libelle = \u0027Livrable stratégique disponible\u0027;\n} else if (/audit|analyse|arbitrage|production/.test(sNorm)) {\n  etape = 3;\n  libelle = \u0027Audit \u0026 arbitrage stratégique en cours\u0027;\n} else if (/affect|mobilis|assign|en mission/.test(sNorm) || expertMobilise) {\n  etape = 2;\n  libelle = \u0027Expert senior mobilisé\u0027;\n} else if (/dispatch/.test(sNorm)) {\n  etape = 1;\n  libelle = \u0027Dispatch expert en cours (SLA 2h)\u0027;\n}\n\nconst dtoPublic = {\n  reference: String(f.Mission_Ref || f.Code_Mission || ref).trim(),\n  statut: statutLabelMap[sNorm] || statutBrut,\n  statut_brut: statutBrut,\n  etape_courante: etape,\n  etape_totale: 5,\n  libelle_etape: libelle,\n  palier: palierLabelMap[palierKey] || palierBrut || \u0027Mandat Certifié\u0027,\n  secteur: secteurAffiche,\n  expert_mobilise: expertMobilise,\n  hash: f.Empreinte_SHA256 || f.Contrat_Hash_Ref || f.Hash_SHA256 || f.Hash_OTS || null,\n  link: f.Rapport_URL || f.Lien_Livrable || f.Livrable_URL || f.webViewLink || null,\n  mise_a_jour_utc: f.UpdatedAt || f.Updated_At || f.CreatedAt || record.updated_at || record.created_at || new Date().toISOString()\n};\n\nreturn [\n  {\n    json: {\n      found: true,\n      ok: true,\n      statusCode: 200,\n      payload: dtoPublic\n    }\n  }\n];"
+                                     },
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       -192,
+                                       0
+                                   ],
+                      "id":  "bc5aa1aa-4d45-4bc2-a3bd-fa3c6ebfd9f4",
+                      "name":  "Construire DTO Public Zéro-PII"
+                  },
+                  {
+                      "parameters":  {
+                                         "conditions":  {
+                                                            "options":  {
+                                                                            "caseSensitive":  true,
+                                                                            "leftValue":  "",
+                                                                            "typeValidation":  "strict",
+                                                                            "version":  3
+                                                                        },
+                                                            "conditions":  [
+                                                                               {
+                                                                                   "id":  "bcc088c0-dbb6-4c13-be7e-74bb24c9c0b9",
+                                                                                   "leftValue":  "={{ $json.found }}",
+                                                                                   "rightValue":  "",
+                                                                                   "operator":  {
+                                                                                                    "type":  "boolean",
+                                                                                                    "operation":  "true",
+                                                                                                    "singleValue":  true
+                                                                                                }
+                                                                               }
+                                                                           ],
+                                                            "combinator":  "and"
+                                                        },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.if",
+                      "typeVersion":  2.3,
+                      "position":  [
+                                       16,
+                                       0
+                                   ],
+                      "id":  "461e4b91-6985-4101-aa33-d9d6af761b79",
+                      "name":  "Aiguillage If"
+                  },
+                  {
+                      "parameters":  {
+                                         "respondWith":  "json",
+                                         "responseBody":  "={{ JSON.stringify($json.payload) }}",
+                                         "options":  {
+                                                         "responseCode":  200,
+                                                         "responseHeaders":  {
+                                                                                 "entries":  [
+                                                                                                 {
+                                                                                                     "name":  "Access-Control-Allow-Origin",
+                                                                                                     "value":  "https://e-metalabs.com"
+                                                                                                 },
+                                                                                                 {
+                                                                                                     "name":  "Cache-Control",
+                                                                                                     "value":  "no-store, max-age=0"
+                                                                                                 }
+                                                                                             ]
+                                                                             }
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "typeVersion":  1.5,
+                      "position":  [
+                                       224,
+                                       -80
+                                   ],
+                      "id":  "c661bc8b-5615-4045-8a8f-15c0e8f32a8a",
+                      "name":  "Réponse JSON 200 Tracker"
+                  },
+                  {
+                      "parameters":  {
+                                         "respondWith":  "json",
+                                         "responseBody":  "={{ JSON.stringify($json.payload) }}",
+                                         "options":  {
+                                                         "responseCode":  404,
+                                                         "responseHeaders":  {
+                                                                                 "entries":  [
+                                                                                                 {
+                                                                                                     "name":  "Access-Control-Allow-Origin",
+                                                                                                     "value":  "https://e-metalabs.com"
+                                                                                                 }
+                                                                                             ]
+                                                                             }
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "typeVersion":  1.5,
+                      "position":  [
+                                       224,
+                                       80
+                                   ],
+                      "id":  "04adbd80-cad7-47a5-bc8f-72fce9947f42",
+                      "name":  "Réponse JSON 404 Introuvable"
+                  }
+              ],
+    "pinData":  {
+
+                },
+    "connections":  {
+                        "Webhook GET Tracker":  {
+                                                    "main":  [
+                                                                 [
+                                                                     {
+                                                                         "node":  "Valider Paramètre Ref",
+                                                                         "type":  "main",
+                                                                         "index":  0
+                                                                     }
+                                                                 ]
+                                                             ]
+                                                },
+                        "Valider Paramètre Ref":  {
+                                                      "main":  [
+                                                                   [
+                                                                       {
+                                                                           "node":  "Lire Mission NocoDB v3",
+                                                                           "type":  "main",
+                                                                           "index":  0
+                                                                       }
+                                                                   ]
+                                                               ]
+                                                  },
+                        "Lire Mission NocoDB v3":  {
+                                                       "main":  [
+                                                                    [
+                                                                        {
+                                                                            "node":  "Construire DTO Public Zéro-PII",
+                                                                            "type":  "main",
+                                                                            "index":  0
+                                                                        }
+                                                                    ]
+                                                                ]
+                                                   },
+                        "Construire DTO Public Zéro-PII":  {
+                                                               "main":  [
+                                                                            [
+                                                                                {
+                                                                                    "node":  "Aiguillage If",
+                                                                                    "type":  "main",
+                                                                                    "index":  0
+                                                                                }
+                                                                            ]
+                                                                        ]
+                                                           },
+                        "Aiguillage If":  {
+                                              "main":  [
+                                                           [
+                                                               {
+                                                                   "node":  "Réponse JSON 200 Tracker",
+                                                                   "type":  "main",
+                                                                   "index":  0
+                                                               }
+                                                           ],
+                                                           [
+                                                               {
+                                                                   "node":  "Réponse JSON 404 Introuvable",
+                                                                   "type":  "main",
+                                                                   "index":  0
+                                                               }
+                                                           ]
+                                                       ]
+                                          }
+                    },
+    "active":  true,
+    "settings":  {
+                     "executionOrder":  "v1",
+                     "binaryMode":  "separate",
+                     "availableInMCP":  false
+                 },
+    "versionId":  "8e407e57-d9a7-4043-82c6-cf266f854a75",
+    "meta":  {
+                 "instanceId":  "ea8fa31aa22966a954dc961c81514f022c83fc78d659cee5ee3c2bdbd3975381"
+             },
+    "id":  "lbvVF5XE9UjUs03b",
+    "tags":  [
+
+             ]
 }

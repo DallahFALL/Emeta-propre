@@ -1,312 +1,326 @@
 {
-  "name": "01 - CORTEX Inbound Saisine",
-  "nodes": [
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "reception-saisine",
-        "responseMode": "responseNode",
-        "options": {
-          "allowedOrigins": "https://e-metalabs.com,https://www.e-metalabs.com"
-        }
-      },
-      "id": "e91bc67d-700f-468e-8dc5-96c50656cc3b",
-      "name": "Webhook Saisine",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -688,
-        112
-      ],
-      "webhookId": "cortex-inbound-saisine"
-    },
-    {
-      "parameters": {
-        "jsCode": "return [{ json: { urls: { nocodb_base: 'https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if', desk_portal: 'https://desk.e-metalabs.com', whatsapp_api: 'https://graph.facebook.com/v20.0', pdf_engine: 'http://pdf_engine:5000/generate-pdf' }, tables: { missions: 'mv1cb6xm00g6rf5', experts: 'm4705kfa0sqavqb', claims: 'cortex_mission_claims' }, sla: { delai_expiration_heures: 2, secret_signature: null }, mission: $input.first().json }, binary: $input.first().binary }];"
-      },
-      "id": "f3926836-5be6-41bf-bfa4-6d8c9ecddcdc",
-      "name": "Initialisation standardisée",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -544,
-        112
-      ]
-    },
-    {
-      "parameters": {
-        "jsCode": "// Calcul SHA-256 autonome compatible sandbox n8n (Node crypto + fallback JS pur)\nfunction computeSha256(str) {\n  try {\n    const nodeCrypto = require('crypto');\n    return nodeCrypto.createHash('sha256').update(str, 'utf8').digest('hex');\n  } catch (e) {\n    const utf8 = unescape(encodeURIComponent(str));\n    const rightRotate = (v, a) => (v >>> a) | (v << (32 - a));\n    const maxWord = Math.pow(2, 32);\n    const words = [];\n    const hash = [];\n    const k = [];\n    const isComp = {};\n    const bitLen = utf8.length * 8;\n    let primeCount = 0;\n    let hex = '';\n\n    for (let cand = 2; primeCount < 64; cand++) {\n      if (!isComp[cand]) {\n        for (let i = 0; i < 313; i += cand) {\n          isComp[i] = cand;\n        }\n        hash[primeCount] = (Math.pow(cand, 0.5) * maxWord) | 0;\n        k[primeCount++] = (Math.pow(cand, 1 / 3) * maxWord) | 0;\n      }\n    }\n\n    let padded = utf8 + '\\x80';\n    while ((padded.length % 64) - 56) {\n      padded += '\\x00';\n    }\n    for (let i = 0; i < padded.length; i++) {\n      words[i >> 2] |= padded.charCodeAt(i) << (((3 - i) % 4) * 8);\n    }\n    words[words.length] = (bitLen / maxWord) | 0;\n    words[words.length] = bitLen;\n\n    for (let j = 0; j < words.length; ) {\n      const w = words.slice(j, (j += 16));\n      const oldHash = hash.slice(0);\n\n      for (let i = 0; i < 64; i++) {\n        const w15 = w[i - 15];\n        const w2 = w[i - 2];\n        const a = hash[0];\n        const e = hash[4];\n\n        const t1 =\n          hash[7] +\n          (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25)) +\n          ((e & hash[5]) ^ (~e & hash[6])) +\n          k[i] +\n          (w[i] =\n            i < 16\n              ? w[i]\n              : (w[i - 16] +\n                  (rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 >>> 3)) +\n                  w[i - 7] +\n                  (rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 >>> 10))) |\n                0);\n\n        const t2 =\n          (rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22)) +\n          ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));\n\n        hash.unshift((t1 + t2) | 0);\n        hash.pop();\n        hash[4] = (hash[4] + t1) | 0;\n      }\n\n      for (let i = 0; i < 8; i++) {\n        hash[i] = (hash[i] + oldHash[i]) | 0;\n      }\n    }\n\n    for (let i = 0; i < 8; i++) {\n      for (let j = 3; j + 1; j--) {\n        const b = (hash[i] >> (j * 8)) & 255;\n        hex += (b < 16 ? '0' : '') + b.toString(16);\n      }\n    }\n    return hex;\n  }\n}\n\ntry {\n  const item = $input.first();\n  const inputData = item.json || {};\n  const envelope = inputData.mission || inputData;\n  const missionPayload = envelope.body || envelope;\n\n  // Intégration éventuelle des pièces jointes binaires\n  const binaryParts = [];\n  for (const [key, file] of Object.entries(item.binary || {})) {\n    const data = await this.helpers.getBinaryDataBuffer(0, key);\n    binaryParts.push(`${key}:${file.fileName || ''}:${data.toString('base64')}`);\n  }\n\n  const canonicalPayload =\n    JSON.stringify(missionPayload) +\n    (binaryParts.length ? '\\n' + binaryParts.join('\\n') : '');\n\n  const sha256Hash = computeSha256(canonicalPayload);\n  const timestampT0 = missionPayload.timestamp_t0 || new Date().toISOString();\n\n  // Conversion en 32 octets bruts pour le serveur calendrier OpenTimestamps (ots_digest)\n  const rawDigestBytes = new Uint8Array(\n    sha256Hash.match(/.{1,2}/g).map((byte) => parseInt(byte, 16))\n  );\n  const otsBinary = await this.helpers.prepareBinaryData(\n    Buffer.from(rawDigestBytes),\n    'ots_digest.bin',\n    'application/octet-stream'\n  );\n\n  return [\n    {\n      json: {\n        ...inputData,\n        sha256: sha256Hash,\n        sha256_hash: sha256Hash,\n        hash: sha256Hash,\n        hashHex: sha256Hash,\n        empreinte_sha256: sha256Hash,\n        contrat_hash_ref: sha256Hash,\n        canonical_payload: canonicalPayload,\n        timestamp_t0: timestampT0\n      },\n      binary: {\n        ots_digest: otsBinary\n      }\n    }\n  ];\n} catch (err) {\n  throw new Error(`Calcul SHA-256 de la saisine impossible : ${err.message}`);\n}"
-      },
-      "id": "7e608348-5645-45c3-8d4a-c135aeeab4e2",
-      "name": "Empreinte SHA-256",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -400,
-        112
-      ]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://a.pool.opentimestamps.org/digest",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Content-Type",
-              "value": "application/vnd.opentimestamps.ots"
-            }
-          ]
-        },
-        "sendBody": true,
-        "contentType": "binaryData",
-        "inputDataFieldName": "ots_digest",
-        "options": {
-          "response": {}
-        }
-      },
-      "id": "0b50ef21-8fb8-4dca-8fc8-f5312feaac51",
-      "name": "Soumission OpenTimestamps T+0",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        -192,
-        -16
-      ],
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT nextval('cortex_mission_ref_seq') AS mission_sequence;",
-        "options": {}
-      },
-      "id": "f4863dea-6c9a-4cbb-a0e7-b69214614688",
-      "name": "Allouer séquence de référence",
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
-      "position": [
-        -192,
-        208
-      ],
-      "credentials": {
-        "postgres": {
-          "id": "yXVlE8lNk3yeKhuj",
-          "name": "Postgres e-META Production"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "mode": "runOnceForEachItem",
-        "jsCode": "try {\n  const sequence = Number($json.mission_sequence);\n  const source = $('Empreinte SHA-256').first();\n  if (!Number.isSafeInteger(sequence) || sequence < 1 || sequence > 9999) throw new Error('Séquence de référence invalide ou quota annuel MIS-2026 épuisé.');\n  const reference = `MIS-2026-${String(sequence).padStart(4, '0')}`;\n  return { json: { ...source.json, reference_mission: reference }, binary: source.binary };\n} catch (err) { throw new Error(`Génération de référence impossible: ${err.message}`); }"
-      },
-      "id": "8f163430-1e6c-4d11-aa53-75e0696a6ba3",
-      "name": "Référence canonique",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -48,
-        208
-      ]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "={{ $('Initialisation standardisée').first().json.urls.nocodb_base + '/' + $('Initialisation standardisée').first().json.tables.missions + '/records' }}",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            }
-          ]
-        },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{\n  (() => {\n    let payload = {};\n    try {\n      payload = typeof $json.canonical_payload === 'string'\n        ? JSON.parse($json.canonical_payload)\n        : ($json.canonical_payload || {});\n    } catch (_) {}\n\n    const norm = (v) => String(v || '').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase().trim();\n\n    const pNorm = norm(payload.palier);\n    let palierCode = 'Palier_2_Certifie';\n    if (/decouver|palier_1|option a|p1/.test(pNorm)) {\n      palierCode = 'Palier_1_Decouverte';\n    } else if (/chambre|palier_3|option c|p3|souverain/.test(pNorm)) {\n      palierCode = 'Palier_3_Chambre';\n    }\n\n    const contexte = String(payload.mission_contexte || payload.contexte || '').trim();\n    const title = String(\n      payload.mission_nom || payload.entreprise || (contexte ? contexte.slice(0, 120) : 'Saisine CORTEX')\n    ).trim();\n\n    const secteurCode = norm(payload.secteur_selectionne || payload.secteur || 'agro') || 'agro';\n\n    return {\n      fields: {\n        Title: title,\n        Mission_Ref: $json.reference_mission,\n        Palier_Mandat: palierCode,\n        Secteur_Code: secteurCode,\n        Langue_Dossier: norm(payload.langue || 'fr') || 'fr',\n        Contexte_Extrait: contexte ? contexte.slice(0, 1000) : '',\n        Date_Saisine_T0: $json.timestamp_t0 || payload.timestamp_t0 || new Date().toISOString(),\n        Statut_Mandat: 'Saisine_Recue',\n        Empreinte_SHA256: $json.empreinte_sha256 || $json.sha256_hash || $json.hash || ''\n      }\n    };\n  })()\n}}",
-        "options": {}
-      },
-      "id": "d2c603db-a4f0-4de5-9b4c-a90c35ae016a",
-      "name": "Créer mission NocoDB v3",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        96,
-        208
-      ],
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "AYFV4CoauevzSq4r",
-          "name": "Header Auth account 2"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://automation.e-metalabs.com/webhook/cortex-analyse-rag-pdf",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            }
-          ]
-        },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{\n  (() => {\n    const refNode = $('Référence canonique').first().json || {};\n    let parsed = {};\n    try {\n      parsed = typeof refNode.canonical_payload === 'string'\n        ? JSON.parse(refNode.canonical_payload)\n        : (refNode.canonical_payload || {});\n    } catch (_) {}\n\n    const rec = $json.records?.[0] || {};\n    const fields = rec.fields || {};\n    const missionRef = fields.Mission_Ref || refNode.reference_mission;\n\n    return {\n      reference_mission: missionRef,\n      mission_ref: missionRef,\n      nocodb_record_id: rec.id || rec.id_fields?.Id || null,\n      statut_mandat: fields.Statut_Mandat || 'Saisine_Recue',\n      palier_mandat: fields.Palier_Mandat || 'Palier_2_Certifie',\n      secteur_code: fields.Secteur_Code || parsed.secteur_selectionne || 'agro',\n      langue: fields.Langue_Dossier || parsed.langue || 'fr',\n      empreinte_sha256: fields.Empreinte_SHA256 || refNode.empreinte_sha256 || null,\n      timestamp_t0: fields.Date_Saisine_T0 || refNode.timestamp_t0 || new Date().toISOString(),\n      mission_nom: parsed.mission_nom || fields.Title || 'Saisine CORTEX',\n      mission_contexte: parsed.mission_contexte || parsed.contexte || fields.Contexte_Extrait || '',\n      option_b_detectee: Boolean(parsed.option_b_detectee),\n      email: parsed.email || '',\n      whatsapp: parsed.whatsapp || parsed.telephone || '',\n      tracker_url: 'https://e-metalabs.com/tracker.html?ref=' + encodeURIComponent(missionRef)\n    };\n  })()\n}}",
-        "options": {}
-      },
-      "id": "3fe5e66a-7084-4702-ae54-2211efd27fc4",
-      "name": "Transmettre à CORTEX 02",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        304,
-        304
-      ],
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "AYFV4CoauevzSq4r",
-          "name": "Header Auth account 2"
-        }
-      },
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "respondWith": "json",
-        "responseBody": "={{\n  JSON.stringify({\n    ok: true,\n    reference_mission: $json.records?.[0]?.fields?.Mission_Ref || $('Référence canonique').first().json.reference_mission,\n    statut: $json.records?.[0]?.fields?.Statut_Mandat || 'Saisine_Recue',\n    empreinte_sha256: $json.records?.[0]?.fields?.Empreinte_SHA256 || $('Référence canonique').first().json.empreinte_sha256 || null,\n    timestamp_t0: $json.records?.[0]?.fields?.Date_Saisine_T0 || $('Référence canonique').first().json.timestamp_t0 || new Date().toISOString(),\n    tracker_url: 'https://e-metalabs.com/tracker.html?ref=' + encodeURIComponent($json.records?.[0]?.fields?.Mission_Ref || $('Référence canonique').first().json.reference_mission)\n  })\n}}",
-        "options": {
-          "responseCode": 201,
-          "responseHeaders": {
-            "entries": [
-              {
-                "name": "Access-Control-Allow-Origin",
-                "value": "https://e-metalabs.com"
-              },
-              {
-                "name": "Cache-Control",
-                "value": "no-store"
-              }
-            ]
-          }
-        }
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.5,
-      "position": [
-        304,
-        80
-      ],
-      "id": "ecd2037c-4431-47e0-b6f8-1b9c6ef9d082",
-      "name": "Réponse JSON 201 Saisine"
-    }
-  ],
-  "pinData": {},
-  "connections": {
-    "Webhook Saisine": {
-      "main": [
-        [
-          {
-            "node": "Initialisation standardisée",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Initialisation standardisée": {
-      "main": [
-        [
-          {
-            "node": "Empreinte SHA-256",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Empreinte SHA-256": {
-      "main": [
-        [
-          {
-            "node": "Soumission OpenTimestamps T+0",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Allouer séquence de référence",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Allouer séquence de référence": {
-      "main": [
-        [
-          {
-            "node": "Référence canonique",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Référence canonique": {
-      "main": [
-        [
-          {
-            "node": "Créer mission NocoDB v3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Créer mission NocoDB v3": {
-      "main": [
-        [
-          {
-            "node": "Réponse JSON 201 Saisine",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Transmettre à CORTEX 02",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Réponse JSON 201 Saisine": {
-      "main": [
-        []
-      ]
-    }
-  },
-  "active": true,
-  "settings": {
-    "executionOrder": "v1",
-    "binaryMode": "separate",
-    "availableInMCP": false
-  },
-  "versionId": "2af7e831-78fc-43a0-ae9c-456ccac06602",
-  "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "ea8fa31aa22966a954dc961c81514f022c83fc78d659cee5ee3c2bdbd3975381"
-  },
-  "id": "55u8HMTvNQOEbmlE",
-  "tags": []
+    "name":  "01 - CORTEX Inbound Saisine",
+    "nodes":  [
+                  {
+                      "parameters":  {
+                                         "httpMethod":  "POST",
+                                         "path":  "reception-saisine",
+                                         "responseMode":  "responseNode",
+                                         "options":  {
+                                                         "allowedOrigins":  "https://e-metalabs.com,https://www.e-metalabs.com"
+                                                     }
+                                     },
+                      "id":  "e91bc67d-700f-468e-8dc5-96c50656cc3b",
+                      "name":  "Webhook Saisine",
+                      "type":  "n8n-nodes-base.webhook",
+                      "typeVersion":  2,
+                      "position":  [
+                                       -688,
+                                       112
+                                   ],
+                      "webhookId":  "cortex-inbound-saisine"
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "return [{ json: { urls: { nocodb_base: \u0027https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if\u0027, desk_portal: \u0027https://desk.e-metalabs.com\u0027, whatsapp_api: \u0027https://graph.facebook.com/v20.0\u0027, pdf_engine: \u0027http://pdf_engine:5000/generate-pdf\u0027 }, tables: { missions: \u0027mv1cb6xm00g6rf5\u0027, experts: \u0027m4705kfa0sqavqb\u0027, claims: \u0027cortex_mission_claims\u0027 }, sla: { delai_expiration_heures: 2, secret_signature: null }, mission: $input.first().json }, binary: $input.first().binary }];"
+                                     },
+                      "id":  "f3926836-5be6-41bf-bfa4-6d8c9ecddcdc",
+                      "name":  "Initialisation standardisée",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       -544,
+                                       112
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "// Calcul SHA-256 autonome compatible sandbox n8n (Node crypto + fallback JS pur)\nfunction computeSha256(str) {\n  try {\n    const nodeCrypto = require(\u0027crypto\u0027);\n    return nodeCrypto.createHash(\u0027sha256\u0027).update(str, \u0027utf8\u0027).digest(\u0027hex\u0027);\n  } catch (e) {\n    const utf8 = unescape(encodeURIComponent(str));\n    const rightRotate = (v, a) =\u003e (v \u003e\u003e\u003e a) | (v \u003c\u003c (32 - a));\n    const maxWord = Math.pow(2, 32);\n    const words = [];\n    const hash = [];\n    const k = [];\n    const isComp = {};\n    const bitLen = utf8.length * 8;\n    let primeCount = 0;\n    let hex = \u0027\u0027;\n\n    for (let cand = 2; primeCount \u003c 64; cand++) {\n      if (!isComp[cand]) {\n        for (let i = 0; i \u003c 313; i += cand) {\n          isComp[i] = cand;\n        }\n        hash[primeCount] = (Math.pow(cand, 0.5) * maxWord) | 0;\n        k[primeCount++] = (Math.pow(cand, 1 / 3) * maxWord) | 0;\n      }\n    }\n\n    let padded = utf8 + \u0027\\x80\u0027;\n    while ((padded.length % 64) - 56) {\n      padded += \u0027\\x00\u0027;\n    }\n    for (let i = 0; i \u003c padded.length; i++) {\n      words[i \u003e\u003e 2] |= padded.charCodeAt(i) \u003c\u003c (((3 - i) % 4) * 8);\n    }\n    words[words.length] = (bitLen / maxWord) | 0;\n    words[words.length] = bitLen;\n\n    for (let j = 0; j \u003c words.length; ) {\n      const w = words.slice(j, (j += 16));\n      const oldHash = hash.slice(0);\n\n      for (let i = 0; i \u003c 64; i++) {\n        const w15 = w[i - 15];\n        const w2 = w[i - 2];\n        const a = hash[0];\n        const e = hash[4];\n\n        const t1 =\n          hash[7] +\n          (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25)) +\n          ((e \u0026 hash[5]) ^ (~e \u0026 hash[6])) +\n          k[i] +\n          (w[i] =\n            i \u003c 16\n              ? w[i]\n              : (w[i - 16] +\n                  (rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 \u003e\u003e\u003e 3)) +\n                  w[i - 7] +\n                  (rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 \u003e\u003e\u003e 10))) |\n                0);\n\n        const t2 =\n          (rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22)) +\n          ((a \u0026 hash[1]) ^ (a \u0026 hash[2]) ^ (hash[1] \u0026 hash[2]));\n\n        hash.unshift((t1 + t2) | 0);\n        hash.pop();\n        hash[4] = (hash[4] + t1) | 0;\n      }\n\n      for (let i = 0; i \u003c 8; i++) {\n        hash[i] = (hash[i] + oldHash[i]) | 0;\n      }\n    }\n\n    for (let i = 0; i \u003c 8; i++) {\n      for (let j = 3; j + 1; j--) {\n        const b = (hash[i] \u003e\u003e (j * 8)) \u0026 255;\n        hex += (b \u003c 16 ? \u00270\u0027 : \u0027\u0027) + b.toString(16);\n      }\n    }\n    return hex;\n  }\n}\n\ntry {\n  const item = $input.first();\n  const inputData = item.json || {};\n  const envelope = inputData.mission || inputData;\n  const missionPayload = envelope.body || envelope;\n\n  // Intégration éventuelle des pièces jointes binaires\n  const binaryParts = [];\n  for (const [key, file] of Object.entries(item.binary || {})) {\n    const data = await this.helpers.getBinaryDataBuffer(0, key);\n    binaryParts.push(`${key}:${file.fileName || \u0027\u0027}:${data.toString(\u0027base64\u0027)}`);\n  }\n\n  const canonicalPayload =\n    JSON.stringify(missionPayload) +\n    (binaryParts.length ? \u0027\\n\u0027 + binaryParts.join(\u0027\\n\u0027) : \u0027\u0027);\n\n  const sha256Hash = computeSha256(canonicalPayload);\n  const timestampT0 = missionPayload.timestamp_t0 || new Date().toISOString();\n\n  // Conversion en 32 octets bruts pour le serveur calendrier OpenTimestamps (ots_digest)\n  const rawDigestBytes = new Uint8Array(\n    sha256Hash.match(/.{1,2}/g).map((byte) =\u003e parseInt(byte, 16))\n  );\n  const otsBinary = await this.helpers.prepareBinaryData(\n    Buffer.from(rawDigestBytes),\n    \u0027ots_digest.bin\u0027,\n    \u0027application/octet-stream\u0027\n  );\n\n  return [\n    {\n      json: {\n        ...inputData,\n        sha256: sha256Hash,\n        sha256_hash: sha256Hash,\n        hash: sha256Hash,\n        hashHex: sha256Hash,\n        empreinte_sha256: sha256Hash,\n        contrat_hash_ref: sha256Hash,\n        canonical_payload: canonicalPayload,\n        timestamp_t0: timestampT0\n      },\n      binary: {\n        ots_digest: otsBinary\n      }\n    }\n  ];\n} catch (err) {\n  throw new Error(`Calcul SHA-256 de la saisine impossible : ${err.message}`);\n}"
+                                     },
+                      "id":  "7e608348-5645-45c3-8d4a-c135aeeab4e2",
+                      "name":  "Empreinte SHA-256",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       -400,
+                                       112
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "method":  "POST",
+                                         "url":  "https://a.pool.opentimestamps.org/digest",
+                                         "sendHeaders":  true,
+                                         "headerParameters":  {
+                                                                  "parameters":  [
+                                                                                     {
+                                                                                         "name":  "Content-Type",
+                                                                                         "value":  "application/vnd.opentimestamps.ots"
+                                                                                     }
+                                                                                 ]
+                                                              },
+                                         "sendBody":  true,
+                                         "contentType":  "binaryData",
+                                         "inputDataFieldName":  "ots_digest",
+                                         "options":  {
+                                                         "response":  {
+
+                                                                      }
+                                                     }
+                                     },
+                      "id":  "0b50ef21-8fb8-4dca-8fc8-f5312feaac51",
+                      "name":  "Soumission OpenTimestamps T+0",
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "typeVersion":  4.2,
+                      "position":  [
+                                       -192,
+                                       -16
+                                   ],
+                      "onError":  "continueRegularOutput"
+                  },
+                  {
+                      "parameters":  {
+                                         "operation":  "executeQuery",
+                                         "query":  "SELECT nextval(\u0027cortex_mission_ref_seq\u0027) AS mission_sequence;",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "id":  "f4863dea-6c9a-4cbb-a0e7-b69214614688",
+                      "name":  "Allouer séquence de référence",
+                      "type":  "n8n-nodes-base.postgres",
+                      "typeVersion":  2.6,
+                      "position":  [
+                                       -192,
+                                       208
+                                   ],
+                      "credentials":  {
+                                          "postgres":  {
+                                                           "id":  "yXVlE8lNk3yeKhuj",
+                                                           "name":  "Postgres e-META Production"
+                                                       }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "mode":  "runOnceForEachItem",
+                                         "jsCode":  "try {\n  const sequence = Number($json.mission_sequence);\n  const source = $(\u0027Empreinte SHA-256\u0027).first();\n  if (!Number.isSafeInteger(sequence) || sequence \u003c 1 || sequence \u003e 9999) throw new Error(\u0027Séquence de référence invalide ou quota annuel MIS-2026 épuisé.\u0027);\n  const reference = `MIS-2026-${String(sequence).padStart(4, \u00270\u0027)}`;\n  return { json: { ...source.json, reference_mission: reference }, binary: source.binary };\n} catch (err) { throw new Error(`Génération de référence impossible: ${err.message}`); }"
+                                     },
+                      "id":  "8f163430-1e6c-4d11-aa53-75e0696a6ba3",
+                      "name":  "Référence canonique",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       -48,
+                                       208
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "method":  "POST",
+                                         "url":  "={{ $(\u0027Initialisation standardisée\u0027).first().json.urls.nocodb_base + \u0027/\u0027 + $(\u0027Initialisation standardisée\u0027).first().json.tables.missions + \u0027/records\u0027 }}",
+                                         "authentication":  "genericCredentialType",
+                                         "genericAuthType":  "httpHeaderAuth",
+                                         "sendHeaders":  true,
+                                         "headerParameters":  {
+                                                                  "parameters":  [
+                                                                                     {
+                                                                                         "name":  "Content-Type",
+                                                                                         "value":  "application/json"
+                                                                                     }
+                                                                                 ]
+                                                              },
+                                         "sendBody":  true,
+                                         "specifyBody":  "json",
+                                         "jsonBody":  "={{\n  (() =\u003e {\n    let payload = {};\n    try {\n      payload = typeof $json.canonical_payload === \u0027string\u0027\n        ? JSON.parse($json.canonical_payload)\n        : ($json.canonical_payload || {});\n    } catch (_) {}\n\n    const norm = (v) =\u003e String(v || \u0027\u0027).normalize(\u0027NFD\u0027).replace(/[\\u0300-\\u036f]/g, \u0027\u0027).toLowerCase().trim();\n\n    const pNorm = norm(payload.palier);\n    let palierCode = \u0027Palier_2_Certifie\u0027;\n    if (/decouver|palier_1|option a|p1/.test(pNorm)) {\n      palierCode = \u0027Palier_1_Decouverte\u0027;\n    } else if (/chambre|palier_3|option c|p3|souverain/.test(pNorm)) {\n      palierCode = \u0027Palier_3_Chambre\u0027;\n    }\n\n    const contexte = String(payload.mission_contexte || payload.contexte || \u0027\u0027).trim();\n    const title = String(\n      payload.mission_nom || payload.entreprise || (contexte ? contexte.slice(0, 120) : \u0027Saisine CORTEX\u0027)\n    ).trim();\n\n    const secteurCode = norm(payload.secteur_selectionne || payload.secteur || \u0027agro\u0027) || \u0027agro\u0027;\n\n    return {\n      fields: {\n        Title: title,\n        Mission_Ref: $json.reference_mission,\n        Palier_Mandat: palierCode,\n        Secteur_Code: secteurCode,\n        Langue_Dossier: norm(payload.langue || \u0027fr\u0027) || \u0027fr\u0027,\n        Contexte_Extrait: contexte ? contexte.slice(0, 1000) : \u0027\u0027,\n        Date_Saisine_T0: $json.timestamp_t0 || payload.timestamp_t0 || new Date().toISOString(),\n        Statut_Mandat: \u0027Saisine_Recue\u0027,\n        Empreinte_SHA256: $json.empreinte_sha256 || $json.sha256_hash || $json.hash || \u0027\u0027\n      }\n    };\n  })()\n}}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "id":  "d2c603db-a4f0-4de5-9b4c-a90c35ae016a",
+                      "name":  "Créer mission NocoDB v3",
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "typeVersion":  4.2,
+                      "position":  [
+                                       96,
+                                       208
+                                   ],
+                      "credentials":  {
+                                          "httpHeaderAuth":  {
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account 2"
+                                                             }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "method":  "POST",
+                                         "url":  "https://automation.e-metalabs.com/webhook/cortex-analyse-rag-pdf",
+                                         "authentication":  "genericCredentialType",
+                                         "genericAuthType":  "httpHeaderAuth",
+                                         "sendHeaders":  true,
+                                         "headerParameters":  {
+                                                                  "parameters":  [
+                                                                                     {
+                                                                                         "name":  "Content-Type",
+                                                                                         "value":  "application/json"
+                                                                                     }
+                                                                                 ]
+                                                              },
+                                         "sendBody":  true,
+                                         "specifyBody":  "json",
+                                         "jsonBody":  "={{\n  (() =\u003e {\n    const refNode = $(\u0027Référence canonique\u0027).first().json || {};\n    let parsed = {};\n    try {\n      parsed = typeof refNode.canonical_payload === \u0027string\u0027\n        ? JSON.parse(refNode.canonical_payload)\n        : (refNode.canonical_payload || {});\n    } catch (_) {}\n\n    const rec = $json.records?.[0] || {};\n    const fields = rec.fields || {};\n    const missionRef = fields.Mission_Ref || refNode.reference_mission;\n\n    return {\n      reference_mission: missionRef,\n      mission_ref: missionRef,\n      nocodb_record_id: rec.id || rec.id_fields?.Id || null,\n      statut_mandat: fields.Statut_Mandat || \u0027Saisine_Recue\u0027,\n      palier_mandat: fields.Palier_Mandat || \u0027Palier_2_Certifie\u0027,\n      secteur_code: fields.Secteur_Code || parsed.secteur_selectionne || \u0027agro\u0027,\n      langue: fields.Langue_Dossier || parsed.langue || \u0027fr\u0027,\n      empreinte_sha256: fields.Empreinte_SHA256 || refNode.empreinte_sha256 || null,\n      timestamp_t0: fields.Date_Saisine_T0 || refNode.timestamp_t0 || new Date().toISOString(),\n      mission_nom: parsed.mission_nom || fields.Title || \u0027Saisine CORTEX\u0027,\n      mission_contexte: parsed.mission_contexte || parsed.contexte || fields.Contexte_Extrait || \u0027\u0027,\n      option_b_detectee: Boolean(parsed.option_b_detectee),\n      email: parsed.email || \u0027\u0027,\n      whatsapp: parsed.whatsapp || parsed.telephone || \u0027\u0027,\n      tracker_url: \u0027https://e-metalabs.com/tracker.html?ref=\u0027 + encodeURIComponent(missionRef)\n    };\n  })()\n}}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "id":  "3fe5e66a-7084-4702-ae54-2211efd27fc4",
+                      "name":  "Transmettre à CORTEX 02",
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "typeVersion":  4.2,
+                      "position":  [
+                                       304,
+                                       304
+                                   ],
+                      "credentials":  {
+                                          "httpHeaderAuth":  {
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account 2"
+                                                             }
+                                      },
+                      "onError":  "continueRegularOutput"
+                  },
+                  {
+                      "parameters":  {
+                                         "respondWith":  "json",
+                                         "responseBody":  "={{\n  JSON.stringify({\n    ok: true,\n    reference_mission: $json.records?.[0]?.fields?.Mission_Ref || $(\u0027Référence canonique\u0027).first().json.reference_mission,\n    statut: $json.records?.[0]?.fields?.Statut_Mandat || \u0027Saisine_Recue\u0027,\n    empreinte_sha256: $json.records?.[0]?.fields?.Empreinte_SHA256 || $(\u0027Référence canonique\u0027).first().json.empreinte_sha256 || null,\n    timestamp_t0: $json.records?.[0]?.fields?.Date_Saisine_T0 || $(\u0027Référence canonique\u0027).first().json.timestamp_t0 || new Date().toISOString(),\n    tracker_url: \u0027https://e-metalabs.com/tracker.html?ref=\u0027 + encodeURIComponent($json.records?.[0]?.fields?.Mission_Ref || $(\u0027Référence canonique\u0027).first().json.reference_mission)\n  })\n}}",
+                                         "options":  {
+                                                         "responseCode":  201,
+                                                         "responseHeaders":  {
+                                                                                 "entries":  [
+                                                                                                 {
+                                                                                                     "name":  "Access-Control-Allow-Origin",
+                                                                                                     "value":  "https://e-metalabs.com"
+                                                                                                 },
+                                                                                                 {
+                                                                                                     "name":  "Cache-Control",
+                                                                                                     "value":  "no-store"
+                                                                                                 }
+                                                                                             ]
+                                                                             }
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "typeVersion":  1.5,
+                      "position":  [
+                                       304,
+                                       80
+                                   ],
+                      "id":  "ecd2037c-4431-47e0-b6f8-1b9c6ef9d082",
+                      "name":  "Réponse JSON 201 Saisine"
+                  }
+              ],
+    "pinData":  {
+
+                },
+    "connections":  {
+                        "Webhook Saisine":  {
+                                                "main":  [
+                                                             [
+                                                                 {
+                                                                     "node":  "Initialisation standardisée",
+                                                                     "type":  "main",
+                                                                     "index":  0
+                                                                 }
+                                                             ]
+                                                         ]
+                                            },
+                        "Initialisation standardisée":  {
+                                                            "main":  [
+                                                                         [
+                                                                             {
+                                                                                 "node":  "Empreinte SHA-256",
+                                                                                 "type":  "main",
+                                                                                 "index":  0
+                                                                             }
+                                                                         ]
+                                                                     ]
+                                                        },
+                        "Empreinte SHA-256":  {
+                                                  "main":  [
+                                                               [
+                                                                   {
+                                                                       "node":  "Soumission OpenTimestamps T+0",
+                                                                       "type":  "main",
+                                                                       "index":  0
+                                                                   },
+                                                                   {
+                                                                       "node":  "Allouer séquence de référence",
+                                                                       "type":  "main",
+                                                                       "index":  0
+                                                                   }
+                                                               ]
+                                                           ]
+                                              },
+                        "Allouer séquence de référence":  {
+                                                              "main":  [
+                                                                           [
+                                                                               {
+                                                                                   "node":  "Référence canonique",
+                                                                                   "type":  "main",
+                                                                                   "index":  0
+                                                                               }
+                                                                           ]
+                                                                       ]
+                                                          },
+                        "Référence canonique":  {
+                                                    "main":  [
+                                                                 [
+                                                                     {
+                                                                         "node":  "Créer mission NocoDB v3",
+                                                                         "type":  "main",
+                                                                         "index":  0
+                                                                     }
+                                                                 ]
+                                                             ]
+                                                },
+                        "Créer mission NocoDB v3":  {
+                                                        "main":  [
+                                                                     [
+                                                                         {
+                                                                             "node":  "Réponse JSON 201 Saisine",
+                                                                             "type":  "main",
+                                                                             "index":  0
+                                                                         },
+                                                                         {
+                                                                             "node":  "Transmettre à CORTEX 02",
+                                                                             "type":  "main",
+                                                                             "index":  0
+                                                                         }
+                                                                     ]
+                                                                 ]
+                                                    },
+                        "Réponse JSON 201 Saisine":  {
+                                                         "main":  [
+                                                                      [
+
+                                                                      ]
+                                                                  ]
+                                                     }
+                    },
+    "active":  true,
+    "settings":  {
+                     "executionOrder":  "v1",
+                     "binaryMode":  "separate",
+                     "availableInMCP":  false
+                 },
+    "versionId":  "2af7e831-78fc-43a0-ae9c-456ccac06602",
+    "meta":  {
+                 "templateCredsSetupCompleted":  true,
+                 "instanceId":  "ea8fa31aa22966a954dc961c81514f022c83fc78d659cee5ee3c2bdbd3975381"
+             },
+    "id":  "55u8HMTvNQOEbmlE",
+    "tags":  [
+
+             ]
 }
