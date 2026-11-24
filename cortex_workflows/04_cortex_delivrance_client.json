@@ -6,10 +6,9 @@
         "httpMethod": "POST",
         "path": "cortex-04-delivrance-client",
         "authentication": "headerAuth",
-        "responseMode": "onReceived",
         "options": {}
       },
-      "id": "44000000-0000-4000-8000-000000000001",
+      "id": "52197cb4-ed40-443a-94f3-517a9288043b",
       "name": "Webhook Délivrance",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
@@ -20,79 +19,26 @@
       "webhookId": "cortex-04-delivrance-client",
       "credentials": {
         "httpHeaderAuth": {
-          "id": "CONFIGURE_HANDOFF_CREDENTIAL_ID",
-          "name": "CORTEX Handoff Header Auth"
+          "id": "AYFV4CoauevzSq4r",
+          "name": "Header Auth account 2"
         }
       }
     },
     {
       "parameters": {
-        "httpMethod": "GET",
-        "path": "statut-mission",
-        "responseMode": "usingRespondToWebhook",
-        "options": {
-          "responseHeaders": {
-            "entries": [
-              {
-                "name": "Access-Control-Allow-Origin",
-                "value": "*"
-              },
-              {
-                "name": "Access-Control-Allow-Methods",
-                "value": "GET, OPTIONS"
-              },
-              {
-                "name": "Access-Control-Allow-Headers",
-                "value": "Content-Type"
-              },
-              {
-                "name": "Cache-Control",
-                "value": "no-store"
-              }
-            ]
-          }
-        }
+        "jsCode": "return [{ json: { urls: { nocodb_base: 'https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if', desk_portal: 'https://desk.e-metalabs.com', whatsapp_api: 'https://graph.facebook.com/v20.0', pdf_engine: 'http://pdf_engine:5000/generate-pdf' }, tables: { missions: 'mv1cb6xm00g6rf5', experts: 'm4705kfa0sqavqb', claims: 'cortex_mission_claims' }, sla: { delai_expiration_heures: 2, secret_signature: null }, mission: $input.first().json } }];"
       },
-      "id": "44000000-0000-4000-8000-000000000002",
-      "name": "Webhook public Tracker GET",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        0,
-        420
-      ],
-      "webhookId": "cortex-public-statut-mission"
-    },
-    {
-      "parameters": {
-        "mode": "runOnceForAllItems",
-        "jsCode": "return [{ json: { urls: { nocodb_base: 'https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if', desk_portal: 'https://desk.e-metalabs.com', whatsapp_api: 'https://graph.facebook.com/v20.0', pdf_engine: 'http://pdf_engine:5000/generate-pdf' }, tables: { missions: 'mu6nj9w06yc0lep', experts: 'm4705kfa0sqavqb', claims: 'cortex_mission_claims' }, sla: { delai_expiration_heures: 2, secret_signature: null }, mission: $input.first().json } }];"
-      },
-      "id": "44000000-0000-4000-8000-000000000003",
+      "id": "176ee12b-331c-4585-b2a0-3a7b2536ec32",
       "name": "Initialisation standardisée",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        240,
+        192,
         0
       ]
     },
     {
       "parameters": {
-        "mode": "runOnceForAllItems",
-        "jsCode": "return [{ json: { urls: { nocodb_base: 'https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if', desk_portal: 'https://desk.e-metalabs.com', whatsapp_api: 'https://graph.facebook.com/v20.0', pdf_engine: 'http://pdf_engine:5000/generate-pdf' }, tables: { missions: 'mu6nj9w06yc0lep', experts: 'm4705kfa0sqavqb', claims: 'cortex_mission_claims' }, sla: { delai_expiration_heures: 2, secret_signature: null }, mission: $input.first().json } }];"
-      },
-      "id": "44000000-0000-4000-8000-000000000004",
-      "name": "Initialisation Tracker",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        240,
-        420
-      ]
-    },
-    {
-      "parameters": {
         "url": "={{ $json.urls.nocodb_base + '/' + $json.tables.missions + '/records' }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
@@ -101,7 +47,7 @@
           "parameters": [
             {
               "name": "where",
-              "value": "={{ '(Code_Mission,eq,' + ($json.mission.body?.ref || $json.mission.query?.ref || $json.mission.ref || '') + ')' }}"
+              "value": "={{ '(Mission_Ref,eq,' + ($json.mission?.body?.reference_mission || $json.mission?.reference_mission || $json.mission?.body?.mission_ref || $json.mission?.mission_ref || $json.mission?.body?.Mission_Ref || $json.mission?.Mission_Ref || $json.mission?.Code_Mission || $json.reference_mission || $json.mission_ref || '') + ')' }}"
             },
             {
               "name": "limit",
@@ -111,118 +57,31 @@
         },
         "options": {}
       },
-      "id": "44000000-0000-4000-8000-000000000005",
-      "name": "Lire statut mission NocoDB",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        500,
-        420
-      ],
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "CONFIGURE_NOCODB_CREDENTIAL_ID",
-          "name": "NocoDB API Token"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "mode": "runOnceForAllItems",
-        "jsCode": "try {\n  const response = $input.first().json;\n  const records = response.records || response.list || (Array.isArray(response) ? response : []);\n  const ref = $('Initialisation Tracker').first().json.mission.body?.ref || $('Initialisation Tracker').first().json.mission.query?.ref || $('Initialisation Tracker').first().json.mission.ref || '';\n  const row = records.find(candidate => { const f = candidate.fields || candidate; return (f.Code_Mission || f.Reference_Mission || f.reference_mission) === ref; });\n  if (!row) return [{ json: { success: true, found: false, reference: ref } }];\n  const f = row.fields || row;\n  return [{ json: { success: true, found: true, reference: ref, statut: f.Statut || '', sha256_hash: f.Contrat_Hash_Ref || '', webViewLink: f.webViewLink || '' } }];\n} catch (err) { throw new Error(`Mapping statut Tracker impossible: ${err.message}`); }"
-      },
-      "id": "44000000-0000-4000-8000-000000000006",
-      "name": "Mapper réponse Tracker",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        760,
-        420
-      ]
-    },
-    {
-      "parameters": {
-        "respondWith": "json",
-        "responseBody": "={{ $json }}",
-        "options": {
-          "responseCode": 200,
-          "responseHeaders": {
-            "entries": [
-              {
-                "name": "Access-Control-Allow-Origin",
-                "value": "*"
-              },
-              {
-                "name": "Access-Control-Allow-Methods",
-                "value": "GET, OPTIONS"
-              },
-              {
-                "name": "Access-Control-Allow-Headers",
-                "value": "Content-Type"
-              },
-              {
-                "name": "Cache-Control",
-                "value": "no-store"
-              }
-            ]
-          }
-        }
-      },
-      "id": "44000000-0000-4000-8000-000000000007",
-      "name": "Réponse publique CORS",
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.4,
-      "position": [
-        1020,
-        420
-      ]
-    },
-    {
-      "parameters": {
-        "url": "={{ $json.urls.nocodb_base + '/' + $json.tables.missions + '/records' }}",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "where",
-              "value": "={{ '(Code_Mission,eq,' + ($json.mission.body?.reference || $json.mission.body?.reference_mission || $json.mission.reference_mission || '') + ')' }}"
-            },
-            {
-              "name": "limit",
-              "value": "1"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "44000000-0000-4000-8000-000000000008",
+      "id": "963f59f4-f269-4c8c-a0a3-a466163779de",
       "name": "Rechercher mission à délivrer",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        500,
+        384,
         0
       ],
       "credentials": {
         "httpHeaderAuth": {
-          "id": "CONFIGURE_NOCODB_CREDENTIAL_ID",
-          "name": "NocoDB API Token"
+          "id": "AYFV4CoauevzSq4r",
+          "name": "Header Auth account 2"
         }
       }
     },
     {
       "parameters": {
-        "mode": "runOnceForAllItems",
-        "jsCode": "try {\n  const response = $input.first().json;\n  const records = response.records || response.list || (Array.isArray(response) ? response : []);\n  const mission = $('Initialisation standardisée').first().json.mission.body || $('Initialisation standardisée').first().json.mission;\n  const row = records.find(candidate => { const f = candidate.fields || candidate; return (f.Code_Mission || f.Reference_Mission || f.reference_mission) === (mission.reference || mission.reference_mission); });\n  if (!row) throw new Error('Mission absente du registre NocoDB.');\n  const f = row.fields || row;\n  const recordId = row.id || row.id_fields?.Id || f.Id || f.id;\n  if (!Number.isSafeInteger(Number(recordId))) throw new Error('ID numérique NocoDB manquant ou invalide.');\n  const amountValue = mission.montant ?? mission.amount;\n  const amount = Number(amountValue);\n  if (amountValue === undefined || !Number.isFinite(amount) || amount < 0) throw new Error('Montant de séquestre manquant ou invalide.');\n  const phone = String(mission.telephone || '').replace(/\\D/g, '');\n  if (!/^\\d{8,15}$/.test(phone)) throw new Error('telephone au format chiffres seuls manquant ou invalide.');\n  const webViewLink = mission.webViewLink || mission.pdf_url;\n  if (!webViewLink) throw new Error('Lien webViewLink du rapport manquant.');\n  return [{ json: { ...mission, telephone: phone, record_id: Number(recordId), sha256_hash: mission.sha256_hash || f.Contrat_Hash_Ref || '', patch: { id: Number(recordId), fields: { Statut: 'Livré au client', Contrat_Hash_Ref: mission.sha256_hash || f.Contrat_Hash_Ref || '' } }, escrow: { devise: mission.currency || 'EUR', montant_total: amount, part_cabinet: Math.round(amount * 0.15 * 100) / 100, part_expert: Math.round(amount * 0.85 * 100) / 100, expert_release_at: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString() }, webViewLink } }];\n} catch (err) { throw new Error(`Mapping délivrance impossible: ${err.message}`); }"
+        "jsCode": "try {\n  const response = $input.first().json || {};\n  const records = response.records || response.list || (Array.isArray(response) ? response : []);\n\n  const parseIfString = (val) => {\n    if (typeof val === 'string') {\n      try {\n        const parsed = JSON.parse(val);\n        return (parsed && typeof parsed === 'object') ? parsed : {};\n      } catch {\n        return {};\n      }\n    }\n    return (val && typeof val === 'object') ? val : {};\n  };\n\n  const initData = parseIfString($('Initialisation standardisée').first()?.json);\n  const webhookRaw = parseIfString($('Webhook Délivrance').first()?.json);\n  const webhookBody = parseIfString(webhookRaw.body || webhookRaw);\n  const initMission = parseIfString(initData.mission);\n  const initMissionBody = parseIfString(initMission.body || initMission);\n  const canonicalPayload = parseIfString(\n    webhookBody.canonical_payload || initMissionBody.canonical_payload || initData.canonical_payload\n  );\n\n  const mission = {\n    ...canonicalPayload,\n    ...webhookBody,\n    ...parseIfString(initData.body),\n    ...initMission,\n    ...initMissionBody\n  };\n\n  // Recherche directe puis extraction récursive (y compris dans les chaînes JSON ou textes)\n  let targetRef = String(\n    mission.reference_mission ||\n    mission.mission_ref ||\n    mission.Mission_Ref ||\n    mission.reference ||\n    mission.Code_Mission ||\n    mission.code_mission ||\n    mission.ref ||\n    ''\n  ).trim();\n\n  if (!/^MIS-\\d{4}-\\d+$/i.test(targetRef)) {\n    const findMissionCode = (obj, depth = 0) => {\n      if (obj === null || obj === undefined || depth > 6) return '';\n      if (typeof obj === 'string') {\n        const match = obj.match(/\\bMIS-\\d{4}-\\d+\\b/i);\n        return match ? match[0].toUpperCase() : '';\n      }\n      if (typeof obj === 'object') {\n        for (const val of Object.values(obj)) {\n          const found = findMissionCode(val, depth + 1);\n          if (found) return found;\n        }\n      }\n      return '';\n    };\n    targetRef = findMissionCode({ mission, initData, webhookRaw });\n  } else {\n    targetRef = targetRef.toUpperCase();\n  }\n\n  if (records.length === 0) {\n    throw new Error(\n      `NocoDB a renvoyé 0 enregistrement pour la référence '${targetRef || 'non trouvée'}'. Vérifiez le filtre 'where' (sans apostrophes) et la table mv1cb6xm00g6rf5 dans 'Rechercher mission à délivrer'.`\n    );\n  }\n\n  let row = null;\n  if (targetRef) {\n    row = records.find((candidate) => {\n      const f = candidate.fields || candidate;\n      const candidateRef =\n        f.Mission_Ref ||\n        f.Code_Mission ||\n        f.Reference_Mission ||\n        f.reference_mission ||\n        f.Title ||\n        '';\n      return String(candidateRef).trim().toUpperCase() === targetRef;\n    });\n  } else if (records.length === 1) {\n    row = records[0];\n  }\n\n  if (!row) {\n    throw new Error(`Mission (${targetRef || 'sans référence'}) absente des ${records.length} lignes retournées par NocoDB.`);\n  }\n\n  const f = row.fields || row;\n  const resolvedRef = String(\n    targetRef ||\n    f.Mission_Ref ||\n    f.Code_Mission ||\n    f.Reference_Mission ||\n    f.reference_mission ||\n    f.Title ||\n    ''\n  ).trim().toUpperCase();\n\n  const recordId = row.id || row.id_fields?.Id || f.Id || f.id;\n  if (!Number.isSafeInteger(Number(recordId))) {\n    throw new Error('ID numérique NocoDB manquant ou invalide.');\n  }\n\n  const amountValue = mission.montant_eur ?? mission.montant ?? mission.amount ?? f.Montant ?? f.Montant_FCFA ?? 0;\n  const amount = Number(amountValue);\n  if (!Number.isFinite(amount) || amount < 0) {\n    throw new Error('Montant de séquestre manquant ou invalide.');\n  }\n\n  const rawPhone =\n    mission.whatsapp ||\n    mission.telephone ||\n    mission.phone ||\n    f.WhatsApp ||\n    f.Telephone ||\n    '';\n  const phone = String(rawPhone).replace(/\\D/g, '');\n  if (!/^\\d{8,15}$/.test(phone)) {\n    throw new Error('Numéro WhatsApp/téléphone au format chiffres seuls (8 à 15 chiffres) manquant ou invalide.');\n  }\n\n  const webViewLink =\n    mission.webViewLink ||\n    mission.pdf_url ||\n    mission.tracker_url ||\n    f.Rapport_URL ||\n    `https://e-metalabs.com/tracker.html?ref=${encodeURIComponent(resolvedRef)}`;\n\n  const sha256Hash = String(\n    mission.empreinte_sha256 ||\n    mission.sha256_hash ||\n    mission.hash ||\n    f.Empreinte_SHA256 ||\n    f.Contrat_Hash_Ref ||\n    ''\n  ).trim();\n\n  // Adaptez 'Livre_Client' si votre option Single select dans Statut_Mandat porte un autre nom exact\n  const patchFields = {\n    Statut_Mandat: 'Livre_Client'\n  };\n  if (sha256Hash) {\n    patchFields.Empreinte_SHA256 = sha256Hash;\n  }\n\n  return [\n    {\n      json: {\n        ...mission,\n        reference: resolvedRef,\n        reference_mission: resolvedRef,\n        telephone: phone,\n        whatsapp: phone,\n        record_id: Number(recordId),\n        sha256_hash: sha256Hash,\n        empreinte_sha256: sha256Hash,\n        patch: {\n          id: Number(recordId),\n          fields: patchFields\n        },\n        escrow: {\n          devise: mission.devise || mission.currency || f.Devise || 'EUR',\n          montant_total: amount,\n          part_cabinet: Math.round(amount * 0.15 * 100) / 100,\n          part_expert: Math.round(amount * 0.85 * 100) / 100,\n          expert_release_at: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString()\n        },\n        webViewLink\n      }\n    }\n  ];\n} catch (err) {\n  throw new Error(`Mapping délivrance impossible: ${err.message}`);\n}"
       },
-      "id": "44000000-0000-4000-8000-000000000009",
+      "id": "b0a0e1a4-ef9a-40c0-8e03-0ecb3bf1882e",
       "name": "Mapper délivrance et séquestre",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        760,
+        560,
         0
       ]
     },
@@ -246,25 +105,25 @@
         "jsonBody": "={{ $json.patch }}",
         "options": {}
       },
-      "id": "44000000-0000-4000-8000-000000000010",
+      "id": "8d8c33af-1f60-46c4-b4c9-9c603765050a",
       "name": "PATCH NocoDB records",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1020,
+        768,
         0
       ],
       "credentials": {
         "httpHeaderAuth": {
-          "id": "CONFIGURE_NOCODB_CREDENTIAL_ID",
-          "name": "NocoDB API Token"
+          "id": "AYFV4CoauevzSq4r",
+          "name": "Header Auth account 2"
         }
       }
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "={{ $('Initialisation standardisée').first().json.urls.whatsapp_api + '/' + ($('Mapper délivrance et séquestre').first().json.phone_number_id || 'CONFIGURE_WHATSAPP_PHONE_NUMBER_ID') + '/messages' }}",
+        "url": "={{ $('Initialisation standardisée').first().json.urls.whatsapp_api + '/' + ($('Mapper délivrance et séquestre').first().json.phone_number_id || '1045757915291250') + '/messages' }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
@@ -278,28 +137,28 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ { messaging_product: 'whatsapp', to: String($('Mapper délivrance et séquestre').first().json.telephone || '').replace(/\\D/g, ''), type: 'template', template: { name: 'cortex_diagnostic', language: { code: 'fr' }, components: [{ type: 'body', parameters: [{ type: 'text', text: $('Mapper délivrance et séquestre').first().json.reference || $('Mapper délivrance et séquestre').first().json.reference_mission }, { type: 'text', text: $('Mapper délivrance et séquestre').first().json.sha256_hash }, { type: 'text', text: $('Mapper délivrance et séquestre').first().json.webViewLink }] }] } } }}",
+        "jsonBody": "={{\n  {\n    messaging_product: \"whatsapp\",\n    recipient_type: \"individual\",\n    to: $('Mapper délivrance et séquestre').first().json.telephone,\n    type: \"template\",\n    template: {\n      name: \"cortex_diagnostic_delivered\",\n      language: {\n        code: \"fr\"\n      },\n      components: [\n        {\n          type: \"body\",\n          parameters: [\n            {\n              type: \"text\",\n              text: $('Mapper délivrance et séquestre').first().json.reference || 'MIS-2026-1565'\n            },\n            {\n              type: \"text\",\n              text: $('Mapper délivrance et séquestre').first().json.sha256_hash || 'ancrage-en-cours'\n            },\n            {\n              type: \"text\",\n              text: $('Mapper délivrance et séquestre').first().json.webViewLink || 'https://desk.e-metalabs.com'\n            }\n          ]\n        }\n      ]\n    }\n  }\n}}",
         "options": {}
       },
-      "id": "44000000-0000-4000-8000-000000000011",
+      "id": "c1de33f9-4b3c-4b7c-ad66-ee65e36aedde",
       "name": "WhatsApp Cloud cortex_diagnostic FR",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1500,
+        1168,
         0
       ],
       "credentials": {
         "httpHeaderAuth": {
-          "id": "CONFIGURE_WHATSAPP_CREDENTIAL_ID",
-          "name": "WhatsApp Cloud API Token"
+          "id": "eyOk7Br81jKexyHq",
+          "name": "Header Auth account 3"
         }
       }
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "={{ $('Initialisation standardisée').first().json.urls.nocodb_base + '/CONFIGURE_LOGS_COMMUNICATIONS_TABLE_ID/records' }}",
+        "url": "={{ $('Initialisation standardisée').first().json.urls.nocodb_base + '/mus18e5bqest9h3/records' }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
@@ -313,75 +172,32 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ { Title: 'Délivrance client ' + ($('Mapper délivrance et séquestre').first().json.reference || ''), Canal: 'WhatsApp Cloud API', Expediteur: $('Mapper délivrance et séquestre').first().json.telephone, Nom_Contact: $('Mapper délivrance et séquestre').first().json.nom_client || '', Message_Brut: 'Tentative du modèle cortex_diagnostic; séquestre calculé.', Reference_Detectee: $('Mapper délivrance et séquestre').first().json.reference || $('Mapper délivrance et séquestre').first().json.reference_mission || '', Statut: 'Envoi initié' } }}",
+        "jsonBody": "={{\n  (() => {\n    const d = $('Mapper délivrance et séquestre').first().json || {};\n    const ref = String(d.reference || d.mission_ref || '').trim();\n    const link = String(d.webViewLink || d.rapport_url || '').trim();\n\n    const contenu = [\n      'Délivrance rapport ' + (ref || 'N/A'),\n      'Statut : Envoyé',\n      link ? ('Lien : ' + link) : 'Canal : WhatsApp Cloud API (template cortex_diagnostic FR)'\n    ].join(' | ');\n\n    return {\n      fields: {\n        Title: 'Délivrance client ' + ref,\n        Canal: 'WhatsApp Cloud API',\n        Contenu_Message: contenu\n      }\n    };\n  })()\n}}",
         "options": {}
       },
-      "id": "44000000-0000-4000-8000-000000000012",
+      "id": "81f32af5-6591-4539-878c-99cc495ecaea",
       "name": "Journal Logs_Communications",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1260,
+        960,
         0
       ],
       "credentials": {
         "httpHeaderAuth": {
-          "id": "CONFIGURE_NOCODB_CREDENTIAL_ID",
-          "name": "NocoDB API Token"
+          "id": "AYFV4CoauevzSq4r",
+          "name": "Header Auth account 2"
         }
       }
     }
   ],
+  "pinData": {},
   "connections": {
     "Webhook Délivrance": {
       "main": [
         [
           {
             "node": "Initialisation standardisée",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Webhook public Tracker GET": {
-      "main": [
-        [
-          {
-            "node": "Initialisation Tracker",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Initialisation Tracker": {
-      "main": [
-        [
-          {
-            "node": "Lire statut mission NocoDB",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Lire statut mission NocoDB": {
-      "main": [
-        [
-          {
-            "node": "Mapper réponse Tracker",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Mapper réponse Tracker": {
-      "main": [
-        [
-          {
-            "node": "Réponse publique CORS",
             "type": "main",
             "index": 0
           }
@@ -444,13 +260,17 @@
       ]
     }
   },
-  "active": false,
+  "active": true,
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
   },
-  "versionId": "44000000-0000-4000-8000-000000000013",
+  "versionId": "7271ad4a-a3ce-476b-a691-a074046f97c0",
   "meta": {
-    "templateCredsSetupCompleted": false
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ea8fa31aa22966a954dc961c81514f022c83fc78d659cee5ee3c2bdbd3975381"
   },
+  "id": "n6esbVGLB9pSeNJr",
   "tags": []
 }
