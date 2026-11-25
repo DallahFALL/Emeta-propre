@@ -536,7 +536,7 @@
                         </p>
 
                         <ul class="plan-features space-y-3 text-xs sm:text-sm text-slate-300 mb-8 font-mono">
-                            <li id="ui-st-1" class="flex items-center gap-2" data-i18n="offers.starter.item.1"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Synthèse de la situation décrite (3 à 5 pages)</li>
+                            <li id="ui-st-1" class="flex items-center gap-2" data-i18n="offers.starter.item.1"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> 1 Diagnostic Découverte offert (3 à 5 pages)</li>
                             <li id="ui-st-2" class="flex items-center gap-2" data-i18n="offers.starter.item.2"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Jusqu'à 3 failles ou points de vigilance prioritaires</li>
                             <li id="ui-st-3" class="flex items-center gap-2" data-i18n="offers.starter.item.3"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Score de maturité sectorielle préliminaire</li>
                             <li id="ui-st-4" class="flex items-center gap-2" data-i18n="offers.starter.item.4"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Restitution par e-mail sécurisé</li>
@@ -565,12 +565,12 @@
 
                         <p class="plan-price text-3xl font-extrabold text-gold font-mono mb-1" id="ui-price-pro">
                             <span class="price-amount" id="price-certified" data-eur="280 €" data-usd="$305" data-xof="185 000 FCFA">280 €</span>
-                            <span class="text-xs text-slate-400 font-normal" data-i18n="offers.price.mandate">/ Mandat</span>
+                            <span class="text-xs text-slate-400 font-normal" data-i18n="offers.price.mandate">/ Pack 3 Missions</span>
                         </p>
                         <p class="price-equivalent text-xs text-slate-400 font-mono mb-6" id="price-equivalent-certified" data-i18n="offers.price.equivalent.certified">Équivalent : 185 000 FCFA</p>
 
                         <ul class="plan-features space-y-3 text-xs sm:text-sm text-slate-200 mb-8 font-mono">
-                            <li id="ui-pr-1" class="flex items-center gap-2" data-i18n="offers.pro.item.1"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> Dossier complet certifié (15 à 25 pages)</li>
+                            <li id="ui-pr-1" class="flex items-center gap-2" data-i18n="offers.pro.item.1"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> 3 Missions Certifiées incluses (15 à 25 pages / dossier)</li>
                             <li id="ui-pr-2" class="flex items-center gap-2" data-i18n="offers.pro.item.2"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> Revue &amp; contreseing de l'Expert Exécutif</li>
                             <li id="ui-pr-3" class="flex items-center gap-2" data-i18n="offers.pro.item.3"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> Modélisation de stress-tests sectoriels</li>
                             <li id="ui-pr-4" class="flex items-center gap-2" data-i18n="offers.pro.item.4"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> Scellement SHA-256 + Bitcoin OTS</li>
@@ -602,7 +602,7 @@
                         <p class="price-equivalent text-xs text-slate-400 font-mono mb-6" id="price-equivalent-executive" data-i18n="offers.price.equivalent.executive">Équivalent : 950 000 FCFA</p>
 
                         <ul class="plan-features space-y-3 text-xs sm:text-sm text-slate-300 mb-8 font-mono">
-                            <li id="ui-ex-1" class="flex items-center gap-2" data-i18n="offers.executive.item.1"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Vision consolidée groupe &amp; filiales (25 à 45+ p.)</li>
+                            <li id="ui-ex-1" class="flex items-center gap-2" data-i18n="offers.executive.item.1"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> 10 Missions Stratégiques / mois (groupe &amp; filiales)</li>
                             <li id="ui-ex-2" class="flex items-center gap-2" data-i18n="offers.executive.item.2"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Anticipation macroéconomique &amp; géopolitique</li>
                             <li id="ui-ex-3" class="flex items-center gap-2" data-i18n="offers.executive.item.3"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Arbitrages d'investissement &amp; allocation de capital</li>
                             <li id="ui-ex-4" class="flex items-center gap-2" data-i18n="offers.executive.item.4"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> Restitution confidentielle avec le collège d'experts</li>
@@ -668,6 +668,30 @@
                                 </label>
                                 <input id="user-file" name="piece_justificative" type="file" onchange="handleFileSelect(event)" accept=".pdf,.doc,.docx,.xlsx,.xls,.png,application/pdf" class="w-full text-xs text-slate-400 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-gold file:text-ebony hover:file:bg-goldLight cursor-pointer bg-ebony border border-ebonyBorder rounded-xl p-1.5" />
                                 <span class="field-hint text-[10px] text-slate-500 font-mono block mt-1" id="file-name" data-i18n="terminal.file.empty">Aucun fichier sélectionné</span>
+                            </div>
+                        </div>
+
+                        <div id="sector-plaquette-box" class="rounded-2xl bg-ebony/90 border border-gold/35 p-5 space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-ebonyBorder">
+                                <div>
+                                    <span class="text-[10px] font-mono uppercase tracking-widest text-gold block">PLAQUETTE D'ORIENTATION DÉCISIONNELLE • CADRAGE SCIENTIFIQUE</span>
+                                    <h4 id="plaquette-sector-title" class="font-serif text-base font-bold text-white">Agro-industrie &amp; Souveraineté Alimentaire</h4>
+                                </div>
+                                <span class="px-2.5 py-1 rounded-full bg-gold/10 border border-gold/30 text-[10px] font-mono text-gold">4 AXES DE PRÉCISION RAG</span>
+                            </div>
+
+                            <div id="plaquette-questions-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+
+                            <div class="space-y-2">
+                                <span class="text-[11px] font-mono text-slate-400 block">Capsules de frictions sectorielles (cliquez pour intégrer à votre dossier) :</span>
+                                <div id="plaquette-tags-list" class="flex flex-wrap gap-2"></div>
+                            </div>
+
+                            <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-ebonyBorder/70">
+                                <span class="text-[11px] text-slate-400 font-light">Renseignez tout ou partie des 4 axes pour générer une formulation calibrée pour l'audit en 20 chapitres.</span>
+                                <button type="button" onclick="synthesizeSectorBrief()" class="px-4 py-2 rounded-xl bg-gold/15 hover:bg-gold text-gold hover:text-ebony border border-gold/40 font-mono text-xs font-bold transition cursor-pointer">
+                                    ⚡ Structurer ma problématique dans le terminal
+                                </button>
                             </div>
                         </div>
 
@@ -1153,10 +1177,177 @@
             };
         }
 
+                const SECTOR_PLAQUETTES = {
+            agro: {
+                title: "Agro-industrie & Souveraineté Alimentaire",
+                questions: [
+                    { label: "1. Chaîne de valeur & volumes", placeholder: "Ex. : Oignon / gombo / riz, hectares exploités, tonnage annuel..." },
+                    { label: "2. Goulot post-récolte & stockage", placeholder: "Ex. : Taux de perte actuel, capacité chambre froide / magasin..." },
+                    { label: "3. Structure financière & BFR", placeholder: "Ex. : Coût intrants, financement campagne, trésorerie disponible..." },
+                    { label: "4. Décision ou investissement visé", placeholder: "Ex. : Dimensionner une unité de conditionnement de 500 T..." }
+                ],
+                tags: ["Pertes post-récolte > 20%", "Rupture chaîne du froid", "Tension BFR saisonnier", "Dépendance intrants importés", "Structuration contrat export"]
+            },
+            energy: {
+                title: "Énergie, Mines & Transition",
+                questions: [
+                    { label: "1. Actif énergétique ou minier", placeholder: "Ex. : Centrale hybride solaire-diesel, site d'extraction, réseau..." },
+                    { label: "2. Profil de charge & rendement", placeholder: "Ex. : Puissance MWc, coût actuel du kWh, taux d'indisponibilité..." },
+                    { label: "3. Capex, PPA & financement", placeholder: "Ex. : Budget d'investissement, tarif de rachat, dette projet..." },
+                    { label: "4. Arbitrage technique ou réglementaire", placeholder: "Ex. : Dimensionner le stockage batterie ou sécuriser le permis..." }
+                ],
+                tags: ["Coût kWh trop élevé", "Instabilité réseau / délestages", "Dimensionnement stockage BESS", "Conformité environnementale", "Modélisation TRI / PPA"]
+            },
+            banking: {
+                title: "Banque, FinTech & Assurance",
+                questions: [
+                    { label: "1. Activité & agrément visé", placeholder: "Ex. : Établissement de paiement, SFD, agrégateur mobile money..." },
+                    { label: "2. Volumes & économie unitaire", placeholder: "Ex. : Volume mensuel FCFA, taux de commission, coût d'acquisition..." },
+                    { label: "3. Conformité BCEAO & risques", placeholder: "Ex. : KYC/AML, interopérabilité QR, cybersécurité PCI-DSS..." },
+                    { label: "4. Décision stratégique attendue", placeholder: "Ex. : Dossier d'agrément, levée de fonds ou lancement produit..." }
+                ],
+                tags: ["Conformité BCEAO / CENTIF", "Interopérabilité Mobile Money", "Risque fraude & cybersécurité", "Rentabilité unitaire (Take-rate)", "Gouvernance & contrôle interne"]
+            },
+            logistics: {
+                title: "Logistique, Ports & Supply Chain",
+                questions: [
+                    { label: "1. Corridors & flux opérés", placeholder: "Ex. : Corridor Dakar-Bamako, fret portuaire, flotte de camions..." },
+                    { label: "2. Points de congestion & délais", placeholder: "Ex. : Surestaries, passage douanier, taux de retour à vide..." },
+                    { label: "3. Structure de coûts logistiques", placeholder: "Ex. : Carburant, maintenance flotte, coût entreposage..." },
+                    { label: "4. Optimisation recherchée", placeholder: "Ex. : Réduire les délais de transit de 30% ou créer un hub..." }
+                ],
+                tags: ["Surestaries portuaires élevées", "Retours à vide flotte", "Retards dédouanement", "Traçabilité temps réel", "Implantation hub régional"]
+            },
+            health: {
+                title: "Santé, Pharma & Bio",
+                questions: [
+                    { label: "1. Structure & capacité clinique", placeholder: "Ex. : Clinique pluridisciplinaire, laboratoire, répartiteur pharma..." },
+                    { label: "2. Plateau technique & qualité", placeholder: "Ex. : Taux d'occupation lits, équipements imagerie, normes ISO..." },
+                    { label: "3. Cycle de recouvrement & stocks", placeholder: "Ex. : Délais paiement assurances/IPM, péremption médicaments..." },
+                    { label: "4. Projet d'extension ou d'audit", placeholder: "Ex. : Certification qualité, ouverture pôle spécialisé..." }
+                ],
+                tags: ["Délais recouvrement IPM/Assurances", "Ruptures ou péremption stocks", "Rentabilité plateau technique", "Conformité normes sanitaires", "Digitalisation parcours patient"]
+            },
+            telecom: {
+                title: "Télécoms, Cloud & Infra",
+                questions: [
+                    { label: "1. Infrastructure ou service opéré", placeholder: "Ex. : Opérateur fibre/FAI, datacenter souverain, intégrateur SaaS..." },
+                    { label: "2. Capacité, SLA & résilience", placeholder: "Ex. : Bande passante Gbps, redondance liens, taux de disponibilité..." },
+                    { label: "3. ARPU, churn & Capex réseau", placeholder: "Ex. : Coût déploiement km fibre, revenu moyen par client..." },
+                    { label: "4. Arbitrage technologique", placeholder: "Ex. : Souveraineté hébergement, extension couverture ou cybersécurité..." }
+                ],
+                tags: ["Souveraineté des données", "Saturation bande passante", "Taux de résiliation (Churn)", "Sécurisation PRA / PCA", "Rentabilité Capex réseau"]
+            },
+            property: {
+                title: "BTP, Immobilier & Foncier",
+                questions: [
+                    { label: "1. Nature du programme & foncier", placeholder: "Ex. : Programme résidentiel 200 logements, zone industrielle, ZAC..." },
+                    { label: "2. Statut juridique & autorisations", placeholder: "Ex. : Titre foncier, bail emphytéotique, permis de construire..." },
+                    { label: "3. Budget travaux & montage financier", placeholder: "Ex. : Coût construction/m², VEFA, financement bancaire..." },
+                    { label: "4. Sécurisation ou arbitrage visé", placeholder: "Ex. : Maîtrise dérive coûts matériaux ou structuration SPV..." }
+                ],
+                tags: ["Sécurisation titre foncier", "Inflation coût matériaux", "Dérive délais chantier", "Montage VEFA / SPV", "Commercialisation & cash-flow"]
+            },
+            manufacturing: {
+                title: "Industrie & Transformation",
+                questions: [
+                    { label: "1. Ligne de production & capacité", placeholder: "Ex. : Unité agroalimentaire, plasturgie, matériaux construction..." },
+                    { label: "2. Rendement machines & intrants", placeholder: "Ex. : Taux de marche (TRS), taux de rebuts, coût énergie..." },
+                    { label: "3. Marges industrielles & stocks", placeholder: "Ex. : Coût de revient unitaire, rotation matières premières..." },
+                    { label: "4. Décision d'investissement", placeholder: "Ex. : Automatisation ligne, substitution importations ou export..." }
+                ],
+                tags: ["Sous-utilisation capacité (TRS)", "Taux de rebuts élevé", "Dépendance matières importées", "Facture énergétique usine", "Certification normes export"]
+            },
+            public: {
+                title: "Secteur Public & Para-public",
+                questions: [
+                    { label: "1. Institution, programme ou PPP", placeholder: "Ex. : Ministère, agence nationale, collectivité, projet bailleur..." },
+                    { label: "2. Gouvernance & exécution budgétaire", placeholder: "Ex. : Taux de décaissement, passation marchés, suivi-évaluation..." },
+                    { label: "3. Impact socio-économique attendu", placeholder: "Ex. : Bénéficiaires cibles, indicateurs ODD, création d'emplois..." },
+                    { label: "4. Livrable institutionnel requis", placeholder: "Ex. : Étude de faisabilité, audit gouvernance ou structuration PPP..." }
+                ],
+                tags: ["Faible taux de décaissement", "Structuration PPP / Bailleurs", "Gouvernance & contrôle interne", "Digitalisation services publics", "Évaluation d'impact économique"]
+            },
+            retail: {
+                title: "Distribution, Retail & Négoce",
+                questions: [
+                    { label: "1. Réseau commercial & références", placeholder: "Ex. : Chaîne supermarchés, distribution grossiste, import-export..." },
+                    { label: "2. Rotation stocks & démarque", placeholder: "Ex. : Nombre jours de stock, démarque inconnue, ruptures..." },
+                    { label: "3. Marges commerciales & crédit client", placeholder: "Ex. : Marge brute par catégorie, encours créances clients..." },
+                    { label: "4. Cap stratégique recherché", placeholder: "Ex. : Expansion réseau points de vente ou refonte supply..." }
+                ],
+                tags: ["Démarque & pertes stocks", "Encours créances clients élevé", "Érosion marge brute", "Pilotage multi-points de vente", "Omnicanal & paiement digital"]
+            }
+        };
+
+        let selectedPlaquetteTags = new Set();
+
+        function renderSectorPlaquette(sectorKey) {
+            const data = SECTOR_PLAQUETTES[sectorKey] || SECTOR_PLAQUETTES.agro;
+            const titleEl = document.getElementById('plaquette-sector-title');
+            const qGrid = document.getElementById('plaquette-questions-grid');
+            const tagsList = document.getElementById('plaquette-tags-list');
+            if (!titleEl || !qGrid || !tagsList) return;
+
+            titleEl.textContent = data.title;
+            selectedPlaquetteTags.clear();
+
+            qGrid.innerHTML = data.questions.map((q, idx) => `
+                <div class="space-y-1">
+                    <label for="plq-q-${idx}" class="block text-[11px] font-mono text-slate-300">${q.label}</label>
+                    <input id="plq-q-${idx}" type="text" placeholder="${q.placeholder}" class="w-full px-3 py-2 rounded-xl bg-ebonyCard border border-ebonyBorder text-white text-xs focus:outline-none focus:border-gold transition font-mono" />
+                </div>
+            `).join('');
+
+            tagsList.innerHTML = data.tags.map((tag) => `
+                <button type="button" onclick="togglePlaquetteTag(this, '${tag.replace(/'/g, "\\'")}')" class="px-2.5 py-1 rounded-lg bg-ebonyCard border border-ebonyBorder text-[11px] font-mono text-slate-300 hover:border-gold transition cursor-pointer">
+                    + ${tag}
+                </button>
+            `).join('');
+        }
+
+        function togglePlaquetteTag(btn, tag) {
+            if (selectedPlaquetteTags.has(tag)) {
+                selectedPlaquetteTags.delete(tag);
+                btn.classList.remove('bg-gold/20', 'border-gold', 'text-gold');
+                btn.classList.add('bg-ebonyCard', 'border-ebonyBorder', 'text-slate-300');
+            } else {
+                selectedPlaquetteTags.add(tag);
+                btn.classList.add('bg-gold/20', 'border-gold', 'text-gold');
+                btn.classList.remove('bg-ebonyCard', 'border-ebonyBorder', 'text-slate-300');
+            }
+        }
+
+        function synthesizeSectorBrief() {
+            const data = SECTOR_PLAQUETTES[selectedSectorKey] || SECTOR_PLAQUETTES.agro;
+            const lines = [`[SECTEUR CIBLE : ${data.title.toUpperCase()}]`];
+
+            data.questions.forEach((q, idx) => {
+                const val = (document.getElementById(`plq-q-${idx}`)?.value || '').trim();
+                if (val) {
+                    lines.push(`${q.label} : ${val}`);
+                }
+            });
+
+            if (selectedPlaquetteTags.size > 0) {
+                lines.push(`[FRICTIONS & RISQUES CRITIQUES IDENTIFIÉS] : ${Array.from(selectedPlaquetteTags).join(' ; ')}.`);
+            }
+
+            lines.push(`[OBJECTIF DE L'AUDIT] : Identifier les leviers d'optimisation financière et opérationnelle, modéliser les scénarios de résistance et établir un plan d'action priorisé.`);
+
+            const textarea = document.getElementById('mission_contexte');
+            if (textarea) {
+                textarea.value = lines.join('\n');
+                updateCharCounter(textarea);
+                textarea.focus();
+            }
+        }
+
         function selectSector(sectorKey) {
             const sector = sectorsDatabase[sectorKey];
             if (!sector) return;
             selectedSectorKey = sectorKey;
+            if (typeof renderSectorPlaquette === 'function') renderSectorPlaquette(sectorKey);
             const copy = localizedSector(sector);
 
             document.querySelectorAll('.sector-badge').forEach(btn => {
