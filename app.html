@@ -915,7 +915,7 @@
                 </div>
                 <div>
                     <label class="block text-xs font-mono text-slate-300 mb-1.5" for="modalDesc" data-i18n="form_lbl_decision">Problématique &amp; Arbitrage Critique *</label>
-                    <textarea id="modalDesc" rows="3" required minlength="150" placeholder="Décrivez les frictions ou arbitrages stratégiques attendus (150 caractères minimum)..." data-i18n-placeholder="form_ph_decision" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold font-mono"></textarea>
+                    <div class="p-3 rounded-xl bg-ebony border border-gold/30 flex items-start gap-3 mb-3"><input id="modal-option-b" type="checkbox" class="mt-1 accent-gold cursor-pointer" /><label for="modal-option-b" class="text-xs text-slate-300 leading-relaxed cursor-pointer"><strong class="text-white block">Option B — Accompagnement Expert Humain (SLA 2H)</strong><span class="text-slate-400">Mobiliser un expert certifié (devis direct Client–Expert consigné en séquestre).</span></label></div><textarea id="modalDesc" rows="3" required minlength="150" placeholder="Décrivez les frictions ou arbitrages stratégiques attendus (150 caractères minimum)..." data-i18n-placeholder="form_ph_decision" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-white text-sm focus:outline-none focus:border-gold font-mono"></textarea>
                 </div>
                 <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-goldDark via-gold to-goldLight text-ebony font-bold text-xs uppercase tracking-wider shadow-lg hover:opacity-95 transition font-mono" data-i18n="form_btn_submit">
                     Sceller et transmettre le mandat (T+0)
@@ -1177,244 +1177,144 @@
             };
         }
 
-                const SECTOR_PLAQUETTES = {
-            agro: {
-                title: "Agro-industrie & Souveraineté Alimentaire",
-                questions: [
-                    { label: "1. Chaîne de valeur & volumes", placeholder: "Ex. : Oignon / gombo / riz, hectares exploités, tonnage annuel..." },
-                    { label: "2. Goulot post-récolte & stockage", placeholder: "Ex. : Taux de perte actuel, capacité chambre froide / magasin..." },
-                    { label: "3. Structure financière & BFR", placeholder: "Ex. : Coût intrants, financement campagne, trésorerie disponible..." },
-                    { label: "4. Décision ou investissement visé", placeholder: "Ex. : Dimensionner une unité de conditionnement de 500 T..." }
-                ],
-                tags: ["Pertes post-récolte > 20%", "Rupture chaîne du froid", "Tension BFR saisonnier", "Dépendance intrants importés", "Structuration contrat export"]
-            },
-            energy: {
-                title: "Énergie, Mines & Transition",
-                questions: [
-                    { label: "1. Actif énergétique ou minier", placeholder: "Ex. : Centrale hybride solaire-diesel, site d'extraction, réseau..." },
-                    { label: "2. Profil de charge & rendement", placeholder: "Ex. : Puissance MWc, coût actuel du kWh, taux d'indisponibilité..." },
-                    { label: "3. Capex, PPA & financement", placeholder: "Ex. : Budget d'investissement, tarif de rachat, dette projet..." },
-                    { label: "4. Arbitrage technique ou réglementaire", placeholder: "Ex. : Dimensionner le stockage batterie ou sécuriser le permis..." }
-                ],
-                tags: ["Coût kWh trop élevé", "Instabilité réseau / délestages", "Dimensionnement stockage BESS", "Conformité environnementale", "Modélisation TRI / PPA"]
-            },
-            banking: {
-                title: "Banque, FinTech & Assurance",
-                questions: [
-                    { label: "1. Activité & agrément visé", placeholder: "Ex. : Établissement de paiement, SFD, agrégateur mobile money..." },
-                    { label: "2. Volumes & économie unitaire", placeholder: "Ex. : Volume mensuel FCFA, taux de commission, coût d'acquisition..." },
-                    { label: "3. Conformité BCEAO & risques", placeholder: "Ex. : KYC/AML, interopérabilité QR, cybersécurité PCI-DSS..." },
-                    { label: "4. Décision stratégique attendue", placeholder: "Ex. : Dossier d'agrément, levée de fonds ou lancement produit..." }
-                ],
-                tags: ["Conformité BCEAO / CENTIF", "Interopérabilité Mobile Money", "Risque fraude & cybersécurité", "Rentabilité unitaire (Take-rate)", "Gouvernance & contrôle interne"]
-            },
-            logistics: {
-                title: "Logistique, Ports & Supply Chain",
-                questions: [
-                    { label: "1. Corridors & flux opérés", placeholder: "Ex. : Corridor Dakar-Bamako, fret portuaire, flotte de camions..." },
-                    { label: "2. Points de congestion & délais", placeholder: "Ex. : Surestaries, passage douanier, taux de retour à vide..." },
-                    { label: "3. Structure de coûts logistiques", placeholder: "Ex. : Carburant, maintenance flotte, coût entreposage..." },
-                    { label: "4. Optimisation recherchée", placeholder: "Ex. : Réduire les délais de transit de 30% ou créer un hub..." }
-                ],
-                tags: ["Surestaries portuaires élevées", "Retours à vide flotte", "Retards dédouanement", "Traçabilité temps réel", "Implantation hub régional"]
-            },
-            health: {
-                title: "Santé, Pharma & Bio",
-                questions: [
-                    { label: "1. Structure & capacité clinique", placeholder: "Ex. : Clinique pluridisciplinaire, laboratoire, répartiteur pharma..." },
-                    { label: "2. Plateau technique & qualité", placeholder: "Ex. : Taux d'occupation lits, équipements imagerie, normes ISO..." },
-                    { label: "3. Cycle de recouvrement & stocks", placeholder: "Ex. : Délais paiement assurances/IPM, péremption médicaments..." },
-                    { label: "4. Projet d'extension ou d'audit", placeholder: "Ex. : Certification qualité, ouverture pôle spécialisé..." }
-                ],
-                tags: ["Délais recouvrement IPM/Assurances", "Ruptures ou péremption stocks", "Rentabilité plateau technique", "Conformité normes sanitaires", "Digitalisation parcours patient"]
-            },
-            telecom: {
-                title: "Télécoms, Cloud & Infra",
-                questions: [
-                    { label: "1. Infrastructure ou service opéré", placeholder: "Ex. : Opérateur fibre/FAI, datacenter souverain, intégrateur SaaS..." },
-                    { label: "2. Capacité, SLA & résilience", placeholder: "Ex. : Bande passante Gbps, redondance liens, taux de disponibilité..." },
-                    { label: "3. ARPU, churn & Capex réseau", placeholder: "Ex. : Coût déploiement km fibre, revenu moyen par client..." },
-                    { label: "4. Arbitrage technologique", placeholder: "Ex. : Souveraineté hébergement, extension couverture ou cybersécurité..." }
-                ],
-                tags: ["Souveraineté des données", "Saturation bande passante", "Taux de résiliation (Churn)", "Sécurisation PRA / PCA", "Rentabilité Capex réseau"]
-            },
-            property: {
-                title: "BTP, Immobilier & Foncier",
-                questions: [
-                    { label: "1. Nature du programme & foncier", placeholder: "Ex. : Programme résidentiel 200 logements, zone industrielle, ZAC..." },
-                    { label: "2. Statut juridique & autorisations", placeholder: "Ex. : Titre foncier, bail emphytéotique, permis de construire..." },
-                    { label: "3. Budget travaux & montage financier", placeholder: "Ex. : Coût construction/m², VEFA, financement bancaire..." },
-                    { label: "4. Sécurisation ou arbitrage visé", placeholder: "Ex. : Maîtrise dérive coûts matériaux ou structuration SPV..." }
-                ],
-                tags: ["Sécurisation titre foncier", "Inflation coût matériaux", "Dérive délais chantier", "Montage VEFA / SPV", "Commercialisation & cash-flow"]
-            },
-            manufacturing: {
-                title: "Industrie & Transformation",
-                questions: [
-                    { label: "1. Ligne de production & capacité", placeholder: "Ex. : Unité agroalimentaire, plasturgie, matériaux construction..." },
-                    { label: "2. Rendement machines & intrants", placeholder: "Ex. : Taux de marche (TRS), taux de rebuts, coût énergie..." },
-                    { label: "3. Marges industrielles & stocks", placeholder: "Ex. : Coût de revient unitaire, rotation matières premières..." },
-                    { label: "4. Décision d'investissement", placeholder: "Ex. : Automatisation ligne, substitution importations ou export..." }
-                ],
-                tags: ["Sous-utilisation capacité (TRS)", "Taux de rebuts élevé", "Dépendance matières importées", "Facture énergétique usine", "Certification normes export"]
-            },
-            public: {
-                title: "Secteur Public & Para-public",
-                questions: [
-                    { label: "1. Institution, programme ou PPP", placeholder: "Ex. : Ministère, agence nationale, collectivité, projet bailleur..." },
-                    { label: "2. Gouvernance & exécution budgétaire", placeholder: "Ex. : Taux de décaissement, passation marchés, suivi-évaluation..." },
-                    { label: "3. Impact socio-économique attendu", placeholder: "Ex. : Bénéficiaires cibles, indicateurs ODD, création d'emplois..." },
-                    { label: "4. Livrable institutionnel requis", placeholder: "Ex. : Étude de faisabilité, audit gouvernance ou structuration PPP..." }
-                ],
-                tags: ["Faible taux de décaissement", "Structuration PPP / Bailleurs", "Gouvernance & contrôle interne", "Digitalisation services publics", "Évaluation d'impact économique"]
-            },
-            retail: {
-                title: "Distribution, Retail & Négoce",
-                questions: [
-                    { label: "1. Réseau commercial & références", placeholder: "Ex. : Chaîne supermarchés, distribution grossiste, import-export..." },
-                    { label: "2. Rotation stocks & démarque", placeholder: "Ex. : Nombre jours de stock, démarque inconnue, ruptures..." },
-                    { label: "3. Marges commerciales & crédit client", placeholder: "Ex. : Marge brute par catégorie, encours créances clients..." },
-                    { label: "4. Cap stratégique recherché", placeholder: "Ex. : Expansion réseau points de vente ou refonte supply..." }
-                ],
-                tags: ["Démarque & pertes stocks", "Encours créances clients élevé", "Érosion marge brute", "Pilotage multi-points de vente", "Omnicanal & paiement digital"]
-            }
-        };
-
-        let selectedPlaquetteTags = new Set();
-
-        function renderSectorPlaquette(sectorKey) {
-            const data = SECTOR_PLAQUETTES[sectorKey] || SECTOR_PLAQUETTES.agro;
-            const titleEl = document.getElementById('plaquette-sector-title');
-            const qGrid = document.getElementById('plaquette-questions-grid');
-            const tagsList = document.getElementById('plaquette-tags-list');
-            if (!titleEl || !qGrid || !tagsList) return;
-
-            titleEl.textContent = data.title;
-            selectedPlaquetteTags.clear();
-
-            qGrid.innerHTML = data.questions.map((q, idx) => `
-                <div class="space-y-1">
-                    <label for="plq-q-${idx}" class="block text-[11px] font-mono text-slate-300">${q.label}</label>
-                    <input id="plq-q-${idx}" type="text" placeholder="${q.placeholder}" class="w-full px-3 py-2 rounded-xl bg-ebonyCard border border-ebonyBorder text-white text-xs focus:outline-none focus:border-gold transition font-mono" />
-                </div>
-            `).join('');
-
-            tagsList.innerHTML = data.tags.map((tag) => `
-                <button type="button" onclick="togglePlaquetteTag(this, '${tag.replace(/'/g, "\\'")}')" class="px-2.5 py-1 rounded-lg bg-ebonyCard border border-ebonyBorder text-[11px] font-mono text-slate-300 hover:border-gold transition cursor-pointer">
-                    + ${tag}
-                </button>
-            `).join('');
-        }
-
-        function togglePlaquetteTag(btn, tag) {
-            if (selectedPlaquetteTags.has(tag)) {
-                selectedPlaquetteTags.delete(tag);
-                btn.classList.remove('bg-gold/20', 'border-gold', 'text-gold');
-                btn.classList.add('bg-ebonyCard', 'border-ebonyBorder', 'text-slate-300');
-            } else {
-                selectedPlaquetteTags.add(tag);
-                btn.classList.add('bg-gold/20', 'border-gold', 'text-gold');
-                btn.classList.remove('bg-ebonyCard', 'border-ebonyBorder', 'text-slate-300');
-            }
-        }
-
-        function synthesizeSectorBrief() {
-            const data = SECTOR_PLAQUETTES[selectedSectorKey] || SECTOR_PLAQUETTES.agro;
-            const lines = [`[SECTEUR CIBLE : ${data.title.toUpperCase()}]`];
-
-            data.questions.forEach((q, idx) => {
-                const val = (document.getElementById(`plq-q-${idx}`)?.value || '').trim();
-                if (val) {
-                    lines.push(`${q.label} : ${val}`);
-                }
-            });
-
-            if (selectedPlaquetteTags.size > 0) {
-                lines.push(`[FRICTIONS & RISQUES CRITIQUES IDENTIFIÉS] : ${Array.from(selectedPlaquetteTags).join(' ; ')}.`);
-            }
-
-            lines.push(`[OBJECTIF DE L'AUDIT] : Identifier les leviers d'optimisation financière et opérationnelle, modéliser les scénarios de résistance et établir un plan d'action priorisé.`);
-
-            const textarea = document.getElementById('mission_contexte');
-            if (textarea) {
-                textarea.value = lines.join('\n');
-                updateCharCounter(textarea);
-                textarea.focus();
-            }
-        }
-
-                async function renderSaisineCheckoutPanel(apiResult, statusEl, isOptionB) {
-            if (!statusEl || !apiResult) return;
-
-            const ref = String(apiResult.reference_mission || '').trim();
-            const palier = String(apiResult.palier_mandat || 'Palier_2_Certifie').trim();
-            const quota = Number(apiResult.quota_missions || (palier === 'Palier_3_Chambre' ? 10 : (palier === 'Palier_1_Decouverte' ? 1 : 3)));
-            const otsInclus = Boolean(apiResult.ots_inclus);
-            const paiementRequis = Boolean(apiResult.paiement_requis);
-            const sha256 = String(apiResult.empreinte_sha256 || '').trim();
-            const trackerUrl = apiResult.tracker_url || `https://e-metalabs.com/tracker.html?ref=${encodeURIComponent(ref)}`;
-            const deviseCode = (typeof selectedCurrency !== 'undefined' && selectedCurrency === 'FCFA')
-                ? 'XOF'
-                : (typeof selectedCurrency !== 'undefined' ? selectedCurrency : 'EUR');
-
-            let paymentBlockHtml = '';
-
-            if (paiementRequis) {
-                try {
-                    const seqRes = await fetch(apiResult.initier_sequestre_url || 'https://automation.e-metalabs.com/webhook/initier-sequestre', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            reference_mission: ref,
-                            palier: palier,
-                            devise: deviseCode,
-                            option_b: false
-                        })
-                    });
-                    const seqData = await seqRes.json();
-                    if (seqData && seqData.ok) {
-                        paymentBlockHtml = `
-                            <div class="mt-3 p-3 rounded-xl bg-amber-500/10 border border-amber-400/40 text-amber-200 space-y-1">
-                                <div class="font-bold text-xs">RÈGLEMENT PACK REQUIS (100 % E-META LABS SASU)</div>
-                                <div class="text-[11px]">• Offre : <strong>${quota} mission(s)</strong> (${palier})</div>
-                                <div class="text-[11px]">• Montant : <strong>${seqData.montant_total} ${seqData.devise}</strong> via <strong>${seqData.operateur_paiement}</strong></div>
-                                <div class="text-[11px] text-slate-300">L'exécution IA démarrera automatiquement dès confirmation du paiement.</div>
-                            </div>
-                        `;
-                    }
-                } catch (err) {
-                    console.warn('[SEQUESTRE_INIT_WARN]', err);
-                }
-            } else {
-                paymentBlockHtml = `
-                    <div class="mt-3 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/40 text-emerald-300 text-[11px]">
-                        ✓ Diagnostic Découverte activé (${quota} mission offerte • Exécution IA immédiate).
-                    </div>
-                `;
-            }
-
-            const optionBNote = isOptionB
-                ? `<div class="mt-2 text-[11px] text-gold">• Option B (Expert Terrain) : mise en relation activée sous le Protocole d'Apport d'Affaires (devis direct Client–Expert consigné en séquestre, commission 15 % HT E-META LABS).</div>`
-                : '';
-
-            statusEl.className = 'form-status text-xs font-mono text-left bg-ebony/95 border border-gold/40 rounded-2xl p-4 mt-3 space-y-2';
-            statusEl.innerHTML = `
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span class="text-emerald-400 font-bold">✓ MANDAT ENREGISTRÉ : ${ref}</span>
-                    <span class="px-2 py-0.5 rounded bg-gold/15 text-gold text-[10px]">${otsInclus ? 'SHA-256 + BITCOIN OTS' : 'SHA-256 (OTS NON INCLUS)'}</span>
-                </div>
-                ${sha256 ? `<div class="text-[10px] text-slate-400 break-all">Empreinte : ${sha256}</div>` : ''}
-                ${paymentBlockHtml}
-                ${optionBNote}
-                <div class="pt-2">
-                    <a href="${trackerUrl}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gold text-ebony font-bold text-xs uppercase tracking-wider hover:opacity-90 transition">
-                        Ouvrir le Cockpit Tracker (${ref}) →
-                    </a>
-                </div>
-            `;
-        }
-
-        function selectSector(sectorKey) {
+                const PLQ_I18N = {
+  fr: {
+    kicker: "PLAQUETTE D'ORIENTATION DÉCISIONNELLE • CADRAGE SCIENTIFIQUE",
+    badge: "4 AXES DE PRÉCISION RAG",
+    tagsLbl: "Capsules de frictions sectorielles (cliquez pour intégrer) :",
+    hint: "Renseignez ces axes pour générer une formulation calibrée pour l'audit en 20 chapitres.",
+    btn: "⚡ Structurer ma problématique dans le terminal",
+    q: [
+      ["1. Périmètre, actifs & volumes", "Ex. : Capacité de production, hectares, flotte, effectifs..."],
+      ["2. Goulots opérationnels & délais", "Ex. : Pertes, pannes, ruptures de stock, retards..."],
+      ["3. Structure financière & trésorerie", "Ex. : Coûts critiques, BFR, marges, financement..."],
+      ["4. Arbitrage ou investissement visé", "Ex. : Dimensionner une unité, sécuriser un agrément..."]
+    ],
+    tags: ["Tension BFR & trésorerie", "Goulot opérationnel critique", "Conformité réglementaire / OHADA", "Rentabilité & maîtrise des coûts", "Dimensionnement CAPEX / Export"],
+    hSec: "SECTEUR CIBLE", hFric: "FRICTIONS IDENTIFIÉES", hGoal: "OBJECTIF DE L'AUDIT",
+    goal: "Identifier les leviers d'optimisation financière et opérationnelle, modéliser les scénarios de résistance et établir un plan d'action priorisé."
+  },
+  en: {
+    kicker: "DECISION ORIENTATION BRIEF • SCIENTIFIC SCOPING",
+    badge: "4 RAG PRECISION AXES",
+    tagsLbl: "Sectoral friction capsules (click to include):",
+    hint: "Fill in these axes to generate a structured problem statement for the 20-chapter audit.",
+    btn: "⚡ Structure my problem statement in terminal",
+    q: [
+      ["1. Scope, assets & volumes", "E.g., Production capacity, hectares, fleet, headcount..."],
+      ["2. Operational bottlenecks & delays", "E.g., Losses, outages, stockouts, lead-time delays..."],
+      ["3. Financial structure & cash flow", "E.g., Key costs, working capital, margins, financing..."],
+      ["4. Target decision or investment", "E.g., Sizing a facility, securing a license, expansion..."]
+    ],
+    tags: ["Working capital & cash strain", "Critical operational bottleneck", "Regulatory & compliance risk", "Margin & cost optimization", "CAPEX sizing & export strategy"],
+    hSec: "TARGET SECTOR", hFric: "IDENTIFIED FRICTIONS", hGoal: "AUDIT OBJECTIVE",
+    goal: "Identify financial and operational optimization levers, model stress-test scenarios, and build a prioritized action plan."
+  },
+  es: {
+    kicker: "GUÍA DE ORIENTACIÓN DECISORIA • ENCUADRE CIENTÍFICO",
+    badge: "4 EJES DE PRECISIÓN RAG",
+    tagsLbl: "Cápsulas de fricción sectorial (haga clic para integrar):",
+    hint: "Complete estos ejes para generar una formulación calibrada para la auditoría de 20 capítulos.",
+    btn: "⚡ Estructurar mi problemática en el terminal",
+    q: [
+      ["1. Alcance, activos y volúmenes", "Ej.: Capacidad productiva, hectáreas, flota, personal..."],
+      ["2. Cuellos operativos y plazos", "Ej.: Pérdidas, paradas, roturas de stock, retrasos..."],
+      ["3. Estructura financiera y liquidez", "Ej.: Costes críticos, circulante, márgenes, financiación..."],
+      ["4. Arbitraje o inversión prevista", "Ej.: Dimensionar planta, obtener licencia, expansión..."]
+    ],
+    tags: ["Tensión liquidez y circulante", "Cuello operativo crítico", "Riesgo normativo y cumplimiento", "Rentabilidad y control costes", "Dimensionamiento CAPEX / Export"],
+    hSec: "SECTOR OBJETIVO", hFric: "FRICCIONES IDENTIFICADAS", hGoal: "OBJETIVO DE LA AUDITORÍA",
+    goal: "Identificar palancas de optimización financiera y operativa, modelar escenarios de resistencia y establecer un plan de acción priorizado."
+  },
+  ar: {
+    kicker: "دليل التوجيه الاستراتيجي • التأطير العلمي للملف",
+    badge: "4 محاور دقيقة للتحليل",
+    tagsLbl: "مؤشرات التحديات القطاعية (انقر لإدراجها في ملفك) :",
+    hint: "أجب عن هذه المحاور لصياغة إشكالية دقيقة مهيأة للتدقيق الشامل من 20 فصلاً.",
+    btn: "⚡ صياغة الإشكالية تلقائياً في منصة الإدخال",
+    q: [
+      ["المحور 1 : النطاق والأصول والكميات", "مثال : الطاقة الإنتاجية، المساحة، الأسطول، حجم العمليات..."],
+      ["المحور 2 : نقاط الاختناق والآجال", "مثال : الفواقد، الأعطال، نفاد المخزون، تأخر التسليم..."],
+      ["المحور 3 : الهيكلة المالية والسيولة", "مثال : التكاليف الحرجة، رأس المال العامل، الهوامش، التمويل..."],
+      ["المحور 4 : القرار أو الاستثمار المستهدف", "مثال : تصميم وحدة إنتاجية، الحصول على ترخيص، التوسع..."]
+    ],
+    tags: ["ضغط السيولة ورأس المال العامل", "نقطة اختناق تشغيلية حرجة", "الامتثال التنظيمي والقانوني", "تحسين الهوامش وضبط التكاليف", "تحديد الاستثمار والتصدير"],
+    hSec: "القطاع المستهدف", hFric: "التحديات المرصودة", hGoal: "هدف التدقيق الاستراتيجي",
+    goal: "تحديد رافعات التحسين المالي والتشغيلي ونمذجة اختبارات الصمود وبناء خطة عمل تنفيذية ذات أولوية."
+  }
+};
+let selectedPlaquetteTags = new Set();
+function getActivePlqLang() {
+  const u = new URLSearchParams(window.location.search).get('lang');
+  const r = (typeof currentLang !== 'undefined' ? currentLang : (u || document.documentElement.lang || 'fr')).toLowerCase();
+  return PLQ_I18N[r] ? r : 'fr';
+}
+function syncLangBtns(lang) {
+  document.querySelectorAll('.lang-btn, [data-lang]').forEach((b) => {
+    const l = (b.getAttribute('data-lang') || b.textContent || '').trim().toLowerCase();
+    if (!['fr', 'en', 'es', 'ar'].includes(l)) return;
+    b.classList.toggle('bg-gold', l === lang);
+    b.classList.toggle('text-ebony', l === lang);
+    b.classList.toggle('font-bold', l === lang);
+  });
+}
+function renderSectorPlaquette(sectorKey) {
+  const lang = getActivePlqLang();
+  const ui = PLQ_I18N[lang];
+  const secObj = (typeof sectorsDatabase !== 'undefined' && sectorsDatabase[sectorKey]) || { name: sectorKey };
+  const secTitle = (typeof localizedSector === 'function') ? localizedSector(secObj).name : secObj.name;
+  const box = document.getElementById('sector-plaquette-box');
+  const titleEl = document.getElementById('plaquette-sector-title');
+  const qGrid = document.getElementById('plaquette-questions-grid');
+  const tagsList = document.getElementById('plaquette-tags-list');
+  if (!titleEl || !qGrid || !tagsList) return;
+  if (box) {
+    const sp = box.querySelectorAll('span');
+    if (sp[0]) sp[0].textContent = ui.kicker;
+    if (sp[1]) sp[1].textContent = ui.badge;
+    if (sp[2]) sp[2].textContent = ui.tagsLbl;
+    if (sp[3]) sp[3].textContent = ui.hint;
+    const btn = box.querySelector('button[onclick="synthesizeSectorBrief()"]');
+    if (btn) btn.textContent = ui.btn;
+  }
+  titleEl.textContent = secTitle;
+  selectedPlaquetteTags.clear();
+  qGrid.innerHTML = ui.q.map((pair, i) => `<div class="space-y-1"><label for="plq-q-${i}" class="block text-[11px] font-mono text-slate-300">${pair[0]}</label><input id="plq-q-${i}" type="text" placeholder="${pair[1]}" class="w-full px-3 py-2 rounded-xl bg-ebonyCard border border-ebonyBorder text-white text-xs focus:outline-none focus:border-gold transition font-mono" /></div>`).join('');
+  tagsList.innerHTML = ui.tags.map((t) => `<button type="button" onclick="togglePlaquetteTag(this, '${t.replace(/'/g, "\\'")}')" class="px-2.5 py-1 rounded-lg bg-ebonyCard border border-ebonyBorder text-[11px] font-mono text-slate-300 hover:border-gold transition cursor-pointer">+ ${t}</button>`).join('');
+}
+function togglePlaquetteTag(btn, tag) {
+  const on = !selectedPlaquetteTags.has(tag);
+  on ? selectedPlaquetteTags.add(tag) : selectedPlaquetteTags.delete(tag);
+  btn.classList.toggle('bg-gold/20', on);
+  btn.classList.toggle('border-gold', on);
+  btn.classList.toggle('text-gold', on);
+}
+function synthesizeSectorBrief() {
+  const lang = getActivePlqLang();
+  const ui = PLQ_I18N[lang];
+  const title = document.getElementById('plaquette-sector-title')?.textContent || selectedSectorKey;
+  const lines = [`[${ui.hSec} : ${title.toUpperCase()}]`];
+  ui.q.forEach((pair, i) => {
+    const v = (document.getElementById(`plq-q-${i}`)?.value || '').trim();
+    if (v) lines.push(`${pair[0]} : ${v}`);
+  });
+  if (selectedPlaquetteTags.size > 0) lines.push(`[${ui.hFric}] : ${Array.from(selectedPlaquetteTags).join(' ; ')}.`);
+  lines.push(`[${ui.hGoal}] : ${ui.goal}`);
+  const ta = document.getElementById('mission_contexte');
+  if (ta) { ta.value = lines.join('\n'); updateCharCounter(ta); ta.focus(); }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const l = getActivePlqLang();
+  syncLangBtns(l);
+  renderSectorPlaquette(typeof selectedSectorKey !== 'undefined' ? selectedSectorKey : 'agro');
+});
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.lang-btn, [data-lang]');
+  if (!btn) return;
+  const l = (btn.getAttribute('data-lang') || btn.textContent || '').trim().toLowerCase();
+  if (PLQ_I18N[l]) setTimeout(() => { syncLangBtns(l); renderSectorPlaquette(typeof selectedSectorKey !== 'undefined' ? selectedSectorKey : 'agro'); }, 20);
+});
+function selectSector(sectorKey) {
             const sector = sectorsDatabase[sectorKey];
             if (!sector) return;
             selectedSectorKey = sectorKey;
@@ -1978,8 +1878,7 @@
             document.getElementById('auto-email').value = email;
             document.getElementById('auto-phone').value = whatsapp;
             updateCharCounter(document.getElementById('mission_contexte'));
-            closeSaisineModal();
-            openModal('autoDetectModal');
+            const mOpt = Boolean(document.getElementById('modal-option-b')?.checked); const aOpt = document.getElementById('auto-option-b'); if (aOpt) aOpt.checked = mOpt; closeSaisineModal(); openModal('autoDetectModal'); fireAutoDetection();
         }
 
         function toggleMobileMenu() {
