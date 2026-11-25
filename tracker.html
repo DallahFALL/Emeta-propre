@@ -751,11 +751,23 @@
         } catch (_) {}
       });
 
-      els.validateBtn.addEventListener('click', () => {
+      els.validateBtn.addEventListener('click', async () => {
         if (!currentMission || els.validateBtn.disabled) return;
-        currentMission.statut = I18N[currentLang].step4SubClosed;
-        currentMission.etape = 5;
-        renderMission(currentMission);
+        const refToClose = currentMission.ref;
+        els.validateBtn.disabled = true;
+        els.validateBtn.textContent = '...';
+        try {
+          const res = await fetch('https://automation.e-metalabs.com/webhook/recette-cloture', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ref: refToClose, lang: currentLang })
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          await loadMission(refToClose);
+        } catch (err) {
+          console.error('[RECETTE_CLOTURE_ERROR]', err);
+          setValidateButton('confirm');
+        }
       });
 
       applyLanguage(currentLang);
