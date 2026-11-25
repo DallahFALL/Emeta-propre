@@ -182,69 +182,83 @@
     "active":  true,
     "name":  "07 - CORTEX Séquestre Paiement (Escrow)",
     "connections":  {
-                        "PATCH Séquestre Consigné NocoDB":  {
-                                                                "main":  [
-                                                                             {
-                                                                                 "node":  "Déclencher Production CORTEX 02",
-                                                                                 "type":  "main",
-                                                                                 "index":  0
-                                                                             }
-                                                                         ]
-                                                            },
                         "Webhook Initier Séquestre":  {
                                                           "main":  [
-                                                                       {
-                                                                           "node":  "Calculer Grille \u0026 Passerelle",
-                                                                           "type":  "main",
-                                                                           "index":  0
-                                                                       }
-                                                                   ]
-                                                      },
-                        "Préparer Consignation \u0026 Relais Production":  {
-                                                                               "main":  [
-                                                                                            {
-                                                                                                "node":  "PATCH Séquestre Consigné NocoDB",
-                                                                                                "type":  "main",
-                                                                                                "index":  0
-                                                                                            }
-                                                                                        ]
-                                                                           },
-                        "Normaliser IPN PayTech PayDunya PayPal":  {
-                                                                       "main":  [
-                                                                                    {
-                                                                                        "node":  "Lire Mission NocoDB Séquestre",
-                                                                                        "type":  "main",
-                                                                                        "index":  0
-                                                                                    }
-                                                                                ]
-                                                                   },
-                        "Calculer Grille \u0026 Passerelle":  {
-                                                                  "main":  [
-                                                                               {
-                                                                                   "node":  "Réponse JSON Session Séquestre",
-                                                                                   "type":  "main",
-                                                                                   "index":  0
-                                                                               }
-                                                                           ]
-                                                              },
-                        "Lire Mission NocoDB Séquestre":  {
-                                                              "main":  [
+                                                                       [
                                                                            {
-                                                                               "node":  "Préparer Consignation \u0026 Relais Production",
+                                                                               "node":  "Calculer Grille \u0026 Passerelle",
                                                                                "type":  "main",
                                                                                "index":  0
                                                                            }
                                                                        ]
-                                                          },
+                                                                   ]
+                                                      },
+                        "Calculer Grille \u0026 Passerelle":  {
+                                                                  "main":  [
+                                                                               [
+                                                                                   {
+                                                                                       "node":  "Réponse JSON Session Séquestre",
+                                                                                       "type":  "main",
+                                                                                       "index":  0
+                                                                                   }
+                                                                               ]
+                                                                           ]
+                                                              },
                         "Webhook IPN Séquestre":  {
                                                       "main":  [
-                                                                   {
-                                                                       "node":  "Normaliser IPN PayTech PayDunya PayPal",
-                                                                       "type":  "main",
-                                                                       "index":  0
-                                                                   }
+                                                                   [
+                                                                       {
+                                                                           "node":  "Normaliser IPN PayTech PayDunya PayPal",
+                                                                           "type":  "main",
+                                                                           "index":  0
+                                                                       }
+                                                                   ]
                                                                ]
-                                                  }
+                                                  },
+                        "Normaliser IPN PayTech PayDunya PayPal":  {
+                                                                       "main":  [
+                                                                                    [
+                                                                                        {
+                                                                                            "node":  "Lire Mission NocoDB Séquestre",
+                                                                                            "type":  "main",
+                                                                                            "index":  0
+                                                                                        }
+                                                                                    ]
+                                                                                ]
+                                                                   },
+                        "Lire Mission NocoDB Séquestre":  {
+                                                              "main":  [
+                                                                           [
+                                                                               {
+                                                                                   "node":  "Préparer Consignation \u0026 Relais Production",
+                                                                                   "type":  "main",
+                                                                                   "index":  0
+                                                                               }
+                                                                           ]
+                                                                       ]
+                                                          },
+                        "Préparer Consignation \u0026 Relais Production":  {
+                                                                               "main":  [
+                                                                                            [
+                                                                                                {
+                                                                                                    "node":  "PATCH Séquestre Consigné NocoDB",
+                                                                                                    "type":  "main",
+                                                                                                    "index":  0
+                                                                                                }
+                                                                                            ]
+                                                                                        ]
+                                                                           },
+                        "PATCH Séquestre Consigné NocoDB":  {
+                                                                "main":  [
+                                                                             [
+                                                                                 {
+                                                                                     "node":  "Déclencher Production CORTEX 02",
+                                                                                     "type":  "main",
+                                                                                     "index":  0
+                                                                                 }
+                                                                             ]
+                                                                         ]
+                                                            }
                     },
     "settings":  {
                      "executionOrder":  "v1"

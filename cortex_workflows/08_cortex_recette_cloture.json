@@ -147,58 +147,70 @@
     "active":  true,
     "name":  "08 - CORTEX Recette \u0026 Clôture",
     "connections":  {
+                        "Webhook Recette Client":  {
+                                                       "main":  [
+                                                                    [
+                                                                        {
+                                                                            "node":  "Valider Payload Recette",
+                                                                            "type":  "main",
+                                                                            "index":  0
+                                                                        }
+                                                                    ]
+                                                                ]
+                                                   },
                         "Valider Payload Recette":  {
                                                         "main":  [
-                                                                     {
-                                                                         "node":  "Lire Mission à Clôturer",
-                                                                         "type":  "main",
-                                                                         "index":  0
-                                                                     }
+                                                                     [
+                                                                         {
+                                                                             "node":  "Lire Mission à Clôturer",
+                                                                             "type":  "main",
+                                                                             "index":  0
+                                                                         }
+                                                                     ]
                                                                  ]
                                                     },
                         "Lire Mission à Clôturer":  {
                                                         "main":  [
-                                                                     {
-                                                                         "node":  "Préparer Clôture \u0026 Libération Séquestre",
-                                                                         "type":  "main",
-                                                                         "index":  0
-                                                                     }
+                                                                     [
+                                                                         {
+                                                                             "node":  "Préparer Clôture \u0026 Libération Séquestre",
+                                                                             "type":  "main",
+                                                                             "index":  0
+                                                                         }
+                                                                     ]
                                                                  ]
                                                     },
-                        "PATCH Clôture Registre_Missions":  {
-                                                                "main":  [
-                                                                             {
-                                                                                 "node":  "Notifier Desk Libération Séquestre",
-                                                                                 "type":  "main",
-                                                                                 "index":  0
-                                                                             }
-                                                                         ]
-                                                            },
-                        "Webhook Recette Client":  {
-                                                       "main":  [
-                                                                    {
-                                                                        "node":  "Valider Payload Recette",
-                                                                        "type":  "main",
-                                                                        "index":  0
-                                                                    }
-                                                                ]
-                                                   },
                         "Préparer Clôture \u0026 Libération Séquestre":  {
                                                                              "main":  [
-                                                                                          {
-                                                                                              "node":  "PATCH Clôture Registre_Missions",
-                                                                                              "type":  "main",
-                                                                                              "index":  0
-                                                                                          }
+                                                                                          [
+                                                                                              {
+                                                                                                  "node":  "PATCH Clôture Registre_Missions",
+                                                                                                  "type":  "main",
+                                                                                                  "index":  0
+                                                                                              }
+                                                                                          ]
                                                                                       ]
                                                                          },
+                        "PATCH Clôture Registre_Missions":  {
+                                                                "main":  [
+                                                                             [
+                                                                                 {
+                                                                                     "node":  "Notifier Desk Libération Séquestre",
+                                                                                     "type":  "main",
+                                                                                     "index":  0
+                                                                                 }
+                                                                             ]
+                                                                         ]
+                                                            },
                         "Notifier Desk Libération Séquestre":  {
                                                                    "main":  [
-                                                                                {
-                                                                                    "node":  "Réponse JSON 200 Clôture",
-                                                                                    "type":  "main",
-                                                                                    "index":  0
-                                                                                }
+                                                                                [
+                                                                                    {
+                                                                                        "node":  "Réponse JSON 200 Clôture",
+                                                                                        "type":  "main",
+                                                                                        "index":  0
+                                                                                    }
+                                                                                ]
                                                                             ]
                                                                }
                     },
