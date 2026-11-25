@@ -132,7 +132,7 @@
                                                               },
                                          "sendBody":  true,
                                          "specifyBody":  "json",
-                                         "jsonBody":  "={{\n  (() =\u003e {\n    let payload = {};\n    try {\n      payload = typeof $json.canonical_payload === \u0027string\u0027\n        ? JSON.parse($json.canonical_payload)\n        : ($json.canonical_payload || {});\n    } catch (_) {}\n\n    const norm = (v) =\u003e String(v || \u0027\u0027).normalize(\u0027NFD\u0027).replace(/[\\u0300-\\u036f]/g, \u0027\u0027).toLowerCase().trim();\n\n    const pNorm = norm(payload.palier);\n    let palierCode = \u0027Palier_2_Certifie\u0027;\n    if (/decouver|palier_1|option a|p1/.test(pNorm)) {\n      palierCode = \u0027Palier_1_Decouverte\u0027;\n    } else if (/chambre|palier_3|option c|p3|souverain/.test(pNorm)) {\n      palierCode = \u0027Palier_3_Chambre\u0027;\n    }\n\n    const contexte = String(payload.mission_contexte || payload.contexte || \u0027\u0027).trim();\n    const title = String(\n      payload.mission_nom || payload.entreprise || (contexte ? contexte.slice(0, 120) : \u0027Saisine CORTEX\u0027)\n    ).trim();\n\n    const secteurCode = norm(payload.secteur_selectionne || payload.secteur || \u0027agro\u0027) || \u0027agro\u0027;\n\n    return {\n      fields: {\n        Title: title,\n        Mission_Ref: $json.reference_mission,\n        Palier_Mandat: palierCode,\n        Secteur_Code: secteurCode,\n        Langue_Dossier: norm(payload.langue || \u0027fr\u0027) || \u0027fr\u0027,\n        Contexte_Extrait: contexte ? contexte.slice(0, 1000) : \u0027\u0027,\n        Date_Saisine_T0: $json.timestamp_t0 || payload.timestamp_t0 || new Date().toISOString(),\n        Statut_Mandat: \u0027Saisine_Recue\u0027,\n        Empreinte_SHA256: $json.empreinte_sha256 || $json.sha256_hash || $json.hash || \u0027\u0027\n      }\n    };\n  })()\n}}",
+                                         "jsonBody":  "={{\n  (() =\u003e {\n    let payload = {};\n    try {\n      payload = typeof $json.canonical_payload === \u0027string\u0027\n        ? JSON.parse($json.canonical_payload)\n        : ($json.canonical_payload || {});\n    } catch (_) {}\n\n    const norm = (v) =\u003e String(v || \u0027\u0027).normalize(\u0027NFD\u0027).replace(/[\\u0300-\\u036f]/g, \u0027\u0027).toLowerCase().trim();\n    const pNorm = norm(payload.palier);\n\n    let palierCode = \u0027Palier_2_Certifie\u0027;\n    let isFreeOrPack = Boolean(String(payload.pack_code || \u0027\u0027).trim());\n\n    if (/decouver|palier_1|option a|p1/.test(pNorm)) {\n      palierCode = \u0027Palier_1_Decouverte\u0027;\n      isFreeOrPack = true;\n    } else if (/chambre|palier_3|option c|p3|souverain/.test(pNorm)) {\n      palierCode = \u0027Palier_3_Chambre\u0027;\n    }\n\n    const contexte = String(payload.mission_contexte || payload.contexte || \u0027\u0027).trim();\n    const title = String(\n      payload.mission_nom || payload.entreprise || (contexte ? contexte.slice(0, 120) : \u0027Saisine CORTEX\u0027)\n    ).trim();\n    const secteurCode = norm(payload.secteur_selectionne || payload.secteur || \u0027agro\u0027) || \u0027agro\u0027;\n\n    return {\n      fields: {\n        Title: title,\n        Mission_Ref: $json.reference_mission,\n        Palier_Mandat: palierCode,\n        Secteur_Code: secteurCode,\n        Langue_Dossier: norm(payload.langue || \u0027fr\u0027) || \u0027fr\u0027,\n        Contexte_Extrait: contexte ? contexte.slice(0, 1000) : \u0027\u0027,\n        Date_Saisine_T0: $json.timestamp_t0 || payload.timestamp_t0 || new Date().toISOString(),\n        Statut_Mandat: isFreeOrPack ? \u0027Saisine_Recue\u0027 : \u0027Attente_Paiement\u0027,\n        Statut_Sequestre: palierCode === \u0027Palier_1_Decouverte\u0027 ? \u0027Non_Requis\u0027 : (isFreeOrPack ? \u0027Pack_Actif\u0027 : \u0027Attente_Paiement\u0027),\n        Operateur_Paiement: palierCode === \u0027Palier_1_Decouverte\u0027 ? \u0027Offert_Palier_1\u0027 : \u0027\u0027,\n        Empreinte_SHA256: $json.empreinte_sha256 || $json.sha256_hash || $json.hash || \u0027\u0027\n      }\n    };\n  })()\n}}",
                                          "options":  {
 
                                                      }
@@ -193,7 +193,7 @@
                   {
                       "parameters":  {
                                          "respondWith":  "json",
-                                         "responseBody":  "={{\n  JSON.stringify({\n    ok: true,\n    reference_mission: $json.records?.[0]?.fields?.Mission_Ref || $(\u0027Référence canonique\u0027).first().json.reference_mission,\n    statut: $json.records?.[0]?.fields?.Statut_Mandat || \u0027Saisine_Recue\u0027,\n    empreinte_sha256: $json.records?.[0]?.fields?.Empreinte_SHA256 || $(\u0027Référence canonique\u0027).first().json.empreinte_sha256 || null,\n    timestamp_t0: $json.records?.[0]?.fields?.Date_Saisine_T0 || $(\u0027Référence canonique\u0027).first().json.timestamp_t0 || new Date().toISOString(),\n    tracker_url: \u0027https://e-metalabs.com/tracker.html?ref=\u0027 + encodeURIComponent($json.records?.[0]?.fields?.Mission_Ref || $(\u0027Référence canonique\u0027).first().json.reference_mission)\n  })\n}}",
+                                         "responseBody":  "={{\n  (() =\u003e {\n    const refNode = $(\u0027Référence canonique\u0027).first().json || {};\n    const fields = $json.records?.[0]?.fields || {};\n    const missionRef = fields.Mission_Ref || refNode.reference_mission;\n    const palier = fields.Palier_Mandat || \u0027Palier_2_Certifie\u0027;\n    const isP1 = palier === \u0027Palier_1_Decouverte\u0027;\n    const isP3 = palier === \u0027Palier_3_Chambre\u0027;\n    const statut = fields.Statut_Mandat || \u0027Saisine_Recue\u0027;\n\n    return JSON.stringify({\n      ok: true,\n      reference_mission: missionRef,\n      palier_mandat: palier,\n      quota_missions: isP3 ? 10 : (isP1 ? 1 : 3),\n      ots_inclus: !isP1,\n      paiement_requis: statut === \u0027Attente_Paiement\u0027,\n      initier_sequestre_url: \u0027https://automation.e-metalabs.com/webhook/initier-sequestre\u0027,\n      statut: statut,\n      empreinte_sha256: fields.Empreinte_SHA256 || refNode.empreinte_sha256 || null,\n      timestamp_t0: fields.Date_Saisine_T0 || refNode.timestamp_t0 || new Date().toISOString(),\n      tracker_url: \u0027https://e-metalabs.com/tracker.html?ref=\u0027 + encodeURIComponent(missionRef)\n    });\n  })()\n}}",
                                          "options":  {
                                                          "responseCode":  201,
                                                          "responseHeaders":  {
@@ -218,6 +218,86 @@
                                    ],
                       "id":  "ecd2037c-4431-47e0-b6f8-1b9c6ef9d082",
                       "name":  "Réponse JSON 201 Saisine"
+                  },
+                  {
+                      "id":  "11000000-0000-4000-8000-000000000010",
+                      "name":  "Palier Éligible OTS ?",
+                      "parameters":  {
+                                         "conditions":  {
+                                                            "options":  {
+                                                                            "typeValidation":  "loose",
+                                                                            "leftValue":  "",
+                                                                            "caseSensitive":  false
+                                                                        },
+                                                            "conditions":  [
+                                                                               {
+                                                                                   "operator":  {
+                                                                                                    "operation":  "notRegex",
+                                                                                                    "type":  "string"
+                                                                                                },
+                                                                                   "rightValue":  "decouver|palier_1|option a|p1",
+                                                                                   "id":  "cond-ots-not-p1",
+                                                                                   "leftValue":  "={{ String((typeof $json.canonical_payload === \"string\" ? JSON.parse($json.canonical_payload).palier : $json.canonical_payload?.palier) || \"Palier_2_Certifie\").normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\") }}"
+                                                                               },
+                                                                               {
+                                                                                   "operator":  {
+                                                                                                    "operation":  "notEmpty",
+                                                                                                    "type":  "string"
+                                                                                                },
+                                                                                   "rightValue":  "",
+                                                                                   "id":  "cond-ots-hash-ready",
+                                                                                   "leftValue":  "={{ String($json.sha256 || \"\") }}"
+                                                                               }
+                                                                           ],
+                                                            "combinator":  "and"
+                                                        }
+                                     },
+                      "type":  "n8n-nodes-base.if",
+                      "position":  [
+                                       -300,
+                                       -16
+                                   ],
+                      "typeVersion":  2.2
+                  },
+                  {
+                      "id":  "11000000-0000-4000-8000-000000000011",
+                      "name":  "Exécution Immédiate Autorisée ?",
+                      "parameters":  {
+                                         "conditions":  {
+                                                            "options":  {
+                                                                            "typeValidation":  "loose",
+                                                                            "leftValue":  "",
+                                                                            "caseSensitive":  true
+                                                                        },
+                                                            "conditions":  [
+                                                                               {
+                                                                                   "operator":  {
+                                                                                                    "operation":  "equals",
+                                                                                                    "type":  "string"
+                                                                                                },
+                                                                                   "rightValue":  "Saisine_Recue",
+                                                                                   "id":  "cond-exec-saisine-recue",
+                                                                                   "leftValue":  "={{ String($json.records?.[0]?.fields?.Statut_Mandat || \"\") }}"
+                                                                               },
+                                                                               {
+                                                                                   "operator":  {
+                                                                                                    "operation":  "notEmpty",
+                                                                                                    "type":  "string"
+                                                                                                },
+                                                                                   "rightValue":  "",
+                                                                                   "id":  "cond-exec-ref-present",
+                                                                                   "leftValue":  "={{ String($json.records?.[0]?.fields?.Mission_Ref || \"\") }}"
+                                                                               }
+                                                                           ],
+                                                            "combinator":  "and"
+                                                        }
+                                     },
+                      "type":  "n8n-nodes-base.if",
+                      "position":  [
+                                       200,
+                                       304
+                                   ],
+                      "typeVersion":  2.2
                   }
               ],
     "pinData":  {
@@ -250,7 +330,7 @@
                                                   "main":  [
                                                                [
                                                                    {
-                                                                       "node":  "Soumission OpenTimestamps T+0",
+                                                                       "node":  "Palier Éligible OTS ?",
                                                                        "type":  "main",
                                                                        "index":  0
                                                                    },
@@ -262,6 +342,20 @@
                                                                ]
                                                            ]
                                               },
+                        "Palier Éligible OTS ?":  {
+                                                      "main":  [
+                                                                   [
+                                                                       {
+                                                                           "node":  "Soumission OpenTimestamps T+0",
+                                                                           "type":  "main",
+                                                                           "index":  0
+                                                                       }
+                                                                   ],
+                                                                   [
+
+                                                                   ]
+                                                               ]
+                                                  },
                         "Allouer séquence de référence":  {
                                                               "main":  [
                                                                            [
@@ -293,20 +387,27 @@
                                                                              "index":  0
                                                                          },
                                                                          {
-                                                                             "node":  "Transmettre à CORTEX 02",
+                                                                             "node":  "Exécution Immédiate Autorisée ?",
                                                                              "type":  "main",
                                                                              "index":  0
                                                                          }
                                                                      ]
                                                                  ]
                                                     },
-                        "Réponse JSON 201 Saisine":  {
-                                                         "main":  [
-                                                                      [
+                        "Exécution Immédiate Autorisée ?":  {
+                                                                "main":  [
+                                                                             [
+                                                                                 {
+                                                                                     "node":  "Transmettre à CORTEX 02",
+                                                                                     "type":  "main",
+                                                                                     "index":  0
+                                                                                 }
+                                                                             ],
+                                                                             [
 
-                                                                      ]
-                                                                  ]
-                                                     }
+                                                                             ]
+                                                                         ]
+                                                            }
                     },
     "active":  true,
     "settings":  {
