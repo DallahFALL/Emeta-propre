@@ -1343,6 +1343,77 @@
             }
         }
 
+                async function renderSaisineCheckoutPanel(apiResult, statusEl, isOptionB) {
+            if (!statusEl || !apiResult) return;
+
+            const ref = String(apiResult.reference_mission || '').trim();
+            const palier = String(apiResult.palier_mandat || 'Palier_2_Certifie').trim();
+            const quota = Number(apiResult.quota_missions || (palier === 'Palier_3_Chambre' ? 10 : (palier === 'Palier_1_Decouverte' ? 1 : 3)));
+            const otsInclus = Boolean(apiResult.ots_inclus);
+            const paiementRequis = Boolean(apiResult.paiement_requis);
+            const sha256 = String(apiResult.empreinte_sha256 || '').trim();
+            const trackerUrl = apiResult.tracker_url || `https://e-metalabs.com/tracker.html?ref=${encodeURIComponent(ref)}`;
+            const deviseCode = (typeof selectedCurrency !== 'undefined' && selectedCurrency === 'FCFA')
+                ? 'XOF'
+                : (typeof selectedCurrency !== 'undefined' ? selectedCurrency : 'EUR');
+
+            let paymentBlockHtml = '';
+
+            if (paiementRequis) {
+                try {
+                    const seqRes = await fetch(apiResult.initier_sequestre_url || 'https://automation.e-metalabs.com/webhook/initier-sequestre', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            reference_mission: ref,
+                            palier: palier,
+                            devise: deviseCode,
+                            option_b: false
+                        })
+                    });
+                    const seqData = await seqRes.json();
+                    if (seqData && seqData.ok) {
+                        paymentBlockHtml = `
+                            <div class="mt-3 p-3 rounded-xl bg-amber-500/10 border border-amber-400/40 text-amber-200 space-y-1">
+                                <div class="font-bold text-xs">RÈGLEMENT PACK REQUIS (100 % E-META LABS SASU)</div>
+                                <div class="text-[11px]">• Offre : <strong>${quota} mission(s)</strong> (${palier})</div>
+                                <div class="text-[11px]">• Montant : <strong>${seqData.montant_total} ${seqData.devise}</strong> via <strong>${seqData.operateur_paiement}</strong></div>
+                                <div class="text-[11px] text-slate-300">L'exécution IA démarrera automatiquement dès confirmation du paiement.</div>
+                            </div>
+                        `;
+                    }
+                } catch (err) {
+                    console.warn('[SEQUESTRE_INIT_WARN]', err);
+                }
+            } else {
+                paymentBlockHtml = `
+                    <div class="mt-3 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/40 text-emerald-300 text-[11px]">
+                        ✓ Diagnostic Découverte activé (${quota} mission offerte • Exécution IA immédiate).
+                    </div>
+                `;
+            }
+
+            const optionBNote = isOptionB
+                ? `<div class="mt-2 text-[11px] text-gold">• Option B (Expert Terrain) : mise en relation activée sous le Protocole d'Apport d'Affaires (devis direct Client–Expert consigné en séquestre, commission 15 % HT E-META LABS).</div>`
+                : '';
+
+            statusEl.className = 'form-status text-xs font-mono text-left bg-ebony/95 border border-gold/40 rounded-2xl p-4 mt-3 space-y-2';
+            statusEl.innerHTML = `
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span class="text-emerald-400 font-bold">✓ MANDAT ENREGISTRÉ : ${ref}</span>
+                    <span class="px-2 py-0.5 rounded bg-gold/15 text-gold text-[10px]">${otsInclus ? 'SHA-256 + BITCOIN OTS' : 'SHA-256 (OTS NON INCLUS)'}</span>
+                </div>
+                ${sha256 ? `<div class="text-[10px] text-slate-400 break-all">Empreinte : ${sha256}</div>` : ''}
+                ${paymentBlockHtml}
+                ${optionBNote}
+                <div class="pt-2">
+                    <a href="${trackerUrl}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gold text-ebony font-bold text-xs uppercase tracking-wider hover:opacity-90 transition">
+                        Ouvrir le Cockpit Tracker (${ref}) →
+                    </a>
+                </div>
+            `;
+        }
+
         function selectSector(sectorKey) {
             const sector = sectorsDatabase[sectorKey];
             if (!sector) return;
