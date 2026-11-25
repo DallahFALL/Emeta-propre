@@ -1,0 +1,208 @@
+{
+    "nodes":  [
+                  {
+                      "id":  "88000000-0000-4000-8000-000000000001",
+                      "name":  "Webhook Recette Client",
+                      "parameters":  {
+                                         "path":  "recette-cloture",
+                                         "responseMode":  "responseNode",
+                                         "options":  {
+                                                         "allowedOrigins":  "https://e-metalabs.com,https://www.e-metalabs.com"
+                                                     },
+                                         "httpMethod":  "POST"
+                                     },
+                      "webhookId":  "recette-cloture",
+                      "type":  "n8n-nodes-base.webhook",
+                      "position":  [
+                                       0,
+                                       200
+                                   ],
+                      "typeVersion":  2
+                  },
+                  {
+                      "id":  "88000000-0000-4000-8000-000000000002",
+                      "name":  "Valider Payload Recette",
+                      "parameters":  {
+                                         "jsCode":  "const raw = $input.first().json || {};\nconst body = raw.body \u0026\u0026 typeof raw.body === \u0027object\u0027 ? raw.body : raw;\nconst ref = String(body.ref || body.reference || body.mission_ref || \u0027\u0027).trim().toUpperCase();\nif (!/^MIS-20\\d{2}-\\d{3,6}$/.test(ref)) throw new Error(\u0027Référence mission invalide.\u0027);\nreturn [{ json: { reference: ref, lang: String(body.lang || \u0027fr\u0027).trim() } }];",
+                                         "mode":  "runOnceForAllItems"
+                                     },
+                      "type":  "n8n-nodes-base.code",
+                      "position":  [
+                                       240,
+                                       200
+                                   ],
+                      "typeVersion":  2
+                  },
+                  {
+                      "id":  "88000000-0000-4000-8000-000000000003",
+                      "name":  "Lire Mission à Clôturer",
+                      "credentials":  {
+                                          "httpHeaderAuth":  {
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account"
+                                                             }
+                                      },
+                      "parameters":  {
+                                         "authentication":  "genericCredentialType",
+                                         "genericAuthType":  "httpHeaderAuth",
+                                         "queryParameters":  {
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "value":  "={{ \u0027(Mission_Ref,eq,\u0027 + .reference + \u0027)\u0027 }}",
+                                                                                        "name":  "where"
+                                                                                    }
+                                                                                ]
+                                                             },
+                                         "method":  "GET",
+                                         "sendQuery":  true,
+                                         "url":  "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mv1cb6xm00g6rf5/records"
+                                     },
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "position":  [
+                                       480,
+                                       200
+                                   ],
+                      "typeVersion":  4.2
+                  },
+                  {
+                      "id":  "88000000-0000-4000-8000-000000000004",
+                      "name":  "Préparer Clôture \u0026 Libération Séquestre",
+                      "parameters":  {
+                                         "jsCode":  "const ref = $(\u0027Valider Payload Recette\u0027).first().json.reference;\nconst resp = $input.first().json || {};\nconst rec = (resp.records || resp.list || [])[0];\nif (!rec) throw new Error(`Dossier ${ref} introuvable dans Registre_Missions.`);\n\nconst f = rec.fields || rec;\nconst recordId = Number(rec.id || rec.id_fields?.Id || f.Id);\nconst nowIso = new Date().toISOString();\n\nconst expertMatch = String(f.Expert_Assigne || \u0027\u0027).match(/#(\\d+)/);\nconst expertId = expertMatch ? Number(expertMatch[1]) : null;\nconst hasEscrow = /consigne/i.test(String(f.Statut_Sequestre || \u0027\u0027));\n\nconst missionPatch = [{\n  id: recordId,\n  fields: {\n    Statut_Mandat: \u0027Cloture\u0027,\n    Statut_Sequestre: hasEscrow ? \u0027Libere\u0027 : (f.Statut_Sequestre || \u0027Non_Requis\u0027),\n    Date_Recette_UTC: nowIso\n  }\n}];\n\nconst expertPatch = expertId\n  ? [{ id: expertId, fields: { Statut: \u0027Disponible\u0027 } }]\n  : [];\n\nconst telegramSummary = `✅ RECETTE CLIENT \u0026 CLÔTURE — ${ref}\\n• Client : ${f.Title || ref}\\n• Palier : ${f.Palier_Mandat || \u0027Mandat Certifié\u0027}\\n• Séquestre : ${hasEscrow ? `LIBÉRÉ (85% Partenaire = ${f.Quote_Part_Expert || 0} ${f.Devise || \u0027\u0027} | 15% Commission E-META = ${f.Commission_Emeta || 0} ${f.Devise || \u0027\u0027})` : \u0027Non requis / Offert\u0027}\\n• Partenaire : ${f.Expert_Assigne || \u0027Audit IA\u0027}\\n• Clôturé le : ${nowIso}`;\n\nreturn [{\n  json: {\n    reference: ref,\n    has_expert: Boolean(expertId),\n    mission_patch: missionPatch,\n    expert_patch: expertPatch,\n    telegram_summary: telegramSummary,\n    closed_at: nowIso\n  }\n}];",
+                                         "mode":  "runOnceForAllItems"
+                                     },
+                      "type":  "n8n-nodes-base.code",
+                      "position":  [
+                                       740,
+                                       200
+                                   ],
+                      "typeVersion":  2
+                  },
+                  {
+                      "id":  "88000000-0000-4000-8000-000000000005",
+                      "name":  "PATCH Clôture Registre_Missions",
+                      "credentials":  {
+                                          "httpHeaderAuth":  {
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account"
+                                                             }
+                                      },
+                      "parameters":  {
+                                         "specifyBody":  "json",
+                                         "authentication":  "genericCredentialType",
+                                         "sendBody":  true,
+                                         "genericAuthType":  "httpHeaderAuth",
+                                         "method":  "PATCH",
+                                         "jsonBody":  "={{ JSON.stringify($(\u0027Préparer Clôture \u0026 Libération Séquestre\u0027).first().json.mission_patch) }}",
+                                         "url":  "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mv1cb6xm00g6rf5/records"
+                                     },
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "position":  [
+                                       1000,
+                                       200
+                                   ],
+                      "typeVersion":  4.2
+                  },
+                  {
+                      "id":  "88000000-0000-4000-8000-000000000006",
+                      "name":  "Notifier Desk Libération Séquestre",
+                      "credentials":  {
+                                          "telegramApi":  {
+                                                              "id":  "OZEJ1H3HWx6oPSiP",
+                                                              "name":  "Telegram account"
+                                                          }
+                                      },
+                      "parameters":  {
+                                         "chatId":  "={{ $env.TELEGRAM_DESK_CHAT_ID || \"6201937645\" }}",
+                                         "additionalFields":  {
+
+                                                              },
+                                         "text":  "={{ $(\u0027Préparer Clôture \u0026 Libération Séquestre\u0027).first().json.telegram_summary }}"
+                                     },
+                      "type":  "n8n-nodes-base.telegram",
+                      "position":  [
+                                       1260,
+                                       200
+                                   ],
+                      "typeVersion":  1.2
+                  },
+                  {
+                      "id":  "88000000-0000-4000-8000-000000000007",
+                      "name":  "Réponse JSON 200 Clôture",
+                      "parameters":  {
+                                         "responseBody":  "={{ JSON.stringify({ ok: true, reference: $(\u0027Préparer Clôture \u0026 Libération Séquestre\u0027).first().json.reference, statut: \"Cloture\", closed_at: $(\u0027Préparer Clôture \u0026 Libération Séquestre\u0027).first().json.closed_at }) }}",
+                                         "respondWith":  "json",
+                                         "options":  {
+                                                         "responseCode":  200
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "position":  [
+                                       1520,
+                                       200
+                                   ],
+                      "typeVersion":  1.1
+                  }
+              ],
+    "active":  true,
+    "name":  "08 - CORTEX Recette \u0026 Clôture",
+    "connections":  {
+                        "Valider Payload Recette":  {
+                                                        "main":  [
+                                                                     {
+                                                                         "node":  "Lire Mission à Clôturer",
+                                                                         "type":  "main",
+                                                                         "index":  0
+                                                                     }
+                                                                 ]
+                                                    },
+                        "Lire Mission à Clôturer":  {
+                                                        "main":  [
+                                                                     {
+                                                                         "node":  "Préparer Clôture \u0026 Libération Séquestre",
+                                                                         "type":  "main",
+                                                                         "index":  0
+                                                                     }
+                                                                 ]
+                                                    },
+                        "PATCH Clôture Registre_Missions":  {
+                                                                "main":  [
+                                                                             {
+                                                                                 "node":  "Notifier Desk Libération Séquestre",
+                                                                                 "type":  "main",
+                                                                                 "index":  0
+                                                                             }
+                                                                         ]
+                                                            },
+                        "Webhook Recette Client":  {
+                                                       "main":  [
+                                                                    {
+                                                                        "node":  "Valider Payload Recette",
+                                                                        "type":  "main",
+                                                                        "index":  0
+                                                                    }
+                                                                ]
+                                                   },
+                        "Préparer Clôture \u0026 Libération Séquestre":  {
+                                                                             "main":  [
+                                                                                          {
+                                                                                              "node":  "PATCH Clôture Registre_Missions",
+                                                                                              "type":  "main",
+                                                                                              "index":  0
+                                                                                          }
+                                                                                      ]
+                                                                         },
+                        "Notifier Desk Libération Séquestre":  {
+                                                                   "main":  [
+                                                                                {
+                                                                                    "node":  "Réponse JSON 200 Clôture",
+                                                                                    "type":  "main",
+                                                                                    "index":  0
+                                                                                }
+                                                                            ]
+                                                               }
+                    },
+    "settings":  {
+                     "executionOrder":  "v1"
+                 }
+}

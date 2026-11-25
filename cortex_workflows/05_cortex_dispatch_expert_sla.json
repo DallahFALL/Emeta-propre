@@ -31,7 +31,7 @@
                       "parameters":  {
                                          "httpMethod":  "GET",
                                          "path":  "cortex-expert-claim",
-                                         "responseMode":  "onReceived",
+                                         "responseMode":  "responseNode",
                                          "options":  {
 
                                                      }
@@ -101,7 +101,7 @@
                   {
                       "parameters":  {
                                          "mode":  "runOnceForAllItems",
-                                         "jsCode":  "try {\n  const response = $input.first().json;\n  const records = response.records || response.list || (Array.isArray(response) ? response : []);\n  const available = records.map(row =\u003e { const f = row.fields || row; const recordId = row.id || row.id_fields?.Id || f.Id || f.id; return { ...f, recordId: Number(recordId) }; }).filter(expert =\u003e Number.isSafeInteger(expert.recordId) \u0026\u0026 !/indisponible|suspendu|delai_expire/i.test(String(expert.Statut || \u0027\u0027))).sort((a, b) =\u003e Number(a.Priorite || a.Score || 9999) - Number(b.Priorite || b.Score || 9999));\n  if (available.length \u003c 2) throw new Error(\u0027Deux profils experts disponibles sont requis pour la cascade SLA.\u0027);\n  if (!available[0].Telegram_Chat_ID || !available[1].Telegram_Chat_ID) throw new Error(\u0027Telegram_Chat_ID doit être renseigné pour les deux premiers profils.\u0027);\n  const mission = $(\u0027Initialisation standardisée\u0027).first().json.mission.body || $(\u0027Initialisation standardisée\u0027).first().json.mission;\n  const tokenBytes = new Uint8Array(32);\n  globalThis.crypto.getRandomValues(tokenBytes);\n  const token = Array.from(tokenBytes, byte =\u003e byte.toString(16).padStart(2, \u00270\u0027)).join(\u0027\u0027);\n  const digest = await globalThis.crypto.subtle.digest(\u0027SHA-256\u0027, new TextEncoder().encode(token));\n  const token_hash = Array.from(new Uint8Array(digest), byte =\u003e byte.toString(16).padStart(2, \u00270\u0027)).join(\u0027\u0027);\n  if (!/^MIS-2026-\\d{4}$/.test(mission.reference_mission || mission.reference || \u0027\u0027)) throw new Error(\u0027Référence mission MIS-2026-XXXX invalide.\u0027);\n  return [{ json: { ...mission, reference_mission: mission.reference_mission || mission.reference, expert1: available[0], expert2: available[1], token, token_hash, expires_at: new Date(Date.now() + 120 * 60 * 1000).toISOString() } }];\n} catch (err) { throw new Error(`Sélection des experts impossible: ${err.message}`); }"
+                                         "jsCode":  "try {\n  const response = $input.first().json;\n  const records = response.records || response.list || (Array.isArray(response) ? response : []);\n  const mission = $(\u0027Initialisation standardisée\u0027).first().json.mission.body || $(\u0027Initialisation standardisée\u0027).first().json.mission;\n\n  const reference = String(mission.reference_mission || mission.reference || \u0027\u0027).trim();\n  if (!/^MIS-2026-\\d{4}$/.test(reference)) {\n    throw new Error(\u0027Référence mission MIS-2026-XXXX invalide.\u0027);\n  }\n\n  const norm = (v) =\u003e String(v || \u0027\u0027)\n    .normalize(\u0027NFD\u0027)\n    .replace(/[\\u0300-\\u036f]/g, \u0027\u0027)\n    .toLowerCase()\n    .trim();\n\n  const targetSecteur = norm(mission.secteur_code || mission.secteur || \u0027\u0027);\n  const targetLangue = norm(mission.langue || mission.langue_dossier || \u0027fr\u0027);\n\n  const allEligible = records\n    .map((row) =\u003e {\n      const f = row.fields || row;\n      const recordId = row.id || row.id_fields?.Id || f.Id || f.id;\n      const chatId = String(f.Telegram_Chat_ID || f.telegram_chat_id || \u0027\u0027).trim();\n      const expertSecteurs = norm(`${f.Secteur_Code || \u0027\u0027} ${f.Secteur || \u0027\u0027} ${f.Specialites || \u0027\u0027} ${f.Domaine || \u0027\u0027}`);\n      const expertLangues = norm(`${f.Langue_Dossier || \u0027\u0027} ${f.Langues || \u0027\u0027} ${f.Langue || \u0027fr\u0027}`);\n\n      let matchBonus = 0;\n      if (targetSecteur \u0026\u0026 expertSecteurs.includes(targetSecteur)) matchBonus -= 1000;\n      if (targetLangue \u0026\u0026 expertLangues.includes(targetLangue)) matchBonus -= 200;\n\n      const baseRank = Number(f.Priorite || f.Score || 500);\n      return {\n        ...f,\n        recordId: Number(recordId),\n        Telegram_Chat_ID: chatId,\n        _rank: baseRank + matchBonus\n      };\n    })\n    .filter((expert) =\u003e\n      Number.isSafeInteger(expert.recordId) \u0026\u0026\n      !/indisponible|suspendu|delai_expire|en_mission/i.test(String(expert.Statut || \u0027\u0027))\n    )\n    .sort((a, b) =\u003e a._rank - b._rank);\n\n  const telegramReady = allEligible.filter((e) =\u003e Boolean(e.Telegram_Chat_ID));\n  if (telegramReady.length === 0) {\n    throw new Error(\u0027Aucun expert disponible avec Telegram_Chat_ID renseigné dans Desk_Experts.\u0027);\n  }\n\n  const expert1 = telegramReady[0];\n  const expert2 = telegramReady[1] || {\n    ...expert1,\n    _isDeskFallback: true,\n    Nom_Complet: `${expert1.Nom_Complet || \u0027Desk Exécutif\u0027} (Escalade SLA)`\n  };\n\n  const tokenBytes = new Uint8Array(32);\n  globalThis.crypto.getRandomValues(tokenBytes);\n  const token = Array.from(tokenBytes, (byte) =\u003e byte.toString(16).padStart(2, \u00270\u0027)).join(\u0027\u0027);\n  const digest = await globalThis.crypto.subtle.digest(\u0027SHA-256\u0027, new TextEncoder().encode(token));\n  const token_hash = Array.from(new Uint8Array(digest), (byte) =\u003e byte.toString(16).padStart(2, \u00270\u0027)).join(\u0027\u0027);\n\n  const palier = String(mission.palier_mandat || mission.palier || \u0027Palier_2_Certifie\u0027).trim();\n  const slaMinutes = /palier_3|chambre/i.test(palier) ? 60 : 120;\n\n  return [{\n    json: {\n      ...mission,\n      reference_mission: reference,\n      palier_mandat: palier,\n      expert1,\n      expert2,\n      solo_fallback_mode: telegramReady.length === 1,\n      token,\n      token_hash,\n      sla_minutes: slaMinutes,\n      expires_at: new Date(Date.now() + slaMinutes * 60 * 1000).toISOString()\n    }\n  }];\n} catch (err) {\n  throw new Error(`Sélection des experts impossible: ${err.message}`);\n}"
                                      },
                       "id":  "55000000-0000-4000-8000-000000000006",
                       "name":  "Sélectionner profils et générer token",
@@ -400,7 +400,215 @@
                                                            "id":  "yXVlE8lNk3yeKhuj",
                                                            "name":  "Postgres e-META Production"
                                                        }
-                                      }
+                                      },
+                      "alwaysOutputData":  true
+                  },
+                  {
+                      "id":  "55000000-0000-4000-8000-000000000020",
+                      "name":  "Verrou réclamation valide ?",
+                      "parameters":  {
+                                         "conditions":  {
+                                                            "options":  {
+                                                                            "typeValidation":  "loose",
+                                                                            "leftValue":  "",
+                                                                            "caseSensitive":  true
+                                                                        },
+                                                            "conditions":  [
+                                                                               {
+                                                                                   "operator":  {
+                                                                                                    "operation":  "notEmpty",
+                                                                                                    "type":  "string"
+                                                                                                },
+                                                                                   "rightValue":  "",
+                                                                                   "id":  "cond-claim-valid",
+                                                                                   "leftValue":  "={{ String($json.mission_ref || \"\") }}"
+                                                                               }
+                                                                           ],
+                                                            "combinator":  "and"
+                                                        }
+                                     },
+                      "type":  "n8n-nodes-base.if",
+                      "position":  [
+                                       1000,
+                                       480
+                                   ],
+                      "typeVersion":  2.2
+                  },
+                  {
+                      "id":  "55000000-0000-4000-8000-000000000021",
+                      "name":  "Lire Mission NocoDB",
+                      "credentials":  {
+                                          "httpHeaderAuth":  {
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account"
+                                                             }
+                                      },
+                      "parameters":  {
+                                         "authentication":  "genericCredentialType",
+                                         "genericAuthType":  "httpHeaderAuth",
+                                         "queryParameters":  {
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "value":  "={{ \u0027(Mission_Ref,eq,\u0027 + Valider réclamation atomiquement.first().json.mission_ref + \u0027)\u0027 }}",
+                                                                                        "name":  "where"
+                                                                                    }
+                                                                                ]
+                                                             },
+                                         "method":  "GET",
+                                         "sendQuery":  true,
+                                         "url":  "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mv1cb6xm00g6rf5/records"
+                                     },
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "position":  [
+                                       1260,
+                                       400
+                                   ],
+                      "typeVersion":  4.2
+                  },
+                  {
+                      "id":  "55000000-0000-4000-8000-000000000022",
+                      "name":  "Lire Expert NocoDB",
+                      "credentials":  {
+                                          "httpHeaderAuth":  {
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account"
+                                                             }
+                                      },
+                      "parameters":  {
+                                         "authentication":  "genericCredentialType",
+                                         "genericAuthType":  "httpHeaderAuth",
+                                         "queryParameters":  {
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "value":  "={{ \u0027(Id,eq,\u0027 + Valider réclamation atomiquement.first().json.expert_ref + \u0027)\u0027 }}",
+                                                                                        "name":  "where"
+                                                                                    }
+                                                                                ]
+                                                             },
+                                         "method":  "GET",
+                                         "sendQuery":  true,
+                                         "url":  "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/m4705kfa0sqavqb/records"
+                                     },
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "position":  [
+                                       1500,
+                                       400
+                                   ],
+                      "typeVersion":  4.2
+                  },
+                  {
+                      "id":  "55000000-0000-4000-8000-000000000023",
+                      "name":  "Sceller Contrat Tripartite NDA",
+                      "parameters":  {
+                                         "jsCode":  "const claim = $(\u0027Valider réclamation atomiquement\u0027).first().json || {};\nconst mResp = $(\u0027Lire Mission NocoDB\u0027).first().json || {};\nconst eResp = $(\u0027Lire Expert NocoDB\u0027).first().json || {};\n\nconst mRec = (mResp.records || mResp.list || [])[0] || {};\nconst mFields = mRec.fields || mRec;\nconst mId = Number(mRec.id || mRec.id_fields?.Id || mFields.Id);\n\nconst eRec = (eResp.records || eResp.list || [])[0] || {};\nconst eFields = eRec.fields || eRec;\nconst eId = Number(eRec.id || eRec.id_fields?.Id || eFields.Id || claim.expert_ref);\n\nconst missionRef = String(claim.mission_ref || mFields.Mission_Ref || \u0027\u0027).trim();\nconst expertName = String(eFields.Nom_Complet || `Expert #${eId}`).trim();\nconst acceptedAt = new Date().toISOString();\n\nconst contractPayload = {\n  cadre_juridique: \u0027Protocole d’Apport d’Affaires (Août 2026) \u0026 CGV (Octobre 2026) — Cortex Billing \u0026 Escrow\u0027,\n  apporteur_tiers_sequestre: {\n    denomination: \u0027E-META LABS SASU\u0027,\n    capital: \u0027500 000 FCFA\u0027,\n    siege: \u0027Face Débarcadère, Rosso, Sénégal\u0027,\n    rccm: \u0027SN STL 2026 B768\u0027,\n    ninea: \u0027012887553\u0027,\n    representant: \u0027M. Abdoulaye Fall, Président\u0027\n  },\n  partenaire_expert_independant: {\n    id: eId,\n    nom: expertName,\n    email: eFields.Email || \u0027\u0027,\n    statut_juridique: \u0027Professionnel indépendant — contrat direct avec le Client\u0027\n  },\n  mission: {\n    reference: missionRef,\n    client_prospect: mFields.Title || missionRef,\n    palier: mFields.Palier_Mandat || \u0027Palier_2_Certifie\u0027,\n    secteur: mFields.Secteur_Code || \u0027agro\u0027,\n    empreinte_saisine_sha256: mFields.Empreinte_SHA256 || \u0027\u0027\n  },\n  clauses_imperatives: {\n    commission_apporteur_ht: \u002715 % HT (85 % Partenaire) — valable 24 mois sur contrat initial et avenants\u0027,\n    non_contournement: \u0027Pénalité forfaitaire de 5 000 EUR ou 3x la commission dissimulée\u0027,\n    confidentialite_rgpd: true,\n    droit_applicable: \u0027Droit sénégalais \u0026 Actes OHADA — Tribunal de Commerce de Dakar\u0027\n  },\n  accepte_le_utc: acceptedAt\n};\n\nconst digest = await globalThis.crypto.subtle.digest(\n  \u0027SHA-256\u0027,\n  new TextEncoder().encode(JSON.stringify(contractPayload))\n);\nconst contratHash = Array.from(new Uint8Array(digest), (b) =\u003e b.toString(16).padStart(2, \u00270\u0027)).join(\u0027\u0027);\n\nconst missionPatch = Number.isSafeInteger(mId)\n  ? [{\n      id: mId,\n      fields: {\n        Statut_Mandat: \u0027Contrat_Accepte\u0027,\n        Expert_Assigne: `${expertName} (#${eId})`,\n        Contrat_Hash_Ref: contratHash\n      }\n    }]\n  : [];\n\nconst expertPatch = Number.isSafeInteger(eId)\n  ? [{ id: eId, fields: { Statut: \u0027En_Mission\u0027 } }]\n  : [];\n\nconst htmlConfirmation = `\u003c!DOCTYPE html\u003e\u003chtml lang=\"fr\"\u003e\u003chead\u003e\u003cmeta charset=\"utf-8\"\u003e\u003ctitle\u003eMandat Accepté — ${missionRef}\u003c/title\u003e\n\u003cstyle\u003ebody{background:#0b0f17;color:#f8fafc;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;padding:24px}\n.card{max-width:650px;background:#111827;border:1px solid rgba(212,175,55,.45);border-radius:20px;padding:32px}\n.badge{display:inline-block;background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.4);padding:4px 12px;border-radius:999px;font-size:12px;font-family:monospace}\nh1{font-size:21px;margin:16px 0 8px}p{color:#94a3b8;font-size:13.5px;line-height:1.6}\n.hash{background:#090d14;border:1px solid #1e293b;padding:14px;border-radius:12px;font-family:monospace;font-size:12px;color:#d4af37;word-break:break-all;margin:16px 0}\na.btn{display:inline-block;margin-top:12px;background:#d4af37;color:#0b0f17;font-weight:700;text-decoration:none;padding:12px 20px;border-radius:12px;font-size:13px}\u003c/style\u003e\u003c/head\u003e\n\u003cbody\u003e\u003cdiv class=\"card\"\u003e\u003cspan class=\"badge\"\u003e✓ CONTRAT DIRECT \u0026 PROTOCOLE D\u0027APPORT SCELLÉS\u003c/span\u003e\n\u003ch1\u003eMission ${missionRef} attribuée à ${expertName}\u003c/h1\u003e\n\u003cp\u003eVotre acceptation vaut contrat de prestation directe avec le Client sous le Protocole d\u0027Apport d\u0027Affaires E-META LABS SASU (85 % honoraires Partenaire / 15 % HT commission Apporteur, non-contournement 24 mois, Tribunal de Commerce de Dakar). Les fonds sont consignés en séquestre jusqu\u0027à la recette client.\u003c/p\u003e\n\u003cdiv class=\"hash\"\u003e\u003cstrong\u003eEmpreinte Contrat SHA-256 :\u003c/strong\u003e\u003cbr\u003e${contratHash}\u003cbr\u003e\u003cbr\u003e\u003cstrong\u003eHorodatage UTC :\u003c/strong\u003e ${acceptedAt}\u003c/div\u003e\n\u003ca class=\"btn\" href=\"https://e-metalabs.com/expert.html\"\u003eOuvrir le Desk Exécutif\u003c/a\u003e\u003c/div\u003e\u003c/body\u003e\u003c/html\u003e`;\n\nreturn [{\n  json: {\n    mission_ref: missionRef,\n    expert_assigne: `${expertName} (#${eId})`,\n    contrat_hash: contratHash,\n    mission_patch: missionPatch,\n    expert_patch: expertPatch,\n    html_confirmation: htmlConfirmation\n  }\n}];",
+                                         "mode":  "runOnceForAllItems"
+                                     },
+                      "type":  "n8n-nodes-base.code",
+                      "position":  [
+                                       1740,
+                                       400
+                                   ],
+                      "typeVersion":  2
+                  },
+                  {
+                      "id":  "55000000-0000-4000-8000-000000000024",
+                      "name":  "PATCH Mission Contrat_Accepte",
+                      "credentials":  {
+                                          "httpHeaderAuth":  {
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account"
+                                                             }
+                                      },
+                      "parameters":  {
+                                         "specifyBody":  "json",
+                                         "authentication":  "genericCredentialType",
+                                         "sendBody":  true,
+                                         "genericAuthType":  "httpHeaderAuth",
+                                         "method":  "PATCH",
+                                         "jsonBody":  "={{ JSON.stringify($(\u0027Sceller Contrat Tripartite NDA\u0027).first().json.mission_patch) }}",
+                                         "url":  "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mv1cb6xm00g6rf5/records"
+                                     },
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "position":  [
+                                       1980,
+                                       400
+                                   ],
+                      "typeVersion":  4.2
+                  },
+                  {
+                      "id":  "55000000-0000-4000-8000-000000000025",
+                      "name":  "PATCH Expert En_Mission",
+                      "credentials":  {
+                                          "httpHeaderAuth":  {
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account"
+                                                             }
+                                      },
+                      "parameters":  {
+                                         "specifyBody":  "json",
+                                         "authentication":  "genericCredentialType",
+                                         "sendBody":  true,
+                                         "genericAuthType":  "httpHeaderAuth",
+                                         "method":  "PATCH",
+                                         "jsonBody":  "={{ JSON.stringify($(\u0027Sceller Contrat Tripartite NDA\u0027).first().json.expert_patch) }}",
+                                         "url":  "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/m4705kfa0sqavqb/records"
+                                     },
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "position":  [
+                                       2220,
+                                       400
+                                   ],
+                      "typeVersion":  4.2
+                  },
+                  {
+                      "id":  "55000000-0000-4000-8000-000000000026",
+                      "name":  "Réponse HTML Contrat Scellé",
+                      "parameters":  {
+                                         "responseBody":  "={{ $(\u0027Sceller Contrat Tripartite NDA\u0027).first().json.html_confirmation }}",
+                                         "respondWith":  "text",
+                                         "options":  {
+                                                         "responseCode":  200,
+                                                         "responseHeaders":  {
+                                                                                 "entries":  [
+                                                                                                 {
+                                                                                                     "value":  "text/html; charset=utf-8",
+                                                                                                     "name":  "Content-Type"
+                                                                                                 }
+                                                                                             ]
+                                                                             }
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "position":  [
+                                       2460,
+                                       400
+                                   ],
+                      "typeVersion":  1.1
+                  },
+                  {
+                      "id":  "55000000-0000-4000-8000-000000000027",
+                      "name":  "Réponse HTML Lien Expiré",
+                      "parameters":  {
+                                         "responseBody":  "\u003c!DOCTYPE html\u003e\u003chtml lang=\"fr\"\u003e\u003cbody style=\"background:#0b0f17;color:#f8fafc;font-family:sans-serif;padding:40px;text-align:center\"\u003e\u003ch2\u003eDélai SLA expiré ou mission déjà attribuée\u003c/h2\u003e\u003cp\u003eCe lien de réclamation à usage unique n\u0027est plus actif.\u003c/p\u003e\u003c/body\u003e\u003c/html\u003e",
+                                         "respondWith":  "text",
+                                         "options":  {
+                                                         "responseCode":  409,
+                                                         "responseHeaders":  {
+                                                                                 "entries":  [
+                                                                                                 {
+                                                                                                     "value":  "text/html; charset=utf-8",
+                                                                                                     "name":  "Content-Type"
+                                                                                                 }
+                                                                                             ]
+                                                                             }
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "position":  [
+                                       1260,
+                                       620
+                                   ],
+                      "typeVersion":  1.1
                   }
               ],
     "connections":  {
@@ -597,6 +805,78 @@
                                                                              "index":  0
                                                                          }
                                                                      ]
+                                                                 ]
+                                                    },
+                        "Valider réclamation atomiquement":  {
+                                                                 "main":  [
+                                                                              {
+                                                                                  "node":  "Verrou réclamation valide ?",
+                                                                                  "type":  "main",
+                                                                                  "index":  0
+                                                                              }
+                                                                          ]
+                                                             },
+                        "Verrou réclamation valide ?":  {
+                                                            "main":  [
+                                                                         [
+                                                                             {
+                                                                                 "node":  "Lire Mission NocoDB",
+                                                                                 "type":  "main",
+                                                                                 "index":  0
+                                                                             }
+                                                                         ],
+                                                                         [
+                                                                             {
+                                                                                 "node":  "Réponse HTML Lien Expiré",
+                                                                                 "type":  "main",
+                                                                                 "index":  0
+                                                                             }
+                                                                         ]
+                                                                     ]
+                                                        },
+                        "Lire Mission NocoDB":  {
+                                                    "main":  [
+                                                                 {
+                                                                     "node":  "Lire Expert NocoDB",
+                                                                     "type":  "main",
+                                                                     "index":  0
+                                                                 }
+                                                             ]
+                                                },
+                        "Lire Expert NocoDB":  {
+                                                   "main":  [
+                                                                {
+                                                                    "node":  "Sceller Contrat Tripartite NDA",
+                                                                    "type":  "main",
+                                                                    "index":  0
+                                                                }
+                                                            ]
+                                               },
+                        "Sceller Contrat Tripartite NDA":  {
+                                                               "main":  [
+                                                                            {
+                                                                                "node":  "PATCH Mission Contrat_Accepte",
+                                                                                "type":  "main",
+                                                                                "index":  0
+                                                                            }
+                                                                        ]
+                                                           },
+                        "PATCH Mission Contrat_Accepte":  {
+                                                              "main":  [
+                                                                           {
+                                                                               "node":  "PATCH Expert En_Mission",
+                                                                               "type":  "main",
+                                                                               "index":  0
+                                                                           }
+                                                                       ]
+                                                          },
+                        "PATCH Expert En_Mission":  {
+                                                        "main":  [
+                                                                     {
+                                                                         "node":  "Réponse HTML Contrat Scellé",
+                                                                         "type":  "main",
+                                                                         "index":  0
+                                                                     }
                                                                  ]
                                                     }
                     },

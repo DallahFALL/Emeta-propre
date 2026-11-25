@@ -1,0 +1,252 @@
+{
+    "nodes":  [
+                  {
+                      "id":  "77000000-0000-4000-8000-000000000001",
+                      "name":  "Webhook Initier Séquestre",
+                      "parameters":  {
+                                         "path":  "initier-sequestre",
+                                         "responseMode":  "responseNode",
+                                         "options":  {
+                                                         "allowedOrigins":  "https://e-metalabs.com,https://www.e-metalabs.com"
+                                                     },
+                                         "httpMethod":  "POST"
+                                     },
+                      "webhookId":  "initier-sequestre",
+                      "type":  "n8n-nodes-base.webhook",
+                      "position":  [
+                                       0,
+                                       120
+                                   ],
+                      "typeVersion":  2
+                  },
+                  {
+                      "id":  "77000000-0000-4000-8000-000000000002",
+                      "name":  "Calculer Grille \u0026 Passerelle",
+                      "parameters":  {
+                                         "jsCode":  "const raw = $input.first().json || {};\nconst body = raw.body \u0026\u0026 typeof raw.body === \u0027object\u0027 ? raw.body : raw;\nconst ref = String(body.reference_mission || body.ref || \u0027\u0027).trim().toUpperCase();\nif (!/^MIS-20\\d{2}-\\d{3,6}$/.test(ref)) throw new Error(\u0027Référence mission invalide.\u0027);\n\nconst palier = String(body.palier || \u0027Palier_2_Certifie\u0027).trim();\nconst devise = String(body.devise || body.currency || \u0027XOF\u0027).trim().toUpperCase();\nconst isOptionB = Boolean(body.option_b_detectee || body.option_b);\nconst customAmount = Number(body.montant_devis || 0);\n\nlet montant = 0;\nif (customAmount \u003e 0) {\n  montant = customAmount;\n} else if (/palier_1|decouver/i.test(palier)) {\n  montant = 0;\n} else if (/palier_3|chambre/i.test(palier)) {\n  montant = devise === \u0027XOF\u0027 ? 950000 : (devise === \u0027USD\u0027 ? 1580 : 1450);\n} else {\n  montant = devise === \u0027XOF\u0027 ? 185000 : (devise === \u0027USD\u0027 ? 305 : 280);\n}\n\n// Routage passerelle selon devise / choix client : PayTech ou PayDunya (XOF), PayPal (EUR/USD)\nconst requestedGateway = String(body.passerelle || \u0027\u0027).toLowerCase();\nlet operateur = \u0027Offert_Palier_1\u0027;\nif (montant \u003e 0) {\n  if (devise === \u0027XOF\u0027) {\n    operateur = requestedGateway === \u0027paydunya\u0027 ? \u0027PayDunya\u0027 : \u0027PayTech\u0027;\n  } else {\n    operateur = \u0027PayPal\u0027;\n  }\n}\n\n// Clé Protocole d\u0027Apport d\u0027Affaires (Août 2026) : 85% Partenaire / 15% HT E-META LABS SASU\nconst quotePartExpert = isOptionB ? Math.round(montant * 0.85 * 100) / 100 : 0;\nconst commissionEmeta = Math.round((montant - quotePartExpert) * 100) / 100;\n\nreturn [{\n  json: {\n    reference_mission: ref,\n    palier,\n    devise,\n    montant_total: montant,\n    quote_part_expert: quotePartExpert,\n    commission_emeta: commissionEmeta,\n    operateur_paiement: operateur,\n    statut_sequestre: montant === 0 ? \u0027Non_Requis\u0027 : \u0027Attente_Paiement\u0027,\n    option_b: isOptionB,\n    ipn_callback_url: \u0027https://automation.e-metalabs.com/webhook/ipn-sequestre\u0027,\n    success_return_url: `https://e-metalabs.com/tracker.html?ref=${encodeURIComponent(ref)}`\n  }\n}];",
+                                         "mode":  "runOnceForAllItems"
+                                     },
+                      "type":  "n8n-nodes-base.code",
+                      "position":  [
+                                       260,
+                                       120
+                                   ],
+                      "typeVersion":  2
+                  },
+                  {
+                      "id":  "77000000-0000-4000-8000-000000000003",
+                      "name":  "Réponse JSON Session Séquestre",
+                      "parameters":  {
+                                         "responseBody":  "={{ JSON.stringify({ ok: true, ...$json }) }}",
+                                         "respondWith":  "json",
+                                         "options":  {
+                                                         "responseCode":  200
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "position":  [
+                                       540,
+                                       120
+                                   ],
+                      "typeVersion":  1.1
+                  },
+                  {
+                      "id":  "77000000-0000-4000-8000-000000000004",
+                      "name":  "Webhook IPN Séquestre",
+                      "parameters":  {
+                                         "path":  "ipn-sequestre",
+                                         "responseMode":  "onReceived",
+                                         "options":  {
+
+                                                     },
+                                         "httpMethod":  "POST"
+                                     },
+                      "webhookId":  "ipn-sequestre",
+                      "type":  "n8n-nodes-base.webhook",
+                      "position":  [
+                                       0,
+                                       380
+                                   ],
+                      "typeVersion":  2
+                  },
+                  {
+                      "id":  "77000000-0000-4000-8000-000000000005",
+                      "name":  "Normaliser IPN PayTech PayDunya PayPal",
+                      "parameters":  {
+                                         "jsCode":  "const raw = $input.first().json || {};\nconst b = raw.body \u0026\u0026 typeof raw.body === \u0027object\u0027 ? raw.body : raw;\n\n// Détection unifiée PayTech (type_event=sale_complete, ref_command), PayDunya (data.status=completed) et PayPal (event_type=PAYMENT.CAPTURE.COMPLETED)\nlet operateur = \u0027PayTech\u0027;\nlet ref = \u0027\u0027;\nlet txId = \u0027\u0027;\nlet amount = 0;\nlet currency = \u0027XOF\u0027;\nlet paid = false;\n\nif (b.event_type \u0026\u0026 String(b.event_type).includes(\u0027PAYMENT.CAPTURE.COMPLETED\u0027)) {\n  operateur = \u0027PayPal\u0027;\n  const res = b.resource || {};\n  ref = String(res.custom_id || res.invoice_id || \u0027\u0027).trim().toUpperCase();\n  txId = String(res.id || \u0027\u0027).trim();\n  amount = Number(res.amount?.value || 0);\n  currency = String(res.amount?.currency_code || \u0027EUR\u0027).toUpperCase();\n  paid = true;\n} else if (b.data \u0026\u0026 (b.data.invoice || b.data.custom_data)) {\n  operateur = \u0027PayDunya\u0027;\n  const d = b.data;\n  ref = String(d.custom_data?.reference_mission || d.invoice?.description || \u0027\u0027).match(/MIS-20\\d{2}-\\d{3,6}/i)?.[0]?.toUpperCase() || \u0027\u0027;\n  txId = String(d.invoice?.token || d.hash || \u0027\u0027).trim();\n  amount = Number(d.invoice?.total_amount || 0);\n  currency = \u0027XOF\u0027;\n  paid = String(d.status || \u0027\u0027).toLowerCase() === \u0027completed\u0027;\n} else {\n  operateur = \u0027PayTech\u0027;\n  const custom = typeof b.custom_field === \u0027string\u0027 ? JSON.parse(b.custom_field || \u0027{}\u0027) : (b.custom_field || {});\n  ref = String(custom.reference_mission || b.ref_command || \u0027\u0027).match(/MIS-20\\d{2}-\\d{3,6}/i)?.[0]?.toUpperCase() || \u0027\u0027;\n  txId = String(b.token || b.payment_method || b.ref_command || \u0027\u0027).trim();\n  amount = Number(b.item_price || b.final_item_price || 0);\n  currency = String(b.currency || \u0027XOF\u0027).toUpperCase();\n  paid = /sale_complete|completed|success/i.test(String(b.type_event || b.status || \u0027sale_complete\u0027));\n}\n\nif (!paid || !/^MIS-20\\d{2}-\\d{3,6}$/.test(ref)) {\n  throw new Error(`Notification IPN ignorée ou référence absente (ref=${ref}, paid=${paid}).`);\n}\n\nconst quotePartExpert = Math.round(amount * 0.85 * 100) / 100;\nconst commissionEmeta = Math.round((amount - quotePartExpert) * 100) / 100;\n\nreturn [{\n  json: {\n    reference_mission: ref,\n    operateur_paiement: operateur,\n    transaction_ref: txId,\n    montant_total: amount,\n    devise: currency,\n    quote_part_expert: quotePartExpert,\n    commission_emeta: commissionEmeta,\n    statut_sequestre: \u0027Consigne\u0027\n  }\n}];",
+                                         "mode":  "runOnceForAllItems"
+                                     },
+                      "type":  "n8n-nodes-base.code",
+                      "position":  [
+                                       260,
+                                       380
+                                   ],
+                      "typeVersion":  2
+                  },
+                  {
+                      "id":  "77000000-0000-4000-8000-000000000006",
+                      "name":  "Lire Mission NocoDB Séquestre",
+                      "credentials":  {
+                                          "httpHeaderAuth":  {
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account"
+                                                             }
+                                      },
+                      "parameters":  {
+                                         "authentication":  "genericCredentialType",
+                                         "genericAuthType":  "httpHeaderAuth",
+                                         "queryParameters":  {
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "value":  "={{ \u0027(Mission_Ref,eq,\u0027 + .reference_mission + \u0027)\u0027 }}",
+                                                                                        "name":  "where"
+                                                                                    }
+                                                                                ]
+                                                             },
+                                         "method":  "GET",
+                                         "sendQuery":  true,
+                                         "url":  "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mv1cb6xm00g6rf5/records"
+                                     },
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "position":  [
+                                       520,
+                                       380
+                                   ],
+                      "typeVersion":  4.2
+                  },
+                  {
+                      "id":  "77000000-0000-4000-8000-000000000007",
+                      "name":  "Préparer Consignation \u0026 Relais Production",
+                      "parameters":  {
+                                         "jsCode":  "const ipn = $(\u0027Normaliser IPN PayTech PayDunya PayPal\u0027).first().json;\nconst resp = $input.first().json || {};\nconst rec = (resp.records || resp.list || [])[0];\nif (!rec) throw new Error(`Dossier ${ipn.reference_mission} introuvable.`);\n\nconst f = rec.fields || rec;\nconst recordId = Number(rec.id || rec.id_fields?.Id || f.Id);\n\nconst missionPatch = [{\n  id: recordId,\n  fields: {\n    Statut_Mandat: \u0027Sequestre_Consigne\u0027,\n    Statut_Sequestre: \u0027Consigne\u0027,\n    Operateur_Paiement: ipn.operateur_paiement,\n    Transaction_Ref: ipn.transaction_ref,\n    Montant_Total: ipn.montant_total,\n    Devise: ipn.devise,\n    Quote_Part_Expert: ipn.quote_part_expert,\n    Commission_Emeta: ipn.commission_emeta\n  }\n}];\n\nreturn [{\n  json: {\n    mission_patch: missionPatch,\n    cortex02_payload: {\n      reference_mission: ipn.reference_mission,\n      mission_ref: ipn.reference_mission,\n      nocodb_record_id: recordId,\n      palier_mandat: f.Palier_Mandat || \u0027Palier_2_Certifie\u0027,\n      secteur_code: f.Secteur_Code || \u0027agro\u0027,\n      langue: f.Langue_Dossier || \u0027fr\u0027,\n      mission_nom: f.Title || ipn.reference_mission,\n      mission_contexte: f.Contexte_Extrait || \u0027\u0027,\n      empreinte_sha256: f.Empreinte_SHA256 || \u0027\u0027,\n      sequestre_consigne: true\n    }\n  }\n}];",
+                                         "mode":  "runOnceForAllItems"
+                                     },
+                      "type":  "n8n-nodes-base.code",
+                      "position":  [
+                                       780,
+                                       380
+                                   ],
+                      "typeVersion":  2
+                  },
+                  {
+                      "id":  "77000000-0000-4000-8000-000000000008",
+                      "name":  "PATCH Séquestre Consigné NocoDB",
+                      "credentials":  {
+                                          "httpHeaderAuth":  {
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account"
+                                                             }
+                                      },
+                      "parameters":  {
+                                         "specifyBody":  "json",
+                                         "authentication":  "genericCredentialType",
+                                         "sendBody":  true,
+                                         "genericAuthType":  "httpHeaderAuth",
+                                         "method":  "PATCH",
+                                         "jsonBody":  "={{ JSON.stringify($(\u0027Préparer Consignation \u0026 Relais Production\u0027).first().json.mission_patch) }}",
+                                         "url":  "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mv1cb6xm00g6rf5/records"
+                                     },
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "position":  [
+                                       1040,
+                                       380
+                                   ],
+                      "typeVersion":  4.2
+                  },
+                  {
+                      "id":  "77000000-0000-4000-8000-000000000009",
+                      "name":  "Déclencher Production CORTEX 02",
+                      "credentials":  {
+                                          "httpHeaderAuth":  {
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account"
+                                                             }
+                                      },
+                      "parameters":  {
+                                         "specifyBody":  "json",
+                                         "authentication":  "genericCredentialType",
+                                         "sendBody":  true,
+                                         "genericAuthType":  "httpHeaderAuth",
+                                         "method":  "POST",
+                                         "jsonBody":  "={{ JSON.stringify($(\u0027Préparer Consignation \u0026 Relais Production\u0027).first().json.cortex02_payload) }}",
+                                         "url":  "https://automation.e-metalabs.com/webhook/cortex-analyse-rag"
+                                     },
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "position":  [
+                                       1300,
+                                       380
+                                   ],
+                      "typeVersion":  4.2
+                  }
+              ],
+    "active":  true,
+    "name":  "07 - CORTEX Séquestre Paiement (Escrow)",
+    "connections":  {
+                        "PATCH Séquestre Consigné NocoDB":  {
+                                                                "main":  [
+                                                                             {
+                                                                                 "node":  "Déclencher Production CORTEX 02",
+                                                                                 "type":  "main",
+                                                                                 "index":  0
+                                                                             }
+                                                                         ]
+                                                            },
+                        "Webhook Initier Séquestre":  {
+                                                          "main":  [
+                                                                       {
+                                                                           "node":  "Calculer Grille \u0026 Passerelle",
+                                                                           "type":  "main",
+                                                                           "index":  0
+                                                                       }
+                                                                   ]
+                                                      },
+                        "Préparer Consignation \u0026 Relais Production":  {
+                                                                               "main":  [
+                                                                                            {
+                                                                                                "node":  "PATCH Séquestre Consigné NocoDB",
+                                                                                                "type":  "main",
+                                                                                                "index":  0
+                                                                                            }
+                                                                                        ]
+                                                                           },
+                        "Normaliser IPN PayTech PayDunya PayPal":  {
+                                                                       "main":  [
+                                                                                    {
+                                                                                        "node":  "Lire Mission NocoDB Séquestre",
+                                                                                        "type":  "main",
+                                                                                        "index":  0
+                                                                                    }
+                                                                                ]
+                                                                   },
+                        "Calculer Grille \u0026 Passerelle":  {
+                                                                  "main":  [
+                                                                               {
+                                                                                   "node":  "Réponse JSON Session Séquestre",
+                                                                                   "type":  "main",
+                                                                                   "index":  0
+                                                                               }
+                                                                           ]
+                                                              },
+                        "Lire Mission NocoDB Séquestre":  {
+                                                              "main":  [
+                                                                           {
+                                                                               "node":  "Préparer Consignation \u0026 Relais Production",
+                                                                               "type":  "main",
+                                                                               "index":  0
+                                                                           }
+                                                                       ]
+                                                          },
+                        "Webhook IPN Séquestre":  {
+                                                      "main":  [
+                                                                   {
+                                                                       "node":  "Normaliser IPN PayTech PayDunya PayPal",
+                                                                       "type":  "main",
+                                                                       "index":  0
+                                                                   }
+                                                               ]
+                                                  }
+                    },
+    "settings":  {
+                     "executionOrder":  "v1"
+                 }
+}
