@@ -50,6 +50,10 @@
                                                                                     {
                                                                                         "value":  "={{ \u0027(Mission_Ref,eq,\u0027 + .reference + \u0027)\u0027 }}",
                                                                                         "name":  "where"
+                                                                                    },
+                                                                                    {
+                                                                                        "value":  "1",
+                                                                                        "name":  "limit"
                                                                                     }
                                                                                 ]
                                                              },
@@ -131,9 +135,21 @@
                       "name":  "Réponse JSON 200 Clôture",
                       "parameters":  {
                                          "responseBody":  "={{ JSON.stringify({ ok: true, reference: $(\u0027Préparer Clôture \u0026 Libération Séquestre\u0027).first().json.reference, statut: \"Cloture\", closed_at: $(\u0027Préparer Clôture \u0026 Libération Séquestre\u0027).first().json.closed_at }) }}",
-                                         "respondWith":  "json",
+                                         "respondWith":  "text",
                                          "options":  {
-                                                         "responseCode":  200
+                                                         "responseCode":  200,
+                                                         "responseHeaders":  {
+                                                                                 "entries":  [
+                                                                                                 {
+                                                                                                     "value":  "application/json; charset=utf-8",
+                                                                                                     "name":  "Content-Type"
+                                                                                                 },
+                                                                                                 {
+                                                                                                     "value":  "no-store",
+                                                                                                     "name":  "Cache-Control"
+                                                                                                 }
+                                                                                             ]
+                                                                             }
                                                      }
                                      },
                       "type":  "n8n-nodes-base.respondToWebhook",

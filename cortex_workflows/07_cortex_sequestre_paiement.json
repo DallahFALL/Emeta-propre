@@ -23,7 +23,7 @@
                       "id":  "77000000-0000-4000-8000-000000000002",
                       "name":  "Calculer Grille \u0026 Passerelle",
                       "parameters":  {
-                                         "jsCode":  "const raw = $input.first().json || {};\nconst body = raw.body \u0026\u0026 typeof raw.body === \u0027object\u0027 ? raw.body : raw;\nconst ref = String(body.reference_mission || body.ref || \u0027\u0027).trim().toUpperCase();\nif (!/^MIS-20\\d{2}-\\d{3,6}$/.test(ref)) throw new Error(\u0027Référence mission invalide.\u0027);\n\nconst palier = String(body.palier || \u0027Palier_2_Certifie\u0027).trim();\nconst devise = String(body.devise || body.currency || \u0027XOF\u0027).trim().toUpperCase();\nconst isOptionB = Boolean(body.option_b_detectee || body.option_b);\nconst customAmount = Number(body.montant_devis || 0);\n\nlet montant = 0;\nif (customAmount \u003e 0) {\n  montant = customAmount;\n} else if (/palier_1|decouver/i.test(palier)) {\n  montant = 0;\n} else if (/palier_3|chambre/i.test(palier)) {\n  montant = devise === \u0027XOF\u0027 ? 950000 : (devise === \u0027USD\u0027 ? 1580 : 1450);\n} else {\n  montant = devise === \u0027XOF\u0027 ? 185000 : (devise === \u0027USD\u0027 ? 305 : 280);\n}\n\n// Routage passerelle selon devise / choix client : PayTech ou PayDunya (XOF), PayPal (EUR/USD)\nconst requestedGateway = String(body.passerelle || \u0027\u0027).toLowerCase();\nlet operateur = \u0027Offert_Palier_1\u0027;\nif (montant \u003e 0) {\n  if (devise === \u0027XOF\u0027) {\n    operateur = requestedGateway === \u0027paydunya\u0027 ? \u0027PayDunya\u0027 : \u0027PayTech\u0027;\n  } else {\n    operateur = \u0027PayPal\u0027;\n  }\n}\n\n// Clé Protocole d\u0027Apport d\u0027Affaires (Août 2026) : 85% Partenaire / 15% HT E-META LABS SASU\nconst quotePartExpert = isOptionB ? Math.round(montant * 0.85 * 100) / 100 : 0;\nconst commissionEmeta = Math.round((montant - quotePartExpert) * 100) / 100;\n\nreturn [{\n  json: {\n    reference_mission: ref,\n    palier,\n    devise,\n    montant_total: montant,\n    quote_part_expert: quotePartExpert,\n    commission_emeta: commissionEmeta,\n    operateur_paiement: operateur,\n    statut_sequestre: montant === 0 ? \u0027Non_Requis\u0027 : \u0027Attente_Paiement\u0027,\n    option_b: isOptionB,\n    ipn_callback_url: \u0027https://automation.e-metalabs.com/webhook/ipn-sequestre\u0027,\n    success_return_url: `https://e-metalabs.com/tracker.html?ref=${encodeURIComponent(ref)}`\n  }\n}];",
+                                         "jsCode":  "const raw = $input.first().json || {};\nconst body = raw.body \u0026\u0026 typeof raw.body === \u0027object\u0027 ? raw.body : raw;\nconst ref = String(body.reference_mission || body.ref || \u0027\u0027).trim().toUpperCase();\nif (!/^MIS-20\\d{2}-\\d{3,6}$/.test(ref)) throw new Error(\u0027Référence mission invalide.\u0027);\n\nconst palier = String(body.palier || \u0027Palier_2_Certifie\u0027).trim();\nconst devise = String(body.devise || body.currency || \u0027XOF\u0027).trim().toUpperCase();\nconst isOptionB = Boolean(body.option_b_detectee || body.option_b);\nconst customAmount = Number(body.montant_devis || 0);\n\nlet montant = 0;\nif (customAmount \u003e 0) {\n  montant = customAmount;\n} else if (/palier_1|decouver/i.test(palier)) {\n  montant = 0;\n} else if (/palier_3|chambre/i.test(palier)) {\n  montant = devise === \u0027XOF\u0027 ? 950000 : (devise === \u0027USD\u0027 ? 1580 : 1450);\n} else {\n  montant = devise === \u0027XOF\u0027 ? 185000 : (devise === \u0027USD\u0027 ? 305 : 280);\n}\n\n// Routage passerelle selon devise / choix client : PayTech ou PayDunya (XOF), PayPal (EUR/USD)\nconst requestedGateway = String(body.passerelle || \u0027\u0027).toLowerCase();\nlet operateur = \u0027Offert_Palier_1\u0027;\nif (montant \u003e 0) {\n  if (devise === \u0027XOF\u0027) {\n    operateur = requestedGateway === \u0027paydunya\u0027 ? \u0027PayDunya\u0027 : \u0027PayTech\u0027;\n  } else {\n    operateur = \u0027PayPal\u0027;\n  }\n}\n\n// Clé Protocole d\u0027Apport d\u0027Affaires (Août 2026) : 85% Partenaire / 15% HT E-META LABS SASU\nconst quotePartExpert = isOptionB ? Math.round(montant * 0.85 * 100) / 100 : 0;\nconst commissionEmeta = Math.round((montant - quotePartExpert) * 100) / 100;\n\nreturn [{\n  json: {\n    ok: true, reference_mission: ref,\n    palier,\n    devise,\n    montant_total: montant,\n    quote_part_expert: quotePartExpert,\n    commission_emeta: commissionEmeta,\n    operateur_paiement: operateur,\n    statut_sequestre: montant === 0 ? \u0027Non_Requis\u0027 : \u0027Attente_Paiement\u0027,\n    option_b: isOptionB,\n    ipn_callback_url: \u0027https://automation.e-metalabs.com/webhook/ipn-sequestre\u0027,\n    success_return_url: `https://e-metalabs.com/tracker.html?ref=${encodeURIComponent(ref)}`\n  }\n}];",
                                          "mode":  "runOnceForAllItems"
                                      },
                       "type":  "n8n-nodes-base.code",
@@ -37,11 +37,22 @@
                       "id":  "77000000-0000-4000-8000-000000000003",
                       "name":  "Réponse JSON Session Séquestre",
                       "parameters":  {
-                                         "responseBody":  "={{ JSON.stringify({ ok: true, ...$json }) }}",
-                                         "respondWith":  "json",
                                          "options":  {
-                                                         "responseCode":  200
-                                                     }
+                                                         "responseCode":  200,
+                                                         "responseHeaders":  {
+                                                                                 "entries":  [
+                                                                                                 {
+                                                                                                     "value":  "application/json; charset=utf-8",
+                                                                                                     "name":  "Content-Type"
+                                                                                                 },
+                                                                                                 {
+                                                                                                     "value":  "no-store",
+                                                                                                     "name":  "Cache-Control"
+                                                                                                 }
+                                                                                             ]
+                                                                             }
+                                                     },
+                                         "respondWith":  "firstIncomingItem"
                                      },
                       "type":  "n8n-nodes-base.respondToWebhook",
                       "position":  [
@@ -100,6 +111,10 @@
                                                                                     {
                                                                                         "value":  "={{ \u0027(Mission_Ref,eq,\u0027 + .reference_mission + \u0027)\u0027 }}",
                                                                                         "name":  "where"
+                                                                                    },
+                                                                                    {
+                                                                                        "value":  "1",
+                                                                                        "name":  "limit"
                                                                                     }
                                                                                 ]
                                                              },
