@@ -1256,14 +1256,60 @@ function getActivePlqLang() {
   const r = (typeof currentLang !== 'undefined' ? currentLang : (u || document.documentElement.lang || 'fr')).toLowerCase();
   return PLQ_I18N[r] ? r : 'fr';
 }
+const EXTRA_BLOCKS_I18N = {
+  fr: {
+    packLabel: 'CODE PACK CERTIFIÉ OU CHAMBRE EXÉCUTIVE <span class="text-slate-500">(optionnel — si vous disposez déjà d\'un crédit actif)</span>',
+    packPlaceholder: 'Ex. : PACK-P2-482910 ou CHAMBRE-P3-901244',
+    optBTitle: 'Option B — Accompagnement Expert Humain (SLA 2H)',
+    optBDesc: 'Mobiliser un expert certifié (devis direct Client–Expert consigné en séquestre).'
+  },
+  en: {
+    packLabel: 'CERTIFIED PACK OR EXECUTIVE CHAMBER CODE <span class="text-slate-500">(optional — if you already hold an active credit)</span>',
+    packPlaceholder: 'E.g.: PACK-P2-482910 or CHAMBRE-P3-901244',
+    optBTitle: 'Option B — Human Expert Accompaniment (2H SLA)',
+    optBDesc: 'Mobilize a certified expert (direct Client–Expert quote held in escrow).'
+  },
+  es: {
+    packLabel: 'CÓDIGO PACK CERTIFICADO O CÁMARA EJECUTIVA <span class="text-slate-500">(opcional — si ya dispone de un crédito activo)</span>',
+    packPlaceholder: 'Ej.: PACK-P2-482910 o CHAMBRE-P3-901244',
+    optBTitle: 'Opción B — Acompañamiento Experto Humano (SLA 2H)',
+    optBDesc: 'Movilizar un experto certificado (presupuesto directo Cliente–Experto en depósito).'
+  },
+  ar: {
+    packLabel: 'رمز الباقة المعتمدة أو الغرفة التنفيذية <span class="text-slate-500">(اختياري — في حال توفر رصيد مسبق نشط)</span>',
+    packPlaceholder: 'مثال : PACK-P2-482910 أو CHAMBRE-P3-901244',
+    optBTitle: 'الخيار ب — مرافقة خبير بشري معتمد (استجابة خلال ساعتين)',
+    optBDesc: 'تعبئة خبير معتمد لتنفيذ المشروع ميدانياً وفق عرض سعر متفق عليه ومؤمّن بالضمان.'
+  }
+};
+
+function syncExtraBlocksI18n(lang) {
+  const t = EXTRA_BLOCKS_I18N[lang] || EXTRA_BLOCKS_I18N.fr;
+  const packLbl = document.querySelector('label[for="mission_pack_code"]');
+  const packInp = document.getElementById('mission_pack_code');
+  if (packLbl) packLbl.innerHTML = t.packLabel;
+  if (packInp) packInp.placeholder = t.packPlaceholder;
+
+  const optBLbl = document.querySelector('label[for="modal-option-b"]');
+  if (optBLbl) {
+    const strongEl = optBLbl.querySelector('strong');
+    const spanEl = optBLbl.querySelector('span');
+    if (strongEl) strongEl.textContent = t.optBTitle;
+    if (spanEl) spanEl.textContent = t.optBDesc;
+  }
+}
+
 function syncLangBtns(lang) {
   document.querySelectorAll('.lang-btn, [data-lang]').forEach((b) => {
     const l = (b.getAttribute('data-lang') || b.textContent || '').trim().toLowerCase();
     if (!['fr', 'en', 'es', 'ar'].includes(l)) return;
-    b.classList.toggle('bg-gold', l === lang);
-    b.classList.toggle('text-ebony', l === lang);
-    b.classList.toggle('font-bold', l === lang);
+    const active = l === lang;
+    b.classList.toggle('bg-gold', active);
+    b.classList.toggle('text-ebony', active);
+    b.classList.toggle('font-bold', active);
+    if (active) b.classList.remove('text-gold');
   });
+  syncExtraBlocksI18n(lang);
 }
 function renderSectorPlaquette(sectorKey) {
   const lang = getActivePlqLang();
