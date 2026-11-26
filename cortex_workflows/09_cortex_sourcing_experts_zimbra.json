@@ -1,0 +1,102 @@
+{
+  "name": "09 - CORTEX Sourcing Experts & Zimbra Outreach",
+  "nodes": [
+    {
+      "id": "99000000-0000-4000-8000-000000000001",
+      "name": "Webhook Sourcing Experts",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [-640, 120],
+      "webhookId": "cortex-sourcing-expert",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cortex-sourcing-expert",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "99000000-0000-4000-8000-000000000002",
+      "name": "Calibrer Profils & Grades",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-400, 120],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const raw = $input.first().json || {};\nconst body = raw.body && typeof raw.body === 'object' ? raw.body : raw;\nconst list = Array.isArray(body.candidats) ? body.candidats : (Array.isArray(body) ? body : [body]);\n\nconst norm = (v) => String(v || '').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase().trim();\n\nconst mapSector = (s) => {\n  const n = norm(s);\n  if (/ener|mine|solair|petrol/.test(n)) return 'energy';\n  if (/banq|fintech|assur|monet|finance/.test(n)) return 'banking';\n  if (/logist|port|supply|transport/.test(n)) return 'logistics';\n  if (/sant|pharma|bio|medic/.test(n)) return 'health';\n  if (/telecom|cloud|cyber|numer|it/.test(n)) return 'telecom';\n  if (/btp|immob|foncier|construc/.test(n)) return 'property';\n  if (/industr|transfo|usine/.test(n)) return 'manufacturing';\n  if (/public|etat|minist|ppp|diplom/.test(n)) return 'public';\n  if (/retail|distrib|negoce|commerc/.test(n)) return 'retail';\n  return 'agro';\n};\n\nconst out = [];\nfor (const c of list) {\n  const email = String(c.email || '').trim().toLowerCase();\n  const nom = String(c.nom_complet || c.nom || '').trim();\n  if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email) || !nom) continue;\n\n  const exp = Number(c.annees_experience || c.experience || 5);\n  const titre = String(c.titre || c.poste || '').trim();\n  const tNorm = norm(titre);\n\n  let grade = 'Grade_I_Praticien';\n  let gradeLabel = 'Praticien Opérationnel';\n  if (exp >= 18 || /directeur general|\\bdg\\b|ceo|partner|associe|ancien ministre|gouverneur|bceao/.test(tNorm)) {\n    grade = 'Grade_III_Executive_Fellow';\n    gradeLabel = 'Executive Fellow';\n  } else if (exp >= 10 || /directeur|daf|cfo|coo|cto|ingénieur en chef|ingenieur en chef/.test(tNorm)) {\n    grade = 'Grade_II_Senior';\n    gradeLabel = 'Senior Advisor';\n  }\n\n  const secteur = mapSector(c.secteur || c.domaine);\n  const cooptCode = 'COOPT-' + Math.floor(100000 + Math.random() * 900000);\n  const inviteUrl = `https://e-metalabs.com/expert.html?secteur=${encodeURIComponent(secteur)}&grade=${encodeURIComponent(grade)}&email=${encodeURIComponent(email)}`;\n\n  out.push({\n    json: {\n      nom_complet: nom,\n      email,\n      whatsapp: String(c.whatsapp || c.telephone || '').trim(),\n      linkedin: String(c.linkedin || '').trim(),\n      secteur_code: secteur,\n      annees_experience: exp,\n      grade_accreditation: grade,\n      grade_label: gradeLabel,\n      source_sourcing: String(c.source || 'OSINT_Zimbra').trim(),\n      code_parrain_attribue: cooptCode,\n      parrain_ref: String(c.code_parrain || '').trim().toUpperCase(),\n      invite_url: inviteUrl\n    }\n  });\n}\n\nif (!out.length) throw new Error('Aucun profil valide (nom + email requis).');\nreturn out;"
+      }
+    },
+    {
+      "id": "99000000-0000-4000-8000-000000000003",
+      "name": "Enregistrer Candidat Vivier NocoDB",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [-140, 120],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "AYFV4CoauevzSq4r",
+          "name": "Header Auth account 2"
+        }
+      },
+      "parameters": {
+        "method": "POST",
+        "url": "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/m4705kfa0sqavqb/records",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ fields: { Nom_Complet: $json.nom_complet, Email: $json.email, Telephone_WhatsApp: $json.whatsapp, Profil_LinkedIn: $json.linkedin, Secteur_Principal: $json.secteur_code, Annees_Experience: $json.annees_experience, Grade_Accreditation: $json.grade_accreditation, Code_Cooptation: $json.code_parrain_attribue, Statut: 'Invite_Zimbra' } }) }}"
+      }
+    },
+    {
+      "id": "99000000-0000-4000-8000-000000000004",
+      "name": "Invitation Zimbra Desk Exécutif",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [120, 120],
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "fromEmail": "desk@e-metalabs.com",
+        "toEmail": "={{ $('Calibrer Profils & Grades').item.json.email }}",
+        "subject": "={{ 'Invitation Collège d’Experts e-META LABS — Accréditation ' + $('Calibrer Profils & Grades').item.json.grade_label }}",
+        "emailType": "html",
+        "html": "={{ `<div style=\"font-family:Georgia,serif;background:#0a192f;color:#f8fafc;padding:32px;border-radius:16px;max-width:620px;margin:auto;border:1px solid #d4af37\"><p style=\"color:#d4af37;font-family:monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase\">E-META LABS SASU • COLLÈGE DES EXPERTS ACCRÉDITÉS</p><h2 style=\"color:#ffffff;margin-top:8px\">Bonjour ${$('Calibrer Profils & Grades').item.json.nom_complet},</h2><p style=\"color:#cbd5e1;font-size:14px;line-height:1.6\">Au regard de votre parcours sectoriel (${$('Calibrer Profils & Grades').item.json.annees_experience} ans d'expérience), le Comité d'Accréditation d'<strong>e-META LABS</strong> vous invite à rejoindre notre Collège privé au rang de <strong>${$('Calibrer Profils & Grades').item.json.grade_label}</strong>.</p><ul style=\"color:#cbd5e1;font-size:13px;line-height:1.7\"><li><strong>Dossiers pré-qualifiés par IA :</strong> mandats déjà audités et chiffrés (20 chapitres).</li><li><strong>Sécurité financière intégrale :</strong> honoraires négociés d'un commun accord avec le client et consignés en séquestre avant démarrage (85 % reversés à la recette, 15 % HT de commission d'apporteur).</li><li><strong>Zéro frais d'adhésion :</strong> inscription gratuite sur validation de vos références.</li></ul><p style=\"margin:24px 0\"><a href=\"${$('Calibrer Profils & Grades').item.json.invite_url}\" style=\"background:#d4af37;color:#0a192f;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:bold;font-family:monospace;font-size:12px\">ACTIVER MON DOSSIER D'ACCRÉDITATION →</a></p><p style=\"color:#64748b;font-size:11px;font-family:monospace\">Code de cooptation réservé (2 pairs) : ${$('Calibrer Profils & Grades').item.json.code_parrain_attribue} • Desk Exécutif e-META LABS SASU</p></div>` }}"
+      }
+    },
+    {
+      "id": "99000000-0000-4000-8000-000000000005",
+      "name": "Réponse JSON Sourcing",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [360, 120],
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ JSON.stringify({ ok: true, invites_envoyees: $('Calibrer Profils & Grades').all().length, canal: 'NocoDB + Zimbra (@e-metalabs.com)' }) }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              { "name": "Content-Type", "value": "application/json; charset=utf-8" },
+              { "name": "Cache-Control", "value": "no-store" }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Sourcing Experts": {
+      "main": [[{ "node": "Calibrer Profils & Grades", "type": "main", "index": 0 }]]
+    },
+    "Calibrer Profils & Grades": {
+      "main": [[{ "node": "Enregistrer Candidat Vivier NocoDB", "type": "main", "index": 0 }]]
+    },
+    "Enregistrer Candidat Vivier NocoDB": {
+      "main": [[{ "node": "Invitation Zimbra Desk Exécutif", "type": "main", "index": 0 }]]
+    },
+    "Invitation Zimbra Desk Exécutif": {
+      "main": [[{ "node": "Réponse JSON Sourcing", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" }
+}
