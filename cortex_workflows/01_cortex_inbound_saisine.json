@@ -132,7 +132,7 @@
                                                               },
                                          "sendBody":  true,
                                          "specifyBody":  "json",
-                                         "jsonBody":  "={{\n  (() =\u003e {\n    let payload = {};\n    try {\n      payload = typeof $json.canonical_payload === \u0027string\u0027\n        ? JSON.parse($json.canonical_payload)\n        : ($json.canonical_payload || {});\n    } catch (_) {}\n\n    const norm = (v) =\u003e String(v || \u0027\u0027).normalize(\u0027NFD\u0027).replace(/[\\u0300-\\u036f]/g, \u0027\u0027).toLowerCase().trim();\n    const pNorm = norm(payload.palier);\n\n    let palierCode = \u0027Palier_2_Certifie\u0027;\n    let isFreeOrPack = Boolean(String(payload.pack_code || \u0027\u0027).trim());\n\n    if (/decouver|palier_1|option a|p1/.test(pNorm)) {\n      palierCode = \u0027Palier_1_Decouverte\u0027;\n      isFreeOrPack = true;\n    } else if (/chambre|palier_3|option c|p3|souverain/.test(pNorm)) {\n      palierCode = \u0027Palier_3_Chambre\u0027;\n    }\n\n    const contexte = String(payload.mission_contexte || payload.contexte || \u0027\u0027).trim();\n    const title = String(\n      payload.mission_nom || payload.entreprise || (contexte ? contexte.slice(0, 120) : \u0027Saisine CORTEX\u0027)\n    ).trim();\n    const secteurCode = norm(payload.secteur_selectionne || payload.secteur || \u0027agro\u0027) || \u0027agro\u0027;\n\n    return {\n      fields: {\n        Title: title,\n        Mission_Ref: $json.reference_mission,\n        Palier_Mandat: palierCode,\n        Secteur_Code: secteurCode,\n        Langue_Dossier: norm(payload.langue || \u0027fr\u0027) || \u0027fr\u0027,\n        Contexte_Extrait: contexte ? contexte.slice(0, 1000) : \u0027\u0027,\n        Date_Saisine_T0: $json.timestamp_t0 || payload.timestamp_t0 || new Date().toISOString(),\n        Statut_Mandat: isFreeOrPack ? \u0027Saisine_Recue\u0027 : \u0027Attente_Paiement\u0027,\n        Statut_Sequestre: palierCode === \u0027Palier_1_Decouverte\u0027 ? \u0027Non_Requis\u0027 : (isFreeOrPack ? \u0027Pack_Actif\u0027 : \u0027Attente_Paiement\u0027),\n        Operateur_Paiement: palierCode === \u0027Palier_1_Decouverte\u0027 ? \u0027Offert_Palier_1\u0027 : \u0027\u0027,\n        Empreinte_SHA256: $json.empreinte_sha256 || $json.sha256_hash || $json.hash || \u0027\u0027\n      }\n    };\n  })()\n}}",
+                                         "jsonBody":  "={{\n  (() =\u003e {\n    let payload = {};\n    try {\n      payload = typeof $(\u0027Référence canonique\u0027).first().json.canonical_payload === \u0027string\u0027\n        ? JSON.parse($(\u0027Référence canonique\u0027).first().json.canonical_payload)\n        : ($(\u0027Référence canonique\u0027).first().json.canonical_payload || {});\n    } catch (_) {}\n\n    const norm = (v) =\u003e String(v || \u0027\u0027).normalize(\u0027NFD\u0027).replace(/[\\u0300-\\u036f]/g, \u0027\u0027).toLowerCase().trim();\n    const pNorm = norm(payload.palier);\n    const packInfo = $(\u0027Calculer Décrémentation Pack\u0027).first().json || {};\n\n    let palierCode = \u0027Palier_2_Certifie\u0027;\n    if (/decouver|palier_1|option a|p1/.test(pNorm)) {\n      palierCode = \u0027Palier_1_Decouverte\u0027;\n    } else if (/chambre|palier_3|option c|p3|souverain/.test(pNorm)) {\n      palierCode = \u0027Palier_3_Chambre\u0027;\n    }\n\n    const isFreeOrValidPack = palierCode === \u0027Palier_1_Decouverte\u0027 || Boolean(packInfo.pack_valide);\n    const refNode = $(\u0027Référence canonique\u0027).first().json || {};\n    const contexte = String(payload.mission_contexte || payload.contexte || \u0027\u0027).trim();\n    const title = String(payload.mission_nom || payload.entreprise || (contexte ? contexte.slice(0, 120) : \u0027Saisine CORTEX\u0027)).trim();\n    const secteurCode = norm(payload.secteur_selectionne || payload.secteur || \u0027agro\u0027) || \u0027agro\u0027;\n\n    return {\n      fields: {\n        Title: title,\n        Mission_Ref: refNode.reference_mission,\n        Palier_Mandat: palierCode,\n        Secteur_Code: secteurCode,\n        Langue_Dossier: norm(payload.langue || \u0027fr\u0027) || \u0027fr\u0027,\n        Contexte_Extrait: contexte ? contexte.slice(0, 1000) : \u0027\u0027,\n        Date_Saisine_T0: refNode.timestamp_t0 || new Date().toISOString(),\n        Statut_Mandat: isFreeOrValidPack ? \u0027Saisine_Recue\u0027 : \u0027Attente_Paiement\u0027,\n        Statut_Sequestre: palierCode === \u0027Palier_1_Decouverte\u0027 ? \u0027Non_Requis\u0027 : (packInfo.pack_valide ? \u0027Pack_Actif\u0027 : \u0027Attente_Paiement\u0027),\n        Operateur_Paiement: palierCode === \u0027Palier_1_Decouverte\u0027 ? \u0027Offert_Palier_1\u0027 : (packInfo.pack_valide ? \u0027Credit_Pack\u0027 : \u0027\u0027),\n        Code_Pack: packInfo.pack_valide ? packInfo.pack_code : \u0027\u0027,\n        Missions_Restantes: packInfo.pack_valide ? packInfo.missions_restantes : 0,\n        Empreinte_SHA256: refNode.empreinte_sha256 || \u0027\u0027\n      }\n    };\n  })()\n}}",
                                          "options":  {
 
                                                      }
@@ -298,6 +298,80 @@
                                        304
                                    ],
                       "typeVersion":  2.2
+                  },
+                  {
+                      "id":  "11000000-0000-4000-8000-000000000012",
+                      "name":  "Lire Solde Pack NocoDB",
+                      "credentials":  {
+                                          "httpHeaderAuth":  {
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account"
+                                                             }
+                                      },
+                      "parameters":  {
+                                         "authentication":  "genericCredentialType",
+                                         "genericAuthType":  "httpHeaderAuth",
+                                         "queryParameters":  {
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "value":  "={{ \"(Code_Pack,eq,\" + String((typeof $(\"Référence canonique\").first().json.canonical_payload === \"string\" ? JSON.parse($(\"Référence canonique\").first().json.canonical_payload).pack_code : $(\"Référence canonique\").first().json.canonical_payload?.pack_code) || \"NONE\").trim().toUpperCase() + \")\" }}",
+                                                                                        "name":  "where"
+                                                                                    },
+                                                                                    {
+                                                                                        "value":  "10",
+                                                                                        "name":  "limit"
+                                                                                    }
+                                                                                ]
+                                                             },
+                                         "method":  "GET",
+                                         "sendQuery":  true,
+                                         "url":  "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mv1cb6xm00g6rf5/records"
+                                     },
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "position":  [
+                                       100,
+                                       420
+                                   ],
+                      "typeVersion":  4.2
+                  },
+                  {
+                      "id":  "11000000-0000-4000-8000-000000000013",
+                      "name":  "Calculer Décrémentation Pack",
+                      "parameters":  {
+                                         "jsCode":  "const refNode = $(\u0027Référence canonique\u0027).first().json || {};\nlet payload = {};\ntry {\n  payload = typeof refNode.canonical_payload === \u0027string\u0027\n    ? JSON.parse(refNode.canonical_payload)\n    : (refNode.canonical_payload || {});\n} catch (_) {}\n\nconst packCode = String(payload.pack_code || \u0027\u0027).trim().toUpperCase();\nconst records = $input.first().json?.records || [];\n\nif (!packCode || records.length === 0) {\n  return [{ json: { pack_valide: false, pack_code: packCode, missions_restantes: 0, patch_records: [] } }];\n}\n\n// Prendre le solde minimum enregistré sur ce Code_Pack\nconst sorted = records\n  .map((r) =\u003e ({ id: Number(r.id || r.id_fields?.Id || r.fields?.Id), rest: Number(r.fields?.Missions_Restantes ?? 0) }))\n  .filter((x) =\u003e Number.isSafeInteger(x.id))\n  .sort((a, b) =\u003e a.rest - b.rest);\n\nconst currentBalance = sorted.length ? sorted[0].rest : 0;\nif (currentBalance \u003c= 0) {\n  return [{ json: { pack_valide: false, pack_epuise: true, pack_code: packCode, missions_restantes: 0, patch_records: [] } }];\n}\n\nconst nextBalance = currentBalance - 1;\nconst patchRecords = sorted.map((item) =\u003e ({\n  id: item.id,\n  fields: { Missions_Restantes: nextBalance }\n}));\n\nreturn [{\n  json: {\n    pack_valide: true,\n    pack_epuise: nextBalance === 0,\n    pack_code: packCode,\n    missions_restantes: nextBalance,\n    patch_records: patchRecords\n  }\n}];",
+                                         "mode":  "runOnceForAllItems"
+                                     },
+                      "type":  "n8n-nodes-base.code",
+                      "position":  [
+                                       320,
+                                       420
+                                   ],
+                      "typeVersion":  2
+                  },
+                  {
+                      "id":  "11000000-0000-4000-8000-000000000014",
+                      "name":  "PATCH Solde Pack NocoDB",
+                      "credentials":  {
+                                          "httpHeaderAuth":  {
+                                                                 "id":  "AYFV4CoauevzSq4r",
+                                                                 "name":  "Header Auth account"
+                                                             }
+                                      },
+                      "parameters":  {
+                                         "specifyBody":  "json",
+                                         "authentication":  "genericCredentialType",
+                                         "sendBody":  true,
+                                         "genericAuthType":  "httpHeaderAuth",
+                                         "method":  "PATCH",
+                                         "jsonBody":  "={{ JSON.stringify($json.patch_records.length ? $json.patch_records : []) }}",
+                                         "url":  "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mv1cb6xm00g6rf5/records"
+                                     },
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "position":  [
+                                       540,
+                                       420
+                                   ],
+                      "typeVersion":  4.2
                   }
               ],
     "pinData":  {
@@ -371,13 +445,35 @@
                                                     "main":  [
                                                                  [
                                                                      {
-                                                                         "node":  "Créer mission NocoDB v3",
+                                                                         "node":  "Lire Solde Pack NocoDB",
                                                                          "type":  "main",
                                                                          "index":  0
                                                                      }
                                                                  ]
                                                              ]
                                                 },
+                        "Lire Solde Pack NocoDB":  {
+                                                       "main":  [
+                                                                    [
+                                                                        {
+                                                                            "node":  "Calculer Décrémentation Pack",
+                                                                            "type":  "main",
+                                                                            "index":  0
+                                                                        }
+                                                                    ]
+                                                                ]
+                                                   },
+                        "Calculer Décrémentation Pack":  {
+                                                             "main":  [
+                                                                          [
+                                                                              {
+                                                                                  "node":  "Créer mission NocoDB v3",
+                                                                                  "type":  "main",
+                                                                                  "index":  0
+                                                                              }
+                                                                          ]
+                                                                      ]
+                                                         },
                         "Créer mission NocoDB v3":  {
                                                         "main":  [
                                                                      [

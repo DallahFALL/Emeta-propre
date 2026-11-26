@@ -116,7 +116,7 @@
                 <span class="text-slate-600">|</span>
                 <button type="button" data-currency="USD" onclick="setIndexCurrency('USD')" class="curr-btn text-slate-400 hover:text-gold transition font-bold" aria-pressed="false">USD $</button>
                 <span class="text-slate-600">|</span>
-                <button type="button" data-currency="FCFA" onclick="setIndexCurrency('FCFA')" class="curr-btn text-slate-400 hover:text-gold transition font-bold" aria-pressed="false">FCFA</button>
+                <button type="button" data-currency="XOF" onclick="setIndexCurrency('XOF')" class="curr-btn text-slate-400 hover:text-gold transition font-bold" aria-pressed="false">XOF</button>
             </div>
 
             <!-- Sélecteur de Langue Diplomatique -->
@@ -531,7 +531,7 @@
                         </p>
 
                         <p class="plan-price text-3xl font-extrabold text-white font-mono mb-6" id="ui-price-starter">
-                            <span class="price-amount text-gold" id="price-starter" data-eur="0 €" data-usd="$0" data-xof="0 FCFA">0 €</span>
+                            <span class="price-amount text-gold" id="price-starter" data-eur="0 €" data-usd="$0" data-xof="0 XOF">0 €</span>
                             <span class="text-xs text-slate-400 font-normal" data-i18n="offers.price.free">/ Offert</span>
                         </p>
 
@@ -564,10 +564,10 @@
                         </p>
 
                         <p class="plan-price text-3xl font-extrabold text-gold font-mono mb-1" id="ui-price-pro">
-                            <span class="price-amount" id="price-certified" data-eur="280 €" data-usd="$305" data-xof="185 000 FCFA">280 €</span>
+                            <span class="price-amount" id="price-certified" data-eur="280 €" data-usd="$305" data-xof="185 000 XOF">280 €</span>
                             <span class="text-xs text-slate-400 font-normal" data-i18n="offers.price.mandate">/ Pack 3 Missions</span>
                         </p>
-                        <p class="price-equivalent text-xs text-slate-400 font-mono mb-6" id="price-equivalent-certified" data-i18n="offers.price.equivalent.certified">Équivalent : 185 000 FCFA</p>
+                        <p class="price-equivalent text-xs text-slate-400 font-mono mb-6" id="price-equivalent-certified" data-i18n="offers.price.equivalent.certified">Équivalent : 185 000 XOF</p>
 
                         <ul class="plan-features space-y-3 text-xs sm:text-sm text-slate-200 mb-8 font-mono">
                             <li id="ui-pr-1" class="flex items-center gap-2" data-i18n="offers.pro.item.1"><i data-lucide="check-circle" class="w-4 h-4 text-gold shrink-0"></i> 3 Missions Certifiées incluses (15 à 25 pages / dossier)</li>
@@ -596,10 +596,10 @@
                         </p>
 
                         <p class="plan-price text-3xl font-extrabold text-white font-mono mb-1" id="ui-price-expert">
-                            <span class="price-amount text-gold" id="price-executive" data-eur="1 450 €" data-usd="$1,580" data-xof="950 000 FCFA">1 450 €</span>
+                            <span class="price-amount text-gold" id="price-executive" data-eur="1 450 €" data-usd="$1,580" data-xof="950 000 XOF">1 450 €</span>
                             <span class="text-xs text-slate-400 font-normal" data-i18n="offers.price.month">/ Mois</span>
                         </p>
-                        <p class="price-equivalent text-xs text-slate-400 font-mono mb-6" id="price-equivalent-executive" data-i18n="offers.price.equivalent.executive">Équivalent : 950 000 FCFA</p>
+                        <p class="price-equivalent text-xs text-slate-400 font-mono mb-6" id="price-equivalent-executive" data-i18n="offers.price.equivalent.executive">Équivalent : 950 000 XOF</p>
 
                         <ul class="plan-features space-y-3 text-xs sm:text-sm text-slate-300 mb-8 font-mono">
                             <li id="ui-ex-1" class="flex items-center gap-2" data-i18n="offers.executive.item.1"><i data-lucide="check" class="w-4 h-4 text-gold shrink-0"></i> 10 Missions Stratégiques / mois (groupe &amp; filiales)</li>
@@ -669,6 +669,13 @@
                                 <input id="user-file" name="piece_justificative" type="file" onchange="handleFileSelect(event)" accept=".pdf,.doc,.docx,.xlsx,.xls,.png,application/pdf" class="w-full text-xs text-slate-400 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-gold file:text-ebony hover:file:bg-goldLight cursor-pointer bg-ebony border border-ebonyBorder rounded-xl p-1.5" />
                                 <span class="field-hint text-[10px] text-slate-500 font-mono block mt-1" id="file-name" data-i18n="terminal.file.empty">Aucun fichier sélectionné</span>
                             </div>
+                        </div>
+
+                        <div class="form-field space-y-1.5 mb-4">
+                            <label for="mission_pack_code" class="block text-xs font-mono text-slate-300">
+                                CODE PACK CERTIFIÉ OU CHAMBRE EXÉCUTIVE <span class="text-slate-500">(optionnel — si vous disposez déjà d'un crédit actif)</span>
+                            </label>
+                            <input id="mission_pack_code" name="pack_code" type="text" placeholder="Ex. : PACK-P2-482910 ou CHAMBRE-P3-901244" class="w-full px-4 py-2.5 rounded-xl bg-ebony border border-ebonyBorder text-gold text-xs focus:outline-none focus:border-gold transition font-mono uppercase" />
                         </div>
 
                         <div id="sector-plaquette-box" class="rounded-2xl bg-ebony/90 border border-gold/35 p-5 space-y-4">
@@ -1538,7 +1545,7 @@ function selectSector(sectorKey) {
             formData.set('whatsapp', phone);
             formData.set('secteur', selectedSector);
             formData.set('secteur_selectionne', selectedSector);
-            formData.set('palier', selectedPalier);
+            formData.set('palier', selectedPalier); const pCode = (document.getElementById('mission_pack_code')?.value || '').trim().toUpperCase(); if (pCode) formData.set('pack_code', pCode);
             const isOptionB = Boolean(document.getElementById('auto-option-b')?.checked);
             if (isOptionB) {
                 formData.set('option_b_detectee', 'true');
@@ -1727,7 +1734,7 @@ function selectSector(sectorKey) {
         let selectedCurrency = 'EUR';
 
         function setIndexCurrency(curr) {
-            if (!['EUR', 'USD', 'FCFA'].includes(curr)) curr = 'EUR';
+            if (!['EUR', 'USD', 'XOF'].includes(curr)) curr = 'EUR';
             selectedCurrency = curr;
             window.setCurrency(curr);
             const eqCert = document.getElementById('price-equivalent-certified');
@@ -1751,7 +1758,7 @@ function selectSector(sectorKey) {
                     eqExec.dataset.i18n = 'offers.currency.eq.approx';
                     eqExec.textContent = translate('offers.currency.eq.approx', { amount: '1 450' });
                 }
-            } else if (curr === 'FCFA') {
+            } else if (curr === 'XOF') {
                 if (eqCert) {
                     eqCert.dataset.i18n = 'offers.currency.eq.official';
                     eqCert.textContent = translate('offers.currency.eq.official', { amount: '280' });
