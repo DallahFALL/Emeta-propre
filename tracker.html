@@ -195,6 +195,23 @@
         </a>
       </div>
 
+            <!-- Mobilisation Expert Option B (Disponible après lecture du rapport) -->
+      <div id="option-b-post-card" class="hidden rounded-2xl border border-gold/40 bg-ebony/85 p-5 space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <span class="text-[11px] font-mono uppercase tracking-widest text-gold">OPTION B • MISE EN ŒUVRE TERRAIN À LA DEMANDE</span>
+          <span class="px-2.5 py-0.5 rounded-full bg-gold/15 text-gold text-[10px] font-mono">SLA 2H • DEVIS SÉQUESTRE</span>
+        </div>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Vous avez consulté votre rapport. Si vous souhaitez confier son exécution opérationnelle à un <strong>Expert Accrédité</strong> calibré selon votre secteur et votre palier, activez la mise en relation (accord préalable sur le devis, 85 % Expert / 15 % HT commission E-META LABS).
+        </p>
+        <div class="flex flex-wrap items-center gap-3">
+          <button id="btn-request-expert" type="button" onclick="triggerPostReportExpert()" class="px-4 py-2.5 rounded-xl bg-gold text-ebony font-mono font-bold text-xs uppercase tracking-wider hover:opacity-90 transition cursor-pointer">
+            Solliciter un Expert Accrédité pour ce rapport →
+          </button>
+          <span id="option-b-post-status" class="text-xs font-mono text-emerald-400"></span>
+        </div>
+      </div>
+
       <!-- Action de Recette & Validation Client -->
       <div class="pt-2 space-y-2 text-center">
         <button
@@ -769,6 +786,24 @@
           setValidateButton('confirm');
         }
       });
+
+            async function triggerPostReportExpert() {
+        const ref = els.refDisplay?.textContent?.trim();
+        const stEl = document.getElementById('option-b-post-status');
+        const btn = document.getElementById('btn-request-expert');
+        if (!ref || ref === '—') return;
+        if (btn) btn.disabled = true;
+        try {
+          await fetch('https://automation.e-metalabs.com/webhook/dispatch-expert', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ reference_mission: ref, option_b: true, declenchement: 'post_rapport_tracker' })
+          });
+          if (stEl) stEl.textContent = '✓ Demande transmise au Collège des Experts (attribution sous 2h).';
+        } catch (e) {
+          if (stEl) stEl.textContent = '✓ Demande enregistrée pour ' + ref + '.';
+        }
+      }
 
       applyLanguage(currentLang);
       const initialRef = params.get('ref') || params.get('reference') || '';

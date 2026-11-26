@@ -193,6 +193,22 @@
                     </div>
                 </div>
 
+                                <!-- Grade d'Accréditation & Code Cooptation -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label for="grade_accreditation" class="block text-xs font-mono text-gold uppercase tracking-wider">Grade d'Accréditation Visé *</label>
+                        <select id="grade_accreditation" required class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-sm text-white focus:outline-none focus:border-gold transition">
+                            <option value="Praticien Opérationnel">Grade I — Praticien Opérationnel (5–10 ans)</option>
+                            <option value="Senior Advisor" selected>Grade II — Senior Advisor (10–18 ans / Direction)</option>
+                            <option value="Executive Fellow">Grade III — Executive Fellow (18+ ans / C-Level)</option>
+                        </select>
+                    </div>
+                    <div class="space-y-2">
+                        <label for="code_cooptation" class="block text-xs font-mono text-gold uppercase tracking-wider">Code de Cooptation (Optionnel)</label>
+                        <input type="text" id="code_cooptation" placeholder="Ex: COOPT-482910" class="w-full px-4 py-3 rounded-xl bg-ebony border border-ebonyBorder text-sm text-gold placeholder-slate-600 focus:outline-none focus:border-gold transition font-mono uppercase">
+                    </div>
+                </div>
+
                 <!-- Domaine d'Expertise Principal -->
                 <div class="space-y-2">
                     <label for="domaine" class="block text-xs font-mono text-gold uppercase tracking-wider" id="lbl-domaine">Domaine d'Expertise Principal *</label>
@@ -322,6 +338,13 @@
         let currentLang = urlParams.get('lang') || localStorage.getItem('emeta_lang') || 'fr';
         if (!['fr', 'en', 'es', 'ar'].includes(currentLang)) currentLang = 'fr';
 
+                const preEmail = urlParams.get('email');
+        const preGrade = urlParams.get('grade');
+        if (preEmail && document.getElementById('email')) document.getElementById('email').value = preEmail;
+        if (preGrade && document.getElementById('grade_accreditation')) {
+            const gMap = { Grade_I_Praticien: 'Praticien Opérationnel', Grade_II_Senior: 'Senior Advisor', Grade_III_Executive_Fellow: 'Executive Fellow' };
+            document.getElementById('grade_accreditation').value = gMap[preGrade] || preGrade;
+        }
         function applyExpertLang(lang) {
             currentLang = lang;
             const t = expertDict[lang];
