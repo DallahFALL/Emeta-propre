@@ -354,7 +354,7 @@
                       "credentials":  {
                                           "httpHeaderAuth":  {
                                                                  "id":  "AYFV4CoauevzSq4r",
-                                                                 "name":  "Header Auth account"
+                                                                 "name":  "Header Auth account 2"
                                                              }
                                       },
                       "parameters":  {
@@ -363,15 +363,55 @@
                                          "sendBody":  true,
                                          "genericAuthType":  "httpHeaderAuth",
                                          "method":  "PATCH",
-                                         "jsonBody":  "={{ JSON.stringify($json.patch_records.length ? $json.patch_records : []) }}",
+                                         "jsonBody":  "={{ JSON.stringify($(\u0027Calculer Décrémentation Pack\u0027).first().json.patch_records) }}",
                                          "url":  "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mv1cb6xm00g6rf5/records"
                                      },
                       "type":  "n8n-nodes-base.httpRequest",
                       "position":  [
-                                       540,
-                                       420
+                                       460,
+                                       460
                                    ],
                       "typeVersion":  4.2
+                  },
+                  {
+                      "id":  "11000000-0000-4000-8000-000000000015",
+                      "name":  "Pack Valide ?",
+                      "parameters":  {
+                                         "conditions":  {
+                                                            "options":  {
+                                                                            "typeValidation":  "loose",
+                                                                            "leftValue":  "",
+                                                                            "caseSensitive":  true
+                                                                        },
+                                                            "conditions":  [
+                                                                               {
+                                                                                   "operator":  {
+                                                                                                    "operation":  "equals",
+                                                                                                    "type":  "string"
+                                                                                                },
+                                                                                   "rightValue":  "true",
+                                                                                   "id":  "cond-pack-valid",
+                                                                                   "leftValue":  "={{ String($(\u0027Calculer Décrémentation Pack\u0027).first().json.pack_valide) }}"
+                                                                               },
+                                                                               {
+                                                                                   "operator":  {
+                                                                                                    "operation":  "gt",
+                                                                                                    "type":  "number"
+                                                                                                },
+                                                                                   "rightValue":  0,
+                                                                                   "id":  "cond-pack-records",
+                                                                                   "leftValue":  "={{ Number($(\u0027Calculer Décrémentation Pack\u0027).first().json.patch_records?.length || 0) }}"
+                                                                               }
+                                                                           ],
+                                                            "combinator":  "and"
+                                                        }
+                                     },
+                      "type":  "n8n-nodes-base.if",
+                      "position":  [
+                                       200,
+                                       460
+                                   ],
+                      "typeVersion":  2.2
                   }
               ],
     "pinData":  {
@@ -486,6 +526,11 @@
                                                                              "node":  "Exécution Immédiate Autorisée ?",
                                                                              "type":  "main",
                                                                              "index":  0
+                                                                         },
+                                                                         {
+                                                                             "node":  "Pack Valide ?",
+                                                                             "type":  "main",
+                                                                             "index":  0
                                                                          }
                                                                      ]
                                                                  ]
@@ -503,7 +548,21 @@
 
                                                                              ]
                                                                          ]
-                                                            }
+                                                            },
+                        "Pack Valide ?":  {
+                                              "main":  [
+                                                           [
+                                                               {
+                                                                   "node":  "PATCH Solde Pack NocoDB",
+                                                                   "type":  "main",
+                                                                   "index":  0
+                                                               }
+                                                           ],
+                                                           [
+
+                                                           ]
+                                                       ]
+                                          }
                     },
     "active":  true,
     "settings":  {
