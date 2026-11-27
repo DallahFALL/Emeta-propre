@@ -255,43 +255,51 @@
     "connections":  {
                         "Webhook Recette Clôture":  {
                                                         "main":  [
-                                                                     {
-                                                                         "node":  "Rechercher Mission à Clôturer",
-                                                                         "type":  "main",
-                                                                         "index":  0
-                                                                     }
+                                                                     [
+                                                                         {
+                                                                             "node":  "Rechercher Mission à Clôturer",
+                                                                             "type":  "main",
+                                                                             "index":  0
+                                                                         }
+                                                                     ]
                                                                  ]
                                                     },
                         "Rechercher Mission à Clôturer":  {
                                                               "main":  [
-                                                                           {
-                                                                               "node":  "Calculer Clôture \u0026 État de Paiement",
-                                                                               "type":  "main",
-                                                                               "index":  0
-                                                                           }
+                                                                           [
+                                                                               {
+                                                                                   "node":  "Calculer Clôture \u0026 État de Paiement",
+                                                                                   "type":  "main",
+                                                                                   "index":  0
+                                                                               }
+                                                                           ]
                                                                        ]
                                                           },
                         "Calculer Clôture \u0026 État de Paiement":  {
                                                                          "main":  [
-                                                                                      {
-                                                                                          "node":  "PATCH Clôture Mission NocoDB",
-                                                                                          "type":  "main",
-                                                                                          "index":  0
-                                                                                      }
+                                                                                      [
+                                                                                          {
+                                                                                              "node":  "PATCH Clôture Mission NocoDB",
+                                                                                              "type":  "main",
+                                                                                              "index":  0
+                                                                                          }
+                                                                                      ]
                                                                                   ]
                                                                      },
                         "PATCH Clôture Mission NocoDB":  {
                                                              "main":  [
-                                                                          {
-                                                                              "node":  "Réponse JSON 200 Recette",
-                                                                              "type":  "main",
-                                                                              "index":  0
-                                                                          },
-                                                                          {
-                                                                              "node":  "Expert Option B Assigné ?",
-                                                                              "type":  "main",
-                                                                              "index":  0
-                                                                          }
+                                                                          [
+                                                                              {
+                                                                                  "node":  "Réponse JSON 200 Recette",
+                                                                                  "type":  "main",
+                                                                                  "index":  0
+                                                                              },
+                                                                              {
+                                                                                  "node":  "Expert Option B Assigné ?",
+                                                                                  "type":  "main",
+                                                                                  "index":  0
+                                                                              }
+                                                                          ]
                                                                       ]
                                                          },
                         "Expert Option B Assigné ?":  {
@@ -310,25 +318,29 @@
                                                       },
                         "Lire Fiche Expert Accrédité":  {
                                                             "main":  [
-                                                                         {
-                                                                             "node":  "Préparer Libération Expert \u0026 Mail",
-                                                                             "type":  "main",
-                                                                             "index":  0
-                                                                         }
+                                                                         [
+                                                                             {
+                                                                                 "node":  "Préparer Libération Expert \u0026 Mail",
+                                                                                 "type":  "main",
+                                                                                 "index":  0
+                                                                             }
+                                                                         ]
                                                                      ]
                                                         },
                         "Préparer Libération Expert \u0026 Mail":  {
                                                                        "main":  [
-                                                                                    {
-                                                                                        "node":  "PATCH Libérer Expert NocoDB",
-                                                                                        "type":  "main",
-                                                                                        "index":  0
-                                                                                    },
-                                                                                    {
-                                                                                        "node":  "Envoyer État de Paiement Zimbra",
-                                                                                        "type":  "main",
-                                                                                        "index":  0
-                                                                                    }
+                                                                                    [
+                                                                                        {
+                                                                                            "node":  "PATCH Libérer Expert NocoDB",
+                                                                                            "type":  "main",
+                                                                                            "index":  0
+                                                                                        },
+                                                                                        {
+                                                                                            "node":  "Envoyer État de Paiement Zimbra",
+                                                                                            "type":  "main",
+                                                                                            "index":  0
+                                                                                        }
+                                                                                    ]
                                                                                 ]
                                                                    }
                     },
