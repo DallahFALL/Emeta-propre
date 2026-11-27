@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
@@ -794,7 +794,7 @@
         if (!ref || ref === '—') return;
         if (btn) btn.disabled = true;
         try {
-          await fetch('https://automation.e-metalabs.com/webhook/dispatch-expert', {
+          await fetch('https://automation.e-metalabs.com/webhook/cortex-dispatch-expert', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ reference_mission: ref, option_b: true, declenchement: 'post_rapport_tracker' })
