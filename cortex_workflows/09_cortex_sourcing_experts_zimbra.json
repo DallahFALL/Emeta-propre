@@ -46,17 +46,26 @@
                       "credentials":  {
                                           "httpHeaderAuth":  {
                                                                  "id":  "AYFV4CoauevzSq4r",
-                                                                 "name":  "Header Auth account 2"
+                                                                 "name":  "Header Auth account"
                                                              }
                                       },
                       "parameters":  {
-                                         "method":  "POST",
                                          "url":  "https://base.e-metalabs.com/api/v3/data/pch2k3ljr1ut4if/mphgy69rmbhb7es/records",
-                                         "authentication":  "genericCredentialType",
-                                         "genericAuthType":  "httpHeaderAuth",
-                                         "sendBody":  true,
                                          "specifyBody":  "json",
-                                         "jsonBody":  "={{ JSON.stringify([{ fields: { Title: $json.nom_complet, Nom_Complet: $json.nom_complet, Email_Pro: $json.email, WhatsApp_E164: $json.whatsapp, Profil_LinkedIn: $json.linkedin, Code_Cooptation: $json.code_parrain_attribue, Niveau_Accreditation: $json.grade_label, Secteurs_Clefs: [$json.secteur_label], Statut_Disponibilite: \"Disponible\", Protocole_Signe: false } }]) }}"
+                                         "method":  "POST",
+                                         "headerParameters":  {
+                                                                  "parameters":  [
+                                                                                     {
+                                                                                         "value":  "application/json",
+                                                                                         "name":  "Content-Type"
+                                                                                     }
+                                                                                 ]
+                                                              },
+                                         "sendBody":  true,
+                                         "sendHeaders":  true,
+                                         "jsonBody":  "={{ JSON.stringify({ fields: { Title: $json.nom_complet, Nom_Complet: $json.nom_complet, Email_Pro: $json.email, WhatsApp_E164: $json.whatsapp, Profil_LinkedIn: $json.linkedin, Code_Cooptation: $json.code_parrain_attribue, Niveau_Accreditation: $json.grade_label, Secteurs_Clefs: $json.secteur_label, Statut_Disponibilite: \"Disponible\", Protocole_Signe: false } }) }}",
+                                         "genericAuthType":  "httpHeaderAuth",
+                                         "authentication":  "genericCredentialType"
                                      }
                   },
                   {
