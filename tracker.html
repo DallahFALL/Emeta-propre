@@ -834,33 +834,41 @@
       }
     })();
   </script>
+
 <script id="emeta-optionb-script">
 (function () {
   function mountOptionB() {
-    if (document.getElementById('option-b-dispatch-card')) return;
-
-    // 1. Repérer le bouton vert VALIDER LE JALON ACTUEL (RECETTE)
     const buttons = Array.from(document.querySelectorAll('button'));
-    const validateBtn = buttons.find((b) =>
-      /VALIDER LE JALON|VALIDATE CURRENT|VALIDAR HITO|تأكيد المرحلة/i.test(b.textContent || '')
+    const actionBtn = buttons.find((b) =>
+      /VALIDER LE JALON|DOSSIER CLÔTURÉ|VALIDATE CURRENT|CLOSED|VALIDAR HITO|تأكيد المرحلة/i.test(b.textContent || '')
     );
-    if (!validateBtn) return;
+    if (!actionBtn) return;
+
+    const isClosed = /DOSSIER CLÔTURÉ|CLOSED|CERRADO|مغلق/i.test(actionBtn.textContent || '');
+    const existing = document.getElementById('option-b-dispatch-card');
+    if (existing) {
+      if (isClosed) {
+        const btn = existing.querySelector('#btn-dispatch-expert');
+        if (btn) {
+          btn.disabled = true;
+          btn.style.background = '#1e293b';
+          btn.style.color = '#94a3b8';
+          btn.textContent = 'Mandat clôturé — Option B fermée';
+        }
+      }
+      return;
+    }
 
     const params = new URLSearchParams(window.location.search);
     const lang = (params.get('lang') || 'fr').toLowerCase();
 
-    // 2. Corriger le libellé "Arbitrage effectué" si aucun expert Option B n'est encore mobilisé
-    const subTexts = Array.from(document.querySelectorAll('div, p, span'));
-    subTexts.forEach((el) => {
-      if (el.children.length === 0 && (el.textContent || '').trim() === 'Arbitrage effectué') {
-        if (!window.__emetaExpertAssigned) {
-          el.textContent = 'Option B disponible (à la demande)';
-          el.style.color = '#d4af37';
-        }
+    Array.from(document.querySelectorAll('div, p, span')).forEach((el) => {
+      if (el.children.length === 0 && (el.textContent || '').trim() === 'Arbitrage effectué' && !isClosed && !window.__emetaExpertAssigned) {
+        el.textContent = 'Option B disponible (à la demande)';
+        el.style.color = '#d4af37';
       }
     });
 
-    // 3. Construire la carte dorée Option B juste au-dessus du bouton de recette
     const card = document.createElement('div');
     card.id = 'option-b-dispatch-card';
     card.style.cssText = 'background:rgba(212,175,55,0.07);border:1px solid rgba(212,175,55,0.45);border-radius:16px;padding:22px;margin:20px 0;text-align:left;';
@@ -872,13 +880,15 @@
       <p style="color:#cbd5e1;font-size:13.5px;line-height:1.55;margin:0 0 14px 0;">
         Besoin d'un accompagnement opérationnel pour exécuter les recommandations de ce rapport ? Mobilisez un Expert Accrédité du Collège E-META LABS (accord préalable sur devis direct, consignation en séquestre avant démarrage).
       </p>
-      <button id="btn-dispatch-expert" type="button" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#d4af37;color:#0b0f17;border:none;border-radius:12px;padding:13px 20px;font-weight:800;font-size:13px;cursor:pointer;width:100%;">
-        Solliciter un Expert Accrédité pour ce rapport →
+      <button id="btn-dispatch-expert" type="button" ${isClosed ? 'disabled' : ''} style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:${isClosed ? '#1e293b' : '#d4af37'};color:${isClosed ? '#94a3b8' : '#0b0f17'};border:none;border-radius:12px;padding:13px 20px;font-weight:800;font-size:13px;cursor:${isClosed ? 'not-allowed' : 'pointer'};width:100%;">
+        ${isClosed ? 'Mandat clôturé — Option B fermée' : 'Solliciter un Expert Accrédité pour ce rapport →'}
       </button>
       <div id="option-b-status" style="margin-top:12px;font-size:12.5px;font-family:monospace;display:none;"></div>
     `;
 
-    validateBtn.parentNode.insertBefore(card, validateBtn);
+    actionBtn.parentNode.insertBefore(card, actionBtn);
+
+    if (isClosed) return;
 
     const btn = document.getElementById('btn-dispatch-expert');
     const statusEl = document.getElementById('option-b-status');
@@ -921,7 +931,7 @@
   } else {
     mountOptionB();
   }
-  setTimeout(mountOptionB, 600);
+  setInterval(mountOptionB, 800);
 })();
 </script>
 </body>
