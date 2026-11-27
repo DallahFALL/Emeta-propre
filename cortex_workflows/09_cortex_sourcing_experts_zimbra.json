@@ -56,7 +56,7 @@
                                          "genericAuthType":  "httpHeaderAuth",
                                          "sendBody":  true,
                                          "specifyBody":  "json",
-                                         "jsonBody":  "={{ JSON.stringify({ fields: { Title: $json.nom_complet, Nom_Complet: $json.nom_complet, Email_Pro: $json.email, WhatsApp_E164: $json.whatsapp, Profil_LinkedIn: $json.linkedin, Code_Cooptation: $json.code_parrain_attribue, Niveau_Accreditation: $json.grade_label, Secteurs_Clefs: [$json.secteur_code], Statut_Disponibilite: \"Disponible\", Protocole_Signe: false } }) }}"
+                                         "jsonBody":  "={{ JSON.stringify([{ fields: { Title: $json.nom_complet, Nom_Complet: $json.nom_complet, Email_Pro: $json.email, WhatsApp_E164: $json.whatsapp, Profil_LinkedIn: $json.linkedin, Code_Cooptation: $json.code_parrain_attribue, Niveau_Accreditation: $json.grade_label, Secteurs_Clefs: [$json.secteur_code], Statut_Disponibilite: \"Disponible\", Protocole_Signe: false } }]) }}"
                                      }
                   },
                   {
