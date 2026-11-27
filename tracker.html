@@ -834,5 +834,95 @@
       }
     })();
   </script>
+<script id="emeta-optionb-script">
+(function () {
+  function mountOptionB() {
+    if (document.getElementById('option-b-dispatch-card')) return;
+
+    // 1. Repérer le bouton vert VALIDER LE JALON ACTUEL (RECETTE)
+    const buttons = Array.from(document.querySelectorAll('button'));
+    const validateBtn = buttons.find((b) =>
+      /VALIDER LE JALON|VALIDATE CURRENT|VALIDAR HITO|تأكيد المرحلة/i.test(b.textContent || '')
+    );
+    if (!validateBtn) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const lang = (params.get('lang') || 'fr').toLowerCase();
+
+    // 2. Corriger le libellé "Arbitrage effectué" si aucun expert Option B n'est encore mobilisé
+    const subTexts = Array.from(document.querySelectorAll('div, p, span'));
+    subTexts.forEach((el) => {
+      if (el.children.length === 0 && (el.textContent || '').trim() === 'Arbitrage effectué') {
+        if (!window.__emetaExpertAssigned) {
+          el.textContent = 'Option B disponible (à la demande)';
+          el.style.color = '#d4af37';
+        }
+      }
+    });
+
+    // 3. Construire la carte dorée Option B juste au-dessus du bouton de recette
+    const card = document.createElement('div');
+    card.id = 'option-b-dispatch-card';
+    card.style.cssText = 'background:rgba(212,175,55,0.07);border:1px solid rgba(212,175,55,0.45);border-radius:16px;padding:22px;margin:20px 0;text-align:left;';
+    card.innerHTML = `
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+        <span style="color:#d4af37;font-family:monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;">OPTION B • MISE EN ŒUVRE TERRAIN À LA DEMANDE</span>
+        <span style="color:#94a3b8;font-family:monospace;font-size:11px;">SLA Attribution : 2h</span>
+      </div>
+      <p style="color:#cbd5e1;font-size:13.5px;line-height:1.55;margin:0 0 14px 0;">
+        Besoin d'un accompagnement opérationnel pour exécuter les recommandations de ce rapport ? Mobilisez un Expert Accrédité du Collège E-META LABS (accord préalable sur devis direct, consignation en séquestre avant démarrage).
+      </p>
+      <button id="btn-dispatch-expert" type="button" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#d4af37;color:#0b0f17;border:none;border-radius:12px;padding:13px 20px;font-weight:800;font-size:13px;cursor:pointer;width:100%;">
+        Solliciter un Expert Accrédité pour ce rapport →
+      </button>
+      <div id="option-b-status" style="margin-top:12px;font-size:12.5px;font-family:monospace;display:none;"></div>
+    `;
+
+    validateBtn.parentNode.insertBefore(card, validateBtn);
+
+    const btn = document.getElementById('btn-dispatch-expert');
+    const statusEl = document.getElementById('option-b-status');
+
+    btn.addEventListener('click', async function () {
+      const refInput = document.querySelector('input[type="text"], input[name*="ref"]');
+      const ref = (params.get('ref') || (refInput && refInput.value) || '').trim().toUpperCase();
+      if (!ref) return;
+
+      btn.disabled = true;
+      btn.style.opacity = '0.7';
+      statusEl.style.display = 'block';
+      statusEl.style.color = '#facc15';
+      statusEl.textContent = 'Mobilisation du Collège d’Experts Accrédités...';
+
+      try {
+        const res = await fetch('https://automation.e-metalabs.com/webhook/cortex-dispatch-expert', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ reference_mission: ref, langue: lang })
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        window.__emetaExpertAssigned = true;
+        statusEl.style.color = '#34d399';
+        statusEl.textContent = '✓ Demande transmise au Collège d’Experts Accrédités (SLA 2h activé).';
+        btn.style.background = '#10b981';
+        btn.style.color = '#052e16';
+        btn.textContent = '✓ Demande de mission transmise';
+      } catch (e) {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        statusEl.style.color = '#f87171';
+        statusEl.textContent = 'Erreur de transmission : ' + e.message;
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mountOptionB);
+  } else {
+    mountOptionB();
+  }
+  setTimeout(mountOptionB, 600);
+})();
+</script>
 </body>
 </html>
