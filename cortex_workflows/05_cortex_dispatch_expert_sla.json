@@ -115,7 +115,7 @@
                   {
                       "parameters":  {
                                          "operation":  "executeQuery",
-                                         "query":  "INSERT INTO cortex_mission_claims (mission_ref, expert_ref, token_hash, statut, created_at, expires_at) VALUES ($1, $2, $3, \u0027en_attente\u0027, NOW(), NOW() + INTERVAL \u00272 hours\u0027) ON CONFLICT (mission_ref) DO NOTHING RETURNING mission_ref, expert_ref, statut, expires_at;",
+                                         "query":  "INSERT INTO cortex_mission_claims (mission_ref, expert_ref, token_hash, statut, created_at, expires_at) VALUES ($1, $2, $3, \u0027en_attente\u0027, NOW(), NOW() + INTERVAL \u00272 hours\u0027) ON CONFLICT (mission_ref) DO UPDATE SET expert_ref = EXCLUDED.expert_ref, token_hash = EXCLUDED.token_hash, statut = \u0027en_attente\u0027, created_at = NOW(), expires_at = EXCLUDED.expires_at WHERE cortex_mission_claims.statut \u003c\u003e \u0027accepte\u0027 RETURNING mission_ref, expert_ref, statut, expires_at;",
                                          "options":  {
                                                          "queryReplacement":  "={{ [$json.reference_mission, $json.expert1.recordId, $json.token_hash] }}"
                                                      }
