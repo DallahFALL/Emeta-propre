@@ -76,7 +76,7 @@
                   },
                   {
                       "parameters":  {
-                                         "url":  "={{ $json.urls.nocodb_base + \u0027/\u0027 + $json.tables.experts + \u0027/records\u0027 }}",
+                                         "url":  "={{ $(\u0027Initialisation standardisée\u0027).first().json.urls.nocodb_base + \u0027/\u0027 + $(\u0027Initialisation standardisée\u0027).first().json.tables.experts + \u0027/records\u0027 }}",
                                          "authentication":  "genericCredentialType",
                                          "genericAuthType":  "httpHeaderAuth",
                                          "options":  {
@@ -446,7 +446,7 @@
                                          "queryParameters":  {
                                                                  "parameters":  [
                                                                                     {
-                                                                                        "value":  "={{ \u0027(Mission_Ref,eq,\u0027 + Valider réclamation atomiquement.first().json.mission_ref + \u0027)\u0027 }}",
+                                                                                        "value":  "={{ \u0027(Mission_Ref,eq,\u0027 + $(\u0027Valider réclamation atomiquement\u0027).first().json.mission_ref + \u0027)\u0027 }}",
                                                                                         "name":  "where"
                                                                                     },
                                                                                     {
@@ -676,7 +676,7 @@
                                          "sendBody":  true,
                                          "genericAuthType":  "httpHeaderAuth",
                                          "method":  "POST",
-                                         "jsonBody":  "={{ JSON.stringify($json.cascade_records) }}",
+                                         "jsonBody":  "={{ JSON.stringify(Array.isArray($json.cascade_records) ? $json.cascade_records[0] : $json.cascade_records) }}",
                                          "url":  "={{ $(\"Initialisation standardisée\").first().json.urls.nocodb_base + \"/\" + $(\"Initialisation standardisée\").first().json.tables.dispatch + \"/records\" }}"
                                      },
                       "position":  [
